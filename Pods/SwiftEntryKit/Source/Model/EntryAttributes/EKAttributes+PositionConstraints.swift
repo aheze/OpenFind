@@ -9,13 +9,10 @@
 import UIKit
 
 public extension EKAttributes {
-    
     /** Describes the frame of the entry. It's limitations, width and offset from the anchor (top / bottom of the screen) */
     struct PositionConstraints {
-
         /** Describes safe area relation */
         public enum SafeArea {
-            
             /** Entry overrides safe area */
             case overridden
             
@@ -34,7 +31,6 @@ public extension EKAttributes {
         
         /** Describes an edge constraint of the entry */
         public enum Edge {
-            
             /** Ratio constraint to screen edge */
             case ratio(value: CGFloat)
             
@@ -55,7 +51,6 @@ public extension EKAttributes {
         
         /** Describes the size of the entry */
         public struct Size {
-            
             /** Describes a width constraint */
             public var width: Edge
             
@@ -86,10 +81,8 @@ public extension EKAttributes {
         
         /** The relation to the keyboard's top and the screen's top while it is opened */
         public enum KeyboardRelation {
-            
             /** Describes the offset when the keyboard is opened */
             public struct Offset {
-                
                 /** Describes top keyboard offset to the entry's bottom */
                 public var bottom: CGFloat
                 
@@ -110,7 +103,7 @@ public extension EKAttributes {
             /** Bind the entry's bottom to the keyboard's top with an offset.
              Additionally, the top edge of the screen can have a resistance offset which the entry isn't able to cross.
              The resistance is mostly used when the device orientation changes and the entry's frame crosses the screen bounds.
-             Current isn't supported with center entry position.*/
+             Current isn't supported with center entry position. */
             case bind(offset: Offset)
             
             /** Entry is unbound to the keyboard. It's location doesn't change. */
@@ -129,10 +122,8 @@ public extension EKAttributes {
         
         /** Rotation related position constraints */
         public struct Rotation {
-            
             /** Attributes of supported interface orientations */
             public enum SupportedInterfaceOrientation {
-                
                 /** Uses standard supported interface orientation (target specification in general settings) */
                 case standard
                 

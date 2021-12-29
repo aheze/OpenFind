@@ -14,11 +14,13 @@ extension ViewController {
         camera.allowSearchFocus = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 8, execute: cameraShutoffTask)
     }
+
     func startCamera() {
         camera.allowSearchFocus = true
         cancelShutoff()
         camera.startSession()
     }
+
     func cancelShutoff() {
         cameraShutoffTask.cancel()
         cameraShutoffTask = DispatchWorkItem { self.shutoffCamera?() }

@@ -22,27 +22,24 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
-internal enum ConstraintRelation : Int {
+internal enum ConstraintRelation: Int {
     case equal = 1
     case lessThanOrEqual
     case greaterThanOrEqual
     
     internal var layoutRelation: LayoutRelation {
-        get {
-            switch(self) {
-            case .equal:
-                return .equal
-            case .lessThanOrEqual:
-                return .lessThanOrEqual
-            case .greaterThanOrEqual:
-                return .greaterThanOrEqual
-            }
+        switch self {
+        case .equal:
+            return .equal
+        case .lessThanOrEqual:
+            return .lessThanOrEqual
+        case .greaterThanOrEqual:
+            return .greaterThanOrEqual
         }
     }
 }

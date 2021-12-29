@@ -6,21 +6,22 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
-import SwiftEntryKit
 import RealmSwift
 import SPAlert
+import SwiftEntryKit
+import UIKit
 
 class ListsNavController: UINavigationController {
     var viewController: ListsController!
 }
-class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, FinishedEditingList {
 
-    
+class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, FinishedEditingList {
     // MARK: - Tab bar
+
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
     
     // MARK: - Selection
+
     var addButton: UIBarButtonItem!
     var selectButton: UIBarButtonItem!
     var updateSelectionLabel: ((Int) -> Void)?
@@ -55,14 +56,13 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
         }
     }
     
-    
-    
     var colorArray: [String] = [
-    "#eb2f06","#e55039","#f7b731","#fed330","#78e08f",
-    "#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba",
-    "#ff6348","#b71540","#579f2b","#d1d8e0","#778ca3",
-    "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
-    "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
+        "#eb2f06", "#e55039", "#f7b731", "#fed330", "#78e08f",
+        "#fc5c65", "#fa8231", "#f6b93b", "#b8e994", "#2bcbba",
+        "#ff6348", "#b71540", "#579f2b", "#d1d8e0", "#778ca3",
+        "#e84393", "#a55eea", "#5352ed", "#70a1ff", "#40739e",
+        "#45aaf2", "#2d98da", "#00aeef", "#4b6584", "#0a3d62"
+    ]
     var randomizedColor = ""
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
@@ -75,7 +75,7 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
         guard let listCats = listCategories else { return }
         if listCats.count == 0 {
             view.addSubview(noListsDisplay)
-            noListsDisplay.snp.makeConstraints { (make) in
+            noListsDisplay.snp.makeConstraints { make in
                 make.center.equalToSuperview()
                 make.width.equalTo(300)
                 make.height.equalTo(300)
@@ -85,15 +85,13 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
         }
     }
     
-    func deleteTheList() { ///Comes from EditListViewController, deletes an existing list.
+    func deleteTheList() { /// Comes from EditListViewController, deletes an existing list.
         if let currentList = listCategories?[currentEditingPresentationPath] {
             do {
                 try realm.write {
                     realm.delete(currentList)
                 }
-            } catch {
-
-            }
+            } catch {}
             let indP = IndexPath(item: currentEditingPresentationPath, section: 0)
             sortLists()
             collectionView?.performBatchUpdates({
@@ -115,25 +113,23 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
     
     @IBOutlet var noListsDisplay: UIView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     
     var currentEditingPresentationPath = 0
     
-    
     @IBAction func blackXButtonPressed(_ sender: UIButton) {
-        if let pvc = self.presentationController {
+        if let pvc = presentationController {
             pvc.delegate?.presentationControllerDidDismiss?(pvc)
         }
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
-    
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
-          layout.delegate = self
+            layout.delegate = self
         }
         
         if let randColorString = colorArray.randomElement() {
@@ -158,7 +154,7 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
             if let navController = navigationController {
                 navController.view.insertSubview(quickTourView, belowSubview: navigationController!.navigationBar)
                 
-                quickTourView.snp.makeConstraints { (make) in
+                quickTourView.snp.makeConstraints { make in
                     make.height.equalTo(50)
                     make.left.equalToSuperview()
                     make.right.equalToSuperview()
@@ -180,23 +176,22 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
                     self?.animateCloseQuickTour(quickTourView: quickTourView)
                 }
             }
-            
         }
         
         let bottomInset = CGFloat(FindConstantVars.tabHeight)
-        let bottomSafeAreaHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0
+        let bottomSafeAreaHeight = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.safeAreaInsets.bottom ?? 0
         collectionView.contentInset.bottom = bottomInset
         collectionView.verticalScrollIndicatorInsets.bottom = bottomInset - CGFloat(bottomSafeAreaHeight)
         
-        self.title = "Lists"
+        title = "Lists"
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        
     }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         indexPathsSelected.removeAll()
     }
+
     func getData() {
         listCategories = realm.objects(FindList.self)
         sortLists()
@@ -208,20 +203,19 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
             try realm.write {
                 realm.add(findList)
             }
-        } catch {
-
-        }
+        } catch {}
         sortLists()
         
         let indexPath = IndexPath(
             item: 0,
-           section: 0
+            section: 0
         )
         collectionView?.performBatchUpdates({
             self.collectionView?.insertItems(at: [indexPath])
         }, completion: nil)
         listsChanged?()
     }
+
     func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
         if let listToEdit = listCategories?[index] {
             do {
@@ -235,14 +229,13 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
                     listToEdit.iconImageName = imageName
                     listToEdit.iconColorName = imageColor
                 }
-            } catch {
-
-            }
+            } catch {}
         }
         listsChanged?()
         collectionView.reloadData()
     }
 }
+
 extension ListsController {
     func updateExistingList(name: String, description: String, contents: [String], imageName: String, imageColor: String, deleteList: Bool) {
         if deleteList {
@@ -255,11 +248,9 @@ extension ListsController {
 
 extension ListsController {
     func madeNewList(name: String, description: String, contents: [String], imageName: String, imageColor: String) {
-        
         let listsCount = defaults.integer(forKey: "listsCreateCount")
         let newListsCount = listsCount + 1
         defaults.set(newListsCount, forKey: "listsCreateCount")
-        
         
         let newList = FindList()
         newList.name = name

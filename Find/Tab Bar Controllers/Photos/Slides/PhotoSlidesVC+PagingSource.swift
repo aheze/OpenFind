@@ -11,10 +11,9 @@ import UIKit
 protocol PhotoSlidesUpdatedIndex: class {
     func indexUpdated(to newIndex: Int)
 }
+
 extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
         if currentIndex == 0 {
             return nil
         }
@@ -33,11 +32,10 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         }
         
         return leftViewController
-        
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if currentIndex == (self.resultPhotos.count - 1) {
+        if currentIndex == (resultPhotos.count - 1) {
             return nil
         }
         
@@ -55,7 +53,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         }
         
         return rightViewController
-        
     }
     
     /// remove highlights if matches changed
@@ -74,17 +71,15 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
         let currentVC = currentViewController
         if completed {
             let index = currentVC.index
             currentIndex = index
             voiceOverSlidesControl.currentIndex = index
             
-            
             if !cameFromFind {
                 temporaryCachingPhoto = nil /// reset caching
-                self.currentCachingIdentifier = nil
+                currentCachingIdentifier = nil
                 CachingFinder.resetState()
                 
                 let resultPhoto = resultPhotos[currentIndex]
@@ -133,7 +128,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                     if matchToColors.keys.count >= 1 {
                         if let currentMatchToColors = resultPhoto.currentMatchToColors, currentMatchToColors == matchToColors {
                             setPromptToFinishedFastFinding(howMany: resultPhoto.components.count) /// cached photo and pressed continue
-                            self.drawHighlightsAndTranscripts()
+                            drawHighlightsAndTranscripts()
                         } else {
                             if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
                                 findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex) /// cached photo, didn't press Continue yet
@@ -143,7 +138,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                         }
                     }
                 }
-                
             }
         }
         previousViewControllers.forEach { vc in
@@ -151,7 +145,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
             zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
         }
         
-        self.updatedIndex?.indexUpdated(to: currentIndex)
-        
+        updatedIndex?.indexUpdated(to: currentIndex)
     }
 }

@@ -22,35 +22,32 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
-
 
 @available(iOS 8.0, *)
 public struct ConstraintLayoutSupportDSL: ConstraintDSL {
-    
     public var target: AnyObject? {
-        return self.support
+        return support
     }
     
     internal let support: ConstraintLayoutSupport
     
     internal init(support: ConstraintLayoutSupport) {
         self.support = support
-        
     }
     
     public var top: ConstraintItem {
-        return ConstraintItem(target: self.target, attributes: ConstraintAttributes.top)
+        return ConstraintItem(target: target, attributes: ConstraintAttributes.top)
     }
     
     public var bottom: ConstraintItem {
-        return ConstraintItem(target: self.target, attributes: ConstraintAttributes.bottom)
+        return ConstraintItem(target: target, attributes: ConstraintAttributes.bottom)
     }
     
     public var height: ConstraintItem {
-        return ConstraintItem(target: self.target, attributes: ConstraintAttributes.height)
+        return ConstraintItem(target: target, attributes: ConstraintAttributes.height)
     }
 }

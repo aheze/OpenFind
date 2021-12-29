@@ -8,12 +8,11 @@
 import UIKit
 
 class LeftView: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var buttonView: ButtonView!
+    @IBOutlet var buttonView: ButtonView!
 
-    @IBOutlet weak var findIconView: FindIconView!
-    @IBOutlet weak var iconViewCenterXC: NSLayoutConstraint!
+    @IBOutlet var findIconView: FindIconView!
+    @IBOutlet var iconViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,9 +27,8 @@ class LeftView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("LeftView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         iconViewCenterXC.constant = SearchConstants.fieldLeftViewPadding
     }
 }
-

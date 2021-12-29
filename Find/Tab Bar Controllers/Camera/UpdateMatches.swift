@@ -16,7 +16,6 @@ extension CameraViewController {
         statsView.accessibilityValue = "\(number) results"
         
         if statsFocused {
-            
             if statsShouldAnnounce {
                 UIAccessibility.post(notification: .announcement, argument: "\(number)")
             }
@@ -55,10 +54,10 @@ extension CameraViewController {
         
         previousNumberOfMatches = number
     }
-
 }
+
 extension UIView {
-    func fadeTransition(_ duration:CFTimeInterval) {
+    func fadeTransition(_ duration: CFTimeInterval) {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name:
             CAMediaTimingFunctionName.easeInEaseOut)

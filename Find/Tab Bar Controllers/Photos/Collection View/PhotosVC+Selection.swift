@@ -19,7 +19,6 @@ enum ChangeActions {
 extension PhotosViewController {
     func selectPressed() {
         if allPhotosToDisplay.count == 0 {
-
             if TipViews.inTutorial {
                 TipViews.finishTutorial()
             }
@@ -48,6 +47,7 @@ extension PhotosViewController {
             }
         }
     }
+
     func doneWithSelect() {
         selectButtonSelected = false
         showSelectionControls?(false)
@@ -69,6 +69,7 @@ extension PhotosViewController {
         segmentedSlider.updateNumberOfSelected(to: numberSelected)
         updateNumberOfSelectedPhotos?(numberSelected)
     }
+
     func determineActions() {
         var starredCount = 0
         var notStarredCount = 0
@@ -108,6 +109,7 @@ extension PhotosViewController {
             updateActions?(.shouldNotCache)
         }
     }
+
     func deselectAllPhotos() {
         numberOfSelected = 0
         for indexP in indexPathsSelected {
@@ -120,6 +122,7 @@ extension PhotosViewController {
         indexPathsSelected.removeAll()
     }
 }
+
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !refreshing {
@@ -140,6 +143,7 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
+
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if selectButtonSelected == true {
             indexPathsSelected.remove(object: indexPath)
@@ -151,14 +155,12 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
+
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
-        
         if selectButtonSelected {
             return true
         } else {
             return false
         }
     }
-
 }
-

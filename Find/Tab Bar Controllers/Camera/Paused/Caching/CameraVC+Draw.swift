@@ -14,6 +14,7 @@ extension CameraViewController {
             scaleInHighlight(component: highlight, shouldScale: false)
         }
     }
+
     func scaleInHighlight(component: Component, shouldScale: Bool) {
         DispatchQueue.main.async {
             let cornerRadius = min(component.height / 3.5, 10)
@@ -45,7 +46,6 @@ extension CameraViewController {
                     newView.layer.cornerRadius = cornerRadius
                 }
             }
-            
             
             component.baseView = newView
             newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)

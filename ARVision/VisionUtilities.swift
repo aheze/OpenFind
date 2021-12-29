@@ -42,7 +42,6 @@ extension Optional where Wrapped == Date {
         } else {
             return true
         }
-        
     }
 }
 
@@ -52,8 +51,7 @@ func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
 
 /// https://stackoverflow.com/a/56876898/14351818
 extension Array {
-
     var middleIndex: Int {
-        return (self.isEmpty ? self.startIndex : self.count - 1) / 2
+        return (isEmpty ? startIndex : count - 1) / 2
     }
 }

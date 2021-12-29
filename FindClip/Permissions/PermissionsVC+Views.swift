@@ -39,8 +39,8 @@ extension PermissionsViewController {
         permissionsNeededLabel.layer.masksToBounds = false
         permissionsNeededLabel.layer.shouldRasterize = true
         permissionsNeededLabel.layer.rasterizationScale = UIScreen.main.scale
-        
     }
+
     func addGraphicsView() {
         let hostingController = UIHostingController(rootView: SymbolsView())
         hostingController.view.backgroundColor = .clear
@@ -50,6 +50,7 @@ extension PermissionsViewController {
         
         addParallaxToView(vw: expandedGraphicsReferenceView)
     }
+
     func addParallaxToView(vw: UIView) {
         let amount = 50
 
@@ -81,7 +82,7 @@ extension UIView {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = 0.6
-        animation.values = [-10.0, 10.0, -9.0, 9.0, -8.0, 7.0, -5.0, 3.0, 0.0 ]
+        animation.values = [-10.0, 10.0, -9.0, 9.0, -8.0, 7.0, -5.0, 3.0, 0.0]
         layer.add(animation, forKey: "shake")
     }
 }

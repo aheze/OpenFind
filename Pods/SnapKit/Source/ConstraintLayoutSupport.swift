@@ -22,15 +22,14 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
 #if os(iOS) || os(tvOS)
-    @available(iOS 8.0, *)
-    public typealias ConstraintLayoutSupport = UILayoutSupport
+@available(iOS 8.0, *)
+public typealias ConstraintLayoutSupport = UILayoutSupport
 #else
-    public class ConstraintLayoutSupport {}
+public class ConstraintLayoutSupport {}
 #endif

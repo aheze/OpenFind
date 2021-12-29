@@ -7,19 +7,16 @@
 
 import SwiftUI
 
-extension ScrollView {
-    
-    public func fixFlickering() -> some View {
-        
-        return self.fixFlickering { (scrollView) in
-            return scrollView
+public extension ScrollView {
+    func fixFlickering() -> some View {
+        return fixFlickering { scrollView in
+            scrollView
         }
     }
     
-    public func fixFlickering<T: View>(@ViewBuilder configurator: @escaping (ScrollView<AnyView>) -> T) -> some View {
-        
+    func fixFlickering<T: View>(@ViewBuilder configurator: @escaping (ScrollView<AnyView>) -> T) -> some View {
         GeometryReader { geometryWithSafeArea in
-            GeometryReader { geometry in
+            GeometryReader { _ in
                 configurator(
                     ScrollView<AnyView>(self.axes, showsIndicators: self.showsIndicators) {
                         AnyView(

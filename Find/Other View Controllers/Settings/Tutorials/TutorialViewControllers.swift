@@ -6,21 +6,20 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import SwiftEntryKit
+import UIKit
 
 class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-    
-    @IBOutlet weak var paperOnboarding: PaperOnboarding!
+    @IBOutlet var paperOnboarding: PaperOnboarding!
     
     @IBAction func xPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet var goButton: UIButton!
     @IBAction func goButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -30,7 +29,6 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         goButton.accessibilityLabel = "Continue"
@@ -53,9 +51,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         }
     }
     
-    
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
-        let firstDescription = UIAccessibility.isVoiceOverRunning ? "Find text in real life, fast. Swipe up or down on the Page chooser to navigate this tutorial." : LaunchLocalization.swipeToGetStarted 
+        let firstDescription = UIAccessibility.isVoiceOverRunning ? "Find text in real life, fast. Swipe up or down on the Page chooser to navigate this tutorial." : LaunchLocalization.swipeToGetStarted
         return [
             OnboardingItemInfo(informationImage: UIImage(named: "Intro1")!,
                                title: LaunchLocalization.welcomeToFind,
@@ -98,23 +95,22 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                descriptionFont: UIFont.systemFont(ofSize: 17))
         ][index]
     }
+
     func onboardingItemsCount() -> Int {
         return 4
     }
 }
 
 class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-    
-    @IBOutlet weak var paperOnboarding: PaperOnboarding!
-    
+    @IBOutlet var paperOnboarding: PaperOnboarding!
     
     @IBAction func historyXPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet var goButton: UIButton!
     @IBAction func histGoButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -127,7 +123,6 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         goButton.accessibilityLabel = "Continue"
         goButton.accessibilityHint = "Finish tutorial"
-        
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
@@ -145,7 +140,6 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
             })
         }
     }
-    
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
@@ -195,20 +189,18 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         return 4
     }
 }
+
 class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-    
-    @IBOutlet weak var paperOnboarding: PaperOnboarding!
-    
+    @IBOutlet var paperOnboarding: PaperOnboarding!
     
     @IBAction func listsXPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet var goButton: UIButton!
     @IBAction func listsGoButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -237,7 +229,6 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
             })
         }
     }
-    
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
@@ -287,17 +278,17 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
         return 4
     }
 }
+
 class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
+    @IBOutlet var paperOnboarding: PaperOnboarding!
     
-    @IBOutlet weak var paperOnboarding: PaperOnboarding!
-    
-    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet var goButton: UIButton!
     @IBAction func listsGoButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func listsBuilderXPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -326,10 +317,8 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             })
-            
         }
     }
-    
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [

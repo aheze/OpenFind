@@ -35,7 +35,6 @@ public protocol URLRepresentable {
 }
 
 extension URL: URLRepresentable {
-
     public var url: URL {
         return self
     }
@@ -46,6 +45,4 @@ extension URL: URLRepresentable {
         }
         self.init(string: string)
     }
-    
 }
-

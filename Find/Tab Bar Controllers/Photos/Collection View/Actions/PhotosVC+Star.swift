@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotosViewController {
     func star(_ shouldStar: Bool) {
-        
         if TipViews.inTutorial {
             TipViews.finishTutorial()
         }
@@ -27,9 +26,7 @@ extension PhotosViewController {
                                     try realm.write {
                                         realModel.isHearted = true
                                     }
-                                } catch {
-
-                                }
+                                } catch {}
                                 editableModel.isHearted = true /// also change the editable model
                             }
                         }
@@ -45,9 +42,7 @@ extension PhotosViewController {
                             try realm.write {
                                 realm.add(newModel)
                             }
-                        } catch {
-
-                        }
+                        } catch {}
                         
                         let editableModel = EditableHistoryModel()
                         editableModel.assetIdentifier = assetIdentifier
@@ -69,9 +64,7 @@ extension PhotosViewController {
                                     try realm.write {
                                         realModel.isHearted = false
                                     }
-                                } catch {
-
-                                }
+                                } catch {}
                                 editableModel.isHearted = false /// also change the editable model
                             }
                         }
@@ -84,6 +77,5 @@ extension PhotosViewController {
         sortPhotos(with: photoFilterState)
         applySnapshot()
         doneWithSelect()
-        
     }
 }

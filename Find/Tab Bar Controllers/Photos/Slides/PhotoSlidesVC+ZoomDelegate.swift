@@ -6,16 +6,13 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension PhotoSlidesViewController: ZoomAnimatorDelegate {
+    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {}
 
-    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-    }
-
-    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-    }
+    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {}
 
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
         return currentViewController.imageView

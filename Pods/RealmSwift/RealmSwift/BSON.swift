@@ -20,73 +20,54 @@ import Realm
 
 /// A tag protocol which marks types that can be used as the partition value
 /// for synchronized Realms.
-public protocol PartitionValue {
-}
+public protocol PartitionValue {}
 
 /// Protocol representing a BSON value.
 /// - SeeAlso: bsonspec.org
-public protocol BSON: PartitionValue, Equatable {
-}
+public protocol BSON: PartitionValue, Equatable {}
 
-extension NSNull: BSON {
-}
+extension NSNull: BSON {}
 
-extension Int: BSON {
-}
+extension Int: BSON {}
 
-extension Int32: BSON {
-}
+extension Int32: BSON {}
 
-extension Int64: BSON {
-}
+extension Int64: BSON {}
 
-extension Bool: BSON {
-}
+extension Bool: BSON {}
 
-extension Double: BSON {
-}
+extension Double: BSON {}
 
-extension String: BSON {
-}
+extension String: BSON {}
 
-extension Data: BSON {
-}
+extension Data: BSON {}
 
-extension Date: BSON {
-}
+extension Date: BSON {}
 
-extension Decimal128: BSON {
-}
+extension Decimal128: BSON {}
 
-extension ObjectId: BSON {
-}
+extension ObjectId: BSON {}
 
-extension UUID: BSON {
-}
+extension UUID: BSON {}
 
 /// A Dictionary object representing a `BSON` document.
-public typealias Document = Dictionary<String, AnyBSON?>
+public typealias Document = [String: AnyBSON?]
 
-extension Dictionary: BSON, PartitionValue where Key == String, Value == AnyBSON? {
-}
+extension Dictionary: BSON, PartitionValue where Key == String, Value == AnyBSON? {}
 
-extension Array: BSON, PartitionValue where Element == AnyBSON? {
-}
+extension Array: BSON, PartitionValue where Element == AnyBSON? {}
 
-extension NSRegularExpression: BSON {
-}
+extension NSRegularExpression: BSON {}
 
 /// MaxKey will always be the greatest value when comparing to other BSON types
 public typealias MaxKey = RLMMaxKey
 
-extension MaxKey: BSON {
-}
+extension MaxKey: BSON {}
 
 /// MinKey will always be the smallest value when comparing to other BSON types
 public typealias MinKey = RLMMinKey
 
-extension MinKey: BSON {
-}
+extension MinKey: BSON {}
 
 /// Enum representing a BSON value.
 /// - SeeAlso: bsonspec.org
@@ -183,7 +164,7 @@ extension MinKey: BSON {
             self = .objectId(val)
         case let val as Document:
             self = .document(val)
-        case let val as Array<AnyBSON?>:
+        case let val as [AnyBSON?]:
             self = .array(val)
         case let val as Bool:
             self = .bool(val)
@@ -202,7 +183,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is an `.int32`, return it as an `Int32`. Otherwise, return nil.
     public var int32Value: Int32? {
-        guard case let .int32(i) = self else {
+        guard case .int32(let i) = self else {
             return nil
         }
         return i
@@ -210,7 +191,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.regex`, return it as a `RegularExpression`. Otherwise, return nil.
     public var regexValue: NSRegularExpression? {
-        guard case let .regex(r) = self else {
+        guard case .regex(let r) = self else {
             return nil
         }
         return r
@@ -218,7 +199,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is an `.int64`, return it as an `Int64`. Otherwise, return nil.
     public var int64Value: Int64? {
-        guard case let .int64(i) = self else {
+        guard case .int64(let i) = self else {
             return nil
         }
         return i
@@ -226,7 +207,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is an `.objectId`, return it as an `ObjectId`. Otherwise, return nil.
     public var objectIdValue: ObjectId? {
-        guard case let .objectId(o) = self else {
+        guard case .objectId(let o) = self else {
             return nil
         }
         return o
@@ -234,7 +215,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.date`, return it as a `Date`. Otherwise, return nil.
     public var dateValue: Date? {
-        guard case let .datetime(d) = self else {
+        guard case .datetime(let d) = self else {
             return nil
         }
         return d
@@ -242,7 +223,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is an `.array`, return it as an `[BSON]`. Otherwise, return nil.
     public var arrayValue: [AnyBSON?]? {
-        guard case let .array(a) = self else {
+        guard case .array(let a) = self else {
             return nil
         }
         return a
@@ -250,7 +231,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.string`, return it as a `String`. Otherwise, return nil.
     public var stringValue: String? {
-        guard case let .string(s) = self else {
+        guard case .string(let s) = self else {
             return nil
         }
         return s
@@ -258,7 +239,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.document`, return it as a `Document`. Otherwise, return nil.
     public var documentValue: Document? {
-        guard case let .document(d) = self else {
+        guard case .document(let d) = self else {
             return nil
         }
         return d
@@ -266,7 +247,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.bool`, return it as an `Bool`. Otherwise, return nil.
     public var boolValue: Bool? {
-        guard case let .bool(b) = self else {
+        guard case .bool(let b) = self else {
             return nil
         }
         return b
@@ -274,7 +255,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.binary`, return it as a `Binary`. Otherwise, return nil.
     public var binaryValue: Data? {
-        guard case let .binary(b) = self else {
+        guard case .binary(let b) = self else {
             return nil
         }
         return b
@@ -282,7 +263,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.double`, return it as a `Double`. Otherwise, return nil.
     public var doubleValue: Double? {
-        guard case let .double(d) = self else {
+        guard case .double(let d) = self else {
             return nil
         }
         return d
@@ -290,7 +271,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.decimal128`, return it as a `Decimal128`. Otherwise, return nil.
     public var decimal128Value: Decimal128? {
-        guard case let .decimal128(d) = self else {
+        guard case .decimal128(let d) = self else {
             return nil
         }
         return d
@@ -298,7 +279,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.timestamp`, return it as a `Timestamp`. Otherwise, return nil.
     public var timestampValue: Date? {
-        guard case let .timestamp(t) = self else {
+        guard case .timestamp(let t) = self else {
             return nil
         }
         return t
@@ -306,7 +287,7 @@ extension MinKey: BSON {
 
     /// If this `BSON` is a `.uuid`, return it as a `UUID`. Otherwise, return nil.
     public var uuidValue: UUID? {
-        guard case let .uuid(s) = self else {
+        guard case .uuid(let s) = self else {
             return nil
         }
         return s
@@ -321,11 +302,11 @@ extension MinKey: BSON {
     /// This will coerce non-integer numeric cases (e.g. `.double`) into an `Int` if such coercion would be lossless.
     public func asInt() -> Int? {
         switch self {
-        case let .int32(value):
+        case .int32(let value):
             return Int(value)
-        case let .int64(value):
+        case .int64(let value):
             return Int(exactly: value)
-        case let .double(value):
+        case .double(let value):
             return Int(exactly: value)
         default:
             return nil
@@ -336,11 +317,11 @@ extension MinKey: BSON {
     /// This will coerce numeric cases (e.g. `.double`) into an `Int32` if such coercion would be lossless.
     public func asInt32() -> Int32? {
         switch self {
-        case let .int32(value):
+        case .int32(let value):
             return value
-        case let .int64(value):
+        case .int64(let value):
             return Int32(exactly: value)
-        case let .double(value):
+        case .double(let value):
             return Int32(exactly: value)
         default:
             return nil
@@ -351,11 +332,11 @@ extension MinKey: BSON {
     /// This will coerce numeric cases (e.g. `.double`) into an `Int64` if such coercion would be lossless.
     public func asInt64() -> Int64? {
         switch self {
-        case let .int32(value):
+        case .int32(let value):
             return Int64(value)
-        case let .int64(value):
+        case .int64(let value):
             return value
-        case let .double(value):
+        case .double(let value):
             return Int64(exactly: value)
         default:
             return nil
@@ -366,10 +347,10 @@ extension MinKey: BSON {
     /// This will coerce numeric cases (e.g. `.decimal128`) into a `Double` if such coercion would be lossless.
     public func asDouble() -> Double? {
         switch self {
-        case let .double(d):
+        case .double(let d):
             return d
         default:
-            guard let intValue = self.asInt() else {
+            guard let intValue = asInt() else {
                 return nil
             }
             return Double(intValue)
@@ -381,13 +362,13 @@ extension MinKey: BSON {
     public func asDecimal128() -> Decimal128? {
         let str: String
         switch self {
-        case let .decimal128(d):
+        case .decimal128(let d):
             return d
-        case let .int64(i):
+        case .int64(let i):
             str = String(i)
-        case let .int32(i):
+        case .int32(let i):
             str = String(i)
-        case let .double(d):
+        case .double(let d):
             str = String(d)
         default:
             return nil
@@ -399,12 +380,12 @@ extension MinKey: BSON {
     public func value<T: BSON>() -> T? {
         switch self {
         case .int32(let val):
-            if T.self == Int.self && MemoryLayout<Int>.size == 4 {
+            if T.self == Int.self, MemoryLayout<Int>.size == 4 {
                 return Int(val) as? T
             }
             return val as? T
         case .int64(let val):
-            if T.self == Int.self && MemoryLayout<Int>.size != 4 {
+            if T.self == Int.self, MemoryLayout<Int>.size != 4 {
                 return Int(val) as? T
             }
             return val as? T

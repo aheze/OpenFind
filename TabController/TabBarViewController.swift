@@ -5,16 +5,16 @@
 //  Created by Zheng on 10/28/21.
 //
 
-import UIKit
-import SwiftUI
 import Combine
+import SwiftUI
+import UIKit
 
 class TabBarViewController: UIViewController {
     /// big, general area
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet var contentView: UIView!
     
     /// for the pages
-    @IBOutlet weak var contentCollectionView: UICollectionView!
+    @IBOutlet var contentCollectionView: UICollectionView!
     lazy var contentPagingLayout: ContentPagingFlowLayout = {
         let flowLayout = ContentPagingFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -31,10 +31,9 @@ class TabBarViewController: UIViewController {
     var getPages: (() -> [PageViewController])?
     var scrollViewDidScroll: ((UIScrollView) -> Void)?
     
-    
     /// for tab bar (SwiftUI)
-    @IBOutlet weak var tabBarContainerView: UIView!
-    @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
+    @IBOutlet var tabBarContainerView: UIView!
+    @IBOutlet var tabBarHeightC: NSLayoutConstraint!
 
     var excludedFrames = [CGRect]()
     
@@ -64,6 +63,7 @@ class TabBarViewController: UIViewController {
             updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
         }
     }
+
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat) {
         if let pages = getPages?() {
             for page in pages {
@@ -106,13 +106,9 @@ class TabBarViewController: UIViewController {
         }
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
-            
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
             let targetOffset = contentPagingLayout.getTargetOffset(for: CGPoint(x: attributes.fullOrigin, y: 0), velocity: 0)
             contentCollectionView.setContentOffset(targetOffset, animated: animated)
         }
     }
 }
-
-
-

@@ -12,6 +12,7 @@ enum ToolbarButtonType {
     case newMatch
     case done
 }
+
 enum ListToolbarLocation {
     case inCamera
     case inPhotos
@@ -20,19 +21,21 @@ enum ListToolbarLocation {
 protocol ToolbarButtonPressed: class {
     func buttonPressed(button: ToolbarButtonType)
 }
+
 protocol SelectedList: class {
     func addList(list: EditableFindList)
 }
+
 protocol StartedEditing: class {
     func startedEditing(start: Bool)
 }
-class ListToolBar: UIView, InjectLists {
 
+class ListToolBar: UIView, InjectLists {
     var location = ListToolbarLocation.inPhotos
     
-    @IBOutlet weak var backgroundTapView: UIView!
+    @IBOutlet var backgroundTapView: UIView!
     
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet var flowLayout: UICollectionViewFlowLayout!
     var editableListCategories = [EditableFindList]()
     
     weak var pressedButton: ToolbarButtonPressed?
@@ -40,12 +43,12 @@ class ListToolBar: UIView, InjectLists {
     weak var startedEditing: StartedEditing?
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var visualBaseView: UIVisualEffectView!
+    @IBOutlet var visualBaseView: UIVisualEffectView!
     
-    @IBOutlet weak var newMatchButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet var newMatchButton: UIButton!
+    @IBOutlet var doneButton: UIButton!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     
     @IBAction func newMatchPressed(_ sender: Any) {
         pressedButton?.buttonPressed(button: .newMatch)
@@ -69,15 +72,16 @@ class ListToolBar: UIView, InjectLists {
         super.init(frame: .zero)
         setup()
     }
+
     private func setup() {
         clipsToBounds = true
         
         Bundle.main.loadNibNamed("ListToolBar", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        collectionView.register(UINib.init(nibName: "NewListToolbarCell", bundle: nil), forCellWithReuseIdentifier: "tooltopCellNew")
+        collectionView.register(UINib(nibName: "NewListToolbarCell", bundle: nil), forCellWithReuseIdentifier: "tooltopCellNew")
         
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
@@ -103,7 +107,6 @@ class ListToolBar: UIView, InjectLists {
         } else {
             doneButton.accessibilityHint = "Dismiss the keyboard"
         }
-        
     }
     
     func addList(list: EditableFindList) {
@@ -111,7 +114,6 @@ class ListToolBar: UIView, InjectLists {
     }
     
     func setLightMode() {
-
         newMatchButton.backgroundColor = UIColor.secondarySystemFill
         doneButton.backgroundColor = UIColor.secondarySystemFill
         
@@ -120,11 +122,9 @@ class ListToolBar: UIView, InjectLists {
         
         let effect = UIBlurEffect(style: .systemThickMaterial)
         visualBaseView.effect = effect
-        
     }
     
     func forceDarkMode() {
-
         newMatchButton.backgroundColor = UIColor(named: "DarkSystemFill")
         doneButton.backgroundColor = UIColor(named: "DarkSystemFill")
         
@@ -133,13 +133,10 @@ class ListToolBar: UIView, InjectLists {
         
         let effect = UIBlurEffect(style: .systemThickMaterialDark)
         visualBaseView.effect = effect
-        
     }
-    
 }
 
 extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return editableListCategories.count
     }
@@ -175,14 +172,13 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
                 listName,
                 iconTitle, iconString,
                 colorTitle, colorString,
-                pitchTitle, pitchString,
+                pitchTitle, pitchString
             ]
         )
         
         cell.contentView.accessibilityAttributedValue = accessibilityLabel
         
         return cell
-        
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -199,14 +195,14 @@ extension ListToolBar {
         let componentOrderID = component.orderIdentifier
         var indexPathToAppendTo = 0
         for (index, singleComponent) in editableListCategories.enumerated() {
-            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
-            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
+            /// We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
+            /// If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
             if singleComponent.orderIdentifier < componentOrderID {
                 indexPathToAppendTo = index + 1
             }
         }
         
-        ///Now that we know where to append the green cell, let's do it!
+        /// Now that we know where to append the green cell, let's do it!
         editableListCategories.insert(component, at: indexPathToAppendTo)
         let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
         collectionView.performBatchUpdates({

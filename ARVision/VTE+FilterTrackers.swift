@@ -17,14 +17,13 @@ extension VisionTrackingEngine {
         var keptTrackers = [UUID: Tracker]()
         for (uuid, tracker) in trackers {
             if !keptTrackers.contains(where: {
-
                 let distance = CGPointDistanceSquared(
                     from: CGPoint(x: $0.value.boundingBox.midX, y: $0.value.boundingBox.midY),
                     to: CGPoint(x: tracker.boundingBox.midX, y: tracker.boundingBox.midY)
                 )
 
                 return distance <= CGFloat(VisionConstants.trackerMinimumProximitySquared)
-            }) && tracker.confidence >= averageConfidence {
+            }), tracker.confidence >= averageConfidence {
                 keptTrackers[uuid] = tracker
             }
         }

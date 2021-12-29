@@ -8,63 +8,51 @@
 import SwiftUI
 
 class PhotosViewController: UIViewController, PageViewController {
-    
     var tabType: TabState = .photos
     var photosSelectionViewModel: ToolbarViewModel.PhotosSelection!
     
-    lazy var selectionToolbar: PhotosSelectionToolbarView = {
-        return PhotosSelectionToolbarView(viewModel: photosSelectionViewModel)
-    }()
+    lazy var selectionToolbar: PhotosSelectionToolbarView = .init(viewModel: photosSelectionViewModel)
     
     var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
     
     /// active, animate
     var activateSelectionToolbar: ((Bool, Bool) -> Void)?
     
-    
     @IBAction func selectPressed(_ sender: Any) {
         if let activeToolbarViewModel = getActiveToolbarViewModel?() {
             if activeToolbarViewModel.toolbar == .photosSelection {
-                self.activateSelectionToolbar?(false, false)
+                activateSelectionToolbar?(false, false)
             } else {
-                self.activateSelectionToolbar?(true, false)
+                activateSelectionToolbar?(true, false)
             }
         }
     }
-    @IBAction func addPressed(_ sender: Any) {
 
+    @IBAction func addPressed(_ sender: Any) {
         photosSelectionViewModel.selectedCount += 1
     }
-    @IBAction func minusPressed(_ sender: Any) {
 
+    @IBAction func minusPressed(_ sender: Any) {
         photosSelectionViewModel.selectedCount -= 1
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        self.photosSelectionViewModel = .init()
+        photosSelectionViewModel = .init()
     }
 }
 
 extension PhotosViewController {
-    func willBecomeActive() {
-        
-    }
+    func willBecomeActive() {}
     
-    func didBecomeActive() {
-        
-    }
+    func didBecomeActive() {}
     
     func willBecomeInactive() {
-
-        self.activateSelectionToolbar?(false, true)
+        activateSelectionToolbar?(false, true)
     }
     
-    func didBecomeInactive() {
-        
-    }
+    func didBecomeInactive() {}
 }
 
 struct PhotosSelectionToolbarView: View {
@@ -81,15 +69,15 @@ struct PhotosSelectionToolbarView: View {
                 .font(.system(.headline))
                 .frame(maxWidth: .infinity)
             
-            ToolbarIconButton(iconName: "trash") {
-            }
-            .disabled(viewModel.selectedCount == 0)
+            ToolbarIconButton(iconName: "trash") {}
+                .disabled(viewModel.selectedCount == 0)
         }
     }
 }
+
 struct ToolbarIconButton: View {
     var iconName: String
-    var action: (() -> Void)
+    var action: () -> Void
     var body: some View {
         Button(action: action) {
             Image(systemName: iconName)

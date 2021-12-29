@@ -9,9 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var lists: ListsController = {
-        return ListsBridge.makeController()
-    }()
+    lazy var lists: ListsController = ListsBridge.makeController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,4 +17,3 @@ class ViewController: UIViewController {
         addChild(lists.viewController, in: view)
     }
 }
-

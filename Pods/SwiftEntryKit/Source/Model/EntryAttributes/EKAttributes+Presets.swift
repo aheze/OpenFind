@@ -8,7 +8,6 @@
 import Foundation
 
 public extension EKAttributes {
-    
     /** Default attributes - Can be mutated according to the hosting application theme */
     static var `default` = EKAttributes()
     

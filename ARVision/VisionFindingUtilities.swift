@@ -11,7 +11,7 @@ import Vision
 
 struct VisionFindingUtilities {
     static func getMiddleWordBoundingBox(textObservation: VNRecognizedTextObservation) -> CGRect {
-        guard let text = textObservation.topCandidates(1).first?.string else { return textObservation.boundingBox}
+        guard let text = textObservation.topCandidates(1).first?.string else { return textObservation.boundingBox }
         let separatedWords = text.components(separatedBy: " ")
         let middleWordIndex = separatedWords.middleIndex
         let middleWord = separatedWords[safe: middleWordIndex]
@@ -28,12 +28,11 @@ struct VisionFindingUtilities {
         wordBoundingBox.size.width = wordWidth
         wordBoundingBox.origin.x += wordXOriginOffset
         return wordBoundingBox
-        
     }
+
     static func getWordBoundingBox(textObservation: VNRecognizedTextObservation, firstWord: Bool) -> CGRect {
         let text = textObservation.topCandidates(1).first?.string
         if firstWord {
-            
             let wordCount = text?.components(separatedBy: " ").first?.count ?? 1
             let wordPercentageOfTotal = Double(wordCount) / Double(text?.count ?? 1)
             let wordWidth = textObservation.boundingBox.width * wordPercentageOfTotal
@@ -41,7 +40,6 @@ struct VisionFindingUtilities {
             wordBoundingBox.size.width = wordWidth
             return wordBoundingBox
         } else {
-            
             let wordCount = text?.components(separatedBy: " ").last?.count ?? 1
             let wordPercentageOfTotal = Double(wordCount) / Double(text?.count ?? 1)
             let wordWidth = textObservation.boundingBox.width * wordPercentageOfTotal
@@ -52,6 +50,5 @@ struct VisionFindingUtilities {
             wordBoundingBox.origin.x += wordXOriginOffset
             return wordBoundingBox
         }
-        
     }
 }

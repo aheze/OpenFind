@@ -10,19 +10,18 @@ import UIKit
 
 /// in case no camera was found
 class FallbackView: UIView {
-    
     var goToPhotos: (() -> Void)?
     
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var button: UIButton!
     @IBAction func buttonPressed(_ sender: Any) {
         goToPhotos?()
     }
     
-    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet var backgroundView: UIView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +36,7 @@ class FallbackView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("FallbackView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         titleLabel.text = "No Camera Found."
@@ -46,7 +45,6 @@ class FallbackView: UIView {
         descriptionLabel.text = "Find was not able to access the camera. Would you like to find from your photos instead?"
         descriptionLabel.font = .preferredFont(forTextStyle: .headline)
             
-        
         button.setTitle("Find From Photos", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .headline).bold()
         button.backgroundColor = .white.withAlphaComponent(0.3)
@@ -55,4 +53,3 @@ class FallbackView: UIView {
         backgroundView.layer.cornerRadius = 16
     }
 }
-

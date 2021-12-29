@@ -9,7 +9,6 @@
 import UIKit
 
 final class EKButtonView: UIView {
-
     // MARK: - Properties
     
     private let button = UIButton()
@@ -28,6 +27,7 @@ final class EKButtonView: UIView {
         setupInterfaceStyle()
     }
     
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -64,7 +64,8 @@ final class EKButtonView: UIView {
     }
     
     private func setBackground(by content: EKProperty.ButtonContent,
-                               isHighlighted: Bool) {
+                               isHighlighted: Bool)
+    {
         if isHighlighted {
             backgroundColor = content.highlightedBackgroundColor(for: traitCollection)
         } else {

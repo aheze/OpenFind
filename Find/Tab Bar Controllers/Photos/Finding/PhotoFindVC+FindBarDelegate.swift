@@ -9,11 +9,10 @@
 import UIKit
 
 extension PhotoFindViewController: FindBarDelegate {
-    func pause(pause: Bool) {
-    }
+    func pause(pause: Bool) {}
     
-    func returnTerms(matchToColorsR: [String : [HighlightColor]]) {
-        self.matchToColors = matchToColorsR
+    func returnTerms(matchToColorsR: [String: [HighlightColor]]) {
+        matchToColors = matchToColorsR
         if matchToColorsR.keys.count >= 1 {
             shouldAnnounceStatus = true /// set true now, so later on will announce prompt
             findFromCache()
@@ -22,23 +21,20 @@ extension PhotoFindViewController: FindBarDelegate {
             resultPhotos.removeAll()
             tableView.reloadData()
             currentFastFindProcess = nil
-            self.progressView.alpha = 0
-            self.tableView.alpha = 1
+            progressView.alpha = 0
+            tableView.alpha = 1
         }
     }
     
-    func startedEditing(start: Bool) {
-    }
+    func startedEditing(start: Bool) {}
     
     func pressedReturn() {
         continuePressed(dismissKeyboard: false)
     }
     
-    func triedToEdit() {
-    }
+    func triedToEdit() {}
     
-    func triedToEditWhilePaused() {
-    }
+    func triedToEditWhilePaused() {}
     
     func pressedContinue() {
         if numberCurrentlyFindingFromCache == 0 {
@@ -46,5 +42,4 @@ extension PhotoFindViewController: FindBarDelegate {
             fastFind()
         }
     }
-    
 }

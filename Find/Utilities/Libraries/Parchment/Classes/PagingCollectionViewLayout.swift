@@ -53,21 +53,21 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     /// in a collection view layout based on the invalidation context.
     public var invalidationState: InvalidationState = .everything
 
-    open override var collectionViewContentSize: CGSize {
+    override open var collectionViewContentSize: CGSize {
         return contentSize
     }
 
-    open override class var layoutAttributesClass: AnyClass {
+    override open class var layoutAttributesClass: AnyClass {
         return PagingCellLayoutAttributes.self
     }
 
-    open override var flipsHorizontallyInOppositeLayoutDirection: Bool {
+    override open var flipsHorizontallyInOppositeLayoutDirection: Bool {
         return true
     }
 
     // MARK: Initializers
 
-    public required override init() {
+    override public required init() {
         super.init()
         configure()
     }
@@ -88,7 +88,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     }
 
     private var range: Range<Int> {
-        return 0 ..< view.numberOfItems(inSection: 0)
+        return 0..<view.numberOfItems(inSection: 0)
     }
 
     private var adjustedMenuInsets: UIEdgeInsets {
@@ -119,7 +119,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
 
     // MARK: Public Methods
 
-    open override func prepare() {
+    override open func prepare() {
         super.prepare()
 
         switch invalidationState {
@@ -142,23 +142,23 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
         invalidationState = .nothing
     }
 
-    open override func invalidateLayout() {
+    override open func invalidateLayout() {
         super.invalidateLayout()
         invalidationState = .everything
     }
 
-    open override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+    override open func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
         super.invalidateLayout(with: context)
         invalidationState = invalidationState + InvalidationState(context)
     }
 
-    open override func invalidationContext(forPreferredLayoutAttributes _: UICollectionViewLayoutAttributes, withOriginalAttributes _: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
+    override open func invalidationContext(forPreferredLayoutAttributes _: UICollectionViewLayoutAttributes, withOriginalAttributes _: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
         let context = PagingInvalidationContext()
         context.invalidateSizes = true
         return context
     }
 
-    open override func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
+    override open func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
         switch options.menuItemSize {
         // Invalidate the layout and update the layout attributes with the
         // preferred width for each cell. The preferred size is based on
@@ -175,13 +175,13 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
         }
     }
 
-    open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        guard let layoutAttributes = self.layoutAttributes[indexPath] else { return nil }
+    override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let layoutAttributes = layoutAttributes[indexPath] else { return nil }
         layoutAttributes.progress = progressForItem(at: layoutAttributes.indexPath)
         return layoutAttributes
     }
 
-    open override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    override open func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         switch elementKind {
         case PagingIndicatorKind:
             return indicatorLayoutAttributes
@@ -192,7 +192,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
         }
     }
 
-    open override func layoutAttributesForElements(in _: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override open func layoutAttributesForElements(in _: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var layoutAttributes: [UICollectionViewLayoutAttributes] = Array(self.layoutAttributes.values)
 
         for attributes in layoutAttributes {
@@ -225,7 +225,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     // MARK: Private Methods
 
     private func optionsChanged(oldValue: PagingOptions) {
-        var shouldInvalidateLayout: Bool = false
+        var shouldInvalidateLayout = false
 
         if options.borderClass != oldValue.borderClass {
             registerBorderClass()
@@ -270,7 +270,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
         var previousFrame: CGRect = .zero
         previousFrame.origin.x = adjustedMenuInsets.left - options.menuItemSpacing
 
-        for index in 0 ..< view.numberOfItems(inSection: 0) {
+        for index in 0..<view.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: index, section: 0)
             let attributes = PagingCellLayoutAttributes(forCellWith: indexPath)
             let x = previousFrame.maxX + options.menuItemSpacing
@@ -290,11 +290,11 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
                 attributes.frame = CGRect(x: x, y: y, width: width, height: options.menuItemSize.height)
             } else {
                 switch options.menuItemSize {
-                case let .fixed(width, height):
+                case .fixed(let width, let height):
                     attributes.frame = CGRect(x: x, y: y, width: width, height: height)
-                case let .sizeToFit(minWidth, height):
+                case .sizeToFit(let minWidth, let height):
                     attributes.frame = CGRect(x: x, y: y, width: minWidth, height: height)
-                case let .selfSizing(estimatedWidth, height):
+                case .selfSizing(let estimatedWidth, let height):
                     if let actualWidth = preferredSizeCache[pagingItem.identifier] {
                         attributes.frame = CGRect(x: x, y: y, width: actualWidth, height: height)
                     } else {
@@ -311,7 +311,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
         // reposition the items based on the current options
         if previousFrame.maxX - adjustedMenuInsets.left < view.bounds.width {
             switch options.menuItemSize {
-            case let .sizeToFit(_, height) where sizeCache.implementsSizeDelegate == false:
+            case .sizeToFit(_, let height) where sizeCache.implementsSizeDelegate == false:
                 let insets = adjustedMenuInsets.left + adjustedMenuInsets.right
                 let spacing = (options.menuItemSpacing * CGFloat(range.upperBound - 1))
                 let width = (view.bounds.width - insets - spacing) / CGFloat(range.upperBound)
@@ -498,14 +498,14 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     }
 
     private func indicatorSpacingForIndex(_: Int) -> UIEdgeInsets {
-        if case let .visible(_, _, insets, _) = options.indicatorOptions {
+        if case .visible(_, _, let insets, _) = options.indicatorOptions {
             return insets
         }
         return UIEdgeInsets.zero
     }
 
     private func indicatorInsetsForIndex(_ index: Int) -> PagingIndicatorMetric.Inset {
-        if case let .visible(_, _, _, insets) = options.indicatorOptions {
+        if case .visible(_, _, _, let insets) = options.indicatorOptions {
             if index == 0, range.upperBound == 1 {
                 return .both(insets.left, insets.right)
             } else if index == range.lowerBound {

@@ -11,36 +11,36 @@ import UIKit
 extension CameraViewController {
     func toggleShutter() {
         CameraState.isPaused.toggle()
-        self.cameraIcon.toggle(on: CameraState.isPaused)
-        self.cameraChanged?(CameraState.isPaused, true)
+        cameraIcon.toggle(on: CameraState.isPaused)
+        cameraChanged?(CameraState.isPaused, true)
         
         if CameraState.isPaused {
-            self.pauseLivePreview()
+            pauseLivePreview()
             
             if TipViews.currentLocalStep == 2 {
-                self.startLocalThirdStep()
+                startLocalThirdStep()
             }
             let hasPausedBefore = UserDefaults.standard.bool(forKey: "hasPausedBefore")
             if !hasPausedBefore {
                 UserDefaults.standard.set(true, forKey: "hasPausedBefore")
-                self.showCacheTip()
+                showCacheTip()
             }
-            self.cameraIcon.animateLoading(start: true)
+            cameraIcon.animateLoading(start: true)
         } else {
-            self.saveToPhotosIfNeeded()
-            self.resetState()
-            self.startLivePreview()
+            saveToPhotosIfNeeded()
+            resetState()
+            startLivePreview()
             
             /// clear drawing view
-            self.resetHighlights()
-            self.resetTranscripts()
+            resetHighlights()
+            resetTranscripts()
             
-            self.cameraIcon.animateLoading(start: false)
+            cameraIcon.animateLoading(start: false)
             AppStoreReviewManager.requestReviewIfPossible()
         }
         
-        self.removeFocusRects(CameraState.isPaused)
-        self.adjustButtonLayout(CameraState.isPaused) /// rearrange buttons
-        self.lockFlashlight(lock: CameraState.isPaused)
+        removeFocusRects(CameraState.isPaused)
+        adjustButtonLayout(CameraState.isPaused) /// rearrange buttons
+        lockFlashlight(lock: CameraState.isPaused)
     }
 }

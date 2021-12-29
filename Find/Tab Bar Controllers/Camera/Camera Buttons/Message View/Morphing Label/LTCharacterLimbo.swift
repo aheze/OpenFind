@@ -28,7 +28,6 @@
 import UIKit
 
 public struct LTCharacterLimbo: CustomDebugStringConvertible {
-    
     public let char: Character
     public var rect: CGRect
     public var alpha: CGFloat
@@ -42,5 +41,4 @@ public struct LTCharacterLimbo: CustomDebugStringConvertible {
             + "with alpha \(alpha) "
             + "and \(size)pt font."
     }
-    
 }

@@ -9,14 +9,12 @@
 import UIKit
 
 public extension EKAttributes {
-    
     /** Status bar appearance */
     enum StatusBar {
-        
         /** The appearance of the status bar */
         public typealias Appearance = (visible: Bool, style: UIStatusBarStyle)
         
-        /** Ignored. Status bar is ignored by entries with this apperance value*/
+        /** Ignored. Status bar is ignored by entries with this apperance value */
         case ignored
         
         /** Hidden. Doesn't apply to iPhone X */

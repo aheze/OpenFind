@@ -11,7 +11,7 @@ import UIKit
 extension CameraViewController {
     func findWhenPaused() {
         if let currentImage = currentPausedImage, let cgImage = currentImage.cgImage {
-            if allowSearch == true && displayingOrientationError == false && allowSearchFocus == true {
+            if allowSearch == true, displayingOrientationError == false, allowSearchFocus == true {
                 if busyFastFinding {
                     waitingToFind = true
                 } else {

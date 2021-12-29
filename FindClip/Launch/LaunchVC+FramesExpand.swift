@@ -12,17 +12,21 @@ extension LaunchViewController {
         frameContainerView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         edgeContainerView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
+
     func expandFrameConstraints() {
         frameWidthC.constant = view.bounds.width
         frameHeightC.constant = view.bounds.height
     }
+
     func resetEdgesIdentity() {
         edgeContainerView.transform = CGAffineTransform.identity
     }
+
     func expandHorizontalEdges() {
         leftView.frame.origin.x = -leftView.bounds.width
         rightView.frame.origin.x = view.bounds.width + rightView.bounds.width
     }
+
     func expandBottomEdge() {
         bottomView.frame.origin.y = view.bounds.height
     }

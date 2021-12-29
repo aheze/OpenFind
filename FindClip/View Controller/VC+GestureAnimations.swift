@@ -9,7 +9,6 @@ import UIKit
 
 extension ViewController {
     func releasedPan(at currentY: CGFloat, velocity: CGFloat) {
-        
         let sheetBottomPosition = view.bounds.height + currentY
         
         let decelerationRate = UIScrollView.DecelerationRate.normal.rawValue
@@ -34,7 +33,7 @@ extension ViewController {
             self.cameraContainerView.transform = CGAffineTransform(
                 translationX: 0,
                 y:
-                    finalY
+                finalY
             )
             self.cameraViewController.cameraContentView.transform = CGAffineTransform(
                 scaleX: 1,
@@ -46,13 +45,12 @@ extension ViewController {
             }
         }
         
-        
         let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.animationDuration, initialVelocity: relativeV)
         animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
         
         animator?.addAnimations(block)
         animator?.startAnimation()
-        animator?.addCompletion({ _ in
+        animator?.addCompletion { _ in
             GestureState.savedOffset = finalY
             GestureState.began = false
             
@@ -86,7 +84,7 @@ extension ViewController {
                     self.downloadCoverView.alpha = 1
                 }
             }
-        })
+        }
         
         let progress = -currentY / (view.bounds.height - Positions.topStop)
         

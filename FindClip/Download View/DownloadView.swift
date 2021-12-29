@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DownloadView: View {
-    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -17,7 +16,6 @@ struct DownloadView: View {
                         .foregroundColor(.white)
                         .padding(.bottom, 16)
                         
-                    
                     FeatureWidget(
                         imageName: "photo.on.rectangle.angled",
                         imageColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
@@ -57,7 +55,6 @@ struct DownloadView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 18)
                 .padding(.bottom, 180)
-                
             }
             .fixFlickering { scrollView in
                 scrollView
@@ -70,7 +67,6 @@ struct DownloadView: View {
             .navigationViewStyle(StackNavigationViewStyle())
         }
     }
-    
 }
 
 struct FeatureWidget: View {
@@ -106,17 +102,14 @@ struct FeatureWidget: View {
                             .opacity(0.8)
                     }
                 } else {
-                Text(description)
-                    .font(.system(size: 18, weight: .regular))
-                    .foregroundColor(.white)
-                    .opacity(0.8)
+                    Text(description)
+                        .font(.system(size: 18, weight: .regular))
+                        .foregroundColor(.white)
+                        .opacity(0.8)
                 }
-                
             }
-            
         }
         .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-        
     }
 }
 

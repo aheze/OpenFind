@@ -23,9 +23,8 @@ class PhotosEmptyViewModel: ObservableObject {
 
 extension PhotosViewController {
     func showEmptyView(for types: [PhotoTutorialType]) {
-        
         if photosEmptyViewModel == nil {
-            self.photosEmptyViewModel = PhotosEmptyViewModel()
+            photosEmptyViewModel = PhotosEmptyViewModel()
             let emptyListView = EmptyListView(model: photosEmptyViewModel!)
             let viewController = UIHostingController(rootView: emptyListView)
             addChild(viewController, in: emptyListContainerView)
@@ -47,6 +46,7 @@ extension PhotosViewController {
             emptyListContainerTopC.constant = 0
         }
     }
+
     func hideEmptyView() {
         UIView.animate(withDuration: 0.3) {
             self.emptyListContainerView.alpha = 0

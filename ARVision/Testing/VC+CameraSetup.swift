@@ -6,10 +6,9 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 extension ViewController {
-    
     func configureCamera() {
         if let cameraDevice = getCamera() {
             self.cameraDevice = cameraDevice
@@ -28,7 +27,6 @@ extension ViewController {
                 session.addInput(captureDeviceInput)
             }
         } catch {
-
             return
         }
         session.sessionPreset = .photo
@@ -64,13 +62,12 @@ extension ViewController {
         livePreviewView.videoPreviewLayer.bounds = viewBounds
         livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
         livePreviewView.videoPreviewLayer.videoGravity = .resizeAspect
-        
     }
     
     func getCamera() -> AVCaptureDevice? {
         let discoverySession = AVCaptureDevice.DiscoverySession(
             deviceTypes: [
-//                .builtInTripleCamera,
+                //                .builtInTripleCamera,
                 .builtInDualWideCamera,
                 .builtInDualCamera,
                 .builtInWideAngleCamera
@@ -83,5 +80,3 @@ extension ViewController {
         return bestDevice
     }
 }
-
-

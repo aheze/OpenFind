@@ -13,8 +13,7 @@ class VisionFindingEngine {
     var startTime: Date?
     
     func fastFind(_ text: [String], in pixelBuffer: CVPixelBuffer, completion: @escaping (([VNRecognizedTextObservation]) -> Void)) {
-        
-        let request = VNRecognizeTextRequest { request, error in
+        let request = VNRecognizeTextRequest { request, _ in
             let observations = self.textFound(request: request)
             completion(observations)
         }
@@ -26,9 +25,7 @@ class VisionFindingEngine {
         startTime = Date()
         do {
             try imageRequestHandler.perform([request])
-        } catch let error {
-
-        }
+        } catch {}
     }
 }
 

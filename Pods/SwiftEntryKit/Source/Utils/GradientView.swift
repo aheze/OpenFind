@@ -9,13 +9,13 @@
 import UIKit
 
 class GradientView: UIView {
-    
     struct Style {
         let gradient: EKAttributes.BackgroundStyle.Gradient
         let displayMode: EKAttributes.DisplayMode
         
         init?(gradient: EKAttributes.BackgroundStyle.Gradient?,
-              displayMode: EKAttributes.DisplayMode) {
+              displayMode: EKAttributes.DisplayMode)
+        {
             guard let gradient = gradient else {
                 return nil
             }
@@ -37,6 +37,7 @@ class GradientView: UIView {
         layer.addSublayer(gradientLayer)
     }
     
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

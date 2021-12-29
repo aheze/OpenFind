@@ -9,13 +9,10 @@
 import UIKit
 
 public extension EKAttributes {
-    
     /** The background style property */
     enum BackgroundStyle: Equatable {
-        
         /** Blur style for light and dark modes */
         public struct BlurStyle: Equatable {
-            
             public static var extra: BlurStyle {
                 return BlurStyle(light: .extraLight, dark: .dark)
             }
@@ -37,8 +34,8 @@ public extension EKAttributes {
             let dark: UIBlurEffect.Style
             
             public init(style: UIBlurEffect.Style) {
-                self.light = style
-                self.dark = style
+                light = style
+                dark = style
             }
             
             public init(light: UIBlurEffect.Style, dark: UIBlurEffect.Style) {
@@ -48,7 +45,8 @@ public extension EKAttributes {
             
             /** Computes a proper `UIBlurEffect.Style` instance */
             public func blurStyle(for traits: UITraitCollection,
-                                  mode: EKAttributes.DisplayMode) -> UIBlurEffect.Style {
+                                  mode: EKAttributes.DisplayMode) -> UIBlurEffect.Style
+            {
                 switch mode {
                 case .inferred:
                     if #available(iOS 13, *) {
@@ -71,7 +69,8 @@ public extension EKAttributes {
             }
             
             public func blurEffect(for traits: UITraitCollection,
-                                   mode: EKAttributes.DisplayMode) -> UIBlurEffect {
+                                   mode: EKAttributes.DisplayMode) -> UIBlurEffect
+            {
                 return UIBlurEffect(style: blurStyle(for: traits, mode: mode))
             }
         }
@@ -84,7 +83,8 @@ public extension EKAttributes {
             
             public init(colors: [EKColor],
                         startPoint: CGPoint,
-                        endPoint: CGPoint) {
+                        endPoint: CGPoint)
+            {
                 self.colors = colors
                 self.startPoint = startPoint
                 self.endPoint = endPoint
@@ -108,7 +108,8 @@ public extension EKAttributes {
         
         /** == operator overload */
         public static func == (lhs: EKAttributes.BackgroundStyle,
-                               rhs: EKAttributes.BackgroundStyle) -> Bool {
+                               rhs: EKAttributes.BackgroundStyle) -> Bool
+        {
             switch (lhs, rhs) {
             case (visualEffect(style: let leftStyle),
                   visualEffect(style: let rightStyle)):
@@ -127,7 +128,7 @@ public extension EKAttributes {
                     }
                 }
                 return leftGradient.startPoint == rightGradient.startPoint &&
-                       leftGradient.endPoint == rightGradient.endPoint
+                    leftGradient.endPoint == rightGradient.endPoint
             case (clear, clear):
                 return true
             default:

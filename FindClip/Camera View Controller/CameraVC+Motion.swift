@@ -5,8 +5,8 @@
 //  Created by Zheng on 3/18/21.
 //
 
-import UIKit
 import CoreMotion
+import UIKit
 
 extension CameraViewController {
     func configureMotion() {
@@ -17,18 +17,18 @@ extension CameraViewController {
         }
 
         motionManager.startDeviceMotionUpdates(to: .main) {
-            [weak self] (data, error) in
-            if !CurrentState.currentlyPaused {
-                guard let data = data, error == nil else {
-                    return
+            [weak self] data, error in
+                if !CurrentState.currentlyPaused {
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    self?.updateHighlightOrientations(attitude: data.attitude)
                 }
-                self?.updateHighlightOrientations(attitude: data.attitude)
-            }
         }
     }
+
     func updateHighlightOrientations(attitude: CMAttitude) {
         if let initAttitude = initialAttitude {
-            
             attitude.multiply(byInverseOf: initAttitude)
             let rollValue = attitude.roll.radiansToDegrees
             let pitchValue = attitude.pitch.radiansToDegrees

@@ -6,11 +6,10 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 public class EKMessageContentView: UIView {
-    
     // MARK: Properties
     
     private let titleLabel = UILabel()
@@ -89,6 +88,7 @@ public class EKMessageContentView: UIView {
         setupSubtitleLabel()
     }
     
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -114,7 +114,7 @@ public class EKMessageContentView: UIView {
         subtitleLabel.textColor = subtitleContent?.style.color(for: traitCollection)
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupInterfaceStyle()
     }
 }

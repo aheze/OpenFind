@@ -11,7 +11,6 @@ import UIKit
 extension PhotosViewController {
     func pressedTutorial(for type: PhotoTutorialType) {
         switch type {
-        
         case .starred:
             TipViews.queuingStar = true
             if photoFilterState.starSelected {
@@ -19,7 +18,7 @@ extension PhotosViewController {
             } else if photoFilterState.cacheSelected {
                 removeFilters(type: .cached)
             } else {
-                self.startTutorial?(.starred)
+                startTutorial?(.starred)
             }
         case .cached:
             TipViews.queuingCache = true
@@ -28,14 +27,15 @@ extension PhotosViewController {
             } else if photoFilterState.cacheSelected {
                 removeFilters(type: .cached)
             } else {
-                self.startTutorial?(.cached)
+                startTutorial?(.cached)
             }
         case .local:
-            self.startTutorial?(.local)
+            startTutorial?(.local)
         default:
             break
         }
     }
+
     func removeFilters(type: PhotoTutorialType) {
         TipViews.removeStarFilterView?.dismiss()
         TipViews.removeCacheFilterView?.dismiss()
@@ -68,7 +68,6 @@ extension PhotosViewController {
             TipViews.removeCacheFilterView = tipView
         }
         
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             UIAccessibility.post(notification: .layoutChanged, argument: self.segmentedSlider)
             
@@ -79,6 +78,7 @@ extension PhotosViewController {
             }
         }
     }
+
     func startStarSecondStep() {
         TipViews.dismissAll()
         
@@ -109,6 +109,7 @@ extension PhotosViewController {
             }
         }
     }
+
     func startCacheSecondStep() {
         TipViews.dismissAll()
         
@@ -141,10 +142,9 @@ extension PhotosViewController {
         }
     }
 }
-extension PhotosViewController: EasyTipViewDelegate {
-    func easyTipViewDidTap(_ tipView: EasyTipView) {
 
-    }
+extension PhotosViewController: EasyTipViewDelegate {
+    func easyTipViewDidTap(_ tipView: EasyTipView) {}
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         if tipView == TipViews.starTipView2 || tipView == TipViews.cacheTipView2 {

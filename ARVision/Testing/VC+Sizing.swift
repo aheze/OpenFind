@@ -18,6 +18,7 @@ extension ViewController {
             self.resetAverageView()
         }
     }
+
     func getResetCenter() -> CGPoint {
         return CGPoint(x: imageFitViewRect.width / 2, y: imageFitViewRect.height / 2)
     }
@@ -39,7 +40,6 @@ extension ViewController {
             (imageAspect < containerAspect) && (aspectMode == .scaleAspectFill) || /// image extends left and right
             (imageAspect >= containerAspect) && (aspectMode == .scaleAspectFit) /// image has gaps left and right
         {
-            
             let newImageWidth = containerSize.height * (1 / imageAspect) /// the width of the overflowing image
             let newX = -(newImageWidth - containerSize.width) / 2
             contentRect = CGRect(x: newX, y: 0, width: newImageWidth, height: containerSize.height)
@@ -48,4 +48,3 @@ extension ViewController {
         return contentRect
     }
 }
-

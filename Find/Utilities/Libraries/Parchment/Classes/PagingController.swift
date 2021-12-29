@@ -142,7 +142,7 @@ final class PagingController: NSObject {
 
     func contentScrolled(progress: CGFloat) {
         switch state {
-        case let .selected(pagingItem):
+        case .selected(let pagingItem):
             var upcomingItem: PagingItem?
 
             if progress > 0 {
@@ -163,7 +163,7 @@ final class PagingController: NSObject {
                 progress: progress
             )
 
-        case let .scrolling(pagingItem, upcomingPagingItem, oldProgress, initialContentOffset, distance):
+        case .scrolling(let pagingItem, let upcomingPagingItem, let oldProgress, let initialContentOffset, let distance):
             if oldProgress < 0, progress > 0 {
                 state = .selected(pagingItem: pagingItem)
             } else if oldProgress > 0, progress < 0 {
@@ -186,7 +186,7 @@ final class PagingController: NSObject {
     }
 
     func contentFinishedScrolling() {
-        guard case let .scrolling(pagingItem, upcomingPagingItem, _, _, _) = state else { return }
+        guard case .scrolling(let pagingItem, let upcomingPagingItem, _, _, _) = state else { return }
 
         // If a transition finishes scrolling, but the upcoming paging
         // item is nil it means that the user scrolled away from one of
@@ -215,7 +215,7 @@ final class PagingController: NSObject {
 
     func transitionSize() {
         switch state {
-        case let .scrolling(pagingItem, _, _, _, _):
+        case .scrolling(let pagingItem, _, _, _, _):
             sizeCache.clear()
             state = .selected(pagingItem: pagingItem)
             reloadItems(around: pagingItem)
@@ -249,7 +249,7 @@ final class PagingController: NSObject {
 
     func viewAppeared() {
         switch state {
-        case let .selected(pagingItem), let .scrolling(_, pagingItem?, _, _, _):
+        case .selected(let pagingItem), .scrolling(_, let pagingItem?, _, _, _):
             state = .selected(pagingItem: pagingItem)
             reloadItems(around: pagingItem)
 
@@ -548,7 +548,7 @@ final class PagingController: NSObject {
         // wrong. For instance, when hitting the edge of the collection view
         // while transitioning we need to reload all the paging items and
         // update the transition data.
-        if case let .scrolling(pagingItem, upcomingPagingItem, progress, _, distance) = state {
+        if case .scrolling(let pagingItem, let upcomingPagingItem, let progress, _, let distance) = state {
             let transition = calculateTransition(
                 from: pagingItem,
                 to: upcomingPagingItem
@@ -660,7 +660,7 @@ extension PagingController: UICollectionViewDataSource {
             withReuseIdentifier: String(describing: type(of: pagingItem)),
             for: indexPath
         ) as! PagingCell
-        var selected: Bool = false
+        var selected = false
         if let currentPagingItem = state.currentPagingItem {
             selected = currentPagingItem.isEqual(to: pagingItem)
         }

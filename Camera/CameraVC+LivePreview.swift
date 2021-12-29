@@ -6,11 +6,10 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension CameraViewController {
-    func createLivePreview() -> LivePreviewViewController{
+    func createLivePreview() -> LivePreviewViewController {
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let livePreviewViewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
         

@@ -15,11 +15,10 @@ extension CameraViewController {
             preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
             preferences.drawing.arrowPosition = .bottom
             if cacheTipView == nil, !dismissedCacheTipAlready {
-                
                 let cacheToGetMoreAccurateResults = NSLocalizedString("tip-cacheToGetMoreAccurateResults", comment: "")
                 let tipView = EasyTipView(text: cacheToGetMoreAccurateResults, preferences: preferences, delegate: self)
                 tipView.show(forView: cache)
-                self.cacheTipView = tipView
+                cacheTipView = tipView
             }
         }
     }
@@ -47,13 +46,11 @@ extension CameraViewController {
                 UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
             }
         }
-        
     }
 }
 
 extension CameraViewController: EasyTipViewDelegate {
-    func easyTipViewDidTap(_ tipView: EasyTipView) {
-    }
+    func easyTipViewDidTap(_ tipView: EasyTipView) {}
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         if tipView == cacheTipView {

@@ -25,37 +25,37 @@ struct TabBarView<PhotosSelectionToolbarView: View, PhotosDetailToolbarView: Vie
                     CameraButton(tabViewModel: tabViewModel, cameraViewModel: cameraViewModel, attributes: tabViewModel.cameraIconAttributes)
                     ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
                 }
-                    .padding(.bottom, ConstantVars.tabBarOverflowingIconsBottomPadding)
-                    .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
-                    .overlay(
-                        VStack {
-                            switch toolbarViewModel.toolbar {
-                            case .none:
-                                EmptyView()
-                            case .photosSelection:
-                                photosSelectionToolbarView
-                            case .photosDetail:
-                                photosDetailToolbarView
-                            case .listsSelection:
-                                listsSelectionToolbarView
-                            }
+                .padding(.bottom, ConstantVars.tabBarOverflowingIconsBottomPadding)
+                .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
+                .overlay(
+                    VStack {
+                        switch toolbarViewModel.toolbar {
+                        case .none:
+                            EmptyView()
+                        case .photosSelection:
+                            photosSelectionToolbarView
+                        case .photosDetail:
+                            photosDetailToolbarView
+                        case .listsSelection:
+                            listsSelectionToolbarView
                         }
-                            .frame(maxHeight: .infinity)
-                            .padding(.bottom, ConstantVars.tabBarHuggingBottomPadding)
-                    )
-                    .overlay(
-                        CameraToolbarView(viewModel: cameraViewModel)
-                            .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
-                            .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
-                    )
-                    .frame(height: tabViewModel.tabBarAttributes.backgroundHeight, alignment: .bottom)
-                    .padding(.horizontal, 16)
+                    }
+                    .frame(maxHeight: .infinity)
+                    .padding(.bottom, ConstantVars.tabBarHuggingBottomPadding)
+                )
+                .overlay(
+                    CameraToolbarView(viewModel: cameraViewModel)
+                        .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
+                        .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
+                )
+                .frame(height: tabViewModel.tabBarAttributes.backgroundHeight, alignment: .bottom)
+                .padding(.horizontal, 16)
                 
                 /// right after this point is the area of visual tab bar background (what the user sees)
                 
-                    .background(BackgroundView(tabViewModel: tabViewModel))
+                .background(BackgroundView(tabViewModel: tabViewModel)),
                 
-                , alignment: .bottom
+                alignment: .bottom
             )
             .edgesIgnoringSafeArea(.all)
     }
@@ -89,6 +89,7 @@ struct AnimatableVisualEffectView: UIViewRepresentable {
         }
         return blurEffectView
     }
+
     func updateUIView(_ uiView: BlurEffectView, context: UIViewRepresentableContext<Self>) {
         uiView.updateProgress(percentage: progress)
     }
@@ -101,7 +102,6 @@ struct AnimatableVisualEffectView: UIViewRepresentable {
 }
 
 class BlurEffectView: UIVisualEffectView {
-    
     var animator: UIViewPropertyAnimator?
     
     override func didMoveToSuperview() {

@@ -11,7 +11,6 @@ import UIKit
 
 @IBDesignable
 class ClearShadow: UIView {
-
     let bottomOverflow: CGFloat = 400
     let cornerRadius: CGFloat = 16
     var maskingLayer: CAShapeLayer?
@@ -58,7 +57,6 @@ class ClearShadow: UIView {
     }
 
     private func common() {
-
         backgroundColor = .clear
         clipsToBounds = false
         

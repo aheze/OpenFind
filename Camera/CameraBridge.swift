@@ -13,4 +13,3 @@ struct CameraBridge {
         return camera
     }
 }
-

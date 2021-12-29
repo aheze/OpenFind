@@ -9,10 +9,8 @@
 import Foundation
 
 public extension EKAttributes {
-
     /** The position of the entry. */
     enum Position {
-        
         /** The entry appears at the top of the screen. */
         case top
         

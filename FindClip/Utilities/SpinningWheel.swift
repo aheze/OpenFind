@@ -10,12 +10,9 @@ import UIKit
 /// from https://stackoverflow.com/a/33455882/14351818
 
 @IBDesignable
-class SpinnerView : UIView {
-
+class SpinnerView: UIView {
     override var layer: CAShapeLayer {
-        get {
-            return super.layer as! CAShapeLayer
-        }
+        return super.layer as! CAShapeLayer
     }
 
     override class var layerClass: AnyClass {
@@ -50,18 +47,16 @@ class SpinnerView : UIView {
     }
 
     class var poses: [Pose] {
-        get {
-            return [
-                Pose(0.0, 0.000, 0.7),
-                Pose(0.6, 0.500, 0.5),
-                Pose(0.6, 1.000, 0.3),
-                Pose(0.6, 1.500, 0.1),
-                Pose(0.2, 1.875, 0.1),
-                Pose(0.2, 2.250, 0.3),
-                Pose(0.2, 2.625, 0.5),
-                Pose(0.2, 3.000, 0.7),
-            ]
-        }
+        return [
+            Pose(0.0, 0.000, 0.7),
+            Pose(0.6, 0.500, 0.5),
+            Pose(0.6, 1.000, 0.3),
+            Pose(0.6, 1.500, 0.1),
+            Pose(0.2, 1.875, 0.1),
+            Pose(0.2, 2.250, 0.3),
+            Pose(0.2, 2.625, 0.5),
+            Pose(0.2, 3.000, 0.7)
+        ]
     }
 
     func animate() {
@@ -105,8 +100,8 @@ class SpinnerView : UIView {
     func animateStrokeHueWithDuration(duration: CFTimeInterval) {
         let count = 36
         let animation = CAKeyframeAnimation(keyPath: "strokeColor")
-        animation.keyTimes = (0 ... count).map { NSNumber(value: CFTimeInterval($0) / CFTimeInterval(count)) }
-        animation.values = (0 ... count).map {
+        animation.keyTimes = (0...count).map { NSNumber(value: CFTimeInterval($0) / CFTimeInterval(count)) }
+        animation.values = (0...count).map {
             UIColor(hue: CGFloat($0) / CGFloat(count), saturation: 1, brightness: 1, alpha: 1).cgColor
         }
         animation.duration = duration
@@ -114,5 +109,4 @@ class SpinnerView : UIView {
         animation.repeatCount = Float.infinity
         layer.add(animation, forKey: animation.keyPath)
     }
-
 }

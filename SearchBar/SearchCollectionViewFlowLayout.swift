@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    
     override init() {
         super.init()
     }
@@ -64,7 +63,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
     }
@@ -74,22 +72,19 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return offset
     }
     
-    
-    
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
-        
         
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
         currentOffset = contentOffset
         
-        
         guard let fields = getFields?() else { return }
         let fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size
         
         // MARK: Calculate shifting for each cell
+
         var cellOrigin = SearchConstants.sidePadding /// origin for each cell
         
         var leftFieldOffsets = [FieldOffset]() /// array of each cell's shifting offset + percentage complete
@@ -101,7 +96,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             var sidePadding = CGFloat(0)
             let cellOriginWithoutSidePadding: CGFloat
             if index == 0 {
-                
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
                 sidePadding = SearchConstants.cellSpacing - (SearchConstants.sidePeekPadding - SearchConstants.sidePadding)
@@ -113,14 +107,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
                 cellOriginWithoutSidePadding = cellOrigin - SearchConstants.sidePeekPadding
             } else {
-                
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 sidePadding = SearchConstants.cellSpacing
                 cellOriginWithoutSidePadding = cellOrigin - SearchConstants.sidePeekPadding
             }
             
             if cellOriginWithoutSidePadding >= contentOffset { /// cell is not yet approached
-                
                 let distanceToNextCell = fullCellWidth + sidePadding
                 
                 let contentOffsetPlusWidth = contentOffset + distanceToNextCell /// is the field's origin (once the field is on the right, waiting)
@@ -133,10 +125,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 
                 var alpha = CGFloat(1)
                 if index == fieldHuggingWidths.count - 1 {
-                    
                     /// only highlight/unhighlight when cell is not being instantly added
                     if !convertingInstantly {
-                        
                         /// when hit the edge already
                         if shouldUseOffsetWithAddNew {
                             let percentage = distanceTravelledLeft / (SearchConstants.addWordFieldSnappingFactor * distanceToNextCell)
@@ -165,7 +155,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 rightFieldOffsets.append(fieldOffset)
                 
             } else {
-                
                 /// how much to drag collection view, until the next field's origin reaches this field's origin
                 /// add `sidePadding` to account for cell spacing
                 let distanceToNextCell = fullCellWidth + sidePadding
@@ -180,7 +169,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let shift = percentage * differenceBetweenWidthAndFullWidth
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, percentage: percentage, shift: shift)
                 leftFieldOffsets.append(fieldOffset)
-                
             }
             
             var additionalOffset = fullCellWidth
@@ -189,24 +177,24 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
         
         // MARK: Apply ALL shifting to the start of the collection view
+
         var fullOrigin = SearchConstants.sidePadding /// origin for each cell, in expanded mode
         var fullOriginWithoutAddNew = SearchConstants.sidePadding
         var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
         
         func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat, leftSide: Bool) {
-            
             let fieldOffset = offsetArray[offsetIndex]
             
             let origin: CGFloat
             let width: CGFloat
             
             if leftSide {
-                let totalShiftingOffset = offsetArray.dropFirst(offsetIndex).reduce(0, { $0 + $1.shift })
+                let totalShiftingOffset = offsetArray.dropFirst(offsetIndex).reduce(0) { $0 + $1.shift }
                 origin = fullOrigin + totalShiftingOffset
                 width = fieldOffset.fullWidth - fieldOffset.shift
             } else {
                 /// prefix current index directly, so **only add shift of previous fields** - don't add this current fields shift
-                let totalShiftingOffset = offsetArray.prefix(offsetIndex).reduce(0, { $0 + $1.shift })
+                let totalShiftingOffset = offsetArray.prefix(offsetIndex).reduce(0) { $0 + $1.shift }
                 let offset = (offsetIndex == 0) ? 0 : totalShiftingOffset
                 origin = fullOrigin - offset
                 width = fieldOffset.fullWidth - fieldOffset.shift
@@ -245,9 +233,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         /// set from scrollview delegate
         if shouldUseOffsetWithAddNew {
-            self.contentSize = CGSize(width: fullOrigin + SearchConstants.sidePadding, height: SearchConstants.cellHeight)
+            contentSize = CGSize(width: fullOrigin + SearchConstants.sidePadding, height: SearchConstants.cellHeight)
         } else {
-            self.contentSize = CGSize(width: fullOriginWithoutAddNew + SearchConstants.sidePadding, height: SearchConstants.cellHeight)
+            contentSize = CGSize(width: fullOriginWithoutAddNew + SearchConstants.sidePadding, height: SearchConstants.cellHeight)
         }
         
         self.layoutAttributes = layoutAttributes
@@ -263,6 +251,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     /// boilerplate code
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool { return true }
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
@@ -274,13 +263,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// convenience - get the target offset, then you must scroll there.
     func getTargetOffsetForScrollingThere(for point: CGPoint, velocity: CGPoint) -> CGPoint {
         let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point, velocity: velocity)
-        self.focusedCellIndex = focusedIndex
+        focusedCellIndex = focusedIndex
         return targetOffset
     }
     
     /// get nearest field, then scroll to it (with padding)
     func getTargetOffsetAndIndex(for point: CGPoint, velocity: CGPoint) -> (CGPoint, Int?) {
-        if  /// handle end, but not actually swiped
+        if /// handle end, but not actually swiped
             highlightingAddWordField,
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
         {
@@ -288,7 +277,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let targetContentOffset = addWordFieldOrigin - SearchConstants.sidePeekPadding
             return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
-            
             let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
             let pickedAttributes: [FieldLayoutAttributes?]
             
@@ -326,7 +314,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             var targetContentOffset = CGFloat(0)
             
-            if let closestAttribute = closestAttribute  {
+            if let closestAttribute = closestAttribute {
                 targetContentOffset = closestAttribute.fullOrigin
             } else { /// swiped to the last one. Instantly add it.
                 convertingInstantly = true
@@ -357,6 +345,3 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
     }
 }
-
-
-

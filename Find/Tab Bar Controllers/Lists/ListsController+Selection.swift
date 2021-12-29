@@ -6,12 +6,11 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
-import SwiftEntryKit
 import SPAlert
+import SwiftEntryKit
+import UIKit
 
 extension ListsController {
-    
     func selectPressed() {
         if listCategories?.count == 0 {
             showNoListsAlert()
@@ -54,7 +53,7 @@ extension ListsController {
         subTitle.text = noListsCreatedYet
         subTitle.textColor = UIColor.white
         contentView.addSubview(subTitle)
-        subTitle.snp.makeConstraints { (make) in
+        subTitle.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
@@ -85,7 +84,6 @@ extension ListsController {
     
     /// Pressed delete from controls
     func listDeleteButtonPressed() {
-        
         var titleMessage = ""
         var finishMessage = ""
         if indexPathsSelected.count == 1 {
@@ -94,23 +92,21 @@ extension ListsController {
             let listDeletedExclaim = NSLocalizedString("listDeletedExclaim",
                                                        comment: "ListsController def=List deleted!")
             
-            
             titleMessage = deleteThisListQuestion
             finishMessage = listDeletedExclaim
         } else if indexPathsSelected.count == listCategories?.count {
             let deleteAllListsQuestion = NSLocalizedString("deleteAllListsQuestion",
                                                            comment: "ListsController def=Delete ALL lists?!")
             let allListsDeletedExclaim = NSLocalizedString("allListsDeletedExclaim",
-                                                       comment: "ListsController def=All lists deleted!")
+                                                           comment: "ListsController def=All lists deleted!")
             
             titleMessage = deleteAllListsQuestion
             finishMessage = allListsDeletedExclaim
         } else {
             let deleteSelectedCountLists = NSLocalizedString("Delete %d lists?",
-                                                             comment:"ListsController def=Delete x lists?")
+                                                             comment: "ListsController def=Delete x lists?")
             let finishedDeleteSelectedCountLists = NSLocalizedString("%d lists deleted!",
-                                                                     comment:"ListsController def=x lists deleted!")
-            
+                                                                     comment: "ListsController def=x lists deleted!")
             
             titleMessage = String.localizedStringWithFormat(deleteSelectedCountLists, indexPathsSelected.count)
             finishMessage = String.localizedStringWithFormat(finishedDeleteSelectedCountLists, indexPathsSelected.count)
@@ -137,9 +133,7 @@ extension ListsController {
                 try self.realm.write {
                     self.realm.delete(tempLists)
                 }
-            } catch {
-
-            }
+            } catch {}
             self.collectionView.deleteItems(at: arrayOfIndexPaths)
             self.indexPathsSelected.removeAll()
             self.numberOfSelected -= tempLists.count
@@ -162,6 +156,6 @@ extension ListsController {
         
         let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
         alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }

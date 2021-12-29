@@ -35,154 +35,148 @@ import Foundation
 import UIKit
 
 internal enum IBInterfaceKeys: String {
-	case styleName = "SwiftRichString.StyleName"
-	case styleObj = "SwiftRichString.StyleObj"
+    case styleName = "SwiftRichString.StyleName"
+    case styleObj = "SwiftRichString.StyleObj"
 }
 
-//MARK: - UILabel
+// MARK: - UILabel
 
-extension UILabel {
+public extension UILabel {
+    /// The name of a style in the global `NamedStyles` registry.
+    @IBInspectable
+    var styleName: String? {
+        get { return getAssociatedValue(key: IBInterfaceKeys.styleName.rawValue, object: self) }
+        set {
+            set(associatedValue: newValue, key: IBInterfaceKeys.styleName.rawValue, object: self)
+            style = StylesManager.shared[newValue]
+        }
+    }
 	
-	/// The name of a style in the global `NamedStyles` registry.
-	@IBInspectable
-	public var styleName: String? {
-		get { return getAssociatedValue(key: IBInterfaceKeys.styleName.rawValue, object: self) }
-		set {
-			set(associatedValue: newValue, key: IBInterfaceKeys.styleName.rawValue, object: self)
-			self.style = StylesManager.shared[newValue]
-		}
-	}
+    /// Style instance to apply. Any change of this value reload the current text of the control with set style.
+    var style: StyleProtocol? {
+        set {
+            set(associatedValue: newValue, key: IBInterfaceKeys.styleObj.rawValue, object: self)
+            styledText = text
+        }
+        get {
+            if let innerValue: StyleProtocol? = getAssociatedValue(key: IBInterfaceKeys.styleObj.rawValue, object: self) {
+                return innerValue
+            }
+            return StylesManager.shared[styleName]
+        }
+    }
 	
-	/// Style instance to apply. Any change of this value reload the current text of the control with set style.
-	public var style: StyleProtocol? {
-		set {
-			set(associatedValue: newValue, key: IBInterfaceKeys.styleObj.rawValue, object: self)
-			self.styledText = self.text
-		}
-		get {
-			if let innerValue: StyleProtocol? = getAssociatedValue(key: IBInterfaceKeys.styleObj.rawValue, object: self) {
-				return innerValue
-			}
-			return StylesManager.shared[self.styleName]
-		}
-	}
-	
-	/// Use this to render automatically the text with the currently set style instance or styleName.
-	public var styledText: String? {
-		get {
-			return attributedText?.string
-		}
-		set {
-			guard let text = newValue else {
-                self.attributedText = nil
-                return 
+    /// Use this to render automatically the text with the currently set style instance or styleName.
+    var styledText: String? {
+        get {
+            return attributedText?.string
+        }
+        set {
+            guard let text = newValue else {
+                attributedText = nil
+                return
             }
             let style = self.style ?? Style()
-            self.attributedText = style.set(to: text, range: nil)
-		}
-	}
-	
+            attributedText = style.set(to: text, range: nil)
+        }
+    }
 }
 
-//MARK: - UITextField
+// MARK: - UITextField
 
-extension UITextField {
+public extension UITextField {
+    /// The name of a style in the global `NamedStyles` registry.
+    @IBInspectable
+    var styleName: String? {
+        get { return getAssociatedValue(key: IBInterfaceKeys.styleName.rawValue, object: self) }
+        set {
+            set(associatedValue: newValue, key: IBInterfaceKeys.styleName.rawValue, object: self)
+            style = StylesManager.shared[newValue]
+        }
+    }
 	
-	/// The name of a style in the global `NamedStyles` registry.
-	@IBInspectable
-	public var styleName: String? {
-		get { return getAssociatedValue(key: IBInterfaceKeys.styleName.rawValue, object: self) }
-		set {
-			set(associatedValue: newValue, key: IBInterfaceKeys.styleName.rawValue, object: self)
-			self.style = StylesManager.shared[newValue]
-		}
-	}
+    /// Style instance to apply. Any change of this value reload the current text of the control with set style.
+    var style: StyleProtocol? {
+        set {
+            set(associatedValue: newValue, key: IBInterfaceKeys.styleObj.rawValue, object: self)
+            styledText = text
+        }
+        get {
+            if let innerValue: StyleProtocol? = getAssociatedValue(key: IBInterfaceKeys.styleObj.rawValue, object: self) {
+                return innerValue
+            }
+            return StylesManager.shared[styleName]
+        }
+    }
 	
-	/// Style instance to apply. Any change of this value reload the current text of the control with set style.
-	public var style: StyleProtocol? {
-		set {
-			set(associatedValue: newValue, key: IBInterfaceKeys.styleObj.rawValue, object: self)
-			self.styledText = self.text
-		}
-		get {
-			if let innerValue: StyleProtocol? = getAssociatedValue(key: IBInterfaceKeys.styleObj.rawValue, object: self) {
-				return innerValue
-			}
-			return StylesManager.shared[self.styleName]
-		}
-	}
-	
-	/// Use this to render automatically the text with the currently set style instance or styleName.
-	public var styledText: String? {
-		get {
-			return attributedText?.string
-		}
-		set {
-			guard let text = newValue else {
-                self.attributedText = nil
-                return 
+    /// Use this to render automatically the text with the currently set style instance or styleName.
+    var styledText: String? {
+        get {
+            return attributedText?.string
+        }
+        set {
+            guard let text = newValue else {
+                attributedText = nil
+                return
             }
             let style = self.style ?? Style()
-            self.attributedText = style.set(to: text, range: nil)
-		}
-	}
-	
+            attributedText = style.set(to: text, range: nil)
+        }
+    }
 }
 
-//MARK: - UITextView
+// MARK: - UITextView
 
-extension UITextView {
+public extension UITextView {
+    /// The name of a style in the global `NamedStyles` registry.
+    @IBInspectable
+    var styleName: String? {
+        get { return getAssociatedValue(key: IBInterfaceKeys.styleName.rawValue, object: self) }
+        set {
+            set(associatedValue: newValue, key: IBInterfaceKeys.styleName.rawValue, object: self)
+            style = StylesManager.shared[newValue]
+        }
+    }
 	
-	/// The name of a style in the global `NamedStyles` registry.
-	@IBInspectable
-	public var styleName: String? {
-		get { return getAssociatedValue(key: IBInterfaceKeys.styleName.rawValue, object: self) }
-		set {
-			set(associatedValue: newValue, key: IBInterfaceKeys.styleName.rawValue, object: self)
-			self.style = StylesManager.shared[newValue]
-		}
-	}
+    /// Style instance to apply. Any change of this value reload the current text of the control with set style.
+    var style: StyleProtocol? {
+        set {
+            set(associatedValue: newValue, key: IBInterfaceKeys.styleObj.rawValue, object: self)
+            styledText = text
+        }
+        get {
+            if let innerValue: StyleProtocol? = getAssociatedValue(key: IBInterfaceKeys.styleObj.rawValue, object: self) {
+                return innerValue
+            }
+            return StylesManager.shared[styleName]
+        }
+    }
 	
-	/// Style instance to apply. Any change of this value reload the current text of the control with set style.
-	public var style: StyleProtocol? {
-		set {
-			set(associatedValue: newValue, key: IBInterfaceKeys.styleObj.rawValue, object: self)
-			self.styledText = self.text
-		}
-		get {
-			if let innerValue: StyleProtocol? = getAssociatedValue(key: IBInterfaceKeys.styleObj.rawValue, object: self) {
-				return innerValue
-			}
-			return StylesManager.shared[self.styleName]
-		}
-	}
-	
-	/// Use this to render automatically the text with the currently set style instance or styleName.
-	public var styledText: String? {
-		get {
-			return attributedText?.string
-		}
-		set {
-			guard let text = newValue else {
-                self.attributedText = nil
-                return 
+    /// Use this to render automatically the text with the currently set style instance or styleName.
+    var styledText: String? {
+        get {
+            return attributedText?.string
+        }
+        set {
+            guard let text = newValue else {
+                attributedText = nil
+                return
             }
             let style = self.style ?? Style()
-            self.attributedText = style.set(to: text, range: nil)
-		}
-	}
-	
+            attributedText = style.set(to: text, range: nil)
+        }
+    }
 }
 
 #endif
 
-//MARK: - compactMap for Swift 4.0 (not necessary > 4.0)
+// MARK: - compactMap for Swift 4.0 (not necessary > 4.0)
 
 #if swift(>=4.1)
 #else
 extension Collection {
-	func compactMap<ElementOfResult>(_ transform: (Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult] {
-		return try flatMap(transform)
-	}
+    func compactMap<ElementOfResult>(_ transform: (Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult] {
+        return try flatMap(transform)
+    }
 }
 #endif

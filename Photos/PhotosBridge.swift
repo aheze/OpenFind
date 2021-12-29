@@ -13,5 +13,3 @@ struct PhotosBridge {
         return photos
     }
 }
-
-

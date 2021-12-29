@@ -6,13 +6,14 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension SlideViewController {
     func removeAllHighlights() {
-        drawingView?.subviews.forEach({ $0.removeFromSuperview() })
+        drawingView?.subviews.forEach { $0.removeFromSuperview() }
     }
+
     func drawHighlights() {
         removeAllHighlights()
         
@@ -36,7 +37,7 @@ extension SlideViewController {
             highlight.baseView?.frame = newFrame
             
             if let baseView = highlight.baseView {
-                guard let componentColors = self.matchToColors[highlight.text] else { return }
+                guard let componentColors = matchToColors[highlight.text] else { return }
                 
                 addAccessibilityLabel(component: highlight, newView: baseView, hexString: componentColors.first?.hexString ?? "")
             }
@@ -52,13 +53,12 @@ extension SlideViewController {
             transcript.baseView?.frame = newFrame
             
             if let baseView = transcript.baseView {
-                self.addTranscriptAccessibility(component: transcript, newView: baseView)
+                addTranscriptAccessibility(component: transcript, newView: baseView)
             }
         }
     }
     
     func scaleInHighlight(component: Component, aspectFrame: CGRect) {
-        
         let newX = component.x * (aspectFrame.width) + aspectFrame.origin.x - 6
         let newY = component.y * (aspectFrame.height) + aspectFrame.origin.y - 3
         let newWidth = component.width * aspectFrame.width + 12
@@ -68,7 +68,7 @@ extension SlideViewController {
         
         let newView: CustomActionsView
         
-        guard let componentColors = self.matchToColors[component.text] else { return }
+        guard let componentColors = matchToColors[component.text] else { return }
         let gradientColors = componentColors.map { $0.cgColor }
         let hexStrings = componentColors.map { $0.hexString }
         
@@ -97,8 +97,7 @@ extension SlideViewController {
         component.baseView = newView
         newView.frame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
         
-        self.drawingView.addSubview(newView)
-        
+        drawingView.addSubview(newView)
         
         addAccessibilityLabel(component: component, newView: newView, hexString: hexStrings.first ?? "")
         
@@ -109,11 +108,9 @@ extension SlideViewController {
     
     func addAccessibilityLabel(component: Component, newView: CustomActionsView, hexString: String) {
         if UIAccessibility.isVoiceOverRunning {
-            
             var overlapString = AccessibilityText(text: "", isRaised: false)
             if !cameFromFind {
-                if let navigationBar = self.navigationController?.navigationBar {
-                    
+                if let navigationBar = navigationController?.navigationBar {
                     let navigationBarFrame = navigationBar.convert(navigationBar.bounds, to: nil)
                     let tabBarFrame = FindConstantVars.getTabBarFrame?() ?? CGRect.zero
                     
@@ -166,7 +163,6 @@ extension SlideViewController {
                 let insetFrame = newView.frame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
                 newView.accessibilityFrame = insetFrame
             }
-            
         }
     }
 }

@@ -28,15 +28,13 @@
 import UIKit
 
 extension LTMorphingLabel {
-
     @objc
     func EvaporateLoad() {
-        
         progressClosures["Evaporate\(LTMorphingPhases.progress)"] = {
-            (index: Int, progress: Float, isNewChar: Bool) in
-            let j: Int = Int(round(cos(Double(index)) * 1.2))
-            let delay = isNewChar ? self.morphingCharacterDelay * -1.0 : self.morphingCharacterDelay
-            return min(1.0, max(0.0, self.morphingProgress + delay * Float(j)))
+            (index: Int, _: Float, isNewChar: Bool) in
+                let j: Int = .init(round(cos(Double(index)) * 1.2))
+                let delay = isNewChar ? self.morphingCharacterDelay * -1.0 : self.morphingCharacterDelay
+                return min(1.0, max(0.0, self.morphingProgress + delay * Float(j)))
         }
         
         effectClosures["Evaporate\(LTMorphingPhases.disappear)"] = {
@@ -52,7 +50,8 @@ extension LTMorphingLabel {
                 rect: currentRect,
                 alpha: currentAlpha,
                 size: self.font.pointSize,
-                drawingProgress: 0.0)
+                drawingProgress: 0.0
+            )
         }
         
         effectClosures["Evaporate\(LTMorphingPhases.appear)"] = {
@@ -70,5 +69,4 @@ extension LTMorphingLabel {
             )
         }
     }
-    
 }

@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension PhotoSlidesViewController {
     func setNavigationBar() {
@@ -30,6 +30,7 @@ extension PhotoSlidesViewController {
             navigationController?.navigationBar.compactScrollEdgeAppearance = appearance
         }
     }
+
     func makeTitleView() {
         let titleLabel = UILabel()
         titleLabel.text = ""
@@ -59,7 +60,7 @@ extension PhotoSlidesViewController {
         stackView.isAccessibilityElement = true
         stackView.accessibilityLabel = "Date taken"
         
-        self.navigationTitleStackView = stackView
+        navigationTitleStackView = stackView
         self.titleLabel = titleLabel
         self.subtitleLabel = subtitleLabel
         
@@ -90,7 +91,6 @@ extension PhotoSlidesViewController {
 
 extension UINavigationItem {
     func setTitle(title: String, subtitle: String) {
-        
         let one = UILabel()
         one.text = title
         one.font = UIFont.systemFont(ofSize: 17)
@@ -113,6 +113,6 @@ extension UINavigationItem {
         one.sizeToFit()
         two.sizeToFit()
         
-        self.titleView = stackView
+        titleView = stackView
     }
 }

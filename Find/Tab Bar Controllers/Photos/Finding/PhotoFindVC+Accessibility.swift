@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotoFindViewController {
     func setupAccessibility() {
-        
         promptView.isAccessibilityElement = true
         promptView.shouldGroupAccessibilityChildren = true
         promptView.accessibilityLabel = "Summary"
@@ -30,13 +29,12 @@ extension PhotoFindViewController {
 }
 
 class PromptView: UIView {
-    
     var activated: (() -> Bool)?
     
     override func accessibilityActivate() -> Bool {
-
         return activated?() ?? false
     }
+
     override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
         get {
             return nil
@@ -56,7 +54,5 @@ class PromptView: UIView {
         commonInit()
     }
     
-    func commonInit() {
-    }
+    func commonInit() {}
 }
-

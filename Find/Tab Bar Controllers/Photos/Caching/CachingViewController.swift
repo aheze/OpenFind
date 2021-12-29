@@ -6,53 +6,58 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
+import Photos
+import RealmSwift
 import SDWebImage
 import SDWebImagePhotosPlugin
 import SwiftEntryKit
+import UIKit
 import Vision
-import RealmSwift
-import Photos
 
 enum CacheReturn {
     case completedAll
     case keptSome
 }
+
 protocol ReturnCachedPhotos: class {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn)
 }
+
 class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    // MARK: Cancel cache
+
+    @IBOutlet var cancelView: UIView!
+    @IBOutlet var cancelImageView: UIImageView!
+    @IBOutlet var cancelLabel: UILabel!
+    @IBOutlet var keepButton: UIButton!
+    @IBOutlet var discardButton: UIButton!
+    @IBOutlet var backButton: UIButton!
     
-    //MARK: Cancel cache
-    @IBOutlet weak var cancelView: UIView!
-    @IBOutlet weak var cancelImageView: UIImageView!
-    @IBOutlet weak var cancelLabel: UILabel!
-    @IBOutlet weak var keepButton: UIButton!
-    @IBOutlet weak var discardButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
-    
-    @IBOutlet weak var baseView: UIView!
+    @IBOutlet var baseView: UIView!
     let rimView = UIView()
     let tintView = UIView()
     
-    @IBOutlet weak var cachingPhotosLabel: UILabel!
-    @IBOutlet weak var numberCachedLabel: UILabel!
-    @IBOutlet weak var collectionSuperview: UIView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var cachingPhotosLabel: UILabel!
+    @IBOutlet var numberCachedLabel: UILabel!
+    @IBOutlet var collectionSuperview: UIView!
+    @IBOutlet var collectionView: UICollectionView!
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         CachingFinder.statusOk = false
         let cancelling = NSLocalizedString("cancelling", comment: "CachingViewController def=Cancelling...")
         cancelButton.setTitle(cancelling, for: .normal)
     }
+
     @IBAction func keepButtonPressed(_ sender: Any) {
         keepAlreadyCached()
     }
+
     @IBAction func discardButtonPressed(_ sender: Any) {
         SwiftEntryKit.dismiss()
     }
+
     @IBAction func backButtonPressed(_ sender: Any) {
         animateChange(toCancel: false)
     }
@@ -62,12 +67,13 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     var getRealRealmModel: ((EditableHistoryModel) -> HistoryModel?)? /// get real realm managed object
     
     // MARK: Photos to cache
+
     var photosToCache = [FindPhoto]()
     
     private var gradient: CAGradientLayer!
     private var newGrad: CAGradientLayer!
     
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
     var presentingCancelPrompt = false
     
     weak var finishedCache: ReturnCachedPhotos?
@@ -106,8 +112,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func animateChange(toCancel: Bool) {
         if toCancel == true {
-            self.cancelView.isHidden = false
-            self.backButton.isHidden = false
+            cancelView.isHidden = false
+            backButton.isHidden = false
             UIView.animate(withDuration: 0.4, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 self.cancelView.transform = CGAffineTransform.identity
@@ -129,10 +135,10 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
             })
             
         } else {
-            self.baseView.isHidden = false
-            self.rimView.isHidden = false
-            self.tintView.isHidden = false
-            self.activityIndicator.isHidden = false
+            baseView.isHidden = false
+            rimView.isHidden = false
+            tintView.isHidden = false
+            activityIndicator.isHidden = false
             
             CachingFinder.statusOk = true
             
@@ -156,7 +162,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.backButton.isHidden = true
                 self.startFinding()
             })
-            
         }
     }
     
@@ -174,15 +179,13 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         let imageLength = cellLength * (screenScale + 1)
         
         cell.imageView.sd_imageTransition = .fade
-        cell.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+        cell.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize: CGSize(width: imageLength, height: imageLength)])
         
         return cell
     }
-    
-    
 }
+
 extension CachingViewController {
-    
     func keepAlreadyCached() {
         DispatchQueue.main.async {
             self.finishedCache?.giveCachedPhotos(photos: CachingFinder.alreadyCachedPhotos, returnResult: .keptSome)
@@ -190,6 +193,7 @@ extension CachingViewController {
             CachingFinder.resetState()
         }
     }
+
     func finishedFind() {
         DispatchQueue.main.async {
             self.cancelButton.isEnabled = false
@@ -198,6 +202,7 @@ extension CachingViewController {
             CachingFinder.resetState()
         }
     }
+
     func finishedCancelling() {
         var newLabel = ""
         if CachingFinder.numberCached == 1 {
@@ -211,11 +216,11 @@ extension CachingViewController {
         }
         cancelLabel.text = newLabel
         animateChange(toCancel: true)
-        
     }
+
     func startFinding() {
         activityIndicator.startAnimating()
-        CachingFinder.getRealRealmModel = self.getRealRealmModel
+        CachingFinder.getRealRealmModel = getRealRealmModel
         
         CachingFinder.startedFindingFromNewPhoto = { [weak self] photoIndex in
             guard let self = self else { return }
@@ -249,26 +254,29 @@ extension CachingViewController {
         CachingFinder.startFinding()
     }
 }
-extension CachingViewController : UICollectionViewDelegateFlowLayout {
+
+extension CachingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
         return 5
     }
 }
 
 extension CachingViewController {
-    
     func setupViews() {
-        
         cancelButton.layer.cornerRadius = 6
         
         let bigRect = CGRect(x: 0, y: 0, width: 180, height: 180)
@@ -288,7 +296,7 @@ extension CachingViewController {
         
         rimView.layer.addSublayer(fillLayer)
         view.addSubview(rimView)
-        rimView.snp.makeConstraints { (make) in
+        rimView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 180, height: 180))
             make.center.equalToSuperview()
         }
@@ -312,16 +320,13 @@ extension CachingViewController {
         
         cancelImageView.layer.cornerRadius = 4
         if let firstPhoto = photosToCache.first {
-            
             let url = NSURL.sd_URL(with: firstPhoto.asset)
             let boundsLength = cancelImageView.bounds.width
             let imageLength = boundsLength * (screenScale + 1)
             
             cancelImageView.sd_imageTransition = .fade
-            cancelImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-            
+            cancelImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize: CGSize(width: imageLength, height: imageLength)])
         }
-        
         
         keepButton.layer.cornerRadius = 6
         discardButton.layer.cornerRadius = 6

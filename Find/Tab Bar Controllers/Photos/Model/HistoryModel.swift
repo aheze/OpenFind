@@ -6,8 +6,8 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class HistoryModel: Object {
     @objc dynamic var filePath = ""

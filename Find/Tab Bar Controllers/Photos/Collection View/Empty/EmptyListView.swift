@@ -9,17 +9,15 @@
 import SwiftUI
 
 struct EmptyListView: View {
-    
     @ObservedObject var model: PhotosEmptyViewModel
     
     var body: some View {
-        VStack {        
+        VStack {
             Text("No photos with your filters")
                 .foregroundColor(Color(.secondaryLabel))
             
             ScrollView {
                 VStack(spacing: 16) {
-                    
                     ForEach(model.cards) { card in
                         HStack(alignment: .top, spacing: 10) {
                             Image(card.type.getName().0)
@@ -49,7 +47,6 @@ struct EmptyListView: View {
                                     }
                                 }
                             }
-                            
                         }
                         .transition(AnyTransition.scale.combined(with: .opacity))
                         .padding()
@@ -69,6 +66,7 @@ struct PhotoTutorialCard: Identifiable {
     let id = UUID()
     var type: PhotoTutorialType
 }
+
 enum PhotoTutorialType: CaseIterable {
     case starred
     case cached

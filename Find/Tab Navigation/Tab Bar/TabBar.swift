@@ -5,11 +5,10 @@
 //  Created by Zheng on 12/17/20.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class TabBarView: UIView {
-    
     var shutterIgnoreFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
@@ -34,39 +33,41 @@ class TabBarView: UIView {
     var checkIfAnimating: (() -> (Bool))?
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var containerHeightC: NSLayoutConstraint!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var containerHeightC: NSLayoutConstraint!
+    @IBOutlet var stackView: UIStackView!
     
     /// reference view to add selecting buttons
-    @IBOutlet weak var controlsReferenceView: UIView!
+    @IBOutlet var controlsReferenceView: UIView!
     
     // MARK: Selection in Photos
+
     var numberOfSelectedPhotos = 0
     var photoSelectionControlPressed: ((PhotoSlideAction) -> Void)?
     @IBOutlet var photosControls: UIView!
     
     var shouldStarSelectedPhotos = true
-    @IBOutlet weak var starButton: CustomButton!
+    @IBOutlet var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
         photoSelectionControlPressed?(.star)
     }
     
     var shouldCacheSelectedPhotos = true
-    @IBOutlet weak var cacheButton: CustomButton!
+    @IBOutlet var cacheButton: CustomButton!
     @IBAction func cacheButtonPressed(_ sender: Any) {
         photoSelectionControlPressed?(.cache)
     }
     
-    @IBOutlet weak var photosDeleteButton: CustomButton!
+    @IBOutlet var photosDeleteButton: CustomButton!
     @IBAction func photosDeleteButtonPressed(_ sender: Any) {
         photoSelectionControlPressed?(.delete)
     }
     
     // MARK: Selection in Lists
+
     @IBOutlet var listsControls: UIView!
-    @IBOutlet weak var listsSelectionLabel: UILabel!
-    @IBOutlet weak var listsDeleteButton: CustomButton!
+    @IBOutlet var listsSelectionLabel: UILabel!
+    @IBOutlet var listsDeleteButton: CustomButton!
     
     var listsDeletePressed: (() -> Void)?
     @IBAction func listsDeleteButtonPressed(_ sender: Any) {
@@ -74,101 +75,96 @@ class TabBarView: UIView {
     }
     
     // MARK: Photo Slide controls
+
     @IBOutlet var photoSlideControls: UIView!
-    @IBOutlet weak var slideShareButton: CustomButton!
+    @IBOutlet var slideShareButton: CustomButton!
     @IBAction func slideSharePressed(_ sender: Any) {
         photoSlideControlPressed?(.share)
     }
 
-    @IBOutlet weak var slideStarButton: CustomButton!
+    @IBOutlet var slideStarButton: CustomButton!
     @IBAction func slideStarPressed(_ sender: Any) {
         photoSlideControlPressed?(.star)
     }
    
-    @IBOutlet weak var slideCacheButton: CustomButton!
+    @IBOutlet var slideCacheButton: CustomButton!
     @IBAction func slideCachePressed(_ sender: Any) {
         photoSlideControlPressed?(.cache)
     }
     
-    @IBOutlet weak var slideDeleteButton: CustomButton!
+    @IBOutlet var slideDeleteButton: CustomButton!
     @IBAction func slideDeletePressed(_ sender: Any) {
         photoSlideControlPressed?(.delete)
     }
     
-    @IBOutlet weak var slideInfoButton: CustomButton!
+    @IBOutlet var slideInfoButton: CustomButton!
     @IBAction func slideInfoPressed(_ sender: Any) {
         photoSlideControlPressed?(.info)
     }
     
     var photoSlideControlPressed: ((PhotoSlideAction) -> Void)?
     
+    @IBOutlet var topLineView: UIView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var shadeView: UIView!
     
-    @IBOutlet weak var topLineView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var shadeView: UIView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var blurBackgroundView: UIView! /// extra color for more opaque look
     
+    @IBOutlet var photosIcon: PhotosIcon!
+    @IBOutlet var cameraIcon: CameraIcon!
+    @IBOutlet var listsIcon: ListsIcon!
     
-    @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var blurBackgroundView: UIView! /// extra color for more opaque look
-    
-    
-    @IBOutlet weak var photosIcon: PhotosIcon!
-    @IBOutlet weak var cameraIcon: CameraIcon!
-    @IBOutlet weak var listsIcon: ListsIcon!
-    
-    @IBOutlet weak var photosContainerView: UIView!
-    @IBOutlet weak var photosButton: CustomButton!
+    @IBOutlet var photosContainerView: UIView!
+    @IBOutlet var photosButton: CustomButton!
     @IBAction func photosButtonPressed(_ sender: Any) {
         if let currentVC = ViewControllerState.currentVC {
-            let (prep, block, completion) = self.getBlocks(from: currentVC, to: .photos)
+            let (prep, block, completion) = getBlocks(from: currentVC, to: .photos)
             if let block = block {
-                if (self.checkIfAnimating ?? { false })() == false {
+                if (checkIfAnimating ?? { false })() == false {
                     prep()
-                    self.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
-                    self.makeLayerInactiveState(duration: FindConstants.transitionDuration)
-                    self.animate(block: block, completion: completion)
+                    cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    animate(block: block, completion: completion)
                 }
-                self.changedViewController?(.photos)
+                changedViewController?(.photos)
             }
         }
     }
     
-    @IBOutlet weak var cameraContainerView: UIView!
-    @IBOutlet weak var cameraButton: CustomButton!
+    @IBOutlet var cameraContainerView: UIView!
+    @IBOutlet var cameraButton: CustomButton!
     @IBAction func cameraButtonPressed(_ sender: Any) {
         if let currentVC = ViewControllerState.currentVC {
-            let (prep, block, completion) = self.getBlocks(from: currentVC, to: .camera)
+            let (prep, block, completion) = getBlocks(from: currentVC, to: .camera)
             if let block = block {
-                if (self.checkIfAnimating ?? { false })() == false {
+                if (checkIfAnimating ?? { false })() == false {
                     prep()
-                    self.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
-                    self.makeLayerActiveState(duration: FindConstants.transitionDuration)
-                    self.animate(block: block, completion: completion)
+                    cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    animate(block: block, completion: completion)
                 }
-                self.changedViewController?(.camera)
+                changedViewController?(.camera)
             }
         }
     }
     
-    
-    @IBOutlet weak var listsContainerView: UIView!
-    @IBOutlet weak var listsButton: CustomButton!
+    @IBOutlet var listsContainerView: UIView!
+    @IBOutlet var listsButton: CustomButton!
     @IBAction func listsButtonPressed(_ sender: Any) {
         if let currentVC = ViewControllerState.currentVC {
-            let (prep, block, completion) = self.getBlocks(from: currentVC, to: .lists)
+            let (prep, block, completion) = getBlocks(from: currentVC, to: .lists)
             if let block = block {
-                if (self.checkIfAnimating ?? { false })() == false {
+                if (checkIfAnimating ?? { false })() == false {
                     prep()
-                    self.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
-                    self.makeLayerInactiveState(duration: FindConstants.transitionDuration)
-                    self.animate(block: block, completion: completion)
+                    cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    animate(block: block, completion: completion)
                 }
-                self.changedViewController?(.lists)
+                changedViewController?(.lists)
             }
         }
     }
-    
-    
     
     var fillLayer: CAShapeLayer?
     
@@ -185,7 +181,7 @@ class TabBarView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("TabBar", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let fillLayer = CAShapeLayer()
@@ -242,7 +238,7 @@ class TabBarView: UIView {
             }
         }
         
-        self.clipsToBounds = false
+        clipsToBounds = false
         
         controlsReferenceView.isUserInteractionEnabled = false
         
@@ -252,11 +248,10 @@ class TabBarView: UIView {
     }
     
     func getBlocks(from fromVC: UIViewController, to toVCType: ViewControllerType) -> (
-        (() -> Void), (() -> Void)?, (() -> Void)
+        () -> Void, (() -> Void)?, () -> Void
     ) {
-        
         var prep: (() -> Void) = {}
-        var block: (() -> Void)? = nil
+        var block: (() -> Void)?
         var completion: (() -> Void) = {}
         
         switch toVCType {
@@ -265,9 +260,9 @@ class TabBarView: UIView {
             case is PhotosWrapperController:
                 break
             case is CameraViewController:
-                let makeInactive = self.cameraIcon.makeNormalState()
-                let makeOtherInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
-                let makeActive = self.photosIcon.makeActiveState()
+                let makeInactive = cameraIcon.makeNormalState()
+                let makeOtherInactive = listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
+                let makeActive = photosIcon.makeActiveState()
                 
                 prep = {
                     self.hideRealShutter?(true)
@@ -280,9 +275,9 @@ class TabBarView: UIView {
                     makeActive()
                 }
             case is ListsNavController:
-                let makeInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
-                let makeOtherInactive = self.cameraIcon.makeNormalState()
-                let makeActive = self.photosIcon.makeActiveState()
+                let makeInactive = listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
+                let makeOtherInactive = cameraIcon.makeNormalState()
+                let makeActive = photosIcon.makeActiveState()
                 
                 block = {
                     makeInactive()
@@ -296,10 +291,9 @@ class TabBarView: UIView {
             switch fromVC {
             case is PhotosWrapperController:
 
-                
-                let makeInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
-                let makeOtherInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
-                let makeActive = self.cameraIcon.makeActiveState()
+                let makeInactive = photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
+                let makeOtherInactive = listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
+                let makeActive = cameraIcon.makeActiveState()
                 
                 prep = {
                     self.hideRealShutter?(true)
@@ -318,9 +312,9 @@ class TabBarView: UIView {
             case is CameraViewController:
                 break
             case is ListsNavController:
-                let makeInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
-                let makeOtherInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
-                let makeActive = self.cameraIcon.makeActiveState()
+                let makeInactive = listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
+                let makeOtherInactive = photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
+                let makeActive = cameraIcon.makeActiveState()
                 
                 prep = {
                     self.hideRealShutter?(true)
@@ -340,9 +334,9 @@ class TabBarView: UIView {
         case .lists:
             switch fromVC {
             case is PhotosWrapperController:
-                let makeInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
-                let makeOtherInactive = self.cameraIcon.makeNormalState()
-                let makeActive = self.listsIcon.makeActiveState()
+                let makeInactive = photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
+                let makeOtherInactive = cameraIcon.makeNormalState()
+                let makeActive = listsIcon.makeActiveState()
                 
                 block = {
                     makeInactive()
@@ -350,9 +344,9 @@ class TabBarView: UIView {
                     makeActive()
                 }
             case is CameraViewController:
-                let makeInactive = self.cameraIcon.makeNormalState()
-                let makeOtherInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
-                let makeActive = self.listsIcon.makeActiveState()
+                let makeInactive = cameraIcon.makeNormalState()
+                let makeOtherInactive = photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
+                let makeActive = listsIcon.makeActiveState()
                 
                 prep = {
                     self.hideRealShutter?(true)
@@ -379,27 +373,27 @@ class TabBarView: UIView {
         tabAnimator?.stopAnimation(false)
         tabAnimator?.finishAnimation(at: .current)
         tabAnimator?.addAnimations(block)
-        tabAnimator?.addCompletion({ _ in
+        tabAnimator?.addCompletion { _ in
             self.animatingObjects -= 1
-            if self.animatingObjects == 0 && !self.gestureInterruptedButton {
+            if self.animatingObjects == 0, !self.gestureInterruptedButton {
                 completion()
             }
-        })
+        }
         tabAnimator?.startAnimation()
     }
+
     func showLineView(show: Bool) {
         if show {
-            
             if UserDefaults.standard.integer(forKey: "shutterStyle") == 3 {
-                self.cameraIcon.fillBorderView.layer.borderWidth = 0.5
-                self.cameraIcon.fillBorderView.layer.borderColor = FindConstants.detailIconColorLight.cgColor
+                cameraIcon.fillBorderView.layer.borderWidth = 0.5
+                cameraIcon.fillBorderView.layer.borderColor = FindConstants.detailIconColorLight.cgColor
             }
             UIView.animate(withDuration: 0.6) {
                 self.topLineView.alpha = 1
                 self.cameraIcon.fillBorderView.alpha = 1
             }
         } else {
-            self.cameraIcon.fillBorderView.layer.borderWidth = 0
+            cameraIcon.fillBorderView.layer.borderWidth = 0
             UIView.animate(withDuration: 0.1) {
                 self.topLineView.alpha = 0
                 self.cameraIcon.fillBorderView.alpha = 0
@@ -418,11 +412,11 @@ class TabBarView: UIView {
             let newCurve = createCurve(with: 0, iPhoneX: deviceHasNotch)
             
             CATransaction.begin()
-            CATransaction.setCompletionBlock({
-                if !hide && !(ViewControllerState.currentVC is CameraViewController) {
+            CATransaction.setCompletionBlock {
+                if !hide, !(ViewControllerState.currentVC is CameraViewController) {
                     self.showLineView(show: true)
                 }
-            })
+            }
             
             let animation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.path))
             animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -435,13 +429,14 @@ class TabBarView: UIView {
             CATransaction.commit()
             
             if hide {
-                self.isUserInteractionEnabled = false
+                isUserInteractionEnabled = false
                 UIView.animate(withDuration: Double(duration)) {
                     self.contentView.frame.origin.y = self.contentView.bounds.height
                 }
             }
         }
     }
+
     func makeLayerActiveState(duration: CGFloat, show: Bool = false) {
         if let fillLayer = fillLayer {
             if let currentValue = fillLayer.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.path)) {
@@ -450,7 +445,7 @@ class TabBarView: UIView {
                 fillLayer.removeAllAnimations()
             }
             
-            self.showLineView(show: false)
+            showLineView(show: false)
             let newCurve = createCurve(with: 1, iPhoneX: deviceHasNotch)
             
             let animation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.path))
@@ -463,19 +458,19 @@ class TabBarView: UIView {
             fillLayer.add(animation, forKey: "path")
             
             if show {
-                self.isUserInteractionEnabled = true
+                isUserInteractionEnabled = true
                 UIView.animate(withDuration: 0.6) {
                     self.contentView.frame.origin.y = 0
                 }
             }
         }
     }
+
     func makePercentageOfActive(percentage: CGFloat) {
         showLineView(show: false)
         let curve = createCurve(with: percentage, iPhoneX: deviceHasNotch)
         fillLayer?.path = curve
     }
-    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -531,8 +526,6 @@ class TabBarView: UIView {
         let difference = distanceFromTargetBottomToScreenBottom - distanceFromCameraBottomToScreenBottom
         
         cameraIcon.offsetNeeded = difference
-        
-        
     }
     
     func createCurve(with percentage: CGFloat = 1, iPhoneX: Bool = true) -> CGPath {

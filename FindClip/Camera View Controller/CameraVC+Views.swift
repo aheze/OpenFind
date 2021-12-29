@@ -9,12 +9,11 @@ import UIKit
 
 extension CameraViewController {
     func setupViews() {
-        
         scrollView.keyboardDismissMode = .interactive
         textFieldContainer.clipsToBounds = true
         textFieldContainer.layer.cornerRadius = 16
         textField.delegate = self
-        textField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
+        textField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.75)])
         textField.tintColor = UIColor(named: "CursorTint")
         
         cameraContentView.mask = cameraMaskView
@@ -30,7 +29,6 @@ extension CameraViewController {
         overlayShadowView.alpha = 0
         
         blurView.effect = nil
-        
         
         morphingLabel.morphingEffect = .evaporate
     }

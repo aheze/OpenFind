@@ -59,7 +59,7 @@ public func schemaVersionAtURL(_ fileURL: URL, encryptionKey: Data? = nil) throw
     return version
 }
 
-extension Realm {
+public extension Realm {
     /**
      Performs the given Realm configuration's migration block on a Realm at the given path.
 
@@ -68,7 +68,7 @@ extension Realm {
 
      - parameter configuration: The Realm configuration used to open and migrate the Realm.
      */
-    public static func performMigration(for configuration: Realm.Configuration = Realm.Configuration.defaultConfiguration) throws {
+    static func performMigration(for configuration: Realm.Configuration = Realm.Configuration.defaultConfiguration) throws {
         try RLMRealm.performMigration(for: configuration.rlmConfiguration)
     }
 }
@@ -81,7 +81,6 @@ extension Realm {
  modifying the Realm during the migration.
  */
 @frozen public struct Migration {
-
     // MARK: Properties
 
     /// The old schema, describing the Realm before applying a migration.
@@ -173,7 +172,6 @@ extension Realm {
         self.rlmMigration = rlmMigration
     }
 }
-
 
 // MARK: Private Helpers
 

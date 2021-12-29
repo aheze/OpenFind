@@ -5,11 +5,9 @@
 //  Created by Zheng on 11/2/21.
 //
 
-
 import UIKit
 
 open class PageLayoutAttributes: UICollectionViewLayoutAttributes {
-    
     var fullOrigin = CGFloat(0) /// origin when expanded
     
     override open func copy(with zone: NSZone?) -> Any {
@@ -30,7 +28,6 @@ open class PageLayoutAttributes: UICollectionViewLayoutAttributes {
 }
 
 class ContentPagingFlowLayout: UICollectionViewFlowLayout {
-    
     override init() {
         super.init()
     }
@@ -41,7 +38,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// get data
     var getTabs: (() -> [TabState])?
     
-    
     var layoutAttributes = [PageLayoutAttributes]()
 
     /// actual content offset used by `prepare`
@@ -49,7 +45,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
    
     /// calculated from `getTargetOffset`
     var currentIndex = 1
-    
     
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
@@ -60,7 +55,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
     }
@@ -102,15 +96,14 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             currentOrigin += width
         }
 
-        
-        self.contentSize = CGSize(width: currentOrigin, height: height)
+        contentSize = CGSize(width: currentOrigin, height: height)
         self.layoutAttributes = layoutAttributes
-        
         
         currentOffset = collectionView.contentOffset.x
     }
     
     /// boilerplate code
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool { return true }
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
@@ -180,5 +173,3 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         return CGPoint(x: closestAttribute?.fullOrigin ?? point.x, y: 0)
     }
 }
-
-

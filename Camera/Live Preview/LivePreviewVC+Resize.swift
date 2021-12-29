@@ -10,7 +10,6 @@ import UIKit
 
 extension LivePreviewViewController {
     func updateViewportSize(safeViewFrame: CGRect) {
-
         guard let imageSize = imageSize else { return }
         self.safeViewFrame = safeViewFrame
         
@@ -29,7 +28,7 @@ extension LivePreviewViewController {
         var imageFillSafeRect = imageFillSafeCenteredRect
         imageFillSafeRect.origin.y = safeViewFrame.origin.y
         
-        self.imageFitViewSize = imageFitViewCenteredRect.size
+        imageFitViewSize = imageFitViewCenteredRect.size
         self.imageFillSafeRect = imageFillSafeRect
         
         /// Avoid a slide animation
@@ -47,9 +46,9 @@ extension LivePreviewViewController {
         if aspectFill {
             safeViewFrame = CGRect(
                 x: self.safeViewFrame.origin.x,
-                y: self.view.frame.origin.y,
+                y: view.frame.origin.y,
                 width: self.safeViewFrame.width,
-                height: self.view.frame.height
+                height: view.frame.height
             )
         } else {
             safeViewFrame = self.safeViewFrame
@@ -58,17 +57,15 @@ extension LivePreviewViewController {
     }
     
     func updateAspectProgressTarget() {
+        let halfImageHeight = imageFillSafeRect.height / 2
         
-        let halfImageHeight = self.imageFillSafeRect.height / 2
-        
-        let containerTopHalfHeight = self.imageFillSafeRect.midY
+        let containerTopHalfHeight = imageFillSafeRect.midY
         let containerBottomHalfHeight = view.bounds.height - containerTopHalfHeight
         
         /// calculate the image's progress to the full view for both top and bottom
         let imageTopMultiplier = containerTopHalfHeight / halfImageHeight
         let imageBottomMultiplier = containerBottomHalfHeight / halfImageHeight
         let imageMultiplier = max(imageTopMultiplier, imageBottomMultiplier)
-        
         
         aspectProgressTarget = imageMultiplier
     }
@@ -90,7 +87,6 @@ extension LivePreviewViewController {
             (imageAspect < containerAspect) && (aspectMode == .scaleAspectFill) || /// image extends left and right
             (imageAspect >= containerAspect) && (aspectMode == .scaleAspectFit) /// image has gaps left and right
         {
-            
             let newImageWidth = containerSize.height * (1 / imageAspect) /// the width of the overflowing image
             let newX = -(newImageWidth - containerSize.width) / 2
             contentRect = CGRect(x: newX, y: 0, width: newImageWidth, height: containerSize.height)

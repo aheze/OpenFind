@@ -22,15 +22,12 @@ class Component: NSObject {
 }
 
 class StatsView: UIView {
-    
     var currentlyFocused: ((Bool) -> Void)?
     override func accessibilityElementDidBecomeFocused() {
-
         currentlyFocused?(true)
     }
     
     override func accessibilityElementDidLoseFocus() {
-
         currentlyFocused?(false)
     }
 }

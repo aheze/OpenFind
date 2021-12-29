@@ -26,13 +26,13 @@ extension PhotoSlidesViewController {
         
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         viewController.placeholderImage = firstPlaceholderImage
-        let viewControllers = [ viewController ]
+        let viewControllers = [viewController]
         
         if indexBeforeRemoval == resultPhotos.count {
             if indexBeforeRemoval == 0 { /// removed last photo
-                self.transitionController.animator.removedLast = true
-                self.transitionController.isInteractive = false
-                let _ = self.navigationController?.popViewController(animated: true)
+                transitionController.animator.removedLast = true
+                transitionController.isInteractive = false
+                _ = navigationController?.popViewController(animated: true)
             } else { /// this photo is the rightmost
                 newIndex = indexBeforeRemoval - 1
                 let resultPhoto = resultPhotos[newIndex]
@@ -78,12 +78,12 @@ extension PhotoSlidesViewController {
                     }
                 }
                 
-                self.view.isUserInteractionEnabled = false
-                self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true) { _ in
+                view.isUserInteractionEnabled = false
+                pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true) { _ in
                     self.view.isUserInteractionEnabled = true
                 }
                 
-                self.updatedIndex?.indexUpdated(to: newIndex)
+                updatedIndex?.indexUpdated(to: newIndex)
             }
         } else {
             newIndex = indexBeforeRemoval
@@ -130,14 +130,14 @@ extension PhotoSlidesViewController {
                 }
             }
             
-            self.view.isUserInteractionEnabled = false
-            self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true) { _ in
+            view.isUserInteractionEnabled = false
+            pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true) { _ in
                 self.view.isUserInteractionEnabled = true
             }
-            self.updatedIndex?.indexUpdated(to: newIndex)
+            updatedIndex?.indexUpdated(to: newIndex)
         }
         
-        self.currentIndex = newIndex
+        currentIndex = newIndex
         voiceOverSlidesControl.currentIndex = newIndex
         voiceOverSlidesControl.totalNumberOfPhotos = resultPhotos.count
         UIAccessibility.post(notification: .layoutChanged, argument: voiceOverSlidesControl)

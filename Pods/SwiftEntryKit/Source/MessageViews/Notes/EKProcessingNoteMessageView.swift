@@ -9,8 +9,8 @@
 import UIKit
 
 public class EKProcessingNoteMessageView: EKAccessoryNoteMessageView {
-    
     // MARK: Props
+
     private var activityIndicatorView: UIActivityIndicatorView!
     private var noteMessageView: EKNoteMessageView!
     
@@ -26,6 +26,8 @@ public class EKProcessingNoteMessageView: EKAccessoryNoteMessageView {
     }
     
     // MARK: Setup
+
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

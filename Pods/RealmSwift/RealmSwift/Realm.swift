@@ -43,7 +43,6 @@ import Realm.Private
  queue may fail as queues are not always run on the same thread.
  */
 @frozen public struct Realm {
-
     // MARK: Properties
 
     /// The `Schema` used by the Realm.
@@ -131,7 +130,8 @@ import Realm.Private
     @discardableResult
     public static func asyncOpen(configuration: Realm.Configuration = .defaultConfiguration,
                                  callbackQueue: DispatchQueue = .main,
-                                 callback: @escaping (Result<Realm, Swift.Error>) -> Void) -> AsyncOpenTask {
+                                 callback: @escaping (Result<Realm, Swift.Error>) -> Void) -> AsyncOpenTask
+    {
         return AsyncOpenTask(rlmTask: RLMRealm.asyncOpen(with: configuration.rlmConfiguration, callbackQueue: callbackQueue, callback: { rlmRealm, error in
             if let realm = rlmRealm.flatMap(Realm.init) {
                 callback(.success(realm))
@@ -141,7 +141,7 @@ import Realm.Private
         }))
     }
 
-    #if !(os(iOS) && (arch(i386) || arch(arm)))
+#if !(os(iOS) && (arch(i386) || arch(arm)))
     /**
      Asynchronously open a Realm and deliver it to a block on the given queue.
 
@@ -163,7 +163,7 @@ import Realm.Private
     public static func asyncOpen(configuration: Realm.Configuration = .defaultConfiguration) -> RealmPublishers.AsyncOpenPublisher {
         return RealmPublishers.AsyncOpenPublisher(configuration: configuration)
     }
-    #endif
+#endif
 
     /**
      A task object which can be used to observe or cancel an async open.
@@ -199,7 +199,8 @@ import Realm.Private
          - parameter block: The block to invoke when notifications are available.
          */
         public func addProgressNotification(queue: DispatchQueue = .main,
-                                            block: @escaping (SyncSession.Progress) -> Void) {
+                                            block: @escaping (SyncSession.Progress) -> Void)
+        {
             rlmTask.addProgressNotification(on: queue) { transferred, transferrable in
                 block(SyncSession.Progress(transferred: transferred, transferrable: transferrable))
             }
@@ -248,12 +249,12 @@ import Realm.Private
                If `block` throws, the function throws the propagated `ErrorType` instead.
      */
     @discardableResult
-    public func write<Result>(withoutNotifying tokens: [NotificationToken] = [], _ block: (() throws -> Result)) throws -> Result {
+    public func write<Result>(withoutNotifying tokens: [NotificationToken] = [], _ block: () throws -> Result) throws -> Result {
         beginWrite()
         var ret: Result!
         do {
             ret = try block()
-        } catch let error {
+        } catch {
             if isInWriteTransaction { cancelWrite() }
             throw error
         }
@@ -426,7 +427,7 @@ import Realm.Private
      without a primary key.
      */
     public func add(_ object: Object, update: UpdatePolicy = .error) {
-        if update != .error && object.objectSchema.primaryKeyProperty == nil {
+        if update != .error, object.objectSchema.primaryKeyProperty == nil {
             throwRealmException("'\(object.objectSchema.className)' does not have a primary key and can not be updated")
         }
         RLMAddObjectToRealm(object, rlmRealm, RLMUpdatePolicy(rawValue: UInt(update.rawValue))!)
@@ -537,7 +538,6 @@ import Realm.Private
      or (if you are passing in an instance of an `Object` subclass) setting the corresponding
      property on `value` to nil.
 
-
      - warning: This method can only be called during a write transaction.
 
      - parameter className:  The class name of the object to create.
@@ -551,7 +551,7 @@ import Realm.Private
      */
     @discardableResult
     public func dynamicCreate(_ typeName: String, value: Any = [:], update: UpdatePolicy = .error) -> DynamicObject {
-        if update != .error && schema[typeName]?.primaryKeyProperty == nil {
+        if update != .error, schema[typeName]?.primaryKeyProperty == nil {
             throwRealmException("'\(typeName)' does not have a primary key and can not be updated")
         }
         return noWarnUnsafeBitCast(RLMCreateObjectInRealmWithValue(rlmRealm, typeName, value,
@@ -685,7 +685,7 @@ import Realm.Private
     public func object<Element: Object, KeyType>(ofType type: Element.Type, forPrimaryKey key: KeyType) -> Element? {
         return unsafeBitCast(RLMGetObject(rlmRealm, (type as Object.Type).className(),
                                           dynamicBridgeCast(fromSwift: key)) as! RLMObjectBase?,
-                             to: Optional<Element>.self)
+                             to: Element?.self)
     }
 
     /**
@@ -711,7 +711,7 @@ import Realm.Private
      :nodoc:
      */
     public func dynamicObject(ofType typeName: String, forPrimaryKey key: Any) -> DynamicObject? {
-        return unsafeBitCast(RLMGetObject(rlmRealm, typeName, key) as! RLMObjectBase?, to: Optional<DynamicObject>.self)
+        return unsafeBitCast(RLMGetObject(rlmRealm, typeName, key) as! RLMObjectBase?, to: DynamicObject?.self)
     }
 
     // MARK: Notifications
@@ -856,17 +856,17 @@ import Realm.Private
     }
 
     /**
-     Returns a frozen (immutable) snapshot of the given collection.
+      Returns a frozen (immutable) snapshot of the given collection.
 
-     The frozen copy is an immutable collection which contains the same data as the given
-     collection currently contains, but will not update when writes are made to the containing
-     Realm. Unlike live collections, frozen collections can be accessed from any thread.
+      The frozen copy is an immutable collection which contains the same data as the given
+      collection currently contains, but will not update when writes are made to the containing
+      Realm. Unlike live collections, frozen collections can be accessed from any thread.
 
-     - warning: This method cannot be called during a write transaction, or when the Realm is read-only.
-     - warning: Holding onto a frozen collection for an extended period while performing write
-     transaction on the Realm may result in the Realm file growing to large sizes. See
-     `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
-    */
+      - warning: This method cannot be called during a write transaction, or when the Realm is read-only.
+      - warning: Holding onto a frozen collection for an extended period while performing write
+      transaction on the Realm may result in the Realm file growing to large sizes. See
+      `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
+     */
     public func freeze<Collection: RealmCollection>(_ collection: Collection) -> Collection {
         return collection.freeze()
     }
@@ -971,9 +971,9 @@ extension Realm: Equatable {
 
 // MARK: Notifications
 
-extension Realm {
+public extension Realm {
     /// A notification indicating that changes were made to a Realm.
-    @frozen public enum Notification: String {
+    @frozen enum Notification: String {
         /**
          This notification is posted when the data in a Realm has changed.
 
@@ -1003,10 +1003,10 @@ public typealias NotificationBlock = (_ notification: Realm.Notification, _ real
 
 #if swift(>=5.5) && canImport(_Concurrency)
 @available(macOS 12.0, tvOS 15.0, iOS 15.0, watchOS 8.0, *)
-extension Realm {
+public extension Realm {
     /// Options for when to download all data from the server before opening
     /// a synchronized Realm.
-    @frozen public enum OpenBehavior {
+    @frozen enum OpenBehavior {
         /// Immediately return the Realm as if the synchronous initializer was
         /// used. If this is the first time that the Realm has been opened on
         /// this device, the Realm file will initially be empty. Synchronized
@@ -1028,6 +1028,7 @@ extension Realm {
         /// not wait for the download.
         case once
     }
+
     /**
      Obtains a `Realm` instance with the given configuration, possibly asynchronously.
      By default this simply returns the Realm instance exactly as if the
@@ -1046,9 +1047,10 @@ extension Realm {
      - throws: An `NSError` if the Realm could not be initialized.
      - returns: An open Realm.
      */
-    public init(configuration: Realm.Configuration = .defaultConfiguration,
-                downloadBeforeOpen: OpenBehavior = .never,
-                queue: DispatchQueue? = nil) async throws {
+    init(configuration: Realm.Configuration = .defaultConfiguration,
+         downloadBeforeOpen: OpenBehavior = .never,
+         queue: DispatchQueue? = nil) async throws
+    {
         switch downloadBeforeOpen {
         case .never:
             break

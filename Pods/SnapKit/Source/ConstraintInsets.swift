@@ -22,14 +22,13 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
 #if os(iOS) || os(tvOS)
-    public typealias ConstraintInsets = UIEdgeInsets
+public typealias ConstraintInsets = UIEdgeInsets
 #else
-    public typealias ConstraintInsets = NSEdgeInsets
+public typealias ConstraintInsets = NSEdgeInsets
 #endif

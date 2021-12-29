@@ -8,13 +8,14 @@
 import UIKit
 
 public class EKSimpleMessageView: UIView {
-
     // MARK: Props
+
     var thumbImageView: UIImageView!
     let messageContentView = EKMessageContentView()
     private let message: EKSimpleMessage
     
     // MARK: Setup
+
     init(with message: EKSimpleMessage) {
         self.message = message
         super.init(frame: UIScreen.main.bounds)
@@ -23,7 +24,8 @@ public class EKSimpleMessageView: UIView {
                                 description: message.description)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -37,7 +39,8 @@ public class EKSimpleMessageView: UIView {
     }
     
     private func setupMessageContentView(with title: EKProperty.LabelContent,
-                                         description: EKProperty.LabelContent) {
+                                         description: EKProperty.LabelContent)
+    {
         messageContentView.titleContent = title
         messageContentView.subtitleContent = description
         addSubview(messageContentView)
@@ -52,7 +55,7 @@ public class EKSimpleMessageView: UIView {
         }
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupInterfaceStyle()
     }
 }

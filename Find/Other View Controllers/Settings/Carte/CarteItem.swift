@@ -9,21 +9,19 @@
 import Foundation
 
 public struct CarteItem {
+    public var name: String
+    public var version: String?
+    public var licenseName: String?
+    public var licenseText: String?
 
-  public var name: String
-  public var version: String?
-  public var licenseName: String?
-  public var licenseText: String?
-
-  public var displayName: String? {
-    if let version = self.version {
-      return "\(self.name) (\(version))"
+    public var displayName: String? {
+        if let version = version {
+            return "\(name) (\(version))"
+        }
+        return name
     }
-    return self.name
-  }
 
-  public init(name: String) {
-    self.name = name
-  }
-  
+    public init(name: String) {
+        self.name = name
+    }
 }

@@ -9,18 +9,19 @@
 import UIKit
 
 final class EKBackgroundView: EKStyleView {
-
     struct Style {
         let background: EKAttributes.BackgroundStyle
         let displayMode: EKAttributes.DisplayMode
     }
     
     // MARK: Props
+
     private let visualEffectView: UIVisualEffectView
     private let imageView: UIImageView
     private let gradientView: GradientView
     
     // MARK: Setup
+
     init() {
         imageView = UIImageView()
         visualEffectView = UIVisualEffectView(effect: nil)
@@ -38,6 +39,7 @@ final class EKBackgroundView: EKStyleView {
         gradientView.fillSuperview()
     }
     
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

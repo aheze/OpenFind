@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-
 class ToolbarViewModel: ObservableObject {
     @Published var toolbar = Toolbar.none
     
-    init() { }
+    init() {}
     
     enum Toolbar {
         case none
@@ -19,18 +18,21 @@ class ToolbarViewModel: ObservableObject {
         case photosDetail
         case listsSelection
     }
+
     class PhotosSelection: ObservableObject {
         @Published var selectedCount = 0
         @Published var starOn = false
-        init() { }
+        init() {}
     }
+
     class PhotosDetail: ObservableObject {
         @Published var starOn = false
         @Published var infoOn = false
-        init() { }
+        init() {}
     }
+
     class ListsSelection: ObservableObject {
         @Published var selectedCount = 0
-        init() { }
+        init() {}
     }
 }

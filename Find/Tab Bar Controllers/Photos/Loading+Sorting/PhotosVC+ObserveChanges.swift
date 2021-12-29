@@ -6,11 +6,10 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 extension PhotosViewController: PHPhotoLibraryChangeObserver {
-    
     func startObservingChanges() {
         if !currentlyObservingChanges {
             PHPhotoLibrary.shared().register(self)
@@ -29,7 +28,7 @@ extension PhotosViewController: PHPhotoLibraryChangeObserver {
                 } else {
                     refreshing = true
                     DispatchQueue.main.async {
-                        self.loadImages { (allPhotos, allMonths) in
+                        self.loadImages { allPhotos, allMonths in
                             self.allMonths = allMonths
                             self.monthsToDisplay = allMonths
                             self.allPhotosToDisplay = allPhotos
@@ -44,5 +43,4 @@ extension PhotosViewController: PHPhotoLibraryChangeObserver {
             }
         }
     }
-    
 }

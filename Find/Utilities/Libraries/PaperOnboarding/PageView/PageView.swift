@@ -9,7 +9,6 @@
 import UIKit
 
 class PageView: UIView {
-
     var currentSelectedIndex = 0
     var itemsCount = 3
     var itemRadius: CGFloat = 8.0
@@ -37,6 +36,7 @@ class PageView: UIView {
         commonInit()
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     var currentIndex = 0
@@ -49,6 +49,7 @@ class PageView: UIView {
             super.accessibilityTraits = newValue
         }
     }
+
     override var accessibilityValue: String? {
         get {
             return "\(currentIndex + 1) out of \(itemsCount)"
@@ -75,7 +76,7 @@ class PageView: UIView {
 
     override func hitTest(_ point: CGPoint, with _: UIEvent?) -> UIView? {
         guard
-            let containerView = self.containerView,
+            let containerView = containerView,
             let items = containerView.items
         else { return nil }
         for item in items {
@@ -90,7 +91,6 @@ class PageView: UIView {
 // MARK: public
 
 extension PageView {
-    
     class func pageViewOnView(_ view: UIView, itemsCount: Int, bottomConstant: CGFloat, radius: CGFloat, selectedRadius: CGFloat, itemColor: @escaping (Int) -> UIColor) -> PageView {
         let pageView = PageView(frame: CGRect.zero,
                                 itemsCount: itemsCount,
@@ -101,28 +101,25 @@ extension PageView {
         pageView.alpha = 0.4
         view.addSubview(pageView)
         
-        let layoutAttribs:[(NSLayoutConstraint.Attribute, Int)] =  [(NSLayoutConstraint.Attribute.left, 0), (NSLayoutConstraint.Attribute.right, 0), (NSLayoutConstraint.Attribute.bottom, Int(bottomConstant))]
+        let layoutAttribs: [(NSLayoutConstraint.Attribute, Int)] = [(NSLayoutConstraint.Attribute.left, 0), (NSLayoutConstraint.Attribute.right, 0), (NSLayoutConstraint.Attribute.bottom, Int(bottomConstant))]
         
         // add constraints
         for (attribute, const) in layoutAttribs {
             (view, pageView) >>>- {
                 $0.constant = CGFloat(const)
                 $0.attribute = attribute
-                return
             }
         }
         pageView >>>- {
             $0.attribute = .height
             $0.constant = 30
-            return
         }
         
         return pageView
     }
     
     func currentIndex(_ index: Int, animated: Bool) {
-        
-        if 0 ..< itemsCount ~= index {
+        if 0..<itemsCount ~= index {
             containerView?.currenteIndex(index, duration: duration * 0.5, animated: animated)
             moveContainerTo(index, animated: animated, duration: duration)
             currentSelectedIndex = index
@@ -130,7 +127,7 @@ extension PageView {
     }
 
     func positionItemIndex(_ index: Int, onView: UIView) -> CGPoint? {
-        if 0 ..< itemsCount ~= index {
+        if 0..<itemsCount ~= index {
             if let currentItem = containerView?.items?[index].imageView {
                 let pos = currentItem.convert(currentItem.center, to: onView)
                 return pos
@@ -142,9 +139,8 @@ extension PageView {
 
 // MARK: life cicle
 
-extension PageView {
-
-    fileprivate func commonInit() {
+private extension PageView {
+    func commonInit() {
         containerView = createContainerView()
         currentIndex(0, animated: false)
         backgroundColor = .clear
@@ -153,14 +149,13 @@ extension PageView {
 
 // MARK: create
 
-extension PageView {
-
-    fileprivate func createContainerView() -> PageContainer {
+private extension PageView {
+    func createContainerView() -> PageContainer {
         let pageControl = PageContainer(radius: itemRadius,
-                                         selectedRadius: selectedItemRadius,
-                                         space: space,
-                                         itemsCount: itemsCount,
-                                         itemColor: itemColor)
+                                        selectedRadius: selectedItemRadius,
+                                        space: space,
+                                        itemsCount: itemsCount,
+                                        itemColor: itemColor)
         let container = Init(pageControl) {
             $0.backgroundColor = .clear
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -169,24 +164,23 @@ extension PageView {
         
         // add constraints
         for attribute in [NSLayoutConstraint.Attribute.top, NSLayoutConstraint.Attribute.bottom] {
-            (self, container) >>>- { $0.attribute = attribute; return }
+            (self, container) >>>- { $0.attribute = attribute }
         }
 
-        containerX = (self, container) >>>- { $0.attribute = .centerX; return }
+        containerX = (self, container) >>>- { $0.attribute = .centerX }
 
         container >>>- {
             $0.attribute = .width
             $0.constant = selectedItemRadius * 2 + CGFloat(itemsCount - 1) * (itemRadius * 2) + space * CGFloat(itemsCount - 1)
-            return
         }
         return container
     }
 
-    fileprivate func configurePageItems(_ items: [PageViewItem]?) {
+    func configurePageItems(_ items: [PageViewItem]?) {
         guard let items = items else {
             return
         }
-        for index in 0 ..< items.count {
+        for index in 0..<items.count {
             configuration?(items[index], index)
         }
     }
@@ -194,10 +188,9 @@ extension PageView {
 
 // MARK: animation
 
-extension PageView {
-
-    fileprivate func moveContainerTo(_ index: Int, animated: Bool = true, duration: Double = 0) {
-        guard let containerX = self.containerX else {
+private extension PageView {
+    func moveContainerTo(_ index: Int, animated: Bool = true, duration: Double = 0) {
+        guard let containerX = containerX else {
             return
         }
 

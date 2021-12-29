@@ -18,11 +18,11 @@ extension SegmentedSlider {
             indicatorView.isHidden = true
             
             contentView.addSubview(numberOfSelectedView)
-            numberOfSelectedView.snp.makeConstraints { (make) in
+            numberOfSelectedView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
             
-            self.accessibilityLabel = "Select Photos"
+            accessibilityLabel = "Select Photos"
             
         } else {
             baseView.isUserInteractionEnabled = true
@@ -31,7 +31,7 @@ extension SegmentedSlider {
             
             numberOfSelectedView.removeFromSuperview()
             
-            self.accessibilityLabel = "Filters"
+            accessibilityLabel = "Filters"
         }
     }
     
@@ -46,9 +46,8 @@ extension SegmentedSlider {
                 text = "\(number) Photos Selected"
             }
             
-            self.numberOfSelectedLabel.text = text
-            self.accessibilityLabel = text
+            numberOfSelectedLabel.text = text
+            accessibilityLabel = text
         }
     }
-    
 }

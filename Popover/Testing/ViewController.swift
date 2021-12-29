@@ -6,14 +6,13 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
-import SwiftUI
 import Popovers
+import SwiftUI
+import UIKit
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var listLabel: UILabel!
+    @IBOutlet var wordLabel: UILabel!
+    @IBOutlet var listLabel: UILabel!
     
     var fields = [
         Field(text: .init(value: .string(""), colorIndex: 0)),
@@ -23,7 +22,7 @@ class ViewController: UIViewController {
                 desc: "Desc",
                 contents: ["Word", "Branch", "Water", "Dirt"],
                 iconImageName: "plus",
-                iconColorName: 0x00aeef,
+                iconColorName: 0x00AEEF,
                 dateCreated: Date()
             )
         ), colorIndex: 1)),
@@ -33,9 +32,9 @@ class ViewController: UIViewController {
     @IBAction func wordPressed(_ sender: Any) {
         let fieldSettingsModel = FieldSettingsModel()
         fieldSettingsModel.header = "WORD"
-        fieldSettingsModel.defaultColor = self.fields[0].text.color
-        fieldSettingsModel.selectedColor = self.fields[0].text.color
-        fieldSettingsModel.alpha = self.fields[0].text.colorAlpha
+        fieldSettingsModel.defaultColor = fields[0].text.color
+        fieldSettingsModel.selectedColor = fields[0].text.color
+        fieldSettingsModel.alpha = fields[0].text.colorAlpha
         fieldSettingsModel.words = []
         fieldSettingsModel.showingWords = false
         fieldSettingsModel.editListPressed = nil
@@ -64,16 +63,14 @@ class ViewController: UIViewController {
         Popovers.present(popover)
     }
     
-    @IBOutlet weak var listButton: UIButton!
+    @IBOutlet var listButton: UIButton!
     @IBAction func listPressed(_ sender: Any) {
-        
         let fieldSettingsModel = FieldSettingsModel()
         fieldSettingsModel.header = "LIST"
-        fieldSettingsModel.defaultColor = self.fields[1].text.color
-        fieldSettingsModel.selectedColor = self.fields[1].text.color
-        fieldSettingsModel.alpha = self.fields[1].text.colorAlpha
+        fieldSettingsModel.defaultColor = fields[1].text.color
+        fieldSettingsModel.selectedColor = fields[1].text.color
+        fieldSettingsModel.alpha = fields[1].text.colorAlpha
         fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water", "Context", "Popover", "Mud"]
-        
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
         
@@ -106,27 +103,18 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var tipButton: UIButton!
-    @IBAction func tipPressed(_ sender: Any) {
-    }
+    @IBOutlet var tipButton: UIButton!
+    @IBAction func tipPressed(_ sender: Any) {}
     
-    @IBOutlet weak var holdButton: UIButton!
-    @IBAction func holdDown(_ sender: Any) {
-    }
+    @IBOutlet var holdButton: UIButton!
+    @IBAction func holdDown(_ sender: Any) {}
     
-    @IBAction func holdUp(_ sender: Any) {
-    }
+    @IBAction func holdUp(_ sender: Any) {}
     
-    @IBOutlet weak var purpleButton: UIButton!
-    @IBAction func purpleButtonPressed(_ sender: Any) {
-
-    }
-    
+    @IBOutlet var purpleButton: UIButton!
+    @IBAction func purpleButtonPressed(_ sender: Any) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }
-
-

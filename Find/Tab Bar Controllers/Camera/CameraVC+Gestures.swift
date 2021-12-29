@@ -10,7 +10,6 @@ import UIKit
 
 extension CameraViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
         let location = touch.location(in: focusView)
         
         let cameraFrame = passthroughGroupView.convert(cameraIconHolder.frame, to: focusView)

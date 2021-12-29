@@ -9,15 +9,14 @@
 import UIKit
 
 extension CameraViewController {
-    
     /// newView = view of highlight component
     func addAccessibilityLabel(component: Component, newView: CustomActionsView, hexString: String) {
         if UIAccessibility.isVoiceOverRunning {
-            let topContentFrame = self.topGroupView.convert(self.topGroupView.bounds, to: nil)
-            let passthroughFrame = self.passthroughGroupView.convert(self.passthroughGroupView.bounds, to: nil)
+            let topContentFrame = topGroupView.convert(topGroupView.bounds, to: nil)
+            let passthroughFrame = passthroughGroupView.convert(passthroughGroupView.bounds, to: nil)
             let highlightFrame = newView.convert(newView.bounds, to: nil)
             
-            let drawingBounds = self.drawingView.bounds
+            let drawingBounds = drawingView.bounds
             DispatchQueue.global(qos: .userInitiated).async {
                 var overlapString = AccessibilityText(text: "", isRaised: false)
                 if topContentFrame.intersects(highlightFrame) {
@@ -72,6 +71,7 @@ extension CameraViewController {
             }
         }
     }
+
     func updateAccessibilityFrames() {
         for highlight in currentComponents {
             if let baseView = highlight.baseView {

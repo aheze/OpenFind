@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotosViewController {
     func setupAccessibility() {
-        
         collapseButton?.isAccessibilityElement = false
         
         extendedCollapseButton?.isHidden = true /// hide when photos active
@@ -28,7 +27,6 @@ extension PhotosViewController {
     }
     
     func updateFindButtonHint() {
-        
         let findingFrom = "Find from "
         var number = "\(numberOfSelected) "
         var filter = ""
@@ -37,7 +35,7 @@ extension PhotosViewController {
         var combinedPromptString = ""
         
         if photoFilterState.starSelected || photoFilterState.cacheSelected {
-            if photoFilterState.starSelected && photoFilterState.cacheSelected {
+            if photoFilterState.starSelected, photoFilterState.cacheSelected {
                 filter = "starred + cached "
             } else if photoFilterState.starSelected {
                 filter = "starred "

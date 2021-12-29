@@ -9,9 +9,7 @@
 import UIKit
 
 extension CameraViewController {
-    
     func setupAccessibility() {
-        
         if UIAccessibility.isVoiceOverRunning {
             setupOneTimeAccessibility()
         }
@@ -101,7 +99,6 @@ extension CameraViewController {
     func setupOneTimeAccessibility() {
         AccessibilityState.cameraDidSetup = true
         
-        
         messageView.isHidden = true
         searchBackgroundView.isHidden = false
         
@@ -117,7 +114,7 @@ extension CameraViewController {
         let controlsView = UIView()
         passthroughGroupView.insertSubview(controlsView, at: 0)
 
-        controlsView.snp.makeConstraints { (make) in
+        controlsView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -132,11 +129,9 @@ extension CameraViewController {
         passthroughGroupView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
         
         self.controlsView = controlsView
-        
     }
     
     func setupDrawingView() {
-        
         drawingBaseView.isAccessibilityElement = true
         drawingBaseView.accessibilityLabel = "Viewfinder"
         drawingBaseView.accessibilityHint = "Pause the shutter to explore highlights, then double-tap them to toggle transcript overlay."
@@ -166,20 +161,17 @@ extension CameraViewController {
         alternateWarningLabel.accessibilityLabel = "\(onlyPortraitSupported)\n\(rotateToPortrait)"
         
         whatsNewButton.accessibilityLabel = "See what's new in Find!"
-        
     }
     
     func pausedAccessibility(paused: Bool) {
         if paused {
-            
             for component in currentComponents {
                 if
                     let baseView = component.baseView,
-                    let componentColors = self.matchToColors[component.text],
+                    let componentColors = matchToColors[component.text],
                     let firstHexString = componentColors.first?.hexString
                 {
-                    
-                    self.addAccessibilityLabel(component: component, newView: baseView, hexString: firstHexString)
+                    addAccessibilityLabel(component: component, newView: baseView, hexString: firstHexString)
                 }
             }
         
@@ -195,7 +187,6 @@ extension CameraViewController {
                 if TipViews.currentLocalStep != 2 { /// must not be in a tutorial first
                     UIAccessibility.post(notification: .announcement, argument: "\(self.currentNumberOfMatches) results found. Drag your finger over the Viewfinder to explore highlights. Cache for better accuracy.")
                 }
-                
             }
             drawingBaseView.accessibilityHint = ""
         } else {

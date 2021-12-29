@@ -5,7 +5,7 @@ import UIKit
 /// this type if you need further customization; just override the
 /// `indicatorClass` property in `PagingViewController`.
 open class PagingIndicatorView: UICollectionReusableView {
-    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+    override open func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         if let attributes = layoutAttributes as? PagingIndicatorLayoutAttributes {
             backgroundColor = attributes.backgroundColor

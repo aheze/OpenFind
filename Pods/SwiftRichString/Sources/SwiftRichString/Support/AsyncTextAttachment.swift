@@ -31,14 +31,13 @@
 #if os(OSX)
 import AppKit
 #else
-import UIKit
 import MobileCoreServices
+import UIKit
 #endif
 
 #if os(iOS)
 
-@objc public protocol AsyncTextAttachmentDelegate
-{
+@objc public protocol AsyncTextAttachmentDelegate {
     /// Called when the image has been loaded
     func textAttachmentDidLoadImage(textAttachment: AsyncTextAttachment, displaySizeChanged: Bool)
 }
@@ -74,7 +73,8 @@ public class AsyncTextAttachment: NSTextAttachment {
         super.init(data: nil, ofType: nil)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -91,7 +91,7 @@ public class AsyncTextAttachment: NSTextAttachment {
             return
         }
         
-        downloadTask = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+        downloadTask = URLSession.shared.dataTask(with: imageURL) { data, _, error in
             
             defer {
                 // done with the task
@@ -99,7 +99,6 @@ public class AsyncTextAttachment: NSTextAttachment {
             }
             
             guard let data = data, error == nil else {
-
                 return
             }
             
@@ -115,8 +114,7 @@ public class AsyncTextAttachment: NSTextAttachment {
             if let image = UIImage(data: data) {
                 let imageSize = image.size
                 
-                if self.displaySize == nil
-                {
+                if self.displaySize == nil {
                     displaySizeChanged = true
                 }
                 
@@ -139,7 +137,7 @@ public class AsyncTextAttachment: NSTextAttachment {
         downloadTask.resume()
     }
     
-    public override func image(forBounds imageBounds: CGRect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> UIImage? {
+    override public func image(forBounds imageBounds: CGRect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> UIImage? {
         if let image = image { return image }
         
         guard let contents = contents, let image = UIImage(data: contents) else {
@@ -154,7 +152,7 @@ public class AsyncTextAttachment: NSTextAttachment {
         return image
     }
     
-    public override func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
+    override public func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
         if let displaySize = displaySize {
             return CGRect(origin: CGPoint.zero, size: displaySize)
         }
@@ -163,21 +161,17 @@ public class AsyncTextAttachment: NSTextAttachment {
             let maxWidth = maximumDisplayWidth ?? lineFrag.size.width
             let factor = maxWidth / imageSize.width
             
-            return CGRect(origin: CGPoint.zero, size:CGSize(width: Int(imageSize.width * factor), height: Int(imageSize.height * factor)))
+            return CGRect(origin: CGPoint.zero, size: CGSize(width: Int(imageSize.width * factor), height: Int(imageSize.height * factor)))
         }
         
         return CGRect.zero
     }
 }
 
-
-extension NSLayoutManager
-{
+public extension NSLayoutManager {
     /// Determine the character ranges for an attachment
-    private func rangesForAttachment(attachment: NSTextAttachment) -> [NSRange]?
-    {
-        guard let attributedString = self.textStorage else
-        {
+    private func rangesForAttachment(attachment: NSTextAttachment) -> [NSRange]? {
+        guard let attributedString = textStorage else {
             return nil
         }
         
@@ -186,10 +180,10 @@ extension NSLayoutManager
         
         var refreshRanges = [NSRange]()
         
-        attributedString.enumerateAttribute(NSAttributedString.Key.attachment, in: range, options: []) { (value, effectiveRange, nil) in
+        attributedString.enumerateAttribute(NSAttributedString.Key.attachment, in: range, options: []) { value, effectiveRange, _ in
             
-            guard let foundAttachment = value as? NSTextAttachment, foundAttachment == attachment else
-            {
+            guard let foundAttachment = value as? NSTextAttachment, foundAttachment == attachment
+            else {
                 return
             }
             
@@ -197,8 +191,7 @@ extension NSLayoutManager
             refreshRanges.append(effectiveRange)
         }
         
-        if refreshRanges.count == 0
-        {
+        if refreshRanges.count == 0 {
             return nil
         }
         
@@ -206,33 +199,29 @@ extension NSLayoutManager
     }
     
     /// Trigger a relayout for an attachment
-    public func setNeedsLayout(forAttachment attachment: NSTextAttachment)
-    {
-        guard let ranges = rangesForAttachment(attachment: attachment) else
-        {
+    func setNeedsLayout(forAttachment attachment: NSTextAttachment) {
+        guard let ranges = rangesForAttachment(attachment: attachment) else {
             return
         }
         
         // invalidate the display for the corresponding ranges
         for range in ranges.reversed() {
-            self.invalidateLayout(forCharacterRange: range, actualCharacterRange: nil)
+            invalidateLayout(forCharacterRange: range, actualCharacterRange: nil)
             
             // also need to trigger re-display or already visible images might not get updated
-            self.invalidateDisplay(forCharacterRange: range)
+            invalidateDisplay(forCharacterRange: range)
         }
     }
     
     /// Trigger a re-display for an attachment
-    public func setNeedsDisplay(forAttachment attachment: NSTextAttachment)
-    {
-        guard let ranges = rangesForAttachment(attachment: attachment) else
-        {
+    func setNeedsDisplay(forAttachment attachment: NSTextAttachment) {
+        guard let ranges = rangesForAttachment(attachment: attachment) else {
             return
         }
         
         // invalidate the display for the corresponding ranges
         for range in ranges.reversed() {
-            self.invalidateDisplay(forCharacterRange: range)
+            invalidateDisplay(forCharacterRange: range)
         }
     }
 }

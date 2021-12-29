@@ -54,7 +54,6 @@ public protocol _RealmMapValue {
  An iterator for a `RealmKeyedCollection` instance.
  */
 @frozen public struct RLMMapIterator<Element: _RealmMapValue>: IteratorProtocol {
-
     private var generatorBase: NSFastEnumerationIterator
     private var collection: RLMDictionary<AnyObject, AnyObject>
 
@@ -92,7 +91,8 @@ public protocol _RealmMapValue {
     public mutating func next() -> Element? {
         let next = generatorBase.next()
         if let key = next as? Key,
-           let value = collection[key as AnyObject].map(dynamicBridgeCast) as? Value {
+           let value = collection[key as AnyObject].map(dynamicBridgeCast) as? Value
+        {
             return (key: key, value: value)
         }
         return nil
@@ -174,9 +174,9 @@ public protocol _RealmMapValue {
         }
         if let change = change {
             return .update(value!,
-                deletions: forceCast(change.deletions, to: [Int].self),
-                insertions: forceCast(change.insertions, to: [Int].self),
-                modifications: forceCast(change.modifications, to: [Int].self))
+                           deletions: forceCast(change.deletions, to: [Int].self),
+                           insertions: forceCast(change.insertions, to: [Int].self),
+                           modifications: forceCast(change.modifications, to: [Int].self))
         }
         return .initial(value!)
     }
@@ -209,13 +209,14 @@ public protocol RealmCollectionValue: Hashable, _RealmSchemaDiscoverable {
     static func _rlmDefaultValue(_ forceDefaultInitialization: Bool) -> Self
 }
 
-extension RealmCollectionValue {
+public extension RealmCollectionValue {
     /// :nodoc:
-    public static func _nilValue() -> Self {
+    static func _nilValue() -> Self {
         fatalError("unexpected NSNull for non-Optional type")
     }
+
     /// :nodoc:
-    public static func _rlmKeyPathRecorder(with lastAccessedNames: NSMutableArray) -> Self {
+    static func _rlmKeyPathRecorder(with lastAccessedNames: NSMutableArray) -> Self {
         let value = Self._rlmDefaultValue(true)
         if let value = value as? ObjectBase {
             value.lastAccessedNames = lastAccessedNames
@@ -248,9 +249,10 @@ extension AnyRealmValue: RealmCollectionValue {
 }
 
 extension Optional: RealmCollectionValue where Wrapped: RealmCollectionValue,
-                                               Wrapped: _DefaultConstructible {
+    Wrapped: _DefaultConstructible
+{
     /// :nodoc:
-    public static func _rlmDefaultValue(_ forceDefaultInitialization: Bool) -> Optional<Wrapped> {
+    public static func _rlmDefaultValue(_ forceDefaultInitialization: Bool) -> Wrapped? {
         if forceDefaultInitialization {
             return Wrapped()
         }
@@ -272,7 +274,7 @@ public protocol RealmCollectionBase: RandomAccessCollection, LazyCollectionProto
 
 /**
  A homogenous collection of `Object`s which can be retrieved, filtered, sorted, and operated upon.
-*/
+ */
 public protocol RealmCollection: RealmCollectionBase {
     // Must also conform to `AssistedObjectiveCBridgeable`
 
@@ -293,7 +295,6 @@ public protocol RealmCollection: RealmCollectionBase {
 
     /// A human-readable description of the objects contained in the collection.
     var description: String { get }
-
 
     // MARK: Index Retrieval
 
@@ -318,7 +319,6 @@ public protocol RealmCollection: RealmCollectionBase {
      */
     func index(matching predicateFormat: String, _ args: Any...) -> Int?
 
-
     // MARK: Object Retrieval
 
     /**
@@ -329,7 +329,6 @@ public protocol RealmCollection: RealmCollectionBase {
      - parameter indexes: The indexes in the collection to select objects from.
      */
     func objects(at indexes: IndexSet) -> [Element]
-
 
     // MARK: Filtering
 
@@ -346,7 +345,6 @@ public protocol RealmCollection: RealmCollectionBase {
      - parameter predicate: The predicate to use to filter the objects.
      */
     func filter(_ predicate: NSPredicate) -> Results<Element>
-
 
     // MARK: Sorting
 
@@ -400,12 +398,12 @@ public protocol RealmCollection: RealmCollectionBase {
     func max<T: MinMaxType>(ofProperty property: String) -> T?
 
     /**
-    Returns the sum of the given property for objects in the collection, or `nil` if the collection is empty.
+     Returns the sum of the given property for objects in the collection, or `nil` if the collection is empty.
 
-    - warning: Only names of properties of a type conforming to the `AddableType` protocol can be used.
+     - warning: Only names of properties of a type conforming to the `AddableType` protocol can be used.
 
-    - parameter property: The name of a property conforming to `AddableType` to calculate sum on.
-    */
+     - parameter property: The name of a property conforming to `AddableType` to calculate sum on.
+     */
     func sum<T: AddableType>(ofProperty property: String) -> T
 
     /**
@@ -417,7 +415,6 @@ public protocol RealmCollection: RealmCollectionBase {
      - parameter property: The name of a property whose values should be summed.
      */
     func average<T: AddableType>(ofProperty property: String) -> T?
-
 
     // MARK: Key-Value Coding
 
@@ -760,26 +757,26 @@ public protocol RealmCollection: RealmCollectionBase {
     var isFrozen: Bool { get }
 
     /**
-     Returns a frozen (immutable) snapshot of this collection.
+      Returns a frozen (immutable) snapshot of this collection.
 
-     The frozen copy is an immutable collection which contains the same data as this collection
-    currently contains, but will not update when writes are made to the containing Realm. Unlike
-    live collections, frozen collections can be accessed from any thread.
+      The frozen copy is an immutable collection which contains the same data as this collection
+     currently contains, but will not update when writes are made to the containing Realm. Unlike
+     live collections, frozen collections can be accessed from any thread.
 
-     - warning: This method cannot be called during a write transaction, or when the containing
-    Realm is read-only.
-     - warning: Holding onto a frozen collection for an extended period while performing write
-     transaction on the Realm may result in the Realm file growing to large sizes. See
-     `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
-    */
+      - warning: This method cannot be called during a write transaction, or when the containing
+     Realm is read-only.
+      - warning: Holding onto a frozen collection for an extended period while performing write
+      transaction on the Realm may result in the Realm file growing to large sizes. See
+      `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
+     */
     func freeze() -> Self
 
     /**
-     Returns a live (mutable) version of this frozen collection.
+      Returns a live (mutable) version of this frozen collection.
 
-     This method resolves a reference to a live copy of the same frozen collection.
-     If called on a live collection, will return itself.
-    */
+      This method resolves a reference to a live copy of the same frozen collection.
+      If called on a live collection, will return itself.
+     */
     func thaw() -> Self?
 }
 
@@ -815,12 +812,12 @@ public extension RealmCollection where Element: ObjectBase {
     }
 
     /**
-    Returns the sum of the given property for objects in the collection, or `nil` if the collection is empty.
+     Returns the sum of the given property for objects in the collection, or `nil` if the collection is empty.
 
-    - warning: Only names of properties of a type conforming to the `AddableType` protocol can be used.
+     - warning: Only names of properties of a type conforming to the `AddableType` protocol can be used.
 
-    - parameter keyPath: The keyPath of a property conforming to `AddableType` to calculate sum on.
-    */
+     - parameter keyPath: The keyPath of a property conforming to `AddableType` to calculate sum on.
+     */
     func sum<T: AddableType>(of keyPath: KeyPath<Element, T>) -> T {
         sum(ofProperty: _name(for: keyPath))
     }
@@ -875,7 +872,7 @@ public extension RealmCollection where Element: ObjectBase {
      - parameter keyPath:   The key path to sort by.
      - parameter ascending: The direction to sort in.
      */
-    func sorted<T: Comparable>(by keyPath: KeyPath<Element, Optional<T>>, ascending: Bool) -> Results<Element> {
+    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T?>, ascending: Bool) -> Results<Element> {
         sorted(byKeyPath: _name(for: keyPath), ascending: ascending)
     }
 }
@@ -900,7 +897,6 @@ public extension RealmCollection {
     }
 }
 
-
 /// :nodoc:
 public protocol OptionalProtocol {
     associatedtype Wrapped
@@ -915,7 +911,6 @@ extension Optional: OptionalProtocol {
     public func _rlmInferWrappedType() -> Wrapped { return self! }
 }
 
-
 public extension RealmCollection where Element: MinMaxType {
     /**
      Returns the minimum (lowest) value of the collection, or `nil` if the collection is empty.
@@ -923,6 +918,7 @@ public extension RealmCollection where Element: MinMaxType {
     func min() -> Element? {
         return min(ofProperty: "self")
     }
+
     /**
      Returns the maximum (highest) value of the collection, or `nil` if the collection is empty.
      */
@@ -938,6 +934,7 @@ public extension RealmCollection where Element: OptionalProtocol, Element.Wrappe
     func min() -> Element.Wrapped? {
         return min(ofProperty: "self")
     }
+
     /**
      Returns the maximum (highest) value of the collection, or `nil` if the collection is empty.
      */
@@ -953,6 +950,7 @@ public extension RealmCollection where Element: AddableType {
     func sum() -> Element {
         return sum(ofProperty: "self")
     }
+
     /**
      Returns the average of all of the values in the collection.
      */
@@ -968,6 +966,7 @@ public extension RealmCollection where Element: OptionalProtocol, Element.Wrappe
     func sum() -> Element.Wrapped {
         return sum(ofProperty: "self")
     }
+
     /**
      Returns the average of all of the values in the collection.
      */
@@ -1019,6 +1018,7 @@ private class _AnyRealmCollectionBase<T: RealmCollectionValue>: AssistedObjectiv
     func sorted<S: Sequence>(by sortDescriptors: S) -> Results<Element> where S.Iterator.Element == SortDescriptor {
         fatalError()
     }
+
     func min<T: MinMaxType>(ofProperty property: String) -> T? { fatalError() }
     func max<T: MinMaxType>(ofProperty property: String) -> T? { fatalError() }
     func sum<T: AddableType>(ofProperty property: String) -> T { fatalError() }
@@ -1056,7 +1056,6 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
     override var count: Int { return base.count }
     override var description: String { return base.description }
 
-
     // MARK: Index Retrieval
 
     override func index(of object: C.Element) -> Int? { return base.index(of: object) }
@@ -1078,10 +1077,9 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
     }
 
     override func sorted<S: Sequence>
-        (by sortDescriptors: S) -> Results<C.Element> where S.Iterator.Element == SortDescriptor {
+    (by sortDescriptors: S) -> Results<C.Element> where S.Iterator.Element == SortDescriptor {
         return base.sorted(by: sortDescriptors)
     }
-
 
     // MARK: Aggregate Operations
 
@@ -1100,7 +1098,6 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
     override func average<T: AddableType>(ofProperty property: String) -> T? {
         return base.average(ofProperty: property)
     }
-
 
     // MARK: Sequence Support
 
@@ -1128,7 +1125,6 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
         // FIXME: it should be possible to avoid this force-casting
         return base.endIndex as! Int
     }
-
 
     // MARK: Key-Value Coding
 
@@ -1181,7 +1177,6 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
  Instances of `RealmCollection` forward operations to an opaque underlying collection having the same `Element` type.
  */
 public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection, UntypedCollection {
-
     /// The type of the objects contained within the collection.
     public typealias ElementType = Element
 
@@ -1218,7 +1213,6 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
     /// A human-readable description of the objects contained in the collection.
     public var description: String { return base.description }
 
-
     // MARK: Index Retrieval
 
     /**
@@ -1235,7 +1229,6 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      */
     public func index(matching predicate: NSPredicate) -> Int? { return base.index(matching: predicate) }
 
-
     // MARK: Object Retrieval
 
     /**
@@ -1247,7 +1240,6 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      */
     public func objects(at indexes: IndexSet) -> [Element] { return base.objects(at: indexes) }
 
-
     // MARK: Filtering
 
     /**
@@ -1258,7 +1250,6 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      - returns: A `Results` containing objects that match the given predicate.
      */
     public func filter(_ predicate: NSPredicate) -> Results<Element> { return base.filter(predicate) }
-
 
     // MARK: Sorting
 
@@ -1290,10 +1281,10 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      - parameter sortDescriptors: A sequence of `SortDescriptor`s to sort by.
      */
     public func sorted<S: Sequence>(by sortDescriptors: S) -> Results<Element>
-        where S.Iterator.Element == SortDescriptor {
+        where S.Iterator.Element == SortDescriptor
+    {
         return base.sorted(by: sortDescriptors)
     }
-
 
     // MARK: Aggregate Operations
 
@@ -1340,7 +1331,6 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      */
     public func average<T: AddableType>(ofProperty property: String) -> T? { return base.average(ofProperty: property) }
 
-
     // MARK: Sequence Support
 
     /**
@@ -1365,7 +1355,6 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
     /// endIndex is not a valid argument to subscript, and is always reachable from startIndex by
     /// zero or more applications of successor().
     public var endIndex: Int { return base.endIndex }
-
 
     // MARK: Key-Value Coding
 
@@ -1726,26 +1715,26 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
     public var isFrozen: Bool { return base.isFrozen }
 
     /**
-     Returns a frozen (immutable) snapshot of this collection.
+      Returns a frozen (immutable) snapshot of this collection.
 
-     The frozen copy is an immutable collection which contains the same data as this collection
-     currently contains, but will not update when writes are made to the containing Realm. Unlike
-     live collections, frozen collections can be accessed from any thread.
+      The frozen copy is an immutable collection which contains the same data as this collection
+      currently contains, but will not update when writes are made to the containing Realm. Unlike
+      live collections, frozen collections can be accessed from any thread.
 
-     - warning: This method cannot be called during a write transaction, or when the containing
-    Realm is read-only.
-     - warning: Holding onto a frozen collection for an extended period while performing write
-     transaction on the Realm may result in the Realm file growing to large sizes. See
-     `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
-    */
+      - warning: This method cannot be called during a write transaction, or when the containing
+     Realm is read-only.
+      - warning: Holding onto a frozen collection for an extended period while performing write
+      transaction on the Realm may result in the Realm file growing to large sizes. See
+      `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
+     */
     public func freeze() -> AnyRealmCollection { return base.freeze() }
 
     /**
-     Returns a live version of this frozen collection.
+      Returns a live version of this frozen collection.
 
-     This method resolves a reference to a live copy of the same frozen collection.
-     If called on a live collection, will return itself.
-    */
+      This method resolves a reference to a live copy of the same frozen collection.
+      If called on a live collection, will return itself.
+     */
     public func thaw() -> AnyRealmCollection? { return base.thaw() }
 }
 
@@ -1784,8 +1773,8 @@ extension ObservableCollection where Self: RealmCollection {
     // be `self`, but if it's on a different thread it needs to be a new Swift
     // wrapper for the obj-c type, which we'll construct the first time the
     // callback is called.
-    internal typealias ObjcCollectionChange = (BackingObjcCollection?, RLMCollectionChange?, Error?) -> Void
-    internal func wrapObserveBlock(_ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void) -> ObjcCollectionChange {
+    typealias ObjcCollectionChange = (BackingObjcCollection?, RLMCollectionChange?, Error?) -> Void
+    func wrapObserveBlock(_ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void) -> ObjcCollectionChange {
         var anyCollection: AnyRealmCollection<Element>?
         return { collection, change, error in
             if anyCollection == nil, let collection = collection {
@@ -1795,7 +1784,7 @@ extension ObservableCollection where Self: RealmCollection {
         }
     }
 
-    internal func wrapObserveBlock(_ block: @escaping (RealmCollectionChange<Self>) -> Void) -> ObjcCollectionChange {
+    func wrapObserveBlock(_ block: @escaping (RealmCollectionChange<Self>) -> Void) -> ObjcCollectionChange {
         var col: Self?
         return { collection, change, error in
             if col == nil, let collection = collection {
@@ -1812,9 +1801,9 @@ extension ObservableCollection where Self: RealmKeyedCollection {
     // be `self`, but if it's on a different thread it needs to be a new Swift
     // wrapper for the obj-c type, which we'll construct the first time the
     // callback is called.
-    internal typealias ObjcChange = (RLMDictionary<AnyObject, AnyObject>?, RLMDictionaryChange?, Error?) -> Void
+    typealias ObjcChange = (RLMDictionary<AnyObject, AnyObject>?, RLMDictionaryChange?, Error?) -> Void
 
-    internal func wrapDictionaryObserveBlock(_ block: @escaping (RealmMapChange<Self>) -> Void) -> ObjcChange {
+    func wrapDictionaryObserveBlock(_ block: @escaping (RealmMapChange<Self>) -> Void) -> ObjcChange {
         var col: Self?
         return { collection, change, error in
             if col == nil, let collection = collection as? Self.BackingObjcCollection {

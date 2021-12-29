@@ -35,64 +35,62 @@ import AppKit
 import UIKit
 #endif
 
-//MARK: - String Extension
+// MARK: - String Extension
 
 // The following methods are used to produce an attributed string by a plain string.
 public extension String {
+    // MARK: RENDERING FUNCTIONS
 	
-	//MARK: RENDERING FUNCTIONS
+    /// Apply style with given name defines in global `StylesManager` to the receiver string.
+    /// If required style is not available this function return `nil`.
+    ///
+    /// - Parameters:
+    ///   - style: name of style registered in `StylesManager` singleton.
+    ///   - range: range of substring where style is applied, `nil` to use the entire string.
+    /// - Returns: rendered attributed string, `nil` if style is not registered.
+    func set(style: String, range: NSRange? = nil) -> AttributedString? {
+        return StylesManager.shared[style]?.set(to: self, range: range)
+    }
 	
-	/// Apply style with given name defines in global `StylesManager` to the receiver string.
-	/// If required style is not available this function return `nil`.
-	///
-	/// - Parameters:
-	///   - style: name of style registered in `StylesManager` singleton.
-	///   - range: range of substring where style is applied, `nil` to use the entire string.
-	/// - Returns: rendered attributed string, `nil` if style is not registered.
-	func set(style: String, range: NSRange? = nil) -> AttributedString? {
-		return StylesManager.shared[style]?.set(to: self, range: range)
-	}
+    /// Apply a sequence of styles defied in global `StylesManager` to the receiver string.
+    /// Unregistered styles are ignored.
+    /// Sequence produces a single merge style where the each n+1 element of the sequence may
+    /// override existing key set by previous applied style.
+    /// Resulting attributes dictionary is threfore applied to the string.
+    ///
+    /// - Parameters:
+    ///   - styles: ordered list of styles name to apply. Styles must be registed in `StylesManager`.
+    ///   - range: range of substring where style is applied, `nil` to use the entire string.
+    /// - Returns: attributed string, `nil` if all specified styles required are not registered.
+    func set(styles: [String], range: NSRange? = nil) -> AttributedString? {
+        return StylesManager.shared[styles]?.mergeStyle().set(to: self, range: range)
+    }
 	
-	/// Apply a sequence of styles defied in global `StylesManager` to the receiver string.
-	/// Unregistered styles are ignored.
-	/// Sequence produces a single merge style where the each n+1 element of the sequence may
-	/// override existing key set by previous applied style.
-	/// Resulting attributes dictionary is threfore applied to the string.
-	///
-	/// - Parameters:
-	///   - styles: ordered list of styles name to apply. Styles must be registed in `StylesManager`.
-	///   - range: range of substring where style is applied, `nil` to use the entire string.
-	/// - Returns: attributed string, `nil` if all specified styles required are not registered.
-	func set(styles: [String], range: NSRange? = nil) -> AttributedString? {
-		return StylesManager.shared[styles]?.mergeStyle().set(to: self, range: range)
-	}
+    /// Apply passed style to the receiver string.
+    ///
+    /// - Parameters:
+    ///   - style: style to apply.
+    ///   - range: range of substring where style is applied, `nil` to use the entire string.
+    /// - Returns: rendered attributed string.
+    func set(style: StyleProtocol, range: NSRange? = nil) -> AttributedString {
+        return style.set(to: self, range: range)
+    }
 	
-	/// Apply passed style to the receiver string.
-	///
-	/// - Parameters:
-	///   - style: style to apply.
-	///   - range: range of substring where style is applied, `nil` to use the entire string.
-	/// - Returns: rendered attributed string.
-	func set(style: StyleProtocol, range: NSRange? = nil) -> AttributedString {
-		return style.set(to: self, range: range)
-	}
-	
-	/// Apply passed sequence of `StyleProtocol` instances to the receiver.
-	/// Sequence produces a single merge style where the each n+1 element of the sequence may
-	/// override existing key set by previous applied style.
-	/// Resulting attributes dictionary is threfore applied to the string.
-	///
-	/// - Parameters:
-	///   - styles: ordered list of styles to apply. Styles must be registed in `StylesManager`.
-	///   - range: range of substring where style is applied, `nil` to use the entire string.
-	/// - Returns: attributed string.
-	func set(styles: [StyleProtocol], range: NSRange? = nil) -> AttributedString {
-		return styles.mergeStyle().set(to: self, range: range)
-	}
-	
+    /// Apply passed sequence of `StyleProtocol` instances to the receiver.
+    /// Sequence produces a single merge style where the each n+1 element of the sequence may
+    /// override existing key set by previous applied style.
+    /// Resulting attributes dictionary is threfore applied to the string.
+    ///
+    /// - Parameters:
+    ///   - styles: ordered list of styles to apply. Styles must be registed in `StylesManager`.
+    ///   - range: range of substring where style is applied, `nil` to use the entire string.
+    /// - Returns: attributed string.
+    func set(styles: [StyleProtocol], range: NSRange? = nil) -> AttributedString {
+        return styles.mergeStyle().set(to: self, range: range)
+    }
 }
 
-//MARK: - Operations
+// MARK: - Operations
 
 /// Create a new attributed string using + where the left operand is a plain string and left is a style.
 ///
@@ -101,6 +99,5 @@ public extension String {
 ///   - rhs: style to apply.
 /// - Returns: rendered attributed string instance
 public func + (lhs: String, rhs: StyleProtocol) -> AttributedString {
-	return rhs.set(to: lhs, range: nil)
+    return rhs.set(to: lhs, range: nil)
 }
-

@@ -38,7 +38,6 @@ import UIKit
 // MARK: - XMLDynamicAttributesResolver
 
 public protocol XMLDynamicAttributesResolver {
-        
     /// When an `img` tag is found this function is called to return requested image.
     /// Default implementation of this method receive the `name` attribute of the `img` tag along with any mapping
     /// provided by calling `StyleXML`, if `mapping` does not contains requested image for given name
@@ -70,12 +69,10 @@ public protocol XMLDynamicAttributesResolver {
     ///   - attributes: attributes of the tag received.
     ///   - fromStyle: caller instance of `StyleXML.
     func styleForUnknownXMLTag(_ tag: String, to attributedString: inout AttributedString, attributes: [String: String]?, fromStyle: StyleXML)
-
 }
 
-extension XMLDynamicAttributesResolver {
-    
-    public func image(name: String, attributes: [String: String]?, fromStyle style: StyleXML) -> Image? {
+public extension XMLDynamicAttributesResolver {
+    func image(name: String, attributes: [String: String]?, fromStyle style: StyleXML) -> Image? {
         guard let mappedImage = style.imageProvider?(name, attributes) else {
             return Image(named: name) // xcassets fallback
         }
@@ -83,59 +80,57 @@ extension XMLDynamicAttributesResolver {
         // origin xml style contains mapped image.
         return mappedImage
     }
-    
 }
 
 // MARK: - StandardXMLAttributesResolver
 
 open class StandardXMLAttributesResolver: XMLDynamicAttributesResolver {
-    
     public init() {}
     
     open func applyDynamicAttributes(to attributedString: inout AttributedString, xmlStyle: XMLDynamicStyle, fromStyle: StyleXML) {
         let finalStyleToApply = Style()
-        xmlStyle.enumerateAttributes { key, value  in
+        xmlStyle.enumerateAttributes { key, value in
             switch key {
-                case "color": // color support
-                    finalStyleToApply.color = Color(hexString: value)
+            case "color": // color support
+                finalStyleToApply.color = Color(hexString: value)
                 
-                default: break
+            default: break
             }
         }
-        self.styleForUnknownXMLTag(xmlStyle.tag, to: &attributedString, attributes: xmlStyle.xmlAttributes, fromStyle: fromStyle)
+        styleForUnknownXMLTag(xmlStyle.tag, to: &attributedString, attributes: xmlStyle.xmlAttributes, fromStyle: fromStyle)
         attributedString.add(style: finalStyleToApply)
     }
     
     open func styleForUnknownXMLTag(_ tag: String, to attributedString: inout AttributedString, attributes: [String: String]?, fromStyle: StyleXML) {
         let finalStyleToApply = Style()
         switch tag {
-            case "a": // href support
-                finalStyleToApply.linkURL = URL(string: attributes?["href"])
+        case "a": // href support
+            finalStyleToApply.linkURL = URL(string: attributes?["href"])
             
-            case "img":
-                #if os(iOS)
-                // Remote Image URL support
-                if let url = attributes?["url"] {
-                    if let image = AttributedString(imageURL: url, bounds: attributes?["rect"]) {
-                        attributedString.append(image)
-                    }
+        case "img":
+#if os(iOS)
+            // Remote Image URL support
+            if let url = attributes?["url"] {
+                if let image = AttributedString(imageURL: url, bounds: attributes?["rect"]) {
+                    attributedString.append(image)
                 }
-                #endif
+            }
+#endif
                 
-                #if os(iOS) || os(OSX)
-                // Local Image support
-                if let imageName = attributes?["named"] {
-                    if let image = image(name: imageName, attributes: attributes, fromStyle: fromStyle),
-                        let imageString = AttributedString(image: image, bounds: attributes?["rect"]) {
-                        attributedString.append(imageString)
-                    }
+#if os(iOS) || os(OSX)
+            // Local Image support
+            if let imageName = attributes?["named"] {
+                if let image = image(name: imageName, attributes: attributes, fromStyle: fromStyle),
+                   let imageString = AttributedString(image: image, bounds: attributes?["rect"])
+                {
+                    attributedString.append(imageString)
                 }
-                #endif
+            }
+#endif
             
-            default:
-                break
+        default:
+            break
         }
         attributedString.add(style: finalStyleToApply)
     }
-    
 }

@@ -12,9 +12,10 @@ extension ViewController {
     func observeVoiceOverChanges() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.voiceOverChanged),
+            selector: #selector(voiceOverChanged),
             name: UIAccessibility.voiceOverStatusDidChangeNotification,
-            object: nil)
+            object: nil
+        )
     }
     
     @objc func voiceOverChanged() {

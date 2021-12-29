@@ -19,35 +19,33 @@ extension PhotoSlidesViewController {
             }
         }
         if to == .full {
-            if self.cameFromFind {
+            if cameFromFind {
                 UIView.animate(withDuration: 0.25) {
                     self.backButtonView.alpha = 0
                     self.view.backgroundColor = .black
                 }
             } else {
-                if self.findPressed {
+                if findPressed {
                     slideFindBarTopC?.update(offset: -45)
                     slideFindBar?.findBar.searchField.resignFirstResponder()
                 }
                 UIView.animate(withDuration: 0.25) {
-                    
                     self.navigationController?.setNavigationBarHidden(true, animated: false)
                     self.view.backgroundColor = .black
                     self.view.layoutIfNeeded()
                     self.slideFindBar?.alpha = 0
-                    
                 }
                 hideTabBar?(true)
             }
             
         } else {
-            if self.cameFromFind {
+            if cameFromFind {
                 UIView.animate(withDuration: 0.25) {
                     self.backButtonView.alpha = 1
                     self.view.backgroundColor = .systemBackground
                 }
             } else {
-                if self.findPressed {
+                if findPressed {
                     slideFindBarTopC?.update(offset: 0)
                 }
                 UIView.animate(withDuration: 0.25) {

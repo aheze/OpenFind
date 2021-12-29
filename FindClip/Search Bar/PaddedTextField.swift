@@ -23,6 +23,7 @@ class PaddedTextField: UITextField {
         super.editingRect(forBounds: bounds)
         return bounds.insetBy(dx: insetX, dy: insetY)
     }
+
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         super.placeholderRect(forBounds: bounds)
         return bounds.insetBy(dx: insetX, dy: insetY)

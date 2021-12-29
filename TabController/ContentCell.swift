@@ -7,5 +7,4 @@
 
 import UIKit
 
-class ContentCell: UICollectionViewCell {
-}
+class ContentCell: UICollectionViewCell {}

@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 // MARK: - UIView extension with animations.
-public extension UIView {
 
+public extension UIView {
     /// Performs the animation.
     ///
     /// - Parameters:
@@ -32,8 +32,8 @@ public extension UIView {
                  usingSpringWithDamping dampingRatio: CGFloat = ViewAnimatorConfig.springDampingRatio,
                  initialSpringVelocity velocity: CGFloat = ViewAnimatorConfig.initialSpringVelocity,
                  options: UIView.AnimationOptions = [],
-                 completion: (() -> Void)? = nil) {
-        
+                 completion: (() -> Void)? = nil)
+    {
         let transformFrom = transform
         var transformTo = transform
         animations.forEach { transformTo = transformTo.concatenating($0.initialTransform) }
@@ -49,9 +49,10 @@ public extension UIView {
                        initialSpringVelocity: velocity,
                        options: options,
                        animations: { [weak self] in
-            self?.transform = reversed ? transformTo : transformFrom
-            self?.alpha = finalAlpha
-        }) { _ in
+                           self?.transform = reversed ? transformTo : transformFrom
+                           self?.alpha = finalAlpha
+                       })
+        { _ in
             completion?()
         }
     }
@@ -80,8 +81,8 @@ public extension UIView {
                         usingSpringWithDamping dampingRatio: CGFloat = ViewAnimatorConfig.springDampingRatio,
                         initialSpringVelocity velocity: CGFloat = ViewAnimatorConfig.initialSpringVelocity,
                         options: UIView.AnimationOptions = [],
-                        completion: (() -> Void)? = nil) {
-
+                        completion: (() -> Void)? = nil)
+    {
         guard views.count > 0 else {
             completion?()
             return

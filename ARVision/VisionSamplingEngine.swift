@@ -12,14 +12,13 @@ import Vision
 class VisionSamplingEngine {
     var focusedBoundingBox = CGRect.zero
     func start(in boundingBox: CGRect) {
-        self.focusedBoundingBox = boundingBox
+        focusedBoundingBox = boundingBox
     }
     
     var startTime: Date?
     func update(pixelBuffer: CVPixelBuffer, completion: @escaping (([VNRecognizedTextObservation]) -> Void)) {
-
         startTime = Date()
-        let request = VNRecognizeTextRequest { request, error in
+        let request = VNRecognizeTextRequest { request, _ in
             let observations = self.textFound(request: request)
             completion(observations)
             self.startTime = nil
@@ -34,13 +33,10 @@ class VisionSamplingEngine {
         startTime = Date()
         do {
             try imageRequestHandler.perform([request])
-        } catch let error {
-
-        }
-        
-        
+        } catch {}
     }
 }
+
 extension VisionSamplingEngine {
     func textFound(request: VNRequest) -> [VNRecognizedTextObservation] {
         guard

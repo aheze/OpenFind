@@ -8,7 +8,6 @@
 import UIKit
 
 class PhotosIcon: UIView {
-    
     var pressed: (() -> Void)?
     
     var newDetailsColor = FindConstants.detailIconColorDark
@@ -29,21 +28,23 @@ class PhotosIcon: UIView {
     let activeBackgroundHeight = CGFloat(22)
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var foregroundView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var detailsView: UIView!
+    @IBOutlet var foregroundView: UIView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var detailsView: UIView!
     
-    @IBOutlet weak var touchButton: UIButton!
+    @IBOutlet var touchButton: UIButton!
     
     @IBAction func touchDown(_ sender: Any) {
         UIView.animate(withDuration: 0.2, animations: {
             self.contentView.alpha = 0.5
         })
     }
+
     @IBAction func touchUpInside(_ sender: Any) {
         pressed?()
         resetAlpha()
     }
+
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
     }
@@ -67,7 +68,7 @@ class PhotosIcon: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("PhotosIcon", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let photoIconBezier = makePhotosIconBezier()
@@ -117,34 +118,33 @@ class PhotosIcon: UIView {
         }
         return block
     }
+
     func makePercentageOfActive(percentage: CGFloat, originalDetails: UIColor, originalForeground: UIColor, originalBackground: UIColor) {
+        let foregroundX = originalForegroundX + ((activeForegroundX - originalForegroundX) * percentage)
+        let foregroundY = originalForegroundY + ((activeForegroundY - originalForegroundY) * percentage)
+        let backgroundX = originalBackgroundX + ((activeBackgroundX - originalBackgroundX) * percentage)
+        let backgroundY = originalBackgroundY + ((activeBackgroundY - originalBackgroundY) * percentage)
+        let backgroundWidth = originalBackgroundWidth + ((activeBackgroundWidth - originalBackgroundWidth) * percentage)
+        let backgroundHeight = originalBackgroundHeight + ((activeBackgroundHeight - originalBackgroundHeight) * percentage)
         
-        let foregroundX = self.originalForegroundX + ((self.activeForegroundX - self.originalForegroundX) * percentage)
-        let foregroundY = self.originalForegroundY + ((self.activeForegroundY - self.originalForegroundY) * percentage)
-        let backgroundX = self.originalBackgroundX + ((self.activeBackgroundX - self.originalBackgroundX) * percentage)
-        let backgroundY = self.originalBackgroundY + ((self.activeBackgroundY - self.originalBackgroundY) * percentage)
-        let backgroundWidth = self.originalBackgroundWidth + ((self.activeBackgroundWidth - self.originalBackgroundWidth) * percentage)
-        let backgroundHeight = self.originalBackgroundHeight + ((self.activeBackgroundHeight - self.originalBackgroundHeight) * percentage)
+        foregroundView.transform = CGAffineTransform.identity
         
-        self.foregroundView.transform = CGAffineTransform.identity
+        foregroundView.frame = CGRect(x: foregroundX, y: foregroundY, width: 30, height: 24)
+        backgroundView.frame = CGRect(x: backgroundX, y: backgroundY, width: backgroundWidth, height: backgroundHeight)
+        foregroundView.transform = CGAffineTransform(rotationAngle: (-15.degreesToRadians) * percentage)
         
-        self.foregroundView.frame = CGRect(x: foregroundX, y: foregroundY, width: 30, height: 24)
-        self.backgroundView.frame = CGRect(x: backgroundX, y: backgroundY, width: backgroundWidth, height: backgroundHeight)
-        self.foregroundView.transform = CGAffineTransform(rotationAngle: (-15.degreesToRadians) * percentage)
-        
-        self.detailsView.backgroundColor = [originalDetails, UIColor.white].intermediate(percentage: percentage)
-        self.foregroundView.backgroundColor = [originalForeground, UIColor(named: "TabIconPhotosMain")!].intermediate(percentage: percentage)
-        self.backgroundView.backgroundColor = [originalBackground, UIColor(named: "TabIconPhotosSecondary")!].intermediate(percentage: percentage)
+        detailsView.backgroundColor = [originalDetails, UIColor.white].intermediate(percentage: percentage)
+        foregroundView.backgroundColor = [originalForeground, UIColor(named: "TabIconPhotosMain")!].intermediate(percentage: percentage)
+        backgroundView.backgroundColor = [originalBackground, UIColor(named: "TabIconPhotosSecondary")!].intermediate(percentage: percentage)
     }
     
     func makePercentageOfDark(percentage: CGFloat) {
-        self.detailsView.backgroundColor = [FindConstants.detailIconColorLight, FindConstants.detailIconColorDark].intermediate(percentage: percentage)
-        self.foregroundView.backgroundColor = [FindConstants.foregroundIconColorLight, FindConstants.foregroundIconColorDark].intermediate(percentage: percentage)
-        self.backgroundView.backgroundColor = [FindConstants.backgroundIconColorLight, FindConstants.backgroundIconColorDark].intermediate(percentage: percentage)
+        detailsView.backgroundColor = [FindConstants.detailIconColorLight, FindConstants.detailIconColorDark].intermediate(percentage: percentage)
+        foregroundView.backgroundColor = [FindConstants.foregroundIconColorLight, FindConstants.foregroundIconColorDark].intermediate(percentage: percentage)
+        backgroundView.backgroundColor = [FindConstants.backgroundIconColorLight, FindConstants.backgroundIconColorDark].intermediate(percentage: percentage)
     }
     
     func makePhotosIconBezier() -> CGPath {
-
         //// Oval Drawing
         let bezierPath = UIBezierPath(ovalIn: CGRect(x: 8.6, y: 7.6, width: 4.8, height: 4.8))
 
@@ -166,7 +166,5 @@ class PhotosIcon: UIView {
         bezierPath.close()
         
         return bezierPath.cgPath
-
     }
 }
-

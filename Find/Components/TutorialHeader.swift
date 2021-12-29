@@ -9,15 +9,13 @@
 import UIKit
 
 class TutorialHeader: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet var colorView: UIView!
     
-    @IBOutlet weak var startTourButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet var startTourButton: UIButton!
+    @IBOutlet var closeButton: UIButton!
     
-    @IBOutlet weak var colorViewHeightConst: NSLayoutConstraint!
-    
+    @IBOutlet var colorViewHeightConst: NSLayoutConstraint!
     
     var pressed: (() -> Void)?
     var closed: (() -> Void)?
@@ -25,6 +23,7 @@ class TutorialHeader: UIView {
     @IBAction func startButtonPressed(_ sender: Any) {
         pressed?()
     }
+
     @IBAction func closeButtonPressed(_ sender: Any) {
         closed?()
     }
@@ -42,7 +41,7 @@ class TutorialHeader: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("TutorialHeader", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         startTourButton.accessibilityHint = "Present a quick tutorial"

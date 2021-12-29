@@ -9,13 +9,11 @@
 import UIKit
 
 public struct EKPopUpMessage {
-    
     /** Code block that is executed as the user taps the popup button */
-    public typealias EKPopUpMessageAction = () -> ()
+    public typealias EKPopUpMessageAction = () -> Void
     
     /** Popup theme image */
     public struct ThemeImage {
-        
         /** Position of the theme image */
         public enum Position {
             case topToTop(offset: CGFloat)
@@ -30,7 +28,8 @@ public struct EKPopUpMessage {
         
         /** Initializer */
         public init(image: EKProperty.ImageContent,
-                    position: Position = .topToTop(offset: 40)) {
+                    position: Position = .topToTop(offset: 40))
+        {
             self.image = image
             self.position = position
         }
@@ -50,7 +49,8 @@ public struct EKPopUpMessage {
                 title: EKProperty.LabelContent,
                 description: EKProperty.LabelContent,
                 button: EKProperty.ButtonContent,
-                action: @escaping EKPopUpMessageAction) {
+                action: @escaping EKPopUpMessageAction)
+    {
         self.themeImage = themeImage
         self.title = title
         self.description = description

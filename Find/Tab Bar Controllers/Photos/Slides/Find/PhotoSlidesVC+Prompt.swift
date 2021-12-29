@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftRichString
+import UIKit
 
 extension PhotoSlidesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
@@ -16,6 +16,7 @@ extension PhotoSlidesViewController: UITextViewDelegate {
         return true
     }
 }
+
 extension PhotoSlidesViewController {
     func changePromptToStarting() {
         slideFindBar?.hasPrompt = false
@@ -56,7 +57,6 @@ extension PhotoSlidesViewController {
         let resultText = NSLocalizedString("resultText", comment: "")
         let inCache = NSLocalizedString("_InCache", comment: "")
         let toFindWithOCR = NSLocalizedString("toFindWithOCR", comment: "")
-        
         
         var results = resultsText
         if howMany == 1 {

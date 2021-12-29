@@ -6,8 +6,8 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 extension UILabel {
     var style: EKProperty.LabelStyle {
@@ -94,7 +94,8 @@ extension UIImageView {
             
             if case .animate(duration: let duration,
                              options: let options,
-                             transform: let transform) = newValue.animation {
+                             transform: let transform) = newValue.animation
+            {
                 let options: UIView.AnimationOptions = [.repeat, .autoreverse, options]
                 // A hack that forces the animation to run on the main thread,
                 // on one of the next run loops
@@ -103,8 +104,8 @@ extension UIImageView {
                                    delay: 0,
                                    options: options,
                                    animations: {
-                        self.transform = transform
-                    }, completion: nil)
+                                       self.transform = transform
+                                   }, completion: nil)
                 }
             }
         }
@@ -115,7 +116,6 @@ extension UIImageView {
 }
 
 extension UITextField {
-    
     var placeholder: EKProperty.LabelContent {
         set {
             attributedPlaceholder = NSAttributedString(

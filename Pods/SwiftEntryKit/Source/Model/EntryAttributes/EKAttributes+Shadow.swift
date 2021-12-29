@@ -10,10 +10,8 @@ import Foundation
 import UIKit
 
 public extension EKAttributes {
-
     /** The shadow around the entry */
     enum Shadow {
-        
         /** No shadow */
         case none
         
@@ -30,7 +28,8 @@ public extension EKAttributes {
             public init(color: EKColor = .black,
                         opacity: Float,
                         radius: CGFloat,
-                        offset: CGSize = .zero) {
+                        offset: CGSize = .zero)
+            {
                 self.color = color
                 self.radius = radius
                 self.offset = offset
@@ -39,5 +38,3 @@ public extension EKAttributes {
         }
     }
 }
-
-

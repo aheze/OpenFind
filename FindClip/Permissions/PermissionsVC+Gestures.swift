@@ -49,7 +49,6 @@ extension PermissionsViewController {
     }
     
     func panEnded() {
-        
         let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.animationDuration, initialVelocity: CGVector.zero)
         animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
         
@@ -58,9 +57,9 @@ extension PermissionsViewController {
             self.permissionsBottomView.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
         animator?.startAnimation()
-        animator?.addCompletion({ _ in
+        animator?.addCompletion { _ in
             self.savedOffset = 0
             self.began = false
-        })
+        }
     }
 }

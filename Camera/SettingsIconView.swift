@@ -12,7 +12,6 @@ struct SettingsIconView: View {
     
     var body: some View {
         Button {
-            
             /// small scale animation
             withAnimation(.spring()) { scaleAnimationActive = true }
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {

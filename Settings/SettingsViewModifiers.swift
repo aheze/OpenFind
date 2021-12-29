@@ -10,17 +10,18 @@ import SwiftUI
 
 extension View {
     func edgePadding(_ verticalPadding: CGFloat = 10) -> some View {
-        self.modifier(EdgePadding(verticalPadding: verticalPadding))
+        modifier(EdgePadding(verticalPadding: verticalPadding))
     }
     
     func header(_ localizedText: LocalizedStringKey) -> some View {
-        self.modifier(HeaderModifiers(localizedText: localizedText))
+        modifier(HeaderModifiers(localizedText: localizedText))
     }
     
     func bottomRowPadding() -> some View {
-        self.modifier(BottomRowPadding())
+        modifier(BottomRowPadding())
     }
 }
+
 struct EdgePadding: ViewModifier {
     var verticalPadding: CGFloat
     func body(content: Content) -> some View {

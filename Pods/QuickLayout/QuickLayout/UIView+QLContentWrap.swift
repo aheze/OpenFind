@@ -13,8 +13,8 @@ import UIKit
 #endif
 
 // MARK: Content Compression Resistance & Content Hugging Priority
-public extension QLView {
 
+public extension QLView {
     /**
      Force hugging and compression resistance for the given axes, using variadic parameter.
      - parameter axes: The axes
@@ -100,8 +100,8 @@ public extension QLView {
     }
     
     /**
-    Content compression resistance priority (Vertical & Horizontal)
-     */
+     Content compression resistance priority (Vertical & Horizontal)
+      */
     var contentCompressionResistancePriority: QLPriorityPair {
         set {
             horizontalCompressionResistancePriority = newValue.horizontal

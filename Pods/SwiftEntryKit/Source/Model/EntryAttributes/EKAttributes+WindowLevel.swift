@@ -9,10 +9,8 @@
 import UIKit
 
 public extension EKAttributes {
-    
     /** Describes the window level in which the entry would be displayed */
     enum WindowLevel {
-        
         /** Above the alerts */
         case alerts
         

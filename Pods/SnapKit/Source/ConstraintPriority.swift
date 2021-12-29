@@ -22,12 +22,12 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-public struct ConstraintPriority : ExpressibleByFloatLiteral, Equatable, Strideable {
+public struct ConstraintPriority: ExpressibleByFloatLiteral, Equatable, Strideable {
     public typealias FloatLiteralType = Float
     
     public let value: Float
@@ -49,19 +49,18 @@ public struct ConstraintPriority : ExpressibleByFloatLiteral, Equatable, Stridea
     }
     
     public static var medium: ConstraintPriority {
-        #if os(OSX)
-            return 501.0
-        #else
-            return 500.0
-        #endif
-        
+#if os(OSX)
+        return 501.0
+#else
+        return 500.0
+#endif
     }
     
     public static var low: ConstraintPriority {
         return 250.0
     }
     
-    public static func ==(lhs: ConstraintPriority, rhs: ConstraintPriority) -> Bool {
+    public static func == (lhs: ConstraintPriority, rhs: ConstraintPriority) -> Bool {
         return lhs.value == rhs.value
     }
 

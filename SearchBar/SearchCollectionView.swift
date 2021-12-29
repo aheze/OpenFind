@@ -7,9 +7,6 @@
 
 import UIKit
 
-
 class SearchCollectionView: UICollectionView {
-    override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {
-
-    }
+    override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {}
 }

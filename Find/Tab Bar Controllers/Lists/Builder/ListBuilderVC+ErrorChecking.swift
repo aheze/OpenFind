@@ -6,15 +6,14 @@
 // Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftEntryKit
+import UIKit
 
 extension ListBuilderViewController {
-    
     func findAndStoreErrors(contentsArray: [String]) { /// find errors and store in the error arrays
         generalVC.emptyStringErrors.removeAll()
         
-        ///REFRESH
+        /// REFRESH
         generalVC.singleSpaceWarning.removeAll()
         generalVC.startSpaceWarning.removeAll()
         generalVC.endSpaceWarning.removeAll()
@@ -25,28 +24,25 @@ extension ListBuilderViewController {
             if match == "" {
                 generalVC.emptyStringErrors.append(index)
             }
-        }///First, check for empty string.
+        } /// First, check for empty string.
         
-        
-        ///Now, check for duplicates
+        /// Now, check for duplicates
         generalVC.stringToIndexesError.removeAll() //
-        if contentsArray.count !=  noDuplicateArray.count {
-            
-            let differentStrings = Array(Set(contentsArray.filter({ (i: String) in contentsArray.filter({ $0 == i }).count > 1}))) ///ContentsArray, but without duplicates
+        if contentsArray.count != noDuplicateArray.count {
+            let differentStrings = Array(Set(contentsArray.filter { (i: String) in contentsArray.filter { $0 == i }.count > 1 })) /// ContentsArray, but without duplicates
             
             var firstOccurrenceArray = [String]()
-            for (index, singleContent) in contentsArray.enumerated() { ///Go through every match
+            for (index, singleContent) in contentsArray.enumerated() { /// Go through every match
                 if differentStrings.contains(singleContent) {
                     if !firstOccurrenceArray.contains(singleContent) {
                         firstOccurrenceArray.append(singleContent)
-                    } else { //A occurrence has already occurred.
+                    } else { // A occurrence has already occurred.
                         generalVC.stringToIndexesError[singleContent, default: [Int]()].append(index)
                     }
                 }
             }
-        
         }
-        ///check for empty spaces
+        /// check for empty spaces
         for (index, match) in contentsArray.enumerated() {
             if match == " " {
                 generalVC.singleSpaceWarning.append(index)
@@ -60,14 +56,14 @@ extension ListBuilderViewController {
         }
     }
     
-    func showDoneAlerts() -> Bool { ///For the end after pressing Save
+    func showDoneAlerts() -> Bool { /// For the end after pressing Save
         var showAnAlert = false
         
         if generalVC.emptyStringErrors.count >= 1 {
             let cantHaveEmptyMatch = NSLocalizedString("cantHaveEmptyMatch", comment: "GeneralViewController def=Can't have an empty match!")
             
             let youHaveXEmptyMatches = NSLocalizedString("youHave %d EmptyMatches",
-                                                         comment:"GeneralViewController def=You have x empty matches!")
+                                                         comment: "GeneralViewController def=You have x empty matches!")
             
             var matchesPlural = String.localizedStringWithFormat(youHaveXEmptyMatches, generalVC.emptyStringErrors.count)
             
@@ -86,7 +82,7 @@ extension ListBuilderViewController {
             UIAccessibility.postAnnouncement([errorTitle, errorString, errorHint], delay: 1.5)
 
             generalVC.highlightRowsOnError(type: "EmptyMatch")
-        } else if generalVC.stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
+        } else if generalVC.stringToIndexesError.count >= 1 { /// No empty errors. Only duplicates.
             var titleMessage = ""
             
             let dupStrings = generalVC.stringToIndexesError.keys
@@ -103,7 +99,6 @@ extension ListBuilderViewController {
                 if let differentPaths = generalVC.stringToIndexesError[duplicateStringArray[0]] {
                     let aDuplicateOriginal = NSLocalizedString("aDuplicateOriginal", comment: "GeneralViewController def=a duplicate.")
                     
-                    
                     var aDuplicate = aDuplicateOriginal
                     if differentPaths.count == 1 {
                         aDuplicate = aDuplicateOriginal
@@ -116,13 +111,13 @@ extension ListBuilderViewController {
                         aDuplicate = aCoupleDuplicates
                     }
                     
-                    let xHasXDuplicates = NSLocalizedString("%@ has %@", comment:"GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate)")
+                    let xHasXDuplicates = NSLocalizedString("%@ has %@", comment: "GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate)")
                     
                     titleMessage = String.localizedStringWithFormat(xHasXDuplicates, duplicateStringArray[0], aDuplicate)
                 }
             case 2:
                 let xAndxHaveDuplicates = NSLocalizedString("%@ and %@ have",
-                                                            comment:"GeneralViewController def=\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates.")
+                                                            comment: "GeneralViewController def=\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates.")
                 
                 titleMessage = String.localizedStringWithFormat(xAndxHaveDuplicates, duplicateStringArray[0], duplicateStringArray[1])
                 
@@ -132,23 +127,21 @@ extension ListBuilderViewController {
                     if index != duplicateStringArray.count - 1 {
                         newString.append("\"\(message)\", ")
                     } else {
-                        
                         let and = NSLocalizedString("and", comment: "Multipurpose def=and")
                         newString.append(" \(and) \"\(message)\"")
                     }
                 }
                 
-                let spaceHaveDuplicates = NSLocalizedString("spaceHaveDuplicates", comment:"GeneralViewController def= have duplicates.")
+                let spaceHaveDuplicates = NSLocalizedString("spaceHaveDuplicates", comment: "GeneralViewController def= have duplicates.")
                 
                 titleMessage = newString + spaceHaveDuplicates
             default:
                 
                 let youHaveLotsDuplicates = NSLocalizedString("youHaveLotsDuplicates",
-                                                              comment:"GeneralViewController def=You have a lot of duplicate matches.")
+                                                              comment: "GeneralViewController def=You have a lot of duplicate matches.")
                 titleMessage = youHaveLotsDuplicates
             }
             if titleMessage != "" {
-                
                 titleMessage = titleMessage.typographized(language: "en")
                 var attributes = EKAttributes.topFloat
                 attributes.displayDuration = .infinity
@@ -161,14 +154,13 @@ extension ListBuilderViewController {
                 showAnAlert = true
                 
                 let wouldYouLikeDeleteDup = NSLocalizedString("wouldYouLikeDeleteDup",
-                                                              comment:"GeneralViewController def=Would you like us to delete the duplicates?")
+                                                              comment: "GeneralViewController def=Would you like us to delete the duplicates?")
                 
                 let leftButtonDeleteSave = NSLocalizedString("leftButtonDeleteSave",
-                                                             comment:"GeneralViewController def=Yes, Delete and save")
+                                                             comment: "GeneralViewController def=Yes, Delete and save")
                 
                 let rightButtonFixItMyself = NSLocalizedString("rightButtonFixItMyself",
-                                                               comment:"GeneralViewController def=I'll fix it myself")
-                
+                                                               comment: "GeneralViewController def=I'll fix it myself")
                 
                 showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: wouldYouLikeDeleteDup, leftButton: leftButtonDeleteSave, yesButton: rightButtonFixItMyself)
             }
@@ -177,7 +169,6 @@ extension ListBuilderViewController {
     }
     
     func showButtonBarMessage(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteWarningShield", specialAction: String = "None") {
-        
         if UIAccessibility.isVoiceOverRunning {
             let alert = UIAlertController(title: titleMessage, message: desc, preferredStyle: .alert)
             
@@ -204,18 +195,18 @@ extension ListBuilderViewController {
                     UIAccessibility.postAnnouncement([AccessibilityText(text: "Words with errors are highlighted", isRaised: true, customPitch: 1)], delay: 1.5)
                 }
             )
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
             
         } else {
             let displayMode = EKAttributes.DisplayMode.inferred
             
             let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
-            let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,displayMode: displayMode))
-            let image = EKProperty.ImageContent( imageName: image, displayMode: displayMode, size: CGSize(width: 35, height: 35), contentMode: .scaleAspectFit)
+            let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white, displayMode: displayMode))
+            let image = EKProperty.ImageContent(imageName: image, displayMode: displayMode, size: CGSize(width: 35, height: 35), contentMode: .scaleAspectFit)
             let simpleMessage = EKSimpleMessage(image: image, title: title, description: description)
             let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-            let okButtonLabelStyle = EKProperty.LabelStyle( font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode)
-            let okButtonLabel = EKProperty.LabelContent( text: yesButton, style: okButtonLabelStyle)
+            let okButtonLabelStyle = EKProperty.LabelStyle(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode)
+            let okButtonLabel = EKProperty.LabelContent(text: yesButton, style: okButtonLabelStyle)
             let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)), displayMode: displayMode)
             let closeButtonLabel = EKProperty.LabelContent(text: leftButton, style: closeButtonLabelStyle)
             
@@ -239,9 +230,8 @@ extension ListBuilderViewController {
                         self?.returnCompletedList()
                     }
                 }
-                let buttonsBarContent = EKProperty.ButtonBarContent( with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
-                let alertMessage = EKAlertMessage( simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
-                )
+                let buttonsBarContent = EKProperty.ButtonBarContent(with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true)
+                let alertMessage = EKAlertMessage(simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent)
                 let contentView = EKAlertMessageView(with: alertMessage)
                 contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
                 contentView.layer.cornerRadius = 10

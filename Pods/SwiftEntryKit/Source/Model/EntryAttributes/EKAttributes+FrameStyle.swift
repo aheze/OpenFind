@@ -5,15 +5,13 @@
 //  Created by Daniel Huri on 4/28/18.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 import UIKit
 
 public extension EKAttributes {
-    
     /** Corner radius of the entry - Specifies the corners */
     enum RoundCorners {
-        
         /** *None* of the corners will be round */
         case none
         
@@ -51,7 +49,6 @@ public extension EKAttributes {
     
     /** The border around the entry */
     enum Border {
-        
         /** No border */
         case none
         
@@ -70,7 +67,7 @@ public extension EKAttributes {
         var borderValues: (color: UIColor, width: CGFloat)? {
             switch self {
             case .value(color: let color, width: let width):
-                return(color: color, width: width)
+                return (color: color, width: width)
             case .none:
                 return nil
             }

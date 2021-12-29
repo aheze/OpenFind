@@ -9,11 +9,9 @@ import UIKit
 
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
         if GestureState.began {
             return true
         } else {
-
             let location = touch.location(in: view)
             
             let preventLocation = touch.location(in: cameraViewController.shutter)
@@ -27,7 +25,6 @@ extension ViewController: UIGestureRecognizerDelegate {
             
             if cameraContainerView.transform.ty == 0 {
                 let allowFrame = CGRect(x: 0, y: view.bounds.height - 100, width: view.bounds.width, height: 100)
-                
                 
                 /// make long press not interfere with button
                 if gestureRecognizer == longPressGestureRecognizer {
@@ -49,7 +46,6 @@ extension ViewController: UIGestureRecognizerDelegate {
                     return false
                 }
             } else {
-                
                 if gestureRecognizer == longPressGestureRecognizer {
                     if cameraViewController.goBackButton.bounds.contains(goBackButtonLocation) {
                         return false
@@ -64,8 +60,6 @@ extension ViewController: UIGestureRecognizerDelegate {
                 } else {
                     return false
                 }
-                
-
             }
         }
     }
@@ -79,4 +73,3 @@ extension ViewController: UIGestureRecognizerDelegate {
         }
     }
 }
-

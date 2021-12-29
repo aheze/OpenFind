@@ -13,7 +13,6 @@ import UIKit
  The data source information it needs to construct and modify a PaperOnboarding.
  */
 public protocol PaperOnboardingDataSource {
-
     /**
      Asks the data source to return the number of items.
 
@@ -50,7 +49,6 @@ public protocol PaperOnboardingDataSource {
 }
 
 public extension PaperOnboardingDataSource {
-
     func onboardingPageItemColor(at index: Int) -> UIColor {
         return UIColor(named: "Gray2")!
     }

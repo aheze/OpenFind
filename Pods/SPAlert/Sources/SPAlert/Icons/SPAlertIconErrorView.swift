@@ -22,7 +22,6 @@
 import UIKit
 
 public class SPAlertIconErrorView: UIView, SPAlertIconAnimatable {
-
     public func animate() {
         animateTopToBottomLine()
         animateBottomToTopLine()
@@ -43,7 +42,7 @@ public class SPAlertIconErrorView: UIView, SPAlertIconAnimatable {
         animatableLayer.lineCap = .round
         animatableLayer.lineJoin = .round
         animatableLayer.strokeEnd = 0
-        self.layer.addSublayer(animatableLayer)
+        layer.addSublayer(animatableLayer)
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = 0.22
@@ -70,7 +69,7 @@ public class SPAlertIconErrorView: UIView, SPAlertIconAnimatable {
         animatableLayer.lineCap = .round
         animatableLayer.lineJoin = .round
         animatableLayer.strokeEnd = 0
-        self.layer.addSublayer(animatableLayer)
+        layer.addSublayer(animatableLayer)
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = 0.22

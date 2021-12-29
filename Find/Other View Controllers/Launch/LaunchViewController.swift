@@ -6,9 +6,9 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import SnapKit
+import UIKit
 
 enum LaunchAction {
     case onboarding
@@ -17,9 +17,10 @@ enum LaunchAction {
     case denied
     case restricted
 }
+
 class LaunchViewController: UIViewController {
-    
     // MARK: Status bar
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if traitCollection.userInterfaceStyle == .light {
             return FindConstantVars.shouldHaveLightStatusBar ? .lightContent : .darkContent
@@ -27,9 +28,10 @@ class LaunchViewController: UIViewController {
             return .lightContent
         }
     }
+
     override var prefersStatusBarHidden: Bool {
         if isForcingStatusBarHidden {
-            self.additionalSafeAreaInsets.top = 20
+            additionalSafeAreaInsets.top = 20
             return true
         } else {
             return !FindConstantVars.shouldHaveStatusBar
@@ -37,23 +39,23 @@ class LaunchViewController: UIViewController {
     }
     
     /// Hold the main view controller
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var blueCoverView: UIView!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var blueCoverView: UIView!
     
-    @IBOutlet weak var baseView: UIView!
-    @IBOutlet weak var topLeftImageView: UIImageView!
-    @IBOutlet weak var topRightImageView: UIImageView!
-    @IBOutlet weak var bottomLeftImageView: UIImageView!
-    @IBOutlet weak var bottomRightImageView: UIImageView!
+    @IBOutlet var baseView: UIView!
+    @IBOutlet var topLeftImageView: UIImageView!
+    @IBOutlet var topRightImageView: UIImageView!
+    @IBOutlet var bottomLeftImageView: UIImageView!
+    @IBOutlet var bottomRightImageView: UIImageView!
     
-    @IBOutlet weak var totalWidthC: NSLayoutConstraint!
-    @IBOutlet weak var totalHeightC: NSLayoutConstraint!
+    @IBOutlet var totalWidthC: NSLayoutConstraint!
+    @IBOutlet var totalHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var allowAccessView: UIView!
-    @IBOutlet weak var allowAccessButton: UIButton!
+    @IBOutlet var allowAccessView: UIView!
+    @IBOutlet var allowAccessButton: UIButton!
     
-    @IBOutlet weak var allowAccessWidthC: NSLayoutConstraint!
-    @IBOutlet weak var allowAccessViewHeightC: NSLayoutConstraint!
+    @IBOutlet var allowAccessWidthC: NSLayoutConstraint!
+    @IBOutlet var allowAccessViewHeightC: NSLayoutConstraint!
     
     var innerViewMaxWidth = CGFloat(0)
     var innerViewMaxHeight = CGFloat(0)
@@ -62,8 +64,8 @@ class LaunchViewController: UIViewController {
     
     let topHeight = CGFloat(70)
     
-    @IBOutlet weak var permissionsTitleView: UIView!
-    @IBOutlet weak var accessDescLabel: UILabel!
+    @IBOutlet var permissionsTitleView: UIView!
+    @IBOutlet var accessDescLabel: UILabel!
     
     var onboardingOnLastPage = false
     
@@ -96,12 +98,13 @@ class LaunchViewController: UIViewController {
             })
         }
     }
+
     var shouldGoToSettings = false
     var firstTimeDeny = false
     
-    @IBOutlet weak var settingsPictureView: UIImageView!
+    @IBOutlet var settingsPictureView: UIImageView!
     
-    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet var skipButton: UIButton!
     @IBAction func skipPressed(_ sender: Any) {
         let defaults = UserDefaults.standard
         defaults.set(true, forKey: "launchedBefore")
@@ -123,23 +126,24 @@ class LaunchViewController: UIViewController {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
 
-            self.drawAnimation(type: .fullScreenStart)
+            drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             shouldGoToSettings = false
-            self.drawAnimation(type: .needPermissions)
+            drawAnimation(type: .needPermissions)
         case .denied:
             firstTimeDeny = true
             shouldGoToSettings = true
-            self.drawAnimation(type: .denied)
+            drawAnimation(type: .denied)
         case .restricted:
-            self.drawAnimation(type: .restricted)
+            drawAnimation(type: .restricted)
         @unknown default:
             fatalError()
         }
     }
-    @IBOutlet weak var onboarding: PaperOnboarding!
+
+    @IBOutlet var onboarding: PaperOnboarding!
     
-    @IBOutlet weak var getStartedButton: UIButton!
+    @IBOutlet var getStartedButton: UIButton!
     @IBAction func getStartedPressed(_ sender: Any) {
         let defaults = UserDefaults.standard
         defaults.set(true, forKey: "launchedBefore")
@@ -158,24 +162,24 @@ class LaunchViewController: UIViewController {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
 
-            self.drawAnimation(type: .fullScreenStart)
+            drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             shouldGoToSettings = false
-            self.drawAnimation(type: .needPermissions)
+            drawAnimation(type: .needPermissions)
         case .denied:
             firstTimeDeny = true
             shouldGoToSettings = true
-            self.drawAnimation(type: .denied)
+            drawAnimation(type: .denied)
         case .restricted:
-            self.drawAnimation(type: .restricted)
+            drawAnimation(type: .restricted)
         @unknown default:
             fatalError()
         }
     }
     
-    @IBOutlet weak var onboardingTopC: NSLayoutConstraint!
-    @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
-    @IBOutlet weak var onboardingHeightC: NSLayoutConstraint!
+    @IBOutlet var onboardingTopC: NSLayoutConstraint!
+    @IBOutlet var onboardingWidthC: NSLayoutConstraint!
+    @IBOutlet var onboardingHeightC: NSLayoutConstraint!
     
     let defaults = UserDefaults.standard
     
@@ -223,37 +227,36 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
         if launchedBefore == false {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.drawAnimation(type: .onboarding)
-            })
+            }
         } else {
             onboarding.removeFromSuperview()
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized:
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.drawAnimation(type: .fullScreenStart)
-                })
+                }
             case .notDetermined:
                 shouldGoToSettings = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.drawAnimation(type: .needPermissions)
-                })
+                }
             case .denied:
                 firstTimeDeny = true
                 shouldGoToSettings = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.drawAnimation(type: .denied)
-                })
+                }
             case .restricted:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.drawAnimation(type: .restricted)
-                })
+                }
             @unknown default:
                 break
             }
         }
-        
         
         getStartedButton.accessibilityLabel = "Continue"
         getStartedButton.accessibilityHint = "Finish tutorial"
@@ -262,7 +265,6 @@ class LaunchViewController: UIViewController {
     let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
     
     func drawAnimation(type: LaunchAction) {
-        
         innerViewMaxWidth = view.bounds.width - CGFloat(70)
         innerViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2)
         cornersViewMaxWidth = view.bounds.width - CGFloat(20)
@@ -273,10 +275,9 @@ class LaunchViewController: UIViewController {
         let restrictedCornersViewWidth = min(400, cornersViewMaxWidth)
         let restrictedCornersViewHeight = min(400, cornersViewMaxHeight)
         
-        
         switch type {
         case .restricted:
-            self.allowAccessView.alpha = 0
+            allowAccessView.alpha = 0
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }) { _ in
@@ -298,11 +299,10 @@ class LaunchViewController: UIViewController {
             
             let noPermissionToUseCamera = NSLocalizedString("noPermissionToUseCamera", comment: "LaunchViewController def=You don't have permission to use the camera.")
             
-            self.accessDescLabel.text = noPermissionToUseCamera
-            self.shouldGoToSettings = true
-            self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
+            accessDescLabel.text = noPermissionToUseCamera
+            shouldGoToSettings = true
+            allowAccessButton.setTitle(goToSettings, for: .normal)
         case .denied:
-            
             
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -325,9 +325,7 @@ class LaunchViewController: UIViewController {
                 self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
             }
             
-            
         case .needPermissions:
-            
             
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -348,12 +346,12 @@ class LaunchViewController: UIViewController {
             
         case .onboarding:
             
-            self.onboarding.dataSource = self
-            self.onboarding.delegate = self
-            self.onboarding.alpha = 0
-            self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-            self.onboarding.layer.cornerRadius = 10
-            self.onboarding.clipsToBounds = true
+            onboarding.dataSource = self
+            onboarding.delegate = self
+            onboarding.alpha = 0
+            onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+            onboarding.layer.cornerRadius = 10
+            onboarding.clipsToBounds = true
             
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -382,9 +380,8 @@ class LaunchViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
             
-            
-            self.addChild(viewController, in: self.containerView)
-            self.containerView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            addChild(viewController, in: containerView)
+            containerView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -414,6 +411,7 @@ class LaunchViewController: UIViewController {
         skipButton?.alpha = 0
         onboarding?.alpha = 0
     }
+
     func removeEverything() {
         blueCoverView?.removeFromSuperview()
         baseView?.removeFromSuperview()
@@ -424,9 +422,7 @@ class LaunchViewController: UIViewController {
     }
 }
 
-
 extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
-    
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 0 {
             UIView.animate(withDuration: 0.15, animations: {
@@ -441,7 +437,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         if index == 3 {
             onboardingOnLastPage = true
             getStartedButton.alpha = 0
-            onboardingHeightC.constant = self.innerViewMaxHeight - 60
+            onboardingHeightC.constant = innerViewMaxHeight - 60
             UIView.animate(withDuration: 0.15, animations: {
                 self.getStartedButton.transform = CGAffineTransform.identity
                 self.view.layoutIfNeeded()
@@ -453,7 +449,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
             if onboardingOnLastPage == true {
                 onboardingOnLastPage = false
                 getStartedButton.alpha = 1
-                onboardingHeightC.constant = self.innerViewMaxHeight
+                onboardingHeightC.constant = innerViewMaxHeight
                 UIView.animate(withDuration: 0.15, animations: {
                     self.view.layoutIfNeeded()
                     self.getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
@@ -461,15 +457,12 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
                 })
             }
         }
-        
-
     }
 }
 
-
 extension LaunchViewController {
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
-        let firstDescription = UIAccessibility.isVoiceOverRunning ? "Find text in real life, fast. Swipe up or down on the Page chooser to navigate this tutorial." : LaunchLocalization.swipeToGetStarted 
+        let firstDescription = UIAccessibility.isVoiceOverRunning ? "Find text in real life, fast. Swipe up or down on the Page chooser to navigate this tutorial." : LaunchLocalization.swipeToGetStarted
         
         return [
             OnboardingItemInfo(informationImage: UIImage(named: "Intro1")!,
@@ -518,5 +511,3 @@ extension LaunchViewController {
         return 4
     }
 }
-
-

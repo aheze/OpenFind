@@ -123,11 +123,11 @@ public struct PagingOptions {
 
     public var estimatedItemWidth: CGFloat {
         switch menuItemSize {
-        case let .fixed(width, _):
+        case .fixed(let width, _):
             return width
-        case let .sizeToFit(minWidth, _):
+        case .sizeToFit(let minWidth, _):
             return minWidth
-        case let .selfSizing(estimatedItemWidth, _):
+        case .selfSizing(let estimatedItemWidth, _):
             return estimatedItemWidth
         }
     }

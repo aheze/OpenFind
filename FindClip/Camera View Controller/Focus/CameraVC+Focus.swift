@@ -5,8 +5,8 @@
 //  Created by Zheng on 3/19/21.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension CameraViewController {
     func focused(sender: UILongPressGestureRecognizer) {
@@ -27,10 +27,7 @@ extension CameraViewController {
                 device.exposurePointOfInterest = focusPoint
                 device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
                 device.unlockForConfiguration()
-            }
-            catch {
-
-            }
+            } catch {}
         }
         
         let focusViewIndicator = CameraFocusView()
@@ -71,6 +68,7 @@ extension CameraViewController {
             }
         }
     }
+
     func removeFocusRects() {
         UIView.animate(withDuration: 0.2) {
             for existingFocusView in self.focusView.subviews {

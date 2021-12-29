@@ -27,7 +27,6 @@ import UIKit
  */
 @available(iOSApplicationExtension, unavailable)
 public enum SPAlert {
-    
     /**
      SPAlert: Present alert with preset and custom haptic.
      

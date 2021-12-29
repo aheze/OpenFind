@@ -11,14 +11,11 @@ import UIKit
 extension FindBar {
     func refreshLists() {
         if let listCategories = listCategories {
-            
             var newSelectedLists = [EditableFindList]()
             var newUnselectedLists = [EditableFindList]()
             var allLists = [EditableFindList]()
             
-            
             for (index, realList) in listCategories.enumerated() {
-                
                 var listIsSelected = false
                 
                 let editableList = EditableFindList()

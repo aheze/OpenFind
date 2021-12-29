@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 public extension UICollectionView {
-
     /// VisibleCells in the order they are displayed on screen.
     var orderedVisibleCells: [UICollectionViewCell] {
         return indexPathsForVisibleItems.sorted().compactMap { cellForItem(at: $0) }

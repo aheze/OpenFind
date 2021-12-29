@@ -8,17 +8,16 @@
 import UIKit
 
 class Shutter: UIView {
-    
     var pressed: (() -> Void)?
     
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var containerView: UIView! /// contains rim and fill
-    @IBOutlet weak var rimView: UIView!
-    @IBOutlet weak var fillView: UIView!
+    @IBOutlet var containerView: UIView! /// contains rim and fill
+    @IBOutlet var rimView: UIView!
+    @IBOutlet var fillView: UIView!
     var shapeFillLayer: CAShapeLayer?
     
-    @IBOutlet weak var touchButton: UIButton!
+    @IBOutlet var touchButton: UIButton!
     
     @IBAction func touchDown(_ sender: Any) {
         UIView.animate(withDuration: 0.2, animations: {
@@ -26,13 +25,16 @@ class Shutter: UIView {
             self.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         })
     }
+
     @IBAction func touchUpInside(_ sender: Any) {
         pressed?()
         resetAlpha()
     }
+
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
     }
+
     func resetAlpha() {
         UIView.animate(withDuration: 0.2, animations: {
             self.contentView.alpha = 1
@@ -53,7 +55,7 @@ class Shutter: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("Shutter", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let fillLayer = CAShapeLayer()
@@ -67,7 +69,6 @@ class Shutter: UIView {
         rimView.layer.borderWidth = 4
         rimView.layer.borderColor = UIColor.white.cgColor
     }
-    
     
     override func layoutSubviews() {
         super.layoutSubviews()

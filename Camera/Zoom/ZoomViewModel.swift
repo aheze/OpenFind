@@ -8,9 +8,7 @@
 
 import SwiftUI
 
-
 struct ZoomFactor: Hashable {
-    
     /// range of the zoom label (what the user sees)
     /// example: `0.5...1`
     var zoomLabelRange: ClosedRange<CGFloat>
@@ -18,7 +16,6 @@ struct ZoomFactor: Hashable {
     /// 0 = aspect fit
     /// 1 = aspect fill
     var aspectRatioRange: ClosedRange<CGFloat>
-    
     
     /// range of actual zoom
     /// example: `1...2`
@@ -30,7 +27,6 @@ struct ZoomFactor: Hashable {
     
     var activationProgress: CGFloat = 1
 }
-
 
 class ZoomViewModel: ObservableObject {
     @Published var ready = false
@@ -69,12 +65,10 @@ class ZoomViewModel: ObservableObject {
         }
     }
     
-    
     func configureZoomFactors(minZoom: CGFloat, maxZoom: CGFloat, switchoverFactors: [NSNumber]) {
-        
         let limitedMaxZoom = min(40, maxZoom)
         
-        let minimumFactorLabel: Double = 0.5
+        let minimumFactorLabel = 0.5
         let centerFactorLabel: Double = 1
         let maxFactorLabel: Double = UIDevice.modelName.contains("iPhone 13 Pro") ? 3 : 2
         let maxZoomLabel: Double = 10
@@ -158,8 +152,8 @@ class ZoomViewModel: ObservableObject {
     }
     
     func setup() {
-        self.updateSliderWidth()
-        self.updateSliderLeftPadding()
+        updateSliderWidth()
+        updateSliderLeftPadding()
         
         savedExpandedOffset = -(C.zoomFactors[safe: 1]?.positionRange.lowerBound ?? 0) * sliderWidth
         
@@ -170,7 +164,7 @@ class ZoomViewModel: ObservableObject {
     }
     
     /// return (`totalExpandedOffset`, `newTranslation`)
-    func update(translation: CGFloat, ended: Bool, changeDraggingAmount: ((CGFloat, CGFloat) -> Void)) {
+    func update(translation: CGFloat, ended: Bool, changeDraggingAmount: (CGFloat, CGFloat) -> Void) {
         let offset = savedExpandedOffset + translation
         
         var newSavedExpandedOffset = savedExpandedOffset
@@ -184,8 +178,8 @@ class ZoomViewModel: ObservableObject {
             newSavedExpandedOffset = 0
             newTranslation = 0
         } else if -offset >= sliderWidth {
-            totalExpandedOffset = -self.sliderWidth
-            newSavedExpandedOffset = -self.sliderWidth
+            totalExpandedOffset = -sliderWidth
+            newSavedExpandedOffset = -sliderWidth
             newTranslation = 0
         } else {
             totalExpandedOffset = newSavedExpandedOffset + translation
@@ -206,7 +200,6 @@ class ZoomViewModel: ObservableObject {
         }
     }
     
-    
     /// width of the entire slider
     func updateSliderWidth() {
         var width = CGFloat(0)
@@ -220,7 +213,7 @@ class ZoomViewModel: ObservableObject {
             width += addedWidth
         }
         
-        self.sliderWidth = width
+        sliderWidth = width
     }
     
     /// have half-screen gap on left side of slider
@@ -230,7 +223,7 @@ class ZoomViewModel: ObservableObject {
         let leftPadding = C.edgePadding
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth + leftPadding
         
-        self.sliderLeftPadding = padding
+        sliderLeftPadding = padding
     }
     
     /// width of screen, inset from padding
@@ -305,7 +298,6 @@ class ZoomViewModel: ObservableObject {
     func setZoom(positionInSlider: CGFloat) {
         /// get the zoom factor whose position contains the fraction
         if let zoomFactor = C.zoomFactors.first(where: { $0.positionRange.contains(positionInSlider) }) {
-            
             let positionRangeLower = zoomFactor.positionRange.lowerBound
             let positionRangeUpper = zoomFactor.positionRange.upperBound
             
@@ -323,14 +315,14 @@ class ZoomViewModel: ObservableObject {
             /// display
             let zoomLabelRangeWidth = zoomFactor.zoomLabelRange.upperBound - zoomFactor.zoomLabelRange.lowerBound
             let newZoomLabel = zoomFactor.zoomLabelRange.lowerBound + fractionOfPositionRange * zoomLabelRangeWidth
-            let previousZoomLabel = self.zoomLabel
+            let previousZoomLabel = zoomLabel
             
             let roundedPreviousZoomLabel = Double(previousZoomLabel).truncate(places: 1)
             let roundedNewZoomLabel = Double(newZoomLabel).truncate(places: 1)
             
             if
-                roundedNewZoomLabel != roundedPreviousZoomLabel &&
-                    (floor(roundedNewZoomLabel) == roundedNewZoomLabel || roundedNewZoomLabel == C.zoomFactors[0].zoomLabelRange.lowerBound)
+                roundedNewZoomLabel != roundedPreviousZoomLabel,
+                floor(roundedNewZoomLabel) == roundedNewZoomLabel || roundedNewZoomLabel == C.zoomFactors[0].zoomLabelRange.lowerBound
             {
                 let generator = UISelectionFeedbackGenerator()
                 generator.prepare()
@@ -354,6 +346,7 @@ class ZoomViewModel: ObservableObject {
             }
         }
     }
+
     func expand() {
         if !gestureStarted {
             DispatchQueue.main.async {
@@ -370,11 +363,11 @@ class ZoomViewModel: ObservableObject {
             }
         }
     }
+
     func startTimeout() {
         gestureStarted = false
         let uuidToCheck = keepingExpandedUUID
         DispatchQueue.main.asyncAfter(deadline: .now() + C.timeoutTime) {
-
             /// make sure another swipe hasn't happened yet
             if uuidToCheck == self.keepingExpandedUUID {
                 self.keepingExpandedUUID = nil
@@ -384,5 +377,4 @@ class ZoomViewModel: ObservableObject {
             }
         }
     }
-    
 }

@@ -6,15 +6,15 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension PhotoSlidesViewController {
     func setupFindBar() {
         let slideFindBar = SlideFindBar()
         view.addSubview(slideFindBar)
         
-        slideFindBar.snp.makeConstraints { (make) in
+        slideFindBar.snp.makeConstraints { make in
             self.slideFindBarTopC = make.top.equalTo(view.safeArea.top).offset(-45).constraint
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -25,7 +25,6 @@ extension PhotoSlidesViewController {
         slideFindBar.findBar.findBarDelegate = self
         slideFindBar.promptTextView.delegate = self
         self.slideFindBar = slideFindBar
-        
         
         slideFindBar.promptBackgroundView.shouldGroupAccessibilityChildren = true
         slideFindBar.promptBackgroundView.accessibilityValue = "Finding from photos"
@@ -40,7 +39,6 @@ extension PhotoSlidesViewController {
             return false
         }
     }
-    
     
     @objc func findPressed(sender: UIBarButtonItem) {
         if slideFindBarTopC == nil {
@@ -98,4 +96,3 @@ extension PhotoSlidesViewController {
         }
     }
 }
-

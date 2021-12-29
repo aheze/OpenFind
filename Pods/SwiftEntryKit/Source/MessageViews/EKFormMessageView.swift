@@ -7,8 +7,7 @@
 
 import UIKit
 
-final public class EKFormMessageView: UIView {
-    
+public final class EKFormMessageView: UIView {
     private let scrollViewVerticalOffset: CGFloat = 20
     
     // MARK: Props
@@ -25,8 +24,9 @@ final public class EKFormMessageView: UIView {
     
     public init(with title: EKProperty.LabelContent,
                 textFieldsContent: [EKProperty.TextFieldContent],
-                buttonContent: EKProperty.ButtonContent) {
-        self.titleContent = title
+                buttonContent: EKProperty.ButtonContent)
+    {
+        titleContent = title
         self.textFieldsContent = textFieldsContent
         super.init(frame: UIScreen.main.bounds)
         setupScrollView()
@@ -40,7 +40,8 @@ final public class EKFormMessageView: UIView {
             priority: .defaultHigh)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -117,7 +118,7 @@ final public class EKFormMessageView: UIView {
         textFieldViews[textFieldIndex].makeFirstResponder()
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         titleLabel.textColor = titleContent.style.color(for: traitCollection)
     }
     

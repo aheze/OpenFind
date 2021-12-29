@@ -6,14 +6,14 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftEntryKit
+import UIKit
 
 class StatsNavController: UINavigationController {
     var viewController: StatsViewController!
 }
+
 class StatsViewController: UIViewController {
-    
     func update(to: Int) {
         DispatchQueue.main.async {
             let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
@@ -30,8 +30,6 @@ class StatsViewController: UIViewController {
             newString.append(regularText)
             
             if let matchesLabel = self.currentlyHowManyMatches {
-                
-                
                 matchesLabel.attributedText = newString
             } else {
                 self.currentlyHowManyMatchesText = newString
@@ -49,29 +47,29 @@ class StatsViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var justForFun: UILabel!
+    @IBOutlet var justForFun: UILabel!
     
     var currentlyHowManyMatchesText = NSAttributedString(string: "")
-    @IBOutlet weak var currentlyHowManyMatches: UILabel!
+    @IBOutlet var currentlyHowManyMatches: UILabel!
     
     var currentSearchingForTheseWordsText = NSAttributedString(string: "")
-    @IBOutlet weak var currentSearchingForTheseWords: UILabel!
+    @IBOutlet var currentSearchingForTheseWords: UILabel!
     
-    @IBOutlet weak var cachesSinceFirstD: UILabel!
-    @IBOutlet weak var helpPressCount: UILabel!
-    @IBOutlet weak var listsCreateCount: UILabel!
+    @IBOutlet var cachesSinceFirstD: UILabel!
+    @IBOutlet var helpPressCount: UILabel!
+    @IBOutlet var listsCreateCount: UILabel!
     
-    @IBOutlet weak var customizedSettings: UILabel!
-    @IBOutlet weak var leftFeedback: UILabel!
+    @IBOutlet var customizedSettings: UILabel!
+    @IBOutlet var leftFeedback: UILabel!
     
-    @IBOutlet weak var viewStatsStatus: UILabel!
+    @IBOutlet var viewStatsStatus: UILabel!
     
     let defaults = UserDefaults.standard
     
     var arrayOfEmoji = ["😀", "😃", "😁", "😄", "😌", "😜", "😛", "😏", "🤔", "🥴", "🥱", "😅", "😂", "🤣", "🙃", "😉", "😋", "🤪", "😝", "🤓", "😎", "🤩"]
     
     @objc func donePressed(sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -83,7 +81,7 @@ class StatsViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         let statsText = NSLocalizedString("statsText", comment: "")
-        self.title = statsText
+        title = statsText
         
         setupNavigationBar()
         
@@ -118,17 +116,14 @@ class StatsViewController: UIViewController {
         if cacheCount == 1 {
             let photoSingularLoc = NSLocalizedString("photosSingularLoc", comment: "StatsViewController def=photo")
             photosPlural = photoSingularLoc
-            
         }
         if helpCount == 1 {
             let timeSingularLoc = NSLocalizedString("timeSingularLoc", comment: "StatsViewController def=time")
             timesPlural = timeSingularLoc
-            
         }
         if listsCount == 1 {
             let listSingularLoc = NSLocalizedString("listSingularLoc", comment: "StatsViewController def=list")
             listsPlural = listSingularLoc
-            
         }
         
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
@@ -142,7 +137,6 @@ class StatsViewController: UIViewController {
         cacheString.append(cacheBold)
         cacheString.append(cacheRegular)
         cachesSinceFirstD.attributedText = cacheString
-        
         
         let helpPressed = NSLocalizedString("helpPressed", comment: "StatsViewController def=Help pressed")
         
@@ -192,7 +186,6 @@ class StatsViewController: UIViewController {
         viewStatString.append(viewStatRegular)
         viewStatString.append(viewStatBold)
         viewStatsStatus.attributedText = viewStatString
-        
     }
 }
 

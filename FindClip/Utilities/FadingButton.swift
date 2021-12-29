@@ -8,28 +8,28 @@
 import UIKit
 
 class FadingButton: UIButton {
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
 
     required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
+        super.init(coder: aDecoder)
         configure()
     }
 
     func configure() {
-        self.addTarget(self, action: #selector(touchDown(_:)), for: [.touchDown, .touchDragEnter])
-        self.addTarget(self, action: #selector(touchFinish(_:)), for: [.touchUpInside, .touchCancel, .touchDragExit])
+        addTarget(self, action: #selector(touchDown(_:)), for: [.touchDown, .touchDragEnter])
+        addTarget(self, action: #selector(touchFinish(_:)), for: [.touchUpInside, .touchCancel, .touchDragExit])
         imageView?.contentMode = .scaleAspectFit
-        self.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
 
     @objc func touchDown(_ sender: UIButton) {
         touched?(true)
         fade(true)
     }
+
     @objc func touchFinish(_ sender: UIButton) {
         touched?(false)
         fade(false)
@@ -54,4 +54,3 @@ class FadingButton: UIButton {
         }
     }
 }
-

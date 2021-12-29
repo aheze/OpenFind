@@ -49,6 +49,5 @@ extension LaunchViewController {
         rightImageView.alpha = 0
         bottomImageView.alpha = 0
         leftImageView.alpha = 0
-        
     }
 }

@@ -9,9 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var photos: PhotosController = {
-        return PhotosBridge.makeController()
-    }()
+    lazy var photos: PhotosController = PhotosBridge.makeController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,4 +17,3 @@ class ViewController: UIViewController {
         addChild(photos.viewController, in: view)
     }
 }
-

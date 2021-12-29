@@ -9,25 +9,20 @@
 import SwiftUI
 
 class ViewController: UIViewController {
-    
     var cameraToolbarModel = CameraViewModel()
     
-    lazy var photos: PhotosController = {
-        return PhotosBridge.makeController()
-    }()
-    lazy var camera: CameraController = {
-        return CameraBridge.makeController(model: cameraToolbarModel)
-    }()
-    lazy var lists: ListsController = {
-        return ListsBridge.makeController()
-    }()
+    lazy var photos: PhotosController = PhotosBridge.makeController()
+
+    lazy var camera: CameraController = CameraBridge.makeController(model: cameraToolbarModel)
+
+    lazy var lists: ListsController = ListsBridge.makeController()
     
     var toolbarViewModel: ToolbarViewModel!
     lazy var tabController: TabBarController<PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         photos.viewController.getActiveToolbarViewModel = { [weak self] in
-            return self?.toolbarViewModel ?? ToolbarViewModel()
+            self?.toolbarViewModel ?? ToolbarViewModel()
         }
         photos.viewController.activateSelectionToolbar = { [weak self] activate, animate in
             guard let self = self else { return }
@@ -65,16 +60,15 @@ class ViewController: UIViewController {
         
 //        tabController.viewController.contentCollectionView
 //            .panGestureRecognizer
-////            .shouldRequireFailure(of:
+        ////            .shouldRequireFailure(of:
 //            .require(toFail:
-////            .shouldBeRequiredToFail(by:
-////            .shouldRequireFailure(
-////                of:
-                    camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer
+        ////            .shouldBeRequiredToFail(by:
+        ////            .shouldRequireFailure(
+        ////                of:
+        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer
 //            )
 //        tabController.viewController.contentCollectionView.panGestureRecognizer.shouldReceive(<#T##event: UIEvent##UIEvent#>)
 //        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer.delegate = self
-        
         
 //        camera.viewController.searchViewController.searchCollectionView.addGestureRecognizer(UIPanGestureRecognizer())
 //        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer.shouldBeRequiredToFail(by: tabController.viewController.contentCollectionView.panGestureRecognizer)
@@ -82,7 +76,7 @@ class ViewController: UIViewController {
         
         let searchBar = camera.viewController.searchViewController.searchBarView ?? UIView()
         let searchBarBounds = searchBar.convert(searchBar.bounds, to: nil)
-        tabController.viewController.excludedFrames = [ searchBarBounds ]
+        tabController.viewController.excludedFrames = [searchBarBounds]
         return tabController
     }()
     
@@ -95,7 +89,6 @@ class ViewController: UIViewController {
 
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-
         let location = touch.location(in: nil)
         let searchContainerFrame = camera.viewController.searchContainerView.convert(camera.viewController.searchContainerView.bounds, to: nil)
 
@@ -108,7 +101,6 @@ extension ViewController: UIGestureRecognizerDelegate {
 }
 
 extension ViewController: TabBarControllerDelegate {
-    
     func willBeginNavigatingTo(tab: TabState) {
         switch tab {
         case .photos:

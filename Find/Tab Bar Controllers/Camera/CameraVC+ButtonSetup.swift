@@ -6,24 +6,22 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 enum PhotoPermissionAction {
     case shouldAsk
     case shouldGoToSettings
     case allowed
 }
+
 extension CameraViewController {
-    
     func enableButtons(_ enable: Bool) {
-        
         statsView?.isUserInteractionEnabled = enable
         fullScreenView?.isUserInteractionEnabled = enable
         flashView?.isUserInteractionEnabled = enable
         settingsView?.isUserInteractionEnabled = enable
         cameraIconHolder?.isUserInteractionEnabled = enable
-        
     }
     
     func setupCameraButtons() {
@@ -88,7 +86,7 @@ extension CameraViewController {
                 self.messageView.hideMessages()
                 
                 self.cache.accessibilityLabel = "Cache"
-                self.cache.accessibilityHint = "Caches the current paused image. Produces much more accurate results." 
+                self.cache.accessibilityHint = "Caches the current paused image. Produces much more accurate results."
             }
         }
         
@@ -133,19 +131,19 @@ extension CameraViewController {
     
     func requestAuthorization(completion: @escaping (() -> Void)) {
         if #available(iOS 15, *) {
-            PHPhotoLibrary.requestAuthorization(for: .addOnly) { (status) in
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
                 if status == .authorized || status == .limited {
                     completion()
                 }
             }
         } else if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 if status == .authorized || status == .limited {
                     completion()
                 }
             }
         } else {
-            PHPhotoLibrary.requestAuthorization { (status) in
+            PHPhotoLibrary.requestAuthorization { status in
                 if status == .authorized {
                     completion()
                 }

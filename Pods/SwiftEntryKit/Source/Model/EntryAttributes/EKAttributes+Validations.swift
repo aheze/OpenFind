@@ -8,7 +8,6 @@
 import Foundation
 
 extension EKAttributes {
-    
     private static var minDisplayDuration: DisplayDuration {
         return 0
     }

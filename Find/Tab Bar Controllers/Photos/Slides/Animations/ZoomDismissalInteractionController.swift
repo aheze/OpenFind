@@ -9,7 +9,6 @@
 import UIKit
 
 class ZoomDismissalInteractionController: NSObject {
-    
     var transitionContext: UIViewControllerContextTransitioning?
     var animator: UIViewControllerAnimatedTransitioning?
     
@@ -17,23 +16,24 @@ class ZoomDismissalInteractionController: NSObject {
     var toReferenceImageViewFrame: CGRect?
     
     func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
-        guard let transitionContext = self.transitionContext,
-            let animator = self.animator as? ZoomAnimator,
-            let transitionImageView = animator.transitionImageView,
-            let fromVC = transitionContext.viewController(forKey: .from),
-            let toVC = transitionContext.viewController(forKey: .to),
-            let fromReferenceImageView = animator.fromDelegate?.referenceImageView(for: animator),
-            let toReferenceImageView = animator.toDelegate?.referenceImageView(for: animator),
-            let fromReferenceImageViewFrame = self.fromReferenceImageViewFrame,
-            let toReferenceImageViewFrame = self.toReferenceImageViewFrame else {
-                return
+        guard let transitionContext = transitionContext,
+              let animator = animator as? ZoomAnimator,
+              let transitionImageView = animator.transitionImageView,
+              let fromVC = transitionContext.viewController(forKey: .from),
+              let toVC = transitionContext.viewController(forKey: .to),
+              let fromReferenceImageView = animator.fromDelegate?.referenceImageView(for: animator),
+              let toReferenceImageView = animator.toDelegate?.referenceImageView(for: animator),
+              let fromReferenceImageViewFrame = fromReferenceImageViewFrame,
+              let toReferenceImageViewFrame = toReferenceImageViewFrame
+        else {
+            return
         }
         
         fromReferenceImageView.isHidden = true
         
         let anchorPoint = CGPoint(x: fromReferenceImageViewFrame.midX, y: fromReferenceImageViewFrame.midY)
         let translatedPoint = gestureRecognizer.translation(in: fromReferenceImageView)
-        let verticalDelta : CGFloat = translatedPoint.y < 0 ? 0 : translatedPoint.y
+        let verticalDelta: CGFloat = translatedPoint.y < 0 ? 0 : translatedPoint.y
 
         let backgroundAlpha = backgroundAlphaFor(view: fromVC.view, withPanningVerticalDelta: verticalDelta)
         let scale = scaleFor(view: fromVC.view, withPanningVerticalDelta: verticalDelta)
@@ -53,8 +53,7 @@ class ZoomDismissalInteractionController: NSObject {
         if gestureRecognizer.state == .ended {
             let velocity = gestureRecognizer.velocity(in: fromVC.view)
             if velocity.y < 0 || newCenter.y < anchorPoint.y {
-                
-                //cancel
+                // cancel
                 UIView.animate(
                     withDuration: 0.5,
                     delay: 0,
@@ -65,8 +64,8 @@ class ZoomDismissalInteractionController: NSObject {
                         transitionImageView.frame = fromReferenceImageViewFrame
                         fromVC.view.alpha = 1.0
                         toVC.tabBarController?.tabBar.alpha = 0
-                },
-                    completion: { completed in
+                    },
+                    completion: { _ in
                         animator.finishedDismissing = false
                         
                         toReferenceImageView.isHidden = false
@@ -78,43 +77,44 @@ class ZoomDismissalInteractionController: NSObject {
                         animator.toDelegate?.transitionDidEndWith(zoomAnimator: animator)
                         animator.fromDelegate?.transitionDidEndWith(zoomAnimator: animator)
                         self.transitionContext = nil
-                })
+                    }
+                )
                 return
             }
             
             if animator.cameFromFind {
                 transitionImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
             }
-            //start animation
+            // start animation
             let finalTransitionSize = toReferenceImageViewFrame
             
             UIView.animate(withDuration: 0.25,
                            delay: 0,
                            options: [],
                            animations: {
-                            fromVC.view.alpha = 0
-                            transitionImageView.frame = finalTransitionSize
-                            if animator.cameFromFind {
-                                transitionImageView.layer.cornerRadius = 8
-                            }
-            }, completion: { completed in
-                animator.finishedDismissing = true
+                               fromVC.view.alpha = 0
+                               transitionImageView.frame = finalTransitionSize
+                               if animator.cameFromFind {
+                                   transitionImageView.layer.cornerRadius = 8
+                               }
+                           }, completion: { _ in
+                               animator.finishedDismissing = true
                 
-                transitionImageView.removeFromSuperview()
-                toReferenceImageView.isHidden = false
-                fromReferenceImageView.isHidden = false
+                               transitionImageView.removeFromSuperview()
+                               toReferenceImageView.isHidden = false
+                               fromReferenceImageView.isHidden = false
                 
-                self.transitionContext?.finishInteractiveTransition()
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                animator.toDelegate?.transitionDidEndWith(zoomAnimator: animator)
-                animator.fromDelegate?.transitionDidEndWith(zoomAnimator: animator)
-                self.transitionContext = nil
-            })
+                               self.transitionContext?.finishInteractiveTransition()
+                               transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                               animator.toDelegate?.transitionDidEndWith(zoomAnimator: animator)
+                               animator.fromDelegate?.transitionDidEndWith(zoomAnimator: animator)
+                               self.transitionContext = nil
+                           })
         }
     }
     
     func backgroundAlphaFor(view: UIView, withPanningVerticalDelta verticalDelta: CGFloat) -> CGFloat {
-        let startingAlpha:CGFloat = 1.0
+        let startingAlpha: CGFloat = 1.0
         let finalAlpha: CGFloat = 0.0
         let totalAvailableAlpha = startingAlpha - finalAlpha
         
@@ -125,7 +125,7 @@ class ZoomDismissalInteractionController: NSObject {
     }
     
     func scaleFor(view: UIView, withPanningVerticalDelta verticalDelta: CGFloat) -> CGFloat {
-        let startingScale:CGFloat = 1.0
+        let startingScale: CGFloat = 1.0
         let finalScale: CGFloat = 0.5
         let totalAvailableScale = startingScale - finalScale
         
@@ -138,18 +138,17 @@ class ZoomDismissalInteractionController: NSObject {
 
 extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransitioning {
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
-        
         self.transitionContext = transitionContext
         let containerView = transitionContext.containerView
         
-        guard let animator = self.animator as? ZoomAnimator,
-            let fromVC = transitionContext.viewController(forKey: .from),
-            let toVC = transitionContext.viewController(forKey: .to),
-            let fromReferenceImageViewFrame = animator.fromDelegate?.referenceImageViewFrameInTransitioningView(for: animator),
-            let toReferenceImageViewFrame = animator.toDelegate?.referenceImageViewFrameInTransitioningView(for: animator),
-            let fromReferenceImageView = animator.fromDelegate?.referenceImageView(for: animator)
-            else {
-                return
+        guard let animator = animator as? ZoomAnimator,
+              let fromVC = transitionContext.viewController(forKey: .from),
+              let toVC = transitionContext.viewController(forKey: .to),
+              let fromReferenceImageViewFrame = animator.fromDelegate?.referenceImageViewFrameInTransitioningView(for: animator),
+              let toReferenceImageViewFrame = animator.toDelegate?.referenceImageViewFrameInTransitioningView(for: animator),
+              let fromReferenceImageView = animator.fromDelegate?.referenceImageView(for: animator)
+        else {
+            return
         }
         
         animator.fromDelegate?.transitionWillStartWith(zoomAnimator: animator)
@@ -179,7 +178,7 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
 }
 
 //
-//class ZoomDismissalInteractionController: NSObject {
+// class ZoomDismissalInteractionController: NSObject {
 //
 //    var transitionContext: UIViewControllerContextTransitioning?
 //    var animator: UIViewControllerAnimatedTransitioning?
@@ -302,9 +301,9 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
 //
 //        return startingScale - (deltaAsPercentageOfMaximun * totalAvailableScale)
 //    }
-//}
+// }
 //
-//extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransitioning {
+// extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransitioning {
 //    func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
 //        self.transitionContext = transitionContext
 //        let containerView = transitionContext.containerView
@@ -339,4 +338,4 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
 //            containerView.addSubview(transitionImageView)
 //        }
 //    }
-//}
+// }

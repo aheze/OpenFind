@@ -10,14 +10,11 @@ import UIKit
 import Vision
 
 extension CameraViewController {
-    
     func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil) {
-        
         /// busy finding
         busyFastFinding = true
         
         DispatchQueue.global(qos: .userInitiated).async {
-            
             if let pixelBuffer = pixelBuffer {
                 let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
                 self.pixelBufferSize = CGSize(width: ciImage.extent.height, height: ciImage.extent.width)
@@ -46,29 +43,25 @@ extension CameraViewController {
             request.recognitionLevel = .fast
             request.recognitionLanguages = Defaults.recognitionLanguages
             
-            
             if let pixelBuffer = pixelBuffer {
                 let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
                 do {
                     try imageRequestHandler.perform([request])
-                } catch let error {
+                } catch {
                     self.busyFastFinding = false
-
                 }
             } else if let cgImage = cgImage {
                 let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
                 do {
                     try imageRequestHandler.perform([request])
-                } catch let error {
+                } catch {
                     self.busyFastFinding = false
-
                 }
             }
         }
     }
     
     func getConvertedRect(boundingBox: CGRect, inImage imageSize: CGSize, containedIn containerSize: CGSize) -> CGRect {
-        
         let rectOfImage: CGRect
         
         let imageAspect = imageSize.width / imageSize.height
@@ -101,6 +94,7 @@ extension CameraViewController {
         return convertedRect
     }
 }
+
 extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()

@@ -29,7 +29,6 @@ extension PhotoFindViewController {
         newLayer.lineWidth = 0
         
         if colors.count > 1 {
-            
             var newRect = layer.frame
             newRect.origin.x += 1
             newRect.origin.y += 1

@@ -8,7 +8,6 @@
 import UIKit
 
 extension SearchViewController: UICollectionViewDelegate {
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.isTracking {
             searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = searchCollectionViewFlowLayout.reachedEndBeforeAddWordField
@@ -86,7 +85,7 @@ extension SearchViewController: UICollectionViewDelegate {
         
         let indexOfLastField = searchViewModel.fields.count - 2 /// index of the last field (not including "Add New" cell)
         
-        if case let .addNew(currentString) = searchViewModel.fields[indexOfLastField].text.value {
+        if case .addNew(let currentString) = searchViewModel.fields[indexOfLastField].text.value {
             searchViewModel.fields[indexOfLastField].text.value = .string(currentString)
         }
         
@@ -99,9 +98,9 @@ extension SearchViewController: UICollectionViewDelegate {
         }
         
         if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexOfLastField]?.fullOrigin { /// the last field that's not the "add new" field
-            let (targetOrigin, _) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
+            let (targetOrigin, _) = searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
             
-            self.searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
+            searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
         }
         
         /// after scroll view stopped, set the content offset

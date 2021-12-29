@@ -8,8 +8,8 @@
 import UIKit
 
 class LaunchViewController: UIViewController {
-    
     // MARK: Status bar
+
     var firstStatusBarLaunch = true
     var makeStatusBarHidden = false
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -18,6 +18,7 @@ class LaunchViewController: UIViewController {
         }
         return .lightContent
     }
+
     override var prefersStatusBarHidden: Bool {
         if firstStatusBarLaunch {
             return false
@@ -33,27 +34,30 @@ class LaunchViewController: UIViewController {
     }
     
     // MARK: Frames
-    @IBOutlet weak var frameContainerView: UIView!
+
+    @IBOutlet var frameContainerView: UIView!
     
-    @IBOutlet weak var frameWidthC: NSLayoutConstraint!
-    @IBOutlet weak var frameHeightC: NSLayoutConstraint!
+    @IBOutlet var frameWidthC: NSLayoutConstraint!
+    @IBOutlet var frameHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var topImageView: UIImageView!
-    @IBOutlet weak var rightImageView: UIImageView!
-    @IBOutlet weak var bottomImageView: UIImageView!
-    @IBOutlet weak var leftImageView: UIImageView!
+    @IBOutlet var topImageView: UIImageView!
+    @IBOutlet var rightImageView: UIImageView!
+    @IBOutlet var bottomImageView: UIImageView!
+    @IBOutlet var leftImageView: UIImageView!
     
-    @IBOutlet weak var edgeContainerView: UIView!
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var rightView: UIView!
-    @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var leftView: UIView!
+    @IBOutlet var edgeContainerView: UIView!
+    @IBOutlet var topView: UIView!
+    @IBOutlet var rightView: UIView!
+    @IBOutlet var bottomView: UIView!
+    @IBOutlet var leftView: UIView!
     
     // MARK: Overlay background
-    @IBOutlet weak var blueBackgroundView: UIView!
+
+    @IBOutlet var blueBackgroundView: UIView!
     
     // MARK: Main
-    @IBOutlet weak var mainReferenceView: UIView!
+
+    @IBOutlet var mainReferenceView: UIView!
     lazy var mainViewController: ViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
@@ -75,7 +79,8 @@ class LaunchViewController: UIViewController {
     }()
     
     // MARK: Permissions
-    @IBOutlet weak var permissionsReferenceView: UIView!
+
+    @IBOutlet var permissionsReferenceView: UIView!
     lazy var permissionsViewController: PermissionsViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "PermissionsViewController") as? PermissionsViewController {
@@ -96,8 +101,8 @@ class LaunchViewController: UIViewController {
     
         determineAction()
         
-        self.addChildViewController(self.mainViewController, in: self.mainReferenceView)
-        self.mainViewController.cameraViewController.textFieldContainer.alpha = 0
+        addChildViewController(mainViewController, in: mainReferenceView)
+        mainViewController.cameraViewController.textFieldContainer.alpha = 0
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.firstStatusBarLaunch = false
@@ -106,7 +111,6 @@ class LaunchViewController: UIViewController {
                 self.setNeedsStatusBarAppearanceUpdate()
             }
         }
-        
     }
     
     var viewDidLayout = false
@@ -123,9 +127,6 @@ class LaunchViewController: UIViewController {
             } else {
                 goToPermissions()
             }
-            
         }
-        
     }
-    
 }

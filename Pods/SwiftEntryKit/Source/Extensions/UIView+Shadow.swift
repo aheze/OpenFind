@@ -11,7 +11,8 @@ extension UIView {
     func applyDropShadow(withOffset offset: CGSize,
                          opacity: Float,
                          radius: CGFloat,
-                         color: UIColor) {
+                         color: UIColor)
+    {
         layer.applyDropShadow(withOffset: offset,
                               opacity: opacity,
                               radius: radius,
@@ -27,7 +28,8 @@ extension CALayer {
     func applyDropShadow(withOffset offset: CGSize,
                          opacity: Float,
                          radius: CGFloat,
-                         color: UIColor) {
+                         color: UIColor)
+    {
         shadowOffset = offset
         shadowOpacity = opacity
         shadowRadius = radius

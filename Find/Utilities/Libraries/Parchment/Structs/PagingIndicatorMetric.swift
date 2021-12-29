@@ -15,7 +15,7 @@ struct PagingIndicatorMetric {
 
     var x: CGFloat {
         switch insets {
-        case let .left(inset), let .both(inset, _):
+        case .left(let inset), .both(let inset, _):
             return frame.origin.x + max(inset, spacing.left)
         default:
             return frame.origin.x + spacing.left
@@ -24,11 +24,11 @@ struct PagingIndicatorMetric {
 
     var width: CGFloat {
         switch insets {
-        case let .left(inset):
+        case .left(let inset):
             return frame.size.width - max(inset, spacing.left) - spacing.right
-        case let .right(inset):
+        case .right(let inset):
             return frame.size.width - max(inset, spacing.right) - spacing.left
-        case let .both(insetLeft, insetRight):
+        case .both(let insetLeft, let insetRight):
             return frame.size.width - max(insetRight, spacing.right) - max(insetLeft, spacing.left)
         case .none:
             return frame.size.width - spacing.left - spacing.right

@@ -14,7 +14,6 @@ extension UIColor {
     }
 }
 
-
 extension UIColor {
     convenience init(hex: UInt, alpha: CGFloat = 1) {
         self.init(
@@ -56,7 +55,7 @@ extension UIColor {
         default:
             var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
             var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
-            guard self.getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return self }
+            guard getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return self }
             guard color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2) else { return self }
             
             return UIColor(
@@ -72,7 +71,7 @@ extension UIColor {
 /// get gradient color for search bar field
 extension UIColor {
     func getFieldColor(for index: Int) -> UIColor {
-        let (h, s, b, a) = self.hsba
+        let (h, s, b, a) = hsba
         let gradation = CGFloat(1) / 15
         let offset = gradation * CGFloat(index)
         var newHue = h - offset
@@ -107,6 +106,7 @@ extension UIColor {
         return r1 == r2 && g1 == g2 && b1 == b2 && a1 == a2
     }
 }
+
 func == (l: UIColor?, r: UIColor?) -> Bool {
     let l = l ?? .clear
     let r = r ?? .clear

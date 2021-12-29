@@ -21,10 +21,9 @@ extension PhotoFindViewController {
     }
     
     func presentFromIndexPath(indexPath: IndexPath) {
-        self.selectedIndexPath = indexPath
+        selectedIndexPath = indexPath
         
-        if numberCurrentlyFindingFromCache == 0 && currentFastFindProcess == nil {
-            
+        if numberCurrentlyFindingFromCache == 0, currentFastFindProcess == nil {
             let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoSlidesViewController") as! PhotoSlidesViewController
             
             slidesViewController.transitioningDelegate = slidesViewController.transitionController
@@ -56,7 +55,7 @@ extension PhotoFindViewController {
                     }
                 }
             }
-            self.present(slidesViewController, animated: true)
+            present(slidesViewController, animated: true)
         }
     }
 }

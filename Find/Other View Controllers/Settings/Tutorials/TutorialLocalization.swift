@@ -18,13 +18,11 @@ struct LaunchLocalization {
     static let photos = NSLocalizedString("photos", comment: "")
     static let photosDescription = NSLocalizedString("TutorialLocalization-photosDescription", comment: "")
     
-    
     static let lists = NSLocalizedString("lists", comment: "")
     static let listsDescription = NSLocalizedString("TutorialLocalization-listsDescription", comment: "")
-    
 }
 
-struct PhotosTutorialLocalization {
+enum PhotosTutorialLocalization {
     static let findFromAllPhotos = NSLocalizedString("PhotosTutorialLocalization-findFromAllPhotos", comment: "")
     static let justTapFind = NSLocalizedString("PhotosTutorialLocalization-justTapFind", comment: "")
     
@@ -35,8 +33,7 @@ struct PhotosTutorialLocalization {
     static let resultsWillAppearInstantly = NSLocalizedString("PhotosTutorialLocalization-resultsWillAppearInstantly", comment: "")
 }
 
-struct ListsTutorialLocalization {
-    
+enum ListsTutorialLocalization {
     static let makeAList = NSLocalizedString("ListsTutorialLocalization-makeAList", comment: "")
     static let tapThePlusIcon = NSLocalizedString("ListsTutorialLocalization-tapThePlusIcon", comment: "")
     
@@ -47,9 +44,7 @@ struct ListsTutorialLocalization {
     static let yourListsWillAppear = NSLocalizedString("yourListsWillAppear", comment: "TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos")
 }
 
-
-struct ListsBuilderTutorialLocalization {
-    
+enum ListsBuilderTutorialLocalization {
     static let listsBuilder = NSLocalizedString("ListsBuilderTutorialLocalization-listsBuilder", comment: "")
     static let listsBuilderDescription = NSLocalizedString("ListsBuilderTutorialLocalization-listsBuilderDescription", comment: "")
     

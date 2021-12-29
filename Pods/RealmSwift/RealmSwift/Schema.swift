@@ -27,7 +27,6 @@ import Realm
  Schemas map to collections of tables in the core database.
  */
 @frozen public struct Schema: CustomStringConvertible {
-
     // MARK: Properties
 
     internal let rlmSchema: RLMSchema

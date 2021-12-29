@@ -46,12 +46,11 @@ struct ExternalLinks: View {
                 .frame(maxWidth: .infinity)
                 .padding(16)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [ Color(#colorLiteral(red: 0.9686274529, green: 0.5967518268, blue: 0.1745674654, alpha: 1)), Color(#colorLiteral(red: 0.9529411793, green: 0.7149735081, blue: 0.1333333403, alpha: 1))]), startPoint: .bottom, endPoint: .top)
+                    LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9686274529, green: 0.5967518268, blue: 0.1745674654, alpha: 1)), Color(#colorLiteral(red: 0.9529411793, green: 0.7149735081, blue: 0.1333333403, alpha: 1))]), startPoint: .bottom, endPoint: .top)
                 )
                 .cornerRadius(12)
             }
             .accessibility(hint: Text("Open the App Store to rate Find. Thanks!"))
-            
             
             Button(action: {
                 if let serverURL = URL(string: "https://discord.com/invite/UJpHv8jmN5") {

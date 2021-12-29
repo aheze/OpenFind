@@ -44,7 +44,6 @@ struct ListsButton: View {
     }
 }
 
-
 struct TabButton<Content: View>: View {
     let tabType: TabState
     @ObservedObject var tabViewModel: TabViewModel
@@ -59,7 +58,6 @@ struct TabButton<Content: View>: View {
         .buttonStyle(IconButtonStyle())
     }
 }
-
 
 struct IconButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {

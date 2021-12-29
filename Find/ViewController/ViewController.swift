@@ -6,35 +6,32 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
-    
     let realm = try! Realm()
     var photoObjects: Results<HistoryModel>?
     
-    @IBOutlet weak var tabBarView: TabBarView!
-    @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet var tabBarView: TabBarView!
+    @IBOutlet var tabBarHeightC: NSLayoutConstraint!
+    @IBOutlet var containerView: UIView!
         
-    @IBOutlet weak var blurContainerView: UIView!
-    @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var shadeView: UIView!
+    @IBOutlet var blurContainerView: UIView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var shadeView: UIView!
     
-    var globalUrl: URL = URL(fileURLWithPath: "")
+    var globalUrl: URL = .init(fileURLWithPath: "")
     
-    @IBOutlet weak var somethingWentWrongView: UIView!
-    @IBOutlet weak var somethingWentWrongTitle: UILabel!
-    @IBOutlet weak var somethingWentWrongDescription: UILabel!
-    
+    @IBOutlet var somethingWentWrongView: UIView!
+    @IBOutlet var somethingWentWrongTitle: UILabel!
+    @IBOutlet var somethingWentWrongDescription: UILabel!
     
     // MARK: - View Controllers
     
     lazy var photos: PhotosWrapperController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
-            
             let navigationController = PhotosNavController(rootViewController: viewController)
             navigationController.viewController = viewController
             viewController.modalPresentationCapturesStatusBarAppearance = true
@@ -74,7 +71,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 self.tabBarView.updateActions(action: action, isPhotosControls: false)
             }
-            viewController.dimSlideControls = { [weak self] (dim, isPhotosControls) in
+            viewController.dimSlideControls = { [weak self] dim, isPhotosControls in
                 guard let self = self else { return }
                 self.tabBarView.dimPhotoSlideControls(dim: dim, isPhotosControls: isPhotosControls)
             }
@@ -125,7 +122,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
             
-            
             /// controls in selection
             tabBarView.photoSelectionControlPressed = { action in
                 switch action {
@@ -166,6 +162,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         fatalError()
     }()
+
     lazy var camera: CameraViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as? CameraViewController {
@@ -178,7 +175,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     viewController.cameraIcon.alpha = 1
                 }
             }
-            viewController.cameraChanged = { [weak self] (paused, shouldFadeButtons) in
+            viewController.cameraChanged = { [weak self] paused, shouldFadeButtons in
                 guard let self = self else { return }
                 self.tabBarView.cameraIcon.toggle(on: paused)
                 if paused {
@@ -256,10 +253,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }()
     
     // MARK: Camera shutoff
-    var cameraShutoffTask = DispatchWorkItem { }
+
+    var cameraShutoffTask = DispatchWorkItem {}
     var shutoffCamera: (() -> Void)?
     
     // MARK: Gestures
+
     var blurAnimator: UIViewPropertyAnimator?
     var animator: UIViewPropertyAnimator? /// animate gesture endings
     
@@ -272,7 +271,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         switch sender.state {
         case .began:
             if gestures.isAnimating {
-                
                 /// temporarily disable scrolling in the collection view/table view
                 stopScroll(lists.viewController.collectionView)
                 stopScroll(photos.navController.viewController.collectionView)
@@ -281,7 +279,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 animator?.isReversed = false
                 animator?.stopAnimation(true)
                 if !gestures.isRubberBanding {
-                    self.tabBarView.animatingObjects -= 1
+                    tabBarView.animatingObjects -= 1
                 }
                 if let currentValue = tabBarView.fillLayer?.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.path)) {
                     let currentPath = currentValue as! CGPath
@@ -353,7 +351,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
         case .ended, .cancelled, .failed:
-            if !gestures.isAnimating && !gestures.hasMovedFromPress {
+            if !gestures.isAnimating, !gestures.hasMovedFromPress {
                 let position: CGFloat
                 
                 gestures.totalTranslation = gestures.gestureSavedOffset
@@ -436,7 +434,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
         case .ended, .failed:
-            self.gestures.hasMovedFromPress = false
+            gestures.hasMovedFromPress = false
             let velocity = sender.velocity(in: view)
             
             let position: CGFloat
@@ -482,7 +480,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         checkIfHistoryImagesExist()
         checkForOldUserDefaults()
         
-        tabBarHeightC.constant =  CGFloat(FindConstantVars.tabHeight)
+        tabBarHeightC.constant = CGFloat(FindConstantVars.tabHeight)
         
         ViewControllerState.currentVC = camera
         
@@ -526,7 +524,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-        
         blurView.effect = nil
         shadeView.alpha = 0
         blurView.isHidden = false
@@ -548,6 +545,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestures.direction == nil {
             if let gesture = gestureRecognizer as? UIPanGestureRecognizer {
@@ -557,6 +555,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         return true
     }
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let location = touch.location(in: containerView)
         
@@ -575,9 +574,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         return true
     }
+
     func setupFilePath() {
         guard let url = URL.createFolder(folderName: "historyImages") else {
-
             return
         }
         globalUrl = url
@@ -587,8 +586,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 extension ViewController {
     func updateStatusBar() {
         if !isForcingStatusBarHidden {
-            self.setNeedsStatusBarAppearanceUpdate()
+            setNeedsStatusBarAppearanceUpdate()
         }
     }
 }
-

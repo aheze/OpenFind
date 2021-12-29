@@ -9,7 +9,6 @@ import UIKit
 
 extension LaunchViewController {
     func goToMain() {
-        
         permissionsReferenceView.removeFromSuperview()
         
         addChildViewController(mainViewController, in: mainReferenceView)
@@ -27,7 +26,6 @@ extension LaunchViewController {
                 self.frameContainerView.layoutIfNeeded()
                 self.frameContainerView.alpha = 0
                 self.resetEdgesIdentity()
-                
                 
                 self.expandHorizontalEdges()
                 self.expandBottomEdge()
@@ -50,6 +48,5 @@ extension LaunchViewController {
                 }
             }
         }
-       
     }
 }

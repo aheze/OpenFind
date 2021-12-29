@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 Ramotion. All rights reserved.
 //
 
-import UIKit
 import QuartzCore
+import UIKit
 
 class GradientView: UIView {
-    
     var gradientLayer: CAGradientLayer!
     
     var listBackgroundColor: UIColor? {
@@ -28,9 +27,9 @@ class GradientView: UIView {
     
     func setupGradientLayer() {
         gradientLayer = CAGradientLayer()
-        gradientLayer.frame  = self.bounds
+        gradientLayer.frame = bounds
         updateGradient()
-        self.layer.insertSublayer(gradientLayer, at: 0)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,12 +47,11 @@ class GradientView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        gradientLayer.frame  = self.bounds
+        gradientLayer.frame = bounds
         gradientLayer.setNeedsDisplay()
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return false
     }
-
 }

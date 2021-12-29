@@ -12,10 +12,9 @@ struct Bridge {
         let bundle = Bundle(identifier: "com.aheze.SearchBar")
         let storyboard = UIStoryboard(name: "SearchBar", bundle: bundle)
         let viewController = storyboard.instantiateViewController(identifier: "SearchViewController") { coder in
-            return SearchViewController(coder: coder, searchViewModel: searchViewModel)
+            SearchViewController(coder: coder, searchViewModel: searchViewModel)
         }
     
-            
         return viewController
     }
 }

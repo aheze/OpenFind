@@ -6,9 +6,9 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
-import Photos
 import LinkPresentation
+import Photos
+import UIKit
 
 extension PhotoSlidesViewController {
     func sharePhoto() {
@@ -18,14 +18,12 @@ extension PhotoSlidesViewController {
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
             options.isSynchronous = true
-            manager.requestImage(for: currentAsset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { (result, info) in
+            manager.requestImage(for: currentAsset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { result, _ in
                 if let photo = result {
-                    
                     self.imageToShare = photo
                     
                     DispatchQueue.main.async {
                         let activityViewController = UIActivityViewController(activityItems: [photo, self], applicationActivities: nil)
-                        
                         
                         if let popoverController = activityViewController.popoverPresentationController {
                             popoverController.sourceRect = CGRect(x: 10, y: self.view.bounds.height - 50, width: 20, height: 20)
@@ -33,14 +31,12 @@ extension PhotoSlidesViewController {
                         }
                         
                         self.present(activityViewController, animated: true)
-                        
                     }
                 }
             })
         }
     }
 }
-
 
 extension PhotoSlidesViewController: UIActivityItemSource {
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {

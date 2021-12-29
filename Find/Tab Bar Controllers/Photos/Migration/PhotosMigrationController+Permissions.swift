@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 extension PhotosMigrationController {
     func getPermissionsAndWrite() {
@@ -34,7 +34,6 @@ extension PhotosMigrationController {
         }
         
         switch permissionAction {
-        
         case .notDetermined:
             if #available(iOS 14, *) {
                 getAdvancedPhotoAccess()
@@ -55,7 +54,7 @@ extension PhotosMigrationController {
                     UIApplication.shared.open(settingsUrl)
                 }
             }))
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         case .restricted:
             let restrictedText = NSLocalizedString("restrictedText", comment: "")
             let findCouldNotAccess = NSLocalizedString("findCouldNotAccess", comment: "")
@@ -63,16 +62,15 @@ extension PhotosMigrationController {
             
             let alert = UIAlertController(title: restrictedText, message: findCouldNotAccess, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: okText, style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         case .allowed, .limited:
             writeToPhotos(editablePhotos: editablePhotosToMigrate, baseURL: folderURL)
         }
-        
     }
     
     @available(iOS 14, *)
     func getAdvancedPhotoAccess() {
-        PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             if status == .authorized || status == .limited {
                 self.getPermissionsAndWrite()
             }
@@ -80,11 +78,10 @@ extension PhotosMigrationController {
     }
     
     func getPhotoAccess() {
-        PHPhotoLibrary.requestAuthorization { (status) in
+        PHPhotoLibrary.requestAuthorization { status in
             if status == .authorized {
                 self.getPermissionsAndWrite()
             }
         }
     }
-
 }

@@ -35,12 +35,12 @@ public final class ObjectId: RLMObjectId, Decodable {
     // MARK: Initializers
 
     /// Creates a new zero-initialized ObjectId.
-    public override required init() {
+    override public required init() {
         super.init()
     }
 
     /// Creates a new randomly-initialized ObjectId.
-    public override class func generate() -> ObjectId {
+    override public class func generate() -> ObjectId {
         return unsafeDowncast(super.generate(), to: ObjectId.self)
     }
 
@@ -48,7 +48,7 @@ public final class ObjectId: RLMObjectId, Decodable {
     ///
     /// Throws if the string is not 24 characters or contains any characters other than 0-9a-fA-F.
     /// - Parameter string: The string to parse.
-    public override required init(string: String) throws {
+    override public required init(string: String) throws {
         try super.init(string: string)
     }
 
@@ -90,7 +90,7 @@ extension ObjectId: Encodable {
     ///
     /// - Parameter encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        try self.stringValue.encode(to: encoder)
+        try stringValue.encode(to: encoder)
     }
 }
 

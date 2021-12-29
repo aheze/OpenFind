@@ -15,7 +15,8 @@ open class PagingViewController:
     UIViewController,
     UICollectionViewDelegate,
     PageViewControllerDataSource,
-    PageViewControllerDelegate {
+    PageViewControllerDelegate
+{
     // MARK: Public Properties
 
     /// The size for each of the menu items. _Default:
@@ -193,11 +194,11 @@ open class PagingViewController:
     /// Determine how users can interact with the page view controller.
     /// _Default: .scrolling_
     public var contentInteraction: PagingContentInteraction {
-      get { return options.contentInteraction }
-      set { 
-        options.contentInteraction = newValue
-        configureContentInteraction()
-      }
+        get { return options.contentInteraction }
+        set {
+            options.contentInteraction = newValue
+            configureContentInteraction()
+        }
     }
 
     /// The current state of the menu items. Indicates whether an item
@@ -363,10 +364,10 @@ open class PagingViewController:
         var updatedItems: [PagingItem] = []
 
         switch dataSourceReference {
-        case let .static(dataSource):
+        case .static(let dataSource):
             dataSource.reloadItems()
             updatedItems = dataSource.items
-        case let .finite(dataSource):
+        case .finite(let dataSource):
             dataSource.items = itemsForFiniteDataSource()
             updatedItems = dataSource.items
         default:
@@ -374,7 +375,8 @@ open class PagingViewController:
         }
 
         if let previouslySelected = state.currentPagingItem,
-            let pagingItem = updatedItems.first(where: { $0.isEqual(to: previouslySelected) }) {
+           let pagingItem = updatedItems.first(where: { $0.isEqual(to: previouslySelected) })
+        {
             pagingController.reloadMenu(around: pagingItem)
         } else if let firstItem = updatedItems.first {
             pagingController.reloadMenu(around: firstItem)
@@ -393,10 +395,10 @@ open class PagingViewController:
         var updatedItems: [PagingItem] = []
 
         switch dataSourceReference {
-        case let .static(dataSource):
+        case .static(let dataSource):
             dataSource.reloadItems()
             updatedItems = dataSource.items
-        case let .finite(dataSource):
+        case .finite(let dataSource):
             dataSource.items = itemsForFiniteDataSource()
             updatedItems = dataSource.items
         default:
@@ -404,7 +406,8 @@ open class PagingViewController:
         }
 
         if let previouslySelected = state.currentPagingItem,
-            let pagingItem = updatedItems.first(where: { $0.isEqual(to: previouslySelected) }) {
+           let pagingItem = updatedItems.first(where: { $0.isEqual(to: previouslySelected) })
+        {
             pagingController.reloadData(around: pagingItem)
         } else if let firstItem = updatedItems.first {
             pagingController.reloadData(around: firstItem)
@@ -424,9 +427,9 @@ open class PagingViewController:
     /// after the data reloads.
     open func reloadData(around pagingItem: PagingItem) {
         switch dataSourceReference {
-        case let .static(dataSource):
+        case .static(let dataSource):
             dataSource.reloadItems()
-        case let .finite(dataSource):
+        case .finite(let dataSource):
             dataSource.items = itemsForFiniteDataSource()
         default:
             break
@@ -455,10 +458,10 @@ open class PagingViewController:
     /// the transtion should be animated. Default is false.
     open func select(index: Int, animated: Bool = false) {
         switch dataSourceReference {
-        case let .static(dataSource):
+        case .static(let dataSource):
             let pagingItem = dataSource.items[index]
             pagingController.select(pagingItem: pagingItem, animated: animated)
-        case let .finite(dataSource):
+        case .finite(let dataSource):
             let pagingItem = dataSource.items[index]
             pagingController.select(pagingItem: pagingItem, animated: animated)
         case .none:
@@ -466,7 +469,7 @@ open class PagingViewController:
         }
     }
 
-    open override func loadView() {
+    override open func loadView() {
         view = PagingView(
             options: options,
             collectionView: collectionView,
@@ -474,7 +477,7 @@ open class PagingViewController:
         )
     }
 
-    open override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         addChild(pageViewController)
@@ -486,7 +489,7 @@ open class PagingViewController:
         configureContentInteraction()
     }
 
-    open override func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         // We need generate the menu items when the view appears for the
@@ -498,11 +501,11 @@ open class PagingViewController:
         }
     }
 
-    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { _ in
             self.pagingController.transitionSize()
-    }, completion: nil)
+        }, completion: nil)
     }
 
     /// Register cell class for paging cell
@@ -533,7 +536,7 @@ open class PagingViewController:
         let numberOfItems = dataSource?.numberOfViewControllers(in: self) ?? 0
         var items: [PagingItem] = []
 
-        for index in 0 ..< numberOfItems {
+        for index in 0..<numberOfItems {
             if let item = dataSource?.pagingViewController(self, pagingItemAt: index) {
                 items.append(item)
             }
@@ -581,29 +584,17 @@ open class PagingViewController:
         pagingController.menuScrolled()
     }
 
-    open func scrollViewWillBeginDragging(_: UIScrollView) {
-        return
-    }
+    open func scrollViewWillBeginDragging(_: UIScrollView) {}
 
-    open func scrollViewWillEndDragging(_: UIScrollView, withVelocity _: CGPoint, targetContentOffset _: UnsafeMutablePointer<CGPoint>) {
-        return
-    }
+    open func scrollViewWillEndDragging(_: UIScrollView, withVelocity _: CGPoint, targetContentOffset _: UnsafeMutablePointer<CGPoint>) {}
 
-    open func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
-        return
-    }
+    open func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {}
 
-    open func scrollViewDidEndScrollingAnimation(_: UIScrollView) {
-        return
-    }
+    open func scrollViewDidEndScrollingAnimation(_: UIScrollView) {}
 
-    open func scrollViewWillBeginDecelerating(_: UIScrollView) {
-        return
-    }
+    open func scrollViewWillBeginDecelerating(_: UIScrollView) {}
 
-    open func scrollViewDidEndDecelerating(_: UIScrollView) {
-        return
-    }
+    open func scrollViewDidEndDecelerating(_: UIScrollView) {}
 
     // MARK: UICollectionViewDelegate
 
@@ -617,25 +608,15 @@ open class PagingViewController:
         return proposedContentOffset
     }
 
-    open func collectionView(_: UICollectionView, didUnhighlightItemAt _: IndexPath) {
-        return
-    }
+    open func collectionView(_: UICollectionView, didUnhighlightItemAt _: IndexPath) {}
 
-    open func collectionView(_: UICollectionView, didHighlightItemAt _: IndexPath) {
-        return
-    }
+    open func collectionView(_: UICollectionView, didHighlightItemAt _: IndexPath) {}
 
-    open func collectionView(_: UICollectionView, didDeselectItemAt _: IndexPath) {
-        return
-    }
+    open func collectionView(_: UICollectionView, didDeselectItemAt _: IndexPath) {}
 
-    open func collectionView(_: UICollectionView, willDisplay _: UICollectionViewCell, forItemAt _: IndexPath) {
-        return
-    }
+    open func collectionView(_: UICollectionView, willDisplay _: UICollectionViewCell, forItemAt _: IndexPath) {}
 
-    open func collectionView(_: UICollectionView, didEndDisplaying _: UICollectionViewCell, forItemAt _: IndexPath) {
-        return
-    }
+    open func collectionView(_: UICollectionView, didEndDisplaying _: UICollectionViewCell, forItemAt _: IndexPath) {}
 
     // MARK: PageViewControllerDataSource
 

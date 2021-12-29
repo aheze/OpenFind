@@ -8,22 +8,20 @@
 import UIKit
 
 struct Field {
-    
     init(text: Text, index: Int = 0) {
         self.text = text
-        fieldHuggingWidth = self.getFieldHuggingWidth()
+        fieldHuggingWidth = getFieldHuggingWidth()
     }
     
     var text = Text(value: .string(""), colorIndex: 0) {
         didSet {
-            fieldHuggingWidth = self.getFieldHuggingWidth()
+            fieldHuggingWidth = getFieldHuggingWidth()
         }
     }
     
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what
     var showingDeleteButton = false
-    
     
     /// width of text label + side views, nothing more
     var fieldHuggingWidth = CGFloat(200)
@@ -52,12 +50,12 @@ struct Field {
         var value: Value {
             didSet {
                 switch value {
-                case .string(_):
-                    self.defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                case .string:
+                    defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
                 case .list(let list):
-                    self.defaultColor = UIColor(hex: list.iconColorName)
-                case .addNew(_):
-                    self.defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                    defaultColor = UIColor(hex: list.iconColorName)
+                case .addNew:
+                    defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
                 }
             }
         }
@@ -72,29 +70,28 @@ struct Field {
             self.colorIndex = colorIndex
             
             switch value {
-            case .string(_):
+            case .string:
                 let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
-                self.color = defaultColor
+                color = defaultColor
                 self.defaultColor = defaultColor
                 
             case .list(let list):
                 let defaultColor = UIColor(hex: list.iconColorName)
-                self.color = defaultColor
+                color = defaultColor
                 self.defaultColor = defaultColor
-            case .addNew(_):
+            case .addNew:
                 let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
-                self.color = defaultColor
+                color = defaultColor
                 self.defaultColor = defaultColor
             }
         }
     }
     
     private func getFieldHuggingWidth() -> CGFloat {
-        
-        if case let .addNew(string) = self.text.value, string.isEmpty {
+        if case .addNew(let string) = text.value, string.isEmpty {
             return SearchConstants.addWordFieldHuggingWidth
         } else {
-            let fieldText = self.text.value.getText()
+            let fieldText = text.value.getText()
             let finalText = fieldText.isEmpty ? SearchConstants.addTextPlaceholder : fieldText
 
             let textWidth = finalText.width(withConstrainedHeight: 10, font: SearchConstants.fieldFont)
@@ -106,7 +103,6 @@ struct Field {
     }
 }
 
-
 struct FieldOffset {
     var fullWidth = CGFloat(0)
     var percentage = CGFloat(0)
@@ -115,7 +111,6 @@ struct FieldOffset {
 }
 
 open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
-    
     var fullOrigin = CGFloat(0) /// origin when expanded
     var fullWidth = CGFloat(0) /// width when expanded
     var percentage = CGFloat(0) /// percentage shrunk
@@ -139,5 +134,4 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
     
         return super.isEqual(object)
     }
-    
 }

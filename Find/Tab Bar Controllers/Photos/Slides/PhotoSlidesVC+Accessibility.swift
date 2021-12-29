@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func setupAccessibility() {
-        
         if UIAccessibility.isVoiceOverRunning {
             messageView.isHidden = true
             voiceOverSlidesControl.isHidden = false
@@ -29,7 +28,6 @@ extension PhotoSlidesViewController {
             
             view.accessibilityElements = nil
         }
-        
         
         voiceOverSlidesControl.currentIndex = currentIndex
         voiceOverSlidesControl.totalNumberOfPhotos = resultPhotos.count
@@ -50,15 +48,15 @@ extension PhotoSlidesViewController {
         }
         
         speakPhotoDescription(at: currentIndex)
-        
     }
     
     func observeVoiceOverChanges() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.voiceOverChanged),
+            selector: #selector(voiceOverChanged),
             name: UIAccessibility.voiceOverStatusDidChangeNotification,
-            object: nil)
+            object: nil
+        )
     }
     
     @objc func voiceOverChanged() {
@@ -75,8 +73,8 @@ extension PhotoSlidesViewController {
     }
     
     func speakPhotoDescription(at newIndex: Int) {
-        if self.resultPhotos.indices.contains(newIndex) {
-            if let model = self.resultPhotos[newIndex].findPhoto.editableModel {
+        if resultPhotos.indices.contains(newIndex) {
+            if let model = resultPhotos[newIndex].findPhoto.editableModel {
                 DispatchQueue.global(qos: .userInitiated).async {
                     var information = ""
                     if model.isHearted {
@@ -106,22 +104,19 @@ extension PhotoSlidesViewController {
 }
 
 extension UIPageViewController {
-    
     func goToNextPage() {
-        guard let currentViewController = self.viewControllers?.first else { return }
-        guard let nextViewController = dataSource?.pageViewController( self, viewControllerAfter: currentViewController ) else { return }
+        guard let currentViewController = viewControllers?.first else { return }
+        guard let nextViewController = dataSource?.pageViewController(self, viewControllerAfter: currentViewController) else { return }
         setViewControllers([nextViewController], direction: .forward, animated: true) { completed in
             self.delegate?.pageViewController?(self, didFinishAnimating: true, previousViewControllers: [], transitionCompleted: completed)
         }
     }
     
     func goToPreviousPage() {
-        guard let currentViewController = self.viewControllers?.first else { return }
-        guard let previousViewController = dataSource?.pageViewController( self, viewControllerBefore: currentViewController ) else { return }
+        guard let currentViewController = viewControllers?.first else { return }
+        guard let previousViewController = dataSource?.pageViewController(self, viewControllerBefore: currentViewController) else { return }
         setViewControllers([previousViewController], direction: .reverse, animated: true) { completed in
             self.delegate?.pageViewController?(self, didFinishAnimating: true, previousViewControllers: [], transitionCompleted: completed)
         }
     }
-    
 }
-

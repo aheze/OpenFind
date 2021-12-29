@@ -5,8 +5,8 @@
 //  Created by Zheng on 3/18/21.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension CameraViewController {
     func pausePressed() {
@@ -25,17 +25,19 @@ extension CameraViewController {
             self.showImageView(true, image: image)
         }
     }
+
     func startLivePreview() {
         /// make sure it's running (can stop when going to app switcher and back)
         if !avSession.isRunning {
-            self.avSession.startRunning()
+            avSession.startRunning()
         }
         cameraView.videoPreviewLayer.connection?.isEnabled = true
-        self.showImageView(false)
+        showImageView(false)
         DispatchQueue.main.async {
             self.removeCurrentComponents()
         }
     }
+
     func showImageView(_ show: Bool, image: UIImage = UIImage()) {
         if show {
             pausedImageView.image = image

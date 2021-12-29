@@ -27,13 +27,13 @@
 
 import UIKit
 
-@objc public enum LTMorphingEffect
-    : Int
-    , CustomStringConvertible
-    , ExpressibleByIntegerLiteral
-    , ExpressibleByStringLiteral
-    , CaseIterable {
-    
+@objc public enum LTMorphingEffect:
+    Int,
+    CustomStringConvertible,
+    ExpressibleByIntegerLiteral,
+    ExpressibleByStringLiteral,
+    CaseIterable
+{
     public typealias IntegerLiteralType = Int
     public typealias StringLiteralType = String
 
@@ -85,5 +85,4 @@ import UIKit
             }
         }()
     }
-
 }

@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-//struct TipView: View {
+// struct TipView: View {
 //    @Binding var configuration: PopoverConfiguration.FieldSettings
-//    
+//
 //    var body: some View {
 //        <#T##Content##AnyView#>
 //    }
-//}
+// }

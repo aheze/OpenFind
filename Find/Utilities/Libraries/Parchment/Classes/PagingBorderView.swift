@@ -5,7 +5,7 @@ import UIKit
 /// type if you need further customization; just override the
 /// `borderClass` property in `PagingViewController`.
 open class PagingBorderView: UICollectionReusableView {
-    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+    override open func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         if let attributes = layoutAttributes as? PagingBorderLayoutAttributes {
             backgroundColor = attributes.backgroundColor

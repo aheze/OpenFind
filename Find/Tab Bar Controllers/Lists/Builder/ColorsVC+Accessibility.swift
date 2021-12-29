@@ -93,18 +93,15 @@ extension String {
         return (colorName, pitch)
     }
 }
+
 extension UIColor {
     func whichColor() -> String {
-        
-        var (h, s, b, a) : (CGFloat, CGFloat, CGFloat, CGFloat) = (0,0,0,0)
-        _ = self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        
-
+        var (h, s, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+        _ = getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         
         var colorTitle = ""
         
         switch (h, s, b) {
-        
         // red
         case (0...0.138, 0.88...1.00, 0.75...1.00):
             colorTitle = "red"
@@ -145,4 +142,3 @@ extension UIColor {
         return colorTitle
     }
 }
-

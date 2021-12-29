@@ -9,7 +9,7 @@ public final class PageViewController: UIViewController {
     public weak var dataSource: PageViewControllerDataSource?
     public weak var delegate: PageViewControllerDelegate?
 
-    public override var shouldAutomaticallyForwardAppearanceMethods: Bool {
+    override public var shouldAutomaticallyForwardAppearanceMethods: Bool {
         return false
     }
 
@@ -39,7 +39,7 @@ public final class PageViewController: UIViewController {
             .flexibleTopMargin,
             .flexibleRightMargin,
             .flexibleBottomMargin,
-            .flexibleLeftMargin,
+            .flexibleLeftMargin
         ]
         scrollView.scrollsToTop = false
         scrollView.bounces = true
@@ -114,7 +114,8 @@ public final class PageViewController: UIViewController {
             return false
         case .horizontal:
             if #available(iOS 9.0, *),
-                UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft {
+               UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+            {
                 return true
             } else {
                 return false
@@ -136,7 +137,7 @@ public final class PageViewController: UIViewController {
         manager.dataSource = self
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(scrollView)
         scrollView.delegate = self
@@ -146,27 +147,27 @@ public final class PageViewController: UIViewController {
         }
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         manager.viewWillAppear(animated)
     }
 
-    public override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         manager.viewDidAppear(animated)
     }
 
-    public override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         manager.viewWillDisappear(animated)
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         manager.viewDidDisappear(animated)
     }
 
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         coordinator.animate(alongsideTransition: { _ in
@@ -298,7 +299,7 @@ extension PageViewController: PageViewManagerDelegate {
         }
     }
 
-    public override func viewWillLayoutSubviews() {
+    override public func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         scrollView.frame = view.bounds
     }

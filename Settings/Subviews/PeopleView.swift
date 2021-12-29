@@ -23,7 +23,8 @@ struct PeopleView: View {
                             Circle()
                                 .strokeBorder(
                                     LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))]), startPoint: .bottom, endPoint: .top),
-                                    lineWidth: 6)
+                                    lineWidth: 6
+                                )
                                 .background(Circle().foregroundColor(Color.clear))
                         )
                         .padding(EdgeInsets(top: 20, leading: 20, bottom: 6, trailing: 20))
@@ -45,7 +46,6 @@ struct PeopleView: View {
                         ProfileButton(imageName: "IconReddit", link: "https://www.reddit.com/user/aheze")
                         ProfileButton(imageName: "IconDiscord", link: "https://discord.com/invite/UJpHv8jmN5")
                         ProfileButton(imageName: "IconEmail", link: "mailto:aheze@getfind.app")
-                        
                     }
                     
                     HStack {
@@ -81,7 +81,6 @@ struct PeopleView: View {
                         urlText: "soundcloud.com/winksounds"
                     )
                     .padding(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
-                    
                 }
                 .padding(.bottom, 24)
             }
@@ -134,7 +133,8 @@ struct PersonWidget: View {
                         Circle()
                             .strokeBorder(
                                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))]), startPoint: .bottom, endPoint: .top),
-                                lineWidth: 4)
+                                lineWidth: 4
+                            )
                             .background(Circle().foregroundColor(Color.clear))
                     )
                     .padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 6))
@@ -170,7 +170,6 @@ struct PersonWidget: View {
         }
         .buttonStyle(PlainButtonStyle())
     }
-    
 }
 
 struct PeopleView_PreviewProvider: PreviewProvider {

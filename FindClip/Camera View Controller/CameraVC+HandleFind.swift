@@ -10,13 +10,11 @@ import Vision
 
 extension CameraViewController {
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
-        
         if currentPassCount >= 80 {
             canNotify = true
         }
         
         if let results = request?.results, results.count > 0 {
-            
             if let currentMotion = motionManager.deviceMotion {
                 motionXAsOfHighlightStart = Double(0)
                 motionYAsOfHighlightStart = Double(0)
@@ -24,7 +22,6 @@ extension CameraViewController {
             }
             
             DispatchQueue.main.async {
-                
                 var newComponents = [Component]()
                 
                 for result in results {
@@ -40,14 +37,12 @@ extension CameraViewController {
                         
                         /// just one string usually
                         for text in observation.topCandidates(1) {
-                            
                             let individualCharacterWidth = convertedRect.width / CGFloat(text.string.count)
                             let lowercaseText = text.string.lowercased()
                             
                             if lowercaseText.contains(self.findText) {
                                 let indices = lowercaseText.indicesOf(string: self.findText)
                                 for index in indices {
-                                    
                                     let x = convertedRect.origin.x + (individualCharacterWidth * CGFloat(index))
                                     let y = convertedRect.origin.y
                                     let width = (individualCharacterWidth * CGFloat(self.findText.count))
@@ -70,7 +65,6 @@ extension CameraViewController {
                 if newComponents.isEmpty {
                     self.removeCurrentComponents()
                 } else {
-                    
                     let finalizeNotify = (newComponents.count > self.currentComponents.count && self.canNotify)
                     self.animateNewHighlights(newComponents: newComponents, shouldScale: finalizeNotify)
                     
@@ -100,23 +94,21 @@ extension CameraViewController {
     }
     
     func removeCurrentComponents() {
-        for component in self.currentComponents {
+        for component in currentComponents {
             UIView.animate(withDuration: 0.2) {
                 component.baseView?.alpha = 0
             } completion: { _ in
                 component.baseView?.removeFromSuperview()
             }
         }
-        self.currentComponents.removeAll()
+        currentComponents.removeAll()
     }
     
     func animateNewHighlights(newComponents: [Component], shouldScale: Bool) {
-        
         var animatedComponents = [Component]()
         var nextComponents = [Component]()
         
         for newComponent in newComponents {
-            
             var lowestDistance = CGFloat(10000)
             var lowestComponent: Component?
             
@@ -169,7 +161,6 @@ extension CameraViewController {
         currentComponents = nextComponents
     }
     
-    
     func scaleInHighlight(component: Component, shouldScale: Bool) {
         DispatchQueue.main.async {
             let cornerRadius = min(component.height / 3.5, 10)
@@ -212,11 +203,11 @@ extension CameraViewController {
         
         let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
         startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
-        startPointAnim.toValue = CGPoint(x:1, y: 0.5)
+        startPointAnim.toValue = CGPoint(x: 1, y: 0.5)
         
         let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
         endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
-        endPointAnim.toValue = CGPoint(x:2, y: 0.5)
+        endPointAnim.toValue = CGPoint(x: 2, y: 0.5)
         
         let animGroup = CAAnimationGroup()
         animGroup.animations = [startPointAnim, endPointAnim]
@@ -225,9 +216,9 @@ extension CameraViewController {
         animGroup.repeatCount = 0
         gradient.add(animGroup, forKey: "animateGrad")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             layer.removeFromSuperlayer()
-        })
+        }
     }
     
     func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
@@ -235,6 +226,4 @@ extension CameraViewController {
         let yDist = a.y - b.y
         return CGFloat(xDist * xDist + yDist * yDist)
     }
-    
 }
-

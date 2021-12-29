@@ -5,8 +5,8 @@
 //  Created by Zheng on 3/17/21.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 enum LaunchAction {
     case goToPermissions

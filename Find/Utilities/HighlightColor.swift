@@ -12,7 +12,7 @@ struct HighlightColor: Equatable {
     var cgColor: CGColor
     var hexString: String
     
-    static func ==(lhs: HighlightColor, rhs: HighlightColor) -> Bool {
+    static func == (lhs: HighlightColor, rhs: HighlightColor) -> Bool {
         return lhs.cgColor == rhs.cgColor
     }
 }

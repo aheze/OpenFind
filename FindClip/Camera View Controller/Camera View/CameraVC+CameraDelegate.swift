@@ -5,20 +5,18 @@
 //  Created by Zheng on 3/18/21.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
-    
-    // MARK:  Camera Delegate and Setup
+    // MARK: Camera Delegate and Setup
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
         if CurrentState.currentlyPaused == false {
             currentPassCount += 1
             if busyFastFinding == false {
-                
                 /// 1. Find
                 fastFind(in: pixelBuffer)
             }

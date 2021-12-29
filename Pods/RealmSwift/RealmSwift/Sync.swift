@@ -37,7 +37,7 @@ public extension User {
     /// @param credentials The `Credentials` used to link the user to a new identity.
     /// @completion A completion that eventually return `Result.success(User)` with user's data or `Result.failure(Error)`.
     func linkUser(credentials: Credentials, _ completion: @escaping (Result<User, Error>) -> Void) {
-        self.__linkUser(with: ObjectiveCSupport.convert(object: credentials)) { user, error in
+        __linkUser(with: ObjectiveCSupport.convert(object: credentials)) { user, error in
             if let user = user {
                 completion(.success(user))
             } else {
@@ -94,14 +94,14 @@ public typealias UserCompletionBlock = RLMUserCompletionBlock
  */
 public typealias SyncError = RLMSyncError
 
-extension SyncError {
+public extension SyncError {
     /**
      An opaque token allowing the user to take action after certain types of
      errors have been reported.
 
      - see: `RLMSyncErrorActionToken`
      */
-    public typealias ActionToken = RLMSyncErrorActionToken
+    typealias ActionToken = RLMSyncErrorActionToken
 
     /**
      Given a client reset error, extract and return the recovery file path
@@ -122,10 +122,11 @@ extension SyncError {
 
      - see: `SyncError.ActionToken`, `SyncSession.immediatelyHandleError(_:)`
      */
-    public func clientResetInfo() -> (String, SyncError.ActionToken)? {
+    func clientResetInfo() -> (String, SyncError.ActionToken)? {
         if code == SyncError.clientResetError,
-            let recoveryPath = userInfo[kRLMSyncPathOfRealmBackupCopyKey] as? String,
-            let token = _nsError.__rlmSync_errorActionToken() {
+           let recoveryPath = userInfo[kRLMSyncPathOfRealmBackupCopyKey] as? String,
+           let token = _nsError.__rlmSync_errorActionToken()
+        {
             return (recoveryPath, token)
         }
         return nil
@@ -146,7 +147,7 @@ extension SyncError {
 
      - see: `SyncError.ActionToken`, `SyncSession.immediatelyHandleError(_:)`
      */
-    public func deleteRealmUserInfo() -> SyncError.ActionToken? {
+    func deleteRealmUserInfo() -> SyncError.ActionToken? {
         return _nsError.__rlmSync_errorActionToken()
     }
 }
@@ -237,10 +238,10 @@ public typealias Provider = RLMIdentityProvider
     public let cancelAsyncOpenOnNonFatalErrors: Bool
 
     internal init(config: RLMSyncConfiguration) {
-        self.user = config.user
-        self.stopPolicy = config.stopPolicy
-        self.partitionValue = ObjectiveCSupport.convert(object: config.partitionValue)
-        self.cancelAsyncOpenOnNonFatalErrors = config.cancelAsyncOpenOnNonFatalErrors
+        user = config.user
+        stopPolicy = config.stopPolicy
+        partitionValue = ObjectiveCSupport.convert(object: config.partitionValue)
+        cancelAsyncOpenOnNonFatalErrors = config.cancelAsyncOpenOnNonFatalErrors
     }
 
     func asConfig() -> RLMSyncConfiguration {
@@ -268,7 +269,6 @@ public typealias Provider = RLMIdentityProvider
 /// This handler is executed on a non-main global `DispatchQueue`.
 @dynamicMemberLookup
 @frozen public struct Functions {
-
     private let user: User
 
     fileprivate init(user: User) {
@@ -311,19 +311,18 @@ public typealias Provider = RLMIdentityProvider
         }
     }
 
-    #if !(os(iOS) && (arch(i386) || arch(arm)))
+#if !(os(iOS) && (arch(i386) || arch(arm)))
     /// The implementation of @dynamicMemberLookup that allows for dynamic remote function calls.
     @available(OSX 10.15, watchOS 6.0, iOS 13.0, iOSApplicationExtension 13.0, OSXApplicationExtension 10.15, tvOS 13.0, macCatalyst 13.0, macCatalystApplicationExtension 13.0, *)
     public subscript(dynamicMember string: String) -> ([AnyBSON]) -> Future<AnyBSON, Error> {
         return { (arguments: [AnyBSON]) in
-            return Future<AnyBSON, Error> { self[dynamicMember: string](arguments, $0) }
+            Future<AnyBSON, Error> { self[dynamicMember: string](arguments, $0) }
         }
     }
-    #endif
+#endif
 }
 
 public extension User {
-
     /**
      Create a sync configuration instance.
 
@@ -336,7 +335,7 @@ public extension User {
      - warning: NEVER disable SSL validation for a system running in production.
      */
     func configuration<T: BSON>(partitionValue: T) -> Realm.Configuration {
-        let config = self.__configuration(withPartitionValue: ObjectiveCSupport.convert(object: AnyBSON(partitionValue)))
+        let config = __configuration(withPartitionValue: ObjectiveCSupport.convert(object: AnyBSON(partitionValue)))
         return ObjectiveCSupport.convert(object: config)
     }
 
@@ -353,8 +352,9 @@ public extension User {
      - warning: NEVER disable SSL validation for a system running in production.
      */
     func configuration(partitionValue: AnyBSON,
-                       cancelAsyncOpenOnNonFatalErrors: Bool = false) -> Realm.Configuration {
-        let config = self.__configuration(withPartitionValue: ObjectiveCSupport.convert(object: partitionValue))
+                       cancelAsyncOpenOnNonFatalErrors: Bool = false) -> Realm.Configuration
+    {
+        let config = __configuration(withPartitionValue: ObjectiveCSupport.convert(object: partitionValue))
         let syncConfig = config.syncConfiguration!
         syncConfig.cancelAsyncOpenOnNonFatalErrors = cancelAsyncOpenOnNonFatalErrors
         config.syncConfiguration = syncConfig
@@ -374,8 +374,9 @@ public extension User {
      - warning: NEVER disable SSL validation for a system running in production.
      */
     func configuration<T: BSON>(partitionValue: T,
-                                cancelAsyncOpenOnNonFatalErrors: Bool = false) -> Realm.Configuration {
-        let config = self.__configuration(withPartitionValue: ObjectiveCSupport.convert(object: AnyBSON(partitionValue)))
+                                cancelAsyncOpenOnNonFatalErrors: Bool = false) -> Realm.Configuration
+    {
+        let config = __configuration(withPartitionValue: ObjectiveCSupport.convert(object: AnyBSON(partitionValue)))
         let syncConfig = config.syncConfiguration!
         syncConfig.cancelAsyncOpenOnNonFatalErrors = cancelAsyncOpenOnNonFatalErrors
         config.syncConfiguration = syncConfig
@@ -383,13 +384,14 @@ public extension User {
     }
 
     /**
-     The custom data of the user.
-     This is configured in your MongoDB Realm App.
-    */
+      The custom data of the user.
+      This is configured in your MongoDB Realm App.
+     */
     var customData: Document {
-        guard let rlmCustomData = self.__customData as RLMBSON?,
-            let anyBSON = ObjectiveCSupport.convert(object: rlmCustomData),
-            case let .document(customData) = anyBSON else {
+        guard let rlmCustomData = __customData as RLMBSON?,
+              let anyBSON = ObjectiveCSupport.convert(object: rlmCustomData),
+              case .document(let customData) = anyBSON
+        else {
             return [:]
         }
 
@@ -400,7 +402,7 @@ public extension User {
     /// - Parameter serviceName:  The name of the MongoDB service
     /// - Returns: A `MongoClient` which is used for interacting with a remote MongoDB service
     func mongoClient(_ serviceName: String) -> MongoClient {
-        return self.__mongoClient(withServiceName: serviceName)
+        return __mongoClient(withServiceName: serviceName)
     }
 
     /// Call a MongoDB Realm function with the provided name and arguments.
@@ -556,29 +558,31 @@ public extension SyncSession {
      */
     func addProgressNotification(for direction: ProgressDirection,
                                  mode: ProgressMode,
-                                 block: @escaping (Progress) -> Void) -> ProgressNotificationToken? {
-        return __addProgressNotification(for: (direction == .upload ? .upload : .download),
-                                         mode: (mode == .reportIndefinitely
-                                            ? .reportIndefinitely
-                                            : .forCurrentlyOutstandingWork)) { transferred, transferrable in
-                                                block(Progress(transferred: transferred, transferrable: transferrable))
+                                 block: @escaping (Progress) -> Void) -> ProgressNotificationToken?
+    {
+        return __addProgressNotification(for: direction == .upload ? .upload : .download,
+                                         mode: mode == .reportIndefinitely
+                                             ? .reportIndefinitely
+                                             : .forCurrentlyOutstandingWork) { transferred, transferrable in
+            block(Progress(transferred: transferred, transferrable: transferrable))
         }
     }
 }
 
-extension Realm {
+public extension Realm {
     /// :nodoc:
     @available(*, unavailable, message: "Use Results.subscribe()")
-    public func subscribe<T: Object>(to objects: T.Type, where: String,
-                                     completion: @escaping (Results<T>?, Swift.Error?) -> Void) {
+    func subscribe<T: Object>(to objects: T.Type, where: String,
+                              completion: @escaping (Results<T>?, Swift.Error?) -> Void)
+    {
         fatalError()
     }
 
     /**
-     Get the SyncSession used by this Realm. Will be nil if this is not a
-     synchronized Realm.
-    */
-    public var syncSession: SyncSession? {
+      Get the SyncSession used by this Realm. Will be nil if this is not a
+      synchronized Realm.
+     */
+    var syncSession: SyncSession? {
         return SyncSession(for: rlmRealm)
     }
 }
@@ -653,8 +657,7 @@ public extension User {
     /// This function is not implemented.
     ///
     /// Realm publishers do not support backpressure and so this function does nothing.
-    public func request(_ demand: Subscribers.Demand) {
-    }
+    public func request(_ demand: Subscribers.Demand) {}
 
     /// Stop emitting values on this subscription.
     public func cancel() {
@@ -701,7 +704,7 @@ public extension User {
     /// Refresh a user's custom data. This will, in effect, refresh the user's auth session.
     /// @completion A completion that eventually return `Result.success(Dictionary)` with user's data or `Result.failure(Error)`.
     func refreshCustomData(_ completion: @escaping (Result<[AnyHashable: Any], Error>) -> Void) {
-        self.refreshCustomData { customData, error in
+        refreshCustomData { customData, error in
             if let customData = customData {
                 completion(.success(customData))
             } else {

@@ -6,14 +6,13 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftEntryKit
+import UIKit
 
 class TemporaryCachingPhoto {
     var cachePressed = false
     var contents = [EditableSingleHistoryContent]()
 }
-
 
 extension PhotoSlidesViewController {
     func cachePhoto() {
@@ -38,9 +37,7 @@ extension PhotoSlidesViewController {
                             realModel.isDeepSearched = false
                             self.realm.delete(realModel.contents)
                         }
-                    } catch {
-
-                    }
+                    } catch {}
                     editableModel.isDeepSearched = false /// also change the editable model
                     editableModel.contents.removeAll()
                     
@@ -62,11 +59,10 @@ extension PhotoSlidesViewController {
                 self.focusCacheButton?()
             }))
             if let popoverController = alert.popoverPresentationController {
-                popoverController.sourceView = self.view
-                popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)
+                popoverController.sourceView = view
+                popoverController.sourceRect = CGRect(x: (view.bounds.width / 2) - 40, y: view.bounds.height - 80, width: 80, height: 80)
             }
-            self.present(alert, animated: true, completion: nil)
-            
+            present(alert, animated: true, completion: nil)
             
         } else {
             if let temporaryCachingPhoto = temporaryCachingPhoto, temporaryCachingPhoto.cachePressed {
@@ -80,4 +76,3 @@ extension PhotoSlidesViewController {
         }
     }
 }
-

@@ -37,6 +37,7 @@ extension ViewController {
             }
         }
     }
+
     func startLocalSecondStep() {
         TipViews.localTipView1?.dismiss()
         
@@ -47,7 +48,6 @@ extension ViewController {
         let pauseThePreview = NSLocalizedString("tip-pauseThePreview", comment: "")
         let tipView = EasyTipView(text: pauseThePreview, preferences: preferences, delegate: self)
         tipView.show(forView: camera.cameraIconHolder, withinSuperview: camera.view)
-        
         
         TipViews.localTipView2 = tipView
         TipViews.currentLocalStep = 2
@@ -62,5 +62,4 @@ extension ViewController {
             }
         }
     }
-    
 }

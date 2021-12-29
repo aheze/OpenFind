@@ -104,7 +104,6 @@ extension Object: RealmCollectionValue {
         RLMInitializeWithValue(self, value, .partialPrivateShared())
     }
 
-
     // MARK: Properties
 
     /// The Realm which manages the object, or `nil` if the object is unmanaged.
@@ -124,17 +123,17 @@ extension Object: RealmCollectionValue {
     ///
     /// An object can no longer be accessed if the object has been deleted from the Realm that manages it, or if
     /// `invalidate()` is called on that Realm. This property is key-value observable.
-    @objc dynamic open override var isInvalidated: Bool { return super.isInvalidated }
+    @objc override open dynamic var isInvalidated: Bool { return super.isInvalidated }
 
     /// A human-readable description of the object.
-    open override var description: String { return super.description }
+    override open var description: String { return super.description }
 
     /**
      WARNING: This is an internal helper method not intended for public use.
      It is not considered part of the public API.
      :nodoc:
      */
-    public override final class func _getProperties() -> [RLMProperty] {
+    override public final class func _getProperties() -> [RLMProperty] {
         return ObjectUtil.getSwiftProperties(self)
     }
 
@@ -271,7 +270,8 @@ extension Object: RealmCollectionValue {
      */
     public func observe<T: RLMObjectBase>(keyPaths: [String]? = nil,
                                           on queue: DispatchQueue? = nil,
-                                          _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken {
+                                          _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken
+    {
         return _observe(keyPaths: keyPaths, on: queue, block)
     }
 
@@ -351,7 +351,8 @@ extension Object: RealmCollectionValue {
      */
     public func observe<T: ObjectBase>(keyPaths: [PartialKeyPath<T>],
                                        on queue: DispatchQueue? = nil,
-                                       _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken {
+                                       _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken
+    {
         return _observe(keyPaths: keyPaths.map(_name(for:)), on: queue, block)
     }
 
@@ -425,6 +426,7 @@ extension Object: RealmCollectionValue {
     }
 
     // MARK: Comparison
+
     /**
      Returns whether two Realm objects are the same.
 
@@ -488,27 +490,27 @@ extension Object: ThreadConfined {
  */
 @frozen public struct PropertyChange {
     /**
-     The name of the property which changed.
-    */
+      The name of the property which changed.
+     */
     public let name: String
 
     /**
-     Value of the property before the change occurred. This is not supplied if
-     the change happened on the same thread as the notification and for `List`
-     properties.
+      Value of the property before the change occurred. This is not supplied if
+      the change happened on the same thread as the notification and for `List`
+      properties.
 
-     For object properties this will give the object which was previously
-     linked to, but that object will have its new values and not the values it
-     had before the changes. This means that `previousValue` may be a deleted
-     object, and you will need to check `isInvalidated` before accessing any
-     of its properties.
-    */
+      For object properties this will give the object which was previously
+      linked to, but that object will have its new values and not the values it
+      had before the changes. This means that `previousValue` may be a deleted
+      object, and you will need to check `isInvalidated` before accessing any
+      of its properties.
+     */
     public let oldValue: Any?
 
     /**
-     The value of the property after the change occurred. This is not supplied
-     for `List` properties and will always be nil.
-    */
+      The value of the property after the change occurred. This is not supplied
+      for `List` properties and will always be nil.
+     */
     public let newValue: Any?
 }
 
@@ -538,7 +540,7 @@ extension Object: ThreadConfined {
 @objc(RealmSwiftDynamicObject)
 @dynamicMemberLookup
 public final class DynamicObject: Object {
-    public override subscript(key: String) -> Any? {
+    override public subscript(key: String) -> Any? {
         get {
             let value = RLMDynamicGetByName(self, key).flatMap(coerceToNil)
             if let array = value as? RLMArray<AnyObject> {
@@ -567,17 +569,17 @@ public final class DynamicObject: Object {
     }
 
     /// :nodoc:
-    public override func value(forUndefinedKey key: String) -> Any? {
+    override public func value(forUndefinedKey key: String) -> Any? {
         return self[key]
     }
 
     /// :nodoc:
-    public override func setValue(_ value: Any?, forUndefinedKey key: String) {
+    override public func setValue(_ value: Any?, forUndefinedKey key: String) {
         self[key] = value
     }
 
     /// :nodoc:
-    public override class func shouldIncludeInDefaultSchema() -> Bool {
+    override public class func shouldIncludeInDefaultSchema() -> Bool {
         return false
     }
 
@@ -619,12 +621,15 @@ public extension RealmEnum where Self: RawRepresentable, Self.RawValue: _RealmSc
     static func _rlmToRawValue(_ value: Any) -> Any {
         return (value as! Self).rawValue
     }
+
     static func _rlmFromRawValue(_ value: Any) -> Any? {
         return Self(rawValue: value as! RawValue)
     }
+
     static func _rlmPopulateProperty(_ prop: RLMProperty) {
         RawValue._rlmPopulateProperty(prop)
     }
+
     static var _rlmType: PropertyType { RawValue._rlmType }
 }
 
@@ -664,7 +669,7 @@ extension Object: AssistedObjectiveCBridgeable {
 // MARK: Key Path Strings
 
 extension ObjectBase {
-    internal func prepareForRecording() {
+    func prepareForRecording() {
         let objectSchema = ObjectSchema(RLMObjectBaseObjectSchema(self)!)
         (objectSchema.rlmObjectSchema.properties + objectSchema.rlmObjectSchema.computedProperties)
             .map { (prop: $0, accessor: $0.swiftAccessor) }
@@ -697,7 +702,8 @@ public func _name<T: ObjectBase>(for keyPath: PartialKeyPath<T>) -> String {
     let value = traceObject[keyPath: keyPath]
     if let collection = value as? PropertyNameConvertible,
        let propertyInfo = collection.propertyInformation,
-       propertyInfo.isLegacy {
+       propertyInfo.isLegacy
+    {
         traceObject.lastAccessedNames?.add(propertyInfo.key)
     }
 

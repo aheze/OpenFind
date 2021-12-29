@@ -6,11 +6,10 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
-import SwiftEntryKit
 import RealmSwift
 import SnapKit
-
+import SwiftEntryKit
+import UIKit
 
 protocol FindBarDelegate: class {
     func pause(pause: Bool)
@@ -22,7 +21,6 @@ protocol FindBarDelegate: class {
 }
 
 class FindBar: UIView, UITextFieldDelegate {
-    
     let deviceSize = screenBounds.size
     
     let realm = try! Realm()
@@ -30,24 +28,22 @@ class FindBar: UIView, UITextFieldDelegate {
     var editableListCategories = [EditableFindList]()
     var selectedLists = [EditableFindList]()
     
-    
     var searchDisabled = false
     var dupPaused = false
     
-    @IBOutlet weak var warningView: UIView!
-    @IBOutlet weak var warningButton: UIButton!
-    @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet var warningView: UIView!
+    @IBOutlet var warningButton: UIButton!
+    @IBOutlet var warningLabel: UILabel!
     
     var hasExpandedAlert = false
     
-    @IBOutlet weak var warningWidth: NSLayoutConstraint!
+    @IBOutlet var warningWidth: NSLayoutConstraint!
     
     @IBAction func warningPressed(_ sender: Any) {
         warningWidth.constant = searchField.frame.width
         warningLabel.isHidden = false
         hasExpandedAlert = true
         UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeCubic, animations: {
-            
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
                 self.warningButton.alpha = 0
                 self.layoutIfNeeded()
@@ -63,10 +59,9 @@ class FindBar: UIView, UITextFieldDelegate {
             }
             
         })
-        
     }
     
-    @IBOutlet weak var okButton: UIButton!
+    @IBOutlet var okButton: UIButton!
     
     @IBAction func okButtonPressed(_ sender: Any) {
         hasExpandedAlert = false
@@ -92,18 +87,18 @@ class FindBar: UIView, UITextFieldDelegate {
         })
     }
     
-    var finalTextToFind : String = ""
+    var finalTextToFind: String = ""
     var matchToColors = [String: [HighlightColor]]()
     
     @IBOutlet var contentView: FindBar!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     
-    @IBOutlet weak var searchLeftC: NSLayoutConstraint! ///16
-    @IBOutlet weak var collViewRightC: NSLayoutConstraint!
+    @IBOutlet var searchLeftC: NSLayoutConstraint! /// 16
+    @IBOutlet var collViewRightC: NSLayoutConstraint!
     
     var searchActive = false
     
-    @IBOutlet weak var searchField: InsetTextField!
+    @IBOutlet var searchField: InsetTextField!
     
     weak var injectListDelegate: InjectLists?
     weak var findBarDelegate: FindBarDelegate?
@@ -117,6 +112,7 @@ class FindBar: UIView, UITextFieldDelegate {
         super.init(frame: .zero)
         setup()
     }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         let availableWidth = contentView.bounds.width - (35 + 35 + 35 + 9)
@@ -124,13 +120,12 @@ class FindBar: UIView, UITextFieldDelegate {
     }
     
     private func setup() {
-        
         clipsToBounds = true
         layer.cornerRadius = 5
         
         Bundle.main.loadNibNamed("FindBar", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         searchField.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
@@ -161,11 +156,9 @@ class FindBar: UIView, UITextFieldDelegate {
         
         searchField.keyboardAppearance = .default
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
+        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.75)])
         
-
         setupAccessibility()
-     
     }
     
     func changeConstraints() {
@@ -185,7 +178,6 @@ class FindBar: UIView, UITextFieldDelegate {
 }
 
 extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedLists.count
     }
@@ -218,6 +210,7 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
             findBarDelegate?.triedToEdit()
         }
     }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCellid", for: indexPath) as! SearchCollectionCell
         
@@ -252,7 +245,7 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                 listName,
                 iconTitle, iconString,
                 colorTitle, colorString,
-                pitchTitle, pitchString,
+                pitchTitle, pitchString
             ]
         )
         
@@ -265,19 +258,16 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         let width = collectionView.frame.size.height
         return CGSize(width: width, height: width)
     }
-    
 }
 
 extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
-    
     func showDuplicateAlert(show: Bool) {
         if show == true {
-            
             warningWidth.constant = 67
-            self.warningButton.isHidden = false
+            warningButton.isHidden = false
             
-            self.warningLabel.isHidden = true
-            self.okButton.isHidden = true
+            warningLabel.isHidden = true
+            okButton.isHidden = true
             UIView.animate(withDuration: 0.5, animations: {
                 self.warningView.alpha = 1
                 self.layoutIfNeeded()
@@ -308,10 +298,12 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         clearTextField()
         return true
     }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
         findBarDelegate?.startedEditing(start: true)
     }
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if searchDisabled == false {
             return true
@@ -322,7 +314,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if dupPaused == false {
             if matchToColors.keys.count != 0 {
                 searchActive = false
@@ -351,7 +342,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 findBarDelegate?.pause(pause: false)
                 sortSearchTerms()
             }
-            
         }
         return true
     }
@@ -385,6 +375,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             findBarDelegate?.startedEditing(start: false)
         }
     }
+
     func addList(list: EditableFindList) {
         selectedLists.insert(list, at: 0)
         let indP = IndexPath(item: 0, section: 0)
@@ -413,9 +404,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         sortSearchTerms()
     }
     
-    func startedEditing(start: Bool) {
-    
-    }
+    func startedEditing(start: Bool) {}
+
     func loadListsRealm() {
         listCategories = realm.objects(FindList.self)
         selectedLists.removeAll()
@@ -443,7 +433,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
     }
 }
-
 
 extension FindBar {
     func sortSearchTerms(shouldReturnTerms: Bool = true) {
@@ -475,14 +464,12 @@ extension FindBar {
             
             for list in selectedLists {
                 for match in list.contents {
-                    let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
+                    let matchColor = UIColor(hexString: list.iconColorName).cgColor
                     let highlightColor = HighlightColor(cgColor: matchColor, hexString: list.iconColorName)
                     
-                    if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
+                    if !duplicatedStrings.contains(match.lowercased()), !cameAcrossSearchFieldText.contains(match.lowercased()) {
                         matchToColors[match.lowercased()] = [highlightColor]
                     } else {
-                        
-                        
                         if matchToColors[match.lowercased()] == nil {
                             matchToColors[match.lowercased()] = [highlightColor]
                         } else {
@@ -496,7 +483,7 @@ extension FindBar {
             
             var newSearch = [String]()
             for match in arrayOfSearch {
-                if match != "" && !cameAcrossSearchFieldText.contains(match) && !duplicatedStrings.contains(match) {
+                if match != "", !cameAcrossSearchFieldText.contains(match), !duplicatedStrings.contains(match) {
                     newSearch.append(match)
                 }
             }
@@ -522,38 +509,34 @@ extension FindBar {
                 findBarDelegate?.returnTerms(matchToColorsR: matchToColors)
             }
         }
-        
     }
 }
 
-
 class SearchCollectionCell: UICollectionViewCell {
+    var imageView: UIImageView = .init(frame: CGRect.zero)
     
-    var imageView: UIImageView = UIImageView(frame: CGRect.zero)
-    
-    override init(frame : CGRect) {
-        super.init(frame : frame)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         imageView.frame.size = CGSize(width: self.frame.width, height: self.frame.height)
         imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
+        imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 3.5, left: 3.5, bottom: 3.5, right: 3.5))
         }
-        
     }
+
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 class InsetTextField: UITextField {
-    
     var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private func setInsets(forBounds bounds: CGRect) -> CGRect {
+        var totalInsets = insets // property in you subClass
         
-        var totalInsets = insets //property in you subClass
-        
-        if let leftView = leftView  { totalInsets.left += leftView.frame.origin.x }
+        if let leftView = leftView { totalInsets.left += leftView.frame.origin.x }
         if let rightView = rightView { totalInsets.right += rightView.bounds.size.width }
         
         return bounds.inset(by: totalInsets)
@@ -572,7 +555,6 @@ class InsetTextField: UITextField {
     }
     
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
-        
         var rect = super.rightViewRect(forBounds: bounds)
         rect.origin.x -= insets.right
         
@@ -580,7 +562,6 @@ class InsetTextField: UITextField {
     }
     
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-        
         var rect = super.leftViewRect(forBounds: bounds)
         rect.origin.x += insets.left
         

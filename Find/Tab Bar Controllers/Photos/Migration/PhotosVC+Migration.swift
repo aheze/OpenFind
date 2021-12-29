@@ -6,25 +6,24 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension PhotosViewController {
     func showMigrationView(photosToMigrate: [HistoryModel], folderURL: URL) {
-        
         collectionView.alpha = 0
         
         let scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor.systemBackground
         scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (make) in
+        scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
         let migrationView = PhotosMigrationView()
         scrollView.addSubview(migrationView)
-        migrationView.snp.makeConstraints { (make) in
+        migrationView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
             make.height.equalTo(500)
@@ -35,7 +34,6 @@ extension PhotosViewController {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosMigrationController") as? PhotosMigrationController {
-                
                 var editablePhotos = [EditableHistoryModel]()
                 for photo in photosToMigrate {
                     let editablePhoto = EditableHistoryModel()
@@ -53,7 +51,6 @@ extension PhotosViewController {
                 viewController.completed = { [weak self] in
                     guard let self = self else { return }
 
-                    
 //                    collectionView.
 //                    applySnapshot(animatingDifferences: false)
                     
@@ -66,7 +63,6 @@ extension PhotosViewController {
                     }) { _ in
                         scrollView.removeFromSuperview()
                     }
-                    
                 }
                 self.present(viewController, animated: true)
             }

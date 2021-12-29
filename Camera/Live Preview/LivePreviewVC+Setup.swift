@@ -6,12 +6,11 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import SnapKit
+import UIKit
 
 extension LivePreviewViewController {
-    
     func configureCamera() {
         if let cameraDevice = getCamera() {
             self.cameraDevice = cameraDevice
@@ -39,7 +38,6 @@ extension LivePreviewViewController {
                 session.addInput(captureDeviceInput)
             }
         } catch {
-
             return
         }
         session.sessionPreset = .photo
@@ -71,7 +69,6 @@ extension LivePreviewViewController {
         livePreviewView.videoPreviewLayer.bounds = viewBounds
         livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
         livePreviewView.videoPreviewLayer.videoGravity = .resizeAspect
-        
     }
     
     func getCamera() -> AVCaptureDevice? {

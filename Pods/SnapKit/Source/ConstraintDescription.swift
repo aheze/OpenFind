@@ -22,27 +22,26 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
 public class ConstraintDescription {
-    
     internal let item: LayoutConstraintItem
     internal var attributes: ConstraintAttributes
-    internal var relation: ConstraintRelation? = nil
-    internal var sourceLocation: (String, UInt)? = nil
-    internal var label: String? = nil
-    internal var related: ConstraintItem? = nil
+    internal var relation: ConstraintRelation?
+    internal var sourceLocation: (String, UInt)?
+    internal var label: String?
+    internal var related: ConstraintItem?
     internal var multiplier: ConstraintMultiplierTarget = 1.0
     internal var constant: ConstraintConstantTarget = 0.0
     internal var priority: ConstraintPriorityTarget = 1000.0
     internal lazy var constraint: Constraint? = {
         guard let relation = self.relation,
               let related = self.related,
-              let sourceLocation = self.sourceLocation else {
+              let sourceLocation = self.sourceLocation
+        else {
             return nil
         }
         let from = ConstraintItem(target: self.item, attributes: self.attributes)
@@ -65,5 +64,4 @@ public class ConstraintDescription {
         self.item = item
         self.attributes = attributes
     }
-    
 }

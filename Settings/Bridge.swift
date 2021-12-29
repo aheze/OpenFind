@@ -1,6 +1,6 @@
 //
 //  Bridge.swift
-//  
+//
 //
 //  Created by Zheng on 10/7/21.
 //
@@ -8,7 +8,7 @@
 import UIKit
 
 extension Settings {
-    struct Bridge {
+    enum Bridge {
         static var dismissed: (() -> Void)?
         static var presentTopOfTheList: (() -> Void)?
         static var presentRequiresSoftwareUpdate: ((String) -> Void)?

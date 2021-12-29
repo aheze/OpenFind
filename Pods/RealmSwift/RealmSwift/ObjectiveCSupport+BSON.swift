@@ -25,7 +25,7 @@ public extension ObjectiveCSupport {
     // FIXME: remove these and rename convertBson to convert on the next major
     // version bump
     static func convert(object: AnyBSON?) -> RLMBSON? {
-        if let converted = object.map(self.convertBson), !(converted is NSNull) {
+        if let converted = object.map(convertBson), !(converted is NSNull) {
             return converted
         }
         return nil
@@ -64,7 +64,7 @@ public extension ObjectiveCSupport {
         case .objectId(let val):
             return val as RLMObjectId
         case .document(let val):
-            return val.reduce(into: Dictionary<String, RLMBSON?>()) { (result: inout [String: RLMBSON?], kvp) in
+            return val.reduce(into: [String: RLMBSON?]()) { (result: inout [String: RLMBSON?], kvp) in
                 result[kvp.key] = kvp.value.map(convertBson) ?? NSNull()
             } as NSDictionary
         case .array(let val):
@@ -131,7 +131,8 @@ public extension ObjectiveCSupport {
             return .datetime(val as Date)
         case .objectId:
             guard let val = bson as? RLMObjectId,
-                let oid = try? ObjectId(string: val.stringValue) else {
+                  let oid = try? ObjectId(string: val.stringValue)
+            else {
                 return nil
             }
             return .objectId(oid)
@@ -150,14 +151,14 @@ public extension ObjectiveCSupport {
         case .minKey:
             return .minKey
         case .document:
-            guard let val = bson as? Dictionary<String, RLMBSON?> else {
+            guard let val = bson as? [String: RLMBSON?] else {
                 return nil
             }
-            return .document(val.reduce(into: Dictionary<String, AnyBSON?>()) { (result: inout [String: AnyBSON?], kvp) in
+            return .document(val.reduce(into: [String: AnyBSON?]()) { (result: inout [String: AnyBSON?], kvp) in
                 result[kvp.key] = kvp.value.map(convert)
             })
         case .array:
-            guard let val = bson as? Array<RLMBSON?> else {
+            guard let val = bson as? [RLMBSON?] else {
                 return nil
             }
             return .array(val.compactMap {

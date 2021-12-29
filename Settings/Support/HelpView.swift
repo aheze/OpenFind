@@ -6,11 +6,10 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import SwiftUI
 import SupportDocs
+import SwiftUI
 
 struct HelpView: View {
-    
     let dataSource = URL(string: "https://raw.githubusercontent.com/aheze/FindInfo/DataSource/_data/supportdocs_datasource.json")!
     let options = SupportOptions(
         categories: [
@@ -67,7 +66,6 @@ struct HelpView: View {
             Line()
             
             Button(action: {
-
                 tutorialsPresented = true
             }) {
                 HStack(spacing: 0) {
@@ -78,7 +76,6 @@ struct HelpView: View {
             .edgePadding()
             .accessibility(hint: Text("Rewatch the \"Quick Tour\" tutorials"))
             .bottomRowPadding()
-            
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)

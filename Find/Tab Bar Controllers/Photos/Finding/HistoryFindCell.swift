@@ -9,22 +9,18 @@
 import UIKit
 
 class HistoryFindCell: UITableViewCell {
+    @IBOutlet var shadowView: CellShadowView!
     
-    @IBOutlet weak var shadowView: CellShadowView!
+    @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var shadowImageView: UIImageView!
+    @IBOutlet var starImageView: UIImageView!
+    @IBOutlet var cacheImageView: UIImageView!
     
-    @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var shadowImageView: UIImageView!
-    @IBOutlet weak var starImageView: UIImageView!
-    @IBOutlet weak var cacheImageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var numberOfMatchesView: UIView!
+    @IBOutlet var numberOfMatchesLabel: UILabel!
+    @IBOutlet var textView: UITextView!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var numberOfMatchesView: UIView!
-    @IBOutlet weak var numberOfMatchesLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
-    
-    @IBOutlet weak var drawingView: UIView!
-    @IBOutlet weak var baseView: UIView!
-    
-    
-    
+    @IBOutlet var drawingView: UIView!
+    @IBOutlet var baseView: UIView!
 }

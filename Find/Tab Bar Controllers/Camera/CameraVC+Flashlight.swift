@@ -9,7 +9,6 @@
 import UIKit
 
 extension CameraViewController {
-    
     /// lock when preview is paused
     func lockFlashlight(lock: Bool) {
         flashButton.isEnabled = !lock
@@ -32,7 +31,6 @@ extension CameraViewController {
             let device = cameraDevice,
             device.hasTorch
         else {
-
             return
         }
         
@@ -40,9 +38,7 @@ extension CameraViewController {
             try device.lockForConfiguration()
             device.torchMode = on ? .on : .off
             device.unlockForConfiguration()
-        } catch {
-
-        }
+        } catch {}
         
         flashView.accessibilityValue = on ? "On" : "Off"
         
@@ -58,12 +54,10 @@ extension CameraViewController {
         UIView.animate(withDuration: 0.3) {
             self.flashView.backgroundColor = on ? #colorLiteral(red: 0.5, green: 0.4678574155, blue: 0, alpha: 0.75) : UIColor(named: "50Black")
         }
-        
     }
 }
 
 class FlashDisableIcon: UIView {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -77,7 +71,6 @@ class FlashDisableIcon: UIView {
     var slashLayer: CAShapeLayer?
     
     func setup() {
-        
         // Create a CAShapeLayer
         let slashLayer = CAShapeLayer()
 
@@ -95,15 +88,13 @@ class FlashDisableIcon: UIView {
         slashLayer.strokeEnd = 0
 
         // add the new layer to our custom view
-        self.layer.addSublayer(slashLayer)
+        layer.addSublayer(slashLayer)
         self.slashLayer = slashLayer
         
         alpha = 0
-        
     }
     
     func animateSlash(lock: Bool) {
-    
         if let slashLayer = slashLayer {
             if let currentValue = slashLayer.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.strokeEnd)) {
                 let currentStrokeEnd = currentValue as! CGFloat
@@ -125,8 +116,8 @@ class FlashDisableIcon: UIView {
             self.alpha = lock ? 1 : 0
         }
     }
+
     func createBezierPath() -> UIBezierPath {
-        
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 0, y: 16))
         bezierPath.addLine(to: CGPoint(x: 16, y: 0))
@@ -134,4 +125,3 @@ class FlashDisableIcon: UIView {
         return bezierPath
     }
 }
-

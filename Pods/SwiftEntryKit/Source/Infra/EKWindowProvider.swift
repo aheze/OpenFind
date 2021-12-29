@@ -9,7 +9,6 @@
 import UIKit
 
 final class EKWindowProvider: EntryPresenterDelegate {
-    
     /** The artificial safe area insets */
     static var safeAreaInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
@@ -107,7 +106,7 @@ final class EKWindowProvider: EntryPresenterDelegate {
     // MARK: - Exposed Actions
     
     func queueContains(entryNamed name: String? = nil) -> Bool {
-        if name == nil && !entryQueue.isEmpty {
+        if name == nil, !entryQueue.isEmpty {
             return true
         }
         if let name = name {
@@ -171,14 +170,12 @@ final class EKWindowProvider: EntryPresenterDelegate {
     /** Display a pending entry if there is any inside the queue */
     func displayPendingEntryOrRollbackWindow(dismissCompletionHandler: SwiftEntryKit.DismissCompletionHandler?) {
         if let next = entryQueue.dequeue() {
-            
             // Execute dismiss handler if needed before dequeuing (potentially) another entry
             dismissCompletionHandler?()
             
             // Show the next entry in queue
             show(entryView: next.view, presentInsideKeyWindow: next.presentInsideKeyWindow, rollbackWindow: next.rollbackWindow)
         } else {
-            
             // Display the rollback window
             displayRollbackWindow()
             

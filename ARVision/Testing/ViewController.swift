@@ -6,12 +6,11 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 import Vision
 
 class ViewController: UIViewController {
-    
     /// original, unscaled image size (pretty large)
     var imageSize: CGSize?
     
@@ -26,13 +25,11 @@ class ViewController: UIViewController {
     var latestPixelBuffer: CVPixelBuffer?
     let visionEngine = VisionEngine()
     
-    
-    @IBOutlet weak var livePreviewView: LivePreviewView!
-    @IBOutlet weak var imageFitView: UIView!
-    @IBOutlet weak var averageView: UIView!
+    @IBOutlet var livePreviewView: LivePreviewView!
+    @IBOutlet var imageFitView: UIView!
+    @IBOutlet var averageView: UIView!
     
     @IBAction func resetPressed(_ sender: Any) {
-
         if let latestPixelBuffer = latestPixelBuffer {
             if visionEngine.canFind {
                 visionEngine.startToFind(["Hi"], in: latestPixelBuffer)
@@ -73,20 +70,17 @@ extension ViewController: VisionEngineDelegate {
             newView.addDebugBorders(UIColor.yellow, width: 1.5)
             imageFitView.addSubview(newView)
         }
-
     }
     
     func cameraMoved(by translation: CGSize) {
         updateTranslation(with: translation)
     }
-    
-    
 }
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        self.latestPixelBuffer = pixelBuffer
+        latestPixelBuffer = pixelBuffer
         let size = CVImageBufferGetDisplaySize(pixelBuffer)
         if imageSize == nil {
             imageSize = CGSize(width: size.width, height: size.height)
@@ -111,10 +105,10 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 extension CGRect {
     func scaleTo(_ newRect: CGRect) -> CGRect {
         let scaledRect = CGRect(
-            x: self.origin.x * newRect.width,
-            y: self.origin.y * newRect.height,
-            width: self.width * newRect.width,
-            height: self.height * newRect.height
+            x: origin.x * newRect.width,
+            y: origin.y * newRect.height,
+            width: width * newRect.width,
+            height: height * newRect.height
         )
         return scaledRect
     }

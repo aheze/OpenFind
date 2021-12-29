@@ -17,7 +17,6 @@ struct ShareView: View {
             
             HStack(spacing: 14) {
                 Button(action: {
-                    
                     Bridge.presentShareScreen?()
                     
                     let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -26,14 +25,14 @@ struct ShareView: View {
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            LinearGradient(
-                                gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.462745098, blue: 0.8941176471, alpha: 1))]),
-                                startPoint: .init(x: 0.5, y: 0),
-                                endPoint: .init(x: 0.5, y: 1)
+                            .fill(
+                                LinearGradient(
+                                    gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.462745098, blue: 0.8941176471, alpha: 1))]),
+                                    startPoint: .init(x: 0.5, y: 0),
+                                    endPoint: .init(x: 0.5, y: 1)
+                                )
                             )
-                        )
-                        .frame(height: 65)
+                            .frame(height: 65)
                         
                         HStack {
                             Image(systemName: "link")
@@ -61,12 +60,12 @@ struct ShareView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(
                                 LinearGradient(
-                                gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.8470588235, blue: 0.4, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.5803921569, blue: 0, alpha: 1))]),
-                                startPoint: .init(x: 0.5, y: 0),
-                                endPoint: .init(x: 0.5, y: 1)
+                                    gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.8470588235, blue: 0.4, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.5803921569, blue: 0, alpha: 1))]),
+                                    startPoint: .init(x: 0.5, y: 0),
+                                    endPoint: .init(x: 0.5, y: 1)
+                                )
                             )
-                        )
-                        .frame(height: 65)
+                            .frame(height: 65)
                         
                         HStack {
                             Image(systemName: "qrcode")
@@ -77,11 +76,9 @@ struct ShareView: View {
                                 .font(.system(size: 22, weight: .medium))
                                 .foregroundColor(Color.white)
                         }
-                        
                     }
                 }
                 .accessibility(hint: Text("Presents a QR code"))
-                
             }
             
             .padding(EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 14))
@@ -91,15 +88,12 @@ struct ShareView: View {
     }
 }
 
-
 struct QRCodeView: View {
     @Binding var isPresented: Bool
     var body: some View {
-        
         ZStack {
             VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
             
             VStack(spacing: 20) {
                 Image("AppQRCode")
@@ -109,7 +103,6 @@ struct QRCodeView: View {
                     .foregroundColor(Color.white)
                     .frame(maxWidth: 300, maxHeight: 300)
                     .accessibility(label: Text("QR Code"))
-                
                 
                 Button(action: {
                     if let url = URL(string: "https://www.getfind.app/") {
@@ -135,7 +128,6 @@ struct QRCodeView: View {
                 }
                 .accessibility(hint: Text("Return to Settings screen"))
             }
-            
         }
         .onTapGesture {
             withAnimation(.easeOut(duration: 0.15)) {

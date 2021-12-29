@@ -6,20 +6,21 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 class PhotoForDeletion {
     var indexPath = IndexPath(item: 0, section: 0)
     var findPhoto = FindPhoto()
 }
+
 extension PhotosViewController {
     func deleteSinglePhotoFromSlides(findPhoto: FindPhoto) {
         let photoForDeletion = PhotoForDeletion()
         photoForDeletion.findPhoto = findPhoto
         
         for (monthIndex, month) in allMonths.enumerated() {
-            let samePhotos = month.photos.filter { $0.asset.localIdentifier == findPhoto.asset.localIdentifier}
+            let samePhotos = month.photos.filter { $0.asset.localIdentifier == findPhoto.asset.localIdentifier }
             
             /// same photo in allMonths found, get its index
             if let samePhoto = samePhotos.first, let itemIndex = month.photos.firstIndex(of: samePhoto) {
@@ -31,13 +32,12 @@ extension PhotosViewController {
         let assets = PHAsset.fetchAssets(withLocalIdentifiers: [findPhoto.asset.localIdentifier], options: nil)
         PHPhotoLibrary.shared().performChanges {
             PHAssetChangeRequest.deleteAssets(assets)
-        } completionHandler: { (success, error) in
+        } completionHandler: { success, _ in
             if success {
                 var hasError = false
                 if let editableModel = photoForDeletion.findPhoto.editableModel {
                     DispatchQueue.main.async {
                         if let realModel = self.getRealRealmModel(from: editableModel) {
-                            
                             do {
                                 try self.realm.write {
                                     self.realm.delete(realModel.contents)
@@ -45,7 +45,6 @@ extension PhotosViewController {
                                 }
                             } catch {
                                 hasError = true
-
                             }
                         }
                     }
@@ -61,7 +60,7 @@ extension PhotosViewController {
                 }
                 
                 self.allMonths = self.allMonths.filter { month in
-                    return !month.photos.isEmpty
+                    !month.photos.isEmpty
                 }
                 
                 DispatchQueue.main.async {
@@ -70,7 +69,6 @@ extension PhotosViewController {
                 }
             }
         }
-        
     }
     
     func deleteSelectedPhotos() {
@@ -85,7 +83,7 @@ extension PhotosViewController {
                 let photoForDeletion = PhotoForDeletion()
                 
                 for (monthIndex, month) in allMonths.enumerated() {
-                    let samePhotos = month.photos.filter { $0.asset.localIdentifier == findPhoto.asset.localIdentifier}
+                    let samePhotos = month.photos.filter { $0.asset.localIdentifier == findPhoto.asset.localIdentifier }
                     
                     /// same photo in allMonths found, get its index
                     if let samePhoto = samePhotos.first, let itemIndex = month.photos.firstIndex(of: samePhoto) {
@@ -99,20 +97,19 @@ extension PhotosViewController {
             }
         }
         
-        photosForDeletion.sort { $0.indexPath.section == $1.indexPath.section ? $0.indexPath.item < $1.indexPath.item : $0.indexPath.section < $1.indexPath.section  }
+        photosForDeletion.sort { $0.indexPath.section == $1.indexPath.section ? $0.indexPath.item < $1.indexPath.item : $0.indexPath.section < $1.indexPath.section }
         photosForDeletion.reverse() /// start removing from the end
         
         let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
         PHPhotoLibrary.shared().performChanges {
             PHAssetChangeRequest.deleteAssets(assets)
-        } completionHandler: { (success, error) in
+        } completionHandler: { success, _ in
             if success {
                 for photoToDelete in photosForDeletion {
                     var hasError = false
                     if let editableModel = photoToDelete.findPhoto.editableModel {
                         DispatchQueue.main.async {
                             if let realModel = self.getRealRealmModel(from: editableModel) {
-
                                 do {
                                     try self.realm.write {
                                         self.realm.delete(realModel.contents)
@@ -120,7 +117,6 @@ extension PhotosViewController {
                                     }
                                 } catch {
                                     hasError = true
-
                                 }
                             }
                         }
@@ -133,7 +129,7 @@ extension PhotosViewController {
                 }
                 
                 self.allMonths = self.allMonths.filter { month in
-                    return !month.photos.isEmpty
+                    !month.photos.isEmpty
                 }
                 
                 DispatchQueue.main.async {

@@ -9,14 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            
             Settings.Bridge.presentTopOfTheList = {}
-            Settings.Bridge.presentRequiresSoftwareUpdate = { versionString in }
+            Settings.Bridge.presentRequiresSoftwareUpdate = { _ in }
             Settings.Bridge.presentWhatsNew = {}
             Settings.Bridge.presentLicenses = {}
             Settings.Bridge.presentGeneralTutorial = {}
@@ -29,7 +27,4 @@ class ViewController: UIViewController {
             self.present(vc, animated: true)
         }
     }
-
-
 }
-

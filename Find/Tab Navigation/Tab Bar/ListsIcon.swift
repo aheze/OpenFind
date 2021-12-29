@@ -8,7 +8,6 @@
 import UIKit
 
 class ListsIcon: UIView {
-    
     var pressed: (() -> Void)?
     
     let originalForegroundX = CGFloat(10)
@@ -22,21 +21,23 @@ class ListsIcon: UIView {
     let activeBackgroundY = CGFloat(6)
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var foregroundView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var detailsView: UIView!
+    @IBOutlet var foregroundView: UIView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var detailsView: UIView!
     
-    @IBOutlet weak var touchButton: UIButton!
+    @IBOutlet var touchButton: UIButton!
     
     @IBAction func touchDown(_ sender: Any) {
         UIView.animate(withDuration: 0.2, animations: {
             self.contentView.alpha = 0.5
         })
     }
+
     @IBAction func touchUpInside(_ sender: Any) {
         pressed?()
         resetAlpha()
     }
+
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
     }
@@ -60,7 +61,7 @@ class ListsIcon: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("ListsIcon", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let listsIconBezier = makeListsIconBezier()
@@ -109,36 +110,33 @@ class ListsIcon: UIView {
     }
     
     func makePercentageOfActive(percentage: CGFloat, originalDetails: UIColor, originalForeground: UIColor, originalBackground: UIColor) {
+        let foregroundX = originalForegroundX + ((activeForegroundX - originalForegroundX) * percentage)
+        let foregroundY = originalForegroundY + ((activeForegroundY - originalForegroundY) * percentage)
+        let backgroundX = originalBackgroundX + ((activeBackgroundX - originalBackgroundX) * percentage)
+        let backgroundY = originalBackgroundY + ((activeBackgroundY - originalBackgroundY) * percentage)
         
-        let foregroundX = self.originalForegroundX + ((self.activeForegroundX - self.originalForegroundX) * percentage)
-        let foregroundY = self.originalForegroundY + ((self.activeForegroundY - self.originalForegroundY) * percentage)
-        let backgroundX = self.originalBackgroundX + ((self.activeBackgroundX - self.originalBackgroundX) * percentage)
-        let backgroundY = self.originalBackgroundY + ((self.activeBackgroundY - self.originalBackgroundY) * percentage)
+        foregroundView.transform = CGAffineTransform.identity
+        backgroundView.transform = CGAffineTransform.identity
+        foregroundView.frame = CGRect(x: foregroundX, y: foregroundY, width: 24, height: 30)
+        backgroundView.frame = CGRect(x: backgroundX, y: backgroundY, width: 24, height: 30)
+        foregroundView.transform = CGAffineTransform(rotationAngle: (15.degreesToRadians) * percentage)
+        backgroundView.transform = CGAffineTransform(rotationAngle: (-15.degreesToRadians) * percentage)
         
-        self.foregroundView.transform = CGAffineTransform.identity
-        self.backgroundView.transform = CGAffineTransform.identity
-        self.foregroundView.frame = CGRect(x: foregroundX, y: foregroundY, width: 24, height: 30)
-        self.backgroundView.frame = CGRect(x: backgroundX, y: backgroundY, width: 24, height: 30)
-        self.foregroundView.transform = CGAffineTransform(rotationAngle: (15.degreesToRadians) * percentage)
-        self.backgroundView.transform = CGAffineTransform(rotationAngle: (-15.degreesToRadians) * percentage)
-        
-        self.detailsView.backgroundColor = [originalDetails, UIColor.white].intermediate(percentage: percentage)
-        self.foregroundView.backgroundColor = [originalForeground, UIColor(named: "TabIconListsMain")!].intermediate(percentage: percentage)
-        self.backgroundView.backgroundColor = [originalBackground, UIColor(named: "TabIconListsSecondary")!].intermediate(percentage: percentage)
+        detailsView.backgroundColor = [originalDetails, UIColor.white].intermediate(percentage: percentage)
+        foregroundView.backgroundColor = [originalForeground, UIColor(named: "TabIconListsMain")!].intermediate(percentage: percentage)
+        backgroundView.backgroundColor = [originalBackground, UIColor(named: "TabIconListsSecondary")!].intermediate(percentage: percentage)
     }
     
     func makePercentageOfDark(percentage: CGFloat) {
-        self.detailsView.backgroundColor = [FindConstants.detailIconColorLight, FindConstants.detailIconColorDark].intermediate(percentage: percentage)
-        self.foregroundView.backgroundColor = [FindConstants.foregroundIconColorLight, FindConstants.foregroundIconColorDark].intermediate(percentage: percentage)
-        self.backgroundView.backgroundColor = [FindConstants.backgroundIconColorLight, FindConstants.backgroundIconColorDark].intermediate(percentage: percentage)
+        detailsView.backgroundColor = [FindConstants.detailIconColorLight, FindConstants.detailIconColorDark].intermediate(percentage: percentage)
+        foregroundView.backgroundColor = [FindConstants.foregroundIconColorLight, FindConstants.foregroundIconColorDark].intermediate(percentage: percentage)
+        backgroundView.backgroundColor = [FindConstants.backgroundIconColorLight, FindConstants.backgroundIconColorDark].intermediate(percentage: percentage)
     }
     
     func makeListsIconBezier() -> CGPath {
-
         //// Rectangle 2 Drawing
         let bezierPath = UIBezierPath(roundedRect: CGRect(x: 6, y: 5.8, width: 12.8, height: 1.6), cornerRadius: 0.8)
         
-
         //// Rectangle 3 Drawing
         bezierPath.append(UIBezierPath(roundedRect: CGRect(x: 6, y: 10.6, width: 12.8, height: 1.6), cornerRadius: 0.8))
 
@@ -146,7 +144,5 @@ class ListsIcon: UIView {
         bezierPath.append(UIBezierPath(roundedRect: CGRect(x: 6, y: 16.2, width: 7.2, height: 1.6), cornerRadius: 0.8))
         
         return bezierPath.cgPath
-
     }
 }
-

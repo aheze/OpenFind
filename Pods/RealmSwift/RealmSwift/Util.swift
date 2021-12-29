@@ -70,7 +70,7 @@ internal func gsub(pattern: String, template: String, string: String, error: NSE
 extension ObjectBase {
     // Must *only* be used to call Realm Objective-C APIs that are exposed on `RLMObject`
     // but actually operate on `RLMObjectBase`. Do not expose cast value to user.
-    internal func unsafeCastToRLMObject() -> RLMObject {
+    func unsafeCastToRLMObject() -> RLMObject {
         return noWarnUnsafeBitCast(self, to: RLMObject.self)
     }
 }
@@ -133,6 +133,7 @@ extension Float: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Float {
         return (objCValue as! NSNumber).floatValue
     }
+
     internal var objCValue: Any {
         return NSNumber(value: self)
     }
@@ -142,34 +143,42 @@ extension Int8: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Int8 {
         return (objCValue as! NSNumber).int8Value
     }
+
     internal var objCValue: Any {
         return NSNumber(value: self)
     }
 }
+
 extension Int16: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Int16 {
         return (objCValue as! NSNumber).int16Value
     }
+
     internal var objCValue: Any {
         return NSNumber(value: self)
     }
 }
+
 extension Int32: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Int32 {
         return (objCValue as! NSNumber).int32Value
     }
+
     internal var objCValue: Any {
         return NSNumber(value: self)
     }
 }
+
 extension Int64: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Int64 {
         return (objCValue as! NSNumber).int64Value
     }
+
     internal var objCValue: Any {
         return NSNumber(value: self)
     }
 }
+
 extension Optional: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Optional {
         if objCValue as AnyObject is NSNull {
@@ -177,6 +186,7 @@ extension Optional: CustomObjectiveCBridgeable {
         }
         return failableDynamicBridgeCast(fromObjectiveC: objCValue)
     }
+
     internal var objCValue: Any {
         if let value = self {
             return dynamicBridgeCast(fromSwift: value)
@@ -185,6 +195,7 @@ extension Optional: CustomObjectiveCBridgeable {
         }
     }
 }
+
 extension Decimal128: CustomObjectiveCBridgeable {
     static func bridging(objCValue: Any) -> Decimal128 {
         if let number = objCValue as? NSNumber {
@@ -195,10 +206,12 @@ extension Decimal128: CustomObjectiveCBridgeable {
         }
         return objCValue as! Decimal128
     }
+
     var objCValue: Any {
         return self
     }
 }
+
 extension AnyRealmValue: CustomObjectiveCBridgeable {
     static func bridging(objCValue: Any) -> AnyRealmValue {
         if let any = objCValue as? RLMValue {
@@ -206,6 +219,7 @@ extension AnyRealmValue: CustomObjectiveCBridgeable {
         }
         throwRealmException("objCValue is not bridgeable to AnyRealmValue")
     }
+
     var objCValue: Any {
         return ObjectiveCSupport.convert(value: self) ?? NSNull()
     }

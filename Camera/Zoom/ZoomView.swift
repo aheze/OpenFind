@@ -22,13 +22,12 @@ struct DotSpacerView: View {
                     .frame(maxWidth: .infinity)
                 }
             }
-                .drawingGroup()
-                .opacity(0.5)
+            .drawingGroup()
+            .opacity(0.5)
         )
-            .clipped()
+        .clipped()
     }
 }
-
 
 struct ZoomFactorView: View {
     @ObservedObject var zoomViewModel: ZoomViewModel
@@ -70,11 +69,11 @@ struct ZoomFactorView: View {
                     isActive: false
                 )
             }
-                .scaleEffect(zoomFactor.activationProgress)
-                .opacity(zoomFactor.activationProgress)
-                .scaleEffect(0.7)
-                .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0) /// show when passed preset and dragging left, increasing zoom value
-                .disabled(!zoomViewModel.allowingButtonPresses)
+            .scaleEffect(zoomFactor.activationProgress)
+            .opacity(zoomFactor.activationProgress)
+            .scaleEffect(0.7)
+            .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0) /// show when passed preset and dragging left, increasing zoom value
+            .disabled(!zoomViewModel.allowingButtonPresses)
         )
     }
     
@@ -112,10 +111,8 @@ struct ZoomFactorContent: View {
 }
 
 struct ZoomView: View {
-    
     @ObservedObject var zoomViewModel: ZoomViewModel
     @GestureState var draggingAmount = CGFloat(0)
-    
     
     var body: some View {
         Color.clear.overlay(
@@ -123,7 +120,6 @@ struct ZoomView: View {
                 .opacity(0.3)
                 .frame(width: zoomViewModel.isExpanded ? nil : C.zoomFactorLength * 3 + C.edgePadding * 2, height: C.zoomFactorLength + C.edgePadding * 2)
                 .overlay(
-                    
                     HStack(spacing: 0) {
                         ForEach(C.zoomFactors.indices, id: \.self) { index in
                             let zoomFactor = C.zoomFactors[index]
@@ -134,68 +130,66 @@ struct ZoomView: View {
                                 zoomFactor: zoomFactor,
                                 index: index
                             )
-                                .zIndex(1)
+                            .zIndex(1)
                             
                             DotSpacerView(numberOfDots: Int(zoomViewModel.dotViewWidth(for: zoomFactor)) / 12)
                                 .frame(width: zoomViewModel.isExpanded ? zoomViewModel.dotViewWidth(for: zoomFactor) : 0, height: 30)
                                 .zIndex(0)
                         }
                     }
-                        .frame(width: zoomViewModel.isExpanded ? zoomViewModel.sliderWidth : nil, alignment: .leading)
-                        .offset(x: zoomViewModel.isExpanded ? (zoomViewModel.savedExpandedOffset + draggingAmount + zoomViewModel.sliderLeftPadding) : 0, y: 0)
-                    , alignment: zoomViewModel.isExpanded ? .leading : .center
+                    .frame(width: zoomViewModel.isExpanded ? zoomViewModel.sliderWidth : nil, alignment: .leading)
+                    .offset(x: zoomViewModel.isExpanded ? (zoomViewModel.savedExpandedOffset + draggingAmount + zoomViewModel.sliderLeftPadding) : 0, y: 0),
+                    alignment: zoomViewModel.isExpanded ? .leading : .center
                 )
                 .cornerRadius(50)
                 .padding(.horizontal, C.containerEdgePadding)
                 .opacity(zoomViewModel.ready ? 1 : 0)
         )
-            .simultaneousGesture(
-                
-                /// if expanded, immediately keep expanded
-                /// if not, wait 0.3 seconds
-                LongPressGesture(minimumDuration: zoomViewModel.isExpanded ? 0 : 0.5, maximumDistance: .infinity)
-                    .onEnded { _ in /// touched down
-                        zoomViewModel.expand()
-                    }
-                    .simultaneously( /// to cancel button presses after too long
-                        with:
-                            LongPressGesture(minimumDuration: 0.6, maximumDistance: .infinity)
-                            .onEnded { _ in
-                                zoomViewModel.stopButtonPresses()
-                            }
-                    )
-                    .sequenced( /// if the user pressed down and up without dragging
-                        before:
-                            TapGesture()
-                            .onEnded { _ in
-                                zoomViewModel.startTimeout()
-                            }
-                                   )
-                    .simultaneously( /// normal drag gesture
-                        with:
-                            DragGesture(minimumDistance: 2)
-                            .updating($draggingAmount) { value, draggingAmount, transaction in
-                                zoomViewModel.stopButtonPresses()
-                                zoomViewModel.update(translation: value.translation.width, ended: false) { newSavedExpandedOffset, newTranslation in
-                                    DispatchQueue.main.async {
-                                        zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
-                                    }
-                                    draggingAmount = newTranslation
+        .simultaneousGesture(
+            /// if expanded, immediately keep expanded
+            /// if not, wait 0.3 seconds
+            LongPressGesture(minimumDuration: zoomViewModel.isExpanded ? 0 : 0.5, maximumDistance: .infinity)
+                .onEnded { _ in /// touched down
+                    zoomViewModel.expand()
+                }
+                .simultaneously( /// to cancel button presses after too long
+                    with:
+                    LongPressGesture(minimumDuration: 0.6, maximumDistance: .infinity)
+                        .onEnded { _ in
+                            zoomViewModel.stopButtonPresses()
+                        }
+                )
+                .sequenced( /// if the user pressed down and up without dragging
+                    before:
+                    TapGesture()
+                        .onEnded { _ in
+                            zoomViewModel.startTimeout()
+                        }
+                )
+                .simultaneously( /// normal drag gesture
+                    with:
+                    DragGesture(minimumDistance: 2)
+                        .updating($draggingAmount) { value, draggingAmount, _ in
+                            zoomViewModel.stopButtonPresses()
+                            zoomViewModel.update(translation: value.translation.width, ended: false) { newSavedExpandedOffset, newTranslation in
+                                DispatchQueue.main.async {
+                                    zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
                                 }
+                                draggingAmount = newTranslation
                             }
-                            .onEnded { value in
-                                zoomViewModel.update(translation: value.translation.width, ended: true) { newSavedExpandedOffset, _ in
+                        }
+                        .onEnded { value in
+                            zoomViewModel.update(translation: value.translation.width, ended: true) { newSavedExpandedOffset, _ in
                                     
-                                    /// `DispatchQueue` is important! Otherwise, if going too fast, offset won't update.
-                                    DispatchQueue.main.async {
-                                        zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
-                                    }
+                                /// `DispatchQueue` is important! Otherwise, if going too fast, offset won't update.
+                                DispatchQueue.main.async {
+                                    zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
                                 }
-                                zoomViewModel.startTimeout()
                             }
-                    )
-                
-            )
+                            zoomViewModel.startTimeout()
+                        }
+                )
+        )
     }
 }
 
@@ -207,4 +201,3 @@ struct ZoomView_Previews: PreviewProvider {
             .background(Color.gray)
     }
 }
-

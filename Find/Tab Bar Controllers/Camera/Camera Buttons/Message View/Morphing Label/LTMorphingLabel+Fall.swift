@@ -28,40 +28,38 @@
 import UIKit
 
 extension LTMorphingLabel {
-
     @objc
     func FallLoad() {
-        
         progressClosures["Fall\(LTMorphingPhases.progress)"] = {
             (index: Int, progress: Float, isNewChar: Bool) in
             
-            if isNewChar {
-                return min(
-                    1.0,
-                    max(
-                        0.0,
-                        progress
-                            - self.morphingCharacterDelay
-                            * Float(index)
-                            / 1.7
+                if isNewChar {
+                    return min(
+                        1.0,
+                        max(
+                            0.0,
+                            progress
+                                - self.morphingCharacterDelay
+                                * Float(index)
+                                / 1.7
+                        )
                     )
-                )
-            }
+                }
             
-            let j: Float = Float(sin(Double(index))) * 1.7
-            return min(1.0, max(0.0001, progress + self.morphingCharacterDelay * Float(j)))
-            
+                let j: Float = .init(sin(Double(index))) * 1.7
+                return min(1.0, max(0.0001, progress + self.morphingCharacterDelay * Float(j)))
         }
         
         effectClosures["Fall\(LTMorphingPhases.disappear)"] = {
             char, index, progress in
             
-            return LTCharacterLimbo(
+            LTCharacterLimbo(
                 char: char,
                 rect: self.previousRects[index],
                 alpha: CGFloat(1.0 - progress),
                 size: self.font.pointSize,
-                drawingProgress: CGFloat(progress))
+                drawingProgress: CGFloat(progress)
+            )
         }
         
         effectClosures["Fall\(LTMorphingPhases.appear)"] = {
@@ -117,7 +115,8 @@ extension LTMorphingLabel {
                     x: charRect.size.width / -2.0,
                     y: charRect.size.height * -1.0 + self.font.pointSize / 6,
                     width: charRect.size.width,
-                    height: charRect.size.height)
+                    height: charRect.size.height
+                )
                 context!.translateBy(x: charCenterX, y: charBottomY)
                 
                 let angle = Float(sin(Double(limbo.rect.origin.x)) > 0.5 ? 168 : -168)
@@ -146,5 +145,4 @@ extension LTMorphingLabel {
             return false
         }
     }
-    
 }

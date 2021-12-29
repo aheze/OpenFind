@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 import Vision
 
 extension PhotoFindViewController {
@@ -18,7 +18,6 @@ extension PhotoFindViewController {
         var fastFindResultsNumber = 0
         
         DispatchQueue.main.async {
-            
             self.progressView.setProgress(Float(0), animated: false)
             UIView.animate(withDuration: 0.5, animations: {
                 self.progressView.alpha = 1
@@ -26,7 +25,7 @@ extension PhotoFindViewController {
             })
         }
         
-        let photosToFindFrom = self.findPhotos
+        let photosToFindFrom = findPhotos
         
         dispatchQueue.async {
             self.numberFastFound = 0
@@ -41,7 +40,7 @@ extension PhotoFindViewController {
                         let options = PHImageRequestOptions()
                         options.isSynchronous = true
                         
-                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
+                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { data, _, _, _ in
                             if let imageData = data {
                                 let request = VNRecognizeTextRequest { request, error in
                                     let howManyMatches = self.handleFastDetectedText(request: request, error: error, photo: findPhoto, thisProcessIdentifier: thisProcessIdentifier)
@@ -60,13 +59,10 @@ extension PhotoFindViewController {
                                 
                                 request.customWords = customFindArray
                                 
-                                
                                 let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
                                 do {
                                     try imageRequestHandler.perform([request])
-                                } catch let error {
-
-                                }
+                                } catch {}
                                 
                                 self.dispatchSemaphore.wait()
                             }
@@ -78,12 +74,10 @@ extension PhotoFindViewController {
                 
                 if stop { break }
             }
-            
         }
         dispatchGroup.notify(queue: dispatchQueue) {
             if thisProcessIdentifier == self.currentFastFindProcess {
                 DispatchQueue.main.async {
-                    
                     self.setPromptToFinishedFastFinding(howMany: self.totalCacheResults + fastFindResultsNumber)
                     self.tableView.reloadData()
                     
@@ -97,18 +91,16 @@ extension PhotoFindViewController {
         }
     }
     
-    
     func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto, thisProcessIdentifier: UUID) -> Int {
-        
         guard
             thisProcessIdentifier == currentFastFindProcess,
             let results = request?.results,
-            results.count > 0 else {
+            results.count > 0
+        else {
             dispatchSemaphore.signal()
             dispatchGroup.leave()
             return 0
         }
-        
         
         var fastFindResultsNumber = 0
         
@@ -126,7 +118,6 @@ extension PhotoFindViewController {
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
                 for text in observation.topCandidates(1) {
-                    
                     let origX = observation.boundingBox.origin.x
                     let origY = 1 - observation.boundingBox.minY
                     let origWidth = observation.boundingBox.width
@@ -148,7 +139,7 @@ extension PhotoFindViewController {
         resultPhoto.transcripts = transcripts
         
         var descriptionOfPhoto = ""
-        var textToRanges = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
+        var textToRanges = [String: [ArrayOfMatchesInComp]]() /// COMPONENT to ranges
         var numberOfMatches = 0
         
         for content in transcripts {
@@ -158,7 +149,7 @@ extension PhotoFindViewController {
             let lowercaseContentText = content.text.lowercased()
             
             let individualCharacterWidth = CGFloat(content.width) / CGFloat(lowercaseContentText.count)
-            for match in self.matchToColors.keys {
+            for match in matchToColors.keys {
                 if lowercaseContentText.contains(match) {
                     hasMatch = true
                     let finalW = individualCharacterWidth * CGFloat(match.count)
@@ -172,7 +163,7 @@ extension PhotoFindViewController {
                         let newComponent = Component()
                         
                         newComponent.x = finalX
-                        newComponent.y = CGFloat(content.y) - (CGFloat(content.height))
+                        newComponent.y = CGFloat(content.y) - CGFloat(content.height)
                         newComponent.width = finalW
                         newComponent.height = CGFloat(content.height)
                         newComponent.text = match
@@ -183,7 +174,6 @@ extension PhotoFindViewController {
                         newRangeObject.descriptionRange = index...index + match.count
                         newRangeObject.text = match
                         matchRanges.append(newRangeObject)
-                        
                     }
                 }
             }
@@ -223,8 +213,7 @@ extension PhotoFindViewController {
             }
             
             var foundSamePhoto = false
-            for existingPhoto in self.resultPhotos {
-                
+            for existingPhoto in resultPhotos {
                 let localIdentifier = existingPhoto.findPhoto.asset.localIdentifier
                 if photo.asset.localIdentifier == localIdentifier {
                     foundSamePhoto = true
@@ -235,7 +224,6 @@ extension PhotoFindViewController {
                     for newFindMatch in resultPhoto.components {
                         var smallestDistance = CGFloat(999)
                         for findMatch in existingPhoto.components {
-                            
                             let point1 = CGPoint(x: findMatch.x, y: findMatch.y)
                             let point2 = CGPoint(x: newFindMatch.x, y: newFindMatch.y)
                             let pointDistance = relativeDistance(point1, point2)
@@ -243,25 +231,22 @@ extension PhotoFindViewController {
                             if pointDistance < smallestDistance {
                                 smallestDistance = pointDistance
                             }
-                            
                         }
                         
-                        if smallestDistance >= 0.008 { ///Bigger, so add it
+                        if smallestDistance >= 0.008 { /// Bigger, so add it
                             componentsToAdd.append(newFindMatch)
                             newMatchesNumber += 1
                         }
-                        
                     }
                     
                     existingPhoto.components += componentsToAdd
                     existingPhoto.numberOfMatches += newMatchesNumber
                     fastFindResultsNumber += newMatchesNumber
-                    
                 }
             }
             
             if foundSamePhoto == false {
-                let totalWidth = self.deviceWidth
+                let totalWidth = deviceWidth
                 let finalWidth = totalWidth - 146
                 let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
                 let finalHeight = height + 70
@@ -290,6 +275,7 @@ extension PhotoFindViewController {
         let yDist = a.y - b.y
         return CGFloat(sqrt(xDist * xDist + yDist * yDist))
     }
+
     func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
         let yDist = a.y - b.y

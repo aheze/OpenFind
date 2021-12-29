@@ -13,7 +13,6 @@ import Foundation
  protocol allow the delegate to manage items, configure items, and perform other actions.
  */
 public protocol PaperOnboardingDelegate {
-
     /**
      Tells the delegate that the paperOnbording start scrolling.
 

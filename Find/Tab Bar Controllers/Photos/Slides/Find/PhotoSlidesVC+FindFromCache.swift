@@ -19,14 +19,13 @@ extension PhotoSlidesViewController {
             }
         }
     }
+
     func findFromCache(resultPhoto: ResultPhoto, index: Int) {
-        
         numberCurrentlyFindingFromCache += 1
         
         var totalMatchNumber = 0
         
         DispatchQueue.global(qos: .userInitiated).async {
-            
             guard let editableModel = resultPhoto.findPhoto.editableModel else {
                 self.numberCurrentlyFindingFromCache -= 1
                 return
@@ -37,9 +36,8 @@ extension PhotoSlidesViewController {
             var transcriptComponents = [Component]()
             var components = [Component]()
             
-            ///Cycle through each block of text. Each cont may be a line long.
+            /// Cycle through each block of text. Each cont may be a line long.
             for content in editableModel.contents {
-                
                 let transcript = Component()
                 transcript.x = content.x
                 transcript.y = content.y
@@ -64,7 +62,7 @@ extension PhotoSlidesViewController {
                             let newComponent = Component()
                             
                             newComponent.x = finalX
-                            newComponent.y = CGFloat(content.y) - (CGFloat(content.height))
+                            newComponent.y = CGFloat(content.y) - CGFloat(content.height)
                             newComponent.width = finalW
                             newComponent.height = CGFloat(content.height)
                             newComponent.text = match
@@ -77,7 +75,6 @@ extension PhotoSlidesViewController {
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {
-                
                 if index == self.currentIndex {
                     resultPhoto.transcripts = transcriptComponents
                     resultPhoto.components = components
@@ -89,6 +86,5 @@ extension PhotoSlidesViewController {
                 }
             }
         }
-        
     }
 }

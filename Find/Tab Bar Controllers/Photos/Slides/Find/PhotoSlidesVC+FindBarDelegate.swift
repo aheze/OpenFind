@@ -9,11 +9,9 @@
 import UIKit
 
 extension PhotoSlidesViewController: FindBarDelegate {
-    func pause(pause: Bool) {
-    }
+    func pause(pause: Bool) {}
     
-    func returnTerms(matchToColorsR: [String : [HighlightColor]]) {
-        
+    func returnTerms(matchToColorsR: [String: [HighlightColor]]) {
         for highlight in currentViewController.resultPhoto.components {
             highlight.baseView?.removeFromSuperview()
         }
@@ -23,7 +21,6 @@ extension PhotoSlidesViewController: FindBarDelegate {
         resultPhoto.currentMatchToColors = nil
         resultPhoto.components.removeAll()
         if matchToColorsR.keys.count >= 1 {
-            
             if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
                 findFromCache(resultPhoto: resultPhoto, index: currentIndex)
             } else {
@@ -34,18 +31,15 @@ extension PhotoSlidesViewController: FindBarDelegate {
         }
     }
     
-    func startedEditing(start: Bool) {
-    }
+    func startedEditing(start: Bool) {}
     
     func pressedReturn() {
         continuePressed(dismissKeyboard: false)
     }
     
-    func triedToEdit() {
-    }
+    func triedToEdit() {}
     
-    func triedToEditWhilePaused() {
-    }
+    func triedToEditWhilePaused() {}
     
     func continuePressed(dismissKeyboard: Bool = true) {
         pressedContinue()
@@ -65,6 +59,4 @@ extension PhotoSlidesViewController: FindBarDelegate {
             fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
         }
     }
-    
 }
-

@@ -144,7 +144,7 @@ open class PagingMenuView: UIView {
     }
 
     /// The background color for the menu items.
-    open override var backgroundColor: UIColor? {
+    override open var backgroundColor: UIColor? {
         didSet {
             if let backgroundColor = backgroundColor {
                 options.backgroundColor = backgroundColor
@@ -195,17 +195,13 @@ open class PagingMenuView: UIView {
     /// setting the customization properties on `PagingViewController`.
     /// You can also use your own subclass of the layout by defining the
     /// `menuLayoutClass` property.
-    public private(set) lazy var collectionViewLayout: PagingCollectionViewLayout = {
-        createLayout(layout: options.menuLayoutClass.self)
-    }()
+    public private(set) lazy var collectionViewLayout: PagingCollectionViewLayout = createLayout(layout: options.menuLayoutClass.self)
 
     /// Used to display the menu items that scrolls along with the
     /// content. Using a collection view means you can create custom
     /// cells that display pretty much anything. By default, scrolling
     /// is enabled in the collection view.
-    public lazy var collectionView: UICollectionView = {
-        UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-    }()
+    public lazy var collectionView: UICollectionView = .init(frame: .zero, collectionViewLayout: collectionViewLayout)
 
     /// An instance that stores all the customization so that it's
     /// easier to share between other classes.
@@ -233,7 +229,7 @@ open class PagingMenuView: UIView {
     /// Creates an instance of `PagingViewController`. You need to call
     /// `select(pagingItem:animated:)` in order to set the initial view
     /// controller before any items become visible.
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }

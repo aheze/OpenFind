@@ -17,7 +17,6 @@ extension CameraViewController {
         currentCachingProcess = thisProcessIdentifier
         
         DispatchQueue.global(qos: .userInitiated).async {
-            
             let request = VNRecognizeTextRequest { request, error in
                 self.handleCachedText(request: request, error: error, thisProcessIdentifier: thisProcessIdentifier)
             }
@@ -34,11 +33,10 @@ extension CameraViewController {
             
             request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()] + customFindArray
             
-            
             request.recognitionLevel = .accurate
             request.recognitionLanguages = Defaults.recognitionLanguages
             
-            request.progressHandler = { (_, progress, _) in
+            request.progressHandler = { _, progress, _ in
                 if thisProcessIdentifier == self.currentCachingProcess {
                     self.currentProgress = CGFloat(progress)
                     let percent = progress * 100
@@ -56,11 +54,9 @@ extension CameraViewController {
             let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
             do {
                 try imageRequestHandler.perform([request])
-            } catch let error {
+            } catch {
                 self.busyFastFinding = false
-
             }
         }
     }
 }
-

@@ -20,7 +20,6 @@ struct SnapshotView: View {
     
     var body: some View {
         Button {
-            
             /// small scale animation
             withAnimation(.spring()) { scaleAnimationActive = true }
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
@@ -59,23 +58,23 @@ struct SnapshotView: View {
                             .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
                     )
             }
-                .scaleEffect(scaleAnimationActive ? 1.2 : 1)
-                .frame(width: 40, height: 40)
-                .foregroundColor(.white)
-                .font(.system(size: 19))
-                .background(
-                    Color.white.opacity(0.15)
-                )
-                .cornerRadius(20)
+            .scaleEffect(scaleAnimationActive ? 1.2 : 1)
+            .frame(width: 40, height: 40)
+            .foregroundColor(.white)
+            .font(.system(size: 19))
+            .background(
+                Color.white.opacity(0.15)
+            )
+            .cornerRadius(20)
         }
     }
-    
 }
+
 struct CameraInnerShape: Shape {
     var progress = CGFloat(1)
     var animatableData: CGFloat {
         get { progress }
-        set { self.progress = newValue }
+        set { progress = newValue }
     }
     
     func path(in rect: CGRect) -> Path {
@@ -107,6 +106,7 @@ struct SnapshotViewTester: View {
         SnapshotView(done: $done)
     }
 }
+
 struct SnapshotView_Previews: PreviewProvider {
     static var previews: some View {
         SnapshotViewTester()

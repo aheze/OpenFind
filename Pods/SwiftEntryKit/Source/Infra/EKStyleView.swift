@@ -8,10 +8,7 @@
 import UIKit
 
 class EKStyleView: UIView {
-    
-    private lazy var borderLayer: CAShapeLayer = {
-        return CAShapeLayer()
-    }()
+    private lazy var borderLayer: CAShapeLayer = .init()
     
     private var roundCorners: EKAttributes.RoundCorners!
     private var border: EKAttributes.Border!
@@ -29,7 +26,7 @@ class EKStyleView: UIView {
         let size = CGSize(width: cornerRadius, height: cornerRadius)
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: size)
         
-        if !corners.isEmpty && cornerRadius > 0 {
+        if !corners.isEmpty, cornerRadius > 0 {
             let maskLayer = CAShapeLayer()
             maskLayer.path = path.cgPath
             layer.mask = maskLayer

@@ -9,8 +9,6 @@ import SwiftUI
 
 struct TabBarToolbarView: View {
     var body: some View {
-        HStack {
-            
-        }
+        HStack {}
     }
 }

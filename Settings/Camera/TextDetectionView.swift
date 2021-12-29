@@ -29,11 +29,9 @@ struct TextDetectionView: View {
                     Toggle(isOn: $isOn, label: {
                         Text("Toggle")
                     }).labelsHidden()
-
                 }
                 .edgePadding(6)
             }
-           
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)

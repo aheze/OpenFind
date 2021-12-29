@@ -14,15 +14,15 @@ enum PhotoSlideAction {
     case cache
     case delete
     case info
-    
 }
+
 extension TabBarView {
     func showPhotoSelectionControls(show: Bool) {
         if show {
             controlsReferenceView.isUserInteractionEnabled = true
             stackView.isHidden = true
             controlsReferenceView.addSubview(photosControls)
-            photosControls.snp.makeConstraints { (make) in
+            photosControls.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
             
@@ -35,13 +35,14 @@ extension TabBarView {
             backgroundView.accessibilityLabel = "Tab bar"
         }
     }
+
     func showPhotoSlideControls(show: Bool) {
         if show {
             controlsReferenceView.isUserInteractionEnabled = true
             
             if !photoSlideControls.isDescendant(of: controlsReferenceView) {
                 controlsReferenceView.addSubview(photoSlideControls)
-                photoSlideControls.snp.makeConstraints { (make) in
+                photoSlideControls.snp.makeConstraints { make in
                     make.edges.equalToSuperview()
                 }
             }
@@ -56,7 +57,6 @@ extension TabBarView {
             backgroundView.accessibilityLabel = "Toolbar"
             
         } else {
-            
             controlsReferenceView.isUserInteractionEnabled = false
 
             UIView.animate(withDuration: 0.3) {
@@ -70,8 +70,8 @@ extension TabBarView {
             
             backgroundView.accessibilityLabel = "Tab bar"
         }
-        
     }
+
     func dimPhotoSlideControls(dim: Bool, isPhotosControls: Bool) {
         if isPhotosControls {
             if dim {
@@ -101,7 +101,7 @@ extension TabBarView {
     }
     
     func updateNumberOfSelectedPhotos(to number: Int) {
-        self.numberOfSelectedPhotos = number
+        numberOfSelectedPhotos = number
         
         let starText = shouldStarSelectedPhotos ? "Star" : "Unstar"
         let cacheText = shouldCacheSelectedPhotos ? "Cache" : "Uncache"

@@ -28,7 +28,7 @@ extension ViewController {
                 }
             }
             self?.blurCamera()
-            self?.releasedPan(at: CurrentState.currentlyPresenting ? 0 : -(self?.view.bounds.height ?? 0), velocity: 0)   
+            self?.releasedPan(at: CurrentState.currentlyPresenting ? 0 : -(self?.view.bounds.height ?? 0), velocity: 0)
         }
         
         cameraReferenceView.clipsToBounds = false

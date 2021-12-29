@@ -48,7 +48,7 @@ import Realm
 
  * `Object`
  * `Array`
-*/
+ */
 public typealias PropertyType = RLMPropertyType
 
 /**
@@ -138,9 +138,10 @@ extension ObjectBase {
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
     // swiftlint:disable:next identifier_name
-    internal func _observe<T: ObjectBase>(keyPaths: [String]? = nil,
-                                          on queue: DispatchQueue? = nil,
-                                          _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken {
+    func _observe<T: ObjectBase>(keyPaths: [String]? = nil,
+                                 on queue: DispatchQueue? = nil,
+                                 _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken
+    {
         return RLMObjectBaseAddNotificationBlock(self, keyPaths, queue) { object, names, oldValues, newValues, error in
             if let error = error {
                 block(.error(error as NSError))

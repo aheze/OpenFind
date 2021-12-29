@@ -9,13 +9,12 @@
 import UIKit
 
 extension TabBarView {
-    
     func showListsControls(show: Bool) {
         if show {
             controlsReferenceView.isUserInteractionEnabled = true
             stackView.isHidden = true
             controlsReferenceView.addSubview(listsControls)
-            listsControls.snp.makeConstraints { (make) in
+            listsControls.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
             
@@ -30,6 +29,7 @@ extension TabBarView {
             contentView.accessibilityElements = nil
         }
     }
+
     func updateListsSelectionLabel(numberOfSelected: Int) {
         if numberOfSelected == 0 {
             listsDeleteButton.isEnabled = false

@@ -7,20 +7,18 @@
 
 import Foundation
 
-fileprivate extension Int {
+private extension Int {
     var isValidDisplayPriority: Bool {
         return self >= EKAttributes.Precedence.Priority.minRawValue && self <= EKAttributes.Precedence.Priority.maxRawValue
     }
 }
 
 public extension EKAttributes {
-    
     /**
      Describes the manner on which the entry is pushed and displayed.
      See the various values of more explanation.
      */
     enum Precedence {
-        
         /**
          The display priority of the entry - Determines whether is can be overriden by other entries.
          Must be in range [0...1000]
@@ -55,7 +53,6 @@ public extension EKAttributes {
          Describes the queueing heoristic of entries.
          */
         public enum QueueingHeuristic {
-            
             /** Determines the heuristic which the entry-queue is based on */
             public static var value = QueueingHeuristic.priority
             
@@ -139,4 +136,3 @@ public extension EKAttributes.Precedence.Priority {
     static let low = EKAttributes.Precedence.Priority(rawValue: lowRawValue)
     static let min = EKAttributes.Precedence.Priority(rawValue: minRawValue)
 }
-

@@ -6,21 +6,23 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 public class EKXStatusBarMessageView: UIView {
-    
     // MARK: Props
+
     private let leadingLabel = UILabel()
     private let trailingLabel = UILabel()
     
     // MARK: Setup
+
     public init(leading: EKProperty.LabelContent, trailing: EKProperty.LabelContent) {
         super.init(frame: UIScreen.main.bounds)
         setup(leading: leading, trailing: trailing)
     }
     
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

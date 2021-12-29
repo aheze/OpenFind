@@ -8,12 +8,11 @@
 import UIKit
 
 class CacheButton: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var shadeView: UIView!
-    @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var cacheIcon: CacheIcon!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet var shadeView: UIView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var cacheIcon: CacheIcon!
+    @IBOutlet var button: UIButton!
     
     var pressed: (() -> Void)?
     
@@ -22,10 +21,12 @@ class CacheButton: UIView {
             self.contentView.alpha = 0.5
         })
     }
+
     @IBAction func touchUpInside(_ sender: Any) {
         resetAlpha()
         pressed?()
     }
+
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
     }
@@ -49,7 +50,7 @@ class CacheButton: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("CacheButton", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         blurView.clipsToBounds = true

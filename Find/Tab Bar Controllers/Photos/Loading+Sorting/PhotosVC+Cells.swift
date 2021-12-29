@@ -9,7 +9,5 @@
 import UIKit
 
 class PhotoHeader: UICollectionReusableView {
-    
-    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet var monthLabel: UILabel!
 }
-

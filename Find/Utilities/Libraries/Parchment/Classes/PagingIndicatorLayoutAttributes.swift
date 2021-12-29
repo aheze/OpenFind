@@ -3,13 +3,13 @@ import UIKit
 open class PagingIndicatorLayoutAttributes: UICollectionViewLayoutAttributes {
     open var backgroundColor: UIColor?
 
-    open override func copy(with zone: NSZone? = nil) -> Any {
+    override open func copy(with zone: NSZone? = nil) -> Any {
         let copy = super.copy(with: zone) as! PagingIndicatorLayoutAttributes
         copy.backgroundColor = backgroundColor
         return copy
     }
 
-    open override func isEqual(_ object: Any?) -> Bool {
+    override open func isEqual(_ object: Any?) -> Bool {
         if let rhs = object as? PagingIndicatorLayoutAttributes {
             if backgroundColor != rhs.backgroundColor {
                 return false
@@ -21,7 +21,7 @@ open class PagingIndicatorLayoutAttributes: UICollectionViewLayoutAttributes {
     }
 
     func configure(_ options: PagingOptions) {
-        if case let .visible(height, index, _, insets) = options.indicatorOptions {
+        if case .visible(let height, let index, _, let insets) = options.indicatorOptions {
             backgroundColor = options.indicatorColor
             frame.size.height = height
 

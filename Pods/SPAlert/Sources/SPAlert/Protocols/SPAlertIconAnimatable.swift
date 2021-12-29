@@ -25,7 +25,6 @@ import UIKit
  SPAlert: Protocol for animatable views.
  */
 public protocol SPAlertIconAnimatable {
-    
     /**
      SPAlert: Shoud call when need start animation.
      */

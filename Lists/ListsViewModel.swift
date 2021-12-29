@@ -37,13 +37,11 @@ class ListsViewModel: ObservableObject {
     ]
 }
 
-
-
 struct List {
     var name = ""
     var desc = ""
     var contents = [String]()
     var iconImageName = ""
-    var iconColorName: UInt = 0xaeef
+    var iconColorName: UInt = 0xAEEF
     var dateCreated = Date()
 }

@@ -9,5 +9,5 @@
 import UIKit
 
 class CacheCell: UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var imageView: UIImageView!
 }

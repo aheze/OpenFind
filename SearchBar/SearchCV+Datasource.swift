@@ -14,7 +14,7 @@ extension SearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
-        let field = self.searchViewModel.fields[indexPath.item]
+        let field = searchViewModel.fields[indexPath.item]
         
         cell.setField(field) /// cell can configure itself
         cell.fieldChanged = { [weak self] field in
@@ -46,7 +46,6 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func widthOfExpandedCell(for index: Int) -> Double {
-        
         var extraPadding = CGFloat(0)
         
         if index == 0 {
@@ -64,14 +63,12 @@ extension SearchViewController: UICollectionViewDataSource {
         let fullWidth = searchCollectionView.frame.width
         return max(SearchConstants.minimumHuggingWidth, fullWidth - extraPadding)
     }
-    
-    
 }
 
 extension String {
     func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return ceil(boundingBox.width)
     }

@@ -9,8 +9,6 @@
 import UIKit
 
 class NewListToolbarCell: UICollectionViewCell {
-
-    @IBOutlet weak var labelText: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet var labelText: UILabel!
+    @IBOutlet var imageView: UIImageView!
 }

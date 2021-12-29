@@ -13,6 +13,7 @@ enum Direction {
     case left
     case right
 }
+
 class Gestures {
     var isAnimating = false
     var completedMove = false
@@ -29,15 +30,14 @@ class Gestures {
     var isRubberBanding = false
     
     var transitionAnimatorBlock: (() -> Void)?
-    
 }
 
-class ViewControllerState {
+enum ViewControllerState {
     static var currentVC: UIViewController?
     static var newVC: UIViewController? /// only set when swiping via gesture
 }
 
-class CameraState {
+enum CameraState {
     static var isPaused = false
 }
 
@@ -47,7 +47,7 @@ enum ViewControllerType {
     case lists
 }
 
-struct FindConstants {
+enum FindConstants {
     static var rubberBandingPower = CGFloat(0.7)
     static var shutterBoundsLength = CGFloat(92) /// length of the 40x40 containers
     static var framelessShutterBottomDistance = CGFloat(48 - 10) /// iPhone X
@@ -68,7 +68,7 @@ struct FindConstants {
     static var photoBottomPreviewHeight = CGFloat(60) /// height of the shown portion of the photos vc when finding
 }
 
-struct FindConstantVars { /// calculated based on device size
+enum FindConstantVars { /// calculated based on device size
     static var shutterBottomDistance = CGFloat(0)
     static var cameraShutterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     static var photoFilterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
@@ -82,7 +82,7 @@ struct FindConstantVars { /// calculated based on device size
     static var getTabBarFrame: (() -> CGRect)?
 }
 
-struct Defaults {
+enum Defaults {
     static var highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
     static var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
     static var shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
@@ -91,7 +91,6 @@ struct Defaults {
     static var recognitionLanguages = ["en_US"]
 }
 
-
-struct AccessibilityState {
+enum AccessibilityState {
     static var cameraDidSetup = false
 }

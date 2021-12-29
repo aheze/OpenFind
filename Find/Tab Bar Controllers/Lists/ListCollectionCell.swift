@@ -9,20 +9,19 @@
 import UIKit
 
 class ListCollectionCell: UICollectionViewCell {
+    @IBOutlet var baseView: UIView!
     
-    @IBOutlet weak var baseView: UIView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var title: UILabel!
+    @IBOutlet var nameDescription: UILabel!
+    @IBOutlet var contentsLabel: UILabel!
+    @IBOutlet var contentsList: UILabel!
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var nameDescription: UILabel!
-    @IBOutlet weak var contentsLabel: UILabel!
-    @IBOutlet weak var contentsList: UILabel!
+    @IBOutlet var highlightView: UIView!
     
-    @IBOutlet weak var highlightView: UIView!
+    @IBOutlet var checkmarkView: UIImageView!
     
-    @IBOutlet weak var checkmarkView: UIImageView!
-    
-    @IBOutlet weak var tapHighlightView: UIView!
+    @IBOutlet var tapHighlightView: UIView!
 
     override var isHighlighted: Bool {
         didSet {

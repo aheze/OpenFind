@@ -6,24 +6,25 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
 import RealmSwift
+import UIKit
 
 class PhotosViewController: UIViewController {
     var migrationNeeded = false
     var photosToMigrate = [HistoryModel]()
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
-    @IBOutlet weak var segmentedSlider: SegmentedSlider!
-    @IBOutlet weak var segmentedSliderBottomC: NSLayoutConstraint!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var segmentedSlider: SegmentedSlider!
+    @IBOutlet var segmentedSliderBottomC: NSLayoutConstraint!
+    @IBOutlet var collectionView: UICollectionView!
     
     // MARK: Photo loading
+
     var hasPermissions = false
     var hasFullAccess = false
     var currentlyObservingChanges = false /// if already observing
-    var allPhotos: PHFetchResult<PHAsset>? = nil
+    var allPhotos: PHFetchResult<PHAsset>?
     var allMonths = [Month]() /// all photos
     var monthsToDisplay = [Month]() /// shown photos, including filters
     var allPhotosToDisplay = [FindPhoto]() /// shown photos, including filters, but without grouping by month
@@ -33,6 +34,7 @@ class PhotosViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView? /// show photo loading
     
     // MARK: Realm photo matching + loading
+
     let realm = try! Realm()
     var photoObjects: Results<HistoryModel>?
     let screenScale = UIScreen.main.scale /// for photo thumbnail
@@ -41,11 +43,13 @@ class PhotosViewController: UIViewController {
     var refreshing = false /// currently refreshing data, prevent select cell
     
     // MARK: Prompt
+
     var promptLabel: UILabel!
     
     // MARK: Tips
-    @IBOutlet weak var emptyListContainerView: UIView!
-    @IBOutlet weak var emptyListContainerTopC: NSLayoutConstraint!
+
+    @IBOutlet var emptyListContainerView: UIView!
+    @IBOutlet var emptyListContainerTopC: NSLayoutConstraint!
     
     var photosEmptyViewModel: PhotosEmptyViewModel?
     
@@ -54,6 +58,7 @@ class PhotosViewController: UIViewController {
     var quickTourView: TutorialHeader?
     
     // MARK: Photo selection
+
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
     var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     var updateNumberOfSelectedPhotos: ((Int) -> Void)? /// update accessibility
@@ -86,13 +91,14 @@ class PhotosViewController: UIViewController {
     var dimSlideControls: ((Bool, Bool) -> Void)? /// dim the controls during dismissal, is photos  = true / for dismissal = false
     
     // MARK: Slides
+
     var updateSlideActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     var findPhotoChanged: (() -> Void)? /// starred/cached photos
     var hideTabBar: ((Bool) -> Void)?
     var focusCacheButton: (() -> Void)?
 
-    
     // MARK: Diffable Data Source
+
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<Month, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Month, FindPhoto>
@@ -101,23 +107,26 @@ class PhotosViewController: UIViewController {
     var slidesPresentingInfo: ((Bool) -> Void)?
    
     // MARK: Nav bar
+
     var findButton: UIBarButtonItem!
     var selectButton: UIBarButtonItem!
     
     // MARK: Finding
+
     var hasChangedFromBefore = false /// whether photo deleted, cached, or something changed
     var switchToFind: ((PhotoFilterState, [FindPhoto], Bool, Bool) -> Void)? /// filter, photos to find from, is all photos, has changed from before
     var switchBack: (() -> Void)?
-    @IBOutlet weak var shadeView: UIView!
+    @IBOutlet var shadeView: UIView!
     
-    @IBOutlet weak var collapseButton: UIButton! /// dismiss Finding
+    @IBOutlet var collapseButton: UIButton! /// dismiss Finding
     @IBAction func collapseButtonPressed(_ sender: Any) {
         switchBack?()
         if selectButtonSelected {
             showSelectionControls?(true)
         }
     }
-    @IBOutlet weak var extendedCollapseButton: UIButton!
+
+    @IBOutlet var extendedCollapseButton: UIButton!
     @IBAction func extendedCollapseButtonPressed(_ sender: Any) {
         switchBack?()
         if selectButtonSelected {
@@ -160,7 +169,7 @@ class PhotosViewController: UIViewController {
         setupFinding()
 
         let bottomInset = CGFloat(FindConstantVars.tabHeight)
-        let bottomSafeAreaHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0
+        let bottomSafeAreaHeight = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.safeAreaInsets.bottom ?? 0
         collectionView.contentInset.bottom = 16 + segmentedSlider.bounds.height + bottomInset
         collectionView.verticalScrollIndicatorInsets.bottom = bottomInset - CGFloat(bottomSafeAreaHeight)
         segmentedSliderBottomC.constant = 8 + bottomInset
@@ -174,18 +183,17 @@ class PhotosViewController: UIViewController {
         setupAccessibility()
         
         emptyListContainerView.alpha = 0
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
         if refreshNeededAtLoad {
             refreshNeededAtLoad = false
             refreshing = true
             DispatchQueue.main.async {
-                self.loadImages { (allPhotos, allMonths) in
+                self.loadImages { allPhotos, allMonths in
                     self.allMonths = allMonths
                     self.monthsToDisplay = allMonths
                     self.allPhotosToDisplay = allPhotos
@@ -199,7 +207,7 @@ class PhotosViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSlides" {
-            if let navigationController = self.navigationController, let viewController = segue.destination as? PhotoSlidesViewController {
+            if let navigationController = navigationController, let viewController = segue.destination as? PhotoSlidesViewController {
                 configureSlides(navigationController: navigationController, slidesViewController: viewController)
             }
         }

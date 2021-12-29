@@ -9,7 +9,6 @@ import UIKit
 
 /// Direction of the animation used in AnimationType.from.
 public enum Direction: Int, CaseIterable {
-
     case top
     case left
     case right

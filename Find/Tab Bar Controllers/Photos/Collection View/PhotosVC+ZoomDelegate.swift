@@ -9,7 +9,6 @@
 import UIKit
 
 extension PhotosViewController: ZoomAnimatorDelegate {
-    
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
         if !zoomAnimator.isPresenting {
             dimSlideControls?(true, false)
@@ -24,13 +23,13 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                 /// finished dismissing
                 currentSlidesController = nil
                 changePresentationMode(presentingSlides: false)
-                self.hideTabBar?(false)
+                hideTabBar?(false)
                 
                 if refreshNeededAfterDismissPhoto {
                     refreshNeededAfterDismissPhoto = false
                     refreshing = true
                     DispatchQueue.main.async {
-                        self.loadImages { (allPhotos, allMonths) in
+                        self.loadImages { allPhotos, allMonths in
                             self.allMonths = allMonths
                             self.monthsToDisplay = allMonths
                             self.allPhotosToDisplay = allPhotos
@@ -46,16 +45,15 @@ extension PhotosViewController: ZoomAnimatorDelegate {
         guard let selectedIndexPath = selectedIndexPath else { return }
         
         if let cell = collectionView.cellForItem(at: selectedIndexPath) as? ImageCell {
-            if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
+            if zoomAnimator.isPresenting == false, zoomAnimator.finishedDismissing == true {
                 if
                     let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
                     let model = findPhoto.editableModel
                 {
-                    
                     UIView.animate(withDuration: 0.2, animations: {
                         cell.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
                         cell.starImageView.alpha = model.isHearted ? 1 : 0
-                        cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+                        cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted) ? 1 : 0
                     })
                 }
             }
@@ -72,7 +70,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
         guard let selectedIndexPath = selectedIndexPath else { return nil }
-        //Get a guarded reference to the cell's UIImageView
+        // Get a guarded reference to the cell's UIImageView
         let referenceImageView = getImageViewFromCollectionViewCell(for: selectedIndexPath)
         
         return referenceImageView
@@ -84,7 +82,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
         view.layoutIfNeeded()
         collectionView.layoutIfNeeded()
         
-        //Get a guarded reference to the cell's frame
+        // Get a guarded reference to the cell's frame
         let unconvertedFrame = getFrameFromCollectionViewCell(for: selectedIndexPath)
         
         let cellFrame = collectionView.convert(unconvertedFrame, to: view)
@@ -95,5 +93,4 @@ extension PhotosViewController: ZoomAnimatorDelegate {
         
         return cellFrame
     }
-    
 }

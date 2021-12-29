@@ -22,32 +22,26 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
-public protocol LayoutConstraintItem: class {
-}
+public protocol LayoutConstraintItem: class {}
 
 @available(iOS 9.0, OSX 10.11, *)
-extension ConstraintLayoutGuide : LayoutConstraintItem {
-}
+extension ConstraintLayoutGuide: LayoutConstraintItem {}
 
-extension ConstraintView : LayoutConstraintItem {
-}
-
+extension ConstraintView: LayoutConstraintItem {}
 
 extension LayoutConstraintItem {
-    
-    internal func prepare() {
+    func prepare() {
         if let view = self as? ConstraintView {
             view.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
-    internal var superview: ConstraintView? {
+    var superview: ConstraintView? {
         if let view = self as? ConstraintView {
             return view.superview
         }
@@ -58,18 +52,19 @@ extension LayoutConstraintItem {
         
         return nil
     }
-    internal var constraints: [Constraint] {
-        return self.constraintsSet.allObjects as! [Constraint]
+
+    var constraints: [Constraint] {
+        return constraintsSet.allObjects as! [Constraint]
     }
     
-    internal func add(constraints: [Constraint]) {
+    func add(constraints: [Constraint]) {
         let constraintsSet = self.constraintsSet
         for constraint in constraints {
             constraintsSet.add(constraint)
         }
     }
     
-    internal func remove(constraints: [Constraint]) {
+    func remove(constraints: [Constraint]) {
         let constraintsSet = self.constraintsSet
         for constraint in constraints {
             constraintsSet.remove(constraint)
@@ -86,8 +81,7 @@ extension LayoutConstraintItem {
             objc_setAssociatedObject(self, &constraintsKey, constraintsSet, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         return constraintsSet
-        
     }
-    
 }
+
 private var constraintsKey: UInt8 = 0

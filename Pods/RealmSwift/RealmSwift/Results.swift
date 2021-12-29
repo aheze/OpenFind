@@ -51,6 +51,7 @@ public protocol AddableType {
     /// :nodoc:
     init()
 }
+
 extension NSNumber: AddableType {}
 extension Double: AddableType {}
 extension Float: AddableType {}
@@ -83,7 +84,6 @@ extension AnyRealmValue: AddableType {}
  Results instances cannot be directly instantiated.
  */
 @frozen public struct Results<Element: RealmCollectionValue>: Equatable {
-
     internal let rlmResults: RLMResults<AnyObject>
 
     /// A human-readable description of the objects represented by the results.
@@ -115,6 +115,7 @@ extension AnyRealmValue: AddableType {}
     internal init(_ rlmResults: RLMResults<AnyObject>) {
         self.rlmResults = rlmResults
     }
+
     internal init(objc rlmResults: RLMResults<AnyObject>) {
         self.rlmResults = rlmResults
     }
@@ -243,8 +244,9 @@ extension AnyRealmValue: AddableType {}
      - parameter sortDescriptors: A sequence of `SortDescriptor`s to sort by.
      */
     public func sorted<S: Sequence>(by sortDescriptors: S) -> Results<Element>
-        where S.Iterator.Element == SortDescriptor {
-            return Results<Element>(rlmResults.sortedResults(using: sortDescriptors.map { $0.rlmSortDescriptorValue }))
+        where S.Iterator.Element == SortDescriptor
+    {
+        return Results<Element>(rlmResults.sortedResults(using: sortDescriptors.map { $0.rlmSortDescriptorValue }))
     }
 
     /**
@@ -253,8 +255,9 @@ extension AnyRealmValue: AddableType {}
      - parameter keyPaths:  The key paths used produce distinct results
      */
     public func distinct<S: Sequence>(by keyPaths: S) -> Results<Element>
-        where S.Iterator.Element == String {
-            return Results<Element>(rlmResults.distinctResults(usingKeyPaths: Array(keyPaths)))
+        where S.Iterator.Element == String
+    {
+        return Results<Element>(rlmResults.distinctResults(usingKeyPaths: Array(keyPaths)))
     }
 
     // MARK: Aggregate Operations
@@ -364,7 +367,8 @@ extension AnyRealmValue: AddableType {}
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
     public func observe(on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken {
+                        _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
     }
 
@@ -486,7 +490,8 @@ extension AnyRealmValue: AddableType {}
      */
     public func observe(keyPaths: [String]? = nil,
                         on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken {
+                        _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths, queue: queue)
     }
 
@@ -608,7 +613,8 @@ extension AnyRealmValue: AddableType {}
      */
     public func observe<T: ObjectBase>(keyPaths: [PartialKeyPath<T>],
                                        on queue: DispatchQueue? = nil,
-                                       _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken {
+                                       _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths.map(_name(for:)), queue: queue)
     }
 
@@ -653,8 +659,9 @@ extension Results: RealmCollection {
     public func _observe(_ keyPaths: [String]?,
                          _ queue: DispatchQueue?,
                          _ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void)
-        -> NotificationToken {
-            return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths, queue: queue)
+        -> NotificationToken
+    {
+        return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths, queue: queue)
     }
 }
 
@@ -683,14 +690,15 @@ extension Results: Encodable where Element: Encodable {
 
 // MARK: KeyPath Distinct
 
-extension Results where Element: ObjectBase {
+public extension Results where Element: ObjectBase {
     /**
      Returns a `Results` containing distinct objects based on the specified key paths
 
      - parameter keyPaths: The key paths used produce distinct results
      */
-    public func distinct<S: Sequence>(by keyPaths: S) -> Results<Element>
-        where S.Iterator.Element == PartialKeyPath<Element> {
-            return Results<Element>(rlmResults.distinctResults(usingKeyPaths: keyPaths.map(_name(for:))))
+    func distinct<S: Sequence>(by keyPaths: S) -> Results<Element>
+        where S.Iterator.Element == PartialKeyPath<Element>
+    {
+        return Results<Element>(rlmResults.distinctResults(usingKeyPaths: keyPaths.map(_name(for:))))
     }
 }

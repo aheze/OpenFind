@@ -5,17 +5,17 @@
 //  Created by Zheng on 3/18/21.
 //
 
-import UIKit
-import AVFoundation
 import AppClip
+import AVFoundation
+import UIKit
 
 enum PermissionAction {
     case ask
     case goToSettings
     case authorized
 }
+
 extension PermissionsViewController {
-    
     func requestAccess() {
         switch permissionAction {
         case .ask:
@@ -37,6 +37,5 @@ extension PermissionsViewController {
         case .authorized:
             granted?()
         }
-        
     }
 }

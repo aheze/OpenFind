@@ -99,7 +99,8 @@ struct PagingDistance {
     ) {
         guard
             let upcomingIndexPath = visibleItems.indexPath(for: upcomingPagingItem),
-            let upcomingAttributes = layoutAttributes[upcomingIndexPath] else {
+            let upcomingAttributes = layoutAttributes[upcomingIndexPath]
+        else {
             // When there is no upcomingIndexPath or any layout attributes
             // for that item we have no way to determine the distance.
             return nil
@@ -116,7 +117,8 @@ struct PagingDistance {
         self.navigationOrientation = navigationOrientation
 
         if let currentIndexPath = visibleItems.indexPath(for: currentPagingItem),
-            let fromAttributes = layoutAttributes[currentIndexPath] {
+           let fromAttributes = layoutAttributes[currentIndexPath]
+        {
             self.fromAttributes = fromAttributes
         } else {
             fromAttributes = nil

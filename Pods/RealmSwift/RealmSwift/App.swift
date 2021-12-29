@@ -21,32 +21,31 @@ import Realm
 import Realm.Private
 
 /**
-An object representing the Realm App configuration
+ An object representing the Realm App configuration
 
-- see: `RLMAppConfiguration`
-*/
+ - see: `RLMAppConfiguration`
+ */
 public typealias AppConfiguration = RLMAppConfiguration
 
 /**
-An object representing a client which performs network calls on
-Realm Cloud user api keys
+ An object representing a client which performs network calls on
+ Realm Cloud user api keys
 
-- see: `RLMAPIKeyAuth`
-*/
+ - see: `RLMAPIKeyAuth`
+ */
 public typealias APIKeyAuth = RLMAPIKeyAuth
 
 /**
-An object representing a client which performs network calls on
-Realm Cloud user registration & password functions
+ An object representing a client which performs network calls on
+ Realm Cloud user registration & password functions
 
-- see: `RLMEmailPasswordAuth`
-*/
+ - see: `RLMEmailPasswordAuth`
+ */
 public typealias EmailPasswordAuth = RLMEmailPasswordAuth
 
 /// A block type used to report an error
 public typealias EmailPasswordAuthOptionalErrorBlock = RLMEmailPasswordAuthOptionalErrorBlock
-extension EmailPasswordAuth {
-
+public extension EmailPasswordAuth {
     /// Resets the password of an email identity using the
     /// password reset function set up in the application.
     /// - Parameters:
@@ -54,33 +53,34 @@ extension EmailPasswordAuth {
     ///   - password: The desired new password.
     ///   - args: A list of arguments passed in as a BSON array.
     ///   - completion: A callback to be invoked once the call is complete.
-    public func callResetPasswordFunction(email: String,
-                                          password: String,
-                                          args: [AnyBSON],
-                                          _ completion: @escaping EmailPasswordAuthOptionalErrorBlock) {
+    func callResetPasswordFunction(email: String,
+                                   password: String,
+                                   args: [AnyBSON],
+                                   _ completion: @escaping EmailPasswordAuthOptionalErrorBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .array(args))
-        self.__callResetPasswordFunction(email, password: password, args: bson as! [RLMBSON], completion: completion)
+        __callResetPasswordFunction(email, password: password, args: bson as! [RLMBSON], completion: completion)
     }
 }
 
 /**
-An object representing a client which performs network calls on
-Realm Cloud for registering devices to push notifications
+ An object representing a client which performs network calls on
+ Realm Cloud for registering devices to push notifications
  
-- see `RLMPushClient`
- */
+ - see `RLMPushClient`
+  */
 public typealias PushClient = RLMPushClient
 
 /// An object which is used within UserAPIKeyProviderClient
 public typealias UserAPIKey = RLMUserAPIKey
 
 /**
-`Credentials`is an enum representing supported authentication types for MongoDB Realm.
-Example Usage:
-```
-let credentials = Credentials.JWT(token: myToken)
-```
-*/
+ `Credentials`is an enum representing supported authentication types for MongoDB Realm.
+ Example Usage:
+ ```
+ let credentials = Credentials.JWT(token: myToken)
+ ```
+ */
 @frozen public enum Credentials {
     /// Credentials from a Facebook access token.
     case facebook(accessToken: String)
@@ -118,7 +118,7 @@ public extension App {
      @param completion A callback invoked after completion. Will return `Result.success(User)` or `Result.failure(Error)`.
      */
     func login(credentials: Credentials, _ completion: @escaping (Result<User, Error>) -> Void) {
-        self.__login(withCredential: ObjectiveCSupport.convert(object: credentials)) { user, error in
+        __login(withCredential: ObjectiveCSupport.convert(object: credentials)) { user, error in
             if let user = user {
                 completion(.success(user))
             } else {
@@ -133,26 +133,26 @@ public extension App {
 public typealias ASLoginDelegate = RLMASLoginDelegate
 
 @available(OSX 10.15, watchOS 6.0, iOS 13.0, iOSApplicationExtension 13.0, OSXApplicationExtension 10.15, tvOS 13.0, *)
-extension App {
+public extension App {
     /**
-     Sets the ASAuthorizationControllerDelegate to be handled by `App`
-     - Parameter controller: The ASAuthorizationController in which you want `App` to consume its delegate.
+      Sets the ASAuthorizationControllerDelegate to be handled by `App`
+      - Parameter controller: The ASAuthorizationController in which you want `App` to consume its delegate.
 
-     Usage:
-     ```
-     let app = App(id: "my-app-id")
-     let appleIDProvider = ASAuthorizationAppleIDProvider()
-     let request = appleIDProvider.createRequest()
-     request.requestedScopes = [.fullName, .email]
+      Usage:
+      ```
+      let app = App(id: "my-app-id")
+      let appleIDProvider = ASAuthorizationAppleIDProvider()
+      let request = appleIDProvider.createRequest()
+      request.requestedScopes = [.fullName, .email]
 
-     let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-     app.setASAuthorizationControllerDelegate(controller: authorizationController)
-     authorizationController.presentationContextProvider = self
-     authorizationController.performRequests()
-     ```
-    */
-    public func setASAuthorizationControllerDelegate(for controller: ASAuthorizationController) {
-        self.__setASAuthorizationControllerDelegateFor(controller)
+      let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+      app.setASAuthorizationControllerDelegate(controller: authorizationController)
+      authorizationController.presentationContextProvider = self
+      authorizationController.performRequests()
+      ```
+     */
+    func setASAuthorizationControllerDelegate(for controller: ASAuthorizationController) {
+        __setASAuthorizationControllerDelegateFor(controller)
     }
 }
 
@@ -178,8 +178,7 @@ import Combine
     /// This function is not implemented.
     ///
     /// Realm publishers do not support backpressure and so this function does nothing.
-    public func request(_ demand: Subscribers.Demand) {
-    }
+    public func request(_ demand: Subscribers.Demand) {}
 
     /// Stop emitting values on this subscription.
     public func cancel() {
@@ -237,13 +236,13 @@ extension App: ObservableObject {
 @available(OSX 10.15, watchOS 6.0, iOS 13.0, iOSApplicationExtension 13.0, OSXApplicationExtension 10.15, tvOS 13.0, macCatalyst 13.0, macCatalystApplicationExtension 13.0, *)
 public extension EmailPasswordAuth {
     /**
-     Registers a new email identity with the username/password provider,
-     and sends a confirmation email to the provided address.
+      Registers a new email identity with the username/password provider,
+      and sends a confirmation email to the provided address.
 
-     @param email The email address of the user to register.
-     @param password The password that the user created for the new username/password identity.
-     @returns A publisher that eventually return `Result.success` or `Error`.
-    */
+      @param email The email address of the user to register.
+      @param password The password that the user created for the new username/password identity.
+      @returns A publisher that eventually return `Result.success` or `Error`.
+     */
     func registerUser(email: String, password: String) -> Future<Void, Error> {
         return Future<Void, Error> { promise in
             self.registerUser(email: email, password: password) { error in
@@ -257,12 +256,12 @@ public extension EmailPasswordAuth {
     }
 
     /**
-     Confirms an email identity with the username/password provider.
+      Confirms an email identity with the username/password provider.
 
-     @param token The confirmation token that was emailed to the user.
-     @param tokenId The confirmation token id that was emailed to the user.
-     @returns A publisher that eventually return `Result.success` or `Error`.
-    */
+      @param token The confirmation token that was emailed to the user.
+      @param tokenId The confirmation token id that was emailed to the user.
+      @returns A publisher that eventually return `Result.success` or `Error`.
+     */
     func confirmUser(_ token: String, tokenId: String) -> Future<Void, Error> {
         return Future<Void, Error> { promise in
             self.confirmUser(token, tokenId: tokenId) { error in
@@ -276,11 +275,11 @@ public extension EmailPasswordAuth {
     }
 
     /**
-     Re-sends a confirmation email to a user that has registered but
-     not yet confirmed their email address.
-     @param email The email address of the user to re-send a confirmation for.
-     @returns A publisher that eventually return `Result.success` or `Error`.
-    */
+      Re-sends a confirmation email to a user that has registered but
+      not yet confirmed their email address.
+      @param email The email address of the user to re-send a confirmation for.
+      @returns A publisher that eventually return `Result.success` or `Error`.
+     */
     func resendConfirmationEmail(email: String) -> Future<Void, Error> {
         return Future<Void, Error> { promise in
             self.resendConfirmationEmail(email) { error in
@@ -312,10 +311,10 @@ public extension EmailPasswordAuth {
     }
 
     /**
-     Sends a password reset email to the given email address.
-     @param email The email address of the user to send a password reset email for.
-     @returns A publisher that eventually return `Result.success` or `Error`.
-    */
+      Sends a password reset email to the given email address.
+      @param email The email address of the user to send a password reset email for.
+      @returns A publisher that eventually return `Result.success` or `Error`.
+     */
     func sendResetPasswordEmail(email: String) -> Future<Void, Error> {
         return Future<Void, Error> { promise in
             self.sendResetPasswordEmail(email) { error in
@@ -329,14 +328,14 @@ public extension EmailPasswordAuth {
     }
 
     /**
-     Resets the password of an email identity using the
-     password reset token emailed to a user.
+      Resets the password of an email identity using the
+      password reset token emailed to a user.
 
-     @param password The new password.
-     @param token The password reset token that was emailed to the user.
-     @param tokenId The password reset token id that was emailed to the user.
-     @returns A publisher that eventually return `Result.success` or `Error`.
-    */
+      @param password The new password.
+      @param token The password reset token that was emailed to the user.
+      @param tokenId The password reset token id that was emailed to the user.
+      @returns A publisher that eventually return `Result.success` or `Error`.
+     */
     func resetPassword(to: String, token: String, tokenId: String) -> Future<Void, Error> {
         return Future<Void, Error> { promise in
             self.resetPassword(to: to, token: token, tokenId: tokenId) { error in
@@ -350,14 +349,14 @@ public extension EmailPasswordAuth {
     }
 
     /**
-     Resets the password of an email identity using the
-     password reset function set up in the application.
+      Resets the password of an email identity using the
+      password reset function set up in the application.
 
-     @param email  The email address of the user.
-     @param password The desired new password.
-     @param args A list of arguments passed in as a BSON array.
-     @returns A publisher that eventually return `Result.success` or `Error`.
-    */
+      @param email  The email address of the user.
+      @param password The desired new password.
+      @param args A list of arguments passed in as a BSON array.
+      @returns A publisher that eventually return `Result.success` or `Error`.
+     */
     func callResetPasswordFunction(email: String, password: String, args: [AnyBSON]) -> Future<Void, Error> {
         return Future<Void, Error> { promise in
             self.callResetPasswordFunction(email: email, password: password, args: args) { error in
@@ -406,11 +405,11 @@ public extension APIKeyAuth {
      */
     func deleteAPIKey(_ objectId: ObjectId) -> Future<Void, Error> {
         return Future { promise in
-            self.deleteAPIKey(objectId) { (error) in
+            self.deleteAPIKey(objectId) { error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
-                    promise(.success(Void()))
+                    promise(.success(()))
                 }
             }
         }
@@ -423,11 +422,11 @@ public extension APIKeyAuth {
      */
     func enableAPIKey(_ objectId: ObjectId) -> Future<Void, Error> {
         return Future { promise in
-            self.enableAPIKey(objectId) { (error) in
+            self.enableAPIKey(objectId) { error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
-                    promise(.success(Void()))
+                    promise(.success(()))
                 }
             }
         }
@@ -440,11 +439,11 @@ public extension APIKeyAuth {
      */
     func disableAPIKey(_ objectId: ObjectId) -> Future<Void, Error> {
         return Future { promise in
-            self.disableAPIKey(objectId) { (error) in
+            self.disableAPIKey(objectId) { error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
-                    promise(.success(Void()))
+                    promise(.success(()))
                 }
             }
         }
@@ -469,11 +468,11 @@ public extension PushClient {
     /// @returns A publisher that eventually return `Result.success` or `Error`.
     func registerDevice(token: String, user: User) -> Future<Void, Error> {
         return Future { promise in
-            self.registerDevice(token: token, user: user) { (error) in
+            self.registerDevice(token: token, user: user) { error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
-                    promise(.success(Void()))
+                    promise(.success(()))
                 }
             }
         }
@@ -484,11 +483,11 @@ public extension PushClient {
     /// @returns A publisher that eventually return `Result.success` or `Error`.
     func deregisterDevice(user: User) -> Future<Void, Error> {
         return Future { promise in
-            self.deregisterDevice(user: user) { (error) in
+            self.deregisterDevice(user: user) { error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
-                    promise(.success(Void()))
+                    promise(.success(()))
                 }
             }
         }
@@ -503,7 +502,7 @@ public extension APIKeyAuth {
      @completion A completion that eventually return `Result.success(UserAPIKey)` or `Result.failure(Error)`.
      */
     func createAPIKey(named: String, completion: @escaping (Result<UserAPIKey, Error>) -> Void) {
-        createAPIKey(named: named) { (userApiKey, error) in
+        createAPIKey(named: named) { userApiKey, error in
             if let userApiKey = userApiKey {
                 completion(.success(userApiKey))
             } else {
@@ -518,7 +517,7 @@ public extension APIKeyAuth {
      @completion A completion that eventually return `Result.success(UserAPIKey)` or `Result.failure(Error)`.
      */
     func fetchAPIKey(_ objectId: ObjectId, _ completion: @escaping (Result<UserAPIKey, Error>) -> Void) {
-        fetchAPIKey(objectId) { (userApiKey, error) in
+        fetchAPIKey(objectId) { userApiKey, error in
             if let userApiKey = userApiKey {
                 completion(.success(userApiKey))
             } else {
@@ -532,7 +531,7 @@ public extension APIKeyAuth {
      @completion A completion that eventually return `Result.success([UserAPIKey])` or `Result.failure(Error)`.
      */
     func fetchAPIKeys(_ completion: @escaping (Result<[UserAPIKey], Error>) -> Void) {
-        fetchAPIKeys { (userApiKeys, error) in
+        fetchAPIKeys { userApiKeys, error in
             if let userApiKeys = userApiKeys {
                 completion(.success(userApiKeys))
             } else {
@@ -544,11 +543,11 @@ public extension APIKeyAuth {
 
 #if swift(>=5.5) && canImport(_Concurrency)
 @available(macOS 12.0, tvOS 15.0, iOS 15.0, watchOS 8.0, *)
-extension App {
+public extension App {
     /// Login to a user for the Realm app.
     /// @param credentials The credentials identifying the user.
     /// @returns A publisher that eventually return `User` or `Error`.
-    public func login(credentials: Credentials) async throws -> User {
+    func login(credentials: Credentials) async throws -> User {
         return try await withCheckedThrowingContinuation { continuation in
             self.login(credentials: credentials, continuation.resume)
         }

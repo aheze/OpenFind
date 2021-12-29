@@ -9,7 +9,6 @@
 import UIKit
 
 extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listCategories?.count ?? 1
     }
@@ -19,7 +18,6 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
         cell.isAccessibilityElement = true
         
         if let list = listCategories?[indexPath.item] {
-            
             cell.title.text = list.name
             cell.nameDescription.text = list.descriptionOfList
             
@@ -47,7 +45,7 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
             
             if overFlowCount >= 1 {
                 let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
-                                                          comment:"ListsController def=\n... x more")
+                                                                comment: "ListsController def=\n... x more")
                 textToDisplay += String.localizedStringWithFormat(overFlowCountMoreFormat, overFlowCount)
             }
             
@@ -80,22 +78,19 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView,
-                        heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
+                        heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat
+    {
         guard let cell = listCategories?[indexPath.item] else { return 0 }
         
         let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
         
-        
         let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
         let array = cell.contents
-        
         
         var textToDisplay = ""
         var overFlowCount = 0
         for (index, text) in array.enumerated() {
-            
             if index <= 10 {
                 if index == array.count - 1 {
                     textToDisplay += text
@@ -108,7 +103,7 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
         }
         if overFlowCount >= 1 {
             let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
-                                                      comment:"ListsController def=\n... x more")
+                                                            comment: "ListsController def=\n... x more")
             
             textToDisplay += String.localizedStringWithFormat(overFlowCountMoreFormat, overFlowCount)
         }
@@ -119,10 +114,9 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
         
         let extendHeight = newDescHeight + newContentsHeight + titleHeight
         
-        return AdaptiveCollectionConfig.cellBaseHeight + extendHeight + 8 //+ 300
+        return AdaptiveCollectionConfig.cellBaseHeight + extendHeight + 8 // + 300
     }
   
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectButtonSelected == true {
             indexPathsSelected.append(indexPath.item)
@@ -162,10 +156,11 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
                 }
                 
                 presentingList?(true)
-                self.present(viewController, animated: true)
+                present(viewController, animated: true)
             }
         }
     }
+
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if selectButtonSelected == true {
             indexPathsSelected.remove(object: indexPath.item)

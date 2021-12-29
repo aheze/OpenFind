@@ -25,7 +25,6 @@ import UIKit
  SPAlert: Wrapper of haptic styles.
  */
 public enum SPAlertHaptic {
-    
     case success
     case warning
     case error

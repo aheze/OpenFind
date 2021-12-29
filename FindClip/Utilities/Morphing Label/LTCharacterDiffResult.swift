@@ -28,7 +28,6 @@
 import Foundation
 
 public enum LTCharacterDiffResult: CustomDebugStringConvertible, Equatable {
-    
     case same
     case add
     case delete
@@ -52,7 +51,6 @@ public enum LTCharacterDiffResult: CustomDebugStringConvertible, Equatable {
             return "The character is REPLACED with a new character."
         }
     }
-    
 }
 
 public func == (lhs: LTCharacterDiffResult, rhs: LTCharacterDiffResult) -> Bool {

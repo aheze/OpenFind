@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension LivePreviewViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {

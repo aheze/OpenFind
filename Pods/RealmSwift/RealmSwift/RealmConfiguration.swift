@@ -20,7 +20,7 @@ import Foundation
 import Realm
 import Realm.Private
 
-extension Realm {
+public extension Realm {
     /**
      A `Configuration` instance describes the different options used to create an instance of a Realm.
 
@@ -31,8 +31,7 @@ extension Realm {
      of this, you will normally want to cache and reuse a single configuration value for each distinct configuration
      rather than creating a new value each time you open a Realm.
      */
-    @frozen public struct Configuration {
-
+    @frozen struct Configuration {
         // MARK: Default Configuration
 
         /**
@@ -51,29 +50,29 @@ extension Realm {
         // MARK: Initialization
 
         /**
-         Creates a `Configuration` which can be used to create new `Realm` instances.
+          Creates a `Configuration` which can be used to create new `Realm` instances.
 
-         - note: The `fileURL`, `inMemoryIdentifier`, and `syncConfiguration` parameters are mutually exclusive. Only
-                 set one of them, or none if you wish to use the default file URL.
+          - note: The `fileURL`, `inMemoryIdentifier`, and `syncConfiguration` parameters are mutually exclusive. Only
+                  set one of them, or none if you wish to use the default file URL.
 
-         - parameter fileURL:            The local URL to the Realm file.
-         - parameter inMemoryIdentifier: A string used to identify a particular in-memory Realm.
-         - parameter syncConfiguration:  For Realms intended to sync with MongoDB Realm, a sync configuration.
-         - parameter encryptionKey:      An optional 64-byte key to use to encrypt the data.
-         - parameter readOnly:           Whether the Realm is read-only (must be true for read-only files).
-         - parameter schemaVersion:      The current schema version.
-         - parameter migrationBlock:     The block which migrates the Realm to the current version.
-         - parameter deleteRealmIfMigrationNeeded: If `true`, recreate the Realm file with the provided
-                                                   schema if a migration is required.
-         - parameter shouldCompactOnLaunch: A block called when opening a Realm for the first time during the
-                                            life of a process to determine if it should be compacted before being
-                                            returned to the user. It is passed the total file size (data + free space)
-                                            and the total bytes used by data in the file.
+          - parameter fileURL:            The local URL to the Realm file.
+          - parameter inMemoryIdentifier: A string used to identify a particular in-memory Realm.
+          - parameter syncConfiguration:  For Realms intended to sync with MongoDB Realm, a sync configuration.
+          - parameter encryptionKey:      An optional 64-byte key to use to encrypt the data.
+          - parameter readOnly:           Whether the Realm is read-only (must be true for read-only files).
+          - parameter schemaVersion:      The current schema version.
+          - parameter migrationBlock:     The block which migrates the Realm to the current version.
+          - parameter deleteRealmIfMigrationNeeded: If `true`, recreate the Realm file with the provided
+                                                    schema if a migration is required.
+          - parameter shouldCompactOnLaunch: A block called when opening a Realm for the first time during the
+                                             life of a process to determine if it should be compacted before being
+                                             returned to the user. It is passed the total file size (data + free space)
+                                             and the total bytes used by data in the file.
 
-                                            Return `true ` to indicate that an attempt to compact the file should be made.
-                                            The compaction will be skipped if another process is accessing it.
-         - parameter objectTypes:        The subset of `Object` and `EmbeddedObject` subclasses persisted in the Realm. 
-        */
+                                             Return `true ` to indicate that an attempt to compact the file should be made.
+                                             The compaction will be skipped if another process is accessing it.
+          - parameter objectTypes:        The subset of `Object` and `EmbeddedObject` subclasses persisted in the Realm.
+         */
         public init(fileURL: URL? = URL(fileURLWithPath: RLMRealmPathForFile("default.realm"), isDirectory: false),
                     inMemoryIdentifier: String? = nil,
                     syncConfiguration: SyncConfiguration? = nil,
@@ -83,21 +82,22 @@ extension Realm {
                     migrationBlock: MigrationBlock? = nil,
                     deleteRealmIfMigrationNeeded: Bool = false,
                     shouldCompactOnLaunch: ((Int, Int) -> Bool)? = nil,
-                    objectTypes: [ObjectBase.Type]? = nil) {
-                self.fileURL = fileURL
-                if let inMemoryIdentifier = inMemoryIdentifier {
-                    self.inMemoryIdentifier = inMemoryIdentifier
-                }
-                if let syncConfiguration = syncConfiguration {
-                    self.syncConfiguration = syncConfiguration
-                }
-                self.encryptionKey = encryptionKey
-                self.readOnly = readOnly
-                self.schemaVersion = schemaVersion
-                self.migrationBlock = migrationBlock
-                self.deleteRealmIfMigrationNeeded = deleteRealmIfMigrationNeeded
-                self.shouldCompactOnLaunch = shouldCompactOnLaunch
-                self.objectTypes = objectTypes
+                    objectTypes: [ObjectBase.Type]? = nil)
+        {
+            self.fileURL = fileURL
+            if let inMemoryIdentifier = inMemoryIdentifier {
+                self.inMemoryIdentifier = inMemoryIdentifier
+            }
+            if let syncConfiguration = syncConfiguration {
+                self.syncConfiguration = syncConfiguration
+            }
+            self.encryptionKey = encryptionKey
+            self.readOnly = readOnly
+            self.schemaVersion = schemaVersion
+            self.migrationBlock = migrationBlock
+            self.deleteRealmIfMigrationNeeded = deleteRealmIfMigrationNeeded
+            self.shouldCompactOnLaunch = shouldCompactOnLaunch
+            self.objectTypes = objectTypes
         }
 
         // MARK: Configuration Properties
@@ -189,7 +189,7 @@ extension Realm {
                 return _deleteRealmIfMigrationNeeded
             }
             set(newValue) {
-                if newValue && syncConfiguration != nil {
+                if newValue, syncConfiguration != nil {
                     throwRealmException("Cannot set 'deleteRealmIfMigrationNeeded' when sync is enabled ('syncConfig' is set).")
                 }
                 _deleteRealmIfMigrationNeeded = newValue
@@ -212,12 +212,13 @@ extension Realm {
         /// The classes managed by the Realm.
         public var objectTypes: [ObjectBase.Type]? {
             get {
-                return self.customSchema.map { $0.objectSchema.compactMap { $0.objectClass as? ObjectBase.Type } }
+                return customSchema.map { $0.objectSchema.compactMap { $0.objectClass as? ObjectBase.Type } }
             }
             set {
-                self.customSchema = newValue.map { RLMSchema(objectClasses: $0) }
+                customSchema = newValue.map { RLMSchema(objectClasses: $0) }
             }
         }
+
         /**
          The maximum number of live versions in the Realm file before an exception will
          be thrown when attempting to start a write transaction.
@@ -263,19 +264,19 @@ extension Realm {
             } else if syncConfiguration == nil {
                 fatalError("A Realm Configuration must specify a path or an in-memory identifier.")
             }
-            configuration.encryptionKey = self.encryptionKey
-            configuration.readOnly = self.readOnly
-            configuration.schemaVersion = self.schemaVersion
-            configuration.migrationBlock = self.migrationBlock.map { accessorMigrationBlock($0) }
-            configuration.deleteRealmIfMigrationNeeded = self.deleteRealmIfMigrationNeeded
-            if let shouldCompactOnLaunch = self.shouldCompactOnLaunch {
+            configuration.encryptionKey = encryptionKey
+            configuration.readOnly = readOnly
+            configuration.schemaVersion = schemaVersion
+            configuration.migrationBlock = migrationBlock.map { accessorMigrationBlock($0) }
+            configuration.deleteRealmIfMigrationNeeded = deleteRealmIfMigrationNeeded
+            if let shouldCompactOnLaunch = shouldCompactOnLaunch {
                 configuration.shouldCompactOnLaunch = ObjectiveCSupport.convert(object: shouldCompactOnLaunch)
             } else {
                 configuration.shouldCompactOnLaunch = nil
             }
-            configuration.setCustomSchemaWithoutCopying(self.customSchema)
-            configuration.disableFormatUpgrade = self.disableFormatUpgrade
-            configuration.maximumNumberOfActiveVersions = self.maximumNumberOfActiveVersions ?? 0
+            configuration.setCustomSchemaWithoutCopying(customSchema)
+            configuration.disableFormatUpgrade = disableFormatUpgrade
+            configuration.maximumNumberOfActiveVersions = maximumNumberOfActiveVersions ?? 0
             return configuration
         }
 
@@ -292,7 +293,7 @@ extension Realm {
             configuration.readOnly = rlmConfiguration.readOnly
             configuration.schemaVersion = rlmConfiguration.schemaVersion
             configuration.migrationBlock = rlmConfiguration.migrationBlock.map { rlmMigration in
-                return { migration, schemaVersion in
+                { migration, schemaVersion in
                     rlmMigration(migration.rlmMigration, schemaVersion)
                 }
             }

@@ -17,28 +17,20 @@ class HistorySharing: UIActivityItemProvider {
         self.folderURL = folderURL
         self.filePath = filePath
         let newUrl = URL(fileURLWithPath: NSTemporaryDirectory() + "\(filePath).jpg")
-        self.temporaryURL = newUrl
+        temporaryURL = newUrl
         do {
             let data = Data()
             try data.write(to: temporaryURL)
-        } catch let error {
-
-        }
+        } catch {}
         super.init(placeholderItem: temporaryURL)
     }
     
     override var item: Any {
-        get {
-            let newFileUrl = folderURL.appendingPathComponent(filePath)
-            do {
-                let data = try Data(contentsOf: newFileUrl)
-                try data.write(to: temporaryURL)
-            } catch let error {
-
-            }
-            return temporaryURL
-        }
+        let newFileUrl = folderURL.appendingPathComponent(filePath)
+        do {
+            let data = try Data(contentsOf: newFileUrl)
+            try data.write(to: temporaryURL)
+        } catch {}
+        return temporaryURL
     }
-    
 }
-

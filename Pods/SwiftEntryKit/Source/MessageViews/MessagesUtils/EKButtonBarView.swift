@@ -6,8 +6,8 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 /**
  Dynamic button bar view
@@ -15,8 +15,7 @@ import QuickLayout
  1-2 buttons spread horizontally
  3 or more buttons spread vertically
  */
-final public class EKButtonBarView: UIView {
-    
+public final class EKButtonBarView: UIView {
     // MARK: - Properties
     
     private var buttonViews: [EKButtonView] = []
@@ -33,9 +32,7 @@ final public class EKButtonBarView: UIView {
         }
     }
     
-    private lazy var buttonEdgeRatio: CGFloat = {
-        return 1.0 / CGFloat(self.buttonBarContent.content.count)
-    }()
+    private lazy var buttonEdgeRatio: CGFloat = 1.0 / CGFloat(self.buttonBarContent.content.count)
     
     private(set) lazy var intrinsicHeight: CGFloat = {
         var height: CGFloat = 0
@@ -53,12 +50,12 @@ final public class EKButtonBarView: UIView {
     }()
     
     private var compressedConstraint: NSLayoutConstraint!
-    private lazy var expandedConstraint: NSLayoutConstraint = {
-        return set(.height, of: intrinsicHeight, priority: .defaultLow)
-    }()
+    private lazy var expandedConstraint: NSLayoutConstraint = set(.height, of: intrinsicHeight, priority: .defaultLow)
 
     // MARK: Setup
-    required public init?(coder aDecoder: NSCoder) {
+
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -80,7 +77,7 @@ final public class EKButtonBarView: UIView {
         compressedConstraint = set(.height, of: 1, priority: .must)
     }
     
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         adjustRoundCornersIfNecessary()
     }
@@ -186,7 +183,7 @@ final public class EKButtonBarView: UIView {
         }
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupInterfaceStyle()
     }
 }

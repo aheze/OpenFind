@@ -9,10 +9,8 @@
 import UIKit
 
 public struct EKNotificationMessage {
-    
     /** Insets of the content of the message */
     public struct Insets {
-        
         /** The insets of the content of the message, from the top, bottom, left, right */
         public var contentInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
@@ -33,7 +31,8 @@ public struct EKNotificationMessage {
         
     public init(simpleMessage: EKSimpleMessage,
                 auxiliary: EKProperty.LabelContent? = nil,
-                insets: Insets = .default) {
+                insets: Insets = .default)
+    {
         self.simpleMessage = simpleMessage
         self.auxiliary = auxiliary
         self.insets = insets

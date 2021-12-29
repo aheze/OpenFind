@@ -6,11 +6,10 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
-final public class EKRatingMessageView: UIView, EntryAppearanceDescriptor {
-
+public final class EKRatingMessageView: UIView, EntryAppearanceDescriptor {
     // MARK: Properties
     
     private var message: EKRatingMessage
@@ -46,12 +45,14 @@ final public class EKRatingMessageView: UIView, EntryAppearanceDescriptor {
             description: message.initialDescription)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func set(title: EKProperty.LabelContent,
-                     description: EKProperty.LabelContent) {
+                     description: EKProperty.LabelContent)
+    {
         messageContentView.titleContent = title
         messageContentView.subtitleContent = description
         UIView.animate(withDuration: 0.4,
@@ -60,8 +61,8 @@ final public class EKRatingMessageView: UIView, EntryAppearanceDescriptor {
                        initialSpringVelocity: 0,
                        options: [.transitionCrossDissolve],
                        animations: {
-            SwiftEntryKit.layoutIfNeeded()
-        }, completion: nil)
+                           SwiftEntryKit.layoutIfNeeded()
+                       }, completion: nil)
     }
     
     private func setupMessageContentView() {

@@ -10,7 +10,7 @@ import UIKit
 
 extension CameraViewController {
     func beginCachingPhoto() {
-        if let cacheTipView = self.cacheTipView {
+        if let cacheTipView = cacheTipView {
             cacheTipView.dismiss()
         }
         if startedCaching {
@@ -21,8 +21,8 @@ extension CameraViewController {
                 cacheLabel.text = NSLocalizedString("shouldNotCache", comment: "")
                 addCacheResults()
                 
-                self.cache.accessibilityLabel = "Cached"
-                self.cache.accessibilityHint = "Tap to uncache the current paused image"
+                cache.accessibilityLabel = "Cached"
+                cache.accessibilityHint = "Tap to uncache the current paused image"
             } else {
                 cache.cacheIcon.animateCheck(percentage: currentProgress)
                 cache.cacheIcon.toggleRim(light: true)
@@ -32,7 +32,7 @@ extension CameraViewController {
                 
                 cache.accessibilityLabel = "Caching"
                 cache.accessibilityHint = ""
-                UIAccessibility.post(notification: .layoutChanged, argument: self.cache)
+                UIAccessibility.post(notification: .layoutChanged, argument: cache)
             }
         } else {
             if let currentImage = currentPausedImage?.cgImage {
@@ -43,12 +43,11 @@ extension CameraViewController {
                 messageView.showMessage("0", dismissible: false, duration: -1)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     if self.cachePressed {
-                        if 0.25 > self.currentProgress {
+                        if self.currentProgress < 0.25 {
                             self.messageView.showMessage("25", dismissible: false, duration: -1)
                             self.cache.cacheIcon.animateCheck(percentage: 0.25)
                             
                             UIAccessibility.post(notification: .announcement, argument: "25%")
-                            
                         }
                     }
                 }

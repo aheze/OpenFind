@@ -9,14 +9,12 @@
 import UIKit
 
 class CameraFocusView: UIView {
-    
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var topLeft: UIImageView!
-    @IBOutlet weak var topRight: UIImageView!
-    @IBOutlet weak var bottomRight: UIImageView!
-    @IBOutlet weak var bottomLeft: UIImageView!
-    
+    @IBOutlet var topLeft: UIImageView!
+    @IBOutlet var topRight: UIImageView!
+    @IBOutlet var bottomRight: UIImageView!
+    @IBOutlet var bottomLeft: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,12 +29,11 @@ class CameraFocusView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("CameraFocusView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         topRight.transform = CGAffineTransform(rotationAngle: 90.degreesToRadians)
         bottomRight.transform = CGAffineTransform(rotationAngle: 180.degreesToRadians)
         bottomLeft.transform = CGAffineTransform(rotationAngle: 270.degreesToRadians)
-        
     }
 }

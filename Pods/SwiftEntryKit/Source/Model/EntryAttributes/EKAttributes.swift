@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 public struct EKAttributes {
-    
     // MARK: Identification
     
     /**

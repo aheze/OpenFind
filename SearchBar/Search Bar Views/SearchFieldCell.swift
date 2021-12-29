@@ -8,39 +8,37 @@
 import UIKit
 
 class SearchFieldCell: UICollectionViewCell {
-    
     /// main content, constraints applied
-    @IBOutlet weak var baseView: UIView!
+    @IBOutlet var baseView: UIView!
     
-    @IBOutlet weak var leftView: LeftView!
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var rightView: RightView!
+    @IBOutlet var leftView: LeftView!
+    @IBOutlet var textField: UITextField!
+    @IBOutlet var rightView: RightView!
     
     /// full-width button
-    @IBOutlet weak var triggerButton: UIButton!
+    @IBOutlet var triggerButton: UIButton!
     @IBAction func triggerButtonPressed(_ sender: Any) {
         entireViewTapped?()
     }
     
-    @IBOutlet weak var baseViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var baseViewRightC: NSLayoutConstraint!
-    @IBOutlet weak var baseViewBottomC: NSLayoutConstraint!
-    @IBOutlet weak var baseViewLeftC: NSLayoutConstraint!
+    @IBOutlet var baseViewTopC: NSLayoutConstraint!
+    @IBOutlet var baseViewRightC: NSLayoutConstraint!
+    @IBOutlet var baseViewBottomC: NSLayoutConstraint!
+    @IBOutlet var baseViewLeftC: NSLayoutConstraint!
     
-    @IBOutlet weak var leftViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var rightViewWidthC: NSLayoutConstraint!
+    @IBOutlet var leftViewWidthC: NSLayoutConstraint!
+    @IBOutlet var rightViewWidthC: NSLayoutConstraint!
     
-    @IBOutlet weak var addNewView: UIView!
-    @IBOutlet weak var addNewViewCenterHorizontallyWithSuperview: NSLayoutConstraint!
-    @IBOutlet weak var addNewViewCenterHorizontallyWithRightC: NSLayoutConstraint!
-    @IBOutlet weak var addNewViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var addNewViewHeightC: NSLayoutConstraint!
-    @IBOutlet weak var addNewImageView: UIImageView!
+    @IBOutlet var addNewView: UIView!
+    @IBOutlet var addNewViewCenterHorizontallyWithSuperview: NSLayoutConstraint!
+    @IBOutlet var addNewViewCenterHorizontallyWithRightC: NSLayoutConstraint!
+    @IBOutlet var addNewViewWidthC: NSLayoutConstraint!
+    @IBOutlet var addNewViewHeightC: NSLayoutConstraint!
+    @IBOutlet var addNewImageView: UIImageView!
     
     var leftViewTapped: (() -> Void)?
     var rightViewTapped: (() -> Void)?
     var entireViewTapped: (() -> Void)?
-    
     
     var fieldChanged: ((Field) -> Void)?
     
@@ -48,12 +46,12 @@ class SearchFieldCell: UICollectionViewCell {
     /// ONLY cellForRowAt
     func setField(_ field: Field) {
         self.field = field
-        self.textField.text = field.text.value.getText()
+        textField.text = field.text.value.getText()
         
         switch field.text.value {
-        case .string(_):
+        case .string:
             break
-        case .list(_):
+        case .list:
             break
         case .addNew:
             let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
@@ -65,16 +63,14 @@ class SearchFieldCell: UICollectionViewCell {
         let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
         animations()
         completion()
-        
     }
     
-    func updateField(_ makeChangesTo: ((inout Field) -> Void)) {
+    func updateField(_ makeChangesTo: (inout Field) -> Void) {
         makeChangesTo(&field)
-        self.fieldChanged?(field)
+        fieldChanged?(field)
     }
     
     var field = Field(text: .init(value: .string(""), colorIndex: 0)) {
-        
         /// perform instant updates, no animation
         didSet {
             textField.isEnabled = field.focused
@@ -121,7 +117,6 @@ class SearchFieldCell: UICollectionViewCell {
         }
         
         addNewViewCenterHorizontallyWithRightC.constant = -SearchConstants.fieldRightViewPadding
-        
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -146,10 +141,9 @@ class SearchFieldCell: UICollectionViewCell {
     }
     
     func showAddNew(_ show: Bool, changeColorOnly: Bool) -> (() -> Void, () -> Void, () -> Void) {
-        
-        var setup = { } /// constraints
-        var animationBlock = { }
-        var completion = { } /// cleanup
+        var setup = {} /// constraints
+        var animationBlock = {}
+        var completion = {} /// cleanup
         
         if changeColorOnly {
             animationBlock = { [weak self] in
@@ -196,28 +190,25 @@ class SearchFieldCell: UICollectionViewCell {
         
         return (setup, animationBlock, completion)
     }
-    
 }
 
 extension SearchFieldCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if let text = textField.text,
-           let textRange = Range(range, in: text) {
+           let textRange = Range(range, in: text)
+        {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
 
             updateField {
                 $0.text.value = .string(updatedText)
             }
-
         }
         
         return true
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
-
-

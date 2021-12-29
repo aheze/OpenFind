@@ -35,7 +35,7 @@ extension ListBuilderViewController {
             [
                 iconTitle, iconString,
                 colorTitle, colorString,
-                pitchTitle, pitchString,
+                pitchTitle, pitchString
             ]
         )
         

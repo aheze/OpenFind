@@ -20,7 +20,6 @@ extension CameraViewController {
         cameraControlsBottomC.constant = Positions.bottomStop + 16
         showControlsBottomC.constant = Positions.bottomStop + 4
         
-        
         cameraMaskBottomC.constant = Positions.bottomStop
         cameraShadowBottomC.constant = Positions.bottomStop
         overlayShadowBottomC.constant = Positions.bottomStop

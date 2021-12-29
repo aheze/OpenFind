@@ -34,24 +34,20 @@ extension CameraViewController {
     
     /// add cache results to fast found results
     func addCacheResults() {
-        
         numberCurrentlyFindingFromCache += 1
         
         DispatchQueue.global(qos: .userInitiated).async {
-            
             var numberOfMatches = 0 /// how many individual matches
             
             var components = [Component]()
            
-            ///Cycle through each block of text. Each cont may be a line long.
+            /// Cycle through each block of text. Each cont may be a line long.
             for cachedComponent in self.cachedComponents {
-                
                 let lowercaseContentText = cachedComponent.text
                 let individualCharacterWidth = CGFloat(cachedComponent.width) / CGFloat(lowercaseContentText.count)
                 
                 for match in self.matchToColors.keys {
                     if lowercaseContentText.contains(match) {
-
                         let indices = lowercaseContentText.indicesOf(string: match)
                         
                         for index in indices {
@@ -75,7 +71,6 @@ extension CameraViewController {
                     }
                 }
             }
-            
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {

@@ -6,9 +6,9 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SDWebImage
 import SDWebImagePhotosPlugin
+import UIKit
 
 extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,7 +71,6 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.textView.text = findModel.descriptionText
             
-            
             let url = NSURL.sd_URL(with: findModel.findPhoto.asset)
             
             cell.photoImageView.sd_imageTransition = .fade
@@ -80,7 +79,7 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textView.layoutManager.ensureLayout(for: cell.textView.textContainer)
             
             var rects = [CGRect]()
-            cell.drawingView.subviews.forEach({ $0.removeFromSuperview() })
+            cell.drawingView.subviews.forEach { $0.removeFromSuperview() }
             
             let attributedVoiceOverDescription = NSMutableAttributedString(string: cell.textView.text)
             
@@ -106,11 +105,11 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
                         attributedVoiceOverDescription.addAttributes(
                             [.accessibilitySpeechPitch: firstColor.hexString.getDescription().1],
                             range:
-                                NSRange(
-                                    location:
-                                        range.descriptionRange.first ?? 0,
-                                    length: (range.descriptionRange.last ?? 0) - (range.descriptionRange.first ?? 0)
-                                )
+                            NSRange(
+                                location:
+                                range.descriptionRange.first ?? 0,
+                                length: (range.descriptionRange.last ?? 0) - (range.descriptionRange.first ?? 0)
+                            )
                         )
                     }
                 }

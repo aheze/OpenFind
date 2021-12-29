@@ -15,6 +15,7 @@ extension CameraViewController: UITextFieldDelegate {
         scrollView.isScrollEnabled = true
         searchPressed?(true)
     }
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         UIView.animate(withDuration: 0.2) {
             self.textFieldBackgroundView.backgroundColor = UIColor(named: "SearchBackground")
@@ -22,6 +23,7 @@ extension CameraViewController: UITextFieldDelegate {
         scrollView.isScrollEnabled = false
         searchPressed?(false)
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         
@@ -31,6 +33,7 @@ extension CameraViewController: UITextFieldDelegate {
         }
         return true
     }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             findText = updatedString
@@ -43,6 +46,7 @@ extension CameraViewController: UITextFieldDelegate {
         
         return true
     }
+
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         findText = ""
         DispatchQueue.main.async {

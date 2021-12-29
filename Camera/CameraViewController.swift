@@ -5,11 +5,10 @@
 //  Created by Zheng on 11/18/21.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 class CameraViewController: UIViewController, PageViewController {
-    
     var tabType: TabState = .camera
     
     var cameraViewModel: CameraViewModel
@@ -21,17 +20,17 @@ class CameraViewController: UIViewController, PageViewController {
     var listsViewModel = ListsViewModel()
     
     // MARK: - Sub view controllers
+
     lazy var livePreviewViewController = createLivePreview()
     lazy var searchViewController = createSearchBar()
     
-    @IBOutlet weak var searchContainerView: UIView!
+    @IBOutlet var searchContainerView: UIView!
     
-    @IBOutlet weak var zoomContainerView: UIView!
-    @IBOutlet weak var zoomContainerHeightC: NSLayoutConstraint!
+    @IBOutlet var zoomContainerView: UIView!
+    @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var livePreviewContainerView: UIView!
-    @IBOutlet weak var safeView: UIView!
-    
+    @IBOutlet var livePreviewContainerView: UIView!
+    @IBOutlet var safeView: UIView!
     
     init?(
         coder: NSCoder,
@@ -40,13 +39,14 @@ class CameraViewController: UIViewController, PageViewController {
         self.cameraViewModel = cameraViewModel
         super.init(coder: coder)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("You must create this view controller with metadata.")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         setup()
     }
@@ -66,28 +66,15 @@ class CameraViewController: UIViewController, PageViewController {
         safeView.backgroundColor = .clear
         
         setupZoom()
-
     }
 }
 
 extension CameraViewController {
-    func willBecomeActive() {
-        
-    }
+    func willBecomeActive() {}
     
-    func didBecomeActive() {
-        
-    }
+    func didBecomeActive() {}
     
-    func willBecomeInactive() {
-        
-    }
+    func willBecomeInactive() {}
     
-    func didBecomeInactive() {
-        
-    }
-    
+    func didBecomeInactive() {}
 }
-
-
-

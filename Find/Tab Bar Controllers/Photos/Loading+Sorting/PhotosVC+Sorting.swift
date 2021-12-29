@@ -6,9 +6,9 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
 import SwiftUI
+import UIKit
 
 struct Month: Hashable {
     var id = UUID()
@@ -18,7 +18,7 @@ struct Month: Hashable {
     init(monthDate: Date, photos: [FindPhoto]) {
         self.monthDate = monthDate
         self.photos = photos
-        self.id = UUID()
+        id = UUID()
     }
     
     func hash(into hasher: inout Hasher) {
@@ -60,11 +60,11 @@ extension PhotosViewController {
             self.applySnapshot(animatingDifferences: true)
         }
     }
+
     func sortPhotos(with filterState: PhotoFilterState) {
         var allPhotosToDisplay = [FindPhoto]()
         
         func determineIncludedInStarAndCache(_ state: PhotoFilterState, model: EditableHistoryModel?) -> Bool {
-            
             if state.starSelected {
                 if state.cacheSelected {
                     let photoStarred = model?.isHearted ?? false
@@ -86,7 +86,7 @@ extension PhotosViewController {
         
         switch filterState.currentFilter {
         case .local:
-            var filteredMonths = self.allMonths
+            var filteredMonths = allMonths
             for index in 0..<filteredMonths.count {
                 let filteredPhotos = filteredMonths[index].photos.filter { photo in
                     let photoTakenLocally = photo.editableModel?.isTakenLocally ?? false
@@ -97,11 +97,11 @@ extension PhotosViewController {
                 allPhotosToDisplay += filteredPhotos
             }
             filteredMonths = filteredMonths.filter { month in
-                return !month.photos.isEmpty
+                !month.photos.isEmpty
             }
-            self.monthsToDisplay = filteredMonths
+            monthsToDisplay = filteredMonths
         case .screenshots:
-            var filteredMonths = self.allMonths
+            var filteredMonths = allMonths
             for index in 0..<filteredMonths.count {
                 let filteredPhotos = filteredMonths[index].photos.filter { photo in
                     
@@ -115,51 +115,50 @@ extension PhotosViewController {
                 allPhotosToDisplay += filteredPhotos
             }
             filteredMonths = filteredMonths.filter { month in
-                return !month.photos.isEmpty
+                !month.photos.isEmpty
             }
-            self.monthsToDisplay = filteredMonths
+            monthsToDisplay = filteredMonths
         case .all:
-            var filteredMonths = self.allMonths
+            var filteredMonths = allMonths
             for index in 0..<filteredMonths.count {
                 let filteredPhotos = filteredMonths[index].photos.filter { photo in
-                    return determineIncludedInStarAndCache(filterState, model: photo.editableModel)
+                    determineIncludedInStarAndCache(filterState, model: photo.editableModel)
                 }
                 filteredMonths[index].photos = filteredPhotos
                 allPhotosToDisplay += filteredPhotos
             }
             filteredMonths = filteredMonths.filter { month in
-                return !month.photos.isEmpty
+                !month.photos.isEmpty
             }
-            self.monthsToDisplay = filteredMonths
+            monthsToDisplay = filteredMonths
             
             if TipViews.currentStarStep == 1 {
-                self.startStarSecondStep()
+                startStarSecondStep()
             }
             if TipViews.currentCacheStep == 1 {
-                self.startCacheSecondStep()
+                startCacheSecondStep()
             }
         }
         
         if TipViews.inTutorial {
-            
             /// star is already deselected, cache left
             if !filterState.starSelected {
                 if filterState.cacheSelected {
-                    if TipViews.currentStarStep == 0 && TipViews.currentCacheStep == 0 {
+                    if TipViews.currentStarStep == 0, TipViews.currentCacheStep == 0 {
                         removeFilters(type: .cached)
                     }
                 } else {
                     if TipViews.queuingStar {
                         if filterState.currentFilter == .all {
-                            self.startStarSecondStep()
+                            startStarSecondStep()
                         } else {
-                            self.startTutorial?(.starred)
+                            startTutorial?(.starred)
                         }
                     } else if TipViews.queuingCache {
                         if filterState.currentFilter == .all {
-                            self.startCacheSecondStep()
+                            startCacheSecondStep()
                         } else {
-                            self.startTutorial?(.cached)
+                            startTutorial?(.cached)
                         }
                     }
                 }
@@ -193,5 +192,3 @@ extension PhotosViewController {
         updateFindButtonHint()
     }
 }
-
-

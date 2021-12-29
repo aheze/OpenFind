@@ -6,20 +6,18 @@
 //  Copyright © 2019 Andrew. All rights reserved.
 //
 
-import UIKit
-import Vision
 import ARKit
 import CoreMotion
+import UIKit
+import Vision
 
 extension CameraViewController {
-    
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
         if currentPassCount >= 80 {
             canNotify = true
         }
         
         if let results = request?.results, results.count > 0 {
-            
             if let currentMotion = motionManager.deviceMotion {
                 motionXAsOfHighlightStart = Double(0)
                 motionYAsOfHighlightStart = Double(0)
@@ -28,7 +26,6 @@ extension CameraViewController {
             }
             
             DispatchQueue.main.async {
-                
                 var newComponents = [Component]()
                 var transcriptComponents = [Component]()
                 
@@ -45,9 +42,7 @@ extension CameraViewController {
                             self.animateDetection(rect: detectionRect)
                         }
                         
-                        
                         for text in observation.topCandidates(1) {
-                            
                             let individualCharacterWidth = convertedRect.width / CGFloat(text.string.count)
                             let lowercaseText = text.string.lowercased()
                             
@@ -61,7 +56,6 @@ extension CameraViewController {
                             
                             for match in self.matchToColors.keys {
                                 if lowercaseText.contains(match) {
-                                    
                                     let indices = lowercaseText.indicesOf(string: match)
                                     for index in indices {
                                         let x = convertedRect.origin.x + (individualCharacterWidth * CGFloat(index))
@@ -96,7 +90,6 @@ extension CameraViewController {
                     self.updateMatchesNumber(to: 0, tapHaptic: false)
                     self.fadeCurrentComponents(currentComponents: self.currentComponents)
                 } else {
-                    
                     if CameraState.isPaused, self.cachePressed {
                         self.addPausedFastResults(newComponents: newComponents)
                         self.updateMatchesNumber(to: newComponents.count, tapHaptic: false)
@@ -126,7 +119,7 @@ extension CameraViewController {
         } else {
             fadeCurrentComponents(currentComponents: currentComponents)
             updateMatchesNumber(to: 0, tapHaptic: false)
-            currentComponents.removeAll() 
+            currentComponents.removeAll()
         }
         
         busyFastFinding = false
@@ -142,7 +135,6 @@ extension CameraViewController {
             var lowestDistance = CGFloat(10000)
             
             for oldComponent in currentComponents {
-                
                 if newComponent.text == oldComponent.text {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
@@ -162,12 +154,10 @@ extension CameraViewController {
     }
     
     func animateNewHighlights(newComponents: [Component], shouldScale: Bool) {
-        
         var animatedComponents = [Component]()
         var nextComponents = [Component]()
         
         for newComponent in newComponents {
-            
             var lowestDistance = CGFloat(10000)
             var lowestComponent: Component?
             
@@ -223,7 +213,7 @@ extension CameraViewController {
     
     func layerScaleAnimation(layer: CALayer, duration: CFTimeInterval, fromValue: CGFloat, toValue: CGFloat) {
         let timing = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
-        let scaleAnimation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
         CATransaction.begin()
         CATransaction.setAnimationTimingFunction(timing)
         scaleAnimation.duration = duration
@@ -232,6 +222,7 @@ extension CameraViewController {
         layer.add(scaleAnimation, forKey: "scale")
         CATransaction.commit()
     }
+
     func fadeCurrentComponents(currentComponents: [Component]) {
         DispatchQueue.main.async {
             let currentViews = currentComponents.map { $0.baseView }
@@ -276,11 +267,11 @@ extension CameraViewController {
         
         let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
         startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
-        startPointAnim.toValue = CGPoint(x:1, y: 0.5)
+        startPointAnim.toValue = CGPoint(x: 1, y: 0.5)
         
         let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
         endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
-        endPointAnim.toValue = CGPoint(x:2, y: 0.5)
+        endPointAnim.toValue = CGPoint(x: 2, y: 0.5)
         
         let animGroup = CAAnimationGroup()
         animGroup.animations = [startPointAnim, endPointAnim]
@@ -289,29 +280,30 @@ extension CameraViewController {
         animGroup.repeatCount = 0
         gradient.add(animGroup, forKey: "animateGrad")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             layer.removeFromSuperlayer()
-        })
+        }
     }
 }
+
 extension Array where Element: Equatable {
-    
     // Remove first collection element that is equal to the given `object`:
     mutating func remove(object: Element) {
-        guard let index = firstIndex(of: object) else {return}
+        guard let index = firstIndex(of: object) else { return }
         remove(at: index)
     }
 }
+
 extension String {
     func indicesOf(string: String) -> [Int] {
         var indices = [Int]()
-        var searchStartIndex = self.startIndex
+        var searchStartIndex = startIndex
         
-        while searchStartIndex < self.endIndex,
-              let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
+        while searchStartIndex < endIndex,
+              let range = range(of: string, range: searchStartIndex..<endIndex),
               !range.isEmpty
         {
-            let index = distance(from: self.startIndex, to: range.lowerBound)
+            let index = distance(from: startIndex, to: range.lowerBound)
             indices.append(index)
             searchStartIndex = range.upperBound
         }
@@ -319,4 +311,3 @@ extension String {
         return indices
     }
 }
-

@@ -35,21 +35,20 @@ import UIKit
  */
 @available(iOSApplicationExtension, unavailable)
 open class SPAlertView: UIView {
-    
     // MARK: - Properties
     
     open var dismissByTap: Bool = true
-    open var completion: (() -> Void)? = nil
+    open var completion: (() -> Void)?
     
     // MARK: - UIAppearance
     
-    @objc dynamic open var cornerRadius: CGFloat = 8 {
+    @objc open dynamic var cornerRadius: CGFloat = 8 {
         didSet {
-            layer.cornerRadius = self.cornerRadius
+            layer.cornerRadius = cornerRadius
         }
     }
     
-    @objc dynamic open var duration: TimeInterval = 1.5
+    @objc open dynamic var duration: TimeInterval = 1.5
     
     // MARK: - Views
     
@@ -69,7 +68,7 @@ open class SPAlertView: UIView {
         return view
     }()
     
-    weak open var presentWindow: UIWindow?
+    open weak var presentWindow: UIWindow?
     
     // MARK: - Init
     
@@ -111,7 +110,7 @@ open class SPAlertView: UIView {
             addGestureRecognizer(tapGesterRecognizer)
         }
         
-        setCornerRadius(self.cornerRadius)
+        setCornerRadius(cornerRadius)
     }
     
     // MARK: - Configure
@@ -142,7 +141,7 @@ open class SPAlertView: UIView {
     
     private func setIcon(for preset: SPAlertIconPreset) {
         let view = preset.createView()
-        self.iconView = view
+        iconView = view
         addSubview(view)
     }
     
@@ -174,16 +173,15 @@ open class SPAlertView: UIView {
     }
     
     open func present(haptic: SPAlertHaptic = .success, completion: (() -> Void)? = nil) {
-        present(duration: self.duration, haptic: haptic, completion: completion)
+        present(duration: duration, haptic: haptic, completion: completion)
     }
     
     open func present(duration: TimeInterval, haptic: SPAlertHaptic = .success, completion: (() -> Void)? = nil) {
-        
-        if self.presentWindow == nil {
-            self.presentWindow = UIApplication.shared.keyWindow
+        if presentWindow == nil {
+            presentWindow = UIApplication.shared.keyWindow
         }
         
-        guard let window = self.presentWindow else { return }
+        guard let window = presentWindow else { return }
         
         window.addSubview(self)
         
@@ -198,7 +196,7 @@ open class SPAlertView: UIView {
         
         alpha = 0
         setFrame()
-        transform = transform.scaledBy(x: self.presentDismissScale, y: self.presentDismissScale)
+        transform = transform.scaledBy(x: presentDismissScale, y: presentDismissScale)
         
         // Present
         
@@ -207,7 +205,7 @@ open class SPAlertView: UIView {
         UIView.animate(withDuration: presentDismissDuration, animations: {
             self.alpha = 1
             self.transform = CGAffineTransform.identity
-        }, completion: { finished in
+        }, completion: { _ in
             if let iconView = self.iconView as? SPAlertIconAnimatable {
                 iconView.animate()
             }
@@ -221,7 +219,7 @@ open class SPAlertView: UIView {
         UIView.animate(withDuration: presentDismissDuration, animations: {
             self.alpha = 0
             self.transform = self.transform.scaledBy(x: self.presentDismissScale, y: self.presentDismissScale)
-        }, completion: { [weak self] finished in
+        }, completion: { [weak self] _ in
             self?.removeFromSuperview()
             self?.completion?()
         })
@@ -232,34 +230,35 @@ open class SPAlertView: UIView {
     open var layout: SPAlertLayout = .init()
     
     fileprivate func setFrame() {
-        guard let window = self.presentWindow else { return }
-        frame = CGRect.init(x: 0, y: 0, width: 250, height: 100)
+        guard let window = presentWindow else { return }
+        frame = CGRect(x: 0, y: 0, width: 250, height: 100)
         center = .init(x: window.frame.midX, y: window.frame.midY)
         layoutMargins = layout.margins
         sizeToFit()
         center = .init(x: window.frame.midX, y: window.frame.midY)
     }
     
-    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+    override open func sizeThatFits(_ size: CGSize) -> CGSize {
         layoutSubviews()
         let bottomY = [subtitleLabel, titleLabel, iconView].first(where: { $0 != nil })??.frame.maxY ?? 150
-        return CGSize.init(width: frame.width, height: bottomY + layoutMargins.bottom)
+        return CGSize(width: frame.width, height: bottomY + layoutMargins.bottom)
     }
     
-    open override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         backgroundView.frame = bounds
-        if let iconView = self.iconView {
+        if let iconView = iconView {
             iconView.frame = .init(origin: .init(x: 0, y: layoutMargins.top), size: layout.iconSize)
             iconView.center.x = bounds.midX
         }
-        if let titleLabel = self.titleLabel {
+        if let titleLabel = titleLabel {
             titleLabel.layoutDynamicHeight(
                 x: layoutMargins.left,
                 y: iconView == nil ? layoutMargins.top : (iconView?.frame.maxY ?? 0) + layout.spaceBetweenIconAndTitle,
-                width: frame.width - layoutMargins.left - layoutMargins.right)
+                width: frame.width - layoutMargins.left - layoutMargins.right
+            )
         }
-        if let subtitleLabel = self.subtitleLabel {
+        if let subtitleLabel = subtitleLabel {
             let yPosition: CGFloat = {
                 if let titleLabel = self.titleLabel {
                     return titleLabel.frame.maxY + 4

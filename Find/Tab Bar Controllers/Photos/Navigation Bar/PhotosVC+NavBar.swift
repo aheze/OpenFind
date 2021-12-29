@@ -10,10 +10,8 @@ import UIKit
 
 extension PhotosViewController {
     func setupBarButtons() {
-        
         let photos = NSLocalizedString("welcomeToPhotos", comment: "")
-        self.title = photos
-        
+        title = photos
         
         let findText = NSLocalizedString("universal-find", comment: "")
         let selectText = NSLocalizedString("universal-select", comment: "")
@@ -29,9 +27,11 @@ extension PhotosViewController {
         findButton.isEnabled = false
         selectButton.isEnabled = false
     }
+
     @objc func findPressed(sender: UIBarButtonItem) {
         findPressed()
     }
+
     @objc func selectPressed(sender: UIBarButtonItem) {
         selectPressed()
     }

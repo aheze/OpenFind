@@ -22,47 +22,45 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
 public class ConstraintMakerPriortizable: ConstraintMakerFinalizable {
-    
     @discardableResult
     public func priority(_ amount: ConstraintPriority) -> ConstraintMakerFinalizable {
-        self.description.priority = amount.value
+        description.priority = amount.value
         return self
     }
     
     @discardableResult
     public func priority(_ amount: ConstraintPriorityTarget) -> ConstraintMakerFinalizable {
-        self.description.priority = amount
+        description.priority = amount
         return self
     }
     
-    @available(*, deprecated, message:"Use priority(.required) instead.")
+    @available(*, deprecated, message: "Use priority(.required) instead.")
     @discardableResult
     public func priorityRequired() -> ConstraintMakerFinalizable {
-        return self.priority(.required)
+        return priority(.required)
     }
     
-    @available(*, deprecated, message:"Use priority(.high) instead.")
+    @available(*, deprecated, message: "Use priority(.high) instead.")
     @discardableResult
     public func priorityHigh() -> ConstraintMakerFinalizable {
-        return self.priority(.high)
+        return priority(.high)
     }
     
-    @available(*, deprecated, message:"Use priority(.medium) instead.")
+    @available(*, deprecated, message: "Use priority(.medium) instead.")
     @discardableResult
     public func priorityMedium() -> ConstraintMakerFinalizable {
-        return self.priority(.medium)
+        return priority(.medium)
     }
     
-    @available(*, deprecated, message:"Use priority(.low) instead.")
+    @available(*, deprecated, message: "Use priority(.low) instead.")
     @discardableResult
     public func priorityLow() -> ConstraintMakerFinalizable {
-        return self.priority(.low)
+        return priority(.low)
     }
 }

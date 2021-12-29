@@ -13,7 +13,7 @@ extension ViewController {
         blurAnimator?.finishAnimation(at: .start)
         blurAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
         
-        self.cameraViewController.blurView.effect = nil
+        cameraViewController.blurView.effect = nil
         blurAnimator?.addAnimations {
             self.cameraViewController.blurView.effect = UIBlurEffect(style: .systemChromeMaterialDark)
         }

@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIFont {
-    
     /// https://mackarous.com/dev/2018/12/4/dynamic-type-at-any-font-weight
     func withTraits(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
         if let descriptor = fontDescriptor.withSymbolicTraits(traits) {
@@ -17,7 +16,6 @@ extension UIFont {
         } else {
             return self
         }
-        
     }
 
     func bold() -> UIFont {

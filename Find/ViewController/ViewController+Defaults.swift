@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SupportDocs
+import UIKit
 
 extension ViewController {
     func readDefaults() {
@@ -38,9 +38,7 @@ extension ViewController {
                 let strings = sorted.map { $0.language.getName().1 }
                 Defaults.recognitionLanguages = strings
             }
-        } catch {
-
-        }
+        } catch {}
     }
     
     /// prevent swiping, then reset to defaults

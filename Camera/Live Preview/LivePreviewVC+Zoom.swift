@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 /**
  Zoom + aspect progress changing
@@ -23,9 +23,7 @@ extension LivePreviewViewController {
                 cameraDevice.videoZoomFactor = zoom
             }
             cameraDevice.unlockForConfiguration()
-        } catch {
-
-        }
+        } catch {}
     }
     
     func changeAspectProgress(to aspectProgress: CGFloat, animated: Bool) {
@@ -42,7 +40,7 @@ extension LivePreviewViewController {
             height: safeViewHeightC
         )
         
-        self.previewFitViewScale = CGAffineTransform(scaleX: scale, y: scale)
+        previewFitViewScale = CGAffineTransform(scaleX: scale, y: scale)
         
         /// recalculate preview fit frame
         let scaledWidth = imageFillSafeRect.width * scale
@@ -71,16 +69,15 @@ extension LivePreviewViewController {
         )
         self.safeViewFrameFromPreviewFit = safeViewFrameFromPreviewFit
         
-        self.drawingView.frame = previewFitViewFrame
-        self.simulatedSafeView.frame = safeViewFrameFromPreviewFit
-        
+        drawingView.frame = previewFitViewFrame
+        simulatedSafeView.frame = safeViewFrameFromPreviewFit
         
         if animated {
             UIView.animate(withDuration: 0.3) {
                 self.previewFitView.transform = self.previewFitViewScale
             }
         } else {
-            self.previewFitView.transform = self.previewFitViewScale
+            previewFitView.transform = previewFitViewScale
         }
         
         if !Debug.tabBarAlwaysTransparent {

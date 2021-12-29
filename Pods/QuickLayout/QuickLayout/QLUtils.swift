@@ -69,7 +69,6 @@ public struct QLFillConstraints {
  Represents pair of priorities
  */
 public struct QLPriorityPair {
-    
     public let horizontal: QLPriority
     public let vertical: QLPriority
     public static var required: QLPriorityPair {
@@ -94,7 +93,6 @@ public enum QLAxis {
     case vertically
     
     public var attributes: QLAttributePair {
-        
         let first: QLAttribute
         let second: QLAttribute
         

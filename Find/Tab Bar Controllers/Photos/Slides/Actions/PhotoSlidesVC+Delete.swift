@@ -11,7 +11,6 @@ import UIKit
 extension PhotoSlidesViewController {
     func startDeletePhoto() {
         let findPhoto = resultPhotos[currentIndex].findPhoto
-        self.deletePhotoFromSlides?(findPhoto)
-        
+        deletePhotoFromSlides?(findPhoto)
     }
 }

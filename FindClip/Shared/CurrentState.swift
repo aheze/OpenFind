@@ -8,7 +8,6 @@
 import UIKit
 
 struct CurrentState {
-    
     /// true = presenting bottom layer
     static var currentlyPresenting = false
     

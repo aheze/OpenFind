@@ -15,5 +15,3 @@ extension PhotoSlidesViewController {
         currentViewController.drawAllTranscripts(show: currentViewController.showingTranscripts)
     }
 }
-
-

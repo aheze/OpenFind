@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class LivePreviewView: UIView {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
@@ -16,6 +16,7 @@ class LivePreviewView: UIView {
         }
         return layer
     }
+
     var session: AVCaptureSession? {
         get {
             return videoPreviewLayer.session
@@ -26,6 +27,7 @@ class LivePreviewView: UIView {
     }
     
     // MARK: UIView
+
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }

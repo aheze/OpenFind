@@ -8,8 +8,7 @@
 
 import UIKit
 
-final public class EKPopUpMessageView: UIView {
-
+public final class EKPopUpMessageView: UIView {
     // MARK: - Properties
     
     private var imageView: UIImageView!
@@ -31,6 +30,7 @@ final public class EKPopUpMessageView: UIView {
         setupInterfaceStyle()
     }
     
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -94,7 +94,7 @@ final public class EKPopUpMessageView: UIView {
         actionButton.setTitleColor(tapColor, for: .selected)
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupInterfaceStyle()
     }
     

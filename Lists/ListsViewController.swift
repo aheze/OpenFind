@@ -15,20 +15,11 @@ class ListsViewController: UIViewController, PageViewController {
 }
 
 extension ListsViewController {
+    func willBecomeActive() {}
     
-    func willBecomeActive() {
-        
-    }
+    func didBecomeActive() {}
     
-    func didBecomeActive() {
-        
-    }
+    func willBecomeInactive() {}
     
-    func willBecomeInactive() {
-        
-    }
-    
-    func didBecomeInactive() {
-        
-    }
+    func didBecomeInactive() {}
 }

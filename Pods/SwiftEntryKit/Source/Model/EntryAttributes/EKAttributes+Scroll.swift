@@ -5,14 +5,12 @@
 //  Created by Daniel Huri on 4/30/18.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 public extension EKAttributes {
-    
     /** Describes the event of scroll user interaction */
     enum Scroll {
-    
         /** Describes the event when the user leaves the entry after rubber-banding it - How the entry behaves */
         public struct PullbackAnimation {
             public var duration: TimeInterval

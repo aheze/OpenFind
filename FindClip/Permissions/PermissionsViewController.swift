@@ -8,10 +8,8 @@
 import UIKit
 
 class PermissionsViewController: UIViewController {
-    
-    @IBOutlet weak var searchBarView: UIView!
+    @IBOutlet var searchBarView: UIView!
     @IBAction func searchButtonPressed(_ sender: Any) {
-        
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         generator.notificationOccurred(.warning)
@@ -32,7 +30,6 @@ class PermissionsViewController: UIViewController {
             self.permissionsNeededLabel.alpha = 1
         } completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                
                 self.permissionsAnimationCount -= 1
                 if self.permissionsAnimationCount == 0 {
                     UIView.animate(withDuration: 0.5) {
@@ -43,26 +40,28 @@ class PermissionsViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var graphicsReferenceView: UIView!
-    @IBOutlet weak var expandedGraphicsReferenceView: UIView!
+    @IBOutlet var graphicsReferenceView: UIView!
+    @IBOutlet var expandedGraphicsReferenceView: UIView!
     
     var changeToSettings = false
     var permissionsAnimationCount = 0
-    @IBOutlet weak var permissionsNeededLabel: UILabel!
-    @IBOutlet weak var permissionsBackgroundView: UIView!
-    @IBOutlet weak var permissionsView: UIView!
-    @IBOutlet weak var permissionsShadowView: UIView!
-    @IBOutlet weak var permissionsBottomView: UIView!
-    @IBOutlet weak var allowAccessButton: GradientButton!
+    @IBOutlet var permissionsNeededLabel: UILabel!
+    @IBOutlet var permissionsBackgroundView: UIView!
+    @IBOutlet var permissionsView: UIView!
+    @IBOutlet var permissionsShadowView: UIView!
+    @IBOutlet var permissionsBottomView: UIView!
+    @IBOutlet var allowAccessButton: GradientButton!
     @IBAction func allowAccessPressed(_ sender: Any) {
         requestAccess()
     }
     
     // MARK: Permissions
+
     var granted: (() -> Void)? /// tell LaunchVC that permission was granted
     var permissionAction = PermissionAction.ask
     
     // MARK: Gestures
+
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         handlePan(sender: sender)
     }
@@ -72,7 +71,8 @@ class PermissionsViewController: UIViewController {
     var savedOffset = CGFloat(0)
     
     // MARK: Constraints
-    @IBOutlet weak var searchBarTopC: NSLayoutConstraint!
+
+    @IBOutlet var searchBarTopC: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +81,7 @@ class PermissionsViewController: UIViewController {
         addGraphicsView()
         
         if changeToSettings {
-            self.allowAccessButton.setTitle("Go to Settings", for: .normal)
+            allowAccessButton.setTitle("Go to Settings", for: .normal)
         }
     }
     
@@ -95,7 +95,5 @@ class PermissionsViewController: UIViewController {
             viewDidLayout = true
             didLayoutSubviews?()
         }
-        
     }
-    
 }

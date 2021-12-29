@@ -24,6 +24,7 @@ extension ListsController {
         
         updateSelectionLabel?(0)
     }
+
     @objc func addPressed(sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ListBuilderViewController") as? ListBuilderViewController {
@@ -35,11 +36,11 @@ extension ListsController {
                 self?.presentingList?(false)
             }
             presentingList?(true)
-            self.present(viewController, animated: true, completion: nil)
+            present(viewController, animated: true, completion: nil)
         }
     }
+
     @objc func selectPressed(sender: UIBarButtonItem) {
         selectPressed()
     }
-    
 }

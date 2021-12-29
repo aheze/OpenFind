@@ -84,7 +84,6 @@ extension EmbeddedObject: RealmCollectionValue {
         RLMInitializeWithValue(self, value, .partialPrivateShared())
     }
 
-
     // MARK: Properties
 
     /// The Realm which manages the object, or `nil` if the object is unmanaged.
@@ -104,17 +103,17 @@ extension EmbeddedObject: RealmCollectionValue {
     ///
     /// An object can no longer be accessed if the object has been deleted from the Realm that manages it, or if
     /// `invalidate()` is called on that Realm.
-    public override final var isInvalidated: Bool { return super.isInvalidated }
+    override public final var isInvalidated: Bool { return super.isInvalidated }
 
     /// A human-readable description of the object.
-    open override var description: String { return super.description }
+    override open var description: String { return super.description }
 
     /**
      WARNING: This is an internal helper method not intended for public use.
      It is not considered part of the public API.
      :nodoc:
      */
-    public override final class func _getProperties() -> [RLMProperty] {
+    override public final class func _getProperties() -> [RLMProperty] {
         return ObjectUtil.getSwiftProperties(self)
     }
 
@@ -182,7 +181,8 @@ extension EmbeddedObject: RealmCollectionValue {
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
     public func observe<T: RLMObjectBase>(on queue: DispatchQueue? = nil,
-                                          _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken {
+                                          _ block: @escaping (ObjectChange<T>) -> Void) -> NotificationToken
+    {
         return _observe(on: queue, block)
     }
 
@@ -207,6 +207,7 @@ extension EmbeddedObject: RealmCollectionValue {
     }
 
     // MARK: Comparison
+
     /**
      Returns whether two Realm objects are the same.
 
@@ -262,7 +263,6 @@ extension EmbeddedObject: ThreadConfined {
         return realm?.thaw(self)
     }
 }
-
 
 // MARK: AssistedObjectiveCBridgeable
 

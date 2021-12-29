@@ -16,15 +16,14 @@ extension UIBarItem {
         if let item = self as? UIBarButtonItem, let customView = item.customView {
             return customView
         }
-        return self.value(forKey: "view") as? UIView
+        return value(forKey: "view") as? UIView
     }
 }
 
-// MARK:- UIView extension -
+// MARK: - UIView extension -
 
 extension UIView {
-    
-    func hasSuperview(_ superview: UIView) -> Bool{
+    func hasSuperview(_ superview: UIView) -> Bool {
         return viewHasSuperview(self, superview: superview)
     }
     
@@ -32,39 +31,39 @@ extension UIView {
         if let sview = view.superview {
             if sview === superview {
                 return true
-            } else{
+            } else {
                 return viewHasSuperview(sview, superview: superview)
             }
-        } else{
+        } else {
             return false
         }
     }
 }
 
-// MARK:- CGRect extension -
+// MARK: - CGRect extension -
 
 extension CGRect {
     var x: CGFloat {
         get {
-            return self.origin.x
+            return origin.x
         }
         set {
-            self.origin.x = newValue
+            origin.x = newValue
         }
     }
     
     var y: CGFloat {
         get {
-            return self.origin.y
+            return origin.y
         }
         
         set {
-            self.origin.y = newValue
+            origin.y = newValue
         }
     }
     
     var center: CGPoint {
-        return CGPoint(x: self.x + self.width / 2, y: self.y + self.height / 2)
+        return CGPoint(x: x + width / 2, y: y + height / 2)
     }
 }
 #endif

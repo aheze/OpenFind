@@ -6,13 +6,13 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import SwiftUI
 import Popovers
+import SwiftUI
 
 class FieldSettingsModel: ObservableObject {
     @Published var header = "WORD"
-    @Published var defaultColor: UIColor = UIColor(hex: 0x00aeef)
-    @Published var selectedColor: UIColor = UIColor(hex: 0x00aeef)
+    @Published var defaultColor: UIColor = .init(hex: 0x00AEEF)
+    @Published var selectedColor: UIColor = .init(hex: 0x00AEEF)
     @Published var alpha: CGFloat = 1
     
     /// lists
@@ -21,7 +21,7 @@ class FieldSettingsModel: ObservableObject {
     @Published var editListPressed: (() -> Void)?
 }
 
-struct FieldSettingsConstants {
+enum FieldSettingsConstants {
     static var sliderHeight = CGFloat(40)
     static var cornerRadius = CGFloat(12)
     
@@ -34,7 +34,6 @@ struct FieldSettingsConstants {
 }
 
 struct FieldSettingsView: View {
-    
     @ObservedObject var model: FieldSettingsModel
     
     var body: some View {
@@ -65,7 +64,6 @@ struct FieldSettingsView: View {
             
             Line()
             
-            
             /// main content
             VStack(spacing: 0) {
                 FieldSettingsContainer {
@@ -83,7 +81,6 @@ struct FieldSettingsView: View {
                         .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                         .modifier(PopoverButtonModifier(backgroundColor: model.defaultColor))
                     }
-                    
                     
                     PaletteView(selectedColor: $model.selectedColor)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
@@ -104,7 +101,6 @@ struct FieldSettingsView: View {
                     } label: {
                         Text("Show Words")
                             .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-                        
                     }
                     
                     Button {
@@ -112,13 +108,11 @@ struct FieldSettingsView: View {
                     } label: {
                         Text("Edit List")
                             .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-                        
                     }
                 }
                 .clipped()
                 .opacity(model.words.isEmpty ? 0 : 1)
                 .frame(height: model.words.isEmpty ? 0 : nil, alignment: .top)
-                
             }
             .offset(x: model.showingWords ? -180 : 0, y: 0)
             .opacity(model.showingWords ? 0 : 1)
@@ -131,9 +125,10 @@ struct FieldSettingsView: View {
                         }
                     }
                 }
-                    .offset(x: model.showingWords ? 0 : 180, y: 0)
-                    .opacity(model.showingWords ? 1 : 0)
-                , alignment: .top)
+                .offset(x: model.showingWords ? 0 : 180, y: 0)
+                .opacity(model.showingWords ? 1 : 0),
+                alignment: .top
+            )
         }
         .frame(width: 180)
         .background(
@@ -147,7 +142,6 @@ struct FieldSettingsView: View {
 }
 
 struct FieldSettingsContainer<Content: View>: View {
-    
     @ViewBuilder var content: Content
     var body: some View {
         VStack(spacing: FieldSettingsConstants.spacing) {
@@ -168,7 +162,6 @@ struct PopoverButtonModifier: ViewModifier {
             .cornerRadius(FieldSettingsConstants.cornerRadius)
     }
 }
-
 
 struct PaletteView: View {
     @Binding var selectedColor: UIColor
@@ -223,7 +216,6 @@ struct OpacitySlider: View {
     let color: UIColor
     
     var body: some View {
-        
         GeometryReader { proxy in
             Color(UIColor.systemBackground).overlay(
                 ZStack {
@@ -250,38 +242,38 @@ struct OpacitySlider: View {
             )
             
             /// slider thumb
-                .overlay(
-                    Color.clear.overlay(
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 6)
-                                .fill(UIColor.systemBackground.color)
+            .overlay(
+                Color.clear.overlay(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(UIColor.systemBackground.color)
                             
-                            RoundedRectangle(cornerRadius: 6)
-                                .fill(color.withAlphaComponent(value).color)
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(color.withAlphaComponent(value).color)
                             
-                            RoundedRectangle(cornerRadius: 6)
-                                .strokeBorder(Color.white, lineWidth: 2)
-                        }
-                            .padding(6)
-                            .frame(width: FieldSettingsConstants.sliderHeight, height: FieldSettingsConstants.sliderHeight)
-                        
-                        /// pin thumb to right of stretching `clear` container
-                        , alignment: .trailing
-                    )
-                    /// set frame of stretching `clear` container
-                        .frame(
-                            width: FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight)
-                        )
-                    , alignment: .leading)
-                .highPriorityGesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { value in
-                            self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
-                            Popovers.draggingEnabled = false
-                        }
-                        .onEnded { _ in Popovers.draggingEnabled = true }
+                        RoundedRectangle(cornerRadius: 6)
+                            .strokeBorder(Color.white, lineWidth: 2)
+                    }
+                    .padding(6)
+                    .frame(width: FieldSettingsConstants.sliderHeight, height: FieldSettingsConstants.sliderHeight),
+                    
+                    /// pin thumb to right of stretching `clear` container
+                    alignment: .trailing
                 )
+                /// set frame of stretching `clear` container
+                .frame(
+                    width: FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight)
+                ),
+                alignment: .leading
+            )
+            .highPriorityGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
+                        Popovers.draggingEnabled = false
+                    }
+                    .onEnded { _ in Popovers.draggingEnabled = true }
+            )
         }
         .drawingGroup() /// prevent thumb from disappearing when offset to show words
     }
@@ -292,6 +284,6 @@ struct FieldSettingsView_Previews: PreviewProvider {
         FieldSettingsView(
             model: FieldSettingsModel()
         )
-            .previewLayout(.fixed(width: 250, height: 300))
+        .previewLayout(.fixed(width: 250, height: 300))
     }
 }

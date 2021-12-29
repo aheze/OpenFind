@@ -20,7 +20,7 @@ extension PhotosViewController {
             if let navController = navigationController {
                 navController.view.insertSubview(quickTourView, belowSubview: navigationController!.navigationBar)
                 
-                quickTourView.snp.makeConstraints { (make) in
+                quickTourView.snp.makeConstraints { make in
                     make.height.equalTo(50)
                     make.left.equalToSuperview()
                     make.right.equalToSuperview()
@@ -34,7 +34,6 @@ extension PhotosViewController {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
                     
-                    
                     self?.defaults.set(true, forKey: "historyViewedBefore")
                     self?.animateCloseQuickTour(quickTourView: quickTourView)
                     self?.present(vc, animated: true, completion: nil)
@@ -45,9 +44,9 @@ extension PhotosViewController {
                     self?.animateCloseQuickTour(quickTourView: quickTourView)
                 }
             }
-            
         }
     }
+
     func animateCloseQuickTour(quickTourView: TutorialHeader) {
         quickTourView.colorViewHeightConst.constant = 0
         emptyListContainerTopC.constant = 0

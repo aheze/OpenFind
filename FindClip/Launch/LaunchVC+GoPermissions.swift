@@ -8,9 +8,7 @@
 import UIKit
 
 extension LaunchViewController {
-    
     func goToPermissions() {
-        
         addChildViewController(permissionsViewController, in: permissionsReferenceView)
         permissionsViewController.permissionsView.alpha = 0
         permissionsViewController.permissionsBottomView.alpha = 0
@@ -34,7 +32,6 @@ extension LaunchViewController {
                 self.frameContainerView.layoutIfNeeded()
                 self.frameContainerView.alpha = 0
                 self.resetEdgesIdentity()
-                
                 
                 self.expandHorizontalEdges()
                 self.leftView.alpha = 0
@@ -63,6 +60,5 @@ extension LaunchViewController {
                 }
             }
         }
-       
     }
 }

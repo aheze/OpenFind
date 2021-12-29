@@ -12,10 +12,11 @@ extension PhotosViewController {
     func getRealmObjects() {
         photoObjects = realm.objects(HistoryModel.self)
     }
+
     func getRealRealmModel(from editableModel: EditableHistoryModel) -> HistoryModel? {
         if
             let photoObjects = photoObjects,
-            let firstObject = (photoObjects.filter {$0.assetIdentifier == editableModel.assetIdentifier }).first
+            let firstObject = (photoObjects.filter { $0.assetIdentifier == editableModel.assetIdentifier }).first
         {
             return firstObject
         }

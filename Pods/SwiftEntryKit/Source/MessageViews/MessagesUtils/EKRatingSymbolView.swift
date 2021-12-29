@@ -8,8 +8,7 @@
 
 import UIKit
 
-final public class EKRatingSymbolView: UIView {
-    
+public final class EKRatingSymbolView: UIView {
     private let button = UIButton()
     private let imageView = UIImageView()
     
@@ -36,7 +35,8 @@ final public class EKRatingSymbolView: UIView {
         setupButton()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

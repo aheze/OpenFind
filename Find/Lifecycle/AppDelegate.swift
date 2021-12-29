@@ -6,26 +6,20 @@
 //  Copyright © 2019 Andrew. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         
         if let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL {
             if let bundleRealmPath = Bundle.main.url(forResource: "defaultSeeds", withExtension: "realm") {
                 if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
                     do {
                         try FileManager.default.copyItem(at: bundleRealmPath, to: defaultRealmPath)
-                    } catch let error {
-
-                    }
+                    } catch {}
                 }
             }
         }
@@ -34,14 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
             schemaVersion: 16,
-
+            
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 16) {
-                    
-                    migration.enumerateObjects(ofType: HistoryModel.className()) { oldObject, newObject in
+                if oldSchemaVersion < 16 {
+                    migration.enumerateObjects(ofType: HistoryModel.className()) { _, newObject in
                         newObject!["assetIdentifier"] = ""
                         newObject!["isTakenLocally"] = true
                     }
@@ -49,12 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
                 }
-            })
+            }
+        )
 
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
-        
-        
         
         return true
     }
@@ -72,8 +64,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
-
-

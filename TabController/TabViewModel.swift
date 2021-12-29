@@ -8,7 +8,7 @@
 import SwiftUI
 
 class TabViewModel: ObservableObject {
-    @Published var tabState: TabState = TabState.camera {
+    @Published var tabState: TabState = .camera {
         didSet {
             tabBarAttributes = tabState.tabBarAttributes()
             photosIconAttributes = tabState.photosIconAttributes()
@@ -17,6 +17,7 @@ class TabViewModel: ObservableObject {
             animatorProgress = tabState.getAnimatorProgress()
         }
     }
+
     @Published var tabBarAttributes = TabBarAttributes.darkBackground
     @Published var photosIconAttributes = PhotosIconAttributes.inactiveDarkBackground
     @Published var cameraIconAttributes = CameraIconAttributes.active
@@ -43,7 +44,6 @@ class TabViewModel: ObservableObject {
     }
     
     enum TabStateChangeAnimation {
-        
         /// used when swiping
         case fractionalProgress
         
@@ -65,7 +65,6 @@ enum TabState: Equatable {
     /// progress from <camera to photos> or <camera to lists> is going up
     static var progressGoingUpNow = false
     
-    
     static func modifyProgress(current previous: TabState? = nil, new: TabState) {
         switch new {
         case .photos:
@@ -83,7 +82,7 @@ enum TabState: Equatable {
                     break
                 }
                 progressGoingUpNow = newProgress > previousProgress
-            case .cameraToLists(_):
+            case .cameraToLists:
                 progressGoingUpNow = true
             default: break
             }
@@ -91,8 +90,8 @@ enum TabState: Equatable {
         case .cameraToLists(let newProgress):
             guard let previousTab = previous else { return }
             switch previousTab {
-            case .cameraToPhotos(_):
-                self.progressGoingUpNow = true
+            case .cameraToPhotos:
+                progressGoingUpNow = true
             case .cameraToLists(let previousProgress):
                 guard newProgress <= 1 else {
                     progressGoingUpNow = true
@@ -110,31 +109,31 @@ enum TabState: Equatable {
         modifyProgress(current: current, new: new)
         
         switch current {
-        case .cameraToPhotos(_):
+        case .cameraToPhotos:
             switch new {
-            case .cameraToPhotos(_):
-                if !progressGoingUpPreviously && progressGoingUpNow {
+            case .cameraToPhotos:
+                if !progressGoingUpPreviously, progressGoingUpNow {
                     /// previously going to camera, now going to photos
                     return .photos
-                } else if progressGoingUpPreviously && !progressGoingUpNow {
+                } else if progressGoingUpPreviously, !progressGoingUpNow {
                     /// previously going to photos, now going to camera
                     return .camera
                 }
                 
-            case .cameraToLists(_):
+            case .cameraToLists:
                 return .lists
             default: break
             }
             
-        case .cameraToLists(_):
+        case .cameraToLists:
             switch new {
-            case .cameraToPhotos(_):
+            case .cameraToPhotos:
                 return .photos
-            case .cameraToLists(_):
-                if !progressGoingUpPreviously && progressGoingUpNow {
+            case .cameraToLists:
+                if !progressGoingUpPreviously, progressGoingUpNow {
                     /// previously going to camera, now going to lists
                     return .lists
-                } else if progressGoingUpPreviously && !progressGoingUpNow {
+                } else if progressGoingUpPreviously, !progressGoingUpNow {
                     /// previously going to lists, now going to camera
                     return .camera
                 }
@@ -154,12 +153,13 @@ enum TabState: Equatable {
             return 1
         case .lists:
             return 2
-        case .cameraToPhotos(_):
+        case .cameraToPhotos:
             return 1
-        case .cameraToLists(_):
+        case .cameraToLists:
             return 1
         }
     }
+
     var name: String {
         switch self {
         case .photos:
@@ -168,12 +168,13 @@ enum TabState: Equatable {
             return "Camera"
         case .lists:
             return "Lists"
-        case .cameraToPhotos(_):
+        case .cameraToPhotos:
             return ""
-        case .cameraToLists(_):
+        case .cameraToLists:
             return ""
         }
     }
+
     func getAnimatorProgress() -> CGFloat {
         switch self {
         case .photos:
@@ -188,6 +189,7 @@ enum TabState: Equatable {
             return transitionProgress
         }
     }
+
     func tabBarAttributes() -> TabBarAttributes {
         switch self {
         case .photos:
@@ -202,6 +204,7 @@ enum TabState: Equatable {
             return .init(progress: transitionProgress, from: .darkBackground, to: .lightBackground)
         }
     }
+
     func photosIconAttributes() -> PhotosIconAttributes {
         switch self {
         case .photos:
@@ -216,6 +219,7 @@ enum TabState: Equatable {
             return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .inactiveLightBackground)
         }
     }
+
     func cameraIconAttributes() -> CameraIconAttributes {
         switch self {
         case .photos:
@@ -234,6 +238,7 @@ enum TabState: Equatable {
             return .init(progress: cameraProgress, from: .inactive, to: .active)
         }
     }
+
     func listsIconAttributes() -> ListsIconAttributes {
         switch self {
         case .photos:
@@ -248,7 +253,6 @@ enum TabState: Equatable {
             return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .active)
         }
     }
-    
 }
 
 /**
@@ -257,21 +261,21 @@ enum TabState: Equatable {
 protocol AnimatableAttributes {
     init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self)
 }
-struct AnimatableUtilities {
+
+enum AnimatableUtilities {
     static func mixedValue(from: CGFloat, to: CGFloat, progress: CGFloat) -> CGFloat {
         let value = from + (to - from) * progress
         return value
     }
+
     static func mixedValue(from: CGPoint, to: CGPoint, progress: CGFloat) -> CGPoint {
         let valueX = from.x + (to.x - from.x) * progress
         let valueY = from.y + (to.y - from.y) * progress
         return CGPoint(x: valueX, y: valueY)
     }
-
 }
 
 struct TabBarAttributes: AnimatableAttributes {
-    
     /// color of the tab bar
     var backgroundColor: UIColor
     
@@ -290,28 +294,24 @@ struct TabBarAttributes: AnimatableAttributes {
     /// alpha of the top divider line
     var topLineAlpha: CGFloat
     
-    static let lightBackground: Self = {
-        return .init(
-            backgroundColor: Constants.tabBarLightBackgroundColor,
-            backgroundHeight: ConstantVars.tabBarTotalHeight,
-            topPadding: 0,
-            toolbarOffset: -40,
-            toolbarAlpha: 0,
-            topLineAlpha: 1
-        )
-    }()
+    static let lightBackground: Self = .init(
+        backgroundColor: Constants.tabBarLightBackgroundColor,
+        backgroundHeight: ConstantVars.tabBarTotalHeight,
+        topPadding: 0,
+        toolbarOffset: -40,
+        toolbarAlpha: 0,
+        topLineAlpha: 1
+    )
     
     /// when active tab is camera
-    static let darkBackground: Self = {
-        return .init(
-            backgroundColor: Constants.tabBarDarkBackgroundColor,
-            backgroundHeight: ConstantVars.tabBarTotalHeightExpanded,
-            topPadding: 16,
-            toolbarOffset: 0,
-            toolbarAlpha: 1,
-            topLineAlpha: 0
-        )
-    }()
+    static let darkBackground: Self = .init(
+        backgroundColor: Constants.tabBarDarkBackgroundColor,
+        backgroundHeight: ConstantVars.tabBarTotalHeightExpanded,
+        topPadding: 16,
+        toolbarOffset: 0,
+        toolbarAlpha: 1,
+        topLineAlpha: 0
+    )
 }
 
 /// keep normal initializer, so put in extension
@@ -342,32 +342,27 @@ extension TabBarAttributes {
 }
 
 struct PhotosIconAttributes: AnimatableAttributes {
-    
     var foregroundColor: UIColor
     var backgroundHeight: CGFloat
     
     /// when active tab is camera
     static let inactiveDarkBackground: Self = { /// `Self` could also be `PhotosIconAttributes`
-        return .init(
+        .init(
             foregroundColor: UIColor.white,
             backgroundHeight: 48
         )
     }()
     
-    static let inactiveLightBackground: Self = {
-        return .init(
-            foregroundColor: UIColor(hex: 0x7e7e7e),
-            backgroundHeight: 48
-        )
-    }()
+    static let inactiveLightBackground: Self = .init(
+        foregroundColor: UIColor(hex: 0x7E7E7E),
+        backgroundHeight: 48
+    )
     
     /// always light background
-    static let active: Self = {
-        return .init(
-            foregroundColor: UIColor(hex: 0x40C74D),
-            backgroundHeight: 48
-        )
-    }()
+    static let active: Self = .init(
+        foregroundColor: UIColor(hex: 0x40C74D),
+        backgroundHeight: 48
+    )
 }
 
 /// keep normal initializer, so put in extension
@@ -382,7 +377,6 @@ extension PhotosIconAttributes {
 }
 
 struct CameraIconAttributes: AnimatableAttributes {
-    
     /// fill color
     var foregroundColor: UIColor
     
@@ -398,27 +392,23 @@ struct CameraIconAttributes: AnimatableAttributes {
     /// rim width
     var rimWidth: CGFloat
     
+    static let inactive: Self = .init(
+        foregroundColor: UIColor(hex: 0x7E7E7E).withAlphaComponent(0.5),
+        backgroundHeight: 48,
+        length: 26,
+        rimColor: UIColor(hex: 0x7E7E7E),
+        rimWidth: 1
+    )
     
-    static let inactive: Self = {
-        return .init(
-            foregroundColor: UIColor(hex: 0x7e7e7e).withAlphaComponent(0.5),
-            backgroundHeight: 48,
-            length: 26,
-            rimColor: UIColor(hex: 0x7e7e7e),
-            rimWidth: 1
-        )
-    }()
-    
-    static let active: Self = {
-        return .init(
-            foregroundColor: UIColor(hex: 0x00aeef).withAlphaComponent(0.5),
-            backgroundHeight: 98,
-            length: 64,
-            rimColor: .white,
-            rimWidth: 3
-        )
-    }()
+    static let active: Self = .init(
+        foregroundColor: UIColor(hex: 0x00AEEF).withAlphaComponent(0.5),
+        backgroundHeight: 98,
+        length: 64,
+        rimColor: .white,
+        rimWidth: 3
+    )
 }
+
 extension CameraIconAttributes {
     init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self) {
         let foregroundColor = fromAttributes.foregroundColor.toColor(toAttributes.foregroundColor, percentage: progress)
@@ -439,26 +429,20 @@ struct ListsIconAttributes: AnimatableAttributes {
     var foregroundColor: UIColor
     var backgroundHeight: CGFloat
     
-    static let inactiveDarkBackground: ListsIconAttributes = {
-        return .init(
-            foregroundColor: UIColor.white,
-            backgroundHeight: 48
-        )
-    }()
+    static let inactiveDarkBackground: ListsIconAttributes = .init(
+        foregroundColor: UIColor.white,
+        backgroundHeight: 48
+    )
     
-    static let inactiveLightBackground: ListsIconAttributes = {
-        return .init(
-            foregroundColor: UIColor(hex: 0x7e7e7e),
-            backgroundHeight: 48
-        )
-    }()
+    static let inactiveLightBackground: ListsIconAttributes = .init(
+        foregroundColor: UIColor(hex: 0x7E7E7E),
+        backgroundHeight: 48
+    )
     
-    static let active: ListsIconAttributes = {
-        return .init(
-            foregroundColor: UIColor(hex: 0xFFC600),
-            backgroundHeight: 48
-        )
-    }()
+    static let active: ListsIconAttributes = .init(
+        foregroundColor: UIColor(hex: 0xFFC600),
+        backgroundHeight: 48
+    )
 }
 
 /// keep normal initializer, so put in extension
@@ -471,4 +455,3 @@ extension ListsIconAttributes {
         self.backgroundHeight = backgroundHeight
     }
 }
-

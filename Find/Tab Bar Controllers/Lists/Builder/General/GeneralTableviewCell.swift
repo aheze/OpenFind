@@ -9,15 +9,14 @@
 import UIKit
 
 protocol ChangedTextCell: class {
-    
     func textFieldEndedEditing(indexPath: Int, text: String)
     func textFieldStartedEditing(indexPath: Int)
     func textFieldChangedText(indexPath: Int, text: String)
     func cellPressedDoneButton()
     func textFieldPressedReturn()
 }
+
 class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
-    
     var indexPath = 0
     
     var overlayView = UIView()
@@ -26,16 +25,16 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     weak var changedTextDelegate: ChangedTextCell?
     
     var deletePressed: (() -> Void)?
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet var deleteButton: UIButton!
     @IBAction func deletePressed(_ sender: Any) {
         deletePressed?()
     }
     
-    @IBOutlet weak var matchTextField: UITextField!
+    @IBOutlet var matchTextField: UITextField!
     var cellFieldText = ""
   
     func animateDupSlide() {
-        overlayView.snp.remakeConstraints{ (make) in
+        overlayView.snp.remakeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -46,8 +45,9 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
             self.contentView.layoutIfNeeded()
         }
     }
+
     func animateDupRetreat() {
-        overlayView.snp.remakeConstraints{ (make) in
+        overlayView.snp.remakeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -60,10 +60,9 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     }
    
     override func awakeFromNib() {
-        
         matchTextField.returnKeyType = .next
         contentView.insertSubview(overlayView, at: 0)
-        overlayView.snp.makeConstraints { (make) in
+        overlayView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -89,7 +88,7 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         doneButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         doneButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         doneButton.layer.cornerRadius = 6
-        doneButton.snp.makeConstraints { (make) in
+        doneButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-6)
             make.width.equalTo(60)
@@ -104,25 +103,27 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         self.doneButton = doneButton
         
         matchTextField.inputAccessoryView = toolbarInputView
-        
     }
     
     @objc func buttonAction(sender: UIButton!) {
         changedTextDelegate?.cellPressedDoneButton()
         contentView.endEditing(true)
     }
+
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         changedTextDelegate?.textFieldEndedEditing(indexPath: indexPath, text: textField.text ?? "")
-        
     }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         animateDupRetreat()
         changedTextDelegate?.textFieldStartedEditing(indexPath: indexPath)
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         changedTextDelegate?.textFieldPressedReturn()
         return false
     }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         changedTextDelegate?.textFieldChangedText(indexPath: indexPath, text: updatedString ?? "Something went wrong...")
@@ -132,15 +133,16 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
 }
 
 extension UITextField {
-    func setLeftPaddingPoints(_ amount:CGFloat){
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.leftView = paddingView
-        self.leftViewMode = .always
+    func setLeftPaddingPoints(_ amount: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: frame.size.height))
+        leftView = paddingView
+        leftViewMode = .always
     }
-    func setRightPaddingPoints(_ amount:CGFloat) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.rightView = paddingView
-        self.rightViewMode = .always
+
+    func setRightPaddingPoints(_ amount: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: frame.size.height))
+        rightView = paddingView
+        rightViewMode = .always
     }
 }
 
@@ -160,6 +162,7 @@ class TextField: UITextField {
         super.editingRect(forBounds: bounds)
         return bounds.insetBy(dx: insetX, dy: insetY)
     }
+
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         super.placeholderRect(forBounds: bounds)
         return bounds.insetBy(dx: insetX, dy: insetY)

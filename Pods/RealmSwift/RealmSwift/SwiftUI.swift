@@ -1,28 +1,28 @@
 ////////////////////////////////////////////////////////////////////////////
- //
- // Copyright 2021 Realm Inc.
- //
- // Licensed under the Apache License, Version 2.0 (the "License");
- // you may not use this file except in compliance with the License.
- // You may obtain a copy of the License at
- //
- // http://www.apache.org/licenses/LICENSE-2.0
- //
- // Unless required by applicable law or agreed to in writing, software
- // distributed under the License is distributed on an "AS IS" BASIS,
- // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- // See the License for the specific language governing permissions and
- // limitations under the License.
- //
- ////////////////////////////////////////////////////////////////////////////
+//
+// Copyright 2021 Realm Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////
 
 import Foundation
 
 #if !(os(iOS) && (arch(i386) || arch(arm)))
-import SwiftUI
 import Combine
 import Realm
 import Realm.Private
+import SwiftUI
 
 private func safeWrite<Value>(_ value: Value, _ block: (Value) -> Void) where Value: ThreadConfined {
     let thawed = value.realm == nil ? value : value.thaw() ?? value
@@ -38,8 +38,8 @@ private func safeWrite<Value>(_ value: Value, _ block: (Value) -> Void) where Va
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private func createBinding<T: ThreadConfined, V>(
     _ value: T,
-    forKeyPath keyPath: ReferenceWritableKeyPath<T, V>) -> Binding<V> {
-
+    forKeyPath keyPath: ReferenceWritableKeyPath<T, V>
+) -> Binding<V> {
     guard let value = value.isFrozen ? value.thaw() : value else {
         throwRealmException("Could not bind value")
     }
@@ -62,8 +62,8 @@ private func createBinding<T: ThreadConfined, V>(
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private func createCollectionBinding<T: ThreadConfined, V: RLMSwiftCollectionBase & ThreadConfined>(
     _ value: T,
-    forKeyPath keyPath: ReferenceWritableKeyPath<T, V>) -> Binding<V> {
-
+    forKeyPath keyPath: ReferenceWritableKeyPath<T, V>
+) -> Binding<V> {
     guard let value = value.isFrozen ? value.thaw() : value else {
         throwRealmException("Could not bind value")
     }
@@ -87,8 +87,8 @@ private func createCollectionBinding<T: ThreadConfined, V: RLMSwiftCollectionBas
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private func createEquatableBinding<T: ThreadConfined, V: Equatable>(
     _ value: T,
-    forKeyPath keyPath: ReferenceWritableKeyPath<T, V>) -> Binding<V> {
-
+    forKeyPath keyPath: ReferenceWritableKeyPath<T, V>
+) -> Binding<V> {
     guard let value = value.isFrozen ? value.thaw() : value else {
         throwRealmException("Could not bind value")
     }
@@ -126,8 +126,7 @@ private func createEquatableBinding<T: ThreadConfined, V: Equatable>(
             CombineIdentifier(value)
         }
 
-        func request(_ demand: Subscribers.Demand) {
-        }
+        func request(_ demand: Subscribers.Demand) {}
 
         func cancel() {
             removeObservers()
@@ -152,12 +151,14 @@ private func createEquatableBinding<T: ThreadConfined, V: Equatable>(
             }
         }
     }
+
     private let receive: () -> Void
 
     override func observeValue(forKeyPath keyPath: String?,
                                of object: Any?,
                                change: [NSKeyValueChangeKey: Any]?,
-                               context: UnsafeMutableRawPointer?) {
+                               context: UnsafeMutableRawPointer?)
+    {
         receive()
     }
 
@@ -168,6 +169,7 @@ private func createEquatableBinding<T: ThreadConfined, V: Equatable>(
 }
 
 // MARK: - ObservableStorage
+
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private final class ObservableStoragePublisher<ObjectType>: Publisher where ObjectType: ThreadConfined & RealmSubscribable {
     public typealias Output = Void
@@ -190,10 +192,10 @@ private final class ObservableStoragePublisher<ObjectType>: Publisher where Obje
 
     public func receive<S>(subscriber: S) where S: Subscriber, Failure == S.Failure, Output == S.Input {
         subscribers.append(AnySubscriber(subscriber))
-        if value.realm != nil && !value.isInvalidated, let value = value.thaw() {
+        if value.realm != nil, !value.isInvalidated, let value = value.thaw() {
             // This path is for cases where the object is already managed. If an
             // unmanaged object becomes managed it will continue to use KVO.
-            let token =  value._observe(keyPaths, subscriber)
+            let token = value._observe(keyPaths, subscriber)
             subscriber.receive(subscription: ObservationSubscription(token: token))
         } else if let value = value as? ObjectBase, !value.isInvalidated {
             // else if the value is unmanaged
@@ -211,13 +213,14 @@ private final class ObservableStoragePublisher<ObjectType>: Publisher where Obje
         }
     }
 }
+
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private class ObservableStorage<ObservedType>: ObservableObject where ObservedType: RealmSubscribable & ThreadConfined & Equatable {
     @Published var value: ObservedType {
         willSet {
             if newValue != value {
                 objectWillChange.send()
-                self.objectWillChange = ObservableStoragePublisher(newValue, self.keyPaths)
+                objectWillChange = ObservableStoragePublisher(newValue, keyPaths)
             }
         }
     }
@@ -227,11 +230,10 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
 
     init(_ value: ObservedType, _ keyPaths: [String]? = nil) {
         self.value = value.realm != nil && !value.isInvalidated ? value.thaw() ?? value : value
-        self.objectWillChange = ObservableStoragePublisher(value, keyPaths)
+        objectWillChange = ObservableStoragePublisher(value, keyPaths)
         self.keyPaths = keyPaths
     }
 }
-
 
 // MARK: - StateRealmObject
 
@@ -295,6 +297,7 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
             storage.value = newValue
         }
     }
+
     /// :nodoc:
     public var projectedValue: Binding<T> {
         Binding(get: {
@@ -307,31 +310,34 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
             self.storage.value = newValue
         })
     }
+
     /**
      Initialize a RealmState struct for a given thread confined type.
      - parameter wrappedValue The List reference to wrap and observe.
      */
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public init<Value>(wrappedValue: T) where T == List<Value> {
-        self._storage = StateObject(wrappedValue: ObservableStorage(wrappedValue))
+        _storage = StateObject(wrappedValue: ObservableStorage(wrappedValue))
         defaultValue = T()
     }
+
     /**
      Initialize a RealmState struct for a given thread confined type.
      - parameter wrappedValue The Map reference to wrap and observe.
      */
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public init<Key, Value>(wrappedValue: T) where T == Map<Key, Value> {
-        self._storage = StateObject(wrappedValue: ObservableStorage(wrappedValue))
+        _storage = StateObject(wrappedValue: ObservableStorage(wrappedValue))
         defaultValue = T()
     }
+
     /**
      Initialize a RealmState struct for a given thread confined type.
      - parameter wrappedValue The ObjectBase reference to wrap and observe.
      */
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public init(wrappedValue: T) where T: ObjectBase & Identifiable {
-        self._storage = StateObject(wrappedValue: ObservableStorage(wrappedValue))
+        _storage = StateObject(wrappedValue: ObservableStorage(wrappedValue))
         defaultValue = T()
     }
 
@@ -398,12 +404,14 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
             storage.filter = newValue
         }
     }
+
     /// :nodoc:
     @State public var sortDescriptor: SortDescriptor? {
         willSet {
             storage.sortDescriptor = newValue
         }
     }
+
     /// :nodoc:
     public var wrappedValue: Results<ResultType> {
         if !storage.setupHasRun {
@@ -411,18 +419,21 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
         }
         return storage.configuration != nil ? storage.value.freeze() : storage.value
     }
+
     /// :nodoc:
     public var projectedValue: Self {
         return self
     }
+
     /// :nodoc:
     public init(_ type: ResultType.Type,
                 configuration: Realm.Configuration? = nil,
                 filter: NSPredicate? = nil,
                 keyPaths: [String]? = nil,
-                sortDescriptor: SortDescriptor? = nil) {
-        self.storage = Storage(Results(RLMResults.emptyDetached()), keyPaths)
-        self.storage.configuration = configuration
+                sortDescriptor: SortDescriptor? = nil)
+    {
+        storage = Storage(Results(RLMResults.emptyDetached()), keyPaths)
+        storage.configuration = configuration
         self.filter = filter
         self.sortDescriptor = sortDescriptor
     }
@@ -454,6 +465,7 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
         public subscript<Subject>(dynamicMember keyPath: ReferenceWritableKeyPath<ObjectType, Subject>) -> Binding<Subject> {
             createBinding(wrappedValue, forKeyPath: keyPath)
         }
+
         /// Returns a binding to the resulting equatable value of a given key path.
         ///
         /// This binding's set() will only perform a write if the new value is different from the existing value.
@@ -463,6 +475,7 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
         public subscript<Subject: Equatable>(dynamicMember keyPath: ReferenceWritableKeyPath<ObjectType, Subject>) -> Binding<Subject> {
             createEquatableBinding(wrappedValue, forKeyPath: keyPath)
         }
+
         /// Returns a binding to the resulting collection value of a given key path.
         ///
         /// - Parameter keyPath  : A key path to a specific resulting value.
@@ -471,6 +484,7 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
             createCollectionBinding(wrappedValue, forKeyPath: keyPath)
         }
     }
+
     /// The object to observe.
     @ObservedObject private var storage: ObservableStorage<ObjectType>
     /// A default value to avoid invalidated access.
@@ -498,10 +512,12 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
             storage.value = newValue
         }
     }
+
     /// :nodoc:
     public var projectedValue: Wrapper {
         return Wrapper(wrappedValue: storage.value.isInvalidated ? defaultValue : storage.value)
     }
+
     /**
      Initialize a RealmState struct for a given thread confined type.
      - parameter wrappedValue The RealmSubscribable value to wrap and observe.
@@ -510,6 +526,7 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
         _storage = ObservedObject(wrappedValue: ObservableStorage(wrappedValue))
         defaultValue = ObjectType()
     }
+
     /**
      Initialize a RealmState struct for a given thread confined type.
      - parameter wrappedValue The RealmSubscribable value to wrap and observe.
@@ -521,17 +538,19 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension Binding where Value: ObjectBase & ThreadConfined {
+public extension Binding where Value: ObjectBase & ThreadConfined {
     /// :nodoc:
-    public subscript<V>(dynamicMember member: ReferenceWritableKeyPath<Value, V>) -> Binding<V> where V: _Persistable {
+    subscript<V>(dynamicMember member: ReferenceWritableKeyPath<Value, V>) -> Binding<V> where V: _Persistable {
         createBinding(wrappedValue, forKeyPath: member)
     }
+
     /// :nodoc:
-    public subscript<V>(dynamicMember member: ReferenceWritableKeyPath<Value, V>) -> Binding<V> where V: _Persistable & RLMSwiftCollectionBase & ThreadConfined {
+    subscript<V>(dynamicMember member: ReferenceWritableKeyPath<Value, V>) -> Binding<V> where V: _Persistable & RLMSwiftCollectionBase & ThreadConfined {
         createCollectionBinding(wrappedValue, forKeyPath: member)
     }
+
     /// :nodoc:
-    public subscript<V>(dynamicMember member: ReferenceWritableKeyPath<Value, V>) -> Binding<V> where V: _Persistable & Equatable {
+    subscript<V>(dynamicMember member: ReferenceWritableKeyPath<Value, V>) -> Binding<V> where V: _Persistable & Equatable {
         createEquatableBinding(wrappedValue, forKeyPath: member)
     }
 }
@@ -559,67 +578,75 @@ public extension BoundCollection where Value: RealmCollection {
 
     /// :nodoc:
     func remove<V>(at index: Index) where Value == List<V> {
-        safeWrite(self.wrappedValue) { list in
+        safeWrite(wrappedValue) { list in
             list.remove(at: index)
         }
     }
+
     /// :nodoc:
     func remove<V>(_ object: V) where Value == Results<V>, V: ObjectBase & ThreadConfined {
         guard let thawed = object.thaw(),
-              let index = wrappedValue.thaw()?.index(of: thawed) else {
+              let index = wrappedValue.thaw()?.index(of: thawed)
+        else {
             return
         }
-        safeWrite(self.wrappedValue) { results in
+        safeWrite(wrappedValue) { results in
             results.realm?.delete(results[index])
         }
     }
+
     /// :nodoc:
     func remove<V>(atOffsets offsets: IndexSet) where Value == Results<V>, V: ObjectBase {
-        safeWrite(self.wrappedValue) { results in
+        safeWrite(wrappedValue) { results in
             results.realm?.delete(Array(offsets.map { results[$0] }))
         }
     }
+
     /// :nodoc:
     func remove<V>(atOffsets offsets: IndexSet) where Value == List<V> {
-        safeWrite(self.wrappedValue) { list in
+        safeWrite(wrappedValue) { list in
             list.remove(atOffsets: offsets)
         }
     }
+
     /// :nodoc:
     func move<V>(fromOffsets offsets: IndexSet, toOffset destination: Int) where Value == List<V> {
-        safeWrite(self.wrappedValue) { list in
+        safeWrite(wrappedValue) { list in
             list.move(fromOffsets: offsets, toOffset: destination)
         }
     }
+
     /// :nodoc:
     func append<V>(_ value: Value.Element) where Value == List<V> {
-        safeWrite(self.wrappedValue) { list in
+        safeWrite(wrappedValue) { list in
             list.append(value)
         }
     }
+
     /// :nodoc:
     func append<V>(_ value: Value.Element) where Value == List<V>, Value.Element: ObjectBase & ThreadConfined {
         // if the value is unmanaged but the list is managed, we are adding this value to the realm
-        if value.realm == nil && self.wrappedValue.realm != nil {
+        if value.realm == nil && wrappedValue.realm != nil {
             SwiftUIKVO.observedObjects[value]?.cancel()
         }
-        safeWrite(self.wrappedValue) { list in
+        safeWrite(wrappedValue) { list in
             list.append(value)
         }
     }
+
     /// :nodoc:
     func append<V>(_ value: Value.Element) where Value == Results<V>, V: Object {
-        if value.realm == nil && self.wrappedValue.realm != nil {
+        if value.realm == nil && wrappedValue.realm != nil {
             SwiftUIKVO.observedObjects[value]?.cancel()
         }
-        safeWrite(self.wrappedValue) { results in
+        safeWrite(wrappedValue) { results in
             results.realm?.add(value)
         }
     }
 }
+
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-extension Binding: BoundCollection where Value: RealmCollection {
-}
+extension Binding: BoundCollection where Value: RealmCollection {}
 
 // MARK: - BoundMap
 
@@ -644,24 +671,24 @@ public extension BoundMap where Value: RealmKeyedCollection {
     // The compiler will not allow us to assign values by subscript as the binding is a get-only
     // property. To get around this we need an explicit `set` method.
     /// :nodoc:
-    subscript( key: Key) -> Element? {
-        self.wrappedValue[key]
+    subscript(key: Key) -> Element? {
+        wrappedValue[key]
     }
 
     /// :nodoc:
     func set<K, V>(object: Element?, for key: Key) where Element: ObjectBase & ThreadConfined, Value == Map<K, V> {
         // If the value is `nil` remove it from the map.
         guard let value = object else {
-            safeWrite(self.wrappedValue) { map in
+            safeWrite(wrappedValue) { map in
                 map.removeObject(for: key)
             }
             return
         }
         // if the value is unmanaged but the map is managed, we are adding this value to the realm
-        if value.realm == nil && self.wrappedValue.realm != nil {
+        if value.realm == nil && wrappedValue.realm != nil {
             SwiftUIKVO.observedObjects[value]?.cancel()
         }
-        safeWrite(self.wrappedValue) { map in
+        safeWrite(wrappedValue) { map in
             map[key] = value
         }
     }
@@ -670,25 +697,24 @@ public extension BoundMap where Value: RealmKeyedCollection {
     func set<K, V>(object: Element?, for key: Key) where Value == Map<K, V> {
         // If the value is `nil` remove it from the map.
         guard let value = object else {
-            safeWrite(self.wrappedValue) { map in
+            safeWrite(wrappedValue) { map in
                 map.removeObject(for: key)
             }
             return
         }
-        safeWrite(self.wrappedValue) { map in
+        safeWrite(wrappedValue) { map in
             map[key] = value
         }
     }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-extension Binding: BoundMap where Value: RealmKeyedCollection {
-}
+extension Binding: BoundMap where Value: RealmKeyedCollection {}
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-extension Binding where Value: Object & Identifiable {
+public extension Binding where Value: Object & Identifiable {
     /// :nodoc:
-    public func delete() {
+    func delete() {
         safeWrite(wrappedValue) { object in
             object.realm?.delete(self.wrappedValue)
         }
@@ -696,9 +722,9 @@ extension Binding where Value: Object & Identifiable {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension ObservedRealmObject.Wrapper where ObjectType: ObjectBase {
+public extension ObservedRealmObject.Wrapper where ObjectType: ObjectBase {
     /// :nodoc:
-    public func delete() {
+    func delete() {
         safeWrite(wrappedValue) { object in
             object.realm?.delete(self.wrappedValue)
         }
@@ -706,7 +732,7 @@ extension ObservedRealmObject.Wrapper where ObjectType: ObjectBase {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension ThreadConfined where Self: ObjectBase {
+public extension ThreadConfined where Self: ObjectBase {
     /**
      Create a `Binding` for a given property, allowing for
      automatically transacted reads and writes behind the scenes.
@@ -718,11 +744,12 @@ extension ThreadConfined where Self: ObjectBase {
      - parameter keyPath The key path to the member property.
      - returns A `Binding` to the member property.
      */
-    public func bind<V: _Persistable & Equatable>(_ keyPath: ReferenceWritableKeyPath<Self, V>) -> Binding<V> {
+    func bind<V: _Persistable & Equatable>(_ keyPath: ReferenceWritableKeyPath<Self, V>) -> Binding<V> {
         createEquatableBinding(self, forKeyPath: keyPath)
     }
+
     /// :nodoc:
-    public func bind<V: _Persistable & RLMSwiftCollectionBase & ThreadConfined>(_ keyPath: ReferenceWritableKeyPath<Self, V>) -> Binding<V> {
+    func bind<V: _Persistable & RLMSwiftCollectionBase & ThreadConfined>(_ keyPath: ReferenceWritableKeyPath<Self, V>) -> Binding<V> {
         createCollectionBinding(self, forKeyPath: keyPath)
     }
 }
@@ -736,9 +763,9 @@ private struct PartitionValueEnvironmentKey: EnvironmentKey {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension EnvironmentValues {
+public extension EnvironmentValues {
     /// The current `Realm.Configuration` that the view should use.
-    public var realmConfiguration: Realm.Configuration {
+    var realmConfiguration: Realm.Configuration {
         get {
             return self[RealmEnvironmentKey.self]
         }
@@ -746,8 +773,9 @@ extension EnvironmentValues {
             self[RealmEnvironmentKey.self] = newValue
         }
     }
+
     /// The current `Realm` that the view should use.
-    public var realm: Realm {
+    var realm: Realm {
         get {
             return try! Realm(configuration: self[RealmEnvironmentKey.self])
         }
@@ -755,8 +783,9 @@ extension EnvironmentValues {
             self[RealmEnvironmentKey.self] = newValue.configuration
         }
     }
+
     /// The current `PartitionValue` that the view should use.
-    public var partitionValue: PartitionValue? {
+    var partitionValue: PartitionValue? {
         get {
             return self[PartitionValueEnvironmentKey.self]
         }
@@ -782,7 +811,8 @@ private class ObservableAsyncOpenStorage: ObservableObject {
 
     func asyncOpen() -> AnyPublisher<RealmPublishers.AsyncOpenPublisher.Output, RealmPublishers.AsyncOpenPublisher.Failure> {
         if let currentUser = app.currentUser,
-           currentUser.isLoggedIn {
+           currentUser.isLoggedIn
+        {
             return asyncOpenForUser(app.currentUser!, partitionValue: partitionValue, configuration: configuration)
         } else {
             asyncOpenState = .waitingForUser
@@ -821,7 +851,8 @@ private class ObservableAsyncOpenStorage: ObservableObject {
         if let appId = appId {
             app = App(id: appId)
         } else if appsIds.count == 1, // Check if there is a singular cached app
-            let cachedAppId = appsIds.first as? String {
+                  let cachedAppId = appsIds.first as? String
+        {
             app = App(id: cachedAppId)
         } else if appsIds.count > 1 {
             throwRealmException("Cannot AsyncOpen the Realm because more than one appId was found. When using multiple Apps you must explicitly pass an appId to indicate which to use.")
@@ -839,8 +870,8 @@ private class ObservableAsyncOpenStorage: ObservableObject {
 }
 
 /**
-An enum representing different states from `AsyncOpen` and `AutoOpen` process
-*/
+ An enum representing different states from `AsyncOpen` and `AutoOpen` process
+ */
 public enum AsyncOpenState {
     /// Starting the Realm.asyncOpen process.
     case connecting
@@ -944,7 +975,8 @@ public enum AsyncOpenState {
     public init(appId: String? = nil,
                 partitionValue: Partition,
                 configuration: Realm.Configuration = Realm.Configuration.defaultConfiguration,
-                timeout: UInt? = nil) {
+                timeout: UInt? = nil)
+    {
         let app = ObservableAsyncOpenStorage.configureApp(appId: appId, withTimeout: timeout)
         // Store property wrapper values on the storage
         storage = ObservableAsyncOpenStorage(app: app, configuration: configuration, partitionValue: AnyBSON(partitionValue))
@@ -1027,8 +1059,9 @@ public enum AsyncOpenState {
             .sink { completion in
                 if case .failure(let error) = completion {
                     if let error = error as NSError?,
-                       error.code == Int(ETIMEDOUT) && error.domain == NSPOSIXErrorDomain,
-                       let realm = try? Realm(configuration: configuration) {
+                       error.code == Int(ETIMEDOUT), error.domain == NSPOSIXErrorDomain,
+                       let realm = try? Realm(configuration: configuration)
+                    {
                         self.storage.asyncOpenState = .open(realm)
                     } else {
                         self.storage.asyncOpenState = .error(error)
@@ -1072,7 +1105,8 @@ public enum AsyncOpenState {
     public init(appId: String? = nil,
                 partitionValue: Partition,
                 configuration: Realm.Configuration = Realm.Configuration.defaultConfiguration,
-                timeout: UInt? = nil) {
+                timeout: UInt? = nil)
+    {
         let app = ObservableAsyncOpenStorage.configureApp(appId: appId, withTimeout: timeout)
         // Store property wrapper values on the storage
         storage = ObservableAsyncOpenStorage(app: app, configuration: configuration, partitionValue: AnyBSON(partitionValue))
@@ -1124,7 +1158,6 @@ extension SwiftUIKVO {
         return false
     }
 
-    @objc(addObserversToObject:) public static func addObservers(object: NSObject) {
-    }
+    @objc(addObserversToObject:) public static func addObservers(object: NSObject) {}
 }
 #endif

@@ -46,4 +46,3 @@ struct Tracker {
         return confident && oldEnough
     }
 }
-

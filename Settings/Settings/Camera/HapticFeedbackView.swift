@@ -12,7 +12,6 @@ struct HapticFeedbackView: View {
     @Binding var level: Int
     
     var body: some View {
-        
         ZStack {
             VStack(spacing: 0) {
                 HeaderView(text: "Haptic Feedback")
@@ -29,7 +28,6 @@ struct HapticFeedbackView: View {
                                 .frame(height: 36)
                             
                             Label(text: "None")
-                            
                         }
                     }
                     .accessibility(addTraits:
@@ -70,8 +68,6 @@ struct HapticFeedbackView: View {
                                 .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))))
                                 .frame(height: 36)
                             Label(text: "Heavy")
-                            
-                            
                         }
                     }
                     .accessibility(addTraits:
@@ -83,7 +79,6 @@ struct HapticFeedbackView: View {
                 
                 .padding(EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 14))
             }
-           
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)

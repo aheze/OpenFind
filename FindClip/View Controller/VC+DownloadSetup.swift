@@ -5,14 +5,15 @@
 //  Created by Zheng on 3/13/21.
 //
 
-import SwiftUI
 import StoreKit
+import SwiftUI
 
 extension ViewController {
     func setupDownloadView() {
         let downloadViewController = UIHostingController(rootView: DownloadView())
         addChildViewController(downloadViewController, in: downloadReferenceView)
     }
+
     func displayOverlay() {
         CurrentState.presentingOverlay = true
         guard let scene = view.window?.windowScene else { return }
@@ -21,8 +22,8 @@ extension ViewController {
         let overlay = SKOverlay(configuration: config)
         overlay.present(in: scene)
         overlay.delegate = self
-        
     }
+
     func dismissOverlay() {
         CurrentState.presentingOverlay = false
         guard let scene = view.window?.windowScene else { return }
@@ -34,7 +35,7 @@ extension ViewController {
 
 extension ViewController: SKOverlayDelegate {
     func storeOverlayDidFinishDismissal(_ overlay: SKOverlay, transitionContext: SKOverlay.TransitionContext) {
-        if CurrentState.currentlyPresenting && CurrentState.presentingOverlay {
+        if CurrentState.currentlyPresenting, CurrentState.presentingOverlay {
             displayOverlay()
         }
     }

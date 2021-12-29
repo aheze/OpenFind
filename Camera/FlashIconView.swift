@@ -55,7 +55,6 @@ struct FlashIconView: View {
         }
         .brightness(isDisabled ? -0.5 : 0)
         .disabled(isDisabled)
-        
     }
 }
 
@@ -63,7 +62,7 @@ struct LineShape: Shape {
     var progress = CGFloat(1)
     var animatableData: CGFloat {
         get { progress }
-        set { self.progress = newValue }
+        set { progress = newValue }
     }
     
     func path(in rect: CGRect) -> Path {

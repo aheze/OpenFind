@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 // MARK: -  Text field reactor operators
+
 precedencegroup RPrecedence {
-  higherThan: BitwiseShiftPrecedence
+    higherThan: BitwiseShiftPrecedence
 }
 
-infix operator <&> : RPrecedence
+infix operator <&>: RPrecedence
 
 /**
  Links text field to data flow
@@ -26,7 +27,7 @@ infix operator <&> : RPrecedence
  - returns: `TextFieldReactor` object
  */
 public func <&> <FlowDataSource, FlowDataDestination>
-    (left: UITextField, right: DataFlow<FlowDataSource, FlowDataDestination>) -> TextFieldReactor<FlowDataSource, FlowDataDestination>
+(left: UITextField, right: DataFlow<FlowDataSource, FlowDataDestination>) -> TextFieldReactor<FlowDataSource, FlowDataDestination>
     where
     FlowDataSource.ResultType == FlowDataDestination.DataType
 {
@@ -42,50 +43,49 @@ public func <&> <FlowDataSource, FlowDataDestination>
  Implements reactive handling text field editing and passes editing changes to data flow
  */
 public struct TextFieldReactor
-    <
+<
     DS: FlowDataSource,
-    DD: FlowDataDestination>
+    DD: FlowDataDestination
+>
     where
     DS.ResultType == DD.DataType,
-    DS.QueryType  == String
+    DS.QueryType == String
     
 {
-    let textField : UITextField
-    let dataFlow  : DataFlow<DS, DD>
+    let textField: UITextField
+    let dataFlow: DataFlow<DS, DD>
     
     fileprivate let editingTarget: TextFieldTarget
     
     fileprivate init(textField: UITextField, dataFlow: DataFlow<DS, DD>) {
         self.textField = textField
-        self.dataFlow  = dataFlow
+        self.dataFlow = dataFlow
         
-        self.editingTarget = TextFieldTarget(controlEvents: UIControl.Event.editingChanged, textField: textField) {
+        editingTarget = TextFieldTarget(controlEvents: UIControl.Event.editingChanged, textField: textField) {
             if let text = $0.text {
                 dataFlow.transport(text)
             }
         }
     }
-    
 }
 
 final class TextFieldTarget: NSObject {
-    
     static let actionSelector = #selector(TextFieldTarget.action(_:))
     
-    typealias HookType = (UITextField) -> ()
+    typealias HookType = (UITextField) -> Void
     
     override init() {
         super.init()
     }
     
-    init(controlEvents:UIControl.Event, textField: UITextField, hook: @escaping HookType) {
+    init(controlEvents: UIControl.Event, textField: UITextField, hook: @escaping HookType) {
         super.init()
         
-        self.beTargetFor(textField, controlEvents: controlEvents, hook: hook)
+        beTargetFor(textField, controlEvents: controlEvents, hook: hook)
     }
     
     var hooks: [UITextField: HookType] = [:]
-    func beTargetFor(_ textField: UITextField, controlEvents:UIControl.Event, hook: @escaping HookType) {
+    func beTargetFor(_ textField: UITextField, controlEvents: UIControl.Event, hook: @escaping HookType) {
         textField.addTarget(self, action: TextFieldTarget.actionSelector, for: controlEvents)
         hooks[textField] = hook
     }
@@ -100,5 +100,4 @@ final class TextFieldTarget: NSObject {
         let hook = hooks[textField]
         hook?(textField)
     }
-    
 }

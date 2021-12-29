@@ -16,8 +16,8 @@ extension PhotosViewController {
             }
             animateCloseQuickTour(quickTourView: quickTourView)
         }
-        self.selectedIndexPath = indexPath
-        self.performSegue(withIdentifier: "ShowSlides", sender: self)
+        selectedIndexPath = indexPath
+        performSegue(withIdentifier: "ShowSlides", sender: self)
     }
       
     func configureSlides(navigationController: UINavigationController, slidesViewController: PhotoSlidesViewController) {
@@ -58,9 +58,9 @@ extension PhotosViewController {
                 return false
             }
             
-            slidesViewController.hideTabBar = self.hideTabBar
-            slidesViewController.presentingInfo = self.slidesPresentingInfo
-            slidesViewController.focusCacheButton = self.focusCacheButton
+            slidesViewController.hideTabBar = hideTabBar
+            slidesViewController.presentingInfo = slidesPresentingInfo
+            slidesViewController.focusCacheButton = focusCacheButton
             
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
                 slidesViewController.currentIndex = currentIndex
@@ -80,7 +80,6 @@ extension PhotosViewController {
                         cell.shadowImageView.alpha = 0
                     }
                 }
-                
             }
             
             currentSlidesController = slidesViewController

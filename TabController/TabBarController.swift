@@ -5,14 +5,13 @@
 //  Created by Zheng on 11/10/21.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 protocol TabBarControllerDelegate: AnyObject {
     func willBeginNavigatingTo(tab: TabState)
     func didFinishNavigatingTo(tab: TabState)
 }
-
 
 enum TabControl {
     static var moveToOtherTab: ((TabState, Bool) -> Void)?
@@ -39,7 +38,6 @@ protocol PageViewController: UIViewController {
 class TabBarController<
     PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
 >: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
-    
     /// data
     var pages: [PageViewController]
     
@@ -66,12 +64,11 @@ class TabBarController<
         photosDetailToolbarView: PhotosDetailToolbarView,
         listsSelectionToolbarView: ListsSelectionToolbarView
     ) {
-        
         // MARK: - init first
+
         self.pages = pages
         self.cameraViewModel = cameraViewModel
         self.toolbarViewModel = toolbarViewModel
-        
         
         self.photosSelectionToolbarView = photosSelectionToolbarView
         self.photosDetailToolbarView = photosDetailToolbarView
@@ -89,7 +86,7 @@ class TabBarController<
         /// make the tab bar the height of the camera
         viewController.updateTabBarHeight(.camera)
         viewController.getPages = { [weak self] in
-            return self?.pages ?? [PageViewController]()
+            self?.pages ?? [PageViewController]()
         }
         
         tabViewModel = TabViewModel()
@@ -118,8 +115,6 @@ class TabBarController<
             }
         }
         
-        
-        
         let tabBarHostingController = UIHostingController(
             rootView: TabBarView(
                 tabViewModel: tabViewModel,
@@ -146,9 +141,8 @@ class TabBarController<
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
-        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             let middle = viewController.contentCollectionView.bounds.width
             let distanceFromMiddle = scrollView.contentOffset.x - middle
             
@@ -188,9 +182,8 @@ class TabBarController<
     
     /// notify delegate and update tab bar height
     func updateTabBarHeightAfterScrolling(_ scrollView: UIScrollView, to tab: TabState) {
-        
         /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
-        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             tabViewModel.updateTabBarHeight?(tab)
         }
     }

@@ -9,8 +9,7 @@ import UIKit
 
 /// Configuration class for the default values used in animations.
 /// All it's values are used when creating 'random' animations as well.
-public class ViewAnimatorConfig {
-    
+public enum ViewAnimatorConfig {
     /// Amount of movement in points.
     /// Depends on the Direction given to the AnimationType.
     public static var offset: CGFloat = 30.0
@@ -26,7 +25,7 @@ public class ViewAnimatorConfig {
     public static var maxZoomScale: Double = 2.0
     
     /// Maximum rotation (left or right) to be applied in animations using random AnimationType.rotate
-    public static var maxRotationAngle: CGFloat = CGFloat.pi/4
+    public static var maxRotationAngle: CGFloat = CGFloat.pi / 4
 
     /// The damping ratio for the spring animation as it approaches its quiescent state.
     public static var springDampingRatio: CGFloat = 1

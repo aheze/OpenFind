@@ -8,8 +8,8 @@
 import UIKit
 
 public class EKAccessoryNoteMessageView: UIView {
-
     // MARK: Props
+
     private let contentView = UIView()
     private var noteMessageView: EKNoteMessageView!
     var accessoryView: UIView!

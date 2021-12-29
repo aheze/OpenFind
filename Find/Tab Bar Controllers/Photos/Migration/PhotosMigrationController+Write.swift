@@ -6,15 +6,14 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
-import SPAlert
 import Photos
+import SPAlert
 import SwiftEntryKit
+import UIKit
 
 extension PhotosMigrationController {
-    
     func writeToPhotos(editablePhotos: [EditableHistoryModel], baseURL: URL) {
-        self.isModalInPresentation = true
+        isModalInPresentation = true
         cancelButton.isEnabled = false
         confirmButton.isEnabled = false
         
@@ -32,7 +31,6 @@ extension PhotosMigrationController {
         var finishedEditablePhotos = [EditableHistoryModel]()
         
         dispatchQueue.async {
-            
             for editablePhoto in editablePhotos {
                 var photoData: Data?
                 
@@ -53,17 +51,14 @@ extension PhotosMigrationController {
                     continue
                 }
                 
-                
                 var photoIdentifier: String?
                 PHPhotoLibrary.shared().performChanges({
-                    
                     let creationRequest = PHAssetCreationRequest.forAsset()
                     creationRequest.addResource(with: .photo, data: data, options: nil)
                     if let identifier = creationRequest.placeholderForCreatedAsset?.localIdentifier {
                         photoIdentifier = identifier
-                    } else {
-                    }
-                }) { (success, error) in
+                    } else {}
+                }) { success, error in
                     
                     if
                         success,
@@ -89,7 +84,6 @@ extension PhotosMigrationController {
             DispatchQueue.main.async {
                 self.finish(editablePhotosWithErrors: editablePhotosWithErrors, errorMessages: errorMessages, finishedEditablePhotos: finishedEditablePhotos)
             }
-            
         }
     }
     
@@ -103,21 +97,16 @@ extension PhotosMigrationController {
         
         segmentIndicator.updateProgress(percent: Degrees(percentCompleteOf100))
     }
+
     func finish(editablePhotosWithErrors: [EditableHistoryModel], errorMessages: [String], finishedEditablePhotos: [EditableHistoryModel]) {
-        
-        
-        
         for templatePhoto in finishedEditablePhotos {
             for realPhoto in realPhotos {
                 if realPhoto.dateCreated == templatePhoto.dateCreated {
-                    
                     do {
                         try realm.write {
                             realPhoto.assetIdentifier = templatePhoto.assetIdentifier
                         }
-                    } catch {
-
-                    }
+                    } catch {}
                     let fullUrl = folderURL.appendingPathComponent(realPhoto.filePath)
                     deletePhotoAtPath(fullUrl: fullUrl)
                 }
@@ -145,13 +134,12 @@ extension PhotosMigrationController {
                 }
             }
             
-            
             let somePhotosCouldNotBeMoved = NSLocalizedString("somePhotosCouldNotBeMoved", comment: "")
             let okText = NSLocalizedString("okText", comment: "")
             
             let alert = UIAlertController(title: somePhotosCouldNotBeMoved, message: errorToShow, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: okText, style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
             
             editablePhotosToMigrate = editablePhotosWithErrors
             collectionView.reloadData()
@@ -164,7 +152,7 @@ extension PhotosMigrationController {
             let alertView = SPAlertView(title: finishedMovingMessage, message: detailsMessage, preset: .done)
             alertView.present(duration: 3.6, haptic: .success)
             resetProgress()
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
             completed?()
         }
     }
@@ -184,6 +172,7 @@ extension PhotosMigrationController {
             self.segmentIndicator.updateProgress(percent: Degrees(0))
         }
     }
+
     func manualMove() {
         var objects = [HistorySharing]()
         for photo in editablePhotosToMigrate {
@@ -197,7 +186,7 @@ extension PhotosMigrationController {
             popoverController.sourceRect = confirmButton.bounds
             popoverController.sourceView = confirmButton
         }
-        activityViewController.completionWithItemsHandler = { (_, completed, _, hasError) in
+        activityViewController.completionWithItemsHandler = { _, _, _, _ in
             
             var attributes = EKAttributes.topFloat
             attributes.displayDuration = .infinity
@@ -218,49 +207,47 @@ extension PhotosMigrationController {
             let rightButtonTitle = imFinished
             
             self.showManualConfirmation(attributes: attributes, titleMessage: titleMessage, desc: description, leftButton: leftButtonTitle, yesButton: rightButtonTitle)
-            
         }
-        self.present(activityViewController, animated: true)
+        present(activityViewController, animated: true)
     }
     
     func showManualConfirmation(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteCheckmark") {
         let displayMode = EKAttributes.DisplayMode.inferred
         
         let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
-        let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,displayMode: displayMode))
+        let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white, displayMode: displayMode))
         let image = EKProperty.ImageContent(imageName: image, displayMode: displayMode, size: CGSize(width: 35, height: 35), contentMode: .scaleAspectFit)
         let simpleMessage = EKSimpleMessage(image: image, title: title, description: description)
         let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        let okButtonLabelStyle = EKProperty.LabelStyle( font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode)
-        let okButtonLabel = EKProperty.LabelContent( text: yesButton, style: okButtonLabelStyle)
+        let okButtonLabelStyle = EKProperty.LabelStyle(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode)
+        let okButtonLabel = EKProperty.LabelContent(text: yesButton, style: okButtonLabelStyle)
         let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)), displayMode: displayMode)
         let closeButtonLabel = EKProperty.LabelContent(text: leftButton, style: closeButtonLabelStyle)
         
-            let okButton = EKProperty.ButtonContent(
-                label: okButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
-            ) { [weak self] in
-                self?.deleteErrorPhotos()
-                self?.completed?()
-                self?.dismiss(animated: true, completion: nil)
-                SwiftEntryKit.dismiss()
-            }
-            let closeButton = EKProperty.ButtonContent(
-                label: closeButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05),
-                displayMode: displayMode
-            ) { 
-                SwiftEntryKit.dismiss()
-            }
-            let buttonsBarContent = EKProperty.ButtonBarContent(with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
-            let alertMessage = EKAlertMessage(simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
-            )
-            let contentView = EKAlertMessageView(with: alertMessage)
-            contentView.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-            contentView.layer.cornerRadius = 10
-            SwiftEntryKit.display(entry: contentView, using: attributes)
+        let okButton = EKProperty.ButtonContent(
+            label: okButtonLabel,
+            backgroundColor: .clear,
+            highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
+        ) { [weak self] in
+            self?.deleteErrorPhotos()
+            self?.completed?()
+            self?.dismiss(animated: true, completion: nil)
+            SwiftEntryKit.dismiss()
+        }
+        let closeButton = EKProperty.ButtonContent(
+            label: closeButtonLabel,
+            backgroundColor: .clear,
+            highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05),
+            displayMode: displayMode
+        ) {
+            SwiftEntryKit.dismiss()
+        }
+        let buttonsBarContent = EKProperty.ButtonBarContent(with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true)
+        let alertMessage = EKAlertMessage(simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent)
+        let contentView = EKAlertMessageView(with: alertMessage)
+        contentView.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        contentView.layer.cornerRadius = 10
+        SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
     func deleteErrorPhotos() {
@@ -272,23 +259,19 @@ extension PhotosMigrationController {
                             realm.delete(realPhoto.contents)
                             realm.delete(realPhoto)
                         }
-                    } catch {
-
-                    }
+                    } catch {}
                     let fullUrl = folderURL.appendingPathComponent(realPhoto.filePath)
                     deletePhotoAtPath(fullUrl: fullUrl)
                 }
             }
         }
     }
+
     func deletePhotoAtPath(fullUrl: URL) {
         if FileManager.default.fileExists(atPath: fullUrl.path) {
             do {
                 try FileManager.default.removeItem(at: fullUrl)
-            } catch {
-
-            }
+            } catch {}
         }
     }
 }
-

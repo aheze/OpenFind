@@ -9,15 +9,14 @@
 import UIKit
 
 class PhotosMigrationView: UIView {
-    
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var explanation1Label: UILabel!
-    @IBOutlet weak var explanation2Label: UILabel!
+    @IBOutlet var headerLabel: UILabel!
+    @IBOutlet var explanation1Label: UILabel!
+    @IBOutlet var explanation2Label: UILabel!
     
     var movePressed: (() -> Void)?
-    @IBOutlet weak var moveButton: UIButton!
+    @IBOutlet var moveButton: UIButton!
     @IBAction func moveButtonPressed(_ sender: Any) {
         movePressed?()
     }
@@ -35,10 +34,9 @@ class PhotosMigrationView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("PhotosMigrationView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         moveButton.layer.cornerRadius = 12
     }
 }
-

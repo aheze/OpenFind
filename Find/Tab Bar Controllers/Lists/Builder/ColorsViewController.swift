@@ -13,12 +13,11 @@ protocol GetColorInfo: class {
 }
 
 class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     let spacing = CGFloat(6)
     let sectionInsets = UIEdgeInsets(top: 16,
-                                             left: 16,
-                                             bottom: 16,
-                                             right: 16)
+                                     left: 16,
+                                     bottom: 16,
+                                     right: 16)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +53,7 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colorArray.count
     }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         colorName = colorArray[indexPath.item]
         colorDelegate?.returnNewColor(colorName: colorName)
@@ -64,6 +64,7 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
             colorCell.contentView.accessibilityTraits = .selected
         }
     }
+
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCell {
             colorCell.checkMarkView.alpha = 0
@@ -98,9 +99,11 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.contentView.accessibilityAttributedLabel = accessibilityLabel
         return cell
     }
+
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
         let totalWidth = collectionView.bounds.width
         let itemsPerRow = Int(totalWidth / 60)
         
@@ -111,19 +114,21 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         let widthPerItem = availableWidth / CGFloat(itemsPerRow)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return spacing
     }
+
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
         return spacing
     }
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet var collectionView: UICollectionView!
 }
 
 class ColorCell: UICollectionViewCell {
-    @IBOutlet weak var checkMarkView: UIImageView!
+    @IBOutlet var checkMarkView: UIImageView!
 }

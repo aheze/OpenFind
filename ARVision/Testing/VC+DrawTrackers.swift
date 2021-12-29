@@ -31,7 +31,6 @@ extension ViewController {
                 newView.addDebugBorders(.red, width: 0.5)
             }
             imageFitView.addSubview(newView)
-            
         }
     }
 }

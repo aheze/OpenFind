@@ -83,6 +83,7 @@ class SliderCategoriesView: UIView {
             super.accessibilityTraits = newValue
         }
     }
+
     override var accessibilityValue: String? {
         get {
             return getAccessibilityValue?()

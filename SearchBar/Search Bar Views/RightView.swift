@@ -8,15 +8,13 @@
 import UIKit
 
 class RightView: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var buttonView: ButtonView!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var buttonView: ButtonView!
+    @IBOutlet var imageView: UIImageView!
     
-    @IBOutlet weak var imageViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var imageViewHeightC: NSLayoutConstraint!
-    @IBOutlet weak var imageViewCenterXC: NSLayoutConstraint!
-    
+    @IBOutlet var imageViewWidthC: NSLayoutConstraint!
+    @IBOutlet var imageViewHeightC: NSLayoutConstraint!
+    @IBOutlet var imageViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +29,7 @@ class RightView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("RightView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let image = UIImage(systemName: "xmark")

@@ -9,15 +9,15 @@
 import UIKit
 
 class VoiceOverSlidesControl: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet var numberLabel: UILabel!
     
     var currentIndex = 0 {
         didSet {
             numberLabel.text = "\(currentIndex + 1)/\(totalNumberOfPhotos)"
         }
     }
+
     var totalNumberOfPhotos = 1 {
         didSet {
             numberLabel.text = "\(currentIndex + 1)/\(totalNumberOfPhotos)"
@@ -44,6 +44,7 @@ class VoiceOverSlidesControl: UIView {
             super.accessibilityTraits = newValue
         }
     }
+
     override var accessibilityValue: String? {
         get {
             return "\(currentIndex + 1) out of \(totalNumberOfPhotos)"
@@ -72,12 +73,11 @@ class VoiceOverSlidesControl: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("VoiceOverSlidesControl", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        self.isAccessibilityElement = true
-        self.accessibilityLabel = "Photo index"
-        self.shouldGroupAccessibilityChildren = true
-        
+        isAccessibilityElement = true
+        accessibilityLabel = "Photo index"
+        shouldGroupAccessibilityChildren = true
     }
 }

@@ -14,12 +14,11 @@ import Foundation
 // c = change
 // d = duration
 
-public struct LTEasing {
-    
+public enum LTEasing {
     public static func easeOutQuint(_ t: Float, _ b: Float, _ c: Float, _ d: Float = 1.0) -> Float {
         return { (f: Float) in
-            return c * (pow(f, 5) + 1.0) + b
-            }(t / d - 1.0)
+            c * (pow(f, 5) + 1.0) + b
+        }(t / d - 1.0)
     }
     
     public static func easeInQuint(_ t: Float, _ b: Float, _ c: Float, _ d: Float = 1.0) -> Float {
@@ -50,5 +49,4 @@ public struct LTEasing {
             }
         }(t / d)
     }
-
 }

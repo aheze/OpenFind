@@ -9,10 +9,9 @@
 import UIKit
 
 class SearchCell: UICollectionViewCell {
-
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var nameLabel: UILabel!
     
-    @IBOutlet weak var labelRightC: NSLayoutConstraint!
-    @IBOutlet weak var imageRightC: NSLayoutConstraint!
+    @IBOutlet var labelRightC: NSLayoutConstraint!
+    @IBOutlet var imageRightC: NSLayoutConstraint!
 }

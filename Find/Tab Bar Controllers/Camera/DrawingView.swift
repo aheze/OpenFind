@@ -19,6 +19,7 @@ class CustomActionsView: UIView {
         lostFocus?()
     }
 }
+
 class DrawingView: UIView {
     var actions = [UIAccessibilityCustomAction]()
     

@@ -5,8 +5,8 @@
 //  Created by Zheng on 3/18/21.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension CameraViewController {
     func configureCamera() {
@@ -17,9 +17,7 @@ extension CameraViewController {
                 if avSession.canAddInput(captureDeviceInput) {
                     avSession.addInput(captureDeviceInput)
                 }
-            }
-            catch {
-
+            } catch {
                 return
             }
             avSession.sessionPreset = .photo
@@ -29,7 +27,6 @@ extension CameraViewController {
             }
             
             DispatchQueue.main.async {
-                
                 self.cameraView.session = self.avSession
                 let newBounds = self.view.layer.bounds
                 self.cameraView.videoPreviewLayer.bounds = newBounds
@@ -40,21 +37,22 @@ extension CameraViewController {
             
             avSession.startRunning()
         } else {
-
             DispatchQueue.main.async {
                 self.cameraFinishedSetup?()
             }
         }
     }
+
     func getCamera() -> AVCaptureDevice? {
         if let cameraDevice = AVCaptureDevice.default(.builtInDualCamera,
-                                                      for: .video, position: .back) {
+                                                      for: .video, position: .back)
+        {
             return cameraDevice
         } else if let cameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                             for: .video, position: .back) {
+                                                             for: .video, position: .back)
+        {
             return cameraDevice
         } else {
-
             return nil
         }
     }

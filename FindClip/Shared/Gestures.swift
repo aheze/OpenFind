@@ -8,7 +8,6 @@
 import UIKit
 
 struct GestureState {
-    
     /// Began a gesture, starting from inactive state
     static var began = false
     

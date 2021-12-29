@@ -15,9 +15,9 @@ enum Debug {
 
 extension UIView {
     func addDebugBorders(_ color: UIColor, width: CGFloat = 5) {
-        self.backgroundColor = color.withAlphaComponent(0.3)
-        self.layer.borderColor = color.cgColor
-        self.layer.borderWidth = width
+        backgroundColor = color.withAlphaComponent(0.3)
+        layer.borderColor = color.cgColor
+        layer.borderWidth = width
         superview?.bringSubviewToFront(self)
     }
 }

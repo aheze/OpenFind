@@ -26,7 +26,6 @@ import UIKit
  Included default styles and can be custom image.
  */
 public enum SPAlertIconPreset {
-    
     case done
     case error
     case heart
@@ -37,7 +36,6 @@ public enum SPAlertIconPreset {
 // Get view and haptic by Preset.
 
 public extension SPAlertIconPreset {
-    
     func createView() -> UIView {
         switch self {
         case .done: return SPAlertIconDoneView()
@@ -55,7 +53,7 @@ public extension SPAlertIconPreset {
         case .done: return .success
         case .error: return .error
         case .heart: return .success
-        case .custom(_): return .none
+        case .custom: return .none
         }
     }
 }
@@ -63,7 +61,6 @@ public extension SPAlertIconPreset {
 // Get layout by preset.
 
 public extension SPAlertLayout {
-    
     convenience init() {
         self.init(iconSize: .init(width: 100, height: 100), margins: .init(top: 43, left: 16, bottom: 25, right: 16), spaceBetweenIconAndTitle: 41)
     }
@@ -118,7 +115,7 @@ public extension SPAlertLayout {
                 ),
                 spaceBetweenIconAndTitle: 39
             )
-        case .custom(_):
+        case .custom:
             self.init(
                 iconSize: .init(
                     width: 100,

@@ -9,14 +9,14 @@
 import UIKit
 
 // MARK: Theme
-/**
-Theme
---
 
-Protocol that allows you change visual appearance a bit.
-*/
+/**
+ Theme
+ --
+
+ Protocol that allows you change visual appearance a bit.
+ */
 public protocol Theme {
-    
     /**
      Text font of both list labels and input textfield.
      */
@@ -32,7 +32,6 @@ public protocol Theme {
      Color of list's background.
      */
     var listBackgroundColor: UIColor { get }
-    
 }
 
 /**
@@ -40,9 +39,8 @@ public protocol Theme {
  --
  
  Theme prefab.
-*/
+ */
 public struct RAMTheme: Theme {
-    
     /// Shared theme with default settings.
     public static let sharedTheme = RAMTheme()
     
@@ -57,8 +55,7 @@ public struct RAMTheme: Theme {
         textColor: UIColor = UIColor.white,
         listBackgroundColor: UIColor = UIColor.clear,
         font: UIFont = RAMTheme.defaultFont
-        )
-    {
+    ) {
         self.textColor = textColor
         self.listBackgroundColor = listBackgroundColor
         self.font = font
@@ -68,7 +65,7 @@ public struct RAMTheme: Theme {
     
     fileprivate static func initDefaultFont() -> UIFont {
         do {
-            let _ = try FontLoader.loadRobotoLight()
+            _ = try FontLoader.loadRobotoLight()
         } catch (let error) {
             print(error)
         }
@@ -87,14 +84,14 @@ public struct RAMTheme: Theme {
         return font
     }
     
-    /** 
-    Creates new theme with new text color.
+    /**
+     Creates new theme with new text color.
      
-    - parameter textColor: New text color.
-    - returns: New `RAMTheme` instance.
-     */
+     - parameter textColor: New text color.
+     - returns: New `RAMTheme` instance.
+      */
     public func textColor(_ textColor: UIColor) -> RAMTheme {
-        return RAMTheme(textColor: textColor, listBackgroundColor: self.listBackgroundColor, font: self.font)
+        return RAMTheme(textColor: textColor, listBackgroundColor: listBackgroundColor, font: font)
     }
     
     /**
@@ -104,7 +101,7 @@ public struct RAMTheme: Theme {
      - returns: New `RAMTheme` instance.
      */
     public func listBackgroundColor(_ listBackgroundColor: UIColor) -> RAMTheme {
-        return RAMTheme(textColor: self.textColor, listBackgroundColor: listBackgroundColor, font: self.font)
+        return RAMTheme(textColor: textColor, listBackgroundColor: listBackgroundColor, font: font)
     }
     
     /**
@@ -114,19 +111,17 @@ public struct RAMTheme: Theme {
      - returns: New `RAMTheme` instance.
      */
     public func font(_ font: UIFont) -> RAMTheme {
-        return RAMTheme(textColor: self.textColor, listBackgroundColor: self.listBackgroundColor, font: font)
+        return RAMTheme(textColor: textColor, listBackgroundColor: listBackgroundColor, font: font)
     }
-    
 }
 
 // MARK: - Font loader
 
 /**
-FontLoader
---
-*/
+ FontLoader
+ --
+ */
 final class FontLoader {
-    
     enum AnError: Error {
         case failedToLoadFont(String)
     }
@@ -155,9 +150,9 @@ final class FontLoader {
             let inData = try? Data(contentsOf: URL(fileURLWithPath: fontPath)),
             let provider = CGDataProvider(data: inData as CFData)
         {
-          let font = CGFont(provider)
-          CTFontManagerRegisterGraphicsFont(font!, nil)
-          FontLoader.loadedFonts[self.name] = self
+            let font = CGFont(provider)
+            CTFontManagerRegisterGraphicsFont(font!, nil)
+            FontLoader.loadedFonts[self.name] = self
             return
         } else {
             throw AnError.failedToLoadFont(name)
@@ -165,5 +160,4 @@ final class FontLoader {
     }
     
     fileprivate static var loadedFonts: [String: FontLoader] = [:]
-    
 }

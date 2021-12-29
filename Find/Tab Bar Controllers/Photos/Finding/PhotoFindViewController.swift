@@ -9,17 +9,18 @@
 import UIKit
 
 class PhotoFindViewController: UIViewController {
-    
     var selfPresented: (() -> Bool)?
     
     // MARK: Find bar
-    @IBOutlet weak var findBar: FindBar!
+
+    @IBOutlet var findBar: FindBar!
     @IBOutlet var promptView: PromptView!
-    @IBOutlet weak var promptTextView: UITextView!
+    @IBOutlet var promptTextView: UITextView!
     var continueButtonVisible = false /// if true, set accessibility activate to true
     var shouldAnnounceStatus = false
     
     // MARK: Finding
+
     var matchToColors = [String: [HighlightColor]]()
     
     var photoFilterState = PhotoFilterState()
@@ -27,11 +28,13 @@ class PhotoFindViewController: UIViewController {
     var findingFromAllPhotos = false /// if finding from all photos in filter
     
     // MARK: Find from cache
+
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
     var deviceWidth = UIScreen.main.bounds.width
     var totalCacheResults = 0
     
     // MARK: Fast find from OCR
+
     var currentFastFindProcess: UUID?
     var numberFastFound = 0 /// how many fast found so far, for the progress view
     let dispatchGroup = DispatchGroup()
@@ -39,13 +42,14 @@ class PhotoFindViewController: UIViewController {
     let dispatchSemaphore = DispatchSemaphore(value: 0)
     
     // MARK: Present photo
+
     var selectedIndexPath: IndexPath?
     var currentlyPresentingSlides = false /// whether currently presenting the slides or not
     var changePresentationMode: ((Bool) -> Void)? /// notify the parent to change the tab bar
     
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet var progressView: UIProgressView!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     
     var findPhotos = [FindPhoto]() /// photos to find from
     var resultPhotos = [ResultPhoto]() /// photos displayed in table view
@@ -76,7 +80,6 @@ class PhotoFindViewController: UIViewController {
             }
         }
         
-        
         if let textField = findBar.searchField {
             let frame = UIAccessibility.convertToScreenCoordinates(
                 textField.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6)),
@@ -85,5 +88,4 @@ class PhotoFindViewController: UIViewController {
             textField.accessibilityFrame = frame
         }
     }
-    
 }

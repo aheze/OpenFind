@@ -5,10 +5,9 @@
 //  Created by Zheng on 1/2/21.
 //
 
-import SwiftUI
 import Combine
 import LinkPresentation
-
+import SwiftUI
 
 class Settings: ObservableObject {
     @Published var highlightColor: String { didSet { UserDefaults.standard.set(highlightColor, forKey: "highlightColor") } }
@@ -19,21 +18,21 @@ class Settings: ObservableObject {
     @Published var swipeToNavigateEnabled: Bool { didSet { UserDefaults.standard.set(swipeToNavigateEnabled, forKey: "swipeToNavigateEnabled") } }
     
     init() {
-        self.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
-        self.recognitionLanguages = UserDefaults.standard.array(forKey: "recognitionLanguages") as? [String] ?? []
-        self.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
-        self.shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
-        self.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
-        self.swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+        highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
+        recognitionLanguages = UserDefaults.standard.array(forKey: "recognitionLanguages") as? [String] ?? []
+        showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+        shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
+        hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+        swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
     }
 }
 
 class SettingsViewController: UIViewController {
-    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,8 +40,6 @@ class SettingsViewController: UIViewController {
     var dismissed: (() -> Void)?
     
     override func loadView() {
-        
-        
         /**
          Instantiate the base `view`.
          */
@@ -60,12 +57,11 @@ class SettingsViewController: UIViewController {
         
         let hostedSettings = UIHostingController(rootView: settingsView)
         
-        self.addChild(hostedSettings)
+        addChild(hostedSettings)
         view.addSubview(hostedSettings.view)
         hostedSettings.view.frame = view.bounds
         hostedSettings.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         hostedSettings.didMove(toParent: self)
-        
     }
 }
 
@@ -82,11 +78,9 @@ extension SettingsViewController {
             }
             
             self.present(activityViewController, animated: true)
-            
         }
     }
 }
-
 
 extension SettingsViewController: UIActivityItemSource {
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
@@ -98,7 +92,6 @@ extension SettingsViewController: UIActivityItemSource {
     }
     
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        
         let appIcon = UIImage(named: "AppIconSmall")!
         let imageProvider = NSItemProvider(object: appIcon)
         let metadata = LPLinkMetadata()
@@ -109,10 +102,7 @@ extension SettingsViewController: UIActivityItemSource {
     }
 }
 
-
-
 struct SettingsView: View {
-    
     @ObservedObject var settings = Settings()
     var donePressed: (() -> Void)?
     
@@ -127,7 +117,6 @@ struct SettingsView: View {
                 ZStack {
                     ScrollView {
                         VStack(spacing: 16) {
-                            
                             VStack(spacing: 8) {
                                 SectionHeaderView(text: "General")
                                     .accessibility(addTraits: .isHeader)
@@ -166,11 +155,9 @@ struct SettingsView: View {
                                     isShowingQR: $isShowingQR,
                                     allSettings: settings
                                 )
-                                
                             }
                             
                             HStack(spacing: 0) {
-                                
                                 Text("Version ")
                                     .foregroundColor(Color.white.opacity(0.75))
                                     .font(Font.system(size: 15, weight: .medium))
@@ -179,7 +166,6 @@ struct SettingsView: View {
                                     .foregroundColor(Color.white.opacity(0.75))
                                     .font(Font.system(size: 15, weight: .medium))
                                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12))
-                                
                                 
                                 Button(action: {
                                     Settings.Bridge.presentWhatsNew?()
@@ -191,7 +177,6 @@ struct SettingsView: View {
                             }
                         }
                         .edgePadding()
-                        
                     }
                     .fixFlickering { scrollView in
                         scrollView
@@ -203,13 +188,13 @@ struct SettingsView: View {
                 .navigationBarTitle("Settings")
                 .navigationBarItems(
                     trailing:
-                        Button(action: {
-                            donePressed?()
-                        }) {
-                            Text("done")
-                                .font(Font.system(size: 19, weight: .regular, design: .default))
-                                .accessibility(hint: Text("Return to the camera screen"))
-                        }
+                    Button(action: {
+                        donePressed?()
+                    }) {
+                        Text("done")
+                            .font(Font.system(size: 19, weight: .regular, design: .default))
+                            .accessibility(hint: Text("Return to the camera screen"))
+                    }
                 )
                 .configureBar()
             }
@@ -229,28 +214,25 @@ struct SettingsView: View {
 }
 
 extension ScrollView {
-    
     func fixFlickering() -> some View {
-        
-        return self.fixFlickering { (scrollView) in
-            return scrollView
+        return fixFlickering { scrollView in
+            scrollView
         }
     }
     
     func fixFlickering<T: View>(@ViewBuilder configurator: @escaping (ScrollView<AnyView>) -> T) -> some View {
-        
         GeometryReader { geometryWithSafeArea in
-            GeometryReader { geometry in
+            GeometryReader { _ in
                 configurator(
                     ScrollView<AnyView>(self.axes, showsIndicators: self.showsIndicators) {
                         AnyView(
                             VStack {
                                 self.content
                             }
-                                .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
-                                .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
-                                .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
-                                .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
+                            .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
+                            .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
+                            .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
+                            .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
                         )
                     }
                 )

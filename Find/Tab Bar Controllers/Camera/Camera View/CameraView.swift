@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class CameraView: UIView {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
@@ -16,6 +16,7 @@ class CameraView: UIView {
         }
         return layer
     }
+
     var session: AVCaptureSession? {
         get {
             return videoPreviewLayer.session
@@ -24,7 +25,9 @@ class CameraView: UIView {
             videoPreviewLayer.session = newValue
         }
     }
+
     // MARK: UIView
+
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }

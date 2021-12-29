@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct LanguagesSummaryView: View {
-    
     @State var languagesPresented = false
     @State var languagesString = ""
     
@@ -21,10 +20,10 @@ struct LanguagesSummaryView: View {
                 NavigationLink(
                     destination:
                         
-                        /**
-                         Push to the web view when tapped.
-                         */
-                        LanguagesView(readLanguages: readDefaults)
+                    /**
+                        Push to the web view when tapped.
+                        */
+                    LanguagesView(readLanguages: readDefaults)
                 ) {
                     HStack(spacing: 0) {
                         VerbatimLabel(text: languagesString)
@@ -36,9 +35,7 @@ struct LanguagesSummaryView: View {
                     .bottomRowPadding()
                 }
                 .accessibility(hint: Text("Navigate to language selection screen."))
-                
             }
-           
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
@@ -58,9 +55,7 @@ struct LanguagesSummaryView: View {
                 
                 return recognitionLanguages
             }
-        } catch {
-
-        }
+        } catch {}
         return [OrderedLanguage]()
     }
 }

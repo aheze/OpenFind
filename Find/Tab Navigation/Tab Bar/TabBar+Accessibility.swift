@@ -6,12 +6,11 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension TabBarView {
     func setupAccessibility() {
-        
         photosContainerView.isAccessibilityElement = true
         photosContainerView.accessibilityLabel = "Photos"
         photosContainerView.accessibilityHint = "Switches to the Photos tab"

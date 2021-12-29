@@ -11,10 +11,8 @@ import UIKit
  A stateless, threadsafe (unless described otherwise) entry point that contains the display and the dismissal logic of entries.
  */
 public final class SwiftEntryKit {
-    
     /** Describes the a single or multiple entries for possible dismissal states */
     public enum EntryDismissalDescriptor {
-        
         /** Describes specific entry / entries with name */
         case specific(entryName: String)
         
@@ -33,7 +31,6 @@ public final class SwiftEntryKit {
     
     /** The window to rollback to after dismissal */
     public enum RollbackWindow {
-        
         /** The main window */
         case main
         

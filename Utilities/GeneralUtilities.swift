@@ -9,15 +9,14 @@
 import SwiftUI
 
 extension Collection {
-
     /// Returns the element at the specified index if it is within bounds, otherwise nil.
-    subscript (safe index: Index) -> Element? {
+    subscript(safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
 
 /// remap `Image` to the current bundle
-//struct Image: View {
+// struct Image: View {
 //
 //    let source: Source
 //    enum Source {
@@ -36,4 +35,4 @@ extension Collection {
 //            SwiftUI.Image(systemName: name)
 //        }
 //    }
-//}
+// }

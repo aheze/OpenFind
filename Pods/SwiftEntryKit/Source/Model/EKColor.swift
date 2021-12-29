@@ -10,7 +10,6 @@ import UIKit
 
 /** A color representation attribute as per user interface style */
 public struct EKColor: Equatable {
-    
     // MARK: - Properties
     
     public private(set) var dark: UIColor
@@ -24,8 +23,8 @@ public struct EKColor: Equatable {
     }
     
     public init(_ unified: UIColor) {
-        self.light = unified
-        self.dark = unified
+        light = unified
+        dark = unified
     }
     
     public init(rgb: Int) {
@@ -47,7 +46,8 @@ public struct EKColor: Equatable {
     
     /** Computes the proper UIColor */
     public func color(for traits: UITraitCollection,
-                      mode: EKAttributes.DisplayMode) -> UIColor {
+                      mode: EKAttributes.DisplayMode) -> UIColor
+    {
         switch mode {
         case .inferred:
             if #available(iOS 13, *) {
@@ -71,7 +71,6 @@ public struct EKColor: Equatable {
 }
 
 public extension EKColor {
-    
     /// Returns the inverse of `self` (light and dark swapped)
     var inverted: EKColor {
         return EKColor(light: dark, dark: light)

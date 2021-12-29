@@ -48,7 +48,7 @@ extension UIView {
             topContraint,
             bottomConstraint,
             leadingContraint,
-            trailingContraint,
+            trailingContraint
         ])
     }
 }

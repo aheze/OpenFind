@@ -10,22 +10,22 @@ public protocol PagingItem {
     func isBefore(item: PagingItem) -> Bool
 }
 
-extension PagingItem where Self: Equatable {
-    public func isEqual(to item: PagingItem) -> Bool {
+public extension PagingItem where Self: Equatable {
+    func isEqual(to item: PagingItem) -> Bool {
         guard let item = item as? Self else { return false }
         return self == item
     }
 }
 
-extension PagingItem where Self: Comparable {
-    public func isBefore(item: PagingItem) -> Bool {
+public extension PagingItem where Self: Comparable {
+    func isBefore(item: PagingItem) -> Bool {
         guard let item = item as? Self else { return false }
         return self < item
     }
 }
 
-extension PagingItem where Self: Hashable {
-    public var identifier: Int {
+public extension PagingItem where Self: Hashable {
+    var identifier: Int {
         return hashValue
     }
 }

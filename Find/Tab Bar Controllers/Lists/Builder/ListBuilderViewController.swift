@@ -11,25 +11,27 @@ import UIKit
 protocol FinishedEditingList: class {
     func updateExistingList(name: String, description: String, contents: [String], imageName: String, imageColor: String, deleteList: Bool)
 }
+
 protocol NewListMade: class {
     func madeNewList(name: String, description: String, contents: [String], imageName: String, imageColor: String)
 }
+
 enum ListBuilderType {
     case editor /// edit existing list
     case maker /// make a new list
 }
+
 class ListBuilderViewController: UIViewController {
-    
     var listBuilderType = ListBuilderType.editor
     
-    @IBOutlet weak var topView: UIView! /// header at the top
-    @IBOutlet weak var topImageView: UIImageView! /// show the symbol and color
-    @IBOutlet weak var promptLabel: UILabel! /// Edit list or New List
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet var topView: UIView! /// header at the top
+    @IBOutlet var topImageView: UIImageView! /// show the symbol and color
+    @IBOutlet var promptLabel: UILabel! /// Edit list or New List
+    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var saveButton: UIButton!
     
-    @IBOutlet weak var tutorialContainer: UIView!
-    @IBOutlet weak var tutorialContainerHeightC: NSLayoutConstraint!
+    @IBOutlet var tutorialContainer: UIView!
+    @IBOutlet var tutorialContainerHeightC: NSLayoutConstraint!
     
     let defaults = UserDefaults.standard
     
@@ -56,13 +58,12 @@ class ListBuilderViewController: UIViewController {
     var donePressed: (() -> Void)?
     @IBAction func cancelButtonPressed(_ sender: Any) {
         donePressed?()
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         view.endEditing(true)
         
-
         var newName = generalVC.name
         var newDesc = generalVC.descriptionOfList
         
@@ -80,15 +81,12 @@ class ListBuilderViewController: UIViewController {
         findAndStoreErrors(contentsArray: generalVC.contents)
         
         if showDoneAlerts() { /// true = has errors
-
         } else {
-
             returnCompletedList()
         }
     }
     
-    
-    @IBOutlet weak var referenceView: UIView!
+    @IBOutlet var referenceView: UIView!
     
     lazy var generalVC: GeneralViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -96,12 +94,14 @@ class ListBuilderViewController: UIViewController {
         
         return viewController
     }()
+
     lazy var symbolVC: SymbolsViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "SymbolsViewController") as! SymbolsViewController
         
         return viewController
     }()
+
     lazy var colorVC: ColorsViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ColorsViewController") as! ColorsViewController
@@ -109,13 +109,11 @@ class ListBuilderViewController: UIViewController {
         return viewController
     }()
     
-    
     var name = ""
     var descriptionOfList = ""
     var contents = [String]()
     var iconImageName = "square.grid.2x2"
     var iconColorName = "#579f2b"
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,18 +123,16 @@ class ListBuilderViewController: UIViewController {
             promptLabel.text = "New List"
         }
         
-        
         let listsBuilderViewedBefore = defaults.bool(forKey: "listsBuilderViewedBefore")
         
         if !listsBuilderViewedBefore {
-            
             let quickTourView = TutorialHeader()
             quickTourView.colorView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.8247417789, blue: 0.1493863227, alpha: 1)
             
             tutorialContainerHeightC.constant = 50
             tutorialContainer.addSubview(quickTourView)
             
-            quickTourView.snp.makeConstraints { (make) in
+            quickTourView.snp.makeConstraints { make in
                 make.top.equalToSuperview()
                 make.left.equalToSuperview()
                 make.right.equalToSuperview()
@@ -162,23 +158,19 @@ class ListBuilderViewController: UIViewController {
         setupAccessibility()
     }
     
-    
     func returnCompletedList() {
         if listBuilderType == .editor {
-
             contents = generalVC.contents
             finishedEditingList?.updateExistingList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName, deleteList: false)
         } else {
-
             newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
         }
         donePressed?()
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 
 extension ListBuilderViewController: GetIconInfo, GetColorInfo {
-    
     func returnNewIcon(iconName: String) {
         iconImageName = iconName
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
@@ -196,7 +188,6 @@ extension ListBuilderViewController: GetIconInfo, GetColorInfo {
     }
     
     func setupPagingVC() {
-        
         let firstVCTitle = NSLocalizedString("firstVCTitle", comment: "EditList def=General")
         let secondVCTitle = NSLocalizedString("secondVCTitle", comment: "EditList def=Icon")
         let thirdVCTitle = NSLocalizedString("thirdVCTitle", comment: "EditList def=Color")
@@ -227,7 +218,7 @@ extension ListBuilderViewController: GetIconInfo, GetColorInfo {
         addChild(pagingViewController)
         referenceView.addSubview(pagingViewController.view)
         
-        pagingViewController.view.snp.makeConstraints { (make) in
+        pagingViewController.view.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()

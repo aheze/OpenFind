@@ -12,8 +12,8 @@ extension SlideViewController {
     func setupAccessibility() {
         setupDrawingView()
     }
+
     func setupDrawingView() {
-        
         drawingBaseView.isAccessibilityElement = true
         drawingBaseView.accessibilityLabel = "Photo"
         
@@ -30,7 +30,7 @@ extension SlideViewController {
         }
         
         if
-            let model = self.resultPhoto.findPhoto.editableModel,
+            let model = resultPhoto.findPhoto.editableModel,
             model.isDeepSearched
         {
             drawingBaseView.accessibilityHint = "Double-tap to show transcript overlay."

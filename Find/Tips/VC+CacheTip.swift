@@ -40,6 +40,7 @@ extension ViewController {
             }
         }
     }
+
     func startCacheThirdStep() {
         TipViews.dismissAll()
         

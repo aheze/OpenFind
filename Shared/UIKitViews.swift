@@ -15,6 +15,7 @@ class FindIconView: UIView {
         super.init(frame: frame)
         commonInit()
     }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
@@ -25,7 +26,7 @@ class FindIconView: UIView {
     var bottomHighlightView: UIView!
 
     private func commonInit() {
-        self.backgroundColor = .clear
+        backgroundColor = .clear
         let spacing = spacingPercent * bounds.height
         
         /// total height of highlights
@@ -50,7 +51,6 @@ class FindIconView: UIView {
         
         let configurations = [topHighlightConfiguration, middleHighlightConfiguration, bottomHighlightConfiguration]
         for (index, configuration) in configurations.enumerated() {
-            
             let highlightView = UIView(frame: configuration.frame)
             highlightView.autoresizingMask = configuration.autoresizingMask
             highlightView.layer.cornerRadius = configuration.cornerRadius
@@ -58,13 +58,13 @@ class FindIconView: UIView {
             
             switch index {
             case 0:
-                self.topHighlightView = highlightView
+                topHighlightView = highlightView
             case 1:
-                self.middleHighlightView = highlightView
+                middleHighlightView = highlightView
             case 2:
-                self.bottomHighlightView = highlightView
+                bottomHighlightView = highlightView
             default:
-                assert(false, "Out of bounds")
+                assertionFailure("Out of bounds")
             }
         }
     }
@@ -82,9 +82,7 @@ class FindIconView: UIView {
     }
 }
 
-
 class ButtonView: UIButton {
-
     var tapped: (() -> Void)?
     var shouldFade = true
     
@@ -94,22 +92,24 @@ class ButtonView: UIButton {
     }
 
     required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
+        super.init(coder: aDecoder)
         configure()
     }
 
     func configure() {
-        self.addTarget(self, action: #selector(touchDown(_:)), for: [.touchDown, .touchDragEnter])
-        self.addTarget(self, action: #selector(touchFinish(_:)), for: [.touchUpInside, .touchCancel, .touchDragExit])
-        self.addTarget(self, action: #selector(touchConfirm(_:)), for: [.touchUpInside, .touchDragEnter])
+        addTarget(self, action: #selector(touchDown(_:)), for: [.touchDown, .touchDragEnter])
+        addTarget(self, action: #selector(touchFinish(_:)), for: [.touchUpInside, .touchCancel, .touchDragExit])
+        addTarget(self, action: #selector(touchConfirm(_:)), for: [.touchUpInside, .touchDragEnter])
     }
 
     @objc func touchDown(_ sender: UIButton) {
         fade(true)
     }
+
     @objc func touchFinish(_ sender: UIButton) {
         fade(false)
     }
+
     @objc func touchConfirm(_ sender: UIButton) {
         tapped?()
     }

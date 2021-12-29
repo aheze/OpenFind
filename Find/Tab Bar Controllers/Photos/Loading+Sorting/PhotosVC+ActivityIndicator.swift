@@ -6,15 +6,15 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension PhotosViewController {
     func addActivityIndicator() {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         view.addSubview(activityIndicator)
         view.bringSubviewToFront(activityIndicator)
-        activityIndicator.snp.makeConstraints { (make) in
+        activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         self.activityIndicator = activityIndicator

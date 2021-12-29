@@ -24,12 +24,11 @@ class CameraViewModel: ObservableObject {
         }
     }
     
-    
     @Published var flash = false
     @Published var cacheOn = false
     
     /// press the snapshot/camera button
     var snapshotPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
-    init() { }
+    init() {}
 }

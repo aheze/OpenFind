@@ -10,7 +10,6 @@ import UIKit
 
 /// When the slides pages left or right
 extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
-    
     func indexUpdated(to newIndex: Int) {
         let currentPhoto = resultPhotos[newIndex]
         let indexPath = IndexPath(row: newIndex, section: 0)
@@ -18,7 +17,7 @@ extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
         if let selectedIndexPath = selectedIndexPath {
             if let cell = tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell { /// old index
                 if let model = currentPhoto.findPhoto.editableModel {
-                    if model.isHearted || model.isDeepSearched  {
+                    if model.isHearted || model.isDeepSearched {
                         cell.shadowImageView.alpha = 1
                     } else {
                         cell.shadowImageView.alpha = 0
@@ -38,7 +37,7 @@ extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
             
             if let cell = tableView.cellForRow(at: indexPath) as? HistoryFindCell { /// new index
                 if let model = currentPhoto.findPhoto.editableModel {
-                    if model.isHearted || model.isDeepSearched  {
+                    if model.isHearted || model.isDeepSearched {
                         cell.shadowImageView.alpha = 0
                     }
                     if model.isHearted {
@@ -53,27 +52,23 @@ extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
         
         selectedIndexPath = indexPath
         tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
-        
     }
 }
 
 extension PhotoFindViewController: ZoomAnimatorDelegate {
-    
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
         zoomAnimator.cameFromFind = true
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-        
         guard let selectedIndexPath = selectedIndexPath else { return }
         
         let cell = tableView.cellForRow(at: selectedIndexPath) as! HistoryFindCell
-        if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
-            
+        if zoomAnimator.isPresenting == false, zoomAnimator.finishedDismissing == true {
             changePresentationMode(presentingSlides: false)
             if let model = resultPhotos[selectedIndexPath.row].findPhoto.editableModel {
                 UIView.animate(withDuration: 0.2, animations: {
-                    if model.isHearted || model.isDeepSearched  {
+                    if model.isHearted || model.isDeepSearched {
                         cell.shadowImageView.alpha = 1
                     }
                     if model.isHearted {
@@ -86,13 +81,12 @@ extension PhotoFindViewController: ZoomAnimatorDelegate {
             }
         }
         
+        let cellFrame = tableView.convert(cell.frame, to: view)
         
-        let cellFrame = self.tableView.convert(cell.frame, to: self.view)
-        
-        if cellFrame.minY < self.tableView.contentInset.top {
-            self.tableView.scrollToRow(at: selectedIndexPath, at: .top, animated: false)
-        } else if cellFrame.maxY > self.view.frame.height - self.tableView.contentInset.bottom {
-            self.tableView.scrollToRow(at: selectedIndexPath, at: .bottom, animated: false)
+        if cellFrame.minY < tableView.contentInset.top {
+            tableView.scrollToRow(at: selectedIndexPath, at: .top, animated: false)
+        } else if cellFrame.maxY > view.frame.height - tableView.contentInset.bottom {
+            tableView.scrollToRow(at: selectedIndexPath, at: .bottom, animated: false)
         }
     }
 }

@@ -8,7 +8,6 @@
 import UIKit
 
 class CacheIcon: UIView {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -24,7 +23,6 @@ class CacheIcon: UIView {
     var checkLayer: CAShapeLayer?
     
     func setup() {
-        
         //// Color Declarations
         let fillColor = UIColor(named: "TabIconBackground-Dark")!
         let strokeColor = UIColor(named: "TabIconDetails-Dark")!
@@ -57,13 +55,12 @@ class CacheIcon: UIView {
         checkLayer.strokeEnd = 0
 
         // add the new layer to our custom view
-        self.layer.addSublayer(rimLayer)
-        self.layer.addSublayer(inactiveCheckLayer)
-        self.layer.addSublayer(checkLayer)
+        layer.addSublayer(rimLayer)
+        layer.addSublayer(inactiveCheckLayer)
+        layer.addSublayer(checkLayer)
         self.rimLayer = rimLayer
         self.inactiveCheckLayer = inactiveCheckLayer
         self.checkLayer = checkLayer
-        
     }
     
     func animateCheck(percentage: CGFloat) {
@@ -81,6 +78,7 @@ class CacheIcon: UIView {
             checkLayer.add(animation, forKey: "lineAnimation")
         }
     }
+
     func toggleRim(light: Bool) {
         if let rimLayer = rimLayer {
             if let currentValue = rimLayer.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.fillColor)) {
@@ -106,7 +104,6 @@ class CacheIcon: UIView {
     }
 
     func createBezierPaths() -> (UIBezierPath, UIBezierPath) {
-        
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 16.23, y: 1))
@@ -156,4 +153,3 @@ class CacheIcon: UIView {
         return (bezierPath, bezier2Path)
     }
 }
-

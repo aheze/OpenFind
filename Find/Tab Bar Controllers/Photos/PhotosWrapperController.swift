@@ -6,16 +6,18 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 enum PhotoScreen {
     case photoGallery
     case finding
 }
+
 class PhotosNavController: UINavigationController {
     var viewController: PhotosViewController!
 }
+
 class PhotosWrapperController: UIViewController {
     var navController = PhotosNavController()
     
@@ -54,7 +56,7 @@ class PhotosWrapperController: UIViewController {
         super.viewDidLoad()
         addChild(navController, in: view)
         
-        navController.viewController.switchToFind = { [weak self] (photoFilterState, photosToFindFrom, isAllPhotos, hasChangedFromBefore)  in
+        navController.viewController.switchToFind = { [weak self] photoFilterState, photosToFindFrom, isAllPhotos, hasChangedFromBefore in
             guard let self = self else { return }
             self.photoFilterState = photoFilterState
             self.photosToFind = photosToFindFrom
@@ -71,20 +73,19 @@ class PhotosWrapperController: UIViewController {
         }
 
         navController.view.clipsToBounds = true
-        
     }
     
     func switchToFind() {
         activeScreen = .finding
         
-        let topHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.top ?? 0
+        let topHeight = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.safeAreaInsets.top ?? 0
         let topShownHeight = topHeight + FindConstants.photoBottomPreviewHeight
         let translationNeeded = view.bounds.height - topShownHeight
         
         let findOriginY = topShownHeight + 16
         let photoFindFrame = CGRect(x: 0, y: findOriginY, width: view.bounds.width, height: view.bounds.height - findOriginY)
         
-        self.addChild(photoFindViewController)
+        addChild(photoFindViewController)
         view.addSubview(photoFindViewController.view)
         photoFindViewController.view.frame = photoFindFrame
         photoFindViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -100,8 +101,6 @@ class PhotosWrapperController: UIViewController {
         navController.viewController.collectionView.isUserInteractionEnabled = false
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
-            
-           
             self.navController.view.transform = CGAffineTransform(translationX: 0, y: -translationNeeded)
             self.navController.view.layer.cornerRadius = 16
             self.navController.viewController.shadeView.alpha = 1
@@ -122,7 +121,6 @@ class PhotosWrapperController: UIViewController {
         navController.viewController.extendedCollapseButton.isHidden = false
         
         UIAccessibility.post(notification: .screenChanged, argument: navController.viewController.extendedCollapseButton)
-        
     }
     
     func switchBackToPhotos() {
@@ -150,7 +148,6 @@ class PhotosWrapperController: UIViewController {
         navController.viewController.extendedCollapseButton.isHidden = true
         
         UIAccessibility.post(notification: .screenChanged, argument: navController.viewController.findButton)
-        
     }
     
     func addShadows() {
@@ -181,4 +178,3 @@ class PhotosWrapperController: UIViewController {
         self.findShadowView = findShadowView
     }
 }
-

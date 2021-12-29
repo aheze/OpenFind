@@ -6,11 +6,10 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 class EKEntryView: EKStyleView {
-    
     struct Content {
         var viewController: UIViewController!
         var view: UIView!
@@ -18,7 +17,7 @@ class EKEntryView: EKStyleView {
         
         init(viewController: UIViewController, attributes: EKAttributes) {
             self.viewController = viewController
-            self.view = viewController.view
+            view = viewController.view
             self.attributes = attributes
         }
         
@@ -36,9 +35,7 @@ class EKEntryView: EKStyleView {
     /** The content - contains the view, view controller, attributes */
     var content: Content
     
-    private lazy var contentView: UIView = {
-        return UIView()
-    }()
+    private lazy var contentView: UIView = .init()
     
     var attributes: EKAttributes {
         return content.attributes
@@ -54,6 +51,7 @@ class EKEntryView: EKStyleView {
     }()
 
     // MARK: Setup
+
     init(newEntry content: Content) {
         self.content = content
         super.init(frame: UIScreen.main.bounds)
@@ -64,6 +62,7 @@ class EKEntryView: EKStyleView {
         adjustInnerContentAppearanceIfNeeded()
     }
     
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -74,7 +73,6 @@ class EKEntryView: EKStyleView {
     }
     
     func transform(to view: UIView) {
-        
         let previousView = content.view
         content.view = view
         view.layoutIfNeeded()
@@ -85,7 +83,6 @@ class EKEntryView: EKStyleView {
         SwiftEntryKit.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState, .layoutSubviews], animations: {
-            
             previousHeight.priority = .defaultLow
             nextHeight.priority = .must
             
@@ -93,7 +90,7 @@ class EKEntryView: EKStyleView {
 
             SwiftEntryKit.layoutIfNeeded()
             
-        }, completion: { (finished) in
+        }, completion: { _ in
             
             view.alpha = 0
             

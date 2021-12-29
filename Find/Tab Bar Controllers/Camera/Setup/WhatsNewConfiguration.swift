@@ -17,8 +17,6 @@ struct WhatsNewConfig {
         configuration.titleView.titleColor = #colorLiteral(red: 0, green: 0.6086733891, blue: 0.840379902, alpha: 1)
         configuration.completionButton.backgroundColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
         
-        
-        
         let language = Locale.preferredLanguages[0]
         if language == "zh-Hans" || language == "zh" {
             whatsNew = WhatsNew(
@@ -91,10 +89,10 @@ struct WhatsNewConfig {
         return (whatsNew, configuration)
     }
 }
+
 extension CameraViewController {
-    
     func dismissWhatsNew(completion: @escaping () -> Void) {
-        self.whatsNewHeightC.constant = 0
+        whatsNewHeightC.constant = 0
         UIView.animate(withDuration: 0.5, animations: {
             self.whatsNewView.alpha = 0
             self.whatsNewButton.alpha = 0
@@ -109,8 +107,7 @@ extension CameraViewController {
         let (whatsNew, configuration) = WhatsNewConfig.getWhatsNew()
         if let whatsNewPresent = whatsNew {
             let whatsNewViewController = WhatsNewViewController(whatsNew: whatsNewPresent, configuration: configuration)
-            self.present(whatsNewViewController, animated: true)
+            present(whatsNewViewController, animated: true)
         }
     }
 }
-

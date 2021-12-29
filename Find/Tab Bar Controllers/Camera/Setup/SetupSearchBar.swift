@@ -6,9 +6,9 @@
 //  Copyright © 2019 Andrew. All rights reserved.
 //
 
-import UIKit
 import ARKit
 import SnapKit
+import UIKit
 import VideoToolbox
 
 protocol InjectLists: class {
@@ -80,7 +80,6 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
             }
             findWhenPaused()
         }
-        
     }
 
     func startedEditing(start: Bool) {
@@ -98,13 +97,13 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
 
 extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return selectedLists.count
+        return selectedLists.count
     }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
         let listNumber = selectedLists[indexPath.item]
         if let list = listCategories?[listNumber.orderIdentifier] {
-
             cell.backgroundColor = UIColor(hexString: list.iconColorName)
             cell.layer.cornerRadius = 6
                
@@ -123,8 +122,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             } else {
                 cell.imageRightC.constant = 8
                 UIView.animate(withDuration: 0.3, animations: {
-                cell.nameLabel.text = list.name
-                cell.nameLabel.alpha = 1
+                    cell.nameLabel.text = list.name
+                    cell.nameLabel.alpha = 1
                     cell.layoutIfNeeded()
                 })
             }
@@ -153,7 +152,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     listName,
                     iconTitle, iconString,
                     colorTitle, colorString,
-                    pitchTitle, pitchString,
+                    pitchTitle, pitchString
                 ]
             )
             
@@ -161,8 +160,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
 
         return cell
-
     }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if searchShrunk == false {
             let list = selectedLists[indexPath.item]
@@ -191,8 +190,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
     }
-    func loadListsRealm() {
 
+    func loadListsRealm() {
         listCategories = realm.objects(FindList.self)
         selectedLists.removeAll()
         editableListCategories.removeAll()
@@ -200,7 +199,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
         if let lC = listCategories {
             for (index, singleL) in lC.enumerated() {
-
                 let editList = EditableFindList()
 
                 editList.name = singleL.name
@@ -221,8 +219,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         searchCollectionView.reloadData()
     }
-    func setupSearchBar() {
 
+    func setupSearchBar() {
         textLabel.alpha = 0
         listsLabel.alpha = 0
         tapToRemoveLabel.alpha = 0
@@ -236,8 +234,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let typeHereToFind = NSLocalizedString("typeHereToFind", comment: "SetupSearchBar def=Type here to find...")
         
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: typeHereToFind,
-                                                                   attributes:
-                                                                   [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
+                                                                      attributes:
+                                                                      [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
         
         alternateWarningView.alpha = 0
         alternateWarningView.layer.cornerRadius = 6
@@ -283,7 +281,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func updateListsLayout(toType: String) {
-        
         switch toType {
         case "onlyTextBox":
             searchShrunk = false
@@ -308,7 +305,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             searchTextTopC.constant = 180
             searchCollectionTopC.constant = 60
             searchContentViewHeight.constant = 243
-            
             
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
                 self.searchCollectionView.alpha = 1
@@ -385,10 +381,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         default:
             break
         }
-        
     }
 
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         temporaryPreventGestures?(true)
         if selectedLists.count == 0 {
@@ -397,6 +391,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             updateListsLayout(toType: "addListsNow")
         }
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         temporaryPreventGestures?(false)
         view.endEditing(true)
@@ -407,9 +402,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         return true
     }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
-            
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
             if uniqueSplits.count != splits.count {
@@ -435,7 +430,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return true
     }
     
-    
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         finalTextToFind = ""
         allowSearch = true
@@ -444,6 +438,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         sortSearchTerms()
         return true
     }
+
     func showDuplicateAlert(show: Bool) {
         if show == true {
             warningHeightC.constant = 32
@@ -495,21 +490,18 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
         for list in selectedLists {
             for match in list.contents {
-                let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
+                let matchColor = UIColor(hexString: list.iconColorName).cgColor
                 let highlightColor = HighlightColor(cgColor: matchColor, hexString: list.iconColorName)
                 
-                
-                if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
+                if !duplicatedStrings.contains(match.lowercased()), !cameAcrossSearchFieldText.contains(match.lowercased()) {
                     matchToColors[match.lowercased()] = [highlightColor]
                     
                 } else {
                     if matchToColors[match.lowercased()] == nil {
-
-                            matchToColors[match.lowercased()] = [highlightColor]
+                        matchToColors[match.lowercased()] = [highlightColor]
                     } else {
                         if !(matchToColors[match.lowercased()]?.contains(highlightColor))! {
                             matchToColors[match.lowercased(), default: [HighlightColor]()].append(highlightColor)
-
                         }
                     }
                 }
@@ -517,7 +509,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         var newSearch = [String]()
         for match in arrayOfSearch {
-            if match != "" && !cameAcrossSearchFieldText.contains(match) && !duplicatedStrings.contains(match) {
+            if match != "", !cameAcrossSearchFieldText.contains(match), !duplicatedStrings.contains(match) {
                 newSearch.append(match)
             }
         }
@@ -539,6 +531,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             matchToColors[match, default: [HighlightColor]()].append(highlightColor)
         }
     }
+
     func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {
         let ciImage = CIImage(cvPixelBuffer: buffer)
         let temporaryContext = CIContext(options: nil)
@@ -550,8 +543,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return nil
     }
 }
+
 extension String {
-    mutating func insert(string:String,ind:Int) {
-        self.insert(contentsOf: string, at:self.index(self.startIndex, offsetBy: ind) )
+    mutating func insert(string: String, ind: Int) {
+        insert(contentsOf: string, at: index(startIndex, offsetBy: ind))
     }
 }

@@ -27,28 +27,27 @@
 
 import UIKit
 
-private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
+private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case (let l?, let r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
 }
 
-private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
+private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case (let l?, let r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
 }
 
 public struct LTEmitter {
-    
     let layer: CAEmitterLayer = {
         let layer = CAEmitterLayer()
         layer.emitterPosition = CGPoint(x: 10, y: 10)
@@ -56,7 +55,7 @@ public struct LTEmitter {
         layer.renderMode = .unordered
         layer.emitterShape = .line
         return layer
-        }()
+    }()
     
     let cell: CAEmitterCell = {
         let cell = CAEmitterCell()
@@ -73,7 +72,7 @@ public struct LTEmitter {
         cell.scaleSpeed = -0.06
         cell.scaleRange = 0.1
         return cell
-        }()
+    }()
     
     public var duration: Float = 0.6
     
@@ -94,7 +93,8 @@ public struct LTEmitter {
         image = UIImage(
             named: particleName,
             in: Bundle(for: LTMorphingLabel.self),
-            compatibleWith: nil)
+            compatibleWith: nil
+        )
     }
     
     public func play() {
@@ -110,7 +110,7 @@ public struct LTEmitter {
     }
     
     public func stop() {
-        if nil != layer.superlayer {
+        if layer.superlayer != nil {
             layer.emitterCells = nil
             layer.removeFromSuperlayer()
         }
@@ -120,41 +120,38 @@ public struct LTEmitter {
         configureClosure?(layer, cell)
         return self
     }
-    
 }
 
 public typealias LTEmitterConfigureClosure = (CAEmitterLayer, CAEmitterCell) -> Void
 
 open class LTEmitterView: UIView {
-    
     open lazy var emitters: [String: LTEmitter] = {
         var _emitters = [String: LTEmitter]()
         return _emitters
-        }()
+    }()
     
     open func createEmitter(
         _ name: String,
         particleName: String,
         duration: Float,
         configureClosure: LTEmitterConfigureClosure?
-        ) -> LTEmitter {
+    ) -> LTEmitter {
+        var emitter: LTEmitter
+        if let e = emitters[name] {
+            emitter = e
+        } else {
+            emitter = LTEmitter(
+                name: name,
+                particleName: particleName,
+                duration: duration
+            )
 
-            var emitter: LTEmitter
-            if let e = emitters[name] {
-                emitter = e
-            } else {
-                emitter = LTEmitter(
-                    name: name,
-                    particleName: particleName,
-                    duration: duration
-                )
+            configureClosure?(emitter.layer, emitter.cell)
 
-                configureClosure?(emitter.layer, emitter.cell)
-
-                layer.addSublayer(emitter.layer)
-                emitters.updateValue(emitter, forKey: name)
-            }
-            return emitter
+            layer.addSublayer(emitter.layer)
+            emitters.updateValue(emitter, forKey: name)
+        }
+        return emitter
     }
     
     open func removeAllEmitters() {
@@ -163,5 +160,4 @@ open class LTEmitterView: UIView {
         }
         emitters.removeAll(keepingCapacity: false)
     }
-    
 }

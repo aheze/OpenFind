@@ -6,8 +6,8 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 protocol EntryContentViewDelegate: class {
     func changeToActive(withAttributes attributes: EKAttributes)
@@ -16,7 +16,6 @@ protocol EntryContentViewDelegate: class {
 }
 
 class EKContentView: UIView {
-    
     enum OutTranslation {
         case exit
         case pop
@@ -70,6 +69,8 @@ class EKContentView: UIView {
     private var contentView: EKEntryView!
     
     // MARK: Setup
+
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -81,7 +82,6 @@ class EKContentView: UIView {
     
     // Called from outer scope with a presentable view and attributes
     func setup(with contentView: EKEntryView) {
-        
         self.contentView = contentView
         
         // Execute willAppear lifecycle action if needed
@@ -110,7 +110,6 @@ class EKContentView: UIView {
     
     // Setup the scrollView initial position
     private func setupInitialPosition() {
-        
         // Determine the layout entrance type according to the entry type
         let messageInAnchor: NSLayoutConstraint.Attribute
         
@@ -123,7 +122,7 @@ class EKContentView: UIView {
         let safeAreaInsets = EKWindowProvider.safeAreaInsets
         let overrideSafeArea = attributes.positionConstraints.safeArea.isOverridden
         
-        if !overrideSafeArea && safeAreaInsets.hasVerticalInsets && !attributes.position.isCenter {
+        if !overrideSafeArea, safeAreaInsets.hasVerticalInsets, !attributes.position.isCenter {
             spacerView = UIView()
             addSubview(spacerView)
             spacerView.set(.height, of: safeAreaInsets.top)
@@ -200,7 +199,6 @@ class EKContentView: UIView {
     
     // Setup out constraints - taking into account the full picture and all the possible use-cases
     private func setupOutConstraints(messageInAnchor: QLAttribute) {
-        
         // Setup entrance and exit out constraints
         entranceOutConstraint = setupOutConstraint(animation: attributes.entranceAnimation, messageInAnchor: messageInAnchor, priority: .must)
         exitOutConstraint = setupOutConstraint(animation: attributes.exitAnimation, messageInAnchor: messageInAnchor, priority: .defaultLow)
@@ -215,9 +213,7 @@ class EKContentView: UIView {
         popOutConstraint = setupOutConstraint(animation: popAnimation, messageInAnchor: messageInAnchor, priority: .defaultLow)
     }
     
-    
     private func setupSize() {
-        
         // Layout the scroll view horizontally inside the screen
         switch attributes.positionConstraints.size.width {
         case .offset(value: let offset):
@@ -244,7 +240,6 @@ class EKContentView: UIView {
     }
     
     private func setupMaxSize() {
-        
         // Layout the scroll view according to the maximum width (if given any)
         switch attributes.positionConstraints.maxSize.width {
         case .offset(value: let offset):
@@ -255,7 +250,6 @@ class EKContentView: UIView {
             layout(to: .width, of: superview!, relation: .lessThanOrEqual, ratio: ratio)
         case .constant(value: let constant):
             set(.width, of: constant, relation: .lessThanOrEqual)
-            break
         case .intrinsic:
             break
         }
@@ -268,7 +262,6 @@ class EKContentView: UIView {
             layout(to: .height, of: superview!, relation: .lessThanOrEqual, ratio: ratio)
         case .constant(value: let constant):
             set(.height, of: constant, relation: .lessThanOrEqual)
-            break
         case .intrinsic:
             break
         }
@@ -324,7 +317,6 @@ class EKContentView: UIView {
     
     // Animate out
     func animateOut(pushOut: Bool) {
-        
         // Execute willDisappear action if needed
         contentView.attributes.lifecycleEvents.willDisappear?()
         
@@ -344,7 +336,6 @@ class EKContentView: UIView {
     
     // Animate out
     private func animateOut(with animation: EKAttributes.Animation, outTranslationType: OutTranslation) {
-        
         superview?.layoutIfNeeded()
         
         if let translation = animation.translate {
@@ -377,7 +368,6 @@ class EKContentView: UIView {
     
     // Animate in
     private func animateIn() {
-                
         let animation = attributes.entranceAnimation
         
         superview?.layoutIfNeeded()
@@ -441,7 +431,7 @@ class EKContentView: UIView {
     }
     
     // Perform animation - translate / scale / fade
-    private func performAnimation(out: Bool, with animation: EKAnimation, preAction: @escaping () -> () = {}, action: @escaping () -> ()) {
+    private func performAnimation(out: Bool, with animation: EKAnimation, preAction: @escaping () -> Void = {}, action: @escaping () -> Void) {
         let curve: UIView.AnimationOptions = out ? .curveEaseIn : .curveEaseOut
         let options: UIView.AnimationOptions = [curve, .beginFromCurrentState]
         preAction()
@@ -490,10 +480,9 @@ class EKContentView: UIView {
     }
 }
 
-
 // MARK: Keyboard Logic
+
 extension EKContentView {
-    
     private enum KeyboardState {
         case visible
         case hidden
@@ -541,7 +530,6 @@ extension EKContentView {
     }
 
     private func animate(by userInfo: [AnyHashable: Any]?, entrance: Bool) {
-        
         // Guard that the entry is bound to the keyboard
         guard case .bind(offset: let offset) = attributes.positionConstraints.keyboardRelation else {
             return
@@ -593,8 +581,8 @@ extension EKContentView {
 }
 
 // MARK: Responds to user interactions (tap / pan / swipe / touches)
+
 extension EKContentView {
-    
     // Tap gesture handler
     @objc func tapGestureRecognized() {
         switch attributes.entryInteraction.defaultAction {
@@ -650,7 +638,7 @@ extension EKContentView {
         var duration = max(0.3, TimeInterval(distance / Swift.abs(velocity)))
         duration = min(0.7, duration)
         
-        if attributes.scroll.isSwipeable && testSwipeVelocity(with: velocity) && testSwipeInConstraint() {
+        if attributes.scroll.isSwipeable, testSwipeVelocity(with: velocity), testSwipeInConstraint() {
             stretchOut(usingSwipe: velocity > 0 ? .swipeDown : .swipeUp, duration: duration)
         } else {
             animateRubberBandPullback()
@@ -663,7 +651,7 @@ extension EKContentView {
         contentView.content.attributes.lifecycleEvents.willDisappear?()
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 4, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
             self.translateOut(withType: type)
-        }, completion: { finished in
+        }, completion: { _ in
             self.removeFromSuperview(keepWindow: false)
         })
     }
@@ -720,7 +708,7 @@ extension EKContentView {
     }
     
     private func handleExitDelayIfNeeded(byPanState state: UIGestureRecognizer.State) {
-        guard attributes.entryInteraction.isDelayExit && attributes.displayDuration.isFinite else {
+        guard attributes.entryInteraction.isDelayExit, attributes.displayDuration.isFinite else {
             return
         }
         switch state {
@@ -736,13 +724,13 @@ extension EKContentView {
     // MARK: UIResponder
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if attributes.entryInteraction.isDelayExit && attributes.displayDuration.isFinite {
+        if attributes.entryInteraction.isDelayExit, attributes.displayDuration.isFinite {
             outDispatchWorkItem?.cancel()
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if attributes.entryInteraction.isDelayExit && attributes.displayDuration.isFinite {
+        if attributes.entryInteraction.isDelayExit, attributes.displayDuration.isFinite {
             scheduleAnimateOut()
         }
     }

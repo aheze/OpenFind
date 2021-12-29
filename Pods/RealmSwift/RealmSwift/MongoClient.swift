@@ -53,9 +53,9 @@ public typealias MongoDatabase = RLMMongoDatabase
 /// Options to use when executing a `find` command on a `MongoCollection`.
 public typealias FindOptions = RLMFindOptions
 
-extension FindOptions {
+public extension FindOptions {
     /// Limits the fields to return for all matching documents.
-    public var projection: Document? {
+    var projection: Document? {
         get {
             return __projection.map(ObjectiveCSupport.convertBson)??.documentValue
         }
@@ -65,7 +65,7 @@ extension FindOptions {
     }
 
     /// The order in which to return matching documents.
-    public var sort: Document? {
+    var sort: Document? {
         get {
             return __sort.map(ObjectiveCSupport.convertBson)??.documentValue
         }
@@ -79,7 +79,7 @@ extension FindOptions {
     ///   - limit: The maximum number of documents to return. Specifying 0 will return all documents.
     ///   - projected: Limits the fields to return for all matching documents.
     ///   - sort: The order in which to return matching documents.
-    public convenience init(_ limit: Int?, _ projection: Document?, _ sort: Document?) {
+    convenience init(_ limit: Int?, _ projection: Document?, _ sort: Document?) {
         self.init()
         self.limit = limit ?? 0
         self.projection = projection
@@ -91,20 +91,18 @@ extension FindOptions {
     ///   - limit: The maximum number of documents to return. Specifying 0 will return all documents.
     ///   - projected: Limits the fields to return for all matching documents.
     ///   - sort: The order in which to return matching documents.
-    public convenience init(limit: Int?, projection: Document?, sort: Document?) {
+    convenience init(limit: Int?, projection: Document?, sort: Document?) {
         self.init(limit, projection, sort)
     }
 }
-
 
 /// Options to use when executing a `findOneAndUpdate`, `findOneAndReplace`,
 /// or `findOneAndDelete` command on a `MongoCollection`.
 public typealias FindOneAndModifyOptions = RLMFindOneAndModifyOptions
 
-extension FindOneAndModifyOptions {
-
+public extension FindOneAndModifyOptions {
     /// Limits the fields to return for all matching documents.
-    public var projection: Document? {
+    var projection: Document? {
         get {
             return __projection.map(ObjectiveCSupport.convertBson)??.documentValue
         }
@@ -114,7 +112,7 @@ extension FindOneAndModifyOptions {
     }
 
     /// The order in which to return matching documents.
-    public var sort: Document? {
+    var sort: Document? {
         get {
             return __sort.map(ObjectiveCSupport.convertBson)??.documentValue
         }
@@ -133,10 +131,11 @@ extension FindOneAndModifyOptions {
     ///   - shouldReturnNewDocument: When true then the new document is returned,
     ///   Otherwise the old document is returned (default)
     ///   (only available for findOneAndReplace and findOneAndUpdate)
-    public convenience init(_ projection: Document?,
-                            _ sort: Document?,
-                            _ upsert: Bool=false,
-                            _ shouldReturnNewDocument: Bool=false) {
+    convenience init(_ projection: Document?,
+                     _ sort: Document?,
+                     _ upsert: Bool = false,
+                     _ shouldReturnNewDocument: Bool = false)
+    {
         self.init()
         self.projection = projection
         self.sort = sort
@@ -154,10 +153,11 @@ extension FindOneAndModifyOptions {
     ///   - shouldReturnNewDocument: When true then the new document is returned,
     ///   Otherwise the old document is returned (default)
     ///   (only available for findOneAndReplace and findOneAndUpdate)
-    public convenience init(projection: Document?,
-                            sort: Document?,
-                            upsert: Bool=false,
-                            shouldReturnNewDocument: Bool=false) {
+    convenience init(projection: Document?,
+                     sort: Document?,
+                     upsert: Bool = false,
+                     shouldReturnNewDocument: Bool = false)
+    {
         self.init(projection, sort, upsert, shouldReturnNewDocument)
     }
 }
@@ -202,7 +202,7 @@ public typealias ChangeStream = RLMChangeStream
 public protocol ChangeEventDelegate: AnyObject {
     /// The stream was opened.
     /// - Parameter changeStream: The `ChangeStream` subscribing to the stream changes.
-    func changeStreamDidOpen(_ changeStream: ChangeStream )
+    func changeStreamDidOpen(_ changeStream: ChangeStream)
     /// The stream has been closed.
     /// - Parameter error: If an error occurred when closing the stream, an error will be passed.
     func changeStreamDidClose(with error: Error?)
@@ -214,7 +214,7 @@ public protocol ChangeEventDelegate: AnyObject {
     func changeStreamDidReceive(changeEvent: AnyBSON?)
 }
 
-extension MongoCollection {
+public extension MongoCollection {
     /// Opens a MongoDB change stream against the collection to watch for changes. The resulting stream will be notified
     /// of all events on this collection that the active user is authorized to see based on the configured MongoDB
     /// rules.
@@ -222,9 +222,9 @@ extension MongoCollection {
     ///   - delegate: The delegate that will react to events and errors from the resulting change stream.
     ///   - queue: Dispatches streaming events to an optional queue, if no queue is provided the main queue is used
     /// - Returns: A ChangeStream which will manage the streaming events.
-    public func watch(delegate: ChangeEventDelegate, queue: DispatchQueue = .main) -> ChangeStream {
-        return self.__watch(with: ChangeEventDelegateProxy(delegate),
-                            delegateQueue: queue)
+    func watch(delegate: ChangeEventDelegate, queue: DispatchQueue = .main) -> ChangeStream {
+        return __watch(with: ChangeEventDelegateProxy(delegate),
+                       delegateQueue: queue)
     }
 
     /// Opens a MongoDB change stream against the collection to watch for changes. The provided BSON document will be
@@ -240,11 +240,11 @@ extension MongoCollection {
     ///   - delegate: The delegate that will react to events and errors from the resulting change stream.
     ///   - queue: Dispatches streaming events to an optional queue, if no queue is provided the main queue is used
     /// - Returns: A ChangeStream which will manage the streaming events.
-    public func watch(matchFilter: Document, delegate: ChangeEventDelegate, queue: DispatchQueue = .main) -> ChangeStream {
+    func watch(matchFilter: Document, delegate: ChangeEventDelegate, queue: DispatchQueue = .main) -> ChangeStream {
         let filterBSON = ObjectiveCSupport.convert(object: .document(matchFilter)) as! [String: RLMBSON]
-        return self.__watch(withMatchFilter: filterBSON,
-                            delegate: ChangeEventDelegateProxy(delegate),
-                            delegateQueue: queue)
+        return __watch(withMatchFilter: filterBSON,
+                       delegate: ChangeEventDelegateProxy(delegate),
+                       delegateQueue: queue)
     }
 
     /// Opens a MongoDB change stream against the collection to watch for changes
@@ -255,24 +255,24 @@ extension MongoCollection {
     ///   - delegate: The delegate that will react to events and errors from the resulting change stream.
     ///   - queue: Dispatches streaming events to an optional queue, if no queue is provided the main queue is used
     /// - Returns: A ChangeStream which will manage the streaming events.
-    public func watch(filterIds: [ObjectId], delegate: ChangeEventDelegate, queue: DispatchQueue = .main) -> ChangeStream {
-        let filterBSON = ObjectiveCSupport.convert(object: .array(filterIds.map {AnyBSON($0)})) as! [RLMObjectId]
-        return self.__watch(withFilterIds: filterBSON,
-                            delegate: ChangeEventDelegateProxy(delegate),
-                            delegateQueue: queue)
+    func watch(filterIds: [ObjectId], delegate: ChangeEventDelegate, queue: DispatchQueue = .main) -> ChangeStream {
+        let filterBSON = ObjectiveCSupport.convert(object: .array(filterIds.map { AnyBSON($0) })) as! [RLMObjectId]
+        return __watch(withFilterIds: filterBSON,
+                       delegate: ChangeEventDelegateProxy(delegate),
+                       delegateQueue: queue)
     }
 }
 
 // MongoCollection methods with result type completions
-extension MongoCollection {
+public extension MongoCollection {
     /// Encodes the provided value to BSON and inserts it. If the value is missing an identifier, one will be
     /// generated for it.
     /// - Parameters:
     ///   - document: document  A `Document` value to insert.
     ///   - completion: The result of attempting to perform the insert. An Id will be returned for the inserted object on sucess
-    public func insertOne(_ document: Document, _ completion: @escaping MongoInsertBlock) {
+    func insertOne(_ document: Document, _ completion: @escaping MongoInsertBlock) {
         let bson = ObjectiveCSupport.convert(object: .document(document))
-        self.__insertOneDocument(bson as! [String: RLMBSON]) { objectId, error in
+        __insertOneDocument(bson as! [String: RLMBSON]) { objectId, error in
             if let o = objectId.map(ObjectiveCSupport.convert), let objectId = o {
                 completion(.success(objectId))
             } else {
@@ -286,9 +286,9 @@ extension MongoCollection {
     /// - Parameters:
     ///   - documents: The `Document` values in a bson array to insert.
     ///   - completion: The result of the insert, returns an array inserted document ids in order.
-    public func insertMany(_ documents: [Document], _ completion: @escaping MongoInsertManyBlock) {
-        let bson = ObjectiveCSupport.convert(object: .array(documents.map {.document($0)}))
-        self.__insertManyDocuments(bson as! [[String: RLMBSON]]) { objectIds, error in
+    func insertMany(_ documents: [Document], _ completion: @escaping MongoInsertManyBlock) {
+        let bson = ObjectiveCSupport.convert(object: .array(documents.map { .document($0) }))
+        __insertManyDocuments(bson as! [[String: RLMBSON]]) { objectIds, error in
             if let objectIds = objectIds?.compactMap(ObjectiveCSupport.convert) {
                 completion(.success(objectIds))
             } else {
@@ -302,11 +302,12 @@ extension MongoCollection {
     ///   - filter: A `Document` as bson that should match the query.
     ///   - options: `FindOptions` to use when executing the command.
     ///   - completion: The resulting bson array of documents or error if one occurs
-    public func find(filter: Document,
-                     options: FindOptions,
-                     _ completion: @escaping MongoFindBlock) {
+    func find(filter: Document,
+              options: FindOptions,
+              _ completion: @escaping MongoFindBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__findWhere(bson as! [String: RLMBSON], options: options) { documents, error in
+        __findWhere(bson as! [String: RLMBSON], options: options) { documents, error in
             let bson: [Document]? = documents?.map { $0.mapValues { ObjectiveCSupport.convert(object: $0) } }
             if let bson = bson {
                 completion(.success(bson))
@@ -320,10 +321,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - filter: A `Document` as bson that should match the query.
     ///   - completion: The resulting bson array of documents or error if one occurs
-    public func find(filter: Document,
-                     _ completion: @escaping MongoFindBlock) {
+    func find(filter: Document,
+              _ completion: @escaping MongoFindBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__findWhere(bson as! [String: RLMBSON]) { documents, error in
+        __findWhere(bson as! [String: RLMBSON]) { documents, error in
             let bson: [Document]? = documents?.map { $0.mapValues { ObjectiveCSupport.convert(object: $0) } }
             if let bson = bson {
                 completion(.success(bson))
@@ -341,11 +343,12 @@ extension MongoCollection {
     ///   - filter: A `Document` as bson that should match the query.
     ///   - options: `FindOptions` to use when executing the command.
     ///   - completion: The resulting bson or error if one occurs
-    public func findOneDocument(filter: Document,
-                                options: FindOptions,
-                                _ completion: @escaping MongoFindOneBlock) {
+    func findOneDocument(filter: Document,
+                         options: FindOptions,
+                         _ completion: @escaping MongoFindOneBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__findOneDocumentWhere(bson as! [String: RLMBSON], options: options) { document, error in
+        __findOneDocumentWhere(bson as! [String: RLMBSON], options: options) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -362,10 +365,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - filter: A `Document` as bson that should match the query.
     ///   - completion: The resulting bson or error if one occurs
-    public func findOneDocument(filter: Document,
-                                _ completion: @escaping MongoFindOneBlock) {
+    func findOneDocument(filter: Document,
+                         _ completion: @escaping MongoFindOneBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__findOneDocumentWhere(bson as! [String: RLMBSON]) { document, error in
+        __findOneDocumentWhere(bson as! [String: RLMBSON]) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -379,10 +383,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - pipeline: A bson array made up of `Documents` containing the pipeline of aggregation operations to perform.
     ///   - completion: The resulting bson array of documents or error if one occurs
-    public func aggregate(pipeline: [Document],
-                          _ completion: @escaping MongoFindBlock) {
-        let bson = ObjectiveCSupport.convert(object: .array(pipeline.map {.document($0)}))
-        self.__aggregate(withPipeline: bson as! [[String: RLMBSON]]) { documents, error in
+    func aggregate(pipeline: [Document],
+                   _ completion: @escaping MongoFindBlock)
+    {
+        let bson = ObjectiveCSupport.convert(object: .array(pipeline.map { .document($0) }))
+        __aggregate(withPipeline: bson as! [[String: RLMBSON]]) { documents, error in
             let bson: [Document]? = documents?.map { $0.mapValues { ObjectiveCSupport.convert(object: $0) } }
             if let bson = bson {
                 completion(.success(bson))
@@ -397,11 +402,12 @@ extension MongoCollection {
     ///   - filter: A `Document` as bson that should match the query.
     ///   - limit: The max amount of documents to count
     ///   - completion: Returns the count of the documents that matched the filter.
-    public func count(filter: Document,
-                      limit: Int,
-                      _ completion: @escaping MongoCountBlock) {
+    func count(filter: Document,
+               limit: Int,
+               _ completion: @escaping MongoCountBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__countWhere(bson as! [String: RLMBSON], limit: limit) { count, error in
+        __countWhere(bson as! [String: RLMBSON], limit: limit) { count, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -414,10 +420,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - filter: A `Document` as bson that should match the query.
     ///   - completion: Returns the count of the documents that matched the filter.
-    public func count(filter: Document,
-                      _ completion: @escaping MongoCountBlock) {
+    func count(filter: Document,
+               _ completion: @escaping MongoCountBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__countWhere(bson as! [String: RLMBSON]) { count, error in
+        __countWhere(bson as! [String: RLMBSON]) { count, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -430,10 +437,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - filter: A `Document` as bson that should match the query.
     ///   - completion: The result of performing the deletion. Returns the count of deleted objects
-    public func deleteOneDocument(filter: Document,
-                                  _ completion: @escaping MongoCountBlock) {
+    func deleteOneDocument(filter: Document,
+                           _ completion: @escaping MongoCountBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__deleteOneDocumentWhere(bson as! [String: RLMBSON]) { count, error in
+        __deleteOneDocumentWhere(bson as! [String: RLMBSON]) { count, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -446,10 +454,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - filter: Document representing the match criteria
     ///   - completion: The result of performing the deletion. Returns the count of the deletion
-    public func deleteManyDocuments(filter: Document,
-                                    _ completion: @escaping MongoCountBlock) {
+    func deleteManyDocuments(filter: Document,
+                             _ completion: @escaping MongoCountBlock)
+    {
         let bson = ObjectiveCSupport.convert(object: .document(filter))
-        self.__deleteManyDocumentsWhere(bson as! [String: RLMBSON]) { count, error in
+        __deleteManyDocumentsWhere(bson as! [String: RLMBSON]) { count, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -464,15 +473,16 @@ extension MongoCollection {
     ///   - update: A bson `Document` representing the update to be applied to a matching document.
     ///   - upsert: When true, creates a new document if no document matches the query.
     ///   - completion: The result of the attempt to update a document.
-    public func updateOneDocument(filter: Document,
-                                  update: Document,
-                                  upsert: Bool,
-                                  _ completion: @escaping MongoUpdateBlock) {
+    func updateOneDocument(filter: Document,
+                           update: Document,
+                           upsert: Bool,
+                           _ completion: @escaping MongoUpdateBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let updateBSON = ObjectiveCSupport.convert(object: .document(update))
-        self.__updateOneDocumentWhere(filterBSON as! [String: RLMBSON],
-                                      updateDocument: updateBSON as! [String: RLMBSON],
-                                      upsert: upsert) { updateResult, error in
+        __updateOneDocumentWhere(filterBSON as! [String: RLMBSON],
+                                 updateDocument: updateBSON as! [String: RLMBSON],
+                                 upsert: upsert) { updateResult, error in
             if let updateResult = updateResult {
                 completion(.success(updateResult))
             } else {
@@ -486,13 +496,14 @@ extension MongoCollection {
     ///   - filter: A bson `Document` representing the match criteria.
     ///   - update: A bson `Document` representing the update to be applied to a matching document.
     ///   - completion: The result of the attempt to update a document.
-    public func updateOneDocument(filter: Document,
-                                  update: Document,
-                                  _ completion: @escaping MongoUpdateBlock) {
+    func updateOneDocument(filter: Document,
+                           update: Document,
+                           _ completion: @escaping MongoUpdateBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let updateBSON = ObjectiveCSupport.convert(object: .document(update))
-        self.__updateOneDocumentWhere(filterBSON as! [String: RLMBSON],
-                                      updateDocument: updateBSON as! [String: RLMBSON]) { updateResult, error in
+        __updateOneDocumentWhere(filterBSON as! [String: RLMBSON],
+                                 updateDocument: updateBSON as! [String: RLMBSON]) { updateResult, error in
             if let updateResult = updateResult {
                 completion(.success(updateResult))
             } else {
@@ -507,15 +518,16 @@ extension MongoCollection {
     ///   - update: A bson `Document` representing the update to be applied to a matching document.
     ///   - upsert: When true, creates a new document if no document matches the query.
     ///   - completion: The result of the attempt to update a document.
-    public func updateManyDocuments(filter: Document,
-                                    update: Document,
-                                    upsert: Bool,
-                                    _ completion: @escaping MongoUpdateBlock) {
+    func updateManyDocuments(filter: Document,
+                             update: Document,
+                             upsert: Bool,
+                             _ completion: @escaping MongoUpdateBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let updateBSON = ObjectiveCSupport.convert(object: .document(update))
-        self.__updateManyDocumentsWhere(filterBSON as! [String: RLMBSON],
-                                        updateDocument: updateBSON as! [String: RLMBSON],
-                                        upsert: upsert) { updateResult, error in
+        __updateManyDocumentsWhere(filterBSON as! [String: RLMBSON],
+                                   updateDocument: updateBSON as! [String: RLMBSON],
+                                   upsert: upsert) { updateResult, error in
             if let updateResult = updateResult {
                 completion(.success(updateResult))
             } else {
@@ -529,13 +541,14 @@ extension MongoCollection {
     ///   - filter: A bson `Document` representing the match criteria.
     ///   - update: A bson `Document` representing the update to be applied to a matching document.
     ///   - completion: The result of the attempt to update a document.
-    public func updateManyDocuments(filter: Document,
-                                    update: Document,
-                                    _ completion: @escaping MongoUpdateBlock) {
+    func updateManyDocuments(filter: Document,
+                             update: Document,
+                             _ completion: @escaping MongoUpdateBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let updateBSON = ObjectiveCSupport.convert(object: .document(update))
-        self.__updateManyDocumentsWhere(filterBSON as! [String: RLMBSON],
-                                        updateDocument: updateBSON as! [String: RLMBSON]) { updateResult, error in
+        __updateManyDocumentsWhere(filterBSON as! [String: RLMBSON],
+                                   updateDocument: updateBSON as! [String: RLMBSON]) { updateResult, error in
             if let updateResult = updateResult {
                 completion(.success(updateResult))
             } else {
@@ -555,15 +568,16 @@ extension MongoCollection {
     ///   - update: A bson `Document` representing the update to be applied to a matching document.
     ///   - options: `RemoteFindOneAndModifyOptions` to use when executing the command.
     ///   - completion: The result of the attempt to update a document.
-    public func findOneAndUpdate(filter: Document,
-                                 update: Document,
-                                 options: FindOneAndModifyOptions,
-                                 _ completion: @escaping MongoFindOneBlock) {
+    func findOneAndUpdate(filter: Document,
+                          update: Document,
+                          options: FindOneAndModifyOptions,
+                          _ completion: @escaping MongoFindOneBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let updateBSON = ObjectiveCSupport.convert(object: .document(update))
-        self.__findOneAndUpdateWhere(filterBSON as! [String: RLMBSON],
-                                     updateDocument: updateBSON as! [String: RLMBSON],
-                                     options: options) { document, error in
+        __findOneAndUpdateWhere(filterBSON as! [String: RLMBSON],
+                                updateDocument: updateBSON as! [String: RLMBSON],
+                                options: options) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -583,13 +597,14 @@ extension MongoCollection {
     ///   - filter: A bson `Document` representing the match criteria.
     ///   - update: A bson `Document` representing the update to be applied to a matching document.
     ///   - completion: The result of the attempt to update a document.
-    public func findOneAndUpdate(filter: Document,
-                                 update: Document,
-                                 _ completion: @escaping MongoFindOneBlock) {
+    func findOneAndUpdate(filter: Document,
+                          update: Document,
+                          _ completion: @escaping MongoFindOneBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let updateBSON = ObjectiveCSupport.convert(object: .document(update))
-        self.__findOneAndUpdateWhere(filterBSON as! [String: RLMBSON],
-                                     updateDocument: updateBSON as! [String: RLMBSON]) { document, error in
+        __findOneAndUpdateWhere(filterBSON as! [String: RLMBSON],
+                                updateDocument: updateBSON as! [String: RLMBSON]) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -610,15 +625,16 @@ extension MongoCollection {
     ///   - replacement: A `Document` describing the replacement.
     ///   - options: `FindOneAndModifyOptions` to use when executing the command.
     ///   - completion: The result of the attempt to replace a document.
-    public func findOneAndReplace(filter: Document,
-                                  replacement: Document,
-                                  options: FindOneAndModifyOptions,
-                                  _ completion: @escaping MongoFindOneBlock) {
+    func findOneAndReplace(filter: Document,
+                           replacement: Document,
+                           options: FindOneAndModifyOptions,
+                           _ completion: @escaping MongoFindOneBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let replacementBSON = ObjectiveCSupport.convert(object: .document(replacement))
-        self.__findOneAndReplaceWhere(filterBSON as! [String: RLMBSON],
-                                      replacementDocument: replacementBSON as! [String: RLMBSON],
-                                      options: options) { document, error in
+        __findOneAndReplaceWhere(filterBSON as! [String: RLMBSON],
+                                 replacementDocument: replacementBSON as! [String: RLMBSON],
+                                 options: options) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -639,13 +655,14 @@ extension MongoCollection {
     ///   - replacement: A `Document` describing the replacement.
     ///   - options: `RLMFindOneAndModifyOptions` to use when executing the command.
     ///   - completion: The result of the attempt to replace a document.
-    public func findOneAndReplace(filter: Document,
-                                  replacement: Document,
-                                  _ completion: @escaping MongoFindOneBlock) {
+    func findOneAndReplace(filter: Document,
+                           replacement: Document,
+                           _ completion: @escaping MongoFindOneBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
         let replacementBSON = ObjectiveCSupport.convert(object: .document(replacement))
-        self.__findOneAndReplaceWhere(filterBSON as! [String: RLMBSON],
-                                      replacementDocument: replacementBSON as! [String: RLMBSON]) { document, error in
+        __findOneAndReplaceWhere(filterBSON as! [String: RLMBSON],
+                                 replacementDocument: replacementBSON as! [String: RLMBSON]) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -665,12 +682,13 @@ extension MongoCollection {
     ///   - filter: A `Document` that should match the query.
     ///   - options: `FindOneAndModifyOptions` to use when executing the command.
     ///   - completion: The result of the attempt to delete a document.
-    public func findOneAndDelete(filter: Document,
-                                 options: FindOneAndModifyOptions,
-                                 _ completion: @escaping MongoFindOneBlock) {
+    func findOneAndDelete(filter: Document,
+                          options: FindOneAndModifyOptions,
+                          _ completion: @escaping MongoFindOneBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
-        self.__findOneAndDeleteWhere(filterBSON as! [String: RLMBSON],
-                                     options: options) { document, error in
+        __findOneAndDeleteWhere(filterBSON as! [String: RLMBSON],
+                                options: options) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -689,10 +707,11 @@ extension MongoCollection {
     /// - Parameters:
     ///   - filter: A `Document` that should match the query.
     ///   - completion: The result of the attempt to delete a document.
-    public func findOneAndDelete(filter: Document,
-                                 _ completion: @escaping MongoFindOneBlock) {
+    func findOneAndDelete(filter: Document,
+                          _ completion: @escaping MongoFindOneBlock)
+    {
         let filterBSON = ObjectiveCSupport.convert(object: .document(filter))
-        self.__findOneAndDeleteWhere(filterBSON as! [String: RLMBSON]) { document, error in
+        __findOneAndDeleteWhere(filterBSON as! [String: RLMBSON]) { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -704,7 +723,6 @@ extension MongoCollection {
 }
 
 private class ChangeEventDelegateProxy: RLMChangeEventDelegate {
-
     private weak var proxyDelegate: ChangeEventDelegate?
 
     init(_ proxyDelegate: ChangeEventDelegate) {
@@ -745,7 +763,8 @@ extension Publishers {
              queue: DispatchQueue = .main,
              filterIds: [ObjectId]? = nil,
              matchFilter: Document? = nil,
-             onOpen: (() -> Void)? = nil) {
+             onOpen: (() -> Void)? = nil)
+        {
             self.collection = collection
             self.subscriber = subscriber
             self.onOpen = onOpen
@@ -764,7 +783,7 @@ extension Publishers {
             }
         }
 
-        func request(_ demand: Subscribers.Demand) { }
+        func request(_ demand: Subscribers.Demand) {}
 
         func cancel() {
             changeStream?.close()
@@ -809,12 +828,13 @@ extension Publishers {
              queue: DispatchQueue,
              filterIds: [ObjectId]? = nil,
              matchFilter: Document? = nil,
-             onOpen: (() -> Void)? = nil) {
+             onOpen: (() -> Void)? = nil)
+        {
             self.collection = collection
             self.queue = queue
             self.filterIds = filterIds
             self.matchFilter = matchFilter
-            self.openEvent = onOpen
+            openEvent = onOpen
         }
 
         /// Triggers an event when the watch change stream is opened.
@@ -861,25 +881,27 @@ extension Publishers {
 }
 
 @available(OSX 10.15, watchOS 6.0, iOS 13.0, iOSApplicationExtension 13.0, OSXApplicationExtension 10.15, tvOS 13.0, *)
-extension MongoCollection {
+public extension MongoCollection {
     /// Creates a publisher that emits a AnyBSON change event each time the MongoDB collection changes.
     ///
     /// - returns: A publisher that emits the AnyBSON change event each time the collection changes.
-    public func watch() -> Publishers.WatchPublisher {
+    func watch() -> Publishers.WatchPublisher {
         return Publishers.WatchPublisher(collection: self, queue: .main)
     }
+
     /// Creates a publisher that emits a AnyBSON change event each time the MongoDB collection changes.
     ///
     /// - Parameter filterIds: The list of _ids in the collection to watch.
     /// - Returns: A publisher that emits the AnyBSON change event each time the collection changes.
-    public func watch(filterIds: [ObjectId]) -> Publishers.WatchPublisher {
+    func watch(filterIds: [ObjectId]) -> Publishers.WatchPublisher {
         return Publishers.WatchPublisher(collection: self, queue: .main, filterIds: filterIds)
     }
+
     /// Creates a publisher that emits a AnyBSON change event each time the MongoDB collection changes.
     ///
     /// - Parameter matchFilter: The $match filter to apply to incoming change events.
     /// - Returns: A publisher that emits the AnyBSON change event each time the collection changes.
-    public func watch(matchFilter: Document) -> Publishers.WatchPublisher {
+    func watch(matchFilter: Document) -> Publishers.WatchPublisher {
         return Publishers.WatchPublisher(collection: self, queue: .main, matchFilter: matchFilter)
     }
 }

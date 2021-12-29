@@ -6,9 +6,8 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-
-import UIKit
 import Popovers
+import UIKit
 
 extension SearchViewController {
     func presentPopover(for field: Field, from cell: UICollectionViewCell) {
@@ -42,7 +41,7 @@ extension SearchViewController {
         case .list(let list):
 //            list.
             break
-        case .addNew(_):
+        case .addNew:
             break
         }
     }

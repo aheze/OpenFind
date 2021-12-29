@@ -22,24 +22,23 @@
 import UIKit
 
 public class SPAlertIconHeartView: UIView {
-        
     init() {
         super.init(frame: .zero)
-        self.backgroundColor = .clear
+        backgroundColor = .clear
     }
     
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         super.draw(rect)
-        HeartDraw.draw(frame: rect, resizing: .aspectFit, fillColor: self.tintColor)
+        HeartDraw.draw(frame: rect, resizing: .aspectFit, fillColor: tintColor)
     }
     
     class HeartDraw: NSObject {
-        
-        @objc dynamic public class func draw(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 510, height: 470), resizing: ResizingBehavior = .aspectFit, fillColor: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)) {
+        @objc public dynamic class func draw(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 510, height: 470), resizing: ResizingBehavior = .aspectFit, fillColor: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)) {
             let context = UIGraphicsGetCurrentContext()!
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 510, height: 470), target: targetFrame)
@@ -63,7 +62,6 @@ public class SPAlertIconHeartView: UIView {
         
         @objc(HeartStyleKitResizingBehavior)
         public enum ResizingBehavior: Int {
-            
             case aspectFit
             case aspectFill
             case stretch
@@ -102,4 +100,3 @@ public class SPAlertIconHeartView: UIView {
         }
     }
 }
-

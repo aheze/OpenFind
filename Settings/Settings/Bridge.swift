@@ -1,14 +1,13 @@
 //
 //  Bridge.swift
-//  
+//
 //
 //  Created by Zheng on 10/7/21.
 //
 
 import UIKit
 
-public struct Bridge {
-    
+public enum Bridge {
     public static var dismissed: (() -> Void)?
     public static var presentTopOfTheList: (() -> Void)?
     public static var presentRequiresSoftwareUpdate: ((String) -> Void)?

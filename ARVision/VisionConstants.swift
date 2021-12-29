@@ -9,7 +9,6 @@
 import UIKit
 
 struct VisionConstants {
-    
     // MARK: Finding
     
     /// how long to wait between finds
@@ -17,6 +16,7 @@ struct VisionConstants {
     static var minimumFindConfidenceForTrackable: Float = 0.4
     
     // MARK: Tracking
+
     static var maximumTimeWithoutConfidence: Float = 1.5
     static var minimumConfidenceForSuccess: Float = 0.5
     static var minimumTimeSinceInitialization: Float = 0.2
@@ -48,16 +48,15 @@ struct VisionConstants {
                 by: verticalAreaLength
             ) {
                 let rectangle = CGRect(
-                        x: xOrigin,
-                        y: yOrigin,
-                        width: horizontalAreaLength,
-                        height: verticalAreaLength
+                    x: xOrigin,
+                    y: yOrigin,
+                    width: horizontalAreaLength,
+                    height: verticalAreaLength
                 )
                 candidates.append(rectangle)
             }
         }
         
-
         return candidates
     }()
 }

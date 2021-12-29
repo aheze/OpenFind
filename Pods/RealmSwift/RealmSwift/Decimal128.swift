@@ -27,7 +27,7 @@ import Realm
 @objc(RealmSwiftDecimal128)
 public final class Decimal128: RLMDecimal128, Decodable {
     /// Creates a new zero-initialized Decimal128.
-    public override required init() {
+    override public required init() {
         super.init()
     }
 
@@ -44,7 +44,7 @@ public final class Decimal128: RLMDecimal128, Decodable {
     /// Passing a value with a type not in this list is a fatal error. Passing a string which cannot be parsed as a valid Decimal128 is a fatal error.
     ///
     /// - parameter value: The value to convert to a Decimal128.
-    public override required init(value: Any) {
+    override public required init(value: Any) {
         super.init(value: value)
     }
 
@@ -53,7 +53,7 @@ public final class Decimal128: RLMDecimal128, Decodable {
     /// This initializer cannot fail and is never lossy.
     ///
     /// - parameter number: The number to convert to a Decimal128.
-    public override required init(number: NSNumber) {
+    override public required init(number: NSNumber) {
         super.init(number: number)
     }
 
@@ -63,7 +63,7 @@ public final class Decimal128: RLMDecimal128, Decodable {
     /// change. Strings which cannot be parsed as a Decimal128 return a value where `isNaN` is `true`.
     ///
     /// - parameter string: The string to parse.
-    public override required init(string: String) throws {
+    override public required init(string: String) throws {
         try super.init(string: string)
     }
 
@@ -103,7 +103,7 @@ extension Decimal128: Encodable {
     ///
     /// - Parameter encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        try self.stringValue.encode(to: encoder)
+        try stringValue.encode(to: encoder)
     }
 }
 
@@ -181,7 +181,7 @@ extension Decimal128: Comparable {
     }
 }
 
-extension Decimal128 {
+public extension Decimal128 {
     /// Creates a new instance from the given integer, if it can be represented
     /// exactly.
     ///
@@ -192,16 +192,16 @@ extension Decimal128 {
     /// `127` at maximum:
     ///
     /// - Parameter source: A value to convert to this type of integer.
-    public convenience init?<T>(exactly source: T) where T: BinaryInteger {
+    convenience init?<T>(exactly source: T) where T: BinaryInteger {
         self.init(value: source)
     }
 
     /// A type that can represent the absolute value of Decimal128
-    public typealias Magnitude = Decimal128
+    typealias Magnitude = Decimal128
 
     /// The magnitude of this Decimal128.
-    public var magnitude: Magnitude {
-        unsafeDowncast(self.__magnitude, to: Magnitude.self)
+    var magnitude: Magnitude {
+        unsafeDowncast(__magnitude, to: Magnitude.self)
     }
 
     /// Adds two decimal128 values and produces their sum.
@@ -209,7 +209,7 @@ extension Decimal128 {
     /// - Parameters:
     ///   - lhs: The first Decimal128 value to add.
     ///   - rhs: The second Decimal128 value to add.
-    public static func + (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
+    static func + (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
         unsafeDowncast(lhs.decimalNumber(byAdding: rhs), to: Decimal128.self)
     }
 
@@ -218,7 +218,7 @@ extension Decimal128 {
     /// - Parameters:
     ///   - lhs: A Decimal128 value.
     ///   - rhs: The Decimal128 value to subtract from `lhs`.
-    public static func - (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
+    static func - (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
         unsafeDowncast(lhs.decimalNumber(bySubtracting: rhs), to: Decimal128.self)
     }
 
@@ -227,7 +227,7 @@ extension Decimal128 {
     /// - Parameters:
     ///   - lhs: The first value to multiply.
     ///   - rhs: The second value to multiply.
-    public static func * (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
+    static func * (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
         unsafeDowncast(lhs.decimalNumberByMultiplying(by: rhs), to: Decimal128.self)
     }
 
@@ -236,21 +236,21 @@ extension Decimal128 {
     /// - Parameters:
     ///   - lhs: The Decimal128 value to divide.
     ///   - rhs: The Decimal128 value to divide `lhs` by. `rhs` must not be zero.
-    public static func / (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
+    static func / (lhs: Decimal128, rhs: Decimal128) -> Decimal128 {
         unsafeDowncast(lhs.decimalNumberByDividing(by: rhs), to: Decimal128.self)
     }
 }
 
-extension Decimal128 {
+public extension Decimal128 {
     /// A type that represents the distance between two values.
-    public typealias Stride = Decimal128
+    typealias Stride = Decimal128
 
     /// Returns the distance from this Decimal128 to the given value, expressed as a
     /// stride.
     ///
     /// - Parameter other: The Decimal128 value to calculate the distance to.
     /// - Returns: The distance from this value to `other`.
-    public func distance(to other: Decimal128) -> Decimal128 {
+    func distance(to other: Decimal128) -> Decimal128 {
         unsafeDowncast(other.decimalNumber(bySubtracting: self), to: Decimal128.self)
     }
 
@@ -262,19 +262,19 @@ extension Decimal128 {
     ///
     /// - Parameter n: The distance to advance this Decimal128.
     /// - Returns: A Decimal128 that is offset from this value by `n`.
-    public func advanced(by n: Decimal128) -> Decimal128 {
+    func advanced(by n: Decimal128) -> Decimal128 {
         unsafeDowncast(decimalNumber(byAdding: n), to: Decimal128.self)
     }
 }
 
-extension Decimal128 {
+public extension Decimal128 {
     /// `true` if `self` is a signaling NaN, `false` otherwise.
-    public var isSignaling: Bool {
-        self.isNaN
+    var isSignaling: Bool {
+        isNaN
     }
 
     /// `true` if `self` is a signaling NaN, `false` otherwise.
-    public var isSignalingNaN: Bool {
-        self.isSignaling
+    var isSignalingNaN: Bool {
+        isSignaling
     }
 }

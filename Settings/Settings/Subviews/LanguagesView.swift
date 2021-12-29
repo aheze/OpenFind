@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import SwiftUI
 import Introspect
+import SwiftUI
 
 public enum Language: Int, CaseIterable, Codable {
     case english = 0
@@ -99,11 +99,9 @@ public struct OrderedLanguage: Codable {
     
     public var language: Language
     public var priority: Int?
-    
 }
 
 struct LanguageRow: Identifiable {
-    
     var id: String {
         if let headerType = headerType {
             return headerType.getName()
@@ -133,9 +131,8 @@ enum HeaderType {
 }
 
 struct LanguagesView: View {
-    
     @State var languageRows = [LanguageRow]()
-    var readLanguages: (() -> [OrderedLanguage])
+    var readLanguages: () -> [OrderedLanguage]
 //
 //    init(readLanguages: @escaping (() -> [OrderedLanguage])) {
 //        UITableView.appearance().separatorStyle = .none
@@ -173,9 +170,7 @@ struct LanguagesView: View {
                                     .moveDisabled(true)
                             }
                         } else {
-                            
                             if let language = languageRow.orderedLanguage?.language {
-                                
                                 let versionUpdateNeeded = language.versionNeeded() > deviceVersion()
                                 let requiresAccurate = language.requiresAccurateMode()
                                 
@@ -197,7 +192,6 @@ struct LanguagesView: View {
                                             }
                                             .buttonStyle(PlainButtonStyle())
                                             .padding(.trailing, 10)
-                                            
                                         }
                                         
                                         if versionUpdateNeeded {
@@ -235,16 +229,15 @@ struct LanguagesView: View {
                 }
                 .environment(\.editMode, .constant(.active))
                 .colorScheme(.dark)
-                
             }
             .foregroundColor(.white)
-    
         }
         .navigationBarTitle("Recognition Languages", displayMode: .inline)
         .onAppear {
             populateRows(with: readLanguages())
         }
     }
+
     func move(from source: IndexSet, to destination: Int) {
         if destination == 0 { /// moved above "Selected Languages" header
             populateRows()
@@ -290,13 +283,12 @@ struct LanguagesView: View {
     }
     
     func populateRows(with initialLanguages: [OrderedLanguage]? = nil) {
-        
         let selectedLanguages: [OrderedLanguage]
         if let initialLanguages = initialLanguages { /// got data from userdefaults
             selectedLanguages = initialLanguages
         } else { /// refresh
             let unsortedSelectedLanguages = languageRows.filter {
-                return $0.orderedLanguage?.priority != nil
+                $0.orderedLanguage?.priority != nil
             }
             selectedLanguages = unsortedSelectedLanguages
                 .map { $0.orderedLanguage ?? OrderedLanguage(language: .english, priority: nil) }
@@ -321,6 +313,6 @@ struct LanguagesView: View {
         rows += selectedRows
         rows.append(unselectedHeader)
         rows += unselectedRows
-        self.languageRows = rows
+        languageRows = rows
     }
 }

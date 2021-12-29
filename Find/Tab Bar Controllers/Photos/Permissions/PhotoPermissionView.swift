@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 enum PermissionAction {
     case notDetermined
@@ -16,20 +16,20 @@ enum PermissionAction {
     case allowed
     case limited
 }
+
 class PhotoPermissionView: UIView {
-    
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel! /// Find from Photos
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel! /// Find from Photos
+    @IBOutlet var descriptionLabel: UILabel!
     
     var shouldGoToSettings = false
     
     /// true is full access
     /// false if limited
     var allowed: ((Bool) -> Void)?
-    @IBOutlet weak var allowAccessButton: UIButton!
+    @IBOutlet var allowAccessButton: UIButton!
     @IBAction func allowAccessPressed(_ sender: Any) {
         if shouldGoToSettings {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
@@ -65,30 +65,27 @@ class PhotoPermissionView: UIView {
     }
     
     private func commonInit() {
-
         Bundle.main.loadNibNamed("PhotoPermissionView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         allowAccessButton.layer.cornerRadius = 12
         
-        let status = self.checkAuthorizationStatus()
+        let status = checkAuthorizationStatus()
         
         if status == .shouldAsk {
-            self.shouldGoToSettings = false
-            self.allowAccessButton.setTitle("Allow Access", for: .normal)
+            shouldGoToSettings = false
+            allowAccessButton.setTitle("Allow Access", for: .normal)
         } else if status == .shouldGoToSettings {
-            self.shouldGoToSettings = true
+            shouldGoToSettings = true
             
             let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
-            self.allowAccessButton.setTitle(goToSettings, for: .normal)
+            allowAccessButton.setTitle(goToSettings, for: .normal)
         }
     }
     
-    
     func checkAuthorizationStatus() -> PhotoPermissionAction {
-
         var action = PhotoPermissionAction.shouldGoToSettings
         if #available(iOS 14, *) {
             let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -115,10 +112,8 @@ class PhotoPermissionView: UIView {
     }
     
     func requestAuthorization(completion: @escaping ((Bool) -> Void)) {
-
         if #available(iOS 14, *) {
-            
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 if status == .authorized || status == .limited {
                     completion(true)
                 } else {
@@ -126,7 +121,7 @@ class PhotoPermissionView: UIView {
                 }
             }
         } else {
-            PHPhotoLibrary.requestAuthorization { (status) in
+            PHPhotoLibrary.requestAuthorization { status in
                 if status == .authorized {
                     completion(true)
                 } else {

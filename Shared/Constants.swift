@@ -20,18 +20,16 @@ enum Constants {
     /// make the fade a bit faster
     static var tabBarToolbarAlphaMultiplier = CGFloat(3.5)
     
-
     /// how long until scale back
     static var toolbarIconDeactivateAnimationDelay = CGFloat(0.08)
     
     /// scale back speed
     static var toolbarIconDeactivateAnimationSpeed = CGFloat(0.3)
     
-    static var defaultHighlightColor = UIColor(hex: 0x00aeef)
+    static var defaultHighlightColor = UIColor(hex: 0x00AEEF)
 }
 
-struct ConstantVars {
-    
+enum ConstantVars {
     /// default tab bar content height
     static let tabBarContentHeight = CGFloat(49)
     
@@ -64,7 +62,3 @@ struct ConstantVars {
         }
     }
 }
-
-
-
-

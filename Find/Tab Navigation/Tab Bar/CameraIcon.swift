@@ -8,7 +8,6 @@
 import UIKit
 
 class CameraIcon: UIView {
-    
     var isActiveCameraIcon = false /// is popped out
     
     let inactiveFillColor = FindConstants.backgroundIconColorLight
@@ -24,18 +23,18 @@ class CameraIcon: UIView {
     
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var containerView: UIView! /// contains rim and fill
-    @IBOutlet weak var rimView: UIView!
-    @IBOutlet weak var fillView: UIView!
-    @IBOutlet weak var fillRimViewContainer: UIView!
-    @IBOutlet weak var fillBorderView: UIView!
+    @IBOutlet var containerView: UIView! /// contains rim and fill
+    @IBOutlet var rimView: UIView!
+    @IBOutlet var fillView: UIView!
+    @IBOutlet var fillRimViewContainer: UIView!
+    @IBOutlet var fillBorderView: UIView!
     var shapeFillLayer: CAShapeLayer?
     var shapeFillRimContainerLayer: CALayer?
     var shapeFillRimLayer: CAShapeLayer?
     var shapeFillRimGradientLayer: CAGradientLayer?
     
     var generator: UIImpactFeedbackGenerator?
-    @IBOutlet weak var touchButton: UIButton!
+    @IBOutlet var touchButton: UIButton!
     @IBAction func touchDown(_ sender: Any) {
         if isActualButton {
             let level = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
@@ -52,6 +51,7 @@ class CameraIcon: UIView {
             }
         })
     }
+
     @IBAction func touchUpInside(_ sender: Any) {
         pressed?()
         resetAlpha()
@@ -64,9 +64,11 @@ class CameraIcon: UIView {
             }
         }
     }
+
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
     }
+
     func resetAlpha() {
         UIView.animate(withDuration: 0.2, animations: {
             self.contentView.alpha = 1
@@ -89,7 +91,7 @@ class CameraIcon: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("CameraIcon", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let fillLayer = CAShapeLayer()
@@ -123,7 +125,7 @@ class CameraIcon: UIView {
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.frame = fillRimViewContainer.bounds.insetBy(dx: -20, dy: -20)
         shapeFillRimContainerLayer.mask = gradientLayer
-        self.shapeFillRimGradientLayer = gradientLayer
+        shapeFillRimGradientLayer = gradientLayer
         fillRimViewContainer.alpha = 0
         
         let circlePath = createRoundedCircle(circumference: fillView.bounds.width, cornerRadius: fillView.bounds.width / 2)
@@ -162,7 +164,6 @@ class CameraIcon: UIView {
             fillRimViewContainer.transform = CGAffineTransform.identity
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         }
-        
     }
     
     /// For dark mode
@@ -201,6 +202,7 @@ class CameraIcon: UIView {
         }
         return block
     }
+
     func makeLayerInactiveState(duration: CGFloat) {
         isActiveCameraIcon = false
         if let currentValue = rimView.layer.presentation()?.value(forKeyPath: #keyPath(CALayer.borderColor)) {
@@ -215,8 +217,8 @@ class CameraIcon: UIView {
         animation.duration = Double(duration)
         rimView.layer.borderColor = inactiveRimColor.cgColor
         rimView.layer.add(animation, forKey: "borderColor")
-        
     }
+
     func makeLayerActiveState(duration: CGFloat) {
         isActiveCameraIcon = true
         if let currentValue = rimView.layer.presentation()?.value(forKeyPath: #keyPath(CALayer.borderColor)) {
@@ -232,14 +234,16 @@ class CameraIcon: UIView {
         rimView.layer.borderColor = activeRimColor.cgColor
         rimView.layer.add(animation, forKey: "borderColor")
     }
+
     func makePercentageOfActive(percentage: CGFloat) {
-        contentView.center.y = (self.contentView.bounds.height / 2) - (self.offsetNeeded * percentage)
-        let scale = 1 + ((FindConstants.shutterBoundsLength / self.contentView.bounds.width - 1) * percentage)
+        contentView.center.y = (contentView.bounds.height / 2) - (offsetNeeded * percentage)
+        let scale = 1 + ((FindConstants.shutterBoundsLength / contentView.bounds.width - 1) * percentage)
         contentView.transform = CGAffineTransform(scaleX: scale, y: scale)
         
-        self.fillView.backgroundColor = [inactiveFillColor, UIColor(named: "50Blue")!].intermediate(percentage: percentage)
-        self.rimView.layer.borderColor = [inactiveRimColor, activeRimColor].intermediate(percentage: percentage).cgColor
+        fillView.backgroundColor = [inactiveFillColor, UIColor(named: "50Blue")!].intermediate(percentage: percentage)
+        rimView.layer.borderColor = [inactiveRimColor, activeRimColor].intermediate(percentage: percentage).cgColor
     }
+
     func toggle(on: Bool) {
         if on {
             let trianglePath = createRoundedTriangle(circumference: fillView.bounds.width)
@@ -339,7 +343,6 @@ class CameraIcon: UIView {
                 shapeFillRimLayer.lineWidth = 0
                 shapeFillRimLayer.add(widthAnimation, forKey: nil)
             }
-            
             
             UIView.animate(withDuration: 0.3) {
                 self.fillRimViewContainer.alpha = start ? 1 : 0

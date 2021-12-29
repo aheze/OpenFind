@@ -14,33 +14,29 @@ protocol VisionEngineDelegate: AnyObject {
     func cameraMoved(by translation: CGSize)
     func drawTrackers(_ trackers: [Tracker])
 }
+
 class VisionEngine {
-    
     weak var delegate: VisionEngineDelegate?
     
 //    let trackingEngine = VisionTrackingEngine()
     let findingEnding = VisionFindingEngine()
     
-    
     let visionSamplingEngine = VisionSamplingEngine()
     
-    
     // MARK: Tracking
+
     /// not nil if tracking gave an updated rect
     
     var startTime: Date?
     var canFind: Bool {
         var canFind = true
         if findingEnding.startTime != nil {
-
             canFind = false
         }
         if !startTime.isPastCoolDown(VisionConstants.findCoolDownTime) {
-
             canFind = false
         }
         
-
         return canFind
     }
     
@@ -61,21 +57,18 @@ class VisionEngine {
 //        }
     }
     
-    
     var canSample: Bool {
         var canSample = true
         if visionSamplingEngine.startTime != nil {
-
             canSample = false
         }
         if !visionSamplingEngine.startTime.isPastCoolDown(VisionConstants.findCoolDownTime) {
-
             canSample = false
         }
         
-
         return canSample
     }
+
     func updatePixelBuffer(_ pixelBuffer: CVPixelBuffer) {
         _ = VisionConstants.highlightCandidateAreas
         
@@ -85,13 +78,10 @@ class VisionEngine {
                 
                 if self?.canSample ?? false {
                     DispatchQueue.main.async {
-
                         self?.delegate?.textFound(observations: observations)
                     }
                 }
             })
-            
-            
             
 //            self?.trackingEngine.updateTracking(with: pixelBuffer) { trackers in
 //                self?.delegate?.drawTrackers(trackers)

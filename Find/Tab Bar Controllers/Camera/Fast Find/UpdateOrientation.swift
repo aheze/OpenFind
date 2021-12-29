@@ -6,13 +6,12 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import CoreMotion
+import UIKit
 
 extension CameraViewController {
     func updateHighlightOrientations(attitude: CMAttitude) {
         if let initAttitude = initialAttitude {
-            
             attitude.multiply(byInverseOf: initAttitude)
             let rollValue = attitude.roll.radiansToDegrees
             let pitchValue = attitude.pitch.radiansToDegrees
@@ -34,6 +33,7 @@ extension CameraViewController {
         }
     }
 }
+
 extension BinaryInteger {
     var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
 }

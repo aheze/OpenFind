@@ -7,7 +7,6 @@
 //
 
 public struct EKAlertMessage {
-    
     public enum ImagePosition {
         case top
         case left
@@ -24,7 +23,8 @@ public struct EKAlertMessage {
     
     public init(simpleMessage: EKSimpleMessage,
                 imagePosition: ImagePosition = .top,
-                buttonBarContent: EKProperty.ButtonBarContent) {
+                buttonBarContent: EKProperty.ButtonBarContent)
+    {
         self.simpleMessage = simpleMessage
         self.imagePosition = imagePosition
         self.buttonBarContent = buttonBarContent

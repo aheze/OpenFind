@@ -8,15 +8,13 @@
 import UIKit
 
 extension LaunchViewController {
-    
     func permissionsToMain() {
         DispatchQueue.main.async {
             self.permissionsViewController.searchBarView.isUserInteractionEnabled = false
             self.permissionsViewController.permissionsBottomView.alpha = 0
             
-                self.mainViewController.cameraViewController.configureCamera()
+            self.mainViewController.cameraViewController.configureCamera()
         }
-        
     }
     
     func finishPermissionsToMain() {
@@ -38,5 +36,4 @@ extension LaunchViewController {
             self.frameContainerView.removeFromSuperview()
         }
     }
-    
 }

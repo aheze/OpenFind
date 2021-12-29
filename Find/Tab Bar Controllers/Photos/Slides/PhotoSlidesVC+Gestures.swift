@@ -12,40 +12,41 @@ import UIKit
 extension PhotoSlidesViewController {
     @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
         if cameFromFind {
-            self.transitionController.animator.cameFromFind = true
+            transitionController.animator.cameFromFind = true
         }
         
         switch gestureRecognizer.state {
         case .began:
-            self.currentViewController.scrollView.isScrollEnabled = false
-            self.transitionController.isInteractive = true
+            currentViewController.scrollView.isScrollEnabled = false
+            transitionController.isInteractive = true
             
             if cameFromFind {
-                self.dismiss(animated: true, completion: nil)
+                dismiss(animated: true, completion: nil)
             } else {
-                let _ = self.navigationController?.popViewController(animated: true)
+                _ = navigationController?.popViewController(animated: true)
             }
             
         case .ended:
-            if self.transitionController.isInteractive {
-                self.currentViewController.scrollView.isScrollEnabled = true
-                self.transitionController.isInteractive = false
-                self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+            if transitionController.isInteractive {
+                currentViewController.scrollView.isScrollEnabled = true
+                transitionController.isInteractive = false
+                transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
             }
         default:
-            if self.transitionController.isInteractive {
-                self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+            if transitionController.isInteractive {
+                transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
             }
         }
     }
+
     @objc func didSingleTapWith(gestureRecognizer: UITapGestureRecognizer) {
         if !UIAccessibility.isVoiceOverRunning {
-            if self.currentScreenMode == .full {
+            if currentScreenMode == .full {
                 changeScreenMode(to: .normal)
-                self.currentScreenMode = .normal
+                currentScreenMode = .normal
             } else {
                 changeScreenMode(to: .full)
-                self.currentScreenMode = .full
+                currentScreenMode = .full
             }
         }
     }
@@ -55,14 +56,13 @@ extension PhotoSlidesViewController {
 extension PhotoSlidesViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-            let velocity = gestureRecognizer.velocity(in: self.view)
+            let velocity = gestureRecognizer.velocity(in: view)
             
-            var velocityCheck : Bool = false
+            var velocityCheck = false
             
             if UIDevice.current.orientation.isLandscape {
                 velocityCheck = velocity.x < 0
-            }
-            else {
+            } else {
                 velocityCheck = velocity.y < 0
             }
             if velocityCheck {
@@ -74,8 +74,8 @@ extension PhotoSlidesViewController: UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if otherGestureRecognizer == self.currentViewController.scrollView.panGestureRecognizer {
-            if self.currentViewController.scrollView.contentOffset.y == 0 {
+        if otherGestureRecognizer == currentViewController.scrollView.panGestureRecognizer {
+            if currentViewController.scrollView.contentOffset.y == 0 {
                 return true
             }
         }

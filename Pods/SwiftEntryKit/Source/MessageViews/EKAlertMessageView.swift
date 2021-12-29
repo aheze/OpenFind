@@ -7,9 +7,9 @@
 
 import UIKit
 
-final public class EKAlertMessageView: EKSimpleMessageView, EntryAppearanceDescriptor {
-    
+public final class EKAlertMessageView: EKSimpleMessageView, EntryAppearanceDescriptor {
     // MARK: Props
+
     var buttonBarView: EKButtonBarView!
     private var buttonsBarCompressedConstraint: NSLayoutConstraint!
     private var buttonsBarExpandedConstraint: NSLayoutConstraint!
@@ -23,12 +23,14 @@ final public class EKAlertMessageView: EKSimpleMessageView, EntryAppearanceDescr
     }
     
     // MARK: Setup
+
     public init(with message: EKAlertMessage) {
         super.init(with: message.simpleMessage)
         setupButtonBarView(with: message.buttonBarContent)
         layoutContent(with: message)
     }
     
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -8,10 +8,6 @@
 
 import UIKit
 
-
 var screenBounds: CGRect {
-    get {
-        
-        return UIScreen.main.bounds
-    }
+    return UIScreen.main.bounds
 }

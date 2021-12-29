@@ -22,14 +22,12 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
-
 public class ConstraintMakerFinalizable {
-    
     internal let description: ConstraintDescription
     
     internal init(_ description: ConstraintDescription) {
@@ -38,12 +36,11 @@ public class ConstraintMakerFinalizable {
     
     @discardableResult
     public func labeled(_ label: String) -> ConstraintMakerFinalizable {
-        self.description.label = label
+        description.label = label
         return self
     }
     
     public var constraint: Constraint {
-        return self.description.constraint!
+        return description.constraint!
     }
-    
 }

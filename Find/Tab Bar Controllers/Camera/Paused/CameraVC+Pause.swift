@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension CameraViewController {
     func pauseLivePreview() {
@@ -25,14 +25,15 @@ extension CameraViewController {
         }
         pausedAccessibility(paused: true)
     }
+
     func startLivePreview() {
         currentlyCapturing = false
         /// make sure it's running (can stop when going to app switcher and back)
         if !avSession.isRunning {
-            self.avSession.startRunning()
+            avSession.startRunning()
         }
         cameraView.videoPreviewLayer.connection?.isEnabled = true
-        self.showImageView(false)
+        showImageView(false)
         pausedAccessibility(paused: false)
     }
     
@@ -76,10 +77,10 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             currentlyCapturing = false
             guard let imageData = photo.fileDataRepresentation() else { return }
             if let unrotatedImage = UIImage(data: imageData), let image = unrotatedImage.rotated() {
-                self.currentPausedImage = image
-                self.showImageView(true)
-                self.findWhenPaused()
-                self.cameraIcon.animateLoading(start: false)
+                currentPausedImage = image
+                showImageView(true)
+                findWhenPaused()
+                cameraIcon.animateLoading(start: false)
             }
             switch UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") {
             case 2:
@@ -99,11 +100,11 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
 
 extension UIImage {
     func rotated() -> UIImage? {
-        if (self.imageOrientation == UIImage.Orientation.up ) {
+        if imageOrientation == UIImage.Orientation.up {
             return self
         }
-        UIGraphicsBeginImageContext(self.size)
-        self.draw(in: CGRect(origin: CGPoint.zero, size: self.size))
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(origin: CGPoint.zero, size: size))
         let copy = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return copy

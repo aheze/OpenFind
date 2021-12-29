@@ -7,11 +7,10 @@
 //
 
 import MobileCoreServices // << for UTI types
-import SwiftUI
 import SwiftEntryKit
+import SwiftUI
 
 class InfoViewHoster: UIViewController {
-    
     var dateTaken = "January 1, 2020 at 3:46 PM"
     var origin = "Saved from Find"
     var isStarred = false
@@ -22,6 +21,7 @@ class InfoViewHoster: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -29,7 +29,6 @@ class InfoViewHoster: UIViewController {
     var pressedDone: (() -> Void)?
     
     override func loadView() {
-        
         /**
          Instantiate the base `view`.
          */
@@ -50,15 +49,15 @@ class InfoViewHoster: UIViewController {
         
         let hostedInfo = UIHostingController(rootView: infoView)
         
-        self.addChild(hostedInfo)
+        addChild(hostedInfo)
         view.addSubview(hostedInfo.view)
         hostedInfo.view.frame = view.bounds
         hostedInfo.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         hostedInfo.didMove(toParent: self)
     }
 }
+
 struct InfoView: View {
-    
     var donePressed: (() -> Void)?
     
     var dateTaken = "January 1, 2020 at 3:46 PM"
@@ -124,9 +123,8 @@ struct InfoView: View {
                             generator.prepare()
                             generator.notificationOccurred(.success)
                             
-                            
                             UIPasteboard.general.setValue(transcript,
-                                       forPasteboardType: kUTTypePlainText as String)
+                                                          forPasteboardType: kUTTypePlainText as String)
                            
                             let topToast = UIView()
                             topToast.backgroundColor = UIColor.systemBackground
@@ -149,11 +147,11 @@ struct InfoView: View {
                             contentView.addSubview(imageView)
                             contentView.addSubview(titleLabel)
                             
-                            contentView.snp.makeConstraints { (make) in
+                            contentView.snp.makeConstraints { make in
                                 make.center.equalToSuperview()
                             }
                             
-                            imageView.snp.makeConstraints { (make) in
+                            imageView.snp.makeConstraints { make in
                                 make.left.equalToSuperview()
                                 make.top.equalToSuperview()
                                 make.bottom.equalToSuperview()
@@ -161,7 +159,7 @@ struct InfoView: View {
                                 make.height.equalTo(24)
                             }
                             
-                            titleLabel.snp.makeConstraints { (make) in
+                            titleLabel.snp.makeConstraints { make in
                                 make.left.equalTo(imageView.snp.right).offset(6)
                                 make.centerY.equalToSuperview()
                                 make.right.equalToSuperview()
@@ -198,20 +196,18 @@ struct InfoView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(EdgeInsets(top: 0, leading: 20, bottom: 16, trailing: 16))
                         .fixedSize(horizontal: false, vertical: true)
-                        
                 }
             }
             .navigationBarTitle("Info")
             .navigationBarItems(
                 trailing:
-                    Button(action: {
-                        donePressed?()
-                    }) {
-                        Text("done")
-                            .font(Font.system(size: 19, weight: .regular, design: .default))
-                            .foregroundColor(Color(UIColor(named: "PhotosText")!))
-                        
-                    }
+                Button(action: {
+                    donePressed?()
+                }) {
+                    Text("done")
+                        .font(Font.system(size: 19, weight: .regular, design: .default))
+                        .foregroundColor(Color(UIColor(named: "PhotosText")!))
+                }
             )
         }
     }

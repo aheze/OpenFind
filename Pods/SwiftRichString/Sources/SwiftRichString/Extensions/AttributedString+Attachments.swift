@@ -37,8 +37,7 @@ import UIKit
 #endif
 
 public extension AttributedString {
-    
-    #if os(iOS)
+#if os(iOS)
 
     /// Initialize a new text attachment with a remote image resource.
     /// Image will be loaded asynchronously after the text appear inside the control.
@@ -61,9 +60,9 @@ public extension AttributedString {
         self.init(attachment: attachment)
     }
     
-    #endif
+#endif
     
-    #if os(iOS) || os(OSX)
+#if os(iOS) || os(OSX)
 
     /// Initialize a new text attachment with local image contained into the assets.
     ///
@@ -89,9 +88,9 @@ public extension AttributedString {
             return nil
         }
         
-        #if os(OSX)
+#if os(OSX)
         let attachment = NSTextAttachment(data: image.pngData()!, ofType: "png")
-        #else
+#else
         var attachment: NSTextAttachment!
         if #available(iOS 13.0, *) {
             // Due to a bug (?) in UIKit we should use two methods to allocate the text attachment
@@ -101,16 +100,16 @@ public extension AttributedString {
             if image.renderingMode == .alwaysTemplate {
                 attachment = NSTextAttachment(image: image)
             } else {
-                attachment =  NSTextAttachment()
+                attachment = NSTextAttachment()
                 attachment.image = image.withRenderingMode(.alwaysOriginal)
             }
         } else {
             // It does not work on iOS12, return empty set.s
             // attachment = NSTextAttachment(data: image.pngData()!, ofType: "png")
-            attachment =  NSTextAttachment()
+            attachment = NSTextAttachment()
             attachment.image = image.withRenderingMode(.alwaysOriginal)
         }
-        #endif
+#endif
         
         if let boundsRect = CGRect(string: bounds) {
             attachment.bounds = boundsRect
@@ -119,6 +118,5 @@ public extension AttributedString {
         self.init(attachment: attachment)
     }
     
-    #endif
-        
+#endif
 }

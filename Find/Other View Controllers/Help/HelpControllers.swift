@@ -6,10 +6,10 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftEntryKit
-import WebKit
 import SwiftyJSON
+import UIKit
+import WebKit
 
 class HelpObject: NSObject {
     var title = ""
@@ -17,14 +17,12 @@ class HelpObject: NSObject {
 }
 
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     var helpObjects = [HelpObject]()
     var helpJsonKey = "ListsHelpArray"
     var goDirectlyToUrl = false
     var directUrl = ""
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var currentPath = -1
     
@@ -53,9 +51,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +61,11 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.alpha = 0
         
         let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: done, style: .plain, target: self, action: #selector(closeTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: done, style: .plain, target: self, action: #selector(closeTapped))
         if let url = URL(string: "https://raw.githubusercontent.com/aheze/FindHelp/master/1NavigatorDatasource.json") {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+            URLSession.shared.dataTask(with: url) { data, _, _ in
                 
-               if let data = data {
+                if let data = data {
                     if let jsonString = String(data: data, encoding: .utf8) {
                         if let data = jsonString.data(using: .utf8) {
                             if let json = try? JSON(data: data) {
@@ -88,10 +84,10 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
-                            self.tableView.reloadData()
-                            UIView.animate(withDuration: 0.3, animations: {
-                                self.tableView.alpha = 1
-                            })
+                        self.tableView.reloadData()
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.tableView.alpha = 1
+                        })
                     }
                 }
                 
@@ -99,39 +95,34 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         if goDirectlyToUrl {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let defaultHelp = storyboard.instantiateViewController(withIdentifier: "HelpController") as? HelpController {
                     defaultHelp.urlString = self.directUrl
                     self.navigationController?.pushViewController(defaultHelp, animated: true)
                 }
-            })
+            }
         }
     }
     
-    
     @objc func closeTapped() {
 //        SwiftEntryKit.dismiss()
-        if let pvc = self.navigationController?.presentationController {
-
+        if let pvc = navigationController?.presentationController {
             pvc.delegate?.presentationControllerDidDismiss?(pvc)
         }
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 
 class HelpCell: UITableViewCell {
-    
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet var nameLabel: UILabel!
 }
+
 class HelpController: UIViewController, WKNavigationDelegate {
-    
     private var estimatedProgressObserver: NSKeyValueObservation?
 
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet var progressBar: UIProgressView!
+    @IBOutlet var webView: WKWebView!
     var urlString = ""
     
     override func viewDidLoad() {
@@ -143,9 +134,6 @@ class HelpController: UIViewController, WKNavigationDelegate {
         let newHelpCount = helpCount + 1
         defaults.set(newHelpCount, forKey: "helpPressCount")
         
-    
-        
-        
 //        progressBar.progressTintColor = #colorLiteral(red: 0.9764705896, green: 0.5311594379, blue: 0, alpha: 1)
         
         webView.navigationDelegate = self
@@ -154,10 +142,9 @@ class HelpController: UIViewController, WKNavigationDelegate {
         webView.backgroundColor = UIColor.clear
         
         sendRequest(urlString: urlString)
-        
     }
+
     private func sendRequest(urlString: String) {
-        
         if let urlToLoad = URL(string: urlString) {
             let myRequest = URLRequest(url: urlToLoad)
             webView.load(myRequest)
@@ -167,33 +154,29 @@ class HelpController: UIViewController, WKNavigationDelegate {
                 webView.load(myRequest)
             }
         }
-        
     }
-    
-  
 }
 
 extension HelpController {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-      
-           if navigationAction.navigationType == WKNavigationType.linkActivated {
-              decisionHandler(WKNavigationActionPolicy.cancel)
+        if navigationAction.navigationType == WKNavigationType.linkActivated {
+            decisionHandler(WKNavigationActionPolicy.cancel)
               
-              if let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController {
-                  if let url = navigationAction.request.url {
-                      if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
-                          let defaults = UserDefaults.standard
-                          defaults.set(true, forKey: "feedbackedAlready")
-                      }
-                      vc.urlString = url.absoluteString
-                  }
-                  self.navigationController?.pushViewController(vc, animated: true)
-              }
-               return
-           }
+            if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController {
+                if let url = navigationAction.request.url {
+                    if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
+                        let defaults = UserDefaults.standard
+                        defaults.set(true, forKey: "feedbackedAlready")
+                    }
+                    vc.urlString = url.absoluteString
+                }
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            return
+        }
       
-          decisionHandler(WKNavigationActionPolicy.allow)
-      }
+        decisionHandler(WKNavigationActionPolicy.allow)
+    }
     
     func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         if progressBar.isHidden {
@@ -204,10 +187,9 @@ extension HelpController {
         UIView.animate(withDuration: 0.33,
                        animations: {
                            self.progressBar.alpha = 1.0
-        })
+                       })
     }
     
-
     func webView(_: WKWebView, didFinish _: WKNavigation!) {
         UIView.animate(withDuration: 0.33,
                        animations: {
@@ -218,15 +200,15 @@ extension HelpController {
                            //  - set to `true` in case animation was completly finished.
                            //  - set to `false` in case animation was interrupted, e.g. due to starting of another animation.
                            self.progressBar.isHidden = isFinished
-        })
+                       })
     }
+
     private func setupEstimatedProgressObserver() {
         estimatedProgressObserver = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] webView, _ in
             UIView.animate(withDuration: 0.6, animations: {
 //                self?.progressBar.progress = Float(webView.estimatedProgress)
                 self?.progressBar.setProgress(Float(webView.estimatedProgress), animated: true)
             })
-            
         }
     }
 }

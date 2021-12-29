@@ -6,22 +6,21 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class LivePreviewViewController: UIViewController {
-    
-    @IBOutlet weak var previewContainerView: UIView!
+    @IBOutlet var previewContainerView: UIView!
     
     /// same bounds as `view`, contains the safe view
-    @IBOutlet weak var safeViewContainer: UIView!
+    @IBOutlet var safeViewContainer: UIView!
     var safeViewFrame = CGRect.zero
-    @IBOutlet weak var safeView: UIView!
+    @IBOutlet var safeView: UIView!
     
-    @IBOutlet weak var safeViewLeftC: NSLayoutConstraint!
-    @IBOutlet weak var safeViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var safeViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var safeViewHeightC: NSLayoutConstraint!
+    @IBOutlet var safeViewLeftC: NSLayoutConstraint!
+    @IBOutlet var safeViewTopC: NSLayoutConstraint!
+    @IBOutlet var safeViewWidthC: NSLayoutConstraint!
+    @IBOutlet var safeViewHeightC: NSLayoutConstraint!
     
     /// original, unscaled image size (pretty large)
     var imageSize: CGSize?
@@ -34,7 +33,7 @@ class LivePreviewViewController: UIViewController {
     
     /// hugging the image
     /// BUT, will be scaled to different aspect - normal or full screen.
-    @IBOutlet weak var previewFitView: UIView!
+    @IBOutlet var previewFitView: UIView!
     
     /// the frame of the scaled preview fit view, relative to `view`
     /// this basically adds the scale transforms to `previewFitView.frame`
@@ -45,21 +44,21 @@ class LivePreviewViewController: UIViewController {
     var safeViewFrameFromPreviewFit = CGRect.zero
     
     /// directly in view hierarchy
-    @IBOutlet weak var testingView: UIView!
-    @IBOutlet weak var testingView2: UIView!
+    @IBOutlet var testingView: UIView!
+    @IBOutlet var testingView2: UIView!
     
     /// should match the frame of the image
-    @IBOutlet weak var drawingView: UIView!
+    @IBOutlet var drawingView: UIView!
     
     /// inside the drawing view, should match the safe view
-    @IBOutlet weak var simulatedSafeView: UIView!
+    @IBOutlet var simulatedSafeView: UIView!
     
     /// don't scale this
-    @IBOutlet weak var previewContentView: UIView!
+    @IBOutlet var previewContentView: UIView!
     
     /// scale to safe area
-    @IBOutlet weak var livePreviewView: LivePreviewView!
-    @IBOutlet weak var pausedImageView: UIImageView!
+    @IBOutlet var livePreviewView: LivePreviewView!
+    @IBOutlet var pausedImageView: UIImageView!
     
     /// in case no camera was found
     var findFromPhotosButtonPressed: (() -> Void)?
@@ -69,8 +68,6 @@ class LivePreviewViewController: UIViewController {
     let photoDataOutput = AVCapturePhotoOutput()
     var cameraDevice: AVCaptureDevice?
     var captureCompletionBlock: ((UIImage) -> Void)?
-    
-    
     
     /// `true` = became `.aspectFill`
     var hitAspectTarget = false
@@ -83,6 +80,7 @@ class LivePreviewViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -101,8 +99,5 @@ class LivePreviewViewController: UIViewController {
         previewContentView.mask = safeViewContainer
         safeViewContainer.backgroundColor = Debug.tabBarAlwaysTransparent ? .blue : .clear
         safeView.backgroundColor = .blue
-        
     }
 }
-
-

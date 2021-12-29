@@ -11,6 +11,7 @@ struct SymbolList: Identifiable {
     let id = UUID()
     var symbols = [SymbolString]()
 }
+
 struct SymbolString: Identifiable {
     let id = UUID()
     var string: String
@@ -134,7 +135,6 @@ extension SymbolsView {
             SymbolString("figure.stand.line.dotted.figure.stand")
         ]
         
-        
         var editing = SymbolList()
         editing.symbols = [
             SymbolString("slider.vertical.3"),
@@ -155,9 +155,6 @@ extension SymbolsView {
             SymbolString("loupe"),
             SymbolString("circle.lefthalf.fill")
         ]
-        
-        
-        
         
         var home = SymbolList()
         home.symbols = [
@@ -193,7 +190,6 @@ extension SymbolsView {
             SymbolString("number")
         ]
         
-        
         var keyboard = SymbolList()
         keyboard.symbols = [
             SymbolString("command"),
@@ -217,7 +213,6 @@ extension SymbolsView {
         var expandedSymbolList = [SymbolList]()
         
         for row in 0..<numberOfRows {
-            
             let repeatedRow = row % symbolSource.count
             
             var symbolList = symbolSource[repeatedRow]
@@ -237,6 +232,6 @@ extension SymbolsView {
             expandedSymbolList.append(symbolList)
         }
         
-        self.symbols = expandedSymbolList
+        symbols = expandedSymbolList
     }
 }

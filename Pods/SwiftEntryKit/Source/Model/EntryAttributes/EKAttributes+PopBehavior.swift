@@ -8,10 +8,8 @@
 import Foundation
 
 public extension EKAttributes {
-    
     /** Describes the entry behavior when a new entry shows (with equal or higher display-priority) */
     enum PopBehavior {
-                
         /** The entry disappears promptly (Does not animates out) when a new one shows */
         case overridden
         
@@ -37,7 +35,7 @@ public extension EKAttributes {
         }
         
         func validate() {
-            #if DEBUG
+#if DEBUG
             guard let animation = animation else { return }
             guard animation == .none else { return }
             print("""
@@ -45,7 +43,7 @@ public extension EKAttributes {
             with `EKAttributes.PopBehavior.animated`. This may result in undefined behavior.
             Please use `PopBehavior.overridden` instead.
             """)
-            #endif
+#endif
         }
     }
 }

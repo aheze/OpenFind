@@ -30,7 +30,6 @@ protocol EntryCachingHeuristic: class {
 }
 
 extension EntryCachingHeuristic {
-    
     var isEmpty: Bool {
         return entries.isEmpty
     }
@@ -72,7 +71,6 @@ extension EntryCachingHeuristic {
 }
 
 class EKEntryChronologicalQueue: EntryCachingHeuristic {
-    
     var entries: [CachedEntry] = []
     
     func enqueue(entry: CachedEntry) {
@@ -81,13 +79,12 @@ class EKEntryChronologicalQueue: EntryCachingHeuristic {
 }
 
 class EKEntryPriorityQueue: EntryCachingHeuristic {
-    
     var entries: [CachedEntry] = []
     
     func enqueue(entry: CachedEntry) {
         let entryPriority = entry.view.attributes.precedence.priority
         let index = entries.firstIndex {
-            return entryPriority > $0.view.attributes.precedence.priority
+            entryPriority > $0.view.attributes.precedence.priority
         }
         if let index = index {
             entries.insert(entry, at: index)

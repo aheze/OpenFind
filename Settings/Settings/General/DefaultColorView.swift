@@ -84,6 +84,7 @@ struct RectangleButton: View {
         }
     }
 }
+
 struct RectangleViewButton: View {
     @Binding var selectedColor: String
     var color: String
@@ -105,6 +106,7 @@ struct RectangleViewButton: View {
             }
     }
 }
+
 struct RectangleView: UIViewRepresentable {
     @Binding var selectedColor: String
     var color = "#00aeef"
@@ -124,8 +126,8 @@ struct RectangleView: UIViewRepresentable {
         uiView.accessibilityAttributedLabel = accessibilityLabel
         uiView.accessibilityTraits = .none
         return uiView
-        
     }
+
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<Self>) {
         if selectedColor == color {
             uiView.accessibilityTraits = .selected

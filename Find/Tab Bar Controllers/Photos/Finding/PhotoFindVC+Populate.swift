@@ -22,10 +22,8 @@ class ResultPhoto: NSObject {
 
 extension PhotoFindViewController {
     func populatePhotos(findPhotos: [FindPhoto], photoFilterState: PhotoFilterState, findingFromAllPhotos: Bool, changedFromBefore: Bool) {
-
         let originalFindPhotoIdentifiers = self.findPhotos.map { $0.asset.localIdentifier }
         let newFindPhotoIdentifiers = findPhotos.map { $0.asset.localIdentifier }
-        
         
         self.findPhotos = findPhotos
         self.photoFilterState = photoFilterState
@@ -40,7 +38,5 @@ extension PhotoFindViewController {
             progressView.alpha = 0
             findBar.clearTextField()
         }
-        
-        
     }
 }

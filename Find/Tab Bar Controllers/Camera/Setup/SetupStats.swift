@@ -25,9 +25,7 @@ extension StatsViewController {
 }
 
 extension CameraViewController {
-    
     func tappedOnStats() {
-        
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         
@@ -39,24 +37,22 @@ extension CameraViewController {
                 wordsFinding.append(list)
             }
             
-
-            
             var finalMatchesString = ""
             
             switch wordsFinding.count {
-             case 0:
+            case 0:
                 let noWords = NSLocalizedString("noWords", comment: "Stats def=[no words]")
                 finalMatchesString = noWords
-             case 1:
+            case 1:
                 let quotexquote = NSLocalizedString("quote %@ quote", comment: "Stats def=“x”")
                 let string = String.localizedStringWithFormat(quotexquote, wordsFinding[0])
                 finalMatchesString = string
-             case 2:
+            case 2:
                 let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %@ quoteSpaceAndquote %@ quote", comment: "Stats def=“x” and “x”")
                 let string = String.localizedStringWithFormat(quotexquoteSpaceAndquotexquote, wordsFinding[0], wordsFinding[1])
                 finalMatchesString = string
                 
-             default:
+            default:
                 for (index, message) in wordsFinding.enumerated() {
                     if index != wordsFinding.count - 1 {
                         let quotexquoteCommaSpace = NSLocalizedString("quote %@ quoteCommaSpace", comment: "Stats def=\"x\", ")
@@ -68,12 +64,10 @@ extension CameraViewController {
                         finalMatchesString.append(string)
                     }
                 }
-             }
-            
+            }
             
             let thisWordColon = NSLocalizedString("thisWord", comment: "Stats def=this word")
             let theseWordsColon = NSLocalizedString("theseWords", comment: "Stats def=these words")
-            
             
             var thisWord = thisWordColon
             if wordsFinding.count != 1 {
@@ -101,7 +95,6 @@ extension CameraViewController {
         }
     
         statsNavController.viewController.update(to: currentNumberOfMatches)
-        self.present(statsNavController, animated: true)
-        
+        present(statsNavController, animated: true)
     }
 }

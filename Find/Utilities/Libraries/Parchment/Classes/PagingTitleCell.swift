@@ -27,13 +27,13 @@ open class PagingTitleCell: PagingCell {
         )
     }()
 
-    open override var isSelected: Bool {
+    override open var isSelected: Bool {
         didSet {
             configureTitleLabel()
         }
     }
 
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
@@ -43,7 +43,7 @@ open class PagingTitleCell: PagingCell {
         configure()
     }
 
-    open override func setPagingItem(_ pagingItem: PagingItem, selected: Bool, options: PagingOptions) {
+    override open func setPagingItem(_ pagingItem: PagingItem, selected: Bool, options: PagingOptions) {
         if let titleItem = pagingItem as? PagingIndexItem {
             viewModel = PagingTitleCellViewModel(
                 title: titleItem.title,
@@ -88,7 +88,7 @@ open class PagingTitleCell: PagingCell {
         contentView.accessibilityTraits = viewModel?.selected ?? false ? .selected : .none
     }
 
-    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+    override open func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         guard let viewModel = viewModel else { return }
         if let attributes = layoutAttributes as? PagingCellLayoutAttributes {

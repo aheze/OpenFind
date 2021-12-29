@@ -9,10 +9,8 @@
 import Foundation
 
 public extension EKAttributes {
-
     /** Contains optionally injected events that take place during the entry lifecycle */
     struct LifecycleEvents {
-        
         public typealias Event = () -> Void
 
         /** Executed before the entry appears - before the animation starts.

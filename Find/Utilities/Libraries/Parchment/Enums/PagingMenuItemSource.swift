@@ -9,10 +9,10 @@ public enum PagingMenuItemSource {
 extension PagingMenuItemSource: Equatable {
     public static func == (lhs: PagingMenuItemSource, rhs: PagingMenuItemSource) -> Bool {
         switch (lhs, rhs) {
-        case let (.class(lhsType), .class(rhsType)):
+        case (.class(let lhsType), .class(let rhsType)):
             return lhsType == rhsType
 
-        case let (.nib(lhsNib), .nib(rhsNib)):
+        case (.nib(let lhsNib), .nib(let rhsNib)):
             return lhsNib === rhsNib
 
         default:

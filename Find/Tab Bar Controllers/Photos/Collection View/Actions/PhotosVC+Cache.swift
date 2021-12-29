@@ -6,12 +6,11 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftEntryKit
+import UIKit
 
 extension PhotosViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn) {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             UIAccessibility.post(notification: .announcement, argument: "Caching complete.")
         }
@@ -26,13 +25,11 @@ extension PhotosViewController: ReturnCachedPhotos {
         
         sortPhotos(with: photoFilterState)
         applySnapshot()
-        
     }
 }
 
 extension PhotosViewController {
     func cache(_ shouldCache: Bool) {
-        
         if TipViews.inTutorial {
             TipViews.finishTutorial()
         }
@@ -45,7 +42,6 @@ extension PhotosViewController {
         }
         
         if shouldCache == true {
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
             
@@ -85,7 +81,6 @@ extension PhotosViewController {
             
             SwiftEntryKit.display(entry: cacheController, using: attributes)
         } else {
-            
             let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
             let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
             let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
@@ -96,9 +91,8 @@ extension PhotosViewController {
                 var changedIndexPaths = [IndexPath]()
                 for findPhoto in selectedPhotos {
                     if let editableModel = findPhoto.editableModel {
-                        if let realModel = self.getRealRealmModel(from: editableModel)  {
+                        if let realModel = self.getRealRealmModel(from: editableModel) {
                             if realModel.isDeepSearched { /// only unstar if already starred
-                                
                                 if let indexPath = self.dataSource.indexPath(for: findPhoto) {
                                     changedIndexPaths.append(indexPath)
                                 }
@@ -107,9 +101,7 @@ extension PhotosViewController {
                                         realModel.isDeepSearched = false
                                         self.realm.delete(realModel.contents)
                                     }
-                                } catch {
-
-                                }
+                                } catch {}
                                 editableModel.isDeepSearched = false
                                 editableModel.contents.removeAll()
                             }
@@ -122,14 +114,11 @@ extension PhotosViewController {
             }))
             alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
             if let popoverController = alert.popoverPresentationController {
-                popoverController.sourceView = self.view
-                popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)
+                popoverController.sourceView = view
+                popoverController.sourceRect = CGRect(x: (view.bounds.width / 2) - 40, y: view.bounds.height - 80, width: 80, height: 80)
             }
-            self.present(alert, animated: true, completion: nil)
-            
-            
+            present(alert, animated: true, completion: nil)
         }
         doneWithSelect()
     }
-    
 }

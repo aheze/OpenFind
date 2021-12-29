@@ -6,12 +6,12 @@
 //  Copyright (c) 2018 huri000@gmail.com. All rights reserved.
 //
 
-import UIKit
 import QuickLayout
+import UIKit
 
 public class EKNoteMessageView: UIView {
-    
     // MARK: Props
+
     private let label = UILabel()
     
     private var horizontalConstrainsts: QLAxisConstraints!
@@ -34,11 +34,13 @@ public class EKNoteMessageView: UIView {
     }
     
     // MARK: Setup
+
     public init(with content: EKProperty.LabelContent) {
         super.init(frame: UIScreen.main.bounds)
         setup(with: content)
     }
 
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

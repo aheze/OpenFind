@@ -9,15 +9,13 @@
 import UIKit
 
 class ImageCell: UICollectionViewCell {
-    
-    @IBOutlet weak var shadowImageView: UIImageView!
-    @IBOutlet weak var cacheImageView: UIImageView!
-    @IBOutlet weak var starImageView: UIImageView!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var shadowImageView: UIImageView!
+    @IBOutlet var cacheImageView: UIImageView!
+    @IBOutlet var starImageView: UIImageView!
+    @IBOutlet var imageView: UIImageView!
     
     // MARK: Selection
-    @IBOutlet weak var highlightView: UIView!
-    @IBOutlet weak var selectionImageView: UIImageView!
-    
-    
+
+    @IBOutlet var highlightView: UIView!
+    @IBOutlet var selectionImageView: UIImageView!
 }

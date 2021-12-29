@@ -66,21 +66,19 @@ struct TipViews {
     
     static var resetToBeginning: (() -> Void)? /// change empty view back to beginning
 }
+
 extension ViewController: EasyTipViewDelegate {
-    
-    
-    
-    func easyTipViewDidTap(_ tipView: EasyTipView) {
-    }
+    func easyTipViewDidTap(_ tipView: EasyTipView) {}
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         if
             tipView == TipViews.localTipView1 ||
-                tipView == TipViews.localTipView2 ||
-                tipView == TipViews.starTipView1 ||
-                tipView == TipViews.starTipView3 ||
-                tipView == TipViews.cacheTipView1 ||
-                tipView == TipViews.cacheTipView3 {
+            tipView == TipViews.localTipView2 ||
+            tipView == TipViews.starTipView1 ||
+            tipView == TipViews.starTipView3 ||
+            tipView == TipViews.cacheTipView1 ||
+            tipView == TipViews.cacheTipView3
+        {
             if TipViews.inTutorial {
                 TipViews.finishTutorial()
             }

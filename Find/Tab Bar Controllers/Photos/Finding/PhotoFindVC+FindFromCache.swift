@@ -34,13 +34,12 @@ extension PhotoFindViewController {
                 resultPhoto.findPhoto = findPhoto
                 
                 var descriptionOfPhoto = ""
-                var textToRanges = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
+                var textToRanges = [String: [ArrayOfMatchesInComp]]() /// COMPONENT to ranges
                 
                 var transcripts = [Component]()
                 
-                ///Cycle through each block of text. Each cont may be a line long.
+                /// Cycle through each block of text. Each cont may be a line long.
                 for content in editableModel.contents {
-                    
                     let transcript = Component()
                     transcript.text = content.text
                     transcript.x = content.x
@@ -70,7 +69,7 @@ extension PhotoFindViewController {
                                 let newComponent = Component()
                                 
                                 newComponent.x = finalX
-                                newComponent.y = CGFloat(content.y) - (CGFloat(content.height))
+                                newComponent.y = CGFloat(content.y) - CGFloat(content.height)
                                 newComponent.width = finalW
                                 newComponent.height = CGFloat(content.height)
                                 newComponent.text = match
@@ -87,7 +86,6 @@ extension PhotoFindViewController {
                     if hasMatch == true {
                         textToRanges[content.text] = matchRanges
                     }
-                    
                 }
                 
                 var finalRangesObjects = [ArrayOfMatchesInComp]()
@@ -113,12 +111,10 @@ extension PhotoFindViewController {
                                 matchObject.descriptionRange = newRange
                                 matchObject.text = compRange.text
                                 
-                                
                                 finalRangesObjects.append(matchObject)
                             }
                             let addedLength = 3 + thisCompString.count
                             existingCount += addedLength
-                            
                         }
                     }
                     
@@ -134,13 +130,11 @@ extension PhotoFindViewController {
                 let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
                 let finalHeight = height + 70
                 resultPhoto.descriptionHeight = finalHeight
-                
             }
             
             self.resultPhotos = resultPhotos
             
             DispatchQueue.main.async {
-                
                 self.numberCurrentlyFindingFromCache -= 1
                 
                 if self.numberCurrentlyFindingFromCache == 0 {
@@ -156,7 +150,6 @@ extension PhotoFindViewController {
                 
                 self.totalCacheResults = totalMatchNumber
             }
-            
         }
     }
 }

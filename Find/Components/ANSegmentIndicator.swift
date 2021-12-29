@@ -14,8 +14,8 @@ struct ANSegmentIndicatorSettings {
     var segmentsCount: Int = 4
     var segmentWidth: CGFloat = 2
     var spaceBetweenSegments: Degrees = 10
-    var segmentColor: UIColor = UIColor.red
-    var defaultSegmentColor: UIColor = UIColor.gray
+    var segmentColor: UIColor = .red
+    var defaultSegmentColor: UIColor = .gray
     var segmentBorderType: CAShapeLayerLineCap = .round
     var animationDuration: Double = 0.5
     var isStaticSegmentsVisible = true
@@ -23,12 +23,11 @@ struct ANSegmentIndicatorSettings {
 }
 
 class ANSegmentIndicator: UIView {
-    
     private var segments: [CAShapeLayer] = []
     private var staticSegments: [CAShapeLayer] = []
     private var value: Radians = 0.0
     private var activeSegment: Int = 0
-    var settings: ANSegmentIndicatorSettings = ANSegmentIndicatorSettings() {
+    var settings: ANSegmentIndicatorSettings = .init() {
         didSet {
             self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
             self.setup()
@@ -59,7 +58,7 @@ class ANSegmentIndicator: UIView {
         let emptySpace = Double(settings.segmentsCount) * settings.spaceBetweenSegments
         let emptySpaceInRadians = toRadians(emptySpace)
         let summedSpaceForSegments = 2 * Radians.pi - emptySpaceInRadians
-        let spaceCorrelation = toRadians(Degrees((settings.segmentWidth)))
+        let spaceCorrelation = toRadians(Degrees(settings.segmentWidth))
         let segmentSpace = summedSpaceForSegments / Radians(settings.segmentsCount) - spaceCorrelation
         let halfSpace = toRadians(settings.spaceBetweenSegments) / 2 + spaceCorrelation / 2
         let startPointPaddingInRadians = toRadians(Degrees(settings.startPointPadding))
@@ -73,7 +72,7 @@ class ANSegmentIndicator: UIView {
                                           color: settings.segmentColor,
                                           strokeEnd: 0)
             segments.append(segmentShape)
-            self.layer.addSublayer(segmentShape)
+            layer.addSublayer(segmentShape)
         }
     }
     
@@ -82,7 +81,7 @@ class ANSegmentIndicator: UIView {
         guard settings.isStaticSegmentsVisible else {
             return
         }
-        let spaceCorrelation = toRadians(Degrees((settings.segmentWidth)))
+        let spaceCorrelation = toRadians(Degrees(settings.segmentWidth))
         let emptySpace = Double(settings.segmentsCount) * settings.spaceBetweenSegments
         let emptySpaceInRadians = toRadians(emptySpace)
         let summedSpaceForSegments = 2 * Radians.pi - emptySpaceInRadians
@@ -99,14 +98,15 @@ class ANSegmentIndicator: UIView {
                                           color: settings.defaultSegmentColor,
                                           strokeEnd: 1)
             staticSegments.append(segmentShape)
-            self.layer.addSublayer(segmentShape)
+            layer.addSublayer(segmentShape)
         }
     }
     
     private func getSegment(startAngle: Radians,
                             endInAngle: Radians,
                             color: UIColor,
-                            strokeEnd: CGFloat) -> CAShapeLayer {
+                            strokeEnd: CGFloat) -> CAShapeLayer
+    {
         let centre = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         let beizerPath = UIBezierPath(arcCenter: centre,
                                       radius: bounds.height / 2 - settings.segmentWidth / 2,
@@ -126,9 +126,10 @@ class ANSegmentIndicator: UIView {
     
     private func updateProgressInLayer(progressLayer: CAShapeLayer,
                                        percent: CGFloat,
-                                       segmentIndex: Int) {
+                                       segmentIndex: Int)
+    {
         CATransaction.begin()
-        self.activeSegment = segmentIndex
+        activeSegment = segmentIndex
         let oldValue = value
         let newValue = percent
         value = newValue
@@ -155,7 +156,7 @@ class ANSegmentIndicator: UIView {
     private func drawSegmentToFull(index: Int, completion: @escaping (() -> Void)) {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
-           completion()
+            completion()
         }
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.toValue = 1.0
@@ -193,19 +194,18 @@ class ANSegmentIndicator: UIView {
                                   percent: Radians(newValueOnActiveSegment),
                                   segmentIndex: activeSegment)
         }
-        
     }
-    
 }
-//import UIKit
+
+// import UIKit
 //
 //// MARK: - the circular double-segment progress indicator
 //// from an open-source library: https://github.com/alexnikol/SegmentProgressIndicator
 //
-//typealias Degrees = Double
-//typealias Radians = CGFloat
+// typealias Degrees = Double
+// typealias Radians = CGFloat
 //
-//struct ANSegmentIndicatorSettings {
+// struct ANSegmentIndicatorSettings {
 //    var segmentsCount: Int = 4
 //    var segmentWidth: CGFloat = 2
 //    var spaceBetweenSegments: Degrees = 10
@@ -215,9 +215,9 @@ class ANSegmentIndicator: UIView {
 //    var animationDuration: Double = 0.5
 //    var isStaticSegmentsVisible = true
 //    var startPointPadding: CGFloat = 0
-//}
+// }
 //
-//class ANSegmentIndicator: UIView {
+// class ANSegmentIndicator: UIView {
 //
 //    private var segments: [CAShapeLayer] = []
 //    private var staticSegments: [CAShapeLayer] = []
@@ -390,4 +390,4 @@ class ANSegmentIndicator: UIView {
 //                                  segmentIndex: activeSegment)
 //        }
 //    }
-//}
+// }

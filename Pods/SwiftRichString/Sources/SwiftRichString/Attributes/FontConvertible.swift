@@ -36,56 +36,53 @@ import AppKit
 import UIKit
 #endif
 
-//MARK: - FontConvertible Protocol
+// MARK: - FontConvertible Protocol
 
 /// FontConvertible Protocol; you can implement conformance to any object.
 /// By defailt both `String` and `UIFont`/`NSFont` are conform to this protocol.
 public protocol FontConvertible {
-	/// Transform the instance of the object to a valid `UIFont`/`NSFont` instance.
-	///
-	/// - Parameter size: optional size of the font.
-	/// - Returns: valid font instance.
-	func font(size: CGFloat?) -> Font
+    /// Transform the instance of the object to a valid `UIFont`/`NSFont` instance.
+    ///
+    /// - Parameter size: optional size of the font.
+    /// - Returns: valid font instance.
+    func font(size: CGFloat?) -> Font
 }
 
-
 // MARK: - FontConvertible for UIFont/NSFont
+
 extension Font: FontConvertible {
-
-	/// Return the same instance of the font with specified size.
-	///
-	/// - Parameter size: size of the font in points. If size is `nil`, `Font.systemFontSize` is used.
-	/// - Returns: instance of the font.
-	public func font(size: CGFloat?) -> Font {
-		#if os(tvOS)
-		return Font(name: self.fontName, size: (size ?? TVOS_SYSTEMFONT_SIZE))!
-		#elseif os(watchOS)
-		return Font(name: self.fontName, size: (size ?? WATCHOS_SYSTEMFONT_SIZE))!
-		#elseif os(macOS)
-		return Font(descriptor: self.fontDescriptor, size: (size ?? Font.systemFontSize))!
-		#else
-		return Font(descriptor: self.fontDescriptor, size: (size ?? Font.systemFontSize))
-		#endif
-	}
-
+    /// Return the same instance of the font with specified size.
+    ///
+    /// - Parameter size: size of the font in points. If size is `nil`, `Font.systemFontSize` is used.
+    /// - Returns: instance of the font.
+    public func font(size: CGFloat?) -> Font {
+#if os(tvOS)
+        return Font(name: fontName, size: size ?? TVOS_SYSTEMFONT_SIZE)!
+#elseif os(watchOS)
+        return Font(name: fontName, size: size ?? WATCHOS_SYSTEMFONT_SIZE)!
+#elseif os(macOS)
+        return Font(descriptor: fontDescriptor, size: size ?? Font.systemFontSize)!
+#else
+        return Font(descriptor: fontDescriptor, size: size ?? Font.systemFontSize)
+#endif
+    }
 }
 
 // MARK: - FontConvertible for String
+
 extension String: FontConvertible {
-
-	/// Transform a string to a valid `UIFont`/`NSFont` instance.
-	/// String must contain a valid Postscript font's name.
-	///
-	/// - Parameter size: size of the font.
-	/// - Returns: instance of the font.
-	public func font(size: CGFloat?) -> Font {
-		#if os(tvOS)
-		return Font(name: self, size:  (size ?? TVOS_SYSTEMFONT_SIZE))!
-		#elseif os(watchOS)
-		return Font(name: self, size:  (size ?? WATCHOS_SYSTEMFONT_SIZE))!
-		#else
-		return Font(name: self, size: (size ?? Font.systemFontSize))!
-		#endif
-	}
-
+    /// Transform a string to a valid `UIFont`/`NSFont` instance.
+    /// String must contain a valid Postscript font's name.
+    ///
+    /// - Parameter size: size of the font.
+    /// - Returns: instance of the font.
+    public func font(size: CGFloat?) -> Font {
+#if os(tvOS)
+        return Font(name: self, size: size ?? TVOS_SYSTEMFONT_SIZE)!
+#elseif os(watchOS)
+        return Font(name: self, size: size ?? WATCHOS_SYSTEMFONT_SIZE)!
+#else
+        return Font(name: self, size: size ?? Font.systemFontSize)!
+#endif
+    }
 }

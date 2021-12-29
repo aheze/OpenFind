@@ -16,7 +16,7 @@ struct CreditsView: View {
                 
                 NavigationLink(
                     destination:
-                        PeopleView()
+                    PeopleView()
                         .navigationBarTitle(Text("People"), displayMode: .inline)
                 ) {
                     HStack {
@@ -46,6 +46,5 @@ struct CreditsView: View {
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
-        
     }
 }

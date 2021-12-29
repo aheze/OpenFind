@@ -6,8 +6,8 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import StoreKit
+import UIKit
 
 enum AppStoreReviewManager {
     static let minimumReviewWorthyActionCount = 15

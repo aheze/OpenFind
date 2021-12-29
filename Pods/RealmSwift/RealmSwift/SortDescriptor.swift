@@ -24,7 +24,6 @@ import Realm
  `NSSortDescriptor`, but supports only the subset of functionality which can be efficiently run by Realm's query engine.
  */
 @frozen public struct SortDescriptor {
-
     // MARK: Properties
 
     /// The key path which the sort descriptor orders results by.
@@ -93,7 +92,6 @@ extension SortDescriptor: Equatable {
 // MARK: StringLiteralConvertible
 
 extension SortDescriptor: ExpressibleByStringLiteral {
-
     public typealias UnicodeScalarLiteralType = StringLiteralType
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
 

@@ -8,15 +8,16 @@
 
 import UIKit
 
-final public class EKNotificationMessageView: EKSimpleMessageView {
-    
+public final class EKNotificationMessageView: EKSimpleMessageView {
     // MARK: Props
+
     private var auxLabel: UILabel!
     private var auxiliaryContent: EKProperty.LabelContent!
     
     private let message: EKNotificationMessage
     
     // MARK: Setup
+
     public init(with message: EKNotificationMessage) {
         self.message = message
         super.init(with: message.simpleMessage)
@@ -24,6 +25,7 @@ final public class EKNotificationMessageView: EKSimpleMessageView {
         layoutContent(with: message.insets)
     }
     
+    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -64,7 +66,7 @@ final public class EKNotificationMessageView: EKSimpleMessageView {
         messageContentView.layoutToSuperview(.bottom, offset: -insets.contentInsets.bottom)
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         auxLabel?.textColor = auxiliaryContent?.style.color(for: traitCollection)
     }

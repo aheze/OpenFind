@@ -16,7 +16,6 @@ struct CameraButton: View {
     
     var body: some View {
         Button {
-            
             /// is current camera
             if tabViewModel.tabState == tabType {
                 withAnimation(.spring()) {
@@ -45,11 +44,10 @@ struct CameraButton: View {
 }
 
 struct ShutterShape: Shape {
-    
     var progress = CGFloat(1)
     var animatableData: CGFloat {
         get { progress }
-        set { self.progress = newValue }
+        set { progress = newValue }
     }
     
     func path(in rect: CGRect) -> Path {
@@ -68,7 +66,6 @@ struct ShutterShape: Shape {
 
 /// don't conform to protocol, since have custom multiplier function
 struct ShutterShapeAttributes {
-
     let origin: CGPoint
     let cornerRadius: CGFloat
     let yOffset: CGFloat
@@ -126,7 +123,6 @@ struct ShutterShapeAttributes {
 }
 
 extension ShutterShapeAttributes {
-    
     /// don't conform to protocol, since have custom multiplier
     init(progress: CGFloat, from fromAttributes: ShutterShapeAttributes, to toAttributes: ShutterShapeAttributes, multiplier: CGFloat) {
         origin = AnimatableUtilities.mixedValue(from: fromAttributes.origin, to: toAttributes.origin, progress: progress) * multiplier
@@ -139,7 +135,6 @@ extension ShutterShapeAttributes {
         point3 = AnimatableUtilities.mixedValue(from: fromAttributes.point3, to: toAttributes.point3, progress: progress) * multiplier
     }
 }
-
 
 struct CameraButtonStyle: ButtonStyle {
     var isShutter: Bool

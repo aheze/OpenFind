@@ -10,10 +10,10 @@ import UIKit
 
 extension PhotoSlidesViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-
         presentingInfo?(false)
     }
 }
+
 extension PhotoSlidesViewController {
     func infoPressed() {
         let currentPhoto = resultPhotos[currentIndex].findPhoto
@@ -50,7 +50,6 @@ extension PhotoSlidesViewController {
                     } else {
                         newTranscript += text + "\n"
                     }
-                    
                 }
                 transcript = newTranscript
             }
@@ -70,6 +69,6 @@ extension PhotoSlidesViewController {
         infoVC.presentationController?.delegate = self
         
         presentingInfo?(true)
-        self.present(infoVC, animated: true)
+        present(infoVC, animated: true)
     }
 }

@@ -6,19 +6,20 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SDWebImage
 import SDWebImagePhotosPlugin
+import UIKit
 
 extension PhotosViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { context in
+        coordinator.animate(alongsideTransition: { _ in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)
     }
+
     func setupSDWebImage() {
-        //Supports HTTP URL as well as Photos URL globally
+        // Supports HTTP URL as well as Photos URL globally
         SDImageLoadersManager.shared.loaders = [SDWebImageDownloader.shared, SDImagePhotosLoader.shared]
         // Replace default manager's loader implementation
         SDWebImageManager.defaultImageLoader = SDImageLoadersManager.shared
@@ -28,22 +29,22 @@ extension PhotosViewController {
         
         SDImagePhotosLoader.shared.imageRequestOptions = options
     }
+
     func makeDataSource() -> DataSource {
-        
         let dataSource = DataSource(
             collectionView: collectionView,
-            cellProvider: { (collectionView, indexPath, findPhoto) ->
+            cellProvider: { collectionView, indexPath, findPhoto ->
                 UICollectionViewCell? in
                 
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: self.cellReuseIdentifier,
-                    for: indexPath) as? ImageCell
+                    for: indexPath
+                ) as? ImageCell
                 
                 let url = NSURL.sd_URL(with: findPhoto.asset)
                 var accessibilityLabel = "Photo."
                 
                 if let dateCreated = findPhoto.asset.creationDate {
-                    
                     let dateDistance = dateCreated.distance(from: Date(), only: .year)
                     
                     let dateFormatter = DateFormatter()
@@ -57,17 +58,16 @@ extension PhotosViewController {
                     accessibilityLabel = "\(dateCreatedString)."
                 }
                 
-                
                 let cellLength = cell?.bounds.width ?? 100
                 let imageLength = cellLength * (self.screenScale + 1)
                 
                 cell?.imageView.sd_imageTransition = .fade
-                cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: [.fromLoaderOnly, .decodeFirstFrameOnly], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+                cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: [.fromLoaderOnly, .decodeFirstFrameOnly], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize: CGSize(width: imageLength, height: imageLength)])
                 
                 if let model = findPhoto.editableModel {
                     cell?.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
                     cell?.starImageView.alpha = model.isHearted ? 1 : 0
-                    cell?.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+                    cell?.shadowImageView.alpha = (model.isDeepSearched || model.isHearted) ? 1 : 0
                     
                     if model.isHearted {
                         accessibilityLabel.append(" Starred")
@@ -99,7 +99,8 @@ extension PhotosViewController {
                 cell?.imageView.isAccessibilityElement = true
                 cell?.imageView.accessibilityTraits = .image
                 return cell
-            })
+            }
+        )
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard kind == UICollectionView.elementKindSectionHeader else {
@@ -110,8 +111,8 @@ extension PhotosViewController {
             let view = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: self.headerReuseIdentifier,
-                for: indexPath) as? PhotoHeader
-            
+                for: indexPath
+            ) as? PhotoHeader
             
             let formatter = DateFormatter()
             formatter.dateFormat = "MMMM yyyy"
@@ -127,8 +128,8 @@ extension PhotosViewController {
         }
         return dataSource
     }
+
     func applySnapshot(animatingDifferences: Bool = true) {
-        
         hasChangedFromBefore = true
         
         var snapshot = Snapshot()
@@ -138,8 +139,9 @@ extension PhotosViewController {
         }
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
+
     func configureLayout() {
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { _, layoutEnvironment -> NSCollectionLayoutSection? in
             let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
             
             let itemCount = isPhone ? 4 : 6
@@ -180,5 +182,3 @@ extension PhotosViewController {
         })
     }
 }
-
-

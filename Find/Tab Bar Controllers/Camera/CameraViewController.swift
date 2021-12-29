@@ -6,42 +6,42 @@
 //  Copyright © 2019 Zheng. All rights reserved.
 //
 
-import UIKit
-import Vision
 import AVFoundation
 import CoreMotion
 import RealmSwift
 import SnapKit
+import UIKit
+import Vision
 import WhatsNewKit
 
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
 }
+
 class CameraViewController: UIViewController {
-    
     let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
     let updateImportantShouldPresentWhatsNew = true
     var shouldPresentWhatsNew = false
     
     // MARK: Accessibility
-    @IBOutlet weak var statsWidthC: NSLayoutConstraint!
-    @IBOutlet weak var statsHeightC: NSLayoutConstraint!
-    @IBOutlet weak var fullScreenWidthC: NSLayoutConstraint!
-    @IBOutlet weak var fullScreenHeightC: NSLayoutConstraint!
-    @IBOutlet weak var flashWidthC: NSLayoutConstraint!
-    @IBOutlet weak var flashHeightC: NSLayoutConstraint!
-    @IBOutlet weak var settingsWidthC: NSLayoutConstraint!
-    @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
+
+    @IBOutlet var statsWidthC: NSLayoutConstraint!
+    @IBOutlet var statsHeightC: NSLayoutConstraint!
+    @IBOutlet var fullScreenWidthC: NSLayoutConstraint!
+    @IBOutlet var fullScreenHeightC: NSLayoutConstraint!
+    @IBOutlet var flashWidthC: NSLayoutConstraint!
+    @IBOutlet var flashHeightC: NSLayoutConstraint!
+    @IBOutlet var settingsWidthC: NSLayoutConstraint!
+    @IBOutlet var settingsHeightC: NSLayoutConstraint!
     var controlsView: UIView?
     
-    @IBOutlet weak var cameraGroupView: UIView!
+    @IBOutlet var cameraGroupView: UIView!
     var showingTranscripts = false
     var currentTranscriptComponents = [Component]()
     var previousActivatedHighlight: Component?
     
-    
-    @IBOutlet weak var topGroupView: UIView!
-    @IBOutlet weak var searchBackgroundView: UIView!
+    @IBOutlet var topGroupView: UIView!
+    @IBOutlet var searchBackgroundView: UIView!
     
     override func accessibilityPerformMagicTap() -> Bool {
         toggleShutter()
@@ -49,63 +49,63 @@ class CameraViewController: UIViewController {
     }
     
     // MARK: Tab bar
-    @IBOutlet weak var cameraIconHolder: UIView!
-    @IBOutlet weak var cameraIconHolderBottomC: NSLayoutConstraint!
+
+    @IBOutlet var cameraIconHolder: UIView!
+    @IBOutlet var cameraIconHolderBottomC: NSLayoutConstraint!
     
-    @IBOutlet weak var messageView: MessageView!
-    @IBOutlet weak var messageViewBottomC: NSLayoutConstraint!
-    @IBOutlet weak var saveToPhotos: SaveToPhotosButton!
-    @IBOutlet weak var cameraIcon: CameraIcon!
-    @IBOutlet weak var cache: CacheButton!
-    @IBOutlet weak var saveLabel: UILabel!
-    @IBOutlet weak var cacheLabel: UILabel!
+    @IBOutlet var messageView: MessageView!
+    @IBOutlet var messageViewBottomC: NSLayoutConstraint!
+    @IBOutlet var saveToPhotos: SaveToPhotosButton!
+    @IBOutlet var cameraIcon: CameraIcon!
+    @IBOutlet var cache: CacheButton!
+    @IBOutlet var saveLabel: UILabel!
+    @IBOutlet var cacheLabel: UILabel!
     
     var statsFocused = false
     var statsShouldAnnounce = false
-    @IBOutlet weak var statsView: StatsView!
-    @IBOutlet weak var statsBottomC: NSLayoutConstraint!
+    @IBOutlet var statsView: StatsView!
+    @IBOutlet var statsBottomC: NSLayoutConstraint!
     
-    @IBOutlet weak var statsButton: CustomButton!
-    @IBOutlet weak var statsLabel: LTMorphingLabel!
+    @IBOutlet var statsButton: CustomButton!
+    @IBOutlet var statsLabel: LTMorphingLabel!
     @IBAction func statsButtonPressed(_ sender: Any) {
         tappedOnStats()
     }
     
-    @IBOutlet weak var fullScreenView: UIView!
-    @IBOutlet weak var fullScreenButton: CustomButton!
-    @IBOutlet weak var fullScreenImageView: UIImageView!
+    @IBOutlet var fullScreenView: UIView!
+    @IBOutlet var fullScreenButton: CustomButton!
+    @IBOutlet var fullScreenImageView: UIImageView!
     
     var isFullScreen = false
-    @IBOutlet weak var fullScreenTopC: NSLayoutConstraint!
-    @IBOutlet weak var fullScreenLeftNeighborC: NSLayoutConstraint!
-    @IBOutlet weak var fullScreenLeftC: NSLayoutConstraint!
-    @IBOutlet weak var fullScreenBottomC: NSLayoutConstraint!
+    @IBOutlet var fullScreenTopC: NSLayoutConstraint!
+    @IBOutlet var fullScreenLeftNeighborC: NSLayoutConstraint!
+    @IBOutlet var fullScreenLeftC: NSLayoutConstraint!
+    @IBOutlet var fullScreenBottomC: NSLayoutConstraint!
     @IBAction func fullScreenButtonPressed(_ sender: Any) {
         isFullScreen.toggle()
         toggleFullScreen(isFullScreen)
     }
     
-    
     var flashlightOn = false
-    @IBOutlet weak var flashView: UIView!
-    @IBOutlet weak var flashDisableIcon: FlashDisableIcon!
-    @IBOutlet weak var flashButton: CustomButton!
-    @IBOutlet weak var flashImageView: UIImageView!
-    @IBOutlet weak var flashTopC: NSLayoutConstraint!
-    @IBOutlet weak var flashRightNeighborC: NSLayoutConstraint!
-    @IBOutlet weak var flashRightC: NSLayoutConstraint!
-    @IBOutlet weak var flashBottomC: NSLayoutConstraint!
+    @IBOutlet var flashView: UIView!
+    @IBOutlet var flashDisableIcon: FlashDisableIcon!
+    @IBOutlet var flashButton: CustomButton!
+    @IBOutlet var flashImageView: UIImageView!
+    @IBOutlet var flashTopC: NSLayoutConstraint!
+    @IBOutlet var flashRightNeighborC: NSLayoutConstraint!
+    @IBOutlet var flashRightC: NSLayoutConstraint!
+    @IBOutlet var flashBottomC: NSLayoutConstraint!
     @IBAction func flashButtonPressed(_ sender: Any) {
         flashlightOn.toggle()
         toggleFlashlight(flashlightOn)
     }
     
     var cameBackFromSettings: (() -> Void)?
-    @IBOutlet weak var settingsView: UIView!
-    @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
+    @IBOutlet var settingsView: UIView!
+    @IBOutlet var settingsBottomC: NSLayoutConstraint!
     
-    @IBOutlet weak var settingsImageView: UIImageView!
-    @IBOutlet weak var settingsButton: CustomButton!
+    @IBOutlet var settingsImageView: UIImageView!
+    @IBOutlet var settingsButton: CustomButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
         setupSettings()
     }
@@ -121,20 +121,21 @@ class CameraViewController: UIViewController {
     var normalSearchFieldTopCConstant = CGFloat(0)
     var displayingOrientationError = false
     
-    @IBOutlet weak var contentTopC: NSLayoutConstraint!
+    @IBOutlet var contentTopC: NSLayoutConstraint!
     
-    @IBOutlet weak var controlsBlurView: UIVisualEffectView!
-    @IBOutlet weak var controlsBlurBottomC: NSLayoutConstraint!
-    @IBOutlet weak var showControlsButton: UIButton!
+    @IBOutlet var controlsBlurView: UIVisualEffectView!
+    @IBOutlet var controlsBlurBottomC: NSLayoutConstraint!
+    @IBOutlet var showControlsButton: UIButton!
     @IBAction func showControlsPressed(_ sender: Any) {
         isFullScreen = false
         toggleFullScreen(isFullScreen)
     }
     
-    @IBOutlet weak var passthroughGroupView: passthroughGroupView!
-    @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
+    @IBOutlet var passthroughGroupView: passthroughGroupView!
+    @IBOutlet var passthroughBottomC: NSLayoutConstraint!
     
-    //MARK: Stats
+    // MARK: Stats
+
     var currentNumberOfMatches = 0
     lazy var statsNavController: StatsNavController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -147,8 +148,9 @@ class CameraViewController: UIViewController {
     }()
     
     // MARK: Camera focusing
+
     @IBOutlet var focusGestureRecognizer: UILongPressGestureRecognizer!
-    @IBOutlet weak var focusView: UIView!
+    @IBOutlet var focusView: UIView!
     @IBAction func handleFocusGesture(_ sender: UILongPressGestureRecognizer) {
         guard sender.state == .ended else { return }
         let location = sender.location(in: focusView)
@@ -163,10 +165,7 @@ class CameraViewController: UIViewController {
                 device.exposurePointOfInterest = focusPoint
                 device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
                 device.unlockForConfiguration()
-            }
-            catch {
-
-            }
+            } catch {}
         }
         
         let focusViewIndicator = CameraFocusView()
@@ -209,45 +208,50 @@ class CameraViewController: UIViewController {
     }
     
     // MARK: Timer and haptic feedback
+
     var currentPassCount = 0 /// +1 whenever frame added for AV
     
     // MARK: Toolbar
+
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     
     // MARK: Keyboard
+
     var toolbar: ListToolBar?
     
     // MARK: Search Bar
+
     var allowSearch = true /// orientation disable
     var allowSearchFocus = true /// disable when on different screen
     var insertingListsCount = 0
     var isSchedulingList = false
     
-    @IBOutlet weak var searchContentView: UIView!
-    @IBOutlet weak var searchBarLayout: UICollectionViewFlowLayout!
+    @IBOutlet var searchContentView: UIView!
+    @IBOutlet var searchBarLayout: UICollectionViewFlowLayout!
     
-    @IBOutlet weak var searchCollectionView: UICollectionView!
-    @IBOutlet weak var searchCollectionTopC: NSLayoutConstraint!
-    @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
+    @IBOutlet var searchCollectionView: UICollectionView!
+    @IBOutlet var searchCollectionTopC: NSLayoutConstraint!
+    @IBOutlet var searchCollectionRightC: NSLayoutConstraint!
     
     // MARK: Prompts
-    @IBOutlet weak var promptContainerView: passthroughGroupView!
+
+    @IBOutlet var promptContainerView: passthroughGroupView!
     
-    @IBOutlet weak var warningView: UIView!
-    @IBOutlet weak var warningLabel: UILabel!
-    @IBOutlet weak var warningHeightC: NSLayoutConstraint!
+    @IBOutlet var warningView: UIView!
+    @IBOutlet var warningLabel: UILabel!
+    @IBOutlet var warningHeightC: NSLayoutConstraint!
     
     var searchShrunk = true
     
-    @IBOutlet weak var alternateWarningView: UIView!
-    @IBOutlet weak var alternateWarningLabel: UILabel!
-    @IBOutlet weak var alternateWarningHeightC: NSLayoutConstraint!
+    @IBOutlet var alternateWarningView: UIView!
+    @IBOutlet var alternateWarningLabel: UILabel!
+    @IBOutlet var alternateWarningHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var whatsNewView: UIView!
-    @IBOutlet weak var whatsNewButton: UIButton!
-    @IBOutlet weak var whatsNewHeightC: NSLayoutConstraint!
+    @IBOutlet var whatsNewView: UIView!
+    @IBOutlet var whatsNewButton: UIButton!
+    @IBOutlet var whatsNewHeightC: NSLayoutConstraint!
     @IBAction func whatsNewPressed(_ sender: Any) {
         if shouldPresentWhatsNew {
             dismissWhatsNew(completion: {
@@ -257,17 +261,18 @@ class CameraViewController: UIViewController {
     }
     
     var temporaryPreventGestures: ((Bool) -> Void)?
-    @IBOutlet weak var newSearchTextField: TextField!
-    @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
-    @IBOutlet weak var searchTextLeftC: NSLayoutConstraint!
-    @IBOutlet weak var searchContentViewHeight: NSLayoutConstraint!
+    @IBOutlet var newSearchTextField: TextField!
+    @IBOutlet var searchTextTopC: NSLayoutConstraint! /// starts at 8
+    @IBOutlet var searchTextLeftC: NSLayoutConstraint!
+    @IBOutlet var searchContentViewHeight: NSLayoutConstraint!
     
-    //MARK: Lists
-    @IBOutlet weak var listsDownIndicatorView: UIView!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var listsLabel: UILabel!
-    @IBOutlet weak var tapToRemoveLabel: UILabel!
-    @IBOutlet weak var arrowDownImage: UIImageView!
+    // MARK: Lists
+
+    @IBOutlet var listsDownIndicatorView: UIView!
+    @IBOutlet var textLabel: UILabel!
+    @IBOutlet var listsLabel: UILabel!
+    @IBOutlet var tapToRemoveLabel: UILabel!
+    @IBOutlet var arrowDownImage: UIImageView!
     
     var selectedLists = [EditableFindList]()
     weak var injectListDelegate: InjectLists?
@@ -276,17 +281,18 @@ class CameraViewController: UIViewController {
     
     var blurView = UIVisualEffectView()
     
-    //MARK: Motion and AR Engine
+    // MARK: Motion and AR Engine
+
     var motionManager = CMMotionManager()
     var motionXAsOfHighlightStart = Double(0) ///     X
     var motionYAsOfHighlightStart = Double(0) ///     Y
     var motionZAsOfHighlightStart = Double(0) ///     Z
     
+    @IBOutlet var drawingBaseView: CustomActionsView!
+    @IBOutlet var drawingView: DrawingView!
     
-    @IBOutlet weak var drawingBaseView: CustomActionsView!
-    @IBOutlet weak var drawingView: DrawingView!
-    
-    //MARK: FAST MODE
+    // MARK: FAST MODE
+
     var busyFastFinding = false
     var currentComponents = [Component]()
     var pixelBufferSize = CGSize(width: 0, height: 0)
@@ -300,13 +306,14 @@ class CameraViewController: UIViewController {
     var currentListsSharedFindList = EditableFindList()
     var currentSearchAndListSharedFindList = EditableFindList()
     
-    var aspectRatioWidthOverHeight : CGFloat = 0
+    var aspectRatioWidthOverHeight: CGFloat = 0
     
-    var finalTextToFind : String = ""
+    var finalTextToFind: String = ""
     let deviceSize = screenBounds.size
-    var globalUrl : URL = URL(fileURLWithPath: "")
+    var globalUrl: URL = .init(fileURLWithPath: "")
     
     // MARK: Caching
+
     var startedCaching = false
     var cachedComponents = [Component]()
     var rawCachedContents = [EditableSingleHistoryContent]() /// raw vision coordinates to save to disk
@@ -317,43 +324,48 @@ class CameraViewController: UIViewController {
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
     var highlightsFromCache = [Component]() /// highlights that were from the cache
     
-    //MARK: Camera
+    // MARK: Camera
+
     var currentlyCapturing = false
-    @IBOutlet weak var pausedImageView: UIImageView!
+    @IBOutlet var pausedImageView: UIImageView!
     
     let avSession = AVCaptureSession()
     private var captureCompletionBlock: ((UIImage) -> Void)?
     var cameraDevice: AVCaptureDevice?
     
-    //MARK: Camera Focus allowed views
-    @IBOutlet weak var cameraView: CameraView!
+    // MARK: Camera Focus allowed views
+
+    @IBOutlet var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
     let photoDataOutput = AVCapturePhotoOutput()
     
     // MARK: Tips
+
     var cacheTipView: EasyTipView?
     var howManyTimesFastFoundSincePaused = 0 /// how many times fast found
     var dismissedCacheTipAlready = false /// if dismissed already, don't show again
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet
-      super.present(viewControllerToPresent, animated: flag, completion: completion)
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
+
     func capturePhoto(completion: ((UIImage) -> Void)?) {
         captureCompletionBlock = completion
     }
+
     var initialAttitude: CMAttitude?
     
     override var prefersStatusBarHidden: Bool {
-        return true  
+        return true
     }
  
     override func viewWillLayoutSubviews() {
-        cameraView.videoPreviewLayer.frame = self.view.bounds
+        cameraView.videoPreviewLayer.frame = view.bounds
         if let connection = cameraView.videoPreviewLayer.connection {
             if connection.isVideoOrientationSupported {
                 if let orientation = statusBarOrientation {
-                    connection.videoOrientation = self.interfaceOrientation(toVideoOrientation: orientation)
+                    connection.videoOrientation = interfaceOrientation(toVideoOrientation: orientation)
                     if orientation != .portrait {
                         displayingOrientationError = true
                         newSearchTextField.isEnabled = false
@@ -386,18 +398,18 @@ class CameraViewController: UIViewController {
             }
         }
     }
+
     var statusBarOrientation: UIInterfaceOrientation? {
-        get {
-            guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
-                #if DEBUG
-                fatalError("Could not obtain UIInterfaceOrientation from a valid windowScene")
-                #else
-                return nil
-                #endif
-            }
-            return orientation
+        guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
+#if DEBUG
+            fatalError("Could not obtain UIInterfaceOrientation from a valid windowScene")
+#else
+            return nil
+#endif
         }
+        return orientation
     }
+
     func interfaceOrientation(toVideoOrientation orientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
         switch orientation {
         case .portrait:
@@ -414,6 +426,7 @@ class CameraViewController: UIViewController {
 
         return .portrait
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cameraIconHolderBottomC.constant = FindConstantVars.shutterBottomDistance
@@ -422,12 +435,12 @@ class CameraViewController: UIViewController {
 //        cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
         
         adjustButtonLayout(CameraState.isPaused, animate: false)
-        
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if deviceHasNotch && !deviceIsRoundPad {
+        if deviceHasNotch, !deviceIsRoundPad {
             if isForcingStatusBarHidden {
                 normalSearchFieldTopCConstant = -16
             } else {
@@ -459,7 +472,6 @@ class CameraViewController: UIViewController {
         fullScreenView.layer.cornerRadius = fullScreenView.bounds.width / 2
         flashView.layer.cornerRadius = flashView.bounds.width / 2
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2
-        
         
         statsBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 8
         fullScreenBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 8
@@ -525,15 +537,14 @@ class CameraViewController: UIViewController {
         }
 
         motionManager.startDeviceMotionUpdates(to: .main) {
-            [weak self] (data, error) in
-            if !CameraState.isPaused {
-                guard let data = data, error == nil else {
-                    return
+            [weak self] data, error in
+                if !CameraState.isPaused {
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    self?.updateHighlightOrientations(attitude: data.attitude)
                 }
-                self?.updateHighlightOrientations(attitude: data.attitude)
-            }
         }
-        
         
         whatsNewView.alpha = 0
         whatsNewView.layer.cornerRadius = 6
@@ -564,7 +575,6 @@ class CameraViewController: UIViewController {
                     }
                 }
             }
-            
         }
         
         if let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
@@ -602,13 +612,13 @@ class CameraViewController: UIViewController {
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // MARK: - Camera Delegate and Setup
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         currentPassCount += 1
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        if busyFastFinding == false && allowSearch == true && displayingOrientationError == false && allowSearchFocus == true && CameraState.isPaused == false {
-            
+        if busyFastFinding == false, allowSearch == true, displayingOrientationError == false, allowSearchFocus == true, CameraState.isPaused == false {
             /// 1. Find
             fastFind(in: pixelBuffer)
         }

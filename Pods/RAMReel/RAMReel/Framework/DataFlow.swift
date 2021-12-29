@@ -9,22 +9,24 @@
 import UIKit
 
 // MARK: - Data flow operators
+
 precedencegroup MSPrecedence {
-  higherThan: RPrecedence
+    higherThan: RPrecedence
 }
 
-infix operator *> : MSPrecedence
+infix operator *>: MSPrecedence
 
 /**
-    Creates data flow from compatatible data source to data destination
+ Creates data flow from compatatible data source to data destination
 
-    - parameter left: Object of type that comply to FlowDataSource protocol.
-    - parameter right: Object of type that comply to FlowDataDestination protocol.
+ - parameter left: Object of type that comply to FlowDataSource protocol.
+ - parameter right: Object of type that comply to FlowDataDestination protocol.
 
-    - returns: `DataFlow` from source to destination.
-*/
-public func *> <FlowDataSource, FlowDataDestination> (left: FlowDataSource, right: FlowDataDestination) -> DataFlow<FlowDataSource, FlowDataDestination>
-    where FlowDataSource.ResultType == FlowDataDestination.DataType {
+ - returns: `DataFlow` from source to destination.
+ */
+public func *> <FlowDataSource, FlowDataDestination>(left: FlowDataSource, right: FlowDataDestination) -> DataFlow<FlowDataSource, FlowDataDestination>
+    where FlowDataSource.ResultType == FlowDataDestination.DataType
+{
     return DataFlow(from: left, to: right)
 }
 
@@ -35,86 +37,76 @@ public func *> <FlowDataSource, FlowDataDestination> (left: FlowDataSource, righ
  --
  
  Represent queried data flow
-*/
-struct Cookie {
-    
-}
+ */
+struct Cookie {}
 
-func eat(a : Cookie) -> () {
-    
-}
+func eat(a: Cookie) {}
 
 public struct DataFlow
-    <
+<
     DS: FlowDataSource,
-    DD: FlowDataDestination>
+    DD: FlowDataDestination
+>
     where DS.ResultType == DD.DataType
     
 {
     let from: DS
-    let   to: DD
+    let to: DD
     
     fileprivate init(from: DS, to: DD) {
-        
         self.from = from
-        self.to   = to
+        self.to = to
         
         let c1 = Cookie()
         
-        eat(a : c1)
-        eat(a : c1)
-        
+        eat(a: c1)
+        eat(a: c1)
     }
     
     func transport(_ query: DS.QueryType) {
-        let results = self.from.resultsForQuery(query)
-        self.to.processData(results)
+        let results = from.resultsForQuery(query)
+        to.processData(results)
     }
 }
 
 /**
-    Type that implement comply to protocol responds to data queries and passes data to data flow
-*/
+ Type that implement comply to protocol responds to data queries and passes data to data flow
+ */
 public protocol FlowDataSource {
-
     associatedtype QueryType = String
     associatedtype ResultType
     
     /**
-        Handles data query
+         Handles data query
         
-        - parameter query: Data query of generic data type
+         - parameter query: Data query of generic data type
         
-        - returns: Array of results
-    */
+         - returns: Array of results
+     */
     func resultsForQuery(_ query: QueryType) -> [ResultType]
-    
 }
 
 /**
-    Type that implements this protocol uses data from data flow
-*/
+ Type that implements this protocol uses data from data flow
+ */
 public protocol FlowDataDestination {
-    
     associatedtype DataType
     
     /**
-        Processed data, recieved from data source via data flow
+         Processed data, recieved from data source via data flow
     
-        - parameter data: Array to process
-    */
+         - parameter data: Array to process
+     */
     func processData(_ data: [DataType])
-    
 }
 
 // MARK: - Simple data source
 
 /**
-    Example data source, that performs string queries over string array data
-*/
+ Example data source, that performs string queries over string array data
+ */
 public struct SimplePrefixQueryDataSource: FlowDataSource {
-    
-    var data: Trie = Trie()
+    var data: Trie = .init()
     /// Creates data source with data array
     public init(_ data: [String]) {
         data.forEach(self.data.insert)
@@ -122,36 +114,35 @@ public struct SimplePrefixQueryDataSource: FlowDataSource {
     
     /// Returns all the strings that starts with query string
     public func resultsForQuery(_ query: String) -> [String] {
-        if(query == ""){
+        if query == "" {
             return [] // self.data.words
-        }else{
-            return self.data.findWordsWithPrefix(prefix: query)
+        } else {
+            return data.findWordsWithPrefix(prefix: query)
         }
     }
-    
 }
 
 // MIT-licensed Trie from https://github.com/raywenderlich/swift-algorithm-club
 
-//Copyright (c) 2016 Matthijs Hollemans and contributors
+// Copyright (c) 2016 Matthijs Hollemans and contributors
 //
-//Permission is hereby granted, free of charge, to any person obtaining a copy
-//of this software and associated documentation files (the "Software"), to deal
-//in the Software without restriction, including without limitation the rights
-//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//copies of the Software, and to permit persons to whom the Software is
-//furnished to do so, subject to the following conditions:
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
-//The above copyright notice and this permission notice shall be included in
-//all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 //  Trie.swift
 //  Trie
@@ -168,7 +159,6 @@ class TrieNode<T: Hashable> {
     var isLeaf: Bool {
         return children.count == 0
     }
-    
     
     /// Initializes a node.
     ///
@@ -200,14 +190,17 @@ class Trie: NSObject, NSCoding {
     public var count: Int {
         return wordCount
     }
+
     /// Is the trie empty?
     public var isEmpty: Bool {
         return wordCount == 0
     }
+
     /// All words currently in the trie
     public var words: [String] {
         return wordsInSubtrie(rootNode: root, partialWord: "")
     }
+
     fileprivate let root: Node
     fileprivate var wordCount: Int
     
@@ -219,6 +212,7 @@ class Trie: NSObject, NSCoding {
     }
     
     // MARK: NSCoding
+
     /// Initializes the trie with words from an archive
     ///
     /// - Parameter decoder: Decodes the archive
@@ -226,7 +220,7 @@ class Trie: NSObject, NSCoding {
         self.init()
         let words = decoder.decodeObject(forKey: "words") as? [String]
         for word in words! {
-            self.insert(word: word)
+            insert(word: word)
         }
     }
     
@@ -235,13 +229,13 @@ class Trie: NSObject, NSCoding {
     ///
     /// - Parameter coder: The object that will encode the array
     func encode(with coder: NSCoder) {
-        coder.encode(self.words, forKey: "words")
+        coder.encode(words, forKey: "words")
     }
 }
 
 // MARK: - Adds methods: insert, remove, contains
+
 extension Trie {
-    
     /// Inserts a word into the trie.  If the word is already present,
     /// there is no change.
     ///
@@ -285,7 +279,6 @@ extension Trie {
         return currentNode.isTerminating
     }
     
-    
     /// Attempts to walk to the last node of a word.  The
     /// search will fail if the word is not present. Doesn't
     /// check if the node is terminating
@@ -315,7 +308,6 @@ extension Trie {
             return lastNode.isTerminating ? lastNode : nil
         }
         return nil
-        
     }
     
     /// Deletes a word from the trie by starting with the last letter
@@ -376,11 +368,11 @@ extension Trie {
             subtrieWords.append(previousLetters)
         }
         for childNode in rootNode.children.values {
-            if(subtrieWords.count < 200){
+            if subtrieWords.count < 200 {
                 let childWords = wordsInSubtrie(rootNode: childNode, partialWord: previousLetters)
                 
                 subtrieWords += childWords
-            }else{
+            } else {
                 break
             }
         }
@@ -402,9 +394,9 @@ extension Trie {
             }
             for childNode in lastNode.children.values {
                 let childWords = wordsInSubtrie(rootNode: childNode, partialWord: prefixLowerCased)
-                if(words.count < 200){
+                if words.count < 200 {
                     words += childWords
-                }else{
+                } else {
                     break
                 }
             }
@@ -412,4 +404,3 @@ extension Trie {
         return words
     }
 }
-

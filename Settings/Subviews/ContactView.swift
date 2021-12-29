@@ -30,7 +30,6 @@ struct ContactView: View {
                     )
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                     
-                    
                     ContactWidget(
                         urlString: "https://www.reddit.com/user/aheze",
                         startColor: #colorLiteral(red: 1, green: 0.5529411765, blue: 0, alpha: 1),
@@ -50,13 +49,11 @@ struct ContactView: View {
                         imageName: "IconEmail"
                     )
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
-                    
                 }
             }
         }
     }
 }
-
 
 struct ContactWidget: View {
     let urlString: String
@@ -73,7 +70,6 @@ struct ContactWidget: View {
             }
         }) {
             HStack(spacing: 0) {
-                
                 ZStack {
                     Rectangle()
                         .fill(

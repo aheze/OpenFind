@@ -19,7 +19,6 @@ extension CameraViewController {
             var transcriptComponents = [Component]()
             
             if let results = request?.results, results.count > 0 {
-                
                 for result in results {
                     if let observation = result as? VNRecognizedTextObservation {
                         let convertedRect = self.getConvertedRect(
@@ -29,7 +28,6 @@ extension CameraViewController {
                         )
                                 
                         for text in observation.topCandidates(1) {
-                            
                             let transcriptComponent = Component()
                             transcriptComponent.text = text.string.lowercased()
                             transcriptComponent.x = convertedRect.origin.x
@@ -60,7 +58,6 @@ extension CameraViewController {
             self.currentTranscriptComponents = transcriptComponents
             self.drawAllTranscripts(show: self.showingTranscripts)
             self.finishedCache(with: transcriptComponents, rawContents: rawContents)
-            
         }
     }
 }

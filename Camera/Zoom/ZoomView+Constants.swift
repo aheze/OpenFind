@@ -9,7 +9,6 @@
 import UIKit
 
 struct C {
-    
     /// padding underneath blue capsule
     static let bottomPadding = CGFloat(16)
     
@@ -25,10 +24,8 @@ struct C {
     static let activationStartDistance = CGFloat(0.09)
     static let activationRange = CGFloat(0.06)
     
-    
     /// how wide `positionRange` normally is
     static let normalPositionRange = 0.3
-    
     
     static let timeoutTime = CGFloat(1.5)
     

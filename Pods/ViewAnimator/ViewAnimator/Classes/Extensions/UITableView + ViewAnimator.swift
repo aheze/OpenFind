@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 public extension UITableView {
-
     /// Gets the currently visibleCells of a section.
     ///
     /// - Parameter section: The section to filter the cells.

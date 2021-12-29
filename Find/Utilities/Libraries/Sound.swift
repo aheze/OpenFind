@@ -24,46 +24,42 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Foundation
 import AVFoundation
+import Foundation
 
 #if os(iOS) || os(tvOS)
 /// SoundCategory is a convenient wrapper for AVAudioSessions category constants.
-    public enum SoundCategory {
+public enum SoundCategory {
+    /// Equivalent of AVAudioSession.Category.ambient.
+    case ambient
+    /// Equivalent of AVAudioSession.Category.soloAmbient.
+    case soloAmbient
+    /// Equivalent of AVAudioSession.Category.playback.
+    case playback
+    /// Equivalent of AVAudioSession.Category.record.
+    case record
+    /// Equivalent of AVAudioSession.Category.playAndRecord.
+    case playAndRecord
 
-        /// Equivalent of AVAudioSession.Category.ambient.
-        case ambient
-        /// Equivalent of AVAudioSession.Category.soloAmbient.
-        case soloAmbient
-        /// Equivalent of AVAudioSession.Category.playback.
-        case playback
-        /// Equivalent of AVAudioSession.Category.record.
-        case record
-        /// Equivalent of AVAudioSession.Category.playAndRecord.
-        case playAndRecord
-
-        fileprivate var avFoundationCategory: AVAudioSession.Category {
-            get {
-                switch self {
-                case .ambient:
-                    return .ambient
-                case .soloAmbient:
-                    return .soloAmbient
-                case .playback:
-                    return .playback
-                case .record:
-                    return .record
-                case .playAndRecord:
-                    return .playAndRecord
-                }
-            }
+    fileprivate var avFoundationCategory: AVAudioSession.Category {
+        switch self {
+        case .ambient:
+            return .ambient
+        case .soloAmbient:
+            return .soloAmbient
+        case .playback:
+            return .playback
+        case .record:
+            return .record
+        case .playAndRecord:
+            return .playAndRecord
         }
     }
+}
 #endif
 
 /// Sound is a class that allows you to easily play sounds in Swift. It uses AVFoundation framework under the hood.
 open class Sound {
-
     // MARK: - Global settings
 
     /// Number of AVAudioPlayer instances created for every sound. SwiftySound creates 5 players for every sound to make sure that it will be able to play the same sound more than once. If your app doesn't need this functionality, you can reduce the number of players to 1 and reduce memory usage. You can increase the number if your app plays the sound more than 5 times at the same time.
@@ -74,7 +70,7 @@ open class Sound {
         }
     }
 
-    #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
     /// Sound session. The default value is the shared `AVAudioSession` session.
     public static var session: Session = AVAudioSession.sharedInstance()
 
@@ -83,27 +79,25 @@ open class Sound {
         let defaultCategory = SoundCategory.ambient
         try? session.setCategory(defaultCategory.avFoundationCategory)
         return defaultCategory
-        }() {
+    }() {
         didSet {
             try? session.setCategory(category.avFoundationCategory)
         }
     }
-    #endif
+#endif
 
     private static var sounds = [URL: Sound]()
 
     private static let defaultsKey = "com.moonlightapps.SwiftySound.enabled"
 
     /// Globally enable or disable sound. This setting value is stored in UserDefaults and will be loaded on app launch.
-    public static var enabled: Bool = {
-        return !UserDefaults.standard.bool(forKey: defaultsKey)
-        }() { didSet {
-            let value = !enabled
-            UserDefaults.standard.set(value, forKey: defaultsKey)
-            if value {
-                stopAll()
-            }
+    public static var enabled: Bool = !UserDefaults.standard.bool(forKey: defaultsKey) { didSet {
+        let value = !enabled
+        UserDefaults.standard.set(value, forKey: defaultsKey)
+        if value {
+            stopAll()
         }
+    }
     }
 
     private let players: [Player]
@@ -122,9 +116,9 @@ open class Sound {
     ///
     /// - Parameter url: Sound file URL.
     public init?(url: URL) {
-        #if os(iOS) || os(tvOS)
-            _ = Sound.category
-        #endif
+#if os(iOS) || os(tvOS)
+        _ = Sound.category
+#endif
         let playersPerSound = max(Sound.playersPerSound, 1)
         var myPlayers: [Player] = []
         myPlayers.reserveCapacity(playersPerSound)
@@ -132,9 +126,7 @@ open class Sound {
             do {
                 let player = try Sound.playerClass.init(contentsOf: url)
                 myPlayers.append(player)
-            } catch {
-
-            }
+            } catch {}
         }
         if myPlayers.count == 0 {
             return nil
@@ -184,7 +176,6 @@ open class Sound {
         players[counter].pause()
         paused = true
     }
-
 
     /// Resume playing.
     @discardableResult public func resume() -> Bool {
@@ -258,9 +249,7 @@ open class Sound {
 
     /// Duration of the sound.
     public var duration: TimeInterval {
-        get {
-            return players[counter].duration
-        }
+        return players[counter].duration
     }
 
     /// Sound volume.
@@ -294,15 +283,14 @@ open class Sound {
     }
 
     // MARK: - Private helper method
+
     private static func url(for file: String, fileExtension: String? = nil) -> URL? {
         return soundsBundle.url(forResource: file, withExtension: fileExtension)
     }
-
 }
 
 /// Player protocol. It duplicates `AVAudioPlayer` methods.
 public protocol Player: class {
-
     /// Play the sound.
     ///
     /// - Parameters:
@@ -338,16 +326,15 @@ public protocol Player: class {
     var isPlaying: Bool { get }
 }
 
-fileprivate var associatedCallbackKey = "com.moonlightapps.SwiftySound.associatedCallbackKey"
+private var associatedCallbackKey = "com.moonlightapps.SwiftySound.associatedCallbackKey"
 
-public typealias PlayerCompletion = ((Bool) -> ())
+public typealias PlayerCompletion = (Bool) -> Void
 
 extension AVAudioPlayer: Player, AVAudioPlayerDelegate {
-
     public func play(numberOfLoops: Int, completion: PlayerCompletion?) -> Bool {
         if let cmpl = completion {
             objc_setAssociatedObject(self, &associatedCallbackKey, cmpl, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            self.delegate = self
+            delegate = self
         }
         self.numberOfLoops = numberOfLoops
         return play()
@@ -361,13 +348,10 @@ extension AVAudioPlayer: Player, AVAudioPlayerDelegate {
         let cmpl = objc_getAssociatedObject(self, &associatedCallbackKey) as? PlayerCompletion
         cmpl?(flag)
         objc_removeAssociatedObjects(self)
-        self.delegate = nil
+        delegate = nil
     }
 
-    public func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-
-    }
-
+    public func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {}
 }
 
 #if os(iOS) || os(tvOS)

@@ -13,7 +13,6 @@ import UIKit
 /// - zoom: Zoom animation.
 /// - rotate: Rotation animation.
 public enum AnimationType: Animation {
-
     case from(direction: Direction, offset: CGFloat)
     case zoom(scale: CGFloat)
     case rotate(angle: CGFloat)
@@ -26,7 +25,7 @@ public enum AnimationType: Animation {
             if direction.isVertical { return CGAffineTransform(translationX: 0, y: offset * sign) }
             return CGAffineTransform(translationX: offset * sign, y: 0)
         case .zoom(let scale):
-             return CGAffineTransform(scaleX: scale, y: scale)
+            return CGAffineTransform(scaleX: scale, y: scale)
         case .rotate(let angle):
             return CGAffineTransform(rotationAngle: angle)
         }

@@ -619,8 +619,6 @@ extension CameraViewController {
         
         carteViewController.items.sort { $0.name < $1.name }
         let navigationController = UINavigationController(rootViewController: carteViewController)
-        self.present(navigationController, animated: true, completion: nil)
-        
+        present(navigationController, animated: true, completion: nil)
     }
 }
-

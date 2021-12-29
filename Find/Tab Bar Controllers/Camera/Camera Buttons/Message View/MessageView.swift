@@ -8,15 +8,14 @@
 import UIKit
 
 class MessageView: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var shadeView: UIView!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var shadeView: UIView!
     
-    @IBOutlet weak var labelContainerView: UIView!
-    @IBOutlet weak var labelButton: UIButton!
-    @IBOutlet weak var morphingLabel: LTMorphingLabel!
+    @IBOutlet var labelContainerView: UIView!
+    @IBOutlet var labelButton: UIButton!
+    @IBOutlet var morphingLabel: LTMorphingLabel!
     
     var currentMessageIdentifier: UUID?
     
@@ -25,10 +24,11 @@ class MessageView: UIView {
             self.labelButton.alpha = 0.5
         })
     }
-    @IBAction func touchUpInside(_ sender: Any) {
 
+    @IBAction func touchUpInside(_ sender: Any) {
         resetAlpha()
     }
+
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
     }
@@ -52,7 +52,7 @@ class MessageView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("MessageView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         containerView.clipsToBounds = true
@@ -64,9 +64,8 @@ class MessageView: UIView {
         labelContainerView.alpha = 0
         blurView.effect = nil
         
-        self.isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
     }
-    
     
     func showMessage(_ message: String, dismissible: Bool, duration: Int) {
         let thisMessageIdentifier = UUID()
@@ -85,13 +84,14 @@ class MessageView: UIView {
                 }
             }
         }
-        
     }
+
     func updateMessage(_ message: String) {
         DispatchQueue.main.async {
             self.morphingLabel.text = message
         }
     }
+
     func unHideMessages() {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.8) {
@@ -101,6 +101,7 @@ class MessageView: UIView {
             }
         }
     }
+
     func hideMessages() {
         DispatchQueue.main.async {
             self.currentMessageIdentifier = nil

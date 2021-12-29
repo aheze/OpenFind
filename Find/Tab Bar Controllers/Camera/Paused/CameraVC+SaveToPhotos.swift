@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 extension CameraViewController {
     func animatePhotosIcon() {
@@ -15,14 +15,14 @@ extension CameraViewController {
             TipViews.finishTutorial()
         }
         
-        if self.savePressed {
+        if savePressed {
             UIView.animate(withDuration: Double(FindConstants.transitionDuration)) {
                 self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
             }
-            self.saveLabel.fadeTransition(0.2)
+            saveLabel.fadeTransition(0.2)
             
             let savedText = NSLocalizedString("savedText", comment: "")
-            self.saveLabel.text = savedText
+            saveLabel.text = savedText
             
             saveToPhotos.accessibilityLabel = "Saved"
             saveToPhotos.accessibilityHint = "Tap to remove the current paused image from the photo library"
@@ -31,9 +31,9 @@ extension CameraViewController {
             UIView.animate(withDuration: Double(FindConstants.transitionDuration)) {
                 self.saveToPhotos.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)()
             }
-            self.saveLabel.fadeTransition(0.2)
+            saveLabel.fadeTransition(0.2)
             let saveText = NSLocalizedString("saveText", comment: "")
-            self.saveLabel.text = saveText
+            saveLabel.text = saveText
             
             saveToPhotos.accessibilityLabel = "Save to Photos"
             saveToPhotos.accessibilityHint = "Saves the current paused image to the photo library"
@@ -46,7 +46,7 @@ extension CameraViewController {
             let pngData = pausedPhoto.pngData()
         else { return }
         
-        let currentRawContents = self.rawCachedContents
+        let currentRawContents = rawCachedContents
         
         var photoIdentifier: String?
         PHPhotoLibrary.shared().performChanges({
@@ -55,7 +55,7 @@ extension CameraViewController {
             if let identifier = creationRequest.placeholderForCreatedAsset?.localIdentifier {
                 photoIdentifier = identifier
             }
-        }) { (success, error) in
+        }) { success, _ in
 
             if
                 success,
@@ -79,14 +79,11 @@ extension CameraViewController {
                         }
                     }
                     
-                    
                     do {
                         try self.realm.write {
                             self.realm.add(newModel)
                         }
-                    } catch {
-
-                    }
+                    } catch {}
                 }
             }
         }

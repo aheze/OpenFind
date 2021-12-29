@@ -12,6 +12,7 @@ enum PhotoFilter {
     case screenshots
     case all
 }
+
 enum TouchStatus {
     case notStarted
     case startedInCurrentFilter /// touched down in current label
@@ -23,8 +24,8 @@ struct PhotoFilterState {
     var cacheSelected = false
     var currentFilter = PhotoFilter.all
 }
+
 class SegmentedSlider: UIView {
-    
     var pressedFilter: ((PhotoFilterState) -> Void)?
     
     var photoFilterState = PhotoFilterState()
@@ -41,13 +42,13 @@ class SegmentedSlider: UIView {
     
     /// contains Star + Cache + Container View
     @IBOutlet var baseView: UIView!
-    @IBOutlet weak var containerView: SliderCategoriesView! /// for baseView
+    @IBOutlet var containerView: SliderCategoriesView! /// for baseView
     
-    @IBOutlet weak var starCacheContainerView: UIView!
-    @IBOutlet weak var starImageView: UIImageView!
-    @IBOutlet weak var cacheImageView: UIImageView!
+    @IBOutlet var starCacheContainerView: UIView!
+    @IBOutlet var starImageView: UIImageView!
+    @IBOutlet var cacheImageView: UIImageView!
     
-    @IBOutlet weak var starButton: CustomButton!
+    @IBOutlet var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
         photoFilterState.starSelected.toggle()
         
@@ -60,7 +61,7 @@ class SegmentedSlider: UIView {
         pressedFilter?(photoFilterState)
     }
     
-    @IBOutlet weak var cacheButton: CustomButton!
+    @IBOutlet var cacheButton: CustomButton!
     @IBAction func cacheButtonPressed(_ sender: Any) {
         photoFilterState.cacheSelected.toggle()
         
@@ -73,28 +74,27 @@ class SegmentedSlider: UIView {
         pressedFilter?(photoFilterState)
     }
     
-    @IBOutlet weak var sliderContainerView: UIView! /// contains slider and labels
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var indicatorView: UIView!
+    @IBOutlet var sliderContainerView: UIView! /// contains slider and labels
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var indicatorView: UIView!
     
-    @IBOutlet weak var localLabel: PaddedLabel!
-    @IBOutlet weak var screenshotsLabel: PaddedLabel!
-    @IBOutlet weak var allLabel: PaddedLabel!
+    @IBOutlet var localLabel: PaddedLabel!
+    @IBOutlet var screenshotsLabel: PaddedLabel!
+    @IBOutlet var allLabel: PaddedLabel!
     
     // MARK: Photos selection
+
     @IBOutlet var numberOfSelectedView: UIView!
-    @IBOutlet weak var numberOfSelectedLabel: UILabel!
+    @IBOutlet var numberOfSelectedLabel: UILabel!
     var showingPhotosSelection = false
     
     var allowingInteraction = true
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if allowingInteraction {
             if let touchPoint = touches.first?.location(in: slidersView) {
                 if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
-                    
                     if hoveredFilter == photoFilterState.currentFilter { /// dragging indicator
                         touchStatus = .startedInCurrentFilter
                         animateScale(shrink: true)
@@ -114,7 +114,6 @@ class SegmentedSlider: UIView {
         if allowingInteraction {
             if let touchPoint = touches.first?.location(in: slidersView) {
                 if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
-                    
                     if hoveredFilter != currentHoveredFilter { /// dragged to different label
                         if touchStatus == .startedInCurrentFilter {
                             animateChangeSelection(filter: hoveredFilter)
@@ -125,7 +124,6 @@ class SegmentedSlider: UIView {
                                 animateHighlight(view: currentHoveredLabel, highlight: false)
                             }
                             currentHoveredLabel = hoveredLabel
-                            
                         }
                         currentHoveredFilter = hoveredFilter
                     }
@@ -133,6 +131,7 @@ class SegmentedSlider: UIView {
             }
         }
     }
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         if allowingInteraction {
@@ -179,20 +178,20 @@ class SegmentedSlider: UIView {
         Bundle.main.loadNibNamed("SegmentedSlider", owner: self, options: nil)
         
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         contentView.addSubview(baseView)
-        baseView.frame = self.bounds
+        baseView.frame = bounds
         baseView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         containerView.addSubview(slidersView)
         slidersView.frame = containerView.bounds
         slidersView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        self.clipsToBounds = true
-        self.layer.borderWidth = 0.1
-        self.layer.borderColor = UIColor.secondaryLabel.cgColor
+        clipsToBounds = true
+        layer.borderWidth = 0.1
+        layer.borderColor = UIColor.secondaryLabel.cgColor
         
         starButton.touched = { [weak self] down in
             if down {
@@ -222,7 +221,7 @@ class SegmentedSlider: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layer.cornerRadius = self.bounds.height / 2
+        layer.cornerRadius = bounds.height / 2
         indicatorView.layer.cornerRadius = indicatorView.bounds.height / 2
     }
     
@@ -236,6 +235,7 @@ class SegmentedSlider: UIView {
             self.indicatorView.center = CGPoint(x: centerX, y: centerY)
         })
     }
+
     func animateHighlight(view: UIView, highlight: Bool) {
         if highlight {
             UIView.animate(withDuration: 0.2) {
@@ -247,6 +247,7 @@ class SegmentedSlider: UIView {
             }
         }
     }
+
     func animateScale(shrink: Bool) {
         if shrink {
             UIView.animate(withDuration: 0.2) {

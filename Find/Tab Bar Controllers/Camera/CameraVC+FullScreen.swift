@@ -40,9 +40,10 @@ extension CameraViewController {
         }
         
         if !CameraState.isPaused {
-            self.cameraChanged?(fullScreen, false)
+            cameraChanged?(fullScreen, false)
         }
     }
+
     func adjustButtonLayout(_ paused: Bool, animate: Bool = true) {
         if paused {
             fullScreenLeftNeighborC.isActive = false
@@ -77,7 +78,7 @@ extension CameraViewController {
                 self.view.layoutIfNeeded()
             }
         } else {
-            self.view.layoutIfNeeded()
+            view.layoutIfNeeded()
         }
     }
 }

@@ -26,7 +26,6 @@ extension PhotosViewController {
 
 /// When the slides pages left or right
 extension PhotosViewController: PhotoSlidesUpdatedIndex {
-    
     func indexUpdated(to newIndex: Int) {
         if let previousIndexPath = selectedIndexPath {
             if let cell = collectionView.cellForItem(at: previousIndexPath) as? ImageCell { /// old index
@@ -34,7 +33,7 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
                     if let model = previousPhoto.editableModel {
                         cell.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
                         cell.starImageView.alpha = model.isHearted ? 1 : 0
-                        cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+                        cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted) ? 1 : 0
                     }
                 }
             }
@@ -43,7 +42,7 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
         if let newIndexPath = dataSource.indexPath(for: currentPhoto) {
             if let cell = collectionView.cellForItem(at: newIndexPath) as? ImageCell { /// new index
                 if let model = currentPhoto.editableModel {
-                    if model.isHearted || model.isDeepSearched  {
+                    if model.isHearted || model.isDeepSearched {
                         cell.shadowImageView.alpha = 0
                     }
                     if model.isHearted {

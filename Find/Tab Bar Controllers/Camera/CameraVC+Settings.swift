@@ -6,15 +6,15 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SupportDocs
+import UIKit
 import WhatsNewKit
 
 extension CameraViewController {
     func setupSettings() {
         let settingsVC = SettingsViewController()
         settingsVC.presentationController?.delegate = self
-        self.present(settingsVC, animated: true)
+        present(settingsVC, animated: true)
         
         Settings.Bridge.dismissed = { [weak self] in
             self?.cameBackFromSettings?()
@@ -72,13 +72,12 @@ extension CameraViewController {
         }
         
         Settings.Bridge.presentListsBuilderTutorial = { [weak self] in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
             self?.present(vc, animated: true, completion: nil)
         }
         
         Settings.Bridge.presentShareScreen = { [weak self] in
-            
         }
     }
 }
@@ -88,5 +87,3 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
         cameBackFromSettings?()
     }
 }
-
-

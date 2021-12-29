@@ -30,24 +30,22 @@ import Foundation
 public typealias LTStringDiffResult = ([LTCharacterDiffResult], skipDrawingResults: [Bool])
 
 public extension String {
-    
     func diffWith(_ anotherString: String?) -> LTStringDiffResult {
-        
         guard let anotherString = anotherString else {
             let diffResults: [LTCharacterDiffResult] =
-                Array(repeating: .delete, count: self.count)
-            let skipDrawingResults: [Bool] = Array(repeating: false, count: self.count)
+                Array(repeating: .delete, count: count)
+            let skipDrawingResults: [Bool] = Array(repeating: false, count: count)
             return (diffResults, skipDrawingResults)
         }
         
         let newChars = anotherString.enumerated()
-        let lhsLength = self.count
+        let lhsLength = count
         let rhsLength = anotherString.count
         var skipIndexes = [Int]()
         let leftChars = Array(self)
         
         let maxLength = max(lhsLength, rhsLength)
-        var diffResults: [LTCharacterDiffResult] = Array(repeating: .add, count: maxLength) 
+        var diffResults: [LTCharacterDiffResult] = Array(repeating: .add, count: maxLength)
         var skipDrawingResults: [Bool] = Array(repeating: false, count: maxLength)
         
         for i in 0..<maxLength {
@@ -96,7 +94,5 @@ public extension String {
         }
         
         return (diffResults, skipDrawingResults)
-        
     }
-    
 }

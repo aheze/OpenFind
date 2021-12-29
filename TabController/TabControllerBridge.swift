@@ -5,7 +5,6 @@
 //  Created by Zheng on 10/28/21.
 //
 
-
 import SwiftUI
 
 struct TabControllerBridge {
@@ -17,7 +16,6 @@ struct TabControllerBridge {
         photosDetailToolbarView: PhotosDetailToolbarView,
         listsSelectionToolbarView: ListsSelectionToolbarView
     ) -> TabBarController<PhotosSelectionToolbarView, PhotosDetailToolbarView, ListsSelectionToolbarView> {
-        
         let tabBarController = TabBarController(
             pages: pageViewControllers,
             cameraViewModel: cameraViewModel,

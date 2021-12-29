@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 import Vision
 
 extension PhotoSlidesViewController {
@@ -18,7 +18,7 @@ extension PhotoSlidesViewController {
             let options = PHImageRequestOptions()
             options.isSynchronous = true
             
-            PHImageManager.default().requestImageDataAndOrientation(for: resultPhoto.findPhoto.asset, options: options) { (data, _, _, _) in
+            PHImageManager.default().requestImageDataAndOrientation(for: resultPhoto.findPhoto.asset, options: options) { data, _, _, _ in
                 if let imageData = data {
                     let request = VNRecognizeTextRequest { request, error in
                         self.handleFastDetectedText(request: request, error: error, resultPhoto: resultPhoto, indexOfPhoto: index)
@@ -39,17 +39,11 @@ extension PhotoSlidesViewController {
                     let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
                     do {
                         try imageRequestHandler.perform([request])
-                    } catch let error {
-
-                    }
-                    
+                    } catch {}
                 }
             }
-            
         }
-        
     }
-    
     
     func handleFastDetectedText(request: VNRequest?, error: Error?, resultPhoto: ResultPhoto, indexOfPhoto: Int) {
         numberCurrentlyFastFinding -= 1
@@ -100,7 +94,7 @@ extension PhotoSlidesViewController {
             let lowercaseContentText = transcript.text.lowercased()
             
             let individualCharacterWidth = CGFloat(transcript.width) / CGFloat(lowercaseContentText.count)
-            for match in self.matchToColors.keys {
+            for match in matchToColors.keys {
                 if lowercaseContentText.contains(match) {
                     let finalW = individualCharacterWidth * CGFloat(match.count)
                     let indices = lowercaseContentText.indicesOf(string: match)
@@ -113,7 +107,7 @@ extension PhotoSlidesViewController {
                         let newComponent = Component()
                         
                         newComponent.x = finalX
-                        newComponent.y = CGFloat(transcript.y) - (CGFloat(transcript.height))
+                        newComponent.y = CGFloat(transcript.y) - CGFloat(transcript.height)
                         newComponent.width = finalW
                         newComponent.height = CGFloat(transcript.height)
                         newComponent.text = match
@@ -125,7 +119,6 @@ extension PhotoSlidesViewController {
                         newRangeObject.descriptionRange = index...index + match.count
                         newRangeObject.text = match
                         matchRanges.append(newRangeObject)
-                        
                     }
                 }
             }
@@ -143,13 +136,11 @@ extension PhotoSlidesViewController {
                 if pointDistance < smallestDistance {
                     smallestDistance = pointDistance
                 }
-                
             }
             
-            if smallestDistance >= 0.008 { ///Bigger, so add it
+            if smallestDistance >= 0.008 { /// Bigger, so add it
                 componentsToAdd.append(newFindComponent)
             }
-            
         }
         
         if resultPhoto.transcripts.isEmpty {
@@ -162,10 +153,8 @@ extension PhotoSlidesViewController {
             self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
             self.drawHighlightsAndTranscripts()
         }
-
     }
 }
-
 
 extension PhotoSlidesViewController {
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
@@ -173,6 +162,7 @@ extension PhotoSlidesViewController {
         let yDist = a.y - b.y
         return CGFloat(sqrt(xDist * xDist + yDist * yDist))
     }
+
     func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
         let yDist = a.y - b.y

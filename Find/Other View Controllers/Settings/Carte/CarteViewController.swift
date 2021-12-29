@@ -24,92 +24,91 @@
 import UIKit
 
 open class CarteViewController: UITableViewController {
-  open lazy var items = Carte.items
-  open var configureDetailViewController: ((CarteDetailViewController) -> Void)?
+    open lazy var items = Carte.items
+    open var configureDetailViewController: ((CarteDetailViewController) -> Void)?
 
-  override open func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = NSLocalizedString("Open Source Licenses", comment: "Open Source Licenses")
-    self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-  }
-
-  open override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    self.adjustLeftBarButtonItemIfNeeded()
-  }
-
-  private func adjustLeftBarButtonItemIfNeeded() {
-    guard self.navigationItem.leftBarButtonItem == nil else { return }
-
-    let isPresented = (self.presentingViewController != nil)
-    if isPresented {
-      self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-        barButtonSystemItem: .done,
-        target: self,
-        action: #selector(self.doneButtonDidTap)
-      )
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        title = NSLocalizedString("Open Source Licenses", comment: "Open Source Licenses")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-  }
 
-  @objc open dynamic func doneButtonDidTap() {
-    self.dismiss(animated: true)
-  }
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        adjustLeftBarButtonItemIfNeeded()
+    }
+
+    private func adjustLeftBarButtonItemIfNeeded() {
+        guard navigationItem.leftBarButtonItem == nil else { return }
+
+        let isPresented = (presentingViewController != nil)
+        if isPresented {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .done,
+                target: self,
+                action: #selector(doneButtonDidTap)
+            )
+        }
+    }
+
+    @objc open dynamic func doneButtonDidTap() {
+        dismiss(animated: true)
+    }
 }
-
 
 extension CarteViewController {
-  open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.items.count
-  }
+    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items.count
+    }
 
-  open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    let item = self.items[indexPath.row]
-    cell.textLabel?.text = item.displayName
-    cell.detailTextLabel?.text = item.licenseName
-    cell.accessoryType = .disclosureIndicator
-    return cell
-  }
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let item = items[indexPath.row]
+        cell.textLabel?.text = item.displayName
+        cell.detailTextLabel?.text = item.licenseName
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
 
-  open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: false)
-    let carteItem = self.items[indexPath.row]
-    let detailViewController = CarteDetailViewController(item: carteItem)
-    self.configureDetailViewController?(detailViewController)
-    self.navigationController?.pushViewController(detailViewController, animated: true)
-  }
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let carteItem = items[indexPath.row]
+        let detailViewController = CarteDetailViewController(item: carteItem)
+        configureDetailViewController?(detailViewController)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
-
 open class CarteDetailViewController: UIViewController {
-  public let carteItem: CarteItem
+    public let carteItem: CarteItem
 
-  open var textView: UITextView = {
-    let textView = UITextView()
-    textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    textView.font = UIFont.preferredFont(forTextStyle: .footnote)
-    textView.isEditable = false
-    textView.alwaysBounceVertical = true
-    textView.dataDetectorTypes = .link
-    return textView
-  }()
+    open var textView: UITextView = {
+        let textView = UITextView()
+        textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        textView.font = UIFont.preferredFont(forTextStyle: .footnote)
+        textView.isEditable = false
+        textView.alwaysBounceVertical = true
+        textView.dataDetectorTypes = .link
+        return textView
+    }()
 
-  public init(item: CarteItem) {
-    self.carteItem = item
-    super.init(nibName: nil, bundle: nil)
-    self.title = item.displayName
-    self.textView.text = item.licenseText
-  }
+    public init(item: CarteItem) {
+        carteItem = item
+        super.init(nibName: nil, bundle: nil)
+        title = item.displayName
+        textView.text = item.licenseText
+    }
   
-  public required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-  open override func viewDidLoad() {
-    self.view.backgroundColor = UIColor.white
-    self.textView.frame = self.view.bounds
-    self.textView.contentOffset = .zero
-    self.view.addSubview(self.textView)
-  }
+    override open func viewDidLoad() {
+        view.backgroundColor = UIColor.white
+        textView.frame = view.bounds
+        textView.contentOffset = .zero
+        view.addSubview(textView)
+    }
 }
 #endif

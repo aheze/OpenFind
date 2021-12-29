@@ -22,127 +22,125 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 public extension LayoutConstraint {
-    
     override var description: String {
         var description = "<"
         
         description += descriptionForObject(self)
         
-        if let firstItem = conditionalOptional(from: self.firstItem) {
+        if let firstItem = conditionalOptional(from: firstItem) {
             description += " \(descriptionForObject(firstItem))"
         }
         
-        if self.firstAttribute != .notAnAttribute {
-            description += ".\(descriptionForAttribute(self.firstAttribute))"
+        if firstAttribute != .notAnAttribute {
+            description += ".\(descriptionForAttribute(firstAttribute))"
         }
         
-        description += " \(descriptionForRelation(self.relation))"
+        description += " \(descriptionForRelation(relation))"
         
-        if let secondItem = self.secondItem {
+        if let secondItem = secondItem {
             description += " \(descriptionForObject(secondItem))"
         }
         
-        if self.secondAttribute != .notAnAttribute {
-            description += ".\(descriptionForAttribute(self.secondAttribute))"
+        if secondAttribute != .notAnAttribute {
+            description += ".\(descriptionForAttribute(secondAttribute))"
         }
         
-        if self.multiplier != 1.0 {
-            description += " * \(self.multiplier)"
+        if multiplier != 1.0 {
+            description += " * \(multiplier)"
         }
         
-        if self.secondAttribute == .notAnAttribute {
-            description += " \(self.constant)"
+        if secondAttribute == .notAnAttribute {
+            description += " \(constant)"
         } else {
-            if self.constant > 0.0 {
-                description += " + \(self.constant)"
-            } else if self.constant < 0.0 {
-                description += " - \(abs(self.constant))"
+            if constant > 0.0 {
+                description += " + \(constant)"
+            } else if constant < 0.0 {
+                description += " - \(abs(constant))"
             }
         }
         
-        if self.priority.rawValue != 1000.0 {
-            description += " ^\(self.priority)"
+        if priority.rawValue != 1000.0 {
+            description += " ^\(priority)"
         }
         
         description += ">"
         
         return description
     }
-    
 }
 
 private func descriptionForRelation(_ relation: LayoutRelation) -> String {
     switch relation {
-    case .equal:                return "=="
-    case .greaterThanOrEqual:   return ">="
-    case .lessThanOrEqual:      return "<="
-    #if swift(>=5.0)
-    @unknown default:           return "unknown"
-    #endif
+    case .equal: return "=="
+    case .greaterThanOrEqual: return ">="
+    case .lessThanOrEqual: return "<="
+#if swift(>=5.0)
+    @unknown default: return "unknown"
+#endif
     }
 }
 
 private func descriptionForAttribute(_ attribute: LayoutAttribute) -> String {
-    #if os(iOS) || os(tvOS)
-        switch attribute {
-        case .notAnAttribute:       return "notAnAttribute"
-        case .top:                  return "top"
-        case .left:                 return "left"
-        case .bottom:               return "bottom"
-        case .right:                return "right"
-        case .leading:              return "leading"
-        case .trailing:             return "trailing"
-        case .width:                return "width"
-        case .height:               return "height"
-        case .centerX:              return "centerX"
-        case .centerY:              return "centerY"
-        case .lastBaseline:         return "lastBaseline"
-        case .firstBaseline:        return "firstBaseline"
-        case .topMargin:            return "topMargin"
-        case .leftMargin:           return "leftMargin"
-        case .bottomMargin:         return "bottomMargin"
-        case .rightMargin:          return "rightMargin"
-        case .leadingMargin:        return "leadingMargin"
-        case .trailingMargin:       return "trailingMargin"
-        case .centerXWithinMargins: return "centerXWithinMargins"
-        case .centerYWithinMargins: return "centerYWithinMargins"
-        #if swift(>=5.0)
-        @unknown default:           return "unknown"
-        #endif
+#if os(iOS) || os(tvOS)
+    switch attribute {
+    case .notAnAttribute: return "notAnAttribute"
+    case .top: return "top"
+    case .left: return "left"
+    case .bottom: return "bottom"
+    case .right: return "right"
+    case .leading: return "leading"
+    case .trailing: return "trailing"
+    case .width: return "width"
+    case .height: return "height"
+    case .centerX: return "centerX"
+    case .centerY: return "centerY"
+    case .lastBaseline: return "lastBaseline"
+    case .firstBaseline: return "firstBaseline"
+    case .topMargin: return "topMargin"
+    case .leftMargin: return "leftMargin"
+    case .bottomMargin: return "bottomMargin"
+    case .rightMargin: return "rightMargin"
+    case .leadingMargin: return "leadingMargin"
+    case .trailingMargin: return "trailingMargin"
+    case .centerXWithinMargins: return "centerXWithinMargins"
+    case .centerYWithinMargins: return "centerYWithinMargins"
+#if swift(>=5.0)
+    @unknown default: return "unknown"
+#endif
     }
-    #else
-        switch attribute {
-        case .notAnAttribute:       return "notAnAttribute"
-        case .top:                  return "top"
-        case .left:                 return "left"
-        case .bottom:               return "bottom"
-        case .right:                return "right"
-        case .leading:              return "leading"
-        case .trailing:             return "trailing"
-        case .width:                return "width"
-        case .height:               return "height"
-        case .centerX:              return "centerX"
-        case .centerY:              return "centerY"
-        case .lastBaseline:         return "lastBaseline"
-        case .firstBaseline:        return "firstBaseline"
-        #if swift(>=5.0)
-        @unknown default:           return "unknown"
-        #endif
+#else
+    switch attribute {
+    case .notAnAttribute: return "notAnAttribute"
+    case .top: return "top"
+    case .left: return "left"
+    case .bottom: return "bottom"
+    case .right: return "right"
+    case .leading: return "leading"
+    case .trailing: return "trailing"
+    case .width: return "width"
+    case .height: return "height"
+    case .centerX: return "centerX"
+    case .centerY: return "centerY"
+    case .lastBaseline: return "lastBaseline"
+    case .firstBaseline: return "firstBaseline"
+#if swift(>=5.0)
+    @unknown default: return "unknown"
+#endif
     }
-    #endif
+#endif
 }
 
-private func conditionalOptional<T>(from object: Optional<T>) -> Optional<T> {
+private func conditionalOptional<T>(from object: T?) -> T? {
     return object
 }
 
-private func conditionalOptional<T>(from object: T) -> Optional<T> {
+private func conditionalOptional<T>(from object: T) -> T? {
     return Optional.some(object)
 }
 

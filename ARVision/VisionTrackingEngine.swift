@@ -9,10 +9,7 @@
 import UIKit
 import Vision
 
-
-
 class VisionTrackingEngine {
-    
     /// request more trackers
     var reportTrackerCount: ((Int) -> Void)?
     
@@ -23,17 +20,15 @@ class VisionTrackingEngine {
     var trackers = [UUID: Tracker]()
         
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
-        
-        var trackers = [UUID : Tracker]()
+        var trackers = [UUID: Tracker]()
         
         /// text observations that met the criteria, in case I need more
         var availableTextObservations = [VNRecognizedTextObservation]()
         for candidateArea in VisionConstants.highlightCandidateAreas {
             if let firstObservation = observations.first(where: {
                 $0.confidence >= VisionConstants.minimumFindConfidenceForTrackable &&
-                candidateArea.contains(CGPoint(x: $0.boundingBox.midX, y: $0.boundingBox.midY))
+                    candidateArea.contains(CGPoint(x: $0.boundingBox.midX, y: $0.boundingBox.midY))
             }) {
-                
                 /// add it to the available  text observations
                 availableTextObservations.append(firstObservation)
                 
@@ -56,7 +51,6 @@ class VisionTrackingEngine {
         if trackers.count < VisionConstants.maxTrackers {
             var index = 0
             while trackers.count < VisionConstants.maxTrackers {
-                
                 guard let textObservation = availableTextObservations[safe: index] else {
                     break
                 }
@@ -83,11 +77,11 @@ class VisionTrackingEngine {
         guard !busy, timeSinceLastTracking >= VisionConstants.debugDelay else { return }
         busy = true
         
-        var newTrackers = [UUID : Tracker]()
+        var newTrackers = [UUID: Tracker]()
         var trackingRequests = [VNRequest]()
         
         for tracker in trackers {
-            let request = VNTrackObjectRequest(detectedObjectObservation: tracker.value.objectObservation) { request, error in }
+            let request = VNTrackObjectRequest(detectedObjectObservation: tracker.value.objectObservation) { _, _ in }
             request.trackingLevel = .accurate
             trackingRequests.append(request)
         }
@@ -95,7 +89,6 @@ class VisionTrackingEngine {
         do {
             try requestHandler?.perform(trackingRequests, on: updatedImage, orientation: .up)
         } catch {
-
             busy = false
         }
         
@@ -111,10 +104,10 @@ class VisionTrackingEngine {
             }
         }
         
-        self.startTime = Date()
-        self.trackers = newTrackers
-        self.reportTrackerCount?(newTrackers.count)
-        self.busy = false
+        startTime = Date()
+        trackers = newTrackers
+        reportTrackerCount?(newTrackers.count)
+        busy = false
         
         DispatchQueue.main.async {
             completion(Array(newTrackers.values))
@@ -129,11 +122,8 @@ class VisionTrackingEngine {
             return nil
         }
         return observation
-        
     }
 }
-
-
 
 enum RoundingPrecision {
     case ones
@@ -144,8 +134,8 @@ enum RoundingPrecision {
 // Round to the specific decimal place
 func preciseRound(
     _ value: CGFloat,
-    precision: RoundingPrecision = .hundredths) -> Double
-{
+    precision: RoundingPrecision = .hundredths
+) -> Double {
     let double = Double(value)
     switch precision {
     case .ones:

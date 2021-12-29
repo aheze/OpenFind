@@ -14,8 +14,8 @@ extension PhotosViewController {
         collapseButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         collapseButton.alpha = 0
     }
-    func findPressed() {
 
+    func findPressed() {
         if indexPathsSelected.isEmpty {
             switchToFind?(photoFilterState, allPhotosToDisplay, true, hasChangedFromBefore)
         } else {

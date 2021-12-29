@@ -18,22 +18,22 @@
 
 import Realm
 
-extension Realm {
+public extension Realm {
     /**
-     Struct that describes the error codes within the Realm error domain.
-     The values can be used to catch a variety of _recoverable_ errors, especially those
-     happening when initializing a Realm instance.
+      Struct that describes the error codes within the Realm error domain.
+      The values can be used to catch a variety of _recoverable_ errors, especially those
+      happening when initializing a Realm instance.
 
-     ```swift
-     let realm: Realm?
-     do {
-         realm = try Realm()
-     } catch Realm.Error.incompatibleLockFile {
+      ```swift
+      let realm: Realm?
+      do {
+          realm = try Realm()
+      } catch Realm.Error.incompatibleLockFile {
 
-     }
-     ```
-    */
-    @frozen public struct Error {
+      }
+      ```
+     */
+    @frozen struct Error {
         public typealias Code = RLMError.Code
 
         /// Error thrown by Realm if no other specific error is returned when a realm is opened.
@@ -118,7 +118,7 @@ public func == (lhs: Error, rhs: Error) -> Bool {
 /**
  Pattern matching matching for `Realm.Error`, so that the instances can be used with Swift's
  `do { ... } catch { ... }` syntax.
-*/
+ */
 public func ~= (lhs: Realm.Error, rhs: Error) -> Bool {
     return lhs == rhs
 }

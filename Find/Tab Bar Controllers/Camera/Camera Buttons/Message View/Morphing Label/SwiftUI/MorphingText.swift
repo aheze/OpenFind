@@ -25,10 +25,10 @@ public struct MorphingText: UIViewRepresentable {
                 effect: LTMorphingEffect = .scale,
                 font: UIFont = .systemFont(ofSize: 16),
                 textColor: UIColor = .black,
-                textAlignment: NSTextAlignment = .center
-    ) {
+                textAlignment: NSTextAlignment = .center)
+    {
         self.text = text
-        self.morphingEffect = effect
+        morphingEffect = effect
         self.font = font
         self.textColor = textColor
         self.textAlignment = textAlignment
@@ -53,7 +53,6 @@ public struct MorphingText: UIViewRepresentable {
 
 @available(iOS 13.0.0, *)
 struct MorphingText_Previews: PreviewProvider {
-    
     static var previews: some View {
         PreviewWrapper()
             .previewDevice("iPhone SE")
@@ -95,7 +94,7 @@ struct MorphingText_Previews: PreviewProvider {
                     font: UIFont.systemFont(ofSize: 20),
                     textColor: .white
                 )
-                    .frame(maxWidth: 200, maxHeight: 100)
+                .frame(maxWidth: 200, maxHeight: 100)
                 
                 Text("Effect: \(LTMorphingEffect.allCases[Int(round(effectIndex))].description)").font(.title)
                 Slider(value: $effectIndex, in: 0...Double(LTMorphingEffect.allCases.count - 1))

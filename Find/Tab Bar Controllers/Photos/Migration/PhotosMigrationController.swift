@@ -6,13 +6,12 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
-import SDWebImage
 import RealmSwift
+import SDWebImage
+import UIKit
 
 class PhotosMigrationController: UIViewController {
-    
     let dispatchQueue = DispatchQueue(label: "saveImagesQueue")
     let dispatchSemaphore = DispatchSemaphore(value: 0)
     var numberCompleted = 0
@@ -23,45 +22,42 @@ class PhotosMigrationController: UIViewController {
     let realm = try! Realm()
     
     // MARK: Once completed...
+
     var completed: (() -> Void)?
     
-    
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var movePhotosLabel: UILabel!
-    @IBOutlet weak var promptLabel: UILabel!
+    @IBOutlet var movePhotosLabel: UILabel!
+    @IBOutlet var promptLabel: UILabel!
     
     var tryAgain = false
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet var confirmButton: UIButton!
     @IBAction func confirmButtonPressed(_ sender: Any) {
         getPermissionsAndWrite()
     }
     
-    
     // MARK: Error handling views
     
-    @IBOutlet weak var tapTryAgainView: UIView!
-    @IBOutlet weak var tapTryAgainHeightC: NSLayoutConstraint!
+    @IBOutlet var tapTryAgainView: UIView!
+    @IBOutlet var tapTryAgainHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var tryAgainLabel: UILabel!
-    @IBOutlet weak var manuallyMoveButton: UIButton!
+    @IBOutlet var tryAgainLabel: UILabel!
+    @IBOutlet var manuallyMoveButton: UIButton!
     @IBAction func manuallyMoveButtonPressed(_ sender: Any) {
         manualMove()
     }
     
-    
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     let scale = UIScreen.main.scale // Will be 2.0 on 6/7/8 and 3.0 on 6+/7+/8+ or later
     
-    @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var segmentIndicator: ANSegmentIndicator!
-    @IBOutlet weak var movingLabel: UILabel!
-    @IBOutlet weak var progressLabel: UILabel!
-    
+    @IBOutlet var overlayView: UIView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var segmentIndicator: ANSegmentIndicator!
+    @IBOutlet var movingLabel: UILabel!
+    @IBOutlet var progressLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +107,7 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         
         let url = folderURL.appendingPathComponent(photo.filePath)
         cell.imageView.sd_imageTransition = .fade
-        cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
+        cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize: thumbnailSize])
         
         if photo.isDeepSearched {
             cell.cacheImageView.image = UIImage(named: "CacheActive-Light")
@@ -134,7 +130,7 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = collectionView.bounds.width
-        let edgePadding =  collectionView.contentInset.left
+        let edgePadding = collectionView.contentInset.left
         let numberPerRow = CGFloat(4)
         let totalPadding = edgePadding * CGFloat(numberPerRow + 1)
         let eachCellWidth = (fullWidth - totalPadding) / numberPerRow
@@ -142,9 +138,11 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         
         return eachCellSize
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return collectionView.contentInset.left
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return collectionView.contentInset.left
     }

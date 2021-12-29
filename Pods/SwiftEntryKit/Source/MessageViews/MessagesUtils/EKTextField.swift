@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-final public class EKTextField: UIView {
-    
+public final class EKTextField: UIView {
     // MARK: - Properties
     
     static let totalHeight: CGFloat = 45
@@ -40,7 +39,8 @@ final public class EKTextField: UIView {
         textField.accessibilityIdentifier = content.accessibilityIdentifier
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -79,7 +79,7 @@ final public class EKTextField: UIView {
         textField.becomeFirstResponder()
     }
     
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         separatorView.backgroundColor = content.bottomBorderColor(for: traitCollection)
         imageView.tintColor = content.tintColor(for: traitCollection)
         textField.textColor = content.textStyle.color(for: traitCollection)

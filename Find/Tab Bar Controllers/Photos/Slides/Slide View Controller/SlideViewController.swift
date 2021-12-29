@@ -6,29 +6,30 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 /// each slide in the slides
 class SlideViewController: UIViewController {
-    
     var cameFromFind = false
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet var imageView: UIImageView!
     
     var placeholderImage: UIImage? /// placeholder from the collection view
     var resultPhoto = ResultPhoto()
     var index: Int = 0 /// index of this slide
     
     // MARK: Drawing
+
     var findingActive = false
-    @IBOutlet weak var drawingBaseView: CustomActionsView!
-    @IBOutlet weak var drawingView: UIView!
+    @IBOutlet var drawingBaseView: CustomActionsView!
+    @IBOutlet var drawingView: UIView!
     var matchToColors = [String: [HighlightColor]]()
     
     // MARK: Accessibility
+
     var showingTranscripts = false
     var previousActivatedHighlight: Component?
     
@@ -44,7 +45,7 @@ class SlideViewController: UIViewController {
         let targetSize = CGSize(width: contentView.bounds.width * scale, height: contentView.bounds.height * scale)
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
-        manager.requestImage(for: resultPhoto.findPhoto.asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (result, info) in
+        manager.requestImage(for: resultPhoto.findPhoto.asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { result, _ in
             if let photo = result {
                 self.imageView.image = photo
             }
@@ -69,4 +70,3 @@ class SlideViewController: UIViewController {
         updateHighlightFrames()
     }
 }
-

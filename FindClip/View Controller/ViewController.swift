@@ -8,20 +8,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     var updateStatusBar: (() -> Void)?
     
     // MARK: Download
-    @IBOutlet weak var downloadReferenceView: UIView!
+
+    @IBOutlet var downloadReferenceView: UIView!
     
-    @IBOutlet weak var downloadCoverView: UIView!
+    @IBOutlet var downloadCoverView: UIView!
     
     // MARK: Camera
-    @IBOutlet weak var cameraContainerView: UIView!
-    @IBOutlet weak var cameraReferenceView: UIView!
+
+    @IBOutlet var cameraContainerView: UIView!
+    @IBOutlet var cameraReferenceView: UIView!
     
     // MARK: Contraints
-    @IBOutlet weak var downloadReferenceTopC: NSLayoutConstraint!
+
+    @IBOutlet var downloadReferenceTopC: NSLayoutConstraint!
     
     lazy var cameraViewController: CameraViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -47,6 +49,7 @@ class ViewController: UIViewController {
     }
     
     // MARK: Gesture release animations
+
     var animator: UIViewPropertyAnimator? /// animate gesture endings
     
     var blurAnimator: UIViewPropertyAnimator?
@@ -76,12 +79,10 @@ class ViewController: UIViewController {
             }))
             alert.addAction(UIAlertAction(title: "No thanks", style: UIAlertAction.Style.cancel, handler: nil))
             if let popoverController = alert.popoverPresentationController {
-                popoverController.sourceView = self.view
-                popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)
+                popoverController.sourceView = view
+                popoverController.sourceRect = CGRect(x: (view.bounds.width / 2) - 40, y: view.bounds.height - 80, width: 80, height: 80)
             }
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
     }
-
 }
-

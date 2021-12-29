@@ -9,13 +9,12 @@
 import UIKit
 
 class SlideFindBar: UIView {
-    
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var findBar: FindBar!
-    @IBOutlet weak var promptBackgroundView: PromptView!
-    @IBOutlet weak var promptTextView: UITextView!
-    @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var blurViewHeightC: NSLayoutConstraint!
+    @IBOutlet var findBar: FindBar!
+    @IBOutlet var promptBackgroundView: PromptView!
+    @IBOutlet var promptTextView: UITextView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var blurViewHeightC: NSLayoutConstraint!
     
     var hasPrompt = false /// to show prompt or not
     
@@ -32,7 +31,7 @@ class SlideFindBar: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("SlideFindBar", owner: self, options: nil)
         addSubview(contentView)
-        contentView.frame = self.bounds
+        contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         promptBackgroundView.alpha = 0
@@ -42,11 +41,10 @@ class SlideFindBar: UIView {
         findBar.searchField.backgroundColor = UIColor.systemBackground
         findBar.searchField.textColor = UIColor.label
         findBar.searchField.tintColor = UIColor(named: "PhotosText")
-        findBar.searchField.attributedPlaceholder = NSAttributedString(string: typeHereToFind, attributes: [NSAttributedString.Key.foregroundColor : UIColor.label.withAlphaComponent(0.25)])
+        findBar.searchField.attributedPlaceholder = NSAttributedString(string: typeHereToFind, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label.withAlphaComponent(0.25)])
         
         promptBackgroundView.isAccessibilityElement = true
         promptBackgroundView.accessibilityLabel = "Summary"
         promptBackgroundView.accessibilityTraits = [.header, .updatesFrequently]
     }
 }
-

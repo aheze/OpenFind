@@ -21,9 +21,9 @@ public extension PagingState {
         switch self {
         case .empty:
             return nil
-        case let .scrolling(pagingItem, _, _, _, _):
+        case .scrolling(let pagingItem, _, _, _, _):
             return pagingItem
-        case let .selected(pagingItem):
+        case .selected(let pagingItem):
             return pagingItem
         }
     }
@@ -32,7 +32,7 @@ public extension PagingState {
         switch self {
         case .empty:
             return nil
-        case let .scrolling(_, upcomingPagingItem, _, _, _):
+        case .scrolling(_, let upcomingPagingItem, _, _, _):
             return upcomingPagingItem
         case .selected:
             return nil
@@ -41,7 +41,7 @@ public extension PagingState {
 
     var progress: CGFloat {
         switch self {
-        case let .scrolling(_, _, progress, _, _):
+        case .scrolling(_, _, let progress, _, _):
             return progress
         case .selected, .empty:
             return 0
@@ -50,7 +50,7 @@ public extension PagingState {
 
     var distance: CGFloat {
         switch self {
-        case let .scrolling(_, _, _, _, distance):
+        case .scrolling(_, _, _, _, let distance):
             return distance
         case .selected, .empty:
             return 0
@@ -70,11 +70,12 @@ public func == (lhs: PagingState, rhs: PagingState) -> Bool {
     switch (lhs, rhs) {
     case
         (let .scrolling(lhsCurrent, lhsUpcoming, lhsProgress, lhsOffset, lhsDistance),
-         let .scrolling(rhsCurrent, rhsUpcoming, rhsProgress, rhsOffset, rhsDistance)):
+         .scrolling(let rhsCurrent, let rhsUpcoming, let rhsProgress, let rhsOffset, let rhsDistance)):
         if lhsCurrent.isEqual(to: rhsCurrent),
-            lhsProgress == rhsProgress,
-            lhsOffset == rhsOffset,
-            lhsDistance == rhsDistance {
+           lhsProgress == rhsProgress,
+           lhsOffset == rhsOffset,
+           lhsDistance == rhsDistance
+        {
             if let lhsUpcoming = lhsUpcoming, let rhsUpcoming = rhsUpcoming, lhsUpcoming.isEqual(to: rhsUpcoming) {
                 return true
             } else if lhsUpcoming == nil, rhsUpcoming == nil {
@@ -82,7 +83,7 @@ public func == (lhs: PagingState, rhs: PagingState) -> Bool {
             }
         }
         return false
-    case let (.selected(a), .selected(b)) where a.isEqual(to: b):
+    case (.selected(let a), .selected(let b)) where a.isEqual(to: b):
         return true
     case (.empty, .empty):
         return true

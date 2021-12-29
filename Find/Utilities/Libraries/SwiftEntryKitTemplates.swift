@@ -6,18 +6,17 @@
 //  Copyright © 2020 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftEntryKit
+import UIKit
 
 enum EntryLocation {
     case top
     case middle
     case bottom
 }
+
 class SwiftEntryKitTemplates {
-    
-    func displaySEK(message: String, backgroundColor: UIColor, textColor: UIColor, location: EntryLocation = .top, duration: CGFloat = 0.7)  {
-        
+    func displaySEK(message: String, backgroundColor: UIColor, textColor: UIColor, location: EntryLocation = .top, duration: CGFloat = 0.7) {
         var attributes = EKAttributes.topFloat
         
         switch location {
@@ -42,16 +41,15 @@ class SwiftEntryKitTemplates {
         subTitle.text = message
         subTitle.textColor = textColor
         contentView.addSubview(subTitle)
-        subTitle.snp.makeConstraints { (make) in
+        subTitle.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16))
         }
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
-    
 }
 
-struct SEKColor {
-    struct Gray {
+enum SEKColor {
+    enum Gray {
         static let a800 = EKColor(rgb: 0x424242)
         static let light = EKColor(red: 230, green: 230, blue: 230)
     }

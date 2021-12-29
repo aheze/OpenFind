@@ -38,14 +38,13 @@ import UIKit
 public typealias StyleGroup = StyleXML
 
 public class StyleXML: StyleProtocol {
-    
     // The following attributes are ignored for StyleXML because are read from the sub styles.
-    public var attributes: [NSAttributedString.Key : Any] = [:]
-    public var fontData: FontData? = nil
-    public var textTransforms: [TextTransform]? = nil
+    public var attributes: [NSAttributedString.Key: Any] = [:]
+    public var fontData: FontData?
+    public var textTransforms: [TextTransform]?
     
     /// Ordered dictionary of the styles inside the group
-    public private(set) var styles: [String : StyleProtocol]
+    public private(set) var styles: [String: StyleProtocol]
 
     /// Style to apply as base. If set, before parsing the string style is applied (add/set)
     /// to the existing source.
@@ -57,7 +56,7 @@ public class StyleXML: StyleProtocol {
     
     /// Image provider is called to provide custom image when `StyleXML` encounter a `img` tag image.
     /// If not implemented the image is automatically searched inside any bundled `xcassets`.
-    public var imageProvider: ((_ name: String, _ attributes: [String: String]?) -> Image?)? = nil
+    public var imageProvider: ((_ name: String, _ attributes: [String: String]?) -> Image?)?
     
     /// Dynamic attributes resolver.
     /// By default the `StandardXMLAttributesResolver` instance is used.
@@ -74,7 +73,7 @@ public class StyleXML: StyleProtocol {
     ///   - styles: styles dictionary used to map your xml tags to styles definitions.
     public init(base: StyleProtocol? = nil, _ styles: [String: StyleProtocol] = [:]) {
         self.styles = styles
-        self.baseStyle = base
+        baseStyle = base
     }
     
     // MARK: - Public Methods
@@ -86,9 +85,8 @@ public class StyleXML: StyleProtocol {
     ///   - style: style you want to add.
     ///   - name: unique name of the style.
     public func add(style: Style, as name: String) {
-        return self.styles[name] = style
+        return styles[name] = style
     }
-    
     
     /// Remove the style with given name.
     ///
@@ -99,7 +97,7 @@ public class StyleXML: StyleProtocol {
         return styles.removeValue(forKey: name)
     }
     
-    //MARK: - Rendering Methods
+    // MARK: - Rendering Methods
     
     /// Render given source with styles defined inside the receiver.
     /// Styles are added as sum to any existing
@@ -110,7 +108,7 @@ public class StyleXML: StyleProtocol {
     /// - Returns: attributed string
     public func set(to source: String, range: NSRange?) -> AttributedString {
         let attributed = NSMutableAttributedString(string: source)
-        return self.apply(to: attributed, adding: true, range: range)
+        return apply(to: attributed, adding: true, range: range)
     }
     
     /// Render given source string by appending parsed styles to the existing attributed string.
@@ -120,7 +118,7 @@ public class StyleXML: StyleProtocol {
     ///   - range: range of parse.
     /// - Returns: same istance of `source` with applied styles.
     public func add(to source: AttributedString, range: NSRange?) -> AttributedString {
-        return self.apply(to: source, adding: true, range: range)
+        return apply(to: source, adding: true, range: range)
     }
     
     /// Render given source string by replacing existing styles to parsed tags.
@@ -130,7 +128,7 @@ public class StyleXML: StyleProtocol {
     ///   - range: range of parse.
     /// - Returns: same istance of `source` with applied styles.
     public func set(to source: AttributedString, range: NSRange?) -> AttributedString {
-        return self.apply(to: source, adding: false, range: range)
+        return apply(to: source, adding: false, range: range)
     }
     
     /// Parse tags and render the attributed string with the styles defined into the receiver.
@@ -145,9 +143,7 @@ public class StyleXML: StyleProtocol {
             let xmlParser = XMLStringBuilder(styleXML: self, string: attrStr.string)
             return try xmlParser.parse()
         } catch {
-
             return attrStr
         }
     }
-    
 }

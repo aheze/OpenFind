@@ -20,9 +20,8 @@ extension CameraViewController {
     }
     
     func drawAllTranscripts(focusedTranscript: Component? = nil, show: Bool) {
-        
         if show {
-            for subView in self.drawingView.subviews {
+            for subView in drawingView.subviews {
                 subView.isHidden = true
             }
         }
@@ -41,7 +40,6 @@ extension CameraViewController {
         }
     }
     
-    
     /// toggling
     func showTranscripts(focusedTranscript: Component? = nil) {
         DispatchQueue.main.async {
@@ -56,7 +54,7 @@ extension CameraViewController {
             
             if
                 let focusedTranscript = focusedTranscript,
-                let baseView =  focusedTranscript.baseView
+                let baseView = focusedTranscript.baseView
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     UIAccessibility.post(notification: .layoutChanged, argument: baseView)
@@ -64,6 +62,7 @@ extension CameraViewController {
             }
         }
     }
+
     func showHighlights(currentTranscript: Component? = nil) {
         DispatchQueue.main.async {
             for subView in self.drawingView.subviews {
@@ -85,11 +84,9 @@ extension CameraViewController {
                 self.previousActivatedHighlight = nil
                 
             } else if currentTranscript != nil {
-                
                 var found = false
                 for component in self.currentComponents {
                     if component.transcriptComponent == currentTranscript {
-                        
                         if let baseView = component.baseView {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                                 UIAccessibility.post(notification: .layoutChanged, argument: baseView)
@@ -108,7 +105,6 @@ extension CameraViewController {
             }
         }
     }
-    
     
     func drawTranscript(component: Component, show: Bool) {
         DispatchQueue.main.async {
@@ -164,12 +160,10 @@ extension CameraViewController {
             let wPercent = Int(100 * (component.width / drawingBounds.width))
             let hPercent = Int(100 * (component.height / drawingBounds.height))
             
-            
             let locationRawString = "\(xPercent) x, \(yPercent) y, \(wPercent) width, \(hPercent) height."
             let locationString = AccessibilityText(text: locationRawString, isRaised: false)
             
             newView.isAccessibilityElement = true
-            
             
 //            let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
 //            newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
@@ -216,7 +210,7 @@ extension CameraViewController {
     }
     
     func updateAccessibilityHints() {
-        if self.showingTranscripts {
+        if showingTranscripts {
             for highlight in currentComponents {
                 highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
             }

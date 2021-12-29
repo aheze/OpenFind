@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var searchContainerView: UIView!
+    @IBOutlet var searchContainerView: UIView!
     
     var searchViewModel = SearchViewModel()
     var listsViewModel = ListsViewModel()
@@ -25,11 +25,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
         _ = searchViewController
-        
-        
     }
-    
 }
-

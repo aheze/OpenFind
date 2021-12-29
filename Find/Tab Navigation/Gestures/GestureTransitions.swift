@@ -19,7 +19,6 @@ extension ViewController {
             let adjustedValue = -pow(-safeTotalValue, FindConstants.rubberBandingPower)
             ViewControllerState.currentVC?.view.frame.origin.x = adjustedValue
         } else if gestures.direction == .right { /// in Photos, hitting left edge
-            
             let safeTotalValue = max(0, totalValue)
             let adjustedValue = pow(safeTotalValue, FindConstants.rubberBandingPower)
             ViewControllerState.currentVC?.view.frame.origin.x = adjustedValue
@@ -27,7 +26,6 @@ extension ViewController {
     }
     
     func finishMoveRubberBand(totalValue: CGFloat, velocity: CGFloat) {
-        
         let maximumTotalValue = min(abs(totalValue), 200)
         let adjustedValue = pow(maximumTotalValue, FindConstants.rubberBandingPower)
         
@@ -48,22 +46,21 @@ extension ViewController {
         animator?.addAnimations {
             ViewControllerState.currentVC?.view.frame.origin.x = 0
         }
-        animator?.addCompletion({ _ in
+        animator?.addCompletion { _ in
             self.gestures.direction = nil
             self.gestures.isAnimating = false
             self.gestures.totalTranslation = 0
             self.gestures.isRubberBanding = false
             self.gestures.gestureSavedOffset = 0
-        })
+        }
         animator?.startAnimation()
     }
     
     func startMoveVC(from fromVC: UIViewController, to toVC: UIViewController, direction: Direction, toOverlay: Bool = true) {
-
         camera.focusGestureRecognizer?.isEnabled = false
         camera.focusGestureRecognizer?.isEnabled = true
         
-        self.addChild(toVC)
+        addChild(toVC)
         containerView.addSubview(toVC.view)
         toVC.view.frame = containerView.bounds
         toVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -205,8 +202,6 @@ extension ViewController {
     }
     
     func finishMoveVC(currentX: CGFloat, velocity: CGFloat, from fromVC: UIViewController, to toVC: UIViewController, instantly: Bool = false) {
-
-
         animator = nil
         
         let decelerationRate = UIScrollView.DecelerationRate.normal.rawValue
@@ -422,9 +417,7 @@ extension ViewController {
                 
                 self.blurAnimator?.isReversed = false
                 
-
             } else {
-
                 toVC.willMove(toParent: nil)
                 toVC.view.removeFromSuperview()
                 toVC.removeFromParent()
@@ -438,7 +431,7 @@ extension ViewController {
             self.gestures.totalTranslation = 0
             self.gestures.gestureSavedOffset = 0
             self.gestures.completedMove = false
-            if let currentVC =  ViewControllerState.currentVC {
+            if let currentVC = ViewControllerState.currentVC {
                 self.notifyCompletion(finishedAtVC: currentVC)
             }
         }
@@ -473,15 +466,14 @@ extension ViewController {
             animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
             
             animator?.addAnimations(block)
-            animator?.addCompletion({ (position) in
+            animator?.addCompletion { _ in
                 completion()
-            })
+            }
             gestures.isAnimating = true
             
             animator?.startAnimation()
             blurAnimator?.continueAnimation(withTimingParameters: timingParameters, durationFactor: 1)
         }
-
     }
     
     /// Distance traveled after decelerating to zero velocity at a constant rate.

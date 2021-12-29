@@ -9,7 +9,6 @@
 import UIKit
 
 extension ViewController {
-    
     func checkIfHistoryImagesExist() {
         do {
             let fileURLs = try FileManager.default.contentsOfDirectory(at: globalUrl, includingPropertiesForKeys: nil)
@@ -18,18 +17,16 @@ extension ViewController {
                 photoObjects = realm.objects(HistoryModel.self)
                 
                 var photoArray = [HistoryModel]()
-                photoObjects?.forEach({ (photo) in
+                photoObjects?.forEach { photo in
                     photoArray.append(photo)
-                })
+                }
                 
                 photos.navController.viewController.migrationNeeded = true
                 photos.navController.viewController.photosToMigrate = photoArray
                 photos.navController.viewController.folderURL = globalUrl
             }
             
-        } catch {
-
-        }
+        } catch {}
     }
     
     func checkForOldUserDefaults() {
@@ -44,9 +41,9 @@ extension ViewController {
 }
 
 extension FileManager {
-    func urls(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true ) -> [URL]? {
+    func urls(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true) -> [URL]? {
         let documentsURL = urls(for: directory, in: .userDomainMask)[0]
-        let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [] )
+        let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [])
         return fileURLs
     }
 }

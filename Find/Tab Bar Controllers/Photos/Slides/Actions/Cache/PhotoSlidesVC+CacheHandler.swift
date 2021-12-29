@@ -17,7 +17,6 @@ extension PhotoSlidesViewController {
         
         if let cachingPhoto = temporaryCachingPhoto {
             if !cachingPhoto.contents.isEmpty { /// finished already
-
                 CachingFinder.saveToDisk(photo: currentPhoto, contentsToSave: cachingPhoto.contents)
                 
                 updateActions?(.shouldNotCache)
@@ -53,7 +52,6 @@ extension PhotoSlidesViewController {
                         self.finishedCaching()
                     }
                 }
-                
             }
             CachingFinder.reportProgress = { [weak self] progress in
                 guard let self = self else { return }
@@ -81,11 +79,10 @@ extension PhotoSlidesViewController {
             CachingFinder.load(with: [currentPhoto], customWords: customFindArray)
             CachingFinder.startFinding()
             
-            
             messageView.showMessage("0", dismissible: false, duration: -1)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 if let cachingPhoto = self.temporaryCachingPhoto, cachingPhoto.cachePressed {
-                    if 0.25 > self.currentProgress {
+                    if self.currentProgress < 0.25 {
                         self.messageView.showMessage("25", dismissible: false, duration: -1)
                     }
                 }
@@ -98,12 +95,10 @@ extension PhotoSlidesViewController {
             let currentPhoto = self.resultPhotos[self.currentIndex].findPhoto
             
             if let tempPhoto = self.temporaryCachingPhoto {
-                
                 if let unsavedContents = CachingFinder.unsavedContents {
                     tempPhoto.contents = unsavedContents
                     
                     if tempPhoto.cachePressed {
-                        
                         CachingFinder.saveToDisk(photo: currentPhoto, contentsToSave: unsavedContents)
                         
                         self.pageViewController.dataSource = self
@@ -123,9 +118,7 @@ extension PhotoSlidesViewController {
                         if photoExists == false {
                             self.removeCurrentSlide()
                         }
-                        
                     }
-                    
                 }
             }
         }

@@ -9,16 +9,13 @@
 import Foundation
 
 public extension EKAttributes {
-    
     /** Describes the user interaction events that are triggered as the user taps the entry / screen */
     struct UserInteraction {
-        
         /** Code that is executed when the user taps the entry / screen */
-        public typealias Action = () -> ()
+        public typealias Action = () -> Void
         
         /** The default event that happens as the user interacts */
         public enum Default {
-            
             /** Absorbs touches. The entry / screen does nothing (Swallows the touch) */
             case absorbTouches
             

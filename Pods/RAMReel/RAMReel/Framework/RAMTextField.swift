@@ -17,17 +17,16 @@ import UIKit
  Textfield with a line in the bottom
  */
 open class RAMTextField: UITextField {
-    
     /**
      Overriding UIView's drawRect method to add line in the bottom of the Text Field
      
      - parameter rect: Rect that should be updated. This override ignores this parameter and redraws all text field
      */
     override open func draw(_ rect: CGRect) {
-        let rect = self.bounds
+        let rect = bounds
         let ctx = UIGraphicsGetCurrentContext()
         
-        let lineColor = self.tintColor.withAlphaComponent(0.3)
+        let lineColor = tintColor.withAlphaComponent(0.3)
         lineColor.set()
         
         ctx?.setLineWidth(1)
@@ -36,24 +35,22 @@ open class RAMTextField: UITextField {
         
 //        var m = CGAffineTransform.identity
 //        CGPathMoveToPoint(path, &m, 0, rect.height)
-      path.move(to: CGPoint(x: 0, y: rect.height))
-      path.addLine(to: CGPoint(x: rect.width, y: rect.height))
+        path.move(to: CGPoint(x: 0, y: rect.height))
+        path.addLine(to: CGPoint(x: rect.width, y: rect.height))
 //        CGPathAddLineToPoint(path, &m, rect.width, rect.height)
       
         ctx?.addPath(path)
         ctx?.strokePath()
     }
-    
 }
 
 // MARK: - UITextField extensions
 
 extension UITextField {
-    
     /**
      Overriding `UITextField` `tintColor` property to make it affect close image tint color.
      */
-    open override var tintColor: UIColor! {
+    override open var tintColor: UIColor! {
         get {
             return super.tintColor
         }
@@ -68,20 +65,18 @@ extension UITextField {
                 }
                 
                 let states: [UIControl.State] = [.highlighted]
-                states.forEach { state -> Void in
+                states.forEach { state in
                     let image = button.image(for: state)?.tintedImage(self.tintColor)
                     button.setImage(image, for: state)
                 }
             }
         }
     }
-    
 }
 
 // MARK: - UIImage extensions
 
 private extension UIImage {
-    
     /**
      Create new image by applying a tint.
      
@@ -90,9 +85,9 @@ private extension UIImage {
     func tintedImage(_ color: UIColor) -> UIImage {
         let size = self.size
         
-        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
         let context = UIGraphicsGetCurrentContext()
-        self.draw(at: CGPoint.zero, blendMode: CGBlendMode.normal, alpha: 1.0)
+        draw(at: CGPoint.zero, blendMode: CGBlendMode.normal, alpha: 1.0)
         
         context?.setFillColor(color.cgColor)
         context?.setBlendMode(CGBlendMode.sourceIn)
@@ -102,12 +97,12 @@ private extension UIImage {
             x: CGPoint.zero.x,
             y: CGPoint.zero.y,
             width: size.width,
-            height: size.height)
+            height: size.height
+        )
         UIGraphicsGetCurrentContext()?.fill(rect)
         let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         return tintedImage ?? self
     }
-    
 }

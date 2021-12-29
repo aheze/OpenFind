@@ -72,18 +72,14 @@ public extension PagingViewControllerDelegate {
         startingViewController _: UIViewController,
         destinationViewController _: UIViewController?,
         progress _: CGFloat
-    ) {
-        return
-    }
+    ) {}
 
     func pagingViewController(
         _: PagingViewController,
         willScrollToItem _: PagingItem,
         startingViewController _: UIViewController,
         destinationViewController _: UIViewController
-    ) {
-        return
-    }
+    ) {}
 
     func pagingViewController(
         _: PagingViewController,
@@ -91,14 +87,10 @@ public extension PagingViewControllerDelegate {
         startingViewController _: UIViewController?,
         destinationViewController _: UIViewController,
         transitionSuccessful _: Bool
-    ) {
-        return
-    }
+    ) {}
 
     func pagingViewController(
         _: PagingViewController,
         didSelectItem _: PagingItem
-    ) {
-        return
-    }
+    ) {}
 }

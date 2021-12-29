@@ -112,10 +112,10 @@ import Realm
     }
 
     /// Returns the first object in the linking objects, or `nil` if the linking objects are empty.
-    public var first: Element? { return unsafeBitCast(rlmResults.firstObject(), to: Optional<Element>.self) }
+    public var first: Element? { return unsafeBitCast(rlmResults.firstObject(), to: Element?.self) }
 
     /// Returns the last object in the linking objects, or `nil` if the linking objects are empty.
-    public var last: Element? { return unsafeBitCast(rlmResults.lastObject(), to: Optional<Element>.self) }
+    public var last: Element? { return unsafeBitCast(rlmResults.lastObject(), to: Element?.self) }
 
     /**
      Returns an array containing the objects in the linking objects at the indexes specified by a given index set.
@@ -205,8 +205,9 @@ import Realm
      - parameter sortDescriptors: A sequence of `SortDescriptor`s to sort by.
      */
     public func sorted<S: Sequence>(by sortDescriptors: S) -> Results<Element>
-        where S.Iterator.Element == SortDescriptor {
-            return Results(rlmResults.sortedResults(using: sortDescriptors.map { $0.rlmSortDescriptorValue }))
+        where S.Iterator.Element == SortDescriptor
+    {
+        return Results(rlmResults.sortedResults(using: sortDescriptors.map { $0.rlmSortDescriptorValue }))
     }
 
     // MARK: Aggregate Operations
@@ -328,7 +329,8 @@ import Realm
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
     public func observe(on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken {
+                        _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
     }
 
@@ -465,7 +467,8 @@ import Realm
      */
     public func observe(keyPaths: [String]? = nil,
                         on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken {
+                        _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths, queue: queue)
     }
 
@@ -600,14 +603,15 @@ import Realm
      */
     public func observe<T: ObjectBase>(keyPaths: [PartialKeyPath<T>],
                                        on queue: DispatchQueue? = nil,
-                                       _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken {
+                                       _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths.map(_name(for:)), queue: queue)
     }
 
     // MARK: Frozen Objects
 
     /// Returns if this collection is frozen.
-    public var isFrozen: Bool { return self.rlmResults.isFrozen }
+    public var isFrozen: Bool { return rlmResults.isFrozen }
 
     /**
      Returns a frozen (immutable) snapshot of this collection.
@@ -627,11 +631,11 @@ import Realm
     }
 
     /**
-     Returns a live version of this frozen collection.
+      Returns a live version of this frozen collection.
 
-     This method resolves a reference to a live copy of the same frozen collection.
-     If called on a live collection, will return itself.
-    */
+      This method resolves a reference to a live copy of the same frozen collection.
+      If called on a live collection, will return itself.
+     */
     public func thaw() -> LinkingObjects<Element>? {
         return LinkingObjects(propertyName: propertyName, handle: handle?.thaw())
     }
@@ -642,9 +646,10 @@ import Realm
         self.propertyName = propertyName
         self.handle = handle
     }
+
     internal init(objc: RLMResults<AnyObject>) {
-        self.propertyName = ""
-        self.handle = RLMLinkingObjectsHandle(linkingObjects: objc)
+        propertyName = ""
+        handle = RLMLinkingObjectsHandle(linkingObjects: objc)
     }
 
     internal var rlmResults: RLMResults<AnyObject> {
@@ -676,18 +681,19 @@ extension LinkingObjects: RealmCollection {
     public var endIndex: Int { return count }
 
     public func index(after: Int) -> Int {
-      return after + 1
+        return after + 1
     }
 
     public func index(before: Int) -> Int {
-      return before - 1
+        return before - 1
     }
 
     /// :nodoc:
     public func _observe(_ keyPaths: [String]?,
                          _ queue: DispatchQueue?,
                          _ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void)
-        -> NotificationToken {
+        -> NotificationToken
+    {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), keyPaths: keyPaths, queue: queue)
     }
 }

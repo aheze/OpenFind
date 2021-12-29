@@ -11,6 +11,7 @@ extension CameraViewController: UIGestureRecognizerDelegate {
     func setupGestures() {
         focusGestureRecognizer.delegate = self
     }
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == focusGestureRecognizer {
             return true

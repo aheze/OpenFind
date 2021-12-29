@@ -9,12 +9,10 @@ import UIKit
 
 extension ViewController {
     func transition(to toVC: UIViewController) {
-        
         /// gesture had started
         if let originalToVC = ViewControllerState.newVC {
-            
             /// finish quickly
-            if (originalToVC >!< toVC) {
+            if originalToVC >!< toVC {
                 if !gestures.isAnimating {
                     let position: CGFloat
                     
@@ -34,7 +32,7 @@ extension ViewController {
                     panGestureRecognizer.setTranslation(.zero, in: containerView)
                 }
                 
-                ///instant switch (pressed icon other than gesture's 2)
+                /// instant switch (pressed icon other than gesture's 2)
             } else if let currentVC = ViewControllerState.currentVC {
                 addChild(toVC, in: containerView)
                 removeChild(currentVC)
@@ -62,10 +60,10 @@ extension ViewController {
                         self.tabBarView.listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)()
                         self.tabBarView.photosIcon.makeActiveState()()
                     }
-                    self.tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
-                    self.tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     
-                    let completion = { }
+                    let completion = {}
                     
                     shadeView.backgroundColor = UIColor.systemBackground
                     shadeView.alpha = 1
@@ -85,16 +83,16 @@ extension ViewController {
                         self.tabBarView.listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)()
                         self.tabBarView.cameraIcon.makeActiveState()()
                     }
-                    self.tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
-                    self.tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     
                     let completion: (() -> Void) = {
                         self.tabBarView.hideRealShutter?(false)
                         self.tabBarView.cameraContainerView.alpha = 0
                     }
                     
-                    self.shadeView.alpha = 0
-                    self.blurView.effect = nil
+                    shadeView.alpha = 0
+                    blurView.effect = nil
                     tabBarView.shadeView.alpha = 1
                     tabBarView.blurView.effect = nil
                     tabBarView.blurBackgroundView.alpha = 0
@@ -111,10 +109,10 @@ extension ViewController {
                         self.tabBarView.cameraIcon.makeNormalState()()
                         self.tabBarView.listsIcon.makeActiveState()()
                     }
-                    self.tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
-                    self.tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     
-                    let completion = { }
+                    let completion = {}
                     
                     shadeView.backgroundColor = UIColor.secondarySystemBackground
                     shadeView.alpha = 1
@@ -136,17 +134,16 @@ extension ViewController {
             }
             
         } else { /// normal button press
-            
             if let currentVC = ViewControllerState.currentVC {
                 if gestures.isRubberBanding {
                     panGestureRecognizer.isEnabled = false
                     panGestureRecognizer.isEnabled = true
                     panGestureRecognizer.setTranslation(.zero, in: containerView)
-                    self.gestures.direction = nil
-                    self.gestures.isAnimating = false
-                    self.gestures.totalTranslation = 0
-                    self.gestures.isRubberBanding = false
-                    self.gestures.gestureSavedOffset = 0
+                    gestures.direction = nil
+                    gestures.isAnimating = false
+                    gestures.totalTranslation = 0
+                    gestures.isRubberBanding = false
+                    gestures.gestureSavedOffset = 0
                 }
                 
                 addChild(toVC, in: containerView)

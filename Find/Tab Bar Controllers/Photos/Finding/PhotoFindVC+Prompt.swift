@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import SwiftRichString
+import UIKit
 
 extension PhotoFindViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
@@ -30,6 +30,7 @@ struct PromptStringAttributes {
     var range: NSRange
     var color: UIColor
 }
+
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilterState: PhotoFilterState, howManyPhotos: Int, isAllPhotos: Bool, announce: Bool = true) {
         continueButtonVisible = false
@@ -42,7 +43,7 @@ extension PhotoFindViewController {
         var combinedPromptString = ""
         
         if photoFilterState.starSelected || photoFilterState.cacheSelected {
-            if photoFilterState.starSelected && photoFilterState.cacheSelected {
+            if photoFilterState.starSelected, photoFilterState.cacheSelected {
                 filter = "starred + cached "
             } else if photoFilterState.starSelected {
                 filter = "starred "
@@ -101,7 +102,6 @@ extension PhotoFindViewController {
         promptView.accessibilityValue = combinedPromptString
     }
     
-    
     func setPromptToHowManyCacheResults(howMany: Int) {
         continueButtonVisible = true
         
@@ -139,6 +139,7 @@ extension PhotoFindViewController {
         let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard, or double-tap Summary label " + toFindFromPhotos, isRaised: false)
         postAnnouncement([summaryTitle, summaryString])
     }
+
     func setPromptToHowManyFastFound(howMany: Int) { /// how many finished finding
         continueButtonVisible = false
         
@@ -158,7 +159,6 @@ extension PhotoFindViewController {
             ? "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))..."
             : "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
         
-        
         if howMany % 15 == 0 {
             let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
             let summaryString = AccessibilityText(text: plainText, isRaised: false)
@@ -166,8 +166,8 @@ extension PhotoFindViewController {
         }
         
         promptTextView.attributedText = attributedText
-        
     }
+
     /// Finished searching cache and uncached photos
     func setPromptToFinishedFastFinding(howMany: Int) {
         continueButtonVisible = false
@@ -203,11 +203,6 @@ extension PhotoFindViewController {
     func postAnnouncement(_ accessibilityText: [AccessibilityText]) {
         if selfPresented?() ?? false {
             UIAccessibility.postAnnouncement(accessibilityText)
-        } else {
-
-        }
+        } else {}
     }
-    
 }
-
-

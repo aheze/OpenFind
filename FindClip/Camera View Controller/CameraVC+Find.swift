@@ -18,11 +18,8 @@ class Component: NSObject {
     var baseView: UIView?
 }
 
-
 extension CameraViewController {
-    
     func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil) {
-        
         /// busy finding
         busyFastFinding = true
         
@@ -40,7 +37,6 @@ extension CameraViewController {
                 self.pixelBufferSize = CGSize(width: width, height: height)
             }
             
-            
             var customFindArray = [String]()
             customFindArray.append(self.findText)
             customFindArray.append(self.findText.lowercased())
@@ -56,24 +52,21 @@ extension CameraViewController {
                 let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
                 do {
                     try imageRequestHandler.perform([request])
-                } catch let error {
+                } catch {
                     self.busyFastFinding = false
-
                 }
             } else if let cgImage = cgImage {
                 let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
                 do {
                     try imageRequestHandler.perform([request])
-                } catch let error {
+                } catch {
                     self.busyFastFinding = false
-
                 }
             }
         }
     }
     
     func getConvertedRect(boundingBox: CGRect, inImage imageSize: CGSize, containedIn containerSize: CGSize) -> CGRect {
-        
         let rectOfImage: CGRect
         
         let imageAspect = imageSize.width / imageSize.height
@@ -91,10 +84,10 @@ extension CameraViewController {
         }
         
         let newOriginBoundingBox = CGRect(
-        x: boundingBox.origin.x,
-        y: 1 - boundingBox.origin.y - boundingBox.height,
-        width: boundingBox.width,
-        height: boundingBox.height
+            x: boundingBox.origin.x,
+            y: 1 - boundingBox.origin.y - boundingBox.height,
+            width: boundingBox.width,
+            height: boundingBox.height
         )
         
         var convertedRect = VNImageRectForNormalizedRect(newOriginBoundingBox, Int(rectOfImage.width), Int(rectOfImage.height))
@@ -106,9 +99,9 @@ extension CameraViewController {
         return convertedRect
     }
 }
+
 extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
 }
-

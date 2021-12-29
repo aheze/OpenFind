@@ -36,6 +36,7 @@ open class PagingView: UIView {
         super.init(frame: .zero)
     }
 
+    @available(*, unavailable)
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -59,12 +60,12 @@ open class PagingView: UIView {
         pageView.translatesAutoresizingMaskIntoConstraints = false
 
         let metrics = [
-            "height": options.menuHeight,
+            "height": options.menuHeight
         ]
 
         let views = [
             "collectionView": collectionView,
-            "pageView": pageView,
+            "pageView": pageView
         ]
 
         let formatOptions = NSLayoutConstraint.FormatOptions()

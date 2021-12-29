@@ -6,23 +6,21 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
-import SnapKit
 import RealmSwift
+import SnapKit
+import UIKit
 
 extension PhotosViewController {
     func loadImages(completion: @escaping (([FindPhoto], [Month]) -> Void)) {
-        
         checkTutorial()
         
         if let photos = allPhotos {
-            
             var totalMonths = [Month]()
             var mutableMonths = [MutableMonth]()
             
             var editableModels = [EditableHistoryModel]()
-            if let photoObjects = self.photoObjects {
+            if let photoObjects = photoObjects {
                 for object in photoObjects {
                     let editableModel = EditableHistoryModel()
                     editableModel.assetIdentifier = object.assetIdentifier
@@ -45,7 +43,7 @@ extension PhotosViewController {
             }
             
             DispatchQueue.global(qos: .userInitiated).async {
-                photos.enumerateObjects { (asset, index, stop) in
+                photos.enumerateObjects { asset, _, _ in
                     
                     var matchingRealmPhoto: EditableHistoryModel?
                     
@@ -63,7 +61,7 @@ extension PhotosViewController {
                     findPhoto.asset = asset
                     
                     if let photoDateCreated = asset.creationDate {
-                        let sameMonths = mutableMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
+                        let sameMonths = mutableMonths.filter { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) }
                         if let firstOfSameMonth = sameMonths.first {
                             firstOfSameMonth.photos.append(findPhoto)
                         } else {
@@ -75,7 +73,6 @@ extension PhotosViewController {
                     }
                 }
                 DispatchQueue.main.async {
-                    
                     var allPhotosToDisplay = [FindPhoto]()
                     for mutableMonth in mutableMonths {
                         for photo in mutableMonth.photos {
@@ -89,8 +86,8 @@ extension PhotosViewController {
                 }
             }
         }
-        
     }
+
     func fetchAssets() {
         let status: PHAuthorizationStatus
         if #available(iOS 14, *) {
@@ -123,7 +120,7 @@ extension PhotosViewController {
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
             
-            loadImages { (allPhotos, allMonths) in
+            loadImages { allPhotos, allMonths in
                 self.findButton.isEnabled = true
                 self.selectButton.isEnabled = true
                 
@@ -136,12 +133,11 @@ extension PhotosViewController {
                 
                 self.startObservingChanges()
             }
-            
         }
     }
     
     func fadeCollectionView(_ shouldFade: Bool, instantly: Bool) {
-        let block: (() -> Void)
+        let block: () -> Void
         var completion: (() -> Void)?
         
         if shouldFade {
@@ -174,13 +170,12 @@ extension PhotosViewController {
     }
     
     func showPermissionView() {
-        
         activityIndicator?.isHidden = true
         collectionView.alpha = 0
         
         let permissionView = PhotoPermissionView()
         view.addSubview(permissionView)
-        permissionView.snp.makeConstraints { (make) in
+        permissionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
@@ -205,7 +200,3 @@ extension PhotosViewController {
         }
     }
 }
-
-
-
-

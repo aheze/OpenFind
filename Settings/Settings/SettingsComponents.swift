@@ -12,7 +12,6 @@ struct Label: View {
     var body: some View {
         Text(text)
             .foregroundColor(.white)
-        
     }
 }
 
@@ -24,6 +23,7 @@ struct VerbatimLabel: View {
             .lineLimit(1)
     }
 }
+
 /// Header for each section
 struct SectionHeaderView: View {
     var text: LocalizedStringKey
@@ -35,6 +35,7 @@ struct SectionHeaderView: View {
             .padding(.top, 6)
     }
 }
+
 struct HeaderView: View {
     var text: LocalizedStringKey
     var body: some View {
@@ -43,11 +44,9 @@ struct HeaderView: View {
     }
 }
 
-
 struct HeaderViewWithRightText: View {
     var text: LocalizedStringKey
     var body: some View {
-        
         HStack {
             Text(text)
                 .foregroundColor(.white)
@@ -58,7 +57,6 @@ struct HeaderViewWithRightText: View {
             Text(":)")
                 .foregroundColor(.white)
                 .font(.headline)
-            
         }
         .header(text)
     }
@@ -79,6 +77,7 @@ struct Line: View {
             .frame(height: 1)
     }
 }
+
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
@@ -105,5 +104,4 @@ extension String {
     static let customMediumBlue = "2E8DFF"
     static let customLightPurple = "B77AFF"
     static let customPink = "FF779F"
-    
 }

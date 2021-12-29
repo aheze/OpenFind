@@ -6,19 +6,16 @@
 //  Copyright © 2019 Andrew. All rights reserved.
 //
 
-import VideoToolbox
-import UIKit
-import SwiftUI
 import SnapKit
+import SwiftUI
+import UIKit
+import VideoToolbox
 
 var screenBounds: CGRect {
-    get {
-        return UIScreen.main.bounds
-    }
+    return UIScreen.main.bounds
 }
 
 extension CVPixelBuffer {
-    
     /// Returns a Core Graphics image from the pixel buffer's current contents.
     func toCGImage() -> CGImage? {
         var cgImage: CGImage?
@@ -32,7 +29,8 @@ extension URL {
         let fileManager = FileManager.default
         // Get document directory for device, this should succeed
         if let documentDirectory = fileManager.urls(for: .documentDirectory,
-                                                    in: .userDomainMask).first {
+                                                    in: .userDomainMask).first
+        {
             // Construct a URL with desired folder name
             let folderURL = documentDirectory.appendingPathComponent(folderName)
             // If folder URL does not exist, create it
@@ -55,20 +53,19 @@ extension URL {
     }
 }
 
-extension NSLayoutConstraint {
-//debug constraints
-    override public var description: String {
+public extension NSLayoutConstraint {
+    // debug constraints
+    override var description: String {
         let id = identifier ?? ""
-        return "id: \(id), constant: \(constant)" //you may print whatever you want here
+        return "id: \(id), constant: \(constant)" // you may print whatever you want here
     }
 }
-class ReceiveTouchView: UIView {
-    
-}
+
+class ReceiveTouchView: UIView {}
+
 class passthroughGroupView: UIView {
     var passthroughActive = true
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        
         if passthroughActive {
             return subviews.contains(where: {
                 ($0 is ReceiveTouchView && $0.point(inside: self.convert(point, to: $0), with: event)) || (
@@ -78,32 +75,29 @@ class passthroughGroupView: UIView {
                 )
             })
         } else {
-            return self.bounds.contains(point)
+            return bounds.contains(point)
         }
     }
 }
 
-
-extension UISpringTimingParameters {
-    
+public extension UISpringTimingParameters {
     /// A design-friendly way to create a spring timing curve.
     ///
     /// - Parameters:
     ///   - damping: The 'bounciness' of the animation. Value must be between 0 and 1.
     ///   - response: The 'speed' of the animation.
     ///   - initialVelocity: The vector describing the starting motion of the property. Optional, default is `.zero`.
-    public convenience init(damping: CGFloat, response: CGFloat, initialVelocity: CGVector = .zero) {
+    convenience init(damping: CGFloat, response: CGFloat, initialVelocity: CGVector = .zero) {
         let stiffness = pow(2 * .pi / response, 2)
         let damp = 4 * .pi * damping / response
         self.init(mass: 1, stiffness: stiffness, damping: damp, initialVelocity: initialVelocity)
     }
-    
 }
 
 infix operator >!<
 
 func >!< (object1: AnyObject!, object2: AnyObject!) -> Bool {
-   return (object_getClassName(object1) == object_getClassName(object2))
+    return (object_getClassName(object1) == object_getClassName(object2))
 }
 
 extension Array where Element: UIColor {
@@ -137,7 +131,6 @@ extension Array where Element: UIColor {
 }
 
 extension Date {
-
     func isEqual(to date: Date, toGranularity component: Calendar.Component, in calendar: Calendar = .current) -> Bool {
         calendar.isDate(self, equalTo: date, toGranularity: component)
     }
@@ -148,20 +141,19 @@ extension Date {
 
     func isInSameDay(as date: Date) -> Bool { Calendar.current.isDate(self, inSameDayAs: date) }
 
-    var isInThisYear:  Bool { isInSameYear(as: Date()) }
+    var isInThisYear: Bool { isInSameYear(as: Date()) }
     var isInThisMonth: Bool { isInSameMonth(as: Date()) }
-    var isInThisWeek:  Bool { isInSameWeek(as: Date()) }
+    var isInThisWeek: Bool { isInSameWeek(as: Date()) }
 
     var isInYesterday: Bool { Calendar.current.isDateInYesterday(self) }
-    var isInToday:     Bool { Calendar.current.isDateInToday(self) }
-    var isInTomorrow:  Bool { Calendar.current.isDateInTomorrow(self) }
+    var isInToday: Bool { Calendar.current.isDateInToday(self) }
+    var isInTomorrow: Bool { Calendar.current.isDateInTomorrow(self) }
 
     var isInTheFuture: Bool { self > Date() }
-    var isInThePast:   Bool { self < Date() }
+    var isInThePast: Bool { self < Date() }
 }
 
 class PaddedLabel: UILabel {
-
     var topInset: CGFloat = 0
     var bottomInset: CGFloat = 0
     var leftInset: CGFloat = 10
@@ -200,9 +192,7 @@ extension Array where Element: Hashable {
     }
 }
 
-
-
-func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
+func ?? <T>(lhs: Binding<T?>, rhs: T) -> Binding<T> {
     Binding(
         get: { lhs.wrappedValue ?? rhs },
         set: { lhs.wrappedValue = $0 }
@@ -211,19 +201,16 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
 
 extension Date {
     func convertDateToReadableString() -> String {
-        
         let todayLoc = NSLocalizedString("todayLoc", comment: "extensionDate def=Today")
         let yesterdayLoc = NSLocalizedString("yesterdayLoc", comment: "extensionDate def=Yesterday")
-        
-        
         
         /// Initializing a Date object will always return the current date (including time)
         let todaysDate = Date()
         
-        guard let yesterday = todaysDate.subtract(days: 1) else { return "2020"}
+        guard let yesterday = todaysDate.subtract(days: 1) else { return "2020" }
         
-        guard let oneWeekAgo = todaysDate.subtract(days: 7) else { return "2020"}
-        guard let yestYesterday = yesterday.subtract(days: 1) else { return "2020"}
+        guard let oneWeekAgo = todaysDate.subtract(days: 7) else { return "2020" }
+        guard let yestYesterday = yesterday.subtract(days: 1) else { return "2020" }
         
         /// This will be any date from one week ago to the day before yesterday
         let recently = oneWeekAgo...yestYesterday
@@ -232,29 +219,26 @@ extension Date {
         let dateFormatter = DateFormatter()
         
         /// If self (the date that you're comparing) is today
-        if self.hasSame(.day, as: todaysDate) {
+        if hasSame(.day, as: todaysDate) {
             return todayLoc
             
             /// if self is yesterday
-        } else if self.hasSame(.day, as: yesterday) {
+        } else if hasSame(.day, as: yesterday) {
             return yesterdayLoc
             
             /// if self is in between one week ago and the day before yesterday
         } else if recently.contains(self) {
-            
             /// "EEEE" will display something like "Wednesday" (the weekday)
             dateFormatter.dateFormat = "EEEE"
             return dateFormatter.string(from: self)
             
             /// self is before one week ago
         } else {
-            
             /// displays the date as "January 1, 2020"
             /// the ' ' marks indicate a character that you add (in our case, a comma)
             dateFormatter.dateFormat = "MMMM d"
             return dateFormatter.string(from: self)
         }
-        
     }
     
     /// Thanks to Vasily Bodnarchuk: https://stackoverflow.com/a/40654331
@@ -265,7 +249,7 @@ extension Date {
     }
     
     func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
-        return self.compare(with: date, only: component) == 0
+        return compare(with: date, only: component) == 0
     }
     
     func add(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
@@ -286,19 +270,18 @@ class CellShadowView: UIView {
     }
 
     private func setupShadow() {
-        self.layer.cornerRadius = 8
-        self.layer.shadowOffset = CGSize(width: 0, height: 3)
-        self.layer.shadowRadius = 3
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
+        layer.cornerRadius = 8
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.3
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
 
 // concatenate attributed strings
-func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedString
-{
+func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedString {
     let result = NSMutableAttributedString()
     result.append(left)
     result.append(right)
@@ -307,23 +290,23 @@ func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedStri
 
 extension Array where Element: Comparable {
     func containsSameElements(as other: [Element]) -> Bool {
-        return self.count == other.count && self.sorted() == other.sorted()
+        return count == other.count && sorted() == other.sorted()
     }
 }
 
 extension UIView {
     var safeArea: ConstraintBasicAttributesDSL {
-        
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                return self.safeAreaLayoutGuide.snp
-            }
-            return self.snp
-        #else
-            return self.snp
-        #endif
+#if swift(>=3.2)
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.snp
+        }
+        return snp
+#else
+        return snp
+#endif
     }
 }
+
 class GradientBorderView: CustomActionsView {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -335,24 +318,25 @@ class GradientBorderView: CustomActionsView {
 
     var cornerRadius = CGFloat(3) {
         didSet {
-            
             let inset = lineWidth / 2
             shapeLayer?.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
             
             layer.cornerRadius = cornerRadius
         }
     }
+
     var colors = [CGColor]() {
         didSet {
             gradientLayer.colors = colors
         }
     }
+
     var lineWidth = CGFloat(3) {
         didSet {
             shapeLayer?.lineWidth = lineWidth
             
             let inset = lineWidth / 2
-            gradientLayer.frame = self.bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
+            gradientLayer.frame = bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
         }
     }
     
@@ -393,10 +377,10 @@ extension CALayer {
             animation.fromValue = value(forKey: "position")
             animation.toValue = NSValue(cgPoint: point)
             animation.fillMode = .forwards
-            self.position = point
+            position = point
             add(animation, forKey: "position")
         } else {
-            self.position = point
+            position = point
         }
     }
 
@@ -410,10 +394,10 @@ extension CALayer {
             animation.fromValue = NSValue(cgRect: oldBounds)
             animation.toValue = NSValue(cgRect: newBounds)
             animation.fillMode = .forwards
-            self.bounds = newBounds
+            bounds = newBounds
             add(animation, forKey: "bounds")
         } else {
-            self.bounds = newBounds
+            bounds = newBounds
         }
     }
 
@@ -446,7 +430,5 @@ extension CALayer {
 }
 
 extension Component {
-    func printDescription() {
-
-    }
+    func printDescription() {}
 }

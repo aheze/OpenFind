@@ -6,13 +6,12 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import Photos
-import Vision
 import RealmSwift
+import UIKit
+import Vision
 
 class CachingFinder {
-    
     static var startedFindingFromNewPhoto: ((Int) -> Void)? /// got to new photo
     static var completedAnotherPhoto: ((Int) -> Void)? /// number cached
     
@@ -31,13 +30,13 @@ class CachingFinder {
     static let dispatchSemaphore = DispatchSemaphore(value: 0)
     
     // MARK: Track which photos have been cached
+
     static var numberCached = 0
     static var photosToCache = [FindPhoto]()
     static var alreadyCachedPhotos = [FindPhoto]()
     static var unsavedContents: [EditableSingleHistoryContent]? /// for temp caching
     
-    static var statusOk = true ///OK = Running, no cancel
-    
+    static var statusOk = true /// OK = Running, no cancel
     
     static func load(with photosToCache: [FindPhoto], customWords: [String] = []) {
         self.photosToCache = photosToCache
@@ -45,7 +44,6 @@ class CachingFinder {
     }
     
     static func startFinding() {
-        
         dispatchQueue.async {
             self.numberCached = 0
             var number = 0
@@ -63,9 +61,8 @@ class CachingFinder {
                         let options = PHImageRequestOptions()
                         options.isSynchronous = true
                         
-                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
+                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { data, _, _, _ in
                             if let imageData = data {
-                                
                                 let savedID = currentCachingIdentifier /// save for the current cycle
                                 
                                 let request = VNRecognizeTextRequest { request, error in
@@ -74,13 +71,11 @@ class CachingFinder {
                                 request.recognitionLevel = .accurate
                                 request.recognitionLanguages = Defaults.recognitionLanguages
                                 
-                                
                                 if !customWords.isEmpty {
                                     request.customWords = customWords
                                 }
                                 
-                                
-                                request.progressHandler = { (_, progress, _) in
+                                request.progressHandler = { _, progress, _ in
                                     if let savedID = savedID, savedID == currentCachingIdentifier {
                                         self.reportProgress?(CGFloat(progress))
                                     }
@@ -89,9 +84,7 @@ class CachingFinder {
                                 let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
                                 do {
                                     try imageRequestHandler.perform([request])
-                                } catch let error {
-
-                                }
+                                } catch {}
                             }
                         }
                         
@@ -104,7 +97,6 @@ class CachingFinder {
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
-
             if reportProgress == nil {
                 if self.statusOk == false {
                     DispatchQueue.main.async {
@@ -115,15 +107,13 @@ class CachingFinder {
                 }
             }
         }
-        
     }
+
     static func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto, currentID: UUID?) {
-        
         numberCached += 1
-        CachingFinder.completedAnotherPhoto?(self.numberCached)
+        CachingFinder.completedAnotherPhoto?(numberCached)
         
         DispatchQueue.main.async {
-            
             var contents = [EditableSingleHistoryContent]()
             
             if let results = request?.results, results.count > 0 {
@@ -147,7 +137,7 @@ class CachingFinder {
                 }
             }
             
-            if reportProgress == nil && currentID == nil {
+            if reportProgress == nil, currentID == nil {
                 saveToDisk(photo: photo, contentsToSave: contents)
             } else {
                 unsavedContents = contents
@@ -162,10 +152,10 @@ class CachingFinder {
     
     static func saveToDisk(photo: FindPhoto, contentsToSave: [EditableSingleHistoryContent]) {
         if let editableModel = photo.editableModel {
-            if let realModel = self.getRealRealmModel?(editableModel) {
+            if let realModel = getRealRealmModel?(editableModel) {
                 if !realModel.isDeepSearched {
                     do {
-                        try self.realm.write {
+                        try realm.write {
                             realModel.isDeepSearched = true
                             self.realm.delete(realModel.contents)
                             
@@ -179,9 +169,7 @@ class CachingFinder {
                                 realModel.contents.append(realmContent)
                             }
                         }
-                    } catch {
-
-                    }
+                    } catch {}
                     editableModel.isDeepSearched = true
                     editableModel.contents = contentsToSave
                 }
@@ -193,7 +181,7 @@ class CachingFinder {
             newModel.isTakenLocally = false
             
             do {
-                try self.realm.write {
+                try realm.write {
                     self.realm.add(newModel)
                     
                     for cont in contentsToSave {
@@ -206,9 +194,7 @@ class CachingFinder {
                         newModel.contents.append(realmContent)
                     }
                 }
-            } catch {
-
-            }
+            } catch {}
             
             let editableModel = EditableHistoryModel()
             editableModel.assetIdentifier = photo.asset.localIdentifier

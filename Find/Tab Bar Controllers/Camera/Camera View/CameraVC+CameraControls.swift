@@ -6,23 +6,24 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
-
+import UIKit
 
 extension CameraViewController {
     func getCamera() -> AVCaptureDevice? {
         if let cameraDevice = AVCaptureDevice.default(.builtInDualCamera,
-                                                      for: .video, position: .back) {
+                                                      for: .video, position: .back)
+        {
             return cameraDevice
         } else if let cameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                             for: .video, position: .back) {
+                                                             for: .video, position: .back)
+        {
             return cameraDevice
         } else {
-
             return nil
         }
     }
+
     func configureCamera() {
         cameraView.session = avSession
         if let cameraDevice = getCamera() {
@@ -32,9 +33,7 @@ extension CameraViewController {
                 if avSession.canAddInput(captureDeviceInput) {
                     avSession.addInput(captureDeviceInput)
                 }
-            }
-            catch {
-
+            } catch {
                 return
             }
             avSession.sessionPreset = .photo
@@ -50,6 +49,7 @@ extension CameraViewController {
             avSession.startRunning()
         }
     }
+
     func startSession() {
         if !avSession.isRunning {
             DispatchQueue.global().async {
@@ -57,6 +57,7 @@ extension CameraViewController {
             }
         }
     }
+
     func stopSession() {
         if avSession.isRunning {
             DispatchQueue.global().async {

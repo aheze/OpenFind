@@ -12,7 +12,6 @@ extension ViewController {
         var currentYPosition = cameraContainerView.layer.presentation()?.affineTransform().ty ?? 0
         
         if currentYPosition == 0 {
-            
             let currentScale = scale(from: cameraViewController.cameraContentView.layer.presentation()?.affineTransform() ?? CGAffineTransform.identity)
             
             let currentScaleOffset = CGFloat(currentScale) - 1
@@ -22,7 +21,6 @@ extension ViewController {
             
             currentYPosition = pow(adjustedYPosition, 1 / Constants.rubberBandingPower)
         } else if currentYPosition < -view.bounds.height + Positions.topStop {
-            
             /// actual negative y offset of the view on screen, is less than actual pan distance
             let adjustedYOffset = view.bounds.height - Positions.topStop + currentYPosition
             
@@ -48,6 +46,7 @@ extension ViewController {
             }
         }
     }
+
     func panned(sender: UIPanGestureRecognizer) {
         let yPosition = sender.translation(in: view).y + GestureState.savedOffset
         
@@ -75,7 +74,6 @@ extension ViewController {
                 }
             }
             
-            
             if CurrentState.currentlyPresenting {
                 cameraViewController.morphingLabel.text = "Thanks for checking it out!"
                 cameraViewController.morphingLabel.pause()
@@ -85,7 +83,6 @@ extension ViewController {
             cameraViewController.getButton.isEnabled = false
         case .changed:
             switch yPosition {
-            
             /// scale camera view
             case let y where y > 0:
                 cameraContainerView.transform = CGAffineTransform(

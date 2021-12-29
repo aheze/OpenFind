@@ -19,7 +19,6 @@ extension CameraViewController {
             
             /// handle everything else
             self.pausePressed()
-            
         }
         
         fullScreenView.clipsToBounds = true
@@ -96,9 +95,7 @@ extension CameraViewController {
             try device.lockForConfiguration()
             device.torchMode = on ? .on : .off
             device.unlockForConfiguration()
-        } catch {
-
-        }
+        } catch {}
         
         let flashlightImage = on ? UIImage(systemName: "flashlight.on.fill") : UIImage(systemName: "flashlight.off.fill")
         UIView.transition(
@@ -112,6 +109,5 @@ extension CameraViewController {
         UIView.animate(withDuration: 0.3) {
             self.flashView.backgroundColor = on ? #colorLiteral(red: 0.5, green: 0.4678574155, blue: 0, alpha: 0.75) : UIColor(named: "50Black")
         }
-        
     }
 }

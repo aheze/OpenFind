@@ -25,7 +25,6 @@ import UIKit
  SPAlert: Layout model for view.
  */
 open class SPAlertLayout {
-    
     /**
      SPAlert: Icon size.
      */

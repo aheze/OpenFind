@@ -6,8 +6,8 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 extension SlideViewController {
     func resetTranscripts() {
@@ -22,15 +22,14 @@ extension SlideViewController {
     
     func drawAllTranscripts(focusedTranscript: Component? = nil, show: Bool) {
         if show {
-            for subView in self.drawingView.subviews {
+            for subView in drawingView.subviews {
                 subView.isHidden = true
             }
         }
         
-        let aspectFrame = AVMakeRect(aspectRatio: self.imageView.image?.size ?? self.imageView.bounds.size, insideRect: self.contentView.bounds)
+        let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
         for transcript in resultPhoto.transcripts {
-            
             drawTranscript(component: transcript, aspectFrame: aspectFrame, show: show)
         }
         
@@ -43,7 +42,6 @@ extension SlideViewController {
             UIAccessibility.post(notification: .layoutChanged, argument: baseView)
         }
     }
-    
     
     /// toggling
     func showTranscripts(focusedTranscript: Component? = nil) {
@@ -59,7 +57,7 @@ extension SlideViewController {
             
             if
                 let focusedTranscript = focusedTranscript,
-                let baseView =  focusedTranscript.baseView
+                let baseView = focusedTranscript.baseView
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     UIAccessibility.post(notification: .layoutChanged, argument: baseView)
@@ -67,6 +65,7 @@ extension SlideViewController {
             }
         }
     }
+
     func showHighlights(currentTranscript: Component? = nil) {
         DispatchQueue.main.async {
             for subView in self.drawingView.subviews {
@@ -88,11 +87,9 @@ extension SlideViewController {
                 self.previousActivatedHighlight = nil
                 
             } else if currentTranscript != nil {
-                
                 var found = false
                 for component in self.resultPhoto.components {
                     if component.transcriptComponent == currentTranscript {
-                        
                         if let baseView = component.baseView {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                                 UIAccessibility.post(notification: .layoutChanged, argument: baseView)
@@ -112,10 +109,8 @@ extension SlideViewController {
         }
     }
     
-    
     func drawTranscript(component: Component, aspectFrame: CGRect, show: Bool) {
         DispatchQueue.main.async {
-            
             let cornerRadius = min(component.height / 5.5, 10)
             
             let transcriptColor = UIColor(hexString: "00AEEF")
@@ -170,7 +165,7 @@ extension SlideViewController {
     func addTranscriptAccessibility(component: Component, newView: UIView) {
         /// speak contents
         var contents = [AccessibilityText]()
-        for match in self.matchToColors {
+        for match in matchToColors {
             if component.text.contains(match.key) {
                 if let pitch = match.value.first?.hexString.getDescription().1 {
                     let text = AccessibilityText(text: match.key, isRaised: false, customPitch: pitch)
@@ -185,11 +180,10 @@ extension SlideViewController {
         let highlightText = AccessibilityText(text: " \nOverlay.\n", isRaised: false)
         let locationTitle = AccessibilityText(text: " \nLocation:\n", isRaised: true)
         
-        let xPercent = Int(100 * (newView.frame.origin.x / self.contentView.bounds.width))
-        let yPercent = Int(100 * (newView.frame.origin.y / self.contentView.bounds.height))
-        let wPercent = Int(100 * (newView.bounds.width / self.contentView.bounds.width))
-        let hPercent = Int(100 * (newView.bounds.height / self.contentView.bounds.height))
-        
+        let xPercent = Int(100 * (newView.frame.origin.x / contentView.bounds.width))
+        let yPercent = Int(100 * (newView.frame.origin.y / contentView.bounds.height))
+        let wPercent = Int(100 * (newView.bounds.width / contentView.bounds.width))
+        let hPercent = Int(100 * (newView.bounds.height / contentView.bounds.height))
         
         let locationRawString = "\(xPercent) x, \(yPercent) y, \(wPercent) width, \(hPercent) height."
         let locationString = AccessibilityText(text: locationRawString, isRaised: false)
@@ -208,7 +202,7 @@ extension SlideViewController {
     
     func updateAccessibilityHints() {
         if findingActive || cameFromFind {
-            if self.showingTranscripts {
+            if showingTranscripts {
                 for highlight in resultPhoto.components {
                     highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
                 }
@@ -226,7 +220,7 @@ extension SlideViewController {
                 drawingBaseView.accessibilityHint = "Showing \(resultPhoto.components.count) highlights. Double-tap to show transcript overlay."
             }
         } else {
-            if self.showingTranscripts {
+            if showingTranscripts {
                 for highlight in resultPhoto.components {
                     highlight.baseView?.accessibilityHint = "Showing transcript overlay. Double-tap to hide."
                 }

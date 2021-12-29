@@ -57,14 +57,13 @@ public struct XMLParsingOptions: OptionSet {
     /// For example if your string contains '&' character parser will break the style.
     /// This option is active by default.
     public static let escapeString = XMLParsingOptions(rawValue: 2)
-    
 }
 
 // MARK: - XMLStringBuilder
 
 public class XMLStringBuilder: NSObject, XMLParserDelegate {
-        
     // MARK: Private Properties
+
     private static let topTag = "source"
     
     /// Parser engine.
@@ -116,11 +115,11 @@ public class XMLStringBuilder: NSObject, XMLParserDelegate {
             fatalError("Unable to convert to UTF8")
         }
         
-        self.attributedString = NSMutableAttributedString()
-        self.xmlParser = XMLParser(data: data)
+        attributedString = NSMutableAttributedString()
+        xmlParser = XMLParser(data: data)
         
         if let baseStyle = styleXML.baseStyle {
-            self.xmlStylers.append( XMLDynamicStyle(tag: XMLStringBuilder.topTag, style: baseStyle) )
+            xmlStylers.append(XMLDynamicStyle(tag: XMLStringBuilder.topTag, style: baseStyle))
         }
         
         super.init()
@@ -173,7 +172,7 @@ public class XMLStringBuilder: NSObject, XMLParserDelegate {
         }
         
         if elementName != XMLStringBuilder.topTag {
-            xmlStylers.append( XMLDynamicStyle(tag: elementName, style: styles[elementName], xmlAttributes: attributes) )
+            xmlStylers.append(XMLDynamicStyle(tag: elementName, style: styles[elementName], xmlAttributes: attributes))
         }
     }
     
@@ -182,10 +181,10 @@ public class XMLStringBuilder: NSObject, XMLParserDelegate {
     }
     
     func foundNewString() {
-       /*guard let newString = currentString else {
-            return // to support images tags
-        }
-       */
+        /* guard let newString = currentString else {
+              return // to support images tags
+          }
+         */
         var newAttributedString = AttributedString(string: currentString ?? "")
         for xmlStyle in xmlStylers {
             // Apply
@@ -200,18 +199,15 @@ public class XMLStringBuilder: NSObject, XMLParserDelegate {
                 // it's an unknown tag, we can call the resolver for unknown tags
                 xmlAttributesResolver.styleForUnknownXMLTag(xmlStyle.tag, to: &newAttributedString, attributes: xmlStyle.xmlAttributes, fromStyle: styleXML)
             }
-
         }
         attributedString.append(newAttributedString)
         currentString = nil
     }
-    
 }
 
 // MARK: - XMLDynamicStyle
 
 public class XMLDynamicStyle {
-    
     // MARK: - Public Properties
     
     /// Tag read for this style.
@@ -236,7 +232,7 @@ public class XMLDynamicStyle {
     /// Shortcut to enumarate attributes found in tags along with their respective values.
     ///
     /// - Parameter handler: handler function.
-    public func enumerateAttributes(_ handler: ((_ key: String, _ value: String) -> Void)) {
+    public func enumerateAttributes(_ handler: (_ key: String, _ value: String) -> Void) {
         guard let xmlAttributes = xmlAttributes else {
             return
         }
@@ -245,5 +241,4 @@ public class XMLDynamicStyle {
             handler($0, xmlAttributes[$0]!)
         }
     }
-    
 }

@@ -13,8 +13,8 @@ import UIKit
 #endif
 
 // MARK: Multiple Views in Array
+
 public extension Array where Element: QLView {
-    
     /**
      All elements in the collection recieve constant value for the given edge.
      - parameter edge: Should be used with *.width* or *.height*.
@@ -24,7 +24,8 @@ public extension Array where Element: QLView {
      */
     @discardableResult
     func set(_ edge: QLAttribute, of value: CGFloat,
-             priority: QLPriority = .required) -> [NSLayoutConstraint] {
+             priority: QLPriority = .required) -> [NSLayoutConstraint]
+    {
         var constraints: [NSLayoutConstraint] = []
         for view in self {
             let constraint = view.set(edge, of: value)
@@ -42,7 +43,8 @@ public extension Array where Element: QLView {
      */
     @discardableResult
     func set(_ edges: QLAttribute..., of value: CGFloat,
-             priority: QLPriority = .required) -> [QLMultipleConstraints] {
+             priority: QLPriority = .required) -> [QLMultipleConstraints]
+    {
         var constraintsArray: [QLMultipleConstraints] = []
         for view in self {
             let constraints = view.set(edges, to: value, priority: priority)
@@ -60,7 +62,8 @@ public extension Array where Element: QLView {
      */
     @discardableResult
     func spread(_ axis: QLAxis, stretchEdgesToSuperview: Bool = false, offset: CGFloat = 0,
-                priority: QLPriority = .required) -> [NSLayoutConstraint] {
+                priority: QLPriority = .required) -> [NSLayoutConstraint]
+    {
         guard isValidForQuickLayout else {
             return []
         }
@@ -98,8 +101,8 @@ public extension Array where Element: QLView {
      */
     @discardableResult
     func layoutToSuperview(axis: QLAxis, offset: CGFloat = 0,
-                           priority: QLPriority = .required) -> [QLAxisConstraints] {
-        
+                           priority: QLPriority = .required) -> [QLAxisConstraints]
+    {
         let attributes = axis.attributes
         
         let firstConstraints = layoutToSuperview(attributes.first, offset: offset, priority: priority)
@@ -130,7 +133,8 @@ public extension Array where Element: QLView {
      */
     @discardableResult
     func layoutToSuperview(_ edge: QLAttribute, ratio: CGFloat = 1, offset: CGFloat = 0,
-                           priority: QLPriority = .required) -> [NSLayoutConstraint] {
+                           priority: QLPriority = .required) -> [NSLayoutConstraint]
+    {
         guard isValidForQuickLayout else {
             return []
         }
@@ -150,7 +154,8 @@ public extension Array where Element: QLView {
     @discardableResult
     func layout(_ firstEdge: QLAttribute? = nil, to anchorEdge: QLAttribute,
                 of anchorView: QLView, ratio: CGFloat = 1, offset: CGFloat = 0,
-                priority: QLPriority = .required) -> [NSLayoutConstraint] {
+                priority: QLPriority = .required) -> [NSLayoutConstraint]
+    {
         guard isValidForQuickLayout else {
             return []
         }
@@ -182,8 +187,9 @@ public extension Array where Element: QLView {
     @discardableResult
     func layout(_ edges: QLAttribute..., to anchorView: QLView,
                 ratio: CGFloat = 1, offset: CGFloat = 0,
-                priority: QLPriority = .required) -> [QLMultipleConstraints] {
-        guard !edges.isEmpty && isValidForQuickLayout else {
+                priority: QLPriority = .required) -> [QLMultipleConstraints]
+    {
+        guard !edges.isEmpty, isValidForQuickLayout else {
             return []
         }
         // Avoid duplicities
@@ -200,16 +206,14 @@ public extension Array where Element: QLView {
         return result
     }
     
-    /** **PRIVATELY USED** to test for validation*/
+    /** **PRIVATELY USED** to test for validation */
     var isValidForQuickLayout: Bool {
         guard !isEmpty else {
-
             return false
         }
         
         for view in self {
             guard view.isValidForQuickLayout else {
-
                 return false
             }
         }

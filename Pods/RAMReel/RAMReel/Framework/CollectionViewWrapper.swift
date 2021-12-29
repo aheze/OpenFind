@@ -15,16 +15,15 @@ import UIKit
  --
  
  Helper protocol for CollectionViewWrapper.
-*/
-protocol WrapperProtocol : class {
-    
+ */
+protocol WrapperProtocol: class {
     /// Number of cells in collection
     var numberOfCells: Int { get }
     
     /**
      Cell constructor, replaces standard Apple way of doing it.
      
-     - parameters: 
+     - parameters:
         - collectionView `UICollectionView` instance in which cell should be created.
         - indexPath `NSIndexPath` where to put cell to.
      
@@ -33,12 +32,11 @@ protocol WrapperProtocol : class {
     func createCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell
     
     /**
-     Attributes of cells in some rect.
+      Attributes of cells in some rect.
      
-     - parameter rect Area in which you want to probe for attributes.
-    */
+      - parameter rect Area in which you want to probe for attributes.
+     */
     func cellAttributes(_ rect: CGRect) -> [UICollectionViewLayoutAttributes]
-    
 }
 
 /**
@@ -46,19 +44,19 @@ protocol WrapperProtocol : class {
  --
  
  Wraps collection view and set's collection view data source.
-*/
+ */
 open class CollectionViewWrapper
-    <
+<
     DataType,
-    CellClass: UICollectionViewCell>: FlowDataDestination, WrapperProtocol
+    CellClass: UICollectionViewCell
+>: FlowDataDestination, WrapperProtocol
     where
     CellClass: ConfigurableCell,
     DataType == CellClass.DataType
- {
-    private var lock : NSLock = NSLock()
+{
+    private var lock: NSLock = .init()
     
     var data: [DataType] = [] {
-        
         didSet {
             self.scrollDelegate.itemIndex = nil
             
@@ -69,14 +67,14 @@ open class CollectionViewWrapper
     }
     
     /**
-     FlowDataDestination protocol implementation method.
+      FlowDataDestination protocol implementation method.
      
-     - seealso: FlowDataDestination
+      - seealso: FlowDataDestination
      
-     This method processes data from data flow.
+      This method processes data from data flow.
      
-     - parameter data: Data array to process.
-    */
+      - parameter data: Data array to process.
+     */
     open func processData(_ data: [DataType]) {
         self.data = data
     }
@@ -84,7 +82,7 @@ open class CollectionViewWrapper
     let collectionView: UICollectionView
     let cellId: String = "ReelCell"
     
-    let dataSource       = CollectionViewDataSource()
+    let dataSource = CollectionViewDataSource()
     let collectionLayout = RAMCollectionViewLayout()
     let scrollDelegate: ScrollViewDelegate
     
@@ -94,38 +92,38 @@ open class CollectionViewWrapper
     var theme: Theme
     
     /**
-     - parameters:
-        - collectionView: Collection view to wrap around.
-        - theme: Visual theme of collection view.
-    */
+      - parameters:
+         - collectionView: Collection view to wrap around.
+         - theme: Visual theme of collection view.
+     */
     public init(collectionView: UICollectionView, theme: Theme) {
         self.collectionView = collectionView
         self.theme = theme
         
-        self.scrollDelegate = ScrollViewDelegate(itemHeight: collectionLayout.itemHeight)
-        self.scrollDelegate.itemIndexChangeCallback = { [weak self] idx in
-          guard let `self` = self else { return }
-          guard let index = idx , 0 <= index && index < self.data.count else {
-            self.selectedItem = nil
-            return
-          }
+        scrollDelegate = ScrollViewDelegate(itemHeight: collectionLayout.itemHeight)
+        scrollDelegate.itemIndexChangeCallback = { [weak self] idx in
+            guard let `self` = self else { return }
+            guard let index = idx, index >= 0, index < self.data.count else {
+                self.selectedItem = nil
+                return
+            }
           
-          let item = self.data[index]
-          self.selectedItem = item
+            let item = self.data[index]
+            self.selectedItem = item
           
-          // TODO: Update cell appearance maybe?
-          // Toggle selected?
-          let indexPath = IndexPath(item: index, section: 0)
-          let cell = collectionView.cellForItem(at: indexPath)
-          cell?.isSelected = true
+            // TODO: Update cell appearance maybe?
+            // Toggle selected?
+            let indexPath = IndexPath(item: index, section: 0)
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.isSelected = true
         }
         
         collectionView.register(CellClass.self, forCellWithReuseIdentifier: cellId)
         
-        dataSource.wrapper        = self
+        dataSource.wrapper = self
         collectionView.dataSource = dataSource
-         collectionView.collectionViewLayout = collectionLayout
-         collectionView.bounces    = false
+        collectionView.collectionViewLayout = collectionLayout
+        collectionView.bounces = false
         
         let scrollView = collectionView as UIScrollView
         scrollView.delegate = scrollDelegate
@@ -153,20 +151,21 @@ open class CollectionViewWrapper
     
     var selectedItem: DataType?
 
-    // MARK Implementation of WrapperProtocol
+    // MARK: Implementation of WrapperProtocol
+
     func createCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CellClass
         
-        let row  = (indexPath as NSIndexPath).row
-        let dat  = self.data[row]
+        let row = (indexPath as NSIndexPath).row
+        let dat = data[row]
         
         cell.configureCell(dat)
-        cell.theme = self.theme
+        cell.theme = theme
         
         return cell as UICollectionViewCell
     }
     
-    var numberOfCells:Int {
+    var numberOfCells: Int {
         return data.count
     }
     
@@ -186,54 +185,50 @@ open class CollectionViewWrapper
         let duration = durationNumber?.doubleValue ?? 0.1
         
         UIView.animate(withDuration: duration, animations: {
-            let number    = self.collectionView.numberOfItems(inSection: 0)
-            let itemIndex = self.scrollDelegate.itemIndex ?? number/2
+            let number = self.collectionView.numberOfItems(inSection: 0)
+            let itemIndex = self.scrollDelegate.itemIndex ?? number / 2
             
             guard itemIndex > 0 else {
                 return
             }
             
-            let inset      = self.collectionView.contentInset.top
+            let inset = self.collectionView.contentInset.top
             let itemHeight = self.collectionLayout.itemHeight
-            let offset     = CGPoint(x: 0, y: CGFloat(itemIndex) * itemHeight - inset)
+            let offset = CGPoint(x: 0, y: CGFloat(itemIndex) * itemHeight - inset)
             
             self.collectionView.contentOffset = offset
-        }) 
+        })
     }
     
     func adjustScroll(_ notification: Notification? = nil) {
         collectionView.contentInset = UIEdgeInsets.zero
         collectionLayout.updateInsets()
-        self.updateOffset(notification)
+        updateOffset(notification)
     }
-    
 }
 
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var wrapper: WrapperProtocol!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let number = self.wrapper.numberOfCells
+        let number = wrapper.numberOfCells
         
         return number
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.wrapper.createCell(collectionView, indexPath: indexPath)
+        let cell = wrapper.createCell(collectionView, indexPath: indexPath)
         
         return cell
     }
-    
 }
 
 class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
-    
-    typealias ItemIndexChangeCallback = (Int?) -> ()
+    typealias ItemIndexChangeCallback = (Int?) -> Void
     
     var itemIndexChangeCallback: ItemIndexChangeCallback?
-    fileprivate(set) var itemIndex: Int? = nil {
-        willSet (newIndex) {
+    fileprivate(set) var itemIndex: Int? {
+        willSet(newIndex) {
             if let callback = itemIndexChangeCallback {
                 callback(newIndex)
             }
@@ -241,23 +236,22 @@ class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
     }
     
     let itemHeight: CGFloat
-    init (itemHeight: CGFloat) {
+    init(itemHeight: CGFloat) {
         self.itemHeight = itemHeight
         
         super.init()
     }
     
     func adjustScroll(_ scrollView: UIScrollView) {
-        let inset           = scrollView.contentInset.top
-        let currentOffsetY  = scrollView.contentOffset.y + inset
-        let floatIndex      = currentOffsetY/itemHeight
+        let inset = scrollView.contentInset.top
+        let currentOffsetY = scrollView.contentOffset.y + inset
+        let floatIndex = currentOffsetY / itemHeight
         
         let scrollDirection = ScrollDirection.scrolledWhere(scrollFrom, scrollTo)
         let itemIndex: Int
         if scrollDirection == .up {
             itemIndex = Int(floor(floatIndex))
-        }
-        else {
+        } else {
             itemIndex = Int(ceil(floatIndex))
         }
         
@@ -270,44 +264,38 @@ class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
         // Difference between actual and designated position in pixels
         let Δ = abs(scrollView.contentOffset.y - adjestedOffsetY)
         // Allowed differenct between actual and designated position in pixels
-        let ε:CGFloat = 0.5
+        let ε: CGFloat = 0.5
         
         // If difference is larger than allowed, then adjust position animated
-        if Δ > ε {            
+        if Δ > ε {
             UIView.animate(withDuration: 0.25,
-                delay: 0.0,
-                options: UIView.AnimationOptions.curveEaseOut,
-                animations: {
-                    let newOffset = CGPoint(x: 0, y: adjestedOffsetY)
-                    scrollView.contentOffset = newOffset
-                },
-                completion: nil)
+                           delay: 0.0,
+                           options: UIView.AnimationOptions.curveEaseOut,
+                           animations: {
+                               let newOffset = CGPoint(x: 0, y: adjestedOffsetY)
+                               scrollView.contentOffset = newOffset
+                           },
+                           completion: nil)
         }
     }
     
     var scrollFrom: CGFloat = 0
-    var scrollTo:   CGFloat = 0
+    var scrollTo: CGFloat = 0
     
     enum ScrollDirection {
-        
         case up
         case down
         case noScroll
         
         static func scrolledWhere(_ from: CGFloat, _ to: CGFloat) -> ScrollDirection {
-            
             if from < to {
                 return .down
-            }
-            else if from > to {
+            } else if from > to {
                 return .up
-            }
-            else {
+            } else {
                 return .noScroll
             }
-            
         }
-        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -325,5 +313,4 @@ class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
             adjustScroll(scrollView)
         }
     }
-    
 }
