@@ -16,8 +16,6 @@ class ViewController: UIViewController {
     
     lazy var searchViewController: SearchViewController = {
         searchViewModel.availableLists = listsViewModel.lists
-//        searchViewModel.fields = []
-        print("fiels;: \(searchViewModel.fields)")
         let viewController = Bridge.makeViewController(searchViewModel: searchViewModel)
         self.addChild(viewController, in: self.searchContainerView)
         return viewController

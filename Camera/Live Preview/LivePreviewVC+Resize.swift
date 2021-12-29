@@ -10,7 +10,7 @@ import UIKit
 
 extension LivePreviewViewController {
     func updateViewportSize(safeViewFrame: CGRect) {
-//        print("up////")
+        print("update size: \(safeViewFrame)")
         guard let imageSize = imageSize else { return }
         self.safeViewFrame = safeViewFrame
         
@@ -32,9 +32,11 @@ extension LivePreviewViewController {
         self.imageFitViewSize = imageFitViewCenteredRect.size
         self.imageFillSafeRect = imageFillSafeRect
         
-        
-        previewFitView.bounds = CGRect(x: 0, y: 0, width: imageFillSafeRect.width, height: imageFillSafeRect.height)
-        previewFitView.center = CGPoint(x: imageFillSafeRect.midX, y: imageFillSafeRect.midY)
+        /// Avoid a slide animation
+        UIView.performWithoutAnimation {
+            previewFitView.bounds = CGRect(x: 0, y: 0, width: imageFillSafeRect.width, height: imageFillSafeRect.height)
+            previewFitView.center = CGPoint(x: imageFillSafeRect.midX, y: imageFillSafeRect.midY)
+        }
 
         updateAspectProgressTarget()
     }

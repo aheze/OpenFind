@@ -183,7 +183,6 @@ class TabBarController<
                 delegate?.willBeginNavigatingTo(tab: newTab)
             }
             tabViewModel.changeTabState(newTab: newTab)
-//            tabViewModel.tabState = newTab
         }
     }
     

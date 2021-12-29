@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import Popovers
 
 class ViewController: UIViewController {
     
@@ -43,48 +44,9 @@ class ViewController: UIViewController {
 
         var popover = Popover(attributes: .init()) {
             popoverView
-        } background: {
-            PopoverReader { context in
-                Color.green.opacity(0.8)
-                    .cornerRadius(16)
-                    .frame(rect: context.presentationFrame.insetBy(dx: -10, dy: -10))
-                
-                Circle()
-                    .stroke(Color.white, lineWidth: 6)
-                    .frame(width: 25, height: 25)
-                    .overlay(
-                        Circle()
-                            .fill(Color.blue)
-                    )
-                    .position(self.purpleButton.frame.pointAtAnchor(.bottom))
-                
-                VerticalPathShape(
-                    start: self.purpleButton.frame.pointAtAnchor(.bottom),
-                    end: context.frame.pointAtAnchor(.top),
-                    steepness: 0.5
-                )
-                .stroke(Color.blue, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                .zIndex(11)
-                
-                Circle()
-                    .stroke(Color.white, lineWidth: 6)
-                    .frame(width: 25, height: 25)
-                    .overlay(
-                        Circle()
-                            .fill(Color.blue)
-                    )
-                    .position(context.presentationFrame.pointAtAnchor(.top))
-                    .zIndex(10)
-            }
         }
         
-        popover.position = .relative(
-            .init(
-                containerFrame: { return self.view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 20, dy: 20) },
-                popoverAnchor: .left
-            )
-        )
-        
+        popover.attributes.sourceFrame = { [weak wordLabel] in wordLabel.windowFrame() }
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
@@ -117,25 +79,13 @@ class ViewController: UIViewController {
         
         var popover = Popover(attributes: .init()) {
             popoverView
-        } background: {
-            PopoverReader { context in
-                Color.blue.opacity(0.8)
-                    .frame(rect: context.frame.insetBy(dx: -10, dy: -10))
-            }
         }
         
         fieldSettingsModel.editListPressed = {
             Popovers.dismiss(popover)
         }
         
-        popover.position = .absolute(
-            .init(
-                originFrame: listLabel.popoverOriginFrame(),
-                originAnchor: .bottomLeft,
-                popoverAnchor: .topLeft
-            )
-        )
-        
+        popover.attributes.sourceFrame = { [weak listLabel] in listLabel.windowFrame() }
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
@@ -158,43 +108,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tipButton: UIButton!
     @IBAction func tipPressed(_ sender: Any) {
-        if let wordPopover = Popovers.popover(tagged: "Field Popover") {
-            var newPopover = wordPopover
-            newPopover.position = .relative(
-                .init(
-                    containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
-                    popoverAnchor: .bottom
-                )
-            )
-            Popovers.replace(wordPopover, with: newPopover)
-        }
     }
     
     @IBOutlet weak var holdButton: UIButton!
     @IBAction func holdDown(_ sender: Any) {
-        if let wordPopover = Popovers.popover(tagged: "Field Popover") {
-            var newPopover = wordPopover
-            newPopover.position = .relative(
-                .init(
-                    containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
-                    popoverAnchor: .top
-                )
-            )
-            Popovers.replace(wordPopover, with: newPopover)
-        }
     }
     
     @IBAction func holdUp(_ sender: Any) {
-        if let wordPopover = Popovers.popover(tagged: "Field Popover") {
-            var newPopover = wordPopover
-            newPopover.position = .relative(
-                .init(
-                    containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
-                    popoverAnchor: .bottom
-                )
-            )
-            Popovers.replace(wordPopover, with: newPopover)
-        }
     }
     
     @IBOutlet weak var purpleButton: UIButton!

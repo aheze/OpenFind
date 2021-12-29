@@ -1,33 +1,38 @@
 //
 //  CameraVC+LivePreview.swift
-//  Camera
+//  Find
 //
-//  Created by Zheng on 12/1/21.
-//  Copyright © 2021 Andrew. All rights reserved.
+//  Created by A. Zheng (github.com/aheze) on 12/28/21.
+//  Copyright © 2021 A. Zheng. All rights reserved.
 //
+    
 
 import UIKit
+
 extension CameraViewController {
-    func createLivePreviewViewController() -> LivePreviewViewController {
+    func createLivePreview() -> LivePreviewViewController{
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
+        let livePreviewViewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
         
-        viewController.findFromPhotosButtonPressed = { [weak self] in
+        livePreviewViewController.findFromPhotosButtonPressed = {
             TabControl.moveToOtherTab?(.photos, true)
         }
-        viewController.needSafeViewUpdate = { [weak self] in
+        
+        /// called when an image is first returned
+        livePreviewViewController.needSafeViewUpdate = { [weak self] in
             guard let self = self else { return }
+            
             DispatchQueue.main.async {
-                viewController.updateViewportSize(safeViewFrame: self.safeView.frame)
-                viewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
-                viewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress, animated: false)
+                livePreviewViewController.updateViewportSize(safeViewFrame: self.safeView.frame)
+                livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
+                livePreviewViewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress, animated: false)
             }
         }
         
-        self.addChild(viewController, in: livePreviewContainerView)
+        addChild(livePreviewViewController, in: livePreviewContainerView)
         
         livePreviewContainerView.backgroundColor = .clear
-        viewController.view.backgroundColor = .clear
-        return viewController
+        livePreviewViewController.view.backgroundColor = .clear
+        return livePreviewViewController
     }
 }

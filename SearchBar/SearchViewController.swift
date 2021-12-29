@@ -10,7 +10,8 @@ import UIKit
 class SearchViewController: UIViewController {
     
     var searchViewModel: SearchViewModel
-//    var fields = [Field]()
+//    @IBOutlet weak var baseViewHeightC: NSLayoutConstraint!
+    @IBOutlet weak var searchBarHeightC: NSLayoutConstraint!
     
     lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = {
         let flowLayout = SearchCollectionViewFlowLayout()
@@ -75,25 +76,17 @@ class SearchViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        fields = [
-//            Field(value: .string("Search Bar Medium Length")),
-////            Field(value: .string("2. Hi.")),
-////            Field(value: .string("3.a Medium text")),
-////            Field(value: .string("3.b Medium text")),
-////            Field(value: .string("3.c Medium text")),
-////            Field(value: .string("3.d Medium text")),
-////            Field(value: .string("4. Longer long long long long long text")),
-////            Field(value: .string("5. Text")),
-//            Field(value: .addNew(""))
-//        ]
-        
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        searchBarHeightC.constant = SearchConstants.cellHeight
 
+        
+        searchBarView.backgroundColor = .clear
         setupCollectionViews()
 
+        
     }
     
     
@@ -101,9 +94,6 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController {
     func setupCollectionViews() {
-//        searchCollectionView.clipsToBounds = false
-//        searchCollectionView.layer.borderWidth = 3
-//        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
         
         /// actually important, when there's only 1 search bar
         searchCollectionView.alwaysBounceHorizontal = true

@@ -18,14 +18,6 @@ extension ViewController {
             self.resetAverageView()
         }
     }
-    
-    func resetAverageView() {
-//        let center = getResetCenter()
-//        self.averageView.center = center
-//        for existingSubview in imageFitView.subviews {
-//            existingSubview.removeFromSuperview()
-//        }
-    }
     func getResetCenter() -> CGPoint {
         return CGPoint(x: imageFitViewRect.width / 2, y: imageFitViewRect.height / 2)
     }

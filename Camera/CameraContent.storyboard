@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxc-BX-aU0">
-                                <rect key="frame" x="0.0" y="152" width="414" height="710"/>
+                                <rect key="frame" x="0.0" y="200" width="414" height="662"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlJ-qC-1i7">
@@ -31,12 +31,9 @@
                                     <constraint firstAttribute="height" constant="100" id="Y59-dz-ePe"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3B-Mf-bwU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="152"/>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="n3B-Mf-bwU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                 <color key="backgroundColor" red="0.7803921568627451" green="0.45034031770652549" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="152" id="B6T-es-DZg"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -61,7 +58,6 @@
                     <connections>
                         <outlet property="livePreviewContainerView" destination="bIO-Uj-HK1" id="Jvd-MQ-Lw8"/>
                         <outlet property="safeView" destination="kxc-BX-aU0" id="gD2-wc-k0h"/>
-                        <outlet property="searchContainerHeightC" destination="B6T-es-DZg" id="Wc6-SV-7lS"/>
                         <outlet property="searchContainerView" destination="n3B-Mf-bwU" id="79P-bp-qV3"/>
                         <outlet property="zoomContainerHeightC" destination="Y59-dz-ePe" id="3Cz-g1-8Br"/>
                         <outlet property="zoomContainerView" destination="hlJ-qC-1i7" id="fnx-k0-ahC"/>

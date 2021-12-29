@@ -9,6 +9,9 @@
 import UIKit
 import AVFoundation
 
+/**
+ Zoom + aspect progress changing
+ */
 extension LivePreviewViewController {
     func changeZoom(to zoom: CGFloat, animated: Bool) {
         guard let cameraDevice = cameraDevice else { return }
@@ -26,7 +29,6 @@ extension LivePreviewViewController {
     }
     
     func changeAspectProgress(to aspectProgress: CGFloat, animated: Bool) {
-        
         let extraProgress = aspectProgressTarget - 1
         let scale = 1 + (extraProgress * aspectProgress)
         let previouslyHitAspectTarget = hitAspectTarget

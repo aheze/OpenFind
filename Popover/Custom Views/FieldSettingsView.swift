@@ -7,6 +7,20 @@
 //
 
 import SwiftUI
+import Popovers
+
+class FieldSettingsModel: ObservableObject {
+
+    @Published var header = "WORD"
+    @Published var defaultColor: UIColor = UIColor(hex: 0x00aeef)
+    @Published var selectedColor: UIColor = UIColor(hex: 0x00aeef)
+    @Published var alpha: CGFloat = 1
+    
+    /// lists
+    @Published var words = [String]()
+    @Published var showingWords = false
+    @Published var editListPressed: (() -> Void)?
+}
 
 struct FieldSettingsConstants {
     static var sliderHeight = CGFloat(40)
@@ -17,6 +31,7 @@ struct FieldSettingsConstants {
     
     /// space between items
     static var spacing = CGFloat(10)
+    static var buttonColor = UIColor(hex: 0x005278)
 }
 
 struct FieldSettingsView: View {
@@ -27,9 +42,6 @@ struct FieldSettingsView: View {
         VStack(spacing: 0) {
             Button {
                 if model.showingWords {
-//                    withAnimation {
-//                        model.showingWords = false
-//                    }
                     let transaction = Transaction(animation: .default)
                     withTransaction(transaction) {
                         model.showingWords = false
@@ -90,13 +102,9 @@ struct FieldSettingsView: View {
                             model.showingWords = true
                             Popovers.refresh(with: transaction)
                         }
-//                        withAnimation {
-//                            model.showingWords = true
-//                            Popovers.refresh()
-//                        }
                     } label: {
                         Text("Show Words")
-                            .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                            .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
                         
                     }
                     
@@ -104,7 +112,7 @@ struct FieldSettingsView: View {
                         model.editListPressed?()
                     } label: {
                         Text("Edit List")
-                            .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                            .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
                         
                     }
                 }
@@ -113,7 +121,6 @@ struct FieldSettingsView: View {
                 .frame(height: model.words.isEmpty ? 0 : nil, alignment: .top)
                 
             }
-            .frame(height: model.showingWords ? 100 : nil, alignment: .top)
             .offset(x: model.showingWords ? -180 : 0, y: 0)
             .opacity(model.showingWords ? 0 : 1)
             .overlay(
@@ -121,7 +128,7 @@ struct FieldSettingsView: View {
                     FieldSettingsContainer {
                         ForEach(model.words, id: \.self) { word in
                             Text(verbatim: word)
-                                .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                                .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
                         }
                     }
                 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,26 +11,38 @@
         <!--Search View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="Y6W-OH-hqX" customClass="SearchViewController" customModule="SearchBar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="Y6W-OH-hqX" customClass="SearchViewController" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2D-v6-50D">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fat-Zu-Sni">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                        <subviews>
+                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVw-3F-BNd">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9a9-2g-UTR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </view>
+                                                <blurEffect style="systemUltraThinMaterialDark"/>
+                                            </visualEffectView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="400" id="UoX-2q-HZB"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="nfx-gd-Z5u"/>
+                                            <constraint firstItem="aVw-3F-BNd" firstAttribute="leading" secondItem="fat-Zu-Sni" secondAttribute="leading" id="CdR-hD-ZEX"/>
+                                            <constraint firstAttribute="bottom" secondItem="aVw-3F-BNd" secondAttribute="bottom" id="M6q-h3-N5d"/>
+                                            <constraint firstItem="aVw-3F-BNd" firstAttribute="top" secondItem="fat-Zu-Sni" secondAttribute="top" id="ayM-4w-7gi"/>
+                                            <constraint firstAttribute="trailing" secondItem="aVw-3F-BNd" secondAttribute="trailing" id="bAE-lf-X9B"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWo-jK-nxc">
                                         <rect key="frame" x="0.0" y="54" width="414" height="100"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-o0-9ha" customClass="SearchCollectionView" customModule="SearchBar" customModuleProvider="target">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-o0-9ha" customClass="SearchCollectionView" customModule="Camera" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="duJ-Eq-RtT">
@@ -42,7 +54,7 @@
                                                 <cells/>
                                             </collectionView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="tintColor"/>
                                         <constraints>
                                             <constraint firstItem="fEC-o0-9ha" firstAttribute="top" secondItem="DWo-jK-nxc" secondAttribute="top" id="O0e-x6-Kuv"/>
                                             <constraint firstAttribute="height" constant="100" id="PJl-mt-CVE"/>
@@ -53,10 +65,12 @@
                                     </view>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="gfc-Sx-Ydh"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="DWo-jK-nxc" secondAttribute="trailing" id="1Ws-M8-J96"/>
+                                    <constraint firstItem="fat-Zu-Sni" firstAttribute="bottom" secondItem="K2D-v6-50D" secondAttribute="bottom" id="27C-H4-gQF"/>
                                     <constraint firstItem="DWo-jK-nxc" firstAttribute="leading" secondItem="K2D-v6-50D" secondAttribute="leading" id="2OR-Yr-zc9"/>
+                                    <constraint firstAttribute="bottom" secondItem="DWo-jK-nxc" secondAttribute="bottom" constant="16" id="8UO-uc-4aQ"/>
                                     <constraint firstItem="DWo-jK-nxc" firstAttribute="top" secondItem="gfc-Sx-Ydh" secondAttribute="top" constant="10" id="kMK-CX-ZOz"/>
                                     <constraint firstAttribute="trailing" secondItem="fat-Zu-Sni" secondAttribute="trailing" id="pmh-S7-myX"/>
                                     <constraint firstItem="fat-Zu-Sni" firstAttribute="leading" secondItem="K2D-v6-50D" secondAttribute="leading" id="tCF-t0-KVJ"/>
@@ -65,17 +79,19 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="K2D-v6-50D" secondAttribute="bottom" id="t6j-oQ-CxZ"/>
+                            <constraint firstAttribute="bottom" secondItem="K2D-v6-50D" secondAttribute="bottom" priority="750" id="c5Y-p5-S9g"/>
                             <constraint firstAttribute="trailing" secondItem="K2D-v6-50D" secondAttribute="trailing" id="xcp-bO-D7u"/>
                             <constraint firstItem="K2D-v6-50D" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="zLU-zd-w0S"/>
                             <constraint firstItem="K2D-v6-50D" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="zgC-yS-DKw"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="backgroundView" destination="fat-Zu-Sni" id="xbl-mH-dE2"/>
                         <outlet property="baseView" destination="K2D-v6-50D" id="CGY-3l-6TA"/>
+                        <outlet property="searchBarHeightC" destination="PJl-mt-CVE" id="9D9-cp-kej"/>
                         <outlet property="searchBarView" destination="DWo-jK-nxc" id="BLg-KI-eyS"/>
                         <outlet property="searchCollectionView" destination="fEC-o0-9ha" id="fng-UJ-zn1"/>
                     </connections>
@@ -86,14 +102,8 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

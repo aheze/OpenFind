@@ -9,17 +9,22 @@ import UIKit
 
 class CameraController {
     var model: CameraViewModel
-    var viewController: CameraViewController
-    
-    init(model: CameraViewModel) {
-        self.model = model
-        
+    lazy var viewController: CameraViewController = {
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "CameraViewController") { coder in
-            CameraViewController(coder: coder, cameraViewModel: model)
+            CameraViewController(
+                coder: coder,
+                cameraViewModel: self.model
+            )
         }
         
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
+        return viewController
+    }()
+    
+    init(model: CameraViewModel) {
+        self.model = model
+        _ = viewController
     }
 }
