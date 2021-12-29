@@ -85,7 +85,8 @@ class SearchViewController: UIViewController {
         
         searchBarView.backgroundColor = .clear
         setupCollectionViews()
-
+        
+        
         
     }
     

@@ -196,9 +196,6 @@
 		3C3232F0261164A900A33192 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
 		3C3232F426118B4000A33192 /* ListBuilderVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */; };
 		3C3642AE277BBED10038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C3642AD277BBED10038CB18 /* Popovers */; };
-		3C3642B1277BC0810038CB18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19F6275A9F390064F2C6 /* SceneDelegate.swift */; };
-		3C3642B2277BC0810038CB18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19F4275A9F390064F2C6 /* AppDelegate.swift */; };
-		3C3642B3277BC0810038CB18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19F8275A9F390064F2C6 /* ViewController.swift */; };
 		3C3642B4277BC0E80038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
 		3C3642B5277BC0EC0038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
 		3C3642B6277BC0FC0038CB18 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */; };
@@ -311,6 +308,8 @@
 		3C364349277C0DD00038CB18 /* SwiftUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0F275AA0DB0064F2C6 /* SwiftUIViews.swift */; };
 		3C36434A277C0EDC0038CB18 /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364342277C0C370038CB18 /* NavigationViewModifier.swift */; };
 		3C36434C277C0F970038CB18 /* SupportDocs in Frameworks */ = {isa = PBXBuildFile; productRef = 3C36434B277C0F970038CB18 /* SupportDocs */; };
+		3C36434E277C1B980038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C36434D277C1B980038CB18 /* Popovers */; };
+		3C364350277C22480038CB18 /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
 		3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */; };
@@ -1071,6 +1070,7 @@
 		3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Zoom.swift"; sourceTree = "<group>"; };
 		3C364304277BC58E0038CB18 /* CameraVC+LivePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+LivePreview.swift"; sourceTree = "<group>"; };
 		3C364342277C0C370038CB18 /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
+		3C36434F277C22480038CB18 /* TabControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabControllerView.swift; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
 		3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingFinder.swift; sourceTree = "<group>"; };
@@ -1596,6 +1596,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C36434E277C1B980038CB18 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1915,6 +1916,7 @@
 				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
+				3C36434F277C22480038CB18 /* TabControllerView.swift */,
 				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C4D3796274756470010FD68 /* ContentPageViewController.swift */,
 				3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */,
@@ -3284,6 +3286,9 @@
 			dependencies = (
 			);
 			name = SearchBar;
+			packageProductDependencies = (
+				3C36434D277C1B980038CB18 /* Popovers */,
+			);
 			productName = SearchBar;
 			productReference = 3C4D3B30274776E90010FD68 /* SearchBar.app */;
 			productType = "com.apple.product-type.application";
@@ -3886,6 +3891,7 @@
 			files = (
 				3C1D1A45275AA2600064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C4D39CB27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
+				3C364350277C22480038CB18 /* TabControllerView.swift in Sources */,
 				3C3642DE277BC2E70038CB18 /* SearchFieldCell.swift in Sources */,
 				3C4D3A22274767970010FD68 /* PhotosViewController.swift in Sources */,
 				3C3642D2277BC2E70038CB18 /* LeftView.swift in Sources */,
@@ -4205,7 +4211,6 @@
 				3C4D3B6B274777E40010FD68 /* ViewController.swift in Sources */,
 				3C4D3B9327477ABD0010FD68 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C4D3B9727477ABD0010FD68 /* SearchCV+Datasource.swift in Sources */,
-				3C3642B1277BC0810038CB18 /* SceneDelegate.swift in Sources */,
 				3C1D1A13275AA0E20064F2C6 /* SwiftUIViews.swift in Sources */,
 				3C4D3BA027477ABD0010FD68 /* SearchUtilities.swift in Sources */,
 				3C4D3BA227477ABD0010FD68 /* Field.swift in Sources */,
@@ -4216,7 +4221,6 @@
 				3C7BADAE275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C1D1A31275AA25C0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3C4D3BA127477ABD0010FD68 /* SearchViewController.swift in Sources */,
-				3C3642B2277BC0810038CB18 /* AppDelegate.swift in Sources */,
 				3C4D3B69274777E40010FD68 /* SceneDelegate.swift in Sources */,
 				3CBEAC0F2754867400D04B39 /* GeneralUtilities.swift in Sources */,
 				3C1D19EC275A983E0064F2C6 /* ListsViewModel.swift in Sources */,
@@ -4228,7 +4232,6 @@
 				3C1D1A24275AA21F0064F2C6 /* TabViewModel.swift in Sources */,
 				3C1D19E52759F2320064F2C6 /* SearchViewModel.swift in Sources */,
 				3C4D20A32750A6CB00090AF9 /* Utilities+UIColor.swift in Sources */,
-				3C3642B3277BC0810038CB18 /* ViewController.swift in Sources */,
 				3C4D3B9827477ABD0010FD68 /* SearchCV+Delegate.swift in Sources */,
 				3C606671274ECCBA000A5BDE /* Debug.swift in Sources */,
 				3C1D1A34275AA25C0064F2C6 /* Utilities+Dates.swift in Sources */,
@@ -5796,6 +5799,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
 			productName = SupportDocs;
+		};
+		3C36434D277C1B980038CB18 /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
 		};
 		3C4D3B7A274779EE0010FD68 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;

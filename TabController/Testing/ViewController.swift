@@ -63,8 +63,29 @@ class ViewController: UIViewController {
         
         self.addChild(tabController.viewController, in: self.view)
         
+//        tabController.viewController.contentCollectionView
+//            .panGestureRecognizer
+////            .shouldRequireFailure(of:
+//            .require(toFail:
+////            .shouldBeRequiredToFail(by:
+////            .shouldRequireFailure(
+////                of:
+                    camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer
+//            )
+//        tabController.viewController.contentCollectionView.panGestureRecognizer.shouldReceive(<#T##event: UIEvent##UIEvent#>)
+//        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer.delegate = self
+        
+        
+//        camera.viewController.searchViewController.searchCollectionView.addGestureRecognizer(UIPanGestureRecognizer())
+//        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer.shouldBeRequiredToFail(by: tabController.viewController.contentCollectionView.panGestureRecognizer)
+//            .delegate = self
+        
+        let searchBar = camera.viewController.searchViewController.searchBarView ?? UIView()
+        let searchBarBounds = searchBar.convert(searchBar.bounds, to: nil)
+        tabController.viewController.excludedFrames = [ searchBarBounds ]
         return tabController
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,7 +93,21 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: TabBarControllerDelegate{
+extension ViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        print("delegate")
+        let location = touch.location(in: nil)
+        let searchContainerFrame = camera.viewController.searchContainerView.convert(camera.viewController.searchContainerView.bounds, to: nil)
+        print("fr: \(searchContainerFrame)")
+        if searchContainerFrame.contains(location) {
+            return false
+        }
+        
+        return true
+    }
+}
+
+extension ViewController: TabBarControllerDelegate {
     
     func willBeginNavigatingTo(tab: TabState) {
         switch tab {

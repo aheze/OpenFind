@@ -364,7 +364,7 @@ class ZoomViewModel: ObservableObject {
         
         if !isExpanded {
             DispatchQueue.main.async {
-                withAnimation {
+                withAnimation(.easeIn(duration: 0.2)) {
                     self.isExpanded = true
                 }
             }

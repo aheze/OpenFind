@@ -36,11 +36,24 @@ class TabBarViewController: UIViewController {
     @IBOutlet weak var tabBarContainerView: UIView!
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
 
+    var excludedFrames = [CGRect]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
         
+        if let view = view as? TabControllerView {
+            view.excludedFrames = { [weak self] in
+                self?.excludedFrames ?? []
+            }
+            view.tappedExcludedView = { [weak self] in
+                self?.contentCollectionView.isScrollEnabled = false
+                DispatchQueue.main.async {
+                    self?.contentCollectionView.isScrollEnabled = true
+                }
+            }
+        }
     }
     
     var subviewsWereLayout = false

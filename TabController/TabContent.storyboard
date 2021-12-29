@@ -12,8 +12,8 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="TabBarViewController" id="Y6W-OH-hqX" customClass="TabBarViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController storyboardIdentifier="TabBarViewController" id="Y6W-OH-hqX" customClass="TabBarViewController" customModule="TabController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc" customClass="TabControllerView" customModule="TabController" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -30,7 +30,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Cf5-sa-G6P" customClass="ContentCell" customModule="Find" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Cf5-sa-G6P" customClass="ContentCell" customModule="TabController" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kk6-UX-rEA">
@@ -70,7 +70,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentCollectionView" destination="6kN-Uj-IUK" id="awm-to-dfV"/>
+                        <outlet property="contentCollectionView" destination="6kN-Uj-IUK" id="Oxm-MQ-aDw"/>
                         <outlet property="contentView" destination="7ag-uH-Frh" id="bS8-iX-gJf"/>
                         <outlet property="tabBarContainerView" destination="0Q9-bi-u1l" id="0YJ-Pe-VMW"/>
                         <outlet property="tabBarHeightC" destination="C0V-dv-94a" id="heD-ME-cxz"/>
