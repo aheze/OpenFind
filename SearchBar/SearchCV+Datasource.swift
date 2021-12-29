@@ -20,14 +20,14 @@ extension SearchViewController: UICollectionViewDataSource {
         cell.fieldChanged = { [weak self] field in
             self?.searchViewModel.fields[indexPath.item] = field
         }
-        cell.leftView.findIconView.setTint(color: field.text.color)
+        cell.leftView.findIconView.setTint(color: field.text.selectedColor ?? field.text.defaultColor, alpha: field.text.colorAlpha)
         
         /// setup constraints
         let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)
         setup()
         
         cell.leftViewTapped = { [weak self] in
-            self?.presentPopover(for: field, from: cell)
+            self?.presentPopover(for: indexPath.item, from: cell)
         }
         
         cell.triggerButton.isEnabled = !field.focused

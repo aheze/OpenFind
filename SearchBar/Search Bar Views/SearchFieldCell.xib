@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,19 +45,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v90-ox-xGV">
                                 <rect key="frame" x="317" y="66.5" width="24" height="24"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TZ6-Wt-gjW">
-                                        <rect key="frame" x="0.0" y="2" width="24" height="20"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxP-dI-uGw" customClass="ClearIconView" customModule="Camera" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="OxP-dI-uGw" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" id="6fI-gD-obG"/>
                                     <constraint firstAttribute="width" constant="24" identifier="Add New WIdth" id="Sxc-XY-Xa1"/>
-                                    <constraint firstAttribute="bottom" secondItem="TZ6-Wt-gjW" secondAttribute="bottom" identifier="Add New View / Image - Bottom" id="cxM-k4-osw"/>
+                                    <constraint firstItem="OxP-dI-uGw" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" id="XHG-VC-twI"/>
                                     <constraint firstAttribute="height" constant="24" identifier="Add New Height" id="fEY-hg-Mh1"/>
-                                    <constraint firstAttribute="trailing" secondItem="TZ6-Wt-gjW" secondAttribute="trailing" identifier="Add New View / Image - Right" id="gDB-It-y1M"/>
-                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" identifier="Add New View / Image - Left" id="lCa-kQ-sid"/>
-                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" identifier="Add New View / Image - Top" id="mer-on-QXO"/>
+                                    <constraint firstAttribute="trailing" secondItem="OxP-dI-uGw" secondAttribute="trailing" id="n20-Jj-NEk"/>
+                                    <constraint firstAttribute="bottom" secondItem="OxP-dI-uGw" secondAttribute="bottom" id="n3n-2P-38z"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -105,7 +106,7 @@
             </collectionViewCellContentView>
             <size key="customSize" width="658" height="157"/>
             <connections>
-                <outlet property="addNewImageView" destination="TZ6-Wt-gjW" id="xpW-gl-Ah7"/>
+                <outlet property="addNewIconView" destination="OxP-dI-uGw" id="KjK-4P-g2a"/>
                 <outlet property="addNewView" destination="v90-ox-xGV" id="RHH-4U-PJT"/>
                 <outlet property="addNewViewCenterHorizontallyWithRightC" destination="vXb-tt-rEQ" id="Ahh-s8-xG6"/>
                 <outlet property="addNewViewCenterHorizontallyWithSuperview" destination="0cb-cP-re4" id="om6-Rn-WlB"/>
@@ -127,9 +128,11 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="100Blue">
             <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -69,16 +69,89 @@ class FindIconView: UIView {
         }
     }
     
-    func setTint(color: UIColor) {
-        topHighlightView.backgroundColor = color
-        middleHighlightView.backgroundColor = color.toColor(.white, percentage: 0.3)
-        bottomHighlightView.backgroundColor = color.toColor(.white, percentage: 0.6)
+    func setTint(color: UIColor, alpha: CGFloat) {
+        let alphaAdjustedColor = color.toColor(.white, percentage: 1 - alpha)
+        topHighlightView.backgroundColor = alphaAdjustedColor
+        middleHighlightView.backgroundColor = alphaAdjustedColor.toColor(.white, percentage: 0.3)
+        bottomHighlightView.backgroundColor = alphaAdjustedColor.toColor(.white, percentage: 0.6)
     }
     
     struct Configuration {
         var frame: CGRect
         var autoresizingMask: UIView.AutoresizingMask
         var cornerRadius: CGFloat
+    }
+}
+
+class ClearIconView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        print("lll")
+        backgroundView.layer.cornerRadius = bounds.height / 2
+    }
+    
+    lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.frame = bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.05)
+        view.layer.cornerRadius = bounds.height / 2
+        addSubview(view)
+        return view
+    }()
+    lazy var iconView: UIImageView = {
+        let configuration = UIImage.SymbolConfiguration(font: SearchConstants.fieldFont)
+        let image = UIImage(systemName: "xmark", withConfiguration: configuration)
+        let imageView = UIImageView(image: image)
+        imageView.frame = bounds
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.tintColor = UIColor.white.withAlphaComponent(0.75)
+        imageView.contentMode = .scaleAspectFit
+        backgroundView.addSubview(imageView)
+        return imageView
+    }()
+    
+    private func commonInit() {
+        backgroundColor = .clear
+        
+        _ = backgroundView
+        _ = iconView
+        
+        setState(.hidden)
+    }
+    
+    func setState(_ state: State, animated: Bool = false) {
+        UIView.animate(withDuration: animated ? 0.3 : 0) {
+            
+            switch state {
+            case .hidden:
+                self.backgroundView.alpha = 0
+                self.iconView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            case .clear:
+                self.backgroundView.alpha = 1
+                self.iconView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            case .delete:
+                self.backgroundView.alpha = 1
+                self.iconView.transform = .identity
+            }
+        }
+    }
+    
+    enum State {
+        case hidden
+        case clear
+        case delete
     }
 }
 

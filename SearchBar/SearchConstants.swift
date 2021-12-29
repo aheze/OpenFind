@@ -30,6 +30,8 @@ struct SearchConstants {
     static var fieldRightViewWidth = CGFloat(48)
     static var fieldRightViewPadding = CGFloat(6)
     
+    static var clearIconLength = CGFloat(28)
+    
     static var addWordFieldHuggingWidth = CGFloat(24)
     static var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left
     static var addWordFieldAntiFlickerPadding = CGFloat(2)

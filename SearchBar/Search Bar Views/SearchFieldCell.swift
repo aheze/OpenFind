@@ -34,7 +34,7 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet var addNewViewCenterHorizontallyWithRightC: NSLayoutConstraint!
     @IBOutlet var addNewViewWidthC: NSLayoutConstraint!
     @IBOutlet var addNewViewHeightC: NSLayoutConstraint!
-    @IBOutlet var addNewImageView: UIImageView!
+    @IBOutlet var addNewIconView: ClearIconView!
     
     var leftViewTapped: (() -> Void)?
     var rightViewTapped: (() -> Void)?
@@ -97,16 +97,11 @@ class SearchFieldCell: UICollectionViewCell {
         baseViewBottomC.constant = SearchConstants.fieldBaseViewBottomPadding
         baseViewLeftC.constant = SearchConstants.fieldBaseViewLeftPadding
         
-        addNewViewWidthC.constant = SearchConstants.fieldIconLength
-        addNewViewHeightC.constant = SearchConstants.fieldIconLength
+        addNewViewWidthC.constant = SearchConstants.clearIconLength
+        addNewViewHeightC.constant = SearchConstants.clearIconLength
         
         leftViewWidthC.constant = 0
         rightViewWidthC.constant = 0
-        
-        let image = UIImage(systemName: "xmark")
-        let configuration = UIImage.SymbolConfiguration(font: SearchConstants.fieldFont)
-        addNewImageView.preferredSymbolConfiguration = configuration
-        addNewImageView.image = image
         
         leftView.buttonView.tapped = { [weak self] in
             self?.leftViewTapped?()
@@ -127,7 +122,7 @@ class SearchFieldCell: UICollectionViewCell {
             
             let scalePercentageVisible = 0.5 + (0.5 * percentageVisible)
             leftView.findIconView.transform = CGAffineTransform(scaleX: scalePercentageVisible, y: scalePercentageVisible)
-            rightView.imageView.transform = CGAffineTransform(scaleX: scalePercentageVisible, y: scalePercentageVisible)
+            rightView.clearIconView.transform = CGAffineTransform(scaleX: scalePercentageVisible, y: scalePercentageVisible)
             
             leftView.alpha = percentageVisible
             rightView.alpha = percentageVisible
@@ -201,6 +196,12 @@ extension SearchFieldCell: UITextFieldDelegate {
 
             updateField {
                 $0.text.value = .string(updatedText)
+            }
+            
+            if updatedText.isEmpty {
+                rightView.clearIconView.setState(.hidden, animated: true)
+            } else {
+                rightView.clearIconView.setState(.clear, animated: true)
             }
         }
         

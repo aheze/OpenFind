@@ -8,17 +8,29 @@
 
 import Popovers
 import SwiftUI
+import Combine
 
 class FieldSettingsModel: ObservableObject {
     @Published var header = "WORD"
     @Published var defaultColor: UIColor = .init(hex: 0x00AEEF)
-    @Published var selectedColor: UIColor = .init(hex: 0x00AEEF)
+    @Published var selectedColor: UIColor?
     @Published var alpha: CGFloat = 1
     
     /// lists
     @Published var words = [String]()
     @Published var showingWords = false
     @Published var editListPressed: (() -> Void)?
+    
+    /// Notify when the class changed.
+    public var changeSink: AnyCancellable?
+    var changed: (() -> Void)?
+    public init() {
+        changeSink = objectWillChange.sink { [weak self] in
+            DispatchQueue.main.async {
+                self?.changed?()
+            }
+        }
+    }
 }
 
 enum FieldSettingsConstants {
@@ -85,7 +97,7 @@ struct FieldSettingsView: View {
                     PaletteView(selectedColor: $model.selectedColor)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                     
-                    OpacitySlider(value: $model.alpha, color: model.selectedColor)
+                    OpacitySlider(value: $model.alpha, color: model.selectedColor ?? model.defaultColor)
                         .frame(height: FieldSettingsConstants.sliderHeight)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
@@ -164,7 +176,7 @@ struct PopoverButtonModifier: ViewModifier {
 }
 
 struct PaletteView: View {
-    @Binding var selectedColor: UIColor
+    @Binding var selectedColor: UIColor?
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -192,7 +204,7 @@ struct PaletteView: View {
 
 struct PaletteButton: View {
     let color: UIColor
-    @Binding var selectedColor: UIColor
+    @Binding var selectedColor: UIColor?
     var body: some View {
         Button {
             withAnimation {

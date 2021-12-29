@@ -10,11 +10,12 @@ import UIKit
 class RightView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet var buttonView: ButtonView!
-    @IBOutlet var imageView: UIImageView!
     
-    @IBOutlet var imageViewWidthC: NSLayoutConstraint!
-    @IBOutlet var imageViewHeightC: NSLayoutConstraint!
-    @IBOutlet var imageViewCenterXC: NSLayoutConstraint!
+    
+    @IBOutlet weak var clearIconView: ClearIconView!
+    @IBOutlet var iconViewWidthC: NSLayoutConstraint!
+    @IBOutlet var iconViewHeightC: NSLayoutConstraint!
+    @IBOutlet var iconViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,14 +32,8 @@ class RightView: UIView {
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        let image = UIImage(systemName: "xmark")
-        let configuration = UIImage.SymbolConfiguration(font: SearchConstants.fieldFont)
-        imageView.preferredSymbolConfiguration = configuration
-        imageView.image = image
-        
-        imageViewWidthC.constant = SearchConstants.fieldIconLength
-        imageViewHeightC.constant = SearchConstants.fieldIconLength
-        imageViewCenterXC.constant = -SearchConstants.fieldRightViewPadding
+        iconViewWidthC.constant = SearchConstants.clearIconLength
+        iconViewHeightC.constant = SearchConstants.clearIconLength
+        iconViewCenterXC.constant = -SearchConstants.fieldRightViewPadding
     }
 }

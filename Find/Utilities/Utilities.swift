@@ -41,7 +41,7 @@ extension URL {
                                                     withIntermediateDirectories: true,
                                                     attributes: nil)
                 } catch {
-                    // Creation failed. Print error & return nil
+                    // Creation failed.
                     return nil
                 }
             }
@@ -57,7 +57,7 @@ public extension NSLayoutConstraint {
     // debug constraints
     override var description: String {
         let id = identifier ?? ""
-        return "id: \(id), constant: \(constant)" // you may print whatever you want here
+        return "id: \(id), constant: \(constant)"
     }
 }
 
@@ -429,6 +429,3 @@ extension CALayer {
     }
 }
 
-extension Component {
-    func printDescription() {}
-}
