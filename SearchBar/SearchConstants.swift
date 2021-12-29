@@ -17,15 +17,18 @@ struct SearchConstants {
     static var fieldBackgroundColor = UIColor.black.withAlphaComponent(0.5)
     static var fieldCornerRadius = CGFloat(16)
     
-    static var fieldBaseViewTopPadding = CGFloat(8)
+    /// Padding when left and right view are hidden
+    static var fieldBaseViewTopPadding = CGFloat(0)
     static var fieldBaseViewRightPadding = CGFloat(12)
-    static var fieldBaseViewBottomPadding = CGFloat(6)
+    static var fieldBaseViewBottomPadding = CGFloat(0)
     static var fieldBaseViewLeftPadding = CGFloat(12)
     
     static var fieldTextSidePadding = CGFloat(0)
     
-    static var fieldLeftViewWidth = CGFloat(40)
-    static var fieldRightViewWidth = CGFloat(40)
+    static var fieldLeftViewWidth = CGFloat(48)
+    static var fieldLeftViewPadding = CGFloat(6)
+    static var fieldRightViewWidth = CGFloat(48)
+    static var fieldRightViewPadding = CGFloat(6)
     
     static var addWordFieldHuggingWidth = CGFloat(24)
     static var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left

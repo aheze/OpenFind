@@ -10,7 +10,6 @@ import UIKit
 class SearchViewController: UIViewController {
     
     var searchViewModel: SearchViewModel
-//    @IBOutlet weak var baseViewHeightC: NSLayoutConstraint!
     @IBOutlet weak var searchBarHeightC: NSLayoutConstraint!
     
     lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = {
@@ -31,6 +30,7 @@ class SearchViewController: UIViewController {
                 self.searchViewModel.fields[oldCellIndex].focused = false /// for cellForItemAt later, after cell reloads
                 if let cell = self.searchCollectionView.cellForItem(at: oldCellIndex.indexPath) as? SearchFieldCell {
                     cell.field = self.searchViewModel.fields[oldCellIndex] /// set it right now anyway
+                    cell.triggerButton.isEnabled = true
                 }
             }
             if let newCellIndex = newCellIndex, self.searchViewModel.fields.indices.contains(newCellIndex) {
@@ -38,6 +38,7 @@ class SearchViewController: UIViewController {
                 if let cell = self.searchCollectionView.cellForItem(at: newCellIndex.indexPath) as? SearchFieldCell {
                     cell.field = self.searchViewModel.fields[newCellIndex] /// set it right now anyway
                     cell.textField.becomeFirstResponder()
+                    cell.triggerButton.isEnabled = false
                 }
             }
         }
@@ -86,8 +87,6 @@ class SearchViewController: UIViewController {
         searchBarView.backgroundColor = .clear
         setupCollectionViews()
         
-        
-        
     }
     
     
@@ -104,7 +103,7 @@ extension SearchViewController {
         
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
-        searchCollectionView.delaysContentTouches = true /// allow scrolling through text fields
+        searchCollectionView.allowsSelection = false
         
         let bundle = Bundle(identifier: "com.aheze.SearchBar")
         let nib = UINib(nibName: "SearchFieldCell", bundle: bundle)

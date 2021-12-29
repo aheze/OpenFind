@@ -13,9 +13,7 @@ class LeftView: UIView {
     @IBOutlet weak var buttonView: ButtonView!
 
     @IBOutlet weak var findIconView: FindIconView!
-    
-    
-    var tapped: (() -> Void)?
+    @IBOutlet weak var iconViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,9 +30,7 @@ class LeftView: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        buttonView.tapped = tapped
-        
+        iconViewCenterXC.constant = SearchConstants.fieldLeftViewPadding
     }
 }
 

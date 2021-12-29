@@ -53,16 +53,17 @@ struct Field {
             didSet {
                 switch value {
                 case .string(_):
-                    self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                    self.defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
                 case .list(let list):
-                    self.color = UIColor(hex: list.iconColorName)
+                    self.defaultColor = UIColor(hex: list.iconColorName)
                 case .addNew(_):
-                    self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                    self.defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
                 }
             }
         }
         
         var color: UIColor
+        var defaultColor: UIColor
         var colorIndex: Int
         var colorAlpha: CGFloat = 1
         
@@ -72,11 +73,18 @@ struct Field {
             
             switch value {
             case .string(_):
-                self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                self.color = defaultColor
+                self.defaultColor = defaultColor
+                
             case .list(let list):
-                self.color = UIColor(hex: list.iconColorName)
+                let defaultColor = UIColor(hex: list.iconColorName)
+                self.color = defaultColor
+                self.defaultColor = defaultColor
             case .addNew(_):
-                self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
+                self.color = defaultColor
+                self.defaultColor = defaultColor
             }
         }
     }

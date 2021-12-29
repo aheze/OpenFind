@@ -15,6 +15,8 @@ class RightView: UIView {
     
     @IBOutlet weak var imageViewWidthC: NSLayoutConstraint!
     @IBOutlet weak var imageViewHeightC: NSLayoutConstraint!
+    @IBOutlet weak var imageViewCenterXC: NSLayoutConstraint!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,5 +41,6 @@ class RightView: UIView {
         
         imageViewWidthC.constant = SearchConstants.fieldIconLength
         imageViewHeightC.constant = SearchConstants.fieldIconLength
+        imageViewCenterXC.constant = -SearchConstants.fieldRightViewPadding
     }
 }

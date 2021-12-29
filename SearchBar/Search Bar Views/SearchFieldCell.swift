@@ -16,6 +16,11 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var rightView: RightView!
     
+    /// full-width button
+    @IBOutlet weak var triggerButton: UIButton!
+    @IBAction func triggerButtonPressed(_ sender: Any) {
+        entireViewTapped?()
+    }
     
     @IBOutlet weak var baseViewTopC: NSLayoutConstraint!
     @IBOutlet weak var baseViewRightC: NSLayoutConstraint!
@@ -32,7 +37,9 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet weak var addNewViewHeightC: NSLayoutConstraint!
     @IBOutlet weak var addNewImageView: UIImageView!
     
-    
+    var leftViewTapped: (() -> Void)?
+    var rightViewTapped: (() -> Void)?
+    var entireViewTapped: (() -> Void)?
     
     
     var fieldChanged: ((Field) -> Void)?
@@ -105,9 +112,16 @@ class SearchFieldCell: UICollectionViewCell {
         addNewImageView.preferredSymbolConfiguration = configuration
         addNewImageView.image = image
         
-        //        leftView.tapped = { [weak self] in
+        leftView.buttonView.tapped = { [weak self] in
+            self?.leftViewTapped?()
+        }
         
-        //        }
+        rightView.buttonView.tapped = { [weak self] in
+            self?.rightViewTapped?()
+        }
+        
+        addNewViewCenterHorizontallyWithRightC.constant = -SearchConstants.fieldRightViewPadding
+        
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -125,6 +139,9 @@ class SearchFieldCell: UICollectionViewCell {
             
             leftViewWidthC.constant = percentageVisible * SearchConstants.fieldLeftViewWidth
             rightViewWidthC.constant = percentageVisible * SearchConstants.fieldRightViewWidth
+            
+            baseViewLeftC.constant = SearchConstants.fieldBaseViewLeftPadding * attributes.percentage
+            baseViewRightC.constant = SearchConstants.fieldBaseViewRightPadding * attributes.percentage
         }
     }
     

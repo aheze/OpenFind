@@ -26,6 +26,21 @@ extension SearchViewController: UICollectionViewDataSource {
         let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)
         setup()
         
+        cell.leftViewTapped = { [weak self] in
+            self?.presentPopover(for: field, from: cell)
+        }
+        
+        cell.triggerButton.isEnabled = !field.focused
+        cell.entireViewTapped = { [weak self] in
+            guard let self = self else { return }
+            if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: indexPath.item]?.fullOrigin {
+                let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
+                self.searchCollectionView.setContentOffset(targetOrigin, animated: true)
+            }
+            if let cell = collectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                cell.textField.becomeFirstResponder()
+            }
+        }
         
         return cell
     }
