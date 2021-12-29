@@ -66,10 +66,7 @@ class CameraViewController: UIViewController, PageViewController {
         safeView.backgroundColor = .clear
         
         setupZoom()
-        
-        
-        searchContainerView.addDebugBorders(.blue)
-        searchContainerView.isUserInteractionEnabled = true
+
     }
 }
 
