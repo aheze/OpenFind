@@ -8,16 +8,6 @@
 import UIKit
 
 struct Field {
-//    init(text: Text, index: Int = 0) {
-//        self.text = text
-//        fieldHuggingWidth = getFieldHuggingWidth()
-//    }
-//
-//    var text = Text(value: .string(""), colorIndex: 0) {
-//        didSet {
-//            fieldHuggingWidth = getFieldHuggingWidth()
-//        }
-//    }
     
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what

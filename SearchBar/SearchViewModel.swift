@@ -24,4 +24,8 @@ class SearchViewModel: ObservableObject {
             )
         )
     ]
+    
+    var values: [Field.Value] {
+        return fields.dropLast().map { $0.value }
+    }
 }

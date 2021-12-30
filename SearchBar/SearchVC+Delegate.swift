@@ -1,5 +1,5 @@
 //
-//  SearchCV+Delegate.swift
+//  SearchVC+Delegate.swift
 //  SearchBar
 //
 //  Created by Zheng on 10/14/21.
@@ -21,29 +21,12 @@ extension SearchViewController: UICollectionViewDelegate {
             generator.impactOccurred()
         }
         
-//        if shouldHighlight {
-//            let indexPath = IndexPath(item: searchViewModel.fields.count - 1, section: 0)
-//            if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-//                let (_, animations, _) = cell.showAddNew(true, changeColorOnly: true)
-//
-//                if animate {
-//                    UIView.animate(withDuration: 0.2) {
-//                        animations()
-//                    }
-//                } else {
-        //                    animations()
-        //                }
-        //            }
-        //        } else {
         let indexPath = IndexPath(item: searchViewModel.fields.count - 1, section: 0)
         if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-            //                let (_, animations, _) = cell.showAddNew(false, changeColorOnly: true)
-            
             UIView.animate(withDuration: 0.2) {
                 cell.contentView.backgroundColor = shouldHighlight ? SearchConstants.highlightedFieldBackgroundColor : SearchConstants.fieldBackgroundColor
             }
         }
-        //        }
     }
     
     func convertAddNewCellToRegularCell(animationCompletion: @escaping (() -> Void) = {}) {
