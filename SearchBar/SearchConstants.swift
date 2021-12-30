@@ -14,6 +14,7 @@ struct SearchConstants {
     static var cellSpacing = CGFloat(8)
     static var fieldFont = UIFont.preferredFont(forTextStyle: .title1)
     
+    static var highlightedFieldBackgroundColor = UIColor(hex: 0x00aeef)
     static var fieldBackgroundColor = UIColor.black.withAlphaComponent(0.5)
     static var fieldCornerRadius = CGFloat(16)
     
@@ -30,7 +31,7 @@ struct SearchConstants {
     static var fieldRightViewWidth = CGFloat(48)
     static var fieldRightViewPadding = CGFloat(6)
     
-    static var clearIconLength = CGFloat(28)
+    static var clearIconLength = CGFloat(22)
     
     static var addWordFieldHuggingWidth = CGFloat(24)
     static var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left

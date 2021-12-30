@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,7 +30,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-QC-iKm">
                                 <rect key="frame" x="80" y="0.0" width="498" height="157"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="100Blue"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
@@ -43,19 +42,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v90-ox-xGV">
-                                <rect key="frame" x="317" y="66.5" width="24" height="24"/>
+                                <rect key="frame" x="319" y="68.5" width="20" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxP-dI-uGw" customClass="ClearIconView" customModule="Camera" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="OxP-dI-uGw" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" id="6fI-gD-obG"/>
-                                    <constraint firstAttribute="width" constant="24" identifier="Add New WIdth" id="Sxc-XY-Xa1"/>
+                                    <constraint firstAttribute="width" constant="20" identifier="Add New WIdth" id="Sxc-XY-Xa1"/>
                                     <constraint firstItem="OxP-dI-uGw" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" id="XHG-VC-twI"/>
-                                    <constraint firstAttribute="height" constant="24" identifier="Add New Height" id="fEY-hg-Mh1"/>
+                                    <constraint firstAttribute="height" constant="20" identifier="Add New Height" id="fEY-hg-Mh1"/>
                                     <constraint firstAttribute="trailing" secondItem="OxP-dI-uGw" secondAttribute="trailing" id="n20-Jj-NEk"/>
                                     <constraint firstAttribute="bottom" secondItem="OxP-dI-uGw" secondAttribute="bottom" id="n3n-2P-38z"/>
                                 </constraints>
@@ -128,9 +127,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="100Blue">
-            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

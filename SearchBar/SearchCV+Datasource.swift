@@ -16,18 +16,36 @@ extension SearchViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         let field = searchViewModel.fields[indexPath.item]
         
-        cell.setField(field) /// cell can configure itself
-        cell.fieldChanged = { [weak self] field in
-            self?.searchViewModel.fields[indexPath.item] = field
+
+        cell.textField.text = field.text.value.getText()
+        
+        switch field.text.value {
+        case .string:
+            cell.loadConfiguration(showAddNew: false)
+        case .list:
+            cell.loadConfiguration(showAddNew: false)
+        case .addNew:
+            cell.loadConfiguration(showAddNew: true)
+        }
+        
+        cell.textChanged = { [weak self] text in
+            self?.searchViewModel.fields[indexPath.item].text.value = .string(text)
+            if text.isEmpty {
+                cell.rightView.clearIconView.setState(.hidden, animated: true)
+            } else {
+                cell.rightView.clearIconView.setState(.clear, animated: true)
+            }
+//            self?.searchViewModel.fields[indexPath.item] = field
+            
         }
         cell.leftView.findIconView.setTint(color: field.text.selectedColor ?? field.text.defaultColor, alpha: field.text.colorAlpha)
-        
-        /// setup constraints
-        let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)
-        setup()
+
         
         cell.leftViewTapped = { [weak self] in
             self?.presentPopover(for: indexPath.item, from: cell)
+        }
+        cell.rightViewTapped = { [weak self] in
+//            fidl
         }
         
         cell.triggerButton.isEnabled = !field.focused

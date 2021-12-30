@@ -40,42 +40,42 @@ class SearchFieldCell: UICollectionViewCell {
     var rightViewTapped: (() -> Void)?
     var entireViewTapped: (() -> Void)?
     
-    var fieldChanged: ((Field) -> Void)?
+    var textChanged: ((String) -> Void)?
     
     /// set field from datasource
     /// ONLY cellForRowAt
     func setField(_ field: Field) {
-        self.field = field
-        textField.text = field.text.value.getText()
-        
-        switch field.text.value {
-        case .string:
-            break
-        case .list:
-            break
-        case .addNew:
-            let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
-            animations()
-            completion()
-            contentView.backgroundColor = SearchConstants.fieldBackgroundColor
-            return
-        }
-        let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
-        animations()
-        completion()
+        //        self.field = field
+        //        textField.text = field.text.value.getText()
+        //
+        //        switch field.text.value {
+        //        case .string:
+        //            break
+        //        case .list:
+        //            break
+        //        case .addNew:
+        //            let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
+        //            animations()
+        //            completion()
+        //            contentView.backgroundColor = SearchConstants.fieldBackgroundColor
+        //            return
+        //        }
+        //        let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
+        //        animations()
+        //        completion()
     }
     
-    func updateField(_ makeChangesTo: (inout Field) -> Void) {
-        makeChangesTo(&field)
-        fieldChanged?(field)
-    }
+    //    func updateField(_ makeChangesTo: (inout Field) -> Void) {
+    //        makeChangesTo(&field)
+    //        fieldChanged?(field)
+    //    }
     
-    var field = Field(text: .init(value: .string(""), colorIndex: 0)) {
-        /// perform instant updates, no animation
-        didSet {
-            textField.isEnabled = field.focused
-        }
-    }
+    //    var field = Field(text: .init(value: .string(""), colorIndex: 0)) {
+    //        /// perform instant updates, no animation
+    //        didSet {
+    //            textField.isEnabled = field.focused
+    //        }
+    //    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -112,6 +112,7 @@ class SearchFieldCell: UICollectionViewCell {
         }
         
         addNewViewCenterHorizontallyWithRightC.constant = -SearchConstants.fieldRightViewPadding
+        
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -135,54 +136,65 @@ class SearchFieldCell: UICollectionViewCell {
         }
     }
     
-    func showAddNew(_ show: Bool, changeColorOnly: Bool) -> (() -> Void, () -> Void, () -> Void) {
+    func loadConfiguration(showAddNew isAddNew: Bool) {
+        if isAddNew {
+            let (setup, animations, completion) = showAddNew(true)
+            setup()
+            animations()
+            completion()
+            contentView.backgroundColor = SearchConstants.fieldBackgroundColor
+        } else {
+            let (setup, animations, completion) = showAddNew(false)
+            setup()
+            animations()
+            completion()
+        }
+    }
+    
+    func showAddNew(_ show: Bool) -> (() -> Void, () -> Void, () -> Void) {
         var setup = {} /// constraints
         var animationBlock = {}
         var completion = {} /// cleanup
         
-        if changeColorOnly {
-            animationBlock = { [weak self] in
-                self?.contentView.backgroundColor = show ? .blue : SearchConstants.fieldBackgroundColor
-            }
-        } else {
-            setup = { [weak self] in
-                if show { /// keep plus button centered
-                    self?.addNewViewCenterHorizontallyWithRightC.isActive = false
-                    self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
-                } else { /// animate plus button to the right
-                    self?.addNewViewCenterHorizontallyWithSuperview.isActive = false
-                    self?.addNewViewCenterHorizontallyWithRightC.isActive = true
-                }
-            }
-            
-            animationBlock = { [weak self] in
-                if show { /// show the plus
-                    self?.addNewView.transform = .identity.rotated(by: 135.degreesToRadians)
-                    self?.textField.alpha = 0
-                    self?.leftView.buttonView.alpha = 0
-                    self?.rightView.buttonView.alpha = 0
-                    self?.contentView.backgroundColor = .blue
-                } else { /// hide the plus, go to normal
-                    self?.addNewView.transform = .identity
-                    self?.textField.alpha = 1
-                    self?.leftView.buttonView.alpha = 1
-                    self?.contentView.backgroundColor = SearchConstants.fieldBackgroundColor
-                }
-                
-                self?.baseView.layoutIfNeeded()
-            }
-            
-            completion = { [weak self] in
-                if show { /// show the plus
-                    self?.rightView.buttonView.alpha = 0
-                    self?.addNewView.alpha = 1
-                } else { /// hide the plus
-                    self?.rightView.buttonView.alpha = 1
-                    self?.addNewView.alpha = 0
-                }
+        setup = { [weak self] in
+            if show { /// keep plus button centered
+                self?.addNewViewCenterHorizontallyWithRightC.isActive = false
+                self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
+                self?.addNewIconView.setState(.delete, animated: false)
+                self?.rightView.clearIconView.setState(.delete, animated: false)
+            } else { /// animate plus button to the right
+                self?.addNewViewCenterHorizontallyWithSuperview.isActive = false
+                self?.addNewViewCenterHorizontallyWithRightC.isActive = true
             }
         }
         
+        animationBlock = { [weak self] in
+            if show { /// show the plus
+                
+                /// shrink at first
+                self?.addNewView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9).rotated(by: 135.degreesToRadians)
+                self?.textField.alpha = 0
+                self?.leftView.buttonView.alpha = 0
+                self?.rightView.buttonView.alpha = 0
+            } else { /// hide the plus, go to normal
+                self?.addNewView.transform = .identity
+                self?.textField.alpha = 1
+                self?.leftView.buttonView.alpha = 1
+                self?.contentView.backgroundColor = SearchConstants.fieldBackgroundColor
+            }
+            
+            self?.baseView.layoutIfNeeded()
+        }
+        
+        completion = { [weak self] in
+            if show { /// show the plus
+                self?.rightView.buttonView.alpha = 0
+                self?.addNewView.alpha = 1
+            } else { /// hide the plus
+                self?.rightView.buttonView.alpha = 1
+                self?.addNewView.alpha = 0
+            }
+        }
         return (setup, animationBlock, completion)
     }
 }
@@ -193,21 +205,17 @@ extension SearchFieldCell: UITextFieldDelegate {
            let textRange = Range(range, in: text)
         {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-
-            updateField {
-                $0.text.value = .string(updatedText)
-            }
+            textChanged?(updatedText)
+            //            updateField {
+            //                $0.text.value = .string(updatedText)
+            //            }
             
-            if updatedText.isEmpty {
-                rightView.clearIconView.setState(.hidden, animated: true)
-            } else {
-                rightView.clearIconView.setState(.clear, animated: true)
-            }
+            
         }
         
         return true
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

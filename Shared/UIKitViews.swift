@@ -97,7 +97,6 @@ class ClearIconView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("lll")
         backgroundView.layer.cornerRadius = bounds.height / 2
     }
     
@@ -111,14 +110,13 @@ class ClearIconView: UIView {
         return view
     }()
     lazy var iconView: UIImageView = {
-        let configuration = UIImage.SymbolConfiguration(font: SearchConstants.fieldFont)
-        let image = UIImage(systemName: "xmark", withConfiguration: configuration)
+
+        let image = UIImage(named: "xmark")
         let imageView = UIImageView(image: image)
         imageView.frame = bounds
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.tintColor = UIColor.white.withAlphaComponent(0.75)
-        imageView.contentMode = .scaleAspectFit
-        backgroundView.addSubview(imageView)
+        addSubview(imageView)
         return imageView
     }()
     
@@ -129,6 +127,7 @@ class ClearIconView: UIView {
         _ = iconView
         
         setState(.hidden)
+        
     }
     
     func setState(_ state: State, animated: Bool = false) {
@@ -137,12 +136,16 @@ class ClearIconView: UIView {
             switch state {
             case .hidden:
                 self.backgroundView.alpha = 0
-                self.iconView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                self.iconView.alpha = 0
             case .clear:
                 self.backgroundView.alpha = 1
+                self.backgroundView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.iconView.alpha = 1
                 self.iconView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             case .delete:
-                self.backgroundView.alpha = 1
+                self.backgroundView.alpha = 0
+                self.backgroundView.transform = .identity
+                self.iconView.alpha = 1
                 self.iconView.transform = .identity
             }
         }
