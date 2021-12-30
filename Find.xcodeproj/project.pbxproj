@@ -192,6 +192,7 @@
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
 		3C2DBBC2277D220400911A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8427477ABC0010FD68 /* Assets.xcassets */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C2DBBC5277E3A8000911A74 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
 		3C3232E0261153FB00A33192 /* CameraVC+Shutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */; };
 		3C3232E826115C7900A33192 /* PostAnnouncement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232E726115C7900A33192 /* PostAnnouncement.swift */; };
 		3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */; };
@@ -888,7 +889,6 @@
 		49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B92421D97B005F4E92 /* FindModel.swift */; };
 		49E9D89224996E1A0006757C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49E9D89424996E1A0006757C /* Localizable.strings */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
-		8511131C23011FC5E7A99B45 /* Pods_TabController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2303362B722FEAF874985B /* Pods_TabController.framework */; };
 		9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */; };
 		E8B76D7E594D3D2C5268626E /* Pods_Camera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1986AAC4E5A69BC70EAB9B7E /* Pods_Camera.framework */; };
 		EFD92ECDDE789B6A27B7A111 /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE9C1F1274B4937008C903C /* Pods_Find.framework */; };
@@ -1559,7 +1559,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C36430D277BDF430038CB18 /* Popovers in Frameworks */,
-				8511131C23011FC5E7A99B45 /* Pods_TabController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3912,6 +3911,7 @@
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C1D19E12759B7CC0064F2C6 /* IconButtons.swift in Sources */,
+				3C2DBBC5277E3A8000911A74 /* SearchVC+Cell.swift in Sources */,
 				3CE9C206274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3C1D19E8275A983C0064F2C6 /* ListsViewModel.swift in Sources */,
 				3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */,
@@ -4964,7 +4964,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YA533DMD5J;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TabController/Testing/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera";

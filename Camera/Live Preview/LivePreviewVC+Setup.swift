@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import SnapKit
 import UIKit
 
 extension LivePreviewViewController {
@@ -21,9 +20,7 @@ extension LivePreviewViewController {
         } else {
             let fallbackView = FallbackView()
             view.addSubview(fallbackView)
-            fallbackView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
+            fallbackView.pinEdgesToSuperview()
             fallbackView.goToPhotos = { [weak self] in
                 self?.findFromPhotosButtonPressed?()
             }

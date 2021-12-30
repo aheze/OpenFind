@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,25 +23,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RW1-m9-ETa">
-                    <rect key="frame" x="16" y="376.5" width="382" height="143"/>
+                    <rect key="frame" x="57" y="376.5" width="300" height="143"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHo-Mq-xZq">
-                            <rect key="frame" x="16" y="16" width="350" height="111"/>
+                            <rect key="frame" x="16" y="16" width="268" height="111"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ru4-Be-cRn">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="268" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ne-VA-C1E">
-                                    <rect key="frame" x="0.0" y="30.5" width="350" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="30.5" width="268" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ter-3a-z3V">
-                                    <rect key="frame" x="0.0" y="61" width="350" height="50"/>
+                                    <rect key="frame" x="0.0" y="61" width="268" height="50"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -72,6 +72,7 @@
                         <constraint firstItem="eHo-Mq-xZq" firstAttribute="leading" secondItem="RW1-m9-ETa" secondAttribute="leading" constant="16" id="4FF-Tl-e36"/>
                         <constraint firstItem="eHo-Mq-xZq" firstAttribute="top" secondItem="RW1-m9-ETa" secondAttribute="top" constant="16" id="4nD-To-YXj"/>
                         <constraint firstItem="eHo-Mq-xZq" firstAttribute="centerY" secondItem="RW1-m9-ETa" secondAttribute="centerY" id="7Lp-ha-QPW"/>
+                        <constraint firstAttribute="width" priority="750" constant="300" id="CQ5-zi-w0b"/>
                         <constraint firstAttribute="trailing" secondItem="eHo-Mq-xZq" secondAttribute="trailing" constant="16" id="h12-Gd-2Pu"/>
                     </constraints>
                 </view>
@@ -79,9 +80,10 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="DarkBlue"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RW1-m9-ETa" secondAttribute="trailing" constant="16" id="1hU-8h-5QS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RW1-m9-ETa" secondAttribute="trailing" constant="16" id="1hU-8h-5QS"/>
                 <constraint firstItem="RW1-m9-ETa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="FMu-k8-nCu"/>
-                <constraint firstItem="RW1-m9-ETa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="er8-Ub-gi3"/>
+                <constraint firstItem="RW1-m9-ETa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H0k-cR-4iW"/>
+                <constraint firstItem="RW1-m9-ETa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="er8-Ub-gi3"/>
             </constraints>
             <point key="canvasLocation" x="132" y="126"/>
         </view>

@@ -16,3 +16,16 @@ extension CGRect {
         height.constant = size.height
     }
 }
+
+extension UIView {
+    func pinEdgesToSuperview() {
+        guard let superview = superview else { return }
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: superview.topAnchor),
+            self.rightAnchor.constraint(equalTo: superview.rightAnchor),
+            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
+            self.leftAnchor.constraint(equalTo: superview.leftAnchor)
+        ])
+    }
+}
