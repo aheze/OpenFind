@@ -11,7 +11,17 @@ import UIKit
 class SearchViewModel: ObservableObject {
     var availableLists = [List]()
     var fields = [
-        Field(text: .init(value: .string(""), colorIndex: 0)),
-        Field(text: .init(value: .addNew(""), colorIndex: 1))
+        Field(
+            value: .string(""),
+            attributes: .init(
+                defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 0)
+            )
+        ),
+        Field(
+            value: .addNew(""),
+            attributes: .init(
+                defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 1)
+            )
+        )
     ]
 }

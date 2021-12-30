@@ -49,11 +49,11 @@ extension SearchViewController: UICollectionViewDelegate {
     func convertAddNewCellToRegularCell(animationCompletion: @escaping (() -> Void) = {}) {
         if
             let addNewFieldIndex = searchViewModel.fields.indices.last,
-            case Field.Value.addNew = searchViewModel.fields[addNewFieldIndex].text.value
+            case Field.Value.addNew = searchViewModel.fields[addNewFieldIndex].value
         {
             searchCollectionView.isUserInteractionEnabled = false
             searchViewModel.fields[addNewFieldIndex].focused = true
-            searchViewModel.fields[addNewFieldIndex].text.value = .addNew("")
+            searchViewModel.fields[addNewFieldIndex].value = .addNew("")
             
             let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
@@ -75,13 +75,14 @@ extension SearchViewController: UICollectionViewDelegate {
         searchCollectionViewFlowLayout.highlightingAddWordField = false
         
         /// append new "Add New" cell
-        let newField = Field(text: .init(value: .addNew(""), colorIndex: searchViewModel.fields.count))
+        let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: searchViewModel.fields.count)
+        let newField = Field(value: .addNew(""), attributes: .init(defaultColor: defaultColor))
         searchViewModel.fields.append(newField)
         
         let indexOfLastField = searchViewModel.fields.count - 2 /// index of the last field (not including "Add New" cell)
         
-        if case .addNew(let currentString) = searchViewModel.fields[indexOfLastField].text.value {
-            searchViewModel.fields[indexOfLastField].text.value = .string(currentString)
+        if case .addNew(let currentString) = searchViewModel.fields[indexOfLastField].value {
+            searchViewModel.fields[indexOfLastField].value = .string(currentString)
         }
         
         searchCollectionView.reloadData() /// add the new field

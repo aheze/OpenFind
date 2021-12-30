@@ -17,9 +17,9 @@ extension SearchViewController: UICollectionViewDataSource {
         let field = searchViewModel.fields[indexPath.item]
         
 
-        cell.textField.text = field.text.value.getText()
+        cell.textField.text = field.value.getText()
         
-        switch field.text.value {
+        switch field.value {
         case .string:
             cell.loadConfiguration(showAddNew: false)
         case .list:
@@ -29,7 +29,7 @@ extension SearchViewController: UICollectionViewDataSource {
         }
         
         cell.textChanged = { [weak self] text in
-            self?.searchViewModel.fields[indexPath.item].text.value = .string(text)
+            self?.searchViewModel.fields[indexPath.item].value = .string(text)
             if text.isEmpty {
                 cell.rightView.clearIconView.setState(.hidden, animated: true)
             } else {
@@ -38,7 +38,10 @@ extension SearchViewController: UICollectionViewDataSource {
 //            self?.searchViewModel.fields[indexPath.item] = field
             
         }
-        cell.leftView.findIconView.setTint(color: field.text.selectedColor ?? field.text.defaultColor, alpha: field.text.colorAlpha)
+        cell.leftView.findIconView.setTint(
+            color: field.attributes.selectedColor ?? field.attributes.defaultColor,
+            alpha: field.attributes.alpha
+        )
 
         
         cell.leftViewTapped = { [weak self] in

@@ -8,16 +8,16 @@
 import UIKit
 
 struct Field {
-    init(text: Text, index: Int = 0) {
-        self.text = text
-        fieldHuggingWidth = getFieldHuggingWidth()
-    }
-    
-    var text = Text(value: .string(""), colorIndex: 0) {
-        didSet {
-            fieldHuggingWidth = getFieldHuggingWidth()
-        }
-    }
+//    init(text: Text, index: Int = 0) {
+//        self.text = text
+//        fieldHuggingWidth = getFieldHuggingWidth()
+//    }
+//
+//    var text = Text(value: .string(""), colorIndex: 0) {
+//        didSet {
+//            fieldHuggingWidth = getFieldHuggingWidth()
+//        }
+//    }
     
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what
@@ -28,6 +28,20 @@ struct Field {
     
     /// if expanded
     var focused = false
+    
+    var value: Value {
+        didSet {
+            fieldHuggingWidth = getFieldHuggingWidth()
+        }
+    }
+    
+    var attributes: Attributes
+    
+    init(value: Value, attributes: Attributes) {
+        self.value = value
+        self.attributes = attributes
+        fieldHuggingWidth = getFieldHuggingWidth()
+    }
     
     enum Value {
         case string(String)
@@ -46,54 +60,18 @@ struct Field {
         }
     }
     
-    struct Text {
-        var value: Value {
-            didSet {
-                switch value {
-                case .string:
-                    defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
-                case .list(let list):
-                    defaultColor = UIColor(hex: list.iconColorName)
-                case .addNew:
-                    defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
-                }
-            }
-        }
-        
-        var selectedColor: UIColor?
+    struct Attributes {
         var defaultColor: UIColor
-        var colorIndex: Int
-        var colorAlpha: CGFloat = 1
-        
-        init(value: Value, colorIndex: Int) {
-            self.value = value
-            self.colorIndex = colorIndex
-            
-            switch value {
-            case .string:
-                let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
-                self.selectedColor = defaultColor
-                self.defaultColor = defaultColor
-                
-            case .list(let list):
-                let defaultColor = UIColor(hex: list.iconColorName)
-                self.selectedColor = defaultColor
-                self.defaultColor = defaultColor
-            case .addNew:
-                let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
-                self.selectedColor = defaultColor
-                self.defaultColor = defaultColor
-            }
-        }
+        var selectedColor: UIColor?
+        var alpha: CGFloat = 1
     }
     
     private func getFieldHuggingWidth() -> CGFloat {
-        if case .addNew(let string) = text.value, string.isEmpty {
+        if case .addNew(let string) = value, string.isEmpty {
             return SearchConstants.addWordFieldHuggingWidth
         } else {
-            let fieldText = text.value.getText()
+            let fieldText = value.getText()
             let finalText = fieldText.isEmpty ? SearchConstants.addTextPlaceholder : fieldText
-
             let textWidth = finalText.width(withConstrainedHeight: 10, font: SearchConstants.fieldFont)
             let leftPaddingWidth = SearchConstants.fieldBaseViewLeftPadding
             let rightPaddingWidth = SearchConstants.fieldBaseViewRightPadding
