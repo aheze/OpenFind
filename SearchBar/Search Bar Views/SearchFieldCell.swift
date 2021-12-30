@@ -39,43 +39,15 @@ class SearchFieldCell: UICollectionViewCell {
     var leftViewTapped: (() -> Void)?
     var rightViewTapped: (() -> Void)?
     var entireViewTapped: (() -> Void)?
-    
     var textChanged: ((String) -> Void)?
-    
-    /// set field from datasource
-    /// ONLY cellForRowAt
-    func setField(_ field: Field) {
-        //        self.field = field
-        //        textField.text = field.text.value.getText()
-        //
-        //        switch field.text.value {
-        //        case .string:
-        //            break
-        //        case .list:
-        //            break
-        //        case .addNew:
-        //            let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
-        //            animations()
-        //            completion()
-        //            contentView.backgroundColor = SearchConstants.fieldBackgroundColor
-        //            return
-        //        }
-        //        let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
-        //        animations()
-        //        completion()
+
+    func activate(_ isActive: Bool) {
+        if isActive {
+            triggerButton.isEnabled = false
+        } else {
+            triggerButton.isEnabled = true
+        }
     }
-    
-    //    func updateField(_ makeChangesTo: (inout Field) -> Void) {
-    //        makeChangesTo(&field)
-    //        fieldChanged?(field)
-    //    }
-    
-    //    var field = Field(text: .init(value: .string(""), colorIndex: 0)) {
-    //        /// perform instant updates, no animation
-    //        didSet {
-    //            textField.isEnabled = field.focused
-    //        }
-    //    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -18,9 +18,6 @@ struct Field: Identifiable {
     /// width of text label + side views, nothing more
     var fieldHuggingWidth = CGFloat(200)
     
-    /// if expanded
-    var focused = false
-    
     var value: Value {
         didSet {
             fieldHuggingWidth = getFieldHuggingWidth()

@@ -29,7 +29,7 @@ extension SearchViewController: UICollectionViewDataSource {
         var fieldsCount = searchViewModel.fields.count
         
         /// The last field (not add new) is being deleted, make the previous one (fallback) full width
-        if let fallbackIndex = searchCollectionViewFlowLayout.fallbackIndex {
+        if searchCollectionViewFlowLayout.fallbackIndex != nil {
             fieldsCount -= 1
         }
         
