@@ -18,6 +18,18 @@ class SearchViewModel: ObservableObject {
             )
         ),
         Field(
+            value: .string(""),
+            attributes: .init(
+                defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 0)
+            )
+        ),
+        Field(
+            value: .string(""),
+            attributes: .init(
+                defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 0)
+            )
+        ),
+        Field(
             value: .addNew(""),
             attributes: .init(
                 defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 1)

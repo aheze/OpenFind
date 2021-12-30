@@ -98,17 +98,57 @@ extension SearchViewController {
         
         if searchViewModel.values.count >= 2 {
             
-            searchCollectionViewFlowLayout.deletedIndex = index
-            UIView.animate(withDuration: 2) {
+            
+           
                 
+               
+                
+                
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            searchCollectionViewFlowLayout.deletedIndex = index
+            UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()
+                
             }
             
             
-            if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-                cell.textField.becomeFirstResponder()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.searchCollectionViewFlowLayout.deletedIndex = nil
+                self.searchViewModel.fields.remove(at: index)
+                self.searchCollectionView.deleteItems(at: [index.indexPath])
             }
+//                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index - 1]?.fullOrigin {
+//                    let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
+//                    self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                        self.searchCollectionViewFlowLayout.deletedIndex = nil
+//                        self.searchViewModel.fields.remove(at: index)
+//                        self.searchCollectionView.reloadData()
+//                    }
+//                }
+//            }
+            //                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index - 1]?.fullOrigin {
+//                    print("O \(origin)")
+//                    let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
+//                    self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
+//                }
+//            }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                self.searchViewModel.fields.remove(at: index)
+//                self.searchCollectionView.reloadData()
+//                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index]?.fullOrigin {
+//                    self.searchCollectionView.setContentOffset(CGPoint(x: origin, y: 0), animated: false) /// go to that offset instantly
+//                }
+//            }
+
+            
+            
+            
+//            if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
+//                cell.textField.becomeFirstResponder()
+//            }
 //            searchViewModel.fields.remove(at: index)
 //            searchCollectionViewFlowLayout.deletingIndex = index
 //            searchCollectionView.deleteItems(at: [index.indexPath])

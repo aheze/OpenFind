@@ -206,21 +206,29 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 width = fieldOffset.fullWidth - fieldOffset.shift
             }
             
-            if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
-                fullOrigin -= SearchConstants.cellSpacing
-            }
             
-            if let deletedIndex = deletedIndex, deletedIndex + 1 == fullIndex {
-                fieldOffset.fullWidth += SearchConstants.cellSpacing
-            }
             
             let indexPath = IndexPath(item: fullIndex, section: 0)
             let attributes = FieldLayoutAttributes(forCellWith: indexPath)
             attributes.frame = CGRect(x: origin, y: 0, width: width, height: SearchConstants.cellHeight)
+            attributes.alpha = fieldOffset.alpha
+            attributes.percentage = fieldOffset.percentage
+            
+//            if let deletedIndex = deletedIndex, deletedIndex - 1 == fullIndex {
+//                fullOrigin -= SearchConstants.cellSpacing / 2
+//            }
+            
+            if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
+                attributes.transform = .init(scaleX: 0.5, y: 0.5)
+                attributes.alpha = 0
+            }
+            
+//            if let deletedIndex = deletedIndex, deletedIndex + 1 == fullIndex {
+//                fieldOffset.fullWidth += SearchConstants.cellSpacing
+//            }
+            
             attributes.fullOrigin = fullOrigin
             attributes.fullWidth = fieldOffset.fullWidth
-            attributes.percentage = fieldOffset.percentage
-            attributes.alpha = fieldOffset.alpha
             layoutAttributes.append(attributes)
             
             var additionalOffset = fieldOffset.fullWidth
