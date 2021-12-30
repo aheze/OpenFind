@@ -7,7 +7,9 @@
 
 import UIKit
 
-struct Field {
+struct Field: Identifiable {
+    
+    let id = UUID()
     
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what
@@ -82,12 +84,14 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
     var fullOrigin = CGFloat(0) /// origin when expanded
     var fullWidth = CGFloat(0) /// width when expanded
     var percentage = CGFloat(0) /// percentage shrunk
+    var beingDeleted = false
     
     override open func copy(with zone: NSZone?) -> Any {
         let copy = super.copy(with: zone) as! FieldLayoutAttributes
         copy.fullOrigin = fullOrigin
         copy.fullWidth = fullWidth
         copy.percentage = percentage
+        copy.beingDeleted = beingDeleted
         
         return copy
     }
@@ -97,7 +101,8 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
         guard
             attributes.fullOrigin == fullOrigin,
             attributes.fullWidth == fullWidth,
-            attributes.percentage == percentage
+            attributes.percentage == percentage,
+            attributes.beingDeleted == beingDeleted
         else { return false }
     
         return super.isEqual(object)

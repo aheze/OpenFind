@@ -131,8 +131,13 @@ class SearchFieldCell: UICollectionViewCell {
             leftViewWidthC.constant = percentageVisible * SearchConstants.fieldLeftViewWidth
             rightViewWidthC.constant = percentageVisible * SearchConstants.fieldRightViewWidth
             
-            baseViewLeftC.constant = SearchConstants.fieldBaseViewLeftPadding * attributes.percentage
-            baseViewRightC.constant = SearchConstants.fieldBaseViewRightPadding * attributes.percentage
+            if attributes.beingDeleted {
+                baseViewLeftC.constant = 0
+                baseViewRightC.constant = 0
+            } else {
+                baseViewLeftC.constant = SearchConstants.fieldBaseViewLeftPadding * attributes.percentage
+                baseViewRightC.constant = SearchConstants.fieldBaseViewRightPadding * attributes.percentage
+            }
         }
     }
     
@@ -206,11 +211,6 @@ extension SearchFieldCell: UITextFieldDelegate {
         {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
             textChanged?(updatedText)
-            //            updateField {
-            //                $0.text.value = .string(updatedText)
-            //            }
-            
-            
         }
         
         return true

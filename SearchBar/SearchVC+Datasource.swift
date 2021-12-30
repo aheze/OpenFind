@@ -26,7 +26,15 @@ extension SearchViewController: UICollectionViewDataSource {
             extraPadding += SearchConstants.sidePeekPadding
         }
         
-        if index == searchViewModel.fields.count - 2 || index == searchViewModel.fields.count - 1 {
+        var fieldsCount = searchViewModel.fields.count
+        
+        /// The last field (not add new) is being deleted, make the previous one (fallback) full width
+        if let fallbackIndex = searchCollectionViewFlowLayout.fallbackIndex {
+            fieldsCount -= 1
+        }
+        
+        
+        if index == fieldsCount - 2 || index == fieldsCount - 1 {
             extraPadding += SearchConstants.sidePadding /// if **right edge**, add side padding
         } else {
             extraPadding += SearchConstants.sidePeekPadding

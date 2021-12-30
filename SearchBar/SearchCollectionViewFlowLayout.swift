@@ -51,6 +51,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
+    var deletedIndex: Int?
+    var fallbackIndex: Int?
+    
     /// showing (past the point where it will auto-scroll) the last field or not
     var highlightingAddWordField = false
     
@@ -72,7 +75,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return offset
     }
     
-    var deletedIndex: Int?
+    
     
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
@@ -101,6 +104,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
             var sidePadding = CGFloat(0)
             var cellOriginWithoutSidePadding: CGFloat
+            
+            
             if index == 0 {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
@@ -109,7 +114,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             } else if index == fieldHuggingWidths.count - 2 {
                 sidePadding = SearchConstants.cellSpacing - (SearchConstants.sidePeekPadding - SearchConstants.sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - SearchConstants.sidePeekPadding
-                
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
                 cellOriginWithoutSidePadding = cellOrigin - SearchConstants.sidePeekPadding
             } else {
@@ -117,7 +121,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 sidePadding = SearchConstants.cellSpacing
                 cellOriginWithoutSidePadding = cellOrigin - SearchConstants.sidePeekPadding
             }
-            
+
             if cellOriginWithoutSidePadding >= contentOffset { /// cell is not yet approached
                 let distanceToNextCell = fullCellWidth + sidePadding
                 
@@ -189,7 +193,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
         
         func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat, leftSide: Bool) {
-            var fieldOffset = offsetArray[offsetIndex]
+            let fieldOffset = offsetArray[offsetIndex]
             
             var origin: CGFloat
             var width: CGFloat
@@ -214,18 +218,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             attributes.alpha = fieldOffset.alpha
             attributes.percentage = fieldOffset.percentage
             
-//            if let deletedIndex = deletedIndex, deletedIndex - 1 == fullIndex {
-//                fullOrigin -= SearchConstants.cellSpacing / 2
-//            }
-            
             if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
                 attributes.transform = .init(scaleX: 0.5, y: 0.5)
                 attributes.alpha = 0
+                
+                /// make left and right constraints 0 to prevent conflicts
+                attributes.beingDeleted = true
             }
-            
-//            if let deletedIndex = deletedIndex, deletedIndex + 1 == fullIndex {
-//                fieldOffset.fullWidth += SearchConstants.cellSpacing
-//            }
             
             attributes.fullOrigin = fullOrigin
             attributes.fullWidth = fieldOffset.fullWidth

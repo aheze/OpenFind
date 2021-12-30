@@ -14,7 +14,7 @@ struct SearchConstants {
     static var cellSpacing = CGFloat(8)
     static var fieldFont = UIFont.preferredFont(forTextStyle: .title1)
     
-    static var highlightedFieldBackgroundColor = UIColor(hex: 0x00aeef)
+    static var highlightedFieldBackgroundColor = UIColor(hex: 0x007eef)
     static var fieldBackgroundColor = UIColor.black.withAlphaComponent(0.5)
     static var fieldCornerRadius = CGFloat(16)
     

@@ -17,7 +17,7 @@ extension SearchViewController {
         let text = field.value.getText()
         
         cell.textField.text = text
-        setClearIcon(for: cell, text: text)
+        setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
         switch field.value {
         case .string:
@@ -30,8 +30,12 @@ extension SearchViewController {
         
         cell.textChanged = { [weak self] text in
             guard let self = self else { return }
+            
+            /// update the index
+            let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
+            
             self.searchViewModel.fields[index].value = .string(text)
-            self.updateClearIcons()
+            self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
             
         }
         cell.leftView.findIconView.setTint(
@@ -41,24 +45,33 @@ extension SearchViewController {
         
         
         cell.leftViewTapped = { [weak self] in
-            self?.presentPopover(for: index, from: cell)
+            guard let self = self else { return }
+            
+            /// update the index
+            let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
+            self.presentPopover(for: index, from: cell)
         }
         cell.rightViewTapped = { [weak self] in
             guard let self = self else { return }
             
+            /// update the index
+            let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
             let value = self.searchViewModel.fields[index].value
             if value.getText().isEmpty {
                 self.removeCell(at: index)
             } else {
                 cell.textField.text = ""
                 self.searchViewModel.fields[index].value = .string("")
-                self.setClearIcon(for: cell, text: "")
+                self.setClearIcon(for: cell, text: "", valuesCount: self.searchViewModel.values.count)
             }
         }
         
         cell.triggerButton.isEnabled = !field.focused
         cell.entireViewTapped = { [weak self] in
             guard let self = self else { return }
+            /// update the index
+            let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
+            
             if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index]?.fullOrigin {
                 let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
                 self.searchCollectionView.setContentOffset(targetOrigin, animated: true)
@@ -71,20 +84,21 @@ extension SearchViewController {
         return cell
     }
     
-    func updateClearIcons() {
+    /// `valuesCount` = `searchViewModel.values.count` usually. But if deleting, subtract 1.
+    func updateClearIcons(valuesCount: Int) {
         let values = self.searchViewModel.values
         
         for index in values.indices {
             let field = searchViewModel.fields[index]
             if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-                setClearIcon(for: cell, text: field.value.getText())
+                setClearIcon(for: cell, text: field.value.getText(), valuesCount: valuesCount)
             }
         }
     }
     
-    func setClearIcon(for cell: SearchFieldCell, text: String) {
+    func setClearIcon(for cell: SearchFieldCell, text: String, valuesCount: Int) {
         if text.isEmpty {
-            if searchViewModel.values.count >= 2 {
+            if valuesCount >= 2 {
                 cell.rightView.clearIconView.setState(.delete, animated: true)
             } else {
                 cell.rightView.clearIconView.setState(.hidden, animated: true)
@@ -96,77 +110,63 @@ extension SearchViewController {
     
     func removeCell(at index: Int) {
         
-        if searchViewModel.values.count >= 2 {
-            
-            
-           
-                
-               
-                
-                
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        /// Make sure there are are least 2 fields
+        guard searchViewModel.values.count >= 2 else { return }
+        
+        if index == self.searchViewModel.values.count - 1 {
+            let targetIndex = index - 1
             searchCollectionViewFlowLayout.deletedIndex = index
+            searchCollectionViewFlowLayout.fallbackIndex = targetIndex
+            searchCollectionView.isUserInteractionEnabled = false
+            updateClearIcons(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()
-                
             }
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: targetIndex]?.fullOrigin { /// the last field that's not the "add new" field
+                    
+                    self.searchCollectionViewFlowLayout.highlightingAddWordField = false
+                    let (targetOrigin, _) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
+                    
+                    self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.searchCollectionViewFlowLayout.deletedIndex = nil
+                    self.searchCollectionViewFlowLayout.fallbackIndex = nil
+                    self.searchViewModel.fields.remove(at: index)
+                    self.searchCollectionView.deleteItems(at: [index.indexPath])
+                    self.searchCollectionView.isUserInteractionEnabled = true
+                    self.searchCollectionViewFlowLayout.reachedEndBeforeAddWordField = true
+                }
+            }
+        } else {
+            searchCollectionViewFlowLayout.deletedIndex = index
+            searchCollectionViewFlowLayout.fallbackIndex = nil
+            searchCollectionView.isUserInteractionEnabled = false
+            updateClearIcons(valuesCount: searchViewModel.values.count - 1)
+            UIView.animate(withDuration: 0.4) {
+                self.searchCollectionViewFlowLayout.invalidateLayout()
+                self.searchCollectionView.layoutIfNeeded()
+            }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.searchCollectionViewFlowLayout.deletedIndex = nil
+                self.searchCollectionViewFlowLayout.fallbackIndex = nil
                 self.searchViewModel.fields.remove(at: index)
                 self.searchCollectionView.deleteItems(at: [index.indexPath])
+                self.searchCollectionView.isUserInteractionEnabled = true
+                
+                /// If the focused index is the second to last, make `reachedEndBeforeAddWordField` true
+                if
+                    let focusedIndex = self.searchCollectionViewFlowLayout.focusedCellIndex,
+                    focusedIndex == self.searchViewModel.values.count - 1
+                {
+                    self.searchCollectionViewFlowLayout.reachedEndBeforeAddWordField = true
+                }
             }
-//                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index - 1]?.fullOrigin {
-//                    let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
-//                    self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-//                        self.searchCollectionViewFlowLayout.deletedIndex = nil
-//                        self.searchViewModel.fields.remove(at: index)
-//                        self.searchCollectionView.reloadData()
-//                    }
-//                }
-//            }
-            //                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index - 1]?.fullOrigin {
-//                    print("O \(origin)")
-//                    let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
-//                    self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
-//                }
-//            }
-//            }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                self.searchViewModel.fields.remove(at: index)
-//                self.searchCollectionView.reloadData()
-//                if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index]?.fullOrigin {
-//                    self.searchCollectionView.setContentOffset(CGPoint(x: origin, y: 0), animated: false) /// go to that offset instantly
-//                }
-//            }
-
-            
-            
-            
-//            if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-//                cell.textField.becomeFirstResponder()
-//            }
-//            searchViewModel.fields.remove(at: index)
-//            searchCollectionViewFlowLayout.deletingIndex = index
-//            searchCollectionView.deleteItems(at: [index.indexPath])
-//
-//            searchCollectionView.reloadData() /// add the new field
-//            searchCollectionView.layoutIfNeeded() /// important! **Otherwise, will glitch**
-            
-            /// make sure the last field stays first responder
-//            if let cell = searchCollectionView.cellForItem(at: 0.indexPath) as? SearchFieldCell {
-//                cell.textField.becomeFirstResponder()
-//            }
-            
-//            if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: 0]?.fullOrigin { /// the last field that's not the "add new" field
-////                let (targetOrigin, _) = searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
-////                print("t: \(targetOrigin)")
-//                searchCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true) /// go to that offset instantly
-//            }
-            //                    self.searchCollectionView.deleteItems(at: [index.indexPath])
         }
     }
     
