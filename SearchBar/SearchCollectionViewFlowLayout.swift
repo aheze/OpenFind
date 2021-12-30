@@ -72,6 +72,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return offset
     }
     
+    var deletedIndex: Int?
+    
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
@@ -81,7 +83,11 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         currentOffset = contentOffset
         
         guard let fields = getFields?() else { return }
-        let fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size
+        var fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size
+
+        if let deletedIndex = deletedIndex {
+            fieldHuggingWidths[deletedIndex] = 0
+        }
         
         // MARK: Calculate shifting for each cell
 
@@ -92,9 +98,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         for index in fieldHuggingWidths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
-            
+
             var sidePadding = CGFloat(0)
-            let cellOriginWithoutSidePadding: CGFloat
+            var cellOriginWithoutSidePadding: CGFloat
             if index == 0 {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
@@ -183,10 +189,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
         
         func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat, leftSide: Bool) {
-            let fieldOffset = offsetArray[offsetIndex]
+            var fieldOffset = offsetArray[offsetIndex]
             
-            let origin: CGFloat
-            let width: CGFloat
+            var origin: CGFloat
+            var width: CGFloat
             
             if leftSide {
                 let totalShiftingOffset = offsetArray.dropFirst(offsetIndex).reduce(0) { $0 + $1.shift }
@@ -198,6 +204,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let offset = (offsetIndex == 0) ? 0 : totalShiftingOffset
                 origin = fullOrigin - offset
                 width = fieldOffset.fullWidth - fieldOffset.shift
+            }
+            
+            if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
+                fullOrigin -= SearchConstants.cellSpacing
+            }
+            
+            if let deletedIndex = deletedIndex, deletedIndex + 1 == fullIndex {
+                fieldOffset.fullWidth += SearchConstants.cellSpacing
             }
             
             let indexPath = IndexPath(item: fullIndex, section: 0)
