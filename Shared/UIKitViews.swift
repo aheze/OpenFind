@@ -139,7 +139,7 @@ class ClearIconView: UIView {
                 self.iconView.alpha = 0
             case .clear:
                 self.backgroundView.alpha = 1
-                self.backgroundView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.backgroundView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
                 self.iconView.alpha = 1
                 self.iconView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             case .delete:

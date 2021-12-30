@@ -81,14 +81,14 @@ struct FieldSettingsView: View {
                 FieldSettingsContainer {
                     Button {
                         withAnimation {
-                            model.selectedColor = model.defaultColor
+                            model.selectedColor = nil
                         }
                     } label: {
                         HStack {
                             Text("Default")
                             Spacer()
                             Image(systemName: "checkmark")
-                                .opacity(model.defaultColor == model.selectedColor ? 1 : 0)
+                                .opacity(model.selectedColor == nil ? 1 : 0)
                         }
                         .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                         .modifier(PopoverButtonModifier(backgroundColor: model.defaultColor))
