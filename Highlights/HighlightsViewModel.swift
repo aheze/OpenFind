@@ -18,6 +18,8 @@ struct Highlight: Identifiable, Hashable {
     /// how many frames the highlight wasn't near any other new highlights
     var cyclesWithoutNeighbor = 0
     
+//    var state: State
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
@@ -39,7 +41,9 @@ class HighlightsViewModel: ObservableObject {
         /// old highlights that are under probation
         var lingeringHighlights = Set<Highlight>()
         
+//        var oldHighlights = self.reusedHighlights + self.addedHighlights + self.lingeringHighlights
         var oldHighlights = self.reusedHighlights.union(self.addedHighlights).union(self.addedHighlights)
+
         
         for newHighlight in newHighlights {
             
@@ -58,10 +62,10 @@ class HighlightsViewModel: ObservableObject {
                 minimumDistance < HighlightsConstants.maximumHighlightTransitionProximitySquared
             {
                 /// previous highlight existed, animate over
-                oldHighlights.remove(nearestHighlight)
                 var reusedHighlight = nearestHighlight
                 reusedHighlight.frame = newHighlight.frame
-                reusedHighlights.insert(nearestHighlight)
+                reusedHighlights.insert(reusedHighlight)
+                oldHighlights.remove(nearestHighlight)
             } else {
                 /// add the new highlight (fade in)
                 addedHighlights.insert(newHighlight)
@@ -82,11 +86,11 @@ class HighlightsViewModel: ObservableObject {
         print("reused: \(reusedHighlights.map { $0.frame })")
         print("added: \(addedHighlights.map { $0.frame })")
         print("lingering: \(lingeringHighlights.map { $0.frame })")
-        withAnimation {
-            self.addedHighlights = newHighlights
-//            self.reusedHighlights = reusedHighlights
-//            self.addedHighlights = addedHighlights
-//            self.lingeringHighlights = lingeringHighlights
+        withAnimation(.linear(duration: 1)) {
+//            self.addedHighlights = newHighlights
+            self.reusedHighlights = reusedHighlights
+            self.addedHighlights = addedHighlights
+            self.lingeringHighlights = lingeringHighlights
         }
     }
     
