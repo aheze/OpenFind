@@ -702,6 +702,18 @@
 		3C7B7A43277E9D9400E1F602 /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3794274756470010FD68 /* ToolbarViewModel.swift */; };
 		3C7B7A44277E9D9400E1F602 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C7B7A45277E9D9400E1F602 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
+		3C7B7A47277EB17D00E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A48277EB19500E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A49277EB19500E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A4A277EB19600E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A4B277EB19600E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A4C277EB19700E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A4D277EB19700E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A4E277EB19700E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A4F277EB19700E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A50277EB19800E1F602 /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C7B7A52277EB1F200E1F602 /* HighlightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */; };
+		3C7B7A53277EB22900E1F602 /* HighlightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */; };
 		3C7BAD94275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD95275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
@@ -1419,6 +1431,8 @@
 		3C7B7A1B277E93F900E1F602 /* HighlightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsView.swift; sourceTree = "<group>"; };
 		3C7B7A1D277E941B00E1F602 /* HighlightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsViewModel.swift; sourceTree = "<group>"; };
 		3C7B7A22277E963700E1F602 /* HighlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsViewController.swift; sourceTree = "<group>"; };
+		3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+CGRect.swift"; sourceTree = "<group>"; };
+		3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsConstants.swift; sourceTree = "<group>"; };
 		3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Math.swift"; sourceTree = "<group>"; };
 		3C7BADA7275C12BA0030F0D2 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
@@ -2142,6 +2156,7 @@
 				3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */,
 				3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */,
 				3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */,
+				3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2650,6 +2665,7 @@
 			isa = PBXGroup;
 			children = (
 				3C7B7A1D277E941B00E1F602 /* HighlightsViewModel.swift */,
+				3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */,
 				3C7B7A1B277E93F900E1F602 /* HighlightsView.swift */,
 				3C7B7A22277E963700E1F602 /* HighlightsViewController.swift */,
 				3C7B7A1A277E93E300E1F602 /* Testing */,
@@ -4111,6 +4127,7 @@
 				3C1D1A0E275AA0CE0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3CB98A7A275B217900A6B1B9 /* SearchVC+Datasource.swift in Sources */,
 				3C1D1A2A275AA25B0064F2C6 /* Utilities+Constraints.swift in Sources */,
+				3C7B7A4F277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3CB98A7D275B219100A6B1B9 /* ListsViewModel.swift in Sources */,
 				3CB98A73275B217900A6B1B9 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */,
@@ -4144,6 +4161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7B7A39277E9D9300E1F602 /* UIKitViews.swift in Sources */,
+				3C7B7A53277EB22900E1F602 /* HighlightsConstants.swift in Sources */,
 				3C2DBBF6277E73E700911A74 /* Find.swift in Sources */,
 				3C7B7A37277E9D9300E1F602 /* Constants.swift in Sources */,
 				3C7B7A21277E944500E1F602 /* HighlightsView.swift in Sources */,
@@ -4151,6 +4169,7 @@
 				3C7B7A26277E9CD300E1F602 /* Utilities+UIDevice.swift in Sources */,
 				3C7B7A01277E8DF900E1F602 /* Find+Utilities.swift in Sources */,
 				3C7B7A29277E9CD300E1F602 /* Utilities+Constraints.swift in Sources */,
+				3C7B7A50277EB19800E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C7B7A3C277E9D9300E1F602 /* Debug.swift in Sources */,
 				3C2DBBE5277E739200911A74 /* ViewController.swift in Sources */,
 				3C7B7A2C277E9CD300E1F602 /* Utilities+UIColor.swift in Sources */,
@@ -4229,6 +4248,7 @@
 				3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */,
 				3C4D3A16274767410010FD68 /* TabControllerBridge.swift in Sources */,
 				3C4D3961274759A40010FD68 /* ViewController.swift in Sources */,
+				3C7B7A48277EB19500E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C4D39C727475E8A0010FD68 /* Constants.swift in Sources */,
 				3C3642D5277BC2E70038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C3642D1277BC2E70038CB18 /* Bridge.swift in Sources */,
@@ -4261,6 +4281,7 @@
 				3C7B7A1F277E942800E1F602 /* HighlightsViewModel.swift in Sources */,
 				3C4D3A002747667A0010FD68 /* ToolbarViewModel.swift in Sources */,
 				3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */,
+				3C7B7A49277EB19500E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C4D3A052747667B0010FD68 /* TabBarToolbars.swift in Sources */,
 				3C4D3A062747667B0010FD68 /* TabControllerBridge.swift in Sources */,
 				3C3642BD277BC20B0038CB18 /* CameraVC+SearchBar.swift in Sources */,
@@ -4354,6 +4375,7 @@
 				3CB0022E2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C3642E0277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C2DBBC9277E6F2200911A74 /* TabControllerView.swift in Sources */,
+				3C7B7A4A277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C4D39EF274766590010FD68 /* PhotosBridge.swift in Sources */,
 				3C3642E3277BC2E90038CB18 /* LeftView.swift in Sources */,
 				3C3642E8277BC2E90038CB18 /* Field.swift in Sources */,
@@ -4409,6 +4431,7 @@
 				3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C2DBBCA277E6F2200911A74 /* TabControllerView.swift in Sources */,
+				3C7B7A4B277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C4D3A722747694F0010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3C3642F4277BC2E90038CB18 /* LeftView.swift in Sources */,
 				3C3642F9277BC2E90038CB18 /* Field.swift in Sources */,
@@ -4491,6 +4514,7 @@
 				3C606672274ECCBA000A5BDE /* Debug.swift in Sources */,
 				3C4D3B21274776D20010FD68 /* SingleWebView.swift in Sources */,
 				3C4D3B18274776D20010FD68 /* ExternalLinks.swift in Sources */,
+				3C7B7A4C277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C364343277C0C370038CB18 /* NavigationViewModifier.swift in Sources */,
 				3C4D3B1C274776D20010FD68 /* TextDetectionView.swift in Sources */,
 				3C4D3B11274776D20010FD68 /* ContactView.swift in Sources */,
@@ -4537,6 +4561,7 @@
 				3C4D20A32750A6CB00090AF9 /* Utilities+UIColor.swift in Sources */,
 				3C4D3B9827477ABD0010FD68 /* SearchVC+Delegate.swift in Sources */,
 				3C606671274ECCBA000A5BDE /* Debug.swift in Sources */,
+				3C7B7A4D277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C1D1A34275AA25C0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3CB0022F2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C4D20A02750A6A800090AF9 /* Constants.swift in Sources */,
@@ -4623,6 +4648,7 @@
 			files = (
 				3C7B7A35277E9CD500E1F602 /* Utilities+UIColor.swift in Sources */,
 				3C7B7A45277E9D9400E1F602 /* Debug.swift in Sources */,
+				3C7B7A47277EB17D00E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C7B7A33277E9CD500E1F602 /* Utilities+Dates.swift in Sources */,
 				3C7B7A30277E9CD500E1F602 /* Utilities+UIFont.swift in Sources */,
 				3C7B7A42277E9D9400E1F602 /* UIKitViews.swift in Sources */,
@@ -4632,6 +4658,7 @@
 				3C7B7A0D277E93CA00E1F602 /* ViewController.swift in Sources */,
 				3C7B7A34277E9CD500E1F602 /* GeneralUtilities.swift in Sources */,
 				3C7B7A2E277E9CD500E1F602 /* Utilities+UIViewController.swift in Sources */,
+				3C7B7A52277EB1F200E1F602 /* HighlightsConstants.swift in Sources */,
 				3C7B7A40277E9D9400E1F602 /* Constants.swift in Sources */,
 				3C7B7A31277E9CD500E1F602 /* Utilities+SwiftUI.swift in Sources */,
 				3C7B7A23277E963700E1F602 /* HighlightsViewController.swift in Sources */,
@@ -4658,6 +4685,7 @@
 				3C1D1A15275AA0E20064F2C6 /* SwiftUIViews.swift in Sources */,
 				3C4D209F2750A6A800090AF9 /* Constants.swift in Sources */,
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
+				3C7B7A4E277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */,
 				3C7BAD9B275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CE9C229274EBB70008C903C /* ViewController.swift in Sources */,
