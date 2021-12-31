@@ -13,7 +13,6 @@ extension CameraViewController {
     func setupHighlights() {
         /// for highlights, make appear after frames are set
 
-        print("setup highlights!")
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
         addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }

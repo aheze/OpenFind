@@ -15,8 +15,6 @@ extension CameraViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: "ScrollZoomViewController") as! ScrollZoomViewController
         addChildViewController(viewController, in: scrollZoomContainerView)
         
-//        contentContainerView.addDebugBorders(.green)
-        
         return viewController
     }
 }

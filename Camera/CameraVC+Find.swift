@@ -39,8 +39,7 @@ extension CameraViewController {
                     }
                 }
             }
-            
-            print("HI: \(highlights)")
+
             DispatchQueue.main.async {
                 self.highlightsViewModel.update(with: highlights)
             }

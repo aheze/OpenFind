@@ -94,6 +94,7 @@ class CameraViewController: UIViewController, PageViewController {
         contentContainerView.backgroundColor = .clear
         scrollZoomContainerView.backgroundColor = .clear
         simulatedSafeView.backgroundColor = .clear
+        simulatedSafeView.isHidden = true
         
         setupZoom()
         setupHighlights()
