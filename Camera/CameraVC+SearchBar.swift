@@ -10,11 +10,10 @@ import UIKit
 
 extension CameraViewController {
     func createSearchBar() -> SearchViewController {
-        searchViewModel.availableLists = listsViewModel.lists
         let searchViewController = Bridge.makeViewController(searchViewModel: searchViewModel)
         
         searchContainerView.backgroundColor = .clear
-        addResizableChild(searchViewController, in: searchContainerView)
+        addResizableChildViewController(searchViewController, in: searchContainerView)
         return searchViewController
     }
 }

@@ -15,7 +15,6 @@ extension ViewController {
             let imageFitViewCenteredRect = self.calculateContentRect(imageSize: imageSize, containerSize: self.view.frame.size, aspectMode: .scaleAspectFit)
             self.imageFitViewRect = imageFitViewCenteredRect
             self.imageFitView.frame = imageFitViewCenteredRect
-            self.resetAverageView()
         }
     }
 

@@ -128,7 +128,7 @@ class TabBarController<
         
         tabBarHostingController.view.backgroundColor = .clear
         viewController.tabBarContainerView.backgroundColor = .clear
-        viewController.addChild(tabBarHostingController, in: viewController.tabBarContainerView)
+        viewController.addChildViewController(tabBarHostingController, in: viewController.tabBarContainerView)
         
         viewController.contentCollectionView.delegate = self
         viewController.contentCollectionView.dataSource = self
@@ -190,7 +190,7 @@ class TabBarController<
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pageViewController = pages[indexPath.item]
-        viewController.addChild(pageViewController, in: cell.contentView)
+        viewController.addChildViewController(pageViewController, in: cell.contentView)
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

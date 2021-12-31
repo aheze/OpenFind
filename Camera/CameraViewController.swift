@@ -11,13 +11,16 @@ import SwiftUI
 class CameraViewController: UIViewController, PageViewController {
     var tabType: TabState = .camera
     
+    /// external models
     var cameraViewModel: CameraViewModel
+    var listsViewModel: ListsViewModel
+    
     lazy var zoomViewModel = ZoomViewModel(containerView: zoomContainerView)
     var zoomCancellable: AnyCancellable?
     var aspectProgressCancellable: AnyCancellable?
     
     var searchViewModel = SearchViewModel()
-    var listsViewModel = ListsViewModel()
+   
     
     // MARK: - Sub view controllers
 
@@ -34,9 +37,11 @@ class CameraViewController: UIViewController, PageViewController {
     
     init?(
         coder: NSCoder,
-        cameraViewModel: CameraViewModel
+        cameraViewModel: CameraViewModel,
+        listsViewModel: ListsViewModel
     ) {
         self.cameraViewModel = cameraViewModel
+        self.listsViewModel = listsViewModel
         super.init(coder: coder)
     }
 

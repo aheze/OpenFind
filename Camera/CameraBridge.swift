@@ -8,8 +8,11 @@
 import UIKit
 
 struct CameraBridge {
-    static func makeController(model: CameraViewModel) -> CameraController {
-        let camera = CameraController(model: model)
+    static func makeController(cameraViewModel: CameraViewModel, listsViewModel: ListsViewModel) -> CameraController {
+        let camera = CameraController(
+            cameraViewModel: cameraViewModel,
+            listsViewModel: listsViewModel
+        )
         return camera
     }
 }

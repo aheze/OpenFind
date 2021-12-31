@@ -8,13 +8,16 @@
 import UIKit
 
 class CameraController {
-    var model: CameraViewModel
+    var cameraViewModel: CameraViewModel
+    var listsViewModel: ListsViewModel
+    
     lazy var viewController: CameraViewController = {
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "CameraViewController") { coder in
             CameraViewController(
                 coder: coder,
-                cameraViewModel: self.model
+                cameraViewModel: self.cameraViewModel,
+                listsViewModel: self.listsViewModel
             )
         }
         
@@ -23,8 +26,9 @@ class CameraController {
         return viewController
     }()
     
-    init(model: CameraViewModel) {
-        self.model = model
+    init(cameraViewModel: CameraViewModel, listsViewModel: ListsViewModel) {
+        self.cameraViewModel = cameraViewModel
+        self.listsViewModel = listsViewModel
         _ = viewController
     }
 }

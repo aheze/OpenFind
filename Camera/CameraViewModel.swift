@@ -11,6 +11,8 @@ import SwiftUI
 class CameraViewModel: ObservableObject {
     @Published var resultsCount = 0
     
+    @Published var highlights = [Highlight]()
+    
     /// set to true when tapped, then set back to false 1 second later
     /// when paused, don't set it back until unpaused
     @Published var snapshotSaved = false

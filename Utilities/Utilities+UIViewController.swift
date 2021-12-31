@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    func addChild(_ childViewController: UIViewController, in inView: UIView) {
+    func addChildViewController(_ childViewController: UIViewController, in inView: UIView) {
         /// Add Child View Controller
         addChild(childViewController)
         
@@ -24,7 +24,7 @@ extension UIViewController {
         childViewController.didMove(toParent: self)
     }
     
-    func addResizableChild(_ childViewController: UIViewController, in inView: UIView) {
+    func addResizableChildViewController(_ childViewController: UIViewController, in inView: UIView) {
         /// Add Child View Controller
         addChild(childViewController)
         

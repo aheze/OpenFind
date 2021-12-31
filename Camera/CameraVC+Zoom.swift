@@ -15,7 +15,7 @@ extension CameraViewController {
         
         let hostingController = UIHostingController(rootView: zoomView)
         hostingController.view.backgroundColor = .clear
-        addChild(hostingController, in: zoomContainerView)
+        addChildViewController(hostingController, in: zoomContainerView)
         zoomContainerView.backgroundColor = .clear
         
         zoomCancellable = zoomViewModel.$zoom.sink { [weak self] zoom in

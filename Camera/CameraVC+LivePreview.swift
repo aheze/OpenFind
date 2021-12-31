@@ -28,7 +28,7 @@ extension CameraViewController {
             }
         }
         
-        addChild(livePreviewViewController, in: livePreviewContainerView)
+        addChildViewController(livePreviewViewController, in: livePreviewContainerView)
         
         livePreviewContainerView.backgroundColor = .clear
         livePreviewViewController.view.backgroundColor = .clear

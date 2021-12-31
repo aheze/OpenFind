@@ -35,13 +35,11 @@ class ViewController: UIViewController {
                 visionEngine.startToFind(["Hi"], in: latestPixelBuffer)
             }
         }
-        resetAverageView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        imageFitView.backgroundColor = .clear
         averageView.addDebugBorders(.systemCyan)
         configureCamera()
         visionEngine.delegate = self
