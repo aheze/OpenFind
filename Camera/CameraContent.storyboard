@@ -25,9 +25,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcN-7d-T0X">
-                                <rect key="frame" x="107" y="298" width="200" height="300"/>
+                                <rect key="frame" x="100" y="100" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OQ-wQ-RqJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62W-yT-yly">
                                         <rect key="frame" x="-20" y="86" width="240" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -88,10 +93,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="drawingView" destination="fcN-7d-T0X" id="7gY-9c-9Mt"/>
+                        <outlet property="contentContainerView" destination="fcN-7d-T0X" id="wpx-Hu-7cj"/>
                         <outlet property="livePreviewContainerView" destination="bIO-Uj-HK1" id="Jvd-MQ-Lw8"/>
                         <outlet property="progressContainerView" destination="vbV-LF-KmV" id="mwe-5f-Eut"/>
                         <outlet property="safeView" destination="kxc-BX-aU0" id="gD2-wc-k0h"/>
+                        <outlet property="scrollZoomContainerView" destination="8OQ-wQ-RqJ" id="YL3-jt-60T"/>
                         <outlet property="searchContainerView" destination="n3B-Mf-bwU" id="79P-bp-qV3"/>
                         <outlet property="simulatedSafeView" destination="62W-yT-yly" id="4qc-3P-bB2"/>
                         <outlet property="testingTabBarContainerView" destination="cDu-p8-1ox" id="g2N-KL-YaW"/>

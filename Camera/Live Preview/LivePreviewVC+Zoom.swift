@@ -69,7 +69,7 @@ extension LivePreviewViewController {
         )
         self.safeViewFrameFromPreviewFit = safeViewFrameFromPreviewFit
         
-        changeDrawingViewFrame?(previewFitViewFrame)
+        changeContentContainerViewFrame?(previewFitViewFrame)
         changeSimulatedSafeViewFrame?(safeViewFrameFromPreviewFit)
         
         if animated {

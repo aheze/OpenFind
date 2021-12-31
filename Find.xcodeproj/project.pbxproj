@@ -754,6 +754,12 @@
 		3C7B7A9B277FB7C400E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
 		3C7B7A9C277FB7C400E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
 		3C7B7A9E277FB7DA00E1F602 /* CameraVC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */; };
+		3C7B7AA6277FBBC000E1F602 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7AA5277FBBC000E1F602 /* AppDelegate.swift */; };
+		3C7B7AA8277FBBC000E1F602 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7AA7277FBBC000E1F602 /* SceneDelegate.swift */; };
+		3C7B7AAA277FBBC000E1F602 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7AA9277FBBC000E1F602 /* ViewController.swift */; };
+		3C7B7AAD277FBBC000E1F602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7B7AAB277FBBC000E1F602 /* Main.storyboard */; };
+		3C7B7AAF277FBBC100E1F602 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C7B7AAE277FBBC100E1F602 /* Assets.xcassets */; };
+		3C7B7AB2277FBBC100E1F602 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7B7AB0277FBBC100E1F602 /* LaunchScreen.storyboard */; };
 		3C7BAD94275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD95275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
@@ -775,6 +781,23 @@
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
+		3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */; };
+		3C8A523C277FC116006CF91E /* ScrollZoomContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */; };
+		3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
+		3C8A523E277FC1F4006CF91E /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
+		3C8A523F277FC1F4006CF91E /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
+		3C8A5240277FC1F4006CF91E /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3C8A5241277FC1F4006CF91E /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
+		3C8A5242277FC1F4006CF91E /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C8A5243277FC1F4006CF91E /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
+		3C8A5244277FC1F4006CF91E /* Utilities+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0D275AA0CE0064F2C6 /* Utilities+SwiftUI.swift */; };
+		3C8A5245277FC1F4006CF91E /* Utilities+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */; };
+		3C8A5246277FC1F4006CF91E /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
+		3C8A5247277FC559006CF91E /* ScrollZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */; };
+		3C8A5248277FC55A006CF91E /* ScrollZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */; };
+		3C8A524A277FC5EF006CF91E /* CameraVC+ScrollZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */; };
+		3C8A524B277FC66A006CF91E /* ScrollZoomContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */; };
+		3C8A524C277FC66A006CF91E /* ScrollZoomContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */; };
 		3C8B648A25BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B648925BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift */; };
 		3C8B648D25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B648C25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift */; };
 		3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B648F25BB51BE008F1535 /* PhotoSlidesVC+Draw.swift */; };
@@ -1484,11 +1507,22 @@
 		3C7B7A7D277FA50B00E1F602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLineView.swift; sourceTree = "<group>"; };
 		3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Progress.swift"; sourceTree = "<group>"; };
+		3C7B7AA3277FBBC000E1F602 /* ScrollZoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollZoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C7B7AA5277FBBC000E1F602 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3C7B7AA7277FBBC000E1F602 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3C7B7AA9277FBBC000E1F602 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C7B7AAC277FBBC000E1F602 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3C7B7AAE277FBBC100E1F602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C7B7AB1277FBBC100E1F602 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3C7B7AB3277FBBC100E1F602 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Math.swift"; sourceTree = "<group>"; };
 		3C7BADA7275C12BA0030F0D2 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
 		3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Defaults.swift"; sourceTree = "<group>"; };
 		3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Settings.swift"; sourceTree = "<group>"; };
+		3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollZoomViewController.swift; sourceTree = "<group>"; };
+		3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScrollZoomContent.storyboard; sourceTree = "<group>"; };
+		3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+ScrollZoom.swift"; sourceTree = "<group>"; };
 		3C8B648925BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBarDelegate.swift"; sourceTree = "<group>"; };
 		3C8B648C25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindFromCache.swift"; sourceTree = "<group>"; };
 		3C8B648F25BB51BE008F1535 /* PhotoSlidesVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Draw.swift"; sourceTree = "<group>"; };
@@ -1783,6 +1817,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3C7B7A74277FA50800E1F602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C7B7AA0277FBBC000E1F602 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2174,6 +2215,7 @@
 				3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */,
 				3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */,
 				3C7B7A54277EE6D900E1F602 /* CameraVC+Find.swift */,
+				3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */,
 				3C7B7A60277EEB9C00E1F602 /* CameraVC+Highlights.swift */,
 				3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */,
 				3C7B7A70277F9FE500E1F602 /* CameraVC+Testing.swift */,
@@ -2754,6 +2796,30 @@
 			path = SwiftUIViews;
 			sourceTree = "<group>";
 		};
+		3C7B7AA4277FBBC000E1F602 /* ScrollZoom */ = {
+			isa = PBXGroup;
+			children = (
+				3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */,
+				3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */,
+				3C7B7AB7277FBBD200E1F602 /* Testing */,
+			);
+			path = ScrollZoom;
+			sourceTree = "<group>";
+		};
+		3C7B7AB7277FBBD200E1F602 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				3C7B7AA5277FBBC000E1F602 /* AppDelegate.swift */,
+				3C7B7AA7277FBBC000E1F602 /* SceneDelegate.swift */,
+				3C7B7AA9277FBBC000E1F602 /* ViewController.swift */,
+				3C7B7AAB277FBBC000E1F602 /* Main.storyboard */,
+				3C7B7AAE277FBBC100E1F602 /* Assets.xcassets */,
+				3C7B7AB0277FBBC100E1F602 /* LaunchScreen.storyboard */,
+				3C7B7AB3277FBBC100E1F602 /* Info.plist */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
 		3C9D5F5325F31F6A002E93F5 /* Focusing */ = {
 			isa = PBXGroup;
 			children = (
@@ -3301,6 +3367,7 @@
 			isa = PBXGroup;
 			children = (
 				3C4D39C427475E800010FD68 /* Shared */,
+				3C7B7AA4277FBBC000E1F602 /* ScrollZoom */,
 				3C7B7A78277FA50800E1F602 /* SwiftUIViews */,
 				3C4D3787274755FE0010FD68 /* TabController */,
 				3C4D39D52747661E0010FD68 /* Photos */,
@@ -3337,6 +3404,7 @@
 				3C2DBBDE277E739200911A74 /* MLVision.app */,
 				3C7B7A06277E93CA00E1F602 /* Highlights.app */,
 				3C7B7A77277FA50800E1F602 /* SwiftUIViews.app */,
+				3C7B7AA3277FBBC000E1F602 /* ScrollZoom.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3630,6 +3698,23 @@
 			productReference = 3C7B7A77277FA50800E1F602 /* SwiftUIViews.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3C7B7AA2277FBBC000E1F602 /* ScrollZoom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C7B7AB4277FBBC100E1F602 /* Build configuration list for PBXNativeTarget "ScrollZoom" */;
+			buildPhases = (
+				3C7B7A9F277FBBC000E1F602 /* Sources */,
+				3C7B7AA0277FBBC000E1F602 /* Frameworks */,
+				3C7B7AA1277FBBC000E1F602 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScrollZoom;
+			productName = ScrollZoom;
+			productReference = 3C7B7AA3277FBBC000E1F602 /* ScrollZoom.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3CE9C221274EBB70008C903C /* ARVision */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CE9C233274EBB72008C903C /* Build configuration list for PBXNativeTarget "ARVision" */;
@@ -3726,6 +3811,9 @@
 					3C7B7A76277FA50800E1F602 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					3C7B7AA2277FBBC000E1F602 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 					3CE9C221274EBB70008C903C = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -3767,6 +3855,7 @@
 				3C2DBBDD277E739200911A74 /* MLVision */,
 				3C7B7A05277E93CA00E1F602 /* Highlights */,
 				3C7B7A76277FA50800E1F602 /* SwiftUIViews */,
+				3C7B7AA2277FBBC000E1F602 /* ScrollZoom */,
 			);
 		};
 /* End PBXProject section */
@@ -3811,6 +3900,7 @@
 				3CE9C1FD274B4E47008C903C /* FallbackView.xib in Resources */,
 				3C4D3A9127476EC70010FD68 /* SharedAssets.xcassets in Resources */,
 				3C3642DF277BC2E70038CB18 /* SearchBar.storyboard in Resources */,
+				3C8A524B277FC66A006CF91E /* ScrollZoomContent.storyboard in Resources */,
 				3C3642D0277BC2E70038CB18 /* SearchFieldCell.xib in Resources */,
 				3C4D3A8F27476E6A0010FD68 /* Assets.xcassets in Resources */,
 				3C1D19DB2759A5870064F2C6 /* Assets.xcassets in Resources */,
@@ -3831,6 +3921,7 @@
 				3C4D39CD27475F3E0010FD68 /* CameraContent.storyboard in Resources */,
 				3C11996E274A385300D6AFE3 /* Assets.xcassets in Resources */,
 				3C3642BF277BC2E70038CB18 /* SearchFieldCell.xib in Resources */,
+				3C8A524C277FC66A006CF91E /* ScrollZoomContent.storyboard in Resources */,
 				3C3642CE277BC2E70038CB18 /* SearchBar.storyboard in Resources */,
 				3C4D39CE27475F430010FD68 /* Main.storyboard in Resources */,
 			);
@@ -3926,6 +4017,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7B7A7E277FA50B00E1F602 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C7B7AA1277FBBC000E1F602 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C7B7AB2277FBBC100E1F602 /* LaunchScreen.storyboard in Resources */,
+				3C7B7AAF277FBBC100E1F602 /* Assets.xcassets in Resources */,
+				3C8A523C277FC116006CF91E /* ScrollZoomContent.storyboard in Resources */,
+				3C7B7AAD277FBBC000E1F602 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4309,6 +4411,7 @@
 				3C7B7A5A277EE78700E1F602 /* VisionEngine.swift in Sources */,
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
+				3C8A5248277FC55A006CF91E /* ScrollZoomViewController.swift in Sources */,
 				3C1D19E12759B7CC0064F2C6 /* IconButtons.swift in Sources */,
 				3C2DBBC5277E3A8000911A74 /* SearchVC+Cell.swift in Sources */,
 				3CE9C206274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
@@ -4433,6 +4536,7 @@
 				3C3642CC277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
 				3CE9C20D274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
 				3C4D3A032747667B0010FD68 /* TabBarView.swift in Sources */,
+				3C8A5247277FC559006CF91E /* ScrollZoomViewController.swift in Sources */,
 				3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */,
 				3C4D3A042747667B0010FD68 /* ContentPageViewController.swift in Sources */,
 				3C3642B4277BC0E80038CB18 /* IconButtons.swift in Sources */,
@@ -4458,6 +4562,7 @@
 				3C3642C0277BC2E70038CB18 /* Bridge.swift in Sources */,
 				3C3642B6277BC0FC0038CB18 /* CameraButton.swift in Sources */,
 				3C7B7A71277F9FE500E1F602 /* CameraVC+Testing.swift in Sources */,
+				3C8A524A277FC5EF006CF91E /* CameraVC+ScrollZoom.swift in Sources */,
 				3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */,
 				3C3642C4277BC2E70038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C3642C6277BC2E70038CB18 /* Field.swift in Sources */,
@@ -4811,6 +4916,27 @@
 				3C7B7A90277FA6E300E1F602 /* Utilities+SwiftUI.swift in Sources */,
 				3C7B7A8F277FA6E300E1F602 /* Utilities+UIViewController.swift in Sources */,
 				3C7B7A87277FA6E300E1F602 /* GeneralUtilities.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C7B7A9F277FBBC000E1F602 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C8A5242277FC1F4006CF91E /* Utilities+Math.swift in Sources */,
+				3C8A5241277FC1F4006CF91E /* Utilities+UIFont.swift in Sources */,
+				3C8A5240277FC1F4006CF91E /* Utilities+CGRect.swift in Sources */,
+				3C8A523E277FC1F4006CF91E /* Utilities+Dates.swift in Sources */,
+				3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */,
+				3C8A5246277FC1F4006CF91E /* Utilities+Constraints.swift in Sources */,
+				3C8A5243277FC1F4006CF91E /* Utilities+UIColor.swift in Sources */,
+				3C7B7AAA277FBBC000E1F602 /* ViewController.swift in Sources */,
+				3C8A523F277FC1F4006CF91E /* GeneralUtilities.swift in Sources */,
+				3C8A5245277FC1F4006CF91E /* Utilities+UIDevice.swift in Sources */,
+				3C8A5244277FC1F4006CF91E /* Utilities+SwiftUI.swift in Sources */,
+				3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */,
+				3C7B7AA6277FBBC000E1F602 /* AppDelegate.swift in Sources */,
+				3C7B7AA8277FBBC000E1F602 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5292,6 +5418,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				3C7B7A14277E93CD00E1F602 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3C7B7AAB277FBBC000E1F602 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C7B7AAC277FBBC000E1F602 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3C7B7AB0277FBBC100E1F602 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C7B7AB1277FBBC100E1F602 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -6106,6 +6248,68 @@
 			};
 			name = Release;
 		};
+		3C7B7AB5277FBBC100E1F602 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScrollZoom/Testing/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.ScrollZoom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C7B7AB6277FBBC100E1F602 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScrollZoom/Testing/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.ScrollZoom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3CE9C234274EBB72008C903C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6443,6 +6647,15 @@
 			buildConfigurations = (
 				3C7B7A83277FA50B00E1F602 /* Debug */,
 				3C7B7A84277FA50B00E1F602 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C7B7AB4277FBBC100E1F602 /* Build configuration list for PBXNativeTarget "ScrollZoom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C7B7AB5277FBBC100E1F602 /* Debug */,
+				3C7B7AB6277FBBC100E1F602 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

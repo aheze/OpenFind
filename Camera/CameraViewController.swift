@@ -26,6 +26,7 @@ class CameraViewController: UIViewController, PageViewController {
 
     lazy var livePreviewViewController = createLivePreview()
     lazy var searchViewController = createSearchBar()
+    lazy var scrollZoomViewController = createScrollZoom()
     
     @IBOutlet var searchContainerView: UIView!
     
@@ -34,13 +35,18 @@ class CameraViewController: UIViewController, PageViewController {
     
     
     /// should match the frame of the image
-    @IBOutlet var drawingView: UIView!
+    @IBOutlet var contentContainerView: UIView!
+    
+    /// Inside the drawing view
+    @IBOutlet weak var scrollZoomContainerView: UIView!
+    
     var drawingViewSize = CGSize.zero
     
     /// inside the drawing view, should match the safe view
     @IBOutlet var simulatedSafeView: UIView!
     
     @IBOutlet var livePreviewContainerView: UIView!
+    
     
     @IBOutlet var zoomContainerView: UIView!
     @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
@@ -76,7 +82,7 @@ class CameraViewController: UIViewController, PageViewController {
         
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
         livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
-        drawingViewSize = drawingView.bounds.size
+        drawingViewSize = contentContainerView.bounds.size
     }
     
     func setup() {
@@ -85,6 +91,9 @@ class CameraViewController: UIViewController, PageViewController {
         
         view.backgroundColor = Constants.darkBlueBackground
         safeView.backgroundColor = .clear
+        contentContainerView.backgroundColor = .clear
+        scrollZoomContainerView.backgroundColor = .clear
+        simulatedSafeView.backgroundColor = .clear
         
         setupZoom()
         setupHighlights()

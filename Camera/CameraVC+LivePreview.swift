@@ -28,10 +28,10 @@ extension CameraViewController {
             }
         }
         
-        livePreviewViewController.changeDrawingViewFrame = { [weak self] frame in
+        livePreviewViewController.changeContentContainerViewFrame = { [weak self] frame in
             guard let self = self else { return }
-            self.drawingView.frame = frame
-            self.drawingView.alpha = 1
+            self.contentContainerView.frame = frame
+            self.contentContainerView.alpha = 1
         }
         
         livePreviewViewController.changeSimulatedSafeViewFrame = { [weak self] frame in

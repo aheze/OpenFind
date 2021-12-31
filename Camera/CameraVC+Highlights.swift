@@ -12,11 +12,9 @@ import UIKit
 extension CameraViewController {
     func setupHighlights() {
         /// for highlights, make appear after frames are set
-        drawingView.alpha = 0
-        simulatedSafeView.alpha = 0
-        
+
+        print("setup highlights!")
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
-        addChildViewController(highlightsViewController, in: drawingView)
-        drawingView.backgroundColor = .clear
+        addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
 }
