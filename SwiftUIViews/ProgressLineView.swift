@@ -16,6 +16,7 @@ class ProgressViewModel: ObservableObject {
     
     /// the actual percentage used by the view
     @Published var percentage = CGFloat(0)
+    @Published var percentageShowing = false
     @Published var shimmerPercentage = CGFloat(0)
     @Published var shimmerShowing = false
     
@@ -40,7 +41,13 @@ class ProgressViewModel: ObservableObject {
         switch progress {
         case .determinate(let progress):
             percentage = progress
+            withAnimation {
+                percentageShowing = true
+            }
         case .auto(let estimatedTime):
+            withAnimation {
+                percentageShowing = true
+            }
             
             let interval = estimatedTime / 4
             
@@ -85,16 +92,21 @@ class ProgressViewModel: ObservableObject {
     
     
     func shimmer(speed: CGFloat = ProgressViewModel.shimmerAnimationTime) {
-            self.shimmerShowing = true
-            self.shimmerPercentage = 0
-            withAnimation(.easeIn(duration: speed)) {
-                self.shimmerPercentage = 1
-            }
+        self.shimmerShowing = true
+        self.shimmerPercentage = 0
+        withAnimation(.easeIn(duration: speed)) {
+            self.shimmerPercentage = 1
+        }
     }
     
     func updateProgress(_ newProgress: CGFloat) {
         withAnimation {
             progress = .determinate(progress: 1)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            withAnimation {
+                self.percentageShowing = false
+            }
         }
     }
     
@@ -103,6 +115,11 @@ class ProgressViewModel: ObservableObject {
             percentage = 1
         }
         shimmer(speed: 0.5)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            withAnimation {
+                self.percentageShowing = false
+            }
+        }
     }
 }
 
@@ -134,6 +151,7 @@ struct ProgressLineView: View {
                     , alignment: .leading
                 )
         }
+        .opacity(model.percentageShowing ? 1 : 0)
     }
     
     func shimmerOffset(screenSize: CGSize) -> CGPoint {
