@@ -20,6 +20,7 @@ struct FindText {
 struct FindOptions {
     var level = VNRequestTextRecognitionLevel.fast
     var customWords = [String]()
+    var orientation = CGImagePropertyOrientation.up
 }
 
 enum FindImage {
@@ -41,9 +42,9 @@ class Find {
         let imageRequestHandler: VNImageRequestHandler
         switch image {
         case .cgImage(let image):
-            imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: .up)
+            imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: options.orientation)
         case .pixelBuffer(let pixelBuffer):
-            imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up)
+            imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: options.orientation)
         }
         
         startTime = Date()

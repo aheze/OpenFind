@@ -13,7 +13,10 @@ class ViewController: UIViewController {
     
     lazy var photos: PhotosController = PhotosBridge.makeController()
 
-    lazy var camera: CameraController = CameraBridge.makeController(model: cameraToolbarModel)
+    lazy var camera: CameraController = CameraBridge.makeController(
+        cameraViewModel: CameraViewModel(),
+        listsViewModel: ListsViewModel()
+    )
 
     lazy var lists: ListsController = ListsBridge.makeController()
     
@@ -56,24 +59,8 @@ class ViewController: UIViewController {
         
         tabController.delegate = self
         
-        self.addChild(tabController.viewController, in: self.view)
-        
-//        tabController.viewController.contentCollectionView
-//            .panGestureRecognizer
-        ////            .shouldRequireFailure(of:
-//            .require(toFail:
-        ////            .shouldBeRequiredToFail(by:
-        ////            .shouldRequireFailure(
-        ////                of:
-        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer
-//            )
-//        tabController.viewController.contentCollectionView.panGestureRecognizer.shouldReceive(<#T##event: UIEvent##UIEvent#>)
-//        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer.delegate = self
-        
-//        camera.viewController.searchViewController.searchCollectionView.addGestureRecognizer(UIPanGestureRecognizer())
-//        camera.viewController.searchViewController.searchCollectionView.panGestureRecognizer.shouldBeRequiredToFail(by: tabController.viewController.contentCollectionView.panGestureRecognizer)
-//            .delegate = self
-        
+        self.addChildViewController(tabController.viewController, in: self.view)
+
         let searchBar = camera.viewController.searchViewController.searchBarView ?? UIView()
         let searchBarBounds = searchBar.convert(searchBar.bounds, to: nil)
         tabController.viewController.excludedFrames = [searchBarBounds]
