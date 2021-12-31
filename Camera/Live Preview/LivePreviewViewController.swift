@@ -69,7 +69,8 @@ class LivePreviewViewController: UIViewController {
     /// a new frame of the live video was taken
     var frameCaptured: ((CVPixelBuffer) -> Void)?
 
-    
+    /// an actual photo was taken. Send back via another closure.
+    var photoCaptured: ((UIImage) -> Void)?
     
     /// `true` = became `.aspectFill`
     var hitAspectTarget = false

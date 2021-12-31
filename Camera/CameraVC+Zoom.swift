@@ -25,11 +25,6 @@ extension CameraViewController {
             self?.livePreviewViewController.changeAspectProgress(to: aspectProgress, animated: true)
         }
         
-        cameraViewModel.shutterPressed = { [weak self] in
-            guard let self = self else { return }
-            self.livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = !self.cameraViewModel.shutterOn
-        }
-        
         if let camera = livePreviewViewController.cameraDevice {
             zoomViewModel.configureZoomFactors(
                 minZoom: camera.minAvailableVideoZoomFactor,

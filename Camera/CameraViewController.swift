@@ -44,6 +44,9 @@ class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet var safeView: UIView!
     
+    /// Testing tab bar view
+    @IBOutlet weak var testingTabBarContainerView: UIView!
+    
     init?(
         coder: NSCoder,
         cameraViewModel: CameraViewModel,
@@ -82,6 +85,15 @@ class CameraViewController: UIViewController, PageViewController {
         
         setupZoom()
         setupHighlights()
+        
+        /// Listen to shutter press events
+        cameraViewModel.shutterPressed = { [weak self] in
+            guard let self = self else { return }
+            self.livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = !self.cameraViewModel.shutterOn
+        }
+        
+        /// A testing tab bar
+        addTestingTabBar(add: false)
     }
 }
 

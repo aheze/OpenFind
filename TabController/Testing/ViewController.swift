@@ -9,13 +9,14 @@
 import SwiftUI
 
 class ViewController: UIViewController {
-    var cameraToolbarModel = CameraViewModel()
+    let cameraViewModel = CameraViewModel()
+    let listsViewModel = ListsViewModel()
     
     lazy var photos: PhotosController = PhotosBridge.makeController()
 
     lazy var camera: CameraController = CameraBridge.makeController(
-        cameraViewModel: CameraViewModel(),
-        listsViewModel: ListsViewModel()
+        cameraViewModel: cameraViewModel,
+        listsViewModel:listsViewModel
     )
 
     lazy var lists: ListsController = ListsBridge.makeController()
@@ -50,7 +51,7 @@ class ViewController: UIViewController {
         
         let tabController = TabControllerBridge.makeTabController(
             pageViewControllers: [photos.viewController, camera.viewController, lists.viewController],
-            cameraViewModel: cameraToolbarModel,
+            cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel,
             photosSelectionToolbarView: photos.viewController.selectionToolbar,
             photosDetailToolbarView: photos.viewController.selectionToolbar,

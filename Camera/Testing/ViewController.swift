@@ -20,5 +20,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .green
         
         addChildViewController(camera.viewController, in: view)
+        
+        camera.viewController.addTestingTabBar(add: true)
     }
 }
