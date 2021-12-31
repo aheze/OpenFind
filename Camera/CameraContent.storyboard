@@ -24,6 +24,18 @@
                                 <rect key="frame" x="0.0" y="200" width="414" height="662"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcN-7d-T0X">
+                                <rect key="frame" x="107" y="298" width="200" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62W-yT-yly">
+                                        <rect key="frame" x="-20" y="86" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlJ-qC-1i7">
                                 <rect key="frame" x="0.0" y="762" width="414" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,9 +68,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="drawingView" destination="fcN-7d-T0X" id="7gY-9c-9Mt"/>
                         <outlet property="livePreviewContainerView" destination="bIO-Uj-HK1" id="Jvd-MQ-Lw8"/>
                         <outlet property="safeView" destination="kxc-BX-aU0" id="gD2-wc-k0h"/>
                         <outlet property="searchContainerView" destination="n3B-Mf-bwU" id="79P-bp-qV3"/>
+                        <outlet property="simulatedSafeView" destination="62W-yT-yly" id="4qc-3P-bB2"/>
                         <outlet property="zoomContainerHeightC" destination="Y59-dz-ePe" id="3Cz-g1-8Br"/>
                         <outlet property="zoomContainerView" destination="hlJ-qC-1i7" id="fnx-k0-ahC"/>
                     </connections>
@@ -78,18 +92,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H2x-e3-0Uq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcN-7d-T0X">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62W-yT-yly">
-                                        <rect key="frame" x="-20" y="86" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tu8-Aa-jnj">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -167,7 +169,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="drawingView" destination="fcN-7d-T0X" id="4Wg-qv-M5c"/>
                         <outlet property="livePreviewView" destination="lJA-7m-wvT" id="iEw-S1-uFm"/>
                         <outlet property="pausedImageView" destination="H2x-e3-0Uq" id="1Ru-Er-ubl"/>
                         <outlet property="previewContainerView" destination="Tu8-Aa-jnj" id="d4i-iV-uH4"/>
@@ -179,7 +180,6 @@
                         <outlet property="safeViewLeftC" destination="Uos-bw-KRr" id="8YN-wL-Mae"/>
                         <outlet property="safeViewTopC" destination="Pfy-p3-Loe" id="ggb-js-Vdv"/>
                         <outlet property="safeViewWidthC" destination="LjV-K0-Ago" id="tDf-7g-wZl"/>
-                        <outlet property="simulatedSafeView" destination="62W-yT-yly" id="ACX-3f-3ao"/>
                         <outlet property="testingView" destination="2H0-u4-f7D" id="YkX-k5-UOH"/>
                         <outlet property="testingView2" destination="Iag-aK-WXG" id="OL0-D7-vqb"/>
                     </connections>

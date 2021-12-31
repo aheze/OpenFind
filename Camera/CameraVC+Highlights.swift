@@ -7,4 +7,16 @@
 //
     
 
-import Foundation
+import UIKit
+
+extension CameraViewController {
+    func setupHighlights() {
+        /// for highlights, make appear after frames are set
+        drawingView.alpha = 0
+        simulatedSafeView.alpha = 0
+        
+        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+        addChildViewController(highlightsViewController, in: drawingView)
+        drawingView.backgroundColor = .clear
+    }
+}

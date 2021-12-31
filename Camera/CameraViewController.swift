@@ -20,7 +20,7 @@ class CameraViewController: UIViewController, PageViewController {
     var aspectProgressCancellable: AnyCancellable?
     
     var searchViewModel = SearchViewModel()
-   
+    var highlightsViewModel = HighlightsViewModel()
     
     // MARK: - Sub view controllers
 
@@ -29,10 +29,19 @@ class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet var searchContainerView: UIView!
     
+    
+    /// should match the frame of the image
+    @IBOutlet var drawingView: UIView!
+    var drawingViewSize = CGSize.zero
+    
+    /// inside the drawing view, should match the safe view
+    @IBOutlet var simulatedSafeView: UIView!
+    
+    @IBOutlet var livePreviewContainerView: UIView!
+    
     @IBOutlet var zoomContainerView: UIView!
     @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
     
-    @IBOutlet var livePreviewContainerView: UIView!
     @IBOutlet var safeView: UIView!
     
     init?(
@@ -61,6 +70,7 @@ class CameraViewController: UIViewController, PageViewController {
         
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
         livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
+        drawingViewSize = drawingView.bounds.size
     }
     
     func setup() {
@@ -71,6 +81,7 @@ class CameraViewController: UIViewController, PageViewController {
         safeView.backgroundColor = .clear
         
         setupZoom()
+        setupHighlights()
     }
 }
 

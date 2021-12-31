@@ -28,6 +28,18 @@ extension CameraViewController {
             }
         }
         
+        livePreviewViewController.changeDrawingViewFrame = { [weak self] frame in
+            guard let self = self else { return }
+            self.drawingView.frame = frame
+            self.drawingView.alpha = 1
+        }
+        
+        livePreviewViewController.changeSimulatedSafeViewFrame = { [weak self] frame in
+            guard let self = self else { return }
+            self.simulatedSafeView.frame = frame
+            self.simulatedSafeView.alpha = 1
+        }
+        
         livePreviewViewController.frameCaptured = { [weak self] pixelBuffer in
             guard let self = self else { return }
             self.find(in: pixelBuffer)

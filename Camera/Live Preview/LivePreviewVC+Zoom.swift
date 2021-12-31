@@ -69,10 +69,12 @@ extension LivePreviewViewController {
         )
         self.safeViewFrameFromPreviewFit = safeViewFrameFromPreviewFit
         
-        drawingView.frame = previewFitViewFrame
-        simulatedSafeView.frame = safeViewFrameFromPreviewFit
-        drawingView.addDebugBorders(.green)
-        simulatedSafeView.addDebugBorders(.red)
+        changeDrawingViewFrame?(previewFitViewFrame)
+        changeSimulatedSafeViewFrame?(safeViewFrameFromPreviewFit)
+//        drawingView.frame = previewFitViewFrame
+//        simulatedSafeView.frame = safeViewFrameFromPreviewFit
+//        drawingView.addDebugBorders(.green)
+//        simulatedSafeView.addDebugBorders(.red)
         
         if animated {
             UIView.animate(withDuration: 0.3) {

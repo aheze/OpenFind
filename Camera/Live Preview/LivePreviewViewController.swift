@@ -43,16 +43,14 @@ class LivePreviewViewController: UIViewController {
     /// the frame of the safe view, from `previewFitView`'s bounds
     var safeViewFrameFromPreviewFit = CGRect.zero
     
+    /// update the frames of the camera
+    var changeDrawingViewFrame: ((CGRect) -> Void)?
+    var changeSimulatedSafeViewFrame: ((CGRect) -> Void)?
+    
     /// directly in view hierarchy
     @IBOutlet var testingView: UIView!
     @IBOutlet var testingView2: UIView!
-    
-    /// should match the frame of the image
-    @IBOutlet var drawingView: UIView!
-    
-    /// inside the drawing view, should match the safe view
-    @IBOutlet var simulatedSafeView: UIView!
-    
+
     /// don't scale this
     @IBOutlet var previewContentView: UIView!
     
@@ -70,6 +68,8 @@ class LivePreviewViewController: UIViewController {
     
     /// a new frame of the live video was taken
     var frameCaptured: ((CVPixelBuffer) -> Void)?
+
+    
     
     /// `true` = became `.aspectFill`
     var hitAspectTarget = false

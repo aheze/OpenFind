@@ -5,7 +5,7 @@
 //  Created by A. Zheng (github.com/aheze) on 12/30/21.
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
-    
+
 
 import UIKit
 import AVFoundation
@@ -26,7 +26,7 @@ extension CameraViewController {
                         
                         let highlight = Highlight(
                             string: string,
-                            frame: word.frame.scaleTo(self.view.bounds.size),
+                            frame: word.frame.scaleTo(self.drawingViewSize),
                             colors: [UIColor(hex: 0xff2600)]
                         )
                         
@@ -34,34 +34,12 @@ extension CameraViewController {
                         
                     }
                 }
-                
-//                for value in self.searchViewModel.values {
-//                    switch value {
-//                    case .string(_):
-//                        <#code#>
-//                    case .list(_):
-//                        <#code#>
-//                    case .addNew(_):
-//                        <#code#>
-//                    }
-//                }
-                
-//                let indices = sentence.string.lowercased().indicesOf(string: self.textToFind.lowercased())
-//                for index in indices {
-//                    let word = sentence.getWord(word: self.textToFind, at: index)
-//
-//                    let highlight = Highlight(
-//                        string: self.textToFind,
-//                        frame: word.frame.scaleTo(self.highlightsView.bounds.size),
-//                        colors: [UIColor(hex: 0xff2600)]
-//                    )
-//
-//                    highlights.insert(highlight)
-//
-//                }
             }
+            print("H: \(highlights)")
             
-//            self.highlightsViewModel.update(with: highlights)
+            DispatchQueue.main.async {
+                self.highlightsViewModel.update(with: highlights)
+            }
         }
     }
 }
