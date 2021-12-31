@@ -29,6 +29,9 @@ class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet var searchContainerView: UIView!
     
+    var progressViewModel = ProgressViewModel()
+    @IBOutlet weak var progressContainerView: UIView!
+    
     
     /// should match the frame of the image
     @IBOutlet var drawingView: UIView!
@@ -85,7 +88,7 @@ class CameraViewController: UIViewController, PageViewController {
         
         setupZoom()
         setupHighlights()
-        
+        setupProgress()
         setupStatic()
         
         /// A testing tab bar

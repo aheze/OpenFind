@@ -743,6 +743,17 @@
 		3C7B7A8E277FA6E300E1F602 /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3C7B7A8F277FA6E300E1F602 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
 		3C7B7A90277FA6E300E1F602 /* Utilities+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0D275AA0CE0064F2C6 /* Utilities+SwiftUI.swift */; };
+		3C7B7A93277FB7BD00E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A94277FB7BD00E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A95277FB7BF00E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A97277FB7C000E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A98277FB7C100E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A99277FB7C200E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A9A277FB7C300E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A9B277FB7C400E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A9C277FB7C400E1F602 /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3C7B7A9E277FB7DA00E1F602 /* CameraVC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */; };
 		3C7BAD94275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD95275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
@@ -1472,6 +1483,7 @@
 		3C7B7A7B277FA50800E1F602 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3C7B7A7D277FA50B00E1F602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLineView.swift; sourceTree = "<group>"; };
+		3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Progress.swift"; sourceTree = "<group>"; };
 		3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Math.swift"; sourceTree = "<group>"; };
 		3C7BADA7275C12BA0030F0D2 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
@@ -2163,6 +2175,7 @@
 				3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */,
 				3C7B7A54277EE6D900E1F602 /* CameraVC+Find.swift */,
 				3C7B7A60277EEB9C00E1F602 /* CameraVC+Highlights.swift */,
+				3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */,
 				3C7B7A70277F9FE500E1F602 /* CameraVC+Testing.swift */,
 				3C11996F274B329E00D6AFE3 /* Live Preview */,
 				3C11996627499A3E00D6AFE3 /* Zoom */,
@@ -4233,6 +4246,7 @@
 				3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */,
 				3CB98A7F275B22B300A6B1B9 /* RightView.swift in Sources */,
 				3C1D1A0B275AA08D0064F2C6 /* FieldSettingsView.swift in Sources */,
+				3C7B7A9A277FB7C300E1F602 /* ProgressLineView.swift in Sources */,
 				3C1D19F7275A9F390064F2C6 /* SceneDelegate.swift in Sources */,
 				3C1D1A29275AA25B0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C7BAD9C275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
@@ -4269,6 +4283,7 @@
 				3C7B7A2A277E9CD300E1F602 /* Utilities+Dates.swift in Sources */,
 				3C2DBBE3277E739200911A74 /* SceneDelegate.swift in Sources */,
 				3C7B7A38277E9D9300E1F602 /* SwiftUIViews.swift in Sources */,
+				3C7B7A9B277FB7C400E1F602 /* ProgressLineView.swift in Sources */,
 				3C7B7A3A277E9D9300E1F602 /* ToolbarViewModel.swift in Sources */,
 				3C2DBBF4277E73B700911A74 /* VisionEngine.swift in Sources */,
 			);
@@ -4365,6 +4380,7 @@
 				3C3642D3277BC2E70038CB18 /* SearchConstants.swift in Sources */,
 				3C3642D8277BC2E70038CB18 /* SearchVC+Datasource.swift in Sources */,
 				3C4D3A25274768790010FD68 /* CameraBridge.swift in Sources */,
+				3C7B7A94277FB7BD00E1F602 /* ProgressLineView.swift in Sources */,
 				3CE9C203274B4F05008C903C /* ZoomViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4424,6 +4440,7 @@
 				3C3642C1277BC2E70038CB18 /* LeftView.swift in Sources */,
 				3C4D3A092747667B0010FD68 /* TabBarViewController.swift in Sources */,
 				3C2DBBC6277E6F0000911A74 /* SearchVC+Cell.swift in Sources */,
+				3C7B7A93277FB7BD00E1F602 /* ProgressLineView.swift in Sources */,
 				3C7B7A5D277EE9A400E1F602 /* HighlightsConstants.swift in Sources */,
 				3C7B7A58277EE78700E1F602 /* Find+Utilities.swift in Sources */,
 				3C3642C2277BC2E70038CB18 /* SearchConstants.swift in Sources */,
@@ -4455,6 +4472,7 @@
 				3C7B7A6D277F9CB200E1F602 /* CameraVC+Static.swift in Sources */,
 				3C4D3A082747667B0010FD68 /* ContentCell.swift in Sources */,
 				3C364303277BC4D00038CB18 /* CameraVC+Zoom.swift in Sources */,
+				3C7B7A9E277FB7DA00E1F602 /* CameraVC+Progress.swift in Sources */,
 				3C4D39AD27475DC80010FD68 /* ResultsIconView.swift in Sources */,
 				3C119975274B345000D6AFE3 /* LivePreviewVC+Delegate.swift in Sources */,
 				3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */,
@@ -4498,6 +4516,7 @@
 				3C4D39DB2747661E0010FD68 /* ViewController.swift in Sources */,
 				3C3642EA277BC2E90038CB18 /* SearchUtilities.swift in Sources */,
 				3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
+				3C7B7A95277FB7BF00E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D39F1274766590010FD68 /* PhotosViewController.swift in Sources */,
 				3C3642EE277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
 				3CE9C208274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
@@ -4554,6 +4573,7 @@
 				3C4D3A6D2747694F0010FD68 /* ContentCell.swift in Sources */,
 				3C3642FB277BC2E90038CB18 /* SearchUtilities.swift in Sources */,
 				3CE9C1F8274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
+				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3C3642FF277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
@@ -4615,6 +4635,7 @@
 				3C4D3B18274776D20010FD68 /* ExternalLinks.swift in Sources */,
 				3C7B7A4C277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C364343277C0C370038CB18 /* NavigationViewModifier.swift in Sources */,
+				3C7B7A97277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3B1C274776D20010FD68 /* TextDetectionView.swift in Sources */,
 				3C4D3B11274776D20010FD68 /* ContactView.swift in Sources */,
 				3C1D1A39275AA25D0064F2C6 /* Utilities+UIDevice.swift in Sources */,
@@ -4639,6 +4660,7 @@
 				3C1D1A13275AA0E20064F2C6 /* SwiftUIViews.swift in Sources */,
 				3C4D3BA027477ABD0010FD68 /* SearchUtilities.swift in Sources */,
 				3C4D3BA227477ABD0010FD68 /* Field.swift in Sources */,
+				3C7B7A98277FB7C100E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3B9427477ABD0010FD68 /* SearchCollectionView.swift in Sources */,
 				3C4D3B67274777E40010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3B9A27477ABD0010FD68 /* LeftView.swift in Sources */,
@@ -4762,6 +4784,7 @@
 				3C7B7A40277E9D9400E1F602 /* Constants.swift in Sources */,
 				3C7B7A31277E9CD500E1F602 /* Utilities+SwiftUI.swift in Sources */,
 				3C7B7A23277E963700E1F602 /* HighlightsViewController.swift in Sources */,
+				3C7B7A9C277FB7C400E1F602 /* ProgressLineView.swift in Sources */,
 				3C7B7A1C277E93F900E1F602 /* HighlightsView.swift in Sources */,
 				3C7B7A36277E9CD500E1F602 /* Utilities+Math.swift in Sources */,
 				3C7B7A09277E93CA00E1F602 /* AppDelegate.swift in Sources */,
@@ -4823,6 +4846,7 @@
 				3C1D1A2D275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C23D274EBD2B008C903C /* VC+Sizing.swift in Sources */,
 				3CE9C239274EBBA1008C903C /* LivePreviewView.swift in Sources */,
+				3C7B7A99277FB7C200E1F602 /* ProgressLineView.swift in Sources */,
 				3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */,
 				3C606676274F5343000A5BDE /* VisionUtilities.swift in Sources */,
 				3CBEAC0D275484D800D04B39 /* VisionFindingUtilities.swift in Sources */,

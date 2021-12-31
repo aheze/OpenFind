@@ -47,6 +47,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                 <color key="backgroundColor" red="0.7803921568627451" green="0.45034031770652549" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbV-LF-KmV">
+                                <rect key="frame" x="0.0" y="200" width="414" height="4"/>
+                                <color key="backgroundColor" systemColor="tintColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="uQ6-7r-N8s"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDu-p8-1ox">
                                 <rect key="frame" x="0.0" y="384" width="414" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -60,10 +67,13 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="bIO-Uj-HK1" secondAttribute="bottom" id="1zt-eG-aTU"/>
                             <constraint firstAttribute="trailing" secondItem="bIO-Uj-HK1" secondAttribute="trailing" id="3ti-Bt-EoY"/>
+                            <constraint firstItem="vbV-LF-KmV" firstAttribute="top" secondItem="n3B-Mf-bwU" secondAttribute="bottom" id="66G-Mw-lQd"/>
+                            <constraint firstItem="vbV-LF-KmV" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="6f2-sU-nsi"/>
                             <constraint firstItem="hlJ-qC-1i7" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="9wg-aY-1tg"/>
                             <constraint firstItem="bIO-Uj-HK1" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="BaX-Vq-j5W"/>
                             <constraint firstItem="n3B-Mf-bwU" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Bjp-et-H1D"/>
                             <constraint firstItem="kxc-BX-aU0" firstAttribute="top" secondItem="n3B-Mf-bwU" secondAttribute="bottom" id="GSW-xb-p5Z"/>
+                            <constraint firstAttribute="trailing" secondItem="vbV-LF-KmV" secondAttribute="trailing" id="Iwp-9G-BTr"/>
                             <constraint firstAttribute="trailing" secondItem="n3B-Mf-bwU" secondAttribute="trailing" id="JYM-qs-4QN"/>
                             <constraint firstItem="bIO-Uj-HK1" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Jfk-Ft-Zbu"/>
                             <constraint firstItem="cDu-p8-1ox" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OiX-yc-2fW"/>
@@ -80,6 +90,7 @@
                     <connections>
                         <outlet property="drawingView" destination="fcN-7d-T0X" id="7gY-9c-9Mt"/>
                         <outlet property="livePreviewContainerView" destination="bIO-Uj-HK1" id="Jvd-MQ-Lw8"/>
+                        <outlet property="progressContainerView" destination="vbV-LF-KmV" id="mwe-5f-Eut"/>
                         <outlet property="safeView" destination="kxc-BX-aU0" id="gD2-wc-k0h"/>
                         <outlet property="searchContainerView" destination="n3B-Mf-bwU" id="79P-bp-qV3"/>
                         <outlet property="simulatedSafeView" destination="62W-yT-yly" id="4qc-3P-bB2"/>
@@ -206,6 +217,9 @@
         </systemColor>
         <systemColor name="systemBrownColor">
             <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -28,11 +28,14 @@ extension CameraViewController {
     }
     func resume() {
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
+        endAutoProgress()
     }
     func pause() {
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = false
-        livePreviewViewController.takePhoto { image in
-            print("imagegot!")
+        startAutoProgress()
+        livePreviewViewController.takePhoto { [weak self ]image in
+            guard let self = self else { return }
+            self.endAutoProgress()
         }
     }
 }

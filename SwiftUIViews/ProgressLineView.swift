@@ -29,15 +29,7 @@ class ProgressViewModel: ObservableObject {
         case auto(estimatedTime: CGFloat)
     }
     
-    init(
-        progress: Progress,
-        foregroundColor: UIColor = UIColor(hex: 0x00aeef),
-        backgroundColor: UIColor = UIColor(hex: 0x00aeef).withAlphaComponent(0.3)
-    ) {
-        self.progress = progress
-        self.foregroundColor = foregroundColor
-        self.backgroundColor = backgroundColor
-        
+    func start(progress: Progress) {
         switch progress {
         case .determinate(let progress):
             percentage = progress
@@ -89,6 +81,16 @@ class ProgressViewModel: ObservableObject {
             }
         }
     }
+    
+//    init(
+//        progress: Progress,
+//        foregroundColor: UIColor = UIColor(hex: 0x00aeef),
+//        backgroundColor: UIColor = UIColor(hex: 0x00aeef).withAlphaComponent(0.3)
+//    ) {
+//        self.progress = progress
+//        self.foregroundColor = foregroundColor
+//        self.backgroundColor = backgroundColor
+//    }
     
     
     func shimmer(speed: CGFloat = ProgressViewModel.shimmerAnimationTime) {
@@ -142,6 +144,7 @@ struct ProgressLineView: View {
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
+                                .drawingGroup()
                                 .opacity(model.shimmerShowing ? 0.5 : 0)
                                 .frame(width: ProgressViewModel.shimmerWidth)
                                 .clipped() /// clip the gradient to its frame
@@ -168,14 +171,20 @@ struct ProgressLineView: View {
 }
 
 struct ProgressLineViewTester: View {
-    @StateObject var model = ProgressViewModel(progress: .auto(estimatedTime: 1))
+    @StateObject var model = ProgressViewModel()
     var body: some View {
-        ProgressLineView(model: model)
-            .frame(height: 5)
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    model.finishAutoProgress()
+        ZStack {
+            Color.black
+            
+            ProgressLineView(model: model)
+                .frame(height: 5)
+                .onAppear {
+                    model.start(progress: .auto(estimatedTime: 1))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        model.finishAutoProgress()
+                    }
                 }
-            }
+        }
     }
 }
+
