@@ -18,7 +18,13 @@ struct Highlight: Identifiable, Hashable {
     /// how many frames the highlight wasn't near any other new highlights
     var cyclesWithoutNeighbor = 0
     
-//    var state: State
+    var state = State.added
+    
+    enum State {
+        case reused
+        case added
+        case lingering
+    }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -26,24 +32,12 @@ struct Highlight: Identifiable, Hashable {
 }
 
 class HighlightsViewModel: ObservableObject {
-    @Published var reusedHighlights = Set<Highlight>()
-    @Published var addedHighlights = Set<Highlight>()
-    @Published var lingeringHighlights = Set<Highlight>()
-    
+    @Published var highlights = Set<Highlight>()
+
     func update(with newHighlights: Set<Highlight>) {
 
-        /// highlights that were reused
-        var reusedHighlights = Set<Highlight>()
-        
-        /// highlights that were added
-        var addedHighlights = Set<Highlight>()
-        
-        /// old highlights that are under probation
-        var lingeringHighlights = Set<Highlight>()
-        
-//        var oldHighlights = self.reusedHighlights + self.addedHighlights + self.lingeringHighlights
-        var oldHighlights = self.reusedHighlights.union(self.addedHighlights).union(self.addedHighlights)
-
+        var nextHighlights = Set<Highlight>()
+        var oldHighlights = highlights
         
         for newHighlight in newHighlights {
             
@@ -63,34 +57,32 @@ class HighlightsViewModel: ObservableObject {
             {
                 /// previous highlight existed, animate over
                 var reusedHighlight = nearestHighlight
+                reusedHighlight.cyclesWithoutNeighbor = 0
                 reusedHighlight.frame = newHighlight.frame
-                reusedHighlights.insert(reusedHighlight)
+                reusedHighlight.state = .reused
+                nextHighlights.insert(reusedHighlight)
                 oldHighlights.remove(nearestHighlight)
             } else {
                 /// add the new highlight (fade in)
-                addedHighlights.insert(newHighlight)
+                var addedHighlight = newHighlight
+                addedHighlight.state = .added
+                nextHighlights.insert(addedHighlight)
             }
             
         }
-        
         
         for oldHighlight in oldHighlights {
             var lingeringHighlight = oldHighlight
             lingeringHighlight.cyclesWithoutNeighbor += 1
+            lingeringHighlight.state = .lingering
             
             if lingeringHighlight.cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights {
-                lingeringHighlights.insert(lingeringHighlight)
+                nextHighlights.insert(lingeringHighlight)
             }
         }
         
-        print("reused: \(reusedHighlights.map { $0.frame })")
-        print("added: \(addedHighlights.map { $0.frame })")
-        print("lingering: \(lingeringHighlights.map { $0.frame })")
-        withAnimation(.linear(duration: 1)) {
-//            self.addedHighlights = newHighlights
-            self.reusedHighlights = reusedHighlights
-            self.addedHighlights = addedHighlights
-            self.lingeringHighlights = lingeringHighlights
+        withAnimation(.easeOut(duration: 0.6)) {
+            self.highlights = nextHighlights
         }
     }
     

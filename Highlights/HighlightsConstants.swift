@@ -10,7 +10,7 @@
 import UIKit
 
 enum HighlightsConstants {
-    static var maximumHighlightTransitionProximity = CGFloat(10)
+    static var maximumHighlightTransitionProximity = CGFloat(0.1)
     static var maximumHighlightTransitionProximitySquared = pow(maximumHighlightTransitionProximity, 2)
     
     static var maximumCyclesForLingeringHighlights = 3

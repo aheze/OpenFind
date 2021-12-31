@@ -14,17 +14,20 @@ struct HighlightsView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ForEach(Array(highlightsViewModel.reusedHighlights)) { highlight in
+                ForEach(Array(highlightsViewModel.highlights)) { highlight in
                     HighlightView(highlight: highlight, viewSize: geometry.size)
                 }
-                
-                ForEach(Array(highlightsViewModel.addedHighlights)) { highlight in
-                    HighlightView(highlight: highlight, viewSize: geometry.size)
-                }
-                
-                ForEach(Array(highlightsViewModel.lingeringHighlights)) { highlight in
-                    HighlightView(highlight: highlight, viewSize: geometry.size)
-                }
+//                ForEach(Array(highlightsViewModel.reusedHighlights)) { highlight in
+//                    HighlightView(highlight: highlight, viewSize: geometry.size)
+//                }
+//
+//                ForEach(Array(highlightsViewModel.addedHighlights)) { highlight in
+//                    HighlightView(highlight: highlight, viewSize: geometry.size)
+//                }
+//
+//                ForEach(Array(highlightsViewModel.lingeringHighlights)) { highlight in
+//                    HighlightView(highlight: highlight, viewSize: geometry.size)
+//                }
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -52,6 +55,7 @@ struct HighlightView: View {
                     .stroke(gradient, lineWidth: 2)
                     .opacity(0.8)
             )
+            .opacity(highlight.state == .lingering ? 0.1 : 1)
             .frame(rect: frame)
     }
 

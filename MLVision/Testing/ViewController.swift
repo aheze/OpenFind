@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { timer in
             self.updateTrackingImage(timer: timer)
         }
         
