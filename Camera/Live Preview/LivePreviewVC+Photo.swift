@@ -21,7 +21,6 @@ extension LivePreviewViewController {
         {
             photoCaptured = { [weak self] image in
                 completion(image)
-                print("done.")
                 self?.photoCaptured = nil
             }
             

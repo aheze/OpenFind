@@ -52,6 +52,10 @@ extension LivePreviewViewController {
             session.addOutput(videoDataOutput)
         }
         
+        if session.canAddOutput(photoDataOutput) {
+            session.addOutput(photoDataOutput)
+        }
+        
         DispatchQueue.main.async {
             self.addSession()
         }

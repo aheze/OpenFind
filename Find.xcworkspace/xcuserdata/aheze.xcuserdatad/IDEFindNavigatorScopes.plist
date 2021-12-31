@@ -312,5 +312,31 @@
 			<string>workspace</string>
 		</dict>
 	</dict>
+	<dict>
+		<key>name</key>
+		<string>Old Find</string>
+		<key>predicate</key>
+		<dict>
+			<key>predicates</key>
+			<array>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>Find</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+			</array>
+			<key>rule</key>
+			<string>any</string>
+		</dict>
+		<key>source</key>
+		<dict>
+			<key>file-source</key>
+			<string>workspace</string>
+		</dict>
+	</dict>
 </array>
 </plist>
