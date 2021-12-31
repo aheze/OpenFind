@@ -44,7 +44,6 @@ struct HighlightView: View {
             endPoint: .trailing
         )
         
-
         let cornerRadius = getCornerRadius(rectHeight: highlight.frame.height)
         
         RoundedRectangle(cornerRadius: cornerRadius)
@@ -59,7 +58,6 @@ struct HighlightView: View {
             .frame(rect: highlight.frame)
     }
 
-    
     func getCornerRadius(rectHeight: CGFloat) -> CGFloat {
         return rectHeight / 10
     }

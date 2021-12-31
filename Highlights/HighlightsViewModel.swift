@@ -6,7 +6,6 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-
 import SwiftUI
 
 struct Highlight: Identifiable, Hashable {
@@ -35,17 +34,15 @@ class HighlightsViewModel: ObservableObject {
     @Published var highlights = Set<Highlight>()
 
     func update(with newHighlights: Set<Highlight>) {
-
         var nextHighlights = Set<Highlight>()
         
         /// lingering last
         var oldHighlights = Array(highlights)
-        oldHighlights.sort { a, b in
-            return b.state == .lingering
+        oldHighlights.sort { _, b in
+            b.state == .lingering
         }
         
         for newHighlight in newHighlights {
-            
             var (minimumDistance, nearestHighlight, nearestHighlightIndex): (CGFloat, Highlight?, Int?) = (.infinity, nil, nil)
             
             for oldHighlightIndex in oldHighlights.indices {
@@ -79,7 +76,6 @@ class HighlightsViewModel: ObservableObject {
                 addedHighlight.state = .added
                 nextHighlights.insert(addedHighlight)
             }
-            
         }
         
         for oldHighlight in oldHighlights {
