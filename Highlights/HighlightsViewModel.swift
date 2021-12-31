@@ -8,28 +8,6 @@
     
 import SwiftUI
 
-struct Highlight: Identifiable, Hashable {
-    let id = UUID()
-    var string = ""
-    var frame = CGRect.zero
-    var colors = [UIColor]()
-    
-    /// how many frames the highlight wasn't near any other new highlights
-    var cyclesWithoutNeighbor = 0
-    
-    var state = State.added
-    
-    enum State {
-        case reused
-        case added
-        case lingering
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
 class HighlightsViewModel: ObservableObject {
     @Published var highlights = Set<Highlight>()
 
@@ -67,6 +45,8 @@ class HighlightsViewModel: ObservableObject {
                 reusedHighlight.cyclesWithoutNeighbor = 0
                 reusedHighlight.frame = newHighlight.frame
                 reusedHighlight.state = .reused
+                reusedHighlight.colors = newHighlight.colors
+                reusedHighlight.alpha = newHighlight.alpha
                 nextHighlights.insert(reusedHighlight)
                 oldHighlights.remove(at: nearestHighlightIndex)
                 

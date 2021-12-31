@@ -30,7 +30,8 @@ extension CameraViewController {
                         let highlight = Highlight(
                             string: string,
                             frame: word.frame.scaleTo(self.drawingViewSize),
-                            colors: [UIColor(hex: 0x00aeef)]
+                            colors: gradient.colors,
+                            alpha: gradient.alpha
                         )
                         
                         highlights.insert(highlight)

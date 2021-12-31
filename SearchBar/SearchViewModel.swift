@@ -31,6 +31,7 @@ class SearchViewModel: ObservableObject {
     
     struct Gradient {
         var colors = [UIColor]()
+        var alpha = CGFloat(1)
     }
     
     var stringToGradients: [String: Gradient] {
@@ -41,19 +42,20 @@ class SearchViewModel: ObservableObject {
             case .string(let string):
                 var existingGradient = stringToGradients[string] ?? Gradient()
                 existingGradient.colors.append(field.attributes.selectedColor ?? field.attributes.defaultColor)
+                existingGradient.alpha = field.attributes.alpha
                 stringToGradients[string] = existingGradient
             case .list(let list):
                 let strings = list.contents
                 for string in strings {
                     var existingGradient = stringToGradients[string] ?? Gradient()
                     existingGradient.colors.append(field.attributes.selectedColor ?? field.attributes.defaultColor)
+                    existingGradient.alpha = field.attributes.alpha
                     stringToGradients[string] = existingGradient
                 }
             case .addNew(_):
                 continue
             }
         }
-//        print("Cont: \(stringToGradients)")
         return stringToGradients
     }
 }
