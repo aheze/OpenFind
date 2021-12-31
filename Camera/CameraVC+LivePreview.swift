@@ -28,6 +28,11 @@ extension CameraViewController {
             }
         }
         
+        livePreviewViewController.frameCaptured = { [weak self] pixelBuffer in
+            guard let self = self else { return }
+            self.find(in: pixelBuffer)
+        }
+        
         addChildViewController(livePreviewViewController, in: livePreviewContainerView)
         
         livePreviewContainerView.backgroundColor = .clear

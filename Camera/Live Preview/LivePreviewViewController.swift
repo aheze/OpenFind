@@ -67,7 +67,9 @@ class LivePreviewViewController: UIViewController {
     let videoDataOutput = AVCaptureVideoDataOutput()
     let photoDataOutput = AVCapturePhotoOutput()
     var cameraDevice: AVCaptureDevice?
-    var captureCompletionBlock: ((UIImage) -> Void)?
+    
+    /// a new frame of the live video was taken
+    var frameCaptured: ((CVPixelBuffer) -> Void)?
     
     /// `true` = became `.aspectFill`
     var hitAspectTarget = false

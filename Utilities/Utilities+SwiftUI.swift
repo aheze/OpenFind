@@ -21,7 +21,7 @@ struct FrameRectModifier: ViewModifier {
 
 public extension View {
     /// Position a view using a rectangular frame.
-    func frame(rect: CGRect) -> some View {
+    func frame(with rect: CGRect) -> some View {
         return self.modifier(FrameRectModifier(rect: rect))
     }
 }

@@ -28,4 +28,32 @@ class SearchViewModel: ObservableObject {
     var values: [Field.Value] {
         return fields.dropLast().map { $0.value }
     }
+    
+    struct Gradient {
+        var colors = [UIColor]()
+    }
+    
+    var stringToGradients: [String: Gradient] {
+        
+        var stringToGradients = [String: Gradient]()
+        for field in fields {
+            switch field.value {
+            case .string(let string):
+                var existingGradient = stringToGradients[string] ?? Gradient()
+                existingGradient.colors.append(field.attributes.selectedColor ?? field.attributes.defaultColor)
+                stringToGradients[string] = existingGradient
+            case .list(let list):
+                let strings = list.contents
+                for string in strings {
+                    var existingGradient = stringToGradients[string] ?? Gradient()
+                    existingGradient.colors.append(field.attributes.selectedColor ?? field.attributes.defaultColor)
+                    stringToGradients[string] = existingGradient
+                }
+            case .addNew(_):
+                continue
+            }
+        }
+//        print("Cont: \(stringToGradients)")
+        return stringToGradients
+    }
 }
