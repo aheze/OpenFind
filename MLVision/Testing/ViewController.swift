@@ -66,7 +66,7 @@ class ViewController: UIViewController {
                     
                     let highlight = Highlight(
                         string: self.textToFind,
-                        frame: word.frame,
+                        frame: word.frame.scaleTo(self.highlightsView.bounds.size),
                         colors: [UIColor(hex: 0xff2600)]
                     )
                     
@@ -78,6 +78,7 @@ class ViewController: UIViewController {
             self.highlightsViewModel.update(with: highlights)
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

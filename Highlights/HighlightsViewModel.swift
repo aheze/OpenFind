@@ -37,22 +37,32 @@ class HighlightsViewModel: ObservableObject {
     func update(with newHighlights: Set<Highlight>) {
 
         var nextHighlights = Set<Highlight>()
-        var oldHighlights = highlights
+        
+        /// lingering last
+        var oldHighlights = Array(highlights)
+        oldHighlights.sort { a, b in
+            return b.state == .lingering
+        }
         
         for newHighlight in newHighlights {
             
-            var (minimumDistance, nearestHighlight): (CGFloat, Highlight?) = (.infinity, nil)
+            var (minimumDistance, nearestHighlight, nearestHighlightIndex): (CGFloat, Highlight?, Int?) = (.infinity, nil, nil)
             
-            for oldHighlight in oldHighlights where oldHighlight.string == newHighlight.string {
+            for oldHighlightIndex in oldHighlights.indices {
+                let oldHighlight = oldHighlights[oldHighlightIndex]
+                guard oldHighlight.string == newHighlight.string else { continue }
+                
                 let distance = relativeDistance(oldHighlight.frame.center, newHighlight.frame.center)
                 if distance < minimumDistance {
                     minimumDistance = distance
                     nearestHighlight = oldHighlight
+                    nearestHighlightIndex = oldHighlightIndex
                 }
             }
             
             if
                 let nearestHighlight = nearestHighlight,
+                let nearestHighlightIndex = nearestHighlightIndex,
                 minimumDistance < HighlightsConstants.maximumHighlightTransitionProximitySquared
             {
                 /// previous highlight existed, animate over
@@ -61,7 +71,8 @@ class HighlightsViewModel: ObservableObject {
                 reusedHighlight.frame = newHighlight.frame
                 reusedHighlight.state = .reused
                 nextHighlights.insert(reusedHighlight)
-                oldHighlights.remove(nearestHighlight)
+                oldHighlights.remove(at: nearestHighlightIndex)
+                
             } else {
                 /// add the new highlight (fade in)
                 var addedHighlight = newHighlight

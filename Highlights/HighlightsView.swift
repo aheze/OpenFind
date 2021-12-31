@@ -44,8 +44,8 @@ struct HighlightView: View {
             endPoint: .trailing
         )
         
-        let frame = getScaledRect()
-        let cornerRadius = getCornerRadius(rectHeight: frame.height)
+
+        let cornerRadius = getCornerRadius(rectHeight: highlight.frame.height)
         
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(gradient)
@@ -56,20 +56,9 @@ struct HighlightView: View {
                     .opacity(0.8)
             )
             .opacity(highlight.state == .lingering ? 0.1 : 1)
-            .frame(rect: frame)
+            .frame(rect: highlight.frame)
     }
 
-    func getScaledRect() -> CGRect {
-        var rect = CGRect(
-            x: highlight.frame.origin.x * viewSize.width,
-            y: highlight.frame.origin.y * viewSize.height,
-            width: highlight.frame.width * viewSize.width,
-            height: highlight.frame.height * viewSize.height
-        )
-        rect = rect.insetBy(dx: -3, dy: -3)
-        
-        return rect
-    }
     
     func getCornerRadius(rectHeight: CGFloat) -> CGFloat {
         return rectHeight / 10
