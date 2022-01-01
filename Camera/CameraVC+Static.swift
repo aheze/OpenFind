@@ -29,18 +29,22 @@ extension CameraViewController {
     func resume() {
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
-        self.removeImage()
+        removeScrollZoomImage()
+        showLivePreview()
+        showZoomView()
     }
     func pause() {
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = false
         startAutoProgress()
+        hideZoomView()
         livePreviewViewController.takePhoto { [weak self] image in
             guard let self = self else { return }
-            self.setImage(image: image)
+            self.setScrollZoomImage(image: image)
             
             if let cgImage = image.cgImage {
                 self.findAndAddHighlights(image: cgImage) { _ in
                     self.endAutoProgress()
+                    self.hideLivePreview()
                 }
             }
         }

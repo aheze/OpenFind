@@ -16,17 +16,26 @@ extension CameraViewController {
         addChildViewController(scrollZoomViewController, in: scrollZoomContainerView)
         
         scrollZoomViewController.imageView.alpha = 0
+        
+        scrollZoomViewController.contentView.addDebugBorders(.red)
+        scrollZoomViewController.imageView.addDebugBorders(.green)
+        
         return scrollZoomViewController
     }
     
-    func setImage(image: UIImage) {
+    func setScrollZoomImage(image: UIImage) {
         scrollZoomViewController.imageView.image = image
+        
+        let contentViewBounds = scrollZoomViewController.contentView.frame
+        let scrollViewBounds = scrollZoomViewController.scrollView.frame
+        print("\(contentViewBounds) vs \(scrollViewBounds)")
+        
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 1
         }
     }
     
-    func removeImage() {
+    func removeScrollZoomImage() {
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 0
         }

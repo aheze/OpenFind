@@ -55,6 +55,12 @@ extension CameraViewController {
         livePreviewViewController.view.backgroundColor = .clear
         return livePreviewViewController
     }
-    
-
+    func showLivePreview() {
+        self.livePreviewContainerView.alpha = 1
+    }
+    func hideLivePreview() {
+        UIView.animate(withDuration: 0.8) {
+            self.livePreviewContainerView.alpha = 0
+        }
+    }
 }

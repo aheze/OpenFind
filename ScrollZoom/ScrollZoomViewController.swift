@@ -20,6 +20,8 @@ class ScrollZoomViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         contentView.backgroundColor = .clear
+        imageView.backgroundColor = .clear
+        imageView.clipsToBounds = true
         drawingView.backgroundColor = .clear
         
         scrollView.delegate = self
