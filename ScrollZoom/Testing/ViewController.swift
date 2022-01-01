@@ -17,6 +17,9 @@ class ViewController: UIViewController {
         let storyboard = UIStoryboard(name: "ScrollZoomContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ScrollZoomViewController") as! ScrollZoomViewController
         addChildViewController(viewController, in: view)
+        
+        viewController.drawingView.addDebugBorders(.red)
+        print("loaded")
     }
 }
 
