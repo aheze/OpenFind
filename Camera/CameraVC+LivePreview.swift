@@ -44,7 +44,7 @@ extension CameraViewController {
             guard let self = self else { return }
             
             if !self.cameraViewModel.shutterOn {
-                self.find(in: pixelBuffer)
+                self.findAndAddHighlights(pixelBuffer: pixelBuffer)
             }
         }
         

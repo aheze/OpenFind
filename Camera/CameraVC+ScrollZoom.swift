@@ -10,12 +10,26 @@
 import UIKit
 
 extension CameraViewController {
-    func createScrollZoom() -> ScrollZoomViewController{
+    func createScrollZoom() -> ScrollZoomViewController {
         let storyboard = UIStoryboard(name: "ScrollZoomContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ScrollZoomViewController") as! ScrollZoomViewController
-        addChildViewController(viewController, in: scrollZoomContainerView)
+        let scrollZoomViewController = storyboard.instantiateViewController(withIdentifier: "ScrollZoomViewController") as! ScrollZoomViewController
+        addChildViewController(scrollZoomViewController, in: scrollZoomContainerView)
         
-        return viewController
+        scrollZoomViewController.imageView.alpha = 0
+        return scrollZoomViewController
+    }
+    
+    func setImage(image: UIImage) {
+        scrollZoomViewController.imageView.image = image
+        UIView.animate(withDuration: 0.5) {
+            self.scrollZoomViewController.imageView.alpha = 1
+        }
+    }
+    
+    func removeImage() {
+        UIView.animate(withDuration: 0.5) {
+            self.scrollZoomViewController.imageView.alpha = 0
+        }
     }
 }
 

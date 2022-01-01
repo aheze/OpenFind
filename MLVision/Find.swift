@@ -36,6 +36,7 @@ class Find {
             let sentences = getSentences(from: request)
             completion(sentences)
         }
+        
         request.customWords = options.customWords
         request.recognitionLevel = options.level
         

@@ -18,7 +18,7 @@ extension CameraViewController {
         progressContainerView.backgroundColor = .clear
     }
     
-    func startAutoProgress(estimatedTime: CGFloat = 1.5) {
+    func startAutoProgress(estimatedTime: CGFloat = 1) {
         progressViewModel.start(progress: .auto(estimatedTime: estimatedTime))
     }
     func endAutoProgress() {

@@ -12,13 +12,17 @@ import SwiftUI
 class ProgressViewModel: ObservableObject {
     @Published var progress = Progress.determinate(progress: 0)
     @Published var foregroundColor: UIColor = UIColor(hex: 0x00aeef)
-    @Published var backgroundColor: UIColor = UIColor(hex: 0x00aeef).withAlphaComponent(0.3)
+    @Published var backgroundColor: UIColor = UIColor(hex: 0x00aeef).withAlphaComponent(0.2)
     
     /// the actual percentage used by the view
     @Published var percentage = CGFloat(0)
     @Published var percentageShowing = false
+    
     @Published var shimmerPercentage = CGFloat(0)
     @Published var shimmerShowing = false
+    
+    @Published var finalShimmerPercentage = CGFloat(0)
+    @Published var finalShimmerShowing = false
     
     static var shimmerWidth = CGFloat(200)
     static var shimmerAnimationInterval = CGFloat(4.5)
@@ -44,14 +48,11 @@ class ProgressViewModel: ObservableObject {
             let interval = estimatedTime / 4
             
             /// make the animation slightly longer
-            let delayedInterval = interval * 5 / 4
+            let delayedInterval = interval * 6 / 4
             percentage = 0
             
-            DispatchQueue.main.async {
-                withAnimation(.easeOut(duration: delayedInterval)) {
-                    self.percentage = 0.2
-                }
-                self.shimmer()
+            withAnimation(.easeOut(duration: delayedInterval)) {
+                self.percentage = 0.2
             }
             
             Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] timer in
@@ -63,7 +64,7 @@ class ProgressViewModel: ObservableObject {
                 }
                 withAnimation(.easeOut(duration: delayedInterval)) {
                     let remaining = 0.9 - self.percentage
-                    let additional = remaining * 2 / 5
+                    let additional = remaining * 1.5 / 5
                     self.percentage += additional
                 }
             }
@@ -72,32 +73,39 @@ class ProgressViewModel: ObservableObject {
                 guard let self = self else { return }
                 if self.percentage >= 1 {
                     timer.invalidate()
-                    withAnimation(.linear(duration: 0.9)) {
-                        self.shimmerShowing = false
-                    }
                     return
                 }
-                self.shimmer()
+                self.shimmer(isFinal: false)
             }
         }
     }
     
-//    init(
-//        progress: Progress,
-//        foregroundColor: UIColor = UIColor(hex: 0x00aeef),
-//        backgroundColor: UIColor = UIColor(hex: 0x00aeef).withAlphaComponent(0.3)
-//    ) {
-//        self.progress = progress
-//        self.foregroundColor = foregroundColor
-//        self.backgroundColor = backgroundColor
-//    }
-    
-    
-    func shimmer(speed: CGFloat = ProgressViewModel.shimmerAnimationTime) {
-        self.shimmerShowing = true
-        self.shimmerPercentage = 0
-        withAnimation(.easeIn(duration: speed)) {
-            self.shimmerPercentage = 1
+    func shimmer(isFinal: Bool) {
+        if isFinal {
+            
+            self.finalShimmerShowing = true
+            self.finalShimmerPercentage = 0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeIn(duration: 0.5)) {
+                    self.finalShimmerPercentage = 1
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation(.linear(duration: 0.9)) {
+                    self.shimmerShowing = false
+                    self.finalShimmerShowing = false
+                }
+            }
+        } else {
+            
+            self.shimmerShowing = true
+            self.shimmerPercentage = 0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeIn(duration: ProgressViewModel.shimmerAnimationTime)) {
+                    self.shimmerPercentage = 1
+                }
+            }
         }
     }
     
@@ -116,7 +124,7 @@ class ProgressViewModel: ObservableObject {
         withAnimation(.easeIn(duration: 0.5)) {
             percentage = 1
         }
-        shimmer(speed: 0.5)
+        shimmer(isFinal: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             withAnimation {
                 self.percentageShowing = false
@@ -134,21 +142,19 @@ struct ProgressLineView: View {
                     Color(model.foregroundColor)
                         .frame(width: geometry.size.width * model.percentage)
                         .overlay(
-                            LinearGradient(
-                                stops: [
-                                    .init(color: Color.white.opacity(0), location: 0),
-                                    .init(color: Color.white.opacity(1), location: 0.5),
-                                    .init(color: Color.white.opacity(1), location: 0.8),
-                                    .init(color: Color.white.opacity(0), location: 1)
-                                ],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                                .drawingGroup()
-                                .opacity(model.shimmerShowing ? 0.5 : 0)
-                                .frame(width: ProgressViewModel.shimmerWidth)
-                                .clipped() /// clip the gradient to its frame
-                                .position(shimmerOffset(screenSize: geometry.size))
+                            ZStack {
+                                ShimmerView(
+                                    showing: model.shimmerShowing,
+                                    percentage: model.shimmerPercentage,
+                                    screenSize: geometry.size
+                                )
+                                
+                                ShimmerView(
+                                    showing: model.finalShimmerShowing,
+                                    percentage: model.finalShimmerPercentage,
+                                    screenSize: geometry.size
+                                )
+                            }
                         )
                         .clipped() /// clip the gradient to the bounds of the color
                     , alignment: .leading
@@ -157,11 +163,37 @@ struct ProgressLineView: View {
         .opacity(model.percentageShowing ? 1 : 0)
     }
     
+}
+
+struct ShimmerView: View {
+    var showing: Bool
+    var percentage: CGFloat
+    var screenSize: CGSize
+    
+    var body: some View {
+        LinearGradient(
+            stops: [
+                .init(color: Color.white.opacity(0), location: 0),
+                .init(color: Color.white.opacity(1), location: 0.5),
+                .init(color: Color.white.opacity(1), location: 0.8),
+                .init(color: Color.white.opacity(0), location: 1)
+            ],
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+            .drawingGroup()
+            .opacity(showing ? 0.5 : 0)
+            .frame(width: ProgressViewModel.shimmerWidth)
+            .clipped() /// clip the gradient to its frame
+            .position(shimmerOffset(screenSize: screenSize))
+    }
+    
+    
     func shimmerOffset(screenSize: CGSize) -> CGPoint {
         
         let totalWidth = screenSize.width + ProgressViewModel.shimmerWidth
         let startingOffset = -ProgressViewModel.shimmerWidth
-        let offset = startingOffset + model.shimmerPercentage * totalWidth
+        let offset = startingOffset + percentage * totalWidth
         
         var position = CGPoint(x: offset, y: 0)
         position.x += ProgressViewModel.shimmerWidth / 2
@@ -179,9 +211,12 @@ struct ProgressLineViewTester: View {
             ProgressLineView(model: model)
                 .frame(height: 5)
                 .onAppear {
-                    model.start(progress: .auto(estimatedTime: 1))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        model.finishAutoProgress()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        
+                        model.start(progress: .auto(estimatedTime: 1))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            model.finishAutoProgress()
+                        }
                     }
                 }
         }

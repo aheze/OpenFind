@@ -11,38 +11,30 @@ import UIKit
 import AVFoundation
 
 extension CameraViewController {
-    func find(in pixelBuffer: CVPixelBuffer) {
-        guard Find.startTime == nil else { return }
-        
+    func findAndAddHighlights(pixelBuffer: CVPixelBuffer, completion: @escaping (([FindText]) -> Void) = { _ in }) {
         var options = FindOptions()
         options.orientation = .right
         
-        Find.run(in: .pixelBuffer(pixelBuffer), options: options) { [weak self] sentences in
-            guard let self = self else { return }
-            
-            var highlights = Set<Highlight>()
-            for sentence in sentences {
-                for (string, gradient) in self.searchViewModel.stringToGradients {
-                    let indices = sentence.string.lowercased().indicesOf(string: string.lowercased())
-                    for index in indices {
-                        let word = sentence.getWord(word: string, at: index)
-                        
-                        let highlight = Highlight(
-                            string: string,
-                            frame: word.frame.scaleTo(self.drawingViewSize),
-                            colors: gradient.colors,
-                            alpha: gradient.alpha
-                        )
-                        
-                        highlights.insert(highlight)
-                        
-                    }
-                }
-            }
-
-            DispatchQueue.main.async {
-                self.highlightsViewModel.update(with: highlights)
-            }
+        find(in: .pixelBuffer(pixelBuffer), options: options) { [weak self] sentences in
+            completion(sentences)
+            self?.addHighlights(from: sentences)
+        }
+    }
+    
+    func findAndAddHighlights(image: CGImage, completion: @escaping (([FindText]) -> Void) = { _ in }) {
+        var options = FindOptions()
+        options.orientation = .up
+        options.level = .accurate
+        find(in: .cgImage(image), options: options) { [weak self] sentences in
+            completion(sentences)
+            self?.addHighlights(from: sentences)
+        }
+    }
+    
+    func find(in image: FindImage, options: FindOptions, completion: @escaping (([FindText]) -> Void)) {
+        guard Find.startTime == nil else { return }
+        Find.run(in: image, options: options) { sentences in
+            completion(sentences)
         }
     }
 }
