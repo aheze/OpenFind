@@ -17,8 +17,6 @@ extension CameraViewController {
         addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
     
-    
-    
     func addHighlights(from sentences: [FindText]) {
         var highlights = Set<Highlight>()
         for sentence in sentences {
@@ -43,5 +41,25 @@ extension CameraViewController {
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights)
         }
+    }
+    
+    func updateHighlightColors() {
+        var newHighlights = Set<Highlight>()
+        let stringToGradients = searchViewModel.stringToGradients
+        
+        for index in highlightsViewModel.highlights.indices {
+            let highlight = highlightsViewModel.highlights[index]
+            let gradient = stringToGradients[highlight.string]
+            var newHighlight = highlight
+            
+            if let gradient = gradient {
+                newHighlight.colors = gradient.colors
+                newHighlight.alpha = gradient.alpha
+            }
+            
+            newHighlights.insert(newHighlight)
+        }
+        
+        self.highlightsViewModel.highlights = newHighlights
     }
 }

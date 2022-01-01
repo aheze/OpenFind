@@ -23,7 +23,13 @@ class SearchViewModel: ObservableObject {
                 defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 1)
             )
         )
-    ]
+    ] {
+        didSet {
+            fieldsChanged?()
+        }
+    }
+    
+    var fieldsChanged: (() -> Void)?
     
     var values: [Field.Value] {
         return fields.dropLast().map { $0.value }

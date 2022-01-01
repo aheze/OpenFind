@@ -14,6 +14,11 @@ extension CameraViewController {
         
         searchContainerView.backgroundColor = .clear
         addResizableChildViewController(searchViewController, in: searchContainerView)
+        
+        searchViewModel.fieldsChanged = { [weak self] in
+            self?.updateHighlightColors()
+        }
+        
         return searchViewController
     }
 }

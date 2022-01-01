@@ -17,9 +17,6 @@ extension CameraViewController {
         
         scrollZoomViewController.imageView.alpha = 0
         
-        scrollZoomViewController.contentView.addDebugBorders(.red)
-        scrollZoomViewController.imageView.addDebugBorders(.green)
-        
         return scrollZoomViewController
     }
     
