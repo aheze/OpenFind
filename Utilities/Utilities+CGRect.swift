@@ -14,7 +14,6 @@ extension CGRect {
         CGPoint(x: self.midX, y: self.midY)
     }
     
-    
     func scaleTo(_ size: CGSize) -> CGRect {
         var rect = CGRect(
             x: self.origin.x * size.width,
