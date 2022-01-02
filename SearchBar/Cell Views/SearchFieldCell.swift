@@ -52,6 +52,9 @@ class SearchFieldCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        /// Needed for some reason sometimes
+        triggerButton.setTitle("", for: .normal)
+        
         contentView.backgroundColor = SearchConstants.fieldBackgroundColor
         contentView.layer.cornerRadius = SearchConstants.fieldCornerRadius
         

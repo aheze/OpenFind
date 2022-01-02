@@ -25,11 +25,11 @@ extension UIColor {
     }
     
     var hex: UInt {
-        return self.hexCode() ?? 0x00AEEF
+        return self.getHex() ?? 0x00AEEF
     }
     
     /// from https://stackoverflow.com/a/28645384/14351818
-    func hexCode() -> UInt? {
+    func getHex() -> UInt? {
         var fRed : CGFloat = 0
         var fGreen : CGFloat = 0
         var fBlue : CGFloat = 0

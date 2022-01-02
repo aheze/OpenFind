@@ -4148,6 +4148,7 @@
 			targets = (
 				4999AC8F2353A80A00AB06A7 /* Find */,
 				3C643F1826057806001E6FA1 /* FindClip */,
+				3C6C7320278193F600E039F0 /* Find-New */,
 				3C4D3948274759240010FD68 /* TabController */,
 				3C4D396927475B890010FD68 /* Camera */,
 				3C4D39D32747661E0010FD68 /* Photos */,
@@ -4160,7 +4161,6 @@
 				3C7B7A05277E93CA00E1F602 /* Highlights */,
 				3C7B7A76277FA50800E1F602 /* SwiftUIViews */,
 				3C7B7AA2277FBBC000E1F602 /* ScrollZoom */,
-				3C6C7320278193F600E039F0 /* Find-New */,
 			);
 		};
 /* End PBXProject section */

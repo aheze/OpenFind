@@ -112,12 +112,11 @@ extension SearchViewController: UICollectionViewDelegate {
         searchCollectionViewFlowLayout.highlightingAddWordField = false
         
         /// append new "Add New" cell
-        let defaultColor = Constants.defaultHighlightColor.getFieldColor(for: searchViewModel.fields.count)
         let newField = Field(
             value: .addNew(
                 .init(
                     string: "",
-                    color: defaultColor.hex
+                    color: Constants.defaultHighlightColor.getFieldColor(for: searchViewModel.fields.count).hex
                 )
             )
         )
@@ -130,7 +129,7 @@ extension SearchViewController: UICollectionViewDelegate {
             searchViewModel.fields[indexOfLastField].value = .word(
                 .init(
                     string: word.string,
-                    color: defaultColor.hex
+                    color: Constants.defaultHighlightColor.getFieldColor(for: indexOfLastField).hex
                 )
             )
         }
