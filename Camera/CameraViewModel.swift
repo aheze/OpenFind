@@ -1,7 +1,6 @@
 //
 //  CameraViewModel.swift
-//  Camera
-//
+//  Camera  //
 //  Created by Zheng on 12/2/21.
 //  Copyright © 2021 Andrew. All rights reserved.
 //

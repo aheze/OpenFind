@@ -85,13 +85,10 @@ extension SearchViewController: UICollectionViewDelegate {
         }
     }
     
+    /// First called, then `addNewCellToRight` is called in the completion
     func convertAddNewCellToRegularCell(animationCompletion: @escaping (() -> Void) = {}) {
-        if
-            let addNewFieldIndex = searchViewModel.fields.indices.last,
-            case .addNew(let word) = searchViewModel.fields[addNewFieldIndex].value
-        {
+        if let addNewFieldIndex = searchViewModel.fields.indices.last {
             searchCollectionView.isUserInteractionEnabled = false
-            searchViewModel.fields[addNewFieldIndex].value = .word(word)
             
             let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
