@@ -24,39 +24,49 @@ struct Field: Identifiable {
         }
     }
     
-    var attributes: Attributes
+    var overrides: Overrides
     
-    init(value: Value, attributes: Attributes) {
+    init(value: Value, overrides: Overrides = Overrides()) {
         self.value = value
-        self.attributes = attributes
+        self.overrides = overrides
         fieldHuggingWidth = getFieldHuggingWidth()
     }
     
     enum Value {
-        case string(String)
+        case word(Word)
         case list(List)
-        case addNew(String) /// `String` for input text during add new -> full cell animation
+        case addNew(Word) /// `String` for input text during add new -> full cell animation
         
         func getText() -> String {
             switch self {
-            case .string(let string):
-                return string
+            case .word(let word):
+                return word.string
             case .list(let list):
                 return list.name
-            case .addNew(let string):
-                return string
+            case .addNew(let word):
+                return word.string
+            }
+        }
+        
+        func getColor() -> UInt {
+            switch self {
+            case .word(let word):
+                return word.color
+            case .list(let list):
+                return list.color
+            case .addNew(let word):
+                return word.color
             }
         }
     }
     
-    struct Attributes {
-        var defaultColor: UIColor
+    struct Overrides {
         var selectedColor: UIColor?
         var alpha: CGFloat = 1
     }
     
     private func getFieldHuggingWidth() -> CGFloat {
-        if case .addNew(let string) = value, string.isEmpty {
+        if case .addNew(let word) = value, word.string.isEmpty {
             return SearchConstants.addWordFieldHuggingWidth
         } else {
             let fieldText = value.getText()

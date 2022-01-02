@@ -13,35 +13,26 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Nature",
             desc: "Words",
+            image: "leaf.fill",
+            color: 0x1F7000,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
-            iconImageName: "leaf.fill",
-            iconColorName: 0x1F7000,
             dateCreated: Date()
         ),
         List(
             name: "Dairy-free",
             desc: "Words",
+            image: "leaf.fill",
+            color: 0x004C7F,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
-            iconImageName: "leaf.fill",
-            iconColorName: 0x004C7F,
             dateCreated: Date()
         ),
         List(
             name: "Gluten-free foods",
             desc: "Words",
+            image: "leaf.fill",
+            color: 0xE2AC00,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
-            iconImageName: "leaf.fill",
-            iconColorName: 0xE2AC00,
             dateCreated: Date()
         )
     ]
-}
-
-struct List {
-    var name = ""
-    var desc = ""
-    var contents = [String]()
-    var iconImageName = ""
-    var iconColorName: UInt = 0xAEEF
-    var dateCreated = Date()
 }

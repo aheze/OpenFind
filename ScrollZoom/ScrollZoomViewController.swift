@@ -27,7 +27,7 @@ class ScrollZoomViewController: UIViewController {
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 2.5
-        
+     
     }
 }
 
@@ -40,8 +40,10 @@ extension ScrollZoomViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
         let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
-        scrollView.contentOffset = CGPoint(x: -leftMargin, y: -topMargin)
+        scrollView.contentInset = UIEdgeInsets(top: topMargin, left: leftMargin, bottom: 0, right: 0)
     }
 }
+
+
 
 

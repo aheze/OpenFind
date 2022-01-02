@@ -12,15 +12,19 @@ class SearchViewModel: ObservableObject {
 
     var fields = [
         Field(
-            value: .string(""),
-            attributes: .init(
-                defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 0)
+            value: .word(
+                .init(
+                    string: "",
+                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
+                )
             )
         ),
         Field(
-            value: .addNew(""),
-            attributes: .init(
-                defaultColor: Constants.defaultHighlightColor.getFieldColor(for: 1)
+            value: .addNew(
+                .init(
+                    string: "",
+                    color: Constants.defaultHighlightColor.getFieldColor(for: 1).hex
+                )
             )
         )
     ] {
@@ -45,17 +49,17 @@ class SearchViewModel: ObservableObject {
         var stringToGradients = [String: Gradient]()
         for field in fields {
             switch field.value {
-            case .string(let string):
-                var existingGradient = stringToGradients[string] ?? Gradient()
-                existingGradient.colors.append(field.attributes.selectedColor ?? field.attributes.defaultColor)
-                existingGradient.alpha = field.attributes.alpha
-                stringToGradients[string] = existingGradient
+            case .word(let word):
+                var existingGradient = stringToGradients[word.string] ?? Gradient()
+                existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: word.color))
+                existingGradient.alpha = field.overrides.alpha
+                stringToGradients[word.string] = existingGradient
             case .list(let list):
                 let strings = list.contents
                 for string in strings {
                     var existingGradient = stringToGradients[string] ?? Gradient()
-                    existingGradient.colors.append(field.attributes.selectedColor ?? field.attributes.defaultColor)
-                    existingGradient.alpha = field.attributes.alpha
+                    existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: list.color))
+                    existingGradient.alpha = field.overrides.alpha
                     stringToGradients[string] = existingGradient
                 }
             case .addNew(_):

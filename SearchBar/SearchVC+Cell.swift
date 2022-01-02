@@ -20,7 +20,7 @@ extension SearchViewController {
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
         switch field.value {
-        case .string:
+        case .word:
             cell.loadConfiguration(showAddNew: false)
         case .list:
             cell.loadConfiguration(showAddNew: false)
@@ -33,14 +33,19 @@ extension SearchViewController {
             
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
-            
-            self.searchViewModel.fields[index].value = .string(text)
+            self.searchViewModel.fields[index].value = .word(
+                .init(
+                    string: text,
+                    color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                )
+            )
             self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
             
         }
+        
         cell.leftView.findIconView.setTint(
-            color: field.attributes.selectedColor ?? field.attributes.defaultColor,
-            alpha: field.attributes.alpha
+            color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
+            alpha: field.overrides.alpha
         )
         
         
@@ -61,7 +66,12 @@ extension SearchViewController {
                 self.removeCell(at: index)
             } else {
                 cell.textField.text = ""
-                self.searchViewModel.fields[index].value = .string("")
+                self.searchViewModel.fields[index].value = .word(
+                    .init(
+                        string: "",
+                        color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                    )
+                )
                 self.setClearIcon(for: cell, text: "", valuesCount: self.searchViewModel.values.count)
             }
             

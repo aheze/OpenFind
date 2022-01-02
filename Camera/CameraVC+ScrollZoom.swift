@@ -23,10 +23,6 @@ extension CameraViewController {
     func setScrollZoomImage(image: UIImage) {
         scrollZoomViewController.imageView.image = image
         
-        let contentViewBounds = scrollZoomViewController.contentView.frame
-        let scrollViewBounds = scrollZoomViewController.scrollView.frame
-        print("\(contentViewBounds) vs \(scrollViewBounds)")
-        
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 1
         }

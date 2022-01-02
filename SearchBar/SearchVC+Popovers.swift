@@ -14,19 +14,24 @@ extension SearchViewController {
 
         let field = searchViewModel.fields[index]
         switch field.value {
-        case .string(_):
-//            string.
+        case .word(let word):
+
             let model = FieldSettingsModel()
             model.header = "WORD"
-            model.defaultColor = field.attributes.defaultColor
-            model.selectedColor = field.attributes.selectedColor
-            model.alpha = field.attributes.alpha
+            model.defaultColor = UIColor(hex: word.color)
+            model.selectedColor = field.overrides.selectedColor
+            model.alpha = field.overrides.alpha
             
             model.changed = { [weak self] in
                 guard let self = self else { return }
-                self.searchViewModel.fields[index].attributes.defaultColor = model.defaultColor
-                self.searchViewModel.fields[index].attributes.selectedColor = model.selectedColor
-                self.searchViewModel.fields[index].attributes.alpha = model.alpha
+                self.searchViewModel.fields[index].value = .word(
+                    .init(
+                        string: word.string,
+                        color: model.defaultColor.hex
+                    )
+                )
+                self.searchViewModel.fields[index].overrides.selectedColor = model.selectedColor
+                self.searchViewModel.fields[index].overrides.alpha = model.alpha
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                     cell.leftView.findIconView.setTint(color: model.selectedColor ?? model.defaultColor, alpha: model.alpha)
                 }
