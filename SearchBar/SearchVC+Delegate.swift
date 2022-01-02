@@ -100,7 +100,9 @@ extension SearchViewController: UICollectionViewDelegate {
                     animationBlock()
                 } completion: { _ in
                     completion()
-                    animationCompletion()
+                    DispatchQueue.main.async {
+                        animationCompletion()
+                    }
                 }
             }
         }
