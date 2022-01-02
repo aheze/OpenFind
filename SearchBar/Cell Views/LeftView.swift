@@ -11,7 +11,7 @@ class LeftView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet var buttonView: ButtonView!
 
-    @IBOutlet var findIconView: FindIconView!
+    @IBOutlet var findIconView: FindIconUIView!
     @IBOutlet var iconViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {

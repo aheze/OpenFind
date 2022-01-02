@@ -18,7 +18,7 @@ struct Field: Identifiable {
     /// width of text label + side views, nothing more
     var fieldHuggingWidth = CGFloat(200)
     
-    var value: Value {
+    var value: FieldValue {
         didSet {
             fieldHuggingWidth = getFieldHuggingWidth()
         }
@@ -26,13 +26,14 @@ struct Field: Identifiable {
     
     var overrides: Overrides
     
-    init(value: Value, overrides: Overrides = Overrides()) {
+    init(value: FieldValue, overrides: Overrides = Overrides()) {
         self.value = value
         self.overrides = overrides
         fieldHuggingWidth = getFieldHuggingWidth()
     }
     
-    enum Value {
+    /// same as `Value`, but with an extra case: `addNew`
+    enum FieldValue {
         case word(Word)
         case list(List)
         case addNew(Word) /// `String` for input text during add new -> full cell animation

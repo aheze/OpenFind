@@ -8,8 +8,8 @@
 
 import UIKit
 
-class FindIconView: UIView {
-    let spacingPercent = CGFloat(0.09)
+class FindIconUIView: UIView {
+    static let spacingPercent = CGFloat(0.09)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +27,7 @@ class FindIconView: UIView {
 
     private func commonInit() {
         backgroundColor = .clear
-        let spacing = spacingPercent * bounds.height
+        let spacing = FindIconUIView.spacingPercent * bounds.height
         
         /// total height of highlights
         let availableHeightForHighlights = bounds.height - (2 * spacing)

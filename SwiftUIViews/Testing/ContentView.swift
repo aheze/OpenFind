@@ -11,7 +11,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ProgressLineViewTester()
+//        ProgressLineViewTester()
+        FindIconView(color: 0x00aeef)
+            .frame(width: 30, height: 30)
     }
 }
 

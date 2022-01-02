@@ -35,7 +35,7 @@ class SearchViewModel: ObservableObject {
     
     var fieldsChanged: (() -> Void)?
     
-    var values: [Field.Value] {
+    var values: [Field.FieldValue] {
         return fields.dropLast().map { $0.value }
     }
     

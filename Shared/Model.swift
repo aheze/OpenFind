@@ -9,6 +9,11 @@
 
 import UIKit
 
+enum Value {
+    case word(Word)
+    case list(List)
+}
+
 struct Word {
     var string = ""
     var color: UInt = 0x00AEEF
