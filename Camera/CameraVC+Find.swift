@@ -14,6 +14,7 @@ extension CameraViewController {
     func findAndAddHighlights(pixelBuffer: CVPixelBuffer, completion: @escaping (([FindText]) -> Void) = { _ in }) {
         var options = FindOptions()
         options.orientation = .right
+        options.customWords = searchViewModel.customWords
         
         find(in: .pixelBuffer(pixelBuffer), options: options) { [weak self] sentences in
             completion(sentences)
@@ -25,6 +26,8 @@ extension CameraViewController {
         var options = FindOptions()
         options.orientation = .up
         options.level = .accurate
+        options.customWords = searchViewModel.customWords
+        
         find(in: .cgImage(image), options: options) { [weak self] sentences in
             completion(sentences)
             self?.addHighlights(from: sentences)

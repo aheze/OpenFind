@@ -26,6 +26,14 @@ public extension View {
     }
 }
 
+/// from https://forums.swift.org/t/swiftui-extension-for-os-specific-view-modifiers-that-seems-too-arcane-to-implement/30897/13
+extension View {
+  @inlinable
+  func modify<T: View>(@ViewBuilder modifier: ( Self ) -> T) -> T {
+    return modifier(self)
+  }
+}
+
 extension Shape {
     func fill<Fill: ShapeStyle, Stroke: ShapeStyle>(_ fillStyle: Fill, strokeBorder strokeStyle: Stroke, lineWidth: CGFloat = 1) -> some View {
         self

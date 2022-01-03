@@ -30,6 +30,7 @@ class SearchViewModel: ObservableObject {
     ] {
         didSet {
             fieldsChanged?()
+            updateStringToGradients()
         }
     }
     
@@ -44,7 +45,10 @@ class SearchViewModel: ObservableObject {
         var alpha = CGFloat(1)
     }
     
-    var stringToGradients: [String: Gradient] {
+    var stringToGradients = [String: Gradient]()
+    var customWords = [String]()
+    
+    func updateStringToGradients() {
         
         var stringToGradients = [String: Gradient]()
         for field in fields {
@@ -66,6 +70,23 @@ class SearchViewModel: ObservableObject {
                 continue
             }
         }
-        return stringToGradients
+        self.stringToGradients = stringToGradients
     }
+    
+    func updateCustomWords() {
+        var words = Set<String>()
+        for value in values {
+            switch value {
+            case .word(let word):
+                words.insert(word.string)
+            case .list(let list):
+                let contents = Set(list.contents)
+                words.formUnion(contents)
+            case .addNew(_):
+                continue
+            }
+        }
+        self.customWords = Array(words)
+    }
+
 }
