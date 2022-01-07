@@ -41,11 +41,11 @@ extension CameraViewController {
     func addHighlights(from sentences: [FindText], replace: Bool) {
         let highlights = getHighlights(from: sentences)
         DispatchQueue.main.async {
-            print("Update highlights. rpleace?\(replace)")
             self.highlightsViewModel.update(with: highlights, replace: replace)
         }
     }
     
+    /// replaces highlights completely
     func updateHighlightColors() {
         var newHighlights = Set<Highlight>()
         let stringToGradients = searchViewModel.stringToGradients
@@ -63,7 +63,6 @@ extension CameraViewController {
             newHighlights.insert(newHighlight)
         }
         
-        print("repace comeptely")
         self.highlightsViewModel.highlights = newHighlights
     }
 }
