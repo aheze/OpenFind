@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C01DE452788A93E0027B435 /* ZoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C01DE442788A93E0027B435 /* ZoomModel.swift */; };
+		3C01DE462788A9680027B435 /* ZoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C01DE442788A93E0027B435 /* ZoomModel.swift */; };
+		3C01DE472788A9680027B435 /* ZoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C01DE442788A93E0027B435 /* ZoomModel.swift */; };
 		3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */; };
 		3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE8259FF7470087AE92 /* PhotosViewController.swift */; };
 		3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */; };
@@ -16,7 +19,7 @@
 		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
 		3C11996827499A4C00D6AFE3 /* ZoomView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */; };
-		3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */; };
+		3C11996A27499A5E00D6AFE3 /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C11996E274A385300D6AFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C11996D274A385200D6AFE3 /* Assets.xcassets */; };
 		3C119971274B32B400D6AFE3 /* LivePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119970274B32B400D6AFE3 /* LivePreviewView.swift */; };
@@ -698,7 +701,7 @@
 		3C6C73792781946B00E039F0 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
 		3C6C737A2781946B00E039F0 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
 		3C6C737B2781946B00E039F0 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67E4EF274840F9001F1B4B /* ZoomView.swift */; };
-		3C6C737C2781946B00E039F0 /* ZoomView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */; };
+		3C6C737C2781946B00E039F0 /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3C6C737D2781946B00E039F0 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C6C737E2781946B00E039F0 /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
 		3C6C737F2781946B00E039F0 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
@@ -716,7 +719,7 @@
 		3C6C738B2781946C00E039F0 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
 		3C6C738C2781946C00E039F0 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
 		3C6C738D2781946C00E039F0 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67E4EF274840F9001F1B4B /* ZoomView.swift */; };
-		3C6C738E2781946C00E039F0 /* ZoomView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */; };
+		3C6C738E2781946C00E039F0 /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3C6C738F2781946C00E039F0 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
 		3C6C73912781946C00E039F0 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
@@ -1163,7 +1166,7 @@
 		3CE9C1FD274B4E47008C903C /* FallbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E9274B4432008C903C /* FallbackView.xib */; };
 		3CE9C1FE274B4E47008C903C /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E7274B4427008C903C /* FallbackView.swift */; };
 		3CE9C200274B4F05008C903C /* ZoomView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */; };
-		3CE9C201274B4F05008C903C /* ZoomView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */; };
+		3CE9C201274B4F05008C903C /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3CE9C202274B4F05008C903C /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67E4EF274840F9001F1B4B /* ZoomView.swift */; };
 		3CE9C203274B4F05008C903C /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3CE9C205274B704E008C903C /* Utilities+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */; };
@@ -1331,6 +1334,7 @@
 		206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2803356BB7CA790012DBE55A /* Pods-Lists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lists.release.xcconfig"; path = "Target Support Files/Pods-Lists/Pods-Lists.release.xcconfig"; sourceTree = "<group>"; };
 		34EBBA657C92EE9C7B62AC9B /* Pods-Camera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camera.release.xcconfig"; path = "Target Support Files/Pods-Camera/Pods-Camera.release.xcconfig"; sourceTree = "<group>"; };
+		3C01DE442788A93E0027B435 /* ZoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomModel.swift; sourceTree = "<group>"; };
 		3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Migration.swift"; sourceTree = "<group>"; };
 		3C020CE8259FF7470087AE92 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Migration.swift"; sourceTree = "<group>"; };
@@ -1340,7 +1344,7 @@
 		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
 		3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomView+Utilities.swift"; sourceTree = "<group>"; };
-		3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomView+Constants.swift"; sourceTree = "<group>"; };
+		3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstants.swift; sourceTree = "<group>"; };
 		3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewModel.swift; sourceTree = "<group>"; };
 		3C11996D274A385200D6AFE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C119970274B32B400D6AFE3 /* LivePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePreviewView.swift; sourceTree = "<group>"; };
@@ -2140,9 +2144,10 @@
 		3C11996627499A3E00D6AFE3 /* Zoom */ = {
 			isa = PBXGroup;
 			children = (
+				3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */,
 				3C67E4EF274840F9001F1B4B /* ZoomView.swift */,
+				3C01DE442788A93E0027B435 /* ZoomModel.swift */,
 				3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */,
-				3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */,
 				3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */,
 			);
 			path = Zoom;
@@ -2473,10 +2478,10 @@
 				3C4D398127475BB10010FD68 /* CameraBridge.swift */,
 				3C4D398527475BB10010FD68 /* CameraController.swift */,
 				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
+				3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */,
 				3C364304277BC58E0038CB18 /* CameraVC+LivePreview.swift */,
 				3C7B7A6C277F9CB200E1F602 /* CameraVC+Static.swift */,
 				3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */,
-				3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */,
 				3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */,
 				3C7B7A54277EE6D900E1F602 /* CameraVC+Find.swift */,
 				3C7B7A60277EEB9C00E1F602 /* CameraVC+Highlights.swift */,
@@ -4782,7 +4787,7 @@
 				3C3642DD277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
 				3C6C73AE2781947600E039F0 /* SuggestionsView.swift in Sources */,
 				3CE9C214274DE343008C903C /* Debug.swift in Sources */,
-				3CE9C201274B4F05008C903C /* ZoomView+Constants.swift in Sources */,
+				3CE9C201274B4F05008C903C /* ZoomConstants.swift in Sources */,
 				3CB002322762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C4D3A1F274767410010FD68 /* TabBarController.swift in Sources */,
 				3C7BAD95275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
@@ -4798,6 +4803,7 @@
 				3CE9C20C274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
 				3C4D3A8527476A260010FD68 /* ListsViewController.swift in Sources */,
 				3CE9C1FB274B4E44008C903C /* LivePreviewVC+Delegate.swift in Sources */,
+				3C01DE462788A9680027B435 /* ZoomModel.swift in Sources */,
 				3C4D3A8427476A260010FD68 /* ListsBridge.swift in Sources */,
 				3C4D3A24274767B20010FD68 /* PhotosController.swift in Sources */,
 				3C4D39A727475D690010FD68 /* GeneralUtilities.swift in Sources */,
@@ -4861,7 +4867,7 @@
 				3C4D3A002747667A0010FD68 /* ToolbarViewModel.swift in Sources */,
 				3C7B7A5E277EE9A400E1F602 /* HighlightsViewController.swift in Sources */,
 				3C7B7A5F277EE9B700E1F602 /* Utilities+SwiftUI.swift in Sources */,
-				3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */,
+				3C11996A27499A5E00D6AFE3 /* ZoomConstants.swift in Sources */,
 				3C7B7A49277EB19500E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C6C74312781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C4D3A052747667B0010FD68 /* TabBarToolbars.swift in Sources */,
@@ -4872,6 +4878,7 @@
 				3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */,
 				3CE9C219274DEAE2008C903C /* Utilities+Constraints.swift in Sources */,
 				3C7B7A56277EE78700E1F602 /* Find.swift in Sources */,
+				3C01DE452788A93E0027B435 /* ZoomModel.swift in Sources */,
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
@@ -5292,6 +5299,7 @@
 				3C6C7427278194A500E039F0 /* GeneralUtilities.swift in Sources */,
 				3C6C73672781946200E039F0 /* CameraViewModel.swift in Sources */,
 				3C6C73642781946200E039F0 /* CameraVC+Zoom.swift in Sources */,
+				3C01DE472788A9680027B435 /* ZoomModel.swift in Sources */,
 				3C6C73562781945400E039F0 /* IconButtons.swift in Sources */,
 				3C6C73542781945400E039F0 /* CameraButton.swift in Sources */,
 				3C6C73C02781947E00E039F0 /* VisionFindingUtilities.swift in Sources */,
@@ -5347,7 +5355,7 @@
 				3C6C73532781945400E039F0 /* ContentPageViewController.swift in Sources */,
 				3C6C73592781945400E039F0 /* ContentCell.swift in Sources */,
 				3C6C73BE2781947E00E039F0 /* VisionFindingEngine.swift in Sources */,
-				3C6C737C2781946B00E039F0 /* ZoomView+Constants.swift in Sources */,
+				3C6C737C2781946B00E039F0 /* ZoomConstants.swift in Sources */,
 				3C6C73842781946B00E039F0 /* CameraToolbarView.swift in Sources */,
 				3C6C73B92781947E00E039F0 /* VisionSamplingEngine.swift in Sources */,
 				3C6C73BF2781947E00E039F0 /* VisionEngine.swift in Sources */,
@@ -5538,7 +5546,7 @@
 				3C6C73952781946C00E039F0 /* LivePreviewVC+Setup.swift in Sources */,
 				3C1D1A2C275AA25B0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
-				3C6C738E2781946C00E039F0 /* ZoomView+Constants.swift in Sources */,
+				3C6C738E2781946C00E039F0 /* ZoomConstants.swift in Sources */,
 				3C6C74362781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

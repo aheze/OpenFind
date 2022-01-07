@@ -86,6 +86,7 @@ struct ZoomFactorView: View {
             zoomViewModel.updateActivationProgress(positionInSlider: zoomViewModel.positionInSlider(totalOffset: zoomViewModel.savedExpandedOffset))
             zoomViewModel.isExpanded = false
             zoomViewModel.keepingExpandedUUID = nil
+            zoomViewModel.zoomChanged?()
         }
     }
 }
@@ -106,7 +107,7 @@ struct ZoomFactorContent: View {
                 .font(.system(size: 16, weight: isActive ? .semibold : .medium))
                 .foregroundColor(isActive ? Color(Constants.activeIconColor) : .white)
         }
-        .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
+        .frame(width: ZoomConstants.zoomFactorLength, height: ZoomConstants.zoomFactorLength)
     }
 }
 
@@ -118,11 +119,11 @@ struct ZoomView: View {
         Color.clear.overlay(
             Color(UIColor(hex: 0x002F3B))
                 .opacity(0.3)
-                .frame(width: zoomViewModel.isExpanded ? nil : C.zoomFactorLength * 3 + C.edgePadding * 2, height: C.zoomFactorLength + C.edgePadding * 2)
+                .frame(width: zoomViewModel.isExpanded ? nil : ZoomConstants.zoomFactorLength * 3 + ZoomConstants.edgePadding * 2, height: ZoomConstants.zoomFactorLength + ZoomConstants.edgePadding * 2)
                 .overlay(
                     HStack(spacing: 0) {
-                        ForEach(C.zoomFactors.indices, id: \.self) { index in
-                            let zoomFactor = C.zoomFactors[index]
+                        ForEach(ZoomConstants.zoomFactors.indices, id: \.self) { index in
+                            let zoomFactor = ZoomConstants.zoomFactors[index]
                             
                             ZoomFactorView(
                                 zoomViewModel: zoomViewModel,
@@ -142,7 +143,7 @@ struct ZoomView: View {
                     alignment: zoomViewModel.isExpanded ? .leading : .center
                 )
                 .cornerRadius(50)
-                .padding(.horizontal, C.containerEdgePadding)
+                .padding(.horizontal, ZoomConstants.containerEdgePadding)
                 .opacity(zoomViewModel.ready ? 1 : 0)
         )
         .simultaneousGesture(

@@ -16,6 +16,9 @@ class ScrollZoomViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var drawingView: UIView!
     
+    /// called when the scroll view zoomed, for zooming when live preview is live
+    var zoomed: ((CGFloat) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
@@ -41,6 +44,12 @@ extension ScrollZoomViewController: UIScrollViewDelegate {
         let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
         let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
         scrollView.contentInset = UIEdgeInsets(top: topMargin, left: leftMargin, bottom: 0, right: 0)
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+            zoomed?(scrollView.zoomScale)
+        }
     }
 }
 

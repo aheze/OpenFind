@@ -10,7 +10,7 @@ import SwiftUI
 
 extension CameraViewController {
     func setupZoom() {
-        zoomContainerHeightC.constant = (C.zoomFactorLength + C.edgePadding * 2) + C.bottomPadding
+        zoomContainerHeightC.constant = (ZoomConstants.zoomFactorLength + ZoomConstants.edgePadding * 2) + ZoomConstants.bottomPadding
         let zoomView = ZoomView(zoomViewModel: zoomViewModel)
         
         let hostingController = UIHostingController(rootView: zoomView)
@@ -18,8 +18,13 @@ extension CameraViewController {
         addChildViewController(hostingController, in: zoomContainerView)
         zoomContainerView.backgroundColor = .clear
         
-        zoomCancellable = zoomViewModel.$zoom.sink { [weak self] zoom in
-            self?.livePreviewViewController.changeZoom(to: zoom, animated: true)
+        zoomViewModel.zoomChanged = { [weak self] in
+            guard let self = self else { return }
+            
+            self.livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: true)
+            
+            let scrollViewZoom = self.getScrollViewZoomFrom(percentage: self.zoomViewModel.percentage)
+            self.scrollZoomViewController.scrollView.zoomScale = scrollViewZoom
         }
         aspectProgressCancellable = zoomViewModel.$aspectProgress.sink { [weak self] aspectProgress in
             self?.livePreviewViewController.changeAspectProgress(to: aspectProgress, animated: true)
@@ -44,5 +49,37 @@ extension CameraViewController {
             self.zoomContainerView.alpha = 0
             self.zoomContainerView.transform = .init(scaleX: 0.9, y: 0.9)
         }
+    }
+    
+    /// With scroll
+    func hookScrollViewForZooming(_ shouldHook: Bool) {
+        if shouldHook {
+            scrollZoomViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
+            scrollZoomViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom
+        } else {
+            scrollZoomViewController.scrollView.minimumZoomScale = 0.5
+            scrollZoomViewController.scrollView.maximumZoomScale = 2
+        }
+    }
+    
+    /// get the fraction (0 to 1) of the current zoom
+    func getPercentageFrom(zoom: CGFloat) -> CGFloat {
+        let percentage = (zoom - zoomViewModel.minZoom) / (zoomViewModel.maxZoom - zoomViewModel.minZoom)
+        return percentage
+    }
+    
+    /// get the fraction (0 to 1) of the current scroll view scale
+    func getPercentageFrom(scrollViewZoom: CGFloat) -> CGFloat {
+        
+        print("         sc: \(scrollViewZoom). Min: \(ZoomConstants.scrollViewMinZoom), max: \(ZoomConstants.scrollViewMaxZoom)")
+        let percentage = (scrollViewZoom - ZoomConstants.scrollViewMinZoom) / (ZoomConstants.scrollViewMaxZoom - ZoomConstants.scrollViewMinZoom)
+        return percentage
+    }
+    
+    /// get the scroll view scale for a fraction
+    func getScrollViewZoomFrom(percentage: CGFloat) -> CGFloat {
+        let scrollViewZoom = ZoomConstants.scrollViewMinZoom + percentage * (ZoomConstants.scrollViewMaxZoom - ZoomConstants.scrollViewMinZoom)
+        
+        return scrollViewZoom
     }
 }

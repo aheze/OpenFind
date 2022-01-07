@@ -14,6 +14,7 @@ import UIKit
  */
 extension LivePreviewViewController {
     func changeZoom(to zoom: CGFloat, animated: Bool) {
+        
         guard let cameraDevice = cameraDevice else { return }
         do {
             try cameraDevice.lockForConfiguration()

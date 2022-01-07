@@ -8,30 +8,14 @@
 
 import SwiftUI
 
-struct ZoomFactor: Hashable {
-    /// range of the zoom label (what the user sees)
-    /// example: `0.5...1`
-    var zoomLabelRange: ClosedRange<CGFloat>
-    
-    /// 0 = aspect fit
-    /// 1 = aspect fill
-    var aspectRatioRange: ClosedRange<CGFloat>
-    
-    /// range of actual zoom
-    /// example: `1...2`
-    var zoomRange: ClosedRange<CGFloat>
-    
-    /// position relative to entire slider
-    /// example: `0.0..<0.3`
-    var positionRange: ClosedRange<CGFloat>
-    
-    var activationProgress: CGFloat = 1
-}
-
 class ZoomViewModel: ObservableObject {
     @Published var ready = false
     @Published var zoomLabel: CGFloat = 1
     @Published var zoom: CGFloat = 2
+    
+    /// the percent zoomed via sliding or pinch
+    @Published var percentage: CGFloat = 0
+    
     
     /// 0 = aspect fit
     /// 1 = aspect fill
@@ -47,15 +31,21 @@ class ZoomViewModel: ObservableObject {
     var sliderWidth = CGFloat(0)
     var sliderLeftPadding = CGFloat(0)
     
+    var minZoom = CGFloat(0)
+    var maxZoom = CGFloat(0)
+    
+    /// when the zoom updated via the slider
+    var zoomChanged: (() -> Void)?
+    
     var containerView: UIView
     init(containerView: UIView) {
         self.containerView = containerView
-
+        
         NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             let previousSliderWidth = self.sliderWidth
             let previousProgress = -self.savedExpandedOffset / previousSliderWidth
-
+            
             self.updateSliderWidth()
             self.updateSliderLeftPadding()
             
@@ -67,12 +57,14 @@ class ZoomViewModel: ObservableObject {
     
     func configureZoomFactors(minZoom: CGFloat, maxZoom: CGFloat, switchoverFactors: [NSNumber]) {
         let limitedMaxZoom = min(40, maxZoom)
+        self.minZoom = minZoom
+        self.maxZoom = limitedMaxZoom
         
         let minimumFactorLabel = 0.5
         let centerFactorLabel: Double = 1
         let maxFactorLabel: Double = UIDevice.modelName.contains("iPhone 13 Pro") ? 3 : 2
         let maxZoomLabel: Double = 10
-
+        
         let zoomLabelRanges: [ClosedRange<CGFloat>] = [
             minimumFactorLabel...centerFactorLabel.nextDown,
             centerFactorLabel...maxFactorLabel.nextDown,
@@ -145,7 +137,8 @@ class ZoomViewModel: ObservableObject {
         
         zoomLabel = centerFactorLabel
         zoom = zoomRanges[1].lowerBound
-        C.zoomFactors = zoomFactors
+//        percentage = d
+        ZoomConstants.zoomFactors = zoomFactors
         setup()
         
         ready = true
@@ -155,7 +148,7 @@ class ZoomViewModel: ObservableObject {
         updateSliderWidth()
         updateSliderLeftPadding()
         
-        savedExpandedOffset = -(C.zoomFactors[safe: 1]?.positionRange.lowerBound ?? 0) * sliderWidth
+        savedExpandedOffset = -(ZoomConstants.zoomFactors[safe: 1]?.positionRange.lowerBound ?? 0) * sliderWidth
         
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
         let positionInSlider = positionInSlider(totalOffset: savedExpandedOffset)
@@ -164,7 +157,7 @@ class ZoomViewModel: ObservableObject {
     }
     
     /// return (`totalExpandedOffset`, `newTranslation`)
-    func update(translation: CGFloat, ended: Bool, changeDraggingAmount: (CGFloat, CGFloat) -> Void) {
+    func update(translation: CGFloat, ended: Bool, changeDraggingAmount: ((CGFloat, CGFloat) -> Void)) {
         let offset = savedExpandedOffset + translation
         
         var newSavedExpandedOffset = savedExpandedOffset
@@ -189,10 +182,16 @@ class ZoomViewModel: ObservableObject {
         
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
         let positionInSlider = positionInSlider(totalOffset: totalExpandedOffset)
-        setZoom(positionInSlider: positionInSlider)
-        updateActivationProgress(positionInSlider: positionInSlider)
+        self.percentage = positionInSlider
+        
+        DispatchQueue.main.async {
+            self.setZoom(positionInSlider: positionInSlider)
+            self.updateActivationProgress(positionInSlider: positionInSlider)
+        }
+        
         expand()
-
+        zoomChanged?()
+        
         if ended {
             changeDraggingAmount(totalExpandedOffset, newTranslation)
         } else {
@@ -204,11 +203,11 @@ class ZoomViewModel: ObservableObject {
     func updateSliderWidth() {
         var width = CGFloat(0)
         
-        for index in C.zoomFactors.indices {
-            let zoomFactor = C.zoomFactors[index]
+        for index in ZoomConstants.zoomFactors.indices {
+            let zoomFactor = ZoomConstants.zoomFactors[index]
             
             var addedWidth = CGFloat(0)
-            addedWidth += C.zoomFactorLength
+            addedWidth += ZoomConstants.zoomFactorLength
             addedWidth += dotViewWidth(for: zoomFactor)
             width += addedWidth
         }
@@ -219,8 +218,8 @@ class ZoomViewModel: ObservableObject {
     /// have half-screen gap on left side of slider
     func updateSliderLeftPadding() {
         let halfAvailableScreenWidth = availableScreenWidth() / 2
-        let halfZoomFactorWidth = C.zoomFactorLength / 2
-        let leftPadding = C.edgePadding
+        let halfZoomFactorWidth = ZoomConstants.zoomFactorLength / 2
+        let leftPadding = ZoomConstants.edgePadding
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth + leftPadding
         
         sliderLeftPadding = padding
@@ -228,10 +227,10 @@ class ZoomViewModel: ObservableObject {
     
     /// width of screen, inset from padding
     func availableScreenWidth() -> CGFloat {
-        let availableWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
+        let availableWidth = UIScreen.main.bounds.width - (ZoomConstants.edgePadding * 2)
         let safeArea = containerView.safeAreaInsets
         let safeAreaHorizontalInset = safeArea.left + safeArea.right
-        let containerEdgePadding = C.containerEdgePadding * 2
+        let containerEdgePadding = ZoomConstants.containerEdgePadding * 2
         return availableWidth - containerEdgePadding - safeAreaHorizontalInset
     }
     
@@ -240,7 +239,7 @@ class ZoomViewModel: ObservableObject {
         let availableScreenWidth = availableScreenWidth()
         
         /// remove the width of the rightmost zoom factor
-        let rightmostZoomFactorWidth = C.zoomFactorLength
+        let rightmostZoomFactorWidth = ZoomConstants.zoomFactorLength
         
         /// **(FACTOR)** OOOOOOOOOO **(FACTOR)** OOOOOOOOOO ~~(removed factor)~~
         /// width for 2 zoom factors and 2 dot views, combined
@@ -252,10 +251,10 @@ class ZoomViewModel: ObservableObject {
         
         /// how much to multiply the width by
         /// `upperBound` - `lowerBound` should either be 0.25 or 0.50.
-        let widthMultiplier = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / C.normalPositionRange
+        let widthMultiplier = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / ZoomConstants.normalPositionRange
         
         /// minus `zoomFactorLength` from the content, so it's only the dot view now
-        let finalWidth = (singleContentWidth * widthMultiplier) - C.zoomFactorLength
+        let finalWidth = (singleContentWidth * widthMultiplier) - ZoomConstants.zoomFactorLength
         return finalWidth
     }
     
@@ -269,19 +268,19 @@ class ZoomViewModel: ObservableObject {
     }
     
     func updateActivationProgress(positionInSlider: CGFloat) {
-        for index in C.zoomFactors.indices {
-            let zoomFactor = C.zoomFactors[index]
+        for index in ZoomConstants.zoomFactors.indices {
+            let zoomFactor = ZoomConstants.zoomFactors[index]
             let lower = zoomFactor.positionRange.lowerBound
-
+            
             var percentActivated = CGFloat(1)
             if positionInSlider < lower {
-                let distanceToActivation = min(C.activationStartDistance, lower - positionInSlider)
-                percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
+                let distanceToActivation = min(ZoomConstants.activationStartDistance, lower - positionInSlider)
+                percentActivated = 1 - (ZoomConstants.activationStartDistance - distanceToActivation) / ZoomConstants.activationRange
             } else if zoomFactor.positionRange.contains(positionInSlider) {
-                let distanceToActivation = min(C.activationStartDistance, positionInSlider - lower)
-                percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
+                let distanceToActivation = min(ZoomConstants.activationStartDistance, positionInSlider - lower)
+                percentActivated = 1 - (ZoomConstants.activationStartDistance - distanceToActivation) / ZoomConstants.activationRange
             }
-            C.zoomFactors[index].activationProgress = max(0.001, percentActivated)
+            ZoomConstants.zoomFactors[index].activationProgress = max(0.001, percentActivated)
         }
     }
     
@@ -295,9 +294,17 @@ class ZoomViewModel: ObservableObject {
         return positionInSlider
     }
     
-    func setZoom(positionInSlider: CGFloat) {
+    func setZoom(positionInSlider rawSliderPosition: CGFloat) {
+        print("-------------> Setting zoom to \(rawSliderPosition).")
+        /// trap between 0 and 1
+        let positionInSlider = max(0, min(1, rawSliderPosition))
+        print("Position: \(positionInSlider)")
+        
         /// get the zoom factor whose position contains the fraction
-        if let zoomFactor = C.zoomFactors.first(where: { $0.positionRange.contains(positionInSlider) }) {
+        if let zoomFactor = ZoomConstants.zoomFactors.first(
+            where: { $0.positionRange.contains(positionInSlider) }
+        ) {
+            
             let positionRangeLower = zoomFactor.positionRange.lowerBound
             let positionRangeUpper = zoomFactor.positionRange.upperBound
             
@@ -322,18 +329,17 @@ class ZoomViewModel: ObservableObject {
             
             if
                 roundedNewZoomLabel != roundedPreviousZoomLabel,
-                floor(roundedNewZoomLabel) == roundedNewZoomLabel || roundedNewZoomLabel == C.zoomFactors[0].zoomLabelRange.lowerBound
+                floor(roundedNewZoomLabel) == roundedNewZoomLabel || roundedNewZoomLabel == ZoomConstants.zoomFactors[0].zoomLabelRange.lowerBound
             {
                 let generator = UISelectionFeedbackGenerator()
                 generator.prepare()
                 generator.selectionChanged()
             }
             
-            DispatchQueue.main.async {
-                self.zoom = newZoom
-                self.zoomLabel = newZoomLabel
-                self.aspectProgress = newAspectRatio
-            }
+            print("-> Setting zoom to \(newZoom).")
+            self.zoom = newZoom
+            self.zoomLabel = newZoomLabel
+            self.aspectProgress = newAspectRatio
         }
     }
     
@@ -346,7 +352,7 @@ class ZoomViewModel: ObservableObject {
             }
         }
     }
-
+    
     func expand() {
         if !gestureStarted {
             DispatchQueue.main.async {
@@ -363,11 +369,11 @@ class ZoomViewModel: ObservableObject {
             }
         }
     }
-
+    
     func startTimeout() {
         gestureStarted = false
         let uuidToCheck = keepingExpandedUUID
-        DispatchQueue.main.asyncAfter(deadline: .now() + C.timeoutTime) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + ZoomConstants.timeoutTime) {
             /// make sure another swipe hasn't happened yet
             if uuidToCheck == self.keepingExpandedUUID {
                 self.keepingExpandedUUID = nil
