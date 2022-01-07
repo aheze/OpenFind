@@ -17,13 +17,9 @@ class CameraViewModel: ObservableObject {
     @Published var snapshotSaved = false
     
     /// shutter on/off
-    @Published var shutterOn = false {
-        didSet {
-//            withAnimation(.spring()) {
-//                snapshotSaved = false
-//            }
-        }
-    }
+    @Published var shutterOn = false
+    
+    @Published var pausedImage: CGImage?
     
     @Published var flash = false
     @Published var cacheOn = false

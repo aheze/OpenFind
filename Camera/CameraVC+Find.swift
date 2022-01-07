@@ -16,6 +16,7 @@ extension CameraViewController {
         options.orientation = .right
         options.customWords = searchViewModel.customWords
         
+        guard Find.startTime == nil else { return }
         find(in: .pixelBuffer(pixelBuffer), options: options) { [weak self] sentences in
             completion(sentences)
             self?.addHighlights(from: sentences)
@@ -28,6 +29,11 @@ extension CameraViewController {
         options.level = .accurate
         options.customWords = searchViewModel.customWords
         
+        guard Find.startTime == nil else {
+            completion([])
+            return
+        }
+        
         find(in: .cgImage(image), options: options) { [weak self] sentences in
             completion(sentences)
             self?.addHighlights(from: sentences)
@@ -35,7 +41,6 @@ extension CameraViewController {
     }
     
     func find(in image: FindImage, options: FindOptions, completion: @escaping (([FindText]) -> Void)) {
-        guard Find.startTime == nil else { return }
         Find.run(in: image, options: options) { sentences in
             completion(sentences)
         }

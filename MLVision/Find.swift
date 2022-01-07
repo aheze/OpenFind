@@ -5,7 +5,7 @@
 //  Created by A. Zheng (github.com/aheze) on 12/30/21.
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
-    
+
 
 import UIKit
 import Vision
@@ -34,7 +34,9 @@ class Find {
     static func run(in image: FindImage, options: FindOptions = FindOptions(), completion: @escaping (([FindText]) -> Void)) {
         let request = VNRecognizeTextRequest { request, _ in
             let sentences = getSentences(from: request)
-            completion(sentences)
+            DispatchQueue.main.async {
+                completion(sentences)
+            }
         }
         
         request.customWords = options.customWords
@@ -49,10 +51,13 @@ class Find {
         }
         
         startTime = Date()
-        do {
-            try imageRequestHandler.perform([request])
-        } catch {
-            print("Error finding: \(error)")
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                try imageRequestHandler.perform([request])
+            } catch {
+                print("Error finding: \(error)")
+            }
         }
     }
 }
@@ -81,8 +86,8 @@ extension Find {
         }
         
         return sentences
-//
-//        startTime = nil
-//        return observations
+        //
+        //        startTime = nil
+        //        return observations
     }
 }

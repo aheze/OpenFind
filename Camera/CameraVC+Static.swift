@@ -42,6 +42,7 @@ extension CameraViewController {
             self.setScrollZoomImage(image: image)
             
             if let cgImage = image.cgImage {
+                self.cameraViewModel.pausedImage = cgImage
                 self.findAndAddHighlights(image: cgImage) { _ in
                     self.endAutoProgress()
                     self.hideLivePreview()

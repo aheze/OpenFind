@@ -62,4 +62,8 @@ extension CameraViewController {
         
         self.highlightsViewModel.highlights = newHighlights
     }
+    
+    func invalidateHighlightColors() {
+        self.highlightsViewModel.setUpToDate(false)
+    }
 }

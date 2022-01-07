@@ -10,6 +10,7 @@ import SwiftUI
 
 class HighlightsViewModel: ObservableObject {
     @Published var highlights = Set<Highlight>()
+    @Published var upToDate = true
 
     func update(with newHighlights: Set<Highlight>) {
         var nextHighlights = Set<Highlight>()
@@ -70,6 +71,13 @@ class HighlightsViewModel: ObservableObject {
         
         withAnimation(.easeOut(duration: 0.6)) {
             self.highlights = nextHighlights
+            self.upToDate = true
+        }
+    }
+    
+    func setUpToDate(_ upToDate: Bool) {
+        withAnimation {
+            self.upToDate = upToDate
         }
     }
     

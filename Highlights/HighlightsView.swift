@@ -17,20 +17,10 @@ struct HighlightsView: View {
                 ForEach(Array(highlightsViewModel.highlights)) { highlight in
                     HighlightView(highlight: highlight, viewSize: geometry.size)
                 }
-//                ForEach(Array(highlightsViewModel.reusedHighlights)) { highlight in
-//                    HighlightView(highlight: highlight, viewSize: geometry.size)
-//                }
-//
-//                ForEach(Array(highlightsViewModel.addedHighlights)) { highlight in
-//                    HighlightView(highlight: highlight, viewSize: geometry.size)
-//                }
-//
-//                ForEach(Array(highlightsViewModel.lingeringHighlights)) { highlight in
-//                    HighlightView(highlight: highlight, viewSize: geometry.size)
-//                }
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .opacity(highlightsViewModel.upToDate ? 1 : 0.7)
     }
 }
 

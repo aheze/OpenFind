@@ -16,7 +16,16 @@ extension CameraViewController {
         addResizableChildViewController(searchViewController, in: searchContainerView)
         
         searchViewModel.fieldsChanged = { [weak self] in
-            self?.updateHighlightColors()
+            guard let self = self else { return }
+            self.updateHighlightColors()
+            self.invalidateHighlightColors()
+            
+            if
+                self.cameraViewModel.shutterOn,
+                let image = self.cameraViewModel.pausedImage
+            {
+                self.findAndAddHighlights(image: image)
+            }
         }
         
         return searchViewController
