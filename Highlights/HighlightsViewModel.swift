@@ -12,7 +12,7 @@ class HighlightsViewModel: ObservableObject {
     @Published var highlights = Set<Highlight>()
     @Published var upToDate = true
 
-    func update(with newHighlights: Set<Highlight>) {
+    func update(with newHighlights: Set<Highlight>, replace: Bool) {
         var nextHighlights = Set<Highlight>()
         
         /// lingering last
@@ -26,7 +26,9 @@ class HighlightsViewModel: ObservableObject {
             
             for oldHighlightIndex in oldHighlights.indices {
                 let oldHighlight = oldHighlights[oldHighlightIndex]
-                guard oldHighlight.string == newHighlight.string else { continue }
+                
+                /// don't check if the word is the same if replacing
+                guard replace || (oldHighlight.string == newHighlight.string) else { continue }
                 
                 let distance = relativeDistance(oldHighlight.frame.center, newHighlight.frame.center)
                 if distance < minimumDistance {
@@ -50,7 +52,6 @@ class HighlightsViewModel: ObservableObject {
                 reusedHighlight.alpha = newHighlight.alpha
                 nextHighlights.insert(reusedHighlight)
                 oldHighlights.remove(at: nearestHighlightIndex)
-                
             } else {
                 /// add the new highlight (fade in)
                 var addedHighlight = newHighlight
@@ -59,13 +60,16 @@ class HighlightsViewModel: ObservableObject {
             }
         }
         
-        for oldHighlight in oldHighlights {
-            var lingeringHighlight = oldHighlight
-            lingeringHighlight.cyclesWithoutNeighbor += 1
-            lingeringHighlight.state = .lingering
-            
-            if lingeringHighlight.cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights {
-                nextHighlights.insert(lingeringHighlight)
+        
+        if !replace {
+            for oldHighlight in oldHighlights {
+                var lingeringHighlight = oldHighlight
+                lingeringHighlight.cyclesWithoutNeighbor += 1
+                lingeringHighlight.state = .lingering
+                
+                if lingeringHighlight.cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights {
+                    nextHighlights.insert(lingeringHighlight)
+                }
             }
         }
         
@@ -76,7 +80,7 @@ class HighlightsViewModel: ObservableObject {
     }
     
     func setUpToDate(_ upToDate: Bool) {
-        withAnimation {
+        withAnimation(.linear(duration: 0.3)) {
             self.upToDate = upToDate
         }
     }

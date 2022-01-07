@@ -17,7 +17,7 @@ extension CameraViewController {
         addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
     
-    func addHighlights(from sentences: [FindText]) {
+    func getHighlights(from sentences: [FindText]) -> Set<Highlight>{
         var highlights = Set<Highlight>()
         for sentence in sentences {
             for (string, gradient) in self.searchViewModel.stringToGradients {
@@ -31,15 +31,18 @@ extension CameraViewController {
                         colors: gradient.colors,
                         alpha: gradient.alpha
                     )
-                    
                     highlights.insert(highlight)
-                    
                 }
             }
         }
-
+        return highlights
+    }
+    
+    func addHighlights(from sentences: [FindText], replace: Bool) {
+        let highlights = getHighlights(from: sentences)
         DispatchQueue.main.async {
-            self.highlightsViewModel.update(with: highlights)
+            print("Update highlights. rpleace?\(replace)")
+            self.highlightsViewModel.update(with: highlights, replace: replace)
         }
     }
     
@@ -60,10 +63,7 @@ extension CameraViewController {
             newHighlights.insert(newHighlight)
         }
         
+        print("repace comeptely")
         self.highlightsViewModel.highlights = newHighlights
-    }
-    
-    func invalidateHighlightColors() {
-        self.highlightsViewModel.setUpToDate(false)
     }
 }

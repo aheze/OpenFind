@@ -29,12 +29,12 @@ class SearchViewModel: ObservableObject {
         )
     ] {
         didSet {
-            fieldsChanged?()
+            fieldsChanged?(oldValue, fields)
             updateStringToGradients()
         }
     }
     
-    var fieldsChanged: (() -> Void)?
+    var fieldsChanged: (([Field], [Field]) -> Void)?
     
     var values: [Field.FieldValue] {
         return fields.dropLast().map { $0.value }

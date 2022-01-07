@@ -15,16 +15,29 @@ extension CameraViewController {
         searchContainerView.backgroundColor = .clear
         addResizableChildViewController(searchViewController, in: searchContainerView)
         
-        searchViewModel.fieldsChanged = { [weak self] in
+        searchViewModel.fieldsChanged = { [weak self] (oldValue, newValue) in
             guard let self = self else { return }
-            self.updateHighlightColors()
-            self.invalidateHighlightColors()
             
-            if
-                self.cameraViewModel.shutterOn,
-                let image = self.cameraViewModel.pausedImage
-            {
-                self.findAndAddHighlights(image: image)
+            let oldText = oldValue.map { $0.value.getText() }
+            let newText = newValue.map { $0.value.getText() }
+            let textIsSame = oldText == newText
+            
+            if textIsSame {
+                
+                /// replace all highlights
+                self.updateHighlightColors()
+            } else {
+                self.highlightsViewModel.setUpToDate(false)
+                
+                /// animate the highlight frames instead
+                if
+                    self.cameraViewModel.shutterOn,
+                    let image = self.cameraViewModel.pausedImage
+                {
+                    self.findAndAddHighlights(image: image, replace: true) { _ in
+                        self.highlightsViewModel.setUpToDate(true)
+                    }
+                }
             }
         }
         

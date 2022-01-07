@@ -20,7 +20,7 @@ struct HighlightsView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .opacity(highlightsViewModel.upToDate ? 1 : 0.7)
+        .opacity(highlightsViewModel.upToDate ? 1 : 0.5)
     }
 }
 
