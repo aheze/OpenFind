@@ -22,23 +22,27 @@ extension CameraViewController {
             if !self.cameraViewModel.shutterOn {
                 let percentage = self.getPercentageFrom(scrollViewZoom: scrollViewZoom)
                 
-                print("Scroll Scale (pinched): \(scrollViewZoom). Percentage is: \(percentage)")
-                
                 DispatchQueue.main.async {
-                    self.zoomViewModel.setZoom(positionInSlider: percentage)
-                    print("Zoom is now \(self.zoomViewModel.zoom).")
+                    self.zoomViewModel.setZoom(percentage: percentage)
+                    self.zoomViewModel.updateActivationProgress(percentage: percentage)
                     self.livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: true)
                 }
                 
                 self.zoomViewModel.savedExpandedOffset = -percentage * self.zoomViewModel.sliderWidth
                 self.zoomViewModel.updateActivationProgress(
-                    positionInSlider: self.zoomViewModel.positionInSlider(
+                    percentage: self.zoomViewModel.percentage(
                         totalOffset: self.zoomViewModel.savedExpandedOffset
                     )
                 )
-                
             }
         }
+        
+        scrollZoomViewController.stoppedZooming = { [weak self] in
+            guard let self = self else { return }
+            self.zoomViewModel.keepingExpandedUUID = UUID()
+            self.zoomViewModel.startTimeout()
+        }
+        
         
         scrollZoomViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
         scrollZoomViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom

@@ -18,6 +18,7 @@ class ScrollZoomViewController: UIViewController {
     
     /// called when the scroll view zoomed, for zooming when live preview is live
     var zoomed: ((CGFloat) -> Void)?
+    var stoppedZooming: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,8 @@ class ScrollZoomViewController: UIViewController {
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 2.5
-     
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
     }
 }
 
@@ -50,6 +52,10 @@ extension ScrollZoomViewController: UIScrollViewDelegate {
         if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
             zoomed?(scrollView.zoomScale)
         }
+    }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        stoppedZooming?()
     }
 }
 

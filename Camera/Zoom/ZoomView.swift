@@ -83,7 +83,10 @@ struct ZoomFactorView: View {
             zoomViewModel.zoomLabel = zoomFactor.zoomLabelRange.lowerBound
             zoomViewModel.aspectProgress = zoomFactor.aspectRatioRange.lowerBound
             zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth
-            zoomViewModel.updateActivationProgress(positionInSlider: zoomViewModel.positionInSlider(totalOffset: zoomViewModel.savedExpandedOffset))
+            
+            let percentage = zoomViewModel.percentage(totalOffset: zoomViewModel.savedExpandedOffset)
+            zoomViewModel.percentage = percentage
+            zoomViewModel.updateActivationProgress(percentage: percentage)
             zoomViewModel.isExpanded = false
             zoomViewModel.keepingExpandedUUID = nil
             zoomViewModel.zoomChanged?()
@@ -187,6 +190,8 @@ struct ZoomView: View {
                                     zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
                                 }
                             }
+                            
+                            zoomViewModel.keepingExpandedUUID = UUID()
                             zoomViewModel.startTimeout()
                         }
                 )

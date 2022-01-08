@@ -137,7 +137,6 @@ class ZoomViewModel: ObservableObject {
         
         zoomLabel = centerFactorLabel
         zoom = zoomRanges[1].lowerBound
-//        percentage = d
         ZoomConstants.zoomFactors = zoomFactors
         setup()
         
@@ -151,9 +150,11 @@ class ZoomViewModel: ObservableObject {
         savedExpandedOffset = -(ZoomConstants.zoomFactors[safe: 1]?.positionRange.lowerBound ?? 0) * sliderWidth
         
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
-        let positionInSlider = positionInSlider(totalOffset: savedExpandedOffset)
-        setZoom(positionInSlider: positionInSlider)
-        updateActivationProgress(positionInSlider: positionInSlider)
+        let percentage = percentage(totalOffset: savedExpandedOffset)
+        self.percentage = percentage
+        setZoom(percentage: percentage)
+        updateActivationProgress(percentage: percentage)
+        zoomChanged?()
     }
     
     /// return (`totalExpandedOffset`, `newTranslation`)
@@ -181,16 +182,15 @@ class ZoomViewModel: ObservableObject {
         }
         
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
-        let positionInSlider = positionInSlider(totalOffset: totalExpandedOffset)
-        self.percentage = positionInSlider
+        let percentage = percentage(totalOffset: totalExpandedOffset)
+        self.percentage = percentage
         
         DispatchQueue.main.async {
-            self.setZoom(positionInSlider: positionInSlider)
-            self.updateActivationProgress(positionInSlider: positionInSlider)
+            self.expand()
+            self.setZoom(percentage: percentage)
+            self.updateActivationProgress(percentage: percentage)
+            self.zoomChanged?()
         }
-        
-        expand()
-        zoomChanged?()
         
         if ended {
             changeDraggingAmount(totalExpandedOffset, newTranslation)
@@ -267,17 +267,17 @@ class ZoomViewModel: ObservableObject {
         return offset
     }
     
-    func updateActivationProgress(positionInSlider: CGFloat) {
+    func updateActivationProgress(percentage: CGFloat) {
         for index in ZoomConstants.zoomFactors.indices {
             let zoomFactor = ZoomConstants.zoomFactors[index]
             let lower = zoomFactor.positionRange.lowerBound
             
             var percentActivated = CGFloat(1)
-            if positionInSlider < lower {
-                let distanceToActivation = min(ZoomConstants.activationStartDistance, lower - positionInSlider)
+            if percentage < lower {
+                let distanceToActivation = min(ZoomConstants.activationStartDistance, lower - percentage)
                 percentActivated = 1 - (ZoomConstants.activationStartDistance - distanceToActivation) / ZoomConstants.activationRange
-            } else if zoomFactor.positionRange.contains(positionInSlider) {
-                let distanceToActivation = min(ZoomConstants.activationStartDistance, positionInSlider - lower)
+            } else if zoomFactor.positionRange.contains(percentage) {
+                let distanceToActivation = min(ZoomConstants.activationStartDistance, percentage - lower)
                 percentActivated = 1 - (ZoomConstants.activationStartDistance - distanceToActivation) / ZoomConstants.activationRange
             }
             ZoomConstants.zoomFactors[index].activationProgress = max(0.001, percentActivated)
@@ -285,31 +285,30 @@ class ZoomViewModel: ObservableObject {
     }
     
     /// from 0 to 1, from slider leftmost to slider rightmost
-    func positionInSlider(totalOffset: CGFloat) -> CGFloat {
+    func percentage(totalOffset: CGFloat) -> CGFloat {
         let sliderTotalTrackWidth = sliderWidth
         
         /// drag finger left = negative `draggingProgress
         /// so, make `draggingProgress` positive
-        let positionInSlider = -totalOffset / sliderTotalTrackWidth
-        return positionInSlider
+        let percentage = -totalOffset / sliderTotalTrackWidth
+        return percentage
     }
     
-    func setZoom(positionInSlider rawSliderPosition: CGFloat) {
-        print("-------------> Setting zoom to \(rawSliderPosition).")
+    func setZoom(percentage rawSliderPosition: CGFloat) {
+
         /// trap between 0 and 1
-        let positionInSlider = max(0, min(1, rawSliderPosition))
-        print("Position: \(positionInSlider)")
+        let percentage = max(0, min(1, rawSliderPosition))
         
         /// get the zoom factor whose position contains the fraction
         if let zoomFactor = ZoomConstants.zoomFactors.first(
-            where: { $0.positionRange.contains(positionInSlider) }
+            where: { $0.positionRange.contains(percentage) }
         ) {
             
             let positionRangeLower = zoomFactor.positionRange.lowerBound
             let positionRangeUpper = zoomFactor.positionRange.upperBound
             
-            /// `positionInSlider` is starts all the way from the left of the entire slider, need to start it from the position range
-            let positionInRange = positionInSlider - positionRangeLower
+            /// `percentage` is starts all the way from the left of the entire slider, need to start it from the position range
+            let positionInRange = percentage - positionRangeLower
             let fractionOfPositionRange = positionInRange / (positionRangeUpper - positionRangeLower)
             
             /// example: `0.5..<1.0` becomes `0.5`
@@ -336,7 +335,6 @@ class ZoomViewModel: ObservableObject {
                 generator.selectionChanged()
             }
             
-            print("-> Setting zoom to \(newZoom).")
             self.zoom = newZoom
             self.zoomLabel = newZoomLabel
             self.aspectProgress = newAspectRatio
@@ -356,7 +354,6 @@ class ZoomViewModel: ObservableObject {
     func expand() {
         if !gestureStarted {
             DispatchQueue.main.async {
-                self.keepingExpandedUUID = UUID()
                 self.gestureStarted = true
             }
         }
