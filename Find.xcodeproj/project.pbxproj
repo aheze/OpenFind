@@ -189,7 +189,6 @@
 		3C2DBBC7277E6F0B00911A74 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C2DBBC8277E6F1F00911A74 /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
 		3C2DBBC9277E6F2200911A74 /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
-		3C2DBBCA277E6F2200911A74 /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
 		3C2DBBD9277E734300911A74 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2DBBD8277E734300911A74 /* Popovers */; };
 		3C2DBBE1277E739200911A74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBE0277E739200911A74 /* AppDelegate.swift */; };
 		3C2DBBE3277E739200911A74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBE2277E739200911A74 /* SceneDelegate.swift */; };
@@ -206,11 +205,9 @@
 		3C35A97A278979700003D7A0 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
 		3C3642AE277BBED10038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C3642AD277BBED10038CB18 /* Popovers */; };
 		3C3642B4277BC0E80038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
-		3C3642B5277BC0EC0038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
 		3C3642B6277BC0FC0038CB18 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */; };
 		3C3642B7277BC0FC0038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
 		3C3642B8277BC0FC0038CB18 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */; };
-		3C3642B9277BC0FC0038CB18 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */; };
 		3C3642BB277BC1340038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C3642BA277BC1340038CB18 /* Popovers */; };
 		3C3642BD277BC20B0038CB18 /* CameraVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */; };
 		3C3642BE277BC2E70038CB18 /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
@@ -430,16 +427,7 @@
 		3C4D3A67274769370010FD68 /* ListsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3A63274769370010FD68 /* ListsController.swift */; };
 		3C4D3A68274769370010FD68 /* ListsContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A64274769370010FD68 /* ListsContent.storyboard */; };
 		3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3A65274769370010FD68 /* ListsViewController.swift */; };
-		3C4D3A6A2747694F0010FD68 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
-		3C4D3A6B2747694F0010FD68 /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3796274756470010FD68 /* ContentPageViewController.swift */; };
-		3C4D3A6D2747694F0010FD68 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378F274756470010FD68 /* ContentCell.swift */; };
 		3C4D3A6E2747694F0010FD68 /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3794274756470010FD68 /* ToolbarViewModel.swift */; };
-		3C4D3A6F2747694F0010FD68 /* TabControllerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3790274756470010FD68 /* TabControllerBridge.swift */; };
-		3C4D3A702747694F0010FD68 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
-		3C4D3A712747694F0010FD68 /* TabBarToolbars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3792274756470010FD68 /* TabBarToolbars.swift */; };
-		3C4D3A722747694F0010FD68 /* ContentPagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */; };
-		3C4D3A732747694F0010FD68 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378A274756460010FD68 /* TabBarView.swift */; };
-		3C4D3A742747694F0010FD68 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
 		3C4D3A75274769500010FD68 /* TabControllerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3790274756470010FD68 /* TabControllerBridge.swift */; };
 		3C4D3A77274769660010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
 		3C4D3A78274769660010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
@@ -655,7 +643,6 @@
 		3C6C73452781944B00E039F0 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
 		3C6C73462781944E00E039F0 /* TabContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* TabContent.storyboard */; };
 		3C6C73472781944E00E039F0 /* TabContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* TabContent.storyboard */; };
-		3C6C73482781944F00E039F0 /* TabContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* TabContent.storyboard */; };
 		3C6C734E2781945000E039F0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
 		3C6C734F2781945000E039F0 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
 		3C6C73502781945000E039F0 /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
@@ -1208,6 +1195,16 @@
 		3CF0421525C2532B00E29FA6 /* VC+StarTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */; };
 		3CF0421825C2553E00E29FA6 /* VC+CacheTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421725C2553E00E29FA6 /* VC+CacheTip.swift */; };
 		3CF45F5C260EF1FC00FE949E /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF45F5B260EF1FC00FE949E /* Dates.swift */; };
+		3CFD5F72278A372A0031BC8B /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
+		3CFD5F74278A374B0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
+		3CFD5F75278A37CD0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
+		3CFD5F76278A37CE0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
+		3CFD5F77278A37CF0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
+		3CFD5F78278A37D00031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
+		3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3CFD5F79278A37F00031BC8B /* Popovers */; };
+		3CFD5F7C278A486D0031BC8B /* ListsViewController+CV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7B278A486D0031BC8B /* ListsViewController+CV.swift */; };
+		3CFD5F7E278A4A130031BC8B /* ListContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */; };
+		3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */; };
 		3CFF312525AA490900D3C56D /* PhotoSlidesVC+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */; };
 		3CFF312825AA496B00D3C56D /* PhotoSlidesVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */; };
 		3CFF312C25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */; };
@@ -1901,6 +1898,10 @@
 		3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+StarTip.swift"; sourceTree = "<group>"; };
 		3CF0421725C2553E00E29FA6 /* VC+CacheTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+CacheTip.swift"; sourceTree = "<group>"; };
 		3CF45F5B260EF1FC00FE949E /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
+		3CFD5F73278A374B0031BC8B /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
+		3CFD5F7B278A486D0031BC8B /* ListsViewController+CV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsViewController+CV.swift"; sourceTree = "<group>"; };
+		3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentCell.swift; sourceTree = "<group>"; };
+		3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionFlowLayout.swift; sourceTree = "<group>"; };
 		3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Gestures.swift"; sourceTree = "<group>"; };
 		3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Setup.swift"; sourceTree = "<group>"; };
 		3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+CollectionCoordinates.swift"; sourceTree = "<group>"; };
@@ -2043,6 +2044,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */,
 				3ECBCC80108ECC2BFFC172FA /* Pods_Lists.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2446,13 +2448,14 @@
 		3C4D3787274755FE0010FD68 /* TabController */ = {
 			isa = PBXGroup;
 			children = (
+				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C4D378C274756470010FD68 /* TabContent.storyboard */,
 				3C4D3790274756470010FD68 /* TabControllerBridge.swift */,
+				3CFD5F73278A374B0031BC8B /* TabModel.swift */,
 				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
 				3C36434F277C22480038CB18 /* TabControllerView.swift */,
-				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C4D3796274756470010FD68 /* ContentPageViewController.swift */,
 				3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */,
 				3C4D378F274756470010FD68 /* ContentCell.swift */,
@@ -2574,11 +2577,14 @@
 		3C4D3A48274768FE0010FD68 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				3C4D3A64274769370010FD68 /* ListsContent.storyboard */,
 				3C4D3A62274769370010FD68 /* ListsBridge.swift */,
 				3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */,
 				3C4D3A63274769370010FD68 /* ListsController.swift */,
 				3C4D3A65274769370010FD68 /* ListsViewController.swift */,
-				3C4D3A64274769370010FD68 /* ListsContent.storyboard */,
+				3CFD5F7B278A486D0031BC8B /* ListsViewController+CV.swift */,
+				3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */,
+				3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */,
 				3C4D3A61274769260010FD68 /* Testing */,
 			);
 			path = Lists;
@@ -3893,6 +3899,9 @@
 			dependencies = (
 			);
 			name = Lists;
+			packageProductDependencies = (
+				3CFD5F79278A37F00031BC8B /* Popovers */,
+			);
 			productName = Lists;
 			productReference = 3C4D3A47274768FE0010FD68 /* Lists.app */;
 			productType = "com.apple.product-type.application";
@@ -4271,7 +4280,6 @@
 			files = (
 				3C4D3A94274771610010FD68 /* SharedAssets.xcassets in Resources */,
 				3C4D3A56274768FF0010FD68 /* LaunchScreen.storyboard in Resources */,
-				3C6C73482781944F00E039F0 /* TabContent.storyboard in Resources */,
 				3C3642F6277BC2E90038CB18 /* RightView.xib in Resources */,
 				3C3642F8277BC2E90038CB18 /* LeftView.xib in Resources */,
 				3C4D3A82274769C10010FD68 /* Main.storyboard in Resources */,
@@ -4800,6 +4808,7 @@
 				3C1D1A1C275AA1710064F2C6 /* UIKitViews.swift in Sources */,
 				3C4D396427475A650010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3962274759A40010FD68 /* SceneDelegate.swift in Sources */,
+				3CFD5F74278A374B0031BC8B /* TabModel.swift in Sources */,
 				3C4D3A18274767410010FD68 /* TabViewModel.swift in Sources */,
 				3C7B7A63277F8DB700E1F602 /* CameraVC+Highlights.swift in Sources */,
 				3C7B7A64277F8DC400E1F602 /* HighlightsView.swift in Sources */,
@@ -4959,6 +4968,7 @@
 				3C11996827499A4C00D6AFE3 /* ZoomView+Utilities.swift in Sources */,
 				3C3642C8277BC2E70038CB18 /* SearchUtilities.swift in Sources */,
 				3C3642C9277BC2E70038CB18 /* SearchViewController.swift in Sources */,
+				3CFD5F76278A37CE0031BC8B /* TabModel.swift in Sources */,
 				3C1D1A1B275AA1710064F2C6 /* UIKitViews.swift in Sources */,
 				3C7B7A6D277F9CB200E1F602 /* CameraVC+Static.swift in Sources */,
 				3C4D3A082747667B0010FD68 /* ContentCell.swift in Sources */,
@@ -4983,6 +4993,7 @@
 				3C1D19EA275A983D0064F2C6 /* ListsViewModel.swift in Sources */,
 				3C4D39F3274766790010FD68 /* ToolbarViewModel.swift in Sources */,
 				3CB0022E2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
+				3CFD5F75278A37CD0031BC8B /* TabModel.swift in Sources */,
 				3C3642E0277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C2DBBC9277E6F2200911A74 /* TabControllerView.swift in Sources */,
 				3C6C74322781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
@@ -5041,7 +5052,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C1D1A3D275AA25E0064F2C6 /* Utilities+Dates.swift in Sources */,
-				3C4D3A742747694F0010FD68 /* TabBarViewController.swift in Sources */,
 				3CCCCAA227818CE9000381CE /* GeneralViews.swift in Sources */,
 				3C4D3A78274769660010FD68 /* Constants.swift in Sources */,
 				3C3642F7277BC2E90038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */,
@@ -5050,32 +5060,25 @@
 				3C6C74332781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
-				3C2DBBCA277E6F2200911A74 /* TabControllerView.swift in Sources */,
 				3C7B7A4B277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
-				3C4D3A722747694F0010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3C3642F4277BC2E90038CB18 /* LeftView.swift in Sources */,
 				3C3642F9277BC2E90038CB18 /* Field.swift in Sources */,
-				3C4D3A6B2747694F0010FD68 /* ContentPageViewController.swift in Sources */,
-				3C4D3A6F2747694F0010FD68 /* TabControllerBridge.swift in Sources */,
 				3C6C73B42781947700E039F0 /* SearchVC+Cell.swift in Sources */,
 				3C1D1A1E275AA1720064F2C6 /* UIKitViews.swift in Sources */,
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */,
+				3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */,
 				3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */,
 				3C3642FE277BC2E90038CB18 /* RightView.swift in Sources */,
-				3C3642B9277BC0FC0038CB18 /* CameraButton.swift in Sources */,
 				3C4D3A7C274769700010FD68 /* GeneralUtilities.swift in Sources */,
+				3CFD5F7C278A486D0031BC8B /* ListsViewController+CV.swift in Sources */,
 				3C606673274ECCBB000A5BDE /* Debug.swift in Sources */,
-				3C3642B5277BC0EC0038CB18 /* IconButtons.swift in Sources */,
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
 				3C3642FD277BC2E90038CB18 /* SearchViewModel.swift in Sources */,
-				3C4D3A702747694F0010FD68 /* TabViewModel.swift in Sources */,
 				3CCCCA8F278185A9000381CE /* Model.swift in Sources */,
 				3C7BADAC275C12BA0030F0D2 /* TipView.swift in Sources */,
-				3C4D3A712747694F0010FD68 /* TabBarToolbars.swift in Sources */,
 				3C1D1A3C275AA25E0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
-				3C4D3A6D2747694F0010FD68 /* ContentCell.swift in Sources */,
 				3C3642FB277BC2E90038CB18 /* SearchUtilities.swift in Sources */,
 				3CCCCAA327818CE9000381CE /* FindIconView.swift in Sources */,
 				3CE9C1F8274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
@@ -5083,18 +5086,19 @@
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3C3642FF277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
+				3CFD5F77278A37CF0031BC8B /* TabModel.swift in Sources */,
 				3C4D3A5F2747691A0010FD68 /* ViewController.swift in Sources */,
+				3CFD5F72278A372A0031BC8B /* TabViewModel.swift in Sources */,
 				3C364300277BC2E90038CB18 /* SearchFieldCell.swift in Sources */,
 				3C4D3A7E274769700010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C3642FA277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */,
 				3C4D3A6E2747694F0010FD68 /* ToolbarViewModel.swift in Sources */,
-				3C4D3A6A2747694F0010FD68 /* TabBarController.swift in Sources */,
 				3C4D3A5E2747691A0010FD68 /* AppDelegate.swift in Sources */,
 				3C3642F5277BC2E90038CB18 /* SearchConstants.swift in Sources */,
+				3CFD5F7E278A4A130031BC8B /* ListContentCell.swift in Sources */,
 				3C6C73B52781947700E039F0 /* SuggestionsView.swift in Sources */,
 				3C3642F3277BC2E90038CB18 /* Bridge.swift in Sources */,
 				3C1D1A3E275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,
-				3C4D3A732747694F0010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A602747691A0010FD68 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5322,6 +5326,7 @@
 				3C6C73602781945D00E039F0 /* HighlightsView.swift in Sources */,
 				3C6C73812781946B00E039F0 /* CameraUtilities.swift in Sources */,
 				3C6C7424278194A500E039F0 /* Utilities+Math.swift in Sources */,
+				3CFD5F78278A37D00031BC8B /* TabModel.swift in Sources */,
 				3C6C73702781946200E039F0 /* CameraVC+Highlights.swift in Sources */,
 				3C6C7324278193F600E039F0 /* AppDelegate.swift in Sources */,
 				3C6C73832781946B00E039F0 /* LivePreviewVC+Setup.swift in Sources */,
@@ -7456,6 +7461,11 @@
 			productName = WhatsNewKit;
 		};
 		3C6C7440278195E200E039F0 /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
+		};
+		3CFD5F79278A37F00031BC8B /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
 			productName = Popovers;

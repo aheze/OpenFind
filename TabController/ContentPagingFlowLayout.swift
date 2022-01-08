@@ -59,7 +59,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
     }
     
-    /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
         

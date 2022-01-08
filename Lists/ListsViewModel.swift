@@ -35,4 +35,7 @@ class ListsViewModel: ObservableObject {
             dateCreated: Date()
         )
     ]
+    
+    /// lists shown by the collection view, can be filtered
+    @Published var displayedLists = [List]()
 }
