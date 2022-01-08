@@ -5,7 +5,7 @@
 //  Created by A. Zheng (github.com/aheze) on 12/31/21.
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
-    
+
 
 import UIKit
 
@@ -22,11 +22,11 @@ extension CameraViewController {
             if !self.cameraViewModel.shutterOn {
                 let percentage = self.getPercentageFrom(scrollViewZoom: scrollViewZoom)
                 
-                DispatchQueue.main.async {
-                    self.zoomViewModel.setZoom(percentage: percentage)
-                    self.zoomViewModel.updateActivationProgress(percentage: percentage)
-                    self.livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: true)
-                }
+                
+                self.zoomViewModel.keepingExpandedUUID = nil
+                self.zoomViewModel.setZoom(percentage: percentage)
+                self.zoomViewModel.updateActivationProgress(percentage: percentage)
+                self.livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: true)
                 
                 self.zoomViewModel.savedExpandedOffset = -percentage * self.zoomViewModel.sliderWidth
                 self.zoomViewModel.updateActivationProgress(

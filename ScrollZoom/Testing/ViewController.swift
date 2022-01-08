@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         addChildViewController(viewController, in: view)
         
         viewController.drawingView.addDebugBorders(.red)
-        print("loaded")
+
     }
 }
 

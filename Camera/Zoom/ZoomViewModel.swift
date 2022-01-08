@@ -185,12 +185,11 @@ class ZoomViewModel: ObservableObject {
         let percentage = percentage(totalOffset: totalExpandedOffset)
         self.percentage = percentage
         
-        DispatchQueue.main.async {
-            self.expand()
-            self.setZoom(percentage: percentage)
-            self.updateActivationProgress(percentage: percentage)
-            self.zoomChanged?()
-        }
+
+        self.expand()
+        self.setZoom(percentage: percentage)
+        self.updateActivationProgress(percentage: percentage)
+        self.zoomChanged?()
         
         if ended {
             changeDraggingAmount(totalExpandedOffset, newTranslation)
@@ -295,7 +294,7 @@ class ZoomViewModel: ObservableObject {
     }
     
     func setZoom(percentage rawSliderPosition: CGFloat) {
-
+        
         /// trap between 0 and 1
         let percentage = max(0, min(1, rawSliderPosition))
         
@@ -355,6 +354,7 @@ class ZoomViewModel: ObservableObject {
         if !gestureStarted {
             DispatchQueue.main.async {
                 self.gestureStarted = true
+                self.keepingExpandedUUID = nil
             }
         }
         
