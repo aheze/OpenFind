@@ -100,7 +100,7 @@ class LivePreviewViewController: UIViewController {
         livePreviewView.backgroundColor = .clear
         
         previewContentView.mask = safeViewContainer
-        safeViewContainer.backgroundColor = Debug.tabBarAlwaysTransparent ? .blue : .clear
+        safeViewContainer.backgroundColor = Debug.tabBarAlwaysTransparent ? .black : .clear
         safeView.backgroundColor = .blue
     }
 }

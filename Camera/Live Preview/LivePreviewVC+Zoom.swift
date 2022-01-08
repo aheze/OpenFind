@@ -83,8 +83,13 @@ extension LivePreviewViewController {
         
         if !Debug.tabBarAlwaysTransparent {
             if previouslyHitAspectTarget != hitAspectTarget {
+                print("Change! \(hitAspectTarget)")
                 UIView.animate(withDuration: 0.6) {
-                    self.safeViewContainer.backgroundColor = self.hitAspectTarget ? .blue : .clear
+                    if self.hitAspectTarget {
+                        self.safeViewContainer.backgroundColor = .black
+                    } else {
+                        self.safeViewContainer.backgroundColor = .clear
+                    }
                 }
             }
         }
