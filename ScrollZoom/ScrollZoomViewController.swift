@@ -20,6 +20,12 @@ class ScrollZoomViewController: UIViewController {
     var zoomed: ((CGFloat) -> Void)?
     var stoppedZooming: (() -> Void)?
     
+    /// zoom events are passed
+    var hookedForZooming = true
+    
+    static var minimumZoomScale = CGFloat(1)
+    static var maximumZoomScale = CGFloat(2.5)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
@@ -29,8 +35,8 @@ class ScrollZoomViewController: UIViewController {
         drawingView.backgroundColor = .clear
         
         scrollView.delegate = self
-        scrollView.minimumZoomScale = 1
-        scrollView.maximumZoomScale = 2.5
+        scrollView.minimumZoomScale = ScrollZoomViewController.minimumZoomScale
+        scrollView.maximumZoomScale = ScrollZoomViewController.maximumZoomScale
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
     }
@@ -50,12 +56,16 @@ extension ScrollZoomViewController: UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
-            zoomed?(scrollView.zoomScale)
+            if hookedForZooming {
+                zoomed?(scrollView.zoomScale)
+            }
         }
     }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        stoppedZooming?()
+        if hookedForZooming {
+            stoppedZooming?()
+        }
     }
 }
 

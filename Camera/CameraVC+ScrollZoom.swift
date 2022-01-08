@@ -21,8 +21,7 @@ extension CameraViewController {
             guard let self = self else { return }
             if !self.cameraViewModel.shutterOn {
                 let percentage = self.getPercentageFrom(scrollViewZoom: scrollViewZoom)
-                
-                
+                self.zoomViewModel.percentage = percentage
                 self.zoomViewModel.keepingExpandedUUID = nil
                 self.zoomViewModel.setZoom(percentage: percentage)
                 self.zoomViewModel.updateActivationProgress(percentage: percentage)
@@ -51,12 +50,15 @@ extension CameraViewController {
     }
     
     func setScrollZoomImage(image: UIImage) {
+        scrollZoomViewController.hookedForZooming = false
         scrollZoomViewController.scrollView.zoomScale = 1
         scrollZoomViewController.imageView.image = image
         hookScrollViewForZooming(false)
         
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 1
+        } completion: { _ in
+            self.scrollZoomViewController.scrollView.zoomScale = 1
         }
     }
     
@@ -64,8 +66,24 @@ extension CameraViewController {
         hookScrollViewForZooming(true)
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 0
+        } completion: { _ in
+            let scrollViewZoom = self.getScrollViewZoomFrom(percentage: self.zoomViewModel.percentage)
+            self.scrollZoomViewController.scrollView.zoomScale = scrollViewZoom
+            self.scrollZoomViewController.hookedForZooming = true
         }
     }
+    
+    /// With scroll
+    func hookScrollViewForZooming(_ shouldHook: Bool) {
+        if shouldHook {
+            scrollZoomViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
+            scrollZoomViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom
+        } else {
+            scrollZoomViewController.scrollView.minimumZoomScale = ScrollZoomViewController.minimumZoomScale
+            scrollZoomViewController.scrollView.maximumZoomScale = ScrollZoomViewController.maximumZoomScale
+        }
+    }
+    
 }
 
 

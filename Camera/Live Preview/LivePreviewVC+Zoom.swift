@@ -19,7 +19,7 @@ extension LivePreviewViewController {
         do {
             try cameraDevice.lockForConfiguration()
             if animated {
-                cameraDevice.ramp(toVideoZoomFactor: zoom, withRate: 200)
+                cameraDevice.ramp(toVideoZoomFactor: zoom, withRate: 100)
             } else {
                 cameraDevice.videoZoomFactor = zoom
             }

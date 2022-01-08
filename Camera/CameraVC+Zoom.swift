@@ -50,17 +50,6 @@ extension CameraViewController {
         }
     }
     
-    /// With scroll
-    func hookScrollViewForZooming(_ shouldHook: Bool) {
-        if shouldHook {
-            scrollZoomViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
-            scrollZoomViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom
-        } else {
-            scrollZoomViewController.scrollView.minimumZoomScale = 0.5
-            scrollZoomViewController.scrollView.maximumZoomScale = 2
-        }
-    }
-    
     /// get the fraction (0 to 1) of the current zoom
     func getPercentageFrom(zoom: CGFloat) -> CGFloat {
         var percentage = (zoom - zoomViewModel.minZoom) / (zoomViewModel.maxZoom - zoomViewModel.minZoom)
