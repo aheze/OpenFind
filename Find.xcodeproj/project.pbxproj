@@ -203,6 +203,7 @@
 		3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */; };
 		3C3232F0261164A900A33192 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
 		3C3232F426118B4000A33192 /* ListBuilderVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */; };
+		3C35A97A278979700003D7A0 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
 		3C3642AE277BBED10038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C3642AD277BBED10038CB18 /* Popovers */; };
 		3C3642B4277BC0E80038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
 		3C3642B5277BC0EC0038CB18 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
@@ -1014,6 +1015,9 @@
 		3C8D58A525B7FD7300EA226D /* PhotoSlidesVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D58A425B7FD7300EA226D /* PhotoSlidesVC+Cache.swift */; };
 		3C8F116B25AD0A160091402B /* SegmentedSlider+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */; };
 		3C8F116E25AD5DA80091402B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116D25AD5DA80091402B /* CustomButton.swift */; };
+		3C989DEC27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
+		3C989DED27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
+		3C989DEE27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
 		3C9CE49B25BFBFAC006D989C /* CameraVC+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CE49A25BFBFAC006D989C /* CameraVC+Resume.swift */; };
 		3C9D5F4E25F2E72F002E93F5 /* CameraVC+FullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D5F4D25F2E72F002E93F5 /* CameraVC+FullScreen.swift */; };
 		3C9D5F5125F30394002E93F5 /* CameraVC+Flashlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D5F5025F30394002E93F5 /* CameraVC+Flashlight.swift */; };
@@ -1470,6 +1474,7 @@
 		3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+CollectionView.swift"; sourceTree = "<group>"; };
 		3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorsVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+Accessibility.swift"; sourceTree = "<group>"; };
+		3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollZoomHookViewController.swift; sourceTree = "<group>"; };
 		3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+SearchBar.swift"; sourceTree = "<group>"; };
 		3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Zoom.swift"; sourceTree = "<group>"; };
 		3C364304277BC58E0038CB18 /* CameraVC+LivePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+LivePreview.swift"; sourceTree = "<group>"; };
@@ -3086,6 +3091,7 @@
 			children = (
 				3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */,
 				3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */,
+				3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */,
 				3C7B7AB7277FBBD200E1F602 /* Testing */,
 			);
 			path = ScrollZoom;
@@ -4801,6 +4807,7 @@
 				3CE9C1FE274B4E47008C903C /* FallbackView.swift in Sources */,
 				3C8A525C277FCA2C006CF91E /* CameraVC+Static.swift in Sources */,
 				3CE9C20C274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
+				3C989DED27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */,
 				3C4D3A8527476A260010FD68 /* ListsViewController.swift in Sources */,
 				3CE9C1FB274B4E44008C903C /* LivePreviewVC+Delegate.swift in Sources */,
 				3C01DE462788A9680027B435 /* ZoomModel.swift in Sources */,
@@ -4933,6 +4940,7 @@
 				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,
 				3CE9C215274DE344008C903C /* Debug.swift in Sources */,
 				3C119971274B32B400D6AFE3 /* LivePreviewView.swift in Sources */,
+				3C989DEE27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */,
 				3C2DBBC8277E6F1F00911A74 /* TabControllerView.swift in Sources */,
 				3C3642BE277BC2E70038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C1D19E9275A983D0064F2C6 /* ListsViewModel.swift in Sources */,
@@ -5288,6 +5296,7 @@
 				3C6C73A12781947400E039F0 /* SearchUtilities.swift in Sources */,
 				3C6C735B2781945A00E039F0 /* PhotosViewController.swift in Sources */,
 				3C6C739B2781947400E039F0 /* LeftView.swift in Sources */,
+				3C989DEC27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */,
 				3C6C73622781945D00E039F0 /* HighlightsViewController.swift in Sources */,
 				3C6C73402781944B00E039F0 /* TabBarController.swift in Sources */,
 				3C6C73A42781947400E039F0 /* SearchVC+Cell.swift in Sources */,
@@ -5473,6 +5482,7 @@
 				3C8A523F277FC1F4006CF91E /* GeneralUtilities.swift in Sources */,
 				3CCCCAB127818CEB000381CE /* FindIconView.swift in Sources */,
 				3C8A5245277FC1F4006CF91E /* Utilities+UIDevice.swift in Sources */,
+				3C35A97A278979700003D7A0 /* ScrollZoomHookViewController.swift in Sources */,
 				3C8A5244277FC1F4006CF91E /* Utilities+SwiftUI.swift in Sources */,
 				3C8A524D277FC929006CF91E /* ToolbarViewModel.swift in Sources */,
 				3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */,

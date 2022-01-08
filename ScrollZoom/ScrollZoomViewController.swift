@@ -16,13 +16,7 @@ class ScrollZoomViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var drawingView: UIView!
     
-    /// called when the scroll view zoomed, for zooming when live preview is live
-    var zoomed: ((CGFloat) -> Void)?
-    var stoppedZooming: (() -> Void)?
-    
-    /// zoom events are passed
-    var hookedForZooming = true
-    
+    /// normal zoom scale, nothing to do with camera zoom
     static var minimumZoomScale = CGFloat(1)
     static var maximumZoomScale = CGFloat(2.5)
     
@@ -40,6 +34,12 @@ class ScrollZoomViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
     }
+    
+    func centerImage() {
+        let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
+        let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
+        scrollView.contentInset = UIEdgeInsets(top: topMargin, left: leftMargin, bottom: 0, right: 0)
+    }
 }
 
 extension ScrollZoomViewController: UIScrollViewDelegate {
@@ -49,23 +49,7 @@ extension ScrollZoomViewController: UIScrollViewDelegate {
     
     /// center the image
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
-        let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
-        scrollView.contentInset = UIEdgeInsets(top: topMargin, left: leftMargin, bottom: 0, right: 0)
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
-            if hookedForZooming {
-                zoomed?(scrollView.zoomScale)
-            }
-        }
-    }
-    
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        if hookedForZooming {
-            stoppedZooming?()
-        }
+        centerImage()
     }
 }
 

@@ -27,7 +27,7 @@ extension CameraViewController {
                     
                     let highlight = Highlight(
                         string: string,
-                        frame: word.frame.scaleTo(self.drawingViewSize),
+                        frame: word.frame.scaleTo(self.contentContainerViewSize),
                         colors: gradient.colors,
                         alpha: gradient.alpha
                     )

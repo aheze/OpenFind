@@ -71,7 +71,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="93.75"/>
+            <point key="canvasLocation" x="554" y="89"/>
+        </scene>
+        <!--Scroll Zoom Hook View Controller-->
+        <scene sceneID="GD8-Bw-Owy">
+            <objects>
+                <viewController storyboardIdentifier="ScrollZoomHookViewController" id="eni-yg-SBc" customClass="ScrollZoomHookViewController" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IUh-1w-htT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-QL-Jih">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3k-mx-iA2">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="i3k-mx-iA2" secondAttribute="trailing" id="6Bi-sh-0zs"/>
+                                    <constraint firstItem="i3k-mx-iA2" firstAttribute="width" secondItem="Qwa-QL-Jih" secondAttribute="width" id="VF7-XH-MGa"/>
+                                    <constraint firstItem="i3k-mx-iA2" firstAttribute="top" secondItem="Qwa-QL-Jih" secondAttribute="top" id="XWd-rq-XJN"/>
+                                    <constraint firstItem="i3k-mx-iA2" firstAttribute="height" secondItem="Qwa-QL-Jih" secondAttribute="height" id="aMG-iC-TX1"/>
+                                    <constraint firstItem="i3k-mx-iA2" firstAttribute="leading" secondItem="Qwa-QL-Jih" secondAttribute="leading" id="fiG-Cf-aqS"/>
+                                    <constraint firstAttribute="bottom" secondItem="i3k-mx-iA2" secondAttribute="bottom" id="hOi-px-2n8"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZOa-5g-o0M"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Qwa-QL-Jih" secondAttribute="bottom" id="Lrl-ff-wdK"/>
+                            <constraint firstAttribute="trailing" secondItem="Qwa-QL-Jih" secondAttribute="trailing" id="Uvc-qQ-a9I"/>
+                            <constraint firstItem="Qwa-QL-Jih" firstAttribute="leading" secondItem="IUh-1w-htT" secondAttribute="leading" id="cN5-Dl-sHK"/>
+                            <constraint firstItem="Qwa-QL-Jih" firstAttribute="top" secondItem="IUh-1w-htT" secondAttribute="top" id="sXo-bG-wDj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="i3k-mx-iA2" id="kBY-Wg-hXe"/>
+                        <outlet property="scrollView" destination="Qwa-QL-Jih" id="uxo-df-rWH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qg6-08-KBg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1222" y="88"/>
         </scene>
     </scenes>
     <resources>

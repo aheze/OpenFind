@@ -33,6 +33,11 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P3v-Ie-izI">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62W-yT-yly">
                                         <rect key="frame" x="-20" y="86" width="240" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,6 +103,7 @@
                         <outlet property="progressContainerView" destination="vbV-LF-KmV" id="mwe-5f-Eut"/>
                         <outlet property="safeView" destination="kxc-BX-aU0" id="gD2-wc-k0h"/>
                         <outlet property="scrollZoomContainerView" destination="8OQ-wQ-RqJ" id="YL3-jt-60T"/>
+                        <outlet property="scrollZoomHookContainerView" destination="P3v-Ie-izI" id="LeF-lL-FaH"/>
                         <outlet property="searchContainerView" destination="n3B-Mf-bwU" id="79P-bp-qV3"/>
                         <outlet property="simulatedSafeView" destination="62W-yT-yly" id="4qc-3P-bB2"/>
                         <outlet property="testingTabBarContainerView" destination="cDu-p8-1ox" id="g2N-KL-YaW"/>

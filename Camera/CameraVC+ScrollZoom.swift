@@ -16,8 +16,15 @@ extension CameraViewController {
         addChildViewController(scrollZoomViewController, in: scrollZoomContainerView)
         
         scrollZoomViewController.imageView.alpha = 0
+        return scrollZoomViewController
+    }
+    
+    func createScrollZoomHook() -> ScrollZoomHookViewController {
+        let storyboard = UIStoryboard(name: "ScrollZoomContent", bundle: nil)
+        let scrollZoomHookViewController = storyboard.instantiateViewController(withIdentifier: "ScrollZoomHookViewController") as! ScrollZoomHookViewController
+        addChildViewController(scrollZoomHookViewController, in: scrollZoomHookContainerView)
         
-        scrollZoomViewController.zoomed = { [weak self] scrollViewZoom in
+        scrollZoomHookViewController.zoomed = { [weak self] scrollViewZoom in
             guard let self = self else { return }
             if !self.cameraViewModel.shutterOn {
                 let percentage = self.getPercentageFrom(scrollViewZoom: scrollViewZoom)
@@ -36,54 +43,38 @@ extension CameraViewController {
             }
         }
         
-        scrollZoomViewController.stoppedZooming = { [weak self] in
+        scrollZoomHookViewController.stoppedZooming = { [weak self] in
             guard let self = self else { return }
             self.zoomViewModel.keepingExpandedUUID = UUID()
             self.zoomViewModel.startTimeout()
         }
         
-        
-        scrollZoomViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
-        scrollZoomViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom
-        
-        return scrollZoomViewController
+        scrollZoomHookViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
+        scrollZoomHookViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom
+        return scrollZoomHookViewController
     }
     
     func setScrollZoomImage(image: UIImage) {
-        scrollZoomViewController.hookedForZooming = false
-        scrollZoomViewController.scrollView.zoomScale = 1
+        self.scrollZoomContainerView.isUserInteractionEnabled = true
+        self.scrollZoomHookContainerView.isUserInteractionEnabled = false
+        
         scrollZoomViewController.imageView.image = image
-        hookScrollViewForZooming(false)
+        scrollZoomViewController.centerImage()
         
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 1
-        } completion: { _ in
-            self.scrollZoomViewController.scrollView.zoomScale = 1
         }
     }
     
     func removeScrollZoomImage() {
-        hookScrollViewForZooming(true)
         UIView.animate(withDuration: 0.5) {
             self.scrollZoomViewController.imageView.alpha = 0
+            self.scrollZoomViewController.scrollView.zoomScale = 1
         } completion: { _ in
-            let scrollViewZoom = self.getScrollViewZoomFrom(percentage: self.zoomViewModel.percentage)
-            self.scrollZoomViewController.scrollView.zoomScale = scrollViewZoom
-            self.scrollZoomViewController.hookedForZooming = true
+            self.scrollZoomContainerView.isUserInteractionEnabled = false
+            self.scrollZoomHookContainerView.isUserInteractionEnabled = true
         }
     }
-    
-    /// With scroll
-    func hookScrollViewForZooming(_ shouldHook: Bool) {
-        if shouldHook {
-            scrollZoomViewController.scrollView.minimumZoomScale = ZoomConstants.scrollViewMinZoom
-            scrollZoomViewController.scrollView.maximumZoomScale = ZoomConstants.scrollViewMaxZoom
-        } else {
-            scrollZoomViewController.scrollView.minimumZoomScale = ScrollZoomViewController.minimumZoomScale
-            scrollZoomViewController.scrollView.maximumZoomScale = ScrollZoomViewController.maximumZoomScale
-        }
-    }
-    
 }
 
 
