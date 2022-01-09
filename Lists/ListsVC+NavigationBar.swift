@@ -14,10 +14,13 @@ extension ListsViewController {
         self.title = "Lists"
         let clearAppearance = UINavigationBarAppearance()
         clearAppearance.configureWithTransparentBackground()
-        navigationController?.navigationBar.standardAppearance = clearAppearance
-        navigationController?.navigationBar.compactAppearance = clearAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = clearAppearance
-        navigationController?.navigationBar.compactScrollEdgeAppearance = clearAppearance
+        
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.standardAppearance = clearAppearance
+            navigationBar.compactAppearance = clearAppearance
+            navigationBar.scrollEdgeAppearance = clearAppearance
+            navigationBar.compactScrollEdgeAppearance = clearAppearance
+        }
     }
     
     func createNavigationBarBackground() -> UIView {
@@ -32,13 +35,87 @@ extension ListsViewController {
             backgroundView.bottomAnchor.constraint(equalTo: searchContainerView.bottomAnchor),
         ])
         
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-        backgroundView.addSubview(blurView)
-        blurView.pinEdgesToSuperview()
+        backgroundView.addSubview(navigationBarBackgroundBlurView)
+        navigationBarBackgroundBlurView.pinEdgesToSuperview()
+        backgroundView.addDebugBorders(.red)
         
         view.bringSubviewToFront(searchContainerView)
+        
         return backgroundView
+    }
+    
+    func updateBlur() {
+        let topPadding = searchConfiguration.getTotalHeight()
+        
+        /// relative to the top of the screen
+        let contentOffset = abs(collectionView.contentOffset.y - topPadding)
+        
+        if
+            let navigationBar = navigationController?.navigationBar,
+            let window = UIApplication.shared.keyWindow
+        {
+            let compactHeight = navigationBar.getCompactHeight() // 44 on iPhone 11
+            let statusBarHeight = window.safeAreaInsets.top // 44 on iPhone 11
+            let navigationBarHeight = compactHeight + statusBarHeight + topPadding
+            
+            print("cont: \(contentOffset), nav: \(navigationBarHeight)")
+        }
     }
 }
 
 
+
+
+
+struct AnimatableVisualEffectView: UIViewRepresentable {
+    @Binding var progress: CGFloat
+    @State var blurEffectView = BlurEffectView()
+    
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> BlurEffectView {
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { _ in
+            refresh()
+        }
+        return blurEffectView
+    }
+
+    func updateUIView(_ uiView: BlurEffectView, context: UIViewRepresentableContext<Self>) {
+        uiView.updateProgress(percentage: progress)
+    }
+    
+    /// re-make the blur after coming back from the home screen/app switcher
+    func refresh() {
+        blurEffectView.setupBlur()
+        blurEffectView.updateProgress(percentage: progress)
+    }
+}
+
+class BlurEffectView: UIVisualEffectView {
+    var animator: UIViewPropertyAnimator?
+    
+    override func didMoveToSuperview() {
+        guard let superview = superview else { return }
+        backgroundColor = .clear
+        frame = superview.bounds
+        setupBlur()
+    }
+    
+    func setupBlur() {
+        animator?.stopAnimation(true)
+        animator?.finishAnimation(at: .start)
+        animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+        effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+
+        animator?.addAnimations { [weak self] in
+            self?.effect = UIBlurEffect(style: .systemThickMaterial)
+        }
+        animator?.fractionComplete = 0
+    }
+    
+    func updateProgress(percentage: CGFloat) {
+        animator?.fractionComplete = percentage
+    }
+    
+    deinit {
+        animator?.stopAnimation(true)
+    }
+}

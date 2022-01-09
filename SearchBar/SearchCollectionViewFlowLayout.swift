@@ -214,8 +214,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 width = fieldOffset.fullWidth - fieldOffset.shift
             }
             
-            
-            
             let indexPath = IndexPath(item: fullIndex, section: 0)
             let attributes = FieldLayoutAttributes(forCellWith: indexPath)
             attributes.frame = CGRect(x: origin, y: 0, width: width, height: configuration.cellHeight)

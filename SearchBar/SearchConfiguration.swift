@@ -53,6 +53,10 @@ struct SearchConfiguration: Equatable {
     var backgroundTopPadding = CGFloat(10)
     var backgroundBottomPadding = CGFloat(16)
     
+    func getTotalHeight() -> CGFloat {
+        cellHeight + backgroundTopPadding + backgroundBottomPadding
+    }
+    
     static var camera: Self = {
         var configuration = SearchConfiguration()
         return configuration
@@ -87,7 +91,7 @@ struct SearchConfiguration: Equatable {
             minimumHuggingWidth: 30,
             keyboardAppearance: UIKeyboardAppearance.default,
             showBackground: false,
-            backgroundTopPadding: 2,
+            backgroundTopPadding: 0,
             backgroundBottomPadding: 16
         )
         return configuration

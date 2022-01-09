@@ -33,6 +33,22 @@ class ListsViewModel: ObservableObject {
             color: 0xE2AC00,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
+        ),
+        List(
+            name: "Gluten-free foods",
+            desc: "Words",
+            image: "leaf.fill",
+            color: 0xE2AC00,
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Gluten-free foods",
+            desc: "Words",
+            image: "leaf.fill",
+            color: 0xE2AC00,
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
         )
     ]
     

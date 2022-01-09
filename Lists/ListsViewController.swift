@@ -13,10 +13,16 @@ class ListsViewController: UIViewController, PageViewController {
     /// external models
     var listsViewModel: ListsViewModel
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    let searchConfiguration = SearchConfiguration.lists
+    var searchViewModel = SearchViewModel()
+    lazy var searchViewController = createSearchBar()
+    @IBOutlet weak var searchContainerView: UIView!
+    @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
     
+    @IBOutlet weak var collectionView: UICollectionView!
     lazy var listsFlowLayout: ListsCollectionFlowLayout = {
-        let flowLayout = ListsCollectionFlowLayout()
+        let topPadding = searchConfiguration.getTotalHeight()
+        let flowLayout = ListsCollectionFlowLayout(topPadding: topPadding)
         flowLayout.scrollDirection = .horizontal
         flowLayout.getLists = { [weak self] in
             guard let self = self else { return [] }
@@ -27,11 +33,9 @@ class ListsViewController: UIViewController, PageViewController {
         return flowLayout
     }()
     
-    var searchViewModel = SearchViewModel()
-    lazy var searchViewController = createSearchBar()
-    @IBOutlet weak var searchContainerView: UIView!
-    @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
     
+    var blur progress: CGFloat
+    var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
     lazy var navigationBarBackground = createNavigationBarBackground()
     
     init?(
@@ -50,8 +54,8 @@ class ListsViewController: UIViewController, PageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = listsFlowLayout
         _ = searchViewController
+        _ = listsFlowLayout
         _ = navigationBarBackground
         
         listsViewModel.displayedLists = listsViewModel.lists

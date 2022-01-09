@@ -34,14 +34,32 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = abs(scrollView.contentOffset.y)
+        let offset = abs(min(0, scrollView.contentOffset.y))
         let topSafeArea = scrollView.adjustedContentInset.top
         
         /// rubber banding on large title
         if offset > topSafeArea {
             searchContainerViewTopC.constant = offset
         } else {
-            searchContainerViewTopC.constant = scrollView.adjustedContentInset.top
+            searchContainerViewTopC.constant = topSafeArea
         }
+        
+        updateBlur()
+    }
+}
+
+extension UINavigationBar {
+    func getCompactHeight() -> CGFloat {
+        
+        /// Loop through the navigation bar's subviews.
+        for subview in subviews {
+            
+            /// Check if the subview is pinned to the top (compact bar) and contains a title label
+            if subview.frame.origin.y == 0 && subview.subviews.contains(where: { $0 is UILabel }) {
+                return subview.bounds.height
+            }
+        }
+        
+        return 0
     }
 }

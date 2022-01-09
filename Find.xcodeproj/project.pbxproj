@@ -1198,6 +1198,65 @@
 		3CFD5F97278A86140031BC8B /* ListsVC+CV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */; };
 		3CFD5F98278A86140031BC8B /* ListsCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */; };
 		3CFD5F99278A861A0031BC8B /* ListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */; };
+		3CFD5FD6278B6F2B0031BC8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FD5278B6F2B0031BC8B /* AppDelegate.swift */; };
+		3CFD5FD8278B6F2B0031BC8B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FD7278B6F2B0031BC8B /* SceneDelegate.swift */; };
+		3CFD5FDA278B6F2B0031BC8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FD9278B6F2B0031BC8B /* ViewController.swift */; };
+		3CFD5FDD278B6F2B0031BC8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD5FDB278B6F2B0031BC8B /* Main.storyboard */; };
+		3CFD5FDF278B6F2D0031BC8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD5FDE278B6F2D0031BC8B /* Assets.xcassets */; };
+		3CFD5FE2278B6F2D0031BC8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD5FE0278B6F2D0031BC8B /* LaunchScreen.storyboard */; };
+		3CFD5FE9278B6F420031BC8B /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */; };
+		3CFD5FEB278B6F640031BC8B /* SearchNavigationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */; };
+		3CFD5FEC278B6F950031BC8B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
+		3CFD5FED278B6F950031BC8B /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
+		3CFD5FEE278B6F950031BC8B /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
+		3CFD5FEF278B6F950031BC8B /* SearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */; };
+		3CFD5FF0278B6F950031BC8B /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
+		3CFD5FF1278B6F950031BC8B /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
+		3CFD5FF2278B6F950031BC8B /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
+		3CFD5FF3278B6F950031BC8B /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
+		3CFD5FF4278B6F950031BC8B /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
+		3CFD5FF5278B6F950031BC8B /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3CFD5FF6278B6F950031BC8B /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8E27477ABC0010FD68 /* Bridge.swift */; };
+		3CFD5FF7278B6F950031BC8B /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3CFD5FF8278B6F950031BC8B /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
+		3CFD5FF9278B6F950031BC8B /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
+		3CFD5FFA278B6F950031BC8B /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
+		3CFD5FFB278B6F950031BC8B /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
+		3CFD5FFC278B6F950031BC8B /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8B27477ABC0010FD68 /* RightView.swift */; };
+		3CFD5FFD278B6F950031BC8B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
+		3CFD5FFE278B6F950031BC8B /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
+		3CFD5FFF278B6F950031BC8B /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
+		3CFD6000278B6FA50031BC8B /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
+		3CFD6001278B6FA50031BC8B /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
+		3CFD6002278B6FA50031BC8B /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
+		3CFD6003278B6FA50031BC8B /* Utilities+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A46277EB17D00E1F602 /* Utilities+CGRect.swift */; };
+		3CFD6004278B6FA50031BC8B /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
+		3CFD6005278B6FA50031BC8B /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3CFD6006278B6FA50031BC8B /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
+		3CFD6007278B6FA50031BC8B /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
+		3CFD6008278B6FA50031BC8B /* Utilities+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0D275AA0CE0064F2C6 /* Utilities+SwiftUI.swift */; };
+		3CFD6009278B6FA50031BC8B /* Utilities+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */; };
+		3CFD600A278B6FA50031BC8B /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
+		3CFD600B278B6FAA0031BC8B /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3794274756470010FD68 /* ToolbarViewModel.swift */; };
+		3CFD600C278B6FAA0031BC8B /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
+		3CFD600D278B6FAA0031BC8B /* UIKitViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A18275AA16C0064F2C6 /* UIKitViews.swift */; };
+		3CFD600E278B6FAA0031BC8B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
+		3CFD600F278B6FAA0031BC8B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA8B2781859C000381CE /* Model.swift */; };
+		3CFD6011278B6FBD0031BC8B /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3CFD6010278B6FBD0031BC8B /* Popovers */; };
+		3CFD6012278B6FCE0031BC8B /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
+		3CFD6013278B6FCE0031BC8B /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADA7275C12BA0030F0D2 /* TipView.swift */; };
+		3CFD6014278B705C0031BC8B /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
+		3CFD6015278B705C0031BC8B /* GeneralViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA9A27818CDD000381CE /* GeneralViews.swift */; };
+		3CFD6016278B705C0031BC8B /* FindIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA9827818CAF000381CE /* FindIconView.swift */; };
+		3CFD6017278B70940031BC8B /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */; };
+		3CFD6018278B70940031BC8B /* SearchNavigationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */; };
+		3CFD6019278B70940031BC8B /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */; };
+		3CFD601A278B70940031BC8B /* SearchNavigationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */; };
+		3CFD601B278B70950031BC8B /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */; };
+		3CFD601C278B70950031BC8B /* SearchNavigationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */; };
+		3CFD601F278B70970031BC8B /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */; };
+		3CFD6020278B70970031BC8B /* SearchNavigationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */; };
+		3CFD6024278B70D90031BC8B /* SearchNavigationContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD6023278B70D90031BC8B /* SearchNavigationContent.storyboard */; };
 		3CFF312525AA490900D3C56D /* PhotoSlidesVC+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */; };
 		3CFF312825AA496B00D3C56D /* PhotoSlidesVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */; };
 		3CFF312C25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */; };
@@ -1897,6 +1956,17 @@
 		3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionFlowLayout.swift; sourceTree = "<group>"; };
 		3CFD5F81278A56BB0031BC8B /* ListsVC+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+NavigationBar.swift"; sourceTree = "<group>"; };
 		3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+SearchBar.swift"; sourceTree = "<group>"; };
+		3CFD5FD3278B6F2B0031BC8B /* SearchNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CFD5FD5278B6F2B0031BC8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3CFD5FD7278B6F2B0031BC8B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3CFD5FD9278B6F2B0031BC8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3CFD5FDC278B6F2B0031BC8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3CFD5FDE278B6F2D0031BC8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3CFD5FE1278B6F2D0031BC8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3CFD5FE3278B6F2D0031BC8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
+		3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationConfiguration.swift; sourceTree = "<group>"; };
+		3CFD6023278B70D90031BC8B /* SearchNavigationContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchNavigationContent.storyboard; sourceTree = "<group>"; };
 		3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Gestures.swift"; sourceTree = "<group>"; };
 		3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Setup.swift"; sourceTree = "<group>"; };
 		3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+CollectionCoordinates.swift"; sourceTree = "<group>"; };
@@ -2103,6 +2173,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C2DBBD9277E734300911A74 /* Popovers in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CFD5FD0278B6F2B0031BC8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CFD6011278B6FBD0031BC8B /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2443,13 +2521,13 @@
 		3C4D3787274755FE0010FD68 /* TabController */ = {
 			isa = PBXGroup;
 			children = (
-				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C4D378C274756470010FD68 /* TabContent.storyboard */,
 				3C4D3790274756470010FD68 /* TabControllerBridge.swift */,
 				3CFD5F73278A374B0031BC8B /* TabModel.swift */,
 				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
+				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C36434F277C22480038CB18 /* TabControllerView.swift */,
 				3C4D3796274756470010FD68 /* ContentPageViewController.swift */,
 				3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */,
@@ -3409,6 +3487,31 @@
 			path = Lifecycle;
 			sourceTree = "<group>";
 		};
+		3CFD5FD4278B6F2B0031BC8B /* SearchNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				3CFD6023278B70D90031BC8B /* SearchNavigationContent.storyboard */,
+				3CFD5FEA278B6F640031BC8B /* SearchNavigationConfiguration.swift */,
+				3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */,
+				3CFD5FE7278B6F370031BC8B /* Testing */,
+			);
+			path = SearchNavigation;
+			sourceTree = "<group>";
+		};
+		3CFD5FE7278B6F370031BC8B /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				3CFD5FD5278B6F2B0031BC8B /* AppDelegate.swift */,
+				3CFD5FD7278B6F2B0031BC8B /* SceneDelegate.swift */,
+				3CFD5FD9278B6F2B0031BC8B /* ViewController.swift */,
+				3CFD5FDB278B6F2B0031BC8B /* Main.storyboard */,
+				3CFD5FDE278B6F2D0031BC8B /* Assets.xcassets */,
+				3CFD5FE0278B6F2D0031BC8B /* LaunchScreen.storyboard */,
+				3CFD5FE3278B6F2D0031BC8B /* Info.plist */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
 		490BC3F723FA5FBF004D1433 /* General */ = {
 			isa = PBXGroup;
 			children = (
@@ -3668,9 +3771,10 @@
 				3C7B7A07277E93CA00E1F602 /* Highlights */,
 				3C4D396527475AB00010FD68 /* Camera */,
 				3C4D3B31274776E90010FD68 /* SearchBar */,
+				3CFD5FD4278B6F2B0031BC8B /* SearchNavigation */,
+				3C4D3A48274768FE0010FD68 /* Lists */,
 				3C2DBBDF277E739200911A74 /* MLVision */,
 				3CE9C223274EBB70008C903C /* ARVision */,
-				3C4D3A48274768FE0010FD68 /* Lists */,
 				3C4D3A9A274775D80010FD68 /* Settings */,
 				3C1D19F3275A9F390064F2C6 /* Popover */,
 				3C4D39A427475D5F0010FD68 /* Utilities */,
@@ -3700,6 +3804,7 @@
 				3C7B7A77277FA50800E1F602 /* SwiftUIViews.app */,
 				3C7B7AA3277FBBC000E1F602 /* ScrollZoom.app */,
 				3C6C7321278193F600E039F0 /* Find-New.app */,
+				3CFD5FD3278B6F2B0031BC8B /* SearchNavigation.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4053,6 +4158,26 @@
 			productReference = 3CE9C222274EBB70008C903C /* ARVision.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3CFD5FD2278B6F2B0031BC8B /* SearchNavigation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CFD5FE4278B6F2D0031BC8B /* Build configuration list for PBXNativeTarget "SearchNavigation" */;
+			buildPhases = (
+				3CFD5FCF278B6F2B0031BC8B /* Sources */,
+				3CFD5FD0278B6F2B0031BC8B /* Frameworks */,
+				3CFD5FD1278B6F2B0031BC8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SearchNavigation;
+			packageProductDependencies = (
+				3CFD6010278B6FBD0031BC8B /* Popovers */,
+			);
+			productName = SearchNavigation;
+			productReference = 3CFD5FD3278B6F2B0031BC8B /* SearchNavigation.app */;
+			productType = "com.apple.product-type.application";
+		};
 		4999AC8F2353A80A00AB06A7 /* Find */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4999ACA42353A81100AB06A7 /* Build configuration list for PBXNativeTarget "Find" */;
@@ -4138,6 +4263,9 @@
 					3CE9C221274EBB70008C903C = {
 						CreatedOnToolsVersion = 13.0;
 					};
+					3CFD5FD2278B6F2B0031BC8B = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 					4999AC8F2353A80A00AB06A7 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -4178,6 +4306,7 @@
 				3C7B7A05277E93CA00E1F602 /* Highlights */,
 				3C7B7A76277FA50800E1F602 /* SwiftUIViews */,
 				3C7B7AA2277FBBC000E1F602 /* ScrollZoom */,
+				3CFD5FD2278B6F2B0031BC8B /* SearchNavigation */,
 			);
 		};
 /* End PBXProject section */
@@ -4390,6 +4519,21 @@
 				3CE9C22C274EBB70008C903C /* Main.storyboard in Resources */,
 				3C6C73CE2781948200E039F0 /* ListsContent.storyboard in Resources */,
 				3CE9C23E274EC01F008C903C /* SharedAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CFD5FD1278B6F2B0031BC8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CFD5FE2278B6F2D0031BC8B /* LaunchScreen.storyboard in Resources */,
+				3CFD5FFE278B6F950031BC8B /* LeftView.xib in Resources */,
+				3CFD6024278B70D90031BC8B /* SearchNavigationContent.storyboard in Resources */,
+				3CFD5FF8278B6F950031BC8B /* RightView.xib in Resources */,
+				3CFD5FDF278B6F2D0031BC8B /* Assets.xcassets in Resources */,
+				3CFD5FF4278B6F950031BC8B /* SearchBar.storyboard in Resources */,
+				3CFD5FFA278B6F950031BC8B /* SearchFieldCell.xib in Resources */,
+				3CFD5FDD278B6F2B0031BC8B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4827,6 +4971,7 @@
 				3C6C74302781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C8A525D277FCA2C006CF91E /* CameraVC+ScrollZoom.swift in Sources */,
 				3C4D3A16274767410010FD68 /* TabControllerBridge.swift in Sources */,
+				3CFD601A278B70940031BC8B /* SearchNavigationConfiguration.swift in Sources */,
 				3C4D3961274759A40010FD68 /* ViewController.swift in Sources */,
 				3C7B7A48277EB19500E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C4D39C727475E8A0010FD68 /* Constants.swift in Sources */,
@@ -4861,6 +5006,7 @@
 				3C4D3A25274768790010FD68 /* CameraBridge.swift in Sources */,
 				3C7B7A94277FB7BD00E1F602 /* ProgressLineView.swift in Sources */,
 				3CE9C203274B4F05008C903C /* ZoomViewModel.swift in Sources */,
+				3CFD6019278B70940031BC8B /* SearchNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5003,6 +5149,7 @@
 				3C3642B8277BC0FC0038CB18 /* CameraButton.swift in Sources */,
 				3C4D3A792747696F0010FD68 /* GeneralUtilities.swift in Sources */,
 				3CFD5F95278A86140031BC8B /* ListContentCell.swift in Sources */,
+				3CFD601F278B70970031BC8B /* SearchNavigationController.swift in Sources */,
 				3C606674274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C3642B7277BC0FC0038CB18 /* IconButtons.swift in Sources */,
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
@@ -5027,6 +5174,7 @@
 				3C3642EF277BC2E90038CB18 /* SearchFieldCell.swift in Sources */,
 				3C4D3A7B2747696F0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C3642E9277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */,
+				3CFD6020278B70970031BC8B /* SearchNavigationConfiguration.swift in Sources */,
 				3C4D39F6274766790010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A75274769500010FD68 /* TabControllerBridge.swift in Sources */,
 				3C4D39FB274766790010FD68 /* ContentCell.swift in Sources */,
@@ -5053,6 +5201,7 @@
 				3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C7B7A4B277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
+				3CFD6017278B70940031BC8B /* SearchNavigationController.swift in Sources */,
 				3C3642F4277BC2E90038CB18 /* LeftView.swift in Sources */,
 				3C3642F9277BC2E90038CB18 /* Field.swift in Sources */,
 				3C6C73B42781947700E039F0 /* SearchVC+Cell.swift in Sources */,
@@ -5062,6 +5211,7 @@
 				3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */,
 				3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */,
 				3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
+				3CFD6018278B70940031BC8B /* SearchNavigationConfiguration.swift in Sources */,
 				3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */,
 				3C3642FE277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C4D3A7C274769700010FD68 /* GeneralUtilities.swift in Sources */,
@@ -5301,6 +5451,7 @@
 				3C6C742C278194A500E039F0 /* Utilities+UIFont.swift in Sources */,
 				3C6C739D2781947400E039F0 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C6C736B2781946200E039F0 /* CameraVC+Testing.swift in Sources */,
+				3CFD601C278B70950031BC8B /* SearchNavigationConfiguration.swift in Sources */,
 				3C6C73762781946B00E039F0 /* LivePreviewView.swift in Sources */,
 				3C6C7429278194A500E039F0 /* Utilities+Constraints.swift in Sources */,
 				3C6C7427278194A500E039F0 /* GeneralUtilities.swift in Sources */,
@@ -5368,6 +5519,7 @@
 				3C6C737B2781946B00E039F0 /* ZoomView.swift in Sources */,
 				3C6C73772781946B00E039F0 /* ZoomView+Utilities.swift in Sources */,
 				3C6C73722781946B00E039F0 /* LivePreviewVC+Delegate.swift in Sources */,
+				3CFD601B278B70950031BC8B /* SearchNavigationController.swift in Sources */,
 				3C6C73752781946B00E039F0 /* LivePreviewVC+Photo.swift in Sources */,
 				3C6C736E2781946200E039F0 /* CameraVC+Progress.swift in Sources */,
 				3C6C733C2781944300E039F0 /* ScrollZoomViewController.swift in Sources */,
@@ -5553,6 +5705,55 @@
 				3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
 				3C6C738E2781946C00E039F0 /* ZoomConstants.swift in Sources */,
 				3C6C74362781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CFD5FCF278B6F2B0031BC8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CFD6012278B6FCE0031BC8B /* FieldSettingsView.swift in Sources */,
+				3CFD5FF9278B6F950031BC8B /* SearchConfiguration.swift in Sources */,
+				3CFD6015278B705C0031BC8B /* GeneralViews.swift in Sources */,
+				3CFD5FEC278B6F950031BC8B /* SearchViewModel.swift in Sources */,
+				3CFD5FF3278B6F950031BC8B /* LeftView.swift in Sources */,
+				3CFD6006278B6FA50031BC8B /* GeneralUtilities.swift in Sources */,
+				3CFD6001278B6FA50031BC8B /* Utilities+UIFont.swift in Sources */,
+				3CFD6003278B6FA50031BC8B /* Utilities+CGRect.swift in Sources */,
+				3CFD5FEB278B6F640031BC8B /* SearchNavigationConfiguration.swift in Sources */,
+				3CFD600D278B6FAA0031BC8B /* UIKitViews.swift in Sources */,
+				3CFD5FF2278B6F950031BC8B /* SearchUtilities.swift in Sources */,
+				3CFD5FFF278B6F950031BC8B /* Field.swift in Sources */,
+				3CFD5FF0278B6F950031BC8B /* SearchVC+Popovers.swift in Sources */,
+				3CFD600F278B6FAA0031BC8B /* Model.swift in Sources */,
+				3CFD5FF6278B6F950031BC8B /* Bridge.swift in Sources */,
+				3CFD6013278B6FCE0031BC8B /* TipView.swift in Sources */,
+				3CFD5FEF278B6F950031BC8B /* SearchFieldCell.swift in Sources */,
+				3CFD5FDA278B6F2B0031BC8B /* ViewController.swift in Sources */,
+				3CFD5FF7278B6F950031BC8B /* SearchVC+Cell.swift in Sources */,
+				3CFD6008278B6FA50031BC8B /* Utilities+SwiftUI.swift in Sources */,
+				3CFD6009278B6FA50031BC8B /* Utilities+UIDevice.swift in Sources */,
+				3CFD5FFD278B6F950031BC8B /* SearchViewController.swift in Sources */,
+				3CFD5FD6278B6F2B0031BC8B /* AppDelegate.swift in Sources */,
+				3CFD5FFC278B6F950031BC8B /* RightView.swift in Sources */,
+				3CFD5FD8278B6F2B0031BC8B /* SceneDelegate.swift in Sources */,
+				3CFD600B278B6FAA0031BC8B /* ToolbarViewModel.swift in Sources */,
+				3CFD5FF5278B6F950031BC8B /* SearchVC+Datasource.swift in Sources */,
+				3CFD600A278B6FA50031BC8B /* Utilities+Constraints.swift in Sources */,
+				3CFD5FE9278B6F420031BC8B /* SearchNavigationController.swift in Sources */,
+				3CFD6005278B6FA50031BC8B /* Utilities+Math.swift in Sources */,
+				3CFD6007278B6FA50031BC8B /* Utilities+UIColor.swift in Sources */,
+				3CFD6004278B6FA50031BC8B /* Utilities+Accessibility.swift in Sources */,
+				3CFD6016278B705C0031BC8B /* FindIconView.swift in Sources */,
+				3CFD5FEE278B6F950031BC8B /* SuggestionsView.swift in Sources */,
+				3CFD5FED278B6F950031BC8B /* SearchCollectionViewFlowLayout.swift in Sources */,
+				3CFD6014278B705C0031BC8B /* ProgressLineView.swift in Sources */,
+				3CFD5FF1278B6F950031BC8B /* SearchCollectionView.swift in Sources */,
+				3CFD6000278B6FA50031BC8B /* Utilities+Dates.swift in Sources */,
+				3CFD6002278B6FA50031BC8B /* Utilities+UIViewController.swift in Sources */,
+				3CFD5FFB278B6F950031BC8B /* SearchVC+Delegate.swift in Sources */,
+				3CFD600C278B6FAA0031BC8B /* Debug.swift in Sources */,
+				3CFD600E278B6FAA0031BC8B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6085,6 +6286,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				3CE9C230274EBB72008C903C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3CFD5FDB278B6F2B0031BC8B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CFD5FDC278B6F2B0031BC8B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3CFD5FE0278B6F2D0031BC8B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CFD5FE1278B6F2D0031BC8B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -7032,6 +7249,68 @@
 			};
 			name = Release;
 		};
+		3CFD5FE5278B6F2D0031BC8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SearchNavigation/Testing/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SearchNavigation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CFD5FE6278B6F2D0031BC8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SearchNavigation/Testing/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SearchNavigation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4999ACA22353A81100AB06A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -7334,6 +7613,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		3CFD5FE4278B6F2D0031BC8B /* Build configuration list for PBXNativeTarget "SearchNavigation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CFD5FE5278B6F2D0031BC8B /* Debug */,
+				3CFD5FE6278B6F2D0031BC8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4999AC8B2353A80A00AB06A7 /* Build configuration list for PBXProject "Find" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -7456,6 +7744,11 @@
 			productName = Popovers;
 		};
 		3CFD5F79278A37F00031BC8B /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
+		};
+		3CFD6010278B6FBD0031BC8B /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
 			productName = Popovers;

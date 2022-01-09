@@ -12,14 +12,25 @@ import UIKit
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
-    
+    var topPadding: CGFloat
     var getLists: (() -> [List])?
+    
+    init(topPadding: CGFloat) {
+        self.topPadding = topPadding
+        super.init()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    var contentSize = CGSize.zero /// the scrollable content size of the collection view
+    override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
-        var currentOffset = CGPoint.zero
+        var currentOffset = CGPoint(x: 0, y: topPadding)
         
         guard let lists = getLists?() else { return }
         guard let collectionView = collectionView else { return }
@@ -38,6 +49,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
             currentOffset = currentOffset + CGPoint(x: 0, y: frame.height)
         }
         
+        self.contentSize = CGSize(width: collectionView.bounds.width, height: currentOffset.y)
         self.layoutAttributes = layoutAttributes
     }
     
