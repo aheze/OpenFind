@@ -12,6 +12,8 @@ class SearchViewController: UIViewController {
     var configuration: SearchConfiguration
     
     @IBOutlet var searchBarHeightC: NSLayoutConstraint!
+    @IBOutlet weak var searchBarTopC: NSLayoutConstraint!
+    @IBOutlet weak var searchBarBottomC: NSLayoutConstraint!
     
     lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = {
         return createFlowLayout()
@@ -52,7 +54,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
         searchBarHeightC.constant = configuration.cellHeight
+        searchBarTopC.constant = configuration.backgroundTopPadding
+        searchBarBottomC.constant = configuration.backgroundBottomPadding
         searchBarView.backgroundColor = .clear
+        backgroundView.isHidden = !configuration.showBackground
         setupCollectionViews()
     }
 }

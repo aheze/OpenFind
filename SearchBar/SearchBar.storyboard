@@ -17,15 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2D-v6-50D">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fat-Zu-Sni">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                         <subviews>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVw-3F-BNd">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9a9-2g-UTR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                                 <blurEffect style="systemUltraThinMaterialDark"/>
@@ -40,7 +40,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWo-jK-nxc">
-                                        <rect key="frame" x="0.0" y="54" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="44" width="414" height="100"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-o0-9ha" customClass="SearchCollectionView" customModule="Camera" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -71,7 +71,7 @@
                                     <constraint firstItem="fat-Zu-Sni" firstAttribute="bottom" secondItem="K2D-v6-50D" secondAttribute="bottom" id="27C-H4-gQF"/>
                                     <constraint firstItem="DWo-jK-nxc" firstAttribute="leading" secondItem="K2D-v6-50D" secondAttribute="leading" id="2OR-Yr-zc9"/>
                                     <constraint firstAttribute="bottom" secondItem="DWo-jK-nxc" secondAttribute="bottom" constant="16" id="8UO-uc-4aQ"/>
-                                    <constraint firstItem="DWo-jK-nxc" firstAttribute="top" secondItem="gfc-Sx-Ydh" secondAttribute="top" constant="10" id="kMK-CX-ZOz"/>
+                                    <constraint firstItem="DWo-jK-nxc" firstAttribute="top" secondItem="gfc-Sx-Ydh" secondAttribute="top" id="kMK-CX-ZOz"/>
                                     <constraint firstAttribute="trailing" secondItem="fat-Zu-Sni" secondAttribute="trailing" id="pmh-S7-myX"/>
                                     <constraint firstItem="fat-Zu-Sni" firstAttribute="leading" secondItem="K2D-v6-50D" secondAttribute="leading" id="tCF-t0-KVJ"/>
                                     <constraint firstItem="fat-Zu-Sni" firstAttribute="top" secondItem="K2D-v6-50D" secondAttribute="top" id="yn0-Zk-Yui"/>
@@ -91,7 +91,9 @@
                     <connections>
                         <outlet property="backgroundView" destination="fat-Zu-Sni" id="xbl-mH-dE2"/>
                         <outlet property="baseView" destination="K2D-v6-50D" id="CGY-3l-6TA"/>
+                        <outlet property="searchBarBottomC" destination="8UO-uc-4aQ" id="rfC-at-i7Z"/>
                         <outlet property="searchBarHeightC" destination="PJl-mt-CVE" id="9D9-cp-kej"/>
+                        <outlet property="searchBarTopC" destination="kMK-CX-ZOz" id="dkK-qy-MsP"/>
                         <outlet property="searchBarView" destination="DWo-jK-nxc" id="BLg-KI-eyS"/>
                         <outlet property="searchCollectionView" destination="fEC-o0-9ha" id="fng-UJ-zn1"/>
                     </connections>

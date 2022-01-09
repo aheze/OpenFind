@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct SearchConfiguration {
+struct SearchConfiguration: Equatable {
     var cellHeight = CGFloat(60)
     var cellSpacing = CGFloat(8)
     
@@ -47,6 +47,12 @@ struct SearchConfiguration {
     var addTextPlaceholder = "Find anything"
     var minimumHuggingWidth = CGFloat(36)
     
+    var keyboardAppearance = UIKeyboardAppearance.dark
+    
+    var showBackground = true
+    var backgroundTopPadding = CGFloat(10)
+    var backgroundBottomPadding = CGFloat(16)
+    
     static var camera: Self = {
         var configuration = SearchConfiguration()
         return configuration
@@ -78,12 +84,12 @@ struct SearchConfiguration {
             addWordFieldHuggingWidth: 20,
             addWordFieldSnappingFactor: 0.25,
             addTextPlaceholder: "Find lists",
-            minimumHuggingWidth: 30
+            minimumHuggingWidth: 30,
+            keyboardAppearance: UIKeyboardAppearance.default,
+            showBackground: false,
+            backgroundTopPadding: 2,
+            backgroundBottomPadding: 16
         )
         return configuration
     }()
-}
-
-extension SearchConfiguration: Equatable {
-    
 }

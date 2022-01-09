@@ -102,6 +102,8 @@ class SearchFieldCell: UICollectionViewCell {
         addNewIconView.iconView.tintColor = configuration.clearImageColor
         
         addNewViewCenterHorizontallyWithRightC.constant = -configuration.fieldRightViewPadding
+        
+        textField.keyboardAppearance = configuration.keyboardAppearance
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

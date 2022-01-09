@@ -32,6 +32,8 @@ class ListsViewController: UIViewController, PageViewController {
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
     
+    lazy var navigationBarBackground = createNavigationBarBackground()
+    
     init?(
         coder: NSCoder,
         listsViewModel: ListsViewModel
@@ -50,9 +52,10 @@ class ListsViewController: UIViewController, PageViewController {
         
         _ = listsFlowLayout
         _ = searchViewController
+        _ = navigationBarBackground
+        
         listsViewModel.displayedLists = listsViewModel.lists
         
-        setupNavigationBar()
         setupCollectionView()
     }
 }

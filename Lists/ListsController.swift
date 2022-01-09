@@ -29,5 +29,6 @@ class ListsController {
         self.navigationController = navigationController
         navigationController.navigationBar.prefersLargeTitles = true
     
+        viewController.setupNavigationBar()
     }
 }
