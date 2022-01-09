@@ -13,7 +13,6 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         return configureCell(for: indexPath.item)
     }
     
@@ -21,9 +20,9 @@ extension SearchViewController: UICollectionViewDataSource {
         var extraPadding = CGFloat(0)
         
         if index == 0 {
-            extraPadding += SearchConstants.sidePadding /// if **left edge**, add side padding
+            extraPadding += configuration.sidePadding /// if **left edge**, add side padding
         } else {
-            extraPadding += SearchConstants.sidePeekPadding
+            extraPadding += configuration.sidePeekPadding
         }
         
         var fieldsCount = searchViewModel.fields.count
@@ -35,13 +34,13 @@ extension SearchViewController: UICollectionViewDataSource {
         
         
         if index == fieldsCount - 2 || index == fieldsCount - 1 {
-            extraPadding += SearchConstants.sidePadding /// if **right edge**, add side padding
+            extraPadding += configuration.sidePadding /// if **right edge**, add side padding
         } else {
-            extraPadding += SearchConstants.sidePeekPadding
+            extraPadding += configuration.sidePeekPadding
         }
         
         let fullWidth = searchCollectionView.frame.width
-        return max(SearchConstants.minimumHuggingWidth, fullWidth - extraPadding)
+        return max(configuration.minimumHuggingWidth, fullWidth - extraPadding)
     }
 }
 

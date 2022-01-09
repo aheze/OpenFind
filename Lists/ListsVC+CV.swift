@@ -1,5 +1,5 @@
 //
-//  ListsViewController+CV.swift
+//  ListsVC+CV.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/8/22.
@@ -31,5 +31,17 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         cell.contentView.addDebugBorders(.blue)
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = abs(scrollView.contentOffset.y)
+        let topSafeArea = scrollView.adjustedContentInset.top
+        
+        /// rubber banding on large title
+        if offset > topSafeArea {
+            searchContainerViewTopC.constant = offset
+        } else {
+            searchContainerViewTopC.constant = scrollView.adjustedContentInset.top
+        }
     }
 }

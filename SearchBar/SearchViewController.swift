@@ -9,6 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController {
     var searchViewModel: SearchViewModel
+    var configuration: SearchConfiguration
+    
     @IBOutlet var searchBarHeightC: NSLayoutConstraint!
     
     lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = {
@@ -25,8 +27,16 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBarView: UIView!
     @IBOutlet var searchCollectionView: SearchCollectionView!
     
-    init?(coder: NSCoder, searchViewModel: SearchViewModel) {
+    init?(
+        coder: NSCoder,
+        searchViewModel: SearchViewModel,
+        configuration: SearchConfiguration
+    ) {
         self.searchViewModel = searchViewModel
+        self.configuration = configuration
+        for index in searchViewModel.fields.indices {
+            searchViewModel.fields[index].configuration = configuration
+        }
         super.init(coder: coder)
     }
 
@@ -37,10 +47,8 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.translatesAutoresizingMaskIntoConstraints = false
-        searchBarHeightC.constant = SearchConstants.cellHeight
-
+        searchBarHeightC.constant = configuration.cellHeight
         searchBarView.backgroundColor = .clear
         setupCollectionViews()
     }
@@ -64,6 +72,8 @@ extension SearchViewController {
         _ = searchCollectionViewFlowLayout /// initialize and set up
         
         searchCollectionView.panGestureRecognizer.addTarget(self, action: #selector(handlePan(_:)))
+        
+        searchCollectionView.addDebugBorders(.green)
     }
     
     /// convert "Add New" cell into a normal field

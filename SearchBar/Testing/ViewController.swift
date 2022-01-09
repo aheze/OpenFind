@@ -15,8 +15,10 @@ class ViewController: UIViewController {
     var listsViewModel = ListsViewModel()
     
     lazy var searchViewController: SearchViewController = {
-//        searchViewModel.availableLists = listsViewModel.lists
-        let viewController = Bridge.makeViewController(searchViewModel: searchViewModel)
+        let viewController = Bridge.makeViewController(
+            searchViewModel: searchViewModel,
+            configuration: SearchConfiguration()
+        )
         self.addResizableChildViewController(viewController, in: self.searchContainerView)
         return viewController
     }()

@@ -27,6 +27,11 @@ class ListsViewController: UIViewController, PageViewController {
         return flowLayout
     }()
     
+    var searchViewModel = SearchViewModel()
+    lazy var searchViewController = createSearchBar()
+    @IBOutlet weak var searchContainerView: UIView!
+    @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
+    
     init?(
         coder: NSCoder,
         listsViewModel: ListsViewModel
@@ -43,12 +48,12 @@ class ListsViewController: UIViewController, PageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Lists"
-        
         _ = listsFlowLayout
+        _ = searchViewController
         listsViewModel.displayedLists = listsViewModel.lists
-        setupCollectionView()
         
+        setupNavigationBar()
+        setupCollectionView()
     }
 }
 

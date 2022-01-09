@@ -9,7 +9,7 @@ import UIKit
 
 extension SearchViewController {
     func createFlowLayout() -> SearchCollectionViewFlowLayout {
-        let flowLayout = SearchCollectionViewFlowLayout()
+        let flowLayout = SearchCollectionViewFlowLayout(configuration: configuration)
         flowLayout.scrollDirection = .horizontal
         flowLayout.getFullCellWidth = { [weak self] index in
             self?.widthOfExpandedCell(for: index) ?? 300
@@ -80,7 +80,11 @@ extension SearchViewController: UICollectionViewDelegate {
         let indexPath = IndexPath(item: searchViewModel.fields.count - 1, section: 0)
         if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
             UIView.animate(withDuration: 0.2) {
-                cell.contentView.backgroundColor = shouldHighlight ? SearchConstants.highlightedFieldBackgroundColor : SearchConstants.fieldBackgroundColor
+                if shouldHighlight {
+                    cell.contentView.backgroundColor = self.configuration.fieldHighlightedBackgroundColor
+                } else {
+                    cell.contentView.backgroundColor = self.configuration.fieldBackgroundColor
+                }
             }
         }
     }
@@ -113,6 +117,7 @@ extension SearchViewController: UICollectionViewDelegate {
         
         /// append new "Add New" cell
         let newField = Field(
+            configuration: configuration,
             value: .addNew(
                 .init(
                     string: "",

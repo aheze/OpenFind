@@ -18,6 +18,8 @@ struct Field: Identifiable {
     /// width of text label + side views, nothing more
     var fieldHuggingWidth = CGFloat(200)
     
+    var configuration: SearchConfiguration
+    
     var value: FieldValue {
         didSet {
             fieldHuggingWidth = getFieldHuggingWidth()
@@ -26,7 +28,8 @@ struct Field: Identifiable {
     
     var overrides: Overrides
     
-    init(value: FieldValue, overrides: Overrides = Overrides()) {
+    init(configuration: SearchConfiguration, value: FieldValue, overrides: Overrides = Overrides()) {
+        self.configuration = configuration
         self.value = value
         self.overrides = overrides
         fieldHuggingWidth = getFieldHuggingWidth()
@@ -68,14 +71,14 @@ struct Field: Identifiable {
     
     private func getFieldHuggingWidth() -> CGFloat {
         if case .addNew(let word) = value, word.string.isEmpty {
-            return SearchConstants.addWordFieldHuggingWidth
+            return configuration.addWordFieldHuggingWidth
         } else {
             let fieldText = value.getText()
-            let finalText = fieldText.isEmpty ? SearchConstants.addTextPlaceholder : fieldText
-            let textWidth = finalText.width(withConstrainedHeight: 10, font: SearchConstants.fieldFont)
-            let leftPaddingWidth = SearchConstants.fieldBaseViewLeftPadding
-            let rightPaddingWidth = SearchConstants.fieldBaseViewRightPadding
-            let textPadding = 2 * SearchConstants.fieldTextSidePadding
+            let finalText = fieldText.isEmpty ? configuration.addTextPlaceholder : fieldText
+            let textWidth = finalText.width(withConstrainedHeight: 10, font: configuration.fieldFont)
+            let leftPaddingWidth = configuration.fieldBaseViewLeftPadding
+            let rightPaddingWidth = configuration.fieldBaseViewRightPadding
+            let textPadding = 2 * configuration.addWordFieldSidePadding
             return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
         }
     }

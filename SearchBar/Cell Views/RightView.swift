@@ -27,13 +27,15 @@ class RightView: UIView {
         commonInit()
     }
     
+    var configuration = SearchConfiguration()
+    
     private func commonInit() {
         Bundle.main.loadNibNamed("RightView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        iconViewWidthC.constant = SearchConstants.clearIconLength
-        iconViewHeightC.constant = SearchConstants.clearIconLength
-        iconViewCenterXC.constant = -SearchConstants.fieldRightViewPadding
+        iconViewWidthC.constant = configuration.clearIconLength
+        iconViewHeightC.constant = configuration.clearIconLength
+        iconViewCenterXC.constant = -configuration.fieldRightViewPadding
     }
 }

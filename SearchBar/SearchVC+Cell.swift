@@ -11,13 +11,16 @@ import UIKit
 
 extension SearchViewController {
     func configureCell(for index: Int) -> UICollectionViewCell {
+        
         guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: index.indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
+        /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         let text = field.value.getText()
-        
         cell.textField.text = text
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
+        
+        cell.configuration = configuration
         
         switch field.value {
         case .word:

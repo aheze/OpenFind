@@ -24,11 +24,13 @@ class LeftView: UIView {
         commonInit()
     }
     
+    var configuration = SearchConfiguration()
+    
     private func commonInit() {
         Bundle.main.loadNibNamed("LeftView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        iconViewCenterXC.constant = SearchConstants.fieldLeftViewPadding
+        iconViewCenterXC.constant = configuration.fieldLeftViewPadding
     }
 }

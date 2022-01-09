@@ -29,7 +29,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
                 x: currentOffset.x,
                 y: currentOffset.y,
                 width: collectionView.bounds.width,
-                height: 400
+                height: 200
             )
             
             let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
