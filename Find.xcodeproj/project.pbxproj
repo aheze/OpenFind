@@ -2691,8 +2691,8 @@
 			children = (
 				3C4D3B8E27477ABC0010FD68 /* Bridge.swift */,
 				3C4D3B9127477ABC0010FD68 /* Field.swift */,
-				3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */,
 				3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */,
+				3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */,
 				3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */,
 				3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */,
 				3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */,

@@ -14,6 +14,8 @@ extension SearchViewController {
         
         guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: index.indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
+        print("made cell. \(configuration.fieldCornerRadius)")
+        
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         let text = field.value.getText()
@@ -21,6 +23,8 @@ extension SearchViewController {
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
         cell.configuration = configuration
+        cell.setConfiguration()
+        print("set.")
         
         switch field.value {
         case .word:

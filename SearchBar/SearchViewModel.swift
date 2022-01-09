@@ -12,7 +12,6 @@ class SearchViewModel: ObservableObject {
     
     var fields = [
         Field(
-            configuration: SearchConfiguration(),
             value: .word(
                 .init(
                     string: "",
@@ -21,7 +20,6 @@ class SearchViewModel: ObservableObject {
             )
         ),
         Field(
-            configuration: SearchConfiguration(),
             value: .addNew(
                 .init(
                     string: "",

@@ -221,6 +221,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             attributes.frame = CGRect(x: origin, y: 0, width: width, height: configuration.cellHeight)
             attributes.alpha = fieldOffset.alpha
             attributes.percentage = fieldOffset.percentage
+            attributes.configuration = configuration /// save the configuration first
             
             if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
                 attributes.transform = .init(scaleX: 0.5, y: 0.5)

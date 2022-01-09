@@ -11,7 +11,7 @@ import UIKit
 
 extension ListsViewController {
     func createSearchBar() -> SearchViewController {
-        let searchViewController = Bridge.makeViewController(searchViewModel: searchViewModel)
+        let searchViewController = Bridge.makeViewController(searchViewModel: searchViewModel, configuration: .lists)
         
         searchContainerView.backgroundColor = .clear
         addResizableChildViewController(searchViewController, in: searchContainerView)

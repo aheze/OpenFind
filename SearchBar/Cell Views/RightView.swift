@@ -34,8 +34,13 @@ class RightView: UIView {
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    func setConfiguration() {
         iconViewWidthC.constant = configuration.clearIconLength
         iconViewHeightC.constant = configuration.clearIconLength
         iconViewCenterXC.constant = -configuration.fieldRightViewPadding
+        clearIconView.backgroundView.backgroundColor = configuration.clearBackgroundColor
+        clearIconView.iconView.tintColor = configuration.clearImageColor
     }
 }

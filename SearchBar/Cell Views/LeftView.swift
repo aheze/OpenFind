@@ -31,6 +31,9 @@ class LeftView: UIView {
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    func setConfiguration() {
         iconViewCenterXC.constant = configuration.fieldLeftViewPadding
     }
 }

@@ -28,7 +28,7 @@ struct Field: Identifiable {
     
     var overrides: Overrides
     
-    init(configuration: SearchConfiguration, value: FieldValue, overrides: Overrides = Overrides()) {
+    init(configuration: SearchConfiguration = .camera, value: FieldValue, overrides: Overrides = Overrides()) {
         self.configuration = configuration
         self.value = value
         self.overrides = overrides
@@ -78,8 +78,7 @@ struct Field: Identifiable {
             let textWidth = finalText.width(withConstrainedHeight: 10, font: configuration.fieldFont)
             let leftPaddingWidth = configuration.fieldBaseViewLeftPadding
             let rightPaddingWidth = configuration.fieldBaseViewRightPadding
-            let textPadding = 2 * configuration.addWordFieldSidePadding
-            return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
+            return textWidth + leftPaddingWidth + rightPaddingWidth
         }
     }
 }
@@ -96,6 +95,7 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
     var fullWidth = CGFloat(0) /// width when expanded
     var percentage = CGFloat(0) /// percentage shrunk
     var beingDeleted = false
+    var configuration = SearchConfiguration()
     
     override open func copy(with zone: NSZone?) -> Any {
         let copy = super.copy(with: zone) as! FieldLayoutAttributes
@@ -103,6 +103,7 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
         copy.fullWidth = fullWidth
         copy.percentage = percentage
         copy.beingDeleted = beingDeleted
+        copy.configuration = configuration
         
         return copy
     }
@@ -113,7 +114,8 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
             attributes.fullOrigin == fullOrigin,
             attributes.fullWidth == fullWidth,
             attributes.percentage == percentage,
-            attributes.beingDeleted == beingDeleted
+            attributes.beingDeleted == beingDeleted,
+            attributes.configuration == configuration
         else { return false }
     
         return super.isEqual(object)

@@ -34,9 +34,12 @@ class SearchViewController: UIViewController {
     ) {
         self.searchViewModel = searchViewModel
         self.configuration = configuration
+        
+        /// inject the configuration for cell width calculations
         for index in searchViewModel.fields.indices {
             searchViewModel.fields[index].configuration = configuration
         }
+        
         super.init(coder: coder)
     }
 
@@ -73,7 +76,6 @@ extension SearchViewController {
         
         searchCollectionView.panGestureRecognizer.addTarget(self, action: #selector(handlePan(_:)))
         
-        searchCollectionView.addDebugBorders(.green)
     }
     
     /// convert "Add New" cell into a normal field

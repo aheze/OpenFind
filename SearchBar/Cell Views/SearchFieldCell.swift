@@ -57,31 +57,10 @@ class SearchFieldCell: UICollectionViewCell {
         /// Needed for some reason sometimes
         triggerButton.setTitle("", for: .normal)
         
-        contentView.backgroundColor = configuration.fieldBackgroundColor
-        contentView.layer.cornerRadius = configuration.fieldCornerRadius
-        
         textField.delegate = self
-        textField.font = configuration.fieldFont
-        textField.textColor = .white
         
-        textField.attributedPlaceholder = NSAttributedString(
-            string: configuration.addTextPlaceholder,
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)]
-        )
-        
-        baseViewTopC.constant = configuration.fieldBaseViewTopPadding
-        baseViewRightC.constant = configuration.fieldBaseViewRightPadding
-        baseViewBottomC.constant = configuration.fieldBaseViewBottomPadding
-        baseViewLeftC.constant = configuration.fieldBaseViewLeftPadding
-        
-        addNewViewWidthC.constant = configuration.clearIconLength
-        addNewViewHeightC.constant = configuration.clearIconLength
-        
-        leftViewWidthC.constant = 0
-        rightViewWidthC.constant = 0
-        
-        leftView.configuration = configuration
-        rightView.configuration = configuration
+        baseViewLeftC.constant = 0
+        baseViewRightC.constant = 0
         
         leftView.buttonView.tapped = { [weak self] in
             self?.leftViewTapped?()
@@ -91,8 +70,38 @@ class SearchFieldCell: UICollectionViewCell {
             self?.rightViewTapped?()
         }
         
-        addNewViewCenterHorizontallyWithRightC.constant = -configuration.fieldRightViewPadding
+    }
+    
+    func setConfiguration() {
+        leftView.configuration = configuration
+        rightView.configuration = configuration
+        leftView.setConfiguration()
+        rightView.setConfiguration()
         
+        contentView.backgroundColor = configuration.fieldBackgroundColor
+        contentView.layer.cornerRadius = configuration.fieldCornerRadius
+        
+        textField.font = configuration.fieldFont
+        textField.textColor = configuration.fieldFontColor
+        textField.tintColor = configuration.fieldTintColor
+        
+        textField.attributedPlaceholder = NSAttributedString(
+            string: configuration.addTextPlaceholder,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: configuration.fieldFontColor.withAlphaComponent(0.4)
+            ]
+        )
+        
+        baseViewTopC.constant = configuration.fieldBaseViewTopPadding
+        baseViewRightC.constant = 0 /// 0 at the beginning, when the cell is focused and doesn't need padding.
+        baseViewBottomC.constant = configuration.fieldBaseViewBottomPadding
+        baseViewLeftC.constant = 0
+        
+        addNewViewWidthC.constant = configuration.clearIconLength
+        addNewViewHeightC.constant = configuration.clearIconLength
+        addNewIconView.iconView.tintColor = configuration.clearImageColor
+        
+        addNewViewCenterHorizontallyWithRightC.constant = -configuration.fieldRightViewPadding
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -108,17 +117,18 @@ class SearchFieldCell: UICollectionViewCell {
             leftView.alpha = percentageVisible
             rightView.alpha = percentageVisible
             
-            leftViewWidthC.constant = percentageVisible * configuration.fieldLeftViewWidth
-            rightViewWidthC.constant = percentageVisible * configuration.fieldRightViewWidth
+            leftViewWidthC.constant = percentageVisible * attributes.configuration.fieldLeftViewWidth
+            rightViewWidthC.constant = percentageVisible * attributes.configuration.fieldRightViewWidth
             
             if attributes.beingDeleted {
                 baseViewLeftC.constant = 0
                 baseViewRightC.constant = 0
             } else {
-                baseViewLeftC.constant = configuration.fieldBaseViewLeftPadding * attributes.percentage
-                baseViewRightC.constant = configuration.fieldBaseViewRightPadding * attributes.percentage
+                baseViewLeftC.constant = attributes.configuration.fieldBaseViewLeftPadding * attributes.percentage
+                baseViewRightC.constant = attributes.configuration.fieldBaseViewRightPadding * attributes.percentage
             }
         }
+        
     }
     
     func loadConfiguration(showAddNew isAddNew: Bool) {
