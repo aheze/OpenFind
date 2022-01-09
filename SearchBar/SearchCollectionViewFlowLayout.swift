@@ -78,17 +78,15 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let offset = getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
         return offset
     }
+    
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        print("focus: \(focusedCellIndex), d: \(deletedIndex), fal: \(fallbackIndex)")
         if let focusedCellIndex = focusedCellIndex {
             let attributes = layoutAttributes[safe: focusedCellIndex]
             return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
         }
         return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
     }
-    
-    
     
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames

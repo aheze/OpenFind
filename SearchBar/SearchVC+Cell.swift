@@ -6,14 +6,11 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
 
-
 import UIKit
 
 extension SearchViewController {
     func configureCell(for index: Int) -> UICollectionViewCell {
-        
         guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: index.indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
-        
         
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
@@ -45,14 +42,12 @@ extension SearchViewController {
                 )
             )
             self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
-            
         }
         
         cell.leftView.findIconView.setTint(
             color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
             alpha: field.overrides.alpha
         )
-        
         
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
@@ -94,7 +89,6 @@ extension SearchViewController {
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
             
-            
             if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index]?.fullOrigin {
                 let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
                 self.searchCollectionView.setContentOffset(targetOrigin, animated: true)
@@ -109,11 +103,11 @@ extension SearchViewController {
     
     /// `valuesCount` = `searchViewModel.values.count` usually. But if deleting, subtract 1.
     func updateClearIcons(valuesCount: Int) {
-        let values = self.searchViewModel.values
+        let values = searchViewModel.values
         
         for index in values.indices {
             let field = searchViewModel.fields[index]
-            if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
+            if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                 setClearIcon(for: cell, text: field.value.getText(), valuesCount: valuesCount)
             }
         }
@@ -132,11 +126,10 @@ extension SearchViewController {
     }
     
     func removeCell(at index: Int) {
-        
         /// Make sure there are are least 2 fields
         guard searchViewModel.values.count >= 2 else { return }
         
-        if index == self.searchViewModel.values.count - 1 {
+        if index == searchViewModel.values.count - 1 {
             let targetIndex = index - 1
             searchCollectionViewFlowLayout.deletedIndex = index
             searchCollectionViewFlowLayout.fallbackIndex = targetIndex
@@ -148,13 +141,12 @@ extension SearchViewController {
                 self.searchCollectionView.layoutIfNeeded()
             }
             
-            if let cell = self.searchCollectionView.cellForItem(at: targetIndex.indexPath) as? SearchFieldCell {
+            if let cell = searchCollectionView.cellForItem(at: targetIndex.indexPath) as? SearchFieldCell {
                 cell.activate(true)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: targetIndex]?.fullOrigin { /// the last field that's not the "add new" field
-                    
                     self.searchCollectionViewFlowLayout.highlightingAddWordField = false
                     let (targetOrigin, focusedIndex) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
                     self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
@@ -186,7 +178,6 @@ extension SearchViewController {
                 self.searchCollectionView.layoutIfNeeded()
             }
             
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.searchCollectionViewFlowLayout.deletedIndex = nil
                 self.searchCollectionViewFlowLayout.fallbackIndex = nil
@@ -207,6 +198,4 @@ extension SearchViewController {
             }
         }
     }
-    
 }
-
