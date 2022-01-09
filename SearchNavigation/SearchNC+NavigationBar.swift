@@ -5,16 +5,22 @@
 //  Created by A. Zheng (github.com/aheze) on 1/9/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
+
 
 import UIKit
 
 extension SearchNavigationController {
+    
+    /// call this after embedding in a view controller
     func setupNavigationBar() {
         self.title = "Lists"
+        
+        view.bringSubviewToFront(searchContainerView)
+        setupBlur()
+        setupBorder()
+        
         let clearAppearance = UINavigationBarAppearance()
         clearAppearance.configureWithTransparentBackground()
-        
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.standardAppearance = clearAppearance
             navigationBar.compactAppearance = clearAppearance
@@ -24,9 +30,10 @@ extension SearchNavigationController {
     }
     
     func createNavigationBarBackground() -> UIView {
+        
         let backgroundView = UIView()
         view.addSubview(backgroundView)
-    
+        
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -38,19 +45,19 @@ extension SearchNavigationController {
         backgroundView.addSubview(navigationBarBackgroundBlurView)
         navigationBarBackgroundBlurView.pinEdgesToSuperview()
         
-        animator?.stopAnimation(true)
-        animator?.finishAnimation(at: .start)
-        animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
-        navigationBarBackgroundBlurView.effect = nil
-
-        animator?.addAnimations { [weak navigationBarBackgroundBlurView] in
-            navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .regular)
-        }
-        animator?.fractionComplete = 0
-        
-        view.bringSubviewToFront(searchContainerView)
-        
         return backgroundView
+    }
+    
+    func setupBorder() {
+        navigationBarBackground.addSubview(navigationBarBackgroundBorderView)
+        navigationBarBackgroundBorderView.backgroundColor = .secondaryLabel
+        navigationBarBackgroundBorderView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            navigationBarBackgroundBorderView.leftAnchor.constraint(equalTo: navigationBarBackground.leftAnchor),
+            navigationBarBackgroundBorderView.bottomAnchor.constraint(equalTo: navigationBarBackground.bottomAnchor),
+            navigationBarBackgroundBorderView.rightAnchor.constraint(equalTo: navigationBarBackground.rightAnchor),
+            navigationBarBackgroundBorderView.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
     }
     
     func updateBlur() {
@@ -75,7 +82,19 @@ extension SearchNavigationController {
             } else {
                 animator?.fractionComplete = 0
             }
-
+            
         }
+    }
+    
+    func setupBlur() {
+        animator?.stopAnimation(true)
+        animator?.finishAnimation(at: .start)
+        animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+        navigationBarBackgroundBlurView.effect = nil
+        
+        animator?.addAnimations { [weak navigationBarBackgroundBlurView] in
+            navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .regular)
+        }
+        animator?.fractionComplete = 0
     }
 }

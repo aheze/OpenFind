@@ -30,6 +30,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         cell.contentView.addDebugBorders(.blue)
+        cell.layer.cornerRadius = 16
         return cell
     }
     

@@ -274,9 +274,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         self.minimumLineSpacing = 0
         self.minimumInteritemSpacing = 0
 
-        for attribute in layoutAttributes {
-            print("size: \(attribute.frame) .. \(collectionView.bounds), \(collectionView.adjustedContentInset). \(sectionInset)\(minimumLineSpacing)\(minimumInteritemSpacing)")
-        }
         self.layoutAttributes = layoutAttributes
         
         if !preparedOnce {

@@ -18,6 +18,7 @@ class SearchNavigationController: UIViewController {
     
     lazy var navigationBarBackground = createNavigationBarBackground()
     var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    var navigationBarBackgroundBorderView = UIView()
     var animator: UIViewPropertyAnimator?
     
     var scrollView = UIScrollView()
@@ -28,10 +29,9 @@ class SearchNavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
-        _ = searchViewController
         _ = navigationBarBackground
-        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// pervent blue
+        _ = searchViewController
+        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// prevent blur on the indicator
     }
     
     deinit {
