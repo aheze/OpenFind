@@ -140,6 +140,7 @@ extension SearchViewController {
             let targetIndex = index - 1
             searchCollectionViewFlowLayout.deletedIndex = index
             searchCollectionViewFlowLayout.fallbackIndex = targetIndex
+            searchCollectionViewFlowLayout.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
             updateClearIcons(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
@@ -155,28 +156,29 @@ extension SearchViewController {
                 if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: targetIndex]?.fullOrigin { /// the last field that's not the "add new" field
                     
                     self.searchCollectionViewFlowLayout.highlightingAddWordField = false
-                    let (targetOrigin, _) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
-                    
+                    let (targetOrigin, focusedIndex) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
                     self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.searchCollectionViewFlowLayout.deletedIndex = nil
-                    self.searchCollectionViewFlowLayout.fallbackIndex = nil
-                    self.searchViewModel.fields.remove(at: index)
-                    self.searchCollectionView.deleteItems(at: [index.indexPath])
-                    self.searchCollectionView.isUserInteractionEnabled = true
-                    self.searchCollectionViewFlowLayout.reachedEndBeforeAddWordField = true
                     
-                    if let cell = self.searchCollectionView.cellForItem(at: targetIndex.indexPath) as? SearchFieldCell {
-                        cell.textField.becomeFirstResponder()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.searchCollectionViewFlowLayout.deletedIndex = nil
+                        self.searchCollectionViewFlowLayout.fallbackIndex = nil
+                        self.searchViewModel.fields.remove(at: index)
+                        self.searchCollectionView.deleteItems(at: [index.indexPath])
+                        self.searchCollectionView.isUserInteractionEnabled = true
+                        self.searchCollectionViewFlowLayout.reachedEndBeforeAddWordField = true
+                        
+                        if let cell = self.searchCollectionView.cellForItem(at: targetIndex.indexPath) as? SearchFieldCell {
+                            cell.textField.becomeFirstResponder()
+                        }
+                        
+                        self.searchCollectionViewFlowLayout.focusedCellIndex = focusedIndex
                     }
                 }
             }
         } else {
-            
             searchCollectionViewFlowLayout.deletedIndex = index
             searchCollectionViewFlowLayout.fallbackIndex = nil
+            searchCollectionViewFlowLayout.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
             updateClearIcons(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
@@ -191,10 +193,10 @@ extension SearchViewController {
                 self.searchViewModel.fields.remove(at: index)
                 self.searchCollectionView.deleteItems(at: [index.indexPath])
                 self.searchCollectionView.isUserInteractionEnabled = true
-                
+                self.searchCollectionViewFlowLayout.focusedCellIndex = index
                 
                 /// If the focused index is the second to last, make `reachedEndBeforeAddWordField` true
-                if self.searchViewModel.values.count == 1 {
+                if index == self.searchViewModel.values.count - 1 {
                     self.searchCollectionViewFlowLayout.reachedEndBeforeAddWordField = true
                 }
                 

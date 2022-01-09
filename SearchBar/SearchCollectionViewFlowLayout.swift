@@ -80,6 +80,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        print("focus: \(focusedCellIndex), d: \(deletedIndex), fal: \(fallbackIndex)")
         if let focusedCellIndex = focusedCellIndex {
             let attributes = layoutAttributes[safe: focusedCellIndex]
             return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
