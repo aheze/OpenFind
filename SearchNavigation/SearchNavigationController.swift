@@ -20,6 +20,7 @@ class SearchNavigationController: UIViewController {
     var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
     var navigationBarBackgroundBorderView = UIView()
     var animator: UIViewPropertyAnimator?
+    var blurPercentage = CGFloat(0)
     
     var scrollView = UIScrollView()
     
@@ -32,6 +33,13 @@ class SearchNavigationController: UIViewController {
         _ = navigationBarBackground
         _ = searchViewController
         scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// prevent blur on the indicator
+    
+        /// refresh the blur after coming back from app switcher
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.setupBlur()
+            self.animator?.fractionComplete = self.blurPercentage
+        }
     }
     
     deinit {

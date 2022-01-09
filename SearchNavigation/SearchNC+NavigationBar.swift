@@ -79,8 +79,10 @@ extension SearchNavigationController {
             if difference < SearchNavigationConstants.blurFadeRange {
                 let percentage = 1 - difference / SearchNavigationConstants.blurFadeRange
                 animator?.fractionComplete = percentage
+                blurPercentage = percentage
             } else {
                 animator?.fractionComplete = 0
+                blurPercentage = 0
             }
             
         }
@@ -91,9 +93,11 @@ extension SearchNavigationController {
         animator?.finishAnimation(at: .start)
         animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
         navigationBarBackgroundBlurView.effect = nil
+        navigationBarBackgroundBorderView.alpha = 0
         
-        animator?.addAnimations { [weak navigationBarBackgroundBlurView] in
+        animator?.addAnimations { [weak navigationBarBackgroundBlurView, weak navigationBarBackgroundBorderView] in
             navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .regular)
+            navigationBarBackgroundBorderView?.alpha = 1
         }
         animator?.fractionComplete = 0
     }
