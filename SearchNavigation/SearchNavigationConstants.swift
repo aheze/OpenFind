@@ -1,5 +1,5 @@
 //
-//  SearchNavigationConfiguration.swift
+//  SearchNavigationConstants.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/9/22.
@@ -9,6 +9,6 @@
 
 import UIKit
 
-struct SearchNavigationConfiguration {
-    
+enum SearchNavigationConstants {
+    static var blurFadeRange = CGFloat(10)
 }

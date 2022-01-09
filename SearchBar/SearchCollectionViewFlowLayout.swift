@@ -78,6 +78,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let offset = getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
         return offset
     }
+    /// called after rotation
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        if let focusedCellIndex = focusedCellIndex {
+            let attributes = layoutAttributes[safe: focusedCellIndex]
+            return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
+        }
+        return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
+    }
     
     
     
@@ -262,6 +270,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             contentSize = CGSize(width: fullOriginWithoutAddNew + configuration.sidePadding, height: configuration.cellHeight)
         }
         
+        self.sectionInset = .zero
+        self.minimumLineSpacing = 0
+        self.minimumInteritemSpacing = 0
+
+        for attribute in layoutAttributes {
+            print("size: \(attribute.frame) .. \(collectionView.bounds), \(collectionView.adjustedContentInset). \(sectionInset)\(minimumLineSpacing)\(minimumInteritemSpacing)")
+        }
         self.layoutAttributes = layoutAttributes
         
         if !preparedOnce {

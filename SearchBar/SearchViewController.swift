@@ -59,6 +59,8 @@ class SearchViewController: UIViewController {
         searchBarView.backgroundColor = .clear
         backgroundView.isHidden = !configuration.showBackground
         setupCollectionViews()
+        searchCollectionView.contentInsetAdjustmentBehavior = .never
+
     }
 }
 

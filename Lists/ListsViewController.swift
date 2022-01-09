@@ -7,17 +7,12 @@
 
 import UIKit
 
-class ListsViewController: UIViewController, PageViewController {
+class ListsViewController: SearchNavigationController, PageViewController {
     var tabType: TabState = .lists
     
     /// external models
     var listsViewModel: ListsViewModel
     
-    let searchConfiguration = SearchConfiguration.lists
-    var searchViewModel = SearchViewModel()
-    lazy var searchViewController = createSearchBar()
-    @IBOutlet weak var searchContainerView: UIView!
-    @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
     
     @IBOutlet weak var collectionView: UICollectionView!
     lazy var listsFlowLayout: ListsCollectionFlowLayout = {
@@ -34,10 +29,6 @@ class ListsViewController: UIViewController, PageViewController {
     }()
     
     
-    var blur progress: CGFloat
-    var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-    lazy var navigationBarBackground = createNavigationBarBackground()
-    
     init?(
         coder: NSCoder,
         listsViewModel: ListsViewModel
@@ -51,16 +42,26 @@ class ListsViewController: UIViewController, PageViewController {
         fatalError("You must create this view controller with metadata.")
     }
     
+    override var scrollView: UIScrollView {
+        get {
+            collectionView
+        }
+        set {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = searchViewController
         _ = listsFlowLayout
-        _ = navigationBarBackground
         
         listsViewModel.displayedLists = listsViewModel.lists
         
         setupCollectionView()
+        
+        view.backgroundColor = .secondarySystemBackground
+        collectionView.backgroundColor = .clear
     }
 }
 

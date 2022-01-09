@@ -16,33 +16,27 @@ class SearchNavigationController: UIViewController {
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
     
+    lazy var navigationBarBackground = createNavigationBarBackground()
+    var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    var animator: UIViewPropertyAnimator?
+    
     var scrollView = UIScrollView()
     
-//    init?(
-//        coder: NSCoder,
-//        scrollView: UIScrollView
-//    ) {
-//        self.scrollView = scrollView
-//        super.init(coder: coder)
-//    }
-
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("You must create this view controller with metadata.")
+        super.init(coder: coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBar()
+        _ = searchViewController
+        _ = navigationBarBackground
+        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// pervent blue
+    }
+    
+    deinit {
+        animator?.stopAnimation(true)
     }
 }
 
-extension SearchNavigationController {
-    func createSearchBar() -> SearchViewController {
-        let searchViewController = Bridge.makeViewController(
-            searchViewModel: searchViewModel,
-            configuration: searchConfiguration
-        )
-        
-        searchContainerView.backgroundColor = .clear
-        addResizableChildViewController(searchViewController, in: searchContainerView)
-        searchContainerViewTopC.constant = scrollView.adjustedContentInset.top /// top safe area by default
-        
-        return searchViewController
-    }
-}
+
