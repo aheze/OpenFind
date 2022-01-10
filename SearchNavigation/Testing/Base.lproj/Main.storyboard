@@ -61,7 +61,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="kmN-vc-4qr" firstAttribute="centerX" secondItem="DXg-ya-7KU" secondAttribute="centerX" id="FdU-o6-yZA"/>
                                             <constraint firstItem="kmN-vc-4qr" firstAttribute="centerY" secondItem="DXg-ya-7KU" secondAttribute="centerY" id="lLk-9W-wCY"/>
@@ -88,6 +88,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="DXg-ya-7KU" id="fgJ-l6-bES"/>
                         <outlet property="scrollView" destination="fPd-0F-8Su" id="sdo-jz-m20"/>
                     </connections>
                 </viewController>
@@ -99,9 +100,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

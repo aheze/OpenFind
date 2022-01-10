@@ -9,26 +9,25 @@
 
 import UIKit
 
-protocol SearchNavigationUpdater: UIViewController {
-    func updateSearchBarOffset(offset: CGFloat)
-}
 class SearchNavigationController: UIViewController {
     
     var navigation: UINavigationController!
     var rootViewController: UIViewController
     let searchConfiguration: SearchConfiguration
     
-    var searchViewModel = SearchViewModel()
-    var searchViewController: SearchViewController!
+    var searchContainerViewContainer = PassthroughView() /// whole screen
     var searchContainerView: UIView!
     var searchContainerViewTopC: NSLayoutConstraint!
+    var searchViewModel = SearchViewModel()
+    var searchViewController: SearchViewController!
     
+    var navigationBarBackgroundContainer = PassthroughView()
+    var navigationBarBackgroundHeightC: NSLayoutConstraint!
     var navigationBarBackground = UIView()
     var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     var navigationBarBackgroundBorderView = UIView()
     var animator: UIViewPropertyAnimator?
     var blurPercentage = CGFloat(0)
-
     
     init?(
         coder: NSCoder,
@@ -49,6 +48,8 @@ class SearchNavigationController: UIViewController {
         super.viewDidLoad()
         
         navigation = UINavigationController(rootViewController: rootViewController)
+        navigation.delegate = self
+        
         addChildViewController(navigation, in: view)
         setupSearchBar()
         setupNavigationBar()
@@ -57,7 +58,6 @@ class SearchNavigationController: UIViewController {
         
         print("load.")
         
-        navigation.interactivePopGestureRecognizer?.addTarget(self, action: #selector(popGestureHandler))
         
 //        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// prevent blur on the indicator
     
@@ -74,12 +74,15 @@ class SearchNavigationController: UIViewController {
     }
 }
 
-
-
-extension SearchNavigationController: SearchNavigationUpdater {
-    func updateSearchBarOffset(offset: CGFloat) {
-        print("up: \(offset)")
-        searchContainerViewTopC.constant = offset
-        updateBlur(offset: offset)
-    }
+class PassthroughView: UIView {
+  override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    return subviews.contains(where: {
+      !$0.isHidden
+      && $0.isUserInteractionEnabled
+      && $0.point(inside: self.convert(point, to: $0), with: event)
+    })
+  }
 }
+
+
+

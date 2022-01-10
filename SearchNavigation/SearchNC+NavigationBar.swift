@@ -30,16 +30,22 @@ extension SearchNavigationController {
     }
     
     func setupBackground() {
+        navigationBarBackgroundContainer.isUserInteractionEnabled = false
+        navigation.view.insertSubview(navigationBarBackgroundContainer, at: 1)
+        navigationBarBackgroundContainer.pinEdgesToSuperview()
         
-        navigation.view.insertSubview(navigationBarBackground, at: 1)
+        let navigationBarBackgroundHeightC = navigationBarBackground.heightAnchor.constraint(equalToConstant: 0)
+        self.navigationBarBackgroundHeightC = navigationBarBackgroundHeightC
+        navigationBarBackgroundContainer.addSubview(navigationBarBackground)
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            navigationBarBackground.topAnchor.constraint(equalTo: navigation.view.topAnchor),
-            navigationBarBackground.leftAnchor.constraint(equalTo: navigation.view.leftAnchor),
-            navigationBarBackground.rightAnchor.constraint(equalTo: navigation.view.rightAnchor),
-            navigationBarBackground.bottomAnchor.constraint(equalTo: searchContainerView.bottomAnchor),
+            navigationBarBackground.topAnchor.constraint(equalTo: navigationBarBackgroundContainer.topAnchor),
+            navigationBarBackground.leftAnchor.constraint(equalTo: navigationBarBackgroundContainer.leftAnchor),
+            navigationBarBackground.rightAnchor.constraint(equalTo: navigationBarBackgroundContainer.rightAnchor),
+            navigationBarBackgroundHeightC
         ])
         
+
         navigationBarBackground.addSubview(navigationBarBackgroundBlurView)
         navigationBarBackgroundBlurView.pinEdgesToSuperview()
     }
@@ -56,32 +62,6 @@ extension SearchNavigationController {
         ])
     }
     
-    func updateBlur(offset: CGFloat) {
-        let topPadding = searchConfiguration.getTotalHeight()
-        
-        /// relative to the top of the screen
-//        let contentOffset = -(scrollView.contentOffset.y - topPadding)
-        
-        let navigationBar = navigation.navigationBar
-        if let window = UIApplication.shared.keyWindow {
-            let compactHeight = navigationBar.getCompactHeight() // 44 on iPhone 11
-            let statusBarHeight = window.safeAreaInsets.top // 44 on iPhone 11
-            let navigationBarHeight = compactHeight + statusBarHeight + topPadding
-            
-            let difference = max(0, offset - navigationBarHeight)
-            
-            if difference < SearchNavigationConstants.blurFadeRange {
-                let percentage = 1 - difference / SearchNavigationConstants.blurFadeRange
-                animator?.fractionComplete = percentage
-                blurPercentage = percentage
-            } else {
-                animator?.fractionComplete = 0
-                blurPercentage = 0
-            }
-            
-        }
-    }
-    
     func setupBlur() {
         animator?.stopAnimation(true)
         animator?.finishAnimation(at: .start)
@@ -94,6 +74,27 @@ extension SearchNavigationController {
             navigationBarBackgroundBorderView?.alpha = 1
         }
         animator?.fractionComplete = 0
+    }
+    
+    func updateBlur(searchBarOffset: CGFloat) {
+        let navigationBar = navigation.navigationBar
+        if let window = UIApplication.shared.keyWindow {
+            let compactHeight = navigationBar.getCompactHeight() // 44 on iPhone 11
+            let statusBarHeight = window.safeAreaInsets.top // 44 on iPhone 11
+            let targetOffset = compactHeight + statusBarHeight /// the smallest search bar offset
+            
+            let difference = max(0, searchBarOffset - targetOffset)
+            
+            if difference < SearchNavigationConstants.blurFadeRange {
+                let percentage = 1 - difference / SearchNavigationConstants.blurFadeRange
+                animator?.fractionComplete = percentage
+                blurPercentage = percentage
+            } else {
+                animator?.fractionComplete = 0
+                blurPercentage = 0
+            }
+            
+        }
     }
 }
 
