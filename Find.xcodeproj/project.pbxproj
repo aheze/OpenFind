@@ -1180,6 +1180,7 @@
 		3CF0421525C2532B00E29FA6 /* VC+StarTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */; };
 		3CF0421825C2553E00E29FA6 /* VC+CacheTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421725C2553E00E29FA6 /* VC+CacheTip.swift */; };
 		3CF45F5C260EF1FC00FE949E /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF45F5B260EF1FC00FE949E /* Dates.swift */; };
+		3CF76428278CC2AE00DCA4EA /* SearchNC+Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF76427278CC2AE00DCA4EA /* SearchNC+Transitioning.swift */; };
 		3CFD5F72278A372A0031BC8B /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
 		3CFD5F74278A374B0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
 		3CFD5F75278A37CD0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
@@ -1962,6 +1963,7 @@
 		3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+StarTip.swift"; sourceTree = "<group>"; };
 		3CF0421725C2553E00E29FA6 /* VC+CacheTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+CacheTip.swift"; sourceTree = "<group>"; };
 		3CF45F5B260EF1FC00FE949E /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
+		3CF76427278CC2AE00DCA4EA /* SearchNC+Transitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Transitioning.swift"; sourceTree = "<group>"; };
 		3CFD5F73278A374B0031BC8B /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+CV.swift"; sourceTree = "<group>"; };
 		3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentCell.swift; sourceTree = "<group>"; };
@@ -3507,8 +3509,9 @@
 				3CFD6023278B70D90031BC8B /* SearchNavigationContent.storyboard */,
 				3CFD5FEA278B6F640031BC8B /* SearchNavigationConstants.swift */,
 				3CFD5FE8278B6F420031BC8B /* SearchNavigationController.swift */,
-				3CFD6025278B71A50031BC8B /* SearchNC+NavigationBar.swift */,
 				3CFD6027278B71CE0031BC8B /* SearchNC+SearchBar.swift */,
+				3CFD6025278B71A50031BC8B /* SearchNC+NavigationBar.swift */,
+				3CF76427278CC2AE00DCA4EA /* SearchNC+Transitioning.swift */,
 				3CFD5FE7278B6F370031BC8B /* Testing */,
 			);
 			path = SearchNavigation;
@@ -5767,6 +5770,7 @@
 				3CFD5FD8278B6F2B0031BC8B /* SceneDelegate.swift in Sources */,
 				3CFD600B278B6FAA0031BC8B /* ToolbarViewModel.swift in Sources */,
 				3CFD5FF5278B6F950031BC8B /* SearchVC+Datasource.swift in Sources */,
+				3CF76428278CC2AE00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3CFD600A278B6FA50031BC8B /* Utilities+Constraints.swift in Sources */,
 				3CFD5FE9278B6F420031BC8B /* SearchNavigationController.swift in Sources */,
 				3CFD6005278B6FA50031BC8B /* Utilities+Math.swift in Sources */,

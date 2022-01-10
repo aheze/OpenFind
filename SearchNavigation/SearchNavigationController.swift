@@ -9,30 +9,57 @@
 
 import UIKit
 
+protocol SearchNavigationUpdater: UIViewController {
+    func updateSearchBarOffset(offset: CGFloat)
+}
 class SearchNavigationController: UIViewController {
-    let searchConfiguration = SearchConfiguration.lists
-    var searchViewModel = SearchViewModel()
-    lazy var searchViewController = createSearchBar()
-    @IBOutlet weak var searchContainerView: UIView!
-    @IBOutlet weak var searchContainerViewTopC: NSLayoutConstraint!
     
-    lazy var navigationBarBackground = createNavigationBarBackground()
-    var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    var navigation: UINavigationController!
+    var rootViewController: UIViewController
+    let searchConfiguration: SearchConfiguration
+    
+    var searchViewModel = SearchViewModel()
+    var searchViewController: SearchViewController!
+    var searchContainerView: UIView!
+    var searchContainerViewTopC: NSLayoutConstraint!
+    
+    var navigationBarBackground = UIView()
+    var navigationBarBackgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     var navigationBarBackgroundBorderView = UIView()
     var animator: UIViewPropertyAnimator?
     var blurPercentage = CGFloat(0)
+
     
-    var scrollView = UIScrollView()
-    
-    required init?(coder: NSCoder) {
+    init?(
+        coder: NSCoder,
+        rootViewController: UIViewController,
+        searchConfiguration: SearchConfiguration
+    ) {
+        self.rootViewController = rootViewController
+        self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with metadata.")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigation = UINavigationController(rootViewController: rootViewController)
+        addChildViewController(navigation, in: view)
+        setupSearchBar()
+        setupNavigationBar()
         _ = navigationBarBackground
         _ = searchViewController
-        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// prevent blur on the indicator
+        
+        print("load.")
+        
+        navigation.interactivePopGestureRecognizer?.addTarget(self, action: #selector(popGestureHandler))
+        
+//        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// prevent blur on the indicator
     
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
@@ -48,3 +75,11 @@ class SearchNavigationController: UIViewController {
 }
 
 
+
+extension SearchNavigationController: SearchNavigationUpdater {
+    func updateSearchBarOffset(offset: CGFloat) {
+        print("up: \(offset)")
+        searchContainerViewTopC.constant = offset
+        updateBlur(offset: offset)
+    }
+}

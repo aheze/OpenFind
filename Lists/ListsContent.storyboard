@@ -37,27 +37,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="JrF-we-n6H">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                                <color key="backgroundColor" systemColor="tintColor"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
-                            <constraint firstItem="JrF-we-n6H" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="74B-5Y-VXR"/>
-                            <constraint firstItem="JrF-we-n6H" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Dsu-3o-Rbz"/>
                             <constraint firstAttribute="bottom" secondItem="Mse-Qz-3Qw" secondAttribute="bottom" id="ITg-8H-eus"/>
                             <constraint firstItem="Mse-Qz-3Qw" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="a9F-OA-d2x"/>
-                            <constraint firstAttribute="trailing" secondItem="JrF-we-n6H" secondAttribute="trailing" id="btS-a6-1bs"/>
                             <constraint firstAttribute="trailing" secondItem="Mse-Qz-3Qw" secondAttribute="trailing" id="d9Z-56-52c"/>
                             <constraint firstItem="Mse-Qz-3Qw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="j2x-5B-cvR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Mse-Qz-3Qw" id="zrj-Ph-i9e"/>
-                        <outlet property="searchContainerView" destination="JrF-we-n6H" id="2n8-uY-dgS"/>
-                        <outlet property="searchContainerViewTopC" destination="Dsu-3o-Rbz" id="9jj-MT-gLu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -71,9 +62,6 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
