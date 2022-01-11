@@ -55,11 +55,6 @@ class SearchNavigationController: UIViewController {
         setupNavigationBar()
         _ = navigationBarBackground
         _ = searchViewController
-        
-        print("load.")
-        
-        
-//        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + 4 /// prevent blur on the indicator
     
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in

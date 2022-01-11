@@ -10,5 +10,6 @@
 import UIKit
 
 enum SearchNavigationConstants {
-    static var blurFadeRange = CGFloat(10)
+    static var blurFadeRange = CGFloat(20)
+    static var scrollIndicatorTopPadding = blurFadeRange / 3
 }

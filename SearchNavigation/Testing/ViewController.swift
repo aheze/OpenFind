@@ -66,36 +66,25 @@ class MainViewController: UIViewController, UIScrollViewDelegate, Searchable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Main"
         scrollView.delegate = self
         scrollView.contentInset.top = configuration.getTotalHeight()
-//        contentView.addDebugBorders(.blue)
+        scrollView.verticalScrollIndicatorInsets.top = configuration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffset: CGFloat
-        
-        let offset = abs(min(0, scrollView.contentOffset.y))
-        let topSafeArea = scrollView.adjustedContentInset.top
-        
-        /// rubber banding on large title
-        if offset > topSafeArea {
-            contentOffset = offset
-        } else {
-            contentOffset = topSafeArea
-        }
-        
+        let contentOffset = scrollView.getRelativeContentOffset()
         searchBarOffset = contentOffset - configuration.getTotalHeight()
         updateNavigationBar?()
     }
 }
 
-class DetailViewController: UIViewController, Searchable {
+class DetailViewController: UIViewController, Searchable, UIScrollViewDelegate {
 
     var searchBarOffset = CGFloat(0)
     var configuration: SearchConfiguration!
     var updateNavigationBar: (() -> Void)?
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +97,16 @@ class DetailViewController: UIViewController, Searchable {
         let barHeight = navigationController?.navigationBar.getCompactHeight() ?? 0
         
         searchBarOffset = topInset + barHeight
+        scrollView.contentInset.top = configuration.getTotalHeight()
+        scrollView.verticalScrollIndicatorInsets.top = configuration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        scrollView.delegate = self
     }
-
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset = scrollView.getRelativeContentOffset()
+        searchBarOffset = contentOffset - configuration.getTotalHeight()
+        updateNavigationBar?()
+    }
 }
+
 

@@ -75,27 +75,7 @@ extension SearchNavigationController {
         }
         animator?.fractionComplete = 0
     }
-    
-    func updateBlur(searchBarOffset: CGFloat) {
-        let navigationBar = navigation.navigationBar
-        if let window = UIApplication.shared.keyWindow {
-            let compactHeight = navigationBar.getCompactHeight() // 44 on iPhone 11
-            let statusBarHeight = window.safeAreaInsets.top // 44 on iPhone 11
-            let targetOffset = compactHeight + statusBarHeight /// the smallest search bar offset
-            
-            let difference = max(0, searchBarOffset - targetOffset)
-            
-            if difference < SearchNavigationConstants.blurFadeRange {
-                let percentage = 1 - difference / SearchNavigationConstants.blurFadeRange
-                animator?.fractionComplete = percentage
-                blurPercentage = percentage
-            } else {
-                animator?.fractionComplete = 0
-                blurPercentage = 0
-            }
-            
-        }
-    }
+
 }
 
 extension UINavigationBar {
