@@ -7,17 +7,20 @@
 
 import UIKit
 
-class ListsViewController: SearchNavigationController, PageViewController {
+class ListsViewController: UIViewController, Searchable, PageViewController {
+    
     var tabType: TabState = .lists
     
     /// external models
     var listsViewModel: ListsViewModel
-    
+    var searchConfiguration: SearchConfiguration
+    var searchBarOffset = CGFloat(0)
+    var updateNavigationBar: (() -> Void)?
     
     @IBOutlet weak var collectionView: UICollectionView!
     lazy var listsFlowLayout: ListsCollectionFlowLayout = {
         let topPadding = searchConfiguration.getTotalHeight()
-        let flowLayout = ListsCollectionFlowLayout(topPadding: topPadding)
+        let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.getLists = { [weak self] in
             guard let self = self else { return [] }
@@ -31,9 +34,11 @@ class ListsViewController: SearchNavigationController, PageViewController {
     
     init?(
         coder: NSCoder,
-        listsViewModel: ListsViewModel
+        listsViewModel: ListsViewModel,
+        searchConfiguration: SearchConfiguration
     ) {
         self.listsViewModel = listsViewModel
+        self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
     }
 
@@ -42,17 +47,10 @@ class ListsViewController: SearchNavigationController, PageViewController {
         fatalError("You must create this view controller with metadata.")
     }
     
-    override var scrollView: UIScrollView {
-        get {
-            collectionView
-        }
-        set {
-            
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Lists"
         
         _ = listsFlowLayout
         

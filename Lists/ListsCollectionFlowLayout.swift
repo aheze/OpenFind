@@ -12,11 +12,9 @@ import UIKit
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
-    var topPadding: CGFloat
     var getLists: (() -> [List])?
     
-    init(topPadding: CGFloat) {
-        self.topPadding = topPadding
+    override init() {
         super.init()
     }
     
@@ -30,7 +28,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         super.prepare()
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
-        var currentOffset = CGPoint(x: 0, y: topPadding)
+        var currentOffset = CGPoint.zero
         
         guard let lists = getLists?() else { return }
         guard let collectionView = collectionView else { return }

@@ -26,15 +26,7 @@ class ViewController: UIViewController {
         
         viewController.view.backgroundColor = .secondarySystemBackground
         
-        let storyboard = UIStoryboard(name: "SearchNavigationContent", bundle: nil)
-        let searchNavigationController = storyboard.instantiateViewController(identifier: "SearchNavigationController") { coder in
-            SearchNavigationController(
-                coder: coder,
-                rootViewController: viewController,
-                searchConfiguration: self.configuration
-            )
-        }
-        
+        let searchNavigationController = SearchNavigationController.make(rootViewController: viewController, searchConfiguration: configuration)
         self.searchNavigationController = searchNavigationController
         addChildViewController(searchNavigationController, in: view)
 

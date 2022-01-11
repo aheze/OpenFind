@@ -16,6 +16,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        addChildViewController(lists.navigationController, in: view)
+        addChildViewController(lists.searchNavigationController, in: view)
     }
 }
