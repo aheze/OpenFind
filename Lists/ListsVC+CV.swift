@@ -14,6 +14,7 @@ extension ListsViewController {
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
+        
         collectionView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
     }
 }
@@ -81,8 +82,8 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
 /// Scroll view
 extension ListsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffset = scrollView.getRelativeContentOffset()
-        searchBarOffset = contentOffset - searchConfiguration.getTotalHeight()
+        let contentOffset = -scrollView.contentOffset.y
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchConfiguration.getTotalHeight()
         updateNavigationBar?()
     }
 }

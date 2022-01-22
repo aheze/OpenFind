@@ -37,7 +37,9 @@ class ViewController: UIViewController {
 
 class MainViewController: UIViewController, UIScrollViewDelegate, Searchable {
     
-    var searchBarOffset = CGFloat(0)
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset = CGFloat(0)
+    
     var configuration: SearchConfiguration!
     var updateNavigationBar: (() -> Void)?
     
@@ -53,28 +55,37 @@ class MainViewController: UIViewController, UIScrollViewDelegate, Searchable {
         }
         
         navigationController?.pushViewController(viewController, animated: true)
-        
-        
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Main"
+        
+        
         scrollView.delegate = self
         scrollView.contentInset.top = configuration.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = configuration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        baseSearchBarOffset = getCompactBarSafeAreaHeight()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffset = scrollView.getRelativeContentOffset()
-        searchBarOffset = contentOffset - configuration.getTotalHeight()
+        let contentOffset = -scrollView.contentOffset.y
+        
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - configuration.getTotalHeight()
         updateNavigationBar?()
     }
 }
 
 class DetailViewController: UIViewController, Searchable, UIScrollViewDelegate {
 
-    var searchBarOffset = CGFloat(0)
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset = CGFloat(0)
+    
     var configuration: SearchConfiguration!
     var updateNavigationBar: (() -> Void)?
     @IBOutlet weak var scrollView: UIScrollView!
@@ -86,18 +97,16 @@ class DetailViewController: UIViewController, Searchable, UIScrollViewDelegate {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .secondarySystemBackground
         
-        let topInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-        let barHeight = navigationController?.navigationBar.getCompactHeight() ?? 0
+        baseSearchBarOffset = getCompactBarSafeAreaHeight()
         
-        searchBarOffset = topInset + barHeight
         scrollView.contentInset.top = configuration.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = configuration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         scrollView.delegate = self
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffset = scrollView.getRelativeContentOffset()
-        searchBarOffset = contentOffset - configuration.getTotalHeight()
+        let contentOffset = -scrollView.contentOffset.y
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - configuration.getTotalHeight()
         updateNavigationBar?()
     }
 }

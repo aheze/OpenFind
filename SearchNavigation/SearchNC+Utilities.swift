@@ -9,22 +9,10 @@
 
 import UIKit
 
-extension UIScrollView {
-    
-    /// positive content offset, won't be lower than the navigation bar's height
-    func getRelativeContentOffset() -> CGFloat {
-        let contentOffset: CGFloat
-        
-        let offset = abs(min(0, self.contentOffset.y))
-        let topSafeArea = self.adjustedContentInset.top
-        
-        /// rubber banding on large title
-        if offset > topSafeArea {
-            contentOffset = offset
-        } else {
-            contentOffset = topSafeArea
-        }
-        
-        return contentOffset
+extension UIViewController {
+    func getCompactBarSafeAreaHeight() -> CGFloat {
+        let topInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
+        let barHeight = navigationController?.navigationBar.getCompactHeight() ?? 0
+        return topInset + barHeight
     }
 }

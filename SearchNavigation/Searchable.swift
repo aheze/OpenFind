@@ -10,5 +10,6 @@
 import UIKit
 
 protocol Searchable: UIViewController {
-    var searchBarOffset: CGFloat { get set }
+    var baseSearchBarOffset: CGFloat { get set }
+    var additionalSearchBarOffset: CGFloat { get set }
 }

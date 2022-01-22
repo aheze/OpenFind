@@ -14,6 +14,10 @@ class ListsDetailViewController: UIViewController, Searchable {
     var model: ListsDetailViewModel
     var searchConfiguration: SearchConfiguration
     
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset = CGFloat(0)
+    var updateSearchBarOffset: (() -> Void)?
+    
     init(list: List, searchConfiguration: SearchConfiguration) {
         let model = ListsDetailViewModel(list: list)
         self.model = model
@@ -25,8 +29,6 @@ class ListsDetailViewController: UIViewController, Searchable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var updateSearchBarOffset: (() -> Void)?
-    var searchBarOffset = CGFloat(0)
     override func loadView() {
         
         /**
@@ -35,18 +37,12 @@ class ListsDetailViewController: UIViewController, Searchable {
         view = UIView()
         view.backgroundColor = .systemBackground
         
-        let topInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-        let barHeight = navigationController?.navigationBar.getCompactHeight() ?? 0
-        searchBarOffset = topInset + barHeight
-        
-        model.safeAreaTopInset = topInset + barHeight
+        baseSearchBarOffset = getCompactBarSafeAreaHeight()
         model.topContentInset = searchConfiguration.getTotalHeight()
         
-        model.searchBarOffsetChanged = { [weak self] in
+        model.scrolled = { [weak self] in
             guard let self = self else { return }
-            self.searchBarOffset = self.model.searchBarOffset
-            
-            print("of: \(self.model.searchBarOffset)")
+            self.additionalSearchBarOffset = self.model.scrollViewOffset
             self.updateSearchBarOffset?()
         }
         

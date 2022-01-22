@@ -14,7 +14,10 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
     /// external models
     var listsViewModel: ListsViewModel
     var searchConfiguration: SearchConfiguration
-    var searchBarOffset = CGFloat(0)
+    
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset = CGFloat(0)
+    
     var updateNavigationBar: (() -> Void)?
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -49,6 +52,11 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
         
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        baseSearchBarOffset = getCompactBarSafeAreaHeight()
     }
 }
 
