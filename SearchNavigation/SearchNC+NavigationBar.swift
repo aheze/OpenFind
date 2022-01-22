@@ -25,7 +25,11 @@ extension SearchNavigationController {
         navigationBar.standardAppearance = clearAppearance
         navigationBar.compactAppearance = clearAppearance
         navigationBar.scrollEdgeAppearance = clearAppearance
-        navigationBar.compactScrollEdgeAppearance = clearAppearance
+        
+        if #available(iOS 15.0, *) {
+            navigationBar.compactScrollEdgeAppearance = clearAppearance
+        }
+
         navigationBar.prefersLargeTitles = true
     }
     
@@ -73,7 +77,11 @@ extension SearchNavigationController {
             navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .regular)
             navigationBarBackgroundBorderView?.alpha = 1
         }
+        
+        animator?.startAnimation()
+        animator?.pauseAnimation()
         animator?.fractionComplete = 0
+        animator?.pausesOnCompletion = true
     }
 
 }

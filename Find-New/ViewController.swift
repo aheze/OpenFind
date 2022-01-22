@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         listsViewModel:listsViewModel
     )
 
-    lazy var lists: ListsController = ListsBridge.makeController()
+    lazy var lists: ListsController = ListsBridge.makeController(listsViewModel: listsViewModel)
     
     var toolbarViewModel: ToolbarViewModel!
     lazy var tabController: TabBarController<PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {

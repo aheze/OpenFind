@@ -33,6 +33,7 @@ class ListsController {
             searchConfiguration: searchConfiguration
         )
         self.searchNavigationController = searchNavigationController
+        searchNavigationController.testing = true
     
         viewController.loadViewIfNeeded() /// needed to initialize outlets
         viewController.updateNavigationBar = { [weak self] in

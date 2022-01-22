@@ -63,6 +63,6 @@ class ListsDetailViewController: UIViewController, Searchable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("safe: \(view.safeAreaInsets.top)")
-        model.scrollViewOffsetUpdated(model.scrollViewOffset)
+//        model.scrollViewOffsetUpdated(model.scrollViewOffset)
     }
 }

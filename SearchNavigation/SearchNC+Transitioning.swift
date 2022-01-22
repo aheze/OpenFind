@@ -25,22 +25,24 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                 additionalSearchBarOffset: viewController.additionalSearchBarOffset
             )
             
-     
-                /// stop the animator first
-            animator?.stopAnimation(false)
-            animator?.finishAnimation(at: .end)
-            
-            currentViewControllerCount = navigation.viewControllers.count
+            /// first reset to start, if there's going to be a change
+            if percentage == 0, blurPercentage != 0 {
+                self.navigationBarBackgroundBorderView.alpha = 1
+                self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .regular)
+            } else if percentage == 1, blurPercentage != 1 {
+                self.navigationBarBackgroundBorderView.alpha = 0
+                self.navigationBarBackgroundBlurView.effect = nil
+            }
             
             transitionCoordinator.animate { _ in
                 self.searchContainerViewContainer.layoutIfNeeded()
                 self.navigationBarBackgroundContainer.layoutIfNeeded()
                 
                 /// manually animate the line
-                if percentage == 0 {
+                if percentage == 0, self.blurPercentage != 0 {
                     self.navigationBarBackgroundBorderView.alpha = 0
                     self.navigationBarBackgroundBlurView.effect = nil
-                } else if percentage == 1 {
+                } else if percentage == 1, self.blurPercentage != 1 {
                     self.navigationBarBackgroundBorderView.alpha = 1
                     self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .regular)
                 }
@@ -48,6 +50,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                 
                 /// restart the animator
                 self.setupBlur()
+                
                 if context.isCancelled {
                     if let currentViewController = self.navigation.topViewController as? Searchable {
                         let offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset)
