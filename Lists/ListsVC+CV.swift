@@ -12,6 +12,8 @@ extension ListsViewController {
     func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.allowsSelection = false
+        collectionView.delaysContentTouches = true
         collectionView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
     }
 }

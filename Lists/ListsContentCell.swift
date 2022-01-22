@@ -79,7 +79,8 @@ class ListChipView: UIView {
         backgroundView.frame = bounds
         backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundView.layer.cornerRadius = ListsCellConstants.chipCornerRadius
-        addSubview(backgroundView)
+        buttonView.addSubview(backgroundView)
+        backgroundView.isUserInteractionEnabled = false
         return backgroundView
     }()
 
@@ -89,13 +90,43 @@ class ListChipView: UIView {
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.font = ListsCellConstants.chipFont
         label.textAlignment = .center
-        addSubview(label)
+        buttonView.addSubview(label)
+        label.isUserInteractionEnabled = false
         return label
     }()
     
+//    lazy var button: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.frame = bounds
+//        button.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+//        addSubview(button)
+//        return button
+//    }()
+    
+    lazy var buttonView: UIButton = {
+        let button = ButtonView()
+        button.frame = bounds
+        button.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(button)
+
+        button.tapped = {
+            print("tapp!")
+        }
+        return button
+    }()
+    var tapped: (() -> Void)?
+    @objc func buttonTapped() {
+        print("ttttt")
+        tapped?()
+    }
+    
     private func commonInit() {
         backgroundColor = .clear
+        _ = buttonView
         _ = backgroundView
         _ = label
+//        _ = button
+//        _ = overlayButton
     }
 }
