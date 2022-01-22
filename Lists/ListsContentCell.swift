@@ -64,6 +64,14 @@ class ListsContentCell: UICollectionViewCell {
 }
 
 class ListChipView: UIView {
+    
+    var isWordsLeftButton = false
+    init(isWordsLeftButton: Bool) {
+        self.isWordsLeftButton = isWordsLeftButton
+        super.init(frame: .zero)
+        commonInit()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -74,11 +82,25 @@ class ListChipView: UIView {
         commonInit()
     }
     
+    var tapped: (() -> Void)?
+    lazy var buttonView: UIButton = {
+        let button = ButtonView()
+        button.frame = bounds
+        button.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        button.layer.cornerRadius = ListsCellConstants.chipCornerRadius
+        button.clipsToBounds = true
+        addSubview(button)
+
+        button.tapped = { [weak self] in
+            self?.tapped?()
+        }
+        return button
+    }()
+    
     lazy var backgroundView: UIView = {
         let backgroundView = UIView()
         backgroundView.frame = bounds
         backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundView.layer.cornerRadius = ListsCellConstants.chipCornerRadius
         buttonView.addSubview(backgroundView)
         backgroundView.isUserInteractionEnabled = false
         return backgroundView
@@ -95,38 +117,36 @@ class ListChipView: UIView {
         return label
     }()
     
-//    lazy var button: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.frame = bounds
-//        button.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//        addSubview(button)
-//        return button
-//    }()
-    
-    lazy var buttonView: UIButton = {
-        let button = ButtonView()
-        button.frame = bounds
-        button.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(button)
-
-        button.tapped = {
-            print("tapp!")
-        }
-        return button
-    }()
-    var tapped: (() -> Void)?
-    @objc func buttonTapped() {
-        print("ttttt")
-        tapped?()
-    }
-    
     private func commonInit() {
         backgroundColor = .clear
         _ = buttonView
         _ = backgroundView
         _ = label
-//        _ = button
-//        _ = overlayButton
+        
+        if !isWordsLeftButton {
+            let interaction = UIContextMenuInteraction(delegate: self)
+            buttonView.addInteraction(interaction)
+        }
+    }
+}
+
+extension ListChipView: UIContextMenuInteractionDelegate {
+
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+            return self.makeContextMenu()
+        })
+    }
+    
+    func makeContextMenu() -> UIMenu {
+
+        // Create a UIAction for sharing
+        let share = UIAction(title: "Copy", image: UIImage(systemName: "doc.on.doc")) { action in
+            UIPasteboard.general.string = self.label.text ?? ""
+        }
+
+        // Create and return a UIMenu with the share action
+        return UIMenu(title: "", children: [share])
+        
     }
 }
