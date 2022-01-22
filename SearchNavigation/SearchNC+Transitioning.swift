@@ -19,15 +19,23 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             searchContainerViewTopC.constant = offset
             navigationBarBackgroundHeightC.constant = offset + searchConfiguration.getTotalHeight()
             
-            /// stop the animator fist
-            animator?.stopAnimation(false)
-            animator?.finishAnimation(at: .current)
-            animator = nil
 
             let percentage = getBlurPercentage(
                 baseSearchBarOffset: viewController.baseSearchBarOffset,
                 additionalSearchBarOffset: viewController.additionalSearchBarOffset
             )
+            
+            if navigation.viewControllers.count < currentViewControllerCount {
+                animator?.stopAnimation(false)
+                animator?.finishAnimation(at: .end)
+            } else {
+                /// stop the animator fist
+                animator?.stopAnimation(false)
+                animator?.finishAnimation(at: .current)
+                animator = nil
+            }
+            
+            currentViewControllerCount = navigation.viewControllers.count
             
             transitionCoordinator.animate { _ in
                 self.searchContainerViewContainer.layoutIfNeeded()
@@ -36,8 +44,10 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                 /// manually animate the line
                 if percentage == 0 {
                     self.navigationBarBackgroundBorderView.alpha = 0
+                    self.navigationBarBackgroundBorderView.backgroundColor = .red
                 } else if percentage == 1 {
                     self.navigationBarBackgroundBorderView.alpha = 1
+                    self.navigationBarBackgroundBorderView.backgroundColor = .green
                 }
             } completion: { context in
                 

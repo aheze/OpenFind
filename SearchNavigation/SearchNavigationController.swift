@@ -32,6 +32,8 @@ class SearchNavigationController: UIViewController {
     /// testing
     var testing = false
     
+    var currentViewControllerCount = 0
+    
     static func make(rootViewController: Searchable, searchConfiguration: SearchConfiguration) -> SearchNavigationController {
         
         let storyboard = UIStoryboard(name: "SearchNavigationContent", bundle: nil)
@@ -53,6 +55,8 @@ class SearchNavigationController: UIViewController {
         self.rootViewController = rootViewController
         self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
+        
+        
     }
     
     @available(*, unavailable)
@@ -70,9 +74,10 @@ class SearchNavigationController: UIViewController {
         setupSearchBar()
         setupNavigationBar()
         
-        
         _ = navigationBarBackground
         _ = searchViewController
+        
+        self.currentViewControllerCount = navigation.viewControllers.count
         
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in

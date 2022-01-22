@@ -11,7 +11,6 @@ import UIKit
 
 extension ListsViewController {
     func presentDetails(list: List) {
-        print("presenting: \(list)")
         let viewController = ListsDetailViewController(
             list: list,
             searchConfiguration: searchConfiguration
