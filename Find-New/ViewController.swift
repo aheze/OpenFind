@@ -50,8 +50,9 @@ class ViewController: UIViewController {
             }
         }
         
+        _ = lists
         let tabController = TabControllerBridge.makeTabController(
-            pageViewControllers: [photos.viewController, camera.viewController, lists.viewController],
+            pageViewControllers: [photos.viewController, camera.viewController, lists.searchNavigationController],
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel,
             photosSelectionToolbarView: photos.viewController.selectionToolbar,
@@ -95,15 +96,15 @@ extension ViewController: TabBarControllerDelegate {
         case .photos:
             photos.viewController.willBecomeActive()
             camera.viewController.willBecomeInactive()
-            lists.viewController.willBecomeInactive()
+            lists.searchNavigationController.willBecomeInactive()
         case .camera:
             photos.viewController.willBecomeInactive()
             camera.viewController.willBecomeActive()
-            lists.viewController.willBecomeInactive()
+            lists.searchNavigationController.willBecomeInactive()
         case .lists:
             photos.viewController.willBecomeInactive()
             camera.viewController.willBecomeInactive()
-            lists.viewController.willBecomeActive()
+            lists.searchNavigationController.willBecomeActive()
         default: break
         }
     }
@@ -113,15 +114,15 @@ extension ViewController: TabBarControllerDelegate {
         case .photos:
             photos.viewController.didBecomeActive()
             camera.viewController.didBecomeInactive()
-            lists.viewController.didBecomeInactive()
+            lists.searchNavigationController.didBecomeInactive()
         case .camera:
             photos.viewController.didBecomeInactive()
             camera.viewController.didBecomeActive()
-            lists.viewController.didBecomeInactive()
+            lists.searchNavigationController.didBecomeInactive()
         case .lists:
             photos.viewController.didBecomeInactive()
             camera.viewController.didBecomeInactive()
-            lists.viewController.didBecomeActive()
+            lists.searchNavigationController.didBecomeActive()
         default: break
         }
     }

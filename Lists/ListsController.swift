@@ -30,7 +30,8 @@ class ListsController {
         self.viewController = viewController
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
-            searchConfiguration: searchConfiguration
+            searchConfiguration: searchConfiguration,
+            tabType: .lists
         )
         self.searchNavigationController = searchNavigationController
     

@@ -12,8 +12,7 @@ import UIKit
 extension SearchNavigationController {
     func setupSearchBar() {
         
-    
-        navigation.view.addSubview(searchContainerViewContainer)
+        view.addSubview(searchContainerViewContainer)
         searchContainerViewContainer.pinEdgesToSuperview()
         
         let searchContainerView = UIView()
@@ -35,6 +34,8 @@ extension SearchNavigationController {
             searchViewModel: searchViewModel,
             configuration: searchConfiguration
         )
+        self.searchViewController = searchViewController
+        
         addResizableChildViewController(searchViewController, in: searchContainerView)
         
         

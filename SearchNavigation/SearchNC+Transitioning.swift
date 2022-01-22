@@ -16,8 +16,8 @@ extension SearchNavigationController: UINavigationControllerDelegate {
         {
             let offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset)
             
-            searchContainerViewTopC.constant = offset
-            navigationBarBackgroundHeightC.constant = offset + searchConfiguration.getTotalHeight()
+            searchContainerViewTopC?.constant = offset
+            navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
             
 
             let percentage = getBlurPercentage(
@@ -55,8 +55,8 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                     if let currentViewController = self.navigation.topViewController as? Searchable {
                         let offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset)
                         
-                        self.searchContainerViewTopC.constant = offset
-                        self.navigationBarBackgroundHeightC.constant = offset + self.searchConfiguration.getTotalHeight()
+                        self.searchContainerViewTopC?.constant = offset
+                        self.navigationBarBackgroundHeightC?.constant = offset + self.searchConfiguration.getTotalHeight()
                         self.updateBlur(
                             baseSearchBarOffset: currentViewController.baseSearchBarOffset,
                             additionalSearchBarOffset: currentViewController.additionalSearchBarOffset
@@ -75,11 +75,11 @@ extension SearchNavigationController: UINavigationControllerDelegate {
 
 extension SearchNavigationController {
     func updateSearchBarOffset() {
-        if let topViewController = navigation.topViewController as? Searchable {
+        if let topViewController = navigation?.topViewController as? Searchable {
             let offset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset)
             
-            searchContainerViewTopC.constant = offset
-            navigationBarBackgroundHeightC.constant = offset + searchConfiguration.getTotalHeight()
+            searchContainerViewTopC?.constant = offset
+            navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
             updateBlur(
                 baseSearchBarOffset: topViewController.baseSearchBarOffset,
                 additionalSearchBarOffset: topViewController.additionalSearchBarOffset

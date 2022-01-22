@@ -7,9 +7,7 @@
 
 import UIKit
 
-class ListsViewController: UIViewController, Searchable, PageViewController {
-    
-    var tabType: TabState = .lists
+class ListsViewController: UIViewController, Searchable {
     
     /// external models
     var listsViewModel: ListsViewModel
@@ -42,6 +40,7 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("load!")
         self.title = "Lists"
         
         _ = listsFlowLayout
@@ -59,14 +58,4 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
         additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
     }
-}
-
-extension ListsViewController {
-    func willBecomeActive() {}
-    
-    func didBecomeActive() {}
-    
-    func willBecomeInactive() {}
-    
-    func didBecomeInactive() {}
 }

@@ -9,7 +9,13 @@
 
 import UIKit
 
-class SearchNavigationController: UIViewController {
+class SearchNavigationController: UIViewController, PageViewController {
+    var tabType: TabState
+    
+    var onWillBecomeActive: (() -> Void)?
+    var onDidBecomeActive: (() -> Void)?
+    var onWillBecomeInactive: (() -> Void)?
+    var onDidBecomeInactive: (() -> Void)?
     
     var navigation: UINavigationController!
     var rootViewController: UIViewController
@@ -17,7 +23,7 @@ class SearchNavigationController: UIViewController {
     
     var searchContainerViewContainer = PassthroughView() /// whole screen
     var searchContainerView: UIView!
-    var searchContainerViewTopC: NSLayoutConstraint!
+    var searchContainerViewTopC: NSLayoutConstraint?
     var searchViewModel = SearchViewModel()
     var searchViewController: SearchViewController!
     
@@ -32,16 +38,19 @@ class SearchNavigationController: UIViewController {
     /// testing
     var testing = false
     
-    var currentViewControllerCount = 0
-    
-    static func make(rootViewController: Searchable, searchConfiguration: SearchConfiguration) -> SearchNavigationController {
+    static func make(
+        rootViewController: Searchable,
+        searchConfiguration: SearchConfiguration,
+        tabType: TabState
+    ) -> SearchNavigationController {
         
         let storyboard = UIStoryboard(name: "SearchNavigationContent", bundle: nil)
         let searchNavigationController = storyboard.instantiateViewController(identifier: "SearchNavigationController") { coder in
             SearchNavigationController(
                 coder: coder,
                 rootViewController: rootViewController,
-                searchConfiguration: searchConfiguration
+                searchConfiguration: searchConfiguration,
+                tabType: tabType
             )
         }
         return searchNavigationController
@@ -50,13 +59,13 @@ class SearchNavigationController: UIViewController {
     init?(
         coder: NSCoder,
         rootViewController: UIViewController,
-        searchConfiguration: SearchConfiguration
+        searchConfiguration: SearchConfiguration,
+        tabType: TabState
     ) {
         self.rootViewController = rootViewController
         self.searchConfiguration = searchConfiguration
+        self.tabType = tabType
         super.init(coder: coder)
-        
-        
     }
     
     @available(*, unavailable)
@@ -67,17 +76,13 @@ class SearchNavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("viewdidload.")
         navigation = UINavigationController(rootViewController: rootViewController)
         navigation.delegate = self
         
         addChildViewController(navigation, in: view)
-        setupSearchBar()
         setupNavigationBar()
-        
-        _ = navigationBarBackground
-        _ = searchViewController
-        
-        self.currentViewControllerCount = navigation.viewControllers.count
+        setupSearchBar()
         
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
