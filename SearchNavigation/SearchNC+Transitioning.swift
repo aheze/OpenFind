@@ -25,15 +25,10 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                 additionalSearchBarOffset: viewController.additionalSearchBarOffset
             )
             
-            if navigation.viewControllers.count < currentViewControllerCount {
-                animator?.stopAnimation(false)
-                animator?.finishAnimation(at: .end)
-            } else {
-                /// stop the animator fist
-                animator?.stopAnimation(false)
-                animator?.finishAnimation(at: .current)
-                animator = nil
-            }
+     
+                /// stop the animator first
+            animator?.stopAnimation(false)
+            animator?.finishAnimation(at: .end)
             
             currentViewControllerCount = navigation.viewControllers.count
             
@@ -44,16 +39,15 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                 /// manually animate the line
                 if percentage == 0 {
                     self.navigationBarBackgroundBorderView.alpha = 0
-                    self.navigationBarBackgroundBorderView.backgroundColor = .red
+                    self.navigationBarBackgroundBlurView.effect = nil
                 } else if percentage == 1 {
                     self.navigationBarBackgroundBorderView.alpha = 1
-                    self.navigationBarBackgroundBorderView.backgroundColor = .green
+                    self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .regular)
                 }
             } completion: { context in
                 
                 /// restart the animator
                 self.setupBlur()
-                
                 if context.isCancelled {
                     if let currentViewController = self.navigation.topViewController as? Searchable {
                         let offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset)

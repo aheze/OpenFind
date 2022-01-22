@@ -63,9 +63,9 @@ extension SearchNavigationController {
     }
     
     func setupBlur() {
-        animator?.stopAnimation(true)
-        animator?.finishAnimation(at: .start)
-        animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+        animator?.stopAnimation(false)
+        animator?.finishAnimation(at: .end)
+        animator = UIViewPropertyAnimator(duration: 0.1, curve: .linear)
         navigationBarBackgroundBlurView.effect = nil
         navigationBarBackgroundBorderView.alpha = 0
         
