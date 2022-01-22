@@ -17,6 +17,7 @@ struct ListsCollectionConstants {
 struct ListsCellConstants {
     static var titleColor = UIColor.white
     static var descriptionColor = UIColor.white.withAlphaComponent(0.85)
+    static var chipBackgroundColor = UIColor.secondarySystemBackground
     
     static var headerTitleFont = UIFont.preferredFont(forTextStyle: .headline)
     static var headerDescriptionFont = UIFont.preferredFont(forTextStyle: .body)
@@ -24,7 +25,7 @@ struct ListsCellConstants {
     static var headerImageRightPadding = CGFloat(6)
     static var headerTextSpacing = CGFloat(10)
     
-    static var headerEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+    static var headerEdgeInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
     
     /// hugs the chips
     static var contentEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)

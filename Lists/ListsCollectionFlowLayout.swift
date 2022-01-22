@@ -15,7 +15,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var getLists: (() -> [List])?
     
     /// get the frame of a list cell from available width
-    var getListSizeFromWidth: ((CGFloat, List) -> CGSize)?
+    var getListSizeFromWidth: ((CGFloat, List, Int) -> CGSize)?
     
     override init() {
         super.init()
@@ -39,7 +39,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         let availableWidth = collectionView.bounds.width - ListsCollectionConstants.sidePadding * 2
         
         for index in lists.indices {
-            if let size = getListSizeFromWidth?(availableWidth, lists[index]) {
+            if let size = getListSizeFromWidth?(availableWidth, lists[index], index) {
                 let cellFrame = CGRect(
                     x: currentOffset.x,
                     y: currentOffset.y,

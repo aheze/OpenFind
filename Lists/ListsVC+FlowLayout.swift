@@ -17,9 +17,9 @@ extension ListsViewController {
             guard let self = self else { return [] }
             return self.listsViewModel.displayedLists.map { $0.list }
         }
-        flowLayout.getListSizeFromWidth = { [weak self] (availableWidth, list) in
+        flowLayout.getListSizeFromWidth = { [weak self] (availableWidth, list, listIndex) in
             guard let self = self else { return .zero }
-            return self.getCellSize(availableWidth: availableWidth, list: list)
+            return self.getCellSize(availableWidth: availableWidth, list: list, listIndex: listIndex)
         }
         
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
@@ -27,7 +27,7 @@ extension ListsViewController {
         return flowLayout
     }
     
-    func getCellSize(availableWidth: CGFloat, list: List) -> CGSize {
+    func getCellSize(availableWidth: CGFloat, list: List, listIndex: Int) -> CGSize {
         let c = ListsCellConstants.self
         
         let headerHeight = c.headerTitleFont.lineHeight
@@ -121,6 +121,7 @@ extension ListsViewController {
         + c.contentEdgeInsets.bottom
         
         let height = headerHeight + containerHeight
+        listsViewModel.displayedLists[listIndex].frame.chipFrames = chipFrames
         
         return CGSize(width: availableWidth, height: height)
     }

@@ -25,13 +25,20 @@ class ListsContentCell: UICollectionViewCell {
     @IBOutlet var headerDescriptionLabel: UILabel!
 
     @IBOutlet var containerView: UIView!
-    @IBOutlet var containerChipsView: UIView!
+    @IBOutlet var chipsContainerView: UIView!
+    
+    @IBOutlet var chipsContainerViewTopC: NSLayoutConstraint!
+    @IBOutlet var chipsContainerViewRightC: NSLayoutConstraint!
+    @IBOutlet var chipsContainerViewBottomC: NSLayoutConstraint!
+    @IBOutlet var chipsContainerViewLeftC: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         let c = ListsCellConstants.self
         
         headerContentView.backgroundColor = .clear
+        chipsContainerView.backgroundColor = .clear
+        
         headerImageView.tintColor = c.titleColor
         headerTitleLabel.textColor = c.titleColor
         headerDescriptionLabel.textColor = c.descriptionColor
@@ -45,6 +52,11 @@ class ListsContentCell: UICollectionViewCell {
         headerContentViewRightC.constant = c.headerEdgeInsets.right
         headerContentViewBottomC.constant = c.headerEdgeInsets.bottom
         headerContentViewLeftC.constant = c.headerEdgeInsets.left
+        
+        chipsContainerViewTopC.constant = c.contentEdgeInsets.top
+        chipsContainerViewRightC.constant = c.contentEdgeInsets.right
+        chipsContainerViewBottomC.constant = c.contentEdgeInsets.bottom
+        chipsContainerViewLeftC.constant = c.contentEdgeInsets.left
         
         headerImageViewRightC.constant = c.headerImageRightPadding
         headerStackView.spacing = c.headerTextSpacing
@@ -73,14 +85,16 @@ class ListChipView: UIView {
 
     lazy var label: UILabel = {
         let label = UILabel()
+        label.frame = bounds
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.font = ListsCellConstants.chipFont
+        label.textAlignment = .center
         addSubview(label)
         return label
     }()
     
     private func commonInit() {
         backgroundColor = .clear
-        
         _ = backgroundView
         _ = label
     }

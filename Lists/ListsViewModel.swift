@@ -73,6 +73,38 @@ class ListsViewModel: ObservableObject {
             color: 0xE2AC00,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
+        ),
+        List(
+            name: "Drama",
+            desc: "Words about drama",
+            image: "theatermasks",
+            color: 0xE2AC00,
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Drama",
+            desc: "Words about drama",
+            image: "theatermasks",
+            color: 0xE2AC00,
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Drama",
+            desc: "Words about drama",
+            image: "theatermasks",
+            color: 0xE2AC00,
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Drama",
+            desc: "Words about drama",
+            image: "theatermasks",
+            color: 0xE2AC00,
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
         )
     ]
     

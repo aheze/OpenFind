@@ -35,28 +35,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-D0-RZN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bQ-NR-Mgi">
-                                                            <rect key="frame" x="12" y="8" width="390" height="34"/>
+                                                            <rect key="frame" x="12" y="8" width="390" height="20.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9Rx-cp-LR6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="20.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="G7k-8O-AfD"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="f0M-zl-2Jt">
-                                                                    <rect key="frame" x="30" y="0.0" width="360" height="34"/>
+                                                                    <rect key="frame" x="30" y="0.0" width="360" height="20.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Normal label title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QC-5X-Emn">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="156" height="34"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="156" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description goes here" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xM5-tr-PXn">
-                                                                            <rect key="frame" x="157" y="0.0" width="203" height="34"/>
+                                                                            <rect key="frame" x="157" y="0.0" width="203" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -78,7 +78,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="BR0-9f-jtM"/>
                                                         <constraint firstItem="8bQ-NR-Mgi" firstAttribute="leading" secondItem="Clc-D0-RZN" secondAttribute="leading" constant="12" id="ZwJ-lD-646"/>
                                                         <constraint firstAttribute="bottom" secondItem="8bQ-NR-Mgi" secondAttribute="bottom" constant="8" id="foU-FZ-il1"/>
                                                         <constraint firstItem="8bQ-NR-Mgi" firstAttribute="top" secondItem="Clc-D0-RZN" secondAttribute="top" constant="8" id="wch-wb-yPa"/>
@@ -86,10 +85,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGf-sF-ucv">
-                                                    <rect key="frame" x="0.0" y="50" width="414" height="131"/>
+                                                    <rect key="frame" x="0.0" y="36.5" width="414" height="144.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2D-97-h2h">
-                                                            <rect key="frame" x="12" y="12" width="390" height="107"/>
+                                                            <rect key="frame" x="12" y="12" width="390" height="120.5"/>
                                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                         </view>
                                                     </subviews>
@@ -114,7 +113,11 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="414" height="181"/>
                                         <connections>
-                                            <outlet property="containerChipsView" destination="S2D-97-h2h" id="UOC-rN-nDa"/>
+                                            <outlet property="chipsContainerView" destination="S2D-97-h2h" id="Saa-U7-MTc"/>
+                                            <outlet property="chipsContainerViewBottomC" destination="1Fw-JS-Gdb" id="IHu-Fe-xCR"/>
+                                            <outlet property="chipsContainerViewLeftC" destination="afW-7K-gWh" id="Zap-HI-vyj"/>
+                                            <outlet property="chipsContainerViewRightC" destination="IzF-6J-q0d" id="3F2-xh-CH8"/>
+                                            <outlet property="chipsContainerViewTopC" destination="EWw-mr-huq" id="RhB-gd-xc1"/>
                                             <outlet property="containerView" destination="kGf-sF-ucv" id="TpI-Jb-V3b"/>
                                             <outlet property="headerContentView" destination="8bQ-NR-Mgi" id="bvc-Gl-jei"/>
                                             <outlet property="headerContentViewBottomC" destination="foU-FZ-il1" id="HdV-03-t1C"/>

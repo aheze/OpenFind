@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension ListsViewController {
@@ -31,6 +30,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         let list = listsViewModel.displayedLists[indexPath.item].list
+        cell.headerView.backgroundColor = UIColor(hex: list.color)
         cell.headerImageView.image = UIImage(systemName: list.image)
         cell.headerTitleLabel.text = list.name
         cell.headerDescriptionLabel.text = list.desc
@@ -38,6 +38,26 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return cell
     }
  
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? ListsContentCell else {
+            fatalError()
+        }
+        
+        cell.chipsContainerView.subviews.forEach { $0.removeFromSuperview() }
+        
+        let displayedList = listsViewModel.displayedLists[indexPath.item]
+        let frame = displayedList.frame
+        
+        for chipFrame in frame.chipFrames {
+            let chipView = ListChipView()
+            chipView.frame = chipFrame.frame
+            chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
+            chipView.label.text = chipFrame.string
+            chipView.label.textColor = UIColor(hex: displayedList.list.color)
+            cell.chipsContainerView.addSubview(chipView)
+        }
+        
+    }
 }
 
 /// Scroll view
