@@ -48,10 +48,16 @@ extension ListsViewController {
         func addWordsLeftChipIfNecessary(currentIndex: Int, currentFrame: CGRect) -> Bool {
             guard numberOfLines == c.maxNumberOfChipLines else { return false }
             
+            var nextWordWidth = CGFloat(0)
+            if let nextWord = list.contents[safe: currentIndex + 1] {
+                let nextWordSize = c.chipFont.sizeOfString(nextWord)
+                nextWordWidth = nextWordSize.width + c.chipSpacing
+            }
+            
             let wordsLeftAfterCurrent = list.contents.count - (currentIndex)
             let wordsLeftText = "+\(wordsLeftAfterCurrent)"
             let wordsLeftTextSize = c.chipFont.sizeOfString(wordsLeftText)
-            let combinedWidth = currentFrame.width + c.chipSpacing + wordsLeftTextSize.width
+            let combinedWidth = currentFrame.maxX + nextWordWidth + c.chipSpacing + wordsLeftTextSize.width
             
             if combinedWidth > contentWidth {
                 let wordsLeftFrame = CGRect(
@@ -65,7 +71,6 @@ extension ListsViewController {
                     string: wordsLeftText
                 )
                 chipFrames.append(wordsLeftChipFrame)
-                
                 return true
             }
             return false
@@ -82,7 +87,7 @@ extension ListsViewController {
                 height: size.height + c.chipEdgeInsets.top + c.chipEdgeInsets.bottom
             )
             
-            /// check if there's still space for the `+5` even after the frame
+            /// check if there's still space for the `+5` even after the frame AND the next word
             guard !addWordsLeftChipIfNecessary(currentIndex: index, currentFrame: frame) else {
                 break
             }
@@ -94,7 +99,9 @@ extension ListsViewController {
                 )
                 chipFrames.append(chipFrame)
                 offset.width += frame.width + c.chipSpacing
-            } else if numberOfLines < c.maxNumberOfChipLines { /// add a new line
+                
+                /// try adding another line if not enough space
+            } else if numberOfLines < c.maxNumberOfChipLines {
                 let updatedFrame = CGRect(
                     x: 0,
                     y: frame.height + c.chipSpacing,
@@ -111,6 +118,8 @@ extension ListsViewController {
                     offset.width = frame.width + c.chipSpacing /// is the first chip in the new line
                     offset.height += updatedFrame.origin.y
                     numberOfLines += 1
+                } else {
+                    break
                 }
             }
         }
