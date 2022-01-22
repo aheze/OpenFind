@@ -29,6 +29,9 @@ class SearchNavigationController: UIViewController {
     var animator: UIViewPropertyAnimator?
     var blurPercentage = CGFloat(0)
     
+    /// testing
+    var testing = false
+    
     static func make(rootViewController: Searchable, searchConfiguration: SearchConfiguration) -> SearchNavigationController {
         
         let storyboard = UIStoryboard(name: "SearchNavigationContent", bundle: nil)
