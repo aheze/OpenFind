@@ -18,9 +18,6 @@ extension UIScrollView {
         let offset = abs(min(0, self.contentOffset.y))
         let topSafeArea = self.adjustedContentInset.top
         
-        print("offset; \(self.contentOffset.y)")
-        print("safe; \(topSafeArea)")
-        
         /// rubber banding on large title
         if offset > topSafeArea {
             contentOffset = offset
@@ -29,5 +26,17 @@ extension UIScrollView {
         }
         
         return contentOffset
+    }
+}
+
+class PassthroughView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let contains = subviews.contains {
+            !$0.isHidden
+            && $0.isUserInteractionEnabled
+            && $0.point(inside: self.convert(point, to: $0), with: event)
+        }
+
+        return contains
     }
 }

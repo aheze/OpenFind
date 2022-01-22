@@ -15,14 +15,22 @@ struct ListsCollectionConstants {
 }
 
 struct ListsCellConstants {
-    static var headerFont = UIFont.preferredFont(forTextStyle: .body).bold()
+    static var titleColor = UIColor.white
+    static var descriptionColor = UIColor.white.withAlphaComponent(0.85)
+    
+    static var headerTitleFont = UIFont.preferredFont(forTextStyle: .headline)
+    static var headerDescriptionFont = UIFont.preferredFont(forTextStyle: .body)
+    
+    static var headerImageRightPadding = CGFloat(6)
+    static var headerTextSpacing = CGFloat(10)
+    
     static var headerEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
     
     /// hugs the chips
     static var contentEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     
     static var chipFont = UIFont.preferredFont(forTextStyle: .body)
-    static var chipEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+    static var chipEdgeInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
     static var chipSpacing = CGFloat(8)
     static var maxNumberOfChipLines = 2
     

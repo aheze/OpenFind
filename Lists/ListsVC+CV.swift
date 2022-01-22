@@ -30,7 +30,10 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError()
         }
         
-//        cell.contentView.addDebugBorders(.blue)
+        let list = listsViewModel.displayedLists[indexPath.item]
+        cell.headerImageView.image = UIImage(systemName: list.image)
+        cell.headerTitleLabel.text = list.name
+        cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = 16
         return cell
     }

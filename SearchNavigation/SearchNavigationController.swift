@@ -51,7 +51,7 @@ class SearchNavigationController: UIViewController {
         self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("You must create this view controller with metadata.")
@@ -66,9 +66,11 @@ class SearchNavigationController: UIViewController {
         addChildViewController(navigation, in: view)
         setupSearchBar()
         setupNavigationBar()
+        
+        
         _ = navigationBarBackground
         _ = searchViewController
-    
+        
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
@@ -80,16 +82,6 @@ class SearchNavigationController: UIViewController {
     deinit {
         animator?.stopAnimation(true)
     }
-}
-
-class PassthroughView: UIView {
-  override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-    return subviews.contains(where: {
-      !$0.isHidden
-      && $0.isUserInteractionEnabled
-      && $0.point(inside: self.convert(point, to: $0), with: event)
-    })
-  }
 }
 
 
