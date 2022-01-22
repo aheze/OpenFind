@@ -77,5 +77,5 @@ class ListsViewModel: ObservableObject {
     ]
     
     /// lists shown by the collection view, can be filtered
-    @Published var displayedLists = [List]()
+    @Published var displayedLists = [DisplayedList]()
 }

@@ -30,17 +30,20 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError()
         }
         
-        let list = listsViewModel.displayedLists[indexPath.item]
+        let list = listsViewModel.displayedLists[indexPath.item].list
         cell.headerImageView.image = UIImage(systemName: list.image)
         cell.headerTitleLabel.text = list.name
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = 16
         return cell
     }
-    
+ 
+}
+
+/// Scroll view
+extension ListsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = scrollView.getRelativeContentOffset()
-        print("cr: \(contentOffset)")
         searchBarOffset = contentOffset - searchConfiguration.getTotalHeight()
         updateNavigationBar?()
     }

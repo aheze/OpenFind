@@ -43,7 +43,7 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
         
         _ = listsFlowLayout
         
-        listsViewModel.displayedLists = listsViewModel.lists
+        listsViewModel.displayedLists = listsViewModel.lists.map { .init(list: $0) }
         
         setupCollectionView()
         

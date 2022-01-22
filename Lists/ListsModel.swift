@@ -9,6 +9,11 @@
 
 import UIKit
 
+struct DisplayedList {
+    var list = List()
+    var frame = ListFrame()
+}
+
 struct ListFrame {
     var frame = CGRect.zero
     var chipFrames = [ChipFrame]()

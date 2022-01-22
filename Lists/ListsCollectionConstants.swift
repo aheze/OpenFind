@@ -29,6 +29,7 @@ struct ListsCellConstants {
     /// hugs the chips
     static var contentEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     
+    static var chipCornerRadius = CGFloat(8)
     static var chipFont = UIFont.preferredFont(forTextStyle: .body)
     static var chipEdgeInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
     static var chipSpacing = CGFloat(8)

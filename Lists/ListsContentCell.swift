@@ -6,29 +6,26 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 class ListsContentCell: UICollectionViewCell {
+    @IBOutlet var headerView: UIView!
+    @IBOutlet var headerContentView: UIView!
     
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var headerContentView: UIView!
+    @IBOutlet var headerContentViewTopC: NSLayoutConstraint!
+    @IBOutlet var headerContentViewRightC: NSLayoutConstraint!
+    @IBOutlet var headerContentViewBottomC: NSLayoutConstraint!
+    @IBOutlet var headerContentViewLeftC: NSLayoutConstraint!
     
-    @IBOutlet weak var headerContentViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var headerContentViewRightC: NSLayoutConstraint!
-    @IBOutlet weak var headerContentViewBottomC: NSLayoutConstraint!
-    @IBOutlet weak var headerContentViewLeftC: NSLayoutConstraint!
+    @IBOutlet var headerImageView: UIImageView!
+    @IBOutlet var headerImageViewRightC: NSLayoutConstraint!
     
-    
-    @IBOutlet weak var headerImageView: UIImageView!
-    @IBOutlet weak var headerImageViewRightC: NSLayoutConstraint!
-    
-    @IBOutlet weak var headerStackView: UIStackView!
-    @IBOutlet weak var headerTitleLabel: UILabel!
-    @IBOutlet weak var headerDescriptionLabel: UILabel!
+    @IBOutlet var headerStackView: UIStackView!
+    @IBOutlet var headerTitleLabel: UILabel!
+    @IBOutlet var headerDescriptionLabel: UILabel!
 
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var containerChipsView: UIView!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var containerChipsView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,5 +48,40 @@ class ListsContentCell: UICollectionViewCell {
         
         headerImageViewRightC.constant = c.headerImageRightPadding
         headerStackView.spacing = c.headerTextSpacing
+    }
+}
+
+class ListChipView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    lazy var backgroundView: UIView = {
+        let backgroundView = UIView()
+        backgroundView.frame = bounds
+        backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundView.layer.cornerRadius = ListsCellConstants.chipCornerRadius
+        addSubview(backgroundView)
+        return backgroundView
+    }()
+
+    lazy var label: UILabel = {
+        let label = UILabel()
+        label.font = ListsCellConstants.chipFont
+        addSubview(label)
+        return label
+    }()
+    
+    private func commonInit() {
+        backgroundColor = .clear
+        
+        _ = backgroundView
+        _ = label
     }
 }

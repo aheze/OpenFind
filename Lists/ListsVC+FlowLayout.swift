@@ -1,5 +1,5 @@
 //
-//  ListsVC+Datasource.swift
+//  ListsVC+FlowLayout.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/21/22.
@@ -11,12 +11,11 @@ import UIKit
 
 extension ListsViewController {
     func createFlowLayout() -> ListsCollectionFlowLayout {
-        let topPadding = searchConfiguration.getTotalHeight()
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.getLists = { [weak self] in
             guard let self = self else { return [] }
-            return self.listsViewModel.displayedLists
+            return self.listsViewModel.displayedLists.map { $0.list }
         }
         flowLayout.getListSizeFromWidth = { [weak self] (availableWidth, list) in
             guard let self = self else { return .zero }
@@ -120,11 +119,8 @@ extension ListsViewController {
         let containerHeight = chipContainerHeight
         + c.contentEdgeInsets.top
         + c.contentEdgeInsets.bottom
-//        containerChipsView
         
         let height = headerHeight + containerHeight
-        
-//        print("Frames: \(chipFrames)")
         
         return CGSize(width: availableWidth, height: height)
     }
