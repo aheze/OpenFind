@@ -28,9 +28,9 @@ class ListsViewModel: ObservableObject {
         ),
         List(
             name: "Photo Editing",
-            desc: "Photoshop maybe",
+            desc: "Should learn this",
             image: "lasso.and.sparkles",
-            color: 0x004C7F,
+            color: 0xda00ff,
             contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
@@ -38,7 +38,7 @@ class ListsViewModel: ObservableObject {
             name: "Plans",
             desc: "Some words about plans",
             image: "calendar.day.timeline.left",
-            color: 0x004C7F,
+            color: 0x008bd8,
             contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
@@ -46,7 +46,7 @@ class ListsViewModel: ObservableObject {
             name: "Computer Stuff",
             desc: "Keyboard",
             image: "keyboard.fill",
-            color: 0x004C7F,
+            color: 0xdd000e,
             contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
@@ -54,7 +54,7 @@ class ListsViewModel: ObservableObject {
             name: "Video Editing",
             desc: "DaVinci Resolve",
             image: "sparkles.square.filled.on.square",
-            color: 0xE2AC00,
+            color: 0xaddd00,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
@@ -62,7 +62,7 @@ class ListsViewModel: ObservableObject {
             name: "Popovers",
             desc: "A library to present popovers",
             image: "rectangle.trailinghalf.inset.filled.arrow.trailing",
-            color: 0xE2AC00,
+            color: 0x007eef,
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),

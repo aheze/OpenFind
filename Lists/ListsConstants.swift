@@ -1,5 +1,5 @@
 //
-//  ListsCollectionConstants.swift
+//  ListsConstants.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/21/22.
@@ -12,6 +12,7 @@ import UIKit
 struct ListsCollectionConstants {
     static var minCellWidth = CGFloat(300)
     static var sidePadding = CGFloat(16)
+    static var cellSpacing = CGFloat(16)
 }
 
 struct ListsCellConstants {

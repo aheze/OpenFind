@@ -13,7 +13,7 @@
 		3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */; };
 		3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE8259FF7470087AE92 /* PhotosViewController.swift */; };
 		3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */; };
-		3C08EAD1279B0AA300971D60 /* ListsCollectionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD0279B0AA300971D60 /* ListsCollectionConstants.swift */; };
+		3C08EAD1279B0AA300971D60 /* ListsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD0279B0AA300971D60 /* ListsConstants.swift */; };
 		3C08EAD3279B0B4100971D60 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD2279B0B4100971D60 /* ListsModel.swift */; };
 		3C08EAD5279B0C5400971D60 /* ListsVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD4279B0C5400971D60 /* ListsVC+FlowLayout.swift */; };
 		3C0A7C9B25C649A70076DBCF /* Onboarding.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */; };
@@ -1430,7 +1430,7 @@
 		3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Migration.swift"; sourceTree = "<group>"; };
 		3C020CE8259FF7470087AE92 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Migration.swift"; sourceTree = "<group>"; };
-		3C08EAD0279B0AA300971D60 /* ListsCollectionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionConstants.swift; sourceTree = "<group>"; };
+		3C08EAD0279B0AA300971D60 /* ListsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsConstants.swift; sourceTree = "<group>"; };
 		3C08EAD2279B0B4100971D60 /* ListsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		3C08EAD4279B0C5400971D60 /* ListsVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+FlowLayout.swift"; sourceTree = "<group>"; };
 		3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboarding.xcassets; sourceTree = "<group>"; };
@@ -2698,6 +2698,7 @@
 			children = (
 				3C4D3A64274769370010FD68 /* ListsContent.storyboard */,
 				3C4D3A62274769370010FD68 /* ListsBridge.swift */,
+				3C08EAD0279B0AA300971D60 /* ListsConstants.swift */,
 				3C08EAD2279B0B4100971D60 /* ListsModel.swift */,
 				3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */,
 				3C4D3A63274769370010FD68 /* ListsController.swift */,
@@ -2706,7 +2707,6 @@
 				3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */,
 				3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */,
 				3C08EAD4279B0C5400971D60 /* ListsVC+FlowLayout.swift */,
-				3C08EAD0279B0AA300971D60 /* ListsCollectionConstants.swift */,
 				3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */,
 				3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */,
 				3C4D3A61274769260010FD68 /* Testing */,
@@ -5308,7 +5308,7 @@
 				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3C3642FF277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
-				3C08EAD1279B0AA300971D60 /* ListsCollectionConstants.swift in Sources */,
+				3C08EAD1279B0AA300971D60 /* ListsConstants.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CFD602A278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3CFD5F77278A37CF0031BC8B /* TabModel.swift in Sources */,

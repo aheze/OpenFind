@@ -68,7 +68,8 @@ extension ListsViewController {
                 )
                 let wordsLeftChipFrame = ListFrame.ChipFrame(
                     frame: wordsLeftFrame,
-                    string: wordsLeftText
+                    string: wordsLeftText,
+                    isWordsLeftButton: true
                 )
                 chipFrames.append(wordsLeftChipFrame)
                 return true

@@ -50,7 +50,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
                 attributes.frame = cellFrame
                 layoutAttributes.append(attributes)
-                currentOffset = currentOffset + CGPoint(x: 0, y: cellFrame.height)
+                currentOffset = currentOffset + CGPoint(x: 0, y: cellFrame.height + ListsCollectionConstants.cellSpacing)
             }
         }
         

@@ -51,9 +51,13 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         for chipFrame in frame.chipFrames {
             let chipView = ListChipView()
             chipView.frame = chipFrame.frame
-            chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
             chipView.label.text = chipFrame.string
             chipView.label.textColor = UIColor(hex: displayedList.list.color)
+            if chipFrame.isWordsLeftButton {
+                chipView.backgroundView.backgroundColor = UIColor(hex: displayedList.list.color).withAlphaComponent(0.1)
+            } else {
+                chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
+            }
             cell.chipsContainerView.addSubview(chipView)
         }
         

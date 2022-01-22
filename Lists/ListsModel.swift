@@ -21,5 +21,6 @@ struct ListFrame {
     struct ChipFrame {
         var frame = CGRect.zero
         var string = ""
+        var isWordsLeftButton = false
     }
 }
