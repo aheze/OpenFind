@@ -15,6 +15,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             let transitionCoordinator = navigation.transitionCoordinator,
             let viewController = viewController as? Searchable
         {
+            print("TOP:::: \( viewController.searchBarOffset)")
             searchContainerViewTopC.constant = viewController.searchBarOffset
             navigationBarBackgroundHeightC.constant = viewController.searchBarOffset + searchConfiguration.getTotalHeight()
             
