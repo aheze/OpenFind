@@ -60,9 +60,4 @@ class ListsDetailViewController: UIViewController, Searchable {
         navigationItem.largeTitleDisplayMode = .never
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("safe: \(view.safeAreaInsets.top)")
-//        model.scrollViewOffsetUpdated(model.scrollViewOffset)
-    }
 }

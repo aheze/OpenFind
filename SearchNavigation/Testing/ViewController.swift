@@ -71,12 +71,12 @@ class MainViewController: UIViewController, UIScrollViewDelegate, Searchable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset - configuration.getTotalHeight()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - configuration.getTotalHeight()
+        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset - configuration.getTotalHeight()
         updateNavigationBar?()
     }
 }

@@ -57,6 +57,7 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
     }
 }
 
