@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         
         viewController.view.backgroundColor = .secondarySystemBackground
         
-        let searchNavigationController = SearchNavigationController.make(rootViewController: viewController, searchConfiguration: configuration)
+        let searchNavigationController = SearchNavigationController.make(rootViewController: viewController, searchConfiguration: configuration, tabType: .lists)
         self.searchNavigationController = searchNavigationController
         searchNavigationController.testing = true
         addChildViewController(searchNavigationController, in: view)
@@ -105,6 +105,7 @@ class DetailViewController: UIViewController, Searchable, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("id scroll.")
         let contentOffset = -scrollView.contentOffset.y
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - configuration.getTotalHeight()
         updateNavigationBar?()

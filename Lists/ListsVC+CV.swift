@@ -14,8 +14,6 @@ extension ListsViewController {
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
-        
-        collectionView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
     }
 }
 

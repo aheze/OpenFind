@@ -8,7 +8,6 @@
 import UIKit
 
 class ListsViewController: UIViewController, Searchable {
-    
     /// external models
     var listsViewModel: ListsViewModel
     var searchConfiguration: SearchConfiguration
@@ -18,9 +17,8 @@ class ListsViewController: UIViewController, Searchable {
     
     var updateNavigationBar: (() -> Void)?
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     lazy var listsFlowLayout: ListsCollectionFlowLayout = createFlowLayout()
-    
     
     init?(
         coder: NSCoder,
@@ -40,17 +38,14 @@ class ListsViewController: UIViewController, Searchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("load!")
-        self.title = "Lists"
-        
+        title = "Lists"
         _ = listsFlowLayout
-        
         listsViewModel.displayedLists = listsViewModel.lists.map { .init(list: $0) }
-        
-        setupCollectionView()
         
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear
+        
+        setupCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

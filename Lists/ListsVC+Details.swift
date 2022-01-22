@@ -11,10 +11,15 @@ import UIKit
 
 extension ListsViewController {
     func presentDetails(list: List) {
-        let viewController = ListsDetailViewController(
-            list: list,
-            searchConfiguration: searchConfiguration
-        )
+        let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
+            ListsDetailViewController(
+                coder: coder,
+                list: list,
+                searchConfiguration: self.searchConfiguration
+            )
+        }
+        
         navigationController?.pushViewController(viewController, animated: true)
         
         viewController.updateSearchBarOffset = { [weak self] in

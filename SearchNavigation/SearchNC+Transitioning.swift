@@ -19,7 +19,6 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             searchContainerViewTopC?.constant = offset
             navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
             
-
             let percentage = getBlurPercentage(
                 baseSearchBarOffset: viewController.baseSearchBarOffset,
                 additionalSearchBarOffset: viewController.additionalSearchBarOffset
@@ -80,7 +79,7 @@ extension SearchNavigationController {
             
             searchContainerViewTopC?.constant = offset
             navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
-            updateBlur(
+            self.updateBlur(
                 baseSearchBarOffset: topViewController.baseSearchBarOffset,
                 additionalSearchBarOffset: topViewController.additionalSearchBarOffset
             )
@@ -89,7 +88,6 @@ extension SearchNavigationController {
     
     /// 0 is nil, 1 is blur
     func getBlurPercentage(baseSearchBarOffset: CGFloat, additionalSearchBarOffset: CGFloat) -> CGFloat {
-        
         /// make sure `additionalSearchBarOffset` is negative (scrolling up)
         guard additionalSearchBarOffset <= 0 else { return 0 }
         
@@ -99,10 +97,14 @@ extension SearchNavigationController {
     }
     
     func updateBlur(baseSearchBarOffset: CGFloat, additionalSearchBarOffset: CGFloat) {
-        let blurPercentage = getBlurPercentage(
+        /// make sure no transition is happening currently
+        guard navigation.transitionCoordinator == nil else { return }
+        
+        let blurPercentage = self.getBlurPercentage(
             baseSearchBarOffset: baseSearchBarOffset,
             additionalSearchBarOffset: additionalSearchBarOffset
         )
+        
         animator?.fractionComplete = blurPercentage
         self.blurPercentage = blurPercentage
     }

@@ -163,6 +163,52 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="75.669642857142847"/>
         </scene>
+        <!--Lists Detail View Controller-->
+        <scene sceneID="xQU-4E-3xc">
+            <objects>
+                <viewController storyboardIdentifier="ListsDetailViewController" id="NjZ-Si-jqU" customClass="ListsDetailViewController" customModule="ARVision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qUP-v8-9gv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQu-xm-bX1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fG2-eW-D8T">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1000" id="JoF-zv-HmI"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fG2-eW-D8T" secondAttribute="trailing" id="BoM-F4-ave"/>
+                                    <constraint firstItem="fG2-eW-D8T" firstAttribute="leading" secondItem="UQu-xm-bX1" secondAttribute="leading" id="Ois-IH-dtX"/>
+                                    <constraint firstAttribute="bottom" secondItem="fG2-eW-D8T" secondAttribute="bottom" id="dXI-Ii-MRE"/>
+                                    <constraint firstItem="fG2-eW-D8T" firstAttribute="width" secondItem="UQu-xm-bX1" secondAttribute="width" id="qdl-oJ-FpE"/>
+                                    <constraint firstItem="fG2-eW-D8T" firstAttribute="top" secondItem="UQu-xm-bX1" secondAttribute="top" id="wIN-8C-Lbk"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yJQ-BF-by8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UQu-xm-bX1" firstAttribute="top" secondItem="qUP-v8-9gv" secondAttribute="top" id="AT3-Wp-92J"/>
+                            <constraint firstAttribute="trailing" secondItem="UQu-xm-bX1" secondAttribute="trailing" id="dhH-C2-mBo"/>
+                            <constraint firstItem="UQu-xm-bX1" firstAttribute="leading" secondItem="qUP-v8-9gv" secondAttribute="leading" id="hZ6-Mp-9iM"/>
+                            <constraint firstAttribute="bottom" secondItem="UQu-xm-bX1" secondAttribute="bottom" id="vyE-D7-2TD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="fG2-eW-D8T" id="RNf-6f-Xfa"/>
+                        <outlet property="scrollView" destination="UQu-xm-bX1" id="YDA-Oo-INA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tb3-IN-OWL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853.62318840579712" y="75.669642857142847"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="secondarySystemBackgroundColor">

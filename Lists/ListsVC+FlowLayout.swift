@@ -24,6 +24,7 @@ extension ListsViewController {
         
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
         collectionView.contentInset.top = searchConfiguration.getTotalHeight()
+        collectionView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         return flowLayout
     }
     

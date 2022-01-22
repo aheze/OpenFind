@@ -11,53 +11,55 @@ import SwiftUI
 
 class ListsDetailViewController: UIViewController, Searchable {
     
-    var model: ListsDetailViewModel
+    var list: List
     var searchConfiguration: SearchConfiguration
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
     
-    init(list: List, searchConfiguration: SearchConfiguration) {
-        let model = ListsDetailViewModel(list: list)
-        self.model = model
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
+    init?(
+        coder: NSCoder,
+        list: List,
+        searchConfiguration: SearchConfiguration
+    ) {
+        self.list = list
         self.searchConfiguration = searchConfiguration
-        super.init(nibName: nil, bundle: nil)
+        super.init(coder: coder)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        
-        /**
-         Instantiate the base `view`.
-         */
-        view = UIView()
-        view.backgroundColor = .systemBackground
-        
-        baseSearchBarOffset = getCompactBarSafeAreaHeight()
-        model.topContentInset = searchConfiguration.getTotalHeight()
-        
-        model.scrolled = { [weak self] in
-            guard let self = self else { return }
-            self.additionalSearchBarOffset = self.model.scrollViewOffset
-            self.updateSearchBarOffset?()
-        }
-        
-        let containerView = ListsDetailView(model: model)
-        let hostingController = UIHostingController(rootView: containerView)
-        hostingController.view.frame = view.bounds
-        hostingController.view.backgroundColor = .clear
-        hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        addChild(hostingController)
-        view.addSubview(hostingController.view)
-        hostingController.didMove(toParent: self)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.title = "List"
         navigationItem.largeTitleDisplayMode = .never
+        
+        baseSearchBarOffset = getCompactBarSafeAreaHeight()
+//        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
+        
+        scrollView.contentInset.top = searchConfiguration.getTotalHeight()
+        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        
+        scrollView.delegate = self
+        
+        scrollView.backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        view.backgroundColor = .secondarySystemBackground
     }
-    
+}
+
+/// Scroll view
+extension ListsDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset = -scrollView.contentOffset.y
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchConfiguration.getTotalHeight()
+        updateSearchBarOffset?()
+    }
 }
