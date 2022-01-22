@@ -36,7 +36,13 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.headerImageView.image = UIImage(systemName: list.image)
         cell.headerTitleLabel.text = list.name
         cell.headerDescriptionLabel.text = list.desc
-        cell.layer.cornerRadius = 16
+        cell.layer.cornerRadius = ListsCellConstants.cornerRadius
+        cell.tapped = { [weak self] in
+            guard let self = self else { return }
+            if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
+                self.presentDetails(list: list)
+            }
+        }
         return cell
     }
  
@@ -57,6 +63,12 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             chipView.label.textColor = UIColor(hex: displayedList.list.color)
             if chipFrame.isWordsLeftButton {
                 chipView.backgroundView.backgroundColor = UIColor(hex: displayedList.list.color).withAlphaComponent(0.1)
+                chipView.tapped = { [weak self] in
+                    guard let self = self else { return }
+                    if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
+                        self.presentDetails(list: list)
+                    }
+                }
             } else {
                 chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
             }

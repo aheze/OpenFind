@@ -16,6 +16,8 @@ struct ListsCollectionConstants {
 }
 
 struct ListsCellConstants {
+    static var cornerRadius = CGFloat(12)
+    
     static var titleColor = UIColor.white
     static var descriptionColor = UIColor.white.withAlphaComponent(0.85)
     static var chipBackgroundColor = UIColor.secondarySystemBackground

@@ -34,7 +34,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="181"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-D0-RZN">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-D0-RZN" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bQ-NR-Mgi">
@@ -87,7 +87,11 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGf-sF-ucv">
                                                     <rect key="frame" x="0.0" y="36.5" width="414" height="144.5"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2D-97-h2h">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5K-Sc-LfR" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="144.5"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2D-97-h2h" customClass="PassthroughView" customModule="ARVision" customModuleProvider="target">
                                                             <rect key="frame" x="12" y="12" width="390" height="120.5"/>
                                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                         </view>
@@ -95,9 +99,13 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="S2D-97-h2h" secondAttribute="bottom" constant="12" id="1Fw-JS-Gdb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="d5K-Sc-LfR" secondAttribute="bottom" id="B76-ND-V7q"/>
                                                         <constraint firstItem="S2D-97-h2h" firstAttribute="top" secondItem="kGf-sF-ucv" secondAttribute="top" constant="12" id="EWw-mr-huq"/>
                                                         <constraint firstAttribute="trailing" secondItem="S2D-97-h2h" secondAttribute="trailing" constant="12" id="IzF-6J-q0d"/>
                                                         <constraint firstItem="S2D-97-h2h" firstAttribute="leading" secondItem="kGf-sF-ucv" secondAttribute="leading" constant="12" id="afW-7K-gWh"/>
+                                                        <constraint firstItem="d5K-Sc-LfR" firstAttribute="top" secondItem="kGf-sF-ucv" secondAttribute="top" id="kTH-xM-JZd"/>
+                                                        <constraint firstItem="d5K-Sc-LfR" firstAttribute="leading" secondItem="kGf-sF-ucv" secondAttribute="leading" id="lUy-tL-v4E"/>
+                                                        <constraint firstAttribute="trailing" secondItem="d5K-Sc-LfR" secondAttribute="trailing" id="zBD-Tp-9zT"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -118,6 +126,7 @@
                                             <outlet property="chipsContainerViewLeftC" destination="afW-7K-gWh" id="Zap-HI-vyj"/>
                                             <outlet property="chipsContainerViewRightC" destination="IzF-6J-q0d" id="3F2-xh-CH8"/>
                                             <outlet property="chipsContainerViewTopC" destination="EWw-mr-huq" id="RhB-gd-xc1"/>
+                                            <outlet property="containerButtonView" destination="d5K-Sc-LfR" id="fIC-AU-eqY"/>
                                             <outlet property="containerView" destination="kGf-sF-ucv" id="TpI-Jb-V3b"/>
                                             <outlet property="headerContentView" destination="8bQ-NR-Mgi" id="bvc-Gl-jei"/>
                                             <outlet property="headerContentViewBottomC" destination="foU-FZ-il1" id="HdV-03-t1C"/>
@@ -129,7 +138,7 @@
                                             <outlet property="headerImageViewRightC" destination="8au-RS-esB" id="qUM-NW-9IJ"/>
                                             <outlet property="headerStackView" destination="f0M-zl-2Jt" id="PT7-cO-b4m"/>
                                             <outlet property="headerTitleLabel" destination="8QC-5X-Emn" id="n6o-65-ym4"/>
-                                            <outlet property="headerView" destination="Clc-D0-RZN" id="ZnH-wI-O5n"/>
+                                            <outlet property="headerView" destination="Clc-D0-RZN" id="JV1-BB-z4l"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

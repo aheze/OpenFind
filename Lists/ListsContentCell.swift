@@ -9,7 +9,7 @@
 import UIKit
 
 class ListsContentCell: UICollectionViewCell {
-    @IBOutlet var headerView: UIView!
+    @IBOutlet var headerView: ButtonView!
     @IBOutlet var headerContentView: UIView!
     
     @IBOutlet var headerContentViewTopC: NSLayoutConstraint!
@@ -25,6 +25,7 @@ class ListsContentCell: UICollectionViewCell {
     @IBOutlet var headerDescriptionLabel: UILabel!
 
     @IBOutlet var containerView: UIView!
+    @IBOutlet weak var containerButtonView: ButtonView!
     @IBOutlet var chipsContainerView: UIView!
     
     @IBOutlet var chipsContainerViewTopC: NSLayoutConstraint!
@@ -32,9 +33,13 @@ class ListsContentCell: UICollectionViewCell {
     @IBOutlet var chipsContainerViewBottomC: NSLayoutConstraint!
     @IBOutlet var chipsContainerViewLeftC: NSLayoutConstraint!
     
+    var tapped: (() -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         let c = ListsCellConstants.self
+        
+        /// allow button view to be pressed
+        headerContentView.isUserInteractionEnabled = false
         
         headerContentView.backgroundColor = .clear
         chipsContainerView.backgroundColor = .clear
@@ -60,6 +65,14 @@ class ListsContentCell: UICollectionViewCell {
         
         headerImageViewRightC.constant = c.headerImageRightPadding
         headerStackView.spacing = c.headerTextSpacing
+        
+        headerView.tapped = { [weak self] in
+            self?.tapped?()
+        }
+        containerButtonView.tapped = { [weak self] in
+            self?.tapped?()
+        }
+        
     }
 }
 
