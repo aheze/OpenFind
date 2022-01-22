@@ -13,6 +13,9 @@
 		3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */; };
 		3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE8259FF7470087AE92 /* PhotosViewController.swift */; };
 		3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */; };
+		3C08EAD1279B0AA300971D60 /* ListsCollectionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD0279B0AA300971D60 /* ListsCollectionConstants.swift */; };
+		3C08EAD3279B0B4100971D60 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD2279B0B4100971D60 /* ListsModel.swift */; };
+		3C08EAD5279B0C5400971D60 /* ListsVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EAD4279B0C5400971D60 /* ListsVC+Datasource.swift */; };
 		3C0A7C9B25C649A70076DBCF /* Onboarding.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */; };
 		3C0CC69E25CE0385008E5737 /* unused.rb in Resources */ = {isa = PBXBuildFile; fileRef = 3C0CC69D25CE0385008E5737 /* unused.rb */; };
 		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
@@ -1213,12 +1216,12 @@
 		3CFD5F78278A37D00031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
 		3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3CFD5F79278A37F00031BC8B /* Popovers */; };
 		3CFD5F7C278A486D0031BC8B /* ListsVC+CV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */; };
-		3CFD5F7E278A4A130031BC8B /* ListContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */; };
+		3CFD5F7E278A4A130031BC8B /* ListsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */; };
 		3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */; };
 		3CFD5F82278A56BB0031BC8B /* ListsVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F81278A56BB0031BC8B /* ListsVC+NavigationBar.swift */; };
 		3CFD5F84278A586B0031BC8B /* ListsVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */; };
 		3CFD5F94278A86140031BC8B /* ListsVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */; };
-		3CFD5F95278A86140031BC8B /* ListContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */; };
+		3CFD5F95278A86140031BC8B /* ListsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */; };
 		3CFD5F96278A86140031BC8B /* ListsVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F81278A56BB0031BC8B /* ListsVC+NavigationBar.swift */; };
 		3CFD5F97278A86140031BC8B /* ListsVC+CV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */; };
 		3CFD5F98278A86140031BC8B /* ListsCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */; };
@@ -1427,6 +1430,9 @@
 		3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Migration.swift"; sourceTree = "<group>"; };
 		3C020CE8259FF7470087AE92 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Migration.swift"; sourceTree = "<group>"; };
+		3C08EAD0279B0AA300971D60 /* ListsCollectionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionConstants.swift; sourceTree = "<group>"; };
+		3C08EAD2279B0B4100971D60 /* ListsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
+		3C08EAD4279B0C5400971D60 /* ListsVC+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Datasource.swift"; sourceTree = "<group>"; };
 		3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboarding.xcassets; sourceTree = "<group>"; };
 		3C0CC69D25CE0385008E5737 /* unused.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unused.rb; sourceTree = "<group>"; };
 		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
@@ -1991,7 +1997,7 @@
 		3CF7642B278CE52800DCA4EA /* SearchNC+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Utilities.swift"; sourceTree = "<group>"; };
 		3CFD5F73278A374B0031BC8B /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+CV.swift"; sourceTree = "<group>"; };
-		3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentCell.swift; sourceTree = "<group>"; };
+		3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsContentCell.swift; sourceTree = "<group>"; };
 		3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionFlowLayout.swift; sourceTree = "<group>"; };
 		3CFD5F81278A56BB0031BC8B /* ListsVC+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+NavigationBar.swift"; sourceTree = "<group>"; };
 		3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+SearchBar.swift"; sourceTree = "<group>"; };
@@ -2692,14 +2698,17 @@
 			children = (
 				3C4D3A64274769370010FD68 /* ListsContent.storyboard */,
 				3C4D3A62274769370010FD68 /* ListsBridge.swift */,
+				3C08EAD2279B0B4100971D60 /* ListsModel.swift */,
 				3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */,
 				3C4D3A63274769370010FD68 /* ListsController.swift */,
 				3C4D3A65274769370010FD68 /* ListsViewController.swift */,
 				3CFD5F81278A56BB0031BC8B /* ListsVC+NavigationBar.swift */,
 				3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */,
 				3CFD5F7B278A486D0031BC8B /* ListsVC+CV.swift */,
+				3C08EAD4279B0C5400971D60 /* ListsVC+Datasource.swift */,
+				3C08EAD0279B0AA300971D60 /* ListsCollectionConstants.swift */,
 				3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */,
-				3CFD5F7D278A4A130031BC8B /* ListContentCell.swift */,
+				3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */,
 				3C4D3A61274769260010FD68 /* Testing */,
 			);
 			path = Lists;
@@ -5212,7 +5221,7 @@
 				3C3642ED277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C3642B8277BC0FC0038CB18 /* CameraButton.swift in Sources */,
 				3C4D3A792747696F0010FD68 /* GeneralUtilities.swift in Sources */,
-				3CFD5F95278A86140031BC8B /* ListContentCell.swift in Sources */,
+				3CFD5F95278A86140031BC8B /* ListsContentCell.swift in Sources */,
 				3CFD601F278B70970031BC8B /* SearchNavigationController.swift in Sources */,
 				3C606674274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C3642B7277BC0FC0038CB18 /* IconButtons.swift in Sources */,
@@ -5281,9 +5290,11 @@
 				3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CFD6018278B70940031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */,
+				3C08EAD3279B0B4100971D60 /* ListsModel.swift in Sources */,
 				3C3642FE277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C4D3A7C274769700010FD68 /* GeneralUtilities.swift in Sources */,
 				3CFD5F7C278A486D0031BC8B /* ListsVC+CV.swift in Sources */,
+				3C08EAD5279B0C5400971D60 /* ListsVC+Datasource.swift in Sources */,
 				3C606673274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
 				3C3642FD277BC2E90038CB18 /* SearchViewModel.swift in Sources */,
@@ -5297,6 +5308,7 @@
 				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3C3642FF277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
+				3C08EAD1279B0AA300971D60 /* ListsCollectionConstants.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CFD602A278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3CFD5F77278A37CF0031BC8B /* TabModel.swift in Sources */,
@@ -5311,7 +5323,7 @@
 				3CF76435278D196B00DCA4EA /* Searchable.swift in Sources */,
 				3C4D3A5E2747691A0010FD68 /* AppDelegate.swift in Sources */,
 				3C3642F5277BC2E90038CB18 /* SearchConfiguration.swift in Sources */,
-				3CFD5F7E278A4A130031BC8B /* ListContentCell.swift in Sources */,
+				3CFD5F7E278A4A130031BC8B /* ListsContentCell.swift in Sources */,
 				3C6C73B52781947700E039F0 /* SuggestionsView.swift in Sources */,
 				3C3642F3277BC2E90038CB18 /* Bridge.swift in Sources */,
 				3C1D1A3E275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,

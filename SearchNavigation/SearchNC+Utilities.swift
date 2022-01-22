@@ -18,6 +18,9 @@ extension UIScrollView {
         let offset = abs(min(0, self.contentOffset.y))
         let topSafeArea = self.adjustedContentInset.top
         
+        print("offset; \(self.contentOffset.y)")
+        print("safe; \(topSafeArea)")
+        
         /// rubber banding on large title
         if offset > topSafeArea {
             contentOffset = offset

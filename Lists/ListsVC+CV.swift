@@ -13,7 +13,6 @@ extension ListsViewController {
     func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.contentInset.top = searchConfiguration.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
     }
 }
@@ -27,17 +26,18 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "Cell",
             for: indexPath
-        ) as? ListContentCell else {
+        ) as? ListsContentCell else {
             fatalError()
         }
         
-        cell.contentView.addDebugBorders(.blue)
+//        cell.contentView.addDebugBorders(.blue)
         cell.layer.cornerRadius = 16
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = scrollView.getRelativeContentOffset()
+        print("cr: \(contentOffset)")
         searchBarOffset = contentOffset - searchConfiguration.getTotalHeight()
         updateNavigationBar?()
     }

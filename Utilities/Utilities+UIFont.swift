@@ -25,4 +25,10 @@ extension UIFont {
     func italic() -> UIFont {
         return withTraits(traits: .traitItalic)
     }
+    
+    func sizeOfString(_ string: String) -> CGSize {
+        let fontAttributes = [NSAttributedString.Key.font: self]
+        let size = (string as NSString).size(withAttributes: fontAttributes)
+        return size
+    }
 }

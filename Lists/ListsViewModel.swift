@@ -15,7 +15,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words",
             image: "leaf.fill",
             color: 0x1F7000,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -23,7 +23,31 @@ class ListsViewModel: ObservableObject {
             desc: "Words",
             image: "leaf.fill",
             color: 0x004C7F,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Dairy-free",
+            desc: "Words",
+            image: "leaf.fill",
+            color: 0x004C7F,
+            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Dairy-free",
+            desc: "Words",
+            image: "leaf.fill",
+            color: 0x004C7F,
+            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
+            dateCreated: Date()
+        ),
+        List(
+            name: "Dairy-free",
+            desc: "Words",
+            image: "leaf.fill",
+            color: 0x004C7F,
+            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(

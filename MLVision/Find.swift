@@ -86,8 +86,5 @@ extension Find {
         }
         
         return sentences
-        //
-        //        startTime = nil
-        //        return observations
     }
 }

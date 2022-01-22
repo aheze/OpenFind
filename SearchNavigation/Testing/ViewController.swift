@@ -68,6 +68,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, Searchable {
         let contentOffset = scrollView.getRelativeContentOffset()
         searchBarOffset = contentOffset - configuration.getTotalHeight()
         updateNavigationBar?()
+        print("cr: \(contentOffset)")
     }
 }
 

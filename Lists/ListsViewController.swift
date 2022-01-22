@@ -18,18 +18,7 @@ class ListsViewController: UIViewController, Searchable, PageViewController {
     var updateNavigationBar: (() -> Void)?
     
     @IBOutlet weak var collectionView: UICollectionView!
-    lazy var listsFlowLayout: ListsCollectionFlowLayout = {
-        let topPadding = searchConfiguration.getTotalHeight()
-        let flowLayout = ListsCollectionFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.getLists = { [weak self] in
-            guard let self = self else { return [] }
-            return self.listsViewModel.displayedLists
-        }
-
-        collectionView.setCollectionViewLayout(flowLayout, animated: false)
-        return flowLayout
-    }()
+    lazy var listsFlowLayout: ListsCollectionFlowLayout = createFlowLayout()
     
     
     init?(

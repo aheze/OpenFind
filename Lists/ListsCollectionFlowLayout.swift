@@ -14,6 +14,9 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     var getLists: (() -> [List])?
     
+    /// get the frame of a list cell from available width
+    var getListSizeFromWidth: ((CGFloat, List) -> CGSize)?
+    
     override init() {
         super.init()
     }
@@ -27,24 +30,28 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-        var layoutAttributes = [UICollectionViewLayoutAttributes]()
-        var currentOffset = CGPoint.zero
         
         guard let lists = getLists?() else { return }
         guard let collectionView = collectionView else { return }
         
+        var layoutAttributes = [UICollectionViewLayoutAttributes]()
+        var currentOffset = CGPoint(x: ListsCollectionConstants.sidePadding, y: 0)
+        let availableWidth = collectionView.bounds.width - ListsCollectionConstants.sidePadding * 2
+        
         for index in lists.indices {
-            let frame = CGRect(
-                x: currentOffset.x,
-                y: currentOffset.y,
-                width: collectionView.bounds.width,
-                height: 200
-            )
-            
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
-            attributes.frame = frame
-            layoutAttributes.append(attributes)
-            currentOffset = currentOffset + CGPoint(x: 0, y: frame.height)
+            if let size = getListSizeFromWidth?(availableWidth, lists[index]) {
+                let cellFrame = CGRect(
+                    x: currentOffset.x,
+                    y: currentOffset.y,
+                    width: availableWidth,
+                    height: size.height
+                )
+                
+                let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
+                attributes.frame = cellFrame
+                layoutAttributes.append(attributes)
+                currentOffset = currentOffset + CGPoint(x: 0, y: cellFrame.height)
+            }
         }
         
         self.contentSize = CGSize(width: collectionView.bounds.width, height: currentOffset.y)
