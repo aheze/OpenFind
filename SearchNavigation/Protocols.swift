@@ -1,5 +1,5 @@
 //
-//  Searchable.swift
+//  Protocols.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/10/22.
@@ -8,6 +8,13 @@
     
 
 import UIKit
+
+protocol DismissalNavigationLifecycle: UIViewController {
+    func willAppear()
+    func didAppear()
+    func willDisappear()
+    func didDisappear()
+}
 
 protocol Searchable: UIViewController {
     var baseSearchBarOffset: CGFloat { get set }

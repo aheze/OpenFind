@@ -6,11 +6,9 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-
 import SwiftUI
 
 class ListsDetailViewController: UIViewController, Searchable {
-    
     var model: ListsDetailViewModel
     var toolbarViewModel: ToolbarViewModel
     var searchConfiguration: SearchConfiguration
@@ -19,66 +17,64 @@ class ListsDetailViewController: UIViewController, Searchable {
     var additionalSearchBarOffset = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
     
     /// has padding on the sides
-    @IBOutlet weak var containerStackView: UIStackView!
-    @IBOutlet weak var containerViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var containerViewRightC: NSLayoutConstraint!
-    @IBOutlet weak var containerViewBottomC: NSLayoutConstraint!
-    @IBOutlet weak var containerViewLeftC: NSLayoutConstraint!
+    @IBOutlet var containerStackView: UIStackView!
+    @IBOutlet var containerViewTopC: NSLayoutConstraint!
+    @IBOutlet var containerViewRightC: NSLayoutConstraint!
+    @IBOutlet var containerViewBottomC: NSLayoutConstraint!
+    @IBOutlet var containerViewLeftC: NSLayoutConstraint!
     
     // MARK: - Header
     
-    @IBOutlet weak var headerView: UIView!
+    @IBOutlet var headerView: UIView!
     
     /// surrounds the inner views
-    @IBOutlet weak var headerStackView: UIStackView!
+    @IBOutlet var headerStackView: UIStackView!
     
     /// **top**
-    @IBOutlet weak var headerTopView: UIView!
-    @IBOutlet weak var headerTopViewHeightC: NSLayoutConstraint!
+    @IBOutlet var headerTopView: UIView!
+    @IBOutlet var headerTopViewHeightC: NSLayoutConstraint!
 
-    @IBOutlet weak var headerTopLeftView: ButtonView!
-    @IBOutlet weak var headerTopLeftViewRightC: NSLayoutConstraint!
-    @IBOutlet weak var headerTopLeftImageView: UIImageView!
+    @IBOutlet var headerTopLeftView: ButtonView!
+    @IBOutlet var headerTopLeftViewRightC: NSLayoutConstraint!
+    @IBOutlet var headerTopLeftImageView: UIImageView!
     
-    @IBOutlet weak var headerTopCenterView: UIView!
-    @IBOutlet weak var headerTopCenterTextField: UITextField!
+    @IBOutlet var headerTopCenterView: UIView!
+    @IBOutlet var headerTopCenterTextField: UITextField!
     
-    @IBOutlet weak var headerTopRightView: ButtonView!
-    @IBOutlet weak var headerTopRightViewLeftC: NSLayoutConstraint!
+    @IBOutlet var headerTopRightView: ButtonView!
+    @IBOutlet var headerTopRightViewLeftC: NSLayoutConstraint!
     var headerTopRightColorPickerModel = ColorPickerViewModel()
 
     /// **bottom**
-    @IBOutlet weak var headerBottomView: UIView!
-    @IBOutlet weak var headerBottomViewHeightC: NSLayoutConstraint!
-    @IBOutlet weak var headerBottomTextField: UITextField!
-    
-    
+    @IBOutlet var headerBottomView: UIView!
+    @IBOutlet var headerBottomViewHeightC: NSLayoutConstraint!
+    @IBOutlet var headerBottomTextField: UITextField!
     
     // MARK: - Words
-    @IBOutlet weak var wordsView: UIView!
+
+    @IBOutlet var wordsView: UIView!
 
     /// **top**
-    @IBOutlet weak var wordsTopView: UIView!
+    @IBOutlet var wordsTopView: UIView!
     
-    @IBOutlet weak var wordsTopLeftView: ButtonView!
-    @IBOutlet weak var wordsTopLeftLabel: PaddedLabel!
+    @IBOutlet var wordsTopLeftView: ButtonView!
+    @IBOutlet var wordsTopLeftLabel: PaddedLabel!
     
-    @IBOutlet weak var wordsTopCenterView: ButtonView!
-    @IBOutlet weak var wordsTopCenterLabel: PaddedLabel!
+    @IBOutlet var wordsTopCenterView: ButtonView!
+    @IBOutlet var wordsTopCenterLabel: PaddedLabel!
     
-    @IBOutlet weak var wordsTopRightView: ButtonView!
-    @IBOutlet weak var wordsTopRightImageView: UIImageView!
-    @IBOutlet weak var wordsTopRightImageViewLeftC: NSLayoutConstraint!
-    @IBOutlet weak var wordsTopRightImageViewRightC: NSLayoutConstraint!
-    
+    @IBOutlet var wordsTopRightView: ButtonView!
+    @IBOutlet var wordsTopRightImageView: UIImageView!
+    @IBOutlet var wordsTopRightImageViewLeftC: NSLayoutConstraint!
+    @IBOutlet var wordsTopRightImageViewRightC: NSLayoutConstraint!
     
     /// **table view**
-    @IBOutlet weak var wordsTableView: UITableView!
-    @IBOutlet weak var wordsTableViewHeightC: NSLayoutConstraint!
+    @IBOutlet var wordsTableView: UITableView!
+    @IBOutlet var wordsTableViewHeightC: NSLayoutConstraint!
     lazy var toolbarView = ListsDetailToolbarView(model: model)
     
     init?(
@@ -93,6 +89,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         super.init(coder: coder)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -100,7 +97,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "List"
+        title = "List"
         navigationItem.largeTitleDisplayMode = .never
         
         setup()
@@ -113,6 +110,24 @@ class ListsDetailViewController: UIViewController, Searchable {
         scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         
         scrollView.delegate = self
+    }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        
+        withAnimation {
+            toolbarViewModel.toolbar = nil
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isMovingToParent, model.isEditing {
+            withAnimation {
+                toolbarViewModel.toolbar = AnyView(toolbarView)
+            }
+        }
     }
 }
 

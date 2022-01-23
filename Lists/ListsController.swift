@@ -37,6 +37,11 @@ class ListsController {
             searchConfiguration: searchConfiguration,
             tabType: .lists
         )
+        searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }
+        searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
+        searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
+        searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
+        
         self.searchNavigationController = searchNavigationController
     
         viewController.loadViewIfNeeded() /// needed to initialize outlets

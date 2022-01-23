@@ -20,7 +20,7 @@ extension ListsViewController {
                 searchConfiguration: self.searchConfiguration
             )
         }
-        
+        self.detailsViewController = viewController
         navigationController?.pushViewController(viewController, animated: true)
         
         viewController.updateSearchBarOffset = { [weak self] in

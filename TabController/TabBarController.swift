@@ -71,7 +71,7 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
             case .clickedTabIcon:
                 TabState.modifyProgress(new: activeTab) /// make sure to modify first, so `willBeginNavigatingTo` will be accurate on swipe
                 self.delegate?.willBeginNavigatingTo(tab: activeTab) /// always call will begin anyway
-                self.delegate?.didFinishNavigatingTo(tab: activeTab)
+                self.delegate?.didFinishNavigatingTo(tab: activeTab) /// scroll view delegates not called, so call manually
                 
                 UIView.animate(withDuration: 0.3) { viewController.view.layoutIfNeeded() }
                 viewController.updateTabContent(activeTab, animated: false)
@@ -140,6 +140,23 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
                 delegate?.willBeginNavigatingTo(tab: newTab)
             }
             tabViewModel.changeTabState(newTab: newTab)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        notifyIfScrolledToStop()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        notifyIfScrolledToStop()
+    }
+    
+    /// stopped scrolling, call delegates
+    func notifyIfScrolledToStop() {
+        switch tabViewModel.tabState {
+        case .photos, .camera, .lists:
+            self.delegate?.didFinishNavigatingTo(tab: tabViewModel.tabState)
+        default: break
         }
     }
     

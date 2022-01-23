@@ -76,7 +76,6 @@ class SearchNavigationController: UIViewController, PageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewdidload.")
         navigation = UINavigationController(rootViewController: rootViewController)
         navigation.delegate = self
         

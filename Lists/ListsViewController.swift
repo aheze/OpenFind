@@ -8,6 +8,7 @@
 import UIKit
 
 class ListsViewController: UIViewController, Searchable {
+    
     /// external models
     var listsViewModel: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
@@ -20,6 +21,9 @@ class ListsViewController: UIViewController, Searchable {
     
     @IBOutlet var collectionView: UICollectionView!
     lazy var listsFlowLayout: ListsCollectionFlowLayout = createFlowLayout()
+    
+    /// details
+    var detailsViewController: ListsDetailViewController?
     
     init?(
         coder: NSCoder,

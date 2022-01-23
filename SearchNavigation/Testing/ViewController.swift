@@ -105,7 +105,6 @@ class DetailViewController: UIViewController, Searchable, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("id scroll.")
         let contentOffset = -scrollView.contentOffset.y
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - configuration.getTotalHeight()
         updateNavigationBar?()

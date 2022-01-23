@@ -9,7 +9,9 @@
 import UIKit
 
 extension SearchNavigationController: UINavigationControllerDelegate {
+    
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
         if
             let transitionCoordinator = navigation.transitionCoordinator,
             let viewController = viewController as? Searchable
@@ -32,7 +34,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                 self.navigationBarBackgroundBorderView.alpha = 0
                 self.navigationBarBackgroundBlurView.effect = nil
             }
-            
+    
             transitionCoordinator.animate { _ in
                 self.searchContainerViewContainer.layoutIfNeeded()
                 self.navigationBarBackgroundContainer.layoutIfNeeded()
@@ -61,11 +63,17 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                             additionalSearchBarOffset: currentViewController.additionalSearchBarOffset
                         )
                     }
+                    if let currentViewController = self.navigation.topViewController as? DismissalNavigationLifecycle {
+                        currentViewController.didAppear()
+                    }
                 } else {
                     self.updateBlur(
                         baseSearchBarOffset: viewController.baseSearchBarOffset,
                         additionalSearchBarOffset: viewController.additionalSearchBarOffset
                     )
+                    if let currentViewController = self.navigation.topViewController as? DismissalNavigationLifecycle {
+                        currentViewController.didDisappear()
+                    }
                 }
             }
         }
