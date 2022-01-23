@@ -10,11 +10,14 @@ import UIKit
 class ListsController {
     var searchConfiguration: SearchConfiguration
     var listsViewModel: ListsViewModel
+    var toolbarViewModel: ToolbarViewModel
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
-    init(listsViewModel: ListsViewModel) {
+    init(listsViewModel: ListsViewModel, toolbarViewModel: ToolbarViewModel) {
         self.listsViewModel = listsViewModel
+        self.toolbarViewModel = toolbarViewModel
+        
         let searchConfiguration = SearchConfiguration.lists
         self.searchConfiguration = searchConfiguration
         
@@ -23,6 +26,7 @@ class ListsController {
             ListsViewController(
                 coder: coder,
                 listsViewModel: listsViewModel,
+                toolbarViewModel: toolbarViewModel,
                 searchConfiguration: searchConfiguration
             )
         }

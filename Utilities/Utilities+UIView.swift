@@ -20,3 +20,13 @@ class PassthroughView: UIView {
         return contains
     }
 }
+
+extension UIView {
+    func centerInParent() {
+        guard let superview = superview else { return }
+        self.center = CGPoint(
+            x: superview.bounds.width / 2,
+            y: superview.bounds.height / 2
+        )
+    }
+}

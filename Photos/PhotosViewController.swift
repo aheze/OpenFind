@@ -9,22 +9,17 @@ import SwiftUI
 
 class PhotosViewController: UIViewController, PageViewController {
     var tabType: TabState = .photos
-    var photosSelectionViewModel: ToolbarViewModel.PhotosSelection!
+    var toolbarViewModel: ToolbarViewModel?
     
-    lazy var selectionToolbar: PhotosSelectionToolbarView = .init(viewModel: photosSelectionViewModel)
+    var photosSelectionViewModel = PhotosSelectionViewModel()
+    lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
     
-    var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
-    
-    /// active, animate
-    var activateSelectionToolbar: ((Bool, Bool) -> Void)?
     
     @IBAction func selectPressed(_ sender: Any) {
-        if let activeToolbarViewModel = getActiveToolbarViewModel?() {
-            if activeToolbarViewModel.toolbar == .photosSelection {
-                activateSelectionToolbar?(false, false)
-            } else {
-                activateSelectionToolbar?(true, false)
-            }
+        if toolbarViewModel?.toolbar != nil {
+            toolbarViewModel?.toolbar = nil
+        } else {
+            toolbarViewModel?.toolbar = AnyView(selectionToolbar)
         }
     }
 
@@ -38,8 +33,6 @@ class PhotosViewController: UIViewController, PageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        photosSelectionViewModel = .init()
     }
 }
 
@@ -49,39 +42,11 @@ extension PhotosViewController {
     func didBecomeActive() {}
     
     func willBecomeInactive() {
-        activateSelectionToolbar?(false, true)
+        withAnimation {
+            toolbarViewModel?.toolbar = nil
+        }
     }
     
     func didBecomeInactive() {}
 }
 
-struct PhotosSelectionToolbarView: View {
-    @ObservedObject var viewModel: ToolbarViewModel.PhotosSelection
-    
-    var body: some View {
-        HStack {
-            ToolbarIconButton(iconName: viewModel.starOn ? "star.fill" : "star") {
-                viewModel.starOn.toggle()
-            }
-            .disabled(viewModel.selectedCount == 0)
-            
-            Text("\(viewModel.selectedCount) Photos Selected")
-                .font(.system(.headline))
-                .frame(maxWidth: .infinity)
-            
-            ToolbarIconButton(iconName: "trash") {}
-                .disabled(viewModel.selectedCount == 0)
-        }
-    }
-}
-
-struct ToolbarIconButton: View {
-    var iconName: String
-    var action: () -> Void
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: iconName)
-                .font(Font(Constants.iconFont))
-        }
-    }
-}

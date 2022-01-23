@@ -257,7 +257,7 @@ extension ListsController {
         newList.descriptionOfList = description
         
         for cont in contents {
-            newList.contents.append(cont)
+            newlist.words.append(cont)
         }
         
         newList.iconImageName = imageName

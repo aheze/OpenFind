@@ -15,7 +15,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words",
             image: "leaf.fill",
             color: 0x1F7000,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -23,7 +23,7 @@ class ListsViewModel: ObservableObject {
             desc: "Milk and stuff",
             image: "square.and.arrow.up.trianglebadge.exclamationmark",
             color: 0x004C7F,
-            contents: ["Milk", "Cheese", "Dairy", "Yogurt", "Ice Cream", "Butter", "Whipped Cream", "Cream", "Crackers", "Mochas", "Graham Crackers", "Cream"],
+            words: ["Milk", "Cheese", "Dairy", "Yogurt", "Ice Cream", "Butter", "Whipped Cream", "Cream", "Crackers", "Mochas", "Graham Crackers", "Cream"],
             dateCreated: Date()
         ),
         List(
@@ -31,7 +31,7 @@ class ListsViewModel: ObservableObject {
             desc: "Should learn this",
             image: "lasso.and.sparkles",
             color: 0xda00ff,
-            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
+            words: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -39,7 +39,7 @@ class ListsViewModel: ObservableObject {
             desc: "Some words about plans",
             image: "calendar.day.timeline.left",
             color: 0x008bd8,
-            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
+            words: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -47,7 +47,7 @@ class ListsViewModel: ObservableObject {
             desc: "Keyboard",
             image: "keyboard.fill",
             color: 0xdd000e,
-            contents: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
+            words: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -55,7 +55,7 @@ class ListsViewModel: ObservableObject {
             desc: "DaVinci Resolve",
             image: "sparkles.square.filled.on.square",
             color: 0xaddd00,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -63,7 +63,7 @@ class ListsViewModel: ObservableObject {
             desc: "A library to present popovers",
             image: "rectangle.trailinghalf.inset.filled.arrow.trailing",
             color: 0x007eef,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -71,7 +71,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words about drama",
             image: "theatermasks",
             color: 0xE2AC00,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -79,7 +79,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words about drama",
             image: "theatermasks",
             color: 0xE2AC00,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -87,7 +87,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words about drama",
             image: "theatermasks",
             color: 0xE2AC00,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -95,7 +95,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words about drama",
             image: "theatermasks",
             color: 0xE2AC00,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         ),
         List(
@@ -103,7 +103,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words about drama",
             image: "theatermasks",
             color: 0xE2AC00,
-            contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
+            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
         )
     ]

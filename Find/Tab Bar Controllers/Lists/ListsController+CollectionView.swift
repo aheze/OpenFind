@@ -29,9 +29,9 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
             var overFlowCount = 0
             
             var accessibilityContents = ""
-            for (index, text) in list.contents.enumerated() {
+            for (index, text) in list.words.enumerated() {
                 if index <= 10 {
-                    if index == list.contents.count - 1 {
+                    if index == list.words.count - 1 {
                         textToDisplay += text
                         accessibilityContents += text
                     } else {

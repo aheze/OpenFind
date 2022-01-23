@@ -26,9 +26,16 @@ class ListsDetailWordCell: UITableViewCell {
     @IBOutlet weak var rightView: DragHandleView!
     @IBOutlet weak var rightDragHandleImageView: UIImageView!
     
+    var leftViewTapped: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        leftView.backgroundColor = .clear
+        leftSelectionIconView.configuration = .large
+        leftView.tapped = { [weak self] in
+            self?.leftViewTapped?()
+        }
         
         rightDragHandleImageView.contentMode = .center
         rightDragHandleImageView.preferredSymbolConfiguration = .init(font: .preferredFont(forTextStyle: .title3))
@@ -46,5 +53,6 @@ class ListsDetailWordCell: UITableViewCell {
         centerView.backgroundColor = ListsDetailConstants.listRowWordBackgroundColor
         
         textField.padding = ListsDetailConstants.listRowWordEdgeInsets
+        
     }
 }

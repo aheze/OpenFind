@@ -13,17 +13,11 @@ protocol TabBarControllerDelegate: AnyObject {
     func didFinishNavigatingTo(tab: TabState)
 }
 
-/// wrapper for `TabBarViewController` - compatible with generics
-class TabBarController<
-    PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
->: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+
+class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     /// data
     var pages: [PageViewController]
-    
-    /// toolbars
-    var photosSelectionToolbarView: PhotosSelectionToolbarView
-    var photosDetailToolbarView: PhotosDetailToolbarView
-    var listsSelectionToolbarView: ListsSelectionToolbarView
     
     var viewController: TabBarViewController
     
@@ -38,20 +32,13 @@ class TabBarController<
     init(
         pages: [PageViewController],
         cameraViewModel: CameraViewModel,
-        toolbarViewModel: ToolbarViewModel,
-        photosSelectionToolbarView: PhotosSelectionToolbarView,
-        photosDetailToolbarView: PhotosDetailToolbarView,
-        listsSelectionToolbarView: ListsSelectionToolbarView
+        toolbarViewModel: ToolbarViewModel
     ) {
         // MARK: - init first
 
         self.pages = pages
         self.cameraViewModel = cameraViewModel
         self.toolbarViewModel = toolbarViewModel
-        
-        self.photosSelectionToolbarView = photosSelectionToolbarView
-        self.photosDetailToolbarView = photosDetailToolbarView
-        self.listsSelectionToolbarView = listsSelectionToolbarView
         
         let storyboard = UIStoryboard(name: "TabContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
@@ -98,10 +85,7 @@ class TabBarController<
             rootView: TabBarView(
                 tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
-                cameraViewModel: cameraViewModel,
-                photosSelectionToolbarView: { photosSelectionToolbarView },
-                photosDetailToolbarView: { photosDetailToolbarView },
-                listsSelectionToolbarView: { listsSelectionToolbarView }
+                cameraViewModel: cameraViewModel
             )
         )
         

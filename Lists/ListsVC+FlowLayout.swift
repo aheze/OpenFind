@@ -50,12 +50,12 @@ extension ListsViewController {
             guard numberOfLines == c.maxNumberOfChipLines else { return false }
             
             var nextWordWidth = CGFloat(0)
-            if let nextWord = list.contents[safe: currentIndex + 1] {
+            if let nextWord = list.words[safe: currentIndex + 1] {
                 let nextWordSize = c.chipFont.sizeOfString(nextWord)
                 nextWordWidth = nextWordSize.width + c.chipSpacing
             }
             
-            let wordsLeftAfterCurrent = list.contents.count - (currentIndex)
+            let wordsLeftAfterCurrent = list.words.count - (currentIndex)
             let wordsLeftText = "+\(wordsLeftAfterCurrent)"
             let wordsLeftTextSize = c.chipFont.sizeOfString(wordsLeftText)
             let combinedWidth = currentFrame.maxX + nextWordWidth + c.chipSpacing + wordsLeftTextSize.width
@@ -78,8 +78,8 @@ extension ListsViewController {
             return false
         }
         
-        for index in list.contents.indices {
-            let word = list.contents[index]
+        for index in list.words.indices {
+            let word = list.words[index]
             let size = c.chipFont.sizeOfString(word)
             
             let frame = CGRect(

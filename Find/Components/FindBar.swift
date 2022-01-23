@@ -427,7 +427,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                     contents.append(singleCont)
                 }
                 
-                editList.contents = contents
+                editlist.words = contents
                 editableListCategories.append(editList)
             }
         }
@@ -446,7 +446,7 @@ extension FindBar {
             
             var cameAcrossSearchFieldText = [String]()
             for list in selectedLists {
-                for match in list.contents {
+                for match in list.words {
                     if !cameAcrossShare.contains(match.lowercased()) {
                         cameAcrossShare.append(match.lowercased())
                     } else {
@@ -463,7 +463,7 @@ extension FindBar {
             cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
             
             for list in selectedLists {
-                for match in list.contents {
+                for match in list.words {
                     let matchColor = UIColor(hexString: list.iconColorName).cgColor
                     let highlightColor = HighlightColor(cgColor: matchColor, hexString: list.iconColorName)
                     

@@ -59,7 +59,7 @@ class SearchViewModel: ObservableObject {
                 existingGradient.alpha = field.overrides.alpha
                 stringToGradients[word.string] = existingGradient
             case .list(let list):
-                let strings = list.contents
+                let strings = list.words
                 for string in strings {
                     var existingGradient = stringToGradients[string] ?? Gradient()
                     existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: list.color))
@@ -80,7 +80,7 @@ class SearchViewModel: ObservableObject {
             case .word(let word):
                 words.insert(word.string)
             case .list(let list):
-                let contents = Set(list.contents)
+                let contents = Set(list.words)
                 words.formUnion(contents)
             case .addNew(_):
                 continue

@@ -212,7 +212,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     contents.append(singleCont)
                 }
 
-                editList.contents = contents
+                editlist.words = contents
 
                 editableListCategories.append(editList)
             }
@@ -474,7 +474,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         var cameAcrossSearchFieldText = [String]()
         for list in selectedLists {
-            for match in list.contents {
+            for match in list.words {
                 if !cameAcrossShare.contains(match.lowercased()) {
                     cameAcrossShare.append(match.lowercased())
                 } else {
@@ -489,7 +489,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         duplicatedStrings = duplicatedStrings.uniques
         cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
         for list in selectedLists {
-            for match in list.contents {
+            for match in list.words {
                 let matchColor = UIColor(hexString: list.iconColorName).cgColor
                 let highlightColor = HighlightColor(cgColor: matchColor, hexString: list.iconColorName)
                 

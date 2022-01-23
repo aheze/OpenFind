@@ -12,6 +12,7 @@ import SwiftUI
 class ListsDetailViewController: UIViewController, Searchable {
     
     var model: ListsDetailViewModel
+    var toolbarViewModel: ToolbarViewModel
     var searchConfiguration: SearchConfiguration
     
     var baseSearchBarOffset = CGFloat(0)
@@ -78,13 +79,16 @@ class ListsDetailViewController: UIViewController, Searchable {
     /// **table view**
     @IBOutlet weak var wordsTableView: UITableView!
     @IBOutlet weak var wordsTableViewHeightC: NSLayoutConstraint!
+    lazy var toolbarView = ListsDetailToolbarView(model: model)
     
     init?(
         coder: NSCoder,
         list: List,
+        toolbarViewModel: ToolbarViewModel,
         searchConfiguration: SearchConfiguration
     ) {
         self.model = ListsDetailViewModel(list: list)
+        self.toolbarViewModel = toolbarViewModel
         self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
     }
@@ -100,6 +104,8 @@ class ListsDetailViewController: UIViewController, Searchable {
         navigationItem.largeTitleDisplayMode = .never
         
         setup()
+        listenToButtons()
+        listenToModel()
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
         

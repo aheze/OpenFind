@@ -10,6 +10,7 @@ import UIKit
 class ListsViewController: UIViewController, Searchable {
     /// external models
     var listsViewModel: ListsViewModel
+    var toolbarViewModel: ToolbarViewModel
     var searchConfiguration: SearchConfiguration
     
     var baseSearchBarOffset = CGFloat(0)
@@ -23,10 +24,12 @@ class ListsViewController: UIViewController, Searchable {
     init?(
         coder: NSCoder,
         listsViewModel: ListsViewModel,
+        toolbarViewModel: ToolbarViewModel,
         searchConfiguration: SearchConfiguration
     ) {
         self.listsViewModel = listsViewModel
         self.searchConfiguration = searchConfiguration
+        self.toolbarViewModel = toolbarViewModel
         super.init(coder: coder)
     }
 

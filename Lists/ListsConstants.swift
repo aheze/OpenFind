@@ -88,4 +88,6 @@ struct ListsDetailConstants {
         + ListsDetailConstants.listRowWordEdgeInsets.top
         + ListsDetailConstants.listRowWordEdgeInsets.bottom
     }()
+    
+    static var editAnimationDuration = CGFloat(0.3)
 }

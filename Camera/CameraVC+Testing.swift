@@ -16,10 +16,7 @@ extension CameraViewController {
                 rootView: TabBarView(
                     tabViewModel: TabViewModel(),
                     toolbarViewModel: ToolbarViewModel(),
-                    cameraViewModel: cameraViewModel,
-                    photosSelectionToolbarView: { },
-                    photosDetailToolbarView: { },
-                    listsSelectionToolbarView: { }
+                    cameraViewModel: cameraViewModel
                 )
             )
             

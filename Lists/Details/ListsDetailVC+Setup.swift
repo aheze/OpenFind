@@ -24,6 +24,7 @@ extension ListsDetailViewController {
         wordsTableView.delegate = self
         wordsTableView.separatorStyle = .none
         wordsTableView.isScrollEnabled = false
+        wordsTableView.allowsSelection = false
         wordsTableView.contentInset = UIEdgeInsets(
             top: ListsDetailConstants.listSpacing / 2,
             left: 0,

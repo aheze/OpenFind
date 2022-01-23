@@ -8,14 +8,10 @@
 import SwiftUI
 
 /// `CameraToolbarView` is passed in from `CameraViewController`
-struct TabBarView<PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>: View {
+struct TabBarView: View {
     @ObservedObject var tabViewModel: TabViewModel
     @ObservedObject var toolbarViewModel: ToolbarViewModel
     @ObservedObject var cameraViewModel: CameraViewModel
-    
-    @ViewBuilder var photosSelectionToolbarView: PhotosSelectionToolbarView
-    @ViewBuilder var photosDetailToolbarView: PhotosDetailToolbarView
-    @ViewBuilder var listsSelectionToolbarView: ListsSelectionToolbarView
     
     var body: some View {
         Color.clear
@@ -26,22 +22,16 @@ struct TabBarView<PhotosSelectionToolbarView: View, PhotosDetailToolbarView: Vie
                     ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
                 }
                 .padding(.bottom, ConstantVars.tabBarOverflowingIconsBottomPadding)
-                .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
+                .opacity(toolbarViewModel.toolbar == nil ? 1 : 0)
                 .overlay(
                     VStack {
-                        switch toolbarViewModel.toolbar {
-                        case .none:
-                            EmptyView()
-                        case .photosSelection:
-                            photosSelectionToolbarView
-                        case .photosDetail:
-                            photosDetailToolbarView
-                        case .listsSelection:
-                            listsSelectionToolbarView
+                        if let toolbar = toolbarViewModel.toolbar {
+                            toolbar
                         }
                     }
                     .frame(maxHeight: .infinity)
                     .padding(.bottom, ConstantVars.tabBarHuggingBottomPadding)
+                    .padding(.horizontal, 16)
                 )
                 .overlay(
                     CameraToolbarView(viewModel: cameraViewModel)

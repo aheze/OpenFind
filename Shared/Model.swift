@@ -15,15 +15,18 @@ enum Value {
 }
 
 struct Word {
+    var id = UUID()
     var string = ""
     var color: UInt = 0x00AEEF
 }
 
 struct List {
+    var id = UUID()
     var name = ""
     var desc = ""
     var image = ""
     var color: UInt = 0x00AEEF
-    var contents = [String]()
+    var words = [String]()
     var dateCreated = Date()
+
 }

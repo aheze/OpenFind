@@ -12,6 +12,7 @@ import SwiftUI
 class ViewController: UIViewController {
     let cameraViewModel = CameraViewModel()
     let listsViewModel = ListsViewModel()
+    let toolbarViewModel = ToolbarViewModel()
     
     lazy var photos: PhotosController = PhotosBridge.makeController()
 
@@ -20,44 +21,18 @@ class ViewController: UIViewController {
         listsViewModel:listsViewModel
     )
 
-    lazy var lists: ListsController = ListsBridge.makeController(listsViewModel: listsViewModel)
+    lazy var lists: ListsController = ListsBridge.makeController(
+        listsViewModel: listsViewModel,
+        toolbarViewModel: toolbarViewModel
+    )
     
-    var toolbarViewModel: ToolbarViewModel!
-    lazy var tabController: TabBarController<PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
-        toolbarViewModel = ToolbarViewModel()
+    lazy var tabController: TabBarController = {
+        photos.viewController.toolbarViewModel = toolbarViewModel
         
-        photos.viewController.getActiveToolbarViewModel = { [weak self] in
-            self?.toolbarViewModel ?? ToolbarViewModel()
-        }
-        photos.viewController.activateSelectionToolbar = { [weak self] activate, animate in
-            guard let self = self else { return }
-            if activate {
-                if animate {
-                    withAnimation {
-                        self.toolbarViewModel.toolbar = .photosSelection
-                    }
-                } else {
-                    self.toolbarViewModel.toolbar = .photosSelection
-                }
-            } else {
-                if animate {
-                    withAnimation {
-                        self.toolbarViewModel.toolbar = .none
-                    }
-                } else {
-                    self.toolbarViewModel.toolbar = .none
-                }
-            }
-        }
-        
-        _ = lists
         let tabController = TabControllerBridge.makeTabController(
             pageViewControllers: [photos.viewController, camera.viewController, lists.searchNavigationController],
             cameraViewModel: cameraViewModel,
-            toolbarViewModel: toolbarViewModel,
-            photosSelectionToolbarView: photos.viewController.selectionToolbar,
-            photosDetailToolbarView: photos.viewController.selectionToolbar,
-            listsSelectionToolbarView: photos.viewController.selectionToolbar
+            toolbarViewModel: toolbarViewModel
         )
         
         tabController.delegate = self

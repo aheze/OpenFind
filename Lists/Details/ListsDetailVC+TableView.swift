@@ -12,7 +12,7 @@ import UIKit
 extension ListsDetailViewController {
     func updateTableViewHeightConstraint() {
         let edgePadding = ListsDetailConstants.listSpacing
-        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.list.contents.count)
+        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.list.words.count)
         let height = edgePadding + wordHeight
         wordsTableViewHeightC.constant = height
     }
@@ -20,7 +20,7 @@ extension ListsDetailViewController {
 
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.list.contents.count
+        return model.list.words.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -31,10 +31,27 @@ extension ListsDetailViewController: UITableViewDataSource {
             fatalError()
         }
         
-        let word = model.list.contents[indexPath.item]
+        let word = model.list.words[indexPath.item]
         cell.textField.text = word
         cell.leftView.isHidden = true
         cell.rightView.isHidden = true
+        
+        if model.selectedIndices.contains(indexPath.item) {
+            cell.leftSelectionIconView.setState(.selected)
+        } else {
+            cell.leftSelectionIconView.setState(.empty)
+        }
+        
+        cell.leftViewTapped = { [weak self] in
+            guard let self = self else { return }
+            if self.model.selectedIndices.contains(indexPath.item) {
+                self.model.selectedIndices = self.model.selectedIndices.filter { $0 != indexPath.item }
+                cell.leftSelectionIconView.setState(.empty)
+            } else {
+                self.model.selectedIndices.append(indexPath.item)
+                cell.leftSelectionIconView.setState(.selected)
+            }
+        }
         
         return cell
     }
