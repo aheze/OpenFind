@@ -70,11 +70,21 @@ struct ListsDetailConstants {
     static var wordsHeaderTitleEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     static var wordsHeaderActionsEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-    static var listRowWordFont = UIFont.preferredFont(forTextStyle: .body)
+    static var listSpacing = CGFloat(12)
+    
+    /// edge insets of everything inside the row
+    static var listRowContentEdgeInsets = UIEdgeInsets(top: listSpacing / 2, left: 16, bottom: listSpacing / 2, right: 16)
+    
+    /// edge insets of the word chip
     static var listRowWordEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    static var listRowWordFont = UIFont.preferredFont(forTextStyle: .body)
+    static var listRowWordCornerRadius = CGFloat(8)
+    static var listRowWordBackgroundColor = UIColor.secondarySystemBackground
     
     static var wordRowHeight: CGFloat = {
         ListsDetailConstants.listRowWordFont.lineHeight
+        + ListsDetailConstants.listRowContentEdgeInsets.top
+        + ListsDetailConstants.listRowContentEdgeInsets.bottom
         + ListsDetailConstants.listRowWordEdgeInsets.top
         + ListsDetailConstants.listRowWordEdgeInsets.bottom
     }()

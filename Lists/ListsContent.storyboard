@@ -354,20 +354,20 @@
                                                                 </constraints>
                                                                 <prototypes>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListsDetailWordCell" id="KEM-yx-n4V" customClass="ListsDetailWordCell" customModule="Lists">
-                                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="166.5"/>
+                                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="169.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KEM-yx-n4V" id="Aq5-RU-jAy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="166.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="169.5"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3b-d8-XgN">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="166.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="169.5"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Eu-DW-YsI" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="166.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="169.5"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axQ-Da-UBj" customClass="SelectionIconView" customModule="ARVision" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="58.5" width="50" height="50"/>
+                                                                                                    <rect key="frame" x="0.0" y="60" width="50" height="50"/>
                                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="axQ-Da-UBj" secondAttribute="height" multiplier="1:1" id="hjW-qg-49u"/>
@@ -383,10 +383,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-i2-Qoi">
-                                                                                            <rect key="frame" x="50" y="0.0" width="314" height="166.5"/>
+                                                                                            <rect key="frame" x="50" y="0.0" width="314" height="169.5"/>
                                                                                             <subviews>
-                                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CnX-j0-UT2">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="166.5"/>
+                                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CnX-j0-UT2" customClass="PaddedTextField" customModule="ARVision" customModuleProvider="target">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="169.5"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                     <textInputTraits key="textInputTraits"/>
                                                                                                 </textField>
@@ -400,10 +400,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7KZ-9M-PVj" customClass="DragHandleView" customModule="ARVision" customModuleProvider="target">
-                                                                                            <rect key="frame" x="364" y="0.0" width="50" height="166.5"/>
+                                                                                            <rect key="frame" x="364" y="0.0" width="50" height="169.5"/>
                                                                                             <subviews>
                                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.3.horizontal" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lya-7b-7Tw">
-                                                                                                    <rect key="frame" x="0.0" y="63.5" width="50" height="40.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="65" width="50" height="40.5"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="lya-7b-7Tw" secondAttribute="height" multiplier="1:1" id="BQs-rD-ZOZ"/>
                                                                                                     </constraints>
@@ -434,9 +434,11 @@
                                                                             <outlet property="rightDragHandleImageView" destination="lya-7b-7Tw" id="Zn3-ff-T01"/>
                                                                             <outlet property="rightView" destination="7KZ-9M-PVj" id="xub-mj-n47"/>
                                                                             <outlet property="stackView" destination="a3b-d8-XgN" id="Ieg-eK-iu6"/>
+                                                                            <outlet property="stackViewBottomC" destination="ExH-6P-PvH" id="bDX-jm-nzu"/>
                                                                             <outlet property="stackViewLeftC" destination="b2u-Lv-FX6" id="Jkn-Cb-W5T"/>
                                                                             <outlet property="stackViewRightC" destination="7GU-g5-DFp" id="c04-Xk-7eI"/>
-                                                                            <outlet property="textField" destination="CnX-j0-UT2" id="92f-1N-CcB"/>
+                                                                            <outlet property="stackViewTopC" destination="Srj-7d-uug" id="eg4-So-EFa"/>
+                                                                            <outlet property="textField" destination="CnX-j0-UT2" id="cL4-Vn-68V"/>
                                                                         </connections>
                                                                     </tableViewCell>
                                                                 </prototypes>
@@ -524,6 +526,11 @@
             <point key="canvasLocation" x="853.62318840579712" y="75.669642857142847"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="CnX-j0-UT2">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="line.3.horizontal" catalog="system" width="128" height="64"/>
         <image name="plus" catalog="system" width="128" height="113"/>

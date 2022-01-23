@@ -29,3 +29,22 @@ class PaddedLabel: UILabel {
         super.drawText(in: rect.inset(by: textInsets))
     }
 }
+
+class PaddedTextField: UITextField {
+
+    var padding = UIEdgeInsets.zero {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+}

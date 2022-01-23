@@ -11,13 +11,16 @@ import UIKit
 
 extension ListsDetailViewController {
     func updateTableViewHeightConstraint() {
-        wordsTableViewHeightC.constant = ListsDetailConstants.wordRowHeight * CGFloat(list.contents.count)
+        let edgePadding = ListsDetailConstants.listSpacing
+        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.list.contents.count)
+        let height = edgePadding + wordHeight
+        wordsTableViewHeightC.constant = height
     }
 }
 
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.contents.count
+        return model.list.contents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,7 +31,7 @@ extension ListsDetailViewController: UITableViewDataSource {
             fatalError()
         }
         
-        let word = list.contents[indexPath.item]
+        let word = model.list.contents[indexPath.item]
         cell.textField.text = word
         cell.leftView.isHidden = true
         cell.rightView.isHidden = true
@@ -39,6 +42,7 @@ extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ListsDetailConstants.wordRowHeight
     }
+    
 }
 
 extension ListsDetailViewController: UITableViewDelegate {

@@ -11,7 +11,7 @@ import SwiftUI
 
 class ListsDetailViewController: UIViewController, Searchable {
     
-    var list: List
+    var model: ListsDetailViewModel
     var searchConfiguration: SearchConfiguration
     
     var baseSearchBarOffset = CGFloat(0)
@@ -84,7 +84,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         list: List,
         searchConfiguration: SearchConfiguration
     ) {
-        self.list = list
+        self.model = ListsDetailViewModel(list: list)
         self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
     }

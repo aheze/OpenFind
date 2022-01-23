@@ -22,12 +22,20 @@ extension ListsDetailViewController {
         
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
+        wordsTableView.separatorStyle = .none
+        wordsTableView.isScrollEnabled = false
+        wordsTableView.contentInset = UIEdgeInsets(
+            top: ListsDetailConstants.listSpacing / 2,
+            left: 0,
+            bottom: ListsDetailConstants.listSpacing / 2,
+            right: 0
+        )
     }
     
     func loadListContents() {
-        headerTopLeftImageView.image = UIImage(systemName: list.image)
+        headerTopLeftImageView.image = UIImage(systemName: model.list.image)
         
-        let color = UIColor(hex: list.color)
+        let color = UIColor(hex: model.list.color)
         headerTopRightColorPickerModel.color = color
         headerView.backgroundColor = color
         
@@ -36,8 +44,8 @@ extension ListsDetailViewController {
         wordsTopCenterLabel.textColor = color
         wordsTopRightImageView.tintColor = color
         
-        headerTopCenterTextField.text = list.name
-        headerBottomTextField.text = list.desc
+        headerTopCenterTextField.text = model.list.name
+        headerBottomTextField.text = model.list.desc
     }
     
     func setupViews() {
