@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy var lists: ListsController = ListsBridge.makeController(
-        listsViewModel: ListsViewModel()
+        listsViewModel: ListsViewModel(),
+        toolbarViewModel: ToolbarViewModel()
     )
     
     override func viewDidLoad() {

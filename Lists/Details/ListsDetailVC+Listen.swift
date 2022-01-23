@@ -45,10 +45,12 @@ extension ListsDetailViewController {
             if self.model.isEditing {
                 self.wordsTopLeftLabel.text = "Done"
                 self.toolbarViewModel.toolbar = AnyView(self.toolbarView)
+                self.wordsTableView.isEditing = true
             } else {
                 self.wordsTopLeftLabel.text = "Edit"
                 self.toolbarViewModel.toolbar = nil
                 self.model.selectedIndices = []
+                self.wordsTableView.isEditing = false
             }
             
             for index in self.model.list.words.indices {

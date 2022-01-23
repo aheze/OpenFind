@@ -30,7 +30,7 @@ class PaddedLabel: UILabel {
     }
 }
 
-class PaddedTextField: UITextField {
+class PaddedTextField: UITextField, UITextDropDelegate {
 
     var padding = UIEdgeInsets.zero {
         didSet { invalidateIntrinsicContentSize() }
@@ -46,5 +46,14 @@ class PaddedTextField: UITextField {
 
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        textDropDelegate = self
+    }
+    
+    func textDroppableView(_ textDroppableView: UIView & UITextDroppable, proposalForDrop drop: UITextDropRequest) -> UITextDropProposal {
+        return UITextDropProposal(operation: .cancel)
     }
 }

@@ -1,22 +1,12 @@
 //
-//  ListsDetailVC+TableView.swift
+//  ListsDetailVC+DataSource.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/22/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
-
-extension ListsDetailViewController {
-    func updateTableViewHeightConstraint() {
-        let edgePadding = ListsDetailConstants.listSpacing
-        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.list.words.count)
-        let height = edgePadding + wordHeight
-        wordsTableViewHeightC.constant = height
-    }
-}
 
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,15 +43,23 @@ extension ListsDetailViewController: UITableViewDataSource {
             }
         }
         
+        /// configure which parts of the cell are visible
+        if model.isEditing {
+            cell.stackViewLeftC.constant = 0
+            cell.stackViewRightC.constant = 0
+            cell.leftView.isHidden = false
+            cell.rightView.isHidden = false
+        } else {
+            cell.stackViewLeftC.constant = ListsDetailConstants.listRowContentEdgeInsets.left
+            cell.stackViewRightC.constant = ListsDetailConstants.listRowContentEdgeInsets.right
+            cell.leftView.isHidden = true
+            cell.rightView.isHidden = true
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ListsDetailConstants.wordRowHeight
     }
-    
-}
-
-extension ListsDetailViewController: UITableViewDelegate {
-    
 }

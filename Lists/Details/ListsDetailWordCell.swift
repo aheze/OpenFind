@@ -6,28 +6,36 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 class ListsDetailWordCell: UITableViewCell {
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var stackViewTopC: NSLayoutConstraint!
+    @IBOutlet var stackViewRightC: NSLayoutConstraint!
+    @IBOutlet var stackViewLeftC: NSLayoutConstraint!
+    @IBOutlet var stackViewBottomC: NSLayoutConstraint!
     
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var stackViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var stackViewRightC: NSLayoutConstraint!
-    @IBOutlet weak var stackViewLeftC: NSLayoutConstraint!
-    @IBOutlet weak var stackViewBottomC: NSLayoutConstraint!
+    @IBOutlet var leftView: ButtonView!
+    @IBOutlet var leftSelectionIconView: SelectionIconView!
     
-    @IBOutlet weak var leftView: ButtonView!
-    @IBOutlet weak var leftSelectionIconView: SelectionIconView!
+    @IBOutlet var centerView: UIView!
+    @IBOutlet var textField: PaddedTextField!
     
-    @IBOutlet weak var centerView: UIView!
-    @IBOutlet weak var textField: PaddedTextField!
-    
-    @IBOutlet weak var rightView: DragHandleView!
-    @IBOutlet weak var rightDragHandleImageView: UIImageView!
+    @IBOutlet var rightView: DragHandleView!
+    @IBOutlet var rightDragHandleImageView: UIImageView!
     
     var leftViewTapped: (() -> Void)?
-    
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        for subview in subviews {
+            if let reorderControl = subview.subviews.first(where: { $0 is UIImageView } ) {
+                reorderControl.isHidden = true
+            }
+        }
+        contentView.frame = bounds
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -53,6 +61,5 @@ class ListsDetailWordCell: UITableViewCell {
         centerView.backgroundColor = ListsDetailConstants.listRowWordBackgroundColor
         
         textField.padding = ListsDetailConstants.listRowWordEdgeInsets
-        
     }
 }

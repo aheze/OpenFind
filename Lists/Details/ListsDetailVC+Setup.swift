@@ -22,9 +22,13 @@ extension ListsDetailViewController {
         
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
+        wordsTableView.dragDelegate = self
+        wordsTableView.dropDelegate = self
+        
         wordsTableView.separatorStyle = .none
         wordsTableView.isScrollEnabled = false
         wordsTableView.allowsSelection = false
+        wordsTableView.dragInteractionEnabled = true
         wordsTableView.contentInset = UIEdgeInsets(
             top: ListsDetailConstants.listSpacing / 2,
             left: 0,
