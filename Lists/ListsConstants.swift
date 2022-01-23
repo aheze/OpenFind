@@ -67,7 +67,7 @@ struct ListsDetailConstants {
     static var wordsHeaderTitleFont = UIFont.preferredFont(forTextStyle: .headline)
     static var wordsHeaderActionsFont = UIFont.preferredFont(forTextStyle: .body)
     
-    static var wordsHeaderTitleEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-    static var wordsHeaderActionsEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+    static var wordsHeaderTitleEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    static var wordsHeaderActionsEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 
 }

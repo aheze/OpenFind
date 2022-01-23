@@ -1254,6 +1254,20 @@
 		3CCE2B2C279D008D00F72351 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEE279D004F00F72351 /* ButtonView.swift */; };
 		3CCE2B2D279D008D00F72351 /* UIKitViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A18275AA16C0064F2C6 /* UIKitViews.swift */; };
 		3CCE2B2F279D009D00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B30279D07A900F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B31279D07AA00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B32279D07AA00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B33279D07AA00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B34279D07AA00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B35279D07AB00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B36279D07AB00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B37279D07AB00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B38279D07AC00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B39279D07AC00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B3A279D07AD00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B3B279D07AD00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B3C279D07AD00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
+		3CCE2B3D279D07AE00F72351 /* DragHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B2E279D009D00F72351 /* DragHandleView.swift */; };
 		3CCF61F9266EFE1800109C2F /* PhotosVC+EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCF61F8266EFE1800109C2F /* PhotosVC+EmptyView.swift */; };
 		3CCF61FB266EFE1F00109C2F /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCF61FA266EFE1F00109C2F /* EmptyListView.swift */; };
 		3CD388BD25C11AB900B67B13 /* CameraVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */; };
@@ -5054,6 +5068,7 @@
 				3C6C73AD2781947400E039F0 /* SuggestionsView.swift in Sources */,
 				3C08EB3C279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3CCCCAAA27818CEA000381CE /* GeneralViews.swift in Sources */,
+				3CCE2B35279D07AB00F72351 /* DragHandleView.swift in Sources */,
 				3C6C73C92781948200E039F0 /* ListsViewController.swift in Sources */,
 				3CB98A81275B22B300A6B1B9 /* SearchFieldCell.swift in Sources */,
 				3C1D1A28275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
@@ -5132,6 +5147,7 @@
 				3C7B7A3C277E9D9300E1F602 /* Debug.swift in Sources */,
 				3C2DBBE5277E739200911A74 /* ViewController.swift in Sources */,
 				3C7B7A2C277E9CD300E1F602 /* Utilities+UIColor.swift in Sources */,
+				3CCE2B34279D07AA00F72351 /* DragHandleView.swift in Sources */,
 				3CCE2B07279D008A00F72351 /* FindIconUIView.swift in Sources */,
 				3C7B7A24277E9C4400E1F602 /* HighlightsViewController.swift in Sources */,
 				3C7B7A20277E944500E1F602 /* HighlightsViewModel.swift in Sources */,
@@ -5262,6 +5278,7 @@
 				3CE9C1F9274B4E44008C903C /* LivePreviewView.swift in Sources */,
 				3C8A5260277FCA3A006CF91E /* LivePreviewVC+Photo.swift in Sources */,
 				3C08EB75279CAC2C00971D60 /* TabTransitioning.swift in Sources */,
+				3CCE2B3C279D07AD00F72351 /* DragHandleView.swift in Sources */,
 				3C3642DB277BC2E70038CB18 /* SearchViewModel.swift in Sources */,
 				3C7B7A6A277F94DC00E1F602 /* Highlight.swift in Sources */,
 				3C7B7A62277F8DB400E1F602 /* CameraVC+Find.swift in Sources */,
@@ -5305,6 +5322,7 @@
 				3C7B7A49277EB19500E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C6C74312781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C7B7A5C277EE9A400E1F602 /* HighlightsView.swift in Sources */,
+				3CCE2B3B279D07AD00F72351 /* DragHandleView.swift in Sources */,
 				3C3642BD277BC20B0038CB18 /* CameraVC+SearchBar.swift in Sources */,
 				3CF7643D278D19AC00DCA4EA /* SearchNC+Utilities.swift in Sources */,
 				3CCCCA9E27818CE8000381CE /* GeneralViews.swift in Sources */,
@@ -5419,6 +5437,7 @@
 				3C4D39F3274766790010FD68 /* ToolbarViewModel.swift in Sources */,
 				3C08EAFB279C76E400971D60 /* ListsConstants.swift in Sources */,
 				3CFD5F94278A86140031BC8B /* ListsVC+SearchBar.swift in Sources */,
+				3CCE2B3A279D07AD00F72351 /* DragHandleView.swift in Sources */,
 				3CB0022E2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3CCE2B1E279D008C00F72351 /* ClearIconView.swift in Sources */,
 				3C3642E0277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
@@ -5536,6 +5555,7 @@
 				3C08EAD1279B0AA300971D60 /* ListsConstants.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CFD602A278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
+				3CCE2B39279D07AC00F72351 /* DragHandleView.swift in Sources */,
 				3CF76431278D187300DCA4EA /* SearchNC+Utilities.swift in Sources */,
 				3C4D3A5F2747691A0010FD68 /* ViewController.swift in Sources */,
 				3C08EB71279CAC0600971D60 /* TabModel.swift in Sources */,
@@ -5593,6 +5613,7 @@
 				3C4D3B1B274776D20010FD68 /* FeedbackView.swift in Sources */,
 				3C364344277C0C510038CB18 /* ColorsVC+Accessibility.swift in Sources */,
 				3C6C73D32781948300E039F0 /* ListsBridge.swift in Sources */,
+				3CCE2B38279D07AC00F72351 /* DragHandleView.swift in Sources */,
 				3C4D3B2B274776E20010FD68 /* AppDelegate.swift in Sources */,
 				3C4D20A42750A6CC00090AF9 /* Utilities+UIColor.swift in Sources */,
 				3C4D3B22274776D20010FD68 /* LanguagesView.swift in Sources */,
@@ -5634,6 +5655,7 @@
 				3C4D3B9B27477ABD0010FD68 /* SearchFieldCell.swift in Sources */,
 				3C08EB20279C76E600971D60 /* ListsVC+Details.swift in Sources */,
 				3C6C7445278221E600E039F0 /* HighlightsConstants.swift in Sources */,
+				3CCE2B37279D07AB00F72351 /* DragHandleView.swift in Sources */,
 				3C4D3B6B274777E40010FD68 /* ViewController.swift in Sources */,
 				3C4D3B9327477ABD0010FD68 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C8A5253277FC92A006CF91E /* ToolbarViewModel.swift in Sources */,
@@ -5792,6 +5814,7 @@
 				3C6C73672781946200E039F0 /* CameraViewModel.swift in Sources */,
 				3C6C73642781946200E039F0 /* CameraVC+Zoom.swift in Sources */,
 				3C01DE472788A9680027B435 /* ZoomModel.swift in Sources */,
+				3CCE2B3D279D07AE00F72351 /* DragHandleView.swift in Sources */,
 				3C6C73562781945400E039F0 /* IconButtons.swift in Sources */,
 				3C6C73542781945400E039F0 /* CameraButton.swift in Sources */,
 				3C6C73C02781947E00E039F0 /* VisionFindingUtilities.swift in Sources */,
@@ -5938,6 +5961,7 @@
 				3CCCCAAE27818CEB000381CE /* GeneralViews.swift in Sources */,
 				3C7B7A23277E963700E1F602 /* HighlightsViewController.swift in Sources */,
 				3C7B7A9C277FB7C400E1F602 /* ProgressLineView.swift in Sources */,
+				3CCE2B33279D07AA00F72351 /* DragHandleView.swift in Sources */,
 				3C7B7A1C277E93F900E1F602 /* HighlightsView.swift in Sources */,
 				3C7B7A36277E9CD500E1F602 /* Utilities+Math.swift in Sources */,
 				3CCE2B02279D008900F72351 /* ClearIconView.swift in Sources */,
@@ -5977,6 +6001,7 @@
 				3CCE2B00279D008900F72351 /* ButtonView.swift in Sources */,
 				3CCCCA95278185AB000381CE /* Model.swift in Sources */,
 				3C7B7A87277FA6E300E1F602 /* GeneralUtilities.swift in Sources */,
+				3CCE2B32279D07AA00F72351 /* DragHandleView.swift in Sources */,
 				3C8A5258277FC92B006CF91E /* UIKitViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5989,6 +6014,7 @@
 				3CCCCAB027818CEB000381CE /* GeneralViews.swift in Sources */,
 				3C8A5241277FC1F4006CF91E /* Utilities+UIFont.swift in Sources */,
 				3C8A5240277FC1F4006CF91E /* Utilities+CGRect.swift in Sources */,
+				3CCE2B31279D07AA00F72351 /* DragHandleView.swift in Sources */,
 				3C8A523E277FC1F4006CF91E /* Utilities+Dates.swift in Sources */,
 				3CCE2AFC279D008800F72351 /* ButtonView.swift in Sources */,
 				3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */,
@@ -6089,6 +6115,7 @@
 				3C6C73952781946C00E039F0 /* LivePreviewVC+Setup.swift in Sources */,
 				3C08EB32279C76E700971D60 /* ListsCollectionFlowLayout.swift in Sources */,
 				3C1D1A2C275AA25B0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
+				3CCE2B36279D07AB00F72351 /* DragHandleView.swift in Sources */,
 				3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
 				3C08EB33279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3C6C738E2781946C00E039F0 /* ZoomConstants.swift in Sources */,
@@ -6114,6 +6141,7 @@
 				3C08EB70279CAC0500971D60 /* TabModel.swift in Sources */,
 				3CFD5FEB278B6F640031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3CFD600D278B6FAA0031BC8B /* UIKitViews.swift in Sources */,
+				3CCE2B30279D07A900F72351 /* DragHandleView.swift in Sources */,
 				3CFD5FF2278B6F950031BC8B /* SearchUtilities.swift in Sources */,
 				3CFD5FFF278B6F950031BC8B /* Field.swift in Sources */,
 				3CFD5FF0278B6F950031BC8B /* SearchVC+Popovers.swift in Sources */,

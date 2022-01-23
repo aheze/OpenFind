@@ -23,7 +23,6 @@ class DragHandleView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundView.layer.cornerRadius = bounds.height / 2
     }
     
     private func commonInit() {
@@ -39,7 +38,7 @@ class DragHandleView: UIView {
         guard
             let touch = touches.first,
             let event = event,
-            event?.type == .touches
+            event.type == .touches
         else { return }
         
         let location = touch.location(in: nil)
@@ -53,7 +52,7 @@ class DragHandleView: UIView {
         guard
             let touch = touches.first,
             let event = event,
-            event?.type == .touches
+            event.type == .touches
         else { return }
         
         let location = touch.location(in: nil)
@@ -67,7 +66,7 @@ class DragHandleView: UIView {
         guard
             let touch = touches.first,
             let event = event,
-            event?.type == .touches
+            event.type == .touches
         else { return }
         
         let location = touch.location(in: nil)

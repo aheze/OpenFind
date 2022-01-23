@@ -23,8 +23,14 @@ extension ListsDetailViewController {
     func loadListContents() {
         headerTopLeftImageView.image = UIImage(systemName: list.image)
         
-        headerTopRightColorPickerModel.color = UIColor(hex: list.color)
-        headerView.backgroundColor = UIColor(hex: list.color)
+        let color = UIColor(hex: list.color)
+        headerTopRightColorPickerModel.color = color
+        headerView.backgroundColor = color
+        
+        wordsTopView.backgroundColor = color.withAlphaComponent(0.1)
+        wordsTopLeftLabel.textColor = color
+        wordsTopCenterLabel.textColor = color
+        wordsTopRightImageView.tintColor = color
         
         headerTopCenterTextField.text = list.name
         headerBottomTextField.text = list.desc
@@ -44,6 +50,10 @@ extension ListsDetailViewController {
         headerTopLeftImageView.tintColor = .white
         headerTopLeftImageView.contentMode = .center
         headerTopLeftImageView.preferredSymbolConfiguration = .init(font: ListsDetailConstants.headerTitleFont)
+        
+        wordsTopLeftView.backgroundColor = .clear
+        wordsTopCenterView.backgroundColor = .clear
+        wordsTopRightView.backgroundColor = .clear
     }
     
     func applyConstants() {
