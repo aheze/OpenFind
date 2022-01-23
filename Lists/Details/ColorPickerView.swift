@@ -10,7 +10,7 @@
 import SwiftUI
 
 class ColorPickerViewModel: ObservableObject {
-    @Published var color = UIColor.blue.cgColor
+    @Published var color = UIColor.blue
 }
 
 class ColorPickerViewController: UIViewController {

@@ -15,8 +15,19 @@ extension ListsDetailViewController {
         
         setupViews()
         applyConstants()
+        loadListContents()
         
         scrollView.alwaysBounceVertical = true
+    }
+    
+    func loadListContents() {
+        headerTopLeftImageView.image = UIImage(systemName: list.image)
+        
+        headerTopRightColorPickerModel.color = UIColor(hex: list.color)
+        headerView.backgroundColor = UIColor(hex: list.color)
+        
+        headerTopCenterTextField.text = list.name
+        headerBottomTextField.text = list.desc
     }
     
     func setupViews() {
@@ -28,11 +39,18 @@ extension ListsDetailViewController {
         
         scrollView.backgroundColor = .clear
         contentView.backgroundColor = .clear
-        containerView.backgroundColor = .clear
+        containerStackView.backgroundColor = .clear
+        
+        headerTopLeftImageView.tintColor = .white
+        headerTopLeftImageView.contentMode = .center
+        headerTopLeftImageView.preferredSymbolConfiguration = .init(font: ListsDetailConstants.headerTitleFont)
     }
     
     func applyConstants() {
         let c = ListsDetailConstants.self
+        
+        containerStackView.spacing = c.containerSpacing
+        
         headerTopViewHeightC.constant = c.headerTitleFont.lineHeight
             + c.headerTitleEdgeInsets.top
             + c.headerTitleEdgeInsets.bottom
@@ -83,5 +101,24 @@ extension ListsDetailViewController {
             string: "Description (Optional)",
             attributes: [NSAttributedString.Key.foregroundColor: c.headerPlaceholderColor]
         )
+        
+        
+        // MARK: - Words
+        wordsView.clipsToBounds = true
+        wordsView.layer.cornerRadius = c.wordsCornerRadius
+        
+        /// left edit button
+        wordsTopLeftLabel.font = c.wordsHeaderActionsFont
+        wordsTopLeftLabel.textInsets = c.wordsHeaderActionsEdgeInsets
+        
+        wordsTopCenterLabel.font = c.wordsHeaderTitleFont
+        wordsTopCenterLabel.textInsets = c.wordsHeaderTitleEdgeInsets
+        
+        wordsTopRightImageView.contentMode = .center
+        wordsTopRightImageView.preferredSymbolConfiguration = .init(font: c.wordsHeaderActionsFont)
+        wordsTopRightImageView.image = UIImage(systemName: "plus")
+        
+        wordsTopRightImageViewLeftC.constant = c.wordsHeaderActionsEdgeInsets.left
+        wordsTopRightImageViewRightC.constant = c.wordsHeaderActionsEdgeInsets.right
     }
 }

@@ -42,6 +42,12 @@ struct ListsCellConstants {
 }
 
 struct ListsDetailConstants {
+    
+    /// spacing between header and words
+    static var containerSpacing = CGFloat(16)
+    
+    static var contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16)
+    
     static var headerTitleFont = UIFont.preferredFont(forTextStyle: .headline)
     static var headerDescriptionFont = UIFont.preferredFont(forTextStyle: .body)
     
@@ -57,6 +63,11 @@ struct ListsDetailConstants {
     static var headerInnerViewCornerRadius = CGFloat(12)
     static var headerInnerViewBackgroundColor = UIColor.white.withAlphaComponent(0.3)
     
+    static var wordsCornerRadius = CGFloat(16)
+    static var wordsHeaderTitleFont = UIFont.preferredFont(forTextStyle: .headline)
+    static var wordsHeaderActionsFont = UIFont.preferredFont(forTextStyle: .body)
     
-    static var contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16)
+    static var wordsHeaderTitleEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+    static var wordsHeaderActionsEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+
 }

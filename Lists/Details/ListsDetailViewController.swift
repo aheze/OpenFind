@@ -22,7 +22,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet weak var contentView: UIView!
     
     /// has padding on the sides
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerStackView: UIStackView!
     @IBOutlet weak var containerViewTopC: NSLayoutConstraint!
     @IBOutlet weak var containerViewRightC: NSLayoutConstraint!
     @IBOutlet weak var containerViewBottomC: NSLayoutConstraint!
@@ -54,6 +54,31 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet weak var headerBottomView: UIView!
     @IBOutlet weak var headerBottomViewHeightC: NSLayoutConstraint!
     @IBOutlet weak var headerBottomTextField: UITextField!
+    
+    
+    
+    // MARK: - Words
+    @IBOutlet weak var wordsView: UIView!
+
+    /// **top**
+    @IBOutlet weak var wordsTopView: UIView!
+    
+    @IBOutlet weak var wordsTopLeftView: ButtonView!
+    @IBOutlet weak var wordsTopLeftLabel: PaddedLabel!
+    
+    @IBOutlet weak var wordsTopCenterView: ButtonView!
+    @IBOutlet weak var wordsTopCenterLabel: PaddedLabel!
+    
+    @IBOutlet weak var wordsTopRightView: ButtonView!
+    @IBOutlet weak var wordsTopRightImageView: UIImageView!
+    @IBOutlet weak var wordsTopRightImageViewLeftC: NSLayoutConstraint!
+    @IBOutlet weak var wordsTopRightImageViewRightC: NSLayoutConstraint!
+    
+    
+    /// **table view**
+    @IBOutlet weak var wordsTableView: UITableView!
+    @IBOutlet weak var wordsTableViewHeightC: NSLayoutConstraint!
+    
     
     init?(
         coder: NSCoder,
