@@ -40,3 +40,23 @@ struct ListsCellConstants {
     static var maxNumberOfChipLines = 2
     
 }
+
+struct ListsDetailConstants {
+    static var headerTitleFont = UIFont.preferredFont(forTextStyle: .headline)
+    static var headerDescriptionFont = UIFont.preferredFont(forTextStyle: .body)
+    
+    static var headerTextColor = UIColor.white
+    static var headerPlaceholderColor = UIColor.white.withAlphaComponent(0.75)
+    
+    static var headerTitleEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    static var headerDescriptionEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    static var headerSpacing = CGFloat(10)
+    static var headerContentPadding = CGFloat(16)
+    
+    static var headerCornerRadius = CGFloat(16)
+    static var headerInnerViewCornerRadius = CGFloat(12)
+    static var headerInnerViewBackgroundColor = UIColor.white.withAlphaComponent(0.3)
+    
+    
+    static var contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16)
+}

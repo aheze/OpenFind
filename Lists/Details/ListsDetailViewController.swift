@@ -21,6 +21,40 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
+    /// has padding on the sides
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerViewTopC: NSLayoutConstraint!
+    @IBOutlet weak var containerViewRightC: NSLayoutConstraint!
+    @IBOutlet weak var containerViewBottomC: NSLayoutConstraint!
+    @IBOutlet weak var containerViewLeftC: NSLayoutConstraint!
+    
+    // MARK: - Header
+    
+    @IBOutlet weak var headerView: UIView!
+    
+    /// surrounds the inner views
+    @IBOutlet weak var headerStackView: UIStackView!
+    
+    /// **top**
+    @IBOutlet weak var headerTopView: UIView!
+    @IBOutlet weak var headerTopViewHeightC: NSLayoutConstraint!
+
+    @IBOutlet weak var headerTopLeftView: ButtonView!
+    @IBOutlet weak var headerTopLeftViewRightC: NSLayoutConstraint!
+    @IBOutlet weak var headerTopLeftImageView: UIImageView!
+    
+    @IBOutlet weak var headerTopCenterView: UIView!
+    @IBOutlet weak var headerTopCenterTextField: UITextField!
+    
+    @IBOutlet weak var headerTopRightView: ButtonView!
+    @IBOutlet weak var headerTopRightViewLeftC: NSLayoutConstraint!
+    var headerTopRightColorPickerModel = ColorPickerViewModel()
+
+    /// **bottom**
+    @IBOutlet weak var headerBottomView: UIView!
+    @IBOutlet weak var headerBottomViewHeightC: NSLayoutConstraint!
+    @IBOutlet weak var headerBottomTextField: UITextField!
+    
     init?(
         coder: NSCoder,
         list: List,
@@ -41,17 +75,14 @@ class ListsDetailViewController: UIViewController, Searchable {
         self.title = "List"
         navigationItem.largeTitleDisplayMode = .never
         
+        setup()
+        
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
-//        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
         
         scrollView.contentInset.top = searchConfiguration.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         
         scrollView.delegate = self
-        
-        scrollView.backgroundColor = .clear
-        contentView.backgroundColor = .clear
-        view.backgroundColor = .secondarySystemBackground
     }
 }
 
