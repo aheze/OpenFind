@@ -70,4 +70,12 @@ struct ListsDetailConstants {
     static var wordsHeaderTitleEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     static var wordsHeaderActionsEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 
+    static var listRowWordFont = UIFont.preferredFont(forTextStyle: .body)
+    static var listRowWordEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    
+    static var wordRowHeight: CGFloat = {
+        ListsDetailConstants.listRowWordFont.lineHeight
+        + ListsDetailConstants.listRowWordEdgeInsets.top
+        + ListsDetailConstants.listRowWordEdgeInsets.bottom
+    }()
 }

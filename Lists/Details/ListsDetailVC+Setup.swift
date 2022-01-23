@@ -16,8 +16,12 @@ extension ListsDetailViewController {
         setupViews()
         applyConstants()
         loadListContents()
+        updateTableViewHeightConstraint()
         
         scrollView.alwaysBounceVertical = true
+        
+        wordsTableView.dataSource = self
+        wordsTableView.delegate = self
     }
     
     func loadListContents() {

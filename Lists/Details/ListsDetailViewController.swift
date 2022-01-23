@@ -79,7 +79,6 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet weak var wordsTableView: UITableView!
     @IBOutlet weak var wordsTableViewHeightC: NSLayoutConstraint!
     
-    
     init?(
         coder: NSCoder,
         list: List,
