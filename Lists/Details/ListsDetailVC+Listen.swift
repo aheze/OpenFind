@@ -32,9 +32,9 @@ extension ListsDetailViewController {
         }
         
         /// add word
-        headerTopRightView.tapped = { [weak self] in
+        wordsTopRightView.tapped = { [weak self] in
             guard let self = self else { return }
-            
+            self.addPressed()
         }
     }
     

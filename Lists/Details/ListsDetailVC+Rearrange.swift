@@ -8,15 +8,6 @@
 
 import UIKit
 
-extension ListsDetailViewController {
-    func updateTableViewHeightConstraint() {
-        let edgePadding = ListsDetailConstants.listSpacing
-        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.list.words.count)
-        let height = edgePadding + wordHeight
-        wordsTableViewHeightC.constant = height
-    }
-}
-
 extension ListsDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true

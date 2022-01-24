@@ -29,7 +29,7 @@ class ListsDetailWordCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         for subview in subviews {
-            if let reorderControl = subview.subviews.first(where: { $0 is UIImageView } ) {
+            if let reorderControl = subview.subviews.first(where: { $0 is UIImageView }) {
                 reorderControl.isHidden = true
             }
         }
@@ -48,18 +48,28 @@ class ListsDetailWordCell: UITableViewCell {
         rightDragHandleImageView.contentMode = .center
         rightDragHandleImageView.preferredSymbolConfiguration = .init(font: .preferredFont(forTextStyle: .title3))
         rightDragHandleImageView.image = UIImage(systemName: "line.3.horizontal")
+    }
+    
+    func applyConstants() {
+        let c = ListsDetailConstants.self
         
-        textField.font = ListsDetailConstants.listRowWordFont
+        textField.font = c.listRowWordFont
+        textField.textColor = c.listRowWordTextColor
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Word",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: c.listRowWordPlaceholderColor
+            ]
+        )
+        textField.padding = c.listRowWordEdgeInsets
         
-        stackViewTopC.constant = ListsDetailConstants.listRowContentEdgeInsets.top
-        stackViewRightC.constant = ListsDetailConstants.listRowContentEdgeInsets.right
-        stackViewLeftC.constant = ListsDetailConstants.listRowContentEdgeInsets.left
-        stackViewBottomC.constant = ListsDetailConstants.listRowContentEdgeInsets.bottom
+        stackViewTopC.constant = c.listRowContentEdgeInsets.top
+        stackViewRightC.constant = c.listRowContentEdgeInsets.right
+        stackViewLeftC.constant = c.listRowContentEdgeInsets.left
+        stackViewBottomC.constant = c.listRowContentEdgeInsets.bottom
         
         centerView.clipsToBounds = true
-        centerView.layer.cornerRadius = ListsDetailConstants.listRowWordCornerRadius
-        centerView.backgroundColor = ListsDetailConstants.listRowWordBackgroundColor
-        
-        textField.padding = ListsDetailConstants.listRowWordEdgeInsets
+        centerView.layer.cornerRadius = c.listRowWordCornerRadius
+        centerView.backgroundColor = c.listRowWordBackgroundColor
     }
 }
