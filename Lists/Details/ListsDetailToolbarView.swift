@@ -24,8 +24,7 @@ struct ListsDetailToolbarView: View {
                 .frame(maxWidth: .infinity)
             
             ToolbarIconButton(iconName: "trash") {
-                model.isEditing = false
-                model.isEditingChanged?()
+                model.deleteSelected?()
             }
             .disabled(model.selectedIndices.count == 0)
         }

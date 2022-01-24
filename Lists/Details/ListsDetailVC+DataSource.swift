@@ -10,7 +10,7 @@ import UIKit
 
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.list.words.count
+        return model.editableWords.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -21,8 +21,8 @@ extension ListsDetailViewController: UITableViewDataSource {
             fatalError()
         }
         
-        let word = model.list.words[indexPath.item]
-        cell.textField.text = word
+        let word = model.editableWords[indexPath.item]
+        cell.textField.text = word.string
         cell.leftView.isHidden = true
         cell.rightView.isHidden = true
         
@@ -34,12 +34,14 @@ extension ListsDetailViewController: UITableViewDataSource {
         
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
-            if self.model.selectedIndices.contains(indexPath.item) {
-                self.model.selectedIndices = self.model.selectedIndices.filter { $0 != indexPath.item }
-                cell.leftSelectionIconView.setState(.empty)
-            } else {
-                self.model.selectedIndices.append(indexPath.item)
-                cell.leftSelectionIconView.setState(.selected)
+            if let index = self.model.editableWords.firstIndex(where: { $0.id == word.id }) {
+                if self.model.selectedIndices.contains(index) {
+                    self.model.selectedIndices = self.model.selectedIndices.filter { $0 != index }
+                    cell.leftSelectionIconView.setState(.empty)
+                } else {
+                    self.model.selectedIndices.append(index)
+                    cell.leftSelectionIconView.setState(.selected)
+                }
             }
         }
         

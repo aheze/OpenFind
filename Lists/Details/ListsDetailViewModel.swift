@@ -6,12 +6,12 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
-import SwiftUI
 import MobileCoreServices
+import SwiftUI
 
 class ListsDetailViewModel: ObservableObject {
     var list: List
+    var editableWords = [EditableWord]()
     
     var isEditing = false
     var isEditingChanged: (() -> Void)?
@@ -20,9 +20,15 @@ class ListsDetailViewModel: ObservableObject {
     
     init(list: List) {
         self.list = list
+        self.editableWords = list.words.map { EditableWord(string: $0) }
     }
     
-    
+    var deleteSelected: (() -> Void)?
+}
+
+struct EditableWord {
+    let id = UUID()
+    var string: String
 }
 
 extension ListsDetailViewModel {
@@ -41,17 +47,17 @@ extension ListsDetailViewModel {
     }
     
     /**
-         A helper function that serves as an interface to the data model,
-         called by the implementation of the `tableView(_ canHandle:)` method.
-    */
+          A helper function that serves as an interface to the data model,
+          called by the implementation of the `tableView(_ canHandle:)` method.
+     */
     func canHandle(_ session: UIDropSession) -> Bool {
         return session.canLoadObjects(ofClass: NSString.self)
     }
     
     /**
-         A helper function that serves as an interface to the data mode, called
-         by the `tableView(_:itemsForBeginning:at:)` method.
-    */
+          A helper function that serves as an interface to the data mode, called
+          by the `tableView(_:itemsForBeginning:at:)` method.
+     */
     func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
         let word = list.words[indexPath.row]
 

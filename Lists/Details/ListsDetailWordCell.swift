@@ -48,6 +48,8 @@ class ListsDetailWordCell: UITableViewCell {
         rightDragHandleImageView.contentMode = .center
         rightDragHandleImageView.preferredSymbolConfiguration = .init(font: .preferredFont(forTextStyle: .title3))
         rightDragHandleImageView.image = UIImage(systemName: "line.3.horizontal")
+        
+        applyConstants()
     }
     
     func applyConstants() {

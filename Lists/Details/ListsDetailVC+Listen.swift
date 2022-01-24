@@ -53,7 +53,7 @@ extension ListsDetailViewController {
                 self.wordsTableView.isEditing = false
             }
             
-            for index in self.model.list.words.indices {
+            for index in self.model.editableWords.indices {
                 guard let cell = self.wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell else { continue }
                 
                 if self.model.isEditing {
@@ -76,6 +76,22 @@ extension ListsDetailViewController {
                     }
                 }
             }
+        }
+        
+        model.deleteSelected = { [weak self] in
+            guard let self = self else { return }
+            
+            let selectedIndices = self.model.selectedIndices
+            let indexPaths = selectedIndices.map { IndexPath(item: $0, section: 0) }
+            
+            for index in selectedIndices.sorted(by: >) {
+                print("i: \(index)")
+                self.model.editableWords.remove(at: index)
+            }
+            
+            self.model.selectedIndices = []
+            self.wordsTableView.deleteRows(at: indexPaths, with: .automatic)
+            self.updateTableViewHeightConstraint()
         }
     }
 }
