@@ -34,7 +34,8 @@ extension ListsDetailViewController {
         /// add word
         wordsTopRightView.tapped = { [weak self] in
             guard let self = self else { return }
-            self.addPressed()
+            self.addWord()
+            self.updateTableViewHeightConstraint()
         }
     }
     
@@ -85,12 +86,16 @@ extension ListsDetailViewController {
             let indexPaths = selectedIndices.map { IndexPath(item: $0, section: 0) }
             
             for index in selectedIndices.sorted(by: >) {
-                print("i: \(index)")
                 self.model.editableWords.remove(at: index)
             }
             
             self.model.selectedIndices = []
             self.wordsTableView.deleteRows(at: indexPaths, with: .automatic)
+            
+            if self.model.editableWords.count == 0 {
+                self.addWord()
+            }
+            
             self.updateTableViewHeightConstraint()
         }
     }

@@ -79,7 +79,7 @@ struct ListsDetailConstants {
     static var listRowWordEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     static var listRowWordFont = UIFont.preferredFont(forTextStyle: .body)
     static var listRowWordTextColor = UIColor.label
-    static var listRowWordPlaceholderColor = UIColor.label.withAlphaComponent(0.75)
+    static var listRowWordPlaceholderColor = UIColor.secondaryLabel
     static var listRowWordCornerRadius = CGFloat(8)
     static var listRowWordBackgroundColor = UIColor.secondarySystemBackground
     

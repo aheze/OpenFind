@@ -9,11 +9,10 @@
 import UIKit
 
 extension ListsDetailViewController {
-    func addPressed() {
+    func addWord() {
         let newWord = EditableWord(string: "")
         model.editableWords.insert(newWord, at: 0)
         wordsTableView.insertRows(at: [0.indexPath], with: .automatic)
-        updateTableViewHeightConstraint()
     }
 }
 

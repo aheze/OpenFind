@@ -36,14 +36,15 @@ extension ListsDetailViewModel {
     func moveItem(at sourceIndex: Int, to destinationIndex: Int) {
         guard sourceIndex != destinationIndex else { return }
         
-        let word = list.words[sourceIndex]
-        list.words.remove(at: sourceIndex)
-        list.words.insert(word, at: destinationIndex)
+        let word = editableWords[sourceIndex]
+        editableWords.remove(at: sourceIndex)
+        editableWords.insert(word, at: destinationIndex)
     }
     
     /// The method for adding a new item to the table view's data model.
-    func addItem(_ word: String, at index: Int) {
-        list.words.insert(word, at: index)
+    func addItem(_ string: String, at index: Int) {
+        let newWord = EditableWord(string: string)
+        editableWords.insert(newWord, at: index)
     }
     
     /**
@@ -59,7 +60,7 @@ extension ListsDetailViewModel {
           by the `tableView(_:itemsForBeginning:at:)` method.
      */
     func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
-        let word = list.words[indexPath.row]
+        let word = editableWords[indexPath.row].string
 
         let data = word.data(using: .utf8)
         let itemProvider = NSItemProvider()

@@ -16,7 +16,7 @@ extension ListsDetailViewController {
         setupViews()
         applyConstants()
         loadListContents()
-        updateTableViewHeightConstraint()
+        updateTableViewHeightConstraint(animated: false)
         
         scrollView.alwaysBounceVertical = true
         
