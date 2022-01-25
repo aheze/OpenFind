@@ -132,7 +132,6 @@ extension UIColor {
     /// darken or lighten
     func adjust(by offset: CGFloat) -> UIColor {
         let (r, g, b) = rgb
-        print(r, g, b)
         let newR = r + offset
         let newG = g + offset
         let newB = b + offset
@@ -148,11 +147,22 @@ extension UIColor {
         var b1: CGFloat = 0
         var a1: CGFloat = 0
         l.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+        
         var r2: CGFloat = 0
         var g2: CGFloat = 0
         var b2: CGFloat = 0
         var a2: CGFloat = 0
         r.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        
+        let precision = 4
+        r1 = Double(r1).rounded(toPlaces: precision)
+        g1 = Double(g1).rounded(toPlaces: precision)
+        b1 = Double(b1).rounded(toPlaces: precision)
+        
+        r2 = Double(r2).rounded(toPlaces: precision)
+        g2 = Double(g2).rounded(toPlaces: precision)
+        b2 = Double(b2).rounded(toPlaces: precision)
+        
         return r1 == r2 && g1 == g2 && b1 == b2 && a1 == a2
     }
 }

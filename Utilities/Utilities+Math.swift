@@ -30,3 +30,13 @@ extension CGPoint {
         return sqrt(((x - p.x) * (x - p.x)) + ((y - p.y) * (y - p.y)))
     }
 }
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places: Int) -> Double {
+        let multiplier = pow(10, Double(places))
+        return (self * multiplier).rounded() / multiplier
+    }
+}
+
+
