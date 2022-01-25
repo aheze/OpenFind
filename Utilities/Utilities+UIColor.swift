@@ -96,9 +96,29 @@ extension UIColor {
 /// get gradient color for search bar field
 extension UIColor {
     func getFieldColor(for index: Int) -> UIColor {
-        let (h, s, b, a) = hsba
         let gradation = CGFloat(1) / 15
         let offset = gradation * CGFloat(index)
+        return self.offset(by: offset)
+    }
+    
+    var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
+        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (h: h, s: s, b: b, a: a)
+    }
+    
+    var rgb: (r: CGFloat, g: CGFloat, b: CGFloat) {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return (r: r, g: g, b: b)
+        } else {
+            return (0, 0, 0)
+        }
+    }
+    
+    /// get a gradient color
+    func offset(by offset: CGFloat) -> UIColor {
+        let (h, s, b, a) = hsba
         var newHue = h - offset
         
         /// make it go back to positive
@@ -108,11 +128,16 @@ extension UIColor {
         let normalizedHue = newHue.truncatingRemainder(dividingBy: 1)
         return UIColor(hue: normalizedHue, saturation: s, brightness: b, alpha: a)
     }
-    
-    var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
-        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return (h: h, s: s, b: b, a: a)
+
+    /// darken or lighten
+    func adjust(by offset: CGFloat) -> UIColor {
+        let (r, g, b) = rgb
+        print(r, g, b)
+        let newR = r + offset
+        let newG = g + offset
+        let newB = b + offset
+        
+        return UIColor(red: newR, green: newG, blue: newB, alpha: 1)
     }
 }
 

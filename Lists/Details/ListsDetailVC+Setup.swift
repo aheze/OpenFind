@@ -10,8 +10,8 @@ import UIKit
 
 extension ListsDetailViewController {
     func setup() {
-        let colorPickerViewController = ColorPickerViewController(model: headerTopRightColorPickerModel)
-        addChildViewController(colorPickerViewController, in: headerTopRightView)
+        let colorPickerIconController = ColorPickerIconController(model: headerTopRightColorPickerModel)
+        addChildViewController(colorPickerIconController, in: headerTopRightView)
         
         setupViews()
         applyConstants()

@@ -10,10 +10,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var model = ColorPickerViewModel()
     var body: some View {
 //        ProgressLineViewTester()
-        FindIconView(color: 0x00aeef)
-            .frame(width: 30, height: 30)
+//        FindIconView(color: 0x00aeef)
+//            .frame(width: 30, height: 30)
+        ColorPickerView(model: model)
     }
 }
 

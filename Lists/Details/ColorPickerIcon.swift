@@ -9,11 +9,7 @@
 
 import SwiftUI
 
-class ColorPickerViewModel: ObservableObject {
-    @Published var color = UIColor.blue
-}
-
-class ColorPickerViewController: UIViewController {
+class ColorPickerIconController: UIViewController {
     
     var model: ColorPickerViewModel
     init(model: ColorPickerViewModel) {
@@ -33,7 +29,7 @@ class ColorPickerViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .clear
         
-        let containerView = ColorPickerView(model: model)
+        let containerView = ColorPickerIcon(model: model)
         let hostingController = UIHostingController(rootView: containerView)
         hostingController.view.frame = view.bounds
         hostingController.view.backgroundColor = .clear
@@ -47,7 +43,7 @@ class ColorPickerViewController: UIViewController {
     }
 }
 
-struct ColorPickerView: View {
+struct ColorPickerIcon: View {
     @ObservedObject var model: ColorPickerViewModel
     
     var body: some View {
