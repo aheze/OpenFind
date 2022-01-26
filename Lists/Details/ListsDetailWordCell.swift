@@ -21,7 +21,7 @@ class ListsDetailWordCell: UITableViewCell {
     @IBOutlet var centerView: UIView!
     @IBOutlet var textField: PaddedTextField!
     
-    @IBOutlet var rightView: DragHandleView!
+    @IBOutlet var rightView: UIView!
     @IBOutlet var rightDragHandleImageView: UIImageView!
     
     var leftViewTapped: (() -> Void)?

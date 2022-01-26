@@ -46,6 +46,7 @@ class ListsViewController: UIViewController, Searchable {
         super.viewDidLoad()
         
         title = "Lists"
+        
         _ = listsFlowLayout
         listsViewModel.displayedLists = listsViewModel.lists.map { .init(list: $0) }
         

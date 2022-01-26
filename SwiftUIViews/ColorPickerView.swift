@@ -39,12 +39,93 @@ class ColorPickerViewModel: ObservableObject {
     }
 }
 
+class ColorPickerNavigationViewController: UIViewController {
+    var model: ColorPickerViewModel
+    init(model: ColorPickerViewModel) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    var colorPickerViewController: ColorPickerViewController?
+    override func loadView() {
+        /**
+         Instantiate the base `view`.
+         */
+        view = UIView()
+        view.backgroundColor = .systemBackground
+
+
+        let colorPickerViewController = ColorPickerViewController(model: model)
+        let navigationController = UINavigationController(rootViewController: colorPickerViewController)
+        self.colorPickerViewController = colorPickerViewController
+        addChildViewController(navigationController, in: view)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let viewController = colorPickerViewController {
+            viewController.title = "Colors"
+            viewController.navigationItem.largeTitleDisplayMode = .never
+            viewController.navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(self.dismissSelf), imageName: "Dismiss")
+        }
+    }
+
+    @objc func dismissSelf() {
+        self.dismiss(animated: true)
+    }
+}
+
+
+class ColorPickerViewController: UIViewController {
+    var model: ColorPickerViewModel
+    init(model: ColorPickerViewModel) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    var viewController: UIViewController?
+    override func loadView() {
+        /**
+         Instantiate the base `view`.
+         */
+        view = UIView()
+        view.backgroundColor = .systemBackground
+
+        let containerView = ColorPickerView(model: model)
+        let hostingController = UIHostingController(rootView: containerView)
+        addChildViewController(hostingController, in: view)
+    }
+}
+
 struct ColorPickerView: View {
+    @ObservedObject var model: ColorPickerViewModel
+
+    var body: some View {
+        VStack {
+            ColorPaletteView(model: model)
+
+            Spacer()
+        }
+        .padding(16)
+    }
+}
+
+struct ColorPaletteView: View {
     @ObservedObject var model: ColorPickerViewModel
     @State var colorPaletteSize = CGSize.zero
 
     var body: some View {
-        Text("Color picker")
         ZStack(alignment: .topLeading) {
             HStack(spacing: 0) {
                 ForEach(model.colors, id: \.self) { columnColors in
@@ -57,7 +138,7 @@ struct ColorPickerView: View {
             }
             .aspectRatio(CGFloat(12) / 8, contentMode: .fit)
             .coordinateSpace(name: "Color")
-            .sizeReader {
+            .readSize {
                 colorPaletteSize = $0
             }
             .cornerRadius(12)
@@ -70,8 +151,13 @@ struct ColorPickerView: View {
                         let column = Int(x * 12)
                         let row = Int(y * 8)
 
-                        model.selectedColor = model.colors[column][row]
-                        model.selectedIndex = (column, row)
+                        if
+                            model.colors.indices.contains(column),
+                            model.colors[column].indices.contains(row)
+                        {
+                            model.selectedColor = model.colors[column][row]
+                            model.selectedIndex = (column, row)
+                        }
                     }
             )
 
@@ -94,7 +180,7 @@ extension View {
      Read a view's size. The closure is called whenever the size itself changes, or the transaction changes (in the event of a screen rotation.)
      From https://stackoverflow.com/a/66822461/14351818
      */
-    func sizeReader(size: @escaping (CGSize) -> Void) -> some View {
+    func readSize(size: @escaping (CGSize) -> Void) -> some View {
         return background(
             GeometryReader { geometry in
                 Color.clear
@@ -115,3 +201,17 @@ struct ContentSizeReaderPreferenceKey: PreferenceKey {
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) { value = nextValue() }
 }
 
+extension UIBarButtonItem {
+    static func menuButton(_ target: Any?, action: Selector, imageName: String) -> UIBarButtonItem {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(target, action: action, for: .touchUpInside)
+
+        let menuBarItem = UIBarButtonItem(customView: button)
+        menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28).isActive = true
+        menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28).isActive = true
+
+        return menuBarItem
+    }
+}

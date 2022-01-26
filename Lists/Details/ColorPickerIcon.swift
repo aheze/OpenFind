@@ -48,7 +48,7 @@ struct ColorPickerIcon: View {
     
     var body: some View {
         Circle()
-            .fill(Color(model.color))
+            .fill(Color(model.selectedColor))
             .overlay(
                 Circle()
                     .stroke(Color.white, lineWidth: 2)

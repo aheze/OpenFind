@@ -9,16 +9,9 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Pods-Find.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>Pods-Lists.xcscheme</key>
+		<key>Pods-Find.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

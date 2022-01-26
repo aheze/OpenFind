@@ -18,19 +18,21 @@ extension ListsDetailViewController {
         /// change color
         headerTopRightView.tapped = { [weak self] in
             guard let self = self else { return }
-            if #available(iOS 14.0, *) {
-                let colorPicker = UIColorPickerViewController()
-            
-                if #available(iOS 15.0, *) {
-                    if let presentationController = colorPicker.presentationController as? UISheetPresentationController {
-                        presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
-                    }
-                }
+//            if #available(iOS 14.0, *) {
+//                let colorPicker = UIColorPickerViewController()
+//
+//                if #available(iOS 15.0, *) {
+//                    if let presentationController = colorPicker.presentationController as? UISheetPresentationController {
+//                        presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+//                    }
+//                }
+//
+//                self.present(colorPicker, animated: true)
+//            } else {
                 
-                self.present(colorPicker, animated: true)
-            } else {
-                // Fallback on earlier versions
-            }
+            let colorPicker = ColorPickerNavigationViewController(model: self.headerTopRightColorPickerModel)
+            self.present(colorPicker, animated: true)
+//            }
         }
         
         /// edit mode

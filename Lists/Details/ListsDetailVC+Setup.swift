@@ -41,7 +41,7 @@ extension ListsDetailViewController {
         headerTopLeftImageView.image = UIImage(systemName: model.list.image)
         
         let color = UIColor(hex: model.list.color)
-        headerTopRightColorPickerModel.color = color
+        headerTopRightColorPickerModel.selectedColor = color
         headerView.backgroundColor = color
         
         wordsTopView.backgroundColor = color.withAlphaComponent(0.1)

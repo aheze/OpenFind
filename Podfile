@@ -35,9 +35,6 @@ target 'Camera' do
   shared_pods
 end
 
-target 'Lists' do
-  shared_pods
-end
 
 
 post_install do |installer|
