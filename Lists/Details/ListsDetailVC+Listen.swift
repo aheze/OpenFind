@@ -13,6 +13,8 @@ extension ListsDetailViewController {
         /// change icon
         headerTopLeftView.tapped = { [weak self] in
             guard let self = self else { return }
+            
+            self.present(self.iconPickerViewController, animated: true)
         }
         
         /// change color

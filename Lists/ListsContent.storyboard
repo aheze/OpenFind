@@ -354,20 +354,20 @@
                                                                 </constraints>
                                                                 <prototypes>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListsDetailWordCell" id="KEM-yx-n4V" customClass="ListsDetailWordCell" customModule="ARVision" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="174"/>
+                                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="178"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KEM-yx-n4V" id="Aq5-RU-jAy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="174"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="178"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3b-d8-XgN">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="174"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="178"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Eu-DW-YsI" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="174"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="178"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axQ-Da-UBj" customClass="SelectionIconView" customModule="ARVision" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="62" width="50" height="50"/>
+                                                                                                    <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="axQ-Da-UBj" secondAttribute="height" multiplier="1:1" id="hjW-qg-49u"/>
@@ -383,10 +383,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-i2-Qoi">
-                                                                                            <rect key="frame" x="50" y="0.0" width="314" height="174"/>
+                                                                                            <rect key="frame" x="50" y="0.0" width="314" height="178"/>
                                                                                             <subviews>
                                                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CnX-j0-UT2" customClass="PaddedTextField" customModule="ARVision" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="174"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="178"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                     <textInputTraits key="textInputTraits"/>
                                                                                                 </textField>
@@ -400,10 +400,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7KZ-9M-PVj">
-                                                                                            <rect key="frame" x="364" y="0.0" width="50" height="174"/>
+                                                                                            <rect key="frame" x="364" y="0.0" width="50" height="178"/>
                                                                                             <subviews>
                                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.3.horizontal" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lya-7b-7Tw">
-                                                                                                    <rect key="frame" x="0.0" y="67" width="50" height="40.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="69" width="50" height="40.5"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="lya-7b-7Tw" secondAttribute="height" multiplier="1:1" id="BQs-rD-ZOZ"/>
                                                                                                     </constraints>
@@ -524,6 +524,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tb3-IN-OWL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="853.62318840579712" y="75.669642857142847"/>
+        </scene>
+        <!--Icon Picker View Controller-->
+        <scene sceneID="5T1-gY-I4d">
+            <objects>
+                <viewController storyboardIdentifier="IconPickerViewController" id="QFO-lU-akn" customClass="IconPickerViewController" customModule="ARVision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jxt-r7-nYF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B5n-ts-uxy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lZs-Dz-GbU">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconPickerCell" id="Nwo-ac-mQR" customClass="IconPickerCell" customModule="Lists">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="l19-La-DZU">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mM-kg-bAd" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8l6-Vj-drP">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="8l6-Vj-drP" secondAttribute="bottom" id="C0K-Mq-b03"/>
+                                                        <constraint firstItem="8l6-Vj-drP" firstAttribute="top" secondItem="4mM-kg-bAd" secondAttribute="top" id="Jbj-2b-Bs1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8l6-Vj-drP" secondAttribute="trailing" id="imn-vW-alp"/>
+                                                        <constraint firstItem="8l6-Vj-drP" firstAttribute="leading" secondItem="4mM-kg-bAd" secondAttribute="leading" id="jg9-5t-Kll"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="4mM-kg-bAd" secondAttribute="bottom" id="Jrn-uJ-mq7"/>
+                                                <constraint firstItem="4mM-kg-bAd" firstAttribute="top" secondItem="l19-La-DZU" secondAttribute="top" id="PFj-eL-Ynt"/>
+                                                <constraint firstItem="4mM-kg-bAd" firstAttribute="leading" secondItem="l19-La-DZU" secondAttribute="leading" id="dZo-t7-Lpi"/>
+                                                <constraint firstAttribute="trailing" secondItem="4mM-kg-bAd" secondAttribute="trailing" id="sSq-PU-Mas"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="buttonView" destination="4mM-kg-bAd" id="AF7-ki-tex"/>
+                                            <outlet property="imageView" destination="8l6-Vj-drP" id="kdP-8t-kS4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="h8l-Hz-bZu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="B5n-ts-uxy" secondAttribute="trailing" id="9Wu-2A-Y7e"/>
+                            <constraint firstAttribute="bottom" secondItem="B5n-ts-uxy" secondAttribute="bottom" id="MEO-pd-QNd"/>
+                            <constraint firstItem="B5n-ts-uxy" firstAttribute="leading" secondItem="jxt-r7-nYF" secondAttribute="leading" id="rmC-G2-Zk1"/>
+                            <constraint firstItem="B5n-ts-uxy" firstAttribute="top" secondItem="jxt-r7-nYF" secondAttribute="top" id="xSQ-5J-xJA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="B5n-ts-uxy" id="skf-VY-lEg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PjO-ZW-4dP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1610.144927536232" y="75.669642857142847"/>
         </scene>
     </scenes>
     <designables>
