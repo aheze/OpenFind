@@ -31,6 +31,24 @@ class IconPickerController {
             guard let self = self else { return }
             self.searchNavigationController.updateSearchBarOffset()
         }
+        
+        searchNavigationController.searchViewModel.fieldsChanged = { [weak self] (oldValue, newValue) in
+            guard let self = self else { return }
+            
+            let oldText = oldValue.map { $0.value.getText() }
+            let newText = newValue.map { $0.value.getText() }
+            let textIsSame = oldText == newText
+            
+            if !textIsSame {
+                print("Searches: \(newText)")
+                self.iconPickerViewController.model.filter(words: newText.filter { !$0.isEmpty })
+                self.iconPickerViewController.collectionView.reloadData()
+            }
+            
+            
+            
+            
+        }
     }
 }
 

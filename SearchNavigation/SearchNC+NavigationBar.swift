@@ -74,7 +74,7 @@ extension SearchNavigationController {
         navigationBarBackgroundBorderView.alpha = 0
         
         animator?.addAnimations { [weak navigationBarBackgroundBlurView, weak navigationBarBackgroundBorderView] in
-            navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .regular)
+            navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .systemChromeMaterial)
             navigationBarBackgroundBorderView?.alpha = 1
         }
         

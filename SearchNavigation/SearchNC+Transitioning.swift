@@ -29,7 +29,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             /// first reset to start, if there's going to be a change
             if percentage == 0, blurPercentage != 0 {
                 self.navigationBarBackgroundBorderView.alpha = 1
-                self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .regular)
+                self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .systemChromeMaterial)
             } else if percentage == 1, blurPercentage != 1 {
                 self.navigationBarBackgroundBorderView.alpha = 0
                 self.navigationBarBackgroundBlurView.effect = nil

@@ -29,8 +29,8 @@ class SearchViewModel: ObservableObject {
         )
     ] {
         didSet {
-            fieldsChanged?(oldValue, fields)
             updateStringToGradients()
+            fieldsChanged?(oldValue, fields)
         }
     }
     

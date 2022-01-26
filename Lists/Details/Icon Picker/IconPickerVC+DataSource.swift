@@ -10,11 +10,11 @@ import UIKit
 
 extension IconPickerViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return model.icons.count
+        return model.filteredCategories.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.icons[section].icons.count
+        return model.filteredCategories[section].icons.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -25,7 +25,7 @@ extension IconPickerViewController: UICollectionViewDataSource {
             fatalError()
         }
 
-        let icon = model.icons[indexPath.section].icons[indexPath.item]
+        let icon = model.filteredCategories[indexPath.section].icons[indexPath.item]
         
         if let image = UIImage(systemName: icon) {
             cell.imageView.image = image
