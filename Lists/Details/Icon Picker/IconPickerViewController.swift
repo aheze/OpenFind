@@ -6,22 +6,42 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
-class IconPickerViewController: UIViewController {
-
-    var model = IconPickerViewModel()
-    @IBOutlet weak var collectionView: UICollectionView!
+class IconPickerController {
+    var searchNavigationController: SearchNavigationController
+    var iconPickerViewController: IconPickerViewController
+    static let searchConfiguration = SearchConfiguration.photos
     
-    static func make(model: IconPickerViewModel) -> (UINavigationController, IconPickerViewController) {
+    init(model: IconPickerViewModel) {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "IconPickerViewController") { coder in
+        let iconPickerViewController = storyboard.instantiateViewController(identifier: "IconPickerViewController") { coder in
             IconPickerViewController(coder: coder, model: model)
         }
-        let navigationController = UINavigationController(rootViewController: viewController)
-        return (navigationController, viewController)
+        let searchNavigationController = SearchNavigationController.make(
+            rootViewController: iconPickerViewController,
+            searchConfiguration: IconPickerController.searchConfiguration,
+            tabType: .lists
+        )
+        
+        self.searchNavigationController = searchNavigationController
+        self.iconPickerViewController = iconPickerViewController
+        
+        iconPickerViewController.updateSearchBarOffset = { [weak self] in
+            guard let self = self else { return }
+            self.searchNavigationController.updateSearchBarOffset()
+        }
     }
+}
+
+class IconPickerViewController: UIViewController, Searchable {
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset = CGFloat(0)
+
+    var model = IconPickerViewModel()
+    @IBOutlet var collectionView: UICollectionView!
+    
+    var updateSearchBarOffset: (() -> Void)?
     
     init?(
         coder: NSCoder,
@@ -31,6 +51,7 @@ class IconPickerViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -42,15 +63,25 @@ class IconPickerViewController: UIViewController {
         collectionView.delegate = self
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-
+        baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        collectionView.contentInset.top = IconPickerController.searchConfiguration.getTotalHeight()
+        collectionView.verticalScrollIndicatorInsets.top = IconPickerController.searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         
-        self.title = "Icons"
+        title = "Icons"
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(self.dismissSelf), imageName: "Dismiss")
+        navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(dismissSelf), imageName: "Dismiss")
     }
     
     @objc func dismissSelf() {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
-    
+}
+
+/// Scroll view
+extension IconPickerViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset = -scrollView.contentOffset.y
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - IconPickerController.searchConfiguration.getTotalHeight()
+        updateSearchBarOffset?()
+    }
 }

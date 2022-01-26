@@ -8,33 +8,9 @@
 
 import SwiftUI
 
-//extension ListsDetailViewController: DismissalNavigationLifecycle {
-//    func willAppear() {
-//        
-//    }
-//    
-//    func didAppear() {
-//        if model.isEditing {
-//            withAnimation {
-//                toolbarViewModel.toolbar = AnyView(toolbarView)
-//            }
-//        }
-//    }
-//    
-//    func willDisappear() {
-//        withAnimation {
-//            toolbarViewModel.toolbar = nil
-//        }
-//    }
-//    
-//    func didDisappear() {
-//        
-//    }
-//}
-
 extension ListsDetailViewController {
     func willBecomeActive() {}
-    
+
     func didBecomeActive() {
         if model.isEditing {
             withAnimation {
@@ -42,12 +18,12 @@ extension ListsDetailViewController {
             }
         }
     }
-    
+
     func willBecomeInactive() {
         withAnimation {
             toolbarViewModel.toolbar = nil
         }
     }
-    
+
     func didBecomeInactive() {}
 }

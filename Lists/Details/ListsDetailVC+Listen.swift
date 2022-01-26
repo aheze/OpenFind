@@ -14,27 +14,32 @@ extension ListsDetailViewController {
         headerTopLeftView.tapped = { [weak self] in
             guard let self = self else { return }
             
-            self.present(self.iconPicker.0, animated: true)
+            if #available(iOS 15.0, *) {
+                if let presentationController = self.iconPicker.searchNavigationController.presentationController as? UISheetPresentationController {
+                    presentationController.detents = [.medium(), .large()]
+                }
+            }
+            self.present(self.iconPicker.searchNavigationController, animated: true)
         }
         
         /// change color
         headerTopRightView.tapped = { [weak self] in
             guard let self = self else { return }
-//            if #available(iOS 14.0, *) {
-//                let colorPicker = UIColorPickerViewController()
-//
-//                if #available(iOS 15.0, *) {
-//                    if let presentationController = colorPicker.presentationController as? UISheetPresentationController {
-//                        presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
-//                    }
-//                }
-//
-//                self.present(colorPicker, animated: true)
-//            } else {
+            if #available(iOS 14.0, *) {
+                let colorPicker = UIColorPickerViewController()
                 
-            let colorPicker = ColorPickerNavigationViewController(model: self.headerTopRightColorPickerModel)
-            self.present(colorPicker, animated: true)
-//            }
+                if #available(iOS 15.0, *) {
+                    if let presentationController = colorPicker.presentationController as? UISheetPresentationController {
+                        presentationController.detents = [.medium(), .large()]
+                    }
+                }
+                
+                self.present(colorPicker, animated: true)
+            } else {
+                
+                let colorPicker = ColorPickerNavigationViewController(model: self.headerTopRightColorPickerModel)
+                self.present(colorPicker, animated: true)
+            }
         }
         
         /// edit mode

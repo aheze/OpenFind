@@ -96,4 +96,10 @@ struct SearchConfiguration: Equatable {
         )
         return configuration
     }()
+
+    static var photos: Self = {
+        var configuration = SearchConfiguration.lists
+        configuration.fieldBackgroundColor = .secondarySystemBackground
+        return configuration
+    }()
 }
