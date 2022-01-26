@@ -9,6 +9,16 @@
 
 import UIKit
 
+class IconPickerHeader: UICollectionReusableView {
+    @IBOutlet weak var label: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        label.textColor = .secondaryLabel
+        backgroundColor = .clear
+    }
+}
 class IconPickerCell: UICollectionViewCell {
     
     @IBOutlet weak var buttonView: ButtonView!

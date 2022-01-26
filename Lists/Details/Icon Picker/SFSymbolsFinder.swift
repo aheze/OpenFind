@@ -226,7 +226,7 @@ enum Communication: String, SFFinderConvertible, SFSymbolsEnum, CaseIterable {
     case envelopeOpen
     case envelopeOpenFill
     case envelopeBadge
-    case envelopeBadegFill
+    case envelopeBadgeFill
 
     var enumRawValue: String {
         return rawValue
@@ -310,7 +310,7 @@ enum Weather: String, SFFinderConvertible, SFSymbolsEnum, CaseIterable {
     case windSnow
     case tornado
     case tropicalstorm
-    case huricane
+    case hurricane
 
     case thermometerSun
     case thermometerSnowflake
@@ -332,7 +332,7 @@ enum ObjectAndTools: String, SFFinderConvertible, SFSymbolsEnum, CaseIterable {
     // MARK: iOS 13+
 
     var categoryName: String {
-        "ObjectAndTools"
+        "Objects and Tools"
     }
 
     case pencil
@@ -375,8 +375,8 @@ enum ObjectAndTools: String, SFFinderConvertible, SFSymbolsEnum, CaseIterable {
     case trayFull
     case trayFullFill
 
-    case archiveBox
-    case archiveBoxFill
+    case archivebox
+    case archiveboxFill
     case binXmark
     case binXmarkFill
     case arrowUpBin
@@ -398,7 +398,7 @@ enum ObjectAndTools: String, SFFinderConvertible, SFSymbolsEnum, CaseIterable {
     case rosette
     case paperclip
     case paperclipCircle
-    case paperclicCircleFill
+    case paperclipCircleFill
     case rectangleAndPaperclip
     case link
     case linkCircle

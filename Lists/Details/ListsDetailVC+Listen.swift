@@ -14,7 +14,7 @@ extension ListsDetailViewController {
         headerTopLeftView.tapped = { [weak self] in
             guard let self = self else { return }
             
-            self.present(self.iconPickerViewController, animated: true)
+            self.present(self.iconPicker.0, animated: true)
         }
         
         /// change color
