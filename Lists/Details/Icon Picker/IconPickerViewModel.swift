@@ -10,25 +10,26 @@
 import UIKit
 
 class IconPickerViewModel {
-    var icons: [[SFFinderConvertible]] = [
-        Communication.allCases,
-        Weather.allCases,
-        ObjectAndTools.allCases,
-        Devices.allCases,
-        Gaming.allCases,
-        Connectivity.allCases,
-        Transportation.allCases,
-        Human.allCases,
-        Nature.allCases,
-        Editing.allCases,
-        TextFormatting.allCases,
-        Media.allCases,
-        Keyboard.allCases,
-        Commerce.allCases,
-        Time.allCases,
-        Health.allCases,
-        Shapes.allCases,
-        Arrows.allCases,
-        Math.allCases
+    var icons: [Category] = [
+        communication,
+        weather,
+        objectsAndTools,
+        devices,
+        gaming,
+        connectivity,
+        transportation,
+        human,
+        nature,
+        editing,
+        textFormatting,
+        media,
+        keyboard,
+        commerce,
+        time,
+        health,
+        shapes,
+        arrows,
+        indices,
+        math
     ]
 }

@@ -1074,8 +1074,6 @@
 		3C8F116E25AD5DA80091402B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116D25AD5DA80091402B /* CustomButton.swift */; };
 		3C93FC3E27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */; };
 		3C93FC4027A0EDEC00EBBC81 /* IconPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */; };
-		3C93FC4227A0EE6900EBBC81 /* SFSymbolsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4127A0EE6900EBBC81 /* SFSymbolsValidator.swift */; };
-		3C93FC4427A0EE6F00EBBC81 /* SFSymbolsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4327A0EE6F00EBBC81 /* SFSymbolsFinder.swift */; };
 		3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */; };
 		3C989DEC27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
 		3C989DED27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
@@ -1394,6 +1392,7 @@
 		3CD388BD25C11AB900B67B13 /* CameraVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */; };
 		3CD388C125C122BC00B67B13 /* ViewController+ShutterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */; };
 		3CD7060C27A0F62300B446D7 /* IconPickerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */; };
+		3CD7061027A11E6D00B446D7 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7060F27A11E6D00B446D7 /* Icons.swift */; };
 		3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */; };
 		3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306CE259AC46400F1B2E2 /* TabBar.swift */; };
 		3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */; };
@@ -2162,8 +2161,6 @@
 		3C8F116D25AD5DA80091402B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IconPickerVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewModel.swift; sourceTree = "<group>"; };
-		3C93FC4127A0EE6900EBBC81 /* SFSymbolsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFSymbolsValidator.swift; sourceTree = "<group>"; };
-		3C93FC4327A0EE6F00EBBC81 /* SFSymbolsFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFSymbolsFinder.swift; sourceTree = "<group>"; };
 		3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerCell.swift; sourceTree = "<group>"; };
 		3C9CE49A25BFBFAC006D989C /* CameraVC+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Resume.swift"; sourceTree = "<group>"; };
 		3C9D5F4D25F2E72F002E93F5 /* CameraVC+FullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FullScreen.swift"; sourceTree = "<group>"; };
@@ -2247,6 +2244,7 @@
 		3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Tips.swift"; sourceTree = "<group>"; };
 		3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ShutterPosition.swift"; sourceTree = "<group>"; };
 		3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerConstants.swift; sourceTree = "<group>"; };
+		3CD7060F27A11E6D00B446D7 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFindViewController.swift; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
@@ -3573,8 +3571,7 @@
 				3CC5951927A0EA24001D07DC /* IconPickerViewController.swift */,
 				3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */,
 				3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */,
-				3C93FC4327A0EE6F00EBBC81 /* SFSymbolsFinder.swift */,
-				3C93FC4127A0EE6900EBBC81 /* SFSymbolsValidator.swift */,
+				3CD7060F27A11E6D00B446D7 /* Icons.swift */,
 			);
 			path = "Icon Picker";
 			sourceTree = "<group>";
@@ -5683,7 +5680,6 @@
 				3C1D19E7275A93700064F2C6 /* ListsViewModel.swift in Sources */,
 				3C08EAE8279BA94A00971D60 /* ListsVC+Details.swift in Sources */,
 				3C4D3A67274769370010FD68 /* ListsController.swift in Sources */,
-				3C93FC4427A0EE6F00EBBC81 /* SFSymbolsFinder.swift in Sources */,
 				3C6C74332781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
@@ -5713,6 +5709,7 @@
 				3CCE2B94279D297200F72351 /* ListsVC+Lifecycle.swift in Sources */,
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
 				3CC5951F27A0EA24001D07DC /* IconPickerViewController.swift in Sources */,
+				3CD7061027A11E6D00B446D7 /* Icons.swift in Sources */,
 				3C3642FD277BC2E90038CB18 /* SearchViewModel.swift in Sources */,
 				3CFD6029278B71E10031BC8B /* SearchNC+SearchBar.swift in Sources */,
 				3CC594FC279F3324001D07DC /* ColorPickerView.swift in Sources */,
@@ -5727,7 +5724,6 @@
 				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3C3642FF277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
-				3C93FC4227A0EE6900EBBC81 /* SFSymbolsValidator.swift in Sources */,
 				3C08EAD1279B0AA300971D60 /* ListsConstants.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CFD602A278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,

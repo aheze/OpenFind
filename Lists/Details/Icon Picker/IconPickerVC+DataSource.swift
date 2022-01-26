@@ -14,7 +14,7 @@ extension IconPickerViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.icons[section].count
+        return model.icons[section].icons.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -25,13 +25,13 @@ extension IconPickerViewController: UICollectionViewDataSource {
             fatalError()
         }
 
-        let icon = model.icons[indexPath.section][indexPath.item]
+        let icon = model.icons[indexPath.section].icons[indexPath.item]
         
-        if let image = UIImage(systemName: icon.systemName) {
+        if let image = UIImage(systemName: icon) {
             cell.imageView.image = image
             cell.imageView.tintColor = .label
         } else {
-            print("Name: \(icon.systemName)")
+            print("Name: \(icon)")
             cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
             cell.imageView.tintColor = .systemYellow
         }
@@ -44,7 +44,7 @@ extension IconPickerViewController: UICollectionViewDataSource {
             kind == UICollectionView.elementKindSectionHeader,
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IconPickerHeader", for: indexPath) as? IconPickerHeader
         {
-            headerView.label.text = model.icons[indexPath.section].first?.categoryName ?? ""
+            headerView.label.text = model.icons[indexPath.section].categoryName
             return headerView
         }
         fatalError()
