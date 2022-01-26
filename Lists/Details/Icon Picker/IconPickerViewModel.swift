@@ -40,33 +40,34 @@ class IconPickerViewModel {
         self.cachedSearches = [:]
     }
     
-    func filter(words: [String]) {
-        
-        print("Searching for: \(words)")
+    
+    func filter(search words: [String], completion: @escaping (() -> Void)) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let filteredCategories = self.find(words: words)
+            self.filteredCategories = filteredCategories
+            self.cachedSearches[words] = filteredCategories
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+
+    func find(words: [String]) -> [Category] {
         var cachedCategories: [Category]?
         let sortedCachedSearches = cachedSearches.sorted(by: { $0.key.joined().count > $1.key.joined().count })
         
-        print("Cached searches: \(cachedSearches.keys), sorted: \(sortedCachedSearches.map { $0.key })")
         for (cachedSearch, categories) in sortedCachedSearches {
             let search = zip(words, cachedSearch)
-            if cachedSearch == words {
-                self.filteredCategories = categories
-                return
-            } else if search.map({ $0.0.starts(with: $0.1) }).allSatisfy { $0 } {
+            if cachedSearch == words { /// exact same search as before
+                return categories
+            } else if search.map({ $0.0.starts(with: $0.1) }).allSatisfy({ $0 }) {
                 cachedCategories = categories
                 break
             }
         }
         
-        let start = CFAbsoluteTimeGetCurrent()
-        
-        print("Searching in: \(cachedCategories)")
         let filteredCategories = search(in: cachedCategories ?? icons, for: words)
-        self.filteredCategories = filteredCategories
-        cachedSearches[words] = filteredCategories
-        
-        let diff = CFAbsoluteTimeGetCurrent() - start
-        print("🏁🏁🏁 Filter elapsed time measured:  \(diff * 1000) milliseconds for 🔎: \(words) 🏁🏁🏁")
+        return filteredCategories
     }
 
     func search(in categories: [Category], for searchedWords: [String]) -> [Category] {

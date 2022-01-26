@@ -9,9 +9,16 @@
 
 import Foundation
 
-struct Category {
+struct Category: Hashable {
     var categoryName: String
     var icons: [String]
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(categoryName)
+    }
+    static func == (lhs: Category, rhs: Category) -> Bool {
+        return lhs.categoryName == rhs.categoryName
+    }
 }
 
 let communication = Category(

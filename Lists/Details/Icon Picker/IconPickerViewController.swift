@@ -8,58 +8,20 @@
     
 import UIKit
 
-class IconPickerController {
-    var searchNavigationController: SearchNavigationController
-    var iconPickerViewController: IconPickerViewController
-    static let searchConfiguration = SearchConfiguration.photos
-    
-    init(model: IconPickerViewModel) {
-        let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
-        let iconPickerViewController = storyboard.instantiateViewController(identifier: "IconPickerViewController") { coder in
-            IconPickerViewController(coder: coder, model: model)
-        }
-        let searchNavigationController = SearchNavigationController.make(
-            rootViewController: iconPickerViewController,
-            searchConfiguration: IconPickerController.searchConfiguration,
-            tabType: .lists
-        )
-        
-        self.searchNavigationController = searchNavigationController
-        self.iconPickerViewController = iconPickerViewController
-        
-        iconPickerViewController.updateSearchBarOffset = { [weak self] in
-            guard let self = self else { return }
-            self.searchNavigationController.updateSearchBarOffset()
-        }
-        
-        searchNavigationController.searchViewModel.fieldsChanged = { [weak self] (oldValue, newValue) in
-            guard let self = self else { return }
-            
-            let oldText = oldValue.map { $0.value.getText() }
-            let newText = newValue.map { $0.value.getText() }
-            let textIsSame = oldText == newText
-            
-            if !textIsSame {
-                print("Searches: \(newText)")
-                self.iconPickerViewController.model.filter(words: newText.filter { !$0.isEmpty })
-                self.iconPickerViewController.collectionView.reloadData()
-            }
-            
-            
-            
-            
-        }
-    }
-}
-
 class IconPickerViewController: UIViewController, Searchable {
+    
+    /// searchable
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
-
+    var updateSearchBarOffset: (() -> Void)?
+    
     var model = IconPickerViewModel()
+    
     @IBOutlet var collectionView: UICollectionView!
     
-    var updateSearchBarOffset: (() -> Void)?
+    lazy var dataSource = makeDataSource()
+    typealias DataSource = UICollectionViewDiffableDataSource<Category, String>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Category, String>
     
     init?(
         coder: NSCoder,
@@ -77,7 +39,7 @@ class IconPickerViewController: UIViewController, Searchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = self
+        collectionView.dataSource = dataSource
         collectionView.delegate = self
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
@@ -88,10 +50,58 @@ class IconPickerViewController: UIViewController, Searchable {
         title = "Icons"
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(dismissSelf), imageName: "Dismiss")
+        
+        update(animate: false)
     }
     
     @objc func dismissSelf() {
         dismiss(animated: true)
+    }
+    
+    func update(animate: Bool = true) {
+        var snapshot = Snapshot()
+        snapshot.appendSections(model.filteredCategories)
+        model.filteredCategories.forEach { category in
+            snapshot.appendItems(category.icons, toSection: category)
+        }
+        dataSource.apply(snapshot, animatingDifferences: animate)
+    }
+    
+    func makeDataSource() -> DataSource {
+        let dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, icon -> UICollectionViewCell? in
+                
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "IconPickerCell",
+                    for: indexPath
+                ) as! IconPickerCell
+                
+                if let image = UIImage(systemName: icon) {
+                    cell.imageView.image = image
+                    cell.imageView.tintColor = .label
+                } else {
+                    cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
+                    cell.imageView.tintColor = .systemYellow
+                }
+                
+                return cell
+            }
+        )
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            if
+                kind == UICollectionView.elementKindSectionHeader,
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IconPickerHeader", for: indexPath) as? IconPickerHeader
+            {
+                headerView.label.text = self.model.icons[indexPath.section].categoryName
+                return headerView
+            }
+            
+            return nil
+        }
+        
+        return dataSource
     }
 }
 

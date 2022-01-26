@@ -8,49 +8,6 @@
 
 import UIKit
 
-extension IconPickerViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return model.filteredCategories.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.filteredCategories[section].icons.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "IconPickerCell",
-            for: indexPath
-        ) as? IconPickerCell else {
-            fatalError()
-        }
-
-        let icon = model.filteredCategories[indexPath.section].icons[indexPath.item]
-        
-        if let image = UIImage(systemName: icon) {
-            cell.imageView.image = image
-            cell.imageView.tintColor = .label
-        } else {
-            print("Name: \(icon)")
-            cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
-            cell.imageView.tintColor = .systemYellow
-        }
-
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if
-            kind == UICollectionView.elementKindSectionHeader,
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IconPickerHeader", for: indexPath) as? IconPickerHeader
-        {
-            headerView.label.text = model.icons[indexPath.section].categoryName
-            return headerView
-        }
-        fatalError()
-    }
-}
-
 extension IconPickerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let availableWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
