@@ -56,11 +56,14 @@ class IconPickerViewModel {
         var cachedCategories: [Category]?
         let sortedCachedSearches = cachedSearches.sorted(by: { $0.key.joined().count > $1.key.joined().count })
         
+        print("-> Searching for \(words)")
         for (cachedSearch, categories) in sortedCachedSearches {
             let search = zip(words, cachedSearch)
-            print("Search: \(words) + \(cachedSearch) = \(search)")
+            print("+ \(cachedSearch) = \(Array(search))")
             if cachedSearch == words { /// exact same search as before
                 return categories
+            } else if words.count > cachedSearch.count {
+                cachedCategories = icons
             } else if search.map({ $0.0.starts(with: $0.1) }).allSatisfy({ $0 }) {
                 cachedCategories = categories
                 break

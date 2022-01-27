@@ -13,12 +13,12 @@ extension IconPickerViewController {
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, icon -> UICollectionViewCell? in
-                
+
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: "IconPickerCell",
                     for: indexPath
                 ) as! IconPickerCell
-                
+
                 if let image = UIImage(systemName: icon) {
                     cell.imageView.image = image
                     cell.imageView.tintColor = .label
@@ -26,11 +26,11 @@ extension IconPickerViewController {
                     cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
                     cell.imageView.tintColor = .systemYellow
                 }
-                
+
                 return cell
             }
         )
-        
+
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if
                 kind == UICollectionView.elementKindSectionHeader,
@@ -41,10 +41,10 @@ extension IconPickerViewController {
                 headerView.label.text = section.categoryName
                 return headerView
             }
-            
+
             return nil
         }
-        
+
         return dataSource
     }
 }
