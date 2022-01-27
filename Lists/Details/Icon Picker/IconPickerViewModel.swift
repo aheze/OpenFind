@@ -32,7 +32,13 @@ class IconPickerViewModel {
         math
     ]
     
-    var selectedIcon: String
+    var selectedIcon: String {
+        didSet {
+            iconChanged?(selectedIcon)
+        }
+    }
+    var iconChanged: ((String) -> Void)?
+    
     var filteredCategories: [Category]
     var cachedSearches: [[String]: [Category]]
     

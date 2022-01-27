@@ -51,11 +51,25 @@ class IconPickerViewController: UIViewController, Searchable {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(dismissSelf), imageName: "Dismiss")
         
+        let jumpButton = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.forward.to.line"),
+            style: .plain,
+            target: self,
+            action: #selector(jumpToIcon)
+        )
+        navigationItem.leftBarButtonItem = jumpButton
+        
         update(animate: false)
     }
     
     @objc func dismissSelf() {
         dismiss(animated: true)
+    }
+    
+    @objc func jumpToIcon() {
+        if let indexPath = dataSource.indexPath(for: model.selectedIcon) {
+            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        }
     }
     
     func update(animate: Bool = true) {
