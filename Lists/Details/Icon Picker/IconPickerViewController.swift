@@ -66,43 +66,6 @@ class IconPickerViewController: UIViewController, Searchable {
         }
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
-    
-    func makeDataSource() -> DataSource {
-        let dataSource = DataSource(
-            collectionView: collectionView,
-            cellProvider: { collectionView, indexPath, icon -> UICollectionViewCell? in
-                
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: "IconPickerCell",
-                    for: indexPath
-                ) as! IconPickerCell
-                
-                if let image = UIImage(systemName: icon) {
-                    cell.imageView.image = image
-                    cell.imageView.tintColor = .label
-                } else {
-                    cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
-                    cell.imageView.tintColor = .systemYellow
-                }
-                
-                return cell
-            }
-        )
-        
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if
-                kind == UICollectionView.elementKindSectionHeader,
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IconPickerHeader", for: indexPath) as? IconPickerHeader
-            {
-                headerView.label.text = self.model.icons[indexPath.section].categoryName
-                return headerView
-            }
-            
-            return nil
-        }
-        
-        return dataSource
-    }
 }
 
 /// Scroll view
