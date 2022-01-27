@@ -27,6 +27,22 @@ extension IconPickerViewController {
                     cell.imageView.tintColor = .systemYellow
                 }
 
+                if icon == self.model.selectedIcon {
+                    cell.buttonView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
+                } else {
+                    cell.buttonView.backgroundColor = .clear
+                }
+
+                cell.tapped = { [weak self] in
+                    guard let self = self else { return }
+                    let previousIcon = self.model.selectedIcon
+                    self.model.selectedIcon = icon
+
+                    var snapshot = self.dataSource.snapshot()
+                    snapshot.reconfigureItems([previousIcon, icon])
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
+                }
+
                 return cell
             }
         )
@@ -37,7 +53,6 @@ extension IconPickerViewController {
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IconPickerHeader", for: indexPath) as? IconPickerHeader
             {
                 let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-//                print("section: \(indexPath.section), name: \(self.model.icons[indexPath.section].categoryName)")
                 headerView.label.text = section.categoryName
                 return headerView
             }

@@ -32,10 +32,12 @@ class IconPickerViewModel {
         math
     ]
     
+    var selectedIcon: String
     var filteredCategories: [Category]
     var cachedSearches: [[String]: [Category]]
     
-    init() {
+    init(selectedIcon: String) {
+        self.selectedIcon = selectedIcon
         self.filteredCategories = icons
         self.cachedSearches = [:]
     }
@@ -56,10 +58,8 @@ class IconPickerViewModel {
         var cachedCategories: [Category]?
         let sortedCachedSearches = cachedSearches.sorted(by: { $0.key.joined().count > $1.key.joined().count })
         
-        print("-> Searching for \(words)")
         for (cachedSearch, categories) in sortedCachedSearches {
             let search = zip(words, cachedSearch)
-            print("+ \(cachedSearch) = \(Array(search))")
             if cachedSearch == words { /// exact same search as before
                 return categories
             } else if words.count > cachedSearch.count {

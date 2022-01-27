@@ -41,7 +41,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet var headerTopLeftView: ButtonView!
     @IBOutlet var headerTopLeftViewRightC: NSLayoutConstraint!
     @IBOutlet var headerTopLeftImageView: UIImageView!
-    var headerTopLeftIconPickerModel = IconPickerViewModel()
+    lazy var headerTopLeftIconPickerModel = IconPickerViewModel(selectedIcon: model.list.image)
     lazy var iconPicker = IconPickerController(model: headerTopLeftIconPickerModel)
     
     @IBOutlet var headerTopCenterView: UIView!

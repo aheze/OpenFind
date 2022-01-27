@@ -35,5 +35,8 @@ class IconPickerCell: UICollectionViewCell {
         imageView.tintColor = .label
         imageView.contentMode = .center
         imageView.preferredSymbolConfiguration = .init(font: IconPickerConstants.iconFont)
+        
+        buttonView.clipsToBounds = true
+        buttonView.layer.cornerRadius = IconPickerConstants.iconCornerRadius
     }
 }

@@ -14,4 +14,5 @@ struct IconPickerConstants {
     static var spacing = CGFloat(10)
     
     static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
+    static var iconCornerRadius = CGFloat(12)
 }

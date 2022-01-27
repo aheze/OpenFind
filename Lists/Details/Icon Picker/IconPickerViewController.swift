@@ -15,7 +15,7 @@ class IconPickerViewController: UIViewController, Searchable {
     var additionalSearchBarOffset = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
     
-    var model = IconPickerViewModel()
+    var model: IconPickerViewModel
     
     @IBOutlet var collectionView: UICollectionView!
     
