@@ -53,11 +53,8 @@ struct FieldSettingsView: View {
             PopoverReader { context in
                 Button {
                     if model.showingWords {
-                        let transaction = Transaction(animation: .default)
-                        withTransaction(transaction) {
+                        withAnimation(.spring()) {
                             model.showingWords = false
-//                            context.attributes.
-//                            context.refre?.refresh(with: transaction)
                         }
                     }
                 } label: {
@@ -75,75 +72,74 @@ struct FieldSettingsView: View {
                 .disabled(!model.showingWords)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 10)
-            }
             
-            Line()
-            
-            /// main content
-            VStack(spacing: 0) {
-                FieldSettingsContainer {
-                    Button {
-                        withAnimation {
-                            model.selectedColor = nil
-                        }
-                    } label: {
-                        HStack {
-                            Text("Default")
-                            Spacer()
-                            Image(systemName: "checkmark")
-                                .opacity(model.selectedColor == nil ? 1 : 0)
-                        }
-                        .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                        .modifier(PopoverButtonModifier(backgroundColor: model.defaultColor))
-                    }
-                    
-                    PaletteView(selectedColor: $model.selectedColor)
-                        .cornerRadius(FieldSettingsConstants.cornerRadius)
-                    
-                    OpacitySlider(value: $model.alpha, color: model.selectedColor ?? model.defaultColor)
-                        .frame(height: FieldSettingsConstants.sliderHeight)
-                        .cornerRadius(FieldSettingsConstants.cornerRadius)
-                }
                 Line()
-                
-                FieldSettingsContainer {
-                    Button {
-                        let transaction = Transaction(animation: .default)
-                        withTransaction(transaction) {
-                            model.showingWords = true
-//                            Popovers.refresh(with: transaction)
+            
+                /// main content
+                VStack(spacing: 0) {
+                    FieldSettingsContainer {
+                        Button {
+                            withAnimation {
+                                model.selectedColor = nil
+                            }
+                        } label: {
+                            HStack {
+                                Text("Default")
+                                Spacer()
+                                Image(systemName: "checkmark")
+                                    .opacity(model.selectedColor == nil ? 1 : 0)
+                            }
+                            .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
+                            .modifier(PopoverButtonModifier(backgroundColor: model.defaultColor))
                         }
-                    } label: {
-                        Text("Show Words")
-                            .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
+                    
+                        PaletteView(selectedColor: $model.selectedColor)
+                            .cornerRadius(FieldSettingsConstants.cornerRadius)
+                    
+                        OpacitySlider(value: $model.alpha, color: model.selectedColor ?? model.defaultColor)
+                            .frame(height: FieldSettingsConstants.sliderHeight)
+                            .cornerRadius(FieldSettingsConstants.cornerRadius)
                     }
                     
-                    Button {
-                        model.editListPressed?()
-                    } label: {
-                        Text("Edit List")
-                            .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-                    }
-                }
-                .clipped()
-                .opacity(model.words.isEmpty ? 0 : 1)
-                .frame(height: model.words.isEmpty ? 0 : nil, alignment: .top)
-            }
-            .offset(x: model.showingWords ? -180 : 0, y: 0)
-            .opacity(model.showingWords ? 0 : 1)
-            .overlay(
-                ScrollView {
+                    Line()
+                    
                     FieldSettingsContainer {
-                        ForEach(model.words, id: \.self) { word in
-                            Text(verbatim: word)
+                        Button {
+                            withAnimation(.spring()) {
+                                model.showingWords = true
+                            }
+                        } label: {
+                            Text("Show Words")
+                                .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
+                        }
+                            
+                        Button {
+                            model.editListPressed?()
+                        } label: {
+                            Text("Edit List")
                                 .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
                         }
                     }
+                    .clipped()
+                    .opacity(model.words.isEmpty ? 0 : 1)
+                    .frame(height: listButtonsHeight(), alignment: .top)
                 }
-                .offset(x: model.showingWords ? 0 : 180, y: 0)
-                .opacity(model.showingWords ? 1 : 0),
-                alignment: .top
-            )
+                .offset(x: model.showingWords ? -180 : 0, y: 0)
+                .opacity(model.showingWords ? 0 : 1)
+                .overlay(
+                    ScrollView {
+                        FieldSettingsContainer {
+                            ForEach(model.words, id: \.self) { word in
+                                Text(verbatim: word)
+                                    .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
+                            }
+                        }
+                    }
+                    .offset(x: model.showingWords ? 0 : 180, y: 0)
+                    .opacity(model.showingWords ? 1 : 0),
+                    alignment: .top
+                )
+            }
         }
         .frame(width: 180)
         .background(
@@ -153,7 +149,16 @@ struct FieldSettingsView: View {
             }
         )
         .cornerRadius(16)
-        .frame(height: model.showingWords ? 100 : nil)
+    }
+    
+    func listButtonsHeight() -> CGFloat? {
+        if model.words.isEmpty { /// not list, hide list buttons
+            return 0
+        } else if model.showingWords { /// list is showing words
+            return 70
+        } else { /// list is not showing words
+            return nil
+        }
     }
 }
 

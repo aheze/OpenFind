@@ -2115,6 +2115,7 @@
 		3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerConstants.swift; sourceTree = "<group>"; };
 		3CD7060F27A11E6D00B446D7 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		3CD7061127A1BCC800B446D7 /* IconPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerController.swift; sourceTree = "<group>"; };
+		3CD706F927A384CE00B446D7 /* Popovers */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Popovers; path = ../../Popovers; sourceTree = "<group>"; };
 		3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFindViewController.swift; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
@@ -4035,6 +4036,7 @@
 		4999AC872353A80A00AB06A7 = {
 			isa = PBXGroup;
 			children = (
+				3CD706F927A384CE00B446D7 /* Popovers */,
 				3C6C7322278193F600E039F0 /* Find-New */,
 				3C4D3787274755FE0010FD68 /* TabController */,
 				3C4D39C427475E800010FD68 /* Shared */,
