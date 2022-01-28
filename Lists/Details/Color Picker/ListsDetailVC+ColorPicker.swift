@@ -20,6 +20,8 @@ extension ListsDetailViewController {
             }
 
             self.present(colorPicker, animated: true)
+            colorPicker.selectedColor = UIColor(hex: model.list.color)
+            colorPicker.supportsAlpha = false
             colorPicker.delegate = self
         } else {
             let colorPicker = ColorPickerNavigationViewController(model: self.headerTopRightColorPickerModel)

@@ -51,8 +51,14 @@ struct ListsDetailConstants {
     static var headerTitleFont = UIFont.preferredFont(forTextStyle: .headline)
     static var headerDescriptionFont = UIFont.preferredFont(forTextStyle: .body)
     
-    static var headerTextColor = UIColor.white
-    static var headerPlaceholderColor = UIColor.white.withAlphaComponent(0.75)
+    /// colors
+    static var headerTextColorWhite = UIColor.white
+    static var headerPlaceholderColorWhite = UIColor.white.withAlphaComponent(0.75)
+    static var headerInnerViewBackgroundColorWhite = UIColor.white.withAlphaComponent(0.3)
+    static var headerTextColorBlack = UIColor.black
+    static var headerPlaceholderColorBlack = UIColor.black.withAlphaComponent(0.75)
+    static var headerInnerViewBackgroundColorBlack = UIColor.black.withAlphaComponent(0.06)
+    
     
     static var headerTitleEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     static var headerDescriptionEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
@@ -61,7 +67,6 @@ struct ListsDetailConstants {
     
     static var headerCornerRadius = CGFloat(16)
     static var headerInnerViewCornerRadius = CGFloat(12)
-    static var headerInnerViewBackgroundColor = UIColor.white.withAlphaComponent(0.3)
     
     static var wordsCornerRadius = CGFloat(16)
     static var wordsHeaderTitleFont = UIFont.preferredFont(forTextStyle: .headline)

@@ -51,7 +51,7 @@ struct ColorPickerIcon: View {
             .fill(Color(model.selectedColor))
             .overlay(
                 Circle()
-                    .stroke(Color.white, lineWidth: 2)
+                    .stroke(Color(model.tintColor), lineWidth: 2)
             )
             .padding(8)
     }

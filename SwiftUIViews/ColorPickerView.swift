@@ -9,6 +9,10 @@
 import SwiftUI
 
 class ColorPickerViewModel: ObservableObject {
+    
+    /// for the color picker icon
+    @Published var tintColor = UIColor.systemBackground
+    
     @Published var selectedColor = UIColor(hex: 0x00a1d8)
     @Published var selectedIndex = (0, 0)
     let colors: [[UIColor]]
@@ -58,7 +62,6 @@ class ColorPickerNavigationViewController: UIViewController {
          */
         view = UIView()
         view.backgroundColor = .systemBackground
-
 
         let colorPickerViewController = ColorPickerViewController(model: model)
         let navigationController = UINavigationController(rootViewController: colorPickerViewController)

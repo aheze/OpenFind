@@ -23,18 +23,18 @@ extension UIColor {
             alpha: alpha
         )
     }
-    
+
     var hex: UInt {
-        return self.getHex() ?? 0x00AEEF
+        return getHex() ?? 0x00AEEF
     }
-    
+
     /// from https://stackoverflow.com/a/28645384/14351818
     func getHex() -> UInt? {
-        var fRed : CGFloat = 0
-        var fGreen : CGFloat = 0
-        var fBlue : CGFloat = 0
+        var fRed: CGFloat = 0
+        var fGreen: CGFloat = 0
+        var fBlue: CGFloat = 0
         var fAlpha: CGFloat = 0
-        if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
+        if getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
             let iRed = UInt(fRed * 255.0)
             let iGreen = UInt(fGreen * 255.0)
             let iBlue = UInt(fBlue * 255.0)
@@ -82,7 +82,7 @@ extension UIColor {
             var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
             guard getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return self }
             guard color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2) else { return self }
-            
+
             return UIColor(
                 red: CGFloat(r1 + (r2 - r1) * percentage),
                 green: CGFloat(g1 + (g2 - g1) * percentage),
@@ -100,13 +100,13 @@ extension UIColor {
         let offset = gradation * CGFloat(index)
         return self.offset(by: offset)
     }
-    
+
     var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
         var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return (h: h, s: s, b: b, a: a)
     }
-    
+
     var rgb: (r: CGFloat, g: CGFloat, b: CGFloat) {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
@@ -115,12 +115,12 @@ extension UIColor {
             return (0, 0, 0)
         }
     }
-    
+
     /// get a gradient color
     func offset(by offset: CGFloat) -> UIColor {
         let (h, s, b, a) = hsba
         var newHue = h - offset
-        
+
         /// make it go back to positive
         while newHue <= 0 {
             newHue += 1
@@ -135,7 +135,7 @@ extension UIColor {
         let newR = r + offset
         let newG = g + offset
         let newB = b + offset
-        
+
         return UIColor(red: newR, green: newG, blue: newB, alpha: 1)
     }
 }
@@ -147,22 +147,22 @@ extension UIColor {
         var b1: CGFloat = 0
         var a1: CGFloat = 0
         l.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
-        
+
         var r2: CGFloat = 0
         var g2: CGFloat = 0
         var b2: CGFloat = 0
         var a2: CGFloat = 0
         r.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
-        
+
         let precision = 4
         r1 = Double(r1).rounded(toPlaces: precision)
         g1 = Double(g1).rounded(toPlaces: precision)
         b1 = Double(b1).rounded(toPlaces: precision)
-        
+
         r2 = Double(r2).rounded(toPlaces: precision)
         g2 = Double(g2).rounded(toPlaces: precision)
         b2 = Double(b2).rounded(toPlaces: precision)
-        
+
         return r1 == r2 && g1 == g2 && b1 == b2 && a1 == a2
     }
 }
@@ -171,4 +171,15 @@ func == (l: UIColor?, r: UIColor?) -> Bool {
     let l = l ?? .clear
     let r = r ?? .clear
     return l == r
+}
+
+extension UIColor {
+    var isLight: Bool {
+        let threshold = CGFloat(0.55)
+        let (r, g, b) = rgb
+        let brightness = CGFloat(
+            ((r * 299) + (g * 587) + (b * 114)) / 1000
+        )
+        return (brightness > threshold)
+    }
 }
