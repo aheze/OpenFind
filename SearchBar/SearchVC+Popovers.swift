@@ -41,7 +41,7 @@ extension SearchViewController {
             popover.attributes.sourceFrame = { cell.windowFrame() }
             popover.attributes.sourceFrameInset.bottom = 8
             popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
-            Popovers.present(popover)
+            present(popover)
         case .list(_):
 //            list.
             break

@@ -6,9 +6,9 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
+import Combine
 import Popovers
 import SwiftUI
-import Combine
 
 class FieldSettingsModel: ObservableObject {
     @Published var header = "WORD"
@@ -50,29 +50,32 @@ struct FieldSettingsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Button {
-                if model.showingWords {
-                    let transaction = Transaction(animation: .default)
-                    withTransaction(transaction) {
-                        model.showingWords = false
-                        Popovers.refresh(with: transaction)
-                    }
-                }
-            } label: {
-                HStack(spacing: 4) {
+            PopoverReader { context in
+                Button {
                     if model.showingWords {
-                        Image(systemName: "chevron.backward")
+                        let transaction = Transaction(animation: .default)
+                        withTransaction(transaction) {
+                            model.showingWords = false
+//                            context.attributes.
+//                            context.refre?.refresh(with: transaction)
+                        }
                     }
-                    
-                    Text(model.header)
+                } label: {
+                    HStack(spacing: 4) {
+                        if model.showingWords {
+                            Image(systemName: "chevron.backward")
+                        }
+                        
+                        Text(model.header)
+                    }
+                    .foregroundColor(.white)
+                    .font(.system(size: 12, weight: .semibold))
+                    .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
                 }
-                .foregroundColor(.white)
-                .font(.system(size: 12, weight: .semibold))
-                .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
+                .disabled(!model.showingWords)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 10)
             }
-            .disabled(!model.showingWords)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.bottom, 10)
             
             Line()
             
@@ -108,7 +111,7 @@ struct FieldSettingsView: View {
                         let transaction = Transaction(animation: .default)
                         withTransaction(transaction) {
                             model.showingWords = true
-                            Popovers.refresh(with: transaction)
+//                            Popovers.refresh(with: transaction)
                         }
                     } label: {
                         Text("Show Words")
@@ -229,65 +232,68 @@ struct OpacitySlider: View {
     
     var body: some View {
         GeometryReader { proxy in
-            Color(UIColor.systemBackground).overlay(
-                ZStack {
-                    VStack(spacing: 0) {
-                        ForEach(0..<6) { row in
-                            HStack(spacing: 0) {
-                                ForEach(0..<30) { column in
+            PopoverReader { context in
+                
+                Color(UIColor.systemBackground).overlay(
+                    ZStack {
+                        VStack(spacing: 0) {
+                            ForEach(0..<6) { row in
+                                HStack(spacing: 0) {
+                                    ForEach(0..<30) { column in
                                     
-                                    let offset = row % 2 == 0 ? 1 : 0
-                                    if (offset + column) % 2 == 0 {
-                                        Color.clear
-                                    } else {
-                                        UIColor.label.color.opacity(0.15)
+                                        let offset = row % 2 == 0 ? 1 : 0
+                                        if (offset + column) % 2 == 0 {
+                                            Color.clear
+                                        } else {
+                                            UIColor.label.color.opacity(0.15)
+                                        }
                                     }
                                 }
+                                .aspectRatio(30, contentMode: .fill)
                             }
-                            .aspectRatio(30, contentMode: .fill)
                         }
-                    }
                     
-                    LinearGradient(colors: [.clear, .white], startPoint: .leading, endPoint: .trailing)
-                        .colorMultiply(color.color)
-                }
-            )
-            
-            /// slider thumb
-            .overlay(
-                Color.clear.overlay(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(UIColor.systemBackground.color)
-                            
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(color.withAlphaComponent(value).color)
-                            
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.white, lineWidth: 2)
+                        LinearGradient(colors: [.clear, .white], startPoint: .leading, endPoint: .trailing)
+                            .colorMultiply(color.color)
                     }
-                    .padding(6)
-                    .frame(width: FieldSettingsConstants.sliderHeight, height: FieldSettingsConstants.sliderHeight),
-                    
-                    /// pin thumb to right of stretching `clear` container
-                    alignment: .trailing
                 )
-                /// set frame of stretching `clear` container
-                .frame(
-                    width: FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight)
-                ),
-                alignment: .leading
-            )
-            .highPriorityGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
-                        Popovers.draggingEnabled = false
-                    }
-                    .onEnded { _ in Popovers.draggingEnabled = true }
-            )
+            
+                /// slider thumb
+                .overlay(
+                    Color.clear.overlay(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(UIColor.systemBackground.color)
+                            
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(color.withAlphaComponent(value).color)
+                            
+                            RoundedRectangle(cornerRadius: 6)
+                                .strokeBorder(Color.white, lineWidth: 2)
+                        }
+                        .padding(6)
+                        .frame(width: FieldSettingsConstants.sliderHeight, height: FieldSettingsConstants.sliderHeight),
+                        
+                        /// pin thumb to right of stretching `clear` container
+                        alignment: .trailing
+                    )
+                    /// set frame of stretching `clear` container
+                    .frame(
+                        width: FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight)
+                    ),
+                    alignment: .leading
+                )
+                .highPriorityGesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { value in
+                            self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
+                            context.isDraggingEnabled = false
+                        }
+                        .onEnded { _ in context.isDraggingEnabled = true }
+                )
+            }
+            .drawingGroup() /// prevent thumb from disappearing when offset to show words
         }
-        .drawingGroup() /// prevent thumb from disappearing when offset to show words
     }
 }
 

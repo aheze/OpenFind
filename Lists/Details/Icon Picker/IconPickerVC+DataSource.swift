@@ -39,10 +39,12 @@ extension IconPickerViewController {
                     self.model.selectedIcon = icon
 
                     var snapshot = self.dataSource.snapshot()
+                    var items = [icon]
                     if snapshot.itemIdentifiers.contains(previousIcon) {
-                        snapshot.reconfigureItems([previousIcon, icon])
-                        self.dataSource.apply(snapshot, animatingDifferences: true)
+                        items.append(previousIcon)
                     }
+                    snapshot.reconfigureItems(items)
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
 
                 return cell
