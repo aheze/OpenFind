@@ -107,6 +107,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         listenToModel()
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        additionalSearchBarOffset = 0
         
         scrollView.contentInset.top = searchConfiguration.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding

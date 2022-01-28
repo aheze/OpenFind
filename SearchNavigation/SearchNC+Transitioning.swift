@@ -9,9 +9,7 @@
 import UIKit
 
 extension SearchNavigationController: UINavigationControllerDelegate {
-    
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
         if
             let transitionCoordinator = navigation.transitionCoordinator,
             let viewController = viewController as? Searchable
@@ -29,7 +27,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             /// first reset to start, if there's going to be a change
             if percentage == 0, blurPercentage != 0 {
                 self.navigationBarBackgroundBorderView.alpha = 1
-                self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .systemChromeMaterial)
+                self.navigationBarBackgroundBlurView.effect = SearchNavigationConstants.blurEffect
             } else if percentage == 1, blurPercentage != 1 {
                 self.navigationBarBackgroundBorderView.alpha = 0
                 self.navigationBarBackgroundBlurView.effect = nil
@@ -45,7 +43,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                     self.navigationBarBackgroundBlurView.effect = nil
                 } else if percentage == 1, self.blurPercentage != 1 {
                     self.navigationBarBackgroundBorderView.alpha = 1
-                    self.navigationBarBackgroundBlurView.effect = UIBlurEffect(style: .regular)
+                    self.navigationBarBackgroundBlurView.effect = SearchNavigationConstants.blurEffect
                 }
             } completion: { context in
                 

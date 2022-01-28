@@ -6,14 +6,11 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-
 import UIKit
 
 extension SearchNavigationController {
-    
     /// call this after embedding in a view controller
     func setupNavigationBar() {
-        
         setupBackground()
         setupBlur()
         setupBorder()
@@ -49,7 +46,6 @@ extension SearchNavigationController {
             navigationBarBackgroundHeightC
         ])
         
-
         navigationBarBackground.addSubview(navigationBarBackgroundBlurView)
         navigationBarBackgroundBlurView.pinEdgesToSuperview()
     }
@@ -74,7 +70,7 @@ extension SearchNavigationController {
         navigationBarBackgroundBorderView.alpha = 0
         
         animator?.addAnimations { [weak navigationBarBackgroundBlurView, weak navigationBarBackgroundBorderView] in
-            navigationBarBackgroundBlurView?.effect = UIBlurEffect(style: .systemChromeMaterial)
+            navigationBarBackgroundBlurView?.effect = SearchNavigationConstants.blurEffect
             navigationBarBackgroundBorderView?.alpha = 1
         }
         
@@ -83,17 +79,14 @@ extension SearchNavigationController {
         animator?.fractionComplete = 0
         animator?.pausesOnCompletion = true
     }
-
 }
 
 extension UINavigationBar {
     func getCompactHeight() -> CGFloat {
-        
         /// Loop through the navigation bar's subviews.
         for subview in subviews {
-            
             /// Check if the subview is pinned to the top (compact bar) and contains a title label
-            if subview.frame.origin.y == 0 && subview.subviews.contains(where: { $0 is UILabel }) {
+            if subview.frame.origin.y == 0, subview.subviews.contains(where: { $0 is UILabel }) {
                 return subview.bounds.height
             }
         }
