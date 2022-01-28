@@ -29,6 +29,9 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBarView: UIView!
     @IBOutlet var searchCollectionView: SearchCollectionView!
     
+    var keyboardToolbarViewModel = KeyboardToolbarViewModel()
+    lazy var toolbarViewController = KeyboardToolbarViewController(model: keyboardToolbarViewModel)
+    
     init?(
         coder: NSCoder,
         searchViewModel: SearchViewModel,

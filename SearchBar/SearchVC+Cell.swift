@@ -16,6 +16,7 @@ extension SearchViewController {
         let field = searchViewModel.fields[index]
         let text = field.value.getText()
         cell.textField.text = text
+        cell.textField.inputAccessoryView = toolbarViewController.view
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
         cell.configuration = configuration
