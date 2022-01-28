@@ -31,7 +31,8 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         let list = listsViewModel.displayedLists[indexPath.item].list
-        cell.headerView.backgroundColor = UIColor(hex: list.color)
+        let color = UIColor(hex: list.color)
+        cell.headerView.backgroundColor = color
         cell.headerImageView.image = UIImage(systemName: list.image)
         cell.headerTitleLabel.text = list.name
         cell.headerDescriptionLabel.text = list.desc
@@ -54,14 +55,16 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         let displayedList = listsViewModel.displayedLists[indexPath.item]
         let frame = displayedList.frame
+        let color = UIColor(hex: displayedList.list.color)
         
         for chipFrame in frame.chipFrames {
             let chipView = ListChipView(isWordsLeftButton: chipFrame.isWordsLeftButton)
             chipView.frame = chipFrame.frame
             chipView.label.text = chipFrame.string
-            chipView.label.textColor = UIColor(hex: displayedList.list.color)
+            chipView.color = color
+            chipView.setColors()
             if chipFrame.isWordsLeftButton {
-                chipView.backgroundView.backgroundColor = UIColor(hex: displayedList.list.color).withAlphaComponent(0.1)
+                chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
                 chipView.tapped = { [weak self] in
                     guard let self = self else { return }
                     if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
@@ -73,7 +76,16 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             }
             cell.chipsContainerView.addSubview(chipView)
         }
-        
+    }
+    
+    func updateCellColors() {
+        for index in listsViewModel.displayedLists.indices {
+            if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
+                for case let subview as ListChipView in cell.chipsContainerView.subviews {
+                    subview.setColors()
+                }
+            }
+        }
     }
 }
 

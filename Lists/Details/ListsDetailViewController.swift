@@ -135,8 +135,6 @@ class ListsDetailViewController: UIViewController, Searchable {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        print("Changed! \(traitCollection.userInterfaceStyle)")
-        
         loadListContents()
     }
 }

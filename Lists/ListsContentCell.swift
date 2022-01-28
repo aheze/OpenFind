@@ -96,6 +96,8 @@ class ListChipView: UIView {
     }
     
     var tapped: (() -> Void)?
+    var color = UIColor.systemBlue
+    
     lazy var buttonView: UIButton = {
         let button = ButtonView()
         button.frame = bounds
@@ -129,6 +131,18 @@ class ListChipView: UIView {
         label.isUserInteractionEnabled = false
         return label
     }()
+    
+    func setColors() {
+        if color.isLight, traitCollection.userInterfaceStyle == .light {
+            let adjustedTextColor = color.toColor(.black, percentage: 0.6)
+            label.textColor = adjustedTextColor
+        } else if traitCollection.userInterfaceStyle == .dark {
+            let adjustedTextColor = color.toColor(.white, percentage: 0.8)
+            label.textColor = adjustedTextColor
+        } else {
+            label.textColor = color
+        }
+    }
     
     private func commonInit() {
         backgroundColor = .clear

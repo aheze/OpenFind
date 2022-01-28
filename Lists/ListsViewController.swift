@@ -61,4 +61,11 @@ class ListsViewController: UIViewController, Searchable {
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
         additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        /// refresh for dark mode
+        updateCellColors()
+    }
 }
