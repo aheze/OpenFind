@@ -16,7 +16,7 @@ extension ListsDetailViewController {
         
         setupViews()
         applyConstants()
-        loadListContents()
+        loadListContents(animate: false)
         updateTableViewHeightConstraint(animated: false)
         
         scrollView.alwaysBounceVertical = true
@@ -38,7 +38,7 @@ extension ListsDetailViewController {
         )
     }
     
-    func loadListContents() {
+    func loadListContents(animate: Bool = true) {
         headerTopLeftImageView.image = UIImage(systemName: model.list.icon)
         
         let color = UIColor(hex: model.list.color)
@@ -68,10 +68,10 @@ extension ListsDetailViewController {
             backgroundColor = ListsDetailConstants.headerInnerViewBackgroundColorWhite
         }
         
-        self.updateColors(isLight: isLight, color: color, textColor: textColor, placeholderColor: placeholderColor, backgroundColor: backgroundColor)
+        self.updateColors(animate: animate, isLight: isLight, color: color, textColor: textColor, placeholderColor: placeholderColor, backgroundColor: backgroundColor)
     }
     
-    func updateColors(isLight: Bool, color: UIColor, textColor: UIColor, placeholderColor: UIColor, backgroundColor: UIColor) {
+    func updateColors(animate: Bool, isLight: Bool, color: UIColor, textColor: UIColor, placeholderColor: UIColor, backgroundColor: UIColor) {
         if isLight, traitCollection.userInterfaceStyle == .light {
             let adjustedTextColor = color.toColor(.black, percentage: 0.6)
             wordsTopLeftLabel.textColor = adjustedTextColor
@@ -100,16 +100,17 @@ extension ListsDetailViewController {
             attributes: [NSAttributedString.Key.foregroundColor: placeholderColor]
         )
             
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+        headerTopLeftImageView.tintColor = textColor
+        
+        UIView.animate(withDuration: animate ? 0.3 : 0, delay: 0, options: .curveEaseOut) {
             self.headerTopLeftView.backgroundColor = backgroundColor
             self.headerTopCenterView.backgroundColor = backgroundColor
             self.headerTopRightView.backgroundColor = backgroundColor
             self.headerBottomView.backgroundColor = backgroundColor
         }
+
         
-        headerTopLeftImageView.tintColor = textColor
-        
-        withAnimation(.easeOut(duration: 0.3)) {
+        withAnimation(animate ? .easeOut(duration: 0.3) : nil) {
             headerTopRightColorPickerModel.tintColor = textColor
         }
     }
