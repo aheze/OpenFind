@@ -39,7 +39,7 @@ extension ListsDetailViewController {
     }
     
     func loadListContents() {
-        headerTopLeftImageView.image = UIImage(systemName: model.list.image)
+        headerTopLeftImageView.image = UIImage(systemName: model.list.icon)
         
         let color = UIColor(hex: model.list.color)
         headerTopRightColorPickerModel.selectedColor = color

@@ -17,9 +17,9 @@ extension ListsDetailViewController {
             }
         }
         self.present(self.iconPicker.searchNavigationController, animated: true)
-        self.headerTopLeftIconPickerModel.selectedIcon = self.model.list.image
+        self.headerTopLeftIconPickerModel.selectedIcon = self.model.list.icon
         self.headerTopLeftIconPickerModel.iconChanged = { [weak self] icon in
-            self?.model.list.image = icon
+            self?.model.list.icon = icon
             self?.loadListContents()
         }
     }

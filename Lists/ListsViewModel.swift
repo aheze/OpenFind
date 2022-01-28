@@ -13,7 +13,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Nature",
             desc: "Words",
-            image: "leaf.fill",
+            icon: "leaf.fill",
             color: 0x1F7000,
             words: ["Leaf", "Ant", "Stick", "Branch", "Tree", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -21,7 +21,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Dairy-free",
             desc: "Milk and stuff",
-            image: "square.and.arrow.up.trianglebadge.exclamationmark",
+            icon: "square.and.arrow.up.trianglebadge.exclamationmark",
             color: 0x004C7F,
             words: ["Milk", "Cheese", "Dairy", "Yogurt", "Ice Cream", "Butter", "Whipped Cream", "Cream", "Crackers", "Mochas", "Graham Crackers", "Cream"],
             dateCreated: Date()
@@ -29,7 +29,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Photo Editing",
             desc: "Should learn this",
-            image: "lasso.and.sparkles",
+            icon: "lasso.and.sparkles",
             color: 0xda00ff,
             words: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -37,7 +37,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Plans",
             desc: "Some words about plans",
-            image: "calendar.day.timeline.left",
+            icon: "calendar.day.timeline.left",
             color: 0x008bd8,
             words: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -45,7 +45,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Computer Stuff",
             desc: "Keyboard",
-            image: "keyboard.fill",
+            icon: "keyboard.fill",
             color: 0xdd000e,
             words: ["Computer", "Leaf", "Ant", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -53,7 +53,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Video Editing",
             desc: "DaVinci Resolve",
-            image: "sparkles.square.filled.on.square",
+            icon: "sparkles.square.filled.on.square",
             color: 0xaddd00,
             words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -61,7 +61,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Popovers",
             desc: "A library to present popovers",
-            image: "rectangle.trailinghalf.inset.filled.arrow.trailing",
+            icon: "rectangle.trailinghalf.inset.filled.arrow.trailing",
             color: 0x007eef,
             words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -69,7 +69,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Drama",
             desc: "Words about drama",
-            image: "theatermasks",
+            icon: "theatermasks",
             color: 0xE2AC00,
             words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()
@@ -77,31 +77,7 @@ class ListsViewModel: ObservableObject {
         List(
             name: "Drama",
             desc: "Words about drama",
-            image: "theatermasks",
-            color: 0xE2AC00,
-            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
-            dateCreated: Date()
-        ),
-        List(
-            name: "Drama",
-            desc: "Words about drama",
-            image: "theatermasks",
-            color: 0xE2AC00,
-            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
-            dateCreated: Date()
-        ),
-        List(
-            name: "Drama",
-            desc: "Words about drama",
-            image: "theatermasks",
-            color: 0xE2AC00,
-            words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
-            dateCreated: Date()
-        ),
-        List(
-            name: "Drama",
-            desc: "Words about drama",
-            image: "theatermasks",
+            icon: "theatermasks",
             color: 0xE2AC00,
             words: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             dateCreated: Date()

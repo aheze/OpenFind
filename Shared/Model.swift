@@ -28,7 +28,7 @@ struct List {
     var id = UUID()
     var name = ""
     var desc = ""
-    var image = ""
+    var icon = ""
     var color: UInt = 0x00AEEF
     var words = [String]()
     var dateCreated = Date()
@@ -38,7 +38,7 @@ struct EditableList {
     var id: UUID
     var name: String
     var desc: String
-    var image: String
+    var icon: String
     var color: UInt
     var words: [EditableWord]
     var dateCreated: Date

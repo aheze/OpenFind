@@ -222,6 +222,8 @@
 		3C21ED9327A3CE000005E183 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21ED9227A3CE000005E183 /* Realm */; };
 		3C21ED9527A3CE000005E183 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21ED9427A3CE000005E183 /* RealmSwift */; };
 		3C21ED9727A3CECC0005E183 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED9627A3CECC0005E183 /* RealmModels.swift */; };
+		3C21ED9827A45A2F0005E183 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA8B2781859C000381CE /* Model.swift */; };
+		3C21ED9927A45A2F0005E183 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -5244,6 +5246,8 @@
 				3C21ED7D27A3C4AB0005E183 /* ViewController.swift in Sources */,
 				3C21ED8C27A3C4C20005E183 /* RealmModel.swift in Sources */,
 				3C21ED7927A3C4AB0005E183 /* AppDelegate.swift in Sources */,
+				3C21ED9827A45A2F0005E183 /* Model.swift in Sources */,
+				3C21ED9927A45A2F0005E183 /* Constants.swift in Sources */,
 				3C21ED7B27A3C4AB0005E183 /* SceneDelegate.swift in Sources */,
 				3C21ED9727A3CECC0005E183 /* RealmModels.swift in Sources */,
 			);

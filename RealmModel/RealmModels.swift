@@ -11,9 +11,9 @@ import Foundation
 import RealmSwift
 
 class RealmList: Object {
-    @Persisted var id = UUID()
+    @Persisted(primaryKey: true) var id = UUID()
     @Persisted var name = ""
-    @Persisted var descriptionOfList = ""
+    @Persisted var desc = ""
     let contents = RealmSwift.List<String>()
     @Persisted var icon = ""
     @Persisted var color = ""
@@ -21,14 +21,26 @@ class RealmList: Object {
 }
 
 class RealmWord: Object {
-    @Persisted var id = UUID()
+    @Persisted(primaryKey: true) var id = UUID()
     @Persisted var string = ""
 }
 
 class RealmHistory: Object {
+    
+    /// the date when it was searched for
     @Persisted var date = Date()
-    @Persisted var string = ""
+    
+    /// word or list?
+    @Persisted var valueType: RealmValueType
+    @Persisted var word: RealmWord?
+    @Persisted var list: RealmList?
 }
+
+enum RealmValueType: String, PersistableEnum {
+    case word
+    case list
+}
+
 
 //struct Word {
 //    var id = UUID()

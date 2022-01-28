@@ -33,7 +33,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let list = listsViewModel.displayedLists[indexPath.item].list
         let color = UIColor(hex: list.color)
         cell.headerView.backgroundColor = color
-        cell.headerImageView.image = UIImage(systemName: list.image)
+        cell.headerImageView.image = UIImage(systemName: list.icon)
         cell.headerTitleLabel.text = list.name
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
