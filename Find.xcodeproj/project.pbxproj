@@ -206,6 +206,10 @@
 		3C21ED6B27A3A9320005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C21ED6C27A3A9320005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C21ED6D27A3A9330005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
+		3C21ED6E27A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */; };
+		3C21ED6F27A3ABD30005E183 /* ListsDetailVC+ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */; };
+		3C21ED7027A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */; };
+		3C21ED7127A3ABD30005E183 /* ListsDetailVC+ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -5221,6 +5225,7 @@
 				3CCCCA9D27818CE7000381CE /* FindIconView.swift in Sources */,
 				3C4D3A19274767410010FD68 /* TabBarViewController.swift in Sources */,
 				3C3642D7277BC2E70038CB18 /* Field.swift in Sources */,
+				3C21ED6E27A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C3642DD277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
 				3C6C73AE2781947600E039F0 /* SuggestionsView.swift in Sources */,
 				3CCE2B26279D008C00F72351 /* ClearIconView.swift in Sources */,
@@ -5331,6 +5336,7 @@
 				3CF76432278D196A00DCA4EA /* Protocols.swift in Sources */,
 				3CE9C203274B4F05008C903C /* ZoomViewModel.swift in Sources */,
 				3CFD6019278B70940031BC8B /* SearchNavigationController.swift in Sources */,
+				3C21ED6F27A3ABD30005E183 /* ListsDetailVC+ColorPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5827,6 +5833,7 @@
 				3C6C739B2781947400E039F0 /* LeftView.swift in Sources */,
 				3C989DEC27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */,
 				3C08EB16279C76E500971D60 /* ListsVC+SearchBar.swift in Sources */,
+				3C21ED7027A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C6C73622781945D00E039F0 /* HighlightsViewController.swift in Sources */,
 				3CCE2B50279D235C00F72351 /* ListsDetailVC+Listen.swift in Sources */,
 				3C6C73402781944B00E039F0 /* TabBarController.swift in Sources */,
@@ -5846,6 +5853,7 @@
 				3C6C73672781946200E039F0 /* CameraViewModel.swift in Sources */,
 				3C6C73642781946200E039F0 /* CameraVC+Zoom.swift in Sources */,
 				3C01DE472788A9680027B435 /* ZoomModel.swift in Sources */,
+				3C21ED7127A3ABD30005E183 /* ListsDetailVC+ColorPicker.swift in Sources */,
 				3C6C73562781945400E039F0 /* IconButtons.swift in Sources */,
 				3CD7063227A3842200B446D7 /* IconPickerConstants.swift in Sources */,
 				3C6C73542781945400E039F0 /* CameraButton.swift in Sources */,
