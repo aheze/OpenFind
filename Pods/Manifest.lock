@@ -1,10 +1,5 @@
 PODS:
   - QuickLayout (3.0.0)
-  - Realm (10.15.1):
-    - Realm/Headers (= 10.15.1)
-  - Realm/Headers (10.15.1)
-  - RealmSwift (10.15.1):
-    - Realm (= 10.15.1)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -19,7 +14,6 @@ PODS:
 
 DEPENDENCIES:
   - QuickLayout
-  - RealmSwift
   - SDWebImage (~> 5.0)
   - SDWebImagePhotosPlugin
   - SnapKit
@@ -31,8 +25,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - QuickLayout
-    - Realm
-    - RealmSwift
     - SDWebImage
     - SDWebImagePhotosPlugin
     - SnapKit
@@ -43,8 +35,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  Realm: fbcbde2620d51623cc5b18e28f5b165c39abef52
-  RealmSwift: e4bea8e42efad3d543aea23b56504069c6faaea2
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImagePhotosPlugin: 7d52495711a00637da16bbd7098a634f524c8d7e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -53,6 +43,6 @@ SPEC CHECKSUMS:
   SwiftRichString: d61b807db1f8834c26fee92b6dd3e1be2dc5af03
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: a9071df93cdaae4de9eb627ca8884b4280061a6b
+PODFILE CHECKSUM: 3384a8cb3f3e14979f26f8b0c8817e1047c4eb9b
 
 COCOAPODS: 1.11.2

@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension ListsViewController {
@@ -17,7 +16,7 @@ extension ListsViewController {
             guard let self = self else { return [] }
             return self.listsViewModel.displayedLists.map { $0.list }
         }
-        flowLayout.getListSizeFromWidth = { [weak self] (availableWidth, list, listIndex) in
+        flowLayout.getListSizeFromWidth = { [weak self] availableWidth, list, listIndex in
             guard let self = self else { return .zero }
             return self.getCellSize(availableWidth: availableWidth, list: list, listIndex: listIndex)
         }
@@ -32,13 +31,12 @@ extension ListsViewController {
         let c = ListsCellConstants.self
         
         let headerHeight = c.headerTitleFont.lineHeight
-        + c.headerEdgeInsets.top
-        + c.headerEdgeInsets.bottom
+            + c.headerEdgeInsets.top
+            + c.headerEdgeInsets.bottom
         
         let contentWidth = availableWidth
-        - c.contentEdgeInsets.left
-        - c.contentEdgeInsets.right
-        
+            - c.contentEdgeInsets.left
+            - c.contentEdgeInsets.right
         
         /// relative to content
         var offset = CGSize.zero
@@ -55,7 +53,7 @@ extension ListsViewController {
                 nextWordWidth = nextWordSize.width + c.chipSpacing
             }
             
-            let wordsLeftAfterCurrent = list.words.count - (currentIndex)
+            let wordsLeftAfterCurrent = list.words.count - currentIndex
             let wordsLeftText = "+\(wordsLeftAfterCurrent)"
             let wordsLeftTextSize = c.chipFont.sizeOfString(wordsLeftText)
             let combinedWidth = currentFrame.maxX + nextWordWidth + c.chipSpacing + wordsLeftTextSize.width
@@ -128,8 +126,8 @@ extension ListsViewController {
         
         let chipContainerHeight = offset.height + (chipFrames.last?.frame.height ?? 0)
         let containerHeight = chipContainerHeight
-        + c.contentEdgeInsets.top
-        + c.contentEdgeInsets.bottom
+            + c.contentEdgeInsets.top
+            + c.contentEdgeInsets.bottom
         
         let height = headerHeight + containerHeight
         listsViewModel.displayedLists[listIndex].frame.chipFrames = chipFrames

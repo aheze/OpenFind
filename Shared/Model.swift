@@ -9,6 +9,10 @@
 
 import UIKit
 
+/**
+ Models for the search bar. Includes color.
+ */
+
 enum Value {
     case word(Word)
     case list(List)
@@ -39,6 +43,7 @@ struct EditableList {
     var words: [EditableWord]
     var dateCreated: Date
 }
+
 struct EditableWord {
     let id = UUID()
     var string: String

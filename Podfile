@@ -11,7 +11,6 @@ def shared_pods
 end
 
 def photos_pods
-  pod 'RealmSwift'
   pod 'SDWebImage', '~> 5.0'
   pod 'SDWebImagePhotosPlugin'
 end
