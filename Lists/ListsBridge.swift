@@ -8,8 +8,12 @@
 import UIKit
 
 struct ListsBridge {
-    static func makeController(listsViewModel: ListsViewModel, toolbarViewModel: ToolbarViewModel) -> ListsController {
-        let lists = ListsController(listsViewModel: listsViewModel, toolbarViewModel: toolbarViewModel)
+    static func makeController(listsViewModel: ListsViewModel, toolbarViewModel: ToolbarViewModel, realmModel: RealmModel) -> ListsController {
+        let lists = ListsController(
+            listsViewModel: listsViewModel,
+            toolbarViewModel: toolbarViewModel,
+            realmModel: realmModel
+        )
         return lists
     }
 }

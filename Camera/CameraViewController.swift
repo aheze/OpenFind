@@ -13,7 +13,7 @@ class CameraViewController: UIViewController, PageViewController {
     
     /// external models
     var cameraViewModel: CameraViewModel
-    var listsViewModel: ListsViewModel
+    var realmModel: RealmModel
     
     lazy var zoomViewModel = ZoomViewModel(containerView: zoomContainerView)
     var aspectProgressCancellable: AnyCancellable?
@@ -61,10 +61,10 @@ class CameraViewController: UIViewController, PageViewController {
     init?(
         coder: NSCoder,
         cameraViewModel: CameraViewModel,
-        listsViewModel: ListsViewModel
+        realmModel: RealmModel
     ) {
         self.cameraViewModel = cameraViewModel
-        self.listsViewModel = listsViewModel
+        self.realmModel = realmModel
         super.init(coder: coder)
     }
 

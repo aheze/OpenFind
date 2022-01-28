@@ -12,6 +12,7 @@ class ListsViewController: UIViewController, Searchable {
     /// external models
     var listsViewModel: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
+    var realmModel: RealmModel
     var searchConfiguration: SearchConfiguration
     
     var baseSearchBarOffset = CGFloat(0)
@@ -29,11 +30,13 @@ class ListsViewController: UIViewController, Searchable {
         coder: NSCoder,
         listsViewModel: ListsViewModel,
         toolbarViewModel: ToolbarViewModel,
+        realmModel: RealmModel,
         searchConfiguration: SearchConfiguration
     ) {
         self.listsViewModel = listsViewModel
-        self.searchConfiguration = searchConfiguration
         self.toolbarViewModel = toolbarViewModel
+        self.realmModel = realmModel
+        self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
     }
 
@@ -48,7 +51,7 @@ class ListsViewController: UIViewController, Searchable {
         title = "Lists"
         
         _ = listsFlowLayout
-        listsViewModel.displayedLists = listsViewModel.lists.map { .init(list: $0) }
+        listsViewModel.displayedLists = realmModel.lists.map { .init(list: $0) }
         
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear

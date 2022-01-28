@@ -14,10 +14,32 @@ class RealmList: Object {
     @Persisted(primaryKey: true) var id = UUID()
     @Persisted var name = ""
     @Persisted var desc = ""
-    let contents = RealmSwift.List<String>()
+    @Persisted var words = RealmSwift.List<String>()
     @Persisted var icon = ""
-    @Persisted var color = ""
+    @Persisted var color = 0x00AEEF
     @Persisted var dateCreated = Date()
+    
+    override init() {
+        super.init()
+    }
+    
+    init(
+        id: UUID,
+        name: String,
+        desc: String,
+        words: RealmSwift.List<String>,
+        icon: String,
+        color: Int,
+        dateCreated: Date
+    ) {
+        self.id = id
+        self.name = name
+        self.desc = desc
+        self.words = words
+        self.icon = icon
+        self.color = color
+        self.dateCreated = dateCreated
+    }
 }
 
 class RealmWord: Object {

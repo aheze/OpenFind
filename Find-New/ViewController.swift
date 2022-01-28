@@ -10,6 +10,7 @@
 import SwiftUI
 
 class ViewController: UIViewController {
+    let realmModel = RealmModel()
     let cameraViewModel = CameraViewModel()
     let listsViewModel = ListsViewModel()
     let toolbarViewModel = ToolbarViewModel()
@@ -18,12 +19,13 @@ class ViewController: UIViewController {
 
     lazy var camera: CameraController = CameraBridge.makeController(
         cameraViewModel: cameraViewModel,
-        listsViewModel:listsViewModel
+        realmModel: realmModel
     )
 
     lazy var lists: ListsController = ListsBridge.makeController(
         listsViewModel: listsViewModel,
-        toolbarViewModel: toolbarViewModel
+        toolbarViewModel: toolbarViewModel,
+        realmModel: realmModel
     )
     
     lazy var tabController: TabBarController = {
@@ -49,6 +51,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         _ = tabController
+        
+        realmModel.loadSampleLists()
+        lists.viewController.listsUpdated()
     }
 }
 

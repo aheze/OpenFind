@@ -24,7 +24,7 @@ class ListsDetailViewModel: ObservableObject {
             id: savedList.id,
             name: savedList.name,
             desc: savedList.desc,
-            icon: savedList.icon`,
+            icon: savedList.icon,
             color: savedList.color,
             words: savedList.words.map { EditableWord(string: $0) },
             dateCreated: savedList.dateCreated

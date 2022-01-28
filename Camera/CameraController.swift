@@ -10,18 +10,18 @@ import UIKit
 class CameraController {
     var viewController: CameraViewController
     var cameraViewModel: CameraViewModel
-    var listsViewModel: ListsViewModel
+    var realmModel: RealmModel
     
-    init(cameraViewModel: CameraViewModel, listsViewModel: ListsViewModel) {
+    init(cameraViewModel: CameraViewModel, realmModel: RealmModel) {
         self.cameraViewModel = cameraViewModel
-        self.listsViewModel = listsViewModel
+        self.realmModel = realmModel
     
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "CameraViewController") { coder in
             CameraViewController(
                 coder: coder,
                 cameraViewModel: cameraViewModel,
-                listsViewModel: listsViewModel
+                realmModel: realmModel
             )
         }
         

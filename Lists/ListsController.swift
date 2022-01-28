@@ -8,15 +8,19 @@
 import UIKit
 
 class ListsController {
-    var searchConfiguration: SearchConfiguration
+    
     var listsViewModel: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
+    var realmModel: RealmModel
+    
+    var searchConfiguration: SearchConfiguration
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
-    init(listsViewModel: ListsViewModel, toolbarViewModel: ToolbarViewModel) {
+    init(listsViewModel: ListsViewModel, toolbarViewModel: ToolbarViewModel, realmModel: RealmModel) {
         self.listsViewModel = listsViewModel
         self.toolbarViewModel = toolbarViewModel
+        self.realmModel = realmModel
         
         let searchConfiguration = SearchConfiguration.lists
         self.searchConfiguration = searchConfiguration
@@ -27,6 +31,7 @@ class ListsController {
                 coder: coder,
                 listsViewModel: listsViewModel,
                 toolbarViewModel: toolbarViewModel,
+                realmModel: realmModel,
                 searchConfiguration: searchConfiguration
             )
         }
