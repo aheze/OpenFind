@@ -50,7 +50,7 @@ extension ListsDetailViewController {
                 self.wordsTableView.isEditing = false
             }
             
-            for index in self.model.editableWords.indices {
+            for index in self.model.list.words.indices {
                 guard let cell = self.wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell else { continue }
                 
                 if self.model.isEditing {
@@ -82,13 +82,13 @@ extension ListsDetailViewController {
             let indexPaths = selectedIndices.map { IndexPath(item: $0, section: 0) }
             
             for index in selectedIndices.sorted(by: >) {
-                self.model.editableWords.remove(at: index)
+                self.model.list.words.remove(at: index)
             }
             
             self.model.selectedIndices = []
             self.wordsTableView.deleteRows(at: indexPaths, with: .automatic)
             
-            if self.model.editableWords.count == 0 {
+            if self.model.list.words.count == 0 {
                 self.addWord()
             }
             

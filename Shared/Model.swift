@@ -28,5 +28,18 @@ struct List {
     var color: UInt = 0x00AEEF
     var words = [String]()
     var dateCreated = Date()
+}
 
+struct EditableList {
+    var id: UUID
+    var name: String
+    var desc: String
+    var image: String
+    var color: UInt
+    var words: [EditableWord]
+    var dateCreated: Date
+}
+struct EditableWord {
+    let id = UUID()
+    var string: String
 }

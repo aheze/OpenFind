@@ -11,7 +11,7 @@ import UIKit
 extension ListsDetailViewController {
     func addWord() {
         let newWord = EditableWord(string: "")
-        model.editableWords.insert(newWord, at: 0)
+        model.list.words.insert(newWord, at: 0)
         wordsTableView.insertRows(at: [0.indexPath], with: .automatic)
     }
 }
@@ -19,7 +19,7 @@ extension ListsDetailViewController {
 extension ListsDetailViewController {
     func updateTableViewHeightConstraint(animated: Bool = true) {
         let edgePadding = ListsDetailConstants.listSpacing
-        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.editableWords.count)
+        let wordHeight = ListsDetailConstants.wordRowHeight * CGFloat(model.list.words.count)
         let height = edgePadding + wordHeight
         wordsTableViewHeightC.constant = height
 

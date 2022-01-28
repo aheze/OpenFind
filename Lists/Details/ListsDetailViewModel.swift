@@ -10,8 +10,8 @@ import MobileCoreServices
 import SwiftUI
 
 class ListsDetailViewModel: ObservableObject {
-    var list: List
-    var editableWords = [EditableWord]()
+    var savedList: List
+    var list: EditableList
     
     var isEditing = false
     var isEditingChanged: (() -> Void)?
@@ -19,32 +19,37 @@ class ListsDetailViewModel: ObservableObject {
     @Published var selectedIndices = [Int]()
     
     init(list: List) {
-        self.list = list
-        self.editableWords = list.words.map { EditableWord(string: $0) }
+        self.savedList = list
+        self.list = EditableList(
+            id: savedList.id,
+            name: savedList.name,
+            desc: savedList.desc,
+            image: savedList.image,
+            color: savedList.color,
+            words: savedList.words.map { EditableWord(string: $0) },
+            dateCreated: savedList.dateCreated
+        )
     }
     
     var deleteSelected: (() -> Void)?
 }
 
-struct EditableWord {
-    let id = UUID()
-    var string: String
-}
+
 
 extension ListsDetailViewModel {
     /// The traditional method for rearranging rows in a table view.
     func moveItem(at sourceIndex: Int, to destinationIndex: Int) {
         guard sourceIndex != destinationIndex else { return }
         
-        let word = editableWords[sourceIndex]
-        editableWords.remove(at: sourceIndex)
-        editableWords.insert(word, at: destinationIndex)
+        let word = list.words[sourceIndex]
+        list.words.remove(at: sourceIndex)
+        list.words.insert(word, at: destinationIndex)
     }
     
     /// The method for adding a new item to the table view's data model.
     func addItem(_ string: String, at index: Int) {
         let newWord = EditableWord(string: string)
-        editableWords.insert(newWord, at: index)
+        list.words.insert(newWord, at: index)
     }
     
     /**
@@ -60,7 +65,7 @@ extension ListsDetailViewModel {
           by the `tableView(_:itemsForBeginning:at:)` method.
      */
     func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
-        let word = editableWords[indexPath.row].string
+        let word = list.words[indexPath.row].string
 
         let data = word.data(using: .utf8)
         let itemProvider = NSItemProvider()
