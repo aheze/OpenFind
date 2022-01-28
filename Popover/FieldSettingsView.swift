@@ -153,6 +153,7 @@ struct FieldSettingsView: View {
             }
         )
         .cornerRadius(16)
+        .frame(height: model.showingWords ? 100 : nil)
     }
 }
 

@@ -15,26 +15,42 @@ class ViewController: UIViewController {
     @IBOutlet var listLabel: UILabel!
     
     var fields = [
-        Field(text: .init(value: .string(""), colorIndex: 0)),
-        Field(text: .init(value: .list(
-            List(
-                name: "List",
-                desc: "Desc",
-                contents: ["Word", "Branch", "Water", "Dirt"],
-                iconImageName: "plus",
-                iconColorName: 0x00AEEF,
-                dateCreated: Date()
+        Field(
+            value: .word(
+                .init(
+                    string: "",
+                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
+                )
             )
-        ), colorIndex: 1)),
-        Field(text: .init(value: .addNew(""), colorIndex: 2))
+        ),
+        Field(
+            value: .list(
+                .init(
+                    name: "List",
+                    desc: "Desc",
+                    image: "plus",
+                    color: 0x00AEEF,
+                    words: ["Word", "Branch", "Water", "Dirt"],
+                    dateCreated: Date()
+                )
+            )
+        ),
+        Field(
+            value: .addNew(
+                .init(
+                    string: "",
+                    color: Constants.defaultHighlightColor.getFieldColor(for: 2).hex
+                )
+            )
+        )
     ]
     
     @IBAction func wordPressed(_ sender: Any) {
         let fieldSettingsModel = FieldSettingsModel()
         fieldSettingsModel.header = "WORD"
-        fieldSettingsModel.defaultColor = fields[0].text.color
-        fieldSettingsModel.selectedColor = fields[0].text.color
-        fieldSettingsModel.alpha = fields[0].text.colorAlpha
+        fieldSettingsModel.defaultColor = UIColor(hex: fields[0].value.getColor())
+        fieldSettingsModel.selectedColor = fields[0].overrides.selectedColor
+        fieldSettingsModel.alpha = fields[0].overrides.alpha
         fieldSettingsModel.words = []
         fieldSettingsModel.showingWords = false
         fieldSettingsModel.editListPressed = nil
@@ -60,16 +76,16 @@ class ViewController: UIViewController {
             ]
         }
         popover.attributes.tag = "Field Popover"
-        Popovers.present(popover)
+        present(popover)
     }
     
     @IBOutlet var listButton: UIButton!
     @IBAction func listPressed(_ sender: Any) {
         let fieldSettingsModel = FieldSettingsModel()
         fieldSettingsModel.header = "LIST"
-        fieldSettingsModel.defaultColor = fields[1].text.color
-        fieldSettingsModel.selectedColor = fields[1].text.color
-        fieldSettingsModel.alpha = fields[1].text.colorAlpha
+        fieldSettingsModel.defaultColor = UIColor(hex: fields[1].value.getColor())
+        fieldSettingsModel.selectedColor = fields[1].overrides.selectedColor
+        fieldSettingsModel.alpha = fields[1].overrides.alpha
         fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water", "Context", "Popover", "Mud"]
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
@@ -79,7 +95,7 @@ class ViewController: UIViewController {
         }
         
         fieldSettingsModel.editListPressed = {
-            Popovers.dismiss(popover)
+            self.dismiss(popover)
         }
         
         popover.attributes.sourceFrame = { [weak listLabel] in listLabel.windowFrame() }
@@ -96,10 +112,10 @@ class ViewController: UIViewController {
         }
         popover.attributes.tag = "Field Popover"
         
-        if let oldPopover = Popovers.popover(tagged: "Field Popover") {
-            Popovers.replace(oldPopover, with: popover)
+        if let oldPopover = self.popover(tagged: "Field Popover") {
+            replace(oldPopover, with: popover)
         } else {
-            Popovers.present(popover)
+            present(popover)
         }
     }
     
