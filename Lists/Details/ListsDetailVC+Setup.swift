@@ -39,6 +39,7 @@ extension ListsDetailViewController {
     }
     
     func loadListContents(animate: Bool = true) {
+        
         headerTopLeftImageView.image = UIImage(systemName: model.list.icon)
         
         let color = UIColor(hex: model.list.color)
@@ -102,7 +103,16 @@ extension ListsDetailViewController {
             
         headerTopLeftImageView.tintColor = textColor
         
-        UIView.animate(withDuration: animate ? 0.3 : 0, delay: 0, options: .curveEaseOut) {
+        
+        /// animate only when lightness changed
+        var shouldAnimate = false
+        let isLight = color.isLight
+        if isLight != self.model.colorIsLight {
+            shouldAnimate = animate
+        }
+        self.model.colorIsLight = isLight
+        
+        UIView.animate(withDuration: shouldAnimate ? 0.3 : 0, delay: 0, options: .curveEaseOut) {
             self.headerTopLeftView.backgroundColor = backgroundColor
             self.headerTopCenterView.backgroundColor = backgroundColor
             self.headerTopRightView.backgroundColor = backgroundColor
@@ -110,7 +120,7 @@ extension ListsDetailViewController {
         }
 
         
-        withAnimation(animate ? .easeOut(duration: 0.3) : nil) {
+        withAnimation(shouldAnimate ? .easeOut(duration: 0.3) : nil) {
             headerTopRightColorPickerModel.tintColor = textColor
         }
     }

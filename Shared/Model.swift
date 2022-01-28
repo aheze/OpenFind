@@ -32,6 +32,19 @@ struct List {
     var color: UInt = 0x00AEEF
     var words = [String]()
     var dateCreated = Date()
+    
+    func getEditableList() -> EditableList {
+        let editableList = EditableList(
+            id: self.id,
+            name: self.name,
+            desc: self.desc,
+            icon: self.icon,
+            color: self.color,
+            words: self.words.map { EditableWord(string: $0) },
+            dateCreated: self.dateCreated
+        )
+        return editableList
+    }
 }
 
 struct EditableList {
@@ -42,6 +55,19 @@ struct EditableList {
     var color: UInt
     var words: [EditableWord]
     var dateCreated: Date
+    
+    func getList() -> List {
+        let list = List(
+            id: self.id,
+            name: self.name,
+            desc: self.desc,
+            icon: self.icon,
+            color: self.color,
+            words: self.words.map { $0.string },
+            dateCreated: self.dateCreated
+        )
+        return list
+    }
 }
 
 struct EditableWord {

@@ -11,15 +11,23 @@ import SwiftUI
 
 class ListsDetailViewModel: ObservableObject {
     var savedList: List
-    var list: EditableList
+    var realmModel: RealmModel
+    var list: EditableList {
+        didSet {
+            realmModel.updateList(list: list.getList())
+        }
+    }
+    
+    var colorIsLight = false
     
     var isEditing = false
     var isEditingChanged: (() -> Void)?
     
     @Published var selectedIndices = [Int]()
     
-    init(list: List) {
+    init(list: List, realmModel: RealmModel) {
         self.savedList = list
+        self.realmModel = realmModel
         self.list = EditableList(
             id: savedList.id,
             name: savedList.name,

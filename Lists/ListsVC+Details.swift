@@ -16,6 +16,7 @@ extension ListsViewController {
             ListsDetailViewController(
                 coder: coder,
                 list: list,
+                realmModel: self.realmModel,
                 toolbarViewModel: self.toolbarViewModel,
                 searchConfiguration: self.searchConfiguration
             )

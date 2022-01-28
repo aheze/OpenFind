@@ -28,7 +28,7 @@ extension RealmModel {
         }
         self.lists = lists
     }
-    
+
     func addList(list: List) {
         let words = RealmSwift.List<String>()
         words.append(objectsIn: list.words)
@@ -41,16 +41,7 @@ extension RealmModel {
             color: Int(list.color),
             dateCreated: list.dateCreated
         )
-        
-//        let realmList = RealmList()
-//        realmList.id = list.id
-//        realmList.name = list.name
-//        realmList.desc = list.desc
-//        realmList.words = words
-//        realmList.icon = list.icon
-//        realmList.color = Int(list.color)
-//        realmList.dateCreated = list.dateCreated
-        
+
         do {
             try realm.write {
                 realm.add(realmList)
@@ -59,6 +50,22 @@ extension RealmModel {
             print("Error writing list: \(error)")
         }
     }
+
+    func updateList(list: List) {
+        if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
+            do {
+                try realm.write {
+                    realmList.name = list.name
+                    realmList.desc = list.desc
+                    realmList.words.removeAll()
+                    realmList.words.append(objectsIn: list.words)
+                    realmList.icon = list.icon
+                    realmList.color = Int(list.color)
+                    realmList.dateCreated = list.dateCreated
+                }
+            } catch {
+                print("Error updating list: \(error)")
+            }
+        }
+    }
 }
-
-
