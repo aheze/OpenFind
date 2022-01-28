@@ -9,7 +9,6 @@
 import UIKit
 
 class IconPickerViewController: UIViewController, Searchable {
-    
     /// searchable
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
@@ -44,6 +43,8 @@ class IconPickerViewController: UIViewController, Searchable {
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
         baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        additionalSearchBarOffset = 0
+        
         collectionView.contentInset.top = IconPickerController.searchConfiguration.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = IconPickerController.searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         
@@ -80,6 +81,11 @@ class IconPickerViewController: UIViewController, Searchable {
         }
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        additionalSearchBarOffset = 0
+    }
 }
 
 /// Scroll view
@@ -87,6 +93,7 @@ extension IconPickerViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - IconPickerController.searchConfiguration.getTotalHeight()
+        
         updateSearchBarOffset?()
     }
 }
