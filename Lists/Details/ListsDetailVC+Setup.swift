@@ -10,7 +10,6 @@ import UIKit
 
 extension ListsDetailViewController {
     func setup() {
-        
         let colorPickerIconController = ColorPickerIconController(model: headerTopRightColorPickerModel)
         addChildViewController(colorPickerIconController, in: headerTopRightView)
         
@@ -84,8 +83,8 @@ extension ListsDetailViewController {
             + c.headerTitleEdgeInsets.bottom
         
         headerBottomViewHeightC.constant = c.headerDescriptionFont.lineHeight
-        + c.headerDescriptionEdgeInsets.top
-        + c.headerDescriptionEdgeInsets.bottom
+            + c.headerDescriptionEdgeInsets.top
+            + c.headerDescriptionEdgeInsets.bottom
         
         headerTopLeftViewRightC.constant = c.headerSpacing
         headerTopRightViewLeftC.constant = c.headerSpacing
@@ -130,8 +129,8 @@ extension ListsDetailViewController {
             attributes: [NSAttributedString.Key.foregroundColor: c.headerPlaceholderColor]
         )
         
-        
         // MARK: - Words
+
         wordsView.clipsToBounds = true
         wordsView.layer.cornerRadius = c.wordsCornerRadius
         
