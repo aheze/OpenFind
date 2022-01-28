@@ -12,38 +12,12 @@ extension ListsDetailViewController {
     func listenToButtons() {
         /// change icon
         headerTopLeftView.tapped = { [weak self] in
-            guard let self = self else { return }
-            
-            if #available(iOS 15.0, *) {
-                if let presentationController = self.iconPicker.searchNavigationController.presentationController as? UISheetPresentationController {
-                    presentationController.detents = [.medium(), .large()]
-                }
-            }
-            self.present(self.iconPicker.searchNavigationController, animated: true)
-            self.headerTopLeftIconPickerModel.selectedIcon = self.model.list.image
-            self.headerTopLeftIconPickerModel.iconChanged = { [weak self] icon in
-                self?.model.list.image = icon
-            }
+            self?.presentIconPicker()
         }
         
         /// change color
         headerTopRightView.tapped = { [weak self] in
-            guard let self = self else { return }
-            if #available(iOS 14.0, *) {
-                let colorPicker = UIColorPickerViewController()
-                
-                if #available(iOS 15.0, *) {
-                    if let presentationController = colorPicker.presentationController as? UISheetPresentationController {
-                        presentationController.detents = [.medium(), .large()]
-                    }
-                }
-                
-                self.present(colorPicker, animated: true)
-            } else {
-                
-                let colorPicker = ColorPickerNavigationViewController(model: self.headerTopRightColorPickerModel)
-                self.present(colorPicker, animated: true)
-            }
+            self?.presentColorPicker()
         }
         
         /// edit mode

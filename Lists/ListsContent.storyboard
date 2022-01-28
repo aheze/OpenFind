@@ -13,7 +13,7 @@
         <!--Lists View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ListsViewController" id="Y6W-OH-hqX" customClass="ListsViewController" customModule="ARVision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListsViewController" id="Y6W-OH-hqX" customClass="ListsViewController" customModule="Find_New" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,14 +28,14 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="5Nt-s7-lc7" customClass="ListsContentCell" customModule="ARVision" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="5Nt-s7-lc7" customClass="ListsContentCell" customModule="Find_New" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="181"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ea9-KR-HhC">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="181"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-D0-RZN" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-D0-RZN" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bQ-NR-Mgi">
@@ -88,11 +88,11 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGf-sF-ucv">
                                                     <rect key="frame" x="0.0" y="36.5" width="414" height="144.5"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5K-Sc-LfR" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5K-Sc-LfR" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="144.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2D-97-h2h" customClass="PassthroughView" customModule="ARVision" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2D-97-h2h" customClass="PassthroughView" customModule="Find_New" customModuleProvider="target">
                                                             <rect key="frame" x="12" y="12" width="390" height="120.5"/>
                                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                         </view>
@@ -167,7 +167,7 @@
         <!--Lists Detail View Controller-->
         <scene sceneID="xQU-4E-3xc">
             <objects>
-                <viewController storyboardIdentifier="ListsDetailViewController" id="NjZ-Si-jqU" customClass="ListsDetailViewController" customModule="ARVision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListsDetailViewController" id="NjZ-Si-jqU" customClass="ListsDetailViewController" customModule="Find_New" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qUP-v8-9gv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,7 +190,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cV-eL-FQw">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dei-QC-9jm" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dei-QC-9jm" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                                                 <rect key="frame" x="322" y="0.0" width="60" height="60"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
@@ -214,7 +214,7 @@
                                                                                     <constraint firstItem="sK0-K3-x9s" firstAttribute="leading" secondItem="gR3-8i-8OD" secondAttribute="leading" id="zfu-fO-6Jp"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glp-bN-FtJ" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glp-bN-FtJ" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5DT-f7-gEl">
@@ -281,10 +281,10 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu4-w1-8Ym">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJK-k4-Vgw" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJK-k4-Vgw" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="29.5" height="60"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbY-bU-eLM" customClass="PaddedLabel" customModule="ARVision" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbY-bU-eLM" customClass="PaddedLabel" customModule="Find_New" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="29.5" height="60"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
@@ -299,10 +299,10 @@
                                                                             <constraint firstAttribute="bottom" secondItem="rbY-bU-eLM" secondAttribute="bottom" id="ZNV-91-2cf"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4g-VU-d34" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4g-VU-d34" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                                         <rect key="frame" x="182.5" y="0.0" width="49.5" height="60"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Words" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jh1-id-PHk" customClass="PaddedLabel" customModule="ARVision" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Words" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jh1-id-PHk" customClass="PaddedLabel" customModule="Find_New" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="49.5" height="60"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
@@ -317,7 +317,7 @@
                                                                             <constraint firstAttribute="bottom" secondItem="jh1-id-PHk" secondAttribute="bottom" id="ZxW-uf-kvs"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbX-Di-FGu" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbX-Di-FGu" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                                         <rect key="frame" x="396" y="0.0" width="18" height="60"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QHV-XU-wry">
@@ -353,21 +353,21 @@
                                                                     <constraint firstAttribute="height" constant="300" id="WYd-GV-IYf"/>
                                                                 </constraints>
                                                                 <prototypes>
-                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListsDetailWordCell" id="KEM-yx-n4V" customClass="ListsDetailWordCell" customModule="ARVision" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="182"/>
+                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListsDetailWordCell" id="KEM-yx-n4V" customClass="ListsDetailWordCell" customModule="Find_New" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="182.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KEM-yx-n4V" id="Aq5-RU-jAy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="182"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="182.5"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3b-d8-XgN">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="182"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="182.5"/>
                                                                                     <subviews>
-                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Eu-DW-YsI" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="182"/>
+                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Eu-DW-YsI" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="182.5"/>
                                                                                             <subviews>
-                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axQ-Da-UBj" customClass="SelectionIconView" customModule="ARVision" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="66" width="50" height="50"/>
+                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axQ-Da-UBj" customClass="SelectionIconView" customModule="Find_New" customModuleProvider="target">
+                                                                                                    <rect key="frame" x="0.0" y="66.5" width="50" height="50"/>
                                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="axQ-Da-UBj" secondAttribute="height" multiplier="1:1" id="hjW-qg-49u"/>
@@ -383,10 +383,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-i2-Qoi">
-                                                                                            <rect key="frame" x="50" y="0.0" width="314" height="182"/>
+                                                                                            <rect key="frame" x="50" y="0.0" width="314" height="182.5"/>
                                                                                             <subviews>
-                                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CnX-j0-UT2" customClass="PaddedTextField" customModule="ARVision" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="182"/>
+                                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CnX-j0-UT2" customClass="PaddedTextField" customModule="Find_New" customModuleProvider="target">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="182.5"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                     <textInputTraits key="textInputTraits"/>
                                                                                                 </textField>
@@ -400,10 +400,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7KZ-9M-PVj">
-                                                                                            <rect key="frame" x="364" y="0.0" width="50" height="182"/>
+                                                                                            <rect key="frame" x="364" y="0.0" width="50" height="182.5"/>
                                                                                             <subviews>
                                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.3.horizontal" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lya-7b-7Tw">
-                                                                                                    <rect key="frame" x="0.0" y="71" width="50" height="40.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="71.5" width="50" height="40.5"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="lya-7b-7Tw" secondAttribute="height" multiplier="1:1" id="BQs-rD-ZOZ"/>
                                                                                                     </constraints>
@@ -528,7 +528,7 @@
         <!--Icon Picker View Controller-->
         <scene sceneID="5T1-gY-I4d">
             <objects>
-                <viewController storyboardIdentifier="IconPickerViewController" id="QFO-lU-akn" customClass="IconPickerViewController" customModule="ARVision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IconPickerViewController" id="QFO-lU-akn" customClass="IconPickerViewController" customModule="Find_New" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jxt-r7-nYF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -550,7 +550,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mM-kg-bAd" customClass="ButtonView" customModule="ARVision" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mM-kg-bAd" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8l6-Vj-drP">

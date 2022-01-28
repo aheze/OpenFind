@@ -43,7 +43,11 @@ extension IconPickerViewController {
                     if snapshot.itemIdentifiers.contains(previousIcon) {
                         items.append(previousIcon)
                     }
-                    snapshot.reconfigureItems(items)
+                    if #available(iOS 15.0, *) {
+                        snapshot.reconfigureItems(items)
+                    } else {
+                        snapshot.reloadItems(items)
+                    }
                     self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
 

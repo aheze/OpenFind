@@ -1268,6 +1268,8 @@
 		3CD7063827A3842200B446D7 /* IconPickerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */; };
 		3CD7063927A3842200B446D7 /* IconPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */; };
 		3CD7063A27A3842200B446D7 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7060F27A11E6D00B446D7 /* Icons.swift */; };
+		3CD706FC27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */; };
+		3CD706FE27A3925200B446D7 /* ListsDetailVC+IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */; };
 		3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */; };
 		3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306CE259AC46400F1B2E2 /* TabBar.swift */; };
 		3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */; };
@@ -2116,6 +2118,8 @@
 		3CD7060F27A11E6D00B446D7 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		3CD7061127A1BCC800B446D7 /* IconPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerController.swift; sourceTree = "<group>"; };
 		3CD706F927A384CE00B446D7 /* Popovers */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Popovers; path = ../../Popovers; sourceTree = "<group>"; };
+		3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+ColorPicker.swift"; sourceTree = "<group>"; };
+		3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+IconPicker.swift"; sourceTree = "<group>"; };
 		3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFindViewController.swift; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
@@ -2448,8 +2452,8 @@
 				3CCE2B95279D29D000F72351 /* ListsDetailVC+Lifecycle.swift */,
 				3CCE2B46279D207F00F72351 /* ListsDetailToolbarView.swift */,
 				3C08EB7B279CFBAB00971D60 /* ListsDetailWordCell.swift */,
-				3C08EB77279CBD8100971D60 /* ColorPickerIcon.swift */,
 				3C93FC3C27A0ECD100EBBC81 /* Icon Picker */,
+				3CD706FA27A3920200B446D7 /* Color Picker */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -3437,6 +3441,7 @@
 		3C93FC3C27A0ECD100EBBC81 /* Icon Picker */ = {
 			isa = PBXGroup;
 			children = (
+				3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */,
 				3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */,
 				3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */,
 				3CD7061127A1BCC800B446D7 /* IconPickerController.swift */,
@@ -3642,6 +3647,15 @@
 				3CCE2AF2279D007000F72351 /* SelectionIconView.swift */,
 			);
 			path = "UIKit Views";
+			sourceTree = "<group>";
+		};
+		3CD706FA27A3920200B446D7 /* Color Picker */ = {
+			isa = PBXGroup;
+			children = (
+				3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */,
+				3C08EB77279CBD8100971D60 /* ColorPickerIcon.swift */,
+			);
+			path = "Color Picker";
 			sourceTree = "<group>";
 		};
 		3CDA84F325B250AF00726F91 /* Finding */ = {
@@ -5480,6 +5494,7 @@
 				3CCE2B1B279D008B00F72351 /* FindIconUIView.swift in Sources */,
 				3CCE2B41279D093600F72351 /* ListsDetailVC+DataSource.swift in Sources */,
 				3CCE2B96279D29D000F72351 /* ListsDetailVC+Lifecycle.swift in Sources */,
+				3CD706FE27A3925200B446D7 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C1D19E7275A93700064F2C6 /* ListsViewModel.swift in Sources */,
 				3C08EAE8279BA94A00971D60 /* ListsVC+Details.swift in Sources */,
 				3C4D3A67274769370010FD68 /* ListsController.swift in Sources */,
@@ -5498,6 +5513,7 @@
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */,
 				3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */,
+				3CD706FC27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift in Sources */,
 				3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CFD6018278B70940031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3C08EB78279CBD8100971D60 /* ColorPickerIcon.swift in Sources */,
@@ -7125,7 +7141,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7161,7 +7177,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
