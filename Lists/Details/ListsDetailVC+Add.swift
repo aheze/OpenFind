@@ -14,6 +14,21 @@ extension ListsDetailViewController {
         model.list.words.insert(newWord, at: 0)
         wordsTableView.insertRows(at: [0.indexPath], with: .automatic)
     }
+
+    func addWords(words: [String], originIndex: Int) {
+        var newWords = [EditableWord]()
+        var indices = [Int]()
+        for (index, word) in words.enumerated() {
+            let editableWord = EditableWord(string: word)
+            newWords.append(editableWord)
+            indices.append(index)
+        }
+
+        model.list.words.insert(contentsOf: newWords, at: originIndex + 1)
+        let newWordsIndices = indices.map { (originIndex + 1 + $0).indexPath }
+
+        wordsTableView.insertRows(at: newWordsIndices, with: .automatic)
+    }
 }
 
 extension ListsDetailViewController {

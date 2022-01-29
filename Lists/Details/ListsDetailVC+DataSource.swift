@@ -42,11 +42,42 @@ extension ListsDetailViewController: UITableViewDataSource {
                 cell.leftSelectionIconView.setState(.selected)
             }
         }
-        cell.textChanged = { [weak self] text in
-            guard let self = self else { return }
-            if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
-                self.model.list.words[index].string = text
+        cell.textChanged = { [weak self] newText, replacementString in
+            guard let self = self else { return true }
+            
+            let newWords = replacementString
+                .components(separatedBy: "•")
+                .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+
+            /// a new bullet-separated string was pasted
+            if newWords.count > 1 {
+                /// index of cell where the paste occurred
+                if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
+                    /// if empty, replace cell text with the first new word
+                    if self.model.list.words[index].string.isEmpty {
+                        cell.textField.text = newWords[0]
+                        self.model.list.words[index].string = newWords[0]
+                        
+                        let wordsToAdd = Array(newWords.dropFirst())
+                        self.addWords(words: wordsToAdd, originIndex: index)
+                        
+                    } else {
+                        /// else, just append all the new words
+                        self.addWords(words: newWords, originIndex: index)
+                    }
+                    
+                    self.updateTableViewHeightConstraint()
+                    
+                    return false
+                }
+            } else {
+                /// normal text update.
+                if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
+                    self.model.list.words[index].string = newText
+                }
             }
+            
+            return true
         }
         
         /// configure which parts of the cell are visible

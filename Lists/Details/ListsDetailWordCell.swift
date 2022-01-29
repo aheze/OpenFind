@@ -25,7 +25,9 @@ class ListsDetailWordCell: UITableViewCell {
     @IBOutlet var rightDragHandleImageView: UIImageView!
     
     var leftViewTapped: (() -> Void)?
-    var textChanged: ((String) -> Void)?
+    
+    /// text changed to the string #1, appended/replacement string is #2, should the textfield update?
+    var textChanged: ((String, String) -> Bool)?
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -85,7 +87,7 @@ extension ListsDetailWordCell: UITextFieldDelegate {
             let textRange = Range(range, in: text)
         {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            textChanged?(updatedText)
+            return textChanged?(updatedText, string) ?? true
         }
         
         return true
