@@ -8,7 +8,6 @@
 import UIKit
 
 class ListsViewController: UIViewController, Searchable {
-    
     /// external models
     var listsViewModel: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
@@ -70,5 +69,24 @@ class ListsViewController: UIViewController, Searchable {
         
         /// refresh for dark mode
         updateCellColors()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        let availableWidth = size.width
+        - ListsCollectionConstants.sidePadding * 2
+        - collectionView.safeAreaInsets.left
+        - collectionView.safeAreaInsets.right
+        
+        for index in listsViewModel.displayedLists.indices {
+            let oldDisplayedList = listsViewModel.displayedLists[index]
+            _ = getCellSize(availableWidth: availableWidth, list: oldDisplayedList.list, listIndex: index)
+            let newDisplayedList = listsViewModel.displayedLists[index]
+            
+            if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
+                addChipViews(to: cell, with: newDisplayedList)
+            }
+        }
     }
 }

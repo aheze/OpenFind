@@ -6,11 +6,9 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-
 import UIKit
 
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
-    
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     var getLists: (() -> [List])?
     
@@ -21,8 +19,17 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
+    /// boilerplate code
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool { return true }
+    override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+        let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
+        let boundsChanged = newBounds.size != collectionView?.bounds.size
+        context.invalidateFlowLayoutAttributes = boundsChanged
+        context.invalidateFlowLayoutDelegateMetrics = boundsChanged
+        return context
+    }
     
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
@@ -30,13 +37,15 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-        
         guard let lists = getLists?() else { return }
         guard let collectionView = collectionView else { return }
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         var currentOffset = CGPoint(x: ListsCollectionConstants.sidePadding, y: 0)
-        let availableWidth = collectionView.bounds.width - ListsCollectionConstants.sidePadding * 2
+        let availableWidth = collectionView.bounds.width
+        - ListsCollectionConstants.sidePadding * 2
+        - collectionView.safeAreaInsets.left
+        - collectionView.safeAreaInsets.right
         
         for index in lists.indices {
             if let size = getListSizeFromWidth?(availableWidth, lists[index], index) {
@@ -54,7 +63,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
             }
         }
         
-        self.contentSize = CGSize(width: collectionView.bounds.width, height: currentOffset.y)
+        contentSize = CGSize(width: collectionView.bounds.width, height: currentOffset.y)
         self.layoutAttributes = layoutAttributes
     }
     
@@ -67,4 +76,6 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
     }
+    
+    
 }

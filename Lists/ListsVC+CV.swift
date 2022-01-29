@@ -38,7 +38,6 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
         
-        print("Loading \(indexPath). List color: \(list.color)")
         cell.tapped = { [weak self] in
             guard let self = self else { return }
             if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
@@ -53,9 +52,13 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError()
         }
         
+        let displayedList = listsViewModel.displayedLists[indexPath.item]
+        addChipViews(to: cell, with: displayedList)
+    }
+    
+    func addChipViews(to cell: ListsContentCell, with displayedList: DisplayedList) {
         cell.chipsContainerView.subviews.forEach { $0.removeFromSuperview() }
         
-        let displayedList = listsViewModel.displayedLists[indexPath.item]
         let frame = displayedList.frame
         let color = UIColor(hex: displayedList.list.color)
         
@@ -69,8 +72,8 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
                 chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
                 chipView.tapped = { [weak self] in
                     guard let self = self else { return }
-                    if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
-                        self.presentDetails(list: list)
+                    if let displayedList = self.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                        self.presentDetails(list: displayedList.list)
                     }
                 }
             } else {

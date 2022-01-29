@@ -15,7 +15,7 @@ struct DisplayedList {
 }
 
 struct ListFrame {
-    var frame = CGRect.zero
+//    var frame = CGRect.zero
     var chipFrames = [ChipFrame]()
     
     struct ChipFrame {

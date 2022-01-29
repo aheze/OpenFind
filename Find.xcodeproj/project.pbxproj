@@ -356,6 +356,8 @@
 		3C21EE3827A463B40005E183 /* ListsVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Saving.swift */; };
 		3C21EE3927A463E30005E183 /* ListsVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Saving.swift */; };
 		3C21EE3A27A463E50005E183 /* ListsVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Saving.swift */; };
+		3C21EE3C27A4CEFF0005E183 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE3B27A4CEFF0005E183 /* Realm */; };
+		3C21EE3E27A4CEFF0005E183 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE3D27A4CEFF0005E183 /* RealmSwift */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -2514,6 +2516,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C21EE3E27A4CEFF0005E183 /* RealmSwift in Frameworks */,
+				3C21EE3C27A4CEFF0005E183 /* Realm in Frameworks */,
 				3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4541,6 +4545,8 @@
 			name = Lists;
 			packageProductDependencies = (
 				3CFD5F79278A37F00031BC8B /* Popovers */,
+				3C21EE3B27A4CEFF0005E183 /* Realm */,
+				3C21EE3D27A4CEFF0005E183 /* RealmSwift */,
 			);
 			productName = Lists;
 			productReference = 3C4D3A47274768FE0010FD68 /* Lists.app */;
@@ -8665,6 +8671,16 @@
 			productName = Realm;
 		};
 		3C21EDC527A45C130005E183 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		3C21EE3B27A4CEFF0005E183 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		3C21EE3D27A4CEFF0005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

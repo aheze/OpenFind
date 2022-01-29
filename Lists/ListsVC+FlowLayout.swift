@@ -132,7 +132,8 @@ extension ListsViewController {
         let height = headerHeight + containerHeight
         listsViewModel.displayedLists[listIndex].frame.chipFrames = chipFrames
         
-        return CGSize(width: availableWidth, height: height)
+//        print("Origins: \(chipFrames.map { $0.frame.origin })")
+        let cellSize = CGSize(width: availableWidth, height: height)
+        return cellSize
     }
 }
-
