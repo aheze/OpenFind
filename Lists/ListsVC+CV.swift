@@ -37,6 +37,8 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.headerTitleLabel.text = list.name
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
+        
+        print("Loading \(indexPath). List color: \(list.color)")
         cell.tapped = { [weak self] in
             guard let self = self else { return }
             if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {

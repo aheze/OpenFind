@@ -18,6 +18,10 @@ extension ListsViewController {
                 list: list,
                 realmModel: self.realmModel,
                 toolbarViewModel: self.toolbarViewModel,
+                listUpdated: { [weak self] newList in
+                    self?.realmModel.updateList(list: newList)
+                    self?.listUpdated(list: newList)
+                },
                 searchConfiguration: self.searchConfiguration
             )
         }

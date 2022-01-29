@@ -12,9 +12,11 @@ import SwiftUI
 class ListsDetailViewModel: ObservableObject {
     var savedList: List
     var realmModel: RealmModel
+    var listUpdated: ((List) -> Void)?
     var list: EditableList {
         didSet {
-            realmModel.updateList(list: list.getList())
+            let newList = list.getList()
+            listUpdated?(newList)
         }
     }
     
@@ -25,9 +27,10 @@ class ListsDetailViewModel: ObservableObject {
     
     @Published var selectedIndices = [Int]()
     
-    init(list: List, realmModel: RealmModel) {
+    init(list: List, listUpdated: ((List) -> Void)?, realmModel: RealmModel) {
         self.savedList = list
         self.realmModel = realmModel
+        self.listUpdated = listUpdated
         self.list = EditableList(
             id: savedList.id,
             name: savedList.name,

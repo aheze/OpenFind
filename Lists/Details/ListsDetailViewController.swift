@@ -84,9 +84,10 @@ class ListsDetailViewController: UIViewController, Searchable {
         list: List,
         realmModel: RealmModel,
         toolbarViewModel: ToolbarViewModel,
+        listUpdated: ((List) -> Void)?,
         searchConfiguration: SearchConfiguration
     ) {
-        self.model = ListsDetailViewModel(list: list, realmModel: realmModel)
+        self.model = ListsDetailViewModel(list: list, listUpdated: listUpdated, realmModel: realmModel)
         self.toolbarViewModel = toolbarViewModel
         self.searchConfiguration = searchConfiguration
         super.init(coder: coder)
