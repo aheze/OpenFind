@@ -31,8 +31,7 @@ extension SearchNavigationController {
         searchContainerView.backgroundColor = .clear
         
         let searchViewController = Bridge.makeViewController(
-            searchViewModel: searchViewModel,
-            configuration: searchConfiguration
+            searchViewModel: searchViewModel
         )
         self.searchViewController = searchViewController
         

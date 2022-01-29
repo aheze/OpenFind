@@ -9,7 +9,6 @@ import UIKit
 
 class SearchViewController: UIViewController {
     var searchViewModel: SearchViewModel
-    var configuration: SearchConfiguration
     
     @IBOutlet var searchBarHeightC: NSLayoutConstraint!
     @IBOutlet weak var searchBarTopC: NSLayoutConstraint!
@@ -34,15 +33,13 @@ class SearchViewController: UIViewController {
     
     init?(
         coder: NSCoder,
-        searchViewModel: SearchViewModel,
-        configuration: SearchConfiguration
+        searchViewModel: SearchViewModel
     ) {
         self.searchViewModel = searchViewModel
-        self.configuration = configuration
         
         /// inject the configuration for cell width calculations
         for index in searchViewModel.fields.indices {
-            searchViewModel.fields[index].configuration = configuration
+            searchViewModel.fields[index].configuration = searchViewModel.configuration
         }
         
         super.init(coder: coder)
@@ -60,7 +57,7 @@ class SearchViewController: UIViewController {
         searchBarTopC.constant = 0
         searchBarBottomC.constant = 0
         searchBarView.backgroundColor = .clear
-        backgroundView.isHidden = !configuration.showBackground
+        backgroundView.isHidden = !searchViewModel.configuration.showBackground
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
     }
@@ -73,16 +70,11 @@ class SearchViewController: UIViewController {
 
     func updateLandscapeConstants() {
         if traitCollection.horizontalSizeClass == .regular {
-            searchCollectionViewFlowLayout.isLandscape = true
-            searchBarHeightC.constant = configuration.cellHeight
-            + configuration.barTopPaddingLandscape
-            + configuration.barBottomPaddingLandscape
+            searchViewModel.isLandscape = true
         } else {
-            searchCollectionViewFlowLayout.isLandscape = false
-            searchBarHeightC.constant = configuration.cellHeight
-            + configuration.barTopPadding
-            + configuration.barBottomPadding
+            searchViewModel.isLandscape = false
         }
+        searchBarHeightC.constant = searchViewModel.getTotalHeight()
     }
 }
 

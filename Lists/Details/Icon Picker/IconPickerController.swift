@@ -12,17 +12,24 @@ import UIKit
 class IconPickerController {
     var searchNavigationController: SearchNavigationController
     var iconPickerViewController: IconPickerViewController
-    static let searchConfiguration = SearchConfiguration.photos
+    var searchViewModel: SearchViewModel
 
     
     init(model: IconPickerViewModel) {
+        var searchViewModel = SearchViewModel(configuration: .photos)
+        self.searchViewModel = searchViewModel
+        
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let iconPickerViewController = storyboard.instantiateViewController(identifier: "IconPickerViewController") { coder in
-            IconPickerViewController(coder: coder, model: model)
+            IconPickerViewController(
+                coder: coder,
+                model: model,
+                searchViewModel: searchViewModel
+            )
         }
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: iconPickerViewController,
-            searchConfiguration: IconPickerController.searchConfiguration,
+            searchViewModel: searchViewModel,
             tabType: .lists
         )
         

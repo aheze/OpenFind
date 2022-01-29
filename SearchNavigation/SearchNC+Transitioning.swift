@@ -17,7 +17,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             let offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset)
             
             searchContainerViewTopC?.constant = offset
-            navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
+            navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
             
             let percentage = getBlurPercentage(
                 baseSearchBarOffset: viewController.baseSearchBarOffset,
@@ -55,7 +55,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                         let offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset)
                         
                         self.searchContainerViewTopC?.constant = offset
-                        self.navigationBarBackgroundHeightC?.constant = offset + self.searchConfiguration.getTotalHeight()
+                        self.navigationBarBackgroundHeightC?.constant = offset + self.searchViewModel.getTotalHeight()
                         self.updateBlur(
                             baseSearchBarOffset: currentViewController.baseSearchBarOffset,
                             additionalSearchBarOffset: currentViewController.additionalSearchBarOffset
@@ -84,7 +84,7 @@ extension SearchNavigationController {
             let offset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset)
             
             searchContainerViewTopC?.constant = offset
-            navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
+            navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
             self.updateBlur(
                 baseSearchBarOffset: topViewController.baseSearchBarOffset,
                 additionalSearchBarOffset: topViewController.additionalSearchBarOffset

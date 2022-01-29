@@ -11,7 +11,7 @@ import UIKit
 
 extension SearchViewController {
     func createFlowLayout() -> SearchCollectionViewFlowLayout {
-        let flowLayout = SearchCollectionViewFlowLayout(configuration: configuration)
+        let flowLayout = SearchCollectionViewFlowLayout(searchViewModel: searchViewModel)
         flowLayout.scrollDirection = .horizontal
         flowLayout.getFullCellWidth = { [weak self] index in
             self?.widthOfExpandedCell(for: index) ?? 300

@@ -57,14 +57,6 @@ struct SearchConfiguration: Equatable {
     var barTopPaddingLandscape = CGFloat(16)
     var barBottomPaddingLandscape = CGFloat(16)
     
-    func getTotalHeight(isLandscape: Bool) -> CGFloat {
-        if isLandscape {
-            return cellHeight + barTopPaddingLandscape + barBottomPaddingLandscape
-        } else {
-            return cellHeight + barTopPadding + barBottomPadding
-        }
-    }
-    
     static var camera: Self = {
         var configuration = SearchConfiguration()
         return configuration
@@ -100,7 +92,9 @@ struct SearchConfiguration: Equatable {
             keyboardAppearance: UIKeyboardAppearance.default,
             showBackground: false,
             barTopPadding: 0,
-            barBottomPadding: 16
+            barBottomPadding: 16,
+            barTopPaddingLandscape: 0,
+            barBottomPaddingLandscape: 16
         )
         return configuration
     }()

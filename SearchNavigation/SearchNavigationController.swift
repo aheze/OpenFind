@@ -18,14 +18,13 @@ class SearchNavigationController: UIViewController, PageViewController {
     var onDidBecomeInactive: (() -> Void)?
     var onBoundsChange: ((CGSize, UIEdgeInsets) -> Void)?
     
-    var navigation: UINavigationController!
     var rootViewController: UIViewController
-    let searchConfiguration: SearchConfiguration
+    var searchViewModel: SearchViewModel
+    var navigation: UINavigationController!
     
     var searchContainerViewContainer = PassthroughView() /// whole screen
     var searchContainerView: UIView!
     var searchContainerViewTopC: NSLayoutConstraint?
-    var searchViewModel = SearchViewModel()
     var searchViewController: SearchViewController!
     
     var navigationBarBackgroundContainer = PassthroughView()
@@ -41,7 +40,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     
     static func make(
         rootViewController: Searchable,
-        searchConfiguration: SearchConfiguration,
+        searchViewModel: SearchViewModel,
         tabType: TabState
     ) -> SearchNavigationController {
         
@@ -50,7 +49,7 @@ class SearchNavigationController: UIViewController, PageViewController {
             SearchNavigationController(
                 coder: coder,
                 rootViewController: rootViewController,
-                searchConfiguration: searchConfiguration,
+                searchViewModel: searchViewModel,
                 tabType: tabType
             )
         }
@@ -60,11 +59,11 @@ class SearchNavigationController: UIViewController, PageViewController {
     init?(
         coder: NSCoder,
         rootViewController: UIViewController,
-        searchConfiguration: SearchConfiguration,
+        searchViewModel: SearchViewModel,
         tabType: TabState
     ) {
         self.rootViewController = rootViewController
-        self.searchConfiguration = searchConfiguration
+        self.searchViewModel = searchViewModel
         self.tabType = tabType
         super.init(coder: coder)
     }

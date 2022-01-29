@@ -18,7 +18,7 @@ class CameraViewController: UIViewController, PageViewController {
     lazy var zoomViewModel = ZoomViewModel(containerView: zoomContainerView)
     var aspectProgressCancellable: AnyCancellable?
     
-    var searchViewModel = SearchViewModel()
+    var searchViewModel = SearchViewModel(configuration: .camera)
     var highlightsViewModel = HighlightsViewModel()
     
     // MARK: - Sub view controllers

@@ -19,7 +19,7 @@ extension SearchViewController {
         cell.textField.inputAccessoryView = toolbarViewController.view
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
-        cell.configuration = configuration
+        cell.configuration = searchViewModel.configuration
         cell.setConfiguration()
         
         switch field.value {

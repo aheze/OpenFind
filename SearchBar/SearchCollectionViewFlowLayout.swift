@@ -8,10 +8,10 @@
 import UIKit
 
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    var configuration: SearchConfiguration
+    var searchViewModel: SearchViewModel
     
-    init(configuration: SearchConfiguration) {
-        self.configuration = configuration
+    init(searchViewModel: SearchViewModel) {
+        self.searchViewModel = searchViewModel
         super.init()
     }
     
@@ -40,9 +40,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// 1. finger is down
     /// 2. `reachedEnd` is true
     var shouldUseOffsetWithAddNew = false
-    
-    /// use landscape paddings
-    var isLandscape = false
     
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
@@ -127,17 +124,17 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             if index == 0 {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
-                adjustedSidePadding = configuration.cellSpacing - (sidePeekPadding - sidePadding)
-                cellOriginWithoutSidePadding = cellOrigin - configuration.sidePadding
+                adjustedSidePadding = searchViewModel.configuration.cellSpacing - (sidePeekPadding - sidePadding)
+                cellOriginWithoutSidePadding = cellOrigin - searchViewModel.configuration.sidePadding
             } else if index == fieldHuggingWidths.count - 2 {
-                adjustedSidePadding = configuration.cellSpacing - (sidePeekPadding - sidePadding)
+                adjustedSidePadding = searchViewModel.configuration.cellSpacing - (sidePeekPadding - sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
                 adjustedSidePadding = -collectionView.safeAreaInsets.right /// account for safe area for last cell
                 cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             } else {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
-                adjustedSidePadding = configuration.cellSpacing
+                adjustedSidePadding = searchViewModel.configuration.cellSpacing
                 cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             }
 
@@ -158,7 +155,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     if !convertingInstantly {
                         /// when hit the edge already
                         if shouldUseOffsetWithAddNew {
-                            let percentage = distanceTravelledLeft / (configuration.addWordFieldSnappingFactor * distanceToNextCell)
+                            let percentage = distanceTravelledLeft / (searchViewModel.configuration.addWordFieldSnappingFactor * distanceToNextCell)
                             alpha = min(1, percentage)
                             
                             /// highlight/tap `true` if percentage > 1
@@ -201,7 +198,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             var additionalOffset = fullCellWidth
-            if index != fieldHuggingWidths.indices.last { additionalOffset += configuration.cellSpacing } /// don't add spacing for last cell
+            if index != fieldHuggingWidths.indices.last { additionalOffset += searchViewModel.configuration.cellSpacing } /// don't add spacing for last cell
             cellOrigin += additionalOffset
         }
         
@@ -231,10 +228,15 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             let indexPath = IndexPath(item: fullIndex, section: 0)
             let attributes = FieldLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: origin, y: isLandscape ? configuration.barTopPaddingLandscape : configuration.barTopPadding, width: width, height: configuration.cellHeight)
+            attributes.frame = CGRect(
+                x: origin,
+                y: searchViewModel.isLandscape ? searchViewModel.configuration.barTopPaddingLandscape : searchViewModel.configuration.barTopPadding,
+                width: width,
+                height: searchViewModel.configuration.cellHeight
+            )
             attributes.alpha = fieldOffset.alpha
             attributes.percentage = fieldOffset.percentage
-            attributes.configuration = configuration /// save the configuration first
+            attributes.configuration = searchViewModel.configuration /// save the configuration first
             
             if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
                 attributes.transform = .init(scaleX: 0.5, y: 0.5)
@@ -249,12 +251,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             layoutAttributes.append(attributes)
             
             var additionalOffset = fieldOffset.fullWidth
-            if fullIndex != fieldHuggingWidths.indices.last { additionalOffset += configuration.cellSpacing }
+            if fullIndex != fieldHuggingWidths.indices.last { additionalOffset += searchViewModel.configuration.cellSpacing }
             fullOrigin += additionalOffset
             
             if fullIndex != fieldHuggingWidths.indices.last {
                 var additionalOffset = fieldOffset.fullWidth
-                if fullIndex != fieldHuggingWidths.count - 2 { additionalOffset += configuration.cellSpacing } /// don't add cell spacing for last non-AddNew field
+                if fullIndex != fieldHuggingWidths.count - 2 { additionalOffset += searchViewModel.configuration.cellSpacing } /// don't add cell spacing for last non-AddNew field
                 fullOriginWithoutAddNew += additionalOffset
             }
         }
@@ -274,14 +276,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         if shouldUseOffsetWithAddNew {
             contentSize = CGSize(
                 width: fullOrigin + sidePadding,
-                height: configuration.cellHeight +
-                (isLandscape ? configuration.barBottomPaddingLandscape : configuration.barBottomPadding)
+                height: searchViewModel.configuration.cellHeight +
+                (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
             )
         } else {
             contentSize = CGSize(
                 width: fullOriginWithoutAddNew + sidePadding,
-                height: configuration.cellHeight +
-                (isLandscape ? configuration.barBottomPaddingLandscape : configuration.barBottomPadding)
+                height: searchViewModel.configuration.cellHeight +
+                (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
             )
         }
         
@@ -302,13 +304,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     var sidePeekPadding: CGFloat {
-        guard let collectionView = collectionView else { return configuration.sidePeekPadding }
-        return configuration.sidePeekPadding + Global.safeAreaInsets.left
+        guard let collectionView = collectionView else { return searchViewModel.configuration.sidePeekPadding }
+        return searchViewModel.configuration.sidePeekPadding + Global.safeAreaInsets.left
     }
     
     var sidePadding: CGFloat {
-        guard let collectionView = collectionView else { return configuration.sidePadding }
-        return configuration.sidePadding + Global.safeAreaInsets.left
+        guard let collectionView = collectionView else { return searchViewModel.configuration.sidePadding }
+        return searchViewModel.configuration.sidePadding + Global.safeAreaInsets.left
     }
     
     /// boilerplate code

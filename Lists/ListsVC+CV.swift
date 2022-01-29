@@ -108,7 +108,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
 extension ListsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchConfiguration.getTotalHeight()
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateNavigationBar?()
     }
 }

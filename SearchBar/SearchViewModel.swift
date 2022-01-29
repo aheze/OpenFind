@@ -10,6 +10,20 @@ import UIKit
 
 class SearchViewModel: ObservableObject {
     
+    var configuration: SearchConfiguration
+    var isLandscape = false
+    func getTotalHeight() -> CGFloat {
+        if isLandscape {
+            return configuration.cellHeight + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
+        } else {
+            return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
+        }
+    }
+    
+    init(configuration: SearchConfiguration) {
+        self.configuration = configuration
+    }
+    
     var fields = [
         Field(
             value: .word(
@@ -40,8 +54,6 @@ class SearchViewModel: ObservableObject {
         return fields.dropLast().map { $0.value }
     }
     
-    var configuration = SearchConfiguration()
-    
     struct Gradient {
         var colors = [UIColor]()
         var alpha = CGFloat(1)
@@ -51,7 +63,6 @@ class SearchViewModel: ObservableObject {
     var customWords = [String]()
     
     func updateStringToGradients() {
-        
         var stringToGradients = [String: Gradient]()
         for field in fields {
             switch field.value {
@@ -68,7 +79,7 @@ class SearchViewModel: ObservableObject {
                     existingGradient.alpha = field.overrides.alpha
                     stringToGradients[string] = existingGradient
                 }
-            case .addNew(_):
+            case .addNew:
                 continue
             }
         }
@@ -84,11 +95,10 @@ class SearchViewModel: ObservableObject {
             case .list(let list):
                 let contents = Set(list.words)
                 words.formUnion(contents)
-            case .addNew(_):
+            case .addNew:
                 continue
             }
         }
-        self.customWords = Array(words)
+        customWords = Array(words)
     }
-
 }

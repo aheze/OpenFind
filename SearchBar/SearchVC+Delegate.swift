@@ -25,9 +25,9 @@ extension SearchViewController: UICollectionViewDelegate {
         if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
             UIView.animate(withDuration: 0.2) {
                 if shouldHighlight {
-                    cell.contentView.backgroundColor = self.configuration.fieldHighlightedBackgroundColor
+                    cell.contentView.backgroundColor = self.searchViewModel.configuration.fieldHighlightedBackgroundColor
                 } else {
-                    cell.contentView.backgroundColor = self.configuration.fieldBackgroundColor
+                    cell.contentView.backgroundColor = self.searchViewModel.configuration.fieldBackgroundColor
                 }
             }
         }
@@ -61,7 +61,7 @@ extension SearchViewController: UICollectionViewDelegate {
         
         /// append new "Add New" cell
         let newField = Field(
-            configuration: configuration,
+            configuration: searchViewModel.configuration,
             value: .addNew(
                 .init(
                     string: "",

@@ -11,7 +11,7 @@ import SwiftUI
 class ListsDetailViewController: UIViewController, Searchable {
     var model: ListsDetailViewModel
     var toolbarViewModel: ToolbarViewModel
-    var searchConfiguration: SearchConfiguration
+    var searchViewModel: SearchViewModel
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
@@ -85,11 +85,11 @@ class ListsDetailViewController: UIViewController, Searchable {
         realmModel: RealmModel,
         toolbarViewModel: ToolbarViewModel,
         listUpdated: ((List) -> Void)?,
-        searchConfiguration: SearchConfiguration
+        searchViewModel: SearchViewModel
     ) {
         self.model = ListsDetailViewModel(list: list, listUpdated: listUpdated, realmModel: realmModel)
         self.toolbarViewModel = toolbarViewModel
-        self.searchConfiguration = searchConfiguration
+        self.searchViewModel = searchViewModel
         super.init(coder: coder)
     }
     
@@ -111,8 +111,8 @@ class ListsDetailViewController: UIViewController, Searchable {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0
         
-        scrollView.contentInset.top = searchConfiguration.getTotalHeight()
-        scrollView.verticalScrollIndicatorInsets.top = searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        scrollView.contentInset.top = searchViewModel.getTotalHeight()
+        scrollView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         
         scrollView.delegate = self
     }
@@ -154,7 +154,7 @@ class ListsDetailViewController: UIViewController, Searchable {
 extension ListsDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchConfiguration.getTotalHeight()
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateSearchBarOffset?()
     }
 }

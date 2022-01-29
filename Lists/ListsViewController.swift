@@ -12,7 +12,7 @@ class ListsViewController: UIViewController, Searchable {
     var listsViewModel: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
-    var searchConfiguration: SearchConfiguration
+    var searchViewModel: SearchViewModel
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
@@ -30,12 +30,12 @@ class ListsViewController: UIViewController, Searchable {
         listsViewModel: ListsViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
-        searchConfiguration: SearchConfiguration
+        searchViewModel: SearchViewModel
     ) {
         self.listsViewModel = listsViewModel
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
-        self.searchConfiguration = searchConfiguration
+        self.searchViewModel = searchViewModel
         super.init(coder: coder)
     }
 
@@ -62,7 +62,7 @@ class ListsViewController: UIViewController, Searchable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-        additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
+        additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchViewModel.getTotalHeight()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

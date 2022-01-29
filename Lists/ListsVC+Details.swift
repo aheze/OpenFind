@@ -22,7 +22,7 @@ extension ListsViewController {
                     self?.realmModel.updateList(list: newList)
                     self?.listUpdated(list: newList)
                 },
-                searchConfiguration: self.searchConfiguration
+                searchViewModel: self.searchViewModel
             )
         }
         self.detailsViewController = viewController

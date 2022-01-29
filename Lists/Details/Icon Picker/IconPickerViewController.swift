@@ -15,6 +15,7 @@ class IconPickerViewController: UIViewController, Searchable {
     var updateSearchBarOffset: (() -> Void)?
     
     var model: IconPickerViewModel
+    var searchViewModel: SearchViewModel
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -24,9 +25,11 @@ class IconPickerViewController: UIViewController, Searchable {
     
     init?(
         coder: NSCoder,
-        model: IconPickerViewModel
+        model: IconPickerViewModel,
+        searchViewModel: SearchViewModel
     ) {
         self.model = model
+        self.searchViewModel = searchViewModel
         super.init(coder: coder)
     }
     
@@ -45,8 +48,8 @@ class IconPickerViewController: UIViewController, Searchable {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0
         
-        collectionView.contentInset.top = IconPickerController.searchConfiguration.getTotalHeight()
-        collectionView.verticalScrollIndicatorInsets.top = IconPickerController.searchConfiguration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        collectionView.contentInset.top = searchViewModel.getTotalHeight()
+        collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         
         title = "Icons"
         navigationItem.largeTitleDisplayMode = .never
@@ -92,7 +95,7 @@ class IconPickerViewController: UIViewController, Searchable {
 extension IconPickerViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - IconPickerController.searchConfiguration.getTotalHeight()
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         
         updateSearchBarOffset?()
     }

@@ -13,7 +13,7 @@ class ListsController {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     
-    var searchConfiguration: SearchConfiguration
+    var searchViewModel: SearchViewModel
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
@@ -22,8 +22,8 @@ class ListsController {
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         
-        let searchConfiguration = SearchConfiguration.lists
-        self.searchConfiguration = searchConfiguration
+        let searchViewModel = SearchViewModel(configuration: .lists)
+        self.searchViewModel = searchViewModel
         
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "ListsViewController") { coder in
@@ -32,14 +32,14 @@ class ListsController {
                 listsViewModel: listsViewModel,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
-                searchConfiguration: searchConfiguration
+                searchViewModel: searchViewModel
             )
         }
         
         self.viewController = viewController
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
-            searchConfiguration: searchConfiguration,
+            searchViewModel: searchViewModel,
             tabType: .lists
         )
         searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }

@@ -39,7 +39,7 @@ extension SearchViewController: UICollectionViewDataSource {
         }
         
         let fullWidth = searchCollectionView.bounds.width
-        return max(configuration.minimumHuggingWidth, fullWidth - extraPadding)
+        return max(searchViewModel.configuration.minimumHuggingWidth, fullWidth - extraPadding)
     }
 }
 
