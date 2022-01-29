@@ -10,9 +10,9 @@
 import UIKit
 
 extension UIViewController {
-    func getCompactBarSafeAreaHeight() -> CGFloat {
-        let topInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
+    func getCompactBarSafeAreaHeight(with safeAreaInsets: UIEdgeInsets) -> CGFloat {
+//        let topInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
         let barHeight = navigationController?.navigationBar.getCompactHeight() ?? 0
-        return topInset + barHeight
+        return safeAreaInsets.top + barHeight
     }
 }

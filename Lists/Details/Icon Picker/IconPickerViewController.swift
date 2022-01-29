@@ -42,7 +42,7 @@ class IconPickerViewController: UIViewController, Searchable {
         collectionView.delegate = self
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-        baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: globalSafeAreaInsets)
         additionalSearchBarOffset = 0
         
         collectionView.contentInset.top = IconPickerController.searchConfiguration.getTotalHeight()

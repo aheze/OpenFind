@@ -70,7 +70,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, Searchable {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: globalSafeAreaInsets)
         additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset - configuration.getTotalHeight()
     }
     
@@ -97,7 +97,7 @@ class DetailViewController: UIViewController, Searchable, UIScrollViewDelegate {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .secondarySystemBackground
         
-        baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: globalSafeAreaInsets)
         
         scrollView.contentInset.top = configuration.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = configuration.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding

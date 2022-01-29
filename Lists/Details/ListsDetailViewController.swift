@@ -108,7 +108,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         listenToButtons()
         listenToModel()
         
-        baseSearchBarOffset = getCompactBarSafeAreaHeight()
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: self.globalSafeAreaInsets)
         additionalSearchBarOffset = 0
         
         scrollView.contentInset.top = searchConfiguration.getTotalHeight()
@@ -138,6 +138,15 @@ class ListsDetailViewController: UIViewController, Searchable {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         loadListContents()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate { context in
+            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: self.globalSafeAreaInsets)
+            self.updateSearchBarOffset?()
+        }
     }
 }
 

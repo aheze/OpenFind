@@ -83,6 +83,8 @@ extension SearchNavigationController {
         if let topViewController = navigation?.topViewController as? Searchable {
             let offset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset)
             
+            print("Base: \(topViewController.baseSearchBarOffset), adidtional: \(max(0, topViewController.additionalSearchBarOffset))")
+            
             searchContainerViewTopC?.constant = offset
             navigationBarBackgroundHeightC?.constant = offset + searchConfiguration.getTotalHeight()
             self.updateBlur(

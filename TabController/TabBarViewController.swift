@@ -54,16 +54,7 @@ class TabBarViewController: UIViewController {
             }
         }
     }
-    
-//    var subviewsWereLayout = false
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        if !subviewsWereLayout {
-//            subviewsWereLayout = true
-//            updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
-//        }
-//    }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate { context in
