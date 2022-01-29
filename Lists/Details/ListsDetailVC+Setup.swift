@@ -16,6 +16,7 @@ extension ListsDetailViewController {
         
         setupViews()
         applyConstants()
+        
         loadListContents(animate: false)
         updateTableViewHeightConstraint(animated: false)
         

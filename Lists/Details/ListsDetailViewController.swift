@@ -113,8 +113,10 @@ class ListsDetailViewController: UIViewController, Searchable {
         
         scrollView.contentInset.top = searchViewModel.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
-        
         scrollView.delegate = self
+        
+        headerTopCenterTextField.delegate = self
+        headerBottomTextField.delegate = self
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -156,5 +158,29 @@ extension ListsDetailViewController: UIScrollViewDelegate {
         let contentOffset = -scrollView.contentOffset.y
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateSearchBarOffset?()
+    }
+}
+
+extension ListsDetailViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if
+            let text = textField.text,
+            let textRange = Range(range, in: text)
+        {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            
+            if textField == headerTopCenterTextField {
+                model.list.name = updatedText
+            } else if textField == headerBottomTextField {
+                model.list.desc = updatedText
+            }
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
