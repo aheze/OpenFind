@@ -41,6 +41,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// 2. `reachedEnd` is true
     var shouldUseOffsetWithAddNew = false
     
+    /// use landscape paddings
+    var isLandscape = false
+    
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
     
@@ -99,7 +102,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x + collectionView.safeAreaInsets.left
-        
         currentOffset = contentOffset
         
         guard let fields = getFields?() else { return }
@@ -229,7 +231,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             let indexPath = IndexPath(item: fullIndex, section: 0)
             let attributes = FieldLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: origin, y: configuration.barTopPadding, width: width, height: configuration.cellHeight)
+            attributes.frame = CGRect(x: origin, y: isLandscape ? configuration.barTopPaddingLandscape : configuration.barTopPadding, width: width, height: configuration.cellHeight)
             attributes.alpha = fieldOffset.alpha
             attributes.percentage = fieldOffset.percentage
             attributes.configuration = configuration /// save the configuration first
@@ -270,9 +272,17 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         /// set from scrollview delegate
         if shouldUseOffsetWithAddNew {
-            contentSize = CGSize(width: fullOrigin + sidePadding, height: configuration.cellHeight + configuration.barBottomPadding)
+            contentSize = CGSize(
+                width: fullOrigin + sidePadding,
+                height: configuration.cellHeight +
+                (isLandscape ? configuration.barBottomPaddingLandscape : configuration.barBottomPadding)
+            )
         } else {
-            contentSize = CGSize(width: fullOriginWithoutAddNew + sidePadding, height: configuration.cellHeight + configuration.barBottomPadding)
+            contentSize = CGSize(
+                width: fullOriginWithoutAddNew + sidePadding,
+                height: configuration.cellHeight +
+                (isLandscape ? configuration.barBottomPaddingLandscape : configuration.barBottomPadding)
+            )
         }
         
         sectionInset = .zero
@@ -293,12 +303,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     var sidePeekPadding: CGFloat {
         guard let collectionView = collectionView else { return configuration.sidePeekPadding }
-        return configuration.sidePeekPadding + collectionView.safeAreaInsets.left
+        return configuration.sidePeekPadding + Global.safeAreaInsets.left
     }
     
     var sidePadding: CGFloat {
         guard let collectionView = collectionView else { return configuration.sidePadding }
-        return configuration.sidePadding + collectionView.safeAreaInsets.left
+        return configuration.sidePadding + Global.safeAreaInsets.left
     }
     
     /// boilerplate code

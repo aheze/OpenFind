@@ -56,15 +56,33 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
-        searchBarHeightC.constant = configuration.cellHeight
-        + configuration.barTopPadding
-        + configuration.barBottomPadding
+        updateLandscapeConstants()
         searchBarTopC.constant = 0
         searchBarBottomC.constant = 0
         searchBarView.backgroundColor = .clear
         backgroundView.isHidden = !configuration.showBackground
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
+    }
+
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateLandscapeConstants()
+    }
+
+    func updateLandscapeConstants() {
+        if traitCollection.horizontalSizeClass == .regular {
+            searchCollectionViewFlowLayout.isLandscape = true
+            searchBarHeightC.constant = configuration.cellHeight
+            + configuration.barTopPaddingLandscape
+            + configuration.barBottomPaddingLandscape
+        } else {
+            searchCollectionViewFlowLayout.isLandscape = false
+            searchBarHeightC.constant = configuration.cellHeight
+            + configuration.barTopPadding
+            + configuration.barBottomPadding
+        }
     }
 }
 

@@ -108,7 +108,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         listenToButtons()
         listenToModel()
         
-        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: self.globalSafeAreaInsets)
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0
         
         scrollView.contentInset.top = searchConfiguration.getTotalHeight()
@@ -144,7 +144,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate { context in
-            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: self.globalSafeAreaInsets)
+            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
             self.updateSearchBarOffset?()
         }
     }

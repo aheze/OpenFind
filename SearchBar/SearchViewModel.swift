@@ -40,6 +40,8 @@ class SearchViewModel: ObservableObject {
         return fields.dropLast().map { $0.value }
     }
     
+    var configuration = SearchConfiguration()
+    
     struct Gradient {
         var colors = [UIColor]()
         var alpha = CGFloat(1)

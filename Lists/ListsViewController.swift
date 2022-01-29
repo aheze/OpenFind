@@ -61,7 +61,7 @@ class ListsViewController: UIViewController, Searchable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: globalSafeAreaInsets)
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchConfiguration.getTotalHeight()
     }
     
@@ -76,7 +76,7 @@ class ListsViewController: UIViewController, Searchable {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate { context in
-            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: self.globalSafeAreaInsets)
+            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
             self.updateNavigationBar?()
         }
     }

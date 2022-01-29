@@ -10,10 +10,6 @@ import UIKit
 
 extension UIViewController {
     
-    var globalSafeAreaInsets: UIEdgeInsets {
-        return UIApplication.shared.keyWindow?.safeAreaInsets ?? .zero
-    }
-    
     func addChildViewController(_ childViewController: UIViewController, in inView: UIView) {
         /// Add Child View Controller
         addChild(childViewController)
