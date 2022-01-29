@@ -28,9 +28,9 @@ struct List {
     var id = UUID()
     var name = ""
     var desc = ""
-    var icon = ""
-    var color: UInt = 0x00AEEF
-    var words = [String]()
+    var icon = "bubble.left"
+    var color: UInt = 0x007EEF
+    var words: [String] = [""]
     var dateCreated = Date()
     
     func getEditableList() -> EditableList {

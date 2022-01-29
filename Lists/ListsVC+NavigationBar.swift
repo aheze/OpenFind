@@ -8,3 +8,18 @@
     
 
 import UIKit
+
+extension ListsViewController {
+    func setupNavigationBar() {
+        let addButton = UIBarButtonItem(
+            image: UIImage(systemName: "plus"),
+            style: .plain,
+            target: self,
+            action: #selector(addListPressed)
+        )
+        navigationItem.rightBarButtonItem = addButton
+    }
+    @objc func addListPressed() {
+        addNewList()
+    }
+}

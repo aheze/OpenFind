@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 1/21/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -15,12 +14,17 @@ struct DisplayedList {
 }
 
 struct ListFrame {
-//    var frame = CGRect.zero
     var chipFrames = [ChipFrame]()
-    
+
     struct ChipFrame {
         var frame = CGRect.zero
         var string = ""
-        var isWordsLeftButton = false
+        var chipType = ChipType.word
+    }
+
+    enum ChipType {
+        case word
+        case wordsLeft
+        case addWords
     }
 }

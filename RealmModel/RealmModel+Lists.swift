@@ -49,6 +49,8 @@ extension RealmModel {
         } catch {
             print("Error writing list: \(error)")
         }
+        
+        loadLists()
     }
 
     func updateList(list: List) {
@@ -67,5 +69,7 @@ extension RealmModel {
                 print("Error updating list: \(error)")
             }
         }
+        
+        loadLists()
     }
 }

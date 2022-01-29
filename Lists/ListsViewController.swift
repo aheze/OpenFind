@@ -50,13 +50,13 @@ class ListsViewController: UIViewController, Searchable {
         title = "Lists"
         
         _ = listsFlowLayout
-        listsViewModel.displayedLists = realmModel.lists.map { .init(list: $0) }
+        listsUpdated()
         
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear
         
         setupCollectionView()
-
+        setupNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {

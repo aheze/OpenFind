@@ -25,7 +25,7 @@ class ListsContentCell: UICollectionViewCell {
     @IBOutlet var headerDescriptionLabel: UILabel!
 
     @IBOutlet var containerView: UIView!
-    @IBOutlet weak var containerButtonView: ButtonView!
+    @IBOutlet var containerButtonView: ButtonView!
     @IBOutlet var chipsContainerView: UIView!
     
     @IBOutlet var chipsContainerViewTopC: NSLayoutConstraint!
@@ -68,15 +68,13 @@ class ListsContentCell: UICollectionViewCell {
         containerButtonView.tapped = { [weak self] in
             self?.tapped?()
         }
-        
     }
 }
 
 class ListChipView: UIView {
-    
-    var isWordsLeftButton = false
-    init(isWordsLeftButton: Bool) {
-        self.isWordsLeftButton = isWordsLeftButton
+    var type = ListFrame.ChipType.word
+    init(type: ListFrame.ChipType) {
+        self.type = type
         super.init(frame: .zero)
         commonInit()
     }
@@ -146,23 +144,26 @@ class ListChipView: UIView {
         _ = backgroundView
         _ = label
         
-        if !isWordsLeftButton {
+        switch type {
+        case .word:
             let interaction = UIContextMenuInteraction(delegate: self)
             buttonView.addInteraction(interaction)
+        case .wordsLeft:
+            break
+        case .addWords:
+            break
         }
     }
 }
 
 extension ListChipView: UIContextMenuInteractionDelegate {
-
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-            return self.makeContextMenu()
+            self.makeContextMenu()
         })
     }
     
     func makeContextMenu() -> UIMenu {
-
         // Create a UIAction for sharing
         let share = UIAction(title: "Copy", image: UIImage(systemName: "doc.on.doc")) { action in
             UIPasteboard.general.string = self.label.text ?? ""
@@ -170,6 +171,5 @@ extension ListChipView: UIContextMenuInteractionDelegate {
 
         // Create and return a UIMenu with the share action
         return UIMenu(title: "", children: [share])
-        
     }
 }

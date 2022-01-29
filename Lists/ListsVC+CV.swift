@@ -34,7 +34,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let color = UIColor(hex: list.color)
         cell.headerView.backgroundColor = color
         cell.headerImageView.image = UIImage(systemName: list.icon)
-        cell.headerTitleLabel.text = list.name
+        cell.headerTitleLabel.text = list.name.isEmpty ? "Untitled" : list.name
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
         
@@ -73,12 +73,12 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let color = UIColor(hex: displayedList.list.color)
         
         for chipFrame in frame.chipFrames {
-            let chipView = ListChipView(isWordsLeftButton: chipFrame.isWordsLeftButton)
+            let chipView = ListChipView(type: chipFrame.chipType)
             chipView.frame = chipFrame.frame
             chipView.label.text = chipFrame.string
             chipView.color = color
             chipView.setColors()
-            if chipFrame.isWordsLeftButton {
+            if chipFrame.chipType == .addWords || chipFrame.chipType == .wordsLeft {
                 chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
                 chipView.tapped = { [weak self] in
                     guard let self = self else { return }
