@@ -229,7 +229,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             let indexPath = IndexPath(item: fullIndex, section: 0)
             let attributes = FieldLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: origin, y: 0, width: width, height: configuration.cellHeight)
+            attributes.frame = CGRect(x: origin, y: configuration.barTopPadding, width: width, height: configuration.cellHeight)
             attributes.alpha = fieldOffset.alpha
             attributes.percentage = fieldOffset.percentage
             attributes.configuration = configuration /// save the configuration first
@@ -270,9 +270,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         /// set from scrollview delegate
         if shouldUseOffsetWithAddNew {
-            contentSize = CGSize(width: fullOrigin + sidePadding, height: configuration.cellHeight)
+            contentSize = CGSize(width: fullOrigin + sidePadding, height: configuration.cellHeight + configuration.barBottomPadding)
         } else {
-            contentSize = CGSize(width: fullOriginWithoutAddNew + sidePadding, height: configuration.cellHeight)
+            contentSize = CGSize(width: fullOriginWithoutAddNew + sidePadding, height: configuration.cellHeight + configuration.barBottomPadding)
         }
         
         sectionInset = .zero
@@ -307,7 +307,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool { return true }
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
         let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
-        context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
+        let boundsChanged = newBounds.size != collectionView?.bounds.size
+        context.invalidateFlowLayoutAttributes = boundsChanged
+        context.invalidateFlowLayoutDelegateMetrics = boundsChanged
         return context
     }
     

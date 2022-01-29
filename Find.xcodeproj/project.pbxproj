@@ -362,6 +362,8 @@
 		3C21EE4127A4D9020005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
 		3C21EE4227A4D9030005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
 		3C21EE4327A4D9030005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
+		3C21EE4527A5297C0005E183 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE4427A5297C0005E183 /* Realm */; };
+		3C21EE4727A5297C0005E183 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE4627A5297C0005E183 /* RealmSwift */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -2541,6 +2543,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C21EE4727A5297C0005E183 /* RealmSwift in Frameworks */,
+				3C21EE4527A5297C0005E183 /* Realm in Frameworks */,
 				3C36434E277C1B980038CB18 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4595,6 +4599,8 @@
 			name = SearchBar;
 			packageProductDependencies = (
 				3C36434D277C1B980038CB18 /* Popovers */,
+				3C21EE4427A5297C0005E183 /* Realm */,
+				3C21EE4627A5297C0005E183 /* RealmSwift */,
 			);
 			productName = SearchBar;
 			productReference = 3C4D3B30274776E90010FD68 /* SearchBar.app */;
@@ -8691,6 +8697,16 @@
 			productName = Realm;
 		};
 		3C21EE3D27A4CEFF0005E183 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		3C21EE4427A5297C0005E183 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		3C21EE4627A5297C0005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

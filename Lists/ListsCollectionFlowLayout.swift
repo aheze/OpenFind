@@ -45,12 +45,10 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         var currentOffset = CGPoint(x: ListsCollectionConstants.sidePadding, y: 0)
         
-//        var availableWidth = getAvailableWidth?() ?? collectionView.bounds.width
-//        availableWidth -= ListsCollectionConstants.sidePadding * 2
         let availableWidth = collectionView.bounds.width
-        - ListsCollectionConstants.sidePadding * 2
-        - collectionView.safeAreaInsets.left
-        - collectionView.safeAreaInsets.right
+            - ListsCollectionConstants.sidePadding * 2
+            - collectionView.safeAreaInsets.left
+            - collectionView.safeAreaInsets.right
         
         for index in lists.indices {
             if let size = getListSizeFromWidth?(availableWidth, lists[index], index) {
@@ -70,8 +68,8 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         
         contentSize = CGSize(
             width: collectionView.bounds.width
-            - collectionView.safeAreaInsets.left
-            - collectionView.safeAreaInsets.right,
+                - collectionView.safeAreaInsets.left
+                - collectionView.safeAreaInsets.right,
             height: currentOffset.y
         )
         self.layoutAttributes = layoutAttributes
@@ -86,6 +84,4 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
     }
-    
-    
 }

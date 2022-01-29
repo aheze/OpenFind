@@ -57,8 +57,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
         searchBarHeightC.constant = configuration.cellHeight
-        searchBarTopC.constant = configuration.backgroundTopPadding
-        searchBarBottomC.constant = configuration.backgroundBottomPadding
+        + configuration.barTopPadding
+        + configuration.barBottomPadding
+        searchBarTopC.constant = 0
+        searchBarBottomC.constant = 0
         searchBarView.backgroundColor = .clear
         backgroundView.isHidden = !configuration.showBackground
         setupCollectionViews()

@@ -12,12 +12,11 @@ class ViewController: UIViewController {
     @IBOutlet var searchContainerView: UIView!
     
     var searchViewModel = SearchViewModel()
-    var listsViewModel = ListsViewModel()
     
     lazy var searchViewController: SearchViewController = {
         let viewController = Bridge.makeViewController(
             searchViewModel: searchViewModel,
-            configuration: .lists
+            configuration: .photos
         )
         self.addResizableChildViewController(viewController, in: self.searchContainerView)
         return viewController
@@ -27,6 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        view.backgroundColor = .secondarySystemBackground
         _ = searchViewController
     }
 }
