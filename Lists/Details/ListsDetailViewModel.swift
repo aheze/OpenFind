@@ -6,6 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
+import Combine
 import MobileCoreServices
 import SwiftUI
 
@@ -13,12 +14,7 @@ class ListsDetailViewModel: ObservableObject {
     var savedList: List
     var realmModel: RealmModel
     var listUpdated: ((List) -> Void)?
-    var list: EditableList {
-        didSet {
-            let newList = list.getList()
-            listUpdated?(newList)
-        }
-    }
+    @Published var list: EditableList
     
     var colorIsLight = false
     
@@ -27,8 +23,10 @@ class ListsDetailViewModel: ObservableObject {
     
     @Published var selectedIndices = [Int]()
     
+    var listCancellable: AnyCancellable?
+
     init(list: List, listUpdated: ((List) -> Void)?, realmModel: RealmModel) {
-        self.savedList = list
+        savedList = list
         self.realmModel = realmModel
         self.listUpdated = listUpdated
         self.list = EditableList(
@@ -40,12 +38,17 @@ class ListsDetailViewModel: ObservableObject {
             words: savedList.words.map { EditableWord(string: $0) },
             dateCreated: savedList.dateCreated
         )
+        
+        listCancellable = $list
+            .debounce(for: .seconds(ListsDetailConstants.editDebounceDuration), scheduler: RunLoop.main)
+            .sink { [weak self] list in
+                let newList = list.getList()
+                self?.listUpdated?(newList)
+            }
     }
     
     var deleteSelected: (() -> Void)?
 }
-
-
 
 extension ListsDetailViewModel {
     /// The traditional method for rearranging rows in a table view.
