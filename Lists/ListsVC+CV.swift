@@ -38,6 +38,16 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
         
+        if color.isLight {
+            cell.headerImageView.tintColor = ListsCellConstants.titleColorBlack
+            cell.headerTitleLabel.textColor = ListsCellConstants.titleColorBlack
+            cell.headerDescriptionLabel.textColor = ListsCellConstants.descriptionColorBlack
+        } else {
+            cell.headerImageView.tintColor = ListsCellConstants.titleColorWhite
+            cell.headerTitleLabel.textColor = ListsCellConstants.titleColorWhite
+            cell.headerDescriptionLabel.textColor = ListsCellConstants.titleColorWhite
+        }
+        
         cell.tapped = { [weak self] in
             guard let self = self else { return }
             if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {

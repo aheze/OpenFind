@@ -82,7 +82,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         if let focusedCellIndex = focusedCellIndex {
             let attributes = layoutAttributes[safe: focusedCellIndex]
-            return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
+            var targetContentOffset = attributes?.fullOrigin ?? proposedContentOffset.x
+            if focusedCellIndex == 0 { /// index 0
+                targetContentOffset -= sidePadding /// if left edge, account for side padding
+            } else {
+                targetContentOffset -= sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
+            }
+            return CGPoint(x: targetContentOffset, y: 0)
         }
         return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
     }
@@ -125,6 +131,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 adjustedSidePadding = configuration.cellSpacing - (sidePeekPadding - sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
+                adjustedSidePadding = -collectionView.safeAreaInsets.right /// account for safe area for last cell
                 cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             } else {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away

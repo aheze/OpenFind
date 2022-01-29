@@ -44,10 +44,6 @@ class ListsContentCell: UICollectionViewCell {
         headerContentView.backgroundColor = .clear
         chipsContainerView.backgroundColor = .clear
         
-        headerImageView.tintColor = c.titleColor
-        headerTitleLabel.textColor = c.titleColor
-        headerDescriptionLabel.textColor = c.descriptionColor
-        
         headerImageView.contentMode = .center
         headerImageView.preferredSymbolConfiguration = .init(font: c.headerDescriptionFont)
         headerTitleLabel.font = c.headerTitleFont
