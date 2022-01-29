@@ -61,10 +61,14 @@ struct BackgroundView: View {
             }
             tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
         }
-        .border( /// border is less glitchy than overlay
-            Color(UIColor.secondaryLabel)
-                .opacity(tabViewModel.tabBarAttributes.topLineAlpha),
-            width: 0.5
+        .overlay(
+            Color.clear
+                .border( /// border is less glitchy than overlay
+                    Color(UIColor.secondaryLabel)
+                        .opacity(tabViewModel.tabBarAttributes.topLineAlpha),
+                    width: 0.5
+                )
+                .padding(-0.5)
         )
     }
 }
@@ -108,7 +112,7 @@ class BlurEffectView: UIVisualEffectView {
         effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
 
         animator?.addAnimations { [weak self] in
-            self?.effect = UIBlurEffect(style: .systemThickMaterial)
+            self?.effect = UIBlurEffect(style: .systemChromeMaterial)
         }
         animator?.fractionComplete = 0
     }
