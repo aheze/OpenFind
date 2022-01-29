@@ -12,6 +12,8 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     var getLists: (() -> [List])?
     
+//    var getAvailableWidth: (() -> CGFloat)?
+    
     /// get the frame of a list cell from available width
     var getListSizeFromWidth: ((CGFloat, List, Int) -> CGSize)?
     
@@ -42,6 +44,9 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         var currentOffset = CGPoint(x: ListsCollectionConstants.sidePadding, y: 0)
+        
+//        var availableWidth = getAvailableWidth?() ?? collectionView.bounds.width
+//        availableWidth -= ListsCollectionConstants.sidePadding * 2
         let availableWidth = collectionView.bounds.width
         - ListsCollectionConstants.sidePadding * 2
         - collectionView.safeAreaInsets.left

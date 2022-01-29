@@ -56,6 +56,7 @@ class ListsViewController: UIViewController, Searchable {
         collectionView.backgroundColor = .clear
         
         setupCollectionView()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,22 +72,28 @@ class ListsViewController: UIViewController, Searchable {
         updateCellColors()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        let availableWidth = size.width
-        - ListsCollectionConstants.sidePadding * 2
-        - collectionView.safeAreaInsets.left
-        - collectionView.safeAreaInsets.right
-        
-        for index in listsViewModel.displayedLists.indices {
-            let oldDisplayedList = listsViewModel.displayedLists[index]
-            _ = getCellSize(availableWidth: availableWidth, list: oldDisplayedList.list, listIndex: index)
-            let newDisplayedList = listsViewModel.displayedLists[index]
-            
-            if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
-                addChipViews(to: cell, with: newDisplayedList)
-            }
-        }
-    }
+//    var safeAreaInset = UIEdgeInsets.zero
+//    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        coordinator.animate { context in
+//            let insets = self.collectionView.safeAreaInsets
+//            self.safeAreaInset = insets
+//            let availableWidth = size.width
+//                - ListsCollectionConstants.sidePadding * 2
+//                - insets.left
+//                - insets.right
+//            
+//            print("Width::: \(availableWidth).. \(self.collectionView.safeAreaInsets)")
+//            for index in self.listsViewModel.displayedLists.indices {
+//                let oldDisplayedList = self.listsViewModel.displayedLists[index]
+//                _ = self.getCellSize(availableWidth: availableWidth, list: oldDisplayedList.list, listIndex: index)
+//                let newDisplayedList = self.listsViewModel.displayedLists[index]
+//                
+//                if let cell = self.collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
+//                    self.addChipViews(to: cell, with: newDisplayedList)
+//                }
+//            }
+//        }
+//    }
 }

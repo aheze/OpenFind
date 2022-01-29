@@ -117,4 +117,8 @@ extension CameraViewController {
     func willBecomeInactive() {}
     
     func didBecomeInactive() {}
+    
+    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
+        
+    }
 }

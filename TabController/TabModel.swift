@@ -24,6 +24,8 @@ protocol PageViewController: UIViewController {
     
     /// arrived at another tab
     func didBecomeInactive()
+    
+    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets)
 }
 
 /// to move to another tab from anywhere

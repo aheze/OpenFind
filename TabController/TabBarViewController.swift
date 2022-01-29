@@ -55,19 +55,37 @@ class TabBarViewController: UIViewController {
         }
     }
     
-    var subviewsWereLayout = false
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if !subviewsWereLayout {
-            subviewsWereLayout = true
-            updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
+//    var subviewsWereLayout = false
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        if !subviewsWereLayout {
+//            subviewsWereLayout = true
+//            updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
+//        }
+//    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { context in
+            let insets = self.view.safeAreaInsets
+            
+            let pages = self.getPages?() ?? []
+            for page in pages {
+                page.boundsChanged(to: size, safeAreaInset: insets)
+            }
+            self.updateSafeAreaLayoutGuide(
+                bottomHeight: ConstantVars.tabBarTotalHeightExpanded,
+                safeAreaInsets: insets
+            )
         }
     }
 
-    func updateSafeAreaLayoutGuide(bottomHeight: CGFloat) {
+    func updateSafeAreaLayoutGuide(bottomHeight: CGFloat, safeAreaInsets: UIEdgeInsets) {
         if let pages = getPages?() {
             for page in pages {
-                page.additionalSafeAreaInsets.bottom = bottomHeight - view.safeAreaInsets.bottom
+                page.additionalSafeAreaInsets.right = safeAreaInsets.right
+                page.additionalSafeAreaInsets.bottom = bottomHeight - safeAreaInsets.bottom
+                page.additionalSafeAreaInsets.left = safeAreaInsets.left
             }
         }
     }

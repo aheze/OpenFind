@@ -16,6 +16,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     var onDidBecomeActive: (() -> Void)?
     var onWillBecomeInactive: (() -> Void)?
     var onDidBecomeInactive: (() -> Void)?
+    var onBoundsChange: ((CGSize, UIEdgeInsets) -> Void)?
     
     var navigation: UINavigationController!
     var rootViewController: UIViewController

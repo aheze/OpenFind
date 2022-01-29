@@ -6,8 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
-import Foundation
+import UIKit
 
 extension ListsViewController {
     func willBecomeActive() {
@@ -24,5 +23,22 @@ extension ListsViewController {
     
     func didBecomeInactive() {
         detailsViewController?.didBecomeInactive()
+    }
+    
+    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
+        let availableWidth = size.width
+            - ListsCollectionConstants.sidePadding * 2
+            - safeAreaInset.left
+            - safeAreaInset.right
+        
+        for index in listsViewModel.displayedLists.indices {
+            let oldDisplayedList = listsViewModel.displayedLists[index]
+            _ = getCellSize(availableWidth: availableWidth, list: oldDisplayedList.list, listIndex: index)
+            let newDisplayedList = listsViewModel.displayedLists[index]
+            
+            if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
+                addChipViews(to: cell, with: newDisplayedList)
+            }
+        }
     }
 }

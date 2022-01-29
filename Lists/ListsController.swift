@@ -46,6 +46,10 @@ class ListsController {
         searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
         searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
+        searchNavigationController.onBoundsChange = { (size, safeAreaInset) in
+            viewController.boundsChanged(to: size, safeAreaInset: safeAreaInset)
+        }
+        
         
         self.searchNavigationController = searchNavigationController
     

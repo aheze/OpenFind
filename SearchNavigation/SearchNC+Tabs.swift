@@ -25,4 +25,8 @@ extension SearchNavigationController {
     func didBecomeInactive() {
         onDidBecomeInactive?()
     }
+    
+    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
+        onBoundsChange?(size, safeAreaInset)
+    }
 }

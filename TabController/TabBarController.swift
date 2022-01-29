@@ -63,7 +63,10 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
             guard let self = self else { return }
             let activeTab = self.tabViewModel.tabState
             
-            viewController.updateSafeAreaLayoutGuide(bottomHeight: self.tabViewModel.tabBarAttributes.backgroundHeight)
+            viewController.updateSafeAreaLayoutGuide(
+                bottomHeight: self.tabViewModel.tabBarAttributes.backgroundHeight,
+                safeAreaInsets: self.viewController.view.safeAreaInsets
+            )
             
             switch animation {
             case .fractionalProgress:

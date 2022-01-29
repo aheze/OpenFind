@@ -16,6 +16,13 @@ extension ListsViewController {
             guard let self = self else { return [] }
             return self.listsViewModel.displayedLists.map { $0.list }
         }
+//        flowLayout.getAvailableWidth = { [weak self] in
+//            guard let self = self else { return 0 }
+//            let width = self.collectionView.bounds.width
+//            - self.safeAreaInset.left
+//            - self.safeAreaInset.right
+//            return width
+//        }
         flowLayout.getListSizeFromWidth = { [weak self] availableWidth, list, listIndex in
             guard let self = self else { return .zero }
             return self.getCellSize(availableWidth: availableWidth, list: list, listIndex: listIndex)

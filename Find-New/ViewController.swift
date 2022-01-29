@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         
         _ = tabController
         
-        realmModel.loadSampleLists()
+        realmModel.loadLists()
         lists.viewController.listsUpdated()
     }
 }

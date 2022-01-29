@@ -48,5 +48,9 @@ extension PhotosViewController {
     }
     
     func didBecomeInactive() {}
+    
+    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
+        
+    }
 }
 
