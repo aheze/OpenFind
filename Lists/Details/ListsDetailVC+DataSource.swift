@@ -42,6 +42,12 @@ extension ListsDetailViewController: UITableViewDataSource {
                 cell.leftSelectionIconView.setState(.selected)
             }
         }
+        cell.textChanged = { [weak self] text in
+            guard let self = self else { return }
+            if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
+                self.model.list.words[index].string = text
+            }
+        }
         
         /// configure which parts of the cell are visible
         if model.isEditing {

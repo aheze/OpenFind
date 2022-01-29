@@ -25,6 +25,7 @@ class ListsDetailWordCell: UITableViewCell {
     @IBOutlet var rightDragHandleImageView: UIImageView!
     
     var leftViewTapped: (() -> Void)?
+    var textChanged: ((String) -> Void)?
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -50,6 +51,7 @@ class ListsDetailWordCell: UITableViewCell {
         rightDragHandleImageView.image = UIImage(systemName: "line.3.horizontal")
         
         applyConstants()
+        textField.delegate = self
     }
     
     func applyConstants() {
@@ -73,5 +75,23 @@ class ListsDetailWordCell: UITableViewCell {
         centerView.clipsToBounds = true
         centerView.layer.cornerRadius = c.listRowWordCornerRadius
         centerView.backgroundColor = c.listRowWordBackgroundColor
+    }
+}
+
+extension ListsDetailWordCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+           let textRange = Range(range, in: text)
+        {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            textChanged?(updatedText)
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
