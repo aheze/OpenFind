@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    
     var configuration: SearchConfiguration
     
     init(configuration: SearchConfiguration) {
@@ -93,7 +92,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.prepare()
         
         guard let collectionView = collectionView else { return }
-        let contentOffset = collectionView.contentOffset.x
+        let contentOffset = collectionView.contentOffset.x + collectionView.safeAreaInsets.left
+        
         currentOffset = contentOffset
         
         guard let fields = getFields?() else { return }
@@ -105,7 +105,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         // MARK: Calculate shifting for each cell
 
-        var cellOrigin = configuration.sidePadding /// origin for each cell
+        var cellOrigin = sidePadding /// origin for each cell
         
         var leftFieldOffsets = [FieldOffset]() /// array of each cell's shifting offset + percentage complete
         var rightFieldOffsets = [FieldOffset]() /// same, for fields after the focused one
@@ -113,28 +113,27 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         for index in fieldHuggingWidths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
 
-            var sidePadding = CGFloat(0)
+            var adjustedSidePadding = CGFloat(0)
             var cellOriginWithoutSidePadding: CGFloat
-            
             
             if index == 0 {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
-                sidePadding = configuration.cellSpacing - (configuration.sidePeekPadding - configuration.sidePadding)
+                adjustedSidePadding = configuration.cellSpacing - (sidePeekPadding - sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - configuration.sidePadding
             } else if index == fieldHuggingWidths.count - 2 {
-                sidePadding = configuration.cellSpacing - (configuration.sidePeekPadding - configuration.sidePadding)
-                cellOriginWithoutSidePadding = cellOrigin - configuration.sidePeekPadding
+                adjustedSidePadding = configuration.cellSpacing - (sidePeekPadding - sidePadding)
+                cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
-                cellOriginWithoutSidePadding = cellOrigin - configuration.sidePeekPadding
+                cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             } else {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
-                sidePadding = configuration.cellSpacing
-                cellOriginWithoutSidePadding = cellOrigin - configuration.sidePeekPadding
+                adjustedSidePadding = configuration.cellSpacing
+                cellOriginWithoutSidePadding = cellOrigin - sidePeekPadding
             }
 
             if cellOriginWithoutSidePadding >= contentOffset { /// cell is not yet approached
-                let distanceToNextCell = fullCellWidth + sidePadding
+                let distanceToNextCell = fullCellWidth + adjustedSidePadding
                 
                 let contentOffsetPlusWidth = contentOffset + distanceToNextCell /// is the field's origin (once the field is on the right, waiting)
                 let distanceTravelledLeft = max(0, contentOffsetPlusWidth - cellOriginWithoutSidePadding) /// prevent negatives - when the field is way on the right and not yet waiting
@@ -178,7 +177,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             } else {
                 /// how much to drag collection view, until the next field's origin reaches this field's origin
                 /// add `sidePadding` to account for cell spacing
-                let distanceToNextCell = fullCellWidth + sidePadding
+                let distanceToNextCell = fullCellWidth + adjustedSidePadding
                 
                 /// progress of content offset (positive) through the field, until it reaches the next field (`distanceToNextCell`)
                 /// `min` = prevent progress from getting larger than `distanceToNextCell` (end of the cell)
@@ -199,8 +198,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         // MARK: Apply ALL shifting to the start of the collection view
 
-        var fullOrigin = configuration.sidePadding /// origin for each cell, in expanded mode
-        var fullOriginWithoutAddNew = configuration.sidePadding
+        var fullOrigin = sidePadding /// origin for each cell, in expanded mode
+        var fullOriginWithoutAddNew = sidePadding
         var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
         
         func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat, leftSide: Bool) {
@@ -264,14 +263,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         /// set from scrollview delegate
         if shouldUseOffsetWithAddNew {
-            contentSize = CGSize(width: fullOrigin + configuration.sidePadding, height: configuration.cellHeight)
+            contentSize = CGSize(width: fullOrigin + sidePadding, height: configuration.cellHeight)
         } else {
-            contentSize = CGSize(width: fullOriginWithoutAddNew + configuration.sidePadding, height: configuration.cellHeight)
+            contentSize = CGSize(width: fullOriginWithoutAddNew + sidePadding, height: configuration.cellHeight)
         }
         
-        self.sectionInset = .zero
-        self.minimumLineSpacing = 0
-        self.minimumInteritemSpacing = 0
+        sectionInset = .zero
+        minimumLineSpacing = 0
+        minimumInteritemSpacing = 0
 
         self.layoutAttributes = layoutAttributes
         
@@ -283,6 +282,16 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             collectionView.contentOffset.x = targetOffset.x
             currentOffset = targetOffset.x
         }
+    }
+    
+    var sidePeekPadding: CGFloat {
+        guard let collectionView = collectionView else { return configuration.sidePeekPadding }
+        return configuration.sidePeekPadding + collectionView.safeAreaInsets.left
+    }
+    
+    var sidePadding: CGFloat {
+        guard let collectionView = collectionView else { return configuration.sidePadding }
+        return configuration.sidePadding + collectionView.safeAreaInsets.left
     }
     
     /// boilerplate code
@@ -309,7 +318,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
         {
             reachedEndBeforeAddWordField = true
-            let targetContentOffset = addWordFieldOrigin - configuration.sidePeekPadding
+            let targetContentOffset = addWordFieldOrigin - sidePeekPadding
             return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
             let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
@@ -355,7 +364,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 convertingInstantly = true
                 convertAddNewToRegularCellInstantly?() { [weak self] in
                     self?.convertingInstantly = false
-                    //                    highlightAddNewField?(false)
                 }
                 
                 if let lastOrigin = layoutAttributes[safe: layoutAttributes.count - 1]?.fullOrigin {
@@ -365,9 +373,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             if closestAttributeIndex == 0 { /// index 0
-                targetContentOffset -= configuration.sidePadding /// if left edge, account for side padding
+                targetContentOffset -= sidePadding /// if left edge, account for side padding
             } else {
-                targetContentOffset -= configuration.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
+                targetContentOffset -= sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
             }
             
             if closestAttributeIndex == layoutAttributes.count - 2 { /// last field before "add new" field

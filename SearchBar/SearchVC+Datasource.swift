@@ -20,9 +20,9 @@ extension SearchViewController: UICollectionViewDataSource {
         var extraPadding = CGFloat(0)
         
         if index == 0 {
-            extraPadding += configuration.sidePadding /// if **left edge**, add side padding
+            extraPadding += searchCollectionViewFlowLayout.sidePadding /// if **left edge**, add side padding
         } else {
-            extraPadding += configuration.sidePeekPadding
+            extraPadding += searchCollectionViewFlowLayout.sidePeekPadding
         }
         
         var fieldsCount = searchViewModel.fields.count
@@ -32,14 +32,13 @@ extension SearchViewController: UICollectionViewDataSource {
             fieldsCount -= 1
         }
         
-        
         if index == fieldsCount - 2 || index == fieldsCount - 1 {
-            extraPadding += configuration.sidePadding /// if **right edge**, add side padding
+            extraPadding += searchCollectionViewFlowLayout.sidePadding /// if **right edge**, add side padding
         } else {
-            extraPadding += configuration.sidePeekPadding
+            extraPadding += searchCollectionViewFlowLayout.sidePeekPadding
         }
         
-        let fullWidth = searchCollectionView.frame.width
+        let fullWidth = searchCollectionView.bounds.width
         return max(configuration.minimumHuggingWidth, fullWidth - extraPadding)
     }
 }

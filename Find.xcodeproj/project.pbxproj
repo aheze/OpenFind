@@ -358,6 +358,10 @@
 		3C21EE3A27A463E50005E183 /* ListsVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Saving.swift */; };
 		3C21EE3C27A4CEFF0005E183 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE3B27A4CEFF0005E183 /* Realm */; };
 		3C21EE3E27A4CEFF0005E183 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE3D27A4CEFF0005E183 /* RealmSwift */; };
+		3C21EE4027A4D8940005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
+		3C21EE4127A4D9020005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
+		3C21EE4227A4D9030005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
+		3C21EE4327A4D9030005E183 /* SearchVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -1814,6 +1818,7 @@
 		3C21EDCF27A4616D0005E183 /* RealmModel+Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmModel+Photos.swift"; sourceTree = "<group>"; };
 		3C21EDD127A461780005E183 /* RealmModel+PhotosTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmModel+PhotosTesting.swift"; sourceTree = "<group>"; };
 		3C21EE3727A463B40005E183 /* ListsVC+Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Saving.swift"; sourceTree = "<group>"; };
+		3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+FlowLayout.swift"; sourceTree = "<group>"; };
 		3C22D3882702D577001E8474 /* PagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
 		3C22D3892702D577001E8474 /* PageViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewManager.swift; sourceTree = "<group>"; };
 		3C22D38A2702D577001E8474 /* PagingTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingTitleCell.swift; sourceTree = "<group>"; };
@@ -3256,6 +3261,7 @@
 				3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */,
 				3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */,
 				3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */,
+				3C21EE3F27A4D8940005E183 /* SearchVC+FlowLayout.swift */,
 				3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */,
 				3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */,
 				3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */,
@@ -5614,6 +5620,7 @@
 				3C8A5260277FCA3A006CF91E /* LivePreviewVC+Photo.swift in Sources */,
 				3C21EDA927A45BFD0005E183 /* RealmModels.swift in Sources */,
 				3C08EB75279CAC2C00971D60 /* TabTransitioning.swift in Sources */,
+				3C21EE4327A4D9030005E183 /* SearchVC+FlowLayout.swift in Sources */,
 				3C3642DB277BC2E70038CB18 /* SearchViewModel.swift in Sources */,
 				3C21ED6B27A3A9320005E183 /* KeyboardToolbarViewController.swift in Sources */,
 				3C7B7A6A277F94DC00E1F602 /* Highlight.swift in Sources */,
@@ -5925,6 +5932,7 @@
 				3CFD5F84278A586B0031BC8B /* ListsVC+SearchBar.swift in Sources */,
 				3C4D3A7E274769700010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C7E1093279DDF5D00ABC016 /* ListsDetailVC+Add.swift in Sources */,
+				3C21EE4127A4D9020005E183 /* SearchVC+FlowLayout.swift in Sources */,
 				3CCE2B47279D207F00F72351 /* ListsDetailToolbarView.swift in Sources */,
 				3C3642FA277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */,
 				3C21ED6D27A3A9330005E183 /* KeyboardToolbarViewController.swift in Sources */,
@@ -6063,6 +6071,7 @@
 				3C21ED6927A3A8D10005E183 /* KeyboardToolbarViewController.swift in Sources */,
 				3C21EE1427A461800005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C4D3BA127477ABD0010FD68 /* SearchViewController.swift in Sources */,
+				3C21EE4027A4D8940005E183 /* SearchVC+FlowLayout.swift in Sources */,
 				3CCE2B12279D008B00F72351 /* ClearIconView.swift in Sources */,
 				3C4D3B69274777E40010FD68 /* SceneDelegate.swift in Sources */,
 				3CCCCA8A278182F1000381CE /* SuggestionsView.swift in Sources */,
@@ -6251,6 +6260,7 @@
 				3CD7063327A3842200B446D7 /* IconPickerCell.swift in Sources */,
 				3C6C73662781946200E039F0 /* CameraVC+ScrollZoom.swift in Sources */,
 				3C6C73572781945400E039F0 /* ContentPagingFlowLayout.swift in Sources */,
+				3C21EE4227A4D9030005E183 /* SearchVC+FlowLayout.swift in Sources */,
 				3C6C736C2781946200E039F0 /* CameraBridge.swift in Sources */,
 				3C08EB1C279C76E500971D60 /* ListsConstants.swift in Sources */,
 				3C6C73362781943B00E039F0 /* UIKitViews.swift in Sources */,

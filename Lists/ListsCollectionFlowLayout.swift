@@ -63,7 +63,12 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
             }
         }
         
-        contentSize = CGSize(width: collectionView.bounds.width, height: currentOffset.y)
+        contentSize = CGSize(
+            width: collectionView.bounds.width
+            - collectionView.safeAreaInsets.left
+            - collectionView.safeAreaInsets.right,
+            height: currentOffset.y
+        )
         self.layoutAttributes = layoutAttributes
     }
     

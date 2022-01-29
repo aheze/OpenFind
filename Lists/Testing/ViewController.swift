@@ -20,7 +20,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        realmModel.loadSampleLists()
+//        realmModel.loadSampleLists()
+        realmModel.loadLists()
         addChildViewController(lists.searchNavigationController, in: view)
     }
 }
