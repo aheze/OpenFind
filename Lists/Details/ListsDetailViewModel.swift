@@ -21,7 +21,7 @@ class ListsDetailViewModel: ObservableObject {
     var isEditing = false
     var isEditingChanged: (() -> Void)?
     
-    @Published var selectedIndices = [Int]()
+    @Published var selectedWords = [EditableWord]()
     
     var listCancellable: AnyCancellable?
 

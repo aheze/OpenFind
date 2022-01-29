@@ -26,7 +26,7 @@ extension ListsDetailViewController: UITableViewDataSource {
         cell.leftView.isHidden = true
         cell.rightView.isHidden = true
         
-        if model.selectedIndices.contains(indexPath.item) {
+        if model.selectedWords.contains(where: { $0.id == word.id }) {
             cell.leftSelectionIconView.setState(.selected)
         } else {
             cell.leftSelectionIconView.setState(.empty)
@@ -34,14 +34,12 @@ extension ListsDetailViewController: UITableViewDataSource {
         
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
-            if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
-                if self.model.selectedIndices.contains(index) {
-                    self.model.selectedIndices = self.model.selectedIndices.filter { $0 != index }
-                    cell.leftSelectionIconView.setState(.empty)
-                } else {
-                    self.model.selectedIndices.append(index)
-                    cell.leftSelectionIconView.setState(.selected)
-                }
+            if self.model.selectedWords.contains(where: { $0.id == word.id }) {
+                self.model.selectedWords = self.model.selectedWords.filter { $0.id != word.id }
+                cell.leftSelectionIconView.setState(.empty)
+            } else {
+                self.model.selectedWords.append(word)
+                cell.leftSelectionIconView.setState(.selected)
             }
         }
         

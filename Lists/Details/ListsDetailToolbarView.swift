@@ -17,7 +17,7 @@ struct ListsDetailToolbarView: View {
             ToolbarIconButton(iconName: "doc.on.doc") {
                 
             }
-            .disabled(model.selectedIndices.count == 0)
+            .disabled(model.selectedWords.count == 0)
             
             Text(selectedText())
                 .font(.system(.headline))
@@ -26,15 +26,15 @@ struct ListsDetailToolbarView: View {
             ToolbarIconButton(iconName: "trash") {
                 model.deleteSelected?()
             }
-            .disabled(model.selectedIndices.count == 0)
+            .disabled(model.selectedWords.count == 0)
         }
     }
     
     func selectedText() -> String {
-        if model.selectedIndices.count == 1 {
-            return "\(model.selectedIndices.count) Word Selected"
+        if model.selectedWords.count == 1 {
+            return "\(model.selectedWords.count) Word Selected"
         } else {
-            return "\(model.selectedIndices.count) Words Selected"
+            return "\(model.selectedWords.count) Words Selected"
         }
     }
 }

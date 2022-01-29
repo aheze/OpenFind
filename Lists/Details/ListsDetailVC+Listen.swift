@@ -46,7 +46,7 @@ extension ListsDetailViewController {
             } else {
                 self.wordsTopLeftLabel.text = "Edit"
                 self.toolbarViewModel.toolbar = nil
-                self.model.selectedIndices = []
+                self.model.selectedWords = []
                 self.wordsTableView.isEditing = false
             }
             
@@ -78,14 +78,19 @@ extension ListsDetailViewController {
         model.deleteSelected = { [weak self] in
             guard let self = self else { return }
             
-            let selectedIndices = self.model.selectedIndices
+            var selectedIndices = [Int]()
+            for word in self.model.selectedWords {
+                if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
+                    selectedIndices.append(index)
+                }
+            }
             let indexPaths = selectedIndices.map { IndexPath(item: $0, section: 0) }
             
             for index in selectedIndices.sorted(by: >) {
                 self.model.list.words.remove(at: index)
             }
             
-            self.model.selectedIndices = []
+            self.model.selectedWords = []
             self.wordsTableView.deleteRows(at: indexPaths, with: .automatic)
             
             if self.model.list.words.count == 0 {
