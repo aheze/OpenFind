@@ -43,34 +43,58 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
-        var currentOffset = CGPoint(x: ListsCollectionConstants.sidePadding, y: 0)
         
         let availableWidth = collectionView.bounds.width
             - ListsCollectionConstants.sidePadding * 2
             - collectionView.safeAreaInsets.left
             - collectionView.safeAreaInsets.right
         
+        let numberOfColumns = Int(availableWidth / ListsCollectionConstants.minCellWidth)
+        
+        /// space between columns
+        let columnSpacing = CGFloat(numberOfColumns - 1) * ListsCollectionConstants.cellSpacing
+        let columnWidth = (availableWidth - columnSpacing) / CGFloat(numberOfColumns)
+        
+        var columnOffsets = [CGSize]()
+        for columnIndex in 0 ..< numberOfColumns {
+            let initialXOffset = ListsCollectionConstants.sidePadding
+            let additionalXOffset = CGFloat(columnIndex) * columnWidth
+            var leftSpacing = CGFloat(0)
+            
+            /// add LEFT spacing if not first index
+            if columnIndex != 0 {
+                leftSpacing = CGFloat(columnIndex) * ListsCollectionConstants.cellSpacing
+            }
+            
+            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: 0)
+            columnOffsets.append(offset)
+        }
+        
         for index in lists.indices {
-            if let size = getListSizeFromWidth?(availableWidth, lists[index], index) {
+            if let size = getListSizeFromWidth?(columnWidth, lists[index], index) {
+                let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) ?? 0
+                let columnOffset = columnOffsets[shortestColumnIndex]
+                
                 let cellFrame = CGRect(
-                    x: currentOffset.x,
-                    y: currentOffset.y,
-                    width: availableWidth,
+                    x: columnOffset.width,
+                    y: columnOffset.height,
+                    width: columnWidth,
                     height: size.height
                 )
                 
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
                 attributes.frame = cellFrame
                 layoutAttributes.append(attributes)
-                currentOffset = currentOffset + CGPoint(x: 0, y: cellFrame.height + ListsCollectionConstants.cellSpacing)
+                columnOffsets[shortestColumnIndex].height += cellFrame.height + ListsCollectionConstants.cellSpacing
             }
         }
         
+        let tallestColumnOffset = columnOffsets.max(by: { $0.height < $1.height }) ?? .zero
         contentSize = CGSize(
             width: collectionView.bounds.width
                 - collectionView.safeAreaInsets.left
                 - collectionView.safeAreaInsets.right,
-            height: currentOffset.y
+            height: tallestColumnOffset.height
         )
         self.layoutAttributes = layoutAttributes
     }
