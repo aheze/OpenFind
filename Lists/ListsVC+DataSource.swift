@@ -48,10 +48,35 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.headerDescriptionLabel.textColor = ListsCellConstants.titleColorWhite
         }
         
+        if listsViewModel.isSelecting {
+            cell.headerImageView.alpha = 0
+            cell.headerSelectionIconView.alpha = 1
+            if listsViewModel.selectedLists.contains(where: { $0.id == list.id }) {
+                cell.headerSelectionIconView.setState(.selected)
+            } else {
+                cell.headerSelectionIconView.setState(.empty)
+            }
+        } else {
+            cell.headerImageView.alpha = 1
+            cell.headerSelectionIconView.alpha = 0
+            cell.headerSelectionIconView.setState(.empty)
+        }
+        
         cell.tapped = { [weak self] in
             guard let self = self else { return }
-            if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
-                self.presentDetails(list: list)
+            
+            if self.listsViewModel.isSelecting {
+                if self.listsViewModel.selectedLists.contains(where: { $0.id == list.id }) {
+                    self.listsViewModel.selectedLists = self.listsViewModel.selectedLists.filter { $0.id != list.id }
+                    cell.headerSelectionIconView.setState(.empty)
+                } else {
+                    self.listsViewModel.selectedLists.append(list)
+                    cell.headerSelectionIconView.setState(.selected)
+                }
+            } else {
+                if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
+                    self.presentDetails(list: list)
+                }
             }
         }
         return cell

@@ -25,6 +25,10 @@ struct ListsCellConstants {
     
     static var chipBackgroundColor = UIColor.secondarySystemBackground
     
+    static var headerLeftWidth = CGFloat(28)
+    
+    /// make the circle go a bit higher
+    static var headerSelectionIconYOffset = CGFloat(-1)
     static var headerTitleFont = UIFont.preferredFont(forTextStyle: .headline)
     static var headerDescriptionFont = UIFont.preferredFont(forTextStyle: .body)
     

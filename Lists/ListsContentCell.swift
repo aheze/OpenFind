@@ -10,17 +10,21 @@ import UIKit
 
 class ListsContentCell: UICollectionViewCell {
     @IBOutlet var headerView: ButtonView!
-    @IBOutlet var headerContentView: UIView!
-    
-    @IBOutlet var headerContentViewTopC: NSLayoutConstraint!
-    @IBOutlet var headerContentViewRightC: NSLayoutConstraint!
-    @IBOutlet var headerContentViewBottomC: NSLayoutConstraint!
-    @IBOutlet var headerContentViewLeftC: NSLayoutConstraint!
-    
-    @IBOutlet var headerImageView: UIImageView!
-    @IBOutlet var headerImageViewRightC: NSLayoutConstraint!
-    
     @IBOutlet var headerStackView: UIStackView!
+    
+    @IBOutlet var headerStackViewTopC: NSLayoutConstraint!
+    @IBOutlet var headerStackViewRightC: NSLayoutConstraint!
+    @IBOutlet var headerStackViewBottomC: NSLayoutConstraint!
+    @IBOutlet var headerStackViewLeftC: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var headerLeftView: UIView!
+    @IBOutlet weak var headerLeftViewWidthC: NSLayoutConstraint!
+    @IBOutlet var headerImageView: UIImageView!
+    @IBOutlet weak var headerSelectionIconView: SelectionIconView!
+    @IBOutlet weak var headerSelectionIconViewCenterYC: NSLayoutConstraint!
+    
+    
     @IBOutlet var headerTitleLabel: UILabel!
     @IBOutlet var headerDescriptionLabel: UILabel!
 
@@ -39,27 +43,32 @@ class ListsContentCell: UICollectionViewCell {
         let c = ListsCellConstants.self
         
         /// allow button view to be pressed
-        headerContentView.isUserInteractionEnabled = false
-        
-        headerContentView.backgroundColor = .clear
+        headerStackView.isUserInteractionEnabled = false
+
+        headerStackView.backgroundColor = .clear
+        headerLeftView.backgroundColor = .clear
         chipsContainerView.backgroundColor = .clear
+        
+        headerLeftViewWidthC.constant = c.headerLeftWidth
+        headerSelectionIconViewCenterYC.constant = c.headerSelectionIconYOffset
+        headerSelectionIconView.configuration = .listsSelection
         
         headerImageView.contentMode = .center
         headerImageView.preferredSymbolConfiguration = .init(font: c.headerDescriptionFont)
         headerTitleLabel.font = c.headerTitleFont
         headerDescriptionLabel.font = c.headerDescriptionFont
         
-        headerContentViewTopC.constant = c.headerEdgeInsets.top
-        headerContentViewRightC.constant = c.headerEdgeInsets.right
-        headerContentViewBottomC.constant = c.headerEdgeInsets.bottom
-        headerContentViewLeftC.constant = c.headerEdgeInsets.left
+        headerStackViewTopC.constant = c.headerEdgeInsets.top
+        headerStackViewRightC.constant = c.headerEdgeInsets.right
+        headerStackViewBottomC.constant = c.headerEdgeInsets.bottom
+        headerStackViewLeftC.constant = c.headerEdgeInsets.left
         
         chipsContainerViewTopC.constant = c.contentEdgeInsets.top
         chipsContainerViewRightC.constant = c.contentEdgeInsets.right
         chipsContainerViewBottomC.constant = c.contentEdgeInsets.bottom
         chipsContainerViewLeftC.constant = c.contentEdgeInsets.left
         
-        headerImageViewRightC.constant = c.headerImageRightPadding
+        headerStackView.setCustomSpacing(c.headerImageRightPadding, after: headerImageView)
         headerStackView.spacing = c.headerTextSpacing
         
         headerView.tapped = { [weak self] in

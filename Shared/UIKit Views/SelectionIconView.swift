@@ -6,11 +6,9 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 class SelectionIconView: UIView {
-    
     init(configuration: Configuration = .regular) {
         super.init(frame: .zero)
         commonInit()
@@ -33,10 +31,10 @@ class SelectionIconView: UIView {
     
     var configuration = Configuration.regular {
         didSet {
-            backgroundView.frame.size = configuration.size
+            backgroundView.frame.size = configuration.attributes.size
             backgroundView.centerInParent()
             backgroundView.layer.cornerRadius = backgroundView.bounds.height / 2
-            iconView.preferredSymbolConfiguration = .init(font: configuration.iconFont)
+            iconView.preferredSymbolConfiguration = .init(font: configuration.attributes.iconFont)
         }
     }
     
@@ -44,7 +42,7 @@ class SelectionIconView: UIView {
         let view = UIView()
         addSubview(view)
         
-        view.frame.size = configuration.size
+        view.frame.size = configuration.attributes.size
         view.centerInParent()
         
         view.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.05)
@@ -60,7 +58,7 @@ class SelectionIconView: UIView {
         let imageView = UIImageView(image: image)
         imageView.tintColor = .white
         imageView.contentMode = .center
-        imageView.preferredSymbolConfiguration = .init(font: configuration.iconFont)
+        imageView.preferredSymbolConfiguration = .init(font: configuration.attributes.iconFont)
         
         imageView.frame = bounds
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -72,14 +70,13 @@ class SelectionIconView: UIView {
         backgroundColor = .clear
         _ = backgroundView
         _ = iconView
-        self.isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
         
         setState(.selected)
     }
     
     func setState(_ state: State, animated: Bool = false) {
         UIView.animate(withDuration: animated ? 0.3 : 0) {
-            
             switch state {
             case .hidden:
                 self.backgroundView.alpha = 0
@@ -87,7 +84,7 @@ class SelectionIconView: UIView {
             case .empty:
                 self.backgroundView.alpha = 1
                 self.backgroundView.backgroundColor = .clear
-                self.backgroundView.layer.borderColor = UIColor.secondaryLabel.cgColor
+                self.backgroundView.layer.borderColor = self.configuration.attributes.rimColor.cgColor
                 self.iconView.alpha = 0
             case .selected:
                 self.backgroundView.alpha = 1
@@ -99,24 +96,31 @@ class SelectionIconView: UIView {
     }
     
     enum Configuration {
-        case regular
-        case large
-        
-        var size: CGSize {
-            switch self {
-            case .regular:
-                return CGSize(width: 18, height: 18)
-            case .large:
-                return CGSize(width: 22, height: 22)
-            }
+        struct Attributes {
+            var size = CGSize(width: 18, height: 18)
+            var iconFont = UIFont.systemFont(ofSize: 11, weight: .medium)
+            var rimColor = UIColor.secondaryLabel
         }
         
-        var iconFont: UIFont {
+        case regular
+        case large
+        case listsSelection
+        
+        var attributes: Attributes {
             switch self {
             case .regular:
-                return .systemFont(ofSize: 11, weight: .medium)
+                return Attributes()
             case .large:
-                return .systemFont(ofSize: 14, weight: .medium)
+                var attributes = Attributes()
+                attributes.size = CGSize(width: 22, height: 22)
+                attributes.iconFont = .systemFont(ofSize: 14, weight: .medium)
+                return attributes
+            case .listsSelection:
+                var attributes = Attributes()
+                attributes.size = CGSize(width: 22, height: 22)
+                attributes.iconFont = .systemFont(ofSize: 14, weight: .medium)
+                attributes.rimColor = .white
+                return attributes
             }
         }
     }
