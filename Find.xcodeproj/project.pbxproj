@@ -1249,6 +1249,8 @@
 		3CB181D027A5F74000933372 /* ListsDetailVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB181CF27A5F74000933372 /* ListsDetailVC+NavigationBar.swift */; };
 		3CB181D127A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB181CF27A5F74000933372 /* ListsDetailVC+NavigationBar.swift */; };
 		3CB181D227A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB181CF27A5F74000933372 /* ListsDetailVC+NavigationBar.swift */; };
+		3CB4C31F27A700D10093155E /* TabAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4C31E27A700D10093155E /* TabAttributes.swift */; };
+		3CB4C32027A701780093155E /* TabAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4C31E27A700D10093155E /* TabAttributes.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
@@ -2286,6 +2288,7 @@
 		3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Draw.swift"; sourceTree = "<group>"; };
 		3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CacheFind.swift"; sourceTree = "<group>"; };
 		3CB181CF27A5F74000933372 /* ListsDetailVC+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+NavigationBar.swift"; sourceTree = "<group>"; };
+		3CB4C31E27A700D10093155E /* TabAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAttributes.swift; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
@@ -3031,8 +3034,9 @@
 				3C4D378C274756470010FD68 /* TabContent.storyboard */,
 				3C4D3794274756470010FD68 /* Toolbar.swift */,
 				3CFD5F73278A374B0031BC8B /* TabModel.swift */,
-				3C08EB74279CAC2C00971D60 /* TabTransitioning.swift */,
 				3C4D378E274756470010FD68 /* TabViewModel.swift */,
+				3C08EB74279CAC2C00971D60 /* TabTransitioning.swift */,
+				3CB4C31E27A700D10093155E /* TabAttributes.swift */,
 				3C4D3790274756470010FD68 /* TabControllerBridge.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
@@ -5630,6 +5634,7 @@
 				3C21EE3A27A463E50005E183 /* ListsVC+Realm.swift in Sources */,
 				3C08EB10279C76E500971D60 /* ListsBridge.swift in Sources */,
 				3C08EB0C279C76E500971D60 /* ListsVC+DataSource.swift in Sources */,
+				3CB4C31F27A700D10093155E /* TabAttributes.swift in Sources */,
 				3C21EDDD27A4617C0005E183 /* RealmModel+HistoryTesting.swift in Sources */,
 				3CFD601A278B70940031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3C4D3961274759A40010FD68 /* ViewController.swift in Sources */,
@@ -6322,6 +6327,7 @@
 				3CB181D127A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */,
 				3C6C7428278194A500E039F0 /* Utilities+UIViewController.swift in Sources */,
 				3C6C73A22781947400E039F0 /* SearchVC+Popovers.swift in Sources */,
+				3CB4C32027A701780093155E /* TabAttributes.swift in Sources */,
 				3C6C733F2781944700E039F0 /* ProgressLineView.swift in Sources */,
 				3CD7062F27A3842200B446D7 /* IconPickerController.swift in Sources */,
 				3C6C73802781946B00E039F0 /* FallbackView.swift in Sources */,

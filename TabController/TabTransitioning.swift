@@ -5,15 +5,14 @@
 //  Created by A. Zheng (github.com/aheze) on 1/22/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
 extension TabState {
-    
     /// progress from <camera to photos> or <camera to lists> is going up
     static var progressGoingUpNow = false
-    
+    static var isLandscape = false
+
     var index: Int {
         switch self {
         case .photos:
@@ -60,17 +59,18 @@ extension TabState {
     }
 
     func tabBarAttributes() -> TabBarAttributes {
+        let tabBarAttributesAtCamera: TabBarAttributes = TabState.isLandscape ? .darkBackgroundLandscape : .darkBackground
         switch self {
         case .photos:
             return .lightBackground
         case .camera:
-            return .darkBackground
+            return tabBarAttributesAtCamera
         case .lists:
             return .lightBackground
         case .cameraToPhotos(let transitionProgress):
-            return .init(progress: transitionProgress, from: .darkBackground, to: .lightBackground)
+            return .init(progress: transitionProgress, from: tabBarAttributesAtCamera, to: .lightBackground)
         case .cameraToLists(let transitionProgress):
-            return .init(progress: transitionProgress, from: .darkBackground, to: .lightBackground)
+            return .init(progress: transitionProgress, from: tabBarAttributesAtCamera, to: .lightBackground)
         }
     }
 
@@ -90,21 +90,22 @@ extension TabState {
     }
 
     func cameraIconAttributes() -> CameraIconAttributes {
+        let activeCameraIconAttributes: CameraIconAttributes = TabState.isLandscape ? .activeLandscape : .active
         switch self {
         case .photos:
             return .inactive
         case .camera:
-            return .active
+            return activeCameraIconAttributes
         case .lists:
             return .inactive
         case .cameraToPhotos(let transitionProgress):
-            
+
             /// camera is opposite (camera to photos, so need to reverse)
             let cameraProgress = max(0, 1 - transitionProgress)
-            return .init(progress: cameraProgress, from: .inactive, to: .active)
+            return .init(progress: cameraProgress, from: .inactive, to: activeCameraIconAttributes)
         case .cameraToLists(let transitionProgress):
             let cameraProgress = max(0, 1 - transitionProgress)
-            return .init(progress: cameraProgress, from: .inactive, to: .active)
+            return .init(progress: cameraProgress, from: .inactive, to: activeCameraIconAttributes)
         }
     }
 
@@ -147,7 +148,7 @@ extension TabState {
                 progressGoingUpNow = true
             default: break
             }
-            
+
         case .cameraToLists(let newProgress):
             guard let previousTab = previous else { return }
             switch previousTab {
@@ -163,12 +164,12 @@ extension TabState {
             }
         }
     }
-    
+
     /// detect a change in swiping
     static func notifyBeginChange(current: TabState, new: TabState) -> TabState? {
         let progressGoingUpPreviously = progressGoingUpNow
         modifyProgress(current: current, new: new)
-        
+
         switch current {
         case .cameraToPhotos:
             switch new {
@@ -180,12 +181,12 @@ extension TabState {
                     /// previously going to photos, now going to camera
                     return .camera
                 }
-                
+
             case .cameraToLists:
                 return .lists
             default: break
             }
-            
+
         case .cameraToLists:
             switch new {
             case .cameraToPhotos:
@@ -202,7 +203,7 @@ extension TabState {
             }
         default: break
         }
-        
+
         return nil
     }
 }

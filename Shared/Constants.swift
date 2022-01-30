@@ -33,8 +33,8 @@ enum ConstantVars {
     /// default tab bar content height
     static let tabBarContentHeight = CGFloat(49)
     
-    /// space under hugging tab bar icons
-    static var tabBarHuggingBottomPadding = CGFloat(0)
+    /// space under the Photos/Lists toolbars
+    static var toolbarBottomPadding = CGFloat(0)
     
     /// let icons overflow down a bit
     static var tabBarOverflowingIconsBottomPadding = CGFloat(0)
@@ -45,20 +45,38 @@ enum ConstantVars {
     /// dark background (camera) height
     static var tabBarTotalHeightExpanded = CGFloat(0)
     
+    
+    static var toolbarBottomPaddingLandscape = CGFloat(0)
+    static var tabBarOverflowingIconsBottomPaddingLandscape = CGFloat(0)
+    static var tabBarTotalHeightLandscape = CGFloat(0)
+    static var tabBarTotalHeightExpandedLandscape = CGFloat(0)
+    
     static func configure(window: UIWindow?) {
         let bottomSafeAreaInset = window?.safeAreaInsets.bottom ?? 0
         let deviceHasNotch = bottomSafeAreaInset > 0
         
         if deviceHasNotch {
-            tabBarHuggingBottomPadding = bottomSafeAreaInset
-            tabBarOverflowingIconsBottomPadding = bottomSafeAreaInset - 6
-            tabBarTotalHeight = tabBarContentHeight + bottomSafeAreaInset
+            let bottomPadding = bottomSafeAreaInset + 3
+            toolbarBottomPadding = bottomPadding
+            tabBarOverflowingIconsBottomPadding = bottomPadding - 6 /// make the icons move up, but not that much
+            tabBarTotalHeight = tabBarContentHeight + bottomPadding
             tabBarTotalHeightExpanded = tabBarTotalHeight + 58 /// 58 works out pretty good
+            
+            toolbarBottomPaddingLandscape = bottomSafeAreaInset
+            tabBarOverflowingIconsBottomPaddingLandscape = bottomSafeAreaInset - 6
+            tabBarTotalHeightLandscape = bottomSafeAreaInset
+            tabBarTotalHeightExpandedLandscape = bottomSafeAreaInset + 58
+            
         } else {
-            tabBarHuggingBottomPadding = bottomSafeAreaInset
+            toolbarBottomPadding = bottomSafeAreaInset
             tabBarOverflowingIconsBottomPadding = bottomSafeAreaInset
             tabBarTotalHeight = tabBarContentHeight
             tabBarTotalHeightExpanded = tabBarTotalHeight + 58
+            
+            toolbarBottomPaddingLandscape = toolbarBottomPadding
+            tabBarOverflowingIconsBottomPaddingLandscape = tabBarOverflowingIconsBottomPadding
+            tabBarTotalHeightLandscape = tabBarTotalHeight
+            tabBarTotalHeightExpandedLandscape = tabBarTotalHeightExpanded
         }
     }
 }

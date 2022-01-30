@@ -10,6 +10,9 @@ import SwiftUI
 import UIKit
 
 class TabBarViewController: UIViewController {
+    var tabViewModel: TabViewModel
+    var excludedFrames = [CGRect]()
+    
     /// big, general area
     @IBOutlet var contentView: UIView!
     
@@ -35,7 +38,16 @@ class TabBarViewController: UIViewController {
     @IBOutlet var tabBarContainerView: UIView!
     @IBOutlet var tabBarHeightC: NSLayoutConstraint!
 
-    var excludedFrames = [CGRect]()
+    
+    init?(coder: NSCoder, tabViewModel: TabViewModel) {
+        self.tabViewModel = tabViewModel
+        self.tabViewModel = tabViewModel
+        super.init(coder: coder)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with metadata.")
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +65,8 @@ class TabBarViewController: UIViewController {
                 }
             }
         }
+        
+        updateTraitCollection(to: traitCollection)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -69,6 +83,21 @@ class TabBarViewController: UIViewController {
                 safeAreaInsets: insets
             )
         }
+        
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        updateTraitCollection(to: newCollection)
+    }
+    
+    func updateTraitCollection(to collection: UITraitCollection) {
+        if collection.horizontalSizeClass == .regular {
+            TabState.isLandscape = true
+        } else {
+            TabState.isLandscape = false
+        }
+        tabViewModel.changeTabState(newTab: tabViewModel.tabState, animation: .animate)
     }
 
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat, safeAreaInsets: UIEdgeInsets) {

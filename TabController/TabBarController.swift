@@ -22,7 +22,7 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
     var viewController: TabBarViewController
     
     /// model
-    var tabViewModel = TabViewModel()
+    var tabViewModel: TabViewModel
     var cameraViewModel: CameraViewModel
     var toolbarViewModel: ToolbarViewModel
     
@@ -37,11 +37,18 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
         // MARK: - init first
 
         self.pages = pages
+        let tabViewModel = TabViewModel()
+        self.tabViewModel = tabViewModel
         self.cameraViewModel = cameraViewModel
         self.toolbarViewModel = toolbarViewModel
         
         let storyboard = UIStoryboard(name: "TabContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
+        let viewController = storyboard.instantiateViewController(identifier: "TabBarViewController") { coder in
+            TabBarViewController(
+                coder: coder,
+                tabViewModel: tabViewModel
+            )
+        }
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
         
@@ -55,7 +62,6 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
             self?.pages ?? [PageViewController]()
         }
         
-        tabViewModel = TabViewModel()
         tabViewModel.updateTabBarHeight = { tabState in
             viewController.updateTabBarHeight(tabState)
         }
