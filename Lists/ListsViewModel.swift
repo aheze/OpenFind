@@ -11,4 +11,7 @@ import UIKit
 class ListsViewModel: ObservableObject {
     /// lists shown by the collection view, can be filtered
     @Published var displayedLists = [DisplayedList]()
+    
+    @Published var isSelecting = false
+    @Published var selectedLists = [List]()
 }

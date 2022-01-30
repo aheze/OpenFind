@@ -25,6 +25,10 @@ class ListsViewController: UIViewController, Searchable {
     /// details
     var detailsViewController: ListsDetailViewController?
     
+    /// selection
+    var selectBarButton: UIBarButtonItem!
+    lazy var toolbarView = ListsSelectionToolbarView(model: listsViewModel)
+    
     init?(
         coder: NSCoder,
         listsViewModel: ListsViewModel,

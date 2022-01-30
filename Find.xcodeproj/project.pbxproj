@@ -1279,6 +1279,12 @@
 		3CBEAC0F2754867400D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
 		3CBEAC102754867400D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
 		3CBEAC1227549B9600D04B39 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC1127549B9600D04B39 /* Tracking.swift */; };
+		3CC00EBF27A6501300F6CF9C /* ListsSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */; };
+		3CC00EC127A6507500F6CF9C /* ListsVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */; };
+		3CC00EC227A6517700F6CF9C /* ListsVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */; };
+		3CC00EC327A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */; };
+		3CC00EC427A6517700F6CF9C /* ListsVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */; };
+		3CC00EC527A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */; };
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
@@ -2290,6 +2296,8 @@
 		3CBEAC0A2753584700D04B39 /* VC+DrawTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+DrawTrackers.swift"; sourceTree = "<group>"; };
 		3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionFindingUtilities.swift; sourceTree = "<group>"; };
 		3CBEAC1127549B9600D04B39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsSelectionToolbarView.swift; sourceTree = "<group>"; };
+		3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Selection.swift"; sourceTree = "<group>"; };
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
 		3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		3CC230EA25C2105200AD04B6 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
@@ -3168,6 +3176,8 @@
 				3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */,
 				3C08EAE7279BA94A00971D60 /* ListsVC+Details.swift */,
 				3C21EE3727A463B40005E183 /* ListsVC+Realm.swift */,
+				3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */,
+				3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */,
 				3C08EAEB279BAA3900971D60 /* Details */,
 				3C4D3A61274769260010FD68 /* Testing */,
 			);
@@ -5521,6 +5531,7 @@
 				3C4D39CB27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C364350277C22480038CB18 /* TabControllerView.swift in Sources */,
 				3C3642DE277BC2E70038CB18 /* SearchFieldCell.swift in Sources */,
+				3CC00EC327A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */,
 				3CCE2B59279D235D00F72351 /* ListsDetailVC+Setup.swift in Sources */,
 				3C08EB0D279C76E500971D60 /* ListsVC+NavigationBar.swift in Sources */,
 				3CCE2B25279D008C00F72351 /* SelectionIconView.swift in Sources */,
@@ -5605,6 +5616,7 @@
 				3CE9C202274B4F05008C903C /* ZoomView.swift in Sources */,
 				3C1D19D92759A3E20064F2C6 /* SnapshotView.swift in Sources */,
 				3CCE2B4D279D234C00F72351 /* ListsDetailToolbarView.swift in Sources */,
+				3CC00EC227A6517700F6CF9C /* ListsVC+Selection.swift in Sources */,
 				3C08EB11279C76E500971D60 /* ListsConstants.swift in Sources */,
 				3CCE2B9B279D2B5200F72351 /* ListsDetailVC+Lifecycle.swift in Sources */,
 				3CE9C1FA274B4E44008C903C /* LivePreviewVC+Setup.swift in Sources */,
@@ -5923,6 +5935,7 @@
 				3CFD6018278B70940031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3C08EB78279CBD8100971D60 /* ColorPickerIcon.swift in Sources */,
 				3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */,
+				3CC00EC127A6507500F6CF9C /* ListsVC+Selection.swift in Sources */,
 				3C08EAD3279B0B4100971D60 /* ListsModel.swift in Sources */,
 				3C3642FE277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C4D3A7C274769700010FD68 /* GeneralUtilities.swift in Sources */,
@@ -5981,6 +5994,7 @@
 				3CCE2BA0279DD0C600F72351 /* ListsDetailVC+Rearrange.swift in Sources */,
 				3C6C73B52781947700E039F0 /* SuggestionsView.swift in Sources */,
 				3C3642F3277BC2E90038CB18 /* Bridge.swift in Sources */,
+				3CC00EBF27A6501300F6CF9C /* ListsSelectionToolbarView.swift in Sources */,
 				3C1D1A3E275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,
 				3CD7060C27A0F62300B446D7 /* IconPickerConstants.swift in Sources */,
 				3CCE2B1C279D008B00F72351 /* ButtonView.swift in Sources */,
@@ -6277,6 +6291,7 @@
 				3C6C73972781947400E039F0 /* SearchViewModel.swift in Sources */,
 				3C6C735E2781945D00E039F0 /* HighlightsConstants.swift in Sources */,
 				3C6C73712781946200E039F0 /* CameraVC+LivePreview.swift in Sources */,
+				3CC00EC427A6517700F6CF9C /* ListsVC+Selection.swift in Sources */,
 				3C6C739E2781947400E039F0 /* SearchCollectionView.swift in Sources */,
 				3C6C735A2781945A00E039F0 /* PhotosController.swift in Sources */,
 				3C6C73A32781947400E039F0 /* SearchViewController.swift in Sources */,
@@ -6294,6 +6309,7 @@
 				3C6C73412781944B00E039F0 /* TabBarViewController.swift in Sources */,
 				3CCE2BA1279DD0F400F72351 /* ListsDetailVC+Rearrange.swift in Sources */,
 				3CD7063327A3842200B446D7 /* IconPickerCell.swift in Sources */,
+				3CC00EC527A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */,
 				3C6D77BC27A5B140005371F3 /* Global.swift in Sources */,
 				3C6C73662781946200E039F0 /* CameraVC+ScrollZoom.swift in Sources */,
 				3C6C73572781945400E039F0 /* ContentPagingFlowLayout.swift in Sources */,
