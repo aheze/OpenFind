@@ -6,25 +6,36 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension ListsViewController {
     func presentDetails(list: List) {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
-            ListsDetailViewController(
-                coder: coder,
+        let viewController: ListsDetailViewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
+            
+            let listsDetailViewModel = ListsDetailViewModel(
                 list: list,
-                realmModel: self.realmModel,
-                toolbarViewModel: self.toolbarViewModel,
                 listUpdated: { [weak self] newList in
                     self?.realmModel.updateList(list: newList)
                     self?.listUpdated(list: newList)
                 },
+                listDeleted: { [weak self] listToDelete in
+                    print("deleting")
+                    self?.realmModel.deleteList(list: listToDelete)
+                    self?.listDeleted(list: listToDelete)
+                    print("deleted.")
+                },
+                realmModel: self.realmModel
+            )
+            
+            return ListsDetailViewController(
+                coder: coder,
+                model: listsDetailViewModel,
+                toolbarViewModel: self.toolbarViewModel,
                 searchViewModel: self.searchViewModel
             )
         }
+        
         self.detailsViewController = viewController
         navigationController?.pushViewController(viewController, animated: true)
         

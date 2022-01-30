@@ -81,13 +81,11 @@ class ListsDetailViewController: UIViewController, Searchable {
     
     init?(
         coder: NSCoder,
-        list: List,
-        realmModel: RealmModel,
+        model: ListsDetailViewModel,
         toolbarViewModel: ToolbarViewModel,
-        listUpdated: ((List) -> Void)?,
         searchViewModel: SearchViewModel
     ) {
-        self.model = ListsDetailViewModel(list: list, listUpdated: listUpdated, realmModel: realmModel)
+        self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.searchViewModel = searchViewModel
         super.init(coder: coder)

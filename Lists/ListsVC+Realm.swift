@@ -33,4 +33,11 @@ extension ListsViewController {
         }
         presentDetails(list: newList)
     }
+    
+    func listDeleted(list: List) {
+        if let firstIndex = listsViewModel.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
+            listsViewModel.displayedLists.remove(at: firstIndex)
+            collectionView.deleteItems(at: [firstIndex.indexPath])
+        }
+    }
 }

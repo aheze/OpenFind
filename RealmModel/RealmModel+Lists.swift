@@ -72,4 +72,18 @@ extension RealmModel {
         
         loadLists()
     }
+    
+    func deleteList(list: List) {
+        if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
+            do {
+                try realm.write {
+                    realm.delete(realmList)
+                }
+            } catch {
+                print("Error deleting list: \(error)")
+            }
+        }
+        
+        loadLists()
+    }
 }

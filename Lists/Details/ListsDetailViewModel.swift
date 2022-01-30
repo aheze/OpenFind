@@ -14,6 +14,7 @@ class ListsDetailViewModel: ObservableObject {
     var savedList: List
     var realmModel: RealmModel
     var listUpdated: ((List) -> Void)?
+    var listDeleted: ((List) -> Void)?
     @Published var list: EditableList
     
     var colorIsLight = false
@@ -24,11 +25,13 @@ class ListsDetailViewModel: ObservableObject {
     @Published var selectedWords = [EditableWord]()
     
     var listCancellable: AnyCancellable?
-
-    init(list: List, listUpdated: ((List) -> Void)?, realmModel: RealmModel) {
+    init(
+        list: List,
+        listUpdated: ((List) -> Void)?,
+        listDeleted: ((List) -> Void)?,
+        realmModel: RealmModel
+    ) {
         savedList = list
-        self.realmModel = realmModel
-        self.listUpdated = listUpdated
         self.list = EditableList(
             id: savedList.id,
             name: savedList.name,
@@ -38,6 +41,10 @@ class ListsDetailViewModel: ObservableObject {
             words: savedList.words.map { EditableWord(string: $0) },
             dateCreated: savedList.dateCreated
         )
+        
+        self.realmModel = realmModel
+        self.listUpdated = listUpdated
+        self.listDeleted = listDeleted
         
         listCancellable = $list
             .debounce(for: .seconds(ListsDetailConstants.editDebounceDuration), scheduler: RunLoop.main)
