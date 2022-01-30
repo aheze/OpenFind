@@ -26,13 +26,24 @@ extension ListsViewController {
         for index in listsViewModel.displayedLists.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
                 if listsViewModel.isSelecting {
-                    cell.headerImageView.alpha = 0
-                    cell.headerSelectionIconView.alpha = 1
-                } else {
-                    cell.headerImageView.alpha = 1
                     cell.headerSelectionIconView.alpha = 0
-                    cell.headerSelectionIconView.setState(.empty)
+                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
+                        cell.headerSelectionIconView.isHidden = false
+                        cell.headerStackView.layoutIfNeeded()
+                        cell.headerSelectionIconView.alpha = 1
+                    }
+                } else {
+                    cell.headerSelectionIconView.alpha = 1
+                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
+                        cell.headerSelectionIconView.isHidden = true
+                        cell.headerStackView.layoutIfNeeded()
+                        cell.headerSelectionIconView.alpha = 0
+                    } completion: { _ in
+                        cell.headerSelectionIconView.setState(.empty)
+                    }
                 }
+                
+                
             }
         }
     }

@@ -49,16 +49,14 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         if listsViewModel.isSelecting {
-            cell.headerImageView.alpha = 0
-            cell.headerSelectionIconView.alpha = 1
+            cell.headerSelectionIconView.isHidden = false
             if listsViewModel.selectedLists.contains(where: { $0.id == list.id }) {
                 cell.headerSelectionIconView.setState(.selected)
             } else {
                 cell.headerSelectionIconView.setState(.empty)
             }
         } else {
-            cell.headerImageView.alpha = 1
-            cell.headerSelectionIconView.alpha = 0
+            cell.headerSelectionIconView.isHidden = true
             cell.headerSelectionIconView.setState(.empty)
         }
         

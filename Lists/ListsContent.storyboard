@@ -36,50 +36,50 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-D0-RZN" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="f0M-zl-2Jt">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3Z-oo-ZDO">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9Rx-cp-LR6">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
                                                                         </imageView>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPs-CY-lkl" customClass="SelectionIconView" customModule="Find_New" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="10" width="30" height="30"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" secondItem="QPs-CY-lkl" secondAttribute="height" multiplier="1:1" id="eqy-Rn-baS"/>
-                                                                            </constraints>
-                                                                        </view>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstItem="9Rx-cp-LR6" firstAttribute="top" secondItem="j3Z-oo-ZDO" secondAttribute="top" id="0Ch-rD-8wc"/>
                                                                         <constraint firstItem="9Rx-cp-LR6" firstAttribute="leading" secondItem="j3Z-oo-ZDO" secondAttribute="leading" id="1e0-nX-4u9"/>
-                                                                        <constraint firstItem="QPs-CY-lkl" firstAttribute="centerY" secondItem="j3Z-oo-ZDO" secondAttribute="centerY" id="8Kj-jL-BLw"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="QPs-CY-lkl" secondAttribute="trailing" id="G5L-Gx-kcN"/>
                                                                         <constraint firstAttribute="width" constant="30" id="XfP-Tk-gVe"/>
                                                                         <constraint firstAttribute="trailing" secondItem="9Rx-cp-LR6" secondAttribute="trailing" id="fId-vy-16a"/>
-                                                                        <constraint firstItem="QPs-CY-lkl" firstAttribute="leading" secondItem="j3Z-oo-ZDO" secondAttribute="leading" id="mgB-Uk-xb6"/>
                                                                         <constraint firstAttribute="bottom" secondItem="9Rx-cp-LR6" secondAttribute="bottom" id="vYm-gP-wcI"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Normal label title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QC-5X-Emn">
-                                                                    <rect key="frame" x="31" y="0.0" width="214.5" height="50"/>
+                                                                    <rect key="frame" x="31" y="0.0" width="173.5" height="40"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Description goes here" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xM5-tr-PXn">
-                                                                    <rect key="frame" x="246.5" y="0.0" width="167.5" height="50"/>
+                                                                    <rect key="frame" x="205.5" y="0.0" width="167.5" height="40"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QPs-CY-lkl" customClass="SelectionIconView" customModule="Find_New" customModuleProvider="target">
+                                                                    <rect key="frame" x="374" y="0.0" width="40" height="40"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="QPs-CY-lkl" secondAttribute="height" multiplier="1:1" id="eqy-Rn-baS"/>
+                                                                    </constraints>
+                                                                </view>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="QPs-CY-lkl" firstAttribute="centerY" secondItem="f0M-zl-2Jt" secondAttribute="centerY" id="KH1-6O-72L"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemGreenColor"/>
@@ -88,17 +88,18 @@
                                                         <constraint firstItem="f0M-zl-2Jt" firstAttribute="top" secondItem="Clc-D0-RZN" secondAttribute="top" id="ZJ3-of-Sz5"/>
                                                         <constraint firstAttribute="trailing" secondItem="f0M-zl-2Jt" secondAttribute="trailing" id="myk-x7-z5q"/>
                                                         <constraint firstItem="f0M-zl-2Jt" firstAttribute="leading" secondItem="Clc-D0-RZN" secondAttribute="leading" id="vMq-oa-f7g"/>
+                                                        <constraint firstAttribute="height" constant="40" id="voa-bQ-EeK"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGf-sF-ucv">
-                                                    <rect key="frame" x="0.0" y="50" width="414" height="131"/>
+                                                    <rect key="frame" x="0.0" y="40" width="414" height="141"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5K-Sc-LfR" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="131"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2D-97-h2h" customClass="PassthroughView" customModule="Find_New" customModuleProvider="target">
-                                                            <rect key="frame" x="12" y="12" width="390" height="107"/>
+                                                            <rect key="frame" x="12" y="12" width="390" height="117"/>
                                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                         </view>
                                                     </subviews>
@@ -139,7 +140,6 @@
                                             <outlet property="headerLeftView" destination="j3Z-oo-ZDO" id="ufG-1Q-QkJ"/>
                                             <outlet property="headerLeftViewWidthC" destination="XfP-Tk-gVe" id="5fV-Co-PeA"/>
                                             <outlet property="headerSelectionIconView" destination="QPs-CY-lkl" id="FYu-Fs-5Gh"/>
-                                            <outlet property="headerSelectionIconViewCenterYC" destination="8Kj-jL-BLw" id="BT6-rf-aql"/>
                                             <outlet property="headerStackView" destination="f0M-zl-2Jt" id="pc5-J3-azL"/>
                                             <outlet property="headerStackViewBottomC" destination="3ww-qd-QFD" id="lNP-KX-3gN"/>
                                             <outlet property="headerStackViewLeftC" destination="vMq-oa-f7g" id="WtZ-xb-7vI"/>
@@ -147,6 +147,7 @@
                                             <outlet property="headerStackViewTopC" destination="ZJ3-of-Sz5" id="pzt-V6-BN3"/>
                                             <outlet property="headerTitleLabel" destination="8QC-5X-Emn" id="n6o-65-ym4"/>
                                             <outlet property="headerView" destination="Clc-D0-RZN" id="JV1-BB-z4l"/>
+                                            <outlet property="headerViewHeightC" destination="voa-bQ-EeK" id="lNj-rW-OHR"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

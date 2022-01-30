@@ -10,6 +10,8 @@ import UIKit
 
 class ListsContentCell: UICollectionViewCell {
     @IBOutlet var headerView: ButtonView!
+    
+    @IBOutlet var headerViewHeightC: NSLayoutConstraint!
     @IBOutlet var headerStackView: UIStackView!
     
     @IBOutlet var headerStackViewTopC: NSLayoutConstraint!
@@ -17,13 +19,10 @@ class ListsContentCell: UICollectionViewCell {
     @IBOutlet var headerStackViewBottomC: NSLayoutConstraint!
     @IBOutlet var headerStackViewLeftC: NSLayoutConstraint!
     
-    
-    @IBOutlet weak var headerLeftView: UIView!
-    @IBOutlet weak var headerLeftViewWidthC: NSLayoutConstraint!
+    @IBOutlet var headerLeftView: UIView!
+    @IBOutlet var headerLeftViewWidthC: NSLayoutConstraint!
     @IBOutlet var headerImageView: UIImageView!
-    @IBOutlet weak var headerSelectionIconView: SelectionIconView!
-    @IBOutlet weak var headerSelectionIconViewCenterYC: NSLayoutConstraint!
-    
+    @IBOutlet var headerSelectionIconView: SelectionIconView!
     
     @IBOutlet var headerTitleLabel: UILabel!
     @IBOutlet var headerDescriptionLabel: UILabel!
@@ -50,13 +49,16 @@ class ListsContentCell: UICollectionViewCell {
         chipsContainerView.backgroundColor = .clear
         
         headerLeftViewWidthC.constant = c.headerLeftWidth
-        headerSelectionIconViewCenterYC.constant = c.headerSelectionIconYOffset
         headerSelectionIconView.configuration = .listsSelection
         
         headerImageView.contentMode = .center
         headerImageView.preferredSymbolConfiguration = .init(font: c.headerDescriptionFont)
         headerTitleLabel.font = c.headerTitleFont
         headerDescriptionLabel.font = c.headerDescriptionFont
+        
+        headerViewHeightC.constant = c.headerTitleFont.lineHeight
+        + c.headerEdgeInsets.top
+        + c.headerEdgeInsets.bottom
         
         headerStackViewTopC.constant = c.headerEdgeInsets.top
         headerStackViewRightC.constant = c.headerEdgeInsets.right

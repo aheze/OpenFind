@@ -16,6 +16,10 @@ struct ListsCollectionConstants {
 }
 
 struct ListsCellConstants {
+    
+    /// duration of animate in selection check view
+    static var editAnimationDuration = CGFloat(0.3)
+    
     static var cornerRadius = CGFloat(12)
     
     static var titleColorWhite = UIColor.white

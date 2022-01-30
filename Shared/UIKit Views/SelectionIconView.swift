@@ -27,6 +27,7 @@ class SelectionIconView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundView.layer.cornerRadius = backgroundView.bounds.height / 2
+        backgroundView.centerInParent()
     }
     
     var configuration = Configuration.regular {
