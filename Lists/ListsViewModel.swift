@@ -14,4 +14,6 @@ class ListsViewModel: ObservableObject {
     
     @Published var isSelecting = false
     @Published var selectedLists = [List]()
+    
+    var deleteSelected: (() -> Void)?
 }

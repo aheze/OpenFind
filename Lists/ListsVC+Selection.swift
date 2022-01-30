@@ -6,13 +6,15 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import SwiftUI
 
 extension ListsViewController {
     func toggleSelect() {
         listsViewModel.isSelecting.toggle()
-        
+        updateCollectionViewSelectionState()
+    }
+    
+    func updateCollectionViewSelectionState() {
         if listsViewModel.isSelecting {
             selectBarButton.title = "Done"
             toolbarViewModel.toolbar = AnyView(toolbarView)
@@ -44,8 +46,6 @@ extension ListsViewController {
                         cell.headerSelectionIconView.setState(.empty)
                     }
                 }
-                
-                
             }
         }
     }

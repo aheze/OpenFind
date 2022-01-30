@@ -61,6 +61,7 @@ class ListsViewController: UIViewController, Searchable {
         
         setupCollectionView()
         setupNavigationBar()
+        setupRealm()
     }
     
     override func viewDidAppear(_ animated: Bool) {

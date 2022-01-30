@@ -22,7 +22,7 @@ struct ListsSelectionToolbarView: View {
                 .frame(maxWidth: .infinity)
 
             ToolbarIconButton(iconName: "trash") {
-                
+                model.deleteSelected?()
             }
             .disabled(model.selectedLists.count == 0)
         }
