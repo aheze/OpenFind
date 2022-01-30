@@ -26,10 +26,7 @@ extension ListsViewController {
     }
     
     func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
-        let availableWidth = size.width
-            - ListsCollectionConstants.sidePadding * 2
-            - safeAreaInset.left
-            - safeAreaInset.right
+        let availableWidth = listsFlowLayout.columnWidth
         
         for index in listsViewModel.displayedLists.indices {
             let oldDisplayedList = listsViewModel.displayedLists[index]

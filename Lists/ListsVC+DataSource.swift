@@ -76,8 +76,8 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
                     cell.headerSelectionIconView.setState(.selected)
                 }
             } else {
-                if let list = self.listsViewModel.displayedLists[safe: indexPath.item]?.list {
-                    self.presentDetails(list: list)
+                if let displayedList = self.listsViewModel.displayedLists.first(where: { $0.list.id == list.id }) {
+                    self.presentDetails(list: displayedList.list)
                 }
             }
         }

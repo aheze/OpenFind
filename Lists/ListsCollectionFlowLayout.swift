@@ -12,8 +12,6 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     var getLists: (() -> [List])?
     
-//    var getAvailableWidth: (() -> CGFloat)?
-    
     /// get the frame of a list cell from available width
     var getListSizeFromWidth: ((CGFloat, List, Int) -> CGSize)?
     
@@ -34,6 +32,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     }
     
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
+    var columnWidth = CGFloat(0) /// width of each column. Needed for bounds change calculations
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
     override func prepare() { /// configure the cells' frames
@@ -54,6 +53,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         /// space between columns
         let columnSpacing = CGFloat(numberOfColumns - 1) * ListsCollectionConstants.cellSpacing
         let columnWidth = (availableWidth - columnSpacing) / CGFloat(numberOfColumns)
+        self.columnWidth = columnWidth
         
         var columnOffsets = [CGSize]()
         for columnIndex in 0 ..< numberOfColumns {
