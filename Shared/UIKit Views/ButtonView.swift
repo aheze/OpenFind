@@ -11,6 +11,7 @@ import UIKit
 
 class ButtonView: UIButton {
     var tapped: (() -> Void)?
+    var touchedDown: ((Bool) -> Void)?
     var shouldFade = true
     
     override init(frame: CGRect) {
@@ -42,6 +43,7 @@ class ButtonView: UIButton {
     }
     
     func fade(_ fade: Bool) {
+        touchedDown?(fade)
         if shouldFade {
             if fade {
                 UIView.animate(withDuration: 0.2, animations: {

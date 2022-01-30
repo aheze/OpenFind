@@ -57,8 +57,8 @@ class ListsContentCell: UICollectionViewCell {
         headerDescriptionLabel.font = c.headerDescriptionFont
         
         headerViewHeightC.constant = c.headerTitleFont.lineHeight
-        + c.headerEdgeInsets.top
-        + c.headerEdgeInsets.bottom
+            + c.headerEdgeInsets.top
+            + c.headerEdgeInsets.bottom
         
         headerStackViewTopC.constant = c.headerEdgeInsets.top
         headerStackViewRightC.constant = c.headerEdgeInsets.right
@@ -73,11 +73,32 @@ class ListsContentCell: UICollectionViewCell {
         headerStackView.setCustomSpacing(c.headerImageRightPadding, after: headerImageView)
         headerStackView.spacing = c.headerTextSpacing
         
+        headerView.shouldFade = false
         headerView.tapped = { [weak self] in
             self?.tapped?()
         }
+        headerView.touchedDown = { [weak self] down in
+            self?.touchedDown(down)
+        }
+        
+        containerButtonView.shouldFade = false
         containerButtonView.tapped = { [weak self] in
             self?.tapped?()
+        }
+        containerButtonView.touchedDown = { [weak self] down in
+            self?.touchedDown(down)
+        }
+    }
+    
+    func touchedDown(_ down: Bool) {
+        if down {
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = 0.8
+            }
+        } else {
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = 1
+            }
         }
     }
 }

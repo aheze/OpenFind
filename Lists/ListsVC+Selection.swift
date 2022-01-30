@@ -26,6 +26,7 @@ extension ListsViewController {
         for index in listsViewModel.displayedLists.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
                 if listsViewModel.isSelecting {
+                    cell.chipsContainerView.isUserInteractionEnabled = false
                     cell.headerSelectionIconView.alpha = 0
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.headerSelectionIconView.isHidden = false
@@ -33,6 +34,7 @@ extension ListsViewController {
                         cell.headerSelectionIconView.alpha = 1
                     }
                 } else {
+                    cell.chipsContainerView.isUserInteractionEnabled = true
                     cell.headerSelectionIconView.alpha = 1
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.headerSelectionIconView.isHidden = true

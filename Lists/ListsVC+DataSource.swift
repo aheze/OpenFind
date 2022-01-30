@@ -49,6 +49,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         if listsViewModel.isSelecting {
+            cell.chipsContainerView.isUserInteractionEnabled = false
             cell.headerSelectionIconView.isHidden = false
             if listsViewModel.selectedLists.contains(where: { $0.id == list.id }) {
                 cell.headerSelectionIconView.setState(.selected)
@@ -56,6 +57,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
                 cell.headerSelectionIconView.setState(.empty)
             }
         } else {
+            cell.chipsContainerView.isUserInteractionEnabled = true
             cell.headerSelectionIconView.isHidden = true
             cell.headerSelectionIconView.setState(.empty)
         }
