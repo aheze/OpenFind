@@ -21,8 +21,7 @@ struct TabBarView: View {
                     CameraButton(tabViewModel: tabViewModel, cameraViewModel: cameraViewModel, attributes: tabViewModel.cameraIconAttributes)
                     ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
                 }
-                    .padding(.bottom, TabState.isLandscape ? ConstantVars.tabBarOverflowingIconsBottomPaddingLandscape : ConstantVars.tabBarOverflowingIconsBottomPadding)
-                
+                .padding(.bottom, tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)
                 .opacity(toolbarViewModel.toolbar == nil ? 1 : 0)
                 .overlay(
                     VStack {
@@ -31,7 +30,7 @@ struct TabBarView: View {
                         }
                     }
                     .frame(maxHeight: .infinity)
-                        .padding(.bottom, TabState.isLandscape ? ConstantVars.toolbarBottomPaddingLandscape : ConstantVars.toolbarBottomPadding)
+                    .padding(.bottom, tabViewModel.tabBarAttributes.toolbarBottomPadding)
                     .padding(.horizontal, 16)
                 )
                 .overlay(

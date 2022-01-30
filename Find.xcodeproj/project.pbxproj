@@ -3127,8 +3127,8 @@
 				3C4D39C527475E8A0010FD68 /* Constants.swift */,
 				3C6D77BB27A5B140005371F3 /* Global.swift */,
 				3CCCCA8B2781859C000381CE /* Model.swift */,
-				3CCE2AF4279D007F00F72351 /* UIKit Views */,
 				3CE9C212274DE306008C903C /* Debug.swift */,
+				3CCE2AF4279D007F00F72351 /* UIKit Views */,
 				3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */,
 			);
 			path = Shared;
@@ -4330,8 +4330,8 @@
 			isa = PBXGroup;
 			children = (
 				3C6C7322278193F600E039F0 /* Find-New */,
-				3C4D3787274755FE0010FD68 /* TabController */,
 				3C4D39C427475E800010FD68 /* Shared */,
+				3C4D3787274755FE0010FD68 /* TabController */,
 				3C21ED7727A3C4AB0005E183 /* RealmModel */,
 				3C7B7AA4277FBBC000E1F602 /* ScrollZoom */,
 				3C7B7A78277FA50800E1F602 /* SwiftUIViews */,

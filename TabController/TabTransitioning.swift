@@ -59,18 +59,20 @@ extension TabState {
     }
 
     func tabBarAttributes() -> TabBarAttributes {
-        let tabBarAttributesAtCamera: TabBarAttributes = TabState.isLandscape ? .darkBackgroundLandscape : .darkBackground
+        let lightTabBarAttributes: TabBarAttributes = TabState.isLandscape ? .lightBackgroundLandscape : .lightBackground
+        let darkTabBarAttributes: TabBarAttributes = TabState.isLandscape ? .darkBackgroundLandscape : .darkBackground
+        
         switch self {
         case .photos:
-            return .lightBackground
+            return lightTabBarAttributes
         case .camera:
-            return tabBarAttributesAtCamera
+            return darkTabBarAttributes
         case .lists:
-            return .lightBackground
+            return lightTabBarAttributes
         case .cameraToPhotos(let transitionProgress):
-            return .init(progress: transitionProgress, from: tabBarAttributesAtCamera, to: .lightBackground)
+            return .init(progress: transitionProgress, from: darkTabBarAttributes, to: lightTabBarAttributes)
         case .cameraToLists(let transitionProgress):
-            return .init(progress: transitionProgress, from: tabBarAttributesAtCamera, to: .lightBackground)
+            return .init(progress: transitionProgress, from: darkTabBarAttributes, to: lightTabBarAttributes)
         }
     }
 

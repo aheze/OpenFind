@@ -48,13 +48,19 @@ struct TabBarAttributes: AnimatableAttributes {
     /// alpha of the top divider line
     var topLineAlpha: CGFloat
     
+    var iconsBottomPaddingForOverflow: CGFloat
+    
+    var toolbarBottomPadding: CGFloat
+    
     static let lightBackground: Self = .init(
         backgroundColor: Constants.tabBarLightBackgroundColor,
         backgroundHeight: ConstantVars.tabBarTotalHeight,
         topPadding: 0,
         toolbarOffset: -40,
         toolbarAlpha: 0,
-        topLineAlpha: 1
+        topLineAlpha: 1,
+        iconsBottomPaddingForOverflow: ConstantVars.tabBarOverflowingIconsBottomPadding,
+        toolbarBottomPadding: ConstantVars.toolbarBottomPadding
     )
     
     static let lightBackgroundLandscape: Self = .init(
@@ -63,7 +69,9 @@ struct TabBarAttributes: AnimatableAttributes {
         topPadding: 0,
         toolbarOffset: -40,
         toolbarAlpha: 0,
-        topLineAlpha: 1
+        topLineAlpha: 1,
+        iconsBottomPaddingForOverflow: ConstantVars.tabBarOverflowingIconsBottomPaddingLandscape,
+        toolbarBottomPadding: ConstantVars.toolbarBottomPaddingLandscape
     )
     
     /// when active tab is camera
@@ -73,16 +81,20 @@ struct TabBarAttributes: AnimatableAttributes {
         topPadding: 16,
         toolbarOffset: 0,
         toolbarAlpha: 1,
-        topLineAlpha: 0
+        topLineAlpha: 0,
+        iconsBottomPaddingForOverflow: ConstantVars.tabBarOverflowingIconsBottomPadding,
+        toolbarBottomPadding: ConstantVars.toolbarBottomPadding
     )
     
     static let darkBackgroundLandscape: Self = .init(
         backgroundColor: Constants.tabBarDarkBackgroundColor,
-        backgroundHeight: ConstantVars.tabBarTotalHeightLandscape,
+        backgroundHeight: ConstantVars.tabBarTotalHeightExpandedLandscape,
         topPadding: 0,
         toolbarOffset: -40,
         toolbarAlpha: 0,
-        topLineAlpha: 0
+        topLineAlpha: 0,
+        iconsBottomPaddingForOverflow: ConstantVars.tabBarOverflowingIconsBottomPaddingLandscape,
+        toolbarBottomPadding: ConstantVars.toolbarBottomPaddingLandscape
     )
 }
 
@@ -104,12 +116,17 @@ extension TabBarAttributes {
         let toolbarAlpha = AnimatableUtilities.mixedValue(from: fromAttributes.toolbarAlpha, to: toAttributes.toolbarAlpha, progress: fasterProgress)
         let topLineAlpha = AnimatableUtilities.mixedValue(from: fromAttributes.topLineAlpha, to: toAttributes.topLineAlpha, progress: progress)
         
+        let iconsBottomPaddingForOverflow = AnimatableUtilities.mixedValue(from: fromAttributes.iconsBottomPaddingForOverflow, to: toAttributes.iconsBottomPaddingForOverflow, progress: progress)
+        let toolbarBottomPadding = AnimatableUtilities.mixedValue(from: fromAttributes.toolbarBottomPadding, to: toAttributes.toolbarBottomPadding, progress: progress)
+        
         self.backgroundColor = backgroundColor
         self.backgroundHeight = backgroundHeight
         self.topPadding = topPadding
         self.toolbarOffset = toolbarOffset
         self.toolbarAlpha = toolbarAlpha
         self.topLineAlpha = topLineAlpha
+        self.iconsBottomPaddingForOverflow = iconsBottomPaddingForOverflow
+        self.toolbarBottomPadding = toolbarBottomPadding
     }
 }
 
