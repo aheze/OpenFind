@@ -82,7 +82,6 @@ extension SearchViewController {
     func setupCollectionViews() {
         /// actually important, when there's only 1 search bar
         searchCollectionView.alwaysBounceHorizontal = true
-        
         searchCollectionView.decelerationRate = .fast
         searchCollectionView.showsHorizontalScrollIndicator = false
         

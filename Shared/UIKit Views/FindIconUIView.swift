@@ -27,6 +27,7 @@ class FindIconUIView: UIView {
     var bottomHighlightView: UIView!
 
     private func commonInit() {
+        isUserInteractionEnabled = false
         backgroundColor = .clear
         let spacing = FindIconUIView.spacingPercent * bounds.height
         

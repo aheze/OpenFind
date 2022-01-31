@@ -48,7 +48,7 @@ class ClearIconView: UIView {
     
     private func commonInit() {
         backgroundColor = .clear
-        
+        isUserInteractionEnabled = false
         _ = backgroundView
         _ = iconView
         
