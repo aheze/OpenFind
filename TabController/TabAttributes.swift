@@ -102,8 +102,9 @@ struct TabBarAttributes: AnimatableAttributes {
 extension TabBarAttributes {
     init(progress: CGFloat, from fromAttributes: TabBarAttributes, to toAttributes: TabBarAttributes) {
         let backgroundColor = fromAttributes.backgroundColor.toColor(toAttributes.backgroundColor, percentage: progress)
-        let backgroundHeight = max(
-            ConstantVars.tabBarTotalHeight,
+        let backgroundHeight =
+        max(
+            toAttributes.backgroundHeight,
             AnimatableUtilities.mixedValue(from: fromAttributes.backgroundHeight, to: toAttributes.backgroundHeight, progress: progress)
         )
         

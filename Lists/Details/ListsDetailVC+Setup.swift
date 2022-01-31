@@ -22,6 +22,7 @@ extension ListsDetailViewController {
         updateTableViewHeightConstraint(animated: false)
         
         scrollView.alwaysBounceVertical = true
+        scrollView.showsHorizontalScrollIndicator = false
         
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
