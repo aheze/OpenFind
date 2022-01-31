@@ -140,13 +140,9 @@ class ListsDetailViewController: UIViewController, Searchable {
         loadListContents()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate { context in
-            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-            self.updateSearchBarOffset?()
-        }
+    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        updateSearchBarOffset?()
     }
 }
 

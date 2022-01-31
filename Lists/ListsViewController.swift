@@ -68,6 +68,7 @@ class ListsViewController: UIViewController, Searchable {
         super.viewDidAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        updateNavigationBar?()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -75,14 +76,5 @@ class ListsViewController: UIViewController, Searchable {
         
         /// refresh for dark mode
         updateCellColors()
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate { context in    
-            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-            self.updateNavigationBar?()
-        }
     }
 }

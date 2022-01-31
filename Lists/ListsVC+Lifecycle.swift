@@ -39,5 +39,10 @@ extension ListsViewController {
                 addChipViews(to: cell, with: newDisplayedList)
             }
         }
+        
+        self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        self.updateNavigationBar?()
+        
+        detailsViewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
     }
 }
