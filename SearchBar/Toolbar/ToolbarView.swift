@@ -18,7 +18,9 @@ struct ToolbarView: View {
                 .foregroundColor(.white)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.blue)
-        .edgesIgnoringSafeArea(.all)
+        .background(
+            Color.blue
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
