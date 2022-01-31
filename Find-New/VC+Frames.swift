@@ -11,7 +11,7 @@ import UIKit
 extension ViewController {
     func updateExcludedFrames() {
         let cameraSearchBarFrame = camera.viewController.searchContainerView.windowFrame()
-        let listsSearchBarFrame = lists.searchNavigationController.searchContainerView.windowFrame()
-        tabController.viewController.excludedFrames = [cameraSearchBarFrame, listsSearchBarFrame]
+        TabFrames.excluded[.cameraSearchBar] = cameraSearchBarFrame
+//        TabFrames.excluded[.listsSearchBar] = camera
     }
 }

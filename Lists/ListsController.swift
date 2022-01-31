@@ -55,7 +55,9 @@ class ListsController {
     
         viewController.loadViewIfNeeded() /// needed to initialize outlets
         viewController.updateNavigationBar = { [weak self] in
-            self?.searchNavigationController.updateSearchBarOffset()
+            guard let self = self else { return }
+            self.searchNavigationController.updateSearchBarOffset()
+            TabFrames.excluded[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
     }
 }

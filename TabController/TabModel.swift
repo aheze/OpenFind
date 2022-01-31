@@ -33,6 +33,17 @@ enum TabControl {
     static var moveToOtherTab: ((TabState, Bool) -> Void)?
 }
 
+enum TabFrames {
+    static var excluded = [Identifier: CGRect]()
+}
+
+struct Identifier: Hashable {
+    var key: String
+    
+    static var cameraSearchBar = Identifier(key: "cameraSearchBar")
+    static var listsSearchBar = Identifier(key: "listsSearchBar") /// for both the gallery and individual detail search bar, since they share same navigation controller
+}
+
 enum TabState: Equatable {
     case photos
     case camera

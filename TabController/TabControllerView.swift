@@ -9,11 +9,10 @@
 import UIKit
 
 class TabControllerView: UIView {
-    var excludedFrames: (() -> [CGRect])?
     var tappedExcludedView: (() -> Void)?
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        for excludedFrame in excludedFrames?() ?? [] {
+        for excludedFrame in TabFrames.excluded.values {
             if excludedFrame.contains(point) {
                 tappedExcludedView?()
                 break

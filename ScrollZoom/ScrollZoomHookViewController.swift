@@ -6,24 +6,24 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 class ScrollZoomHookViewController: UIViewController {
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
-    
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
     
     /// called when the scroll view zoomed, for zooming when live preview is live
     var zoomed: ((CGFloat) -> Void)?
     var stoppedZooming: (() -> Void)?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
         contentView.backgroundColor = .clear
         scrollView.delegate = self
+        scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
     }
 }
 
@@ -33,7 +33,7 @@ extension ScrollZoomHookViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             zoomed?(scrollView.zoomScale)
         }
     }

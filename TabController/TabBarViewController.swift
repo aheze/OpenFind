@@ -11,7 +11,6 @@ import UIKit
 
 class TabBarViewController: UIViewController {
     var tabViewModel: TabViewModel
-    var excludedFrames = [CGRect]()
     
     /// big, general area
     @IBOutlet var contentView: UIView!
@@ -55,9 +54,6 @@ class TabBarViewController: UIViewController {
         contentCollectionView.decelerationRate = .fast
         
         if let view = view as? TabControllerView {
-            view.excludedFrames = { [weak self] in
-                self?.excludedFrames ?? []
-            }
             view.tappedExcludedView = { [weak self] in
                 self?.contentCollectionView.isScrollEnabled = false
                 DispatchQueue.main.async {

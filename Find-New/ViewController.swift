@@ -40,10 +40,7 @@ class ViewController: UIViewController {
         tabController.delegate = self
         
         self.addChildViewController(tabController.viewController, in: self.view)
-
-        let searchBar = camera.viewController.searchViewController.searchBarView ?? UIView()
-        let searchBarBounds = searchBar.convert(searchBar.bounds, to: nil)
-        tabController.viewController.excludedFrames = [searchBarBounds]
+        updateExcludedFrames()
         return tabController
     }()
     
