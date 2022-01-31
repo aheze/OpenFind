@@ -23,6 +23,7 @@ extension ListsDetailViewController {
         
         scrollView.alwaysBounceVertical = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.keyboardDismissMode = .interactive
         
         wordsTableView.dataSource = self
         wordsTableView.delegate = self

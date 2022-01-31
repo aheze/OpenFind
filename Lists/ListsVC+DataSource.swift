@@ -15,6 +15,7 @@ extension ListsViewController {
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.keyboardDismissMode = .interactive
     }
 }
 

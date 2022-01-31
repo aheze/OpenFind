@@ -27,9 +27,9 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet var baseViewLeftC: NSLayoutConstraint!
     
     @IBOutlet var leftViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var leftViewRightC: NSLayoutConstraint!
+    @IBOutlet var leftViewRightC: NSLayoutConstraint!
     @IBOutlet var rightViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var rightViewLeftC: NSLayoutConstraint!
+    @IBOutlet var rightViewLeftC: NSLayoutConstraint!
     
     @IBOutlet var addNewView: UIView!
     @IBOutlet var addNewViewCenterHorizontallyWithSuperview: NSLayoutConstraint!
@@ -125,6 +125,9 @@ class SearchFieldCell: UICollectionViewCell {
             
             leftViewWidthC.constant = percentageVisible * (attributes.configuration.fieldLeftViewWidth - attributes.configuration.fieldExtraPadding)
             rightViewWidthC.constant = percentageVisible * (attributes.configuration.fieldRightViewWidth - attributes.configuration.fieldExtraPadding)
+            
+            leftViewRightC.constant = percentageVisible * attributes.configuration.fieldExtraPadding
+            rightViewLeftC.constant = percentageVisible * attributes.configuration.fieldExtraPadding
             
             if attributes.beingDeleted {
                 baseViewLeftC.constant = 0
