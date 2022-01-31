@@ -13,6 +13,7 @@ extension ListsDetailViewController {
         let newWord = EditableWord(string: "")
         model.list.words.insert(newWord, at: 0)
         wordsTableView.insertRows(at: [0.indexPath], with: .automatic)
+        updateVisibleCellIndices()
     }
 
     func addWords(words: [String], originIndex: Int) {
@@ -28,6 +29,7 @@ extension ListsDetailViewController {
         let newWordsIndices = indices.map { (originIndex + 1 + $0).indexPath }
 
         wordsTableView.insertRows(at: newWordsIndices, with: .automatic)
+        updateVisibleCellIndices()
     }
 }
 

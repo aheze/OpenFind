@@ -12,10 +12,11 @@ extension ListsDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         model.moveItem(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
+
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
@@ -23,6 +24,7 @@ extension ListsDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
+    
 }
 
 extension ListsDetailViewController: UITableViewDragDelegate {
@@ -30,12 +32,11 @@ extension ListsDetailViewController: UITableViewDragDelegate {
         return model.dragItems(for: indexPath)
     }
 
-    func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {
-//        navigationItem.rightBarButtonItem?.isEnabled = false
-    }
+    func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {}
 
     func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession) {
-//        navigationItem.rightBarButtonItem?.isEnabled = true
+        print("Did end!")
+        updateVisibleCellIndices()
     }
 }
 
@@ -107,6 +108,7 @@ extension ListsDetailViewController: UITableViewDropDelegate {
             }
 
             tableView.insertRows(at: indexPaths, with: .automatic)
+            self.updateVisibleCellIndices()
         }
     }
 }

@@ -8,6 +8,20 @@
     
 import UIKit
 
+extension ListsDetailViewController {
+    func updateVisibleCellIndices() {
+        for index in self.model.list.words.indices {
+            guard let cell = self.wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell else { continue }
+            
+            let readableIndex = index + 1
+            cell.barLabel.text = "\(readableIndex) / \(model.list.words.count)"
+            cell.previousBarButton.isEnabled = index != 0
+            cell.nextBarButton.isEnabled = index != model.list.words.count - 1
+            cell.toolbar.sizeToFit()
+        }
+    }
+}
+
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.list.words.count
@@ -21,6 +35,7 @@ extension ListsDetailViewController: UITableViewDataSource {
             fatalError()
         }
         
+        /// basics
         let word = model.list.words[indexPath.item]
         cell.textField.text = word.string
         cell.leftView.isHidden = true
@@ -30,6 +45,35 @@ extension ListsDetailViewController: UITableViewDataSource {
             cell.leftSelectionIconView.setState(.selected)
         } else {
             cell.leftSelectionIconView.setState(.empty)
+        }
+        
+        /// toolbar
+        let index = indexPath.row + 1
+        cell.barLabel.text = "\(index) / \(model.list.words.count)"
+        cell.previousBarButton.isEnabled = indexPath.row != 0
+        cell.nextBarButton.isEnabled = indexPath.row != model.list.words.count - 1
+        cell.previousWord = { [weak self] in
+            guard let self = self else { return }
+            if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
+                let previousIndex = index - 1
+                if self.model.list.words.indices.contains(previousIndex) {
+                    if let cell = self.wordsTableView.cellForRow(at: previousIndex.indexPath) as? ListsDetailWordCell {
+                        cell.textField.becomeFirstResponder()
+                    }
+                }
+            }
+        }
+        
+        cell.nextWord = { [weak self] in
+            guard let self = self else { return }
+            if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
+                let previousIndex = index + 1
+                if self.model.list.words.indices.contains(previousIndex) {
+                    if let cell = self.wordsTableView.cellForRow(at: previousIndex.indexPath) as? ListsDetailWordCell {
+                        cell.textField.becomeFirstResponder()
+                    }
+                }
+            }
         }
         
         cell.leftViewTapped = { [weak self] in

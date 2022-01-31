@@ -28,6 +28,12 @@ class ListsDetailWordCell: UITableViewCell {
     
     /// text changed to the string #1, appended/replacement string is #2, should the textfield update?
     var textChanged: ((String, String) -> Bool)?
+    
+    /// toolbar
+    var previousBarButton: UIBarButtonItem!
+    var barLabel: UILabel!
+    var nextBarButton: UIBarButtonItem!
+    var toolbar: UIToolbar!
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -77,6 +83,59 @@ class ListsDetailWordCell: UITableViewCell {
         centerView.clipsToBounds = true
         centerView.layer.cornerRadius = c.listRowWordCornerRadius
         centerView.backgroundColor = c.listRowWordBackgroundColor
+        
+        let bar = UIToolbar()
+        let previous = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(previousTapped)
+        )
+        
+        let barLabel = UILabel()
+        let barLabelItem = UIBarButtonItem(
+            customView: barLabel
+        )
+        
+        let next = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.right"),
+            style: .plain,
+            target: self,
+            action: #selector(nextTapped)
+        )
+        
+        let add = UIBarButtonItem(
+            image: UIImage(systemName: "plus"),
+            style: .plain,
+            target: self,
+            action: #selector(addTapped)
+        )
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        bar.items = [previous, barLabelItem, next, spacer, add]
+        bar.sizeToFit()
+        
+        textField.inputAccessoryView = bar
+        
+        self.previousBarButton = previous
+        self.barLabel = barLabel
+        self.nextBarButton = next
+        self.toolbar = bar
+    }
+    
+    var previousWord: (() -> Void)?
+    @objc func previousTapped() {
+        previousWord?()
+    }
+    
+    var nextWord: (() -> Void)?
+    @objc func nextTapped() {
+        nextWord?()
+    }
+    
+    var addWord: (() -> Void)?
+    @objc func addTapped() {
+        addWord?()
     }
 }
 
