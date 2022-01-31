@@ -20,6 +20,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3YU-hQ-dhy">
                         <rect key="frame" x="0.0" y="0.0" width="658" height="157"/>
                         <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-QC-iKm" customClass="SearchTextField" customModule="Camera" customModuleProvider="target">
+                                <rect key="frame" x="70" y="0.0" width="508" height="157"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
+                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoT-tx-FJE" customClass="LeftView" customModule="Camera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="157"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -27,13 +34,6 @@
                                     <constraint firstAttribute="width" constant="80" identifier="Left View Width" id="xUv-fk-h6p"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-QC-iKm">
-                                <rect key="frame" x="80" y="0.0" width="498" height="157"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
-                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQg-Mx-Rfv" customClass="RightView" customModule="Camera" customModuleProvider="target">
                                 <rect key="frame" x="578" y="0.0" width="80" height="157"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -67,7 +67,7 @@
                             <constraint firstAttribute="trailing" secondItem="oQg-Mx-Rfv" secondAttribute="trailing" identifier="Right View Right" id="1nR-O8-bXu"/>
                             <constraint firstItem="FoT-tx-FJE" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Left View Top" id="QUl-Rf-RPR"/>
                             <constraint firstItem="FoT-tx-FJE" firstAttribute="leading" secondItem="3YU-hQ-dhy" secondAttribute="leading" identifier="Left View Left" id="X1C-gT-nng"/>
-                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" identifier="Left View - Text Field" id="br7-Qw-89x"/>
+                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" constant="-10" identifier="Left View - Text Field" id="br7-Qw-89x"/>
                             <constraint firstAttribute="bottom" secondItem="8OT-QC-iKm" secondAttribute="bottom" identifier="Text Field Bottom" id="fu9-do-PoE"/>
                             <constraint firstItem="oQg-Mx-Rfv" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Right View Top" id="gur-Qf-tve"/>
                             <constraint firstAttribute="bottom" secondItem="oQg-Mx-Rfv" secondAttribute="bottom" identifier="Right View Bottom" id="kqL-06-Fkk"/>
@@ -117,10 +117,12 @@
                 <outlet property="baseViewRightC" destination="Yyz-l0-fZZ" id="zFx-XV-zCa"/>
                 <outlet property="baseViewTopC" destination="bZQ-H4-nxj" id="UVe-R5-7xj"/>
                 <outlet property="leftView" destination="FoT-tx-FJE" id="m4I-KL-gCn"/>
+                <outlet property="leftViewRightC" destination="br7-Qw-89x" id="dNP-ru-A6d"/>
                 <outlet property="leftViewWidthC" destination="xUv-fk-h6p" id="6Jl-UK-Nnf"/>
                 <outlet property="rightView" destination="oQg-Mx-Rfv" id="AmE-Fa-ZFr"/>
+                <outlet property="rightViewLeftC" destination="pOZ-4x-pS5" id="xNc-Pc-cQF"/>
                 <outlet property="rightViewWidthC" destination="mL2-CE-mBE" id="9nP-nX-pGd"/>
-                <outlet property="textField" destination="8OT-QC-iKm" id="4ZN-7u-odN"/>
+                <outlet property="textField" destination="8OT-QC-iKm" id="IsO-eX-y8u"/>
                 <outlet property="triggerButton" destination="z0B-eu-Ep4" id="H3x-VX-T84"/>
             </connections>
             <point key="canvasLocation" x="388.40579710144931" y="130.24553571428572"/>

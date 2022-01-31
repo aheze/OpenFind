@@ -33,9 +33,10 @@ struct SearchConfiguration: Equatable {
     var fieldBaseViewBottomPadding = CGFloat(0)
     
     var fieldLeftViewWidth = CGFloat(48)
-    var fieldLeftViewPadding = CGFloat(6) /// padding on the left and right
+    var fieldLeftViewPadding = CGFloat(0) /// padding on the left and right
     var fieldRightViewWidth = CGFloat(48)
-    var fieldRightViewPadding = CGFloat(6)
+    var fieldRightViewPadding = CGFloat(0)
+    var fieldExtraPadding = CGFloat(-8) /// negative padding around the search field
     
     var clearIconLength = CGFloat(22)
     var clearBackgroundColor = UIColor.white.withAlphaComponent(0.05)
@@ -79,9 +80,10 @@ struct SearchConfiguration: Equatable {
             fieldBaseViewTopPadding: 0,
             fieldBaseViewBottomPadding: 0,
             fieldLeftViewWidth: 36,
-            fieldLeftViewPadding: 4,
+            fieldLeftViewPadding: 5,
             fieldRightViewWidth: 36,
-            fieldRightViewPadding: 4,
+            fieldRightViewPadding: 5,
+            fieldExtraPadding: 4,
             clearIconLength: 18,
             clearBackgroundColor: .label.withAlphaComponent(0.05),
             clearImageColor: .label.withAlphaComponent(0.75),

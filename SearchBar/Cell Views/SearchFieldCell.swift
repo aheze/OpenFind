@@ -12,7 +12,7 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet var baseView: UIView!
     
     @IBOutlet var leftView: LeftView!
-    @IBOutlet var textField: UITextField!
+    @IBOutlet var textField: SearchTextField!
     @IBOutlet var rightView: RightView!
     
     /// full-width button
@@ -27,7 +27,9 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet var baseViewLeftC: NSLayoutConstraint!
     
     @IBOutlet var leftViewWidthC: NSLayoutConstraint!
+    @IBOutlet weak var leftViewRightC: NSLayoutConstraint!
     @IBOutlet var rightViewWidthC: NSLayoutConstraint!
+    @IBOutlet weak var rightViewLeftC: NSLayoutConstraint!
     
     @IBOutlet var addNewView: UIView!
     @IBOutlet var addNewViewCenterHorizontallyWithSuperview: NSLayoutConstraint!
@@ -69,7 +71,6 @@ class SearchFieldCell: UICollectionViewCell {
         rightView.buttonView.tapped = { [weak self] in
             self?.rightViewTapped?()
         }
-        
     }
     
     func setConfiguration() {
@@ -104,6 +105,9 @@ class SearchFieldCell: UICollectionViewCell {
         addNewViewCenterHorizontallyWithRightC.constant = -configuration.fieldRightViewPadding
         
         textField.keyboardAppearance = configuration.keyboardAppearance
+        textField.sideInset = configuration.fieldExtraPadding
+        leftViewRightC.constant = configuration.fieldExtraPadding
+        rightViewLeftC.constant = configuration.fieldExtraPadding
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -119,8 +123,8 @@ class SearchFieldCell: UICollectionViewCell {
             leftView.alpha = percentageVisible
             rightView.alpha = percentageVisible
             
-            leftViewWidthC.constant = percentageVisible * attributes.configuration.fieldLeftViewWidth
-            rightViewWidthC.constant = percentageVisible * attributes.configuration.fieldRightViewWidth
+            leftViewWidthC.constant = percentageVisible * (attributes.configuration.fieldLeftViewWidth - attributes.configuration.fieldExtraPadding)
+            rightViewWidthC.constant = percentageVisible * (attributes.configuration.fieldRightViewWidth - attributes.configuration.fieldExtraPadding)
             
             if attributes.beingDeleted {
                 baseViewLeftC.constant = 0
@@ -130,7 +134,6 @@ class SearchFieldCell: UICollectionViewCell {
                 baseViewRightC.constant = attributes.configuration.fieldBaseViewRightPadding * attributes.percentage
             }
         }
-        
     }
     
     func loadConfiguration(showAddNew isAddNew: Bool) {
@@ -170,7 +173,6 @@ class SearchFieldCell: UICollectionViewCell {
             guard let self = self else { return }
             
             if show { /// show the plus
-                
                 /// shrink at first
                 self.addNewView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9).rotated(by: 135.degreesToRadians)
                 self.textField.alpha = 0
