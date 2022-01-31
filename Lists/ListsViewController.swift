@@ -80,7 +80,7 @@ class ListsViewController: UIViewController, Searchable {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animate { context in
+        coordinator.animate { context in    
             self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
             self.updateNavigationBar?()
         }

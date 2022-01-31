@@ -25,12 +25,14 @@ extension ListsViewController {
         detailsViewController?.didBecomeInactive()
     }
     
-    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
-        let availableWidth = listsFlowLayout.columnWidth
+    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+        
+        /// get width of columns based on new size
+        let (_, columnWidth) = listsFlowLayout.getColumns(bounds: size.width, insets: safeAreaInsets)
         
         for index in listsViewModel.displayedLists.indices {
             let oldDisplayedList = listsViewModel.displayedLists[index]
-            _ = getCellSize(availableWidth: availableWidth, list: oldDisplayedList.list, listIndex: index)
+            _ = getCellSize(availableWidth: columnWidth, list: oldDisplayedList.list, listIndex: index)
             let newDisplayedList = listsViewModel.displayedLists[index]
             
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {

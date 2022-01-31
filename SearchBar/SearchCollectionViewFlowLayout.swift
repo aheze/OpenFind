@@ -304,12 +304,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     var sidePeekPadding: CGFloat {
-        guard let collectionView = collectionView else { return searchViewModel.configuration.sidePeekPadding }
         return searchViewModel.configuration.sidePeekPadding + Global.safeAreaInsets.left
     }
     
     var sidePadding: CGFloat {
-        guard let collectionView = collectionView else { return searchViewModel.configuration.sidePadding }
         return searchViewModel.configuration.sidePadding + Global.safeAreaInsets.left
     }
     

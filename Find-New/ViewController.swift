@@ -54,6 +54,33 @@ class ViewController: UIViewController {
         
         realmModel.loadLists()
         lists.viewController.listsUpdated()
+        
+        updateExcludedFrames()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { _ in
+            self.updateExcludedFrames()
+        }
+
+    }
+}
+
+public extension UIView {
+    /// Convert a view's frame to global coordinates, which are needed for `sourceFrame` and `excludedFrames.`
+    func windowFrame() -> CGRect {
+        return convert(bounds, to: nil)
+    }
+}
+
+public extension Optional where Wrapped: UIView {
+    /// Convert a view's frame to global coordinates, which are needed for `sourceFrame` and `excludedFrames.` This is a convenience overload for optional `UIView`s.
+    func windowFrame() -> CGRect {
+        if let view = self {
+            return view.windowFrame()
+        }
+        return .zero
     }
 }
 

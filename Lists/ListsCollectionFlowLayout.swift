@@ -35,6 +35,22 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var columnWidth = CGFloat(0) /// width of each column. Needed for bounds change calculations
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
+    /// get the number of columns and each column's width from available bounds + insets
+    func getColumns(bounds: CGFloat, insets: UIEdgeInsets) -> (Int, CGFloat) {
+        let availableWidth = bounds
+            - ListsCollectionConstants.sidePadding * 2
+            - insets.left
+            - insets.right
+        
+        let numberOfColumns = Int(availableWidth / ListsCollectionConstants.minCellWidth)
+        
+        /// space between columns
+        let columnSpacing = CGFloat(numberOfColumns - 1) * ListsCollectionConstants.cellSpacing
+        let columnWidth = (availableWidth - columnSpacing) / CGFloat(numberOfColumns)
+        
+        return (numberOfColumns, columnWidth)
+    }
+
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
@@ -43,16 +59,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
-        let availableWidth = collectionView.bounds.width
-            - ListsCollectionConstants.sidePadding * 2
-            - collectionView.safeAreaInsets.left
-            - collectionView.safeAreaInsets.right
-        
-        let numberOfColumns = Int(availableWidth / ListsCollectionConstants.minCellWidth)
-        
-        /// space between columns
-        let columnSpacing = CGFloat(numberOfColumns - 1) * ListsCollectionConstants.cellSpacing
-        let columnWidth = (availableWidth - columnSpacing) / CGFloat(numberOfColumns)
+        let (numberOfColumns, columnWidth) = getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
         self.columnWidth = columnWidth
         
         var columnOffsets = [CGSize]()
@@ -72,20 +79,21 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         
         for index in lists.indices {
             if let size = getListSizeFromWidth?(columnWidth, lists[index], index) {
-                let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) ?? 0
-                let columnOffset = columnOffsets[shortestColumnIndex]
+                /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
+                if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
+                    let columnOffset = columnOffsets[shortestColumnIndex]
+                    let cellFrame = CGRect(
+                        x: columnOffset.width,
+                        y: columnOffset.height,
+                        width: columnWidth,
+                        height: size.height
+                    )
                 
-                let cellFrame = CGRect(
-                    x: columnOffset.width,
-                    y: columnOffset.height,
-                    width: columnWidth,
-                    height: size.height
-                )
-                
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
-                attributes.frame = cellFrame
-                layoutAttributes.append(attributes)
-                columnOffsets[shortestColumnIndex].height += cellFrame.height + ListsCollectionConstants.cellSpacing
+                    let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
+                    attributes.frame = cellFrame
+                    layoutAttributes.append(attributes)
+                    columnOffsets[shortestColumnIndex].height += cellFrame.height + ListsCollectionConstants.cellSpacing
+                }
             }
         }
         
