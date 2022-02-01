@@ -44,7 +44,7 @@ class IconPickerViewController: UIViewController, Searchable {
         collectionView.dataSource = dataSource
         collectionView.delegate = self
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-
+        collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         

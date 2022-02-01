@@ -161,6 +161,7 @@ struct ProgressLineView: View {
                 )
         }
         .opacity(model.percentageShowing ? 1 : 0)
+        .edgesIgnoringSafeArea(.all)
     }
     
 }

@@ -43,11 +43,13 @@ struct TabBarView: View {
                 
                 /// right after this point is the area of visual tab bar background (what the user sees)
                 
-                .background(BackgroundView(tabViewModel: tabViewModel)),
-                
+                .background(
+                    BackgroundView(tabViewModel: tabViewModel)
+                        .edgesIgnoringSafeArea(.all)
+                ),
                 alignment: .bottom
             )
-            .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
 
