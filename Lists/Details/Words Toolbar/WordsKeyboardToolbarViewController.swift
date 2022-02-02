@@ -39,6 +39,8 @@ class WordsKeyboardToolbarViewController: UIViewController {
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
         
-        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 60)
+        let verticalPadding = CGFloat(12)
+        let height = UIFont.preferredFont(forTextStyle: .body).lineHeight + verticalPadding * 2
+        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
     }
 }

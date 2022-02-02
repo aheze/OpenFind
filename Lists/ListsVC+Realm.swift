@@ -14,6 +14,17 @@ extension ListsViewController {
             guard let self = self else { return }
             self.deleteSelectedLists()
         }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(listsUpdated),
+            name: .listsUpdated,
+            object: nil
+        )
+    }
+    
+    @objc func listsUpdated(notification: Notification) {
+        reloadDisplayedLists()
+        collectionView.reloadData()
     }
 
     func reloadDisplayedLists() {
@@ -49,13 +60,6 @@ extension ListsViewController {
         let indexPaths = indices.map { $0.indexPath }
         reloadDisplayedLists()
         collectionView.deleteItems(at: indexPaths)
-    }
-}
-
-extension ListsViewController: RealmModelListener {
-    func listsUpdated() {
-        reloadDisplayedLists()
-        collectionView.reloadData()
     }
 }
 

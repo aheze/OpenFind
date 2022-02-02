@@ -54,7 +54,6 @@ class ListsViewController: UIViewController, Searchable {
         title = "Lists"
         
         _ = listsFlowLayout
-        listsUpdated()
         
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear

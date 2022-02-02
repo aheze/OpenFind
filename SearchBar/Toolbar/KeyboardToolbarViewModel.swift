@@ -10,9 +10,12 @@
 import SwiftUI
 
 class KeyboardToolbarViewModel: ObservableObject {
-//    @Published var realmModel
     var realmModel: RealmModel
     init(realmModel: RealmModel) {
         self.realmModel = realmModel
+    }
+    
+    func reloadDisplayedLists() {
+        
     }
 }

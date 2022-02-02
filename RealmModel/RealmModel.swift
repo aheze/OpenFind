@@ -13,8 +13,12 @@ class RealmModel: ObservableObject {
     let realm = try! Realm()
 
     @Published var lists = [List]()
+
+    func listsUpdated() {
+        NotificationCenter.default.post(name: .listsUpdated, object: nil)
+    }
 }
 
-protocol RealmModelListener: AnyObject {
-    func listsUpdated()
+extension Notification.Name {
+    static var listsUpdated = Notification.Name("Lists Updated")
 }

@@ -9,7 +9,7 @@
 import RealmSwift
 
 extension RealmModel {
-    func loadLists() {
+    func loadLists(notify: Bool = false) {
         var lists = [List]()
 
         /// convert realm lists to normal lists
@@ -27,9 +27,12 @@ extension RealmModel {
             lists.append(list)
         }
         self.lists = lists
+        if notify {
+            listsUpdated()
+        }
     }
 
-    func addList(list: List) {
+    func addList(list: List, notify: Bool = false) {
         let words = RealmSwift.List<String>()
         words.append(objectsIn: list.words)
         let realmList = RealmList(
@@ -49,11 +52,11 @@ extension RealmModel {
         } catch {
             print("Error writing list: \(error)")
         }
-        
-        loadLists()
+
+        loadLists(notify: notify)
     }
 
-    func updateList(list: List) {
+    func updateList(list: List, notify: Bool = false) {
         if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
             do {
                 try realm.write {
@@ -69,11 +72,11 @@ extension RealmModel {
                 print("Error updating list: \(error)")
             }
         }
-        
-        loadLists()
+
+        loadLists(notify: notify)
     }
-    
-    func deleteList(list: List) {
+
+    func deleteList(list: List, notify: Bool = false) {
         if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
             do {
                 try realm.write {
@@ -83,7 +86,7 @@ extension RealmModel {
                 print("Error deleting list: \(error)")
             }
         }
-        
-        loadLists()
+
+        loadLists(notify: notify)
     }
 }
