@@ -112,6 +112,7 @@ extension ListsDetailViewController {
             let newIndex = index + 1
             self.addWord(at: newIndex)
             self.focusCell(at: newIndex)
+            self.updateTableViewHeightConstraint()
         }
     }
 }

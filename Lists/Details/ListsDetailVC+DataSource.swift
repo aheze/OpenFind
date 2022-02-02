@@ -50,13 +50,24 @@ extension ListsDetailViewController: UITableViewDataSource {
             guard let self = self else { return }
             if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
                 self.wordsKeyboardToolbarViewModel.selectedWordIndex = index
-                self.model.activeWord = word
 
-                /// Wait for the keyboard to show
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                if self.model.activeWord == nil {
+                    /// Wait for the keyboard to show if no word selected yet
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        self.scrollToCell(at: index)
+                    }
+                } else {
+                    
+                    /// otherwise, directly scroll
                     self.scrollToCell(at: index)
                 }
+                
+                self.model.activeWord = word
             }
+        }
+        cell.finishedEditing = { [weak self] in
+            guard let self = self else { return }
+            self.model.activeWord = nil
         }
 
         cell.leftViewTapped = { [weak self] in
