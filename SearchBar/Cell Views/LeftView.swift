@@ -12,6 +12,7 @@ class LeftView: UIView {
     @IBOutlet var buttonView: ButtonView!
 
     @IBOutlet var findIconView: FindIconUIView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet var iconViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {
@@ -31,6 +32,9 @@ class LeftView: UIView {
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        imageView.contentMode = .center
+        imageView.preferredSymbolConfiguration = .init(font: configuration.fieldListIconFont)
     }
     
     func setConfiguration() {

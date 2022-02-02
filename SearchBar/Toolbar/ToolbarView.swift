@@ -14,13 +14,13 @@ struct ToolbarView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(model.realmModel.lists) { list in
-                    ListWidgetView(list: list)
+                ForEach(model.displayedLists) { list in
+                    ListWidgetView(model: model, list: list)
                 }
             }
             .padding(.horizontal, 16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
                 .edgesIgnoringSafeArea(.all)
@@ -35,12 +35,15 @@ struct ToolbarView: View {
 }
 
 struct ListWidgetView: View {
+    @ObservedObject var model: KeyboardToolbarViewModel
     var list: List
     var body: some View {
-        Button {} label: {
+        Button {
+            model.listSelected?(list)
+        } label: {
             HStack {
                 Image(systemName: list.icon)
-                Text(list.name)
+                Text(list.name.isEmpty ? "Untitled" : list.name)
             }
             .foregroundColor(
                 Color(textColor())
@@ -52,6 +55,7 @@ struct ListWidgetView: View {
                 )
             )
             .cornerRadius(10)
+            .contentShape(Rectangle())
         }
     }
 

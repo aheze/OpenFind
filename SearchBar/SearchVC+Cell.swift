@@ -9,9 +9,14 @@
 import UIKit
 
 extension SearchViewController {
-    func configureCell(for index: Int) -> UICollectionViewCell {
+    func getCell(for index: Int) -> UICollectionViewCell {
         guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: index.indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
+        configureCell(cell, for: index)
+        return cell
+    }
+
+    func configureCell(_ cell: SearchFieldCell, for index: Int) {
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         let text = field.value.getText()
@@ -25,10 +30,29 @@ extension SearchViewController {
         switch field.value {
         case .word:
             cell.loadConfiguration(showAddNew: false)
-        case .list:
+            cell.leftView.imageView.alpha = 0
+            cell.leftView.findIconView.alpha = 1
+            cell.leftView.findIconView.setTint(
+                color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
+                alpha: field.overrides.alpha
+            )
+            cell.leftViewRightC.constant = searchViewModel.configuration.fieldExtraPadding
+        case .list(let list):
             cell.loadConfiguration(showAddNew: false)
+            cell.leftView.imageView.alpha = 1
+            cell.leftView.findIconView.alpha = 0
+            cell.leftView.imageView.image = UIImage(systemName: list.icon)
+            cell.leftView.imageView.tintColor = UIColor(hex: list.color)
+            cell.leftViewRightC.constant = searchViewModel.configuration.fieldExtraPaddingList
         case .addNew:
             cell.loadConfiguration(showAddNew: true)
+            cell.leftView.imageView.alpha = 0
+            cell.leftView.findIconView.alpha = 1
+            cell.leftView.findIconView.setTint(
+                color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
+                alpha: field.overrides.alpha
+            )
+            cell.leftViewRightC.constant = searchViewModel.configuration.fieldExtraPadding
         }
         
         cell.textChanged = { [weak self] text in
@@ -45,10 +69,6 @@ extension SearchViewController {
             self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
         }
         
-        cell.leftView.findIconView.setTint(
-            color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
-            alpha: field.overrides.alpha
-        )
         
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
@@ -98,8 +118,6 @@ extension SearchViewController {
                 cell.textField.becomeFirstResponder()
             }
         }
-        
-        return cell
     }
     
     /// `valuesCount` = `searchViewModel.values.count` usually. But if deleting, subtract 1.

@@ -23,10 +23,13 @@ extension ListsViewController {
     }
     
     @objc func listsUpdated(notification: Notification) {
+        
+    }
+
+    func reload() {
         reloadDisplayedLists()
         collectionView.reloadData()
     }
-
     func reloadDisplayedLists() {
         listsViewModel.displayedLists = realmModel.lists.map { .init(list: $0) }.sorted(by: { $0.list.dateCreated > $1.list.dateCreated })
     }

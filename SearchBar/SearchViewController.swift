@@ -63,13 +63,7 @@ class SearchViewController: UIViewController {
         backgroundView.isHidden = !searchViewModel.configuration.showBackground
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(listsUpdated),
-            name: .listsUpdated,
-            object: nil
-        )
+        setupToolbar()
     }
 
     
@@ -85,12 +79,6 @@ class SearchViewController: UIViewController {
             searchViewModel.isLandscape = false
         }
         searchBarHeightC.constant = searchViewModel.getTotalHeight()
-    }
-}
-
-extension SearchViewController {
-    @objc func listsUpdated(notification: Notification) {
-        keyboardToolbarViewModel.reloadDisplayedLists()
     }
 }
 

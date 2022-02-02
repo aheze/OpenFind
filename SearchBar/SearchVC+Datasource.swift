@@ -13,7 +13,7 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return configureCell(for: indexPath.item)
+        return getCell(for: indexPath.item)
     }
     
     func widthOfExpandedCell(for index: Int) -> Double {

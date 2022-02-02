@@ -23,6 +23,7 @@ struct SearchConfiguration: Equatable {
     var fieldFont = UIFont.preferredFont(forTextStyle: .title1)
     var fieldFontColor = UIColor.white
     var fieldTintColor = UIColor.white /// tint of the cursor
+    var fieldListIconFont = UIFont.systemFont(ofSize: 19)
     
     /// horizontal padding within cell, only when left and right view are hidden
     var fieldBaseViewRightPadding = CGFloat(12)
@@ -37,6 +38,7 @@ struct SearchConfiguration: Equatable {
     var fieldRightViewWidth = CGFloat(48)
     var fieldRightViewPadding = CGFloat(0)
     var fieldExtraPadding = CGFloat(-8) /// negative padding around the search field (make it expand to underneath the left and right views)
+    var fieldExtraPaddingList = CGFloat(-4)
     
     var clearIconLength = CGFloat(22)
     var clearBackgroundColor = UIColor.white.withAlphaComponent(0.05)
@@ -75,6 +77,7 @@ struct SearchConfiguration: Equatable {
             fieldFont: UIFont.preferredFont(forTextStyle: .title3),
             fieldFontColor: .label,
             fieldTintColor: UIColor(hex: 0x007eef),
+            fieldListIconFont: .preferredFont(forTextStyle: .body),
             fieldBaseViewRightPadding: 10,
             fieldBaseViewLeftPadding: 10,
             fieldBaseViewTopPadding: 0,
@@ -84,6 +87,7 @@ struct SearchConfiguration: Equatable {
             fieldRightViewWidth: 40,
             fieldRightViewPadding: 1,
             fieldExtraPadding: -4,
+            fieldExtraPaddingList: -2,
             clearIconLength: 18,
             clearBackgroundColor: .label.withAlphaComponent(0.05),
             clearImageColor: .label.withAlphaComponent(0.75),
