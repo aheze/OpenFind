@@ -9,6 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     var searchViewModel: SearchViewModel
+    var realmModel: RealmModel
     
     @IBOutlet var searchBarHeightC: NSLayoutConstraint!
     @IBOutlet weak var searchBarTopC: NSLayoutConstraint!
@@ -28,14 +29,16 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBarView: UIView!
     @IBOutlet var searchCollectionView: SearchCollectionView!
     
-    var keyboardToolbarViewModel = KeyboardToolbarViewModel()
+    lazy var keyboardToolbarViewModel = KeyboardToolbarViewModel(realmModel: realmModel)
     lazy var toolbarViewController = KeyboardToolbarViewController(model: keyboardToolbarViewModel)
     
     init?(
         coder: NSCoder,
-        searchViewModel: SearchViewModel
+        searchViewModel: SearchViewModel,
+        realmModel: RealmModel
     ) {
         self.searchViewModel = searchViewModel
+        self.realmModel = realmModel
         
         /// inject the configuration for cell width calculations
         for index in searchViewModel.fields.indices {

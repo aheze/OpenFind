@@ -13,11 +13,12 @@ class IconPickerController {
     var searchNavigationController: SearchNavigationController
     var iconPickerViewController: IconPickerViewController
     var searchViewModel: SearchViewModel
-
+    var realmModel: RealmModel
     
-    init(model: IconPickerViewModel) {
+    init(model: IconPickerViewModel, realmModel: RealmModel) {
         var searchViewModel = SearchViewModel(configuration: .photos)
         self.searchViewModel = searchViewModel
+        self.realmModel = realmModel
         
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let iconPickerViewController = storyboard.instantiateViewController(identifier: "IconPickerViewController") { coder in
@@ -30,6 +31,7 @@ class IconPickerController {
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: iconPickerViewController,
             searchViewModel: searchViewModel,
+            realmModel: realmModel,
             tabType: .lists
         )
         

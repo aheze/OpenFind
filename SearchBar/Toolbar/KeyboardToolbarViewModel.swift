@@ -10,13 +10,9 @@
 import SwiftUI
 
 class KeyboardToolbarViewModel: ObservableObject {
-    @Published var pinned: [Value]
-    @Published var lists: [List]
-    @Published var history: [Value]
-    
-    init() {
-        pinned = []
-        lists = []
-        history = []
+//    @Published var realmModel
+    var realmModel: RealmModel
+    init(realmModel: RealmModel) {
+        self.realmModel = realmModel
     }
 }

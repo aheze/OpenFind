@@ -30,7 +30,8 @@ extension ListsViewController {
                 coder: coder,
                 model: listsDetailViewModel,
                 toolbarViewModel: self.toolbarViewModel,
-                searchViewModel: self.searchViewModel
+                searchViewModel: self.searchViewModel,
+                realmModel: self.realmModel
             )
         }
         

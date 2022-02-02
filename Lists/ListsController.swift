@@ -40,6 +40,7 @@ class ListsController {
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
             searchViewModel: searchViewModel,
+            realmModel: realmModel,
             tabType: .lists
         )
         searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }

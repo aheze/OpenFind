@@ -20,6 +20,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     
     var rootViewController: UIViewController
     var searchViewModel: SearchViewModel
+    var realmModel: RealmModel /// for the search bar
     var navigation: UINavigationController!
     
     var searchContainerViewContainer = PassthroughView() /// whole screen
@@ -41,6 +42,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     static func make(
         rootViewController: Searchable,
         searchViewModel: SearchViewModel,
+        realmModel: RealmModel,
         tabType: TabState
     ) -> SearchNavigationController {
         
@@ -50,6 +52,7 @@ class SearchNavigationController: UIViewController, PageViewController {
                 coder: coder,
                 rootViewController: rootViewController,
                 searchViewModel: searchViewModel,
+                realmModel: realmModel,
                 tabType: tabType
             )
         }
@@ -60,10 +63,12 @@ class SearchNavigationController: UIViewController, PageViewController {
         coder: NSCoder,
         rootViewController: UIViewController,
         searchViewModel: SearchViewModel,
+        realmModel: RealmModel,
         tabType: TabState
     ) {
         self.rootViewController = rootViewController
         self.searchViewModel = searchViewModel
+        self.realmModel = realmModel
         self.tabType = tabType
         super.init(coder: coder)
     }

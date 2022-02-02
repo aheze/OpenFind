@@ -2708,7 +2708,7 @@
 				3CB181CF27A5F74000933372 /* ListsDetailVC+NavigationBar.swift */,
 				3CCE2B46279D207F00F72351 /* ListsDetailToolbarView.swift */,
 				3C08EB7B279CFBAB00971D60 /* ListsDetailWordCell.swift */,
-				3C17685927AA0F3D0099D1CE /* Toolbar */,
+				3C17685927AA0F3D0099D1CE /* Words Toolbar */,
 				3C93FC3C27A0ECD100EBBC81 /* Icon Picker */,
 				3CD706FA27A3920200B446D7 /* Color Picker */,
 			);
@@ -2767,14 +2767,14 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
-		3C17685927AA0F3D0099D1CE /* Toolbar */ = {
+		3C17685927AA0F3D0099D1CE /* Words Toolbar */ = {
 			isa = PBXGroup;
 			children = (
 				3C17685C27AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift */,
 				3C17685B27AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift */,
 				3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */,
 			);
-			path = Toolbar;
+			path = "Words Toolbar";
 			sourceTree = "<group>";
 		};
 		3C1D19DF2759B7AB0064F2C6 /* Tab Bar */ = {

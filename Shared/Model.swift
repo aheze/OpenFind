@@ -24,7 +24,7 @@ struct Word {
     var color: UInt = 0x00AEEF
 }
 
-struct List {
+struct List: Identifiable {
     var id = UUID()
     var name = ""
     var desc = ""

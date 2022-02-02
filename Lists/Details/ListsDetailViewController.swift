@@ -12,6 +12,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     var model: ListsDetailViewModel
     var toolbarViewModel: ToolbarViewModel
     var searchViewModel: SearchViewModel
+    var realmModel: RealmModel
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
@@ -42,7 +43,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet var headerTopLeftViewRightC: NSLayoutConstraint!
     @IBOutlet var headerTopLeftImageView: UIImageView!
     lazy var headerTopLeftIconPickerModel = IconPickerViewModel(selectedIcon: model.list.icon)
-    lazy var iconPicker = IconPickerController(model: headerTopLeftIconPickerModel)
+    lazy var iconPicker = IconPickerController(model: headerTopLeftIconPickerModel, realmModel: realmModel)
     
     @IBOutlet var headerTopCenterView: UIView!
     @IBOutlet var headerTopCenterTextField: UITextField!
@@ -89,11 +90,13 @@ class ListsDetailViewController: UIViewController, Searchable {
         coder: NSCoder,
         model: ListsDetailViewModel,
         toolbarViewModel: ToolbarViewModel,
-        searchViewModel: SearchViewModel
+        searchViewModel: SearchViewModel,
+        realmModel: RealmModel
     ) {
         self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.searchViewModel = searchViewModel
+        self.realmModel = realmModel
         super.init(coder: coder)
     }
     
