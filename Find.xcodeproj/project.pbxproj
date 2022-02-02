@@ -112,6 +112,18 @@
 		3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */; };
 		3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
+		3C17685D27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */; };
+		3C17685E27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */; };
+		3C17685F27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */; };
+		3C17686027AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685B27AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift */; };
+		3C17686127AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685B27AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift */; };
+		3C17686227AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685B27AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift */; };
+		3C17686327AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685C27AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift */; };
+		3C17686427AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685C27AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift */; };
+		3C17686527AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685C27AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift */; };
+		3C17686727AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686627AA24710099D1CE /* ListsDetailVC+Keyboard.swift */; };
+		3C17686827AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686627AA24710099D1CE /* ListsDetailVC+Keyboard.swift */; };
+		3C17686927AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686627AA24710099D1CE /* ListsDetailVC+Keyboard.swift */; };
 		3C1AB195260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */; };
 		3C1AB199260FE40B009B47C0 /* VoiceOverSlidesControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */; };
 		3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */; };
@@ -1799,6 +1811,10 @@
 		3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Highlight.swift"; sourceTree = "<group>"; };
 		3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+FindFromCache.swift"; sourceTree = "<group>"; };
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
+		3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsToolbarView.swift; sourceTree = "<group>"; };
+		3C17685B27AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsKeyboardToolbarViewModel.swift; sourceTree = "<group>"; };
+		3C17685C27AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsKeyboardToolbarViewController.swift; sourceTree = "<group>"; };
+		3C17686627AA24710099D1CE /* ListsDetailVC+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Keyboard.swift"; sourceTree = "<group>"; };
 		3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoiceOverSlidesControl.xib; sourceTree = "<group>"; };
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
@@ -2688,9 +2704,11 @@
 				3CCE2B9F279DD0C600F72351 /* ListsDetailVC+Rearrange.swift */,
 				3C7E1092279DDF5D00ABC016 /* ListsDetailVC+Add.swift */,
 				3CCE2B95279D29D000F72351 /* ListsDetailVC+Lifecycle.swift */,
+				3C17686627AA24710099D1CE /* ListsDetailVC+Keyboard.swift */,
 				3CB181CF27A5F74000933372 /* ListsDetailVC+NavigationBar.swift */,
 				3CCE2B46279D207F00F72351 /* ListsDetailToolbarView.swift */,
 				3C08EB7B279CFBAB00971D60 /* ListsDetailWordCell.swift */,
+				3C17685927AA0F3D0099D1CE /* Toolbar */,
 				3C93FC3C27A0ECD100EBBC81 /* Icon Picker */,
 				3CD706FA27A3920200B446D7 /* Color Picker */,
 			);
@@ -2747,6 +2765,16 @@
 				3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */,
 			);
 			path = Builder;
+			sourceTree = "<group>";
+		};
+		3C17685927AA0F3D0099D1CE /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				3C17685C27AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift */,
+				3C17685B27AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift */,
+				3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */,
+			);
+			path = Toolbar;
 			sourceTree = "<group>";
 		};
 		3C1D19DF2759B7AB0064F2C6 /* Tab Bar */ = {
@@ -5554,6 +5582,7 @@
 				3C21ED6027A3A8AA0005E183 /* ToolbarView.swift in Sources */,
 				3C21EDD927A4617C0005E183 /* RealmModel+Photos.swift in Sources */,
 				3C4D3A1C274767410010FD68 /* ContentCell.swift in Sources */,
+				3C17685E27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */,
 				3C7B7A65277F8DC400E1F602 /* HighlightsViewController.swift in Sources */,
 				3CE9C21C274E0076008C903C /* LivePreviewVC+Zoom.swift in Sources */,
 				3CCE2B4B279D233E00F72351 /* PhotosVC+Selection.swift in Sources */,
@@ -5579,6 +5608,7 @@
 				3CCCCA9D27818CE7000381CE /* FindIconView.swift in Sources */,
 				3C21EDDE27A4617C0005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C4D3A19274767410010FD68 /* TabBarViewController.swift in Sources */,
+				3C17686427AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3C3642D7277BC2E70038CB18 /* Field.swift in Sources */,
 				3C21ED6E27A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C3642DD277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
@@ -5602,6 +5632,7 @@
 				3C4D39AB27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C1FE274B4E47008C903C /* FallbackView.swift in Sources */,
 				3CD7063527A3842200B446D7 /* IconPickerController.swift in Sources */,
+				3C17686827AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
 				3C08EAF9279C76DC00971D60 /* ListsController.swift in Sources */,
 				3C8A525C277FCA2C006CF91E /* CameraVC+Static.swift in Sources */,
 				3CE9C20C274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
@@ -5690,6 +5721,7 @@
 				3C4D3A27274768C00010FD68 /* ResultsIconView.swift in Sources */,
 				3C08EADB279BA85500971D60 /* Utilities+UIView.swift in Sources */,
 				3C21EDDC27A4617C0005E183 /* RealmModel+Lists.swift in Sources */,
+				3C17686127AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */,
 				3CCCCA97278185AC000381CE /* Model.swift in Sources */,
 				3C1D19DE2759B5960064F2C6 /* CameraViewModel.swift in Sources */,
 				3CCE2B57279D235D00F72351 /* ListsDetailVC+DataSource.swift in Sources */,
@@ -5933,6 +5965,8 @@
 				3CFD6017278B70940031BC8B /* SearchNavigationController.swift in Sources */,
 				3C3642F4277BC2E90038CB18 /* LeftView.swift in Sources */,
 				3C3642F9277BC2E90038CB18 /* Field.swift in Sources */,
+				3C17686527AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
+				3C17686927AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
 				3C6C73B42781947700E039F0 /* SearchVC+Cell.swift in Sources */,
 				3C21EDAE27A45BFE0005E183 /* RealmModel.swift in Sources */,
 				3C21ED5D27A3A8A70005E183 /* KeyboardToolbarViewModel.swift in Sources */,
@@ -5959,6 +5993,7 @@
 				3C606673274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3CCE2B94279D297200F72351 /* ListsVC+Lifecycle.swift in Sources */,
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
+				3C17685F27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */,
 				3CC5951F27A0EA24001D07DC /* IconPickerViewController.swift in Sources */,
 				3CD7061027A11E6D00B446D7 /* Icons.swift in Sources */,
 				3C3642FD277BC2E90038CB18 /* SearchViewModel.swift in Sources */,
@@ -6012,6 +6047,7 @@
 				3C1D1A3E275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,
 				3CD7060C27A0F62300B446D7 /* IconPickerConstants.swift in Sources */,
 				3CCE2B1C279D008B00F72351 /* ButtonView.swift in Sources */,
+				3C17686227AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */,
 				3C21EE2027A461810005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C4D3A602747691A0010FD68 /* SceneDelegate.swift in Sources */,
 			);
@@ -6298,6 +6334,7 @@
 				3C08EB14279C76E500971D60 /* ListsContentCell.swift in Sources */,
 				3C6C73832781946B00E039F0 /* LivePreviewVC+Setup.swift in Sources */,
 				3CCE2B54279D235C00F72351 /* ListsDetailVC+Setup.swift in Sources */,
+				3C17686727AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
 				3C08EB48279C95F500971D60 /* SearchNC+Tabs.swift in Sources */,
 				3CCE2B2A279D008D00F72351 /* ClearIconView.swift in Sources */,
 				3C6C7422278194A100E039F0 /* FieldSettingsView.swift in Sources */,
@@ -6316,6 +6353,7 @@
 				3C6C73692781946200E039F0 /* CameraController.swift in Sources */,
 				3C21ED5F27A3A8A90005E183 /* KeyboardToolbarViewModel.swift in Sources */,
 				3C21EE2727A461930005E183 /* RealmModel+Photos.swift in Sources */,
+				3C17686027AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */,
 				3CFD6032278B71E20031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C6C737E2781946B00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
 				3C21EE2D27A461930005E183 /* RealmModel+HistoryTesting.swift in Sources */,
@@ -6325,6 +6363,7 @@
 				3C6C73412781944B00E039F0 /* TabBarViewController.swift in Sources */,
 				3CCE2BA1279DD0F400F72351 /* ListsDetailVC+Rearrange.swift in Sources */,
 				3CD7063327A3842200B446D7 /* IconPickerCell.swift in Sources */,
+				3C17685D27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */,
 				3CC00EC527A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */,
 				3C6D77BC27A5B140005371F3 /* Global.swift in Sources */,
 				3C6C73662781946200E039F0 /* CameraVC+ScrollZoom.swift in Sources */,
@@ -6386,6 +6425,7 @@
 				3CCE2B4A279D233E00F72351 /* PhotosVC+Selection.swift in Sources */,
 				3C6C73442781944B00E039F0 /* TabControllerBridge.swift in Sources */,
 				3CCE2B2C279D008D00F72351 /* ButtonView.swift in Sources */,
+				3C17686327AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3C08EAF8279C76DB00971D60 /* ListsController.swift in Sources */,
 				3C7E1094279E59DE00ABC016 /* ListsDetailVC+Add.swift in Sources */,
 				3C6C737D2781946B00E039F0 /* ZoomViewModel.swift in Sources */,

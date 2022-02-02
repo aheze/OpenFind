@@ -50,7 +50,7 @@ class ListsController {
             viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInset)
         }
         
-        
+        searchNavigationController.testing = true
         self.searchNavigationController = searchNavigationController
     
         viewController.loadViewIfNeeded() /// needed to initialize outlets

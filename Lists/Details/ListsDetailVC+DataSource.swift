@@ -5,20 +5,18 @@
 //  Created by A. Zheng (github.com/aheze) on 1/22/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
+
 import UIKit
 
 extension ListsDetailViewController {
-    func updateVisibleCellIndices() {
-        for index in self.model.list.words.indices {
-            guard let cell = self.wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell else { continue }
-            
-            let readableIndex = index + 1
-            cell.barLabel.text = "\(readableIndex) / \(model.list.words.count)"
-            cell.previousBarButton.isEnabled = index != 0
-            cell.nextBarButton.isEnabled = index != model.list.words.count - 1
-            cell.toolbar.sizeToFit()
+    func updateWordsKeyboardToolbar() {
+        if
+            let word = model.activeWord,
+            let index = model.list.words.firstIndex(where: { $0.id == word.id })
+        {
+            wordsKeyboardToolbarViewModel.selectedWordIndex = index
         }
+        wordsKeyboardToolbarViewModel.totalWordsCount = model.list.words.count
     }
 }
 
@@ -26,7 +24,7 @@ extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.list.words.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "ListsDetailWordCell",
@@ -34,48 +32,29 @@ extension ListsDetailViewController: UITableViewDataSource {
         ) as? ListsDetailWordCell else {
             fatalError()
         }
-        
+
         /// basics
         let word = model.list.words[indexPath.item]
         cell.textField.text = word.string
         cell.leftView.isHidden = true
         cell.rightView.isHidden = true
-        
+
         if model.selectedWords.contains(where: { $0.id == word.id }) {
             cell.leftSelectionIconView.setState(.selected)
         } else {
             cell.leftSelectionIconView.setState(.empty)
         }
-        
-        /// toolbar
-        let index = indexPath.row + 1
-        cell.barLabel.text = "\(index) / \(model.list.words.count)"
-        cell.previousBarButton.isEnabled = indexPath.row != 0
-        cell.nextBarButton.isEnabled = indexPath.row != model.list.words.count - 1
-        cell.previousWord = { [weak self] in
+
+        cell.textField.inputAccessoryView = wordsKeyboardToolbarViewController.view
+        cell.startedEditing = { [weak self] in
             guard let self = self else { return }
             if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
-                let previousIndex = index - 1
-                if self.model.list.words.indices.contains(previousIndex) {
-                    if let cell = self.wordsTableView.cellForRow(at: previousIndex.indexPath) as? ListsDetailWordCell {
-                        cell.textField.becomeFirstResponder()
-                    }
-                }
+                self.wordsKeyboardToolbarViewModel.selectedWordIndex = index
+                self.model.activeWord = word
+//                self.focusCell(at: index)
             }
         }
-        
-        cell.nextWord = { [weak self] in
-            guard let self = self else { return }
-            if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
-                let previousIndex = index + 1
-                if self.model.list.words.indices.contains(previousIndex) {
-                    if let cell = self.wordsTableView.cellForRow(at: previousIndex.indexPath) as? ListsDetailWordCell {
-                        cell.textField.becomeFirstResponder()
-                    }
-                }
-            }
-        }
-        
+
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
             if self.model.selectedWords.contains(where: { $0.id == word.id }) {
@@ -88,7 +67,7 @@ extension ListsDetailViewController: UITableViewDataSource {
         }
         cell.textChanged = { [weak self] newText, replacementString in
             guard let self = self else { return true }
-            
+
             let newWords = replacementString
                 .components(separatedBy: "•")
                 .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
@@ -101,17 +80,17 @@ extension ListsDetailViewController: UITableViewDataSource {
                     if self.model.list.words[index].string.isEmpty {
                         cell.textField.text = newWords[0]
                         self.model.list.words[index].string = newWords[0]
-                        
+
                         let wordsToAdd = Array(newWords.dropFirst())
                         self.addWords(words: wordsToAdd, originIndex: index)
-                        
+
                     } else {
                         /// else, just append all the new words
                         self.addWords(words: newWords, originIndex: index)
                     }
-                    
+
                     self.updateTableViewHeightConstraint()
-                    
+
                     return false
                 }
             } else {
@@ -120,10 +99,10 @@ extension ListsDetailViewController: UITableViewDataSource {
                     self.model.list.words[index].string = newText
                 }
             }
-            
+
             return true
         }
-        
+
         /// configure which parts of the cell are visible
         if model.isEditing {
             cell.stackViewLeftC.constant = 0
@@ -136,10 +115,10 @@ extension ListsDetailViewController: UITableViewDataSource {
             cell.leftView.isHidden = true
             cell.rightView.isHidden = true
         }
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ListsDetailConstants.wordRowHeight
     }

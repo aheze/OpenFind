@@ -17,7 +17,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     var additionalSearchBarOffset = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
     
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var scrollView: ListsDetailScrollView!
     @IBOutlet var contentView: UIView!
     
     /// has padding on the sides
@@ -77,7 +77,13 @@ class ListsDetailViewController: UIViewController, Searchable {
     /// **table view**
     @IBOutlet var wordsTableView: UITableView!
     @IBOutlet var wordsTableViewHeightC: NSLayoutConstraint!
+    
+    /// for copy/delete
     lazy var toolbarView = ListsDetailToolbarView(model: model)
+    
+    /// for keyboard navigation
+    var wordsKeyboardToolbarViewModel = WordsKeyboardToolbarViewModel()
+    lazy var wordsKeyboardToolbarViewController = WordsKeyboardToolbarViewController(model: wordsKeyboardToolbarViewModel)
     
     init?(
         coder: NSCoder,
@@ -105,6 +111,8 @@ class ListsDetailViewController: UIViewController, Searchable {
         setup()
         listenToButtons()
         listenToModel()
+        updateWordsKeyboardToolbar()
+        listenToKeyboard()
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0

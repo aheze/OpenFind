@@ -35,8 +35,7 @@ extension ListsDetailViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {}
 
     func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession) {
-        print("Did end!")
-        updateVisibleCellIndices()
+        updateWordsKeyboardToolbar()
     }
 }
 
@@ -108,7 +107,7 @@ extension ListsDetailViewController: UITableViewDropDelegate {
             }
 
             tableView.insertRows(at: indexPaths, with: .automatic)
-            self.updateVisibleCellIndices()
+            self.updateWordsKeyboardToolbar()
         }
     }
 }

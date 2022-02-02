@@ -48,6 +48,10 @@ extension SearchNavigationController {
         
         navigationBarBackground.addSubview(navigationBarBackgroundBlurView)
         navigationBarBackgroundBlurView.pinEdgesToSuperview()
+        
+        if testing {
+            navigationBarBackground.alpha = 0
+        }
     }
     
     func setupBorder() {

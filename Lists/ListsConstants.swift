@@ -57,6 +57,9 @@ struct ListsDetailConstants {
     /// how long to wait until saving
     static var editDebounceDuration = CGFloat(0.6)
     
+    /// padding under the navigation bar for the focused cell
+    static var focusedCellTopPaddingCompactHeight = CGFloat(24)
+    
     /// spacing between header and words
     static var containerSpacing = CGFloat(16)
     

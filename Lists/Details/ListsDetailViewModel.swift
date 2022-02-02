@@ -24,6 +24,9 @@ class ListsDetailViewModel: ObservableObject {
     
     @Published var selectedWords = [EditableWord]()
     
+    /// the currently-editing word
+    @Published var activeWord: EditableWord?
+    
     var listCancellable: AnyCancellable?
     init(
         list: List,
