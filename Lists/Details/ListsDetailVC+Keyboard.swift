@@ -13,6 +13,13 @@ extension ListsDetailViewController {
         if model.list.words.indices.contains(index) {
             if let cell = wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell {
                 cell.textField.becomeFirstResponder()
+            }
+        }
+    }
+
+    func scrollToCell(at index: Int) {
+        if model.list.words.indices.contains(index) {
+            if let cell = wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell {
 
                 /// origin of cell, relative to the words table view
                 let cellOrigin = cell.convert(cell.bounds.origin, to: wordsTableView)

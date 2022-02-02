@@ -153,8 +153,7 @@ extension ListsDetailWordCell: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         startedEditing?()
-        return true
     }
 }

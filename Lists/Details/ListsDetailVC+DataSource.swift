@@ -51,7 +51,11 @@ extension ListsDetailViewController: UITableViewDataSource {
             if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
                 self.wordsKeyboardToolbarViewModel.selectedWordIndex = index
                 self.model.activeWord = word
-//                self.focusCell(at: index)
+
+                /// Wait for the keyboard to show
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    self.scrollToCell(at: index)
+                }
             }
         }
 
