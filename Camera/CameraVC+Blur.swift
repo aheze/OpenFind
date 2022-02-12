@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 /**
@@ -14,14 +13,26 @@ import UIKit
  */
 
 extension CameraViewController {
-    
     func setupBlur() {
         view.addSubview(blurOverlayView)
         blurOverlayView.pinEdgesToSuperview()
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.blurOverlayView.setupBlur()
+            self?.updateBlurProgress(to: Tab.currentBlurProgress)
+        }
     }
+
     func updateBlurProgress(to progress: CGFloat) {
         blurOverlayView.animator?.fractionComplete = progress
-        
+        switch Tab.currentTabState {
+        case .photos, .cameraToPhotos:
+            blurOverlayView.colorView.backgroundColor = .systemBackground
+        case .lists, .cameraToLists:
+            blurOverlayView.colorView.backgroundColor = .secondarySystemBackground
+        default:
+            break
+        }
     }
 }
 
@@ -49,10 +60,10 @@ class CameraBlurOverlayView: UIView {
         self.isUserInteractionEnabled = false
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     func setupBlur() {
         animator?.stopAnimation(false)
@@ -71,4 +82,3 @@ class CameraBlurOverlayView: UIView {
         animator?.pausesOnCompletion = true
     }
 }
-

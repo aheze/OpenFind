@@ -3203,8 +3203,8 @@
 		3C4D39D52747661E0010FD68 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				3C4D39EA274766580010FD68 /* PhotosBridge.swift */,
 				3C4D39E9274766580010FD68 /* PhotosContent.storyboard */,
+				3C4D39EA274766580010FD68 /* PhotosBridge.swift */,
 				3C4D39EC274766580010FD68 /* PhotosController.swift */,
 				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
 				3CCE2B48279D21C900F72351 /* PhotosVC+Selection.swift */,

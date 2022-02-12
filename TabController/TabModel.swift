@@ -27,7 +27,7 @@ protocol PageViewController: UIViewController {
     func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets)
 }
 
-/// to move to another tab from anywhere
+/// Global access to tab properties
 enum Tab {
     enum Control {
         static var moveToOtherTab: ((TabState, Bool) -> Void)?
@@ -37,6 +37,8 @@ enum Tab {
         static var excluded = [Identifier: CGRect]()
     }
     
+    static var currentTabState = TabState.camera
+    static var currentBlurProgress = CGFloat(0)
     static var blurProgressChanged: ((CGFloat) -> Void)?
 }
 

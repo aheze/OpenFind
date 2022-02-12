@@ -15,6 +15,9 @@ class TabViewModel: ObservableObject {
             cameraIconAttributes = tabState.cameraIconAttributes()
             listsIconAttributes = tabState.listsIconAttributes()
             animatorProgress = tabState.getAnimatorProgress()
+            
+            Tab.currentTabState = tabState
+            Tab.currentBlurProgress = animatorProgress
             Tab.blurProgressChanged?(animatorProgress)
         }
     }
