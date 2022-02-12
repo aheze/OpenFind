@@ -34,8 +34,8 @@ class KeyboardToolbarViewController: UIViewController {
          Instantiate the base `view`.
          */
         view = UIView()
+        view.autoresizingMask = .flexibleHeight
         view.backgroundColor = .clear
-        view.autoresizingMask = [.flexibleHeight]
         
         let containerView = KeyboardToolbarView(
             searchViewModel: searchViewModel,
@@ -50,6 +50,8 @@ class KeyboardToolbarViewController: UIViewController {
         addChild(hostingController)
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
+        
+        _ = reloadFrame(keyboardShown: collectionViewModel.keyboardShown)
     }
     
     /// return true if frame was reloaded

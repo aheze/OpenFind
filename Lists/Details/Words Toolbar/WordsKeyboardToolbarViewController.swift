@@ -27,6 +27,7 @@ class WordsKeyboardToolbarViewController: UIViewController {
          Instantiate the base `view`.
          */
         view = UIView()
+        view.autoresizingMask = .flexibleHeight
         view.backgroundColor = .clear
         
         let containerView = WordsToolbarView(model: model)
@@ -42,5 +43,27 @@ class WordsKeyboardToolbarViewController: UIViewController {
         let verticalPadding = CGFloat(12)
         let height = UIFont.preferredFont(forTextStyle: .body).lineHeight + verticalPadding * 2
         view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
+        
+        print("Just loaded.")
+        _ = reloadFrame(keyboardShown: model.keyboardShown)
+    }
+    
+    /// return true if frame was reloaded
+    func reloadFrame(keyboardShown: Bool) -> Bool {
+        print("Reload. \(keyboardShown)")
+        let currentHeight = view.frame.height
+        let newHeight: CGFloat
+        if keyboardShown {
+            newHeight = 60
+        } else {
+            newHeight = 60 + Global.safeAreaInsets.bottom
+        }
+        
+        let heightChanged = currentHeight != newHeight
+        if heightChanged {
+            view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: newHeight)
+        }
+        
+        return heightChanged
     }
 }

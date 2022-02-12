@@ -114,8 +114,9 @@ class ListsDetailViewController: UIViewController, Searchable {
         setup()
         listenToButtons()
         listenToModel()
-        updateWordsKeyboardToolbar()
         listenToKeyboard()
+        listenToWordsToolbar()
+        updateWordsKeyboardToolbar()
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0

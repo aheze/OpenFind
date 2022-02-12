@@ -99,20 +99,5 @@ extension ListsDetailViewController {
             
             self.updateTableViewHeightConstraint()
         }
-        
-        /// toolbar
-        wordsKeyboardToolbarViewModel.goToIndex = { [weak self] index in
-            guard let self = self else { return }
-            self.focusCell(at: index)
-            self.scrollToCell(at: index)
-        }
-        
-        wordsKeyboardToolbarViewModel.addWordAfterIndex = { [weak self] index in
-            guard let self = self else { return }
-            let newIndex = index + 1
-            self.addWord(at: newIndex)
-            self.focusCell(at: newIndex)
-            self.updateTableViewHeightConstraint()
-        }
     }
 }

@@ -33,48 +33,21 @@ extension SearchViewController {
             }
         }
     }
+    
+    /// Refresh the toolbar's height
+    func reloadToolbarFrame(keyboardShown: Bool) {
+        if
+            let currentIndex = collectionViewModel.focusedCellIndex,
+            let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
+        {
+            if toolbarViewController.reloadFrame(keyboardShown: keyboardShown) {
+                cell.textField.reloadInputViews()
+            }
+        }
+    }
 
     @objc func listsUpdated(notification: Notification) {
         keyboardToolbarViewModel.reloadDisplayedLists()
     }
 }
 
-extension SearchViewController {
-    func listenToKeyboard() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-
-    @objc func keyboardWillShow(_ notification: Notification) {
-
-        if
-            let currentIndex = collectionViewModel.focusedCellIndex,
-            let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
-        {
-            if toolbarViewController.reloadFrame(keyboardShown: true) {
-                cell.textField.reloadInputViews()
-            }
-        }
-    }
-
-    @objc func keyboardWillHide(_ notification: Notification) {
-        if
-            let currentIndex = collectionViewModel.focusedCellIndex,
-            let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
-        {
-            if toolbarViewController.reloadFrame(keyboardShown: false) {
-                cell.textField.reloadInputViews()
-            }
-        }
-    }
-}

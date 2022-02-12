@@ -31,6 +31,8 @@ class ListsDetailViewModel: ObservableObject {
     /// the currently-editing word
     @Published var activeWord: EditableWord?
     
+    var keyboardShown = false
+    
     /// for updating realm
     var listCancellable: AnyCancellable?
     init(

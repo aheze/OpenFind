@@ -27,6 +27,14 @@ enum Constants {
     static var toolbarIconDeactivateAnimationSpeed = CGFloat(0.3)
     
     static var defaultHighlightColor = UIColor(hex: 0x00AEEF)
+    
+    
+    /**
+     For toolbars above the keyboard.
+     when the on-screen keyboard is hidden (connected to external keyboard), it has a height of around 135 (less than 200)
+     so in this case make the toolbar taller to get past the safe area.
+     */
+    static var minimumKeyboardHeight = CGFloat(200)
 }
 
 enum ConstantVars {

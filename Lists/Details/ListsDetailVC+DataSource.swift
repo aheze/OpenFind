@@ -8,17 +8,6 @@
 
 import UIKit
 
-extension ListsDetailViewController {
-    func updateWordsKeyboardToolbar() {
-        if
-            let word = model.activeWord,
-            let index = model.list.words.firstIndex(where: { $0.id == word.id })
-        {
-            wordsKeyboardToolbarViewModel.selectedWordIndex = index
-        }
-        wordsKeyboardToolbarViewModel.totalWordsCount = model.list.words.count
-    }
-}
 
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,7 +34,9 @@ extension ListsDetailViewController: UITableViewDataSource {
             cell.leftSelectionIconView.setState(.empty)
         }
 
+        /// set the toolbar
         cell.textField.inputAccessoryView = wordsKeyboardToolbarViewController.view
+        
         cell.startedEditing = { [weak self] in
             guard let self = self else { return }
             if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {

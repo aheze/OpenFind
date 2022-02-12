@@ -14,4 +14,6 @@ class WordsKeyboardToolbarViewModel: ObservableObject {
     @Published var totalWordsCount = 0
     var goToIndex: ((Int) -> Void)?
     var addWordAfterIndex: ((Int) -> Void)?
+    
+    var keyboardShown = false
 }

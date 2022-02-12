@@ -20,6 +20,8 @@ class SearchCollectionViewModel: ObservableObject {
     /// old / new
     var focusedCellIndexChanged: ((Int?, Int?) -> Void)?
     
+    var keyboardShown = false
+    
     /// prepared before?
     var preparedOnce = false
     

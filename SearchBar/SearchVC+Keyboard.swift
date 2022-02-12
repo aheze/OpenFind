@@ -1,15 +1,15 @@
 //
-//  ListsDetailVC+Keyboard.swift
+//  SearchVC+Keyboard.swift
 //  Find
 //
-//  Created by A. Zheng (github.com/aheze) on 2/1/22.
+//  Created by A. Zheng (github.com/aheze) on 2/12/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
+    
 
 import UIKit
 
-extension ListsDetailViewController {
-
+extension SearchViewController {
     func listenToKeyboard() {
         NotificationCenter.default.addObserver(
             self,
@@ -29,22 +29,18 @@ extension ListsDetailViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-
-            scrollView.contentInset.bottom = keyboardHeight
             
             if keyboardHeight <= Constants.minimumKeyboardHeight {
-                wordsKeyboardToolbarViewModel.keyboardShown = false
-                reloadWordsToolbarFrame(keyboardShown: false)
+                collectionViewModel.keyboardShown = false
+                reloadToolbarFrame(keyboardShown: false)
                 return
             }
         }
-        wordsKeyboardToolbarViewModel.keyboardShown = true
-        reloadWordsToolbarFrame(keyboardShown: true)
+        collectionViewModel.keyboardShown = true
+        reloadToolbarFrame(keyboardShown: true)
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        scrollView.contentInset.bottom = 0
-        wordsKeyboardToolbarViewModel.keyboardShown = false
-        reloadWordsToolbarFrame(keyboardShown: false)
+        reloadToolbarFrame(keyboardShown: false)
     }
 }
