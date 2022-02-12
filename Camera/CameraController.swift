@@ -8,9 +8,10 @@
 import UIKit
 
 class CameraController {
-    var viewController: CameraViewController
+    
     var model: CameraViewModel
     var realmModel: RealmModel
+    var viewController: CameraViewController
     
     init(model: CameraViewModel, realmModel: RealmModel) {
         self.model = model

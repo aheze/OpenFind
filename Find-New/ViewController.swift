@@ -10,28 +10,21 @@ import SwiftUI
 
 class ViewController: UIViewController {
     let realmModel = RealmModel()
+    let photosViewModel = PhotosViewModel()
     let cameraViewModel = CameraViewModel()
     let listsViewModel = ListsViewModel()
     let toolbarViewModel = ToolbarViewModel()
 
-    lazy var photos: PhotosController = PhotosBridge.makeController()
+    lazy var photos = PhotosController(model: photosViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
+    lazy var camera = CameraController(model: cameraViewModel, realmModel: realmModel)
+    lazy var lists = ListsController(model: listsViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
 
-    lazy var camera: CameraController = CameraBridge.makeController(
-        cameraViewModel: cameraViewModel,
-        realmModel: realmModel
-    )
-
-    lazy var lists: ListsController = ListsBridge.makeController(
-        listsViewModel: listsViewModel,
-        toolbarViewModel: toolbarViewModel,
-        realmModel: realmModel
-    )
 
     lazy var tabController: TabBarController = {
         photos.viewController.toolbarViewModel = toolbarViewModel
 
-        let tabController = TabControllerBridge.makeTabController(
-            pageViewControllers: [photos.viewController, camera.viewController, lists.searchNavigationController],
+        let tabController = TabBarController(
+            pages: [photos.viewController, camera.viewController, lists.searchNavigationController],
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )

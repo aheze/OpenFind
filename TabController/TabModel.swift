@@ -24,7 +24,7 @@ protocol PageViewController: UIViewController {
     /// arrived at another tab
     func didBecomeInactive()
 
-    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets)
+    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets)
 }
 
 /// Global access to tab properties

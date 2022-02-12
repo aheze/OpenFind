@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-class PhotosViewController: UIViewController, PageViewController {
+class PhotosViewController: UIViewController, PageViewController, Searchable {
+    
     var tabType: TabState = .photos
     var toolbarViewModel: ToolbarViewModel?
+    
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset = CGFloat(0)
     
     var photosSelectionViewModel = PhotosSelectionViewModel()
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
@@ -19,21 +23,4 @@ class PhotosViewController: UIViewController, PageViewController {
     }
 }
 
-extension PhotosViewController {
-    func willBecomeActive() {}
-    
-    func didBecomeActive() {}
-    
-    func willBecomeInactive() {
-        withAnimation {
-            toolbarViewModel?.toolbar = nil
-        }
-    }
-    
-    func didBecomeInactive() {}
-    
-    func boundsChanged(to size: CGSize, safeAreaInset: UIEdgeInsets) {
-        
-    }
-}
 

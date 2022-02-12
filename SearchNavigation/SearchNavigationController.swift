@@ -59,6 +59,7 @@ class SearchNavigationController: UIViewController, PageViewController {
         return searchNavigationController
     }
     
+    
     init?(
         coder: NSCoder,
         rootViewController: UIViewController,

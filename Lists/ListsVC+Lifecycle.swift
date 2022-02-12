@@ -8,6 +8,7 @@
     
 import UIKit
 
+/// All called manually via `ListsController`
 extension ListsViewController {
     func willBecomeActive() {
         detailsViewController?.willBecomeActive()

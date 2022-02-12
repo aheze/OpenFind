@@ -1,32 +1,33 @@
 //
-//  SearchNC+Tabs.swift
+//  PhotosVC+Lifecycle.swift
 //  Find
 //
-//  Created by A. Zheng (github.com/aheze) on 1/22/22.
+//  Created by A. Zheng (github.com/aheze) on 2/12/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
 
-import UIKit
+import SwiftUI
 
-extension SearchNavigationController {
+extension PhotosViewController {
     func willBecomeActive() {
-        onWillBecomeActive?()
+        
     }
     
     func didBecomeActive() {
-        onDidBecomeActive?()
+        
     }
     
     func willBecomeInactive() {
-        onWillBecomeInactive?()
+        withAnimation {
+            toolbarViewModel?.toolbar = nil
+        }
     }
     
     func didBecomeInactive() {
-        onDidBecomeInactive?()
+        
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        onBoundsChange?(size, safeAreaInsets)
     }
 }

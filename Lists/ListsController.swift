@@ -9,7 +9,7 @@ import UIKit
 
 class ListsController {
     
-    var listsViewModel: ListsViewModel
+    var model: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     
@@ -17,8 +17,8 @@ class ListsController {
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
-    init(listsViewModel: ListsViewModel, toolbarViewModel: ToolbarViewModel, realmModel: RealmModel) {
-        self.listsViewModel = listsViewModel
+    init(model: ListsViewModel, toolbarViewModel: ToolbarViewModel, realmModel: RealmModel) {
+        self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         
@@ -29,7 +29,7 @@ class ListsController {
         let viewController = storyboard.instantiateViewController(identifier: "ListsViewController") { coder in
             ListsViewController(
                 coder: coder,
-                listsViewModel: listsViewModel,
+                listsViewModel: model,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
                 searchViewModel: searchViewModel
@@ -47,8 +47,8 @@ class ListsController {
         searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
         searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
-        searchNavigationController.onBoundsChange = { (size, safeAreaInset) in
-            viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInset)
+        searchNavigationController.onBoundsChange = { (size, safeAreaInsets) in
+            viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
         }
         
         self.searchNavigationController = searchNavigationController

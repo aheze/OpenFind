@@ -73,7 +73,7 @@ class TabBarViewController: UIViewController {
             
             let pages = self.getPages?() ?? []
             for page in pages {
-                page.boundsChanged(to: size, safeAreaInset: insets)
+                page.boundsChanged(to: size, safeAreaInsets: insets)
             }
             self.updateSafeAreaLayoutGuide(
                 bottomHeight: ConstantVars.tabBarTotalHeightExpanded,

@@ -30,9 +30,7 @@ extension SearchNavigationController {
         
         searchContainerView.backgroundColor = .clear
         
-        let searchViewController = Bridge.makeViewController(
-            searchViewModel: searchViewModel, realmModel: realmModel
-        )
+        let searchViewController = SearchViewController.make(searchViewModel: searchViewModel, realmModel: realmModel)
         self.searchViewController = searchViewController
         
         addResizableChildViewController(searchViewController, in: searchContainerView)
