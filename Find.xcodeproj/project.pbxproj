@@ -2277,6 +2277,7 @@
 		3C9314E527B864F0009E5B6E /* CameraVC+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Blur.swift"; sourceTree = "<group>"; };
 		3C9314E827B86E84009E5B6E /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		3C9314EB27B86F2B009E5B6E /* PhotosVC+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Lifecycle.swift"; sourceTree = "<group>"; };
+		3C9314EE27B87183009E5B6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IconPickerVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewModel.swift; sourceTree = "<group>"; };
 		3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerCell.swift; sourceTree = "<group>"; };
@@ -4379,6 +4380,7 @@
 		4999AC872353A80A00AB06A7 = {
 			isa = PBXGroup;
 			children = (
+				3C9314EE27B87183009E5B6E /* README.md */,
 				3C6C7322278193F600E039F0 /* Find-New */,
 				3C4D39C427475E800010FD68 /* Shared */,
 				3C4D3787274755FE0010FD68 /* TabController */,
