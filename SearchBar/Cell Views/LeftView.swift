@@ -14,6 +14,7 @@ class LeftView: UIView {
     @IBOutlet var findIconView: FindIconUIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet var iconViewCenterXC: NSLayoutConstraint!
+    @IBOutlet var imageViewCenterXC: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +39,7 @@ class LeftView: UIView {
     }
     
     func setConfiguration() {
-        iconViewCenterXC.constant = configuration.fieldLeftViewPadding
+        iconViewCenterXC.constant = configuration.fieldLeftIconViewPadding
+        imageViewCenterXC.constant = configuration.fieldLeftImageViewPadding
     }
 }

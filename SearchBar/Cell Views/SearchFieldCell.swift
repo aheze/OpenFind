@@ -102,12 +102,11 @@ class SearchFieldCell: UICollectionViewCell {
         addNewViewHeightC.constant = configuration.clearIconLength
         addNewIconView.iconView.tintColor = configuration.clearImageColor
         
-        addNewViewCenterHorizontallyWithRightC.constant = -configuration.fieldRightViewPadding
+        addNewViewCenterHorizontallyWithRightC.constant = -configuration.fieldRightClearViewPadding
         
         textField.keyboardAppearance = configuration.keyboardAppearance
-        textField.sideInset = configuration.fieldExtraPadding
-        leftViewRightC.constant = configuration.fieldExtraPadding
-        rightViewLeftC.constant = configuration.fieldExtraPadding
+        leftViewRightC.constant = 0
+        rightViewLeftC.constant = 0
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -123,11 +122,8 @@ class SearchFieldCell: UICollectionViewCell {
             leftView.alpha = percentageVisible
             rightView.alpha = percentageVisible
             
-            leftViewWidthC.constant = percentageVisible * (attributes.configuration.fieldLeftViewWidth - attributes.configuration.fieldExtraPadding)
-            rightViewWidthC.constant = percentageVisible * (attributes.configuration.fieldRightViewWidth - attributes.configuration.fieldExtraPadding)
-            
-            leftViewRightC.constant = percentageVisible * attributes.configuration.fieldExtraPadding
-            rightViewLeftC.constant = percentageVisible * attributes.configuration.fieldExtraPadding
+            leftViewWidthC.constant = percentageVisible * attributes.configuration.fieldLeftViewWidth
+            rightViewWidthC.constant = percentageVisible * attributes.configuration.fieldRightViewWidth
             
             if attributes.beingDeleted {
                 baseViewLeftC.constant = 0

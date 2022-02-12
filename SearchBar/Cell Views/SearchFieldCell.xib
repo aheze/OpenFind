@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="658" height="157"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-QC-iKm" customClass="SearchTextField" customModule="Camera" customModuleProvider="target">
-                                <rect key="frame" x="70" y="0.0" width="508" height="157"/>
+                                <rect key="frame" x="80" y="0.0" width="498" height="157"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -67,7 +67,7 @@
                             <constraint firstAttribute="trailing" secondItem="oQg-Mx-Rfv" secondAttribute="trailing" identifier="Right View Right" id="1nR-O8-bXu"/>
                             <constraint firstItem="FoT-tx-FJE" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Left View Top" id="QUl-Rf-RPR"/>
                             <constraint firstItem="FoT-tx-FJE" firstAttribute="leading" secondItem="3YU-hQ-dhy" secondAttribute="leading" identifier="Left View Left" id="X1C-gT-nng"/>
-                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" constant="-10" identifier="Left View - Text Field" id="br7-Qw-89x"/>
+                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" identifier="Left View - Text Field" id="br7-Qw-89x"/>
                             <constraint firstAttribute="bottom" secondItem="8OT-QC-iKm" secondAttribute="bottom" identifier="Text Field Bottom" id="fu9-do-PoE"/>
                             <constraint firstItem="oQg-Mx-Rfv" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Right View Top" id="gur-Qf-tve"/>
                             <constraint firstAttribute="bottom" secondItem="oQg-Mx-Rfv" secondAttribute="bottom" identifier="Right View Bottom" id="kqL-06-Fkk"/>

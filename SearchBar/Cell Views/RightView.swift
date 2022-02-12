@@ -39,7 +39,7 @@ class RightView: UIView {
     func setConfiguration() {
         iconViewWidthC.constant = configuration.clearIconLength
         iconViewHeightC.constant = configuration.clearIconLength
-        iconViewCenterXC.constant = -configuration.fieldRightViewPadding
+        iconViewCenterXC.constant = -configuration.fieldRightClearViewPadding
         clearIconView.backgroundView.backgroundColor = configuration.clearBackgroundColor
         clearIconView.iconView.tintColor = configuration.clearImageColor
     }

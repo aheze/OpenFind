@@ -15,6 +15,7 @@
                 <outlet property="findIconView" destination="Itn-D4-onc" id="C3f-gZ-E4y"/>
                 <outlet property="iconViewCenterXC" destination="WAx-b0-1BN" id="2zu-LP-fAE"/>
                 <outlet property="imageView" destination="Afr-vR-fV7" id="qzd-p1-xKr"/>
+                <outlet property="imageViewCenterXC" destination="2Ca-Nl-Wcs" id="xpt-nG-mhz"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -33,18 +34,16 @@
                                 <constraint firstAttribute="width" constant="20" id="gmS-mV-yFb"/>
                             </constraints>
                         </view>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Afr-vR-fV7">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Afr-vR-fV7">
+                            <rect key="frame" x="40" y="41" width="20.5" height="18"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Afr-vR-fV7" secondAttribute="bottom" id="6U0-34-wfS"/>
-                        <constraint firstItem="Afr-vR-fV7" firstAttribute="leading" secondItem="k2y-nd-nLt" secondAttribute="leading" id="AOo-gE-goq"/>
+                        <constraint firstItem="Afr-vR-fV7" firstAttribute="centerX" secondItem="k2y-nd-nLt" secondAttribute="centerX" id="2Ca-Nl-Wcs"/>
                         <constraint firstItem="Itn-D4-onc" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="SXq-Kw-exa"/>
                         <constraint firstItem="Itn-D4-onc" firstAttribute="centerX" secondItem="k2y-nd-nLt" secondAttribute="centerX" id="WAx-b0-1BN"/>
-                        <constraint firstAttribute="trailing" secondItem="Afr-vR-fV7" secondAttribute="trailing" id="kzi-hN-fmA"/>
-                        <constraint firstItem="Afr-vR-fV7" firstAttribute="top" secondItem="k2y-nd-nLt" secondAttribute="top" id="wqT-CG-aBX"/>
+                        <constraint firstItem="Afr-vR-fV7" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="ilw-Gh-Vml"/>
                     </constraints>
                 </view>
             </subviews>
@@ -61,6 +60,7 @@
         </view>
     </objects>
     <resources>
+        <image name="grid" catalog="system" width="128" height="112"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
