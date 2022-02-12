@@ -6,23 +6,21 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import SwiftUI
 
 class WordsKeyboardToolbarViewController: UIViewController {
-    
     var model: WordsKeyboardToolbarViewModel
     init(model: WordsKeyboardToolbarViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {
-        
         /**
          Instantiate the base `view`.
          */
@@ -44,13 +42,11 @@ class WordsKeyboardToolbarViewController: UIViewController {
         let height = UIFont.preferredFont(forTextStyle: .body).lineHeight + verticalPadding * 2
         view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
         
-        print("Just loaded.")
         _ = reloadFrame(keyboardShown: model.keyboardShown)
     }
     
     /// return true if frame was reloaded
     func reloadFrame(keyboardShown: Bool) -> Bool {
-        print("Reload. \(keyboardShown)")
         let currentHeight = view.frame.height
         let newHeight: CGFloat
         if keyboardShown {

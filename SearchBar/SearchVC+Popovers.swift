@@ -22,14 +22,6 @@ extension SearchViewController {
             model.alpha = field.overrides.alpha
             model.changed = { [weak self] in
                 guard let self = self else { return }
-                self.searchViewModel.setFieldValue(at: index) {
-                    .word(
-                        .init(
-                            string: word.string,
-                            color: model.defaultColor.hex
-                        )
-                    )
-                }
                 self.searchViewModel.fields[index].overrides.selectedColor = model.selectedColor
                 self.searchViewModel.fields[index].overrides.alpha = model.alpha
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
@@ -42,9 +34,27 @@ extension SearchViewController {
             popover.attributes.sourceFrameInset.bottom = 8
             popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
             present(popover)
-        case .list:
-//            list.
-            break
+        case .list(let list):
+            let model = FieldSettingsModel()
+            model.header = "LIST"
+            model.defaultColor = UIColor(hex: list.color)
+            model.selectedColor = field.overrides.selectedColor
+            model.alpha = field.overrides.alpha
+            model.words = list.words
+            model.changed = { [weak self] in
+                guard let self = self else { return }
+                self.searchViewModel.fields[index].overrides.selectedColor = model.selectedColor
+                self.searchViewModel.fields[index].overrides.alpha = model.alpha
+                if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
+                    cell.leftView.imageView.tintColor = UIColor.white.toColor(model.selectedColor ?? UIColor(hex: list.color), percentage: model.alpha)
+                }
+            }
+
+            var popover = Popover { FieldSettingsView(model: model) }
+            popover.attributes.sourceFrame = { cell.windowFrame() }
+            popover.attributes.sourceFrameInset.bottom = 8
+            popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
+            present(popover)
         case .addNew:
             break
         }
