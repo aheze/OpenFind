@@ -21,20 +21,6 @@ target 'Find' do
   pod 'SwiftEntryKit'
 end
 
-target 'TabController' do
-  shared_pods
-end
-
-target 'Photos' do
-  shared_pods
-  photos_pods
-end
-
-target 'Camera' do
-  shared_pods
-end
-
-
 
 post_install do |installer|
   installer.pods_project.build_configurations.each do |config|

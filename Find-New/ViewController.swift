@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 1/2/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import SwiftUI
 
@@ -14,7 +13,7 @@ class ViewController: UIViewController {
     let cameraViewModel = CameraViewModel()
     let listsViewModel = ListsViewModel()
     let toolbarViewModel = ToolbarViewModel()
-    
+
     lazy var photos: PhotosController = PhotosBridge.makeController()
 
     lazy var camera: CameraController = CameraBridge.makeController(
@@ -27,40 +26,40 @@ class ViewController: UIViewController {
         toolbarViewModel: toolbarViewModel,
         realmModel: realmModel
     )
-    
+
     lazy var tabController: TabBarController = {
         photos.viewController.toolbarViewModel = toolbarViewModel
-        
+
         let tabController = TabControllerBridge.makeTabController(
             pageViewControllers: [photos.viewController, camera.viewController, lists.searchNavigationController],
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )
-        
+
         tabController.delegate = self
-        
+
         self.addChildViewController(tabController.viewController, in: self.view)
         updateExcludedFrames()
         return tabController
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         _ = tabController
-        
+
         realmModel.loadLists()
         lists.viewController.reload()
-        
+
+        setup()
         updateExcludedFrames()
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate { _ in
             self.updateExcludedFrames()
         }
-
     }
 }
 
@@ -89,7 +88,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         if searchContainerFrame.contains(location) {
             return false
         }
-        
+
         return true
     }
 }
@@ -112,7 +111,7 @@ extension ViewController: TabBarControllerDelegate {
         default: break
         }
     }
-    
+
     func didFinishNavigatingTo(tab: TabState) {
         switch tab {
         case .photos:

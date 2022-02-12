@@ -156,6 +156,12 @@ class ListsDetailViewController: UIViewController, Searchable {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        model.isEditing = false
+        model.isEditingChanged?()
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         loadListContents()
