@@ -105,7 +105,7 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
         viewController.contentCollectionView.delegate = self
         viewController.contentCollectionView.dataSource = self
         
-        TabControl.moveToOtherTab = { [weak self] tabType, animated in
+        Tab.Control.moveToOtherTab = { [weak self] tabType, animated in
             self?.tabViewModel.changeTabState(newTab: tabType, animation: animated ? .animate : .clickedTabIcon)
         }
     }

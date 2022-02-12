@@ -35,6 +35,8 @@ enum Constants {
      so in this case make the toolbar taller to get past the safe area.
      */
     static var minimumKeyboardHeight = CGFloat(200)
+    
+    static var tabBlurEffect = UIBlurEffect(style: .regular)
 }
 
 enum ConstantVars {

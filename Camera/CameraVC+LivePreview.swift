@@ -14,7 +14,7 @@ extension CameraViewController {
         let livePreviewViewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
         
         livePreviewViewController.findFromPhotosButtonPressed = {
-            TabControl.moveToOtherTab?(.photos, true)
+            Tab.Control.moveToOtherTab?(.photos, true)
         }
         
         /// called when an image is first returned

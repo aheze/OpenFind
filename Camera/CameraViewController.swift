@@ -56,6 +56,8 @@ class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet var safeView: UIView!
     
+    var blurOverlayView = CameraBlurOverlayView()
+    
     /// Testing tab bar view
     @IBOutlet weak var testingTabBarContainerView: UIView!
     
@@ -103,6 +105,7 @@ class CameraViewController: UIViewController, PageViewController {
         setupZoom()
         setupHighlights()
         setupProgress()
+        setupBlur()
         
         listenToModel()
         

@@ -15,6 +15,7 @@ class TabViewModel: ObservableObject {
             cameraIconAttributes = tabState.cameraIconAttributes()
             listsIconAttributes = tabState.listsIconAttributes()
             animatorProgress = tabState.getAnimatorProgress()
+            Tab.blurProgressChanged?(animatorProgress)
         }
     }
 
@@ -25,7 +26,6 @@ class TabViewModel: ObservableObject {
     @Published var animatorProgress = CGFloat(0) /// for blur
    
     var updateTabBarHeight: ((TabState) -> Void)?
-    
     var tabStateChanged: ((TabStateChangeAnimation) -> Void)?
     
     /// animated = clicked

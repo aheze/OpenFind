@@ -52,6 +52,7 @@ class TabBarViewController: UIViewController {
         super.viewDidLoad()
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
+        contentCollectionView.showsHorizontalScrollIndicator = false
         
         if let view = view as? TabControllerView {
             view.tappedExcludedView = { [weak self] in

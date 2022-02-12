@@ -57,7 +57,7 @@ class ListsController {
         viewController.updateNavigationBar = { [weak self] in
             guard let self = self else { return }
             self.searchNavigationController.updateSearchBarOffset()
-            TabFrames.excluded[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
+            Tab.Frames.excluded[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
     }
 }
