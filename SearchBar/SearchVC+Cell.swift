@@ -27,7 +27,7 @@ extension SearchViewController {
         cell.configuration = searchViewModel.configuration
         cell.setConfiguration()
         
-        setFieldValue(for: cell, field: field)
+        configure(cell, for: field)
         
         cell.textChanged = { [weak self] text in
             guard let self = self else { return }
@@ -43,7 +43,7 @@ extension SearchViewController {
                 )
             }
             self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
-            self.setFieldValue(for: cell, field: self.searchViewModel.fields[index])
+            self.configure(cell, for: self.searchViewModel.fields[index])
         }
         
         cell.leftViewTapped = { [weak self] in
@@ -72,6 +72,7 @@ extension SearchViewController {
                     )
                 }
                 self.setClearIcon(for: cell, text: "", valuesCount: self.searchViewModel.values.count)
+                self.configure(cell, for: self.searchViewModel.fields[index])
             }
             
             cell.textField.becomeFirstResponder()
@@ -122,7 +123,7 @@ extension SearchViewController {
         }
     }
     
-    func setFieldValue(for cell: SearchFieldCell, field: Field) {
+    func configure(_ cell: SearchFieldCell, for field: Field) {
         switch field.value {
         case .word:
             cell.loadConfiguration(showAddNew: false)

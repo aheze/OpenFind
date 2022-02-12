@@ -42,12 +42,12 @@ struct KeyboardToolbarView: View {
             let focusedIndex = collectionViewModel.focusedCellIndex,
             let field = searchViewModel.fields[safe: focusedIndex]
         {
-            let text = field.value.getText()
+            let text = field.value.getText().lowercased()
             if text.isEmpty {
                 return model.displayedLists
             }
 
-            let lists = model.displayedLists.filter { $0.displayedName.contains(text) }
+            let lists = model.displayedLists.filter { $0.displayedName.lowercased().contains(text) }
             return lists
         }
 

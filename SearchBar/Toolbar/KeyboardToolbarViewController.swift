@@ -30,8 +30,6 @@ class KeyboardToolbarViewController: UIViewController {
     }
     
     override func loadView() {
-        print("LOAD.")
-        
         /**
          Instantiate the base `view`.
          */
