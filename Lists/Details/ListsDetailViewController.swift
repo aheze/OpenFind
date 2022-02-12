@@ -126,6 +126,15 @@ class ListsDetailViewController: UIViewController, Searchable {
         
         headerTopCenterTextField.delegate = self
         headerBottomTextField.delegate = self
+        
+        /// when the Add Words button was pressed
+        if model.focusFirstWord {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                if let firstCell = self.wordsTableView.cellForRow(at: 0.indexPath) as? ListsDetailWordCell {
+                    firstCell.textField.becomeFirstResponder()
+                }
+            }
+        }
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -154,38 +163,5 @@ class ListsDetailViewController: UIViewController, Searchable {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
-    }
-}
-
-/// Scroll view
-extension ListsDetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
-        updateSearchBarOffset?()
-    }
-}
-
-extension ListsDetailViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if
-            let text = textField.text,
-            let textRange = Range(range, in: text)
-        {
-            let updatedText = text.replacingCharacters(in: textRange, with: string)
-            
-            if textField == headerTopCenterTextField {
-                model.list.name = updatedText
-            } else if textField == headerBottomTextField {
-                model.list.desc = updatedText
-            }
-        }
-        
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }

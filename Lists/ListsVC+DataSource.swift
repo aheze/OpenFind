@@ -107,16 +107,29 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             chipView.label.text = chipFrame.string
             chipView.color = color
             chipView.setColors()
-            if chipFrame.chipType == .addWords || chipFrame.chipType == .wordsLeft {
-                chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
+            
+            switch chipFrame.chipType {
+            case .word:
+                chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
                 chipView.tapped = { [weak self] in
-                    guard let self = self else { return }
-                    if let displayedList = self.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
-                        self.presentDetails(list: displayedList.list)
+                    if let displayedList = self?.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                        self?.presentDetails(list: displayedList.list)
                     }
                 }
-            } else {
-                chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
+            case .wordsLeft:
+                chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
+                chipView.tapped = { [weak self] in
+                    if let displayedList = self?.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                        self?.presentDetails(list: displayedList.list)
+                    }
+                }
+            case .addWords:
+                chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
+                chipView.tapped = { [weak self] in
+                    if let displayedList = self?.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                        self?.presentDetails(list: displayedList.list, focusFirstWord: true)
+                    }
+                }
             }
             cell.chipsContainerView.addSubview(chipView)
         }

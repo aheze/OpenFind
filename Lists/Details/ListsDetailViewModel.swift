@@ -17,6 +17,10 @@ class ListsDetailViewModel: ObservableObject {
     var listDeleted: ((List) -> Void)?
     @Published var list: EditableList
     
+    /// Focus the first word when the view controller appears. For use when the "Add Words" button is pressed on an empty list.
+    var focusFirstWord = false
+    
+    /// if the current color is light or not. Store this to prevent over animations
     var colorIsLight = false
     
     var isEditing = false
@@ -27,6 +31,7 @@ class ListsDetailViewModel: ObservableObject {
     /// the currently-editing word
     @Published var activeWord: EditableWord?
     
+    /// for updating realm
     var listCancellable: AnyCancellable?
     init(
         list: List,

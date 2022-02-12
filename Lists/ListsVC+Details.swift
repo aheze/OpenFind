@@ -9,7 +9,7 @@
 import UIKit
 
 extension ListsViewController {
-    func presentDetails(list: List) {
+    func presentDetails(list: List, focusFirstWord: Bool = false) {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let viewController: ListsDetailViewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
             
@@ -25,6 +25,8 @@ extension ListsViewController {
                 },
                 realmModel: self.realmModel
             )
+            
+            listsDetailViewModel.focusFirstWord = focusFirstWord
             
             return ListsDetailViewController(
                 coder: coder,
