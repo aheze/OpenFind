@@ -12,9 +12,11 @@ class CameraViewModel: ObservableObject {
     
     @Published var highlights = [Highlight]()
     
-    /// set to true when tapped, then set back to false 1 second later
-    /// when paused, don't set it back until unpaused
-    @Published var snapshotSaved = false
+    /// If the button is on or not.
+    @Published var snapshotOn = false
+    
+    /// If the snapshot was actually saved to the photo library
+    var snapshotSaved = false
     
     /// shutter on/off
     @Published var shutterOn = false
@@ -28,4 +30,12 @@ class CameraViewModel: ObservableObject {
     var snapshotPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
     init() {}
+    
+    func resume() {
+        withAnimation {
+            snapshotOn = false
+        }
+        snapshotSaved = false
+        pausedImage = nil
+    }
 }

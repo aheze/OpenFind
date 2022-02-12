@@ -14,18 +14,6 @@ import UIKit
  */
 
 extension CameraViewController {
-    func setupStatic() {
-        /// Listen to shutter press events
-        cameraViewModel.shutterPressed = { [weak self] in
-            guard let self = self else { return }
-            
-            if self.cameraViewModel.shutterOn {
-                self.pause()
-            } else {
-                self.resume()
-            }
-        }
-    }
     func resume() {
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
@@ -42,7 +30,7 @@ extension CameraViewController {
             self.setScrollZoomImage(image: image)
             
             if let cgImage = image.cgImage {
-                self.cameraViewModel.pausedImage = cgImage
+                self.model.pausedImage = cgImage
                 self.findAndAddHighlights(image: cgImage) { _ in
                     self.endAutoProgress()
                     self.hideLivePreview()

@@ -26,7 +26,7 @@ extension CameraViewController {
         
         scrollZoomHookViewController.zoomed = { [weak self] scrollViewZoom in
             guard let self = self else { return }
-            if !self.cameraViewModel.shutterOn {
+            if !self.model.shutterOn {
                 let percentage = self.getPercentageFrom(scrollViewZoom: scrollViewZoom)
                 self.zoomViewModel.percentage = percentage
                 self.zoomViewModel.keepingExpandedUUID = nil

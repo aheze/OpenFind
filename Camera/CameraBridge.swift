@@ -13,7 +13,7 @@ struct CameraBridge {
         realmModel: RealmModel
     ) -> CameraController {
         let camera = CameraController(
-            cameraViewModel: cameraViewModel,
+            model: cameraViewModel,
             realmModel: realmModel
         )
         return camera

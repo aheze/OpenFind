@@ -17,8 +17,6 @@ struct SnapshotView: View {
     @Binding var isEnabled: Bool
 
     @State var scaleAnimationActive = false /// scale up/down animation flag
-    @State var startTrim = CGFloat(0)
-    @State var endTrim = SnapshotConstants.checkStartTrim
 
     var body: some View {
         Button {
@@ -29,7 +27,7 @@ struct SnapshotView: View {
                 .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
                 .overlay(
                     CameraInnerShape()
-                        .trim(from: startTrim, to: endTrim)
+                        .trim(from: startTrim(), to: endTrim())
                         .stroke(
                             isOn ? Color(Constants.activeIconColor) : .white,
                             style: .init(
@@ -41,29 +39,24 @@ struct SnapshotView: View {
                         .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
                 )
                 .frame(width: 40, height: 40)
-                .enabledModifier(isEnabled: isEnabled, linePadding: 10)
+                .enabledModifier(isEnabled: isEnabled, linePadding: 11)
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
                 .cameraToolbarIconBackground()
         }
         .disabled(!isEnabled)
     }
 
+    func startTrim() -> CGFloat {
+        return isOn ? SnapshotConstants.checkStartTrim : 0
+    }
+    
+    func endTrim() -> CGFloat {
+        return isOn ? 1 : SnapshotConstants.checkStartTrim
+    }
+    
     func toggle() {
         withAnimation {
             isOn.toggle()
-        }
-        if isOn {
-            withAnimation(
-                .spring()
-            ) {
-                startTrim = SnapshotConstants.checkStartTrim
-                endTrim = CGFloat(1)
-            }
-        } else {
-            withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) {
-                startTrim = CGFloat(0)
-                endTrim = SnapshotConstants.checkStartTrim
-            }
         }
     }
 }

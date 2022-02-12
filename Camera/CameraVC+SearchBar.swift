@@ -31,8 +31,8 @@ extension CameraViewController {
                 
                 /// animate the highlight frames instead
                 if
-                    self.cameraViewModel.shutterOn,
-                    let image = self.cameraViewModel.pausedImage
+                    self.model.shutterOn,
+                    let image = self.model.pausedImage
                 {
                     self.findAndAddHighlights(image: image, replace: true) { _ in
                         self.highlightsViewModel.setUpToDate(true)

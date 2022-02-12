@@ -11,8 +11,9 @@ import SwiftUI
 class CameraViewController: UIViewController, PageViewController {
     var tabType: TabState = .camera
     
+    var model: CameraViewModel
+    
     /// external models
-    var cameraViewModel: CameraViewModel
     var realmModel: RealmModel
     
     lazy var zoomViewModel = ZoomViewModel(containerView: zoomContainerView)
@@ -60,10 +61,10 @@ class CameraViewController: UIViewController, PageViewController {
     
     init?(
         coder: NSCoder,
-        cameraViewModel: CameraViewModel,
+        model: CameraViewModel,
         realmModel: RealmModel
     ) {
-        self.cameraViewModel = cameraViewModel
+        self.model = model
         self.realmModel = realmModel
         super.init(coder: coder)
     }
@@ -102,7 +103,8 @@ class CameraViewController: UIViewController, PageViewController {
         setupZoom()
         setupHighlights()
         setupProgress()
-        setupStatic()
+        
+        listenToModel()
         
         /// A testing tab bar
         addTestingTabBar(add: false)

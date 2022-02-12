@@ -16,7 +16,7 @@ extension CameraViewController {
                 rootView: TabBarView(
                     tabViewModel: TabViewModel(),
                     toolbarViewModel: ToolbarViewModel(),
-                    cameraViewModel: cameraViewModel
+                    cameraViewModel: model
                 )
             )
             
