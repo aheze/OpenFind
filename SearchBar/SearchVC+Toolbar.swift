@@ -56,23 +56,25 @@ extension SearchViewController {
     }
 
     @objc func keyboardWillShow(_ notification: Notification) {
-        toolbarViewController.reloadFrame(keyboardShown: true)
+
         if
             let currentIndex = collectionViewModel.focusedCellIndex,
             let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
         {
-//            print("Realionding@!!")
-            cell.textField.reloadInputViews()
+            if toolbarViewController.reloadFrame(keyboardShown: true) {
+                cell.textField.reloadInputViews()
+            }
         }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        toolbarViewController.reloadFrame(keyboardShown: false)
         if
             let currentIndex = collectionViewModel.focusedCellIndex,
             let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
         {
-            cell.textField.reloadInputViews()
+            if toolbarViewController.reloadFrame(keyboardShown: false) {
+                cell.textField.reloadInputViews()
+            }
         }
     }
 }

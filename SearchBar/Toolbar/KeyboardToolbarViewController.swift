@@ -54,26 +54,21 @@ class KeyboardToolbarViewController: UIViewController {
         hostingController.didMove(toParent: self)
     }
     
-    func reloadFrame(keyboardShown: Bool) {
+    /// return true if frame was reloaded
+    func reloadFrame(keyboardShown: Bool) -> Bool {
+        let currentHeight = view.frame.height
+        let newHeight: CGFloat
         if keyboardShown {
-            view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 60)
+            newHeight = 60
         } else {
-            view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 60 + Global.safeAreaInsets.bottom)
+            newHeight = 60 + Global.safeAreaInsets.bottom
         }
+        
+        let heightChanged = currentHeight != newHeight
+        if heightChanged {
+            view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: newHeight)
+        }
+        
+        return heightChanged
     }
 }
-//
-//class KeyboardToolbarWrapperView: UIView {
-//    var keyboardShown = false
-//    override var intrinsicContentSize: CGSize {
-//
-//        let size: CGSize
-//        if keyboardShown {
-//            size = CGSize(width: frame.width, height: 60)
-//        } else {
-//            size = CGSize(width: frame.width, height: 60 + Global.safeAreaInsets.bottom)
-//        }
-//        print("int. -> \(size)")
-//        return size
-//    }
-//}

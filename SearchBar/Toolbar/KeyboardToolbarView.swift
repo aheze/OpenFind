@@ -14,17 +14,14 @@ struct KeyboardToolbarView: View {
     @ObservedObject var collectionViewModel: SearchCollectionViewModel
 
     var body: some View {
-        if #available(iOS 15.0, *) {
-            let _ = Self._printChanges()
-        }
-        
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(filteredLists()) { list in
                     ListWidgetView(model: model, list: list)
+                        .transition(.scale)
                 }
-                .animation(.default, value: searchViewModel.fields)
             }
+            .animation(.default, value: searchViewModel.fields)
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
