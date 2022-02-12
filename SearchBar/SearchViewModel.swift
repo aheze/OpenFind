@@ -6,17 +6,17 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 /// Model for the collection view
 class SearchCollectionViewModel: ObservableObject {
-    
     /// index of focused/expanded cell
     @Published var focusedCellIndex: Int? {
         didSet {
             focusedCellIndexChanged?(oldValue, focusedCellIndex)
         }
     }
+
     /// old / new
     var focusedCellIndexChanged: ((Int?, Int?) -> Void)?
     
@@ -42,7 +42,6 @@ class SearchCollectionViewModel: ObservableObject {
     var deletedIndex: Int?
     var fallbackIndex: Int?
     
-    
     /// showing (past the point where it will auto-scroll) the last field or not
     var highlightingAddWordField = false
     
@@ -58,16 +57,17 @@ class SearchViewModel: ObservableObject {
         self.configuration = configuration
     }
     
-    var collectionViewModel = SearchCollectionViewModel()
-    
-    var fields = defaultFields {
+    @Published var fields = defaultFields {
         didSet {
             updateStringToGradients()
             fieldsChanged?(oldValue, fields)
         }
     }
+
     var fieldsChanged: (([Field], [Field]) -> Void)?
-    
+    func setFieldValue(at index: Int, value: () -> Field.FieldValue) {
+        fields[index].value = value()
+    }
 
     var values: [Field.FieldValue] {
         return fields.dropLast().map { $0.value }

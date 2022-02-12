@@ -8,16 +8,22 @@
 
 import SwiftUI
 
-struct ToolbarView: View {
+struct KeyboardToolbarView: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var model: KeyboardToolbarViewModel
+    @ObservedObject var collectionViewModel: SearchCollectionViewModel
 
     var body: some View {
+        if #available(iOS 15.0, *) {
+            let _ = Self._printChanges()
+        }
+        
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(model.displayedLists) { list in
+                ForEach(filteredLists()) { list in
                     ListWidgetView(model: model, list: list)
                 }
+                .animation(.default, value: searchViewModel.fields)
             }
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -33,6 +39,23 @@ struct ToolbarView: View {
             alignment: .top
         )
     }
+
+    func filteredLists() -> [List] {
+        if
+            let focusedIndex = collectionViewModel.focusedCellIndex,
+            let field = searchViewModel.fields[safe: focusedIndex]
+        {
+            let text = field.value.getText()
+            if text.isEmpty {
+                return model.displayedLists
+            }
+
+            let lists = model.displayedLists.filter { $0.displayedName.contains(text) }
+            return lists
+        }
+
+        return model.displayedLists
+    }
 }
 
 struct ListWidgetView: View {
@@ -44,7 +67,7 @@ struct ListWidgetView: View {
         } label: {
             HStack {
                 Image(systemName: list.icon)
-                Text(list.name.isEmpty ? "Untitled" : list.name)
+                Text(list.displayedName)
             }
             .foregroundColor(
                 Color(textColor())

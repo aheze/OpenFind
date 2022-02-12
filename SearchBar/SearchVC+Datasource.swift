@@ -9,7 +9,10 @@ import UIKit
 
 extension SearchViewController {
     func createFlowLayout() -> SearchCollectionViewFlowLayout {
-        let flowLayout = SearchCollectionViewFlowLayout(searchViewModel: searchViewModel)
+        let flowLayout = SearchCollectionViewFlowLayout(
+            searchViewModel: searchViewModel,
+            collectionViewModel: collectionViewModel
+        )
         flowLayout.scrollDirection = .horizontal
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
@@ -27,7 +30,7 @@ extension SearchViewController {
         var fieldsCount = searchViewModel.fields.count
         
         /// The last field (not add new) is being deleted, make the previous one (fallback) full width
-        if searchViewModel.collectionViewModel.fallbackIndex != nil {
+        if collectionViewModel.fallbackIndex != nil {
             fieldsCount -= 1
         }
         

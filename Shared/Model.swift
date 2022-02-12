@@ -18,13 +18,13 @@ enum Value {
     case list(List)
 }
 
-struct Word {
+struct Word: Equatable {
     var id = UUID()
     var string = ""
     var color: UInt = 0x00AEEF
 }
 
-struct List: Identifiable {
+struct List: Identifiable, Equatable {
     var id = UUID()
     var name = ""
     var desc = ""
@@ -44,6 +44,10 @@ struct List: Identifiable {
             dateCreated: self.dateCreated
         )
         return editableList
+    }
+    
+    var displayedName: String {
+        return name.isEmpty ? "Untitled" : name
     }
 }
 

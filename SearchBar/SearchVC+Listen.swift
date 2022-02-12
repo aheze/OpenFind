@@ -11,14 +11,14 @@ import UIKit
 
 extension SearchViewController {
     func listenToCollectionView() {
-        searchViewModel.collectionViewModel.getFullCellWidth = { [weak self] index in
+        collectionViewModel.getFullCellWidth = { [weak self] index in
             self?.getWidthOfExpandedCell(for: index) ?? 300
         }
-        searchViewModel.collectionViewModel.highlightAddNewField = { [weak self] shouldHighlight in
+        collectionViewModel.highlightAddNewField = { [weak self] shouldHighlight in
             self?.highlight(shouldHighlight)
         }
         
-        searchViewModel.collectionViewModel.convertAddNewCellToRegularCell = { [weak self] completion in
+        collectionViewModel.convertAddNewCellToRegularCell = { [weak self] completion in
             
             /// make it blue first
             self?.highlight(true, generateHaptics: true, animate: false)
@@ -28,7 +28,7 @@ extension SearchViewController {
             }
         }
         
-        searchViewModel.collectionViewModel.focusedCellIndexChanged = { [weak self] oldCellIndex, newCellIndex in
+        collectionViewModel.focusedCellIndexChanged = { [weak self] oldCellIndex, newCellIndex in
             guard let self = self else { return }
             
             /// only active the newly-focused cell if previously a text field was active

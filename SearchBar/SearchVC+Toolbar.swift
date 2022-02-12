@@ -17,16 +17,16 @@ extension SearchViewController {
             object: nil
         )
     }
-    
+
     func listenToToolbar() {
         keyboardToolbarViewModel.listSelected = { [weak self] list in
             guard let self = self else { return }
-            if let currentIndex = self.searchViewModel.collectionViewModel.focusedCellIndex {
+            if let currentIndex = self.collectionViewModel.focusedCellIndex {
                 self.searchViewModel.fields[currentIndex] = Field(
                     configuration: self.searchViewModel.configuration,
                     value: .list(list)
                 )
-                
+
                 if let cell = self.searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell {
                     self.configureCell(cell, for: currentIndex)
                 }
@@ -36,5 +36,43 @@ extension SearchViewController {
 
     @objc func listsUpdated(notification: Notification) {
         keyboardToolbarViewModel.reloadDisplayedLists()
+    }
+}
+
+extension SearchViewController {
+    func listenToKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        toolbarViewController.reloadFrame(keyboardShown: true)
+        if
+            let currentIndex = collectionViewModel.focusedCellIndex,
+            let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
+        {
+//            print("Realionding@!!")
+            cell.textField.reloadInputViews()
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        toolbarViewController.reloadFrame(keyboardShown: false)
+        if
+            let currentIndex = collectionViewModel.focusedCellIndex,
+            let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
+        {
+            cell.textField.reloadInputViews()
+        }
     }
 }

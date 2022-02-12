@@ -34,16 +34,17 @@ extension SearchViewController {
             
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
-            self.searchViewModel.fields[index].value = .word(
-                .init(
-                    string: text,
-                    color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+            self.searchViewModel.setFieldValue(at: index) {
+                .word(
+                    .init(
+                        string: text,
+                        color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                    )
                 )
-            )
+            }
             self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
             self.setFieldValue(for: cell, field: self.searchViewModel.fields[index])
         }
-        
         
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
@@ -62,19 +63,21 @@ extension SearchViewController {
                 self.removeCell(at: index)
             } else {
                 cell.textField.text = ""
-                self.searchViewModel.fields[index].value = .word(
-                    .init(
-                        string: "",
-                        color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                self.searchViewModel.setFieldValue(at: index) {
+                    .word(
+                        .init(
+                            string: "",
+                            color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                        )
                     )
-                )
+                }
                 self.setClearIcon(for: cell, text: "", valuesCount: self.searchViewModel.values.count)
             }
             
             cell.textField.becomeFirstResponder()
         }
         
-        if let focusedIndex = searchViewModel.collectionViewModel.focusedCellIndex, focusedIndex == index {
+        if let focusedIndex = collectionViewModel.focusedCellIndex, focusedIndex == index {
             cell.activate(true)
         } else {
             cell.activate(false)
@@ -155,9 +158,9 @@ extension SearchViewController {
         
         if index == searchViewModel.values.count - 1 {
             let targetIndex = index - 1
-            searchViewModel.collectionViewModel.deletedIndex = index
-            searchViewModel.collectionViewModel.fallbackIndex = targetIndex
-            searchViewModel.collectionViewModel.focusedCellIndex = nil /// prevent target offset
+            collectionViewModel.deletedIndex = index
+            collectionViewModel.fallbackIndex = targetIndex
+            collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
             updateClearIcons(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
@@ -171,30 +174,30 @@ extension SearchViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: targetIndex]?.fullOrigin { /// the last field that's not the "add new" field
-                    self.searchViewModel.collectionViewModel.highlightingAddWordField = false
+                    self.collectionViewModel.highlightingAddWordField = false
                     let (targetOrigin, focusedIndex) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
                     self.searchCollectionView.setContentOffset(targetOrigin, animated: true) /// go to that offset instantly
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.searchViewModel.collectionViewModel.deletedIndex = nil
-                        self.searchViewModel.collectionViewModel.fallbackIndex = nil
+                        self.collectionViewModel.deletedIndex = nil
+                        self.collectionViewModel.fallbackIndex = nil
                         self.searchViewModel.fields.remove(at: index)
                         self.searchCollectionView.deleteItems(at: [index.indexPath])
                         self.searchCollectionView.isUserInteractionEnabled = true
-                        self.searchViewModel.collectionViewModel.reachedEndBeforeAddWordField = true
+                        self.collectionViewModel.reachedEndBeforeAddWordField = true
                         
                         if let cell = self.searchCollectionView.cellForItem(at: targetIndex.indexPath) as? SearchFieldCell {
                             cell.textField.becomeFirstResponder()
                         }
                         
-                        self.searchViewModel.collectionViewModel.focusedCellIndex = focusedIndex
+                        self.collectionViewModel.focusedCellIndex = focusedIndex
                     }
                 }
             }
         } else {
-            searchViewModel.collectionViewModel.deletedIndex = index
-            searchViewModel.collectionViewModel.fallbackIndex = nil
-            searchViewModel.collectionViewModel.focusedCellIndex = nil /// prevent target offset
+            collectionViewModel.deletedIndex = index
+            collectionViewModel.fallbackIndex = nil
+            collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
             updateClearIcons(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
@@ -203,16 +206,16 @@ extension SearchViewController {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.searchViewModel.collectionViewModel.deletedIndex = nil
-                self.searchViewModel.collectionViewModel.fallbackIndex = nil
+                self.collectionViewModel.deletedIndex = nil
+                self.collectionViewModel.fallbackIndex = nil
                 self.searchViewModel.fields.remove(at: index)
                 self.searchCollectionView.deleteItems(at: [index.indexPath])
                 self.searchCollectionView.isUserInteractionEnabled = true
-                self.searchViewModel.collectionViewModel.focusedCellIndex = index
+                self.collectionViewModel.focusedCellIndex = index
                 
                 /// If the focused index is the second to last, make `reachedEndBeforeAddWordField` true
                 if index == self.searchViewModel.values.count - 1 {
-                    self.searchViewModel.collectionViewModel.reachedEndBeforeAddWordField = true
+                    self.collectionViewModel.reachedEndBeforeAddWordField = true
                 }
                 
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {

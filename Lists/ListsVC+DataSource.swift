@@ -36,7 +36,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let color = UIColor(hex: list.color)
         cell.headerView.backgroundColor = color
         cell.headerImageView.image = UIImage(systemName: list.icon)
-        cell.headerTitleLabel.text = list.name.isEmpty ? "Untitled" : list.name
+        cell.headerTitleLabel.text = list.displayedName
         cell.headerDescriptionLabel.text = list.desc
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
         

@@ -10,7 +10,7 @@ import UIKit
 extension SearchViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.isTracking {
-            searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew = searchViewModel.collectionViewModel.reachedEndBeforeAddWordField
+            collectionViewModel.shouldUseOffsetWithAddNew = collectionViewModel.reachedEndBeforeAddWordField
         }
     }
     
@@ -57,7 +57,7 @@ extension SearchViewController: UICollectionViewDelegate {
     }
     
     func addNewCellToRight() {
-        searchViewModel.collectionViewModel.highlightingAddWordField = false
+        collectionViewModel.highlightingAddWordField = false
         
         /// append new "Add New" cell
         let newField = Field(
@@ -75,12 +75,14 @@ extension SearchViewController: UICollectionViewDelegate {
         
         /// Set the string of the new word field (previously an add-new field)
         if case .addNew(let word) = searchViewModel.fields[indexOfLastField].value {
-            searchViewModel.fields[indexOfLastField].value = .word(
-                .init(
-                    string: word.string,
-                    color: Constants.defaultHighlightColor.getFieldColor(for: indexOfLastField).hex
+            searchViewModel.setFieldValue(at: indexOfLastField) {
+                .word(
+                    .init(
+                        string: word.string,
+                        color: Constants.defaultHighlightColor.getFieldColor(for: indexOfLastField).hex
+                    )
                 )
-            )
+            }
         }
         
         searchCollectionView.reloadData() /// add the new field
@@ -98,10 +100,10 @@ extension SearchViewController: UICollectionViewDelegate {
         }
         
         /// after scroll view stopped, set the content offset
-        if searchViewModel.collectionViewModel.reachedEndBeforeAddWordField {
-            searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew = true
+        if collectionViewModel.reachedEndBeforeAddWordField {
+            collectionViewModel.shouldUseOffsetWithAddNew = true
         } else {
-            searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew = false
+            collectionViewModel.shouldUseOffsetWithAddNew = false
         }
         
         searchCollectionView.isUserInteractionEnabled = true

@@ -5,13 +5,12 @@
 //  Created by A. Zheng (github.com/aheze) on 12/28/21.
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
-    
+
 import Popovers
 import UIKit
 
 extension SearchViewController {
     func presentPopover(for index: Int, from cell: UICollectionViewCell) {
-
         let field = searchViewModel.fields[index]
         switch field.value {
         case .word(let word):
@@ -21,28 +20,29 @@ extension SearchViewController {
             model.defaultColor = UIColor(hex: word.color)
             model.selectedColor = field.overrides.selectedColor
             model.alpha = field.overrides.alpha
-            
             model.changed = { [weak self] in
                 guard let self = self else { return }
-                self.searchViewModel.fields[index].value = .word(
-                    .init(
-                        string: word.string,
-                        color: model.defaultColor.hex
+                self.searchViewModel.setFieldValue(at: index) {
+                    .word(
+                        .init(
+                            string: word.string,
+                            color: model.defaultColor.hex
+                        )
                     )
-                )
+                }
                 self.searchViewModel.fields[index].overrides.selectedColor = model.selectedColor
                 self.searchViewModel.fields[index].overrides.alpha = model.alpha
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                     cell.leftView.findIconView.setTint(color: model.selectedColor ?? model.defaultColor, alpha: model.alpha)
                 }
             }
-            
+
             var popover = Popover { FieldSettingsView(model: model) }
             popover.attributes.sourceFrame = { cell.windowFrame() }
             popover.attributes.sourceFrameInset.bottom = 8
             popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
             present(popover)
-        case .list(_):
+        case .list:
 //            list.
             break
         case .addNew:
@@ -50,4 +50,3 @@ extension SearchViewController {
         }
     }
 }
-    

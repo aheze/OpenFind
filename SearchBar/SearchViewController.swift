@@ -10,6 +10,7 @@ import UIKit
 class SearchViewController: UIViewController {
     var searchViewModel: SearchViewModel
     var realmModel: RealmModel
+    var collectionViewModel = SearchCollectionViewModel()
     
     @IBOutlet var searchBarHeightC: NSLayoutConstraint!
     @IBOutlet weak var searchBarTopC: NSLayoutConstraint!
@@ -32,7 +33,8 @@ class SearchViewController: UIViewController {
     lazy var keyboardToolbarViewModel = KeyboardToolbarViewModel(realmModel: realmModel)
     lazy var toolbarViewController = KeyboardToolbarViewController(
         searchViewModel: searchViewModel,
-        model: keyboardToolbarViewModel
+        model: keyboardToolbarViewModel,
+        collectionViewModel: collectionViewModel
     )
     
     init?(
@@ -71,6 +73,7 @@ class SearchViewController: UIViewController {
         
         listenToToolbar()
         listenToCollectionView()
+        listenToKeyboard()
     }
 
     
@@ -113,7 +116,7 @@ extension SearchViewController {
     @objc func handlePan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .ended:
-            if searchViewModel.collectionViewModel.highlightingAddWordField {
+            if collectionViewModel.highlightingAddWordField {
                 convertAddNewCellToRegularCell { [weak self] in
                     self?.addNewCellToRight()
                 }

@@ -200,19 +200,19 @@
 		3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */; };
 		3C1FE21C25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
-		3C21ED5927A3A7EF0005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED5927A3A7EF0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED5B27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED5C27A3A8A70005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED5C27A3A8A70005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED5D27A3A8A70005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED5E27A3A8A90005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED5E27A3A8A90005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED5F27A3A8A90005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED6027A3A8AA0005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED6027A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED6127A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED6227A3A8AA0005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED6227A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED6327A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED6427A3A8AA0005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED6427A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED6527A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED6627A3A8AB0005E183 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */; };
+		3C21ED6627A3A8AB0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED6727A3A8AB0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
 		3C21ED6927A3A8D10005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C21ED6A27A3A9310005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
@@ -1851,7 +1851,7 @@
 		3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideFindBar.xib; sourceTree = "<group>"; };
 		3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Prompt.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
-		3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarView.swift; sourceTree = "<group>"; };
 		3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarViewModel.swift; sourceTree = "<group>"; };
 		3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarViewController.swift; sourceTree = "<group>"; };
 		3C21ED7627A3C4AB0005E183 /* RealmModel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealmModel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2842,7 +2842,7 @@
 			children = (
 				3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */,
 				3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */,
-				3C21ED5827A3A7EF0005E183 /* ToolbarView.swift */,
+				3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */,
 			);
 			path = Toolbar;
 			sourceTree = "<group>";
@@ -3221,11 +3221,11 @@
 				3CFD5F83278A586B0031BC8B /* ListsVC+SearchBar.swift */,
 				3CFD5F7B278A486D0031BC8B /* ListsVC+DataSource.swift */,
 				3C08EAD4279B0C5400971D60 /* ListsVC+FlowLayout.swift */,
-				3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */,
-				3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */,
 				3C08EAE7279BA94A00971D60 /* ListsVC+Details.swift */,
 				3C21EE3727A463B40005E183 /* ListsVC+Realm.swift */,
 				3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */,
+				3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */,
+				3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */,
 				3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */,
 				3C08EAEB279BAA3900971D60 /* Details */,
 				3C4D3A61274769260010FD68 /* Testing */,
@@ -5591,7 +5591,7 @@
 				3C3642D2277BC2E70038CB18 /* LeftView.swift in Sources */,
 				3C7B7A66277F8DC400E1F602 /* HighlightsConstants.swift in Sources */,
 				3CCE2B58279D235D00F72351 /* ColorPickerIcon.swift in Sources */,
-				3C21ED6027A3A8AA0005E183 /* ToolbarView.swift in Sources */,
+				3C21ED6027A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C21EDD927A4617C0005E183 /* RealmModel+Photos.swift in Sources */,
 				3C4D3A1C274767410010FD68 /* ContentCell.swift in Sources */,
 				3C17685E27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */,
@@ -5851,7 +5851,7 @@
 				3C3642C6277BC2E70038CB18 /* Field.swift in Sources */,
 				3C21EDE027A4617C0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C364305277BC58E0038CB18 /* CameraVC+LivePreview.swift in Sources */,
-				3C21ED6227A3A8AA0005E183 /* ToolbarView.swift in Sources */,
+				3C21ED6227A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C4D39AF27475DC80010FD68 /* CameraViewController.swift in Sources */,
 				3C7BADAA275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C11996827499A4C00D6AFE3 /* ZoomView+Utilities.swift in Sources */,
@@ -5900,7 +5900,7 @@
 				3C3642EB277BC2E90038CB18 /* SearchViewController.swift in Sources */,
 				3C7BAD97275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C6C73B02781947600E039F0 /* SearchVC+Popovers.swift in Sources */,
-				3C21ED6427A3A8AA0005E183 /* ToolbarView.swift in Sources */,
+				3C21ED6427A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3CCE2B1F279D008C00F72351 /* FindIconUIView.swift in Sources */,
 				3C3642ED277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C4D3A792747696F0010FD68 /* GeneralUtilities.swift in Sources */,
@@ -6021,7 +6021,7 @@
 				3CB181D027A5F74000933372 /* ListsDetailVC+NavigationBar.swift in Sources */,
 				3CCCCAA327818CE9000381CE /* FindIconView.swift in Sources */,
 				3C08EAD9279BA84C00971D60 /* Utilities+UIView.swift in Sources */,
-				3C21ED5C27A3A8A70005E183 /* ToolbarView.swift in Sources */,
+				3C21ED5C27A3A8A70005E183 /* KeyboardToolbarView.swift in Sources */,
 				3CE9C1F8274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
@@ -6112,7 +6112,7 @@
 				3C21EE1A27A461810005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3CCE2B18279D008B00F72351 /* ButtonView.swift in Sources */,
 				3C4D3B19274776D20010FD68 /* ShutterStyleView.swift in Sources */,
-				3C21ED6627A3A8AB0005E183 /* ToolbarView.swift in Sources */,
+				3C21ED6627A3A8AB0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C1D1A3A275AA25D0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C4D3B14274776D20010FD68 /* SwipeToNavigateView.swift in Sources */,
 				3CC594FD279F3324001D07DC /* ColorPickerView.swift in Sources */,
@@ -6162,7 +6162,7 @@
 				3C17686B27AAEE1A0099D1CE /* SearchVC+Toolbar.swift in Sources */,
 				3C21EE1027A461800005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C8A5253277FC92A006CF91E /* Toolbar.swift in Sources */,
-				3C21ED5927A3A7EF0005E183 /* ToolbarView.swift in Sources */,
+				3C21ED5927A3A7EF0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3CC594FE279F3324001D07DC /* ColorPickerView.swift in Sources */,
 				3C4D3B9727477ABD0010FD68 /* SearchVC+Datasource.swift in Sources */,
 				3C2DBBC4277D5D7900911A74 /* SearchVC+Cell.swift in Sources */,
@@ -6340,7 +6340,7 @@
 				3C6C7328278193F600E039F0 /* ViewController.swift in Sources */,
 				3C6C73BB2781947E00E039F0 /* VisionUtilities.swift in Sources */,
 				3C6C73B82781947A00E039F0 /* Vision.swift in Sources */,
-				3C21ED5E27A3A8A90005E183 /* ToolbarView.swift in Sources */,
+				3C21ED5E27A3A8A90005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C6C73602781945D00E039F0 /* HighlightsView.swift in Sources */,
 				3C6C73812781946B00E039F0 /* CameraUtilities.swift in Sources */,
 				3C6C7424278194A500E039F0 /* Utilities+Math.swift in Sources */,

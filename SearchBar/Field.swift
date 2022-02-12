@@ -7,7 +7,10 @@
 
 import UIKit
 
-struct Field: Identifiable {
+struct Field: Identifiable, Equatable {
+    static func == (lhs: Field, rhs: Field) -> Bool {
+        return lhs.value == rhs.value
+    }
     
     let id = UUID()
     
@@ -36,7 +39,18 @@ struct Field: Identifiable {
     }
     
     /// same as `Value`, but with an extra case: `addNew`
-    enum FieldValue {
+    enum FieldValue: Equatable {
+        static func == (lhs: Field.FieldValue, rhs: Field.FieldValue) -> Bool {
+            switch (lhs, rhs) {
+            case (let .word(lhsWord), let .word(rhsWord)):
+                return lhsWord == rhsWord
+            case (let .list(lhsList), let .list(rhsList)):
+                return lhsList == rhsList
+            default:
+                return false
+            }
+        }
+        
         case word(Word)
         case list(List)
         case addNew(Word) /// `String` for input text during add new -> full cell animation
