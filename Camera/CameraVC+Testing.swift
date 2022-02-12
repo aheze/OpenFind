@@ -21,10 +21,9 @@ extension CameraViewController {
             )
             
             tabBarHostingController.view.backgroundColor = .clear
-            testingTabBarContainerView.backgroundColor = .clear
+            testingTabBarContainerView.backgroundColor = .systemBlue
             addChildViewController(tabBarHostingController, in: testingTabBarContainerView)
             testingTabBarContainerView.isHidden = false
-            testingTabBarContainerView.addDebugBorders(.blue)
         } else {
             testingTabBarContainerView.isHidden = true
         }

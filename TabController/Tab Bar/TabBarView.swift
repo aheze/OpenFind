@@ -34,7 +34,7 @@ struct TabBarView: View {
                     .padding(.horizontal, 16)
                 )
                 .overlay(
-                    CameraToolbarView(viewModel: cameraViewModel)
+                    CameraToolbarView(model: cameraViewModel)
                         .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
                         .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
                 )

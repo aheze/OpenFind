@@ -1249,6 +1249,7 @@
 		3C9314AD27B844EC009E5B6E /* TabTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EB74279CAC2C00971D60 /* TabTransitioning.swift */; };
 		3C9314AE27B844EC009E5B6E /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
 		3C9314AF27B844FA009E5B6E /* ListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */; };
+		3C9314B127B84822009E5B6E /* CameraToolbarUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9314B027B84822009E5B6E /* CameraToolbarUtilities.swift */; };
 		3C93FC3E27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */; };
 		3C93FC4027A0EDEC00EBBC81 /* IconPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */; };
 		3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */; };
@@ -2308,6 +2309,7 @@
 		3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Keyboard.swift"; sourceTree = "<group>"; };
 		3C93148827B82167009E5B6E /* ListsDetailVC+WordsToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+WordsToolbar.swift"; sourceTree = "<group>"; };
 		3C93149B27B84457009E5B6E /* VC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Setup.swift"; sourceTree = "<group>"; };
+		3C9314B027B84822009E5B6E /* CameraToolbarUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarUtilities.swift; sourceTree = "<group>"; };
 		3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IconPickerVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewModel.swift; sourceTree = "<group>"; };
 		3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerCell.swift; sourceTree = "<group>"; };
@@ -3022,6 +3024,7 @@
 				3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */,
 				3C4D398727475BB10010FD68 /* FlashIconView.swift */,
 				3C4D397E27475BB10010FD68 /* SettingsIconView.swift */,
+				3C9314B027B84822009E5B6E /* CameraToolbarUtilities.swift */,
 			);
 			path = Toolbar;
 			sourceTree = "<group>";
@@ -4951,7 +4954,7 @@
 				3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */,
 				3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */,
-				3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 4999AC912353A80A00AB06A7 /* Products */;
 			projectDirPath = "";
@@ -5751,6 +5754,7 @@
 				3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */,
 				3CCE2B22279D008C00F72351 /* ClearIconView.swift in Sources */,
 				3CB002332762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
+				3C9314B127B84822009E5B6E /* CameraToolbarUtilities.swift in Sources */,
 				3C9314AD27B844EC009E5B6E /* TabTransitioning.swift in Sources */,
 				3C9314A127B844EC009E5B6E /* TabBarController.swift in Sources */,
 				3CCCCA9F27818CE8000381CE /* FindIconView.swift in Sources */,
@@ -8679,7 +8683,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -8724,52 +8728,52 @@
 /* Begin XCSwiftPackageProductDependency section */
 		3C21ED8E27A3CD910005E183 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		3C21ED9027A3CD910005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		3C21ED9227A3CE000005E183 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		3C21ED9427A3CE000005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		3C21EDC327A45C130005E183 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		3C21EDC527A45C130005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		3C21EE3B27A4CEFF0005E183 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		3C21EE3D27A4CEFF0005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		3C21EE4427A5297C0005E183 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		3C21EE4627A5297C0005E183 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		3C2DBBD8277E734300911A74 /* Popovers */ = {
@@ -8839,12 +8843,12 @@
 		};
 		3C93149D27B844D7009E5B6E /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		3C93149F27B844D7009E5B6E /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		3CFD5F79278A37F00031BC8B /* Popovers */ = {

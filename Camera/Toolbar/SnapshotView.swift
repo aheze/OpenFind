@@ -13,59 +13,57 @@ struct SnapshotConstants {
 }
 
 struct SnapshotView: View {
-    @Binding var done: Bool
+    @Binding var isOn: Bool
+    @Binding var isEnabled: Bool
+
     @State var scaleAnimationActive = false /// scale up/down animation flag
     @State var startTrim = CGFloat(0)
     @State var endTrim = SnapshotConstants.checkStartTrim
-    
+
     var body: some View {
         Button {
-            /// small scale animation
-            withAnimation(.spring()) { scaleAnimationActive = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
-                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
-            }
-            
-            done.toggle()
-            if done {
-                withAnimation(
-                    .spring()
-                ) {
-                    startTrim = SnapshotConstants.checkStartTrim
-                    endTrim = CGFloat(1)
-                }
-            } else {
-                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) {
-                    startTrim = CGFloat(0)
-                    endTrim = SnapshotConstants.checkStartTrim
-                }
-            }
+            scale(scaleAnimationActive: $scaleAnimationActive)
+            toggle()
         } label: {
-            VStack {
-                Image("CameraRim") /// wim of camera
-                    .foregroundColor(done ? Color(Constants.activeIconColor) : .white)
-                    .overlay(
-                        CameraInnerShape()
-                            .trim(from: startTrim, to: endTrim)
-                            .stroke(
-                                done ? Color(Constants.activeIconColor) : .white,
-                                style: .init(
-                                    lineWidth: 1.5,
-                                    lineCap: .round,
-                                    lineJoin: .round
-                                )
+            Image("CameraRim") /// rim of camera
+                .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
+                .overlay(
+                    CameraInnerShape()
+                        .trim(from: startTrim, to: endTrim)
+                        .stroke(
+                            isOn ? Color(Constants.activeIconColor) : .white,
+                            style: .init(
+                                lineWidth: 1.5,
+                                lineCap: .round,
+                                lineJoin: .round
                             )
-                            .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
-                    )
+                        )
+                        .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
+                )
+                .frame(width: 40, height: 40)
+                .enabledModifier(isEnabled: isEnabled, linePadding: 10)
+                .scaleEffect(scaleAnimationActive ? 1.2 : 1)
+                .cameraToolbarIconBackground()
+        }
+        .disabled(!isEnabled)
+    }
+
+    func toggle() {
+        withAnimation {
+            isOn.toggle()
+        }
+        if isOn {
+            withAnimation(
+                .spring()
+            ) {
+                startTrim = SnapshotConstants.checkStartTrim
+                endTrim = CGFloat(1)
             }
-            .scaleEffect(scaleAnimationActive ? 1.2 : 1)
-            .frame(width: 40, height: 40)
-            .foregroundColor(.white)
-            .font(.system(size: 19))
-            .background(
-                Color.white.opacity(0.15)
-            )
-            .cornerRadius(20)
+        } else {
+            withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) {
+                startTrim = CGFloat(0)
+                endTrim = SnapshotConstants.checkStartTrim
+            }
         }
     }
 }
@@ -76,7 +74,7 @@ struct CameraInnerShape: Shape {
         get { progress }
         set { progress = newValue }
     }
-    
+
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let circleRadius = CGFloat(4)
@@ -89,7 +87,7 @@ struct CameraInnerShape: Shape {
             endAngle: .degrees(180),
             clockwise: true
         )
-        
+
         let checkStartX = rect.width / 2 - 4
         let checkMidX = rect.width / 2 - 0.95
         let checkEndX = rect.width / 2 + 4
@@ -101,9 +99,9 @@ struct CameraInnerShape: Shape {
 }
 
 struct SnapshotViewTester: View {
-    @State var done = false
+    @State var isOn = false
     var body: some View {
-        SnapshotView(done: $done)
+        SnapshotView(isOn: $isOn, isEnabled: .constant(true))
     }
 }
 
