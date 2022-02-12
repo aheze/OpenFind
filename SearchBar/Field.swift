@@ -41,12 +41,13 @@ struct Field: Identifiable {
         case list(List)
         case addNew(Word) /// `String` for input text during add new -> full cell animation
         
+        /// get the text of the value. "Untitled" if it's an untitled list.
         func getText() -> String {
             switch self {
             case .word(let word):
                 return word.string
             case .list(let list):
-                return list.name
+                return list.name.isEmpty ? "Untitled" : list.name
             case .addNew(let word):
                 return word.string
             }

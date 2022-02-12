@@ -30,7 +30,10 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchCollectionView: SearchCollectionView!
     
     lazy var keyboardToolbarViewModel = KeyboardToolbarViewModel(realmModel: realmModel)
-    lazy var toolbarViewController = KeyboardToolbarViewController(model: keyboardToolbarViewModel)
+    lazy var toolbarViewController = KeyboardToolbarViewController(
+        searchViewModel: searchViewModel,
+        model: keyboardToolbarViewModel
+    )
     
     init?(
         coder: NSCoder,
@@ -55,7 +58,8 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false /// allow auto sizing
+        
         updateLandscapeConstants()
         searchBarTopC.constant = 0
         searchBarBottomC.constant = 0
@@ -64,6 +68,9 @@ class SearchViewController: UIViewController {
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
         setupToolbar()
+        
+        listenToToolbar()
+        listenToCollectionView()
     }
 
     
@@ -106,7 +113,7 @@ extension SearchViewController {
     @objc func handlePan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .ended:
-            if searchCollectionViewFlowLayout.highlightingAddWordField {
+            if searchViewModel.collectionViewModel.highlightingAddWordField {
                 convertAddNewCellToRegularCell { [weak self] in
                     self?.addNewCellToRight()
                 }

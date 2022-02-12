@@ -16,13 +16,12 @@ extension SearchViewController {
             name: .listsUpdated,
             object: nil
         )
-        listenToToolbar()
     }
     
     func listenToToolbar() {
         keyboardToolbarViewModel.listSelected = { [weak self] list in
             guard let self = self else { return }
-            if let currentIndex = self.searchCollectionViewFlowLayout.focusedCellIndex {
+            if let currentIndex = self.searchViewModel.collectionViewModel.focusedCellIndex {
                 self.searchViewModel.fields[currentIndex] = Field(
                     configuration: self.searchViewModel.configuration,
                     value: .list(list)

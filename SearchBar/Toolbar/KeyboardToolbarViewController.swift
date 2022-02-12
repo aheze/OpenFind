@@ -11,8 +11,14 @@ import SwiftUI
 
 class KeyboardToolbarViewController: UIViewController {
     
+    var searchViewModel: SearchViewModel
     var model: KeyboardToolbarViewModel
-    init(model: KeyboardToolbarViewModel) {
+    
+    init(
+        searchViewModel: SearchViewModel,
+        model: KeyboardToolbarViewModel
+    ) {
+        self.searchViewModel = searchViewModel
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,7 +35,7 @@ class KeyboardToolbarViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .clear
         
-        let containerView = ToolbarView(model: model)
+        let containerView = ToolbarView(searchViewModel: searchViewModel, model: model)
         let hostingController = UIHostingController(rootView: containerView)
         hostingController.view.frame = view.bounds
         hostingController.view.backgroundColor = .clear

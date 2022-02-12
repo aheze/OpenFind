@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ToolbarView: View {
+    @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var model: KeyboardToolbarViewModel
 
     var body: some View {

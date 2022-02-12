@@ -10,7 +10,7 @@ import UIKit
 extension SearchViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.isTracking {
-            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = searchCollectionViewFlowLayout.reachedEndBeforeAddWordField
+            searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew = searchViewModel.collectionViewModel.reachedEndBeforeAddWordField
         }
     }
     
@@ -57,7 +57,7 @@ extension SearchViewController: UICollectionViewDelegate {
     }
     
     func addNewCellToRight() {
-        searchCollectionViewFlowLayout.highlightingAddWordField = false
+        searchViewModel.collectionViewModel.highlightingAddWordField = false
         
         /// append new "Add New" cell
         let newField = Field(
@@ -98,10 +98,10 @@ extension SearchViewController: UICollectionViewDelegate {
         }
         
         /// after scroll view stopped, set the content offset
-        if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
-            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
+        if searchViewModel.collectionViewModel.reachedEndBeforeAddWordField {
+            searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew = true
         } else {
-            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
+            searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew = false
         }
         
         searchCollectionView.isUserInteractionEnabled = true

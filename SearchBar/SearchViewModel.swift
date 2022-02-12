@@ -8,48 +8,67 @@
 
 import UIKit
 
-class SearchViewModel: ObservableObject {
+/// Model for the collection view
+class SearchCollectionViewModel: ObservableObject {
     
-    var configuration: SearchConfiguration
-    var isLandscape = false
-    func getTotalHeight() -> CGFloat {
-        if isLandscape {
-            return configuration.cellHeight + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
-        } else {
-            return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
+    /// index of focused/expanded cell
+    @Published var focusedCellIndex: Int? {
+        didSet {
+            focusedCellIndexChanged?(oldValue, focusedCellIndex)
         }
     }
+    /// old / new
+    var focusedCellIndexChanged: ((Int?, Int?) -> Void)?
+    
+    /// prepared before?
+    var preparedOnce = false
+    
+    /// pass back data
+    var highlightAddNewField: ((Bool) -> Void)?
+    
+    /// fast swipe, instantly convert
+    var convertAddNewCellToRegularCell: ((@escaping () -> Void) -> Void)?
+    var currentConvertingAddNewCellToRegularCell = false /// if in progress of converting
+    
+    /// collection view is about to reach the end (auto-scrolling) or has reached the end
+    var reachedEndBeforeAddWordField = false
+    
+    /// call this from the scroll view delegate when
+    /// 1. finger is down
+    /// 2. `reachedEnd` is true
+    var shouldUseOffsetWithAddNew = false
+    
+    /// when deleting cells
+    var deletedIndex: Int?
+    var fallbackIndex: Int?
+    
+    
+    /// showing (past the point where it will auto-scroll) the last field or not
+    var highlightingAddWordField = false
+    
+    /// get the widths of cells
+    var getFullCellWidth: ((Int) -> CGFloat)?
+}
+
+class SearchViewModel: ObservableObject {
+    var configuration: SearchConfiguration
+    var isLandscape = false
     
     init(configuration: SearchConfiguration) {
         self.configuration = configuration
     }
     
-    var fields = [
-        Field(
-            value: .word(
-                .init(
-                    string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
-                )
-            )
-        ),
-        Field(
-            value: .addNew(
-                .init(
-                    string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 1).hex
-                )
-            )
-        )
-    ] {
+    var collectionViewModel = SearchCollectionViewModel()
+    
+    var fields = defaultFields {
         didSet {
             updateStringToGradients()
             fieldsChanged?(oldValue, fields)
         }
     }
-    
     var fieldsChanged: (([Field], [Field]) -> Void)?
     
+
     var values: [Field.FieldValue] {
         return fields.dropLast().map { $0.value }
     }
@@ -101,4 +120,33 @@ class SearchViewModel: ObservableObject {
         }
         customWords = Array(words)
     }
+    
+    func getTotalHeight() -> CGFloat {
+        if isLandscape {
+            return configuration.cellHeight + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
+        } else {
+            return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
+        }
+    }
+}
+
+extension SearchViewModel {
+    static let defaultFields = [
+        Field(
+            value: .word(
+                .init(
+                    string: "",
+                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
+                )
+            )
+        ),
+        Field(
+            value: .addNew(
+                .init(
+                    string: "",
+                    color: Constants.defaultHighlightColor.getFieldColor(for: 1).hex
+                )
+            )
+        )
+    ]
 }

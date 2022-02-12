@@ -7,16 +7,15 @@
 
 import UIKit
 
-extension SearchViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchViewModel.fields.count + 1
+extension SearchViewController {
+    func createFlowLayout() -> SearchCollectionViewFlowLayout {
+        let flowLayout = SearchCollectionViewFlowLayout(searchViewModel: searchViewModel)
+        flowLayout.scrollDirection = .horizontal
+        searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
+        return flowLayout
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return getCell(for: indexPath.item)
-    }
-    
-    func widthOfExpandedCell(for index: Int) -> Double {
+    func getWidthOfExpandedCell(for index: Int) -> Double {
         var extraPadding = CGFloat(0)
         
         if index == 0 {
@@ -28,7 +27,7 @@ extension SearchViewController: UICollectionViewDataSource {
         var fieldsCount = searchViewModel.fields.count
         
         /// The last field (not add new) is being deleted, make the previous one (fallback) full width
-        if searchCollectionViewFlowLayout.fallbackIndex != nil {
+        if searchViewModel.collectionViewModel.fallbackIndex != nil {
             fieldsCount -= 1
         }
         
@@ -39,9 +38,17 @@ extension SearchViewController: UICollectionViewDataSource {
         }
         
         let fullWidth = searchCollectionView.bounds.width
-//        - searchCollectionView.safeAreaInsets.left
-//        - searchCollectionView.safeAreaInsets.right
         return max(searchViewModel.configuration.minimumHuggingWidth, fullWidth - extraPadding)
+    }
+}
+
+extension SearchViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return searchViewModel.fields.count + 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return getCell(for: indexPath.item)
     }
 }
 

@@ -14,52 +14,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         self.searchViewModel = searchViewModel
         super.init()
     }
-    
-    /// prepared before?
-    var preparedOnce = false
-    
-    /// get data
-    var getFields: (() -> [Field])?
-    var getFullCellWidth: ((Int) -> CGFloat)?
-    
-    /// pass back data
-    var highlightAddNewField: ((Bool) -> Void)?
-    
-    /// fast swipe, instantly convert
-    var convertAddNewToRegularCellInstantly: ((@escaping () -> Void) -> Void)?
-    var convertingInstantly = false /// if in progress of converting
-    
+
     /// store the frame of each item
     /// plus other properties
     var layoutAttributes = [FieldLayoutAttributes]()
     
-    /// collection view is about to reach the end (auto-scrolling) or has reached the end
-    var reachedEndBeforeAddWordField = false
-    
-    /// call this from the scroll view delegate when
-    /// 1. finger is down
-    /// 2. `reachedEnd` is true
-    var shouldUseOffsetWithAddNew = false
-    
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
-    
-    /// old / new
-    var focusedCellIndexChanged: ((Int?, Int?) -> Void)?
-    
-    /// index of focused/expanded cell
-    var focusedCellIndex: Int? {
-        didSet {
-            focusedCellIndexChanged?(oldValue, focusedCellIndex)
-        }
-    }
-    
-    var deletedIndex: Int?
-    var fallbackIndex: Int?
-    
-    /// showing (past the point where it will auto-scroll) the last field or not
-    var highlightingAddWordField = false
-    
+
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
@@ -80,7 +42,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        if let focusedCellIndex = focusedCellIndex {
+        if let focusedCellIndex = searchViewModel.collectionViewModel.focusedCellIndex {
             let attributes = layoutAttributes[safe: focusedCellIndex]
             var targetContentOffset = attributes?.fullOrigin ?? proposedContentOffset.x
             if focusedCellIndex == 0 { /// index 0
@@ -101,10 +63,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let contentOffset = collectionView.contentOffset.x + collectionView.safeAreaInsets.left
         currentOffset = contentOffset
         
-        guard let fields = getFields?() else { return }
+        let fields = searchViewModel.fields
         var fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size
 
-        if let deletedIndex = deletedIndex {
+        if let deletedIndex = searchViewModel.collectionViewModel.deletedIndex {
             fieldHuggingWidths[deletedIndex] = 0
         }
         
@@ -116,7 +78,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var rightFieldOffsets = [FieldOffset]() /// same, for fields after the focused one
         
         for index in fieldHuggingWidths.indices {
-            let fullCellWidth = getFullCellWidth?(index) ?? 0
+            let fullCellWidth = searchViewModel.collectionViewModel.getFullCellWidth?(index) ?? 0
 
             var adjustedSidePadding = CGFloat(0)
             var cellOriginWithoutSidePadding: CGFloat
@@ -152,23 +114,23 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 var alpha = CGFloat(1)
                 if index == fieldHuggingWidths.count - 1 {
                     /// only highlight/unhighlight when cell is not being instantly added
-                    if !convertingInstantly {
+                    if !searchViewModel.collectionViewModel.currentConvertingAddNewCellToRegularCell {
                         /// when hit the edge already
-                        if shouldUseOffsetWithAddNew {
+                        if searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew {
                             let percentage = distanceTravelledLeft / (searchViewModel.configuration.addWordFieldSnappingFactor * distanceToNextCell)
                             alpha = min(1, percentage)
                             
                             /// highlight/tap `true` if percentage > 1
                             let shouldHighlight = percentage > 1
                             if shouldHighlight {
-                                if !highlightingAddWordField { /// don't call too many times
-                                    highlightingAddWordField = true
-                                    highlightAddNewField?(true)
+                                if !searchViewModel.collectionViewModel.highlightingAddWordField { /// don't call too many times
+                                    searchViewModel.collectionViewModel.highlightingAddWordField = true
+                                    searchViewModel.collectionViewModel.highlightAddNewField?(true)
                                 }
                             } else {
-                                if highlightingAddWordField { /// don't call too many times
-                                    highlightingAddWordField = false
-                                    highlightAddNewField?(false)
+                                if searchViewModel.collectionViewModel.highlightingAddWordField { /// don't call too many times
+                                    searchViewModel.collectionViewModel.highlightingAddWordField = false
+                                    searchViewModel.collectionViewModel.highlightAddNewField?(false)
                                 }
                             }
                         } else {
@@ -238,7 +200,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             attributes.percentage = fieldOffset.percentage
             attributes.configuration = searchViewModel.configuration /// save the configuration first
             
-            if let deletedIndex = deletedIndex, deletedIndex == fullIndex {
+            if let deletedIndex = searchViewModel.collectionViewModel.deletedIndex, deletedIndex == fullIndex {
                 attributes.transform = .init(scaleX: 0.5, y: 0.5)
                 attributes.alpha = 0
                 
@@ -273,17 +235,17 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
         
         /// set from scrollview delegate
-        if shouldUseOffsetWithAddNew {
+        if searchViewModel.collectionViewModel.shouldUseOffsetWithAddNew {
             contentSize = CGSize(
                 width: fullOrigin + sidePadding,
                 height: searchViewModel.configuration.cellHeight +
-                (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
+                    (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
             )
         } else {
             contentSize = CGSize(
                 width: fullOriginWithoutAddNew + sidePadding,
                 height: searchViewModel.configuration.cellHeight +
-                (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
+                    (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
             )
         }
         
@@ -293,8 +255,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         self.layoutAttributes = layoutAttributes
         
-        if !preparedOnce {
-            preparedOnce = true
+        if !searchViewModel.collectionViewModel.preparedOnce {
+            searchViewModel.collectionViewModel.preparedOnce = true
             
             /// get the target offset
             let targetOffset = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0), velocity: .zero)
@@ -326,17 +288,17 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// convenience - get the target offset, then you must scroll there.
     func getTargetOffsetForScrollingThere(for point: CGPoint, velocity: CGPoint) -> CGPoint {
         let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point, velocity: velocity)
-        focusedCellIndex = focusedIndex
+        searchViewModel.collectionViewModel.focusedCellIndex = focusedIndex
         return targetOffset
     }
     
     /// get nearest field, then scroll to it (with padding)
     func getTargetOffsetAndIndex(for point: CGPoint, velocity: CGPoint) -> (CGPoint, Int?) {
         if /// handle end, but not actually swiped
-            highlightingAddWordField,
+            searchViewModel.collectionViewModel.highlightingAddWordField,
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
         {
-            reachedEndBeforeAddWordField = true
+            searchViewModel.collectionViewModel.reachedEndBeforeAddWordField = true
             let targetContentOffset = addWordFieldOrigin - sidePeekPadding
             return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
@@ -380,9 +342,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             if let closestAttribute = closestAttribute {
                 targetContentOffset = closestAttribute.fullOrigin
             } else { /// swiped to the last one. Instantly add it.
-                convertingInstantly = true
-                convertAddNewToRegularCellInstantly?() { [weak self] in
-                    self?.convertingInstantly = false
+                searchViewModel.collectionViewModel.currentConvertingAddNewCellToRegularCell = true
+                searchViewModel.collectionViewModel.convertAddNewCellToRegularCell?() { [weak self] in
+                    self?.searchViewModel.collectionViewModel.currentConvertingAddNewCellToRegularCell = false
                 }
                 
                 if let lastOrigin = layoutAttributes[safe: layoutAttributes.count - 1]?.fullOrigin {
@@ -398,9 +360,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             if closestAttributeIndex == layoutAttributes.count - 2 { /// last field before "add new" field
-                reachedEndBeforeAddWordField = true
+                searchViewModel.collectionViewModel.reachedEndBeforeAddWordField = true
             } else {
-                reachedEndBeforeAddWordField = false
+                searchViewModel.collectionViewModel.reachedEndBeforeAddWordField = false
             }
             
             return (CGPoint(x: targetContentOffset, y: 0), closestAttributeIndex)
