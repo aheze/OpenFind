@@ -832,7 +832,6 @@
 		3C6C73702781946200E039F0 /* CameraVC+Highlights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A60277EEB9C00E1F602 /* CameraVC+Highlights.swift */; };
 		3C6C73712781946200E039F0 /* CameraVC+LivePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364304277BC58E0038CB18 /* CameraVC+LivePreview.swift */; };
 		3C6C73722781946B00E039F0 /* LivePreviewVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */; };
-		3C6C73732781946B00E039F0 /* FallbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E9274B4432008C903C /* FallbackView.xib */; };
 		3C6C73742781946B00E039F0 /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
 		3C6C73752781946B00E039F0 /* LivePreviewVC+Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A6E277F9CFA00E1F602 /* LivePreviewVC+Photo.swift */; };
 		3C6C73762781946B00E039F0 /* LivePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119970274B32B400D6AFE3 /* LivePreviewView.swift */; };
@@ -845,13 +844,11 @@
 		3C6C737D2781946B00E039F0 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C6C737E2781946B00E039F0 /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
 		3C6C737F2781946B00E039F0 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
-		3C6C73802781946B00E039F0 /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E7274B4427008C903C /* FallbackView.swift */; };
 		3C6C73812781946B00E039F0 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C6C73822781946B00E039F0 /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
 		3C6C73832781946B00E039F0 /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
 		3C6C73842781946B00E039F0 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
 		3C6C73852781946C00E039F0 /* LivePreviewVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */; };
-		3C6C73862781946C00E039F0 /* FallbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E9274B4432008C903C /* FallbackView.xib */; };
 		3C6C73872781946C00E039F0 /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
 		3C6C73882781946C00E039F0 /* LivePreviewVC+Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A6E277F9CFA00E1F602 /* LivePreviewVC+Photo.swift */; };
 		3C6C73892781946C00E039F0 /* ZoomView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */; };
@@ -859,7 +856,6 @@
 		3C6C738E2781946C00E039F0 /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3C6C738F2781946C00E039F0 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
-		3C6C73922781946C00E039F0 /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E7274B4427008C903C /* FallbackView.swift */; };
 		3C6C73932781946C00E039F0 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C6C73942781946C00E039F0 /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
 		3C6C73952781946C00E039F0 /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
@@ -1172,6 +1168,10 @@
 		3C9314F727B8EAAA009E5B6E /* PhotosVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */; };
 		3C93151927B97667009E5B6E /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3C93151A27B9766E009E5B6E /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
+		3C93152027B990B2009E5B6E /* CameraNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93151F27B990B2009E5B6E /* CameraNotFoundView.swift */; };
+		3C93152127B991AE009E5B6E /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
+		3C93152227B991E8009E5B6E /* CameraNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93151F27B990B2009E5B6E /* CameraNotFoundView.swift */; };
+		3C93152327B991E9009E5B6E /* CameraNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93151F27B990B2009E5B6E /* CameraNotFoundView.swift */; };
 		3C93FC3E27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */; };
 		3C93FC4027A0EDEC00EBBC81 /* IconPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */; };
 		3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */; };
@@ -1440,8 +1440,6 @@
 		3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */; };
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
-		3CE9C1E8274B4427008C903C /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E7274B4427008C903C /* FallbackView.swift */; };
-		3CE9C1EA274B4432008C903C /* FallbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E9274B4432008C903C /* FallbackView.xib */; };
 		3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
@@ -1450,8 +1448,6 @@
 		3CE9C1FA274B4E44008C903C /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
 		3CE9C1FB274B4E44008C903C /* LivePreviewVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */; };
 		3CE9C1FC274B4E44008C903C /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
-		3CE9C1FD274B4E47008C903C /* FallbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E9274B4432008C903C /* FallbackView.xib */; };
-		3CE9C1FE274B4E47008C903C /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1E7274B4427008C903C /* FallbackView.swift */; };
 		3CE9C200274B4F05008C903C /* ZoomView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */; };
 		3CE9C201274B4F05008C903C /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3CE9C202274B4F05008C903C /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67E4EF274840F9001F1B4B /* ZoomView.swift */; };
@@ -2218,6 +2214,7 @@
 		3C9314EF27B8EA39009E5B6E /* ListsVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Delegate.swift"; sourceTree = "<group>"; };
 		3C9314F227B8EA50009E5B6E /* PhotosVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Delegate.swift"; sourceTree = "<group>"; };
+		3C93151F27B990B2009E5B6E /* CameraNotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNotFoundView.swift; sourceTree = "<group>"; };
 		3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IconPickerVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewModel.swift; sourceTree = "<group>"; };
 		3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerCell.swift; sourceTree = "<group>"; };
@@ -2325,8 +2322,6 @@
 		3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTransitions.swift; sourceTree = "<group>"; };
 		3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTransitions.swift; sourceTree = "<group>"; };
 		3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3CE9C1E7274B4427008C903C /* FallbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallbackView.swift; sourceTree = "<group>"; };
-		3CE9C1E9274B4432008C903C /* FallbackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FallbackView.xib; sourceTree = "<group>"; };
 		3CE9C1EB274B48E1008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1EF274B4911008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1F1274B4937008C903C /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2688,8 +2683,6 @@
 				3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */,
 				3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */,
 				3C119970274B32B400D6AFE3 /* LivePreviewView.swift */,
-				3CE9C1E7274B4427008C903C /* FallbackView.swift */,
-				3CE9C1E9274B4432008C903C /* FallbackView.xib */,
 			);
 			path = "Live Preview";
 			sourceTree = "<group>";
@@ -3675,6 +3668,7 @@
 			children = (
 				3CCCCA9A27818CDD000381CE /* GeneralViews.swift */,
 				3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */,
+				3C93151F27B990B2009E5B6E /* CameraNotFoundView.swift */,
 				3CCCCA9827818CAF000381CE /* FindIconView.swift */,
 				3CC594F6279F32E6001D07DC /* ColorPickerView.swift */,
 				3C7B7A7D277FA50B00E1F602 /* Assets.xcassets */,
@@ -4950,7 +4944,6 @@
 				3C4D3A8B27476E180010FD68 /* PhotosContent.storyboard in Resources */,
 				3C4D3A17274767410010FD68 /* TabContent.storyboard in Resources */,
 				3C4D395E274759510010FD68 /* Main.storyboard in Resources */,
-				3CE9C1FD274B4E47008C903C /* FallbackView.xib in Resources */,
 				3CF76442278D19AC00DCA4EA /* SearchNavigationContent.storyboard in Resources */,
 				3C4D3A9127476EC70010FD68 /* SharedAssets.xcassets in Resources */,
 				3C08EB12279C76E500971D60 /* ListsContent.storyboard in Resources */,
@@ -4968,7 +4961,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CF76440278D19AC00DCA4EA /* SearchNavigationContent.storyboard in Resources */,
-				3CE9C1EA274B4432008C903C /* FallbackView.xib in Resources */,
 				3C4D3A92274771600010FD68 /* SharedAssets.xcassets in Resources */,
 				3C3642C3277BC2E70038CB18 /* RightView.xib in Resources */,
 				3C3642C5277BC2E70038CB18 /* LeftView.xib in Resources */,
@@ -5069,7 +5061,6 @@
 				3C6C739F2781947400E039F0 /* SearchFieldCell.xib in Resources */,
 				3C6C73432781944B00E039F0 /* TabContent.storyboard in Resources */,
 				3C08EB1D279C76E500971D60 /* ListsContent.storyboard in Resources */,
-				3C6C73732781946B00E039F0 /* FallbackView.xib in Resources */,
 				3C6C73A02781947400E039F0 /* LeftView.xib in Resources */,
 				3C6C73A72781947400E039F0 /* SearchBar.storyboard in Resources */,
 				3C6C733B2781944300E039F0 /* ScrollZoomContent.storyboard in Resources */,
@@ -5112,7 +5103,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6C73862781946C00E039F0 /* FallbackView.xib in Resources */,
 				3CE9C231274EBB72008C903C /* LaunchScreen.storyboard in Resources */,
 				3CE9C22E274EBB72008C903C /* Assets.xcassets in Resources */,
 				3CE9C22C274EBB70008C903C /* Main.storyboard in Resources */,
@@ -5444,7 +5434,6 @@
 				3CB181D227A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */,
 				3C7B7A64277F8DC400E1F602 /* HighlightsView.swift in Sources */,
 				3C4D39AB27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */,
-				3CE9C1FE274B4E47008C903C /* FallbackView.swift in Sources */,
 				3CD7063527A3842200B446D7 /* IconPickerController.swift in Sources */,
 				3C17686827AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
 				3C08EAF9279C76DC00971D60 /* ListsController.swift in Sources */,
@@ -5577,7 +5566,6 @@
 				3C7B7A6B277F94DD00E1F602 /* Highlight.swift in Sources */,
 				3C4D39C227475E2C0010FD68 /* GeneralUtilities.swift in Sources */,
 				3C3642CA277BC2E70038CB18 /* SearchViewModel.swift in Sources */,
-				3CE9C1E8274B4427008C903C /* FallbackView.swift in Sources */,
 				3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */,
 				3C93149527B823AE009E5B6E /* SearchVC+Toolbar.swift in Sources */,
 				3C21EDAC27A45BFE0005E183 /* RealmModel.swift in Sources */,
@@ -5651,6 +5639,7 @@
 				3C3642C6277BC2E70038CB18 /* Field.swift in Sources */,
 				3C21EDE027A4617C0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C364305277BC58E0038CB18 /* CameraVC+LivePreview.swift in Sources */,
+				3C93152327B991E9009E5B6E /* CameraNotFoundView.swift in Sources */,
 				3C21ED6227A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C9314E627B864F0009E5B6E /* CameraVC+Blur.swift in Sources */,
 				3C9314A827B844EC009E5B6E /* TabControllerView.swift in Sources */,
@@ -6149,6 +6138,7 @@
 				3C6C73AA2781947400E039F0 /* SuggestionsView.swift in Sources */,
 				3C6C742A278194A500E039F0 /* Utilities+UIColor.swift in Sources */,
 				3C6C73972781947400E039F0 /* SearchViewModel.swift in Sources */,
+				3C93152227B991E8009E5B6E /* CameraNotFoundView.swift in Sources */,
 				3C6C735E2781945D00E039F0 /* HighlightsConstants.swift in Sources */,
 				3C6C73712781946200E039F0 /* CameraVC+LivePreview.swift in Sources */,
 				3CC00EC427A6517700F6CF9C /* ListsVC+Selection.swift in Sources */,
@@ -6188,7 +6178,6 @@
 				3CB4C32027A701780093155E /* TabAttributes.swift in Sources */,
 				3C6C733F2781944700E039F0 /* ProgressLineView.swift in Sources */,
 				3CD7062F27A3842200B446D7 /* IconPickerController.swift in Sources */,
-				3C6C73802781946B00E039F0 /* FallbackView.swift in Sources */,
 				3CC5951B27A0EA24001D07DC /* IconPickerViewController.swift in Sources */,
 				3C6C73A52781947400E039F0 /* SearchFieldCell.swift in Sources */,
 				3C6C73372781943B00E039F0 /* Model.swift in Sources */,
@@ -6347,6 +6336,7 @@
 				3C7B7A88277FA6E300E1F602 /* Utilities+Dates.swift in Sources */,
 				3CCCCAB327818CEC000381CE /* GeneralViews.swift in Sources */,
 				3C21EDF227A4617E0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
+				3C93152027B990B2009E5B6E /* CameraNotFoundView.swift in Sources */,
 				3C21EDF327A4617E0005E183 /* RealmModel+History.swift in Sources */,
 				3CCCCAB427818CEC000381CE /* FindIconView.swift in Sources */,
 				3CCCCAB527818CEC000381CE /* ProgressLineView.swift in Sources */,
@@ -6354,6 +6344,7 @@
 				3C7B7A90277FA6E300E1F602 /* Utilities+SwiftUI.swift in Sources */,
 				3C8A525A277FC92C006CF91E /* Debug.swift in Sources */,
 				3C08EADE279BA85B00971D60 /* Utilities+UIView.swift in Sources */,
+				3C93152127B991AE009E5B6E /* TabModel.swift in Sources */,
 				3C7B7A8F277FA6E300E1F602 /* Utilities+UIViewController.swift in Sources */,
 				3C21EDF527A4617E0005E183 /* RealmModel+HistoryTesting.swift in Sources */,
 				3CCE2B00279D008900F72351 /* ButtonView.swift in Sources */,
@@ -6449,7 +6440,6 @@
 				3C1D1A21275AA1740064F2C6 /* UIKitViews.swift in Sources */,
 				3CE9C225274EBB70008C903C /* AppDelegate.swift in Sources */,
 				3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */,
-				3C6C73922781946C00E039F0 /* FallbackView.swift in Sources */,
 				3C1D1A2D275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,
 				3C08EB30279C76E700971D60 /* ListsModel.swift in Sources */,
 				3CE9C23D274EBD2B008C903C /* VC+Sizing.swift in Sources */,

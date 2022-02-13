@@ -7,7 +7,7 @@
 //
 
 import AVFoundation
-import UIKit
+import SwiftUI
 
 extension LivePreviewViewController {
     func configureCamera() {
@@ -18,12 +18,12 @@ extension LivePreviewViewController {
                 self.configureSession()
             }
         } else {
-            let fallbackView = FallbackView()
-            view.addSubview(fallbackView)
-            fallbackView.pinEdgesToSuperview()
-            fallbackView.goToPhotos = { [weak self] in
-                self?.findFromPhotosButtonPressed?()
-            }
+            let cameraNotFoundView = CameraNotFoundView()
+            let hostingController = UIHostingController(rootView: cameraNotFoundView)
+            addChildViewController(hostingController, in: view)
+            view.bringSubviewToFront(hostingController.view)
+            hostingController.view?.backgroundColor = .white
+
         }
     }
     

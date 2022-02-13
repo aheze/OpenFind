@@ -13,10 +13,6 @@ extension CameraViewController {
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let livePreviewViewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
         
-        livePreviewViewController.findFromPhotosButtonPressed = {
-            Tab.Control.moveToOtherTab?(.photos, true)
-        }
-        
         /// called when an image is first returned
         livePreviewViewController.needSafeViewUpdate = { [weak self] in
             guard let self = self else { return }

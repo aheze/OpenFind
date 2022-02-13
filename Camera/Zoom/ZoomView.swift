@@ -102,7 +102,7 @@ struct ZoomFactorContent: View {
     
     var body: some View {
         ZStack {
-            Color(UIColor(hex: 0x002F3B))
+            Color(hex: 0x002F3B)
                 .opacity(isActive ? 0.9 : 0.5)
                 .cornerRadius(24)
             
@@ -120,7 +120,7 @@ struct ZoomView: View {
     
     var body: some View {
         Color.clear.overlay(
-            Color(UIColor(hex: 0x002F3B))
+            Color(hex: 0x002F3B)
                 .opacity(0.3)
                 .frame(width: zoomViewModel.isExpanded ? nil : ZoomConstants.zoomFactorLength * 3 + ZoomConstants.edgePadding * 2, height: ZoomConstants.zoomFactorLength + ZoomConstants.edgePadding * 2)
                 .overlay(

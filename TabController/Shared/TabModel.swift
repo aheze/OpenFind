@@ -30,6 +30,8 @@ protocol PageViewController: UIViewController {
 /// Global access to tab properties
 enum Tab {
     enum Control {
+        
+        /// 1. the tab, 2. animate or not
         static var moveToOtherTab: ((TabState, Bool) -> Void)?
     }
 

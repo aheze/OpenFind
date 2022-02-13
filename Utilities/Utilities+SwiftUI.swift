@@ -26,6 +26,12 @@ public extension View {
     }
 }
 
+extension Color {
+    init(hex: UInt, alpha: CGFloat = 1) {
+        self.init(UIColor(hex: hex, alpha: alpha))
+    }
+}
+
 /// from https://forums.swift.org/t/swiftui-extension-for-os-specific-view-modifiers-that-seems-too-arcane-to-implement/30897/13
 extension View {
   @inlinable

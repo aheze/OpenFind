@@ -58,9 +58,6 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet var livePreviewView: LivePreviewView!
     @IBOutlet var pausedImageView: UIImageView!
     
-    /// in case no camera was found
-    var findFromPhotosButtonPressed: (() -> Void)?
-    
     let session = AVCaptureSession()
     let videoDataOutput = AVCaptureVideoDataOutput()
     let photoDataOutput = AVCapturePhotoOutput()
