@@ -28,7 +28,7 @@ class ViewController: UIViewController {
                 .init(
                     name: "List",
                     desc: "Desc",
-                    image: "plus",
+                    icon: "plus",
                     color: 0x00AEEF,
                     words: ["Word", "Branch", "Water", "Dirt"],
                     dateCreated: Date()
@@ -52,10 +52,9 @@ class ViewController: UIViewController {
         fieldSettingsModel.selectedColor = fields[0].overrides.selectedColor
         fieldSettingsModel.alpha = fields[0].overrides.alpha
         fieldSettingsModel.words = []
-        fieldSettingsModel.showingWords = false
         fieldSettingsModel.editListPressed = nil
         
-        let popoverView = FieldSettingsView(model: fieldSettingsModel)
+        let popoverView = FieldSettingsView(model: fieldSettingsModel, configuration: SearchConfiguration())
 
         var popover = Popover(attributes: .init()) {
             popoverView
@@ -88,7 +87,7 @@ class ViewController: UIViewController {
         fieldSettingsModel.alpha = fields[1].overrides.alpha
         fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water", "Context", "Popover", "Mud"]
         
-        let popoverView = FieldSettingsView(model: fieldSettingsModel)
+        let popoverView = FieldSettingsView(model: fieldSettingsModel, configuration: SearchConfiguration.lists)
         
         var popover = Popover(attributes: .init()) {
             popoverView
@@ -99,6 +98,7 @@ class ViewController: UIViewController {
         }
         
         popover.attributes.sourceFrame = { [weak listLabel] in listLabel.windowFrame() }
+        popover.attributes.rubberBandingMode = .none
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()

@@ -29,5 +29,11 @@ extension PhotosViewController {
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+        
+        
+        self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        self.updateNavigationBar?()
+        
+//        detailsViewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
     }
 }

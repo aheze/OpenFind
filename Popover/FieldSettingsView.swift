@@ -18,7 +18,6 @@ class FieldSettingsModel: ObservableObject {
     
     /// lists
     @Published var words = [String]()
-    @Published var showingWords = false
     @Published var editListPressed: (() -> Void)?
     
     /// Notify when the class changed.
@@ -47,140 +46,147 @@ enum FieldSettingsConstants {
 
 struct FieldSettingsView: View {
     @ObservedObject var model: FieldSettingsModel
+    var configuration: SearchConfiguration
     
     var body: some View {
         VStack(spacing: 0) {
             PopoverReader { context in
-                Button {
-                    if model.showingWords {
-                        withAnimation(.spring()) {
-                            model.showingWords = false
-                        }
-                    }
-                } label: {
-                    HStack(spacing: 4) {
-                        if model.showingWords {
-                            Image(systemName: "chevron.backward")
-                        }
-                        
-                        Text(model.header)
-                    }
-                    .foregroundColor(.white)
-                    .font(.system(size: 12, weight: .semibold))
-                    .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
-                }
-                .disabled(!model.showingWords)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
+                header(string: model.header)
             
-                Line()
+                Line(color: configuration.popoverDividerColor)
             
-                /// main content
-                VStack(spacing: 0) {
-                    FieldSettingsContainer {
-                        Button {
-                            withAnimation {
-                                model.selectedColor = nil
-                            }
-                        } label: {
-                            HStack {
-                                Text("Default")
-                                Spacer()
-                                Image(systemName: "checkmark")
-                                    .opacity(model.selectedColor == nil ? 1 : 0)
-                            }
-                            .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                            .modifier(PopoverButtonModifier(backgroundColor: model.defaultColor))
+                FieldSettingsContainer {
+                    Button {
+                        withAnimation {
+                            model.selectedColor = nil
                         }
-                    
-                        PaletteView(selectedColor: $model.selectedColor)
-                            .cornerRadius(FieldSettingsConstants.cornerRadius)
-                    
-                        OpacitySlider(value: $model.alpha, color: model.selectedColor ?? model.defaultColor)
-                            .frame(height: FieldSettingsConstants.sliderHeight)
-                            .cornerRadius(FieldSettingsConstants.cornerRadius)
+                    } label: {
+                        HStack {
+                            Text("Default")
+                            Spacer()
+                            Image(systemName: "checkmark")
+                                .opacity(model.selectedColor == nil ? 1 : 0)
+                        }
+                        .asPopoverButton(foregroundColor: defaultButtonForegroundColor(), backgroundColor: model.defaultColor)
                     }
                     
-                    Line()
+                    PaletteView(selectedColor: $model.selectedColor)
+                        .cornerRadius(FieldSettingsConstants.cornerRadius)
                     
-                    FieldSettingsContainer {
-                        Button {
-                            withAnimation(.spring()) {
-                                model.showingWords = true
-                            }
-                        } label: {
-                            Text("Show Words")
-                                .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-                        }
-                            
-                        Button {
-                            model.editListPressed?()
-                        } label: {
-                            Text("Edit List")
-                                .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-                        }
-                    }
-                    .clipped()
-                    .opacity(model.words.isEmpty ? 0 : 1)
-                    .frame(height: listButtonsHeight(), alignment: .top)
+                    OpacitySlider(value: $model.alpha, color: model.selectedColor ?? model.defaultColor)
+                        .frame(height: FieldSettingsConstants.sliderHeight)
+                        .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
-                .offset(x: model.showingWords ? -180 : 0, y: 0)
-                .opacity(model.showingWords ? 0 : 1)
-                .overlay(
-                    ScrollView {
-                        FieldSettingsContainer {
-                            ForEach(model.words, id: \.self) { word in
-                                Text(verbatim: word)
-                                    .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-                            }
-                        }
-                    }
-                    .offset(x: model.showingWords ? 0 : 180, y: 0)
-                    .opacity(model.showingWords ? 1 : 0),
-                    alignment: .top
-                )
+                
+                listsView()
+                    
+//                .overlay(
+//                    ScrollView {
+//                        FieldSettingsContainer {
+//                            ForEach(model.words, id: \.self) { word in
+//                                Text(verbatim: word)
+//                                    .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
+//                            }
+//                        }
+//                    }
+//                    alignment: .top
+//                )
             }
         }
         .frame(width: 180)
         .background(
             ZStack {
-                VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
-                UIColor(hex: 0x002F3B, alpha: 0.5).color.opacity(0.5)
+                VisualEffectView(effect: UIBlurEffect(style: configuration.popoverBackgroundBlurStyle))
+                configuration.popoverBackgroundColor.color.opacity(0.25)
             }
         )
         .cornerRadius(16)
     }
     
-    func listButtonsHeight() -> CGFloat? {
-        if model.words.isEmpty { /// not list, hide list buttons
-            return 0
-        } else if model.showingWords { /// list is showing words
-            return 70
-        } else { /// list is not showing words
-            return nil
+    func header(string: String, showEditListButton: Bool = false) -> some View {
+        HStack {
+            Text(string)
+            
+            if showEditListButton {
+                Spacer()
+                
+                Button {
+                    model.editListPressed?()
+                } label: {
+                    Image(systemName: "pencil")
+                }
+            }
+        }
+        .foregroundColor(configuration.popoverTextColor.color)
+        .font(.system(size: 12, weight: .semibold))
+        .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.bottom, 10)
+    }
+    
+    func listsView() -> some View {
+        VStack(spacing: 0) {
+            Line(color: configuration.popoverDividerColor)
+            
+            header(string: "WORDS", showEditListButton: true)
+            
+            ScrollView {
+                FieldSettingsContainer(applyPadding: false) {
+                    ForEach(model.words, id: \.self) { word in
+                        Text(verbatim: word)
+                            .asPopoverButton(foregroundColor: configuration.popoverTextColor, backgroundColor: configuration.popoverButtonColor)
+                    }
+                }
+                .padding(EdgeInsets(top: 0, leading: FieldSettingsConstants.padding, bottom: FieldSettingsConstants.padding, trailing: FieldSettingsConstants.padding))
+            }
+        }
+        .clipped()
+        .opacity(model.words.isEmpty ? 0 : 1)
+        .frame(height: model.words.isEmpty ? 0 : 200, alignment: .top)
+    }
+    
+    func defaultButtonForegroundColor() -> UIColor {
+        if model.defaultColor.isLight {
+            return .black
+        } else {
+            return .white
         }
     }
 }
 
 struct FieldSettingsContainer<Content: View>: View {
+    var applyPadding = true
     @ViewBuilder var content: Content
     var body: some View {
-        VStack(spacing: FieldSettingsConstants.spacing) {
-            content
+        if applyPadding {
+            VStack(spacing: FieldSettingsConstants.spacing) {
+                content
+            }
+            .padding(FieldSettingsConstants.padding)
+        } else {
+            VStack(spacing: FieldSettingsConstants.spacing) {
+                content
+            }
         }
-        .padding(FieldSettingsConstants.padding)
     }
 }
 
 struct PopoverButtonModifier: ViewModifier {
+    var foregroundColor: UIColor
     var backgroundColor: UIColor
     func body(content: Content) -> some View {
         content
-            .foregroundColor(.white)
+            .foregroundColor(foregroundColor.color)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(EdgeInsets(top: 10, leading: 12, bottom: 8, trailing: 12))
             .background(backgroundColor.color)
             .cornerRadius(FieldSettingsConstants.cornerRadius)
+    }
+}
+
+extension View {
+    func asPopoverButton(foregroundColor: UIColor, backgroundColor: UIColor) -> some View {
+        modifier(PopoverButtonModifier(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
     }
 }
 
@@ -306,7 +312,8 @@ struct OpacitySlider: View {
 struct FieldSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         FieldSettingsView(
-            model: FieldSettingsModel()
+            model: FieldSettingsModel(),
+            configuration: SearchConfiguration()
         )
         .previewLayout(.fixed(width: 250, height: 300))
     }

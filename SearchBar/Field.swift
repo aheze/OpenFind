@@ -42,9 +42,9 @@ struct Field: Identifiable, Equatable {
     enum FieldValue: Equatable {
         static func == (lhs: Field.FieldValue, rhs: Field.FieldValue) -> Bool {
             switch (lhs, rhs) {
-            case (let .word(lhsWord), let .word(rhsWord)):
+            case (let .word(lhsWord), .word(let rhsWord)):
                 return lhsWord == rhsWord
-            case (let .list(lhsList), let .list(rhsList)):
+            case (let .list(lhsList), .list(let rhsList)):
                 return lhsList == rhsList
             default:
                 return false
@@ -95,6 +95,15 @@ struct Field: Identifiable, Equatable {
             let rightPaddingWidth = configuration.fieldBaseViewRightPadding
             return textWidth + leftPaddingWidth + rightPaddingWidth
         }
+    }
+}
+
+extension String {
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        
+        return ceil(boundingBox.width)
     }
 }
 

@@ -29,7 +29,8 @@ extension SearchViewController {
                 }
             }
 
-            var popover = Popover { FieldSettingsView(model: model) }
+            let configuration = self.searchViewModel.configuration
+            var popover = Popover { FieldSettingsView(model: model, configuration: configuration) }
             popover.attributes.sourceFrame = { cell.windowFrame() }
             popover.attributes.sourceFrameInset.bottom = 8
             popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
@@ -50,7 +51,8 @@ extension SearchViewController {
                 }
             }
 
-            var popover = Popover { FieldSettingsView(model: model) }
+            let configuration = self.searchViewModel.configuration
+            var popover = Popover { FieldSettingsView(model: model, configuration: configuration) }
             popover.attributes.sourceFrame = { cell.windowFrame() }
             popover.attributes.sourceFrameInset.bottom = 8
             popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)

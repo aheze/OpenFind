@@ -10,9 +10,10 @@
 import SwiftUI
 
 struct Line: View {
+    var color: UIColor
     var body: some View {
         Rectangle()
-            .fill(Color(UIColor.white.withAlphaComponent(0.1)))
+            .fill(Color(color))
             .frame(height: 1)
     }
 }

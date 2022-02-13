@@ -204,10 +204,6 @@
 		3C21ED6127A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
 		3C21ED6227A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED6327A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED6427A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
-		3C21ED6527A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
-		3C21ED6627A3A8AB0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
-		3C21ED6727A3A8AB0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
 		3C21ED6927A3A8D10005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C21ED6A27A3A9310005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C21ED6B27A3A9320005E183 /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
@@ -253,10 +249,6 @@
 		3C21EDB227A45C000005E183 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED8B27A3C4C20005E183 /* RealmModel.swift */; };
 		3C21EDB327A45C000005E183 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED9627A3CECC0005E183 /* RealmModels.swift */; };
 		3C21EDB427A45C000005E183 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED8B27A3C4C20005E183 /* RealmModel.swift */; };
-		3C21EDB527A45C010005E183 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED9627A3CECC0005E183 /* RealmModels.swift */; };
-		3C21EDB627A45C010005E183 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED8B27A3C4C20005E183 /* RealmModel.swift */; };
-		3C21EDB727A45C010005E183 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED9627A3CECC0005E183 /* RealmModels.swift */; };
-		3C21EDB827A45C010005E183 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED8B27A3C4C20005E183 /* RealmModel.swift */; };
 		3C21EDB927A45C020005E183 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED9627A3CECC0005E183 /* RealmModels.swift */; };
 		3C21EDBA27A45C020005E183 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED8B27A3C4C20005E183 /* RealmModel.swift */; };
 		3C21EDBB27A45C020005E183 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED9627A3CECC0005E183 /* RealmModels.swift */; };
@@ -311,18 +303,6 @@
 		3C21EE0027A4617F0005E183 /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC927A45DD80005E183 /* RealmModel+Lists.swift */; };
 		3C21EE0127A4617F0005E183 /* RealmModel+HistoryTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCD27A461670005E183 /* RealmModel+HistoryTesting.swift */; };
 		3C21EE0227A4617F0005E183 /* RealmModel+ListsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC727A45DC60005E183 /* RealmModel+ListsTesting.swift */; };
-		3C21EE0327A461800005E183 /* RealmModel+Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCF27A4616D0005E183 /* RealmModel+Photos.swift */; };
-		3C21EE0427A461800005E183 /* RealmModel+PhotosTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDD127A461780005E183 /* RealmModel+PhotosTesting.swift */; };
-		3C21EE0527A461800005E183 /* RealmModel+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCB27A4615F0005E183 /* RealmModel+History.swift */; };
-		3C21EE0627A461800005E183 /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC927A45DD80005E183 /* RealmModel+Lists.swift */; };
-		3C21EE0727A461800005E183 /* RealmModel+HistoryTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCD27A461670005E183 /* RealmModel+HistoryTesting.swift */; };
-		3C21EE0827A461800005E183 /* RealmModel+ListsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC727A45DC60005E183 /* RealmModel+ListsTesting.swift */; };
-		3C21EE0927A461800005E183 /* RealmModel+Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCF27A4616D0005E183 /* RealmModel+Photos.swift */; };
-		3C21EE0A27A461800005E183 /* RealmModel+PhotosTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDD127A461780005E183 /* RealmModel+PhotosTesting.swift */; };
-		3C21EE0B27A461800005E183 /* RealmModel+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCB27A4615F0005E183 /* RealmModel+History.swift */; };
-		3C21EE0C27A461800005E183 /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC927A45DD80005E183 /* RealmModel+Lists.swift */; };
-		3C21EE0D27A461800005E183 /* RealmModel+HistoryTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCD27A461670005E183 /* RealmModel+HistoryTesting.swift */; };
-		3C21EE0E27A461800005E183 /* RealmModel+ListsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC727A45DC60005E183 /* RealmModel+ListsTesting.swift */; };
 		3C21EE0F27A461800005E183 /* RealmModel+Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCF27A4616D0005E183 /* RealmModel+Photos.swift */; };
 		3C21EE1027A461800005E183 /* RealmModel+PhotosTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDD127A461780005E183 /* RealmModel+PhotosTesting.swift */; };
 		3C21EE1127A461800005E183 /* RealmModel+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDCB27A4615F0005E183 /* RealmModel+History.swift */; };
@@ -488,22 +468,6 @@
 		3C3642DD277BC2E70038CB18 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
 		3C3642DE277BC2E70038CB18 /* SearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */; };
 		3C3642DF277BC2E70038CB18 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
-		3C3642E0277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
-		3C3642E1277BC2E90038CB18 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
-		3C3642E3277BC2E90038CB18 /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
-		3C3642E4277BC2E90038CB18 /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
-		3C3642E5277BC2E90038CB18 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
-		3C3642E6277BC2E90038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
-		3C3642E7277BC2E90038CB18 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
-		3C3642E8277BC2E90038CB18 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
-		3C3642E9277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
-		3C3642EA277BC2E90038CB18 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
-		3C3642EB277BC2E90038CB18 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
-		3C3642EC277BC2E90038CB18 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
-		3C3642ED277BC2E90038CB18 /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8B27477ABC0010FD68 /* RightView.swift */; };
-		3C3642EE277BC2E90038CB18 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
-		3C3642EF277BC2E90038CB18 /* SearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */; };
-		3C3642F0277BC2E90038CB18 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
 		3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
 		3C3642F2277BC2E90038CB18 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
 		3C3642F4277BC2E90038CB18 /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
@@ -919,14 +883,8 @@
 		3C6C73A82781947400E039F0 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
 		3C6C73A92781947400E039F0 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3C6C73AA2781947400E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
-		3C6C73AB2781947400E039F0 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
-		3C6C73AC2781947400E039F0 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
-		3C6C73AD2781947400E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73AE2781947600E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73AF2781947600E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
-		3C6C73B02781947600E039F0 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
-		3C6C73B12781947600E039F0 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
-		3C6C73B22781947600E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C6C73B42781947700E039F0 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
 		3C6C73B52781947700E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
@@ -1179,16 +1137,12 @@
 		3C93148D27B823A7009E5B6E /* ListsDetailVC+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147F27B769A0009E5B6E /* ListsDetailVC+Scroll.swift */; };
 		3C93148E27B823AD009E5B6E /* SearchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */; };
 		3C93148F27B823AD009E5B6E /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
-		3C93149027B823AD009E5B6E /* SearchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */; };
-		3C93149127B823AD009E5B6E /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
-		3C93149227B823AD009E5B6E /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C93149327B823AE009E5B6E /* SearchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */; };
 		3C93149427B823AE009E5B6E /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
 		3C93149527B823AE009E5B6E /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C93149627B823AE009E5B6E /* SearchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */; };
 		3C93149727B823AE009E5B6E /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
 		3C93149827B823C8009E5B6E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
-		3C93149927B823C8009E5B6E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3C93149A27B823C9009E5B6E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3C93149C27B84457009E5B6E /* VC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93149B27B84457009E5B6E /* VC+Setup.swift */; };
 		3C93149E27B844D7009E5B6E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C93149D27B844D7009E5B6E /* Realm */; };
@@ -1225,6 +1179,8 @@
 		3C9314F527B8EA56009E5B6E /* PhotosVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */; };
 		3C9314F627B8EA93009E5B6E /* PhotosVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9314F227B8EA50009E5B6E /* PhotosVC+DataSource.swift */; };
 		3C9314F727B8EAAA009E5B6E /* PhotosVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */; };
+		3C93151927B97667009E5B6E /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
+		3C93151A27B9766E009E5B6E /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
 		3C93FC3E27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3D27A0ECE700EBBC81 /* IconPickerVC+DataSource.swift */; };
 		3C93FC4027A0EDEC00EBBC81 /* IconPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC3F27A0EDEC00EBBC81 /* IconPickerViewModel.swift */; };
 		3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93FC4527A0EF3A00EBBC81 /* IconPickerCell.swift */; };
@@ -1286,22 +1242,6 @@
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
 		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
-		3CB98A72275B217900A6B1B9 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
-		3CB98A73275B217900A6B1B9 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
-		3CB98A74275B217900A6B1B9 /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
-		3CB98A75275B217900A6B1B9 /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
-		3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
-		3CB98A77275B217900A6B1B9 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
-		3CB98A78275B217900A6B1B9 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
-		3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
-		3CB98A7A275B217900A6B1B9 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
-		3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
-		3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
-		3CB98A7F275B22B300A6B1B9 /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8B27477ABC0010FD68 /* RightView.swift */; };
-		3CB98A80275B22B300A6B1B9 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
-		3CB98A81275B22B300A6B1B9 /* SearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */; };
-		3CB98A82275B22B300A6B1B9 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
-		3CB98A83275B22B300A6B1B9 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
@@ -4967,14 +4907,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CB98A72275B217900A6B1B9 /* SearchBar.storyboard in Resources */,
-				3CB98A82275B22B300A6B1B9 /* LeftView.xib in Resources */,
 				3C1D1A01275A9F3B0064F2C6 /* LaunchScreen.storyboard in Resources */,
 				3C1D19FE275A9F3B0064F2C6 /* Assets.xcassets in Resources */,
 				3C1D19FC275A9F390064F2C6 /* Main.storyboard in Resources */,
-				3CB98A80275B22B300A6B1B9 /* SearchFieldCell.xib in Resources */,
 				3C1D1A06275A9F6D0064F2C6 /* SharedAssets.xcassets in Resources */,
-				3CB98A83275B22B300A6B1B9 /* RightView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5046,13 +4982,9 @@
 			files = (
 				3C4D3A93274771600010FD68 /* SharedAssets.xcassets in Resources */,
 				3C4D39E3274766200010FD68 /* LaunchScreen.storyboard in Resources */,
-				3C3642E5277BC2E90038CB18 /* RightView.xib in Resources */,
-				3C3642E7277BC2E90038CB18 /* LeftView.xib in Resources */,
 				3CF7643B278D19AC00DCA4EA /* SearchNavigationContent.storyboard in Resources */,
 				3C4D39E0274766200010FD68 /* Assets.xcassets in Resources */,
 				3C4D39EE274766590010FD68 /* PhotosContent.storyboard in Resources */,
-				3C3642E1277BC2E90038CB18 /* SearchFieldCell.xib in Resources */,
-				3C3642F0277BC2E90038CB18 /* SearchBar.storyboard in Resources */,
 				3C4D3A8927476C800010FD68 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5317,60 +5249,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6C73AD2781947400E039F0 /* SuggestionsView.swift in Sources */,
 				3C08EB3C279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3CCCCAAA27818CEA000381CE /* GeneralViews.swift in Sources */,
-				3CB98A81275B22B300A6B1B9 /* SearchFieldCell.swift in Sources */,
 				3C1D1A28275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
 				3C1D19F9275A9F390064F2C6 /* ViewController.swift in Sources */,
 				3C1D1A27275AA25B0064F2C6 /* Utilities+UIFont.swift in Sources */,
 				3C1D1A25275AA2490064F2C6 /* Constants.swift in Sources */,
-				3CB98A74275B217900A6B1B9 /* SearchConfiguration.swift in Sources */,
 				3C1D1A0E275AA0CE0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
-				3CB98A7A275B217900A6B1B9 /* SearchVC+Datasource.swift in Sources */,
 				3C08EAE2279BA85C00971D60 /* Utilities+UIView.swift in Sources */,
 				3C1D1A2A275AA25B0064F2C6 /* Utilities+Constraints.swift in Sources */,
-				3C21EE0327A461800005E183 /* RealmModel+Photos.swift in Sources */,
 				3C6C74372781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
-				3C6C73AB2781947400E039F0 /* SearchVC+Popovers.swift in Sources */,
 				3C7B7A4F277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3CCCCAAB27818CEA000381CE /* FindIconView.swift in Sources */,
-				3C21EE0727A461800005E183 /* RealmModel+HistoryTesting.swift in Sources */,
 				3CCE2B09279D008A00F72351 /* SelectionIconView.swift in Sources */,
 				3CCCCA92278185AA000381CE /* Model.swift in Sources */,
 				3C08EB39279C76E700971D60 /* ListsModel.swift in Sources */,
-				3CB98A73275B217900A6B1B9 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C6D77C427A5B140005371F3 /* Global.swift in Sources */,
-				3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */,
 				3C7BADB0275C12BA0030F0D2 /* TipView.swift in Sources */,
-				3C21EDB827A45C010005E183 /* RealmModel.swift in Sources */,
-				3C21EE0427A461800005E183 /* RealmModel+PhotosTesting.swift in Sources */,
-				3C21EE0627A461800005E183 /* RealmModel+Lists.swift in Sources */,
 				3C1D1A2B275AA25B0064F2C6 /* Utilities+UIColor.swift in Sources */,
+				3C93151927B97667009E5B6E /* Field.swift in Sources */,
 				3CCE2B0C279D008A00F72351 /* ButtonView.swift in Sources */,
 				3C1D1A19275AA16C0064F2C6 /* UIKitViews.swift in Sources */,
-				3CB98A78275B217900A6B1B9 /* Field.swift in Sources */,
-				3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */,
-				3C21EE0827A461800005E183 /* RealmModel+ListsTesting.swift in Sources */,
-				3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */,
+				3C93151A27B9766E009E5B6E /* SearchConfiguration.swift in Sources */,
 				3C7B7A3D277E9D9300E1F602 /* Toolbar.swift in Sources */,
-				3CB98A75275B217900A6B1B9 /* SearchVC+Delegate.swift in Sources */,
 				3CCE2B0A279D008A00F72351 /* ClearIconView.swift in Sources */,
 				3C1D19F5275A9F390064F2C6 /* AppDelegate.swift in Sources */,
-				3C21EE0527A461800005E183 /* RealmModel+History.swift in Sources */,
-				3CB98A77275B217900A6B1B9 /* SearchViewModel.swift in Sources */,
-				3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */,
-				3CB98A7F275B22B300A6B1B9 /* RightView.swift in Sources */,
 				3C1D1A0B275AA08D0064F2C6 /* FieldSettingsView.swift in Sources */,
 				3CCE2B0B279D008A00F72351 /* FindIconUIView.swift in Sources */,
 				3CC59500279F3327001D07DC /* ColorPickerView.swift in Sources */,
 				3C7B7A9A277FB7C300E1F602 /* ProgressLineView.swift in Sources */,
-				3C6C73AC2781947400E039F0 /* SearchVC+Cell.swift in Sources */,
 				3C1D19F7275A9F390064F2C6 /* SceneDelegate.swift in Sources */,
 				3C1D1A29275AA25B0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C7BAD9C275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C1D1A26275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,
-				3C21EDB727A45C010005E183 /* RealmModels.swift in Sources */,
 				3C1D1A0C275AA0A00064F2C6 /* GeneralUtilities.swift in Sources */,
 				3C7B7A3E277E9D9300E1F602 /* Debug.swift in Sources */,
 			);
@@ -5768,7 +5679,6 @@
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
 				3CCCCAA027818CE8000381CE /* GeneralViews.swift in Sources */,
 				3C4D3A77274769660010FD68 /* Constants.swift in Sources */,
-				3C3642E6277BC2E90038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C4D39F3274766790010FD68 /* Toolbar.swift in Sources */,
 				3C6D77BF27A5B140005371F3 /* Global.swift in Sources */,
 				3CCE2B49279D21C900F72351 /* PhotosVC+Selection.swift in Sources */,
@@ -5776,25 +5686,15 @@
 				3C08EAFB279C76E400971D60 /* ListsConstants.swift in Sources */,
 				3CB0022E2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3CCE2B1E279D008C00F72351 /* ClearIconView.swift in Sources */,
-				3C3642E0277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C08EAF4279C76C400971D60 /* ListsModel.swift in Sources */,
 				3C6C74322781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C7B7A4A277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
-				3C3642E3277BC2E90038CB18 /* LeftView.swift in Sources */,
-				3C3642E8277BC2E90038CB18 /* Field.swift in Sources */,
-				3C93149027B823AD009E5B6E /* SearchVC+Listen.swift in Sources */,
-				3C6C73B12781947600E039F0 /* SearchVC+Cell.swift in Sources */,
 				3C1D1A1D275AA1720064F2C6 /* UIKitViews.swift in Sources */,
 				3C4D3A7A2747696F0010FD68 /* Utilities+UIViewController.swift in Sources */,
-				3C3642EB277BC2E90038CB18 /* SearchViewController.swift in Sources */,
 				3C7BAD97275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
-				3C6C73B02781947600E039F0 /* SearchVC+Popovers.swift in Sources */,
-				3C21ED6427A3A8AA0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3CCE2B1F279D008C00F72351 /* FindIconUIView.swift in Sources */,
-				3C3642ED277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C4D3A792747696F0010FD68 /* GeneralUtilities.swift in Sources */,
 				3CCE2B1D279D008C00F72351 /* SelectionIconView.swift in Sources */,
-				3C21ED6527A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */,
 				3C9314F527B8EA56009E5B6E /* PhotosVC+Delegate.swift in Sources */,
 				3CFD601F278B70970031BC8B /* SearchNavigationController.swift in Sources */,
 				3C9314E927B86E84009E5B6E /* PhotosViewModel.swift in Sources */,
@@ -5803,36 +5703,26 @@
 				3C9314EC27B86F2B009E5B6E /* PhotosVC+Lifecycle.swift in Sources */,
 				3C21EE2327A461820005E183 /* RealmModel+History.swift in Sources */,
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
-				3C3642EC277BC2E90038CB18 /* SearchViewModel.swift in Sources */,
 				3CCCCA8E278185A8000381CE /* Model.swift in Sources */,
 				3C7BADAB275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C1D1A3F275AA25E0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3CC594FB279F3323001D07DC /* ColorPickerView.swift in Sources */,
 				3C4D39DB2747661E0010FD68 /* ViewController.swift in Sources */,
-				3C3642EA277BC2E90038CB18 /* SearchUtilities.swift in Sources */,
 				3CCCCAA127818CE8000381CE /* FindIconView.swift in Sources */,
 				3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C7B7A95277FB7BF00E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D39F1274766590010FD68 /* PhotosViewController.swift in Sources */,
-				3C3642EE277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
 				3CE9C208274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3C4D39D72747661E0010FD68 /* AppDelegate.swift in Sources */,
-				3C3642EF277BC2E90038CB18 /* SearchFieldCell.swift in Sources */,
 				3CF76430278D187300DCA4EA /* SearchNC+Utilities.swift in Sources */,
 				3C21EE2527A461820005E183 /* RealmModel+HistoryTesting.swift in Sources */,
 				3C4D3A7B2747696F0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3CFD602B278B71E10031BC8B /* SearchNC+SearchBar.swift in Sources */,
 				3C21EE2127A461820005E183 /* RealmModel+Photos.swift in Sources */,
-				3C93149127B823AD009E5B6E /* SearchVC+Keyboard.swift in Sources */,
-				3C3642E9277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */,
 				3CFD6020278B70970031BC8B /* SearchNavigationConstants.swift in Sources */,
-				3C93149227B823AD009E5B6E /* SearchVC+Toolbar.swift in Sources */,
 				3CFD602C278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C08EB72279CAC0700971D60 /* TabModel.swift in Sources */,
-				3C3642E4277BC2E90038CB18 /* SearchConfiguration.swift in Sources */,
 				3CCE2B20279D008C00F72351 /* ButtonView.swift in Sources */,
-				3C93149927B823C8009E5B6E /* SearchTextField.swift in Sources */,
-				3C6C73B22781947600E039F0 /* SuggestionsView.swift in Sources */,
 				3C08EB4C279C95F900971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C21EE2627A461820005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C1D1A41275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,
@@ -6009,7 +5899,6 @@
 				3C21EE1A27A461810005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3CCE2B18279D008B00F72351 /* ButtonView.swift in Sources */,
 				3C4D3B19274776D20010FD68 /* ShutterStyleView.swift in Sources */,
-				3C21ED6627A3A8AB0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C1D1A3A275AA25D0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C4D3B14274776D20010FD68 /* SwipeToNavigateView.swift in Sources */,
 				3CC594FD279F3324001D07DC /* ColorPickerView.swift in Sources */,
@@ -6021,7 +5910,6 @@
 				3C6D77C127A5B140005371F3 /* Global.swift in Sources */,
 				3C4D3B10274776D20010FD68 /* SettingsWidgets.swift in Sources */,
 				3C606672274ECCBA000A5BDE /* Debug.swift in Sources */,
-				3C21ED6727A3A8AB0005E183 /* KeyboardToolbarViewModel.swift in Sources */,
 				3C4D3B21274776D20010FD68 /* SingleWebView.swift in Sources */,
 				3C4D3B18274776D20010FD68 /* ExternalLinks.swift in Sources */,
 				3C7B7A4C277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
@@ -6538,15 +6426,11 @@
 				3C4D209F2750A6A800090AF9 /* Constants.swift in Sources */,
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
 				3C7B7A4E277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
-				3C21EE0C27A461800005E183 /* RealmModel+Lists.swift in Sources */,
-				3C21EDB627A45C010005E183 /* RealmModel.swift in Sources */,
 				3C6C738D2781946C00E039F0 /* ZoomView.swift in Sources */,
 				3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */,
 				3CCCCAA927818CEA000381CE /* FindIconView.swift in Sources */,
-				3C21EE0A27A461800005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C6C73882781946C00E039F0 /* LivePreviewVC+Photo.swift in Sources */,
 				3C7BAD9B275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
-				3C21EDB527A45C010005E183 /* RealmModels.swift in Sources */,
 				3CE9C229274EBB70008C903C /* ViewController.swift in Sources */,
 				3CE9C23B274EBCB1008C903C /* VC+CameraSetup.swift in Sources */,
 				3C4D20A62750A7EB00090AF9 /* VisionEngine.swift in Sources */,
@@ -6561,8 +6445,6 @@
 				3C08EAE3279BA85D00971D60 /* Utilities+UIView.swift in Sources */,
 				3C6C73892781946C00E039F0 /* ZoomView+Utilities.swift in Sources */,
 				3C606670274ECCB9000A5BDE /* Debug.swift in Sources */,
-				3C21EE0B27A461800005E183 /* RealmModel+History.swift in Sources */,
-				3C21EE0D27A461800005E183 /* RealmModel+HistoryTesting.swift in Sources */,
 				3C6C73942781946C00E039F0 /* LivePreviewViewController.swift in Sources */,
 				3C7B7A3F277E9D9400E1F602 /* Toolbar.swift in Sources */,
 				3C1D1A21275AA1740064F2C6 /* UIKitViews.swift in Sources */,
@@ -6571,9 +6453,7 @@
 				3C6C73922781946C00E039F0 /* FallbackView.swift in Sources */,
 				3C1D1A2D275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,
 				3C08EB30279C76E700971D60 /* ListsModel.swift in Sources */,
-				3C21EE0E27A461800005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3CE9C23D274EBD2B008C903C /* VC+Sizing.swift in Sources */,
-				3C21EE0927A461800005E183 /* RealmModel+Photos.swift in Sources */,
 				3CCCCA91278185AA000381CE /* Model.swift in Sources */,
 				3CE9C239274EBBA1008C903C /* LivePreviewView.swift in Sources */,
 				3C7B7A99277FB7C200E1F602 /* ProgressLineView.swift in Sources */,

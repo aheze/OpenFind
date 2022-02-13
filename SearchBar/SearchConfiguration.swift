@@ -60,6 +60,13 @@ struct SearchConfiguration: Equatable {
     var barTopPaddingLandscape = CGFloat(16)
     var barBottomPaddingLandscape = CGFloat(16)
     
+    // MARK: - Popovers
+    var popoverBackgroundBlurStyle = UIBlurEffect.Style.systemUltraThinMaterialDark
+    var popoverBackgroundColor = UIColor(hex: 0x0070AF).withAlphaComponent(0.5)
+    var popoverButtonColor = UIColor.black.withAlphaComponent(0.5)
+    var popoverTextColor = UIColor.white
+    var popoverDividerColor = UIColor.white.withAlphaComponent(0.2)
+    
     static var camera: Self = {
         var configuration = SearchConfiguration()
         return configuration
@@ -99,7 +106,12 @@ struct SearchConfiguration: Equatable {
             barTopPadding: 0,
             barBottomPadding: 16,
             barTopPaddingLandscape: 0,
-            barBottomPaddingLandscape: 16
+            barBottomPaddingLandscape: 16,
+            popoverBackgroundBlurStyle: .systemUltraThinMaterial,
+            popoverBackgroundColor: UIColor.systemBackground.withAlphaComponent(0.25),
+            popoverButtonColor: UIColor.label.withAlphaComponent(0.05),
+            popoverTextColor: UIColor.label,
+            popoverDividerColor: UIColor.label.withAlphaComponent(0.2)
         )
         return configuration
     }()
