@@ -21,7 +21,7 @@ extension ListsViewController {
 
 extension ListsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listsViewModel.displayedLists.count
+        return model.displayedLists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,7 +32,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError()
         }
         
-        let list = listsViewModel.displayedLists[indexPath.item].list
+        let list = model.displayedLists[indexPath.item].list
         let color = UIColor(hex: list.color)
         cell.headerView.backgroundColor = color
         cell.headerImageView.image = UIImage(systemName: list.icon)
@@ -50,11 +50,11 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.headerDescriptionLabel.textColor = ListsCellConstants.titleColorWhite
         }
         
-        if listsViewModel.isSelecting {
+        if model.isSelecting {
             cell.chipsContainerView.isUserInteractionEnabled = false
             cell.headerSelectionIconView.isHidden = false
             cell.headerSelectionIconView.alpha = 1
-            if listsViewModel.selectedLists.contains(where: { $0.id == list.id }) {
+            if model.selectedLists.contains(where: { $0.id == list.id }) {
                 cell.headerSelectionIconView.setState(.selected)
             } else {
                 cell.headerSelectionIconView.setState(.empty)
@@ -69,16 +69,16 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.tapped = { [weak self] in
             guard let self = self else { return }
             
-            if self.listsViewModel.isSelecting {
-                if self.listsViewModel.selectedLists.contains(where: { $0.id == list.id }) {
-                    self.listsViewModel.selectedLists = self.listsViewModel.selectedLists.filter { $0.id != list.id }
+            if self.model.isSelecting {
+                if self.model.selectedLists.contains(where: { $0.id == list.id }) {
+                    self.model.selectedLists = self.model.selectedLists.filter { $0.id != list.id }
                     cell.headerSelectionIconView.setState(.empty)
                 } else {
-                    self.listsViewModel.selectedLists.append(list)
+                    self.model.selectedLists.append(list)
                     cell.headerSelectionIconView.setState(.selected)
                 }
             } else {
-                if let displayedList = self.listsViewModel.displayedLists.first(where: { $0.list.id == list.id }) {
+                if let displayedList = self.model.displayedLists.first(where: { $0.list.id == list.id }) {
                     self.presentDetails(list: displayedList.list)
                 }
             }
@@ -91,7 +91,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError()
         }
         
-        let displayedList = listsViewModel.displayedLists[indexPath.item]
+        let displayedList = model.displayedLists[indexPath.item]
         addChipViews(to: cell, with: displayedList)
     }
     
@@ -112,21 +112,21 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             case .word:
                 chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
                 chipView.tapped = { [weak self] in
-                    if let displayedList = self?.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                    if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
                         self?.presentDetails(list: displayedList.list)
                     }
                 }
             case .wordsLeft:
                 chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
                 chipView.tapped = { [weak self] in
-                    if let displayedList = self?.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                    if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
                         self?.presentDetails(list: displayedList.list)
                     }
                 }
             case .addWords:
                 chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
                 chipView.tapped = { [weak self] in
-                    if let displayedList = self?.listsViewModel.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                    if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
                         self?.presentDetails(list: displayedList.list, focusFirstWord: true)
                     }
                 }
@@ -136,7 +136,7 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func updateCellColors() {
-        for index in listsViewModel.displayedLists.indices {
+        for index in model.displayedLists.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
                 for case let subview as ListChipView in cell.chipsContainerView.subviews {
                     subview.setColors()

@@ -31,10 +31,10 @@ extension ListsViewController {
         /// get width of columns based on new size
         let (_, columnWidth) = listsFlowLayout.getColumns(bounds: size.width, insets: safeAreaInsets)
         
-        for index in listsViewModel.displayedLists.indices {
-            let oldDisplayedList = listsViewModel.displayedLists[index]
+        for index in model.displayedLists.indices {
+            let oldDisplayedList = model.displayedLists[index]
             _ = getCellSize(availableWidth: columnWidth, list: oldDisplayedList.list, listIndex: index)
-            let newDisplayedList = listsViewModel.displayedLists[index]
+            let newDisplayedList = model.displayedLists[index]
             
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
                 addChipViews(to: cell, with: newDisplayedList)

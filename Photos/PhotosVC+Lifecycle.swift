@@ -20,7 +20,7 @@ extension PhotosViewController {
     
     func willBecomeInactive() {
         withAnimation {
-            toolbarViewModel?.toolbar = nil
+            toolbarViewModel.toolbar = nil
         }
     }
     

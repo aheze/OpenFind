@@ -8,19 +8,52 @@
 import SwiftUI
 
 class PhotosViewController: UIViewController, PageViewController, Searchable {
-    
     var tabType: TabState = .photos
-    var toolbarViewModel: ToolbarViewModel?
+    
+    var model: PhotosViewModel
+    var toolbarViewModel: ToolbarViewModel
+    var realmModel: RealmModel
+    var searchViewModel: SearchViewModel
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
     
+    var updateNavigationBar: (() -> Void)?
+    
     var photosSelectionViewModel = PhotosSelectionViewModel()
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
     
+    @IBOutlet var collectionView: UICollectionView!
+    
+    init?(
+        coder: NSCoder,
+        model: PhotosViewModel,
+        toolbarViewModel: ToolbarViewModel,
+        realmModel: RealmModel,
+        searchViewModel: SearchViewModel
+    ) {
+        self.model = model
+        self.toolbarViewModel = toolbarViewModel
+        self.realmModel = realmModel
+        self.searchViewModel = searchViewModel
+        super.init(coder: coder)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with metadata.")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Photos"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        updateNavigationBar?()
     }
 }
-
-

@@ -14,7 +14,7 @@ extension ListsViewController {
         flowLayout.scrollDirection = .horizontal
         flowLayout.getLists = { [weak self] in
             guard let self = self else { return [] }
-            return self.listsViewModel.displayedLists.map { $0.list }
+            return self.model.displayedLists.map { $0.list }
         }
         flowLayout.getListSizeFromWidth = { [weak self] availableWidth, list, listIndex in
             guard let self = self else { return .zero }
@@ -146,7 +146,7 @@ extension ListsViewController {
             + c.contentEdgeInsets.bottom
         
         let height = headerHeight + containerHeight
-        listsViewModel.displayedLists[listIndex].frame.chipFrames = chipFrames
+        model.displayedLists[listIndex].frame.chipFrames = chipFrames
         
         let cellSize = CGSize(width: availableWidth, height: height)
         return cellSize

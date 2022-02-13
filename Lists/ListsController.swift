@@ -29,7 +29,7 @@ class ListsController {
         let viewController = storyboard.instantiateViewController(identifier: "ListsViewController") { coder in
             ListsViewController(
                 coder: coder,
-                listsViewModel: model,
+                model: model,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
                 searchViewModel: searchViewModel

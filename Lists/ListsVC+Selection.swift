@@ -10,24 +10,24 @@ import SwiftUI
 
 extension ListsViewController {
     func toggleSelect() {
-        listsViewModel.isSelecting.toggle()
+        model.isSelecting.toggle()
         updateCollectionViewSelectionState()
     }
     
     func updateCollectionViewSelectionState() {
-        if listsViewModel.isSelecting {
+        if model.isSelecting {
             selectBarButton.title = "Done"
             toolbarViewModel.toolbar = AnyView(toolbarView)
             
         } else {
             selectBarButton.title = "Select"
             toolbarViewModel.toolbar = nil
-            listsViewModel.selectedLists = []
+            model.selectedLists = []
         }
         
-        for index in listsViewModel.displayedLists.indices {
+        for index in model.displayedLists.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
-                if listsViewModel.isSelecting {
+                if model.isSelecting {
                     cell.chipsContainerView.isUserInteractionEnabled = false
                     cell.headerSelectionIconView.alpha = 0
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {

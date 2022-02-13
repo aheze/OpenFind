@@ -46,6 +46,7 @@ struct Identifier: Hashable {
     var key: String
 
     static var cameraSearchBar = Identifier(key: "cameraSearchBar")
+    static var photosSearchBar = Identifier(key: "photosSearchBar")
     static var listsSearchBar = Identifier(key: "listsSearchBar") /// for both the gallery and individual detail search bar, since they share same navigation controller
 }
 

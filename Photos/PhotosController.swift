@@ -26,10 +26,17 @@ class PhotosController {
         self.searchViewModel = searchViewModel
         
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as! PhotosViewController
+        let viewController = storyboard.instantiateViewController(identifier: "PhotosViewController") { coder in
+            PhotosViewController(
+                coder: coder,
+                model: model,
+                toolbarViewModel: toolbarViewModel,
+                realmModel: realmModel,
+                searchViewModel: searchViewModel
+            )
+        }
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
-    
     
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
@@ -46,5 +53,12 @@ class PhotosController {
         }
         
         self.searchNavigationController = searchNavigationController
+        
+        viewController.loadViewIfNeeded() /// needed to initialize outlets
+        viewController.updateNavigationBar = { [weak self] in
+            guard let self = self else { return }
+            self.searchNavigationController.updateSearchBarOffset()
+            Tab.Frames.excluded[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
+        }
     }
 }

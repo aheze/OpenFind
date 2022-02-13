@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         photos.viewController.toolbarViewModel = toolbarViewModel
 
         let tabController = TabBarController(
-            pages: [photos.viewController, camera.viewController, lists.searchNavigationController],
+            pages: [photos.searchNavigationController, camera.viewController, lists.searchNavigationController],
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )

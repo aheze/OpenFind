@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     let realmModel = RealmModel()
     lazy var lists: ListsController = ListsBridge.makeController(
-        listsViewModel: ListsViewModel(),
+        model: ListsViewModel(),
         toolbarViewModel: ToolbarViewModel(),
         realmModel: realmModel
     )

@@ -10,17 +10,17 @@ import SwiftUI
 
 class ViewController: UIViewController {
     let cameraViewModel = CameraViewModel()
-    let listsViewModel = ListsViewModel()
+    let model = ListsViewModel()
     var toolbarViewModel = ToolbarViewModel()
     
     lazy var photos: PhotosController = PhotosBridge.makeController()
 
     lazy var camera: CameraController = CameraBridge.makeController(
         cameraViewModel: cameraViewModel,
-        listsViewModel:listsViewModel
+        model:model
     )
 
-    lazy var lists: ListsController = ListsBridge.makeController(listsViewModel: listsViewModel)
+    lazy var lists: ListsController = ListsBridge.makeController(model: model)
     
     lazy var tabController: TabBarController = {
         toolbarViewModel = ToolbarViewModel()

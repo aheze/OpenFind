@@ -9,7 +9,7 @@ import UIKit
 
 class ListsViewController: UIViewController, Searchable {
     /// external models
-    var listsViewModel: ListsViewModel
+    var model: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     var searchViewModel: SearchViewModel
@@ -27,16 +27,16 @@ class ListsViewController: UIViewController, Searchable {
     
     /// selection
     var selectBarButton: UIBarButtonItem!
-    lazy var toolbarView = ListsSelectionToolbarView(model: listsViewModel)
+    lazy var toolbarView = ListsSelectionToolbarView(model: model)
     
     init?(
         coder: NSCoder,
-        listsViewModel: ListsViewModel,
+        model: ListsViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
         searchViewModel: SearchViewModel
     ) {
-        self.listsViewModel = listsViewModel
+        self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         self.searchViewModel = searchViewModel
