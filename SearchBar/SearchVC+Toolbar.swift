@@ -35,12 +35,12 @@ extension SearchViewController {
     }
     
     /// Refresh the toolbar's height
-    func reloadToolbarFrame(keyboardShown: Bool) {
+    func reloadToolbarFrame() {
         if
             let currentIndex = collectionViewModel.focusedCellIndex,
             let cell = searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell
         {
-            if toolbarViewController.reloadFrame(keyboardShown: keyboardShown) {
+            if toolbarViewController.reloadFrame() {
                 cell.textField.reloadInputViews()
             }
         }

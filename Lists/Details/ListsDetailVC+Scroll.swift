@@ -18,6 +18,8 @@ extension ListsDetailViewController {
     }
 
     func scrollToCell(at index: Int) {
+        let currentOffset = scrollView.contentOffset
+        
         if model.list.words.indices.contains(index) {
             if let cell = wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell {
                 /// origin of cell, relative to the words table view
@@ -33,7 +35,7 @@ extension ListsDetailViewController {
                 if traitCollection.verticalSizeClass == .compact {
                     topPadding = ListsDetailConstants.focusedCellTopPaddingCompactHeight
                 } else {
-                    topPadding = (view.bounds.height - navigationBarHeight - scrollView.contentInset.bottom) / 2
+                    topPadding = (view.bounds.height - navigationBarHeight - model.keyboardHeight) / 2
                 }
 
                 /// relative to `contentView`
@@ -41,14 +43,18 @@ extension ListsDetailViewController {
                 let additionalPadding = navigationBarHeight + topPadding
 
                 let offset = relativeCellOrigin - additionalPadding
-                
+
                 /// Usually 151. The scroll view's content offset will also be 151 when it is at the top.
                 let baseOffset = baseSearchBarOffset + searchViewModel.getTotalHeight()
-                
+
                 /// Prevent setting offset to greater than -151 (drag down rubber band after hitting top)
                 let clampedOffset = max(offset, -baseOffset)
-                
+
                 scrollView.setContentOffset(CGPoint(x: 0, y: clampedOffset), animated: true)
+                if model.contentOffsetAddition == nil {
+                    /// subtract this later when keyboard hides.
+                    model.contentOffsetAddition = clampedOffset - currentOffset.y
+                }
             }
         }
     }

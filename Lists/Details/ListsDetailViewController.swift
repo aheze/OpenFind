@@ -57,6 +57,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet var headerBottomViewHeightC: NSLayoutConstraint!
     @IBOutlet var headerBottomTextField: UITextField!
     
+    
     // MARK: - Words
 
     @IBOutlet var wordsView: UIView!
@@ -78,6 +79,10 @@ class ListsDetailViewController: UIViewController, Searchable {
     /// **table view**
     @IBOutlet var wordsTableView: UITableView!
     @IBOutlet var wordsTableViewHeightC: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomSpacerView: UIView!
+    
+    @IBOutlet weak var bottomSpacerHeightC: NSLayoutConstraint!
     
     /// for copy/delete
     lazy var toolbarView = ListsDetailToolbarView(model: model)
@@ -136,6 +141,9 @@ class ListsDetailViewController: UIViewController, Searchable {
                 }
             }
         }
+        
+        bottomSpacerHeightC.constant = 0
+        bottomSpacerView.alpha = 0
     }
     
     override func willMove(toParent parent: UIViewController?) {

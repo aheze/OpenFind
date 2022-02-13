@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 2/12/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -19,8 +18,8 @@ extension SearchViewController {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
+            selector: #selector(keyboardDidHide),
+            name: UIResponder.keyboardDidHideNotification,
             object: nil
         )
     }
@@ -29,18 +28,19 @@ extension SearchViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            
+
             if keyboardHeight <= Constants.minimumKeyboardHeight {
                 collectionViewModel.keyboardShown = false
-                reloadToolbarFrame(keyboardShown: false)
+                reloadToolbarFrame()
                 return
             }
         }
         collectionViewModel.keyboardShown = true
-        reloadToolbarFrame(keyboardShown: true)
+        reloadToolbarFrame()
     }
 
-    @objc func keyboardWillHide(_ notification: Notification) {
-        reloadToolbarFrame(keyboardShown: false)
+    @objc func keyboardDidHide(_ notification: Notification) {
+        collectionViewModel.keyboardShown = false
+        reloadToolbarFrame()
     }
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 extension ListsDetailViewController {
-
     func listenToKeyboard() {
         NotificationCenter.default.addObserver(
             self,
@@ -19,8 +18,8 @@ extension ListsDetailViewController {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
+            selector: #selector(keyboardDidHide),
+            name: UIResponder.keyboardDidHideNotification,
             object: nil
         )
     }
@@ -29,8 +28,8 @@ extension ListsDetailViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-
-            scrollView.contentInset.bottom = keyboardHeight
+            model.keyboardHeight = keyboardHeight
+            bottomSpacerHeightC.constant = keyboardHeight
             
             if keyboardHeight <= Constants.minimumKeyboardHeight {
                 wordsKeyboardToolbarViewModel.keyboardShown = false
@@ -42,8 +41,20 @@ extension ListsDetailViewController {
         reloadWordsToolbarFrame(keyboardShown: true)
     }
 
-    @objc func keyboardWillHide(_ notification: Notification) {
-        scrollView.contentInset.bottom = 0
+    @objc func keyboardDidHide(_ notification: Notification) {
+        
+        let currentOffset = scrollView.contentOffset
+        bottomSpacerHeightC.constant = 0
+        
+        view.layoutIfNeeded()
+        scrollView.setContentOffset(currentOffset, animated: false)
+        
+        if let contentOffsetAddition = model.contentOffsetAddition {
+            model.contentOffsetAddition = nil
+            let newOffset = CGPoint(x: 0, y: currentOffset.y - contentOffsetAddition)
+            scrollView.setContentOffset(newOffset, animated: true)
+        }
+        
         wordsKeyboardToolbarViewModel.keyboardShown = false
         reloadWordsToolbarFrame(keyboardShown: false)
     }

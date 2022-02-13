@@ -32,6 +32,10 @@ class ListsDetailViewModel: ObservableObject {
     @Published var activeWord: EditableWord?
     
     var keyboardShown = false
+    var keyboardHeight = CGFloat(0)
+    
+    /// when the keyboard is dismissed, set the content offset to the current, minus this.
+    var contentOffsetAddition: CGFloat?
     
     /// for updating realm
     var listCancellable: AnyCancellable?

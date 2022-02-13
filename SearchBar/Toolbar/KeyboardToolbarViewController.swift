@@ -51,14 +51,14 @@ class KeyboardToolbarViewController: UIViewController {
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
         
-        _ = reloadFrame(keyboardShown: collectionViewModel.keyboardShown)
+        _ = reloadFrame()
     }
     
     /// return true if frame was reloaded
-    func reloadFrame(keyboardShown: Bool) -> Bool {
+    func reloadFrame() -> Bool {
         let currentHeight = view.frame.height
         let newHeight: CGFloat
-        if keyboardShown {
+        if collectionViewModel.keyboardShown {
             newHeight = 60
         } else {
             newHeight = 60 + Global.safeAreaInsets.bottom

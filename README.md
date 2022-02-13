@@ -1,6 +1,6 @@
 #  Find
 
-Find 1.3 is separated into targets. Inside each target, if there is a `Controller`, make one my just calling the initializer. If there is only a view controller, use the static `make` function.
+Find 1.3 is separated into targets. Inside each target, if there is a `Controller`, make one by just calling the initializer. If there is only a view controller, use the static `make` function.
 
 Example:
 

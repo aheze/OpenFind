@@ -28,17 +28,17 @@ extension ListsDetailViewController: UITextFieldDelegate {
             let textRange = Range(range, in: text)
         {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            
+
             if textField == headerTopCenterTextField {
                 model.list.name = updatedText
             } else if textField == headerBottomTextField {
                 model.list.desc = updatedText
             }
         }
-        
+
         return true
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
