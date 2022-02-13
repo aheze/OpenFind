@@ -48,6 +48,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         super.viewDidLoad()
         
         title = "Photos"
+        setupCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

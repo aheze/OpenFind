@@ -107,6 +107,7 @@ struct SearchConfiguration: Equatable {
     static var photos: Self = {
         var configuration = SearchConfiguration.lists
         configuration.fieldBackgroundColor = .secondarySystemBackground
+        configuration.addTextPlaceholder = "Find photos"
         return configuration
     }()
 }
