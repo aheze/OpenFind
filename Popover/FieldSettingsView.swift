@@ -79,18 +79,6 @@ struct FieldSettingsView: View {
                 }
                 
                 listsView()
-                    
-//                .overlay(
-//                    ScrollView {
-//                        FieldSettingsContainer {
-//                            ForEach(model.words, id: \.self) { word in
-//                                Text(verbatim: word)
-//                                    .modifier(PopoverButtonModifier(backgroundColor: FieldSettingsConstants.buttonColor))
-//                            }
-//                        }
-//                    }
-//                    alignment: .top
-//                )
             }
         }
         .frame(width: 180)
@@ -125,24 +113,44 @@ struct FieldSettingsView: View {
     }
     
     func listsView() -> some View {
-        VStack(spacing: 0) {
+        func heightOfWordsStack() -> CGFloat? {
+            if model.words.isEmpty { /// not a list, is a word
+                return 0
+            } else if model.words.count <= 3 {
+                return nil
+            } else { /// regular list with lots of words, use scroll view
+                return 190 /// hardcoded - show 3 words and a bit of the 4th
+            }
+        }
+        
+        return VStack(spacing: 0) {
             Line(color: configuration.popoverDividerColor)
             
             header(string: "WORDS", showEditListButton: true)
             
-            ScrollView {
-                FieldSettingsContainer(applyPadding: false) {
+            if model.words.count <= 3 {
+                VStack(spacing: FieldSettingsConstants.spacing) {
                     ForEach(model.words, id: \.self) { word in
                         Text(verbatim: word)
                             .asPopoverButton(foregroundColor: configuration.popoverTextColor, backgroundColor: configuration.popoverButtonColor)
                     }
                 }
                 .padding(EdgeInsets(top: 0, leading: FieldSettingsConstants.padding, bottom: FieldSettingsConstants.padding, trailing: FieldSettingsConstants.padding))
+            } else {
+                ScrollView {
+                    VStack(spacing: FieldSettingsConstants.spacing) {
+                        ForEach(model.words, id: \.self) { word in
+                            Text(verbatim: word)
+                                .asPopoverButton(foregroundColor: configuration.popoverTextColor, backgroundColor: configuration.popoverButtonColor)
+                        }
+                    }
+                    .padding(EdgeInsets(top: 0, leading: FieldSettingsConstants.padding, bottom: FieldSettingsConstants.padding, trailing: FieldSettingsConstants.padding))
+                }
             }
         }
         .clipped()
         .opacity(model.words.isEmpty ? 0 : 1)
-        .frame(height: model.words.isEmpty ? 0 : 200, alignment: .top)
+        .frame(height: heightOfWordsStack(), alignment: .top)
     }
     
     func defaultButtonForegroundColor() -> UIColor {
@@ -155,19 +163,12 @@ struct FieldSettingsView: View {
 }
 
 struct FieldSettingsContainer<Content: View>: View {
-    var applyPadding = true
     @ViewBuilder var content: Content
     var body: some View {
-        if applyPadding {
-            VStack(spacing: FieldSettingsConstants.spacing) {
-                content
-            }
-            .padding(FieldSettingsConstants.padding)
-        } else {
-            VStack(spacing: FieldSettingsConstants.spacing) {
-                content
-            }
+        VStack(spacing: FieldSettingsConstants.spacing) {
+            content
         }
+        .padding(FieldSettingsConstants.padding)
     }
 }
 
