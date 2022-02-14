@@ -26,36 +26,27 @@ struct CameraButton: View {
                 tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
             }
         } label: {
-            ZStack {
-                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
-                    .fill(attributes.foregroundColor.color)
-//                    .overlay(
-
-                attributes.rimColor.color
-                    .mask(
-                        Rectangle()
-                            .fill(.black)
-                            .overlay(
-                                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
-//                                    .fill(.black)
-
-                                    .stroke(.white, lineWidth: attributes.rimWidth)
-//                                    .padding(attributes.rimWidth)
-                            )
-                            .compositingGroup()
-                            .luminanceToAlpha()
-//                        ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
-//                            .stroke(.blue, lineWidth: attributes.rimWidth)
-                    )
-
-            }
-            .frame(width: attributes.length, height: attributes.length)
-            .frame(maxWidth: .infinity)
-            .frame(height: attributes.backgroundHeight)
-            .contentShape(Rectangle())
+            ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
+                .fill(attributes.foregroundColor.color)
+                .overlay(
+                    attributes.rimColor.color
+                        .mask(
+                            Rectangle()
+                                .fill(.black) /// the mask seems to need to be a solid, not changing color
+                                .mask(
+                                    ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
+                                        .stroke(.white, lineWidth: attributes.rimWidth)
+                                )
+                                .padding(30)
+                        )
+                        .padding(-30) /// extra canvas padding since the shutter shape content can overflow its bounds
+                )
+                .frame(width: attributes.length, height: attributes.length)
+                .frame(maxWidth: .infinity)
+                .frame(height: attributes.backgroundHeight)
+                .contentShape(Rectangle())
         }
         .buttonStyle(CameraButtonStyle(isShutter: tabViewModel.tabState == tabType))
-//        .opacity(0.5)
     }
 }
 
@@ -184,30 +175,3 @@ struct TabBarView_Previews: PreviewProvider {
         TabBarViewTester()
     }
 }
-
-//                    )
-
-//                    .fill(attributes.rimColor.color)
-//                            .overlay(
-//                                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
-//                                    .fill(.black)
-//                                    .padding(attributes.rimWidth)
-//                            )
-//                            .compositingGroup()
-//                            .luminanceToAlpha()
-                ////                            .padding(attributes.rimWidth / 2)
-//
-                ////                    .mask(
-                ////                        Rectangle()
-                ////                            .fill(.white)
-                ////                            .overlay(
-                ////                                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
-                ////                                    .fill(.black)
-                ////                                    .padding(attributes.rimWidth)
-                ////                            )
-                ////                            .compositingGroup()
-                ////                            .luminanceToAlpha()
-                //////                            .padding(attributes.rimWidth / 2)
-                ////                    )
-//                    .padding(-attributes.rimWidth / 2)
-//                    .border(.green)
