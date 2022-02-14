@@ -13,7 +13,7 @@ struct CameraButton: View {
     @ObservedObject var tabViewModel: TabViewModel
     @ObservedObject var cameraViewModel: CameraViewModel
     let attributes: CameraIconAttributes
-    
+
     var body: some View {
         Button {
             /// is current camera
@@ -26,20 +26,36 @@ struct CameraButton: View {
                 tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
             }
         } label: {
-            Group {
+            ZStack {
                 ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
                     .fill(attributes.foregroundColor.color)
-                    .overlay(
-                        ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
-                            .stroke(attributes.rimColor.color, lineWidth: attributes.rimWidth)
+//                    .overlay(
+
+                attributes.rimColor.color
+                    .mask(
+                        Rectangle()
+                            .fill(.black)
+                            .overlay(
+                                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
+//                                    .fill(.black)
+
+                                    .stroke(.white, lineWidth: attributes.rimWidth)
+//                                    .padding(attributes.rimWidth)
+                            )
+                            .compositingGroup()
+                            .luminanceToAlpha()
+//                        ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
+//                            .stroke(.blue, lineWidth: attributes.rimWidth)
                     )
-                    .frame(width: attributes.length, height: attributes.length)
+
             }
+            .frame(width: attributes.length, height: attributes.length)
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
             .contentShape(Rectangle())
         }
         .buttonStyle(CameraButtonStyle(isShutter: tabViewModel.tabState == tabType))
+//        .opacity(0.5)
     }
 }
 
@@ -49,17 +65,18 @@ struct ShutterShape: Shape {
         get { progress }
         set { progress = newValue }
     }
-    
+
     func path(in rect: CGRect) -> Path {
         let attributes = ShutterShapeAttributes(progress: progress, from: .circle, to: .triangle, multiplier: rect.width)
         var path = Path()
-        
+
         path.move(to: attributes.origin)
         path.addArc(tangent1End: attributes.point1, tangent2End: attributes.point2, radius: attributes.cornerRadius)
         path.addArc(tangent1End: attributes.point2, tangent2End: attributes.point3, radius: attributes.cornerRadius)
         path.addArc(tangent1End: attributes.point3, tangent2End: attributes.point1, radius: attributes.cornerRadius)
         path.addLine(to: attributes.origin)
         path = path.offsetBy(dx: rect.width / 2, dy: rect.height / 2)
+
         return path
     }
 }
@@ -77,16 +94,16 @@ struct ShutterShapeAttributes {
 
     static let triangle: Self = {
         let circumference = CGFloat(1) /// set 1 for now, later multiply by the width of the button
-        
+
         let cornerRadius = circumference / 6
-        
+
         let width = circumference / 1.4
         let yOffset = sqrt(3) * (width / 2)
         let leftOffset = width / 22
         let point1 = CGPoint(x: (-width / 2) - leftOffset, y: -yOffset)
         let point2 = CGPoint(x: width - leftOffset, y: 0)
         let point3 = CGPoint(x: (-width / 2) - leftOffset, y: yOffset)
-            
+
         return .init(
             origin: CGPoint(x: (-width / 2) - leftOffset, y: 0),
             cornerRadius: cornerRadius,
@@ -101,14 +118,14 @@ struct ShutterShapeAttributes {
 
     static let circle: Self = {
         let circumference = CGFloat(1) /// set 1 for now, later multiply by the width of the button
-        
+
         let cornerRadius = circumference / 2
         let yOffset = sqrt(3) * (circumference / 2)
-        
+
         let point1 = CGPoint(x: -circumference / 2, y: -yOffset)
         let point2 = CGPoint(x: circumference, y: 0)
         let point3 = CGPoint(x: -circumference / 2, y: yOffset)
-            
+
         return .init(
             origin: CGPoint(x: -circumference / 2, y: 0),
             cornerRadius: cornerRadius,
@@ -145,3 +162,52 @@ struct CameraButtonStyle: ButtonStyle {
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
+
+struct TabBarViewTester: View {
+    @ObservedObject var tabViewModel = TabViewModel()
+    @ObservedObject var toolbarViewModel = ToolbarViewModel()
+    @ObservedObject var cameraViewModel = CameraViewModel()
+
+    var body: some View {
+        TabBarView(
+            tabViewModel: tabViewModel,
+            toolbarViewModel: toolbarViewModel,
+            cameraViewModel: cameraViewModel
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.blue.edgesIgnoringSafeArea(.all))
+    }
+}
+
+struct TabBarView_Previews: PreviewProvider {
+    static var previews: some View {
+        TabBarViewTester()
+    }
+}
+
+//                    )
+
+//                    .fill(attributes.rimColor.color)
+//                            .overlay(
+//                                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
+//                                    .fill(.black)
+//                                    .padding(attributes.rimWidth)
+//                            )
+//                            .compositingGroup()
+//                            .luminanceToAlpha()
+                ////                            .padding(attributes.rimWidth / 2)
+//
+                ////                    .mask(
+                ////                        Rectangle()
+                ////                            .fill(.white)
+                ////                            .overlay(
+                ////                                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
+                ////                                    .fill(.black)
+                ////                                    .padding(attributes.rimWidth)
+                ////                            )
+                ////                            .compositingGroup()
+                ////                            .luminanceToAlpha()
+                //////                            .padding(attributes.rimWidth / 2)
+                ////                    )
+//                    .padding(-attributes.rimWidth / 2)
+//                    .border(.green)

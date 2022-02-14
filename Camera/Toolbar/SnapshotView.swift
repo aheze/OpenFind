@@ -26,17 +26,22 @@ struct SnapshotView: View {
             Image("CameraRim") /// rim of camera
                 .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
                 .overlay(
-                    CameraInnerShape()
-                        .trim(from: startTrim(), to: endTrim())
-                        .stroke(
-                            isOn ? Color(Constants.activeIconColor) : .white,
-                            style: .init(
-                                lineWidth: 1.5,
-                                lineCap: .round,
-                                lineJoin: .round
-                            )
+                    Color(isOn ? Constants.activeIconColor : .white)
+
+                        /// prevent animation glitches
+                        .mask(
+                            CameraInnerShape()
+                                .trim(from: startTrim(), to: endTrim())
+                                .stroke(
+                                    .black,
+                                    style: .init(
+                                        lineWidth: 1.5,
+                                        lineCap: .round,
+                                        lineJoin: .round
+                                    )
+                                )
+                                .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
                         )
-                        .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
                 )
                 .frame(width: 40, height: 40)
                 .enabledModifier(isEnabled: isEnabled, linePadding: 11)
@@ -49,11 +54,11 @@ struct SnapshotView: View {
     func startTrim() -> CGFloat {
         return isOn ? SnapshotConstants.checkStartTrim : 0
     }
-    
+
     func endTrim() -> CGFloat {
         return isOn ? 1 : SnapshotConstants.checkStartTrim
     }
-    
+
     func toggle() {
         withAnimation {
             isOn.toggle()

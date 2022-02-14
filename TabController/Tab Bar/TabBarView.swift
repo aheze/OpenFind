@@ -127,3 +127,25 @@ class BlurEffectView: UIVisualEffectView {
         animator?.stopAnimation(true)
     }
 }
+
+//struct TabBarViewTester: View {
+//    @ObservedObject var tabViewModel = TabViewModel()
+//    @ObservedObject var toolbarViewModel = ToolbarViewModel()
+//    @ObservedObject var cameraViewModel = CameraViewModel()
+//    
+//    var body: some View {
+//        TabBarView(
+//            tabViewModel: tabViewModel,
+//            toolbarViewModel: toolbarViewModel,
+//            cameraViewModel: cameraViewModel
+//        )
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//        .background(Color.blue.edgesIgnoringSafeArea(.all))
+//    }
+//}
+//
+//struct TabBarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TabBarViewTester()
+//    }
+//}
