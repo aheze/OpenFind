@@ -12,6 +12,7 @@ class HighlightsViewModel: ObservableObject {
     @Published var highlights = Set<Highlight>()
     @Published var upToDate = true
 
+    /// If replace, don't check if word is same, but make sure color is same
     func update(with newHighlights: Set<Highlight>, replace: Bool) {
         var nextHighlights = Set<Highlight>()
         
@@ -28,7 +29,7 @@ class HighlightsViewModel: ObservableObject {
                 let oldHighlight = oldHighlights[oldHighlightIndex]
                 
                 /// don't check if the word is the same if replacing
-                guard replace || (oldHighlight.string == newHighlight.string) else { continue }
+                guard (replace && oldHighlight.colors == newHighlight.colors) || (oldHighlight.string == newHighlight.string) else { continue }
                 
                 let distance = relativeDistance(oldHighlight.frame.center, newHighlight.frame.center)
                 if distance < minimumDistance {

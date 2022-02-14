@@ -104,6 +104,7 @@ class SearchViewModel: ObservableObject {
                 continue
             }
         }
+        
         self.stringToGradients = stringToGradients
     }
     

@@ -78,6 +78,7 @@ class LivePreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCamera()
         setup()
     }
 
@@ -92,7 +93,6 @@ class LivePreviewViewController: UIViewController {
     }
     
     func setup() {
-        configureCamera()
         pausedImageView.alpha = 0
         livePreviewView.backgroundColor = .clear
         

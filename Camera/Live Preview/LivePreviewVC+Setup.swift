@@ -13,21 +13,19 @@ extension LivePreviewViewController {
     func configureCamera() {
         if let cameraDevice = getCamera() {
             self.cameraDevice = cameraDevice
-            
-            DispatchQueue.global(qos: .userInteractive).async {
-                self.configureSession()
-            }
+            self.configureSession()
         } else {
             let cameraNotFoundView = CameraNotFoundView()
             let hostingController = UIHostingController(rootView: cameraNotFoundView)
             addChildViewController(hostingController, in: view)
             view.bringSubviewToFront(hostingController.view)
             hostingController.view?.backgroundColor = .white
-
         }
     }
-    
+
     func configureSession() {
+        livePreviewView.session = session
+
         guard let cameraDevice = cameraDevice else { return }
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
@@ -51,27 +49,25 @@ extension LivePreviewViewController {
         if session.canAddOutput(videoDataOutput) {
             session.addOutput(videoDataOutput)
         }
-        
+
         if session.canAddOutput(photoDataOutput) {
             session.addOutput(photoDataOutput)
         }
-        
+
         DispatchQueue.main.async {
             self.addSession()
+            self.session.startRunning()
         }
-        
-        session.startRunning()
     }
-    
+
     func addSession() {
         let viewBounds = view.layer.bounds
-        
-        livePreviewView.session = session
+
         livePreviewView.videoPreviewLayer.bounds = viewBounds
         livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
         livePreviewView.videoPreviewLayer.videoGravity = .resizeAspect
     }
-    
+
     func getCamera() -> AVCaptureDevice? {
         let discoverySession = AVCaptureDevice.DiscoverySession(
             deviceTypes: [

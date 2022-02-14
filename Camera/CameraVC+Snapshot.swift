@@ -18,7 +18,6 @@ extension CameraViewController {
                 let image = UIImage(cgImage: currentImage)
                 print("Current image exists.")
             }
-            
         }
     }
 }
