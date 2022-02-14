@@ -27,7 +27,11 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This permission is required to save photos to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.</string>
+	<string>By allowing access to your photos, you&apos;ll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConfigurationIntent</string>

@@ -14,6 +14,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     var searchViewModel: SearchViewModel
+    var permissionsViewModel = PhotosPermissionsViewModel()
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset = CGFloat(0)
@@ -48,7 +49,9 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         super.viewDidLoad()
         
         title = "Photos"
-        setupCollectionView()
+        setup()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
