@@ -37,17 +37,17 @@ class TabBarViewController: UIViewController {
     @IBOutlet var tabBarContainerView: UIView!
     @IBOutlet var tabBarHeightC: NSLayoutConstraint!
 
-    
     init?(coder: NSCoder, tabViewModel: TabViewModel) {
         self.tabViewModel = tabViewModel
         self.tabViewModel = tabViewModel
         super.init(coder: coder)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("You must create this view controller with metadata.")
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = contentPagingLayout
@@ -64,6 +64,15 @@ class TabBarViewController: UIViewController {
         }
         
         updateTraitCollection(to: traitCollection)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateSafeAreaLayoutGuide(
+            bottomHeight: tabViewModel.tabBarAttributes.backgroundHeight,
+            safeAreaInsets: Global.safeAreaInsets
+        )
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -75,12 +84,12 @@ class TabBarViewController: UIViewController {
             for page in pages {
                 page.boundsChanged(to: size, safeAreaInsets: insets)
             }
+            
             self.updateSafeAreaLayoutGuide(
-                bottomHeight: ConstantVars.tabBarTotalHeightExpanded,
+                bottomHeight: self.tabViewModel.tabBarAttributes.backgroundHeight,
                 safeAreaInsets: insets
             )
         }
-        
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
