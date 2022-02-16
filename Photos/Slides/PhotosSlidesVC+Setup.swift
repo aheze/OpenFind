@@ -21,6 +21,7 @@ extension PhotosSlidesViewController {
         collectionView.delaysContentTouches = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.keyboardDismissMode = .interactive
+        collectionView.decelerationRate = .fast
         collectionView.collectionViewLayout = flowLayout
     }
 }

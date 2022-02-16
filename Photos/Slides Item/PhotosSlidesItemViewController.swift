@@ -14,9 +14,14 @@ class PhotosSlidesItemViewController: UIViewController {
     lazy var scrollZoomController = ScrollZoomViewController.make()
  
     var model: PhotosViewModel
+    var findPhoto: FindPhoto
     
-    init?(coder: NSCoder, model: PhotosViewModel) {
+    @IBOutlet weak var containerView: UIView!
+    
+    
+    init?(coder: NSCoder, model: PhotosViewModel, findPhoto: FindPhoto) {
         self.model = model
+        self.findPhoto = findPhoto
         super.init(coder: coder)
     }
     required init?(coder: NSCoder) {
@@ -27,17 +32,18 @@ class PhotosSlidesItemViewController: UIViewController {
         super.viewDidLoad()
         
         _ = scrollZoomController
-        addChildViewController(scrollZoomController, in: view)
+        addChildViewController(scrollZoomController, in: containerView)
         
-        if let slidesState = model.slidesState {
             model.imageManager.requestImage(
-                for: slidesState.startingPhoto.asset,
+                for: findPhoto.photo.asset,
                 targetSize: .zero,
                 contentMode: .aspectFill,
                 options: nil
             ) { image, _ in
                 self.scrollZoomController.imageView.image = image
             }
-        }
+        
+        containerView.addDebugBorders(.green)
+        scrollZoomController.view.addDebugBorders(.red)
     }
 }

@@ -19,15 +19,16 @@ class PhotoSlidesSection: Hashable {
         lhs.id == rhs.id
     }
 }
+
 class PhotosSlidesViewController: UIViewController, Searchable {
     var baseSearchBarOffset = CGFloat(0)
-    var additionalSearchBarOffset: CGFloat? = nil
+    var additionalSearchBarOffset: CGFloat?
     var updateSearchBarOffset: (() -> Void)?
     
     var model: PhotosViewModel
     
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var collectionView: UICollectionView!
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
@@ -48,9 +49,33 @@ class PhotosSlidesViewController: UIViewController, Searchable {
         
         setup()
         update(animate: false)
+        
+        if
+            let slidesState = model.slidesState,
+            let index = slidesState.findPhotos.firstIndex(where: {
+                $0.photo == slidesState.startingPhoto
+            })
+        {
+            model.slidesState?.currentIndex = index
+            collectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: false)
+        }
+        
+        view.addDebugBorders(.blue)
+        collectionView.addDebugBorders(.systemOrange, width: 20)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Tab.Frames.excluded[.photosSlidesItemCollectionView] = collectionView.windowFrame()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Tab.Frames.excluded[.photosSlidesItemCollectionView] = nil
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+        print("Bounds changed.")
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
     }

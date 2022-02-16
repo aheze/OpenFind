@@ -6,17 +6,12 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import SwiftUI
 
 extension PhotosViewController {
-    func willBecomeActive() {
-        
-    }
+    func willBecomeActive() {}
     
-    func didBecomeActive() {
-        
-    }
+    func didBecomeActive() {}
     
     func willBecomeInactive() {
         withAnimation {
@@ -24,16 +19,11 @@ extension PhotosViewController {
         }
     }
     
-    func didBecomeInactive() {
-        
-    }
+    func didBecomeInactive() {}
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        
-        
         self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: safeAreaInsets)
         self.updateNavigationBar?()
-        
-//        detailsViewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
+        self.model.slidesState?.viewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
     }
 }

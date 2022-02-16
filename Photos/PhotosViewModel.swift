@@ -25,12 +25,6 @@ class PhotosViewModel {
     var slidesState: PhotosSlidesState?
 }
 
-struct PhotosSlidesState {
-    var photos: [FindPhoto]
-    var startingPhoto: Photo
-    var currentIndex: Int?
-}
-
 extension PHAsset {
     func getDateCreatedCategorization() -> PhotosSection.Categorization? {
         if

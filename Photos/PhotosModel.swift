@@ -9,10 +9,18 @@
 import Photos
 import UIKit
 
+struct PhotosSlidesState {
+    var viewController: PhotosSlidesViewController?
+    var findPhotos: [FindPhoto]
+    var startingPhoto: Photo
+    var currentIndex: Int?
+}
+
 struct FindPhoto: Hashable {
     var photo: Photo
     var associatedViewController: UIViewController?
 }
+
 struct PhotosSection: Hashable {
     var title: String
     var categorization: Categorization

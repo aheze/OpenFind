@@ -10,30 +10,30 @@ import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let photo = model.slidesState?.photos[safe: indexPath.item] {
-            if let viewController = photo.associatedViewController {
+        if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
+            if let viewController = findPhoto.associatedViewController {
                 addChildViewController(viewController, in: cell.contentView)
             } else {
-                
                 let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
                 let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
                     PhotosSlidesItemViewController(
                         coder: coder,
-                        model: self.model
+                        model: self.model,
+                        findPhoto: findPhoto
                     )
                 }
-                
+
                 addChildViewController(viewController, in: cell.contentView)
-                model.slidesState?.photos[indexPath.item].associatedViewController = viewController
+                model.slidesState?.findPhotos[indexPath.item].associatedViewController = viewController
             }
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let photo = model.slidesState?.photos[safe: indexPath.item] {
-            if let viewController = photo.associatedViewController {
+        if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
+            if let viewController = findPhoto.associatedViewController {
                 removeChild(viewController)
-                model.slidesState?.photos[indexPath.item].associatedViewController = nil
+                model.slidesState?.findPhotos[indexPath.item].associatedViewController = nil
             }
         }
     }

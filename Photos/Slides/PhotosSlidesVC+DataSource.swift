@@ -14,7 +14,7 @@ extension PhotosSlidesViewController {
         var snapshot = Snapshot()
         let section = PhotoSlidesSection()
         snapshot.appendSections([section])
-        snapshot.appendItems(slidesState.photos, toSection: section)
+        snapshot.appendItems(slidesState.findPhotos, toSection: section)
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
 
