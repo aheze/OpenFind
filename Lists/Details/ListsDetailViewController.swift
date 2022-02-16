@@ -15,7 +15,7 @@ class ListsDetailViewController: UIViewController, Searchable {
     var realmModel: RealmModel
     
     var baseSearchBarOffset = CGFloat(0)
-    var additionalSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
     
     @IBOutlet var scrollView: ListsDetailScrollView!

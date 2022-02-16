@@ -17,8 +17,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var permissionsViewModel = PhotosPermissionsViewModel()
     
     var baseSearchBarOffset = CGFloat(0)
-    var additionalSearchBarOffset = CGFloat(0)
-    
+    var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateNavigationBar: (() -> Void)?
     
     var photosSelectionViewModel = PhotosSelectionViewModel()

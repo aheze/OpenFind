@@ -26,7 +26,9 @@ class PhotosViewModel {
 }
 
 struct PhotosSlidesState {
+    var photos: [Photo]
     var startingPhoto: Photo
+    var currentIndex: Int?
 }
 
 extension PHAsset {

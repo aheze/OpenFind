@@ -15,7 +15,7 @@ class ListsViewController: UIViewController, Searchable {
     var searchViewModel: SearchViewModel
     
     var baseSearchBarOffset = CGFloat(0)
-    var additionalSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     
     var updateNavigationBar: (() -> Void)?
     

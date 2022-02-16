@@ -39,6 +39,8 @@ class ScrollZoomViewController: UIViewController {
         scrollView.maximumZoomScale = ScrollZoomViewController.maximumZoomScale
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        
+        scrollView.contentInsetAdjustmentBehavior = .never
     }
     
     func centerImage() {

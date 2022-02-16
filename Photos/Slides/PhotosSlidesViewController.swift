@@ -8,8 +8,31 @@
 
 import UIKit
 
-class PhotosSlidesViewController: UIViewController {
+class PhotoSlidesSection: Hashable {
+    let id = 0
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: PhotoSlidesSection, rhs: PhotoSlidesSection) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+class PhotosSlidesViewController: UIViewController, Searchable {
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset: CGFloat? = nil
+    var updateSearchBarOffset: (() -> Void)?
+    
     var model: PhotosViewModel
+    
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
+    lazy var dataSource = makeDataSource()
+    typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, Photo>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, Photo>
+    
     lazy var scrollZoomController = ScrollZoomViewController.make()
 
     init?(coder: NSCoder, model: PhotosViewModel) {
@@ -25,6 +48,9 @@ class PhotosSlidesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
+        update(animate: false)
+        
         _ = scrollZoomController
         addChildViewController(scrollZoomController, in: view)
         
@@ -38,5 +64,10 @@ class PhotosSlidesViewController: UIViewController {
                 self.scrollZoomController.imageView.image = image
             }
         }
+    }
+    
+    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        updateSearchBarOffset?()
     }
 }

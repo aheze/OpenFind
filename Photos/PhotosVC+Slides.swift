@@ -16,7 +16,7 @@ extension PhotosViewController {
             PhotosSlidesViewController(coder: coder, model: self.model)
         }
         
-        let slidesState = PhotosSlidesState(startingPhoto: photo)
+        let slidesState = PhotosSlidesState(photos: model.photos, startingPhoto: photo)
         model.slidesState = slidesState
         navigationController?.pushViewController(viewController, animated: true)
     }

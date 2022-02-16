@@ -18,5 +18,5 @@ protocol DismissalNavigationLifecycle: UIViewController {
 
 protocol Searchable: UIViewController {
     var baseSearchBarOffset: CGFloat { get set }
-    var additionalSearchBarOffset: CGFloat { get set }
+    var additionalSearchBarOffset: CGFloat? { get set }
 }

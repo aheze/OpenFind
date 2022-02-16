@@ -11,7 +11,7 @@ import UIKit
 class IconPickerViewController: UIViewController, Searchable {
     /// searchable
     var baseSearchBarOffset = CGFloat(0)
-    var additionalSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
     
     var model: IconPickerViewModel

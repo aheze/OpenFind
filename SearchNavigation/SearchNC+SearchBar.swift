@@ -6,12 +6,10 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension SearchNavigationController {
     func setupSearchBar() {
-        
         view.addSubview(searchContainerViewContainer)
         searchContainerViewContainer.pinEdgesToSuperview()
         
@@ -34,7 +32,5 @@ extension SearchNavigationController {
         self.searchViewController = searchViewController
         
         addResizableChildViewController(searchViewController, in: searchContainerView)
-        
-        
     }
 }
