@@ -26,7 +26,9 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     var updateSearchBarOffset: (() -> Void)?
     
     var model: PhotosViewModel
+    var searchViewModel: SearchViewModel
     
+    @IBOutlet var containerViewTopC: NSLayoutConstraint!
     @IBOutlet var containerView: UIView!
     @IBOutlet var collectionView: UICollectionView!
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
@@ -34,8 +36,13 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
 
-    init?(coder: NSCoder, model: PhotosViewModel) {
+    init?(
+        coder: NSCoder,
+        model: PhotosViewModel,
+        searchViewModel: SearchViewModel
+    ) {
         self.model = model
+        self.searchViewModel = searchViewModel
         super.init(coder: coder)
     }
 
@@ -51,10 +58,8 @@ class PhotosSlidesViewController: UIViewController, Searchable {
         navigationItem.largeTitleDisplayMode = .never
         
         setup()
+        containerViewTopC.constant = searchViewModel.getTotalHeight()
         update(animate: false)
-        
-        view.addDebugBorders(.blue)
-        collectionView.addDebugBorders(.systemOrange, width: 20)
         
         if
             let slidesState = model.slidesState,
@@ -82,5 +87,6 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
+        containerViewTopC.constant = searchViewModel.getTotalHeight()
     }
 }
