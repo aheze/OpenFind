@@ -63,7 +63,7 @@ extension PhotosViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
-        
+        collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = flowLayout
     }
 }
