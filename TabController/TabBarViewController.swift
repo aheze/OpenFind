@@ -53,6 +53,7 @@ class TabBarViewController: UIViewController {
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
         contentCollectionView.showsHorizontalScrollIndicator = false
+        contentCollectionView.contentInsetAdjustmentBehavior = .never
         
         if let view = view as? TabControllerView {
             view.tappedExcludedView = { [weak self] in
@@ -109,9 +110,7 @@ class TabBarViewController: UIViewController {
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat, safeAreaInsets: UIEdgeInsets) {
         if let pages = getPages?() {
             for page in pages {
-                page.additionalSafeAreaInsets.right = safeAreaInsets.right
                 page.additionalSafeAreaInsets.bottom = bottomHeight - safeAreaInsets.bottom
-                page.additionalSafeAreaInsets.left = safeAreaInsets.left
             }
         }
     }

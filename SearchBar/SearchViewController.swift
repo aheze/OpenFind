@@ -116,6 +116,7 @@ extension SearchViewController {
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         searchCollectionView.allowsSelection = false
+        searchCollectionView.contentInsetAdjustmentBehavior = .never
         
         let bundle = Bundle(identifier: "com.aheze.SearchBar")
         let nib = UINib(nibName: "SearchFieldCell", bundle: bundle)

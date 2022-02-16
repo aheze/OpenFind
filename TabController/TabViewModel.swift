@@ -27,9 +27,24 @@ class TabViewModel: ObservableObject {
     @Published var cameraIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
-   
+    @Published var tabBarShown = true
+    
     var updateTabBarHeight: ((TabState) -> Void)?
     var tabStateChanged: ((TabStateChangeAnimation) -> Void)?
+    
+    init() {
+        NotificationCenter.default.addObserver(forName: UIApplication.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] _ in
+            withAnimation {
+                self?.tabBarShown = false
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
+            withAnimation {
+                self?.tabBarShown = true
+            }
+        }
+    }
     
     /// animated = clicked
     func changeTabState(newTab: TabState, animation: TabStateChangeAnimation = .fractionalProgress) {

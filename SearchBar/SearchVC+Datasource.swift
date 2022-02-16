@@ -22,9 +22,9 @@ extension SearchViewController {
         var extraPadding = CGFloat(0)
         
         if index == 0 {
-            extraPadding += searchCollectionViewFlowLayout.sidePadding /// if **left edge**, add side padding
+            extraPadding += searchCollectionViewFlowLayout.sidePaddingLeft /// if **left edge**, add side padding
         } else {
-            extraPadding += searchCollectionViewFlowLayout.sidePeekPadding
+            extraPadding += searchCollectionViewFlowLayout.sidePeekPaddingLeft
         }
         
         var fieldsCount = searchViewModel.fields.count
@@ -35,9 +35,9 @@ extension SearchViewController {
         }
         
         if index == fieldsCount - 2 || index == fieldsCount - 1 {
-            extraPadding += searchCollectionViewFlowLayout.sidePadding /// if **right edge**, add side padding
+            extraPadding += searchCollectionViewFlowLayout.sidePaddingRight /// if **right edge**, add side padding
         } else {
-            extraPadding += searchCollectionViewFlowLayout.sidePeekPadding
+            extraPadding += searchCollectionViewFlowLayout.sidePeekPaddingRight
         }
         
         let fullWidth = searchCollectionView.bounds.width

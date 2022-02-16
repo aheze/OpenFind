@@ -50,6 +50,7 @@ struct TabBarView: View {
                 alignment: .bottom
             )
             .edgesIgnoringSafeArea(.bottom)
+            .opacity(tabViewModel.tabBarShown ? 1 : 0)
     }
 }
 
@@ -128,11 +129,11 @@ class BlurEffectView: UIVisualEffectView {
     }
 }
 
-//struct TabBarViewTester: View {
+// struct TabBarViewTester: View {
 //    @ObservedObject var tabViewModel = TabViewModel()
 //    @ObservedObject var toolbarViewModel = ToolbarViewModel()
 //    @ObservedObject var cameraViewModel = CameraViewModel()
-//    
+//
 //    var body: some View {
 //        TabBarView(
 //            tabViewModel: tabViewModel,
@@ -142,10 +143,10 @@ class BlurEffectView: UIVisualEffectView {
 //        .frame(maxWidth: .infinity, maxHeight: .infinity)
 //        .background(Color.blue.edgesIgnoringSafeArea(.all))
 //    }
-//}
+// }
 //
-//struct TabBarView_Previews: PreviewProvider {
+// struct TabBarView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        TabBarViewTester()
 //    }
-//}
+// }
