@@ -26,7 +26,7 @@ class PhotosViewModel {
 }
 
 struct PhotosSlidesState {
-    var photos: [Photo]
+    var photos: [FindPhoto]
     var startingPhoto: Photo
     var currentIndex: Int?
 }

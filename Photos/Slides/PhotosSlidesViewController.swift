@@ -30,10 +30,8 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     @IBOutlet weak var collectionView: UICollectionView!
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
     lazy var dataSource = makeDataSource()
-    typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, Photo>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, Photo>
-    
-    lazy var scrollZoomController = ScrollZoomViewController.make()
+    typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
 
     init?(coder: NSCoder, model: PhotosViewModel) {
         self.model = model
@@ -50,20 +48,6 @@ class PhotosSlidesViewController: UIViewController, Searchable {
         
         setup()
         update(animate: false)
-        
-        _ = scrollZoomController
-        addChildViewController(scrollZoomController, in: view)
-        
-        if let slidesState = model.slidesState {
-            model.imageManager.requestImage(
-                for: slidesState.startingPhoto.asset,
-                targetSize: .zero,
-                contentMode: .aspectFill,
-                options: nil
-            ) { image, _ in
-                self.scrollZoomController.imageView.image = image
-            }
-        }
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {

@@ -9,6 +9,10 @@
 import Photos
 import UIKit
 
+struct FindPhoto: Hashable {
+    var photo: Photo
+    var associatedViewController: UIViewController?
+}
 struct PhotosSection: Hashable {
     var title: String
     var categorization: Categorization

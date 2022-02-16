@@ -142,6 +142,21 @@
             </objects>
             <point key="canvasLocation" x="808.69565217391312" y="75.669642857142847"/>
         </scene>
+        <!--Photos Slides Item View Controller-->
+        <scene sceneID="ALe-16-Uhe">
+            <objects>
+                <viewController storyboardIdentifier="PhotosSlidesItemViewController" id="ao7-Gl-6H0" customClass="PhotosSlidesItemViewController" customModule="Find_New" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nUY-tK-LCE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="stP-0T-jgx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hA-vz-uvn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1564" y="76"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
