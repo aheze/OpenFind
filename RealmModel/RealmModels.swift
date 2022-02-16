@@ -6,13 +6,13 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RealmSwift
 
-class RealmPhoto: Object {
+class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var id = UUID()
     @Persisted var assetIdentifier = ""
-    @Persisted var sentences = RealmSwift.List<RealmPhotoSentence>()
+    @Persisted var sentences = RealmSwift.List<RealmPhotoMetadataSentence>()
     @Persisted var isStarred = false
     @Persisted var dateCreated = Date()
 
@@ -23,7 +23,7 @@ class RealmPhoto: Object {
     init(
         id: UUID,
         assetIdentifier: String,
-        sentences: RealmSwift.List<RealmPhotoSentence>,
+        sentences: RealmSwift.List<RealmPhotoMetadataSentence>,
         isStarred: Bool,
         dateCreated: Date
     ) {
@@ -33,11 +33,32 @@ class RealmPhoto: Object {
         self.isStarred = isStarred
         self.dateCreated = dateCreated
     }
+    
+    func getPhotoMetadata() -> PhotoMetadata {
+        let metadata = PhotoMetadata(
+            id: self.id,
+            assetIdentifier: self.assetIdentifier,
+            sentences: self.sentences.map { $0.getSentence() },
+            isStarred: self.isStarred,
+            dateCreated: self.dateCreated
+        )
+        return metadata
+    }
+    
 }
 
-class RealmPhotoSentence: Object {
+class RealmPhotoMetadataSentence: Object {
     @Persisted var rect: RealmRect?
     @Persisted var string = ""
+    
+    func getSentence() -> Sentence {
+        let rect = self.rect?.getRect() ?? .zero
+        let sentence = Sentence(
+            rect: rect,
+            string: string
+        )
+        return sentence
+    }
 }
 
 class RealmRect: Object {
@@ -45,6 +66,16 @@ class RealmRect: Object {
     @Persisted var y = Double(0)
     @Persisted var width = Double(0)
     @Persisted var height = Double(0)
+    
+    func getRect() -> CGRect {
+        let rect = CGRect(
+            x: x,
+            y: y,
+            width: width,
+            height: height
+        )
+        return rect
+    }
 }
 
 class RealmList: Object {

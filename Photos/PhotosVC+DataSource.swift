@@ -6,16 +6,57 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import Photos
 import UIKit
 
-extension PhotosViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+extension PhotosViewController {
+    func loadCollectionView() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        model.assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.contentView.backgroundColor = .systemBlue
-        return cell
+    func update(animate: Bool = true) {
+        var snapshot = Snapshot()
+        snapshot.appendSections(model.sections)
+        model.sections.forEach { section in
+            snapshot.appendItems(section.photos, toSection: section)
+        }
+        dataSource.apply(snapshot, animatingDifferences: animate)
+    }
+
+    func sortCollectionView() {}
+
+    func makeDataSource() -> DataSource {
+        let dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, photo -> UICollectionViewCell? in
+
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "PhotosCollectionCell",
+                    for: indexPath
+                ) as! PhotosCollectionCell
+
+                cell.imageView.contentMode = .scaleAspectFill
+
+                // Request an image for the asset from the PHCachingImageManager.
+                cell.representedAssetIdentifier = photo.asset.localIdentifier
+                self.model.imageManager.requestImage(
+                    for: photo.asset,
+                    targetSize: self.model.thumbnailSize,
+                    contentMode: .aspectFill,
+                    options: nil
+                ) { image, _ in
+                    // UIKit may have recycled this cell by the handler's activation time.
+                    // Set the cell's thumbnail image only if it's still showing the same asset.
+                    if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+                        cell.imageView.image = image
+                    }
+                }
+
+                return cell
+            }
+        )
+        return dataSource
     }
 }

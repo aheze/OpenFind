@@ -7,7 +7,34 @@
 //
     
 
+import Photos
 import UIKit
+
+struct Photo: Hashable {
+    
+    var asset: PHAsset
+    var metadata: PhotoMetadata?
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(asset)
+    }
+    static func == (lhs: Photo, rhs: Photo) -> Bool {
+        lhs.asset == rhs.asset
+    }
+}
+
+struct PhotoMetadata {
+    var id = UUID()
+    var assetIdentifier = ""
+    var sentences = [Sentence]()
+    var isStarred = false
+    var dateCreated = Date()
+}
+
+struct Sentence {
+    var rect: CGRect?
+    var string = ""
+}
 
 /**
  Models for the search bar. Includes color.

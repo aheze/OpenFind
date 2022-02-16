@@ -15,5 +15,8 @@ extension PhotosViewController: UICollectionViewDelegate {
         let contentOffset = -scrollView.contentOffset.y
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateNavigationBar?()
+        
+        /// For photos caching
+        updateCachedAssets()
     }
 }

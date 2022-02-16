@@ -12,7 +12,9 @@ import SwiftUI
 extension PhotosViewController {
     func setup() {
         setupCollectionView()
+        setupAssetCaching()
         checkPermissions()
+        listenToModel()
     }
 
     func checkPermissions() {
@@ -24,9 +26,9 @@ extension PhotosViewController {
         case .denied:
             showPermissionsView()
         case .authorized:
-            showCollectionView()
+            loadCollectionView()
         case .limited:
-            showCollectionView()
+            loadCollectionView()
         @unknown default:
             fatalError()
         }
@@ -40,9 +42,11 @@ extension PhotosViewController {
         view.bringSubviewToFront(hostingController.view)
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
+            self.loadCollectionView()
         }
     }
 
+    /// Call this after `loadCollectionView()`.
     func showCollectionView() {
         UIView.animate(withDuration: 0.5) {
             self.collectionView.alpha = 1
@@ -52,7 +56,6 @@ extension PhotosViewController {
 
 extension PhotosViewController {
     func setupCollectionView() {
-        collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
@@ -61,5 +64,7 @@ extension PhotosViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        
+        collectionView.collectionViewLayout = flowLayout
     }
 }

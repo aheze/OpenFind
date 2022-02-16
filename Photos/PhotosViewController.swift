@@ -25,6 +25,10 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
     
     @IBOutlet var collectionView: UICollectionView!
+    lazy var flowLayout = PhotosCollectionFlowLayout(model: model)
+    lazy var dataSource = makeDataSource()
+    typealias DataSource = UICollectionViewDiffableDataSource<PhotosSection, Photo>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<PhotosSection, Photo>
     
     init?(
         coder: NSCoder,
@@ -49,8 +53,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         super.viewDidLoad()
         
         title = "Photos"
+        model.load()
         setup()
-        
         
     }
     

@@ -22,6 +22,8 @@ class PhotosController {
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         
+        self.model.realmModel = realmModel
+        
         let searchViewModel = SearchViewModel(configuration: .photos)
         self.searchViewModel = searchViewModel
         
