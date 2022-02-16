@@ -11,11 +11,6 @@ import UIKit
 extension PhotosViewController {
     // MARK: Asset Caching
     
-    func setupAssetCaching() {
-        // Determine the size of the thumbnails to request from the PHCachingImageManager.
-        let scale = UIScreen.main.scale
-        model.thumbnailSize = CGSize(width: PhotosConstants.minCellWidth * scale, height: PhotosConstants.minCellWidth * scale)
-    }
     func resetCachedAssets() {
         model.imageManager.stopCachingImagesForAllAssets()
         model.previousPreheatRect = .zero
@@ -46,11 +41,11 @@ extension PhotosViewController {
         // Update the assets the PHCachingImageManager is caching.
         model.imageManager.startCachingImages(
             for: addedAssets,
-            targetSize: model.thumbnailSize, contentMode: .aspectFill, options: nil
+            targetSize: PhotosConstants.thumbnailSize, contentMode: .aspectFill, options: nil
         )
         model.imageManager.stopCachingImages(
             for: removedAssets,
-            targetSize: model.thumbnailSize, contentMode: .aspectFill, options: nil
+            targetSize: PhotosConstants.thumbnailSize, contentMode: .aspectFill, options: nil
         )
         // Store the computed rectangle for future comparison.
         model.previousPreheatRect = preheatRect

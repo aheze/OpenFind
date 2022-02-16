@@ -12,7 +12,6 @@ import SwiftUI
 extension PhotosViewController {
     func setup() {
         setupCollectionView()
-        setupAssetCaching()
         checkPermissions()
         listenToModel()
     }

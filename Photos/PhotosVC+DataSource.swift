@@ -43,7 +43,7 @@ extension PhotosViewController {
                 cell.representedAssetIdentifier = photo.asset.localIdentifier
                 self.model.imageManager.requestImage(
                     for: photo.asset,
-                    targetSize: self.model.thumbnailSize,
+                    targetSize: PhotosConstants.thumbnailSize,
                     contentMode: .aspectFill,
                     options: nil
                 ) { image, _ in

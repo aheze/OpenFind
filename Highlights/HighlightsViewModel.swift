@@ -10,6 +10,8 @@ import SwiftUI
 
 class HighlightsViewModel: ObservableObject {
     @Published var highlights = Set<Highlight>()
+    
+    /// If not up to date, fade out a bit.
     @Published var upToDate = true
 
     /// If replace, don't check if word is same, but make sure color is same
@@ -80,6 +82,7 @@ class HighlightsViewModel: ObservableObject {
         }
     }
     
+    /// Fade in/out the highlights.
     func setUpToDate(_ upToDate: Bool) {
         withAnimation(.linear(duration: 0.3)) {
             self.upToDate = upToDate

@@ -19,7 +19,6 @@ class PhotosViewModel {
 
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
-    var thumbnailSize: CGSize!
     var previousPreheatRect = CGRect.zero
 }
 
