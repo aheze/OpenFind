@@ -20,6 +20,13 @@ class PhotosViewModel {
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
+    
+    /// the slides' current status
+    var slidesState: PhotosSlidesState?
+}
+
+struct PhotosSlidesState {
+    var startingPhoto: Photo
 }
 
 extension PHAsset {

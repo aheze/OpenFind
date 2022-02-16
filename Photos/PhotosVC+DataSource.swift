@@ -38,6 +38,7 @@ extension PhotosViewController {
                 ) as! PhotosCollectionCell
 
                 cell.imageView.contentMode = .scaleAspectFill
+                
 
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = photo.asset.localIdentifier
@@ -52,6 +53,11 @@ extension PhotosViewController {
                     if cell.representedAssetIdentifier == photo.asset.localIdentifier {
                         cell.imageView.image = image
                     }
+                }
+                
+                cell.tapped = { [weak self] in
+                    guard let self = self else { return }
+                    self.presentSlides(startingAt: photo)
                 }
 
                 return cell

@@ -20,6 +20,12 @@ class ScrollZoomViewController: UIViewController {
     static var minimumZoomScale = CGFloat(1)
     static var maximumZoomScale = CGFloat(2.5)
     
+    static func make() -> ScrollZoomViewController {
+        let storyboard = UIStoryboard(name: "ScrollZoomContent", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ScrollZoomViewController") as! ScrollZoomViewController
+        return viewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear

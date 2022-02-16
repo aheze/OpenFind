@@ -21,7 +21,6 @@ extension CameraViewController {
         var highlights = Set<Highlight>()
         for sentence in sentences {
             for (string, gradient) in self.searchViewModel.stringToGradients {
-//                print("Striung: \(string) ..")
                 let indices = sentence.string.lowercased().indicesOf(string: string.lowercased())
                 for index in indices {
                     let word = sentence.getWord(word: string, at: index)

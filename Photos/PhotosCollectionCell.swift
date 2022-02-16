@@ -11,5 +11,15 @@ import UIKit
 
 class PhotosCollectionCell: UICollectionViewCell {
     var representedAssetIdentifier: String?
+    
+    var tapped: (() -> Void)?
+    @IBOutlet weak var buttonView: ButtonView!
     @IBOutlet weak var imageView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        buttonView.tapped = { [weak self] in
+            self?.tapped?()
+        }
+    }
 }
