@@ -36,9 +36,6 @@ class SearchNavigationController: UIViewController, PageViewController {
     var animator: UIViewPropertyAnimator?
     var blurPercentage = CGFloat(0)
     
-    /// testing
-    var testing = false
-    
     static func make(
         rootViewController: Searchable,
         searchViewModel: SearchViewModel,

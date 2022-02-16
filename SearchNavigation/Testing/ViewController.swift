@@ -28,7 +28,6 @@ class ViewController: UIViewController {
         
         let searchNavigationController = SearchNavigationController.make(rootViewController: viewController, searchConfiguration: configuration, tabType: .lists)
         self.searchNavigationController = searchNavigationController
-        searchNavigationController.testing = true
         addChildViewController(searchNavigationController, in: view)
 
     }

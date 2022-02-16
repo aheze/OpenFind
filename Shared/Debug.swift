@@ -10,7 +10,8 @@ import UIKit
 
 /// Everything should be false on release
 enum Debug {
-    static var tabBarAlwaysTransparent = false
+    static var tabBarAlwaysTransparent = true
+    static var navigationBarAlwaysTransparent = true
 }
 
 extension UIView {

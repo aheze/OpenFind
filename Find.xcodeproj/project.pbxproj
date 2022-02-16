@@ -1246,6 +1246,7 @@
 		3CBB319F27BD690D00F25F6A /* PhotosSlidesContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB319D27BD68EC00F25F6A /* PhotosSlidesContentCell.swift */; };
 		3CBB31A227BD6E9200F25F6A /* PhotosSlidesItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB31A127BD6E9200F25F6A /* PhotosSlidesItemViewController.swift */; };
 		3CBB31A327BD708900F25F6A /* PhotosSlidesItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB31A127BD6E9200F25F6A /* PhotosSlidesItemViewController.swift */; };
+		3CBB31A427BD946000F25F6A /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
@@ -5362,6 +5363,7 @@
 				3C21ED9D27A45B2E0005E183 /* Utilities+UIView.swift in Sources */,
 				3C21ED9827A45A2F0005E183 /* Model.swift in Sources */,
 				3C21ED9927A45A2F0005E183 /* Constants.swift in Sources */,
+				3CBB31A427BD946000F25F6A /* Debug.swift in Sources */,
 				3C21EDA527A45B2E0005E183 /* Utilities+UIFont.swift in Sources */,
 				3C21EDA127A45B2E0005E183 /* Utilities+UIViewController.swift in Sources */,
 				3C21EDA627A45B2E0005E183 /* Utilities+SwiftUI.swift in Sources */,

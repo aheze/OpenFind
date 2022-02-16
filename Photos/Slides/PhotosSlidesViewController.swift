@@ -22,7 +22,7 @@ class PhotoSlidesSection: Hashable {
 
 class PhotosSlidesViewController: UIViewController, Searchable {
     var baseSearchBarOffset = CGFloat(0)
-    var additionalSearchBarOffset: CGFloat?
+    var additionalSearchBarOffset: CGFloat? /// nil to always have blur
     var updateSearchBarOffset: (() -> Void)?
     
     var model: PhotosViewModel
@@ -47,8 +47,14 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Photo"
+        navigationItem.largeTitleDisplayMode = .never
+        
         setup()
         update(animate: false)
+        
+        view.addDebugBorders(.blue)
+        collectionView.addDebugBorders(.systemOrange, width: 20)
         
         if
             let slidesState = model.slidesState,
@@ -57,11 +63,10 @@ class PhotosSlidesViewController: UIViewController, Searchable {
             })
         {
             model.slidesState?.currentIndex = index
-            collectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: false)
+            
+            collectionView.layoutIfNeeded()
+            collectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: true)
         }
-        
-        view.addDebugBorders(.blue)
-        collectionView.addDebugBorders(.systemOrange, width: 20)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,7 +80,6 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        print("Bounds changed.")
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
     }
