@@ -60,6 +60,7 @@ extension PhotosViewController {
 
         model.slidesState = slidesState
 
+        model.animatingSlides = true
         /// apply a custom transition
         model.transitionAnimatorsUpdated?(self, viewController)
         navigationController?.pushViewController(viewController, animated: true)

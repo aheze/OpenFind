@@ -10,11 +10,16 @@ import UIKit
 
 extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     func transitionWillStart(type: PhotoTransitionAnimatorType) {
-        if let containerView = getCurrentItemContainerView() {
-            containerView.alpha = 0
+        switch type {
+        case .push:
+            break
+        case .pop:
+            if let containerView = getCurrentItemContainerView() {
+                containerView.alpha = 0
+            }
         }
     }
-    
+
     func transitionDidEnd(type: PhotoTransitionAnimatorType) {
         switch type {
         case .push:

@@ -33,7 +33,6 @@ class PhotosSlidesItemViewController: UIViewController {
         _ = scrollZoomController
         addChildViewController(scrollZoomController, in: containerView)
         reloadImage()
-        containerView.alpha = 0
     }
 
     func reloadImage() {

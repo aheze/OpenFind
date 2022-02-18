@@ -21,6 +21,7 @@ class PhotosViewModel {
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
     
+    var animatingSlides = false
     /// the slides' current status
     var slidesState: PhotosSlidesState?
     

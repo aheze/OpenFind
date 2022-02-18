@@ -10,13 +10,35 @@ import UIKit
 
 extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     func transitionWillStart(type: PhotoTransitionAnimatorType) {
-        guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
-        if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-            cell.alpha = 0
+        
+        /// make sure to set this inside the `presentSlides` function too
+        /// since this could be called too late (in the case that the first photo was pressed)
+        model.animatingSlides = true
+        
+        switch type {
+        case .push:
+            guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
+            if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
+                cell.alpha = 0
+            }
+        case .pop:
+            for sectionIndex in model.sections.indices {
+                for photoIndex in model.sections[sectionIndex].photos.indices {
+                    let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
+                    if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
+                        cell.alpha = 1
+                    }
+                }
+            }
+            guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
+            if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
+                cell.alpha = 0
+            }
         }
     }
     
     func transitionDidEnd(type: PhotoTransitionAnimatorType) {
+        model.animatingSlides = false
         switch type {
         case .push:
             break
@@ -30,7 +52,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
         if
-            let currentIndex = self.model.slidesState?.currentIndex,
+            let currentIndex = model.slidesState?.currentIndex,
             let image = self.model.slidesState?.findPhotos[currentIndex].image
         {
             return image

@@ -50,7 +50,6 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
 
         let transitionImage = fromDelegate.referenceImage(type: .pop)
         transitionImageView.image = transitionImage
-        transitionImageView.addDebugBorders(.red)
         containerView.addSubview(transitionImageView)
 
         if let fromImageFrame = fromDelegate.imageFrame(type: .pop) {

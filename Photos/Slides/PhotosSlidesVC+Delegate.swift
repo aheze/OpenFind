@@ -11,7 +11,9 @@ import UIKit
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
+            let photoSlidesViewController: PhotosSlidesItemViewController
             if let viewController = findPhoto.associatedViewController {
+                photoSlidesViewController = viewController
                 addChildViewController(viewController, in: cell.contentView)
             } else {
                 let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
@@ -22,9 +24,15 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
                         findPhoto: findPhoto
                     )
                 }
-
+                photoSlidesViewController = viewController
                 addChildViewController(viewController, in: cell.contentView)
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = viewController
+            }
+            
+            if model.animatingSlides {
+                photoSlidesViewController.containerView.alpha = 0
+            } else {
+                photoSlidesViewController.containerView.alpha = 1
             }
         }
     }
