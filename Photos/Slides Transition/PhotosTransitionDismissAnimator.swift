@@ -75,13 +75,13 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
         self.transitionContext = transitionContext
         self.fromImageViewFrame = fromImageViewFrame
         self.fromImage = fromImage
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
                 self.toImageViewFrame = toImageViewFrame
             }
         }
-        
+
         let containerView = transitionContext.containerView
 
         transitionImageView.frame = fromImageViewFrame
@@ -154,8 +154,8 @@ extension PhotosTransitionDismissAnimator {
             completionDuration = 0.45
             completionDamping = 0.75
         } else {
-            completionDuration = 0.37
-            completionDamping = 0.90
+            completionDuration = 0.35
+            completionDamping = 1
         }
 
         // The transition-image needs to animate into its final place.
@@ -202,15 +202,6 @@ extension PhotosTransitionDismissAnimator {
         backgroundAlphaAnimator.continueAnimation(withTimingParameters: nil, durationFactor: durationFactor)
         additionalFinalSetup?()
         foregroundAnimator.startAnimation()
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
-//            if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
-//                self.toImageViewFrame = toImageViewFrame
-//                self.transitionImageView.frame = toImageViewFrame
-////                self.transitionImageView.bounds.size = toImageViewFrame.size
-////                self.transitionImageView.center = toImageViewFrame.center
-//            }
-//        }
     }
 }
 
@@ -233,7 +224,7 @@ extension PhotosTransitionDismissAnimator {
 
 extension PhotosTransitionDismissAnimator: UIViewControllerAnimatedTransitioning {
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.4
+        return 0.3
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
