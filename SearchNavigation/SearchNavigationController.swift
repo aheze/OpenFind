@@ -36,6 +36,10 @@ class SearchNavigationController: UIViewController, PageViewController {
     var animator: UIViewPropertyAnimator?
     var blurPercentage = CGFloat(0)
     
+    // MARK: - Optional Transitioning
+    var pushAnimator: UIViewControllerAnimatedTransitioning?
+    var popAnimator: UIViewControllerAnimatedTransitioning?
+    
     static func make(
         rootViewController: Searchable,
         searchViewModel: SearchViewModel,

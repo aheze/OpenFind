@@ -42,7 +42,6 @@ struct TabBarView: View {
                 .padding(.horizontal, 16)
                 
                 /// right after this point is the area of visual tab bar background (what the user sees)
-                
                 .background(
                     BackgroundView(tabViewModel: tabViewModel)
                         .edgesIgnoringSafeArea(.all)
@@ -50,7 +49,7 @@ struct TabBarView: View {
                 alignment: .bottom
             )
             .edgesIgnoringSafeArea(.bottom)
-            .opacity(tabViewModel.tabBarShown ? 1 : 0)
+            .opacity(tabViewModel.tabBarShown ? 1 : 0) /// hide the tab bar when the keyboard shows
     }
 }
 

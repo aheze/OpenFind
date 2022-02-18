@@ -23,6 +23,33 @@ class PhotosViewModel {
     
     /// the slides' current status
     var slidesState: PhotosSlidesState?
+    
+    /// about to present slides, set the transition
+    var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
+    
+    /// the photo manager got an image, update the transition image view's image.
+    var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
+}
+
+extension PhotosViewModel {
+    
+    /// get from `photos`
+    func getPhotoIndex(photo: Photo) -> Int? {
+        if let firstIndex = photos.firstIndex(of: photo) {
+            return firstIndex
+        }
+        return nil
+    }
+    
+    /// get from `sections`
+    func getPhotoIndexPath(photo: Photo) -> IndexPath? {
+        for sectionIndex in sections.indices {
+            if let photoIndex = sections[sectionIndex].photos.firstIndex(of: photo) {
+                return IndexPath(item: photoIndex, section: sectionIndex)
+            }
+        }
+        return nil
+    }
 }
 
 extension PHAsset {

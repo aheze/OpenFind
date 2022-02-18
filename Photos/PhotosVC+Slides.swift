@@ -23,13 +23,45 @@ extension PhotosViewController {
             guard let self = self else { return }
             self.updateNavigationBar?()
         }
-        
-        let slidesState = PhotosSlidesState(
+
+        let findPhotos: [FindPhoto] = model.photos.map { .init(photo: $0) }
+        var slidesState = PhotosSlidesState(
             viewController: viewController,
-            findPhotos: model.photos.map { .init(photo: $0) },
+            findPhotos: findPhotos,
             startingPhoto: photo
         )
+
+        let findPhoto: FindPhoto
+        let currentIndex: Int
+        if let photoIndex = model.getPhotoIndex(photo: photo) {
+            findPhoto = findPhotos[photoIndex]
+            currentIndex = photoIndex
+            slidesState.currentIndex = photoIndex
+        } else {
+            return
+        }
+
+        model.imageManager.requestImage(
+            for: model.photos[currentIndex].asset,
+            targetSize: .zero,
+            contentMode: .aspectFill,
+            options: nil
+        ) { [weak self] image, _ in
+            guard let self = self else { return }
+
+            /// update the transition with the new image.
+            self.model.imageUpdatedWhenPresentingSlides?(image)
+
+            if let index = self.model.slidesState?.getFindPhotoIndex(photo: findPhoto) {
+                self.model.slidesState?.findPhotos[index].image = image
+                self.model.slidesState?.findPhotos[index].associatedViewController?.reloadImage()
+            }
+        }
+
         model.slidesState = slidesState
+
+        /// apply a custom transition
+        model.transitionAnimatorsUpdated?(self, viewController)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

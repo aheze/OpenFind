@@ -14,11 +14,20 @@ struct PhotosSlidesState {
     var findPhotos: [FindPhoto]
     var startingPhoto: Photo
     var currentIndex: Int?
+    
+    /// get from `findPhotos`
+    func getFindPhotoIndex(photo: FindPhoto) -> Int? {
+        if let firstIndex = findPhotos.firstIndex(of: photo) {
+            return firstIndex
+        }
+        return nil
+    }
 }
 
 struct FindPhoto: Hashable {
     var photo: Photo
-    var associatedViewController: UIViewController?
+    var image: UIImage?
+    var associatedViewController: PhotosSlidesItemViewController?
 }
 
 struct PhotosSection: Hashable {

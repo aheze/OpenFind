@@ -33,14 +33,22 @@ class PhotosSlidesItemViewController: UIViewController {
         _ = scrollZoomController
         addChildViewController(scrollZoomController, in: containerView)
         
-        model.imageManager.requestImage(
-            for: findPhoto.photo.asset,
-            targetSize: .zero,
-            contentMode: .aspectFill,
-            options: nil
-        ) { image, _ in
-            self.scrollZoomController.imageView.image = image
-        }
+        reloadImage()
+    }
 
+    func reloadImage() {
+        if let image = findPhoto.image {
+            scrollZoomController.imageView.image = image
+        } else {
+            model.imageManager.requestImage(
+                for: findPhoto.photo.asset,
+                targetSize: .zero,
+                contentMode: .aspectFill,
+                options: nil
+            ) { [weak self] image, _ in
+                self?.findPhoto.image = image
+                self?.scrollZoomController.imageView.image = self?.findPhoto.image
+            }
+        }
     }
 }

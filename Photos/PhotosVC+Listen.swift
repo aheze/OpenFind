@@ -13,7 +13,6 @@ extension PhotosViewController {
     func listenToModel() {
         model.reload = { [weak self] in
             guard let self = self else { return }
-            print("Reloaded!")
             self.update(animate: false)
         }
     }

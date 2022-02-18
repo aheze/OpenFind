@@ -8,7 +8,6 @@
 import UIKit
 
 class PhotosController {
-    
     var model: PhotosViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
@@ -50,7 +49,7 @@ class PhotosController {
         searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
         searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
-        searchNavigationController.onBoundsChange = { (size, safeAreaInset) in
+        searchNavigationController.onBoundsChange = { size, safeAreaInset in
             viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInset)
         }
         
@@ -61,6 +60,16 @@ class PhotosController {
             guard let self = self else { return }
             self.searchNavigationController.updateSearchBarOffset()
             Tab.Frames.excluded[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
+        }
+        
+        model.transitionAnimatorsUpdated = { photos, slides in
+            searchNavigationController.pushAnimator = PhotosTransitionPushAnimator(fromDelegate: photos, toDelegate: slides)
+        }
+        
+        model.imageUpdatedWhenPresentingSlides = { image in
+            if let animator = searchNavigationController.pushAnimator as? PhotosTransitionPushAnimator {
+                animator.transitionImageView.image = image
+            }
         }
     }
 }
