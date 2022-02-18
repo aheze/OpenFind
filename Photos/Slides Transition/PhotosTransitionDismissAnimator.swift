@@ -31,9 +31,9 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
     fileprivate weak var fromVC: PhotosSlidesViewController?
     fileprivate weak var toVC: UIViewController?
     fileprivate var transitionContext: UIViewControllerContextTransitioning?
-    fileprivate var fromImageViewFrame: CGRect?
     fileprivate var toImageViewFrame: CGRect?
     fileprivate var fromImage: UIImage?
+    fileprivate var fromImageViewFrame: CGRect?
 
     /// The snapshotView that is animating between the two view controllers.
     let transitionImageView: UIImageView = {
@@ -48,20 +48,22 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
     var progressUpdated: ((CGFloat) -> Void)?
 
     var additionalFinalSetup: (() -> Void)?
-    
+
     var additionalFinalAnimations: (() -> Void)?
 
     /// true if succeeded
     var additionalCompletion: ((Bool) -> Void)?
 
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+        toDelegate.transitionWillStart(type: .pop)
+        fromDelegate.transitionWillStart(type: .pop)
+
         guard
             let fromVC = transitionContext.viewController(forKey: .from) as? PhotosSlidesViewController,
             let toVC = transitionContext.viewController(forKey: .to),
             let slidesView = transitionContext.view(forKey: .from),
             let photosView = transitionContext.view(forKey: .to),
             let fromImageViewFrame = fromDelegate.imageFrame(type: .pop),
-            let toImageViewFrame = toDelegate.imageFrame(type: .pop),
             let fromImage = fromDelegate.referenceImage(type: .pop)
         else {
             fatalError()
@@ -72,7 +74,6 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
         self.toVC = toVC
         self.transitionContext = transitionContext
         self.fromImageViewFrame = fromImageViewFrame
-        self.toImageViewFrame = toImageViewFrame
         self.fromImage = fromImage
 
         let containerView = transitionContext.containerView
@@ -91,9 +92,6 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
             slidesView.alpha = 0
         }
         self.backgroundAlphaAnimator = backgroundAlphaAnimator
-
-        toDelegate.transitionWillStart(type: .pop)
-        fromDelegate.transitionWillStart(type: .pop)
     }
 }
 
@@ -169,7 +167,7 @@ extension PhotosTransitionDismissAnimator {
             self.transitionImageView.frame = didCancel
                 ? self.fromImageViewFrame!
                 : self.toDelegate.imageFrame(type: .pop) ?? self.toImageViewFrame!
-            
+
             self.additionalFinalAnimations?()
         }
 
@@ -197,6 +195,14 @@ extension PhotosTransitionDismissAnimator {
         backgroundAlphaAnimator.continueAnimation(withTimingParameters: nil, durationFactor: durationFactor)
         additionalFinalSetup?()
         foregroundAnimator.startAnimation()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+            if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
+                self.toImageViewFrame = toImageViewFrame
+                self.transitionImageView.bounds.size = toImageViewFrame.size
+                self.transitionImageView.center = toImageViewFrame.center
+            }
+        }
     }
 }
 

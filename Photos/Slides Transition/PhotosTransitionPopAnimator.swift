@@ -40,6 +40,9 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        self.toDelegate.transitionWillStart(type: .pop)
+        self.fromDelegate.transitionWillStart(type: .pop)
+        
         // 4
         guard let slidesView = transitionContext.view(forKey: .from) else { return }
         guard let photosView = transitionContext.view(forKey: .to) else { return }
@@ -96,8 +99,6 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
             }
         }
 
-        self.toDelegate.transitionWillStart(type: .pop)
-        self.fromDelegate.transitionWillStart(type: .pop)
         animator.startAnimation()
     }
 }

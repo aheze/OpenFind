@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     func transitionWillStart(type: PhotoTransitionAnimatorType) {
-        
         /// make sure to set this inside the `presentSlides` function too
         /// since this could be called too late (in the case that the first photo was pressed)
         model.animatingSlides = true
@@ -30,9 +29,22 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     }
                 }
             }
+            
             guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
-            if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                cell.alpha = 0
+            
+            let hideCell = { [weak self] in
+                if let cell = self?.collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
+                    cell.alpha = 0
+                }
+            }
+            
+            if collectionView.indexPathsForVisibleItems.contains(photoIndexPath) {
+                hideCell()
+            } else {
+                collectionView.scrollToItem(at: photoIndexPath, at: .centeredVertically, animated: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    hideCell()
+                }
             }
         }
     }
