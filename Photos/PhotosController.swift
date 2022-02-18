@@ -72,9 +72,33 @@ class PhotosController {
             searchNavigationController.dismissAnimator = dismissAnimator
             
             
-            pushAnimator?.additionalAnimations = { [weak self] in
-                guard let self = self else { return }
-                self.searchNavigationController.updateSearchBarOffset()
+            pushAnimator?.additionalSetup = {
+                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
+                searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
+            }
+            pushAnimator?.additionalAnimations = {
+                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
+                searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            }
+            pushAnimator?.finalAnimations = {
+                searchNavigationController.finishSearchBarTransitionAnimation(to: slides)
+            }
+            
+            popAnimator?.additionalSetup = {
+                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
+                searchNavigationController.beginSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
+            }
+            popAnimator?.additionalAnimations = {
+                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
+                searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            }
+            
+            popAnimator?.finalAnimations = { completed in
+                if completed {
+                    searchNavigationController.finishSearchBarTransitionAnimation(to: photos)
+                } else {
+                    
+                }
             }
         }
         

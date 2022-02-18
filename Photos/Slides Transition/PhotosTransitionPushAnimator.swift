@@ -30,8 +30,11 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         return imageView
     }()
 
+    /// for the navigation bar or any other animations
+    var additionalSetup: (() -> Void)?
     var additionalAnimations: (() -> Void)?
-
+    var finalAnimations: (() -> Void)?
+    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
@@ -76,6 +79,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
             // Tell our view controllers that we're done, too.
             self.toDelegate.transitionDidEnd(type: .push)
             self.fromDelegate.transitionDidEnd(type: .push)
+            self.finalAnimations?()
         }
 
         // HACK: By delaying 0.005s, I get a layout-refresh on the toViewController,
@@ -83,6 +87,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         // and our toDelegate?.imageFrame() is accurate, even if
         // the device has rotated. :scream_cat:
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+            self.additionalSetup?()
             animator.addAnimations {
                 if let toImageFrame = self.toDelegate.imageFrame(type: .push) {
                     self.transitionImageView.frame = toImageFrame

@@ -29,6 +29,13 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
         imageView.accessibilityIgnoresInvertColors = true
         return imageView
     }()
+    
+    /// for the navigation bar or any other animations
+    var additionalSetup: (() -> Void)?
+    var additionalAnimations: (() -> Void)?
+    
+    /// true if succeeded
+    var finalAnimations: ((Bool) -> Void)?
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.4
@@ -74,6 +81,7 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
             // Tell our view controllers that we're done, too.
             self.toDelegate.transitionDidEnd(type: .pop)
             self.fromDelegate.transitionDidEnd(type: .pop)
+            self.finalAnimations?(!transitionContext.transitionWasCancelled)
         }
 
         // HACK: By delaying 0.005s, I get a layout-refresh on the toViewController,
@@ -81,10 +89,12 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
         // and our toDelegate?.imageFrame() is accurate, even if
         // the device has rotated. :scream_cat:
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+            self.additionalSetup?()
             animator.addAnimations {
                 if let toImageFrame = self.toDelegate.imageFrame(type: .pop) {
                     self.transitionImageView.frame = toImageFrame
                 }
+                self.additionalAnimations?()
             }
         }
 

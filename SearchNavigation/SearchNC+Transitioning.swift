@@ -16,34 +16,11 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             currentAnimator == nil
         else { return }
         
-        let offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
-            
-        searchContainerViewTopC?.constant = offset
-        navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
-            
-        let percentage = getViewControllerBlurPercentage(for: viewController)
-        
-        /// first reset to start, if there's going to be a change
-        if percentage == 0, blurPercentage != 0 {
-            self.navigationBarBackgroundBorderView.alpha = 1
-            self.navigationBarBackgroundBlurView.effect = SearchNavigationConstants.blurEffect
-        } else if percentage == 1, blurPercentage != 1 {
-            self.navigationBarBackgroundBorderView.alpha = 0
-            self.navigationBarBackgroundBlurView.effect = nil
-        }
+        let targetPercentage = getViewControllerBlurPercentage(for: viewController)
+        beginSearchBarTransitionAnimation(to: viewController, targetPercentage: targetPercentage)
     
         transitionCoordinator.animate { _ in
-            self.searchContainerViewContainer.layoutIfNeeded()
-            self.navigationBarBackgroundContainer.layoutIfNeeded()
-                
-            /// manually animate the line
-            if percentage == 0, self.blurPercentage != 0 {
-                self.navigationBarBackgroundBorderView.alpha = 0
-                self.navigationBarBackgroundBlurView.effect = nil
-            } else if percentage == 1, self.blurPercentage != 1 {
-                self.navigationBarBackgroundBorderView.alpha = 1
-                self.navigationBarBackgroundBlurView.effect = SearchNavigationConstants.blurEffect
-            }
+            self.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
         } completion: { context in
                 
             /// restart the animator
@@ -61,10 +38,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                     )
                 }
             } else {
-                self.updateBlur(
-                    baseSearchBarOffset: viewController.baseSearchBarOffset,
-                    additionalSearchBarOffset: viewController.additionalSearchBarOffset
-                )
+                self.finishSearchBarTransitionAnimation(to: viewController)
             }
         }
     }

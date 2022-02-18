@@ -36,3 +36,45 @@ extension SearchNavigationController {
         return self.currentAnimator as? UIViewControllerInteractiveTransitioning
     }
 }
+
+extension SearchNavigationController {
+    func beginSearchBarTransitionAnimation(to viewController: Searchable, targetPercentage: CGFloat) {
+        let offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
+            
+        searchContainerViewTopC?.constant = offset
+        navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
+        
+        /// first reset to start, if there's going to be a change
+        if targetPercentage == 0, blurPercentage != 0 {
+            self.navigationBarBackgroundBorderView.alpha = 1
+            self.navigationBarBackgroundBlurView.effect = SearchNavigationConstants.blurEffect
+        } else if targetPercentage == 1, blurPercentage != 1 {
+            self.navigationBarBackgroundBorderView.alpha = 0
+            self.navigationBarBackgroundBlurView.effect = nil
+        }
+    }
+    
+    func continueSearchBarTransitionAnimation(targetPercentage: CGFloat) {
+        self.searchContainerViewContainer.layoutIfNeeded()
+        self.navigationBarBackgroundContainer.layoutIfNeeded()
+            
+        /// manually animate the line
+        if targetPercentage == 0, self.blurPercentage != 0 {
+            self.navigationBarBackgroundBorderView.alpha = 0
+            self.navigationBarBackgroundBlurView.effect = nil
+        } else if targetPercentage == 1, self.blurPercentage != 1 {
+            self.navigationBarBackgroundBorderView.alpha = 1
+            self.navigationBarBackgroundBlurView.effect = SearchNavigationConstants.blurEffect
+        }
+    }
+    
+    func finishSearchBarTransitionAnimation(to viewController: Searchable) {
+        /// restart the animator
+        self.setupBlur()
+        
+        self.updateBlur(
+            baseSearchBarOffset: viewController.baseSearchBarOffset,
+            additionalSearchBarOffset: viewController.additionalSearchBarOffset
+        )
+    }
+}
