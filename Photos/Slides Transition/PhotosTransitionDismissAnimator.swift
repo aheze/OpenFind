@@ -46,10 +46,9 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
 
     /// from 0 (just started dragging) to 1 (should animate pop)
     var progressUpdated: ((CGFloat) -> Void)?
-
-    var additionalFinalSetup: (() -> Void)?
-
-    var additionalFinalAnimations: (() -> Void)?
+   
+    /// animate the search bar
+    var additionalFinalAnimations: ((Bool) -> Void)?
 
     /// true if succeeded
     var additionalCompletion: ((Bool) -> Void)?
@@ -175,7 +174,7 @@ extension PhotosTransitionDismissAnimator {
             } else {
                 self.transitionImageView.frame = self.toDelegate.imageFrame(type: .pop) ?? self.toImageViewFrame!
             }
-            self.additionalFinalAnimations?()
+            self.additionalFinalAnimations?(!didCancel)
         }
 
         // When the transition-image has moved into place, the animation completes,
@@ -200,7 +199,6 @@ extension PhotosTransitionDismissAnimator {
         // PS: How *cool* are property-animators? I say: very. This "continue animation" bit is magic!
         let durationFactor = CGFloat(foregroundAnimator.duration / backgroundAlphaAnimator.duration)
         backgroundAlphaAnimator.continueAnimation(withTimingParameters: nil, durationFactor: durationFactor)
-        additionalFinalSetup?()
         foregroundAnimator.startAnimation()
     }
 }

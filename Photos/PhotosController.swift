@@ -115,14 +115,16 @@ extension PhotosController {
                 searchNavigationController.setOffset(from: slides, to: photos, percentage: progress)
             }
             
-            dismissAnimator?.additionalFinalSetup = {
-                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
-                searchNavigationController.beginSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
-            }
-            
-            dismissAnimator?.additionalFinalAnimations = {
-                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
-                searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            dismissAnimator?.additionalFinalAnimations = { completed in
+                if completed {
+                    let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
+                    searchNavigationController.beginSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
+                    searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                } else {
+                    let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
+                    searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
+                    searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                }
             }
             
             dismissAnimator?.additionalCompletion = { completed in
