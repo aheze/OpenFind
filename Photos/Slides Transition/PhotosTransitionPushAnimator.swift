@@ -33,7 +33,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
     /// for the navigation bar or any other animations
     var additionalSetup: (() -> Void)?
     var additionalAnimations: (() -> Void)?
-    var finalAnimations: (() -> Void)?
+    var additionalCompletion: (() -> Void)?
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
@@ -79,7 +79,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
             // Tell our view controllers that we're done, too.
             self.toDelegate.transitionDidEnd(type: .push)
             self.fromDelegate.transitionDidEnd(type: .push)
-            self.finalAnimations?()
+            self.additionalCompletion?()
         }
 
         // HACK: By delaying 0.005s, I get a layout-refresh on the toViewController,

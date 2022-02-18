@@ -44,6 +44,16 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
         return imageView
     }()
 
+    /// from 0 (just started dragging) to 1 (should animate pop)
+    var progressUpdated: ((CGFloat) -> Void)?
+
+    var additionalFinalSetup: (() -> Void)?
+    
+    var additionalFinalAnimations: (() -> Void)?
+
+    /// true if succeeded
+    var additionalCompletion: ((Bool) -> Void)?
+
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
         guard
             let fromVC = transitionContext.viewController(forKey: .from) as? PhotosSlidesViewController,
@@ -113,7 +123,7 @@ extension PhotosTransitionDismissAnimator {
 
             transitionContext.updateInteractiveTransition(percentageComplete)
             backgroundAlphaAnimator?.fractionComplete = percentageComplete
-
+            progressUpdated?(percentageComplete)
         case .ended:
             // Here, we decide whether to complete or cancel the transition.
             let fingerIsMovingDownwards = gestureRecognizer.velocity(in: nil).y > 0
@@ -149,7 +159,7 @@ extension PhotosTransitionDismissAnimator {
         // - its original spot on the photo-detail screen (if the transition was cancelled),
         // - or its place in the photo-grid (if the transition completed).
         let foregroundAnimator = UIViewPropertyAnimator(duration: completionDuration, dampingRatio: completionDamping) {
-            // Reset our scale-transform on the imageview
+            // Reset our scale-transform on the image view
             self.transitionImageView.transform = CGAffineTransform.identity
 
             // NOTE: It's important that we ask the toDelegate *here*,
@@ -159,6 +169,8 @@ extension PhotosTransitionDismissAnimator {
             self.transitionImageView.frame = didCancel
                 ? self.fromImageViewFrame!
                 : self.toDelegate.imageFrame(type: .pop) ?? self.toImageViewFrame!
+            
+            self.additionalFinalAnimations?()
         }
 
         // When the transition-image has moved into place, the animation completes,
@@ -176,12 +188,14 @@ extension PhotosTransitionDismissAnimator {
             }
             transitionContext.completeTransition(!didCancel)
             self?.transitionContext = nil
+            self?.additionalCompletion?(!didCancel)
         }
 
         // Update the backgroundAnimation's duration to match.
         // PS: How *cool* are property-animators? I say: very. This "continue animation" bit is magic!
         let durationFactor = CGFloat(foregroundAnimator.duration / backgroundAlphaAnimator.duration)
         backgroundAlphaAnimator.continueAnimation(withTimingParameters: nil, durationFactor: durationFactor)
+        additionalFinalSetup?()
         foregroundAnimator.startAnimation()
     }
 }

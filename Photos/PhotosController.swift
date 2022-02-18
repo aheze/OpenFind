@@ -62,6 +62,21 @@ class PhotosController {
             Tab.Frames.excluded[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
         
+        configureTransitions(for: searchNavigationController)
+    }
+}
+
+extension PhotosController {
+    /// Override `SearchNavigationController`'s default transition animations
+    func configureTransitions(for searchNavigationController: SearchNavigationController) {
+        /// set a higher quality image once available, during the zoom transition
+        model.imageUpdatedWhenPresentingSlides = { image in
+            if let animator = searchNavigationController.pushAnimator as? PhotosTransitionPushAnimator {
+                animator.transitionImageView.image = image
+            }
+        }
+        
+        /// called when presenting slides. Configure the dismissal animators too.
         model.transitionAnimatorsUpdated = { photos, slides in
             let pushAnimator = PhotosTransitionPushAnimator(fromDelegate: photos, toDelegate: slides)
             let popAnimator = PhotosTransitionPopAnimator(fromDelegate: slides, toDelegate: photos)
@@ -71,7 +86,6 @@ class PhotosController {
             searchNavigationController.popAnimator = popAnimator
             searchNavigationController.dismissAnimator = dismissAnimator
             
-            
             pushAnimator?.additionalSetup = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                 searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
@@ -80,7 +94,7 @@ class PhotosController {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                 searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
             }
-            pushAnimator?.finalAnimations = {
+            pushAnimator?.additionalCompletion = {
                 searchNavigationController.finishSearchBarTransitionAnimation(to: slides)
             }
             
@@ -92,19 +106,31 @@ class PhotosController {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
                 searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
             }
+            popAnimator?.additionalCompletion = {
+                searchNavigationController.finishSearchBarTransitionAnimation(to: photos)
+            }
             
-            popAnimator?.finalAnimations = { completed in
+            dismissAnimator?.progressUpdated = { progress in
+                searchNavigationController.setBlur(from: slides, to: photos, percentage: progress)
+                searchNavigationController.setOffset(from: slides, to: photos, percentage: progress)
+            }
+            
+            dismissAnimator?.additionalFinalSetup = {
+                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
+                searchNavigationController.beginSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
+            }
+            
+            dismissAnimator?.additionalFinalAnimations = {
+                let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
+                searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            }
+            
+            dismissAnimator?.additionalCompletion = { completed in
                 if completed {
                     searchNavigationController.finishSearchBarTransitionAnimation(to: photos)
                 } else {
-                    
+                    searchNavigationController.cancelSearchBarPopAnimation()
                 }
-            }
-        }
-        
-        model.imageUpdatedWhenPresentingSlides = { image in
-            if let animator = searchNavigationController.pushAnimator as? PhotosTransitionPushAnimator {
-                animator.transitionImageView.image = image
             }
         }
     }

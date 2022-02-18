@@ -27,16 +27,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             self.setupBlur()
                 
             if context.isCancelled {
-                if let currentViewController = self.navigation.topViewController as? Searchable {
-                    let offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset ?? 0)
-                        
-                    self.searchContainerViewTopC?.constant = offset
-                    self.navigationBarBackgroundHeightC?.constant = offset + self.searchViewModel.getTotalHeight()
-                    self.updateBlur(
-                        baseSearchBarOffset: currentViewController.baseSearchBarOffset,
-                        additionalSearchBarOffset: currentViewController.additionalSearchBarOffset
-                    )
-                }
+                self.cancelSearchBarPopAnimation()
             } else {
                 self.finishSearchBarTransitionAnimation(to: viewController)
             }
@@ -91,11 +82,14 @@ extension SearchNavigationController {
                 baseSearchBarOffset: baseSearchBarOffset,
                 additionalSearchBarOffset: additionalSearchBarOffset
             )
-            animator?.fractionComplete = blurPercentage
-            self.blurPercentage = blurPercentage
+            self.updateBlur(to: blurPercentage)
         } else {
-            animator?.fractionComplete = 1
-            self.blurPercentage = 1
+            self.updateBlur(to: 1)
         }
+    }
+    
+    func updateBlur(to blurPercentage: CGFloat) {
+        animator?.fractionComplete = blurPercentage
+        self.blurPercentage = blurPercentage
     }
 }
