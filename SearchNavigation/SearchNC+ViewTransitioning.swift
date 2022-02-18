@@ -10,20 +10,29 @@ import UIKit
 
 extension SearchNavigationController {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        var animator: UIViewControllerAnimatedTransitioning? = nil
+        var animator: UIViewControllerAnimatedTransitioning?
 
-        if operation == .push {
+        switch operation {
+        case .push:
             animator = pushAnimator
-        } else {
-            animator = popAnimator
+        case .pop:
+            if
+                let slidesViewController = fromVC as? PhotosSlidesViewController,
+                slidesViewController.isInteractivelyDismissing
+            {
+                animator = dismissAnimator
+            } else {
+                animator = popAnimator
+            }
+        default:
+            break
         }
 
+        self.currentAnimator = animator
         return animator
     }
 
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
+    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return self.currentAnimator as? UIViewControllerInteractiveTransitioning
     }
 }
-

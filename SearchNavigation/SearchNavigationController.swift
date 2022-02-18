@@ -39,6 +39,10 @@ class SearchNavigationController: UIViewController, PageViewController {
     // MARK: - Optional Transitioning
     var pushAnimator: UIViewControllerAnimatedTransitioning?
     var popAnimator: UIViewControllerAnimatedTransitioning?
+    var dismissAnimator: UIViewControllerAnimatedTransitioning?
+    
+    /// the current transitioning animator
+    var currentAnimator: UIViewControllerAnimatedTransitioning?
     
     static func make(
         rootViewController: Searchable,

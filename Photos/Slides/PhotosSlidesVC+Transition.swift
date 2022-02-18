@@ -21,14 +21,17 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     }
 
     func transitionDidEnd(type: PhotoTransitionAnimatorType) {
-        switch type {
-        case .push:
-            if let containerView = getCurrentItemContainerView() {
-                containerView.alpha = 1
-            }
-        case .pop:
-            break
+        if let containerView = getCurrentItemContainerView() {
+            containerView.alpha = 1
         }
+//        switch type {
+//        case .push:
+//            if let containerView = getCurrentItemContainerView() {
+//                containerView.alpha = 1
+//            }
+//        case .pop:
+//            break
+//        }
     }
     
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {

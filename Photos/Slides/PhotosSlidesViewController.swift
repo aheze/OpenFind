@@ -36,6 +36,11 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
 
+    // MARK: - Dismissal
+    let dismissPanGesture = UIPanGestureRecognizer()
+    var isInteractivelyDismissing: Bool = false
+    weak var transitionAnimator: PhotosTransitionDismissAnimator? /// auto set via the transition animator
+    
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
@@ -58,6 +63,7 @@ class PhotosSlidesViewController: UIViewController, Searchable {
         navigationItem.largeTitleDisplayMode = .never
         
         setup()
+        setupDismissGesture()
         containerViewTopC.constant = searchViewModel.getTotalHeight()
         update(animate: false)
         
