@@ -15,7 +15,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
-    var layoutAttributes = [UICollectionViewLayoutAttributes]()
+    var layoutAttributes = [PageLayoutAttributes]()
 
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
@@ -31,15 +31,17 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
         
-        var layoutAttributes = [UICollectionViewLayoutAttributes]()
+        var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
         
         for index in model.photos.indices {
-            let attribute = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
+            let attributes = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
             
             let rect = CGRect(x: currentOrigin, y: 0, width: width, height: height)
-            attribute.frame = rect
-            layoutAttributes.append(attribute)
+            attributes.fullOrigin = currentOrigin
+            attributes.frame = rect
+            layoutAttributes.append(attributes)
+            
             currentOrigin += width
         }
 
@@ -90,7 +92,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
     func getTargetOffset(for point: CGPoint, velocity: CGFloat) -> CGPoint {
         let proposedOffset = point.x
 
-        var pickedAttributes = [UICollectionViewLayoutAttributes?]()
+        var pickedAttributes = [PageLayoutAttributes?]()
         
         /// prevent scrolling from **photos -> lists** or **lists -> photos**
         let maxDistance = collectionView?.bounds.width ?? 500
@@ -98,12 +100,12 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         switch velocity {
         case _ where velocity < 0:
             pickedAttributes = layoutAttributes.map { layoutAttribute in
-                let isCandidate = layoutAttribute.frame.origin.x <= proposedOffset
+                let isCandidate = layoutAttribute.fullOrigin <= proposedOffset
                 return isCandidate ? layoutAttribute : nil
             }
         case _ where velocity > 0:
             pickedAttributes = layoutAttributes.map { layoutAttribute in
-                let isCandidate = layoutAttribute.frame.origin.x >= proposedOffset
+                let isCandidate = layoutAttribute.fullOrigin >= proposedOffset
                 return isCandidate ? layoutAttribute : nil
             }
         default:
@@ -111,10 +113,10 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         }
         
         /// find closest origin
-        var (closestAttribute, closestAttributeIndex, closestDistance): (UICollectionViewLayoutAttributes?, Int, CGFloat) = (nil, 0, CGFloat.infinity)
+        var (closestAttribute, closestAttributeIndex, closestDistance): (PageLayoutAttributes?, Int, CGFloat) = (nil, 0, CGFloat.infinity)
         for (index, attribute) in pickedAttributes.enumerated() {
             if let layoutAttribute = attribute {
-                let distance = abs(layoutAttribute.frame.origin.x - proposedOffset)
+                let distance = abs(layoutAttribute.fullOrigin - proposedOffset)
                 if distance < closestDistance {
                     closestAttributeIndex = index
                     closestAttribute = layoutAttribute
@@ -123,11 +125,23 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
             }
         }
         
+        /// check if it's within bounds
         if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
-            let distance = abs(closestAttributeUnwrapped.frame.origin.x - currentOffset)
+            let distance = abs(closestAttributeUnwrapped.fullOrigin - currentOffset)
             if distance > maxDistance {
-                closestAttributeIndex = 1 /// camera
-                closestAttribute = layoutAttributes[closestAttributeIndex]
+                
+                if let currentIndex = model.slidesState?.currentIndex {
+                    let nextIndex = currentIndex + 1
+                    let previousIndex = currentIndex - 1
+                    if velocity >= 0, layoutAttributes.indices.contains(nextIndex) {
+                        closestAttributeIndex = nextIndex
+                    } else if velocity < 0, layoutAttributes.indices.contains(previousIndex) {
+                        closestAttributeIndex = previousIndex
+                    } else {
+                        closestAttributeIndex = currentIndex
+                    }
+                    closestAttribute = layoutAttributes[closestAttributeIndex]
+                }
             }
         }
         

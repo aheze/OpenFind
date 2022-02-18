@@ -77,20 +77,20 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         
         guard let tabs = getTabs?() else { return }
         for index in tabs.indices {
-            let attribute = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
+            let attributes = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
             
             let rect: CGRect
             if index == 1 {
                 rect = CGRect(x: collectionView.contentOffset.x, y: 0, width: width, height: height)
-                attribute.zIndex = 1
+                attributes.zIndex = 1
             } else {
                 rect = CGRect(x: currentOrigin, y: 0, width: width, height: height)
-                attribute.zIndex = 2
+                attributes.zIndex = 2
             }
             
-            attribute.fullOrigin = currentOrigin
-            attribute.frame = rect
-            layoutAttributes.append(attribute)
+            attributes.fullOrigin = currentOrigin
+            attributes.frame = rect
+            layoutAttributes.append(attributes)
             
             currentOrigin += width
         }
