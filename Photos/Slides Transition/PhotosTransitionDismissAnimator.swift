@@ -75,7 +75,13 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
         self.transitionContext = transitionContext
         self.fromImageViewFrame = fromImageViewFrame
         self.fromImage = fromImage
-
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
+                self.toImageViewFrame = toImageViewFrame
+            }
+        }
+        
         let containerView = transitionContext.containerView
 
         transitionImageView.frame = fromImageViewFrame
@@ -164,10 +170,11 @@ extension PhotosTransitionDismissAnimator {
             // because if the device has rotated,
             // the toDelegate needs a chance to update its layout
             // before asking for the frame.
-            self.transitionImageView.frame = didCancel
-                ? self.fromImageViewFrame!
-                : self.toDelegate.imageFrame(type: .pop) ?? self.toImageViewFrame!
-
+            if didCancel {
+                self.transitionImageView.frame = self.fromImageViewFrame!
+            } else {
+                self.transitionImageView.frame = self.toDelegate.imageFrame(type: .pop) ?? self.toImageViewFrame!
+            }
             self.additionalFinalAnimations?()
         }
 
@@ -196,13 +203,14 @@ extension PhotosTransitionDismissAnimator {
         additionalFinalSetup?()
         foregroundAnimator.startAnimation()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
-            if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
-                self.toImageViewFrame = toImageViewFrame
-                self.transitionImageView.bounds.size = toImageViewFrame.size
-                self.transitionImageView.center = toImageViewFrame.center
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+//            if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
+//                self.toImageViewFrame = toImageViewFrame
+//                self.transitionImageView.frame = toImageViewFrame
+////                self.transitionImageView.bounds.size = toImageViewFrame.size
+////                self.transitionImageView.center = toImageViewFrame.center
+//            }
+//        }
     }
 }
 
