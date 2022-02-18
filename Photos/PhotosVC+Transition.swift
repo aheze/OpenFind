@@ -9,18 +9,26 @@
 import UIKit
 
 extension PhotosViewController: PhotoTransitionAnimatorDelegate {
-    func transitionWillStart() {
+    func transitionWillStart(type: PhotoTransitionAnimatorType) {
         guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
         if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
             cell.alpha = 0
         }
     }
     
-    func transitionDidEnd() {
-        
+    func transitionDidEnd(type: PhotoTransitionAnimatorType) {
+        switch type {
+        case .push:
+            break
+        case .pop:
+            guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
+            if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
+                cell.alpha = 1
+            }
+        }
     }
     
-    func referenceImage() -> UIImage? {
+    func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
         if
             let currentIndex = self.model.slidesState?.currentIndex,
             let image = self.model.slidesState?.findPhotos[currentIndex].image
@@ -36,7 +44,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         return nil
     }
     
-    func imageFrame() -> CGRect? {
+    func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect? {
         guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
         if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
             let frame = cell.imageView.windowFrame()

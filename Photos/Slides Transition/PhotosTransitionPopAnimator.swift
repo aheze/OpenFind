@@ -1,5 +1,5 @@
 //
-//  PhotosTransitionPushAnimator.swift
+//  PhotosTransitionPopAnimator.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/17/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     fileprivate let fromDelegate: PhotoTransitionAnimatorDelegate
     fileprivate let toDelegate: PhotoTransitionAnimatorDelegate
 
@@ -31,13 +31,13 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
     }()
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.35
+        return 0.4
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         // 4
-        guard let photosView = transitionContext.view(forKey: .from) else { return }
-        guard let slidesView = transitionContext.view(forKey: .to) else { return }
+        guard let slidesView = transitionContext.view(forKey: .from) else { return }
+        guard let photosView = transitionContext.view(forKey: .to) else { return }
 
         // 5
         let duration = transitionDuration(using: transitionContext)
@@ -45,21 +45,22 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         // 6
         let containerView = transitionContext.containerView
 
-        slidesView.alpha = 0
-        containerView.addSubview(slidesView)
+        photosView.alpha = 0
+        containerView.addSubview(photosView)
 
-        let transitionImage = fromDelegate.referenceImage(type: .push)
+        let transitionImage = fromDelegate.referenceImage(type: .pop)
         transitionImageView.image = transitionImage
+        transitionImageView.addDebugBorders(.red)
         containerView.addSubview(transitionImageView)
 
-        if let fromImageFrame = fromDelegate.imageFrame(type: .push) {
+        if let fromImageFrame = fromDelegate.imageFrame(type: .pop) {
             transitionImageView.frame = fromImageFrame
         }
 
         // Now let's animate, using our old friend UIViewPropertyAnimator!
         let spring: CGFloat = 0.95
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
-            slidesView.alpha = 1
+            photosView.alpha = 1
         }
         
         // Once the animation is complete, we'll need to clean up.
@@ -72,8 +73,8 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 
             // Tell our view controllers that we're done, too.
-            self.toDelegate.transitionDidEnd(type: .push)
-            self.fromDelegate.transitionDidEnd(type: .push)
+            self.toDelegate.transitionDidEnd(type: .pop)
+            self.fromDelegate.transitionDidEnd(type: .pop)
         }
 
         // HACK: By delaying 0.005s, I get a layout-refresh on the toViewController,
@@ -82,14 +83,14 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         // the device has rotated. :scream_cat:
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
             animator.addAnimations {
-                if let toImageFrame = self.toDelegate.imageFrame(type: .push) {
+                if let toImageFrame = self.toDelegate.imageFrame(type: .pop) {
                     self.transitionImageView.frame = toImageFrame
                 }
             }
         }
 
-        self.toDelegate.transitionWillStart(type: .push)
-        self.fromDelegate.transitionWillStart(type: .push)
+        self.toDelegate.transitionWillStart(type: .pop)
+        self.fromDelegate.transitionWillStart(type: .pop)
         animator.startAnimation()
     }
 }

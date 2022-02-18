@@ -945,6 +945,8 @@
 		3C71EFA327BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA227BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift */; };
 		3C71EFA427BF5D4E00F0C0A0 /* PhotosTransitionPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA227BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift */; };
 		3C71EFA527BF5D5000F0C0A0 /* PhotosTransitionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA027BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift */; };
+		3C71EFA727BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA627BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift */; };
+		3C71EFA827BF6A4F00F0C0A0 /* PhotosTransitionPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA627BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift */; };
 		3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */; };
 		3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */; };
 		3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */; };
@@ -2185,6 +2187,7 @@
 		3C71EF9D27BF5C2E00F0C0A0 /* PhotosVC+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Transition.swift"; sourceTree = "<group>"; };
 		3C71EFA027BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTransitionUtilities.swift; sourceTree = "<group>"; };
 		3C71EFA227BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTransitionPushAnimator.swift; sourceTree = "<group>"; };
+		3C71EFA627BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTransitionPopAnimator.swift; sourceTree = "<group>"; };
 		3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Star.swift"; sourceTree = "<group>"; };
 		3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cache.swift"; sourceTree = "<group>"; };
 		3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionSamplingEngine.swift; sourceTree = "<group>"; };
@@ -3694,6 +3697,7 @@
 			children = (
 				3C71EF9627BED22F00F0C0A0 /* PhotosTransitionAnimator.swift */,
 				3C71EFA227BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift */,
+				3C71EFA627BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift */,
 				3C71EFA027BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift */,
 			);
 			path = "Slides Transition";
@@ -5770,6 +5774,7 @@
 				3CBB319827BD642A00F25F6A /* PhotosSlidesVC+DataSource.swift in Sources */,
 				3C1D178627BBF9A200E82B8B /* PhotosVM+Sort.swift in Sources */,
 				3C4D3A77274769660010FD68 /* Constants.swift in Sources */,
+				3C71EFA727BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift in Sources */,
 				3C71EFA127BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift in Sources */,
 				3C4D39F3274766790010FD68 /* Toolbar.swift in Sources */,
 				3C6D77BF27A5B140005371F3 /* Global.swift in Sources */,
@@ -6263,6 +6268,7 @@
 				3C6C73712781946200E039F0 /* CameraVC+LivePreview.swift in Sources */,
 				3CC00EC427A6517700F6CF9C /* ListsVC+Selection.swift in Sources */,
 				3C6C739E2781947400E039F0 /* SearchCollectionView.swift in Sources */,
+				3C71EFA827BF6A4F00F0C0A0 /* PhotosTransitionPopAnimator.swift in Sources */,
 				3C6C735A2781945A00E039F0 /* PhotosController.swift in Sources */,
 				3C6C73A32781947400E039F0 /* SearchViewController.swift in Sources */,
 				3CCE2B52279D235C00F72351 /* ListsDetailVC+DataSource.swift in Sources */,

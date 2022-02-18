@@ -64,6 +64,7 @@ class PhotosController {
         
         model.transitionAnimatorsUpdated = { photos, slides in
             searchNavigationController.pushAnimator = PhotosTransitionPushAnimator(fromDelegate: photos, toDelegate: slides)
+            searchNavigationController.popAnimator = PhotosTransitionPopAnimator(fromDelegate: slides, toDelegate: photos)
         }
         
         model.imageUpdatedWhenPresentingSlides = { image in
