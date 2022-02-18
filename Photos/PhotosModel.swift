@@ -24,6 +24,11 @@ struct PhotosSlidesState {
     }
 }
 
+struct PhotosScanningState {
+    var scannedPhotosCount = 0
+    var totalPhotosCount = 0
+}
+
 struct FindPhoto: Hashable {
     var photo: Photo
     var image: UIImage?

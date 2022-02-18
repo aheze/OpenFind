@@ -22,6 +22,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     
     var photosSelectionViewModel = PhotosSelectionViewModel()
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
+    lazy var scanningIconController = PhotosScanningIconController(model: model)
     
     @IBOutlet var collectionView: UICollectionView!
     lazy var flowLayout = PhotosCollectionFlowLayout(model: model)

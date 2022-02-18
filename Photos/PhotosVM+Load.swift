@@ -30,6 +30,9 @@ extension PhotosViewModel {
         var photos = [Photo]()
         
         DispatchQueue.global(qos: .userInitiated).async {
+            
+            /// how many scanned photos
+            var currentScannedCount = 0
             self.assets?.enumerateObjects { [weak self] asset, _, _ in
                 guard let self = self else { return }
                 
@@ -37,6 +40,10 @@ extension PhotosViewModel {
                 let identifier = asset.localIdentifier
                 if let metadata = self.realmModel?.getPhotoMetadata(from: identifier) {
                     photo = Photo(asset: asset, metadata: metadata)
+                    
+                    if !metadata.sentences.isEmpty {
+                        currentScannedCount += 1
+                    }
                 } else {
                     photo = Photo(asset: asset)
                 }
@@ -46,6 +53,8 @@ extension PhotosViewModel {
             
             DispatchQueue.main.async {
                 self.photos = photos
+                self.scanningState.scannedPhotosCount = currentScannedCount
+                self.scanningState.totalPhotosCount = photos.count
                 completion?()
             }
         }

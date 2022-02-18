@@ -6,10 +6,13 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 enum Colors {
     static var accent = UIColor(named: "Accent")!
+}
+extension Color {
+    static var accent = Colors.accent.color
 }
 
 enum Constants {

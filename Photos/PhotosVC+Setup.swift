@@ -12,6 +12,7 @@ import SwiftUI
 extension PhotosViewController {
     func setup() {
         setupCollectionView()
+        setupNavigationBar()
         checkPermissions()
         listenToModel()
     }
@@ -65,5 +66,10 @@ extension PhotosViewController {
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = flowLayout
+    }
+    
+    func setupNavigationBar() {
+        let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 21)
+        navigationItem.rightBarButtonItems = [scanningButton]
     }
 }

@@ -20,8 +20,8 @@ class CameraViewModel: ObservableObject {
     
     /// shutter on/off
     @Published var shutterOn = false
-    
     @Published var pausedImage: CGImage?
+    var currentPausedUUID: UUID? /// prevent hiding/showing the camera feed incorrectly
     
     @Published var flash = false
     @Published var cacheOn = false

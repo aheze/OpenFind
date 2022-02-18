@@ -30,6 +30,9 @@ class PhotosViewModel: ObservableObject {
     
     /// the photo manager got an image, update the transition image view's image.
     var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
+    
+    
+    @Published var scanningState = PhotosScanningState()
 }
 
 extension PhotosViewModel {
