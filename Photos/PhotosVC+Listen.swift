@@ -6,8 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
-import UIKit
+import SwiftUI
 
 extension PhotosViewController {
     func listenToModel() {
@@ -16,7 +15,12 @@ extension PhotosViewController {
             self.update(animate: false)
         }
         
-        searchViewModel.fieldsChanged = { [weak self] (oldValue, newValue) in
+        model.scanningIconTapped = { [weak self] in
+            guard let self = self else { return }
+            self.present(self.scanningNavigationViewController, animated: true)
+        }
+        
+        searchViewModel.fieldsChanged = { [weak self] oldValue, newValue in
             guard let self = self else { return }
             
             let oldText = oldValue.map { $0.value.getText() }
@@ -30,7 +34,7 @@ extension PhotosViewController {
 //                self.updateHighlightColors()
             } else {
 //                self.highlightsViewModel.setUpToDate(false)
-//                
+//
 //                /// animate the highlight frames instead
 //                if
 //                    self.model.shutterOn,

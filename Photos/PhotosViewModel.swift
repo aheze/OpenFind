@@ -32,6 +32,7 @@ class PhotosViewModel: ObservableObject {
     var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
     
     
+    var scanningIconTapped: (() -> Void)?
     @Published var scanningState = PhotosScanningState()
 }
 

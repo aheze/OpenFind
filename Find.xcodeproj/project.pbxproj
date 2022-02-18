@@ -1497,6 +1497,11 @@
 		3CDD944D27C05F9B00D3EA1A /* Utilities+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD944127C05F9100D3EA1A /* Utilities+NavigationBar.swift */; };
 		3CDD944E27C05F9B00D3EA1A /* Utilities+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD944127C05F9100D3EA1A /* Utilities+NavigationBar.swift */; };
 		3CDD944F27C05F9C00D3EA1A /* Utilities+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD944127C05F9100D3EA1A /* Utilities+NavigationBar.swift */; };
+		3CDD945127C0634200D3EA1A /* PhotosScanningViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */; };
+		3CDD945227C063B700D3EA1A /* PhotosScanningViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */; };
+		3CDD945427C0654100D3EA1A /* PhotosScanningConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */; };
+		3CDD945527C0654500D3EA1A /* PhotosScanningConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */; };
+		3CDD945727C0685500D3EA1A /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD945627C0685500D3EA1A /* Defaults.swift */; };
 		3CDDAEF227A8398C007F9652 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3CDDAEF327A839E9007F9652 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3CDDAEF427A839E9007F9652 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
@@ -2411,6 +2416,9 @@
 		3CDD943B27C05DAF00D3EA1A /* PhotosScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningView.swift; sourceTree = "<group>"; };
 		3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningIcon.swift; sourceTree = "<group>"; };
 		3CDD944127C05F9100D3EA1A /* Utilities+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+NavigationBar.swift"; sourceTree = "<group>"; };
+		3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningViewControllers.swift; sourceTree = "<group>"; };
+		3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningConstants.swift; sourceTree = "<group>"; };
+		3CDD945627C0685500D3EA1A /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		3CDDAEF127A8398C007F9652 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
@@ -3207,6 +3215,7 @@
 				3C6D77BB27A5B140005371F3 /* Global.swift */,
 				3CCCCA8B2781859C000381CE /* Model.swift */,
 				3CE9C212274DE306008C903C /* Debug.swift */,
+				3CDD945627C0685500D3EA1A /* Defaults.swift */,
 				3CCE2AF4279D007F00F72351 /* UIKit Views */,
 				3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */,
 				3CDD942A27C05B5A00D3EA1A /* SharedColors.xcassets */,
@@ -4117,8 +4126,10 @@
 		3CDD943A27C05DA600D3EA1A /* Scanning */ = {
 			isa = PBXGroup;
 			children = (
+				3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */,
 				3CDD943B27C05DAF00D3EA1A /* PhotosScanningView.swift */,
 				3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */,
+				3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */,
 			);
 			path = Scanning;
 			sourceTree = "<group>";
@@ -5850,10 +5861,12 @@
 				3CF7643A278D19AC00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
+				3CDD945127C0634200D3EA1A /* PhotosScanningViewControllers.swift in Sources */,
 				3CCCCAA027818CE8000381CE /* GeneralViews.swift in Sources */,
 				3CBB319827BD642A00F25F6A /* PhotosSlidesVC+DataSource.swift in Sources */,
 				3C1D178627BBF9A200E82B8B /* PhotosVM+Sort.swift in Sources */,
 				3C4D3A77274769660010FD68 /* Constants.swift in Sources */,
+				3CDD945427C0654100D3EA1A /* PhotosScanningConstants.swift in Sources */,
 				3C71EFA727BF6A3F00F0C0A0 /* PhotosTransitionPopAnimator.swift in Sources */,
 				3C71EFA127BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift in Sources */,
 				3C4D39F3274766790010FD68 /* Toolbar.swift in Sources */,
@@ -5886,6 +5899,7 @@
 				3C1D178927BCA4A300E82B8B /* PhotosVC+Listen.swift in Sources */,
 				3C9314EC27B86F2B009E5B6E /* PhotosVC+Lifecycle.swift in Sources */,
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
+				3CDD945727C0685500D3EA1A /* Defaults.swift in Sources */,
 				3CCCCA8E278185A8000381CE /* Model.swift in Sources */,
 				3C7BADAB275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C1D1A3F275AA25E0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
@@ -6370,10 +6384,12 @@
 				3C21ED5F27A3A8A90005E183 /* KeyboardToolbarViewModel.swift in Sources */,
 				3C21EE2727A461930005E183 /* RealmModel+Photos.swift in Sources */,
 				3C17686027AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */,
+				3CDD945527C0654500D3EA1A /* PhotosScanningConstants.swift in Sources */,
 				3CFD6032278B71E20031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C6C737E2781946B00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
 				3C6C73782781946B00E039F0 /* ResultsIconView.swift in Sources */,
 				3CF76437278D197100DCA4EA /* Protocols.swift in Sources */,
+				3CDD945227C063B700D3EA1A /* PhotosScanningViewControllers.swift in Sources */,
 				3C6C73742781946B00E039F0 /* LivePreviewVC+Resize.swift in Sources */,
 				3C6C73412781944B00E039F0 /* TabBarViewController.swift in Sources */,
 				3CCE2BA1279DD0F400F72351 /* ListsDetailVC+Rearrange.swift in Sources */,
