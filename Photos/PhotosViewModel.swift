@@ -9,7 +9,7 @@
 import Photos
 import UIKit
 
-class PhotosViewModel {
+class PhotosViewModel: ObservableObject {
     var realmModel: RealmModel?
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()

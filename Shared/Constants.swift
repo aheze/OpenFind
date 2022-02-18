@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum Colors {
+    static var accent = UIColor(named: "Accent")!
+}
+
 enum Constants {
     static var activeIconColor = UIColor(hex: 0x8AF9FF)
     static var iconFont = UIFont.preferredFont(forTextStyle: .title2)

@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 class PhotoSlidesSection: Hashable {
     let id = 0
@@ -27,6 +27,8 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     
     var model: PhotosViewModel
     var searchViewModel: SearchViewModel
+    var toolbarViewModel: ToolbarViewModel
+    lazy var toolbarView = PhotosSlidesToolbarView(model: model)
     
     @IBOutlet var containerViewTopC: NSLayoutConstraint!
     @IBOutlet var containerView: UIView!
@@ -44,10 +46,12 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
-        searchViewModel: SearchViewModel
+        searchViewModel: SearchViewModel,
+        toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
         self.searchViewModel = searchViewModel
+        self.toolbarViewModel = toolbarViewModel
         super.init(coder: coder)
     }
 
@@ -80,6 +84,13 @@ class PhotosSlidesViewController: UIViewController, Searchable {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        withAnimation {
+            toolbarViewModel.toolbar = AnyView(toolbarView)
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Tab.Frames.excluded[.photosSlidesItemCollectionView] = collectionView.windowFrame()
@@ -88,6 +99,9 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Tab.Frames.excluded[.photosSlidesItemCollectionView] = nil
+        withAnimation {
+            toolbarViewModel.toolbar = nil
+        }
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {

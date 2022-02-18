@@ -15,7 +15,8 @@ extension PhotosViewController {
             PhotosSlidesViewController(
                 coder: coder,
                 model: self.model,
-                searchViewModel: self.searchViewModel
+                searchViewModel: self.searchViewModel,
+                toolbarViewModel: self.toolbarViewModel
             )
         }
 

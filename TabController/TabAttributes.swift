@@ -150,7 +150,7 @@ struct PhotosIconAttributes: AnimatableAttributes {
     
     /// always light background
     static let active: Self = .init(
-        foregroundColor: UIColor(hex: 0x40C74D),
+        foregroundColor: Colors.accent,
         backgroundHeight: 48
     )
 }
@@ -191,7 +191,7 @@ struct CameraIconAttributes: AnimatableAttributes {
     )
     
     static let active: Self = .init(
-        foregroundColor: UIColor(hex: 0x00AEEF).withAlphaComponent(0.5),
+        foregroundColor: Colors.accent.withAlphaComponent(0.5),
         backgroundHeight: 98,
         length: 64,
         rimColor: .white,
@@ -238,7 +238,7 @@ struct ListsIconAttributes: AnimatableAttributes {
     )
     
     static let active: ListsIconAttributes = .init(
-        foregroundColor: UIColor(hex: 0xFFC600),
+        foregroundColor: Colors.accent,
         backgroundHeight: 48
     )
 }
