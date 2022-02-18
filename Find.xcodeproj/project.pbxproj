@@ -4172,8 +4172,8 @@
 				3CFD6025278B71A50031BC8B /* SearchNC+NavigationBar.swift */,
 				3CFD6027278B71CE0031BC8B /* SearchNC+SearchBar.swift */,
 				3CF76427278CC2AE00DCA4EA /* SearchNC+Transitioning.swift */,
-				3CF7642B278CE52800DCA4EA /* SearchNC+Utilities.swift */,
 				3CBB31A527BDB98800F25F6A /* SearchNC+ViewTransitioning.swift */,
+				3CF7642B278CE52800DCA4EA /* SearchNC+Utilities.swift */,
 				3CFD5FE7278B6F370031BC8B /* Testing */,
 			);
 			path = SearchNavigation;

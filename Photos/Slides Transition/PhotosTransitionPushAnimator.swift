@@ -30,6 +30,8 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         return imageView
     }()
 
+    var additionalAnimations: (() -> Void)?
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
@@ -61,7 +63,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
             slidesView.alpha = 1
         }
-        
+
         // Once the animation is complete, we'll need to clean up.
         animator.addCompletion { position in
             // Remove the transition image
@@ -85,11 +87,12 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
                 if let toImageFrame = self.toDelegate.imageFrame(type: .push) {
                     self.transitionImageView.frame = toImageFrame
                 }
+                self.additionalAnimations?()
             }
         }
 
-        self.toDelegate.transitionWillStart(type: .push)
-        self.fromDelegate.transitionWillStart(type: .push)
+        toDelegate.transitionWillStart(type: .push)
+        fromDelegate.transitionWillStart(type: .push)
         animator.startAnimation()
     }
 }

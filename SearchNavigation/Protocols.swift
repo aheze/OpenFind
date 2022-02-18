@@ -9,13 +9,6 @@
 
 import UIKit
 
-protocol DismissalNavigationLifecycle: UIViewController {
-    func willAppear()
-    func didAppear()
-    func willDisappear()
-    func didDisappear()
-}
-
 protocol Searchable: UIViewController {
     var baseSearchBarOffset: CGFloat { get set }
     var additionalSearchBarOffset: CGFloat? { get set }

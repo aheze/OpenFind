@@ -63,9 +63,19 @@ class PhotosController {
         }
         
         model.transitionAnimatorsUpdated = { photos, slides in
-            searchNavigationController.pushAnimator = PhotosTransitionPushAnimator(fromDelegate: photos, toDelegate: slides)
-            searchNavigationController.popAnimator = PhotosTransitionPopAnimator(fromDelegate: slides, toDelegate: photos)
-            searchNavigationController.dismissAnimator = PhotosTransitionDismissAnimator(fromDelegate: slides, toDelegate: photos)
+            let pushAnimator = PhotosTransitionPushAnimator(fromDelegate: photos, toDelegate: slides)
+            let popAnimator = PhotosTransitionPopAnimator(fromDelegate: slides, toDelegate: photos)
+            let dismissAnimator = PhotosTransitionDismissAnimator(fromDelegate: slides, toDelegate: photos)
+            
+            searchNavigationController.pushAnimator = pushAnimator
+            searchNavigationController.popAnimator = popAnimator
+            searchNavigationController.dismissAnimator = dismissAnimator
+            
+            
+            pushAnimator?.additionalAnimations = { [weak self] in
+                guard let self = self else { return }
+                self.searchNavigationController.updateSearchBarOffset()
+            }
         }
         
         model.imageUpdatedWhenPresentingSlides = { image in

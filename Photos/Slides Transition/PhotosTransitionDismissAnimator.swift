@@ -84,7 +84,6 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
 
         toDelegate.transitionWillStart(type: .pop)
         fromDelegate.transitionWillStart(type: .pop)
-        backgroundAlphaAnimator.startAnimation()
     }
 }
 

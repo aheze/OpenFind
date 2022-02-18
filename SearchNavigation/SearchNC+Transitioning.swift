@@ -12,7 +12,8 @@ extension SearchNavigationController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         guard
             let transitionCoordinator = navigation.transitionCoordinator,
-            let viewController = viewController as? Searchable
+            let viewController = viewController as? Searchable,
+            currentAnimator == nil
         else { return }
         
         let offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
@@ -59,17 +60,11 @@ extension SearchNavigationController: UINavigationControllerDelegate {
                         additionalSearchBarOffset: currentViewController.additionalSearchBarOffset
                     )
                 }
-                if let currentViewController = self.navigation.topViewController as? DismissalNavigationLifecycle {
-                    currentViewController.didAppear()
-                }
             } else {
                 self.updateBlur(
                     baseSearchBarOffset: viewController.baseSearchBarOffset,
                     additionalSearchBarOffset: viewController.additionalSearchBarOffset
                 )
-                if let currentViewController = self.navigation.topViewController as? DismissalNavigationLifecycle {
-                    currentViewController.didDisappear()
-                }
             }
         }
     }
