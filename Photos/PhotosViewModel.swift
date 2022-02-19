@@ -34,6 +34,9 @@ class PhotosViewModel: ObservableObject {
     
     var scanningIconTapped: (() -> Void)?
     @Published var scanningState = PhotosScanningState()
+    @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
+    @Saved(Defaults.scanInBackground.0) var scanInBackground = Defaults.scanInBackground.1
+    @Saved(Defaults.scanWhileCharging.0) var scanWhileCharging = Defaults.scanWhileCharging.1
 }
 
 extension PhotosViewModel {
