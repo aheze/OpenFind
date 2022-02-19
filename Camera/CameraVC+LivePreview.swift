@@ -40,7 +40,11 @@ extension CameraViewController {
             guard let self = self else { return }
             
             if !self.model.shutterOn {
-                self.findAndAddHighlights(pixelBuffer: pixelBuffer)
+                guard Find.startTime == nil else { return }
+                print("Going.")
+                Task {
+                    await self.findAndAddHighlights(pixelBuffer: pixelBuffer)
+                }
             }
         }
         
@@ -50,9 +54,11 @@ extension CameraViewController {
         livePreviewViewController.view.backgroundColor = .clear
         return livePreviewViewController
     }
+
     func showLivePreview() {
         self.livePreviewContainerView.alpha = 1
     }
+
     func hideLivePreview() {
         UIView.animate(withDuration: 0.8) {
             self.livePreviewContainerView.alpha = 0

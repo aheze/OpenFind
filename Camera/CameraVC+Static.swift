@@ -6,7 +6,6 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
 
-
 import UIKit
 
 /**
@@ -22,25 +21,25 @@ extension CameraViewController {
         showLivePreview()
         showZoomView()
     }
+
     func pause() {
         model.currentPausedUUID = UUID()
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = false
         startAutoProgress()
         hideZoomView()
-        
-        let currentUUID = model.currentPausedUUID
-        livePreviewViewController.takePhoto { [weak self] image in
-            guard let self = self else { return }
+
+        Task {
+            let currentUUID = model.currentPausedUUID
+            let image = await livePreviewViewController.takePhoto()
             guard currentUUID == self.model.currentPausedUUID else { return }
             self.setScrollZoomImage(image: image)
-            
+
             if let cgImage = image.cgImage {
                 self.model.pausedImage = cgImage
-                self.findAndAddHighlights(image: cgImage) { _ in
-                    guard currentUUID == self.model.currentPausedUUID else { return }
-                    self.endAutoProgress()
-                    self.hideLivePreview()
-                }
+                _ = await self.findAndAddHighlights(image: cgImage)
+                guard currentUUID == self.model.currentPausedUUID else { return }
+                self.endAutoProgress()
+                self.hideLivePreview()
             }
         }
     }

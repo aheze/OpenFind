@@ -6,38 +6,34 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
 
-
-import UIKit
 import AVFoundation
+import UIKit
 
 extension CameraViewController {
-    func findAndAddHighlights(pixelBuffer: CVPixelBuffer, completion: @escaping (([FindText]) -> Void) = { _ in }) {
+    func findAndAddHighlights(pixelBuffer: CVPixelBuffer) async -> [FindText] {
         var options = FindOptions()
         options.orientation = .right
         options.customWords = searchViewModel.customWords
-        
-        find(in: .pixelBuffer(pixelBuffer), options: options) { [weak self] sentences in
-            completion(sentences)
-            self?.addHighlights(from: sentences, replace: false)
-        }
+
+        let sentences = await find(in: .pixelBuffer(pixelBuffer), options: options)
+        addHighlights(from: sentences, replace: false)
+        return sentences
     }
-    
-    func findAndAddHighlights(image: CGImage, replace: Bool = false, completion: @escaping (([FindText]) -> Void) = { _ in }) {
+
+    func findAndAddHighlights(image: CGImage, replace: Bool = false) async -> [FindText] {
         var options = FindOptions()
         options.orientation = .up
         options.level = .accurate
         options.customWords = searchViewModel.customWords
 
-        find(in: .cgImage(image), options: options) { [weak self] sentences in
-            completion(sentences)
-            self?.addHighlights(from: sentences, replace: replace)
-        }
+        let sentences = await find(in: .cgImage(image), options: options)
+        addHighlights(from: sentences, replace: replace)
+        return sentences
     }
-    
-    func find(in image: FindImage, options: FindOptions, completion: @escaping (([FindText]) -> Void)) {
-        guard Find.startTime == nil else { return }
-        Find.run(in: image, options: options) { sentences in
-            completion(sentences)
-        }
+
+    func find(in image: FindImage, options: FindOptions) async -> [FindText] {
+        guard Find.startTime == nil else { return [] }
+        let sentences = await Find.run(in: image, options: options)
+        return sentences
     }
 }

@@ -6,28 +6,29 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
 
-
-import UIKit
 import AVFoundation
+import UIKit
 
 extension LivePreviewViewController {
-    func takePhoto(completion: @escaping ((UIImage) -> Void)) {
+    func takePhoto() async -> UIImage {
         let photoSettings = AVCapturePhotoSettings()
         let videoPreviewLayerOrientation = livePreviewView.videoPreviewLayer.connection?.videoOrientation
-        
+
         if
             let photoOutputConnection = photoDataOutput.connection(with: .video),
             let photoPreviewType = photoSettings.availablePreviewPhotoPixelFormatTypes.first
         {
-            photoCaptured = { [weak self] image in
-                completion(image)
-                self?.photoCaptured = nil
-            }
-            
             photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
             photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: photoPreviewType]
             photoDataOutput.capturePhoto(with: photoSettings, delegate: self)
+            
+            return await withCheckedContinuation { continuation in
+                photoCaptured = { [weak self] image in
+                    self?.photoCaptured = nil
+                    continuation.resume(returning: image)
+                }
+            }
         }
-
+        return UIImage()
     }
 }

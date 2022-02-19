@@ -6,10 +6,9 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
 
-
+import AVFoundation
 import UIKit
 import Vision
-import AVFoundation
 
 struct FindText {
     var string: String
@@ -28,31 +27,30 @@ enum FindImage {
     case pixelBuffer(CVPixelBuffer)
 }
 
-class Find {
+enum Find {
     static var startTime: Date?
-    
-    static func run(in image: FindImage, options: FindOptions = FindOptions(), completion: @escaping (([FindText]) -> Void)) {
-        let request = VNRecognizeTextRequest { request, _ in
-            let sentences = getSentences(from: request)
-            DispatchQueue.main.async {
-                completion(sentences)
-            }
-        }
-        
-        request.customWords = options.customWords
-        request.recognitionLevel = options.level
-        
-        let imageRequestHandler: VNImageRequestHandler
-        switch image {
-        case .cgImage(let image):
-            imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: options.orientation)
-        case .pixelBuffer(let pixelBuffer):
-            imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: options.orientation)
-        }
-        
+
+    static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
+        print("Setting start time.")
         startTime = Date()
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        return await withCheckedContinuation { continuation in
+            let request = VNRecognizeTextRequest { request, _ in
+                let sentences = getSentences(from: request)
+                continuation.resume(returning: sentences)
+            }
+
+            request.customWords = options.customWords
+            request.recognitionLevel = options.level
+
+            let imageRequestHandler: VNImageRequestHandler
+            switch image {
+            case .cgImage(let image):
+                imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: options.orientation)
+            case .pixelBuffer(let pixelBuffer):
+                imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: options.orientation)
+            }
+
             do {
                 try imageRequestHandler.perform([request])
             } catch {
@@ -70,13 +68,13 @@ extension Find {
         else {
             return []
         }
-        
+
         var sentences = [FindText]()
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
             var boundingBox = observation.boundingBox
             boundingBox.origin.y = 1 - boundingBox.minY - boundingBox.height
-            
+
             let sentence = FindText(
                 string: text.string,
                 frame: boundingBox,
@@ -84,7 +82,7 @@ extension Find {
             )
             sentences.append(sentence)
         }
-        
+
         return sentences
     }
 }
