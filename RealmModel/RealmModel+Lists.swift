@@ -48,7 +48,7 @@ extension RealmModel {
                 realm.add(realmList)
             }
         } catch {
-            print("Error writing list: \(error)")
+            Log.print("Error writing list: \(error)", .error)
         }
 
         loadLists()
@@ -56,18 +56,18 @@ extension RealmModel {
 
     func updateList(list: List) {
         if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
+            let words = list.getRealmWords()
             do {
                 try realm.write {
                     realmList.name = list.name
                     realmList.desc = list.desc
-                    realmList.words.removeAll()
-                    realmList.words.append(objectsIn: list.words)
+                    realmList.words = words
                     realmList.icon = list.icon
                     realmList.color = Int(list.color)
                     realmList.dateCreated = list.dateCreated
                 }
             } catch {
-                print("Error updating list: \(error)")
+                Log.print("Error updating list: \(error)", .error)
             }
         }
 
@@ -81,7 +81,7 @@ extension RealmModel {
                     realm.delete(realmList)
                 }
             } catch {
-                print("Error deleting list: \(error)")
+                Log.print("Error deleting list: \(error)", .error)
             }
         }
 

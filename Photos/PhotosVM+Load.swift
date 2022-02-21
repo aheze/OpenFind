@@ -11,6 +11,20 @@ import UIKit
 
 extension PhotosViewModel {
     
+    // MARK: - Listen to realm refreshes
+    func listenToRealm() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(photoMetadatasUpdated),
+            name: .photoMetadatasUpdated,
+            object: nil
+        )
+    }
+
+    @objc func photoMetadatasUpdated(notification: Notification) {
+        load()
+    }
+    
     func load() {
         loadAssets()
         loadPhotos { [weak self] in
@@ -38,7 +52,7 @@ extension PhotosViewModel {
                 
                 let photo: Photo
                 let identifier = asset.localIdentifier
-                if let metadata = self.realmModel?.getPhotoMetadata(from: identifier) {
+                if let metadata = self.realmModel.getPhotoMetadata(from: identifier) {
                     photo = Photo(asset: asset, metadata: metadata)
                     
                     if !metadata.sentences.isEmpty {
@@ -53,8 +67,8 @@ extension PhotosViewModel {
             
             DispatchQueue.main.async {
                 self.photos = photos
-                self.scanningState.scannedPhotosCount = currentScannedCount
-                self.scanningState.totalPhotosCount = photos.count
+                self.photosScanningModel.scannedPhotosCount = currentScannedCount
+                self.photosScanningModel.totalPhotosCount = photos.count
                 completion?()
             }
         }

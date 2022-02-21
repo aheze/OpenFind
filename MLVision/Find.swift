@@ -33,10 +33,11 @@ enum Find {
     static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
         print("Setting start time.")
         startTime = Date()
-        
+
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
                 let sentences = getSentences(from: request)
+                startTime = nil
                 continuation.resume(returning: sentences)
             }
 
@@ -54,7 +55,9 @@ enum Find {
             do {
                 try imageRequestHandler.perform([request])
             } catch {
-                print("Error finding: \(error)")
+                Log.print("Error finding: \(error)", .error)
+                startTime = nil
+                continuation.resume(returning: [])
             }
         }
     }
@@ -62,7 +65,6 @@ enum Find {
 
 extension Find {
     static func getSentences(from request: VNRequest) -> [FindText] {
-        startTime = nil
         guard
             let results = request.results
         else {

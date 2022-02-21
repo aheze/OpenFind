@@ -10,7 +10,8 @@ import SwiftUI
 
 class ViewController: UIViewController {
     let realmModel = RealmModel()
-    let photosViewModel = PhotosViewModel()
+    let photosScanningModel = PhotosScanningModel()
+    lazy var photosViewModel = PhotosViewModel(realmModel: realmModel, photosScanningModel: photosScanningModel)
     let cameraViewModel = CameraViewModel()
     let listsViewModel = ListsViewModel()
     let toolbarViewModel = ToolbarViewModel()
@@ -44,6 +45,12 @@ class ViewController: UIViewController {
         realmModel.loadLists()
         lists.viewController.reload()
 
+        photosScanningModel.loadScanning()
+        if photosScanningModel.scanOnLaunch {
+            print("scan on launch!")
+            photosScanningModel.resumeScanning()
+        }
+        
         setup()
         updateExcludedFrames()
     }

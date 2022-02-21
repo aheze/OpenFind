@@ -26,9 +26,9 @@ extension PhotosViewController {
         case .denied:
             showPermissionsView()
         case .authorized:
-            loadCollectionView()
+            model.load()
         case .limited:
-            loadCollectionView()
+            model.load()
         @unknown default:
             fatalError()
         }
@@ -42,11 +42,12 @@ extension PhotosViewController {
         view.bringSubviewToFront(hostingController.view)
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
-            self.loadCollectionView()
+            self.model.load()
+            self.showCollectionView()
         }
     }
 
-    /// Call this after `loadCollectionView()`.
+    /// Call this after `model.load()`.
     func showCollectionView() {
         UIView.animate(withDuration: 0.5) {
             self.collectionView.alpha = 1

@@ -10,37 +10,29 @@ import UIKit
 import RealmSwift
 
 class RealmPhotoMetadata: Object {
-    @Persisted(primaryKey: true) var id = UUID()
-    @Persisted var assetIdentifier = ""
+    @Persisted(primaryKey: true) var assetIdentifier = ""
     @Persisted var sentences = RealmSwift.List<RealmPhotoMetadataSentence>()
     @Persisted var isStarred = false
-    @Persisted var dateCreated = Date()
 
     override init() {
         super.init()
     }
 
     init(
-        id: UUID,
         assetIdentifier: String,
         sentences: RealmSwift.List<RealmPhotoMetadataSentence>,
-        isStarred: Bool,
-        dateCreated: Date
+        isStarred: Bool
     ) {
-        self.id = id
         self.assetIdentifier = assetIdentifier
         self.sentences = sentences
         self.isStarred = isStarred
-        self.dateCreated = dateCreated
     }
     
     func getPhotoMetadata() -> PhotoMetadata {
         let metadata = PhotoMetadata(
-            id: self.id,
             assetIdentifier: self.assetIdentifier,
             sentences: self.sentences.map { $0.getSentence() },
-            isStarred: self.isStarred,
-            dateCreated: self.dateCreated
+            isStarred: self.isStarred
         )
         return metadata
     }
@@ -66,6 +58,22 @@ class RealmRect: Object {
     @Persisted var y = Double(0)
     @Persisted var width = Double(0)
     @Persisted var height = Double(0)
+    
+    override init() {
+        super.init()
+    }
+    
+    init(
+        x: Double,
+        y: Double,
+        width: Double,
+        height: Double
+    ) {
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+    }
     
     func getRect() -> CGRect {
         let rect = CGRect(

@@ -18,6 +18,10 @@ extension SearchViewController {
         )
     }
 
+    @objc func listsUpdated(notification: Notification) {
+        keyboardToolbarViewModel.reloadDisplayedLists()
+    }
+
     func listenToToolbar() {
         keyboardToolbarViewModel.listSelected = { [weak self] list in
             guard let self = self else { return }
@@ -33,7 +37,7 @@ extension SearchViewController {
             }
         }
     }
-    
+
     /// Refresh the toolbar's height
     func reloadToolbarFrame() {
         if
@@ -45,9 +49,4 @@ extension SearchViewController {
             }
         }
     }
-
-    @objc func listsUpdated(notification: Notification) {
-        keyboardToolbarViewModel.reloadDisplayedLists()
-    }
 }
-

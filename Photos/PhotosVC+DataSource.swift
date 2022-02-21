@@ -10,11 +10,6 @@ import Photos
 import UIKit
 
 extension PhotosViewController {
-    func loadCollectionView() {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        model.assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-    }
 
     func update(animate: Bool = true) {
         var snapshot = Snapshot()

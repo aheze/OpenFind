@@ -29,13 +29,13 @@ struct PhotosScanningViewHeader: View {
                                 .frame(width: 32, height: 32)
 
                             HStack {
-                                Text("\(model.scanningState.scannedPhotosCount)")
+                                Text("\(model.photosScanningModel.scannedPhotosCount)")
                                     .foregroundColor(.accent)
                                     +
                                     Text("/")
                                     .foregroundColor(.accent.opacity(0.75))
                                     +
-                                    Text("\(model.scanningState.totalPhotosCount)")
+                                    Text("\(model.photosScanningModel.totalPhotosCount)")
                                     .foregroundColor(.accent.opacity(0.75))
 
                                 Text("Scanned")
@@ -62,21 +62,21 @@ struct PhotosScanningViewHeader: View {
                     model: model,
                     title: "Scan on Launch",
                     description: "Find will start scanning photos as soon as you open the app.",
-                    binding: \PhotosViewModel.$scanOnLaunch
+                    binding: \PhotosScanningModel.$scanOnLaunch
                 )
 
                 PhotoScanningRow(
                     model: model,
                     title: "Background Scanning",
                     description: "Find will scan photos when the app is inactive and in the background.",
-                    binding: \PhotosViewModel.$scanInBackground
+                    binding: \PhotosScanningModel.$scanInBackground
                 )
 
                 PhotoScanningRow(
                     model: model,
                     title: "Scan While Charging",
                     description: "Find will scan photos when your phone is plugged in.",
-                    binding: \PhotosViewModel.$scanWhileCharging
+                    binding: \PhotosScanningModel.$scanWhileCharging
                 )
 
                 Spacer()
@@ -129,14 +129,14 @@ struct PhotoScanningRow: View {
     @ObservedObject var model: PhotosViewModel
     var title: String
     var description: String
-    var binding: KeyPath<PhotosViewModel, Binding<Bool>>
+    var binding: KeyPath<PhotosScanningModel, Binding<Bool>>
 
     var body: some View {
         Container(description: description) {
             HStack {
                 Text(title)
                 Spacer()
-                Toggle(isOn: model[keyPath: binding]) {
+                Toggle(isOn: model.photosScanningModel[keyPath: binding]) {
                     EmptyView()
                 }
                 .labelsHidden()

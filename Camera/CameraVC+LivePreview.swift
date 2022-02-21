@@ -41,7 +41,6 @@ extension CameraViewController {
             
             if !self.model.shutterOn {
                 guard Find.startTime == nil else { return }
-                print("Going.")
                 Task {
                     await self.findAndAddHighlights(pixelBuffer: pixelBuffer)
                 }
