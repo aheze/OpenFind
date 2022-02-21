@@ -39,13 +39,10 @@ class PhotosSlidesItemViewController: UIViewController {
         if let image = findPhoto.fullImage {
             scrollZoomController.imageView.image = image
         } else {
-            Task {
-                let image = await model.getFullImage(from: findPhoto.photo)
-                
-                await MainActor.run {
-                    self.findPhoto.fullImage = image
-                    self.scrollZoomController.imageView.image = image
-                }
+            model.getFullImage(from: findPhoto.photo) { [weak self] image in
+                guard let self = self else { return }
+                self.findPhoto.fullImage = image
+                self.scrollZoomController.imageView.image = image
             }
         }
     }

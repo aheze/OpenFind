@@ -15,9 +15,9 @@ class PhotosViewModel: ObservableObject {
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
     var sections = [PhotosSection]()
-    
+
     /// store the cell images
-    var photoToThumbnail = [Photo : UIImage?]()
+    var photoToThumbnail = [Photo: UIImage?]()
 
     var reload: (() -> Void)?
 
@@ -48,7 +48,6 @@ class PhotosViewModel: ObservableObject {
 }
 
 extension PhotosViewModel {
-
     /// get from `photos`
     func getPhotoIndex(photo: Photo) -> Int? {
         if let firstIndex = photos.firstIndex(of: photo) {
@@ -66,7 +65,7 @@ extension PhotosViewModel {
         }
         return nil
     }
-    
+
     func getFullImage(from photo: Photo) async -> UIImage? {
         return await withCheckedContinuation { continuation in
             let options = PHImageRequestOptions()
@@ -74,11 +73,23 @@ extension PhotosViewModel {
             imageManager.requestImage(
                 for: photo.asset,
                 targetSize: .zero,
-                contentMode: .aspectFill,
+                contentMode: .aspectFit,
                 options: options
             ) { image, _ in
                 continuation.resume(returning: image)
             }
+        }
+    }
+
+    /// closure-based for immediate return
+    func getFullImage(from photo: Photo, completion: @escaping ((UIImage?) -> Void)) {
+        imageManager.requestImage(
+            for: photo.asset,
+            targetSize: .zero,
+            contentMode: .aspectFit,
+            options: nil
+        ) { image, _ in
+            completion(image)
         }
     }
 }

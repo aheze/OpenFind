@@ -30,15 +30,16 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     var toolbarViewModel: ToolbarViewModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
     
-    @IBOutlet var containerViewTopC: NSLayoutConstraint!
     @IBOutlet var containerView: UIView!
     @IBOutlet var collectionView: UICollectionView!
+    
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
 
     // MARK: - Dismissal
+
     let dismissPanGesture = UIPanGestureRecognizer()
     var isInteractivelyDismissing: Bool = false
     weak var transitionAnimator: PhotosTransitionDismissAnimator? /// auto set via the transition animator
@@ -68,7 +69,6 @@ class PhotosSlidesViewController: UIViewController, Searchable {
         
         setup()
         setupDismissGesture()
-        containerViewTopC.constant = searchViewModel.getTotalHeight()
         update(animate: false)
         
         if
@@ -91,6 +91,7 @@ class PhotosSlidesViewController: UIViewController, Searchable {
             toolbarViewModel.toolbar = AnyView(toolbarView)
         }
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Tab.Frames.excluded[.photosSlidesItemCollectionView] = collectionView.windowFrame()
@@ -107,6 +108,5 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
-        containerViewTopC.constant = searchViewModel.getTotalHeight()
     }
 }
