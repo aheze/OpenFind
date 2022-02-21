@@ -55,7 +55,7 @@ enum Find {
             do {
                 try imageRequestHandler.perform([request])
             } catch {
-                Log.print("Error finding: \(error)", .error)
+                Global.log("Error finding: \(error)", .error)
                 startTime = nil
                 continuation.resume(returning: [])
             }

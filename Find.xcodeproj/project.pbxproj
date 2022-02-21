@@ -1247,21 +1247,21 @@
 		3CB8C30B27C2D0D7000AA3B9 /* Find+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30927C2D0C8000AA3B9 /* Find+Queue.swift */; };
 		3CB8C30C27C2D0D7000AA3B9 /* Find+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30927C2D0C8000AA3B9 /* Find+Queue.swift */; };
 		3CB8C30D27C2D0D8000AA3B9 /* Find+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30927C2D0C8000AA3B9 /* Find+Queue.swift */; };
-		3CB8C30F27C31DE5000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31027C31DEB000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31127C31DEC000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31227C31DEC000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31327C31DEC000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31427C31DED000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31527C31DED000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31627C31DED000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31727C31DEE000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31827C31DEF000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31927C31DEF000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31A27C31DF0000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31B27C31DF0000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31C27C31DF0000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
-		3CB8C31D27C31DF0000AA3B9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Log.swift */; };
+		3CB8C30F27C31DE5000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31027C31DEB000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31127C31DEC000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31227C31DEC000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31327C31DEC000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31427C31DED000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31527C31DED000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31627C31DED000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31727C31DEE000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31827C31DEF000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31927C31DEF000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31A27C31DF0000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31B27C31DF0000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31C27C31DF0000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
+		3CB8C31D27C31DF0000AA3B9 /* Global+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */; };
 		3CB8C31F27C31FE3000AA3B9 /* PhotosScanningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C31E27C31FE3000AA3B9 /* PhotosScanningModel.swift */; };
 		3CB8C32027C31FEE000AA3B9 /* PhotosScanningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C31E27C31FE3000AA3B9 /* PhotosScanningModel.swift */; };
 		3CB8C32327C337BE000AA3B9 /* PhotosVM+Scanning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8C32227C337BE000AA3B9 /* PhotosVM+Scanning.swift */; };
@@ -2397,7 +2397,7 @@
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		3CB8C30927C2D0C8000AA3B9 /* Find+Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Find+Queue.swift"; sourceTree = "<group>"; };
-		3CB8C30E27C31DE5000AA3B9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global+Log.swift"; sourceTree = "<group>"; };
 		3CB8C31E27C31FE3000AA3B9 /* PhotosScanningModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningModel.swift; sourceTree = "<group>"; };
 		3CB8C32227C337BE000AA3B9 /* PhotosVM+Scanning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Scanning.swift"; sourceTree = "<group>"; };
 		3CBB318727BD51FF00F25F6A /* PhotosVC+Slides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Slides.swift"; sourceTree = "<group>"; };
@@ -3255,10 +3255,10 @@
 			children = (
 				3C4D39C527475E8A0010FD68 /* Constants.swift */,
 				3C6D77BB27A5B140005371F3 /* Global.swift */,
+				3CB8C30E27C31DE5000AA3B9 /* Global+Log.swift */,
 				3CCCCA8B2781859C000381CE /* Model.swift */,
 				3CE9C212274DE306008C903C /* Debug.swift */,
 				3CDD945627C0685500D3EA1A /* Defaults.swift */,
-				3CB8C30E27C31DE5000AA3B9 /* Log.swift */,
 				3CCE2AF4279D007F00F72351 /* UIKit Views */,
 				3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */,
 				3CDD942A27C05B5A00D3EA1A /* SharedColors.xcassets */,
@@ -3291,8 +3291,8 @@
 				3C1D178B27BCA50C00E82B8B /* PhotosCollectionCell.swift */,
 				3CDD943A27C05DA600D3EA1A /* Scanning */,
 				3CBB318A27BD522A00F25F6A /* Slides */,
-				3C71EF9927BF48AE00F0C0A0 /* Slides Transition */,
 				3CBB31A027BD6E7C00F25F6A /* Slides Item */,
+				3C71EF9927BF48AE00F0C0A0 /* Slides Transition */,
 				3C4D39E82747664C0010FD68 /* Testing */,
 			);
 			path = Photos;
@@ -5481,7 +5481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CB8C31827C31DEF000AA3B9 /* Log.swift in Sources */,
+				3CB8C31827C31DEF000AA3B9 /* Global+Log.swift in Sources */,
 				3C08EB3C279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3CCCCAAA27818CEA000381CE /* GeneralViews.swift in Sources */,
 				3C1D1A28275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
@@ -5527,7 +5527,7 @@
 			files = (
 				3C21ED7D27A3C4AB0005E183 /* ViewController.swift in Sources */,
 				3C21EE3127A4619E0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
-				3CB8C31D27C31DF0000AA3B9 /* Log.swift in Sources */,
+				3CB8C31D27C31DF0000AA3B9 /* Global+Log.swift in Sources */,
 				3C21EDA027A45B2E0005E183 /* Utilities+Math.swift in Sources */,
 				3C21EE3327A4619E0005E183 /* RealmModel+Lists.swift in Sources */,
 				3C21EE3427A4619E0005E183 /* RealmModels.swift in Sources */,
@@ -5582,7 +5582,7 @@
 				3CDD946027C0688000D3EA1A /* Defaults.swift in Sources */,
 				3CCE2B07279D008A00F72351 /* FindIconUIView.swift in Sources */,
 				3C7B7A24277E9C4400E1F602 /* HighlightsViewController.swift in Sources */,
-				3CB8C30F27C31DE5000AA3B9 /* Log.swift in Sources */,
+				3CB8C30F27C31DE5000AA3B9 /* Global+Log.swift in Sources */,
 				3C21EDFD27A4617F0005E183 /* RealmModel+Photos.swift in Sources */,
 				3C7B7A20277E944500E1F602 /* HighlightsViewModel.swift in Sources */,
 				3C7B7A2D277E9CD300E1F602 /* Utilities+Math.swift in Sources */,
@@ -5745,7 +5745,7 @@
 				3C21ED6B27A3A9320005E183 /* KeyboardToolbarViewController.swift in Sources */,
 				3C7B7A6A277F94DC00E1F602 /* Highlight.swift in Sources */,
 				3C7B7A67277F8DC400E1F602 /* HighlightsViewModel.swift in Sources */,
-				3CB8C31027C31DEB000AA3B9 /* Log.swift in Sources */,
+				3CB8C31027C31DEB000AA3B9 /* Global+Log.swift in Sources */,
 				3C1D1A44275AA2600064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3C7B7A59277EE78700E1F602 /* Find.swift in Sources */,
 				3C1D19E32759B7EC0064F2C6 /* CameraButton.swift in Sources */,
@@ -5843,7 +5843,7 @@
 				3C9314A227B844EC009E5B6E /* TabAttributes.swift in Sources */,
 				3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */,
 				3CF7643E278D19AC00DCA4EA /* SearchNavigationController.swift in Sources */,
-				3CB8C31127C31DEC000AA3B9 /* Log.swift in Sources */,
+				3CB8C31127C31DEC000AA3B9 /* Global+Log.swift in Sources */,
 				3C3642C1277BC2E70038CB18 /* LeftView.swift in Sources */,
 				3C2DBBC6277E6F0000911A74 /* SearchVC+Cell.swift in Sources */,
 				3C7B7A93277FB7BD00E1F602 /* ProgressLineView.swift in Sources */,
@@ -5928,7 +5928,7 @@
 				3CB8C31F27C31FE3000AA3B9 /* PhotosScanningModel.swift in Sources */,
 				3C71EFA127BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift in Sources */,
 				3C4D39F3274766790010FD68 /* Toolbar.swift in Sources */,
-				3CB8C31327C31DEC000AA3B9 /* Log.swift in Sources */,
+				3CB8C31327C31DEC000AA3B9 /* Global+Log.swift in Sources */,
 				3C6D77BF27A5B140005371F3 /* Global.swift in Sources */,
 				3CCE2B49279D21C900F72351 /* PhotosVC+Selection.swift in Sources */,
 				3C21EE2427A461820005E183 /* RealmModel+Lists.swift in Sources */,
@@ -6014,7 +6014,7 @@
 			files = (
 				3C1D1A3D275AA25E0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C08EB7A279CBFDF00971D60 /* ListsDetailVC+Setup.swift in Sources */,
-				3CB8C31427C31DED000AA3B9 /* Log.swift in Sources */,
+				3CB8C31427C31DED000AA3B9 /* Global+Log.swift in Sources */,
 				3CCCCAA227818CE9000381CE /* GeneralViews.swift in Sources */,
 				3C08EB49279C95F700971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */,
@@ -6142,7 +6142,7 @@
 				3C08EAE5279BA85D00971D60 /* Utilities+UIView.swift in Sources */,
 				3C4D3B16274776D20010FD68 /* SettingsView.swift in Sources */,
 				3CCCCAA527818CE9000381CE /* FindIconView.swift in Sources */,
-				3CB8C31527C31DED000AA3B9 /* Log.swift in Sources */,
+				3CB8C31527C31DED000AA3B9 /* Global+Log.swift in Sources */,
 				3CCCCAA427818CE9000381CE /* GeneralViews.swift in Sources */,
 				3C7BAD99275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CDD944627C05F9800D3EA1A /* Utilities+NavigationBar.swift in Sources */,
@@ -6249,7 +6249,7 @@
 				3C21EE1427A461800005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C4D3BA127477ABD0010FD68 /* SearchViewController.swift in Sources */,
 				3CCE2B12279D008B00F72351 /* ClearIconView.swift in Sources */,
-				3CB8C31627C31DED000AA3B9 /* Log.swift in Sources */,
+				3CB8C31627C31DED000AA3B9 /* Global+Log.swift in Sources */,
 				3C4D3B69274777E40010FD68 /* SceneDelegate.swift in Sources */,
 				3CCCCA8A278182F1000381CE /* SuggestionsView.swift in Sources */,
 				3CBEAC0F2754867400D04B39 /* GeneralUtilities.swift in Sources */,
@@ -6540,7 +6540,7 @@
 				3CCE2B4A279D233E00F72351 /* PhotosVC+Selection.swift in Sources */,
 				3C71EFAD27BFFBC000F0C0A0 /* PhotosSlidesVC+Dismissal.swift in Sources */,
 				3CCE2B2C279D008D00F72351 /* ButtonView.swift in Sources */,
-				3CB8C31227C31DEC000AA3B9 /* Log.swift in Sources */,
+				3CB8C31227C31DEC000AA3B9 /* Global+Log.swift in Sources */,
 				3C17686327AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3C08EAF8279C76DB00971D60 /* ListsController.swift in Sources */,
 				3CBB319627BD638000F25F6A /* PhotosSlidesVC+Setup.swift in Sources */,
@@ -6598,7 +6598,7 @@
 				3C21EDF727A4617F0005E183 /* RealmModel+Photos.swift in Sources */,
 				3C7B7A33277E9CD500E1F602 /* Utilities+Dates.swift in Sources */,
 				3C7B7A30277E9CD500E1F602 /* Utilities+UIFont.swift in Sources */,
-				3CB8C31927C31DEF000AA3B9 /* Log.swift in Sources */,
+				3CB8C31927C31DEF000AA3B9 /* Global+Log.swift in Sources */,
 				3C6C74392781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C7B7A42277E9D9400E1F602 /* UIKitViews.swift in Sources */,
 				3C21EDBC27A45C020005E183 /* RealmModel.swift in Sources */,
@@ -6641,7 +6641,7 @@
 			files = (
 				3C7B7A8B277FA6E300E1F602 /* Utilities+CGRect.swift in Sources */,
 				3CCE2AFE279D008900F72351 /* ClearIconView.swift in Sources */,
-				3CB8C31A27C31DF0000AA3B9 /* Log.swift in Sources */,
+				3CB8C31A27C31DF0000AA3B9 /* Global+Log.swift in Sources */,
 				3C8A5259277FC92C006CF91E /* Constants.swift in Sources */,
 				3C21EDF427A4617E0005E183 /* RealmModel+Lists.swift in Sources */,
 				3C7B7A8D277FA6E300E1F602 /* Utilities+Constraints.swift in Sources */,
@@ -6687,7 +6687,7 @@
 			files = (
 				3C21EDF027A4617E0005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C8A5242277FC1F4006CF91E /* Utilities+Math.swift in Sources */,
-				3CB8C31B27C31DF0000AA3B9 /* Log.swift in Sources */,
+				3CB8C31B27C31DF0000AA3B9 /* Global+Log.swift in Sources */,
 				3CCCCAB027818CEB000381CE /* GeneralViews.swift in Sources */,
 				3C8A5241277FC1F4006CF91E /* Utilities+UIFont.swift in Sources */,
 				3C8A5240277FC1F4006CF91E /* Utilities+CGRect.swift in Sources */,
@@ -6784,7 +6784,7 @@
 				3CE9C227274EBB70008C903C /* SceneDelegate.swift in Sources */,
 				3C6C73952781946C00E039F0 /* LivePreviewVC+Setup.swift in Sources */,
 				3C1D1A2C275AA25B0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
-				3CB8C31727C31DEE000AA3B9 /* Log.swift in Sources */,
+				3CB8C31727C31DEE000AA3B9 /* Global+Log.swift in Sources */,
 				3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
 				3C08EB33279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3CDD945E27C0688000D3EA1A /* Defaults.swift in Sources */,
@@ -6799,7 +6799,7 @@
 			files = (
 				3CFD6012278B6FCE0031BC8B /* FieldSettingsView.swift in Sources */,
 				3CFD5FF9278B6F950031BC8B /* SearchConfiguration.swift in Sources */,
-				3CB8C31C27C31DF0000AA3B9 /* Log.swift in Sources */,
+				3CB8C31C27C31DF0000AA3B9 /* Global+Log.swift in Sources */,
 				3CFD6015278B705C0031BC8B /* GeneralViews.swift in Sources */,
 				3CFD5FEC278B6F950031BC8B /* SearchViewModel.swift in Sources */,
 				3CFD5FF3278B6F950031BC8B /* LeftView.swift in Sources */,

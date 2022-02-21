@@ -25,7 +25,13 @@ extension PhotosViewController {
             self.updateNavigationBar?()
         }
 
-        let findPhotos: [FindPhoto] = model.photos.map { .init(photo: $0) }
+        let findPhotos: [FindPhoto] = model.photos.map { photo in
+            let thumbnail = self.model.photoToThumbnail[photo] ?? nil
+            return .init(
+                photo: photo,
+                thumbnail: thumbnail
+            )
+        }
         var slidesState = PhotosSlidesState(
             viewController: viewController,
             findPhotos: findPhotos,
@@ -42,19 +48,15 @@ extension PhotosViewController {
             return
         }
 
-        model.imageManager.requestImage(
-            for: model.photos[currentIndex].asset,
-            targetSize: .zero,
-            contentMode: .aspectFill,
-            options: nil
-        ) { [weak self] image, _ in
-            guard let self = self else { return }
-
+        let photo = model.photos[currentIndex]
+        Task {
+            let fullImage = await model.getFullImage(from: photo)
+            
             /// update the transition with the new image.
-            self.model.imageUpdatedWhenPresentingSlides?(image)
+            self.model.imageUpdatedWhenPresentingSlides?(fullImage)
 
             if let index = self.model.slidesState?.getFindPhotoIndex(photo: findPhoto) {
-                self.model.slidesState?.findPhotos[index].image = image
+                self.model.slidesState?.findPhotos[index].fullImage = fullImage
                 self.model.slidesState?.findPhotos[index].associatedViewController?.reloadImage()
             }
         }

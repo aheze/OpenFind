@@ -26,7 +26,8 @@ struct PhotosSlidesState {
 
 struct FindPhoto: Hashable {
     var photo: Photo
-    var image: UIImage?
+    var thumbnail: UIImage?
+    var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
 }
 

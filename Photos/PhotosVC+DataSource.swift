@@ -42,12 +42,14 @@ extension PhotosViewController {
                     targetSize: PhotosConstants.thumbnailSize,
                     contentMode: .aspectFill,
                     options: nil
-                ) { image, _ in
+                ) { thumbnail, _ in
                     // UIKit may have recycled this cell by the handler's activation time.
                     // Set the cell's thumbnail image only if it's still showing the same asset.
                     if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                        cell.imageView.image = image
+                        cell.imageView.image = thumbnail
+                        self.model.photoToThumbnail[photo] = thumbnail
                     }
+                    
                 }
                 
                 cell.tapped = { [weak self] in

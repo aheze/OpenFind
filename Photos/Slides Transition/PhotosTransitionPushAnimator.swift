@@ -86,7 +86,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         // which means its collection view has updated its layout,
         // and our toDelegate?.imageFrame() is accurate, even if
         // the device has rotated. :scream_cat:
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             self.additionalSetup?()
             animator.addAnimations {
                 if let toImageFrame = self.toDelegate.imageFrame(type: .push) {

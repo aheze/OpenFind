@@ -43,6 +43,11 @@ class PhotosScanningModel: ObservableObject {
             
         } else {
             let metadata = PhotoMetadata()
+            
+            Task {
+//                let cgImage = photo.asset.get
+//                let sentences = Find.run(in: <#T##FindImage#>)
+            }
         }
     }
     

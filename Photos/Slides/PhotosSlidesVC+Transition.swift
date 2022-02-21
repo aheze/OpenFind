@@ -24,14 +24,6 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         if let containerView = getCurrentItemContainerView() {
             containerView.alpha = 1
         }
-//        switch type {
-//        case .push:
-//            if let containerView = getCurrentItemContainerView() {
-//                containerView.alpha = 1
-//            }
-//        case .pop:
-//            break
-//        }
     }
     
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
@@ -44,17 +36,25 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect? {
         if let imageView = getCurrentItemImageView() {
             let frame = imageView.windowFrame()
-            let normalizedFrame = CGRect.makeRect(aspectRatio: imageView.image?.size ?? .zero, insideRect: frame)
+            let thumbnail = getCurrentFindPhoto()?.thumbnail
+            let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnail?.size ?? .zero, insideRect: frame)
             return normalizedFrame
         }
         return nil
     }
     
-    func getCurrentItemViewController() -> PhotosSlidesItemViewController? {
+    func getCurrentFindPhoto() -> FindPhoto? {
         if
             let currentIndex = model.slidesState?.currentIndex,
-            let viewController = model.slidesState?.findPhotos[safe: currentIndex]?.associatedViewController
+            let findPhoto = model.slidesState?.findPhotos[safe: currentIndex]
         {
+            return findPhoto
+        }
+        return nil
+    }
+    
+    func getCurrentItemViewController() -> PhotosSlidesItemViewController? {
+        if let viewController = getCurrentFindPhoto()?.associatedViewController {
             return viewController
         }
         return nil

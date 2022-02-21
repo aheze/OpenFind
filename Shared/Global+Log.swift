@@ -1,5 +1,5 @@
 //
-//  Log.swift
+//  Global+Log.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/20/22.
@@ -9,14 +9,14 @@
 
 import UIKit
 
-enum Log {
+extension Global {
     enum Level: String {
         case error = "Error"
         case warning = "Warning"
         case log = "Log"
     }
     
-    static func print(_ item: Any, _ level: Level? = .log) {
+    static func log(_ item: Any, _ level: Level? = .log) {
         if let level = level {
             Swift.print("[\(level)] - \(item)")
         } else {
