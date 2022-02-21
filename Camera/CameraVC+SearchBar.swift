@@ -34,7 +34,8 @@ extension CameraViewController {
                     let image = self.model.pausedImage
                 {
                     Task {
-                        _ = await self.findAndAddHighlights(image: image, replace: true)
+                        // TODO, remove
+                        _ = await self.findAndAddHighlights(image: image, replace: true, wait: true)
                         self.highlightsViewModel.setUpToDate(true)
                     }
                 }

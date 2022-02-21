@@ -48,7 +48,9 @@ extension PhotosViewModel {
         Task {
             let image = await getFullImage(from: photo)
             if let cgImage = image?.cgImage {
-                let text = await Find.run(in: .cgImage(cgImage))
+                var options = FindOptions()
+                options.level = .accurate
+                let text = await Find.find(in: .cgImage(cgImage), options: options, action: .photos, wait: true) ?? []
                 let sentences = text.map { Sentence(rect: $0.frame, string: $0.string) }
                 photoScanned(photo: photo, sentences: sentences)
             }

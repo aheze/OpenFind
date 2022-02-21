@@ -10,30 +10,31 @@ import AVFoundation
 import UIKit
 
 extension CameraViewController {
-    func findAndAddHighlights(pixelBuffer: CVPixelBuffer) async -> [FindText] {
+    /// use fast mode
+    func findAndAddHighlights(pixelBuffer: CVPixelBuffer) async {
         var options = FindOptions()
         options.orientation = .right
+        options.level = .fast
         options.customWords = searchViewModel.customWords
 
-        let sentences = await find(in: .pixelBuffer(pixelBuffer), options: options)
-        addHighlights(from: sentences, replace: false)
-        return sentences
+        /// `nil` if was finding before
+        if let sentences = await Find.find(in: .pixelBuffer(pixelBuffer), options: options, action: .camera, wait: false) {
+            addHighlights(from: sentences, replace: false)
+        }
     }
 
-    func findAndAddHighlights(image: CGImage, replace: Bool = false) async -> [FindText] {
+    /// use accurate mode and wait
+    func findAndAddHighlights(image: CGImage, replace: Bool = false, wait: Bool) async -> [FindText] {
         var options = FindOptions()
         options.orientation = .up
         options.level = .accurate
         options.customWords = searchViewModel.customWords
 
-        let sentences = await find(in: .cgImage(image), options: options)
-        addHighlights(from: sentences, replace: replace)
-        return sentences
-    }
-
-    func find(in image: FindImage, options: FindOptions) async -> [FindText] {
-        guard Find.startTime == nil else { return [] }
-        let sentences = await Find.run(in: image, options: options)
-        return sentences
+        if let sentences = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: true) {
+            addHighlights(from: sentences, replace: replace)
+            return sentences
+        }
+        
+        return []
     }
 }

@@ -40,7 +40,7 @@ extension CameraViewController {
             guard let self = self else { return }
             
             if !self.model.shutterOn {
-                guard Find.startTime == nil else { return }
+                Find.prioritizedAction = .camera
                 Task {
                     await self.findAndAddHighlights(pixelBuffer: pixelBuffer)
                 }

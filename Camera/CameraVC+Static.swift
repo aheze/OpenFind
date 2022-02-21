@@ -36,8 +36,9 @@ extension CameraViewController {
 
             if let cgImage = image.cgImage {
                 self.model.pausedImage = cgImage
-                _ = await self.findAndAddHighlights(image: cgImage)
+                _ = await self.findAndAddHighlights(image: cgImage, wait: true)
                 guard currentUUID == self.model.currentPausedUUID else { return }
+                Find.prioritizedAction = nil
                 self.endAutoProgress()
                 self.hideLivePreview()
             }

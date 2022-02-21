@@ -27,18 +27,61 @@ enum FindImage {
     case pixelBuffer(CVPixelBuffer)
 }
 
+enum FindingAction {
+    case camera
+    case photos /// photos scanning
+}
+
+struct QueuedRun {
+    var image: FindImage
+    var options: FindOptions
+    var action: FindingAction
+    var completion: (([FindText]) -> ())?
+}
+
 enum Find {
-    static var startTime: Date?
+    static var startTime: Date? {
+        didSet {
+            if
+                startTime == nil,
+                let queuedRun = queuedRuns.first,
+                prioritizedAction == nil || prioritizedAction == queuedRun.action
+            {
+                startTime = Date()
+                Task {
+                    let sentences = await run(in: queuedRun.image, options: queuedRun.options)
+                    queuedRun.completion?(sentences)
+                    queuedRuns.removeFirst()
+                    startTime = nil
+                }
+            }
+        }
+    }
 
-    static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
-        print("Setting start time.")
-        startTime = Date()
+    static var prioritizedAction: FindingAction?
+    static var queuedRuns = [QueuedRun]()
 
+    static func find(in image: FindImage, options: FindOptions = FindOptions(), action: FindingAction, wait: Bool) async -> [FindText]? {
+        if wait, startTime != nil {
+            return await withCheckedContinuation { continuation in
+                let queuedRun = QueuedRun(image: image, options: options, action: action) { sentences in
+                    continuation.resume(returning: sentences)
+                }
+                queuedRuns.append(queuedRun)
+            }
+        } else {
+            guard startTime == nil else { return nil }
+            startTime = Date()
+            let sentences = await run(in: image, options: options)
+            startTime = nil
+            return sentences
+        }
+    }
+
+    private static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
                 let sentences = getSentences(from: request)
-                print("Got sentences: \(sentences)")
-                startTime = nil
                 continuation.resume(returning: sentences)
             }
 
@@ -53,12 +96,14 @@ enum Find {
                 imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: options.orientation)
             }
 
-            do {
-                try imageRequestHandler.perform([request])
-            } catch {
-                Global.log("Error finding: \(error)", .error)
-                startTime = nil
-                continuation.resume(returning: [])
+            DispatchQueue.global(qos: .userInteractive).async {
+                do {
+                    try imageRequestHandler.perform([request])
+
+                } catch {
+                    Global.log("Error finding: \(error)", .error)
+                    continuation.resume(returning: [])
+                }
             }
         }
     }
