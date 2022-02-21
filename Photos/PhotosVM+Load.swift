@@ -35,7 +35,7 @@ extension PhotosViewModel {
             self.reload?()
             
             if self.scanOnLaunch {
-                self.resumeScanning()
+                self.startScanning()
             }
         }
     }

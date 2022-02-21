@@ -41,10 +41,6 @@ struct PhotosScanningViewHeader: View {
                                     +
                                     Text("\(model.totalPhotosCount)")
                                     .foregroundColor(.accent.opacity(0.75))
-
-                                Text("Scanned")
-                                    .foregroundColor(.accent.opacity(0.75))
-                                    .font(.largeTitle.weight(.regular))
                             }
                             .font(.largeTitle.weight(.semibold))
 
@@ -52,7 +48,15 @@ struct PhotosScanningViewHeader: View {
                         }
 
                         HStack {
-                            PhotosScanningButton(image: "pause.fill", title: "Pause") {}
+                            let image = model.scanningState == .scanning ? "pause.fill" : "play.fill"
+                            let title = model.scanningState == .scanning ? "Pause" : "Resume"
+                            PhotosScanningButton(image: image, title: title) {
+                                if model.scanningState == .dormant {
+                                    model.startScanning()
+                                } else {
+                                    model.scanningState = .dormant
+                                }
+                            }
 
                             PhotosScanningButton(image: "speedometer", title: "Turbo") {}
                         }

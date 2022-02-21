@@ -30,12 +30,19 @@ extension PhotosViewModel {
         resumeScanning()
     }
 
-    func resumeScanning() {
+    func startScanning() {
         scanningState = .scanning
+        if let firstPhoto = photosToScan.first {
+            scanPhoto(firstPhoto)
+        }
+    }
+
+    func resumeScanning() {
         if
             shouldResumeScanning(),
             let firstPhoto = photosToScan.first
         {
+            scanningState = .scanning
             scanPhoto(firstPhoto)
         } else {
             scanningState = .dormant
@@ -64,6 +71,10 @@ extension PhotosViewModel {
         }
 
         if scanningState == .dormant {
+            return false
+        }
+
+        if Find.prioritizedAction == .photos {
             return false
         }
 

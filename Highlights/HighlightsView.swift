@@ -16,7 +16,6 @@ struct HighlightsView: View {
             ZStack {
                 ForEach(Array(highlightsViewModel.highlights)) { highlight in
                     HighlightView(highlight: highlight, viewSize: geometry.size)
-                        .transition(.scale.animation(.default))
                 }
             }
         }

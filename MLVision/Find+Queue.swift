@@ -10,5 +10,20 @@
 import UIKit
 
 extension Find {
-    
+    static func continueQueue() {
+        if
+            startTime == nil,
+            let queuedRun = queuedRuns.first,
+            prioritizedAction == nil || prioritizedAction == queuedRun.action
+        {
+            print("Startog qieued")
+            startTime = Date()
+            Task {
+                let sentences = await run(in: queuedRun.image, options: queuedRun.options)
+                queuedRun.completion?(sentences)
+                queuedRuns.removeFirst()
+                startTime = nil
+            }
+        }
+    }
 }

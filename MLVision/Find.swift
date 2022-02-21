@@ -42,23 +42,15 @@ struct QueuedRun {
 enum Find {
     static var startTime: Date? {
         didSet {
-            if
-                startTime == nil,
-                let queuedRun = queuedRuns.first,
-                prioritizedAction == nil || prioritizedAction == queuedRun.action
-            {
-                startTime = Date()
-                Task {
-                    let sentences = await run(in: queuedRun.image, options: queuedRun.options)
-                    queuedRun.completion?(sentences)
-                    queuedRuns.removeFirst()
-                    startTime = nil
-                }
-            }
+            continueQueue()
         }
     }
 
-    static var prioritizedAction: FindingAction?
+    static var prioritizedAction: FindingAction? {
+        didSet {
+            continueQueue()
+        }
+    }
     static var queuedRuns = [QueuedRun]()
 
     static func find(in image: FindImage, options: FindOptions = FindOptions(), action: FindingAction, wait: Bool) async -> [FindText]? {
@@ -78,7 +70,7 @@ enum Find {
         }
     }
 
-    private static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
+    internal static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
                 let sentences = getSentences(from: request)
