@@ -54,7 +54,7 @@ struct PhotosScanningViewHeader: View {
                                 if model.scanningState == .dormant {
                                     model.startScanning()
                                 } else {
-                                    model.scanningState = .dormant
+                                    model.pauseScanning()
                                 }
                             }
 

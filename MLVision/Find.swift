@@ -88,7 +88,7 @@ enum Find {
                 imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: options.orientation)
             }
 
-            DispatchQueue.global(qos: .userInteractive).async {
+            DispatchQueue.global(qos: .utility).async {
                 do {
                     try imageRequestHandler.perform([request])
 

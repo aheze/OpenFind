@@ -50,6 +50,7 @@ struct PhotosScanningProgressView: View {
                         )
                     )
             )
+            .rotationEffect(.degrees(-90))
     }
 
     func getTrimPercentage() -> CGFloat {

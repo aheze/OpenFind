@@ -11,7 +11,7 @@ import RealmSwift
 
 class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var assetIdentifier = ""
-    @Persisted var sentences = RealmSwift.List<RealmPhotoMetadataSentence>()
+    @Persisted var sentences: RealmSwift.List<RealmPhotoMetadataSentence>
     @Persisted var isScanned = false /// there could be no scan results, but still scanned
     @Persisted var isStarred = false
 
@@ -94,7 +94,7 @@ class RealmList: Object {
     @Persisted(primaryKey: true) var id = UUID()
     @Persisted var name = ""
     @Persisted var desc = ""
-    @Persisted var words = RealmSwift.List<String>()
+    @Persisted var words: RealmSwift.List<String>
     @Persisted var icon = ""
     @Persisted var color = 0x00AEEF
     @Persisted var dateCreated = Date()

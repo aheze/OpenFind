@@ -47,8 +47,6 @@ extension RealmModel {
         } catch {
             Global.log("Error adding photo metadata: \(error)", .error)
         }
-
-        loadPhotoMetadatas()
     }
     
     func updatePhotoMetadata(metadata: PhotoMetadata) {
@@ -63,7 +61,5 @@ extension RealmModel {
                 Global.log("Error updating photo metadata: \(error)", .error)
             }
         }
-
-        loadPhotoMetadatas()
     }
 }

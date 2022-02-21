@@ -49,7 +49,9 @@ extension PhotosViewModel {
         }
     }
 
-    func updateState() {}
+    func pauseScanning() {
+        scanningState = .dormant
+    }
 
     func scanPhoto(_ photo: Photo) {
         Task {
@@ -58,8 +60,12 @@ extension PhotosViewModel {
                 var options = FindOptions()
                 options.level = .accurate
                 let text = await Find.find(in: .cgImage(cgImage), options: options, action: .photos, wait: true) ?? []
-                let sentences = text.map { Sentence(rect: $0.frame, string: $0.string) }
-                photoScanned(photo: photo, sentences: sentences)
+                
+                /// discard value if not scanning
+                if scanningState == .scanning {
+                    let sentences = text.map { Sentence(rect: $0.frame, string: $0.string) }
+                    photoScanned(photo: photo, sentences: sentences)
+                }
             }
         }
     }
