@@ -9,10 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var camera: CameraController = CameraBridge.makeController(
-        cameraViewModel: CameraViewModel(),
-        realmModel: RealmModel()
-    )
+    lazy var camera = CameraController(model: CameraViewModel(), realmModel: RealmModel())
     
     override func viewDidLoad() {
         super.viewDidLoad()

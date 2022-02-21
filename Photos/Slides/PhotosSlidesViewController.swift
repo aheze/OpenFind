@@ -20,10 +20,15 @@ class PhotoSlidesSection: Hashable {
     }
 }
 
-class PhotosSlidesViewController: UIViewController, Searchable {
+class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDismissible {
+    
+    // MARK: - Searchable
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? /// nil to always have blur
     var updateSearchBarOffset: (() -> Void)?
+    
+    // MARK: - InteractivelyDismissible
+    var isInteractivelyDismissing: Bool = false
     
     var model: PhotosViewModel
     var searchViewModel: SearchViewModel
@@ -41,7 +46,6 @@ class PhotosSlidesViewController: UIViewController, Searchable {
     // MARK: - Dismissal
 
     let dismissPanGesture = UIPanGestureRecognizer()
-    var isInteractivelyDismissing: Bool = false
     weak var transitionAnimator: PhotosTransitionDismissAnimator? /// auto set via the transition animator
     
     init?(

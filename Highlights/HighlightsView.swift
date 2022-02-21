@@ -16,6 +16,7 @@ struct HighlightsView: View {
             ZStack {
                 ForEach(Array(highlightsViewModel.highlights)) { highlight in
                     HighlightView(highlight: highlight, viewSize: geometry.size)
+                        .transition(.scale.animation(.default))
                 }
             }
         }
@@ -44,7 +45,7 @@ struct HighlightView: View {
                     .stroke(gradient, lineWidth: 2)
                     .opacity(0.8)
             )
-            .opacity(highlight.state == .lingering ? 0.1 : 1)
+//            .opacity(highlight.state == .lingering ? 0.1 : 1)
             .opacity(highlight.alpha)
             .frame(with: highlight.frame)
     }

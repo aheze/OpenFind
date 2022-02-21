@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>15</integer>
 		</dict>
 		<key>GettingStarted (Playground) 10.xcscheme</key>
 		<dict>
@@ -30,7 +30,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>16</integer>
 		</dict>
 		<key>GettingStarted (Playground) 3.xcscheme</key>
 		<dict>
@@ -80,7 +80,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>14</integer>
 		</dict>
 	</dict>
 </dict>

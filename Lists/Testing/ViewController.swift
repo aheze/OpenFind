@@ -11,11 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let realmModel = RealmModel()
-    lazy var lists: ListsController = ListsBridge.makeController(
-        model: ListsViewModel(),
-        toolbarViewModel: ToolbarViewModel(),
-        realmModel: realmModel
-    )
+    lazy var lists = ListsController(model: ListsViewModel(), toolbarViewModel: ToolbarViewModel(), realmModel: RealmModel())
     
     override func viewDidLoad() {
         super.viewDidLoad()

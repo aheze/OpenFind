@@ -953,6 +953,8 @@
 		3C71EFAE27BFFC7000F0C0A0 /* PhotosTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA927BFFB2900F0C0A0 /* PhotosTransitionDismissAnimator.swift */; };
 		3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */; };
 		3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */; };
+		3C7223AD27C414250085EBF1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7223AC27C414250085EBF1 /* Realm */; };
+		3C7223AF27C414250085EBF1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7223AE27C414250085EBF1 /* RealmSwift */; };
 		3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */; };
 		3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
 		3C7B7A01277E8DF900E1F602 /* Find+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */; };
@@ -2632,6 +2634,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7223AF27C414250085EBF1 /* RealmSwift in Frameworks */,
+				3C7223AD27C414250085EBF1 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4719,6 +4723,10 @@
 			dependencies = (
 			);
 			name = MLVision;
+			packageProductDependencies = (
+				3C7223AC27C414250085EBF1 /* Realm */,
+				3C7223AE27C414250085EBF1 /* RealmSwift */,
+			);
 			productName = MLVision;
 			productReference = 3C2DBBDE277E739200911A74 /* MLVision.app */;
 			productType = "com.apple.product-type.application";
@@ -8988,6 +8996,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
 			productName = Popovers;
+		};
+		3C7223AC27C414250085EBF1 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		3C7223AE27C414250085EBF1 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		3C93149D27B844D7009E5B6E /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

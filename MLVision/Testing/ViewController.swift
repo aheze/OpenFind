@@ -6,13 +6,12 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-
-import UIKit
 import AVFoundation
+import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var highlightsView: UIView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var highlightsView: UIView!
     
     let highlightsViewModel = HighlightsViewModel()
     
@@ -55,38 +54,35 @@ class ViewController: UIViewController {
     }
     
     func runFind(in image: CGImage) {
-        Find.run(in: .cgImage(image)) { [weak self] sentences in
-            guard let self = self else { return }
+        Task {
+            guard let sentences = await Find.find(in: .cgImage(image), action: .camera, wait: false) else { return }
             
             var highlights = Set<Highlight>()
             for sentence in sentences {
-                let indices = sentence.string.lowercased().indicesOf(string: self.textToFind.lowercased())
+                let indices = sentence.string.lowercased().indicesOf(string: textToFind.lowercased())
                 for index in indices {
-                    let word = sentence.getWord(word: self.textToFind, at: index)
+                    let word = sentence.getWord(word: textToFind, at: index)
                     
                     let highlight = Highlight(
                         string: self.textToFind,
-                        frame: word.frame.scaleTo(self.highlightsView.bounds.size),
+                        frame: word.frame.scaleTo(highlightsView.bounds.size),
                         colors: [UIColor(hex: 0xff2600)]
                     )
                     
                     highlights.insert(highlight)
-
                 }
-            }
             
-            self.highlightsViewModel.update(with: highlights)
+                highlightsViewModel.update(with: highlights, replace: false)
+            }
         }
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { timer in
             self.updateTrackingImage(timer: timer)
         }
-        
         
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
         addChildViewController(highlightsViewController, in: highlightsView)
@@ -96,4 +92,3 @@ class ViewController: UIViewController {
         view.bringSubviewToFront(highlightsView)
     }
 }
-

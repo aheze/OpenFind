@@ -13,3 +13,7 @@ protocol Searchable: UIViewController {
     var baseSearchBarOffset: CGFloat { get set }
     var additionalSearchBarOffset: CGFloat? { get set }
 }
+
+protocol InteractivelyDismissible: UIViewController {
+    var isInteractivelyDismissing: Bool { get set }
+}

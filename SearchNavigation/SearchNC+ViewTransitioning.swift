@@ -17,7 +17,7 @@ extension SearchNavigationController {
             animator = pushAnimator
         case .pop:
             if
-                let slidesViewController = fromVC as? PhotosSlidesViewController,
+                let slidesViewController = fromVC as? InteractivelyDismissible,
                 slidesViewController.isInteractivelyDismissing
             {
                 animator = dismissAnimator
