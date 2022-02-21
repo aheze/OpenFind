@@ -39,7 +39,11 @@ extension CameraViewController {
         livePreviewViewController.frameCaptured = { [weak self] pixelBuffer in
             guard let self = self else { return }
             
-            if !self.model.shutterOn {
+            if
+                !self.model.shutterOn,
+                Tab.currentTabState == .camera,
+                self.searchViewModel.stringToGradients.count > 0
+            {
                 Find.prioritizedAction = .camera
                 Task {
                     await self.findAndAddHighlights(pixelBuffer: pixelBuffer)

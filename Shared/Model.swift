@@ -102,6 +102,13 @@ struct List: Identifiable, Equatable {
         return words
     }
 
+    
+    /// false if words is empty
+    var containsWords: Bool {
+        let joined = words.joined()
+        return !joined.isEmpty
+    }
+    
     var displayedName: String {
         return self.name.isEmpty ? "Untitled" : self.name
     }

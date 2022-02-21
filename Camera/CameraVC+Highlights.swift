@@ -40,6 +40,8 @@ extension CameraViewController {
     
     func addHighlights(from sentences: [FindText], replace: Bool) {
         let highlights = getHighlights(from: sentences)
+        model.highlightsHistory.newHighlightsFound(highlights)
+        
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: replace)
         }

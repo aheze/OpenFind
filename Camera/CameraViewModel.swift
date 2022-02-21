@@ -5,7 +5,33 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
+import CoreMotion
 import SwiftUI
+
+struct History {
+    var text = [FindText]()
+    var highlights = Set<Highlight>()
+}
+
+struct HighlightsHistory {
+    var history = [Set<Highlight>]()
+    mutating func newHighlightsFound(_ newHighlights: Set<Highlight>) {
+        history.append(newHighlights)
+        print(history.count, terminator: " ")
+        
+        /// start checking after 60 passes
+        if history.count >= 60 {
+            let recentHistory = history.suffix(15)
+            let recentHighlights = recentHistory.flatMap { $0 }
+            
+            if recentHighlights.count == 0 {
+                print("No results recently.")
+            }
+            
+            history.removeAll()
+        }
+    }
+}
 
 class CameraViewModel: ObservableObject {
     @Published var resultsCount = 0
@@ -30,6 +56,11 @@ class CameraViewModel: ObservableObject {
     var snapshotPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
     init() {}
+    
+    var highlightsHistory = HighlightsHistory()
+    
+    /// set to false if no results for a long time, to conserve battery and other system resources
+    var livePreviewScanning = true
     
     func resume() {
         withAnimation {

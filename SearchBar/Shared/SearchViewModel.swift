@@ -88,12 +88,14 @@ class SearchViewModel: ObservableObject {
         for field in fields {
             switch field.value {
             case .word(let word):
+                guard !word.string.isEmpty else { continue }
                 var existingGradient = stringToGradients[word.string] ?? Gradient()
                 existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: word.color))
                 existingGradient.alpha = field.overrides.alpha
                 stringToGradients[word.string] = existingGradient
             case .list(let list):
                 let strings = list.words
+                guard list.containsWords else { continue }
                 for string in strings {
                     var existingGradient = stringToGradients[string] ?? Gradient()
                     existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: list.color))

@@ -74,21 +74,7 @@ extension ListsViewController {
             return false
         }
         
-        let words = list.words.joined()
-        if words.isEmpty {
-            let frame = CGRect(
-                x: offset.width,
-                y: offset.height,
-                width: contentWidth,
-                height: c.chipFont.lineHeight + c.chipEdgeInsets.top + c.chipEdgeInsets.bottom
-            )
-            let chipFrame = ListFrame.ChipFrame(
-                frame: frame,
-                string: "Add Words",
-                chipType: .addWords
-            )
-            chipFrames.append(chipFrame)
-        } else {
+        if list.containsWords {
             for index in list.words.indices {
                 let word = list.words[index]
                 let size = c.chipFont.sizeOfString(word)
@@ -136,6 +122,19 @@ extension ListsViewController {
                     }
                 }
             }
+        } else {
+            let frame = CGRect(
+                x: offset.width,
+                y: offset.height,
+                width: contentWidth,
+                height: c.chipFont.lineHeight + c.chipEdgeInsets.top + c.chipEdgeInsets.bottom
+            )
+            let chipFrame = ListFrame.ChipFrame(
+                frame: frame,
+                string: "Add Words",
+                chipType: .addWords
+            )
+            chipFrames.append(chipFrame)
         }
         
         let chipContainerHeight = offset.height + (chipFrames.last?.frame.height ?? 0)

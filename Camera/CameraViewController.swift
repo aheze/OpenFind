@@ -32,8 +32,7 @@ class CameraViewController: UIViewController, PageViewController {
     @IBOutlet var searchContainerView: UIView!
     
     var progressViewModel = ProgressViewModel()
-    @IBOutlet weak var progressContainerView: UIView!
-    
+    @IBOutlet var progressContainerView: UIView!
     
     /// should match the frame of the image
     @IBOutlet var contentContainerView: UIView!
@@ -42,14 +41,13 @@ class CameraViewController: UIViewController, PageViewController {
     var contentContainerViewSize = CGSize.zero
     
     /// Inside the drawing view
-    @IBOutlet weak var scrollZoomContainerView: UIView!
-    @IBOutlet weak var scrollZoomHookContainerView: UIView!
+    @IBOutlet var scrollZoomContainerView: UIView!
+    @IBOutlet var scrollZoomHookContainerView: UIView!
     
     /// inside the drawing view, should match the safe view
     @IBOutlet var simulatedSafeView: UIView!
     
     @IBOutlet var livePreviewContainerView: UIView!
-    
     
     @IBOutlet var zoomContainerView: UIView!
     @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
@@ -59,7 +57,7 @@ class CameraViewController: UIViewController, PageViewController {
     var blurOverlayView = CameraBlurOverlayView()
     
     /// Testing tab bar view
-    @IBOutlet weak var testingTabBarContainerView: UIView!
+    @IBOutlet var testingTabBarContainerView: UIView!
     
     init?(
         coder: NSCoder,
@@ -114,14 +112,30 @@ class CameraViewController: UIViewController, PageViewController {
 }
 
 extension CameraViewController {
-    func willBecomeActive() {}
+    func willBecomeActive() {
+        if !livePreviewViewController.session.isRunning {
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.livePreviewViewController.session.startRunning()
+            }
+        }
+    }
     
     func didBecomeActive() {}
     
     func willBecomeInactive() {}
     
-    func didBecomeInactive() {}
-    
-    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+    func didBecomeInactive() {
+        Find.prioritizedAction = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + CameraConstants.cameraCoolDownDuration) {
+            if Tab.currentTabState != .camera {
+                DispatchQueue.global(qos: .userInteractive).async {
+                    if self.livePreviewViewController.session.isRunning {
+                        self.livePreviewViewController.session.stopRunning()
+                    }
+                }
+            }
+        }
     }
+    
+    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {}
 }
