@@ -26,6 +26,7 @@ struct Photo: Hashable {
 struct PhotoMetadata {
     var assetIdentifier = ""
     var sentences = [Sentence]()
+    var isScanned = false
     var isStarred = false
 
     func getRealmSentences() -> RealmSwift.List<RealmPhotoMetadataSentence> {

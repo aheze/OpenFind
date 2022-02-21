@@ -43,14 +43,13 @@ extension PhotosViewController {
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.model.load()
-            self.showCollectionView()
-        }
-    }
-
-    /// Call this after `model.load()`.
-    func showCollectionView() {
-        UIView.animate(withDuration: 0.5) {
-            self.collectionView.alpha = 1
+            
+            UIView.animate(withDuration: 0.5) { [weak hostingController] in
+                hostingController?.view.alpha = 0
+                self.collectionView.alpha = 1
+            } completion: {  [weak hostingController] _ in
+                hostingController?.view.removeFromSuperview()
+            }
         }
     }
 }

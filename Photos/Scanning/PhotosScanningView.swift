@@ -25,17 +25,21 @@ struct PhotosScanningViewHeader: View {
                 Container(description: "Find works completely offline, so your photos and other data never leave your phone.") {
                     VStack(spacing: 14) {
                         HStack(spacing: 12) {
-                            PhotosScanningProgressView(model: model, lineWidth: 4)
+                            PhotosScanningProgressView(
+                                scannedPhotosCount: model.scannedPhotosCount,
+                                totalPhotosCount: model.totalPhotosCount,
+                                lineWidth: 4
+                            )
                                 .frame(width: 32, height: 32)
 
                             HStack {
-                                Text("\(model.photosScanningModel.scannedPhotosCount)")
+                                Text("\(model.scannedPhotosCount)")
                                     .foregroundColor(.accent)
                                     +
                                     Text("/")
                                     .foregroundColor(.accent.opacity(0.75))
                                     +
-                                    Text("\(model.photosScanningModel.totalPhotosCount)")
+                                    Text("\(model.totalPhotosCount)")
                                     .foregroundColor(.accent.opacity(0.75))
 
                                 Text("Scanned")
@@ -62,21 +66,21 @@ struct PhotosScanningViewHeader: View {
                     model: model,
                     title: "Scan on Launch",
                     description: "Find will start scanning photos as soon as you open the app.",
-                    binding: \PhotosScanningModel.$scanOnLaunch
+                    binding: \PhotosViewModel.$scanOnLaunch
                 )
 
                 PhotoScanningRow(
                     model: model,
                     title: "Background Scanning",
                     description: "Find will scan photos when the app is inactive and in the background.",
-                    binding: \PhotosScanningModel.$scanInBackground
+                    binding: \PhotosViewModel.$scanInBackground
                 )
 
                 PhotoScanningRow(
                     model: model,
                     title: "Scan While Charging",
                     description: "Find will scan photos when your phone is plugged in.",
-                    binding: \PhotosScanningModel.$scanWhileCharging
+                    binding: \PhotosViewModel.$scanWhileCharging
                 )
 
                 Spacer()
@@ -129,14 +133,14 @@ struct PhotoScanningRow: View {
     @ObservedObject var model: PhotosViewModel
     var title: String
     var description: String
-    var binding: KeyPath<PhotosScanningModel, Binding<Bool>>
+    var binding: KeyPath<PhotosViewModel, Binding<Bool>>
 
     var body: some View {
         Container(description: description) {
             HStack {
                 Text(title)
                 Spacer()
-                Toggle(isOn: model.photosScanningModel[keyPath: binding]) {
+                Toggle(isOn: model[keyPath: binding]) {
                     EmptyView()
                 }
                 .labelsHidden()

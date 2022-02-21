@@ -37,6 +37,7 @@ enum Find {
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
                 let sentences = getSentences(from: request)
+                print("Got sentences: \(sentences)")
                 startTime = nil
                 continuation.resume(returning: sentences)
             }

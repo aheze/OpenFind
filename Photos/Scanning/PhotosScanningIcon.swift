@@ -15,14 +15,19 @@ struct PhotosScanningIcon: View {
         Button {
             model.scanningIconTapped?()
         } label: {
-            PhotosScanningProgressView(model: model, lineWidth: 2.5)
+            PhotosScanningProgressView(
+                scannedPhotosCount: model.scannedPhotosCount,
+                totalPhotosCount: model.totalPhotosCount,
+                lineWidth: 2.5
+            )
                 .contentShape(Rectangle())
         }
     }
 }
 
 struct PhotosScanningProgressView: View {
-    var model: PhotosViewModel
+    var scannedPhotosCount: Int
+    var totalPhotosCount: Int
     var lineWidth: CGFloat
     
     var body: some View {
@@ -48,6 +53,6 @@ struct PhotosScanningProgressView: View {
     }
 
     func getTrimPercentage() -> CGFloat {
-        return CGFloat(model.photosScanningModel.scannedPhotosCount) / CGFloat(model.photosScanningModel.totalPhotosCount)
+        return CGFloat(scannedPhotosCount) / CGFloat(totalPhotosCount)
     }
 }

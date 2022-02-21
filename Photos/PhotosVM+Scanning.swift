@@ -5,30 +5,66 @@
 //  Created by A. Zheng (github.com/aheze) on 2/20/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
-import UIKit
+import Foundation
 
 extension PhotosViewModel {
-    func listenToScanning() {
-        photosScanningModel.photoScanned = { [weak self] photo, sentences in
-            guard let self = self else { return }
+    func photoScanned(photo: Photo, sentences: [Sentence]) {
+        if let metadata = photo.metadata {
+            var newMetadata = metadata
+            newMetadata.sentences = sentences
+            newMetadata.isScanned = true
+            realmModel.updatePhotoMetadata(metadata: newMetadata)
+        } else {
+            let metadata = PhotoMetadata(
+                assetIdentifier: photo.asset.localIdentifier,
+                sentences: sentences,
+                isScanned: true,
+                isStarred: false
+            )
+            realmModel.addPhotoMetadata(metadata: metadata)
+        }
 
-            if
-                let firstIndex = self.getPhotoIndex(photo: photo),
-                let firstIndexPath = self.getPhotoIndexPath(photo: photo)
-            {
-                if self.photos[firstIndex].metadata != nil {
-                    self.photos[firstIndex].metadata?.sentences = sentences
-                } else {
-                    let metadata = PhotoMetadata(
-                        assetIdentifier: photo.asset.localIdentifier,
-                        sentences: sentences,
-                        isStarred: false
-                    )
-                    self.realmModel.addPhotoMetadata(metadata: metadata)
-                }
+        photosToScan.removeFirst()
+        scannedPhotosCount = photos.count - photosToScan.count /// update the text
+        resumeScanning()
+    }
+
+    func resumeScanning() {
+        scanningState = .scanning
+        if
+            shouldResumeScanning(),
+            let firstPhoto = photosToScan.first
+        {
+            scanPhoto(firstPhoto)
+        } else {
+            scanningState = .dormant
+        }
+    }
+
+    func updateState() {}
+
+    func scanPhoto(_ photo: Photo) {
+        Task {
+            let image = await getFullImage(from: photo)
+            if let cgImage = image?.cgImage {
+                let text = await Find.run(in: .cgImage(cgImage))
+                let sentences = text.map { Sentence(rect: $0.frame, string: $0.string) }
+                photoScanned(photo: photo, sentences: sentences)
             }
         }
+    }
+
+    /// true if should resume
+    func shouldResumeScanning() -> Bool {
+        if photosToScan.isEmpty {
+            return false
+        }
+
+        if scanningState == .dormant {
+            return false
+        }
+
+        return true
     }
 }

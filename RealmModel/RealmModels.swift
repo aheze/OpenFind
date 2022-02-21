@@ -12,6 +12,7 @@ import RealmSwift
 class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var assetIdentifier = ""
     @Persisted var sentences = RealmSwift.List<RealmPhotoMetadataSentence>()
+    @Persisted var isScanned = false /// there could be no scan results, but still scanned
     @Persisted var isStarred = false
 
     override init() {
@@ -21,10 +22,12 @@ class RealmPhotoMetadata: Object {
     init(
         assetIdentifier: String,
         sentences: RealmSwift.List<RealmPhotoMetadataSentence>,
+        isScanned: Bool,
         isStarred: Bool
     ) {
         self.assetIdentifier = assetIdentifier
         self.sentences = sentences
+        self.isScanned = isScanned
         self.isStarred = isStarred
     }
     
@@ -32,6 +35,7 @@ class RealmPhotoMetadata: Object {
         let metadata = PhotoMetadata(
             assetIdentifier: self.assetIdentifier,
             sentences: self.sentences.map { $0.getSentence() },
+            isScanned: self.isScanned,
             isStarred: self.isStarred
         )
         return metadata

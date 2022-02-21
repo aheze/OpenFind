@@ -11,7 +11,6 @@ import UIKit
 
 class PhotosViewModel: ObservableObject {
     var realmModel: RealmModel
-    var photosScanningModel: PhotosScanningModel
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
     var sections = [PhotosSection]()
@@ -21,13 +20,9 @@ class PhotosViewModel: ObservableObject {
 
     var reload: (() -> Void)?
 
-    init(
-        realmModel: RealmModel,
-        photosScanningModel: PhotosScanningModel
-    ) {
+    init(realmModel: RealmModel) {
         self.realmModel = realmModel
-        self.photosScanningModel = photosScanningModel
-        listenToScanning()
+        listenToRealm()
     }
 
     /// PHAsset caching
@@ -45,9 +40,31 @@ class PhotosViewModel: ObservableObject {
     var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
 
     var scanningIconTapped: (() -> Void)?
+    var photosToScan = [Photo]()
+    @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
+    @Saved(Defaults.scanInBackground.0) var scanInBackground = Defaults.scanInBackground.1
+    @Saved(Defaults.scanWhileCharging.0) var scanWhileCharging = Defaults.scanWhileCharging.1
+    @Published var scanningState = ScanningState.dormant
+    @Published var scannedPhotosCount = 0
+    @Published var totalPhotosCount = 0
+
+    enum ScanningState {
+        case dormant
+        case scanning
+    }
 }
 
 extension PhotosViewModel {
+    func updatePhotoMetadata(photo: Photo, metadata: PhotoMetadata) {
+        if
+            let index = getPhotoIndex(photo: photo),
+            let indexPath = getPhotoIndexPath(photo: photo)
+        {
+            photos[index].metadata = metadata
+            sections[indexPath.section].photos[indexPath.item].metadata = metadata
+        }
+    }
+
     /// get from `photos`
     func getPhotoIndex(photo: Photo) -> Int? {
         if let firstIndex = photos.firstIndex(of: photo) {

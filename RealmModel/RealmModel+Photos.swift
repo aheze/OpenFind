@@ -36,6 +36,7 @@ extension RealmModel {
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
             sentences: realmSentences,
+            isScanned: metadata.isScanned,
             isStarred: metadata.isStarred
         )
         
@@ -59,7 +60,7 @@ extension RealmModel {
                     realmMetadata.isStarred = metadata.isStarred
                 }
             } catch {
-                Global.log("Error updating list: \(error)", .error)
+                Global.log("Error updating photo metadata: \(error)", .error)
             }
         }
 

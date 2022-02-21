@@ -10,8 +10,8 @@ import Photos
 import UIKit
 
 extension PhotosViewModel {
-    
     // MARK: - Listen to realm refreshes
+
     func listenToRealm() {
         NotificationCenter.default.addObserver(
             self,
@@ -22,15 +22,21 @@ extension PhotosViewModel {
     }
 
     @objc func photoMetadatasUpdated(notification: Notification) {
-        load()
+        print("metadata updated!")
     }
     
+    /// only call this once!
     func load() {
+        realmModel.loadPhotoMetadatas()
         loadAssets()
         loadPhotos { [weak self] in
             guard let self = self else { return }
             self.sort()
             self.reload?()
+            
+            if self.scanOnLaunch {
+                self.resumeScanning()
+            }
         }
     }
     
@@ -44,9 +50,8 @@ extension PhotosViewModel {
         var photos = [Photo]()
         
         DispatchQueue.global(qos: .userInitiated).async {
-            
-            /// how many scanned photos
-            var currentScannedCount = 0
+            /// how many photos that aren't scanned
+            var photosToScan = [Photo]()
             self.assets?.enumerateObjects { [weak self] asset, _, _ in
                 guard let self = self else { return }
                 
@@ -55,11 +60,12 @@ extension PhotosViewModel {
                 if let metadata = self.realmModel.getPhotoMetadata(from: identifier) {
                     photo = Photo(asset: asset, metadata: metadata)
                     
-                    if !metadata.sentences.isEmpty {
-                        currentScannedCount += 1
+                    if !metadata.isScanned {
+                        photosToScan.append(photo)
                     }
                 } else {
                     photo = Photo(asset: asset)
+                    photosToScan.append(photo)
                 }
                 
                 photos.append(photo)
@@ -67,8 +73,9 @@ extension PhotosViewModel {
             
             DispatchQueue.main.async {
                 self.photos = photos
-                self.photosScanningModel.scannedPhotosCount = currentScannedCount
-                self.photosScanningModel.totalPhotosCount = photos.count
+                self.photosToScan = photosToScan
+                self.scannedPhotosCount = photos.count - photosToScan.count
+                self.totalPhotosCount = photos.count
                 completion?()
             }
         }
