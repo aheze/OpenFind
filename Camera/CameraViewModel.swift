@@ -8,33 +8,9 @@
 import CoreMotion
 import SwiftUI
 
-struct History {
-    var text = [FindText]()
-    var highlights = Set<Highlight>()
-}
-
-struct HighlightsHistory {
-    var history = [Set<Highlight>]()
-    mutating func newHighlightsFound(_ newHighlights: Set<Highlight>) {
-        history.append(newHighlights)
-        print(history.count, terminator: " ")
-        
-        /// start checking after 60 passes
-        if history.count >= 60 {
-            let recentHistory = history.suffix(15)
-            let recentHighlights = recentHistory.flatMap { $0 }
-            
-            if recentHighlights.count == 0 {
-                print("No results recently.")
-            }
-            
-            history.removeAll()
-        }
-    }
-}
-
 class CameraViewModel: ObservableObject {
     @Published var resultsCount = 0
+    @Published var showingMessageView = false
     
     @Published var highlights = [Highlight]()
     
@@ -57,10 +33,14 @@ class CameraViewModel: ObservableObject {
     var shutterPressed: (() -> Void)?
     init() {}
     
-    var highlightsHistory = HighlightsHistory()
+    var recentEvents = [Event]()
+    
     
     /// set to false if no results for a long time, to conserve battery and other system resources
     var livePreviewScanning = true
+    
+    /// detect motion to resume live preview
+    var motionManager: CMMotionManager?
     
     func resume() {
         withAnimation {

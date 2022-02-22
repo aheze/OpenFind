@@ -84,7 +84,7 @@ struct FieldSettingsView: View {
         .frame(width: 180)
         .background(
             ZStack {
-                VisualEffectView(effect: UIBlurEffect(style: configuration.popoverBackgroundBlurStyle))
+                Templates.VisualEffectView(configuration.popoverBackgroundBlurStyle)
                 configuration.popoverBackgroundColor.color.opacity(0.25)
             }
         )

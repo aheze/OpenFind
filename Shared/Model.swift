@@ -7,7 +7,6 @@
 //
 
 import Photos
-import RealmSwift
 import UIKit
 
 struct Photo: Hashable {
@@ -28,35 +27,12 @@ struct PhotoMetadata {
     var sentences = [Sentence]()
     var isScanned = false
     var isStarred = false
-
-    func getRealmSentences() -> RealmSwift.List<RealmPhotoMetadataSentence> {
-        let realmSentences = RealmSwift.List<RealmPhotoMetadataSentence>()
-        for sentence in self.sentences {
-            let realmSentence = sentence.getRealmSentence()
-            realmSentences.append(realmSentence)
-        }
-        return realmSentences
-    }
 }
 
 struct Sentence {
     var rect: CGRect?
     var string = ""
 
-    func getRealmSentence() -> RealmPhotoMetadataSentence {
-        let realmSentence = RealmPhotoMetadataSentence()
-        if let rect = self.rect {
-            let realmRect = RealmRect(
-                x: rect.origin.x,
-                y: rect.origin.y,
-                width: rect.width,
-                height: rect.height
-            )
-            realmSentence.rect = realmRect
-        }
-        realmSentence.string = self.string
-        return realmSentence
-    }
 }
 
 /**
@@ -94,12 +70,6 @@ struct List: Identifiable, Equatable {
             dateCreated: self.dateCreated
         )
         return editableList
-    }
-    
-    func getRealmWords() -> RealmSwift.List<String> {
-        let words = RealmSwift.List<String>()
-        words.append(objectsIn: self.words)
-        return words
     }
 
     

@@ -107,8 +107,8 @@ struct SearchConfiguration: Equatable {
             barBottomPadding: 16,
             barTopPaddingLandscape: 0,
             barBottomPaddingLandscape: 16,
-            popoverBackgroundBlurStyle: .systemUltraThinMaterial,
-            popoverBackgroundColor: UIColor.systemBackground.withAlphaComponent(0.25),
+            popoverBackgroundBlurStyle: .systemThinMaterial,
+            popoverBackgroundColor: UIColor.systemBackground.withAlphaComponent(0.5),
             popoverButtonColor: UIColor.label.withAlphaComponent(0.05),
             popoverTextColor: UIColor.label,
             popoverDividerColor: UIColor.label.withAlphaComponent(0.2)

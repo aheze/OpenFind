@@ -10,7 +10,7 @@ import SwiftUI
 
 extension CameraViewController {
     func setupZoom() {
-        zoomContainerHeightC.constant = (ZoomConstants.zoomFactorLength + ZoomConstants.edgePadding * 2) + ZoomConstants.bottomPadding
+        zoomContainerHeightC.constant = ZoomConstants.containerHeight
         let zoomView = ZoomView(zoomViewModel: zoomViewModel)
         
         let hostingController = UIHostingController(rootView: zoomView)

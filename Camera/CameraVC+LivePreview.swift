@@ -41,6 +41,7 @@ extension CameraViewController {
             
             if
                 !self.model.shutterOn,
+                self.model.livePreviewScanning,
                 Tab.currentTabState == .camera,
                 self.searchViewModel.stringToGradients.count > 0
             {

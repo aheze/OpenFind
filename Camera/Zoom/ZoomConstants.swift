@@ -31,4 +31,7 @@ struct ZoomConstants {
     
     static let scrollViewMinZoom = CGFloat(1)
     static let scrollViewMaxZoom = CGFloat(4)
+    
+    /// height of the container
+    static let containerHeight = (ZoomConstants.zoomFactorLength + ZoomConstants.edgePadding * 2) + ZoomConstants.bottomPadding
 }

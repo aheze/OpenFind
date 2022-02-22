@@ -21,6 +21,7 @@ class CameraViewController: UIViewController, PageViewController {
     
     var searchViewModel = SearchViewModel(configuration: .camera)
     var highlightsViewModel = HighlightsViewModel()
+    var messagesViewModel = CameraMessagesViewModel()
     
     // MARK: - Sub view controllers
 

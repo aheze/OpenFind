@@ -29,5 +29,6 @@ struct ResultsIconView: View {
                 )
                 .cornerRadius(20)
         }
+        .frameTag("ResultsIconView")
     }
 }

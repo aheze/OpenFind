@@ -6,7 +6,6 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension CameraViewController {
@@ -17,7 +16,7 @@ extension CameraViewController {
         addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
     
-    func getHighlights(from sentences: [FindText]) -> Set<Highlight>{
+    func getHighlights(from sentences: [FindText]) -> Set<Highlight> {
         var highlights = Set<Highlight>()
         for sentence in sentences {
             for (string, gradient) in self.searchViewModel.stringToGradients {
@@ -36,15 +35,6 @@ extension CameraViewController {
             }
         }
         return highlights
-    }
-    
-    func addHighlights(from sentences: [FindText], replace: Bool) {
-        let highlights = getHighlights(from: sentences)
-        model.highlightsHistory.newHighlightsFound(highlights)
-        
-        DispatchQueue.main.async {
-            self.highlightsViewModel.update(with: highlights, replace: replace)
-        }
     }
     
     /// replaces highlights completely

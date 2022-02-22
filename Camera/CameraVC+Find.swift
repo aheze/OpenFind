@@ -19,7 +19,13 @@ extension CameraViewController {
 
         /// `nil` if was finding before
         if let sentences = await Find.find(in: .pixelBuffer(pixelBuffer), options: options, action: .camera, wait: false) {
-            addHighlights(from: sentences, replace: false)
+            let highlights = getHighlights(from: sentences)
+            print("highlights: \(highlights)")
+            DispatchQueue.main.async {
+                self.highlightsViewModel.update(with: highlights, replace: false)
+                self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
+                self.checkEvents()
+            }
         }
     }
 
@@ -31,7 +37,10 @@ extension CameraViewController {
         options.customWords = searchViewModel.customWords
 
         if let sentences = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: true) {
-            addHighlights(from: sentences, replace: replace)
+            let highlights = getHighlights(from: sentences)
+            DispatchQueue.main.async {
+                self.highlightsViewModel.update(with: highlights, replace: replace)
+            }
             return sentences
         }
         

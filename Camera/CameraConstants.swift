@@ -11,5 +11,8 @@ import UIKit
 
 enum CameraConstants {
     /// shut off the camera after 6 seconds, after going to another tab
-    static var cameraCoolDownDuration = CGFloat(1)
+    static var cameraCoolDownDuration = CGFloat(4)
+    
+    /// once the history reaches this, remove the first history, and append the new history to the end.
+    static var maximumHistoryCount = 50
 }
