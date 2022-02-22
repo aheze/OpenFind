@@ -26,6 +26,7 @@ extension CameraViewController {
 
                 if abs(acceleration) >= 0.3 {
                     print("resuming.")
+                    Find.prioritizedAction = .camera
                     self?.model.motionManager?.stopAccelerometerUpdates()
                     self?.model.motionManager = nil
                     self?.model.livePreviewScanning = true
