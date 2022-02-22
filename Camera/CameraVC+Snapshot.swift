@@ -14,7 +14,7 @@ extension CameraViewController {
         if !model.snapshotSaved {
             model.snapshotSaved = true
             print("Saving!")
-            if let currentImage = model.pausedImage {
+            if let currentImage = model.pausedImage?.cgImage {
                 let image = UIImage(cgImage: currentImage)
                 print("Current image exists.")
             }

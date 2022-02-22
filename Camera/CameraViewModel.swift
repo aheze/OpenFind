@@ -8,6 +8,11 @@
 import CoreMotion
 import SwiftUI
 
+struct PausedImage: Identifiable {
+    let id = UUID()
+    var cgImage: CGImage?
+    var findText = [FindText]()
+}
 class CameraViewModel: ObservableObject {
     @Published var resultsCount = 0
     @Published var showingMessageView = false
@@ -22,8 +27,7 @@ class CameraViewModel: ObservableObject {
     
     /// shutter on/off
     @Published var shutterOn = false
-    @Published var pausedImage: CGImage?
-    var currentPausedUUID: UUID? /// prevent hiding/showing the camera feed incorrectly
+    @Published var pausedImage: PausedImage?
     
     @Published var flash = false
     @Published var cacheOn = false

@@ -14,7 +14,7 @@ import UIKit
 
 extension CameraViewController {
     func resume() {
-        model.currentPausedUUID = nil
+        model.pausedImage = nil
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
         removeScrollZoomImage()
@@ -23,21 +23,29 @@ extension CameraViewController {
     }
 
     func pause() {
-        model.currentPausedUUID = UUID()
+        let pausedImage = PausedImage()
+        model.pausedImage = pausedImage
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = false
         startAutoProgress()
         hideZoomView()
 
         Task {
-            let currentUUID = model.currentPausedUUID
+            let currentUUID = pausedImage.id
             let image = await livePreviewViewController.takePhoto()
-            guard currentUUID == self.model.currentPausedUUID else { return }
+            guard currentUUID == self.model.pausedImage?.id else { return }
             self.setScrollZoomImage(image: image)
 
             if let cgImage = image.cgImage {
-                self.model.pausedImage = cgImage
-                _ = await self.findAndAddHighlights(image: cgImage, wait: true)
-                guard currentUUID == self.model.currentPausedUUID else { return }
+                
+                /// set the image
+                self.model.pausedImage?.cgImage = cgImage
+                
+                let text = await self.findAndAddHighlights(image: cgImage, wait: true)
+                guard currentUUID == self.model.pausedImage?.id else { return }
+                
+                /// set the findText
+                self.model.pausedImage?.findText = text
+                
                 Find.prioritizedAction = nil
                 self.endAutoProgress()
                 self.hideLivePreview()

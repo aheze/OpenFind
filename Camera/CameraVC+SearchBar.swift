@@ -28,15 +28,14 @@ extension CameraViewController {
                 self.highlightsViewModel.setUpToDate(false)
                 
                 
-                /// animate the highlight frames instead
+                /// animate the highlight frames instead if paused
                 if
                     self.model.shutterOn,
-                    let image = self.model.pausedImage
+                    let sentences = self.model.pausedImage?.findText
                 {
-                    Task {
-                        // TODO, remove
-                        _ = await self.findAndAddHighlights(image: image, replace: true, wait: true)
-                        self.highlightsViewModel.setUpToDate(true)
+                    let highlights = self.getHighlights(from: sentences)
+                    DispatchQueue.main.async {
+                        self.highlightsViewModel.update(with: highlights, replace: true)
                     }
                 }
             }
