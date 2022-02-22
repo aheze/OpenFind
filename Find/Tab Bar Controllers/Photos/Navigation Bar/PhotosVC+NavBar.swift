@@ -13,10 +13,10 @@ extension PhotosViewController {
         let photos = NSLocalizedString("welcomeToPhotos", comment: "")
         title = photos
         
-        let findText = NSLocalizedString("universal-find", comment: "")
+        let Sentence = NSLocalizedString("universal-find", comment: "")
         let selectText = NSLocalizedString("universal-select", comment: "")
         
-        findButton = UIBarButtonItem(title: findText, style: .plain, target: self, action: #selector(findPressed(sender:)))
+        findButton = UIBarButtonItem(title: Sentence, style: .plain, target: self, action: #selector(findPressed(sender:)))
         selectButton = UIBarButtonItem(title: selectText, style: .plain, target: self, action: #selector(selectPressed(sender:)))
         
         findButton.tintColor = UIColor(named: "PhotosText")

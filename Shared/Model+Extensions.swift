@@ -23,16 +23,16 @@ extension PhotoMetadata {
 extension Sentence {
     func getRealmSentence() -> RealmPhotoMetadataSentence {
         let realmSentence = RealmPhotoMetadataSentence()
-        if let rect = self.rect {
-            let realmRect = RealmRect(
-                x: rect.origin.x,
-                y: rect.origin.y,
-                width: rect.width,
-                height: rect.height
-            )
-            realmSentence.rect = realmRect
-        }
-        realmSentence.string = self.string
+
+        let realmRect = RealmRect(
+            x: frame.origin.x,
+            y: frame.origin.y,
+            width: frame.width,
+            height: frame.height
+        )
+        realmSentence.string = string
+        realmSentence.frame = realmRect
+        realmSentence.confidence = confidence
         return realmSentence
     }
 }

@@ -38,10 +38,10 @@ extension CameraViewController {
             }
             
             var customFindArray = [String]()
-            customFindArray.append(self.findText)
-            customFindArray.append(self.findText.lowercased())
-            customFindArray.append(self.findText.uppercased())
-            customFindArray.append(self.findText.capitalizingFirstLetter())
+            customFindArray.append(self.Sentence)
+            customFindArray.append(self.Sentence.lowercased())
+            customFindArray.append(self.Sentence.uppercased())
+            customFindArray.append(self.Sentence.capitalizingFirstLetter())
             
             request.customWords = customFindArray
             

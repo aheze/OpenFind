@@ -14,7 +14,6 @@ import UIKit
 
 extension CameraViewController {
     func resume() {
-        model.pausedImage = nil
         livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
         removeScrollZoomImage()
@@ -40,11 +39,25 @@ extension CameraViewController {
                 /// set the image
                 self.model.pausedImage?.cgImage = cgImage
                 
-                let text = await self.findAndAddHighlights(image: cgImage, wait: true)
+                let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
                 guard currentUUID == self.model.pausedImage?.id else { return }
                 
-                /// set the findText
-                self.model.pausedImage?.findText = text
+                /// set the sentences
+                self.model.pausedImage?.scanned = true
+                self.model.pausedImage?.sentences = sentences
+                
+                /// photo was saved to the photo library. Update the sentences
+                if let assetIdentifier = self.model.pausedImage?.assetIdentifier {
+                    let metadata = PhotoMetadata(
+                        assetIdentifier: assetIdentifier,
+                        sentences: sentences,
+                        isScanned: true,
+                        isStarred: false
+                    )
+                    await MainActor.run {
+                        realmModel.updatePhotoMetadata(metadata: metadata)
+                    }
+                }
                 
                 Find.prioritizedAction = nil
                 self.endAutoProgress()

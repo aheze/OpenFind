@@ -31,7 +31,7 @@ extension CameraViewController {
                 /// animate the highlight frames instead if paused
                 if
                     self.model.shutterOn,
-                    let sentences = self.model.pausedImage?.findText
+                    let sentences = self.model.pausedImage?.sentences
                 {
                     let highlights = self.getHighlights(from: sentences)
                     DispatchQueue.main.async {

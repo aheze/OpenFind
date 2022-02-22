@@ -44,14 +44,16 @@ class RealmPhotoMetadata: Object {
 }
 
 class RealmPhotoMetadataSentence: Object {
-    @Persisted var rect: RealmRect?
+    @Persisted var frame: RealmRect?
     @Persisted var string = ""
+    @Persisted var confidence = Double(0)
     
     func getSentence() -> Sentence {
-        let rect = self.rect?.getRect() ?? .zero
+        let frame = self.frame?.getRect() ?? .zero
         let sentence = Sentence(
-            rect: rect,
-            string: string
+            string: string,
+            frame: frame,
+            confidence: confidence
         )
         return sentence
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 extension CameraViewController {
-    func createLivePreviewEvent(sentences: [FindText], highlights: Set<Highlight>) {
+    func createLivePreviewEvent(sentences: [Sentence], highlights: Set<Highlight>) {
 //        print("Create evenet.")
 //        let event = Event(date: Date(), sentences: sentences, highlights: highlights)
 //

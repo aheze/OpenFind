@@ -40,12 +40,12 @@ extension CameraViewController {
                             let individualCharacterWidth = convertedRect.width / CGFloat(text.string.count)
                             let lowercaseText = text.string.lowercased()
                             
-                            if lowercaseText.contains(self.findText) {
-                                let indices = lowercaseText.indicesOf(string: self.findText)
+                            if lowercaseText.contains(self.Sentence) {
+                                let indices = lowercaseText.indicesOf(string: self.Sentence)
                                 for index in indices {
                                     let x = convertedRect.origin.x + (individualCharacterWidth * CGFloat(index))
                                     let y = convertedRect.origin.y
-                                    let width = (individualCharacterWidth * CGFloat(self.findText.count))
+                                    let width = (individualCharacterWidth * CGFloat(self.Sentence.count))
                                     let height = convertedRect.height
                                     
                                     let component = Component()

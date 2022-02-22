@@ -30,9 +30,9 @@ struct PhotoMetadata {
 }
 
 struct Sentence {
-    var rect: CGRect?
     var string = ""
-
+    var frame: CGRect
+    var confidence: Double
 }
 
 /**

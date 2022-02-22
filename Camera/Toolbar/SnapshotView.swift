@@ -13,6 +13,7 @@ struct SnapshotConstants {
 }
 
 struct SnapshotView: View {
+    @ObservedObject var model: CameraViewModel
     @Binding var isOn: Bool
     @Binding var isEnabled: Bool
 
@@ -21,7 +22,10 @@ struct SnapshotView: View {
     var body: some View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
-            toggle()
+            if !isOn {
+                isOn = true
+                model.snapshotPressed?()
+            }
         } label: {
             Image("CameraRim") /// rim of camera
                 .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
@@ -99,7 +103,7 @@ struct CameraInnerShape: Shape {
 struct SnapshotViewTester: View {
     @State var isOn = false
     var body: some View {
-        SnapshotView(isOn: $isOn, isEnabled: .constant(true))
+        SnapshotView(model: CameraViewModel(), isOn: $isOn, isEnabled: .constant(true))
     }
 }
 

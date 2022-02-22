@@ -59,11 +59,10 @@ extension PhotosViewModel {
             if let cgImage = image?.cgImage {
                 var options = FindOptions()
                 options.level = .accurate
-                let text = await Find.find(in: .cgImage(cgImage), options: options, action: .photos, wait: true) ?? []
+                let sentences = await Find.find(in: .cgImage(cgImage), options: options, action: .photos, wait: true) ?? []
                 
                 /// discard value if not scanning
                 if scanningState == .scanning {
-                    let sentences = text.map { Sentence(rect: $0.frame, string: $0.string) }
                     photoScanned(photo: photo, sentences: sentences)
                 }
             }

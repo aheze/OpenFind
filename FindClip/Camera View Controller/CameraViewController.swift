@@ -113,7 +113,7 @@ class CameraViewController: UIViewController {
     
     // MARK: Finding
 
-    var findText = ""
+    var Sentence = ""
     var busyFastFinding = false
     var pixelBufferSize = CGSize(width: 0, height: 0)
     var currentPassCount = 0 /// +1 whenever frame added for AV

@@ -16,7 +16,7 @@ extension CameraViewController {
         addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
     
-    func getHighlights(from sentences: [FindText]) -> Set<Highlight> {
+    func getHighlights(from sentences: [Sentence]) -> Set<Highlight> {
         var highlights = Set<Highlight>()
         for sentence in sentences {
             for (string, gradient) in self.searchViewModel.stringToGradients {

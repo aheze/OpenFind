@@ -8,11 +8,7 @@
 import CoreMotion
 import SwiftUI
 
-struct PausedImage: Identifiable {
-    let id = UUID()
-    var cgImage: CGImage?
-    var findText = [FindText]()
-}
+
 class CameraViewModel: ObservableObject {
     @Published var resultsCount = 0
     @Published var showingMessageView = false

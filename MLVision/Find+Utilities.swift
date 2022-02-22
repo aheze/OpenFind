@@ -9,10 +9,10 @@
 
 import UIKit
 
-extension FindText {
+extension Sentence {
     
     /// If self is a sentence
-    func getWord(word: String, at index: Int) -> FindText {
+    func getWord(word: String, at index: Int) -> Sentence {
         let wordCount = CGFloat(word.count)
         let individualCharacterLength = self.frame.width / CGFloat(self.string.count)
         
@@ -20,7 +20,7 @@ extension FindText {
         let wordWidth = individualCharacterLength * wordCount
         let wordFrame = CGRect(x: wordOriginX, y: self.frame.minY, width: wordWidth, height: self.frame.height)
         
-        let word = FindText(
+        let word = Sentence(
             string: word,
             frame: wordFrame,
             confidence: self.confidence

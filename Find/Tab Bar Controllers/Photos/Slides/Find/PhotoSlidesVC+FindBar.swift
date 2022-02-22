@@ -73,8 +73,8 @@ extension PhotoSlidesViewController {
             }
             currentViewController.updateAccessibilityHints()
         } else {
-            let findText = NSLocalizedString("universal-find", comment: "")
-            findButton.title = findText
+            let Sentence = NSLocalizedString("universal-find", comment: "")
+            findButton.title = Sentence
             findButton.accessibilityHint = "Find from this photo. Displays a search bar."
             
             slideFindBarTopC?.update(offset: -45)

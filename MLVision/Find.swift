@@ -10,12 +10,6 @@ import AVFoundation
 import UIKit
 import Vision
 
-struct FindText {
-    var string: String
-    var frame: CGRect
-    var confidence: CGFloat
-}
-
 struct FindOptions {
     var level = VNRequestTextRecognitionLevel.fast
     var customWords = [String]()
@@ -36,7 +30,7 @@ struct QueuedRun {
     var image: FindImage
     var options: FindOptions
     var action: FindingAction
-    var completion: (([FindText]) -> ())?
+    var completion: (([Sentence]) -> ())?
 }
 
 enum Find {
@@ -53,7 +47,7 @@ enum Find {
     }
     static var queuedRuns = [QueuedRun]()
 
-    static func find(in image: FindImage, options: FindOptions = FindOptions(), action: FindingAction, wait: Bool) async -> [FindText]? {
+    static func find(in image: FindImage, options: FindOptions = FindOptions(), action: FindingAction, wait: Bool) async -> [Sentence]? {
         if wait, startTime != nil {
             return await withCheckedContinuation { continuation in
                 let queuedRun = QueuedRun(image: image, options: options, action: action) { sentences in
@@ -70,7 +64,7 @@ enum Find {
         }
     }
 
-    internal static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [FindText] {
+    internal static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [Sentence] {
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
                 let sentences = getSentences(from: request)
@@ -102,20 +96,20 @@ enum Find {
 }
 
 extension Find {
-    static func getSentences(from request: VNRequest) -> [FindText] {
+    static func getSentences(from request: VNRequest) -> [Sentence] {
         guard
             let results = request.results
         else {
             return []
         }
 
-        var sentences = [FindText]()
+        var sentences = [Sentence]()
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
             var boundingBox = observation.boundingBox
             boundingBox.origin.y = 1 - boundingBox.minY - boundingBox.height
 
-            let sentence = FindText(
+            let sentence = Sentence(
                 string: text.string,
                 frame: boundingBox,
                 confidence: CGFloat(text.confidence)

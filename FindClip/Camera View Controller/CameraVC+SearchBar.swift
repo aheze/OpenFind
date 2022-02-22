@@ -36,7 +36,7 @@ extension CameraViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
-            findText = updatedString
+            Sentence = updatedString
         }
         
         /// if paused, find
@@ -48,7 +48,7 @@ extension CameraViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        findText = ""
+        Sentence = ""
         DispatchQueue.main.async {
             self.removeCurrentComponents()
         }

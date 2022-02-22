@@ -20,7 +20,7 @@ extension CameraViewController {
         /// `nil` if was finding before
         if let sentences = await Find.find(in: .pixelBuffer(pixelBuffer), options: options, action: .camera, wait: false) {
             let highlights = getHighlights(from: sentences)
-            print("highlights: \(highlights)")
+
             DispatchQueue.main.async {
                 self.highlightsViewModel.update(with: highlights, replace: false)
                 self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
@@ -30,7 +30,7 @@ extension CameraViewController {
     }
 
     /// use accurate mode and wait
-    func findAndAddHighlights(image: CGImage, replace: Bool = false, wait: Bool) async -> [FindText] {
+    func findAndAddHighlights(image: CGImage, replace: Bool = false, wait: Bool) async -> [Sentence] {
         var options = FindOptions()
         options.orientation = .up
         options.level = .accurate
@@ -43,7 +43,7 @@ extension CameraViewController {
             }
             return sentences
         }
-        
+
         return []
     }
 }
