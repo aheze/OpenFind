@@ -22,7 +22,7 @@ struct CameraToolbarView: View {
             HStack {
                 ResultsIconView(count: $model.resultsCount)
                 Spacer()
-                SnapshotView(model: model, isOn: $model.snapshotOn, isEnabled: $model.shutterOn)
+                SnapshotView(model: model, isEnabled: $model.shutterOn)
             }
             .frame(maxWidth: .infinity)
 

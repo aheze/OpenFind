@@ -10,19 +10,18 @@ import UIKit
 
 extension CameraViewController {
     func createLivePreviewEvent(sentences: [Sentence], highlights: Set<Highlight>) {
-//        print("Create evenet.")
-//        let event = Event(date: Date(), sentences: sentences, highlights: highlights)
-//
-//        model.recentEvents.append(event)
-//        if model.recentEvents.count > CameraConstants.maximumHistoryCount {
-//            _ = model.recentEvents.removeFirst()
-//        }
+        let event = Event(date: Date(), sentences: sentences, highlights: highlights)
+
+        model.recentEvents.append(event)
+        if model.recentEvents.count > CameraConstants.maximumHistoryCount {
+            _ = model.recentEvents.removeFirst()
+        }
     }
     
     func checkEvents() {
-//        if model.recentEvents.count >= CameraConstants.maximumHistoryCount {
-//            checkDormant()
-//        }
+        if model.recentEvents.count >= CameraConstants.maximumHistoryCount {
+            checkDormant()
+        }
     }
     
     func checkDormant() {

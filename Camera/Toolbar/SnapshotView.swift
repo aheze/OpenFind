@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct SnapshotConstants {
-    static var checkStartTrim = CGFloat(0.675) /// I guessed this number - it's the percentage where the circle becomes the checkmark
+    /// for a circle with a small gap, as a progress indicator.
+    static var loadingStartTrim = CGFloat(0.18)
+    static var checkStartTrim = CGFloat(0.644) /// I guessed this number - it's the percentage where the circle becomes the checkmark
 }
 
 struct SnapshotView: View {
     @ObservedObject var model: CameraViewModel
-    @Binding var isOn: Bool
     @Binding var isEnabled: Bool
 
     @State var scaleAnimationActive = false /// scale up/down animation flag
@@ -22,15 +23,15 @@ struct SnapshotView: View {
     var body: some View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
-            if !isOn {
-                isOn = true
-                model.snapshotPressed?()
-            }
+            model.snapshotPressed?()
         } label: {
-            Image("CameraRim") /// rim of camera
-                .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
+            Color.clear
                 .overlay(
-                    Color(isOn ? Constants.activeIconColor : .white)
+                    Image("CameraRim") /// rim of camera
+                        .foregroundColor(model.snapshotState == .saved ? Color(Constants.activeIconColor) : .white)
+                )
+                .overlay(
+                    Color(model.snapshotState == .saved ? Constants.activeIconColor : .white)
 
                         /// prevent animation glitches
                         .mask(
@@ -44,6 +45,8 @@ struct SnapshotView: View {
                                         lineJoin: .round
                                     )
                                 )
+                                .rotationEffect(.degrees(isSaving ? 360 : 0))
+                                .animation(isSaving ? .easeInOut(duration: 0.8).repeatForever(autoreverses: false) : .default, value: model.snapshotState)
                                 .padding(EdgeInsets(top: 6, leading: 6, bottom: 4, trailing: 6))
                         )
                 )
@@ -55,18 +58,54 @@ struct SnapshotView: View {
         .disabled(!isEnabled)
     }
 
+    var isSaving: Bool {
+        return model.snapshotState == .startedSaving || model.snapshotState == .noImageYet
+    }
+
     func startTrim() -> CGFloat {
-        return isOn ? SnapshotConstants.checkStartTrim : 0
+//        return 0
+        switch model.snapshotState {
+        case .inactive:
+            return 0
+        case .startedSaving:
+            return SnapshotConstants.loadingStartTrim
+        case .noImageYet:
+            return SnapshotConstants.loadingStartTrim
+        case .saved:
+            return SnapshotConstants.checkStartTrim
+        }
     }
 
     func endTrim() -> CGFloat {
-        return isOn ? 1 : SnapshotConstants.checkStartTrim
+//        return SnapshotConstants.checkStartTrim
+        switch model.snapshotState {
+        case .inactive:
+            return SnapshotConstants.checkStartTrim
+        case .startedSaving:
+            return SnapshotConstants.checkStartTrim
+        case .noImageYet:
+            return SnapshotConstants.checkStartTrim
+        case .saved:
+            return 1
+        }
+    }
+}
+
+struct ActivityIndicator: UIViewRepresentable {
+    typealias UIView = UIActivityIndicatorView
+    var isAnimating: Bool
+    fileprivate var configuration = { (indicator: UIView) in }
+
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIView {
+        let view = UIView()
+        view.style = .medium
+        view.color = .white
+        return view
     }
 
-    func toggle() {
-        withAnimation {
-            isOn.toggle()
-        }
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<Self>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+        configuration(uiView)
     }
 }
 
@@ -94,8 +133,8 @@ struct CameraInnerShape: Shape {
         let checkMidX = rect.width / 2 - 0.95
         let checkEndX = rect.width / 2 + 4
         path.move(to: CGPoint(x: checkStartX, y: rect.midY))
-        path.addLine(to: CGPoint(x: checkMidX, y: rect.maxY - 1.2))
-        path.addLine(to: CGPoint(x: checkEndX, y: rect.minY + 0.5))
+        path.addLine(to: CGPoint(x: checkMidX, y: rect.midY + 3.4))
+        path.addLine(to: CGPoint(x: checkEndX, y: rect.midY - 4.0))
         return path
     }
 }
@@ -103,7 +142,7 @@ struct CameraInnerShape: Shape {
 struct SnapshotViewTester: View {
     @State var isOn = false
     var body: some View {
-        SnapshotView(model: CameraViewModel(), isOn: $isOn, isEnabled: .constant(true))
+        SnapshotView(model: CameraViewModel(), isEnabled: .constant(true))
     }
 }
 

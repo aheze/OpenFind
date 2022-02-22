@@ -11,10 +11,16 @@ import UIKit
 
 extension CameraViewController {
     func snapshot() {
-        if !model.snapshotSaved {
-            model.snapshotSaved = true
-            if let image = model.pausedImage {
+        /// only snapshot if the snapshot hasn't started saving yet
+        if model.snapshotState == .inactive {
+            if
+                let image = model.pausedImage,
+                image.cgImage != nil
+            {
+                model.setSnapshotState(to: .startedSaving)
                 saveImage(image)
+            } else {
+                model.setSnapshotState(to: .noImageYet)
             }
         }
     }
@@ -42,6 +48,7 @@ extension CameraViewController {
 
                     if let currentPausedImage = self.model.pausedImage, currentPausedImage.id == image.id {
                         self.model.pausedImage?.assetIdentifier = assetIdentifier
+                        self.model.setSnapshotState(to: .saved)
 
                         /// the photo may have been scanned before the closure was called. if so, save the sentences.
                         metadata = PhotoMetadata(

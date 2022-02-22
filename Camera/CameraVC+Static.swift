@@ -35,18 +35,21 @@ extension CameraViewController {
             self.setScrollZoomImage(image: image)
 
             if let cgImage = image.cgImage {
-                
                 /// set the image
                 self.model.pausedImage?.cgImage = cgImage
-                
+                if model.snapshotState == .noImageYet, let pausedImage = self.model.pausedImage {
+                    saveImage(pausedImage)
+                }
+
                 let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
                 guard currentUUID == self.model.pausedImage?.id else { return }
-                
+
                 /// set the sentences
                 self.model.pausedImage?.scanned = true
                 self.model.pausedImage?.sentences = sentences
-                
+
                 /// photo was saved to the photo library. Update the sentences
+
                 if let assetIdentifier = self.model.pausedImage?.assetIdentifier {
                     let metadata = PhotoMetadata(
                         assetIdentifier: assetIdentifier,
@@ -58,7 +61,7 @@ extension CameraViewController {
                         realmModel.updatePhotoMetadata(metadata: metadata)
                     }
                 }
-                
+
                 Find.prioritizedAction = nil
                 self.endAutoProgress()
                 self.hideLivePreview()
