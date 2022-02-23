@@ -5,33 +5,23 @@
 //  Created by A. Zheng (github.com/aheze) on 2/23/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import Photos
 import UIKit
 
 extension PhotosViewController {
     func updateResults(animate: Bool = true) {
-        guard let slidesState = model.slidesState else { return }
+        guard let resultsState = model.resultsState else { return }
         var resultsSnapshot = ResultsSnapshot()
         let section = PhotoSlidesSection()
         resultsSnapshot.appendSections([section])
-        resultsSnapshot.appendItems(slidesState.findPhotos, toSection: section)
+        resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
-        
-        
-//        var snapshot = Snapshot()
-//        snapshot.appendSections(model.sections)
-//        model.sections.forEach { section in
-//            snapshot.appendItems(section.photos, toSection: section)
-//        }
-//        dataSource.apply(snapshot, animatingDifferences: animate)
     }
-
 
     func makeResultsDataSource() -> ResultsDataSource {
         let dataSource = ResultsDataSource(
-            collectionView: collectionView,
+            collectionView: resultsCollectionView,
             cellProvider: { collectionView, indexPath, findPhoto -> UICollectionViewCell? in
 
                 let cell = collectionView.dequeueReusableCell(
@@ -39,8 +29,8 @@ extension PhotosViewController {
                     for: indexPath
                 ) as! PhotosResultsCell
 
-                cell.imageView.contentMode = .scaleAspectFill
-                
+                cell.titleLabel.text = "Today"
+                cell.resultsLabel.text = "10 Results"
 
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
@@ -56,9 +46,8 @@ extension PhotosViewController {
                         cell.imageView.image = thumbnail
                         self.model.photoToThumbnail[findPhoto.photo] = thumbnail
                     }
-                    
                 }
-                
+
                 cell.tapped = { [weak self] in
                     guard let self = self else { return }
                     self.presentSlides(startingAt: findPhoto.photo)

@@ -17,15 +17,22 @@ extension SearchViewController {
     }
 
     func configureCell(_ cell: SearchFieldCell, for index: Int) {
+        cell.model = searchViewModel
+        
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         let text = field.value.getText()
+        
+        if case .addNew = field.value {
+            cell.configureAddNew(isAddNew: true)
+        } else {
+            cell.configureAddNew(isAddNew: false)
+        }
         
         cell.textField.text = text
         cell.textField.inputAccessoryView = toolbarViewController.view
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
-        cell.configuration = searchViewModel.configuration
         cell.setConfiguration()
         
         configure(cell, for: field)
@@ -125,10 +132,10 @@ extension SearchViewController {
         }
     }
     
+    /// set the cell's left icon
     func configure(_ cell: SearchFieldCell, for field: Field) {
         switch field.value {
         case .word:
-            cell.loadConfiguration(showAddNew: false)
             cell.leftView.imageView.alpha = 0
             cell.leftView.findIconView.alpha = 1
             cell.leftView.findIconView.setTint(
@@ -136,13 +143,11 @@ extension SearchViewController {
                 alpha: field.overrides.alpha
             )
         case .list(let list):
-            cell.loadConfiguration(showAddNew: false)
             cell.leftView.imageView.alpha = 1
             cell.leftView.findIconView.alpha = 0
             cell.leftView.imageView.image = UIImage(systemName: list.icon)
             cell.leftView.imageView.tintColor = UIColor.white.toColor(field.overrides.selectedColor ?? UIColor(hex: list.color), percentage: field.overrides.alpha)
         case .addNew:
-            cell.loadConfiguration(showAddNew: true)
             cell.leftView.imageView.alpha = 0
             cell.leftView.findIconView.alpha = 1
             cell.leftView.findIconView.setTint(

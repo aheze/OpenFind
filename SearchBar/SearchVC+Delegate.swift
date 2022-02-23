@@ -27,7 +27,7 @@ extension SearchViewController: UICollectionViewDelegate {
                 if shouldHighlight {
                     cell.contentView.backgroundColor = self.searchViewModel.configuration.fieldHighlightedBackgroundColor
                 } else {
-                    cell.contentView.backgroundColor = self.searchViewModel.configuration.fieldBackgroundColor
+                    cell.contentView.backgroundColor = self.searchViewModel.getBackgroundColor()
                 }
             }
         }

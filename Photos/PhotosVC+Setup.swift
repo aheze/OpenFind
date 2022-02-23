@@ -18,6 +18,7 @@ extension PhotosViewController {
         setupCollectionView(collectionView, with: flowLayout)
         setupCollectionView(resultsCollectionView, with: resultsFlowLayout)
         showResults(false)
+        resultsCollectionView.backgroundColor = .secondarySystemBackground
         
         setupNavigationBar()
         checkPermissions()

@@ -30,7 +30,7 @@ extension PhotosViewController {
             
 
             let strings = self.searchViewModel.stringToGradients.keys
-            print("Strings: \(strings)")
+
             
             if strings.isEmpty {
                 self.showResults(false)
@@ -42,6 +42,7 @@ extension PhotosViewController {
                 /// replace all highlights
 //                self.updateHighlightColors()
             } else {
+                self.find()
 //                self.highlightsViewModel.setUpToDate(false)
 //
 //                /// animate the highlight frames instead

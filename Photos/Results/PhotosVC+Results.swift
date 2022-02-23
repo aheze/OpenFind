@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 2/23/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -18,6 +17,7 @@ extension PhotosViewController {
         if show {
             resultsCollectionView.alpha = 1
             collectionView.alpha = 0
+
         } else {
             resultsCollectionView.alpha = 0
             collectionView.alpha = 1

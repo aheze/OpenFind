@@ -51,7 +51,10 @@ class SearchFieldCell: UICollectionViewCell {
         }
     }
     
-    var configuration = SearchConfiguration()
+    var model: SearchViewModel!
+    var configuration: SearchConfiguration {
+        return model.configuration
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -79,7 +82,6 @@ class SearchFieldCell: UICollectionViewCell {
         leftView.setConfiguration()
         rightView.setConfiguration()
         
-        contentView.backgroundColor = configuration.fieldBackgroundColor
         contentView.layer.cornerRadius = configuration.fieldCornerRadius
         
         textField.font = configuration.fieldFont
@@ -135,13 +137,13 @@ class SearchFieldCell: UICollectionViewCell {
         }
     }
     
-    func loadConfiguration(showAddNew isAddNew: Bool) {
+    /// call `showAddNew`
+    func configureAddNew(isAddNew: Bool) {
         if isAddNew {
             let (setup, animations, completion) = showAddNew(true)
             setup()
             animations()
             completion()
-            contentView.backgroundColor = configuration.fieldBackgroundColor
         } else {
             let (setup, animations, completion) = showAddNew(false)
             setup()
@@ -181,9 +183,9 @@ class SearchFieldCell: UICollectionViewCell {
                 self.addNewView.transform = .identity
                 self.textField.alpha = 1
                 self.leftView.buttonView.alpha = 1
-                self.contentView.backgroundColor = self.configuration.fieldBackgroundColor
             }
             
+            self.contentView.backgroundColor = self.model.getBackgroundColor()
             self.baseView.layoutIfNeeded()
         }
         
@@ -208,6 +210,9 @@ extension SearchFieldCell: UITextFieldDelegate {
         {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
             textChanged?(updatedText)
+            UIView.animate(withDuration: 0.3) {
+                self.contentView.backgroundColor = self.model.getBackgroundColor()
+            }
         }
         
         return true

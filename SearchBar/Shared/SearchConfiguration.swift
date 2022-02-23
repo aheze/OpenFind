@@ -19,6 +19,7 @@ struct SearchConfiguration: Equatable {
     
     var fieldCornerRadius = CGFloat(16)
     var fieldBackgroundColor = UIColor.black.withAlphaComponent(0.5)
+    var fieldActiveBackgroundColor = UIColor.black.withAlphaComponent(0.5)
     var fieldHighlightedBackgroundColor = UIColor(hex: 0x007eef)
     var fieldFont = UIFont.preferredFont(forTextStyle: .title1)
     var fieldFontColor = UIColor.white
@@ -80,6 +81,7 @@ struct SearchConfiguration: Equatable {
             sidePeekPadding: 30,
             fieldCornerRadius: 12,
             fieldBackgroundColor: .systemBackground,
+            fieldActiveBackgroundColor: .systemBackground,
             fieldHighlightedBackgroundColor: UIColor(hex: 0x007eef).withAlphaComponent(0.2),
             fieldFont: UIFont.preferredFont(forTextStyle: .title3),
             fieldFontColor: .label,
@@ -119,6 +121,7 @@ struct SearchConfiguration: Equatable {
     static var photos: Self = {
         var configuration = SearchConfiguration.lists
         configuration.fieldBackgroundColor = .secondarySystemBackground
+        configuration.fieldActiveBackgroundColor = .systemBackground
         configuration.addTextPlaceholder = "Find photos"
         return configuration
     }()

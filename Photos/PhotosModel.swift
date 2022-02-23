@@ -41,6 +41,7 @@ struct FindPhoto: Hashable {
     var thumbnail: UIImage?
     var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
+    var highlights: Set<Highlight>?
 }
 
 struct PhotosSection: Hashable {

@@ -79,33 +79,33 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AS4-Y2-hHb">
-                        <size key="itemSize" width="271" height="705"/>
+                        <size key="itemSize" width="271" height="388"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells>
                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosResultsCell" id="6Qe-iX-h3n" customClass="PhotosResultsCell" customModule="Find_New" customModuleProvider="target">
-                            <rect key="frame" x="71.5" y="0.0" width="271" height="705"/>
+                            <rect key="frame" x="71.5" y="0.0" width="271" height="388"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kKw-aS-TWR">
-                                <rect key="frame" x="0.0" y="0.0" width="271" height="705"/>
+                                <rect key="frame" x="0.0" y="0.0" width="271" height="388"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hh-A7-7ZC" customClass="ButtonView" customModule="Find_New" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="271" height="705"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="271" height="388"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cP1-N9-FIj">
-                                                <rect key="frame" x="0.0" y="0.0" width="271" height="705"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="271" height="388"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oIZ-Nh-msf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="705"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="388"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="uo6-9k-p73"/>
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1MG-rD-PBL">
-                                                        <rect key="frame" x="100" y="0.0" width="171" height="705"/>
+                                                        <rect key="frame" x="100" y="0.0" width="171" height="388"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="n0w-bQ-c9s">
                                                                 <rect key="frame" x="0.0" y="0.0" width="171" height="20.5"/>
@@ -124,13 +124,13 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zka-9d-UMr">
-                                                                <rect key="frame" x="0.0" y="20.5" width="171" height="684.5"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zka-9d-UMr">
+                                                                <rect key="frame" x="0.0" y="20.5" width="171" height="367.5"/>
                                                                 <subviews>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lPc-81-AcF">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="684.5"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lPc-81-AcF">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="367.5"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque</string>
+                                                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu </mutableString>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -165,7 +165,7 @@
                                     <constraint firstItem="4hh-A7-7ZC" firstAttribute="top" secondItem="kKw-aS-TWR" secondAttribute="top" id="gHW-rb-e7L"/>
                                 </constraints>
                             </collectionViewCellContentView>
-                            <size key="customSize" width="271" height="705"/>
+                            <size key="customSize" width="271" height="388"/>
                             <connections>
                                 <outlet property="buttonView" destination="4hh-A7-7ZC" id="C49-2p-ool"/>
                                 <outlet property="descriptionContainerView" destination="zka-9d-UMr" id="goU-4i-mql"/>
@@ -175,6 +175,10 @@
                                 <outlet property="rightStackView" destination="1MG-rD-PBL" id="1ca-ED-TQ2"/>
                                 <outlet property="rightTopStackView" destination="n0w-bQ-c9s" id="eeb-sj-98s"/>
                                 <outlet property="stackView" destination="cP1-N9-FIj" id="ekV-Kq-wrZ"/>
+                                <outlet property="stackViewBottomC" destination="9Mu-pd-ZrW" id="cnJ-la-KDJ"/>
+                                <outlet property="stackViewLeftC" destination="Xtc-dk-Xnk" id="bUc-qp-cS2"/>
+                                <outlet property="stackViewRightC" destination="Wfy-AF-DSb" id="4PS-1c-Uun"/>
+                                <outlet property="stackViewTopC" destination="l3w-bQ-Ax6" id="GTk-ze-Qu9"/>
                                 <outlet property="titleLabel" destination="IIp-eM-Wdd" id="U0w-YQ-lv5"/>
                             </connections>
                         </collectionViewCell>

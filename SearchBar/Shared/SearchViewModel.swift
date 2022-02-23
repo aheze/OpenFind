@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 class SearchViewModel: ObservableObject {
     struct Gradient {
         var colors = [UIColor]()
@@ -90,6 +89,18 @@ class SearchViewModel: ObservableObject {
         }
         customWords = Array(words)
     }
+}
+
+extension SearchViewModel {
+    func getBackgroundColor() -> UIColor {
+        if !stringToGradients.isEmpty {
+            
+            //// active
+            return configuration.fieldActiveBackgroundColor
+        } else {
+            return configuration.fieldBackgroundColor
+        }
+    }
     
     func getTotalHeight() -> CGFloat {
         if isLandscape {
@@ -101,16 +112,6 @@ class SearchViewModel: ObservableObject {
 }
 
 extension SearchViewModel {
-    /// get a copy of this model
-//    func copy() -> SearchViewModel {
-//        let model = SearchViewModel(configuration: configuration)
-//        model.isLandscape = isLandscape
-//        model.fields = fields
-//        model.stringToGradients = stringToGradients
-//        model.customWords = customWords
-//        return model
-//    }
-    
     /// set all the properties without creating a new instance
     func replaceInPlace(with model: SearchViewModel) {
         isLandscape = model.isLandscape

@@ -35,7 +35,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     typealias Snapshot = NSDiffableDataSourceSnapshot<PhotosSection, Photo>
     
     @IBOutlet var resultsCollectionView: UICollectionView!
-    lazy var resultsFlowLayout = PhotosCollectionFlowLayout(model: model)
+    lazy var resultsFlowLayout = createFlowLayout()
     lazy var resultsDataSource = makeResultsDataSource()
     typealias ResultsDataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>

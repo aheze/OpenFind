@@ -26,7 +26,7 @@ extension PhotosViewController {
             return self.getCellSize(photosIndex: listIndex, availableWidth: availableWidth)
         }
         
-        collectionView.setCollectionViewLayout(flowLayout, animated: false)
+        resultsCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }
     

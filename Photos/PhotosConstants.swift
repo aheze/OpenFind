@@ -19,14 +19,26 @@ enum PhotosConstants {
         return thumbnailSize
     }()
 
-    static var resultsCellCornerRadius = CGFloat(12)
-    static var resultsCellImageCornerRadius = CGFloat(10)
+}
+
+enum PhotosResultsCellConstants {
+    static var cornerRadius = CGFloat(12)
+    static var imageCornerRadius = CGFloat(10)
 
     /// padding outside the stack view
-    static var resultsCellPadding = CGFloat(12)
+    static var cellPadding = CGFloat(12)
 
     /// inside the stack view
-    static var resultsCellSpacing = CGFloat(10)
+    static var cellSpacing = CGFloat(10)
 
+    static var titleFont = UIFont.preferredFont(forTextStyle: .headline)
+    static var titleTextColor = UIColor.label
+    
+    static var resultsFont = UIFont.preferredFont(forTextStyle: .subheadline)
+    static var resultsLabelTextColor = UIColor.secondaryLabel
+    static var resultsLabelBackgroundColor = UIColor.secondarySystemBackground
     static var resultsLabelEdgeInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
+    
+    static var descriptionFont = UIFont.preferredFont(forTextStyle: .body)
+    static var descriptionTextColor = UIColor.label
 }

@@ -32,7 +32,7 @@ extension PhotosViewController {
 
         let findPhotos: [FindPhoto] = model.photos.map { photo in
             let thumbnail = self.model.photoToThumbnail[photo] ?? nil
-            return .init(
+            return FindPhoto(
                 photo: photo,
                 thumbnail: thumbnail
             )

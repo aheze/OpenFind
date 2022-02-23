@@ -21,6 +21,7 @@ class PhotosCollectionCell: UICollectionViewCell {
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
+        imageView.contentMode = .scaleAspectFill
     }
 }
 
@@ -33,6 +34,10 @@ class PhotosResultsCell: UICollectionViewCell {
     
     /// `imageView` on left, `rightStackView` on right
     @IBOutlet var stackView: UIStackView!
+    @IBOutlet var stackViewTopC: NSLayoutConstraint!
+    @IBOutlet var stackViewRightC: NSLayoutConstraint!
+    @IBOutlet var stackViewBottomC: NSLayoutConstraint!
+    @IBOutlet var stackViewLeftC: NSLayoutConstraint!
     
     /// image on the left
     @IBOutlet var imageView: UIImageView!
@@ -59,10 +64,31 @@ class PhotosResultsCell: UICollectionViewCell {
             self?.tapped?()
         }
         
-        let c = PhotosConstants.self
+        imageView.contentMode = .scaleAspectFill
+        descriptionTextView.isEditable = false
+        
+        let c = PhotosResultsCellConstants.self
+        resultsLabel.backgroundColor = c.resultsLabelBackgroundColor
         resultsLabel.textInsets = c.resultsLabelEdgeInsets
         stackView.spacing = c.cellSpacing
         rightStackView.spacing = c.cellSpacing
         rightTopStackView.spacing = c.cellSpacing
+        
+        layer.cornerRadius = c.cornerRadius
+        
+        stackViewTopC.constant = c.cellPadding
+        stackViewRightC.constant = c.cellPadding
+        stackViewBottomC.constant = c.cellPadding
+        stackViewLeftC.constant = c.cellPadding
+        
+        imageView.layer.cornerRadius = c.imageCornerRadius
+        
+        titleLabel.font = c.titleFont
+        resultsLabel.font = c.resultsFont
+        descriptionTextView.font = c.descriptionFont
+        
+        titleLabel.textColor = c.titleTextColor
+        resultsLabel.textColor = c.resultsLabelTextColor
+        descriptionTextView.textColor = c.descriptionTextColor
     }
 }

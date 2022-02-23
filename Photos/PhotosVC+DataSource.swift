@@ -10,7 +10,6 @@ import Photos
 import UIKit
 
 extension PhotosViewController {
-
     func update(animate: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections(model.sections)
@@ -32,9 +31,6 @@ extension PhotosViewController {
                     for: indexPath
                 ) as! PhotosCollectionCell
 
-                cell.imageView.contentMode = .scaleAspectFill
-                
-
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = photo.asset.localIdentifier
                 self.model.imageManager.requestImage(
@@ -49,9 +45,8 @@ extension PhotosViewController {
                         cell.imageView.image = thumbnail
                         self.model.photoToThumbnail[photo] = thumbnail
                     }
-                    
                 }
-                
+
                 cell.tapped = { [weak self] in
                     guard let self = self else { return }
                     self.presentSlides(startingAt: photo)
