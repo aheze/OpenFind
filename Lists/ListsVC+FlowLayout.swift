@@ -12,20 +12,21 @@ extension ListsViewController {
     func createFlowLayout() -> ListsCollectionFlowLayout {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.getLists = { [weak self] in
+        flowLayout.getIndices = { [weak self] in
             guard let self = self else { return [] }
-            return self.model.displayedLists.map { $0.list }
+            return Array(self.model.displayedLists.indices)
         }
-        flowLayout.getListSizeFromWidth = { [weak self] availableWidth, list, listIndex in
+        flowLayout.getSizeForIndexWithWidth = { [weak self] listIndex, availableWidth in
             guard let self = self else { return .zero }
-            return self.getCellSize(availableWidth: availableWidth, list: list, listIndex: listIndex)
+            return self.getCellSize(listIndex: listIndex, availableWidth: availableWidth)
         }
         
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }
     
-    func getCellSize(availableWidth: CGFloat, list: List, listIndex: Int) -> CGSize {
+    func getCellSize(listIndex: Int, availableWidth: CGFloat) -> CGSize {
+        let list = self.model.displayedLists[listIndex].list
         let c = ListsCellConstants.self
         
         let headerHeight = c.headerTitleFont.lineHeight

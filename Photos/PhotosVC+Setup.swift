@@ -9,6 +9,10 @@
 import Photos
 import SwiftUI
 
+/**
+ Pin the collection view, listen to the model, set up the navigation bar
+ Show permissions view if needed
+ */
 extension PhotosViewController {
     func setup() {
         setupCollectionView()
@@ -56,6 +60,8 @@ extension PhotosViewController {
 
 extension PhotosViewController {
     func setupCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.pinEdgesToSuperview()
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true

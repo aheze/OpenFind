@@ -10,10 +10,12 @@ import UIKit
 
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
-    var getLists: (() -> [List])?
+    var getIndices: (() -> [Int])?
     
     /// get the frame of a list cell from available width
-    var getListSizeFromWidth: ((CGFloat, List, Int) -> CGSize)?
+    /// 1. index
+    /// 2. the available width
+    var getSizeForIndexWithWidth: ((Int, CGFloat) -> CGSize)?
     
     override init() {
         super.init()
@@ -54,7 +56,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-        guard let lists = getLists?() else { return }
+        guard let indices = getIndices?() else { return }
         guard let collectionView = collectionView else { return }
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
@@ -77,8 +79,8 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
             columnOffsets.append(offset)
         }
         
-        for index in lists.indices {
-            if let size = getListSizeFromWidth?(columnWidth, lists[index], index) {
+        for index in indices {
+            if let size = getSizeForIndexWithWidth?(index, columnWidth) {
                 /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
                 if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
                     let columnOffset = columnOffsets[shortestColumnIndex]

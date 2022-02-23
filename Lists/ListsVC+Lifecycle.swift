@@ -32,8 +32,7 @@ extension ListsViewController {
         let (_, columnWidth) = listsFlowLayout.getColumns(bounds: size.width, insets: safeAreaInsets)
         
         for index in model.displayedLists.indices {
-            let oldDisplayedList = model.displayedLists[index]
-            _ = getCellSize(availableWidth: columnWidth, list: oldDisplayedList.list, listIndex: index)
+            _ = getCellSize(listIndex: index, availableWidth: columnWidth)
             let newDisplayedList = model.displayedLists[index]
             
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
