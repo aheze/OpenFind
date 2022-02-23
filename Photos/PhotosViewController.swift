@@ -14,6 +14,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     var searchViewModel: SearchViewModel
+    var slidesSearchViewModel: SearchViewModel
     var permissionsViewModel = PhotosPermissionsViewModel()
     
     var baseSearchBarOffset = CGFloat(0)
@@ -38,12 +39,14 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         model: PhotosViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
-        searchViewModel: SearchViewModel
+        searchViewModel: SearchViewModel,
+        slidesSearchViewModel: SearchViewModel
     ) {
         self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         self.searchViewModel = searchViewModel
+        self.slidesSearchViewModel = slidesSearchViewModel
         super.init(coder: coder)
     }
 

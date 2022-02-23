@@ -43,11 +43,11 @@ extension PhotosViewController {
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.model.load()
-            
+
             UIView.animate(withDuration: 0.5) { [weak hostingController] in
                 hostingController?.view.alpha = 0
                 self.collectionView.alpha = 1
-            } completion: {  [weak hostingController] _ in
+            } completion: { [weak hostingController] _ in
                 hostingController?.view.removeFromSuperview()
             }
         }
@@ -67,7 +67,7 @@ extension PhotosViewController {
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = flowLayout
     }
-    
+
     func setupNavigationBar() {
         let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 21)
         navigationItem.rightBarButtonItems = [scanningButton]

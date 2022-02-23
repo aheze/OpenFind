@@ -6,11 +6,15 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension SearchViewController {
     func listenToCollectionView() {
+        searchViewModel.dismissKeyboard = { [weak self] in
+            guard let self = self else { return }
+            self.view.endEditing(true)
+        }
+        
         collectionViewModel.getFullCellWidth = { [weak self] index in
             self?.getWidthOfExpandedCell(for: index) ?? 300
         }
@@ -56,6 +60,5 @@ extension SearchViewController {
                 }
             }
         }
-        
     }
 }

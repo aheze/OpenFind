@@ -21,15 +21,14 @@ extension PhotosViewController {
         }
         
         searchViewModel.fieldsChanged = { [weak self] oldValue, newValue in
+            
             guard let self = self else { return }
             
             let oldText = oldValue.map { $0.value.getText() }
             let newText = newValue.map { $0.value.getText() }
             let textIsSame = oldText == newText
             
-            print("Fields changed!")
             if textIsSame {
-                print("Text is same!")
                 /// replace all highlights
 //                self.updateHighlightColors()
             } else {

@@ -31,7 +31,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var isInteractivelyDismissing: Bool = false
     
     var model: PhotosViewModel
-    var searchViewModel: SearchViewModel
+    var slidesSearchViewModel: SearchViewModel
     var toolbarViewModel: ToolbarViewModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
     
@@ -51,11 +51,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
-        searchViewModel: SearchViewModel,
+        slidesSearchViewModel: SearchViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
-        self.searchViewModel = searchViewModel
+        self.slidesSearchViewModel = slidesSearchViewModel
         self.toolbarViewModel = toolbarViewModel
         super.init(coder: coder)
     }

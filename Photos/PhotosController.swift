@@ -13,6 +13,9 @@ class PhotosController {
     var realmModel: RealmModel
     
     var searchViewModel: SearchViewModel
+    
+    /// for the slides. This will only be up to date when the slides are presented.
+    var slidesSearchViewModel: SearchViewModel
     var searchNavigationController: SearchNavigationController
     var viewController: PhotosViewController
     
@@ -25,15 +28,19 @@ class PhotosController {
         
         let searchViewModel = SearchViewModel(configuration: .photos)
         self.searchViewModel = searchViewModel
+        let slidesSearchViewModel = SearchViewModel(configuration: .photos)
+        self.slidesSearchViewModel = slidesSearchViewModel
         
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
+        
         let viewController = storyboard.instantiateViewController(identifier: "PhotosViewController") { coder in
             PhotosViewController(
                 coder: coder,
                 model: model,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
-                searchViewModel: searchViewModel
+                searchViewModel: searchViewModel,
+                slidesSearchViewModel: slidesSearchViewModel
             )
         }
         self.viewController = viewController
@@ -45,6 +52,9 @@ class PhotosController {
             realmModel: realmModel,
             tabType: .lists
         )
+        
+        /// set the details search view model
+        searchNavigationController.detailsSearchViewModel = slidesSearchViewModel
         searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }
         searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
@@ -78,6 +88,7 @@ extension PhotosController {
         
         /// called when presenting slides. Configure the dismissal animators too.
         model.transitionAnimatorsUpdated = { photos, slides in
+            
             let pushAnimator = PhotosTransitionPushAnimator(fromDelegate: photos, toDelegate: slides)
             let popAnimator = PhotosTransitionPopAnimator(fromDelegate: slides, toDelegate: photos)
             let dismissAnimator = PhotosTransitionDismissAnimator(fromDelegate: slides, toDelegate: photos)
@@ -86,6 +97,12 @@ extension PhotosController {
             searchNavigationController.popAnimator = popAnimator
             searchNavigationController.dismissAnimator = dismissAnimator
             
+            /// reload the details search bar.
+            searchNavigationController.detailsSearchViewController?.collectionViewModel.replaceInPlace(
+                with: searchNavigationController.searchViewController.collectionViewModel
+            )
+            searchNavigationController.detailsSearchViewController?.reload()
+            
             pushAnimator?.additionalSetup = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                 searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
@@ -93,6 +110,7 @@ extension PhotosController {
             pushAnimator?.additionalAnimations = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                 searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                searchNavigationController.showDetailsSearchBar(true)
             }
             pushAnimator?.additionalCompletion = {
                 searchNavigationController.finishSearchBarTransitionAnimation(to: slides)
@@ -105,14 +123,17 @@ extension PhotosController {
             popAnimator?.additionalAnimations = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
                 searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                searchNavigationController.showDetailsSearchBar(false)
             }
             popAnimator?.additionalCompletion = {
                 searchNavigationController.finishSearchBarTransitionAnimation(to: photos)
             }
             
+            /// progress is from 0 to 1. 0 = just started dismissing, 1 = fully dismissed.
             dismissAnimator?.progressUpdated = { progress in
                 searchNavigationController.setBlur(from: slides, to: photos, percentage: progress)
                 searchNavigationController.setOffset(from: slides, to: photos, percentage: progress)
+                searchNavigationController.adjustShowingDetailsSearchBar(percentage: 1 - progress)
             }
             
             dismissAnimator?.additionalFinalAnimations = { completed in
@@ -120,10 +141,12 @@ extension PhotosController {
                     let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
                     searchNavigationController.beginSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
                     searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                    searchNavigationController.showDetailsSearchBar(false)
                 } else {
                     let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                     searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
                     searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                    searchNavigationController.showDetailsSearchBar(true)
                 }
             }
             

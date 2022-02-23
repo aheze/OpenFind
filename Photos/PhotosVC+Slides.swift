@@ -10,12 +10,17 @@ import UIKit
 
 extension PhotosViewController {
     func presentSlides(startingAt photo: Photo) {
+        
+        /// keep it up to date. replacing!
+        self.slidesSearchViewModel.replaceInPlace(with: searchViewModel)
+        self.searchViewModel.dismissKeyboard?()
+
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in
             PhotosSlidesViewController(
                 coder: coder,
                 model: self.model,
-                searchViewModel: self.searchViewModel,
+                slidesSearchViewModel: self.slidesSearchViewModel,
                 toolbarViewModel: self.toolbarViewModel
             )
         }
@@ -51,7 +56,7 @@ extension PhotosViewController {
         let photo = model.photos[currentIndex]
         Task {
             let fullImage = await model.getFullImage(from: photo)
-            
+
             /// update the transition with the new image.
             self.model.imageUpdatedWhenPresentingSlides?(fullImage)
 

@@ -20,6 +20,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     
     var rootViewController: UIViewController
     var searchViewModel: SearchViewModel
+    var detailsSearchViewModel: SearchViewModel?
     var realmModel: RealmModel /// for the search bar
     var navigation: UINavigationController!
     
@@ -27,6 +28,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     var searchContainerView: UIView!
     var searchContainerViewTopC: NSLayoutConstraint?
     var searchViewController: SearchViewController!
+    var detailsSearchViewController: SearchViewController?
     
     var navigationBarBackgroundContainer = PassthroughView()
     var navigationBarBackgroundHeightC: NSLayoutConstraint!

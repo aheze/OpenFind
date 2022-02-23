@@ -45,6 +45,7 @@ enum Find {
             continueQueue()
         }
     }
+
     static var queuedRuns = [QueuedRun]()
 
     static func find(in image: FindImage, options: FindOptions = FindOptions(), action: FindingAction, wait: Bool) async -> [Sentence]? {
@@ -85,10 +86,9 @@ enum Find {
             DispatchQueue.global(qos: .userInteractive).async {
                 do {
                     try imageRequestHandler.perform([request])
-
                 } catch {
                     Global.log("Error finding: \(error)", .error)
-                    continuation.resume(returning: [])
+//                    continuation.resume(returning: [])
                 }
             }
         }

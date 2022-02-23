@@ -20,6 +20,7 @@ extension SearchViewController {
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         let text = field.value.getText()
+        
         cell.textField.text = text
         cell.textField.inputAccessoryView = toolbarViewController.view
         setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
@@ -34,6 +35,7 @@ extension SearchViewController {
             
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
+            
             self.searchViewModel.setFieldValue(at: index) {
                 .word(
                     .init(

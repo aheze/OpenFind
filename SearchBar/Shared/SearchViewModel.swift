@@ -8,80 +8,45 @@
 
 import SwiftUI
 
-/// Model for the collection view
-class SearchCollectionViewModel: ObservableObject {
-    /// index of focused/expanded cell
-    @Published var focusedCellIndex: Int? {
-        didSet {
-            focusedCellIndexChanged?(oldValue, focusedCellIndex)
-        }
-    }
-
-    /// old / new
-    var focusedCellIndexChanged: ((Int?, Int?) -> Void)?
-    
-    var keyboardShown = false
-    
-    /// prepared before?
-    var preparedOnce = false
-    
-    /// pass back data
-    var highlightAddNewField: ((Bool) -> Void)?
-    
-    /// fast swipe, instantly convert
-    var convertAddNewCellToRegularCell: ((@escaping () -> Void) -> Void)?
-    var currentConvertingAddNewCellToRegularCell = false /// if in progress of converting
-    
-    /// collection view is about to reach the end (auto-scrolling) or has reached the end
-    var reachedEndBeforeAddWordField = false
-    
-    /// call this from the scroll view delegate when
-    /// 1. finger is down
-    /// 2. `reachedEnd` is true
-    var shouldUseOffsetWithAddNew = false
-    
-    /// when deleting cells
-    var deletedIndex: Int?
-    var fallbackIndex: Int?
-    
-    /// showing (past the point where it will auto-scroll) the last field or not
-    var highlightingAddWordField = false
-    
-    /// get the widths of cells
-    var getFullCellWidth: ((Int) -> CGFloat)?
-}
 
 class SearchViewModel: ObservableObject {
-    var configuration: SearchConfiguration
-    var isLandscape = false
-    
-    init(configuration: SearchConfiguration) {
-        self.configuration = configuration
-    }
-    
-    @Published var fields = defaultFields {
-        didSet {
-            updateStringToGradients()
-            fieldsChanged?(oldValue, fields)
-        }
-    }
-
-    var fieldsChanged: (([Field], [Field]) -> Void)?
-    func setFieldValue(at index: Int, value: () -> Field.FieldValue) {
-        fields[index].value = value()
-    }
-
-    var values: [Field.FieldValue] {
-        return fields.dropLast().map { $0.value }
-    }
-    
     struct Gradient {
         var colors = [UIColor]()
         var alpha = CGFloat(1)
     }
+
+    var configuration: SearchConfiguration
+    
+    /// set from within SearchViewController
+    var isLandscape = false
+    
+    @Published var fields = defaultFields {
+        didSet {
+            updateStringToGradients()
+            updateCustomWords()
+            fieldsChanged?(oldValue, fields)
+        }
+    }
     
     var stringToGradients = [String: Gradient]()
     var customWords = [String]()
+    
+    /// must be implemented later on
+    var fieldsChanged: (([Field], [Field]) -> Void)?
+    
+    var dismissKeyboard: (() -> Void)?
+    
+    var values: [Field.FieldValue] {
+        return fields.dropLast().map { $0.value }
+    }
+    
+    init(configuration: SearchConfiguration) {
+        self.configuration = configuration
+    }
+
+    func setFieldValue(at index: Int, value: () -> Field.FieldValue) {
+        fields[index].value = value()
+    }
     
     func updateStringToGradients() {
         var stringToGradients = [String: Gradient]()
@@ -132,6 +97,26 @@ class SearchViewModel: ObservableObject {
         } else {
             return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
         }
+    }
+}
+
+extension SearchViewModel {
+    /// get a copy of this model
+//    func copy() -> SearchViewModel {
+//        let model = SearchViewModel(configuration: configuration)
+//        model.isLandscape = isLandscape
+//        model.fields = fields
+//        model.stringToGradients = stringToGradients
+//        model.customWords = customWords
+//        return model
+//    }
+    
+    /// set all the properties without creating a new instance
+    func replaceInPlace(with model: SearchViewModel) {
+        isLandscape = model.isLandscape
+        fields = model.fields
+        stringToGradients = model.stringToGradients
+        customWords = model.customWords
     }
 }
 

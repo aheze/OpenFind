@@ -52,6 +52,8 @@ extension SearchNavigationController {
             self.navigationBarBackgroundBorderView.alpha = 0
             self.navigationBarBackgroundBlurView.effect = nil
         }
+        
+   
     }
     
     func continueSearchBarTransitionAnimation(targetPercentage: CGFloat) {

@@ -13,12 +13,10 @@ class SearchViewController: UIViewController {
     var collectionViewModel = SearchCollectionViewModel()
     
     @IBOutlet var searchBarHeightC: NSLayoutConstraint!
-    @IBOutlet weak var searchBarTopC: NSLayoutConstraint!
-    @IBOutlet weak var searchBarBottomC: NSLayoutConstraint!
+    @IBOutlet var searchBarTopC: NSLayoutConstraint!
+    @IBOutlet var searchBarBottomC: NSLayoutConstraint!
     
-    lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = {
-        return createFlowLayout()
-    }()
+    lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = createFlowLayout()
     
     /// base view for everything
     @IBOutlet var baseView: UIView!
@@ -90,7 +88,6 @@ class SearchViewController: UIViewController {
         listenToKeyboard()
     }
 
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLandscapeConstants()
@@ -124,7 +121,6 @@ extension SearchViewController {
         _ = searchCollectionViewFlowLayout /// initialize and set up
         
         searchCollectionView.panGestureRecognizer.addTarget(self, action: #selector(handlePan(_:)))
-        
     }
     
     /// convert "Add New" cell into a normal field
