@@ -32,7 +32,9 @@ extension CameraViewController {
         if recentFoundHighlights.count == 0, recentRecognizedStrings.count <= 20 {
             print("No text detected.")
             model.recentEvents.removeAll()
-            stopLivePreview()
+            
+            /// stop scanning for now, until the phone shakes
+            stopLivePreviewScanning()
         }
     }
 }

@@ -10,7 +10,9 @@ import CoreMotion
 import UIKit
 
 extension CameraViewController {
-    func stopLivePreview() {
+    
+    /// conserve resources by stopping finding from the live preview
+    func stopLivePreviewScanning() {
         Find.prioritizedAction = nil
         model.livePreviewScanning = false
         showNoTextRecognized()
@@ -25,14 +27,17 @@ extension CameraViewController {
                 let acceleration = data.acceleration.x + data.acceleration.y
 
                 if abs(acceleration) >= 0.3 {
-                    print("resuming.")
-                    Find.prioritizedAction = .camera
-                    self?.model.motionManager?.stopAccelerometerUpdates()
-                    self?.model.motionManager = nil
-                    self?.model.livePreviewScanning = true
-                    self?.hideNoTextRecognized()
+                    self?.resumeLivePreviewScanning()
                 }
             }
         }
+    }
+    
+    func resumeLivePreviewScanning() {
+        Find.prioritizedAction = .camera
+        model.motionManager?.stopAccelerometerUpdates()
+        model.motionManager = nil
+        model.livePreviewScanning = true
+        hideNoTextRecognized()
     }
 }
