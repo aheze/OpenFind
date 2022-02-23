@@ -18,20 +18,21 @@ class PhotosViewModel: ObservableObject {
     /// store the cell images
     var photoToThumbnail = [Photo: UIImage?]()
 
+    /// update the collection view. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
-
-    init(realmModel: RealmModel) {
-        self.realmModel = realmModel
-        listenToRealm()
-    }
 
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
 
+    /// for use inside the slides' `willDisplay` cell - hide the container view if animating.
     var animatingSlides = false
+    
     /// the slides' current status
     var slidesState: PhotosSlidesState?
+    
+    /// the state of the results.
+    var resultsState: PhotosResultsState?
 
     /// about to present slides, set the transition
     var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
@@ -47,6 +48,11 @@ class PhotosViewModel: ObservableObject {
     @Published var scanningState = ScanningState.dormant
     @Published var scannedPhotosCount = 0
     @Published var totalPhotosCount = 0
+
+    init(realmModel: RealmModel) {
+        self.realmModel = realmModel
+        listenToRealm()
+    }
 
     enum ScanningState {
         case dormant

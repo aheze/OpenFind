@@ -14,7 +14,19 @@ struct PhotosSlidesState {
     var findPhotos: [FindPhoto]
     var startingPhoto: Photo
     var currentIndex: Int?
-    
+
+    /// get from `findPhotos`
+    func getFindPhotoIndex(photo: FindPhoto) -> Int? {
+        if let firstIndex = findPhotos.firstIndex(of: photo) {
+            return firstIndex
+        }
+        return nil
+    }
+}
+
+struct PhotosResultsState {
+    var findPhotos: [FindPhoto]
+
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: FindPhoto) -> Int? {
         if let firstIndex = findPhotos.firstIndex(of: photo) {
@@ -35,18 +47,18 @@ struct PhotosSection: Hashable {
     var title: String
     var categorization: Categorization
     var photos = [Photo]()
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(categorization)
     }
-    
+
     static func == (lhs: PhotosSection, rhs: PhotosSection) -> Bool {
         lhs.categorization == rhs.categorization
     }
-    
+
     enum Categorization: Equatable, Hashable {
         case date(year: Int, month: Int, day: Int)
-        
+
         func getTitle() -> String {
             switch self {
             case .date(let year, let month, let day):
@@ -58,7 +70,7 @@ struct PhotosSection: Hashable {
                     return string
                 }
             }
-            
+
             return ""
         }
     }

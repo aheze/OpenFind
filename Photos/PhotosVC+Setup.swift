@@ -15,7 +15,10 @@ import SwiftUI
  */
 extension PhotosViewController {
     func setup() {
-        setupCollectionView()
+        setupCollectionView(collectionView, with: flowLayout)
+        setupCollectionView(resultsCollectionView, with: resultsFlowLayout)
+        showResults(false)
+        
         setupNavigationBar()
         checkPermissions()
         listenToModel()
@@ -59,9 +62,10 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
-    func setupCollectionView() {
+    func setupCollectionView(_ collectionView: UICollectionView, with layout: UICollectionViewFlowLayout) {
         view.addSubview(collectionView)
         collectionView.pinEdgesToSuperview()
+        
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
@@ -71,7 +75,7 @@ extension PhotosViewController {
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         collectionView.contentInsetAdjustmentBehavior = .always
-        collectionView.collectionViewLayout = flowLayout
+        collectionView.collectionViewLayout = layout
     }
 
     func setupNavigationBar() {

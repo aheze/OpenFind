@@ -16,9 +16,11 @@ import UIKit
 extension PhotosViewController {
     func showResults(_ show: Bool) {
         if show {
-            
+            resultsCollectionView.alpha = 1
+            collectionView.alpha = 0
         } else {
-            
+            resultsCollectionView.alpha = 0
+            collectionView.alpha = 1
         }
     }
 }
