@@ -37,8 +37,10 @@ enum PhotosResultsCellConstants {
     static var resultsFont = UIFont.preferredFont(forTextStyle: .subheadline)
     static var resultsLabelTextColor = UIColor.secondaryLabel
     static var resultsLabelBackgroundColor = UIColor.secondarySystemBackground
-    static var resultsLabelEdgeInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
+    static var resultsLabelEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
     
     static var descriptionFont = UIFont.preferredFont(forTextStyle: .body)
     static var descriptionTextColor = UIColor.label
+    
+    static var imageWidth = CGFloat(100)
 }

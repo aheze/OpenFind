@@ -13,15 +13,18 @@ extension PhotosViewController {
         var findPhotos = [FindPhoto]()
         for photo in model.photos {
             guard let metadata = photo.metadata else { continue }
-            let highlights = self.getHighlights(from: metadata.sentences)
+            let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
             if highlights.count >= 1 {
                 let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                 let findPhoto = FindPhoto(
                     photo: photo,
                     thumbnail: thumbnail,
-                    highlights: highlights
+                    highlights: highlights,
+                    descriptionText: getCellDescription(from: lines),
+                    descriptionLines: lines
                 )
             
+                print("Lines: \(lines)")
                 findPhotos.append(findPhoto)
             }
         }
@@ -29,9 +32,14 @@ extension PhotosViewController {
         updateResults(animate: true)
     }
     
-    func getHighlights(from sentences: [Sentence]) -> Set<Highlight> {
+    func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {
         var highlights = Set<Highlight>()
+        var lines = [FindPhoto.Line]()
+        
         for sentence in sentences {
+            /// the highlights in this sentence.
+            var lineHighlights = Set<FindPhoto.Line.LineHighlight>()
+            
             for (string, gradient) in self.searchViewModel.stringToGradients {
                 let indices = sentence.string.lowercased().indicesOf(string: string.lowercased())
                 for index in indices {
@@ -44,9 +52,22 @@ extension PhotosViewController {
                         alpha: gradient.alpha
                     )
                     highlights.insert(highlight)
+                    
+                    print("String: \(string)")
+                    let lineHighlight = FindPhoto.Line.LineHighlight(
+                        rangeInSentence: index ..< index + string.count,
+                        colors: gradient.colors,
+                        alpha: gradient.alpha
+                    )
+                    lineHighlights.insert(lineHighlight)
                 }
             }
+            
+            if lineHighlights.count > 0 {
+                let line = FindPhoto.Line(string: sentence.string, linesHighlights: lineHighlights)
+                lines.append(line)
+            }
         }
-        return highlights
+        return (highlights, lines)
     }
 }

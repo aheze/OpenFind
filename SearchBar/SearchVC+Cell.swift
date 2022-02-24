@@ -142,11 +142,13 @@ extension SearchViewController {
                 color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
                 alpha: field.overrides.alpha
             )
+            cell.updateBackgroundColor()
         case .list(let list):
             cell.leftView.imageView.alpha = 1
             cell.leftView.findIconView.alpha = 0
             cell.leftView.imageView.image = UIImage(systemName: list.icon)
             cell.leftView.imageView.tintColor = UIColor.white.toColor(field.overrides.selectedColor ?? UIColor(hex: list.color), percentage: field.overrides.alpha)
+            cell.updateBackgroundColor()
         case .addNew:
             cell.leftView.imageView.alpha = 0
             cell.leftView.findIconView.alpha = 1
@@ -154,6 +156,7 @@ extension SearchViewController {
                 color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
                 alpha: field.overrides.alpha
             )
+            cell.updateBackgroundColor()
         }
     }
     

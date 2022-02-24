@@ -201,6 +201,12 @@ class SearchFieldCell: UICollectionViewCell {
         }
         return (setup, animationBlock, completion)
     }
+    
+    func updateBackgroundColor() {
+        UIView.animate(withDuration: 0.3) {
+            self.contentView.backgroundColor = self.model.getBackgroundColor()
+        }
+    }
 }
 
 extension SearchFieldCell: UITextFieldDelegate {
@@ -210,9 +216,6 @@ extension SearchFieldCell: UITextFieldDelegate {
         {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
             textChanged?(updatedText)
-            UIView.animate(withDuration: 0.3) {
-                self.contentView.backgroundColor = self.model.getBackgroundColor()
-            }
         }
         
         return true

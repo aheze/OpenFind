@@ -41,7 +41,30 @@ struct FindPhoto: Hashable {
     var thumbnail: UIImage?
     var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
+
+    /// results
     var highlights: Set<Highlight>?
+    var descriptionText = ""
+    var descriptionLines = [Line]()
+
+    struct Line: Hashable {
+        var string: String
+        var linesHighlights: Set<LineHighlight>? /// the frames of these highlights will be relative to the result cell
+    
+        struct LineHighlight: Hashable {
+            
+            /**
+             from the start index to the end index
+             
+                Example: "Safari" - searching for "a"
+                    1..<2
+                    3..<4
+             */
+            var rangeInSentence: Range<Int>
+            var colors: [UIColor]
+            var alpha: CGFloat
+        }
+    }
 }
 
 struct PhotosSection: Hashable {

@@ -41,6 +41,7 @@ class PhotosResultsCell: UICollectionViewCell {
     
     /// image on the left
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imageViewWidthC: NSLayoutConstraint!
     
     /// vertical stack view on right
     @IBOutlet var rightStackView: UIStackView!
@@ -60,6 +61,10 @@ class PhotosResultsCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        resultsLabel.clipsToBounds = true
+        
+        descriptionTextView.textContainerInset = .zero
+        
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
@@ -75,6 +80,7 @@ class PhotosResultsCell: UICollectionViewCell {
         rightTopStackView.spacing = c.cellSpacing
         
         layer.cornerRadius = c.cornerRadius
+        imageViewWidthC.constant = c.imageWidth
         
         stackViewTopC.constant = c.cellPadding
         stackViewRightC.constant = c.cellPadding

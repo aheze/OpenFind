@@ -32,26 +32,24 @@ extension PhotosViewController {
     
     func getCellSize(photosIndex: Int, availableWidth: CGFloat) -> CGSize {
         guard let resultsState = self.model.resultsState else { return .zero }
-//        let photo = resultsState.findPhotos[photosIndex]
-//        let c = ListsCellConstants.self
-//
-//        let headerHeight = c.headerTitleFont.lineHeight
-//            + c.headerEdgeInsets.top
-//            + c.headerEdgeInsets.bottom
-//
-//        let contentWidth = availableWidth
-//            - c.contentEdgeInsets.left
-//            - c.contentEdgeInsets.right
-//
-////        let chipContainerHeight = offset.height + (chipFrames.last?.frame.height ?? 0)
-////        let containerHeight = chipContainerHeight
-////            + c.contentEdgeInsets.top
-////            + c.contentEdgeInsets.bottom
-//
-//        let height = headerHeight
-//        + containerHeight
-//        let cellSize = CGSize(width: availableWidth, height: height)
-        let cellSize = CGSize(width: availableWidth, height: 300)
+        let photo = resultsState.findPhotos[photosIndex]
+        let c = PhotosResultsCellConstants.self
+
+        let rightTopStackViewHeight = c.resultsFont.lineHeight
+            + c.resultsLabelEdgeInsets.top
+            + c.resultsLabelEdgeInsets.bottom
+        
+        let rightStackViewSpacing = c.cellSpacing
+        
+        let contentWidth = availableWidth - (c.cellPadding * 2)
+        let descriptionWidth = contentWidth - c.imageWidth - c.cellSpacing
+        let descriptionHeight = photo.descriptionText.height(withConstrainedWidth: descriptionWidth, font: c.descriptionFont)
+        
+
+        let contentHeight = rightTopStackViewHeight + rightStackViewSpacing + descriptionHeight
+        let height = contentHeight + c.cellPadding * 2
+        
+        let cellSize = CGSize(width: availableWidth, height: height)
         return cellSize
     }
 }
