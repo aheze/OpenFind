@@ -13,6 +13,7 @@ extension PhotosViewController {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.getIndices = { [weak self] in
+            
             if
                 let self = self,
                 let resultsState = self.model.resultsState
@@ -31,7 +32,7 @@ extension PhotosViewController {
     }
     
     func getCellSize(photosIndex: Int, availableWidth: CGFloat) -> CGSize {
-        guard let resultsState = self.model.resultsState else { return .zero }
+        guard let resultsState = model.resultsState else { return .zero }
         let photo = resultsState.findPhotos[photosIndex]
         let c = PhotosResultsCellConstants.self
 
@@ -45,7 +46,6 @@ extension PhotosViewController {
         let descriptionWidth = contentWidth - c.imageWidth - c.cellSpacing
         let descriptionHeight = photo.descriptionText.height(withConstrainedWidth: descriptionWidth, font: c.descriptionFont)
         
-
         let contentHeight = rightTopStackViewHeight + rightStackViewSpacing + descriptionHeight
         let height = contentHeight + c.cellPadding * 2
         

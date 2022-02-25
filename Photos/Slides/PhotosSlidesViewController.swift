@@ -76,17 +76,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         setupDismissGesture()
         update(animate: false)
         
-        if
-            let slidesState = model.slidesState,
-            let index = slidesState.findPhotos.firstIndex(where: {
-                $0 == slidesState.startingFindPhoto
-            })
-        {
-            print("first index.")
-        } else {
-            print("->>>> no index!!")
-        }
-        
         if let slidesState = model.slidesState, let index = slidesState.currentIndex {
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: true)

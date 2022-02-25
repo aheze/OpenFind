@@ -28,8 +28,15 @@ extension PhotosViewController {
             }
         }
         
-        self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
-        updateResults(animate: true)
+        if self.model.resultsState != nil {
+            self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
+            self.updateResults(animate: true)
+        } else {
+            self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
+            self.updateResults(animate: false)
+        }
+        
+        
     }
     
     func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {
