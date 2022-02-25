@@ -59,7 +59,6 @@ extension PhotosViewController {
                     )
                     highlights.insert(highlight)
                     
-//                    print("Range for \(string): \(index) to \(index + string.count)")
                     let lineHighlight = FindPhoto.Line.LineHighlight(
                         rangeInSentence: index ..< index + string.count,
                         colors: gradient.colors,

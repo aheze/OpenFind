@@ -31,6 +31,8 @@ class PhotosResultsCell: UICollectionViewCell {
     var representedAssetIdentifier: String?
     
     var tapped: (() -> Void)?
+    var appeared: (() -> Void)?
+    var disappeared: (() -> Void)?
     @IBOutlet var buttonView: ButtonView!
     
     /// `imageView` on left, `rightStackView` on right
@@ -60,9 +62,13 @@ class PhotosResultsCell: UICollectionViewCell {
         super.layoutSubviews()
         resultsLabel.layer.cornerRadius = resultsLabel.bounds.height / 2
     }
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
+//        print("awake!!")
+//        appeared?()
+        
         stackView.isUserInteractionEnabled = false
         resultsLabel.clipsToBounds = true
         
@@ -101,5 +107,11 @@ class PhotosResultsCell: UICollectionViewCell {
         titleLabel.textColor = c.titleTextColor
         resultsLabel.textColor = c.resultsLabelTextColor
         descriptionTextView.textColor = c.descriptionTextColor
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disappeared?()
     }
 }

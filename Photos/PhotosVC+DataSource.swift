@@ -56,8 +56,7 @@ extension PhotosViewController {
                 return cell
             }
         )
-        
-        
+
         return dataSource
     }
 }

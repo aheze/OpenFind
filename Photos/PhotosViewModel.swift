@@ -36,7 +36,7 @@ class PhotosViewModel: ObservableObject {
 
     /// about to present slides, update the slides search collection view to match the latest search view model
     var updateSlidesSearchCollectionView: (() -> Void)?
-    
+
     /// about to present slides, set the transition
     var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
 

@@ -15,13 +15,13 @@ extension PhotosViewController {
             let findPhoto = resultsState.findPhotos[safe: index]
         else { return }
         
-        print("Will display at \(index) (\(findPhoto.dateString()))")
+//        print("Will display at \(index) (\(findPhoto.dateString()))")
         
         let highlightsViewModel = HighlightsViewModel()
             
         var cellHighlights = Set<Highlight>()
         
-        print("->>    Lines: \(findPhoto.descriptionLines.map { $0.string })")
+//        print("->>    Lines: \(findPhoto.descriptionLines.map { $0.string })")
         for index in findPhoto.descriptionLines.indices {
             let line = findPhoto.descriptionLines[index]
             guard
@@ -39,7 +39,6 @@ extension PhotosViewController {
             }
             
             for lineHighlight in lineHighlights {
-                
                 let startOffset = lineHighlight.rangeInSentence.startIndex + previousDescriptionCount
                 let endOffset = lineHighlight.rangeInSentence.endIndex + previousDescriptionCount
                 
@@ -51,7 +50,7 @@ extension PhotosViewController {
                 
                 let rect = textView.firstRect(for: textRange)
                 
-                print("     [original: \(lineHighlight.rangeInSentence)] + \(previousDescriptionCount) = [new: \(startOffset)..<\(endOffset)] -> rect: \(rect)")
+//                print("     [original: \(lineHighlight.rangeInSentence)] + \(previousDescriptionCount) = [new: \(startOffset)..<\(endOffset)] -> rect: \(rect)")
                 
                 let cellHighlight = Highlight(
                     string: "",
@@ -61,29 +60,20 @@ extension PhotosViewController {
                 )
                 cellHighlights.insert(cellHighlight)
             }
-//                cellHighlight.frame =
         }
         
-        print("     Highlights for \(index): \(cellHighlights.count)")
+//        print("     Highlights for \(index): \(cellHighlights.count)")
         
-//        highlightsViewModel.update(with: cellHighlights, replace: true)
-        if model.resultsState?.findPhotos[index].cellHighlightsViewController == nil {
-            highlightsViewModel.highlights = cellHighlights
-            let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
-            addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
-            model.resultsState?.findPhotos[index].cellHighlightsViewController = highlightsViewController
-        } else {
-            print("Already exists. \(index)")
-        }
+        highlightsViewModel.highlights = cellHighlights
+        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+        addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
+        model.resultsState?.findPhotos[index].cellHighlightsViewController = highlightsViewController
     }
     
     func didEndDisplayingResultsCell(cell: PhotosResultsCell, index: Int) {
         print("             Did end displaying at \(index)")
-        guard let resultsState = model.resultsState else { return }
-        if
-            let findPhoto = resultsState.findPhotos[safe: index],
-            let highlightsViewController = model.resultsState?.findPhotos[index].cellHighlightsViewController
-        {
+        if let highlightsViewController = model.resultsState?.findPhotos[index].cellHighlightsViewController {
+            print("Reoving \(highlightsViewController).")
             removeChildViewController(highlightsViewController)
             model.resultsState?.findPhotos[index].cellHighlightsViewController = nil
         }

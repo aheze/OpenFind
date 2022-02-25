@@ -29,11 +29,16 @@ extension PhotosViewController {
                     for: indexPath
                 ) as! PhotosResultsCell
 
+                if let highlightsViewController = self.model.resultsState?.findPhotos[indexPath.item].cellHighlightsViewController {
+                    self.removeChildViewController(highlightsViewController)
+                    self.model.resultsState?.findPhotos[indexPath.item].cellHighlightsViewController = nil
+                }
+                
                 cell.titleLabel.text = findPhoto.dateString()
                 cell.resultsLabel.text = findPhoto.resultsString()
 
-                print("Setting desc for \(indexPath.item): \(findPhoto.descriptionText)")
                 cell.descriptionTextView.text = findPhoto.descriptionText
+                
 
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
@@ -55,6 +60,20 @@ extension PhotosViewController {
                     guard let self = self else { return }
                     self.presentSlides(startingAtFindPhoto: findPhoto)
                 }
+                
+                
+//                cell.appeared = { [weak self] in
+//                    print("\(indexPath.item) appeared")
+//                }
+                
+                self.didEndDisplayingResultsCell(cell: cell, index: indexPath.item)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.willDisplayResultsCell(cell: cell, index: indexPath.item)
+                }
+//                cell.disappeared = { [weak self] in
+//                    print("\(indexPath.item) disappeared")
+//                    self?.didEndDisplayingResultsCell(cell: cell, index: indexPath.item)
+//                }
 
                 return cell
             }

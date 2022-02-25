@@ -15,6 +15,18 @@ extension PhotosViewController: UICollectionViewDelegate {
         
         /// For photos caching
         updateCachedAssets()
+        
+        if let resultsState = model.resultsState {
+            let oldIndices = resultsState.displayedIndices
+            let newIndices = Set(resultsCollectionView.indexPathsForVisibleItems.map { $0.item })
+            model.resultsState?.displayedIndices = newIndices
+            
+            let removedIndices = oldIndices.subtracting(newIndices)
+            if removedIndices.count >= 1 {
+                print("Removed: \(removedIndices)")
+            }
+            resultsCellIndicesDisappeared(indices: removedIndices)
+        }
     }
     
     /// update the blur with a scroll view's content offset
@@ -24,17 +36,13 @@ extension PhotosViewController: UICollectionViewDelegate {
         updateNavigationBar?()
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PhotosResultsCell {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.willDisplayResultsCell(cell: cell, index: indexPath.item)
+    /// called when the cells disappear, since `didEndDisplayingCell` doesn't work
+    func resultsCellIndicesDisappeared(indices: Set<Int>) {
+        for index in indices {
+            print("Index: \(index)")
+            if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
+                didEndDisplayingResultsCell(cell: cell, index: index)
             }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PhotosResultsCell {
-            didEndDisplayingResultsCell(cell: cell, index: indexPath.item)
         }
     }
 }
