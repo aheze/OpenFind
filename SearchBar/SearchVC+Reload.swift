@@ -9,6 +9,7 @@
 import UIKit
 
 extension SearchViewController {
+    /// update the collection view.
     func reload() {
         searchCollectionView.reloadData()
         searchCollectionView.layoutIfNeeded()

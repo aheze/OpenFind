@@ -16,7 +16,7 @@ import UIKit
 extension ListsDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - detailsSearchViewModel.getTotalHeight()
         updateSearchBarOffset?()
     }
 }

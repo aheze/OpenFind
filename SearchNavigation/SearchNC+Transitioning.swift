@@ -21,6 +21,13 @@ extension SearchNavigationController: UINavigationControllerDelegate {
     
         transitionCoordinator.animate { _ in
             self.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            
+            /// check if is presenting
+            if viewController is ListsDetailViewController {
+                self.showDetailsSearchBar(true)
+            } else {
+                self.showDetailsSearchBar(false)
+            }
         } completion: { context in
                 
             /// restart the animator

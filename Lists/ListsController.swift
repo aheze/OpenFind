@@ -8,12 +8,12 @@
 import UIKit
 
 class ListsController {
-    
     var model: ListsViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     
     var searchViewModel: SearchViewModel
+    var detailsSearchViewModel: SearchViewModel
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
@@ -24,6 +24,8 @@ class ListsController {
         
         let searchViewModel = SearchViewModel(configuration: .lists)
         self.searchViewModel = searchViewModel
+        let detailsSearchViewModel = SearchViewModel(configuration: .lists)
+        self.detailsSearchViewModel = detailsSearchViewModel
         
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "ListsViewController") { coder in
@@ -32,7 +34,8 @@ class ListsController {
                 model: model,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
-                searchViewModel: searchViewModel
+                searchViewModel: searchViewModel,
+                detailsSearchViewModel: detailsSearchViewModel
             )
         }
         
@@ -43,11 +46,14 @@ class ListsController {
             realmModel: realmModel,
             tabType: .lists
         )
+        
+        /// set the details search view model
+        searchNavigationController.detailsSearchViewModel = detailsSearchViewModel
         searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }
         searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
         searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
-        searchNavigationController.onBoundsChange = { (size, safeAreaInsets) in
+        searchNavigationController.onBoundsChange = { size, safeAreaInsets in
             viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
         }
         
@@ -58,6 +64,20 @@ class ListsController {
             guard let self = self else { return }
             self.searchNavigationController.updateSearchBarOffset()
             Tab.Frames.excluded[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
+        }
+        
+        configureTransitions(for: searchNavigationController)
+    }
+}
+
+extension ListsController {
+    func configureTransitions(for searchNavigationController: SearchNavigationController) {
+        model.updateDetailsSearchCollectionView = {
+            /// reload the details search bar.
+            searchNavigationController.detailsSearchViewController?.collectionViewModel.replaceInPlace(
+                with: searchNavigationController.searchViewController.collectionViewModel
+            )
+            searchNavigationController.detailsSearchViewController?.reload()
         }
     }
 }

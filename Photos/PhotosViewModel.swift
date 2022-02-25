@@ -27,13 +27,16 @@ class PhotosViewModel: ObservableObject {
 
     /// for use inside the slides' `willDisplay` cell - hide the container view if animating.
     var animatingSlides = false
-    
+
     /// the slides' current status
     var slidesState: PhotosSlidesState?
-    
+
     /// the state of the results.
     var resultsState: PhotosResultsState?
 
+    /// about to present slides, update the slides search collection view to match the latest search view model
+    var updateSlidesSearchCollectionView: (() -> Void)?
+    
     /// about to present slides, set the transition
     var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
 

@@ -11,7 +11,7 @@ import SwiftUI
 class ListsDetailViewController: UIViewController, Searchable {
     var model: ListsDetailViewModel
     var toolbarViewModel: ToolbarViewModel
-    var searchViewModel: SearchViewModel
+    var detailsSearchViewModel: SearchViewModel
     var realmModel: RealmModel
     
     var baseSearchBarOffset = CGFloat(0)
@@ -57,7 +57,6 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet var headerBottomViewHeightC: NSLayoutConstraint!
     @IBOutlet var headerBottomTextField: UITextField!
     
-    
     // MARK: - Words
 
     @IBOutlet var wordsView: UIView!
@@ -80,9 +79,9 @@ class ListsDetailViewController: UIViewController, Searchable {
     @IBOutlet var wordsTableView: UITableView!
     @IBOutlet var wordsTableViewHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var bottomSpacerView: UIView!
+    @IBOutlet var bottomSpacerView: UIView!
     
-    @IBOutlet weak var bottomSpacerHeightC: NSLayoutConstraint!
+    @IBOutlet var bottomSpacerHeightC: NSLayoutConstraint!
     
     /// for copy/delete
     lazy var toolbarView = ListsDetailToolbarView(model: model)
@@ -95,12 +94,12 @@ class ListsDetailViewController: UIViewController, Searchable {
         coder: NSCoder,
         model: ListsDetailViewModel,
         toolbarViewModel: ToolbarViewModel,
-        searchViewModel: SearchViewModel,
+        detailsSearchViewModel: SearchViewModel,
         realmModel: RealmModel
     ) {
         self.model = model
         self.toolbarViewModel = toolbarViewModel
-        self.searchViewModel = searchViewModel
+        self.detailsSearchViewModel = detailsSearchViewModel
         self.realmModel = realmModel
         super.init(coder: coder)
     }
@@ -126,8 +125,8 @@ class ListsDetailViewController: UIViewController, Searchable {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0
         
-        scrollView.contentInset.top = searchViewModel.getTotalHeight()
-        scrollView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        scrollView.contentInset.top = detailsSearchViewModel.getTotalHeight()
+        scrollView.verticalScrollIndicatorInsets.top = detailsSearchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         scrollView.delegate = self
         
         headerTopCenterTextField.delegate = self
@@ -171,10 +170,8 @@ class ListsDetailViewController: UIViewController, Searchable {
         model.isEditing = false
         model.isEditingChanged?()
         
-        print("diss!")
         Tab.Frames.excluded[.listsDetailsScreenEdge] = nil
     }
-    
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

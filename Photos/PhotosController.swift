@@ -86,6 +86,14 @@ extension PhotosController {
             }
         }
         
+        model.updateSlidesSearchCollectionView = {
+            /// reload the details search bar.
+            searchNavigationController.detailsSearchViewController?.collectionViewModel.replaceInPlace(
+                with: searchNavigationController.searchViewController.collectionViewModel
+            )
+            searchNavigationController.detailsSearchViewController?.reload()
+        }
+        
         /// called when presenting slides. Configure the dismissal animators too.
         model.transitionAnimatorsUpdated = { photos, slides in
             
@@ -96,13 +104,7 @@ extension PhotosController {
             searchNavigationController.pushAnimator = pushAnimator
             searchNavigationController.popAnimator = popAnimator
             searchNavigationController.dismissAnimator = dismissAnimator
-            
-            /// reload the details search bar.
-            searchNavigationController.detailsSearchViewController?.collectionViewModel.replaceInPlace(
-                with: searchNavigationController.searchViewController.collectionViewModel
-            )
-            searchNavigationController.detailsSearchViewController?.reload()
-            
+   
             pushAnimator?.additionalSetup = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                 searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)

@@ -13,6 +13,7 @@ class ListsViewController: UIViewController, Searchable {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     var searchViewModel: SearchViewModel
+    var detailsSearchViewModel: SearchViewModel
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
@@ -34,12 +35,14 @@ class ListsViewController: UIViewController, Searchable {
         model: ListsViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
-        searchViewModel: SearchViewModel
+        searchViewModel: SearchViewModel,
+        detailsSearchViewModel: SearchViewModel
     ) {
         self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         self.searchViewModel = searchViewModel
+        self.detailsSearchViewModel = detailsSearchViewModel
         super.init(coder: coder)
     }
 

@@ -30,7 +30,7 @@ extension ListsDetailViewController {
 
                 let wordsHeaderHeight = wordsTopView.bounds.height
 
-                let navigationBarHeight = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets) + searchViewModel.getTotalHeight()
+                let navigationBarHeight = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets) + detailsSearchViewModel.getTotalHeight()
                 let topPadding: CGFloat
                 if traitCollection.verticalSizeClass == .compact {
                     topPadding = ListsDetailConstants.focusedCellTopPaddingCompactHeight
@@ -45,7 +45,7 @@ extension ListsDetailViewController {
                 let offset = relativeCellOrigin - additionalPadding
 
                 /// Usually 151. The scroll view's content offset will also be 151 when it is at the top.
-                let baseOffset = baseSearchBarOffset + searchViewModel.getTotalHeight()
+                let baseOffset = baseSearchBarOffset + detailsSearchViewModel.getTotalHeight()
 
                 /// Prevent setting offset to greater than -151 (drag down rubber band after hitting top)
                 let clampedOffset = max(offset, -baseOffset)

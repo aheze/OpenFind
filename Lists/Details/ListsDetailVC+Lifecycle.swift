@@ -32,12 +32,11 @@ extension ListsDetailViewController {
         updateSearchBarOffset?()
 
         updateSwipeBackTouchTarget(viewSize: size)
-        print("size: \(size) vs \(view.bounds.size)")
     }
 
     func updateSwipeBackTouchTarget(viewSize: CGSize) {
         let listsDetailsScreenEdgeRect: CGRect
-        
+
         /// right to left, use opposite swipe
         if UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft {
             listsDetailsScreenEdgeRect = CGRect(x: viewSize.width - TabConstants.screenEdgeSwipeGestureWidth, y: 0, width: TabConstants.screenEdgeSwipeGestureWidth, height: viewSize.height)

@@ -11,31 +11,36 @@ import UIKit
 extension ListsViewController {
     func presentDetails(list: List, focusFirstWord: Bool = false) {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
+        let listsDetailViewModel = ListsDetailViewModel(
+            list: list,
+            listUpdated: { [weak self] newList in
+                self?.realmModel.updateList(list: newList)
+                self?.listUpdated(list: newList)
+            },
+            listDeleted: { [weak self] listToDelete in
+                self?.realmModel.deleteList(list: listToDelete)
+                self?.listDeleted(list: listToDelete)
+            },
+            realmModel: self.realmModel
+        )
+        
+        listsDetailViewModel.focusFirstWord = focusFirstWord
         let viewController: ListsDetailViewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
             
-            let listsDetailViewModel = ListsDetailViewModel(
-                list: list,
-                listUpdated: { [weak self] newList in
-                    self?.realmModel.updateList(list: newList)
-                    self?.listUpdated(list: newList)
-                },
-                listDeleted: { [weak self] listToDelete in
-                    self?.realmModel.deleteList(list: listToDelete)
-                    self?.listDeleted(list: listToDelete)
-                },
-                realmModel: self.realmModel
-            )
-            
-            listsDetailViewModel.focusFirstWord = focusFirstWord
-            
-            return ListsDetailViewController(
+            let viewController = ListsDetailViewController(
                 coder: coder,
                 model: listsDetailViewModel,
                 toolbarViewModel: self.toolbarViewModel,
-                searchViewModel: self.searchViewModel,
+                detailsSearchViewModel: self.detailsSearchViewModel,
                 realmModel: self.realmModel
             )
+            
+            return viewController
         }
+        
+        /// keep it up to date. replacing!
+        self.detailsSearchViewModel.replaceInPlace(with: searchViewModel)
+        model.updateDetailsSearchCollectionView?()
         
         self.detailsViewController = viewController
         navigationController?.pushViewController(viewController, animated: true)
