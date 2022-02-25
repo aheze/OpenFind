@@ -29,7 +29,7 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
         imageView.accessibilityIgnoresInvertColors = true
         return imageView
     }()
-    
+
     /// for the navigation bar or any other animations
     var additionalSetup: (() -> Void)?
     var additionalAnimations: (() -> Void)?
@@ -40,9 +40,9 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        self.toDelegate.transitionWillStart(type: .pop)
-        self.fromDelegate.transitionWillStart(type: .pop)
-        
+        toDelegate.transitionWillStart(type: .pop)
+        fromDelegate.transitionWillStart(type: .pop)
+
         // 4
         guard let slidesView = transitionContext.view(forKey: .from) else { return }
         guard let photosView = transitionContext.view(forKey: .to) else { return }
@@ -63,13 +63,14 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
         if let fromImageFrame = fromDelegate.imageFrame(type: .pop) {
             transitionImageView.frame = fromImageFrame
         }
+        transitionImageView.layer.cornerRadius = fromDelegate.imageCornerRadius(type: .push)
 
         // Now let's animate, using our old friend UIViewPropertyAnimator!
         let spring: CGFloat = 0.95
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
             photosView.alpha = 1
         }
-        
+
         // Once the animation is complete, we'll need to clean up.
         animator.addCompletion { position in
             // Remove the transition image
@@ -95,6 +96,9 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
                 if let toImageFrame = self.toDelegate.imageFrame(type: .pop) {
                     self.transitionImageView.frame = toImageFrame
                 }
+
+                self.transitionImageView.layer.cornerRadius = self.toDelegate.imageCornerRadius(type: .push)
+
                 self.additionalAnimations?()
             }
         }

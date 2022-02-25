@@ -30,6 +30,8 @@ protocol PhotoTransitionAnimatorDelegate: UIViewController {
 
     /// The location onscreen for the imageView provided in `referenceImageView(for:)`
     func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect?
+    
+    func imageCornerRadius(type: PhotoTransitionAnimatorType) -> CGFloat
 }
 
 

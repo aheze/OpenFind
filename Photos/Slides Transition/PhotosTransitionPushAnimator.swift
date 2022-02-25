@@ -34,20 +34,16 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
     var additionalSetup: (() -> Void)?
     var additionalAnimations: (() -> Void)?
     var additionalCompletion: (() -> Void)?
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        // 4
-        guard let photosView = transitionContext.view(forKey: .from) else { return }
         guard let slidesView = transitionContext.view(forKey: .to) else { return }
 
-        // 5
         let duration = transitionDuration(using: transitionContext)
 
-        // 6
         let containerView = transitionContext.containerView
 
         slidesView.alpha = 0
@@ -60,6 +56,8 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         if let fromImageFrame = fromDelegate.imageFrame(type: .push) {
             transitionImageView.frame = fromImageFrame
         }
+
+        transitionImageView.layer.cornerRadius = fromDelegate.imageCornerRadius(type: .push)
 
         // Now let's animate, using our old friend UIViewPropertyAnimator!
         let spring: CGFloat = 0.95
@@ -92,6 +90,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
                 if let toImageFrame = self.toDelegate.imageFrame(type: .push) {
                     self.transitionImageView.frame = toImageFrame
                 }
+                self.transitionImageView.layer.cornerRadius = self.toDelegate.imageCornerRadius(type: .push)
                 self.additionalAnimations?()
             }
         }

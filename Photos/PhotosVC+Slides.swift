@@ -67,7 +67,7 @@ extension PhotosViewController {
         let slidesState = PhotosSlidesState(
             viewController: viewController,
             findPhotos: findPhotos,
-            startingFindPhoto: findPhoto,
+            startingFindPhoto: findPhoto, /// should be inside the array
             currentIndex: currentIndex
         )
 

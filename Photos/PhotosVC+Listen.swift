@@ -28,16 +28,8 @@ extension PhotosViewController {
             let newText = newValue.map { $0.value.getText() }
             let textIsSame = oldText == newText
             
-
             let strings = self.searchViewModel.stringToGradients.keys
 
-            
-            if strings.isEmpty {
-                self.showResults(false)
-            } else {
-                self.showResults(true)
-            }
-            
             if textIsSame {
                 /// replace all highlights
 //                self.updateHighlightColors()
@@ -54,6 +46,12 @@ extension PhotosViewController {
 //                        self.highlightsViewModel.setUpToDate(true)
 //                    }
 //                }
+            }
+            
+            if strings.isEmpty {
+                self.showResults(false)
+            } else {
+                self.showResults(true)
             }
         }
     }

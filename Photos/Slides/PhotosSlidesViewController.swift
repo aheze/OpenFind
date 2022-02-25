@@ -21,13 +21,14 @@ class PhotoSlidesSection: Hashable {
 }
 
 class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDismissible {
-    
     // MARK: - Searchable
+
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? /// nil to always have blur
     var updateSearchBarOffset: (() -> Void)?
     
     // MARK: - InteractivelyDismissible
+
     var isInteractivelyDismissing: Bool = false
     
     var model: PhotosViewModel
@@ -81,8 +82,12 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
                 $0 == slidesState.startingFindPhoto
             })
         {
-            model.slidesState?.currentIndex = index
-            
+            print("first index.")
+        } else {
+            print("->>>> no index!!")
+        }
+        
+        if let slidesState = model.slidesState, let index = slidesState.currentIndex {
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: true)
         }

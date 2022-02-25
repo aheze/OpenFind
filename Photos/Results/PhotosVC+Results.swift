@@ -13,7 +13,6 @@ import UIKit
  */
 
 extension PhotosViewController {
-    
     /// `removeFromSuperview` is necessary to update the large title scrolling behavior
     func showResults(_ show: Bool) {
         if show {
@@ -30,9 +29,9 @@ extension PhotosViewController {
             }
             resultsCollectionView.removeFromSuperview()
             updateNavigationBlur(with: collectionView)
+            model.resultsState = nil
+            update(animate: false)
         }
-
-        
     }
 
     /// get the text to show in the cell's text view

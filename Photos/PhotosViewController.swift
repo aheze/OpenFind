@@ -66,13 +66,15 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         
         title = "Photos"
         setup()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-        additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchViewModel.getTotalHeight()
-        updateNavigationBar?()
+        if model.resultsState != nil {
+            updateNavigationBlur(with: resultsCollectionView)
+        } else {
+            updateNavigationBlur(with: collectionView)
+        }
     }
 }

@@ -27,6 +27,7 @@ extension PhotosViewController {
                 findPhotos.append(findPhoto)
             }
         }
+        
         self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
         updateResults(animate: true)
     }

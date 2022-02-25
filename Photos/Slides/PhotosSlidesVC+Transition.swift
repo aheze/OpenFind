@@ -50,6 +50,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         {
             return findPhoto
         }
+        
         return nil
     }
     
@@ -78,5 +79,9 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
             return imageView
         }
         return nil
+    }
+    
+    func imageCornerRadius(type: PhotoTransitionAnimatorType) -> CGFloat {
+        return 0
     }
 }

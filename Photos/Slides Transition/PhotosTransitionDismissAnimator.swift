@@ -34,7 +34,8 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
     fileprivate var toImageViewFrame: CGRect?
     fileprivate var fromImage: UIImage?
     fileprivate var fromImageViewFrame: CGRect?
-
+    fileprivate var fromCornerRadius: CGFloat?
+    fileprivate var toCornerRadius: CGFloat?
     /// The snapshotView that is animating between the two view controllers.
     let transitionImageView: UIImageView = {
         let imageView = UIImageView()
@@ -46,7 +47,7 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
 
     /// from 0 (just started dragging) to 1 (should animate pop)
     var progressUpdated: ((CGFloat) -> Void)?
-   
+
     /// animate the search bar
     var additionalFinalAnimations: ((Bool) -> Void)?
 
@@ -62,10 +63,11 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
             let toVC = transitionContext.viewController(forKey: .to),
             let slidesView = transitionContext.view(forKey: .from),
             let photosView = transitionContext.view(forKey: .to),
+
             let fromImageViewFrame = fromDelegate.imageFrame(type: .pop),
             let fromImage = fromDelegate.referenceImage(type: .pop)
         else {
-            fatalError()
+            fatalError("fromImageViewFrame: \(fromDelegate.imageFrame(type: .pop)), fromImage: \(fromDelegate.referenceImage(type: .pop))")
         }
 
         fromVC.transitionAnimator = self
@@ -74,8 +76,10 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
         self.transitionContext = transitionContext
         self.fromImageViewFrame = fromImageViewFrame
         self.fromImage = fromImage
+        self.fromCornerRadius = self.fromDelegate.imageCornerRadius(type: .pop)
+        self.toCornerRadius = self.toDelegate.imageCornerRadius(type: .pop)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
                 self.toImageViewFrame = toImageViewFrame
             }
@@ -85,6 +89,7 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
 
         transitionImageView.frame = fromImageViewFrame
         transitionImageView.image = fromImage
+        transitionImageView.layer.cornerRadius = fromCornerRadius ?? 0
 
         containerView.addSubview(photosView)
         containerView.addSubview(slidesView)
@@ -123,6 +128,7 @@ extension PhotosTransitionDismissAnimator {
             transitionImageView.transform = CGAffineTransform.identity
                 .scaledBy(x: transitionImageScale, y: transitionImageScale)
                 .translatedBy(x: translation.x, y: translation.y)
+            transitionImageView.layer.cornerRadius = cornerRadiusFor(percentageComplete: percentageComplete)
 
             transitionContext.updateInteractiveTransition(percentageComplete)
             backgroundAlphaAnimator?.fractionComplete = percentageComplete
@@ -171,8 +177,10 @@ extension PhotosTransitionDismissAnimator {
             // before asking for the frame.
             if didCancel {
                 self.transitionImageView.frame = self.fromImageViewFrame!
+                self.transitionImageView.layer.cornerRadius = self.fromCornerRadius ?? 0
             } else {
                 self.transitionImageView.frame = self.toDelegate.imageFrame(type: .pop) ?? self.toImageViewFrame!
+                self.transitionImageView.layer.cornerRadius = self.toCornerRadius ?? 0
             }
             self.additionalFinalAnimations?(!didCancel)
         }
@@ -216,6 +224,13 @@ extension PhotosTransitionDismissAnimator {
     func transitionImageScaleFor(percentageComplete: CGFloat) -> CGFloat {
         let minScale = CGFloat(0.68)
         let result = 1 - (1 - minScale) * percentageComplete
+        return result
+    }
+
+    func cornerRadiusFor(percentageComplete: CGFloat) -> CGFloat {
+        let fromCornerRadius = self.fromCornerRadius ?? 0
+        let toCornerRadius = self.toCornerRadius ?? 0
+        let result = fromCornerRadius + (toCornerRadius - fromCornerRadius) * percentageComplete
         return result
     }
 }
