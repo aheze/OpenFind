@@ -17,6 +17,8 @@ extension PhotosViewController {
         resultsSnapshot.appendSections([section])
         resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
+        
+        
     }
 
     func makeResultsDataSource() -> ResultsDataSource {
@@ -29,8 +31,9 @@ extension PhotosViewController {
                     for: indexPath
                 ) as! PhotosResultsCell
 
-                cell.titleLabel.text = "Today"
-                cell.resultsLabel.text = "10 Results"
+                cell.titleLabel.text = findPhoto.dateString()
+                cell.resultsLabel.text = findPhoto.resultsString()
+//                "10 Results"
                 
                 cell.descriptionTextView.text = findPhoto.descriptionText
 

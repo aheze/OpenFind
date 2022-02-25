@@ -67,6 +67,27 @@ struct FindPhoto: Hashable {
     }
 }
 
+extension FindPhoto {
+    func dateString() -> String {
+        if let string = self.photo.asset.creationDate?.convertDateToReadableString() {
+            return string
+        } else {
+            return "2022"
+        }
+    }
+    
+    func resultsString() -> String {
+        let string: String
+        let count = highlights?.count ?? 0
+        if count == 1 {
+            string = "\(count) Result"
+        } else {
+            string = "\(count) Results"
+        }
+        return string
+    }
+}
+
 struct PhotosSection: Hashable {
     var title: String
     var categorization: Categorization

@@ -16,11 +16,12 @@ extension PhotosViewController {
             let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
             if highlights.count >= 1 {
                 let thumbnail = self.model.photoToThumbnail[photo] ?? nil
+                let description = getCellDescription(from: lines).joined(separator: "\n")
                 let findPhoto = FindPhoto(
                     photo: photo,
                     thumbnail: thumbnail,
                     highlights: highlights,
-                    descriptionText: getCellDescription(from: lines),
+                    descriptionText: description,
                     descriptionLines: lines
                 )
             
@@ -35,8 +36,6 @@ extension PhotosViewController {
             self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
             self.updateResults(animate: false)
         }
-        
-        
     }
     
     func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {
