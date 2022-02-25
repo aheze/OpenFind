@@ -28,6 +28,7 @@ class PhotosCollectionCell: UICollectionViewCell {
 
 /// the results photos cell
 class PhotosResultsCell: UICollectionViewCell {
+    var highlightsViewController: HighlightsViewController?
     var representedAssetIdentifier: String?
     
     var tapped: (() -> Void)?
@@ -66,9 +67,7 @@ class PhotosResultsCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        print("awake!!")
-//        appeared?()
-        
+
         stackView.isUserInteractionEnabled = false
         resultsLabel.clipsToBounds = true
         

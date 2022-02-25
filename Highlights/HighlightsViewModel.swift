@@ -9,7 +9,11 @@
 import SwiftUI
 
 class HighlightsViewModel: ObservableObject {
-    @Published var highlights = Set<Highlight>()
+    @Published var highlights = Set<Highlight>() {
+        didSet {
+//            print("Highlights! \(highlights.count)")
+        }
+    }
     
     /// If not up to date, fade out a bit.
     @Published var upToDate = true

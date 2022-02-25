@@ -50,7 +50,7 @@ struct FindPhoto: Hashable {
     var thumbnail: UIImage?
     var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
-    var cellHighlightsViewController: HighlightsViewController?
+//    var cellHighlightsViewController: HighlightsViewController?
 
     /// results
     var highlights: Set<Highlight>?
