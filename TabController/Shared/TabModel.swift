@@ -51,6 +51,7 @@ struct Identifier: Hashable {
     static var photosSearchBar = Identifier(key: "photosSearchBar")
     static var photosSlidesItemCollectionView = Identifier(key: "photosSlidesItemCollectionView")
     static var listsSearchBar = Identifier(key: "listsSearchBar") /// for both the gallery and individual detail search bar, since they share same navigation controller
+    static var listsDetailsScreenEdge = Identifier(key: "listsDetailsScreenEdge") /// for the navigation controller
 }
 
 enum TabState: Equatable {

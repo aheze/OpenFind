@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-
 import UIKit
 
 class SearchNavigationController: UIViewController, PageViewController {
@@ -39,6 +38,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     var blurPercentage = CGFloat(0)
     
     // MARK: - Optional Transitioning
+
     var pushAnimator: UIViewControllerAnimatedTransitioning?
     var popAnimator: UIViewControllerAnimatedTransitioning?
     var dismissAnimator: UIViewControllerAnimatedTransitioning?
@@ -52,7 +52,6 @@ class SearchNavigationController: UIViewController, PageViewController {
         realmModel: RealmModel,
         tabType: TabState
     ) -> SearchNavigationController {
-        
         let storyboard = UIStoryboard(name: "SearchNavigationContent", bundle: nil)
         let searchNavigationController = storyboard.instantiateViewController(identifier: "SearchNavigationController") { coder in
             SearchNavigationController(
@@ -65,7 +64,6 @@ class SearchNavigationController: UIViewController, PageViewController {
         }
         return searchNavigationController
     }
-    
     
     init?(
         coder: NSCoder,
@@ -90,6 +88,7 @@ class SearchNavigationController: UIViewController, PageViewController {
         super.viewDidLoad()
         
         navigation = UINavigationController(rootViewController: rootViewController)
+        navigation.interactivePopGestureRecognizer?.delegate = nil /// re-enable the swipe back gesture, even when `animationControllerFor` is implemented
         navigation.delegate = self
         
         addChildViewController(navigation, in: view)
@@ -102,12 +101,10 @@ class SearchNavigationController: UIViewController, PageViewController {
             self.setupBlur()
             self.animator?.fractionComplete = self.blurPercentage
         }
+        
     }
     
     deinit {
         animator?.stopAnimation(true)
     }
 }
-
-
-

@@ -162,21 +162,22 @@ class ListsDetailViewController: UIViewController, Searchable {
                 toolbarViewModel.toolbar = AnyView(toolbarView)
             }
         }
+        
+        updateSwipeBackTouchTarget(viewSize: view.bounds.size)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         model.isEditing = false
         model.isEditingChanged?()
+        
+        print("diss!")
+        Tab.Frames.excluded[.listsDetailsScreenEdge] = nil
     }
+    
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         loadListContents()
-    }
-    
-    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
-        updateSearchBarOffset?()
     }
 }

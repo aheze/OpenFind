@@ -27,7 +27,6 @@ extension ListsViewController {
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        
         /// get width of columns based on new size
         let (_, columnWidth) = listsFlowLayout.getColumns(bounds: size.width, insets: safeAreaInsets)
         
@@ -44,5 +43,6 @@ extension ListsViewController {
         self.updateNavigationBar?()
         
         detailsViewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
+
     }
 }

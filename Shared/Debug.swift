@@ -8,10 +8,12 @@
 
 import UIKit
 
-/// Everything should be false on release
 enum Debug {
+    /// Everything should be false on release
     static var tabBarAlwaysTransparent = false
     static var navigationBarAlwaysTransparent = false
+
+    static var collectionViewScrollEnabled = true
 }
 
 extension UIView {
