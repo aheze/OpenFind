@@ -63,6 +63,7 @@ class PhotosResultsCell: UICollectionViewCell {
         super.awakeFromNib()
         resultsLabel.clipsToBounds = true
         
+        descriptionTextView.contentInset = .zero
         descriptionTextView.textContainerInset = .zero
         
         buttonView.tapped = { [weak self] in

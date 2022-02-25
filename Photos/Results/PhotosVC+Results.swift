@@ -13,16 +13,28 @@ import UIKit
  */
 
 extension PhotosViewController {
+    
+    /// `removeFromSuperview` is necessary to update the large title scrolling behavior
     func showResults(_ show: Bool) {
         if show {
-            resultsCollectionView.alpha = 1
-            collectionView.alpha = 0
+            if resultsCollectionView.window == nil {
+                view.addSubview(resultsCollectionView)
+                resultsCollectionView.pinEdgesToSuperview()
+            }
+            collectionView.removeFromSuperview()
+            updateNavigationBlur(with: resultsCollectionView)
         } else {
-            resultsCollectionView.alpha = 0
-            collectionView.alpha = 1
+            if collectionView.window == nil {
+                view.addSubview(collectionView)
+                collectionView.pinEdgesToSuperview()
+            }
+            resultsCollectionView.removeFromSuperview()
+            updateNavigationBlur(with: collectionView)
         }
+
+        
     }
-    
+
     /// get the text to show in the cell's text view
     func getCellDescription(from descriptionLines: [FindPhoto.Line]) -> String {
         let topLines = descriptionLines.prefix(3)

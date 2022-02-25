@@ -24,7 +24,6 @@ extension PhotosViewController {
                     descriptionLines: lines
                 )
             
-                print("Lines: \(lines)")
                 findPhotos.append(findPhoto)
             }
         }
@@ -53,7 +52,6 @@ extension PhotosViewController {
                     )
                     highlights.insert(highlight)
                     
-                    print("String: \(string)")
                     let lineHighlight = FindPhoto.Line.LineHighlight(
                         rangeInSentence: index ..< index + string.count,
                         colors: gradient.colors,

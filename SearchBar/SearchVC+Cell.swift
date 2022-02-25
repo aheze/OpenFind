@@ -19,8 +19,12 @@ extension SearchViewController {
     func configureCell(_ cell: SearchFieldCell, for index: Int) {
         cell.model = searchViewModel
         
+        /// load the configuration
+        cell.setConfiguration()
+        
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
+        
         let text = field.value.getText()
         
         if case .addNew = field.value {
@@ -31,11 +35,8 @@ extension SearchViewController {
         
         cell.textField.text = text
         cell.textField.inputAccessoryView = toolbarViewController.view
-        setClearIcon(for: cell, text: text, valuesCount: searchViewModel.values.count)
         
-        cell.setConfiguration()
-        
-        configure(cell, for: field)
+        updateCell(cell: cell, field: field, valuesCount: searchViewModel.values.count)
         
         cell.textChanged = { [weak self] text in
             guard let self = self else { return }
@@ -51,8 +52,7 @@ extension SearchViewController {
                     )
                 )
             }
-            self.updateClearIcons(valuesCount: self.searchViewModel.values.count)
-            self.configure(cell, for: self.searchViewModel.fields[index])
+            self.updateCells(valuesCount: self.searchViewModel.values.count)
         }
         
         cell.leftViewTapped = { [weak self] in
@@ -80,8 +80,7 @@ extension SearchViewController {
                         )
                     )
                 }
-                self.setClearIcon(for: cell, text: "", valuesCount: self.searchViewModel.values.count)
-                self.configure(cell, for: self.searchViewModel.fields[index])
+                self.updateCells(valuesCount: self.searchViewModel.values.count)
             }
             
             cell.textField.becomeFirstResponder()
@@ -109,15 +108,19 @@ extension SearchViewController {
     }
     
     /// `valuesCount` = `searchViewModel.values.count` usually. But if deleting, subtract 1.
-    func updateClearIcons(valuesCount: Int) {
-        let values = searchViewModel.values
-        
-        for index in values.indices {
+    func updateCells(valuesCount: Int) {
+        for index in searchViewModel.fields.indices {
             let field = searchViewModel.fields[index]
             if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-                setClearIcon(for: cell, text: field.value.getText(), valuesCount: valuesCount)
+                updateCell(cell: cell, field: field, valuesCount: valuesCount)
             }
         }
+    }
+    
+    func updateCell(cell: SearchFieldCell, field: Field, valuesCount: Int) {
+        setClearIcon(for: cell, text: field.value.getText(), valuesCount: valuesCount)
+        setLeftView(cell, for: field)
+        setBackgroundColor(cell)
     }
     
     func setClearIcon(for cell: SearchFieldCell, text: String, valuesCount: Int) {
@@ -132,8 +135,8 @@ extension SearchViewController {
         }
     }
     
-    /// set the cell's left icon
-    func configure(_ cell: SearchFieldCell, for field: Field) {
+    /// set the cell's left icon and background color
+    func setLeftView(_ cell: SearchFieldCell, for field: Field) {
         switch field.value {
         case .word:
             cell.leftView.imageView.alpha = 0
@@ -142,13 +145,13 @@ extension SearchViewController {
                 color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
                 alpha: field.overrides.alpha
             )
-            cell.updateBackgroundColor()
+            
         case .list(let list):
             cell.leftView.imageView.alpha = 1
             cell.leftView.findIconView.alpha = 0
             cell.leftView.imageView.image = UIImage(systemName: list.icon)
             cell.leftView.imageView.tintColor = UIColor.white.toColor(field.overrides.selectedColor ?? UIColor(hex: list.color), percentage: field.overrides.alpha)
-            cell.updateBackgroundColor()
+            
         case .addNew:
             cell.leftView.imageView.alpha = 0
             cell.leftView.findIconView.alpha = 1
@@ -156,8 +159,11 @@ extension SearchViewController {
                 color: field.overrides.selectedColor ?? UIColor(hex: field.value.getColor()),
                 alpha: field.overrides.alpha
             )
-            cell.updateBackgroundColor()
         }
+    }
+    
+    func setBackgroundColor(_ cell: SearchFieldCell) {
+        cell.updateBackgroundColor()
     }
     
     func removeCell(at index: Int) {
@@ -170,7 +176,7 @@ extension SearchViewController {
             collectionViewModel.fallbackIndex = targetIndex
             collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
-            updateClearIcons(valuesCount: searchViewModel.values.count - 1)
+            updateCells(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()
@@ -207,7 +213,7 @@ extension SearchViewController {
             collectionViewModel.fallbackIndex = nil
             collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
-            updateClearIcons(valuesCount: searchViewModel.values.count - 1)
+            updateCells(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()

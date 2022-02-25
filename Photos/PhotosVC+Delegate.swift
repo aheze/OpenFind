@@ -12,11 +12,16 @@ import SwiftUI
 /// Scroll view
 extension PhotosViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
-        updateNavigationBar?()
+        updateNavigationBlur(with: scrollView)
         
         /// For photos caching
         updateCachedAssets()
+    }
+    
+    /// update the blur with a scroll view's content offset
+    func updateNavigationBlur(with scrollView: UIScrollView) {
+        let contentOffset = -scrollView.contentOffset.y
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        updateNavigationBar?()
     }
 }
