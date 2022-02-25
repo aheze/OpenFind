@@ -23,4 +23,16 @@ extension PhotosViewController: UICollectionViewDelegate {
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateNavigationBar?()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? PhotosResultsCell {
+            willDisplayResultsCell(cell: cell, index: indexPath.item)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? PhotosResultsCell {
+            didEndDisplayingResultsCell(cell: cell, index: indexPath.item)
+        }
+    }
 }

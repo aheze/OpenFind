@@ -44,7 +44,7 @@ struct HighlightView: View {
                     .stroke(gradient, lineWidth: 2)
                     .opacity(0.8)
             )
-//            .opacity(highlight.state == .lingering ? 0.1 : 1)
+            .opacity(highlight.state == .lingering ? 0.1 : 1)
             .opacity(highlight.alpha)
             .frame(with: highlight.frame)
     }

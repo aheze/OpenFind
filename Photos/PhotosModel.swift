@@ -41,6 +41,7 @@ struct FindPhoto: Hashable {
     var thumbnail: UIImage?
     var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
+    var cellHighlightsViewController: HighlightsViewController?
 
     /// results
     var highlights: Set<Highlight>?
@@ -49,7 +50,7 @@ struct FindPhoto: Hashable {
 
     struct Line: Hashable {
         var string: String
-        var linesHighlights: Set<LineHighlight>? /// the frames of these highlights will be relative to the result cell
+        var lineHighlights: Set<LineHighlight>? /// the frames of these highlights will be relative to the result cell
 
         struct LineHighlight: Hashable {
             /**

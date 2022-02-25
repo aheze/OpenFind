@@ -53,6 +53,7 @@ class PhotosResultsCell: UICollectionViewCell {
     @IBOutlet var resultsLabel: PaddedLabel!
     
     @IBOutlet var descriptionContainerView: UIView!
+    @IBOutlet var descriptionHighlightsContainerView: UIView!
     @IBOutlet var descriptionTextView: UITextView!
     
     override func layoutSubviews() {
@@ -67,6 +68,7 @@ class PhotosResultsCell: UICollectionViewCell {
         
         descriptionTextView.contentInset = .zero
         descriptionTextView.textContainerInset = .zero
+        descriptionTextView.backgroundColor = .clear
         
         buttonView.tapped = { [weak self] in
             self?.tapped?()

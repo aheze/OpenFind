@@ -41,7 +41,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
             if let viewController = findPhoto.associatedViewController {
-                removeChild(viewController)
+                removeChildViewController(viewController)
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = nil
             }
         }

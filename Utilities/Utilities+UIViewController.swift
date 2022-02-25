@@ -49,7 +49,7 @@ extension UIViewController {
         childViewController.didMove(toParent: self)
     }
     
-    func removeChild(_ childViewController: UIViewController) {
+    func removeChildViewController(_ childViewController: UIViewController) {
         /// Notify Child View Controller
         childViewController.willMove(toParent: nil)
 

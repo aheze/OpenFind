@@ -70,7 +70,7 @@ extension PhotosViewController {
             }
             
             if lineHighlights.count > 0 {
-                let line = FindPhoto.Line(string: sentence.string, linesHighlights: lineHighlights)
+                let line = FindPhoto.Line(string: sentence.string, lineHighlights: lineHighlights)
                 lines.append(line)
             }
         }

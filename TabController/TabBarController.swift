@@ -184,7 +184,7 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pageViewController = pages[indexPath.item]
-        viewController.removeChild(pageViewController)
+        viewController.removeChildViewController(pageViewController)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

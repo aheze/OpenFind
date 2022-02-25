@@ -14,13 +14,13 @@ struct Highlight: Identifiable, Hashable {
     var string = ""
     var frame = CGRect.zero
     var colors = [UIColor]()
+    var alpha = CGFloat(1)
     
     /// how many frames the highlight wasn't near any other new highlights
     var cyclesWithoutNeighbor = 0
     
     var state = State.added
     
-    var alpha = CGFloat(1)
     
     enum State {
         case reused
