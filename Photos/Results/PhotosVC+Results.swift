@@ -30,7 +30,6 @@ extension PhotosViewController {
             resultsCollectionView.removeFromSuperview()
             updateNavigationBlur(with: collectionView)
             model.resultsState = nil
-            update(animate: false)
         }
     }
 
