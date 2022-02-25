@@ -52,7 +52,7 @@ extension PhotosViewController {
 
                 cell.tapped = { [weak self] in
                     guard let self = self else { return }
-                    self.presentSlides(startingAt: findPhoto.photo)
+                    self.presentSlides(startingAtFindPhoto: findPhoto)
                 }
 
                 return cell

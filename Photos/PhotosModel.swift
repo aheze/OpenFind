@@ -12,12 +12,12 @@ import UIKit
 struct PhotosSlidesState {
     var viewController: PhotosSlidesViewController?
     var findPhotos: [FindPhoto]
-    var startingPhoto: Photo
+    var startingFindPhoto: FindPhoto
     var currentIndex: Int?
 
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: FindPhoto) -> Int? {
-        if let firstIndex = findPhotos.firstIndex(of: photo) {
+        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo.photo }){
             return firstIndex
         }
         return nil
@@ -29,7 +29,7 @@ struct PhotosResultsState {
 
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: FindPhoto) -> Int? {
-        if let firstIndex = findPhotos.firstIndex(of: photo) {
+        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo.photo }) {
             return firstIndex
         }
         return nil
@@ -50,12 +50,11 @@ struct FindPhoto: Hashable {
     struct Line: Hashable {
         var string: String
         var linesHighlights: Set<LineHighlight>? /// the frames of these highlights will be relative to the result cell
-    
+
         struct LineHighlight: Hashable {
-            
             /**
              from the start index to the end index
-             
+
                 Example: "Safari" - searching for "a"
                     1..<2
                     3..<4

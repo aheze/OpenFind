@@ -26,7 +26,10 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-        guard let collectionView = collectionView else { return }
+        guard
+            let collectionView = collectionView,
+            let slidesState = model.slidesState
+        else { return }
         
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
@@ -34,7 +37,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
         
-        for index in model.photos.indices {
+        for index in slidesState.findPhotos.indices {
             let attributes = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
             
             let rect = CGRect(x: currentOrigin, y: 0, width: width, height: height)
@@ -129,7 +132,6 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
             let distance = abs(closestAttributeUnwrapped.fullOrigin - currentOffset)
             if distance > maxDistance {
-                
                 if let currentIndex = model.slidesState?.currentIndex {
                     let nextIndex = currentIndex + 1
                     let previousIndex = currentIndex - 1

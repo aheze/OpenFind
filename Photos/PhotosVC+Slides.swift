@@ -9,12 +9,88 @@
 import UIKit
 
 extension PhotosViewController {
-    func presentSlides(startingAt photo: Photo) {
-        
-        /// keep it up to date. replacing!
-        self.slidesSearchViewModel.replaceInPlace(with: searchViewModel)
-        self.searchViewModel.dismissKeyboard?()
+    func presentSlides(startingAtPhoto startingPhoto: Photo) {
+        let viewController = createSlidesViewController()
 
+        let findPhotos: [FindPhoto] = model.photos.map { photo in
+            let thumbnail = self.model.photoToThumbnail[photo] ?? nil
+            return FindPhoto(
+                photo: photo,
+                thumbnail: thumbnail
+            )
+        }
+
+        let findPhoto: FindPhoto
+        let currentIndex: Int
+        if let photoIndex = model.getPhotoIndex(photo: startingPhoto) {
+            findPhoto = findPhotos[photoIndex]
+            currentIndex = photoIndex
+        } else {
+            return
+        }
+
+        /// set later inside `presentSlides`.
+        let slidesState = PhotosSlidesState(
+            viewController: viewController,
+            findPhotos: findPhotos,
+            startingFindPhoto: findPhoto,
+            currentIndex: currentIndex
+        )
+
+        presentSlides(startingAt: findPhoto, with: slidesState)
+    }
+
+    func presentSlides(startingAtFindPhoto startingFindPhoto: FindPhoto) {
+        let viewController = createSlidesViewController()
+
+        guard let resultsState = model.resultsState else { return }
+
+        let findPhotos: [FindPhoto] = resultsState.findPhotos.map { findPhoto in
+            let thumbnail = self.model.photoToThumbnail[findPhoto.photo] ?? nil
+            return FindPhoto(
+                photo: findPhoto.photo,
+                thumbnail: thumbnail
+            )
+        }
+
+        model.resultsState = resultsState
+
+        let findPhoto: FindPhoto
+        let currentIndex: Int
+        if let photoIndex = resultsState.getFindPhotoIndex(photo: startingFindPhoto) {
+            findPhoto = resultsState.findPhotos[photoIndex]
+            currentIndex = photoIndex
+        } else {
+            return
+        }
+
+        let slidesState = PhotosSlidesState(
+            viewController: viewController,
+            findPhotos: findPhotos,
+            startingFindPhoto: findPhoto,
+            currentIndex: currentIndex
+        )
+
+        presentSlides(startingAt: startingFindPhoto, with: slidesState)
+    }
+
+    func createSlidesViewController() -> PhotosSlidesViewController {
+        /// keep it up to date. replacing!
+        slidesSearchViewModel.replaceInPlace(with: searchViewModel)
+        searchViewModel.dismissKeyboard?()
+        let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in
+            PhotosSlidesViewController(
+                coder: coder,
+                model: self.model,
+                slidesSearchViewModel: self.slidesSearchViewModel,
+                toolbarViewModel: self.toolbarViewModel
+            )
+        }
+        return viewController
+    }
+
+    func presentSlides(startingAt findPhoto: FindPhoto, with slidesState: PhotosSlidesState) {
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in
             PhotosSlidesViewController(
@@ -30,32 +106,8 @@ extension PhotosViewController {
             self.updateNavigationBar?()
         }
 
-        let findPhotos: [FindPhoto] = model.photos.map { photo in
-            let thumbnail = self.model.photoToThumbnail[photo] ?? nil
-            return FindPhoto(
-                photo: photo,
-                thumbnail: thumbnail
-            )
-        }
-        var slidesState = PhotosSlidesState(
-            viewController: viewController,
-            findPhotos: findPhotos,
-            startingPhoto: photo
-        )
-
-        let findPhoto: FindPhoto
-        let currentIndex: Int
-        if let photoIndex = model.getPhotoIndex(photo: photo) {
-            findPhoto = findPhotos[photoIndex]
-            currentIndex = photoIndex
-            slidesState.currentIndex = photoIndex
-        } else {
-            return
-        }
-
-        let photo = model.photos[currentIndex]
         Task {
-            let fullImage = await model.getFullImage(from: photo)
+            let fullImage = await model.getFullImage(from: findPhoto.photo)
 
             /// update the transition with the new image.
             self.model.imageUpdatedWhenPresentingSlides?(fullImage)

@@ -78,7 +78,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         if
             let slidesState = model.slidesState,
             let index = slidesState.findPhotos.firstIndex(where: {
-                $0.photo == slidesState.startingPhoto
+                $0 == slidesState.startingFindPhoto
             })
         {
             model.slidesState?.currentIndex = index

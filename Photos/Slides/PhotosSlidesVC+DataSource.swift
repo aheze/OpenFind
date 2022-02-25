@@ -28,7 +28,6 @@ extension PhotosSlidesViewController {
                     for: indexPath
                 ) as! PhotosSlidesContentCell
 
-                cell.contentView.backgroundColor = .green
                 return cell
             }
         )

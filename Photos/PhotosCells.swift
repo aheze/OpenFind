@@ -18,6 +18,7 @@ class PhotosCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        imageView.isUserInteractionEnabled = false
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
@@ -61,6 +62,7 @@ class PhotosResultsCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        stackView.isUserInteractionEnabled = false
         resultsLabel.clipsToBounds = true
         
         descriptionTextView.contentInset = .zero
