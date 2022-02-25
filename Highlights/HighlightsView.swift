@@ -12,11 +12,9 @@ struct HighlightsView: View {
     @ObservedObject var highlightsViewModel: HighlightsViewModel
 
     var body: some View {
-//        let _ = print("Highlights: \(highlightsViewModel.highlights.count)-")
         GeometryReader { geometry in
             ZStack {
                 ForEach(Array(highlightsViewModel.highlights)) { highlight in
-                    let _ = print("frame: \(highlight.frame)")
                     HighlightView(highlight: highlight, viewSize: geometry.size)
                 }
             }

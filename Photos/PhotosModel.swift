@@ -26,15 +26,6 @@ struct PhotosSlidesState {
 
 struct PhotosResultsState {
     var findPhotos: [FindPhoto]
-    var displayedIndices = Set<Int>()
-//    {
-//        didSet {
-//            let newIndices = displayedIndices
-//            let oldIndices = oldValue
-//            let removedIndices = oldIndices.subtracting(newIndices)
-//            print("Removed: \(removedIndices). New: \(newIndices), old: \(oldIndices)")
-//        }
-//    }
 
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: FindPhoto) -> Int? {

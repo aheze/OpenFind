@@ -31,20 +31,13 @@ extension PhotosViewController {
 
                 cell.titleLabel.text = findPhoto.dateString()
                 cell.resultsLabel.text = findPhoto.resultsString()
-//                cell.resultsLabel.text = "#\(indexPath.item)"
-
                 cell.descriptionTextView.text = findPhoto.descriptionText
-                
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                DispatchQueue.main.async {
-                    
+                                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     let highlights = self.getHighlights(for: cell, with: findPhoto)
                     if let highlightsViewController = cell.highlightsViewController {
-                        print("\(indexPath.item) exists.")
                         highlightsViewController.highlightsViewModel.highlights = highlights
                     } else {
-                        print("\(indexPath.item) does not exist.")
                         let highlightsViewModel = HighlightsViewModel()
                         highlightsViewModel.highlights = highlights
                         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
@@ -74,19 +67,6 @@ extension PhotosViewController {
                     guard let self = self else { return }
                     self.presentSlides(startingAtFindPhoto: findPhoto)
                 }
-
-//                cell.appeared = { [weak self] in
-//                    print("\(indexPath.item) appeared")
-//                }
-
-//                self.didEndDisplayingResultsCell(cell: cell, index: indexPath.item)
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                    self.willDisplayResultsCell(cell: cell, index: indexPath.item)
-//                }
-//                cell.disappeared = { [weak self] in
-//                    print("\(indexPath.item) disappeared")
-//                    self?.didEndDisplayingResultsCell(cell: cell, index: indexPath.item)
-//                }
 
                 return cell
             }

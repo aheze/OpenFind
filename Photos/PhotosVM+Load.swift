@@ -22,7 +22,7 @@ extension PhotosViewModel {
     }
 
     @objc func photoMetadatasUpdated(notification: Notification) {
-        print("metadata updated!")
+        
     }
     
     /// only call this once!
