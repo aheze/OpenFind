@@ -17,8 +17,6 @@ extension PhotosViewController {
         resultsSnapshot.appendSections([section])
         resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
-        
-        
     }
 
     func makeResultsDataSource() -> ResultsDataSource {
@@ -33,8 +31,8 @@ extension PhotosViewController {
 
                 cell.titleLabel.text = findPhoto.dateString()
                 cell.resultsLabel.text = findPhoto.resultsString()
-//                "10 Results"
-                
+
+                print("Setting desc for \(indexPath.item): \(findPhoto.descriptionText)")
                 cell.descriptionTextView.text = findPhoto.descriptionText
 
                 // Request an image for the asset from the PHCachingImageManager.

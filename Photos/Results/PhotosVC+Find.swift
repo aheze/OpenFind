@@ -16,7 +16,7 @@ extension PhotosViewController {
             let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
             if highlights.count >= 1 {
                 let thumbnail = self.model.photoToThumbnail[photo] ?? nil
-                let description = getCellDescription(from: lines).joined(separator: "\n")
+                let description = getCellDescription(from: lines)
                 let findPhoto = FindPhoto(
                     photo: photo,
                     thumbnail: thumbnail,
@@ -59,6 +59,7 @@ extension PhotosViewController {
                     )
                     highlights.insert(highlight)
                     
+//                    print("Range for \(string): \(index) to \(index + string.count)")
                     let lineHighlight = FindPhoto.Line.LineHighlight(
                         rangeInSentence: index ..< index + string.count,
                         colors: gradient.colors,

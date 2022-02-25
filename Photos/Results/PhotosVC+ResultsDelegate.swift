@@ -10,11 +10,12 @@ import UIKit
 
 extension PhotosViewController {
     func willDisplayResultsCell(cell: PhotosResultsCell, index: Int) {
-        print("Will display at \(index).")
         guard
             let resultsState = model.resultsState,
             let findPhoto = resultsState.findPhotos[safe: index]
         else { return }
+        
+        print("Will display at \(index) (\(findPhoto.dateString()))")
         
         let highlightsViewModel = HighlightsViewModel()
             
@@ -28,24 +29,29 @@ extension PhotosViewController {
                 let textView = cell.descriptionTextView
             else { continue }
             
-
             let previousLines = Array(findPhoto.descriptionLines.prefix(index))
             let previousDescription = getCellDescription(from: previousLines)
+            var previousDescriptionCount = previousDescription.count
             
-            let previousDescriptionCount = previousDescription.count
+            /// Needed to account for newLines - otherwise every line after the first will have highlights shifted 1 to the left
+            if previousDescriptionCount > 0 {
+                previousDescriptionCount += 1
+            }
             
             for lineHighlight in lineHighlights {
-
-                textView.layoutManager.ensureLayout(for: textView.textContainer)
+                
+                let startOffset = lineHighlight.rangeInSentence.startIndex + previousDescriptionCount
+                let endOffset = lineHighlight.rangeInSentence.endIndex + previousDescriptionCount
+                
                 guard
-                    let start = textView.position(from: textView.beginningOfDocument, offset: lineHighlight.rangeInSentence.startIndex + previousDescriptionCount),
-                    let end = textView.position(from: textView.beginningOfDocument, offset: lineHighlight.rangeInSentence.endIndex + previousDescriptionCount),
+                    let start = textView.position(from: textView.beginningOfDocument, offset: startOffset),
+                    let end = textView.position(from: textView.beginningOfDocument, offset: endOffset),
                     let textRange = textView.textRange(from: start, to: end)
                 else { continue }
                 
                 let rect = textView.firstRect(for: textRange)
                 
-                print("     rect: \(rect)")
+                print("     [original: \(lineHighlight.rangeInSentence)] + \(previousDescriptionCount) = [new: \(startOffset)..<\(endOffset)] -> rect: \(rect)")
                 
                 let cellHighlight = Highlight(
                     string: "",
@@ -59,11 +65,16 @@ extension PhotosViewController {
         }
         
         print("     Highlights for \(index): \(cellHighlights.count)")
-        highlightsViewModel.highlights = cellHighlights
+        
 //        highlightsViewModel.update(with: cellHighlights, replace: true)
-        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
-        addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
-        model.resultsState?.findPhotos[index].cellHighlightsViewController = highlightsViewController
+        if model.resultsState?.findPhotos[index].cellHighlightsViewController == nil {
+            highlightsViewModel.highlights = cellHighlights
+            let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+            addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
+            model.resultsState?.findPhotos[index].cellHighlightsViewController = highlightsViewController
+        } else {
+            print("Already exists. \(index)")
+        }
     }
     
     func didEndDisplayingResultsCell(cell: PhotosResultsCell, index: Int) {

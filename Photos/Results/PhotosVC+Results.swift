@@ -34,9 +34,11 @@ extension PhotosViewController {
     }
 
     /// get the text to show in the cell's text view
-    func getCellDescription(from descriptionLines: [FindPhoto.Line]) -> [String] {
+    func getCellDescription(from descriptionLines: [FindPhoto.Line]) -> String {
         let topLines = descriptionLines.prefix(3)
-        let strings = topLines.map { $0.string + "..." }
-        return strings
+        let string = topLines.map { $0.string + "..." }
+//            .joined()
+            .joined(separator: "\n")
+        return string
     }
 }

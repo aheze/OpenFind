@@ -26,7 +26,9 @@ extension PhotosViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? PhotosResultsCell {
-            willDisplayResultsCell(cell: cell, index: indexPath.item)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.willDisplayResultsCell(cell: cell, index: indexPath.item)
+            }
         }
     }
     
