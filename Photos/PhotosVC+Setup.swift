@@ -19,7 +19,7 @@ extension PhotosViewController {
         setupCollectionView(resultsCollectionView, with: resultsFlowLayout)
         showResults(false)
         resultsCollectionView.backgroundColor = .secondarySystemBackground
-        
+
         setupNavigationBar()
         checkPermissions()
         listenToModel()
@@ -66,7 +66,7 @@ extension PhotosViewController {
     func setupCollectionView(_ collectionView: UICollectionView, with layout: UICollectionViewFlowLayout) {
         view.addSubview(collectionView)
         collectionView.pinEdgesToSuperview()
-        
+
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
@@ -77,10 +77,5 @@ extension PhotosViewController {
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = layout
-    }
-
-    func setupNavigationBar() {
-        let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 21)
-        navigationItem.rightBarButtonItems = [scanningButton]
     }
 }

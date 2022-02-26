@@ -22,6 +22,7 @@ extension PhotosViewController {
             }
             collectionView.removeFromSuperview()
             updateNavigationBlur(with: resultsCollectionView)
+            showCancelNavigationBar()
         } else {
             if collectionView.window == nil {
                 view.addSubview(collectionView)
@@ -30,15 +31,14 @@ extension PhotosViewController {
             resultsCollectionView.removeFromSuperview()
             updateNavigationBlur(with: collectionView)
             model.resultsState = nil
+            hideCancelNavigationBar()
         }
     }
 
     /// get the text to show in the cell's text view
     func getCellDescription(from descriptionLines: [FindPhoto.Line]) -> String {
         let topLines = descriptionLines.prefix(3)
-        let string = topLines.map { $0.string + "..." }
-//            .joined()
-            .joined(separator: "\n")
+        let string = topLines.map { $0.string + "..." }.joined(separator: "\n")
         return string
     }
     

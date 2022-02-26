@@ -95,7 +95,6 @@ extension SearchViewController: UICollectionViewDelegate {
         
         if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexOfLastField]?.fullOrigin { /// the last field that's not the "add new" field
             let (targetOrigin, _) = searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
-            
             searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
         }
         

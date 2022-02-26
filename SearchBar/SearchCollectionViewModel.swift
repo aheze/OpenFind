@@ -36,7 +36,7 @@ class SearchCollectionViewModel: ObservableObject {
     var deletedIndex: Int?
     var fallbackIndex: Int?
     
-    /// showing (past the point where it will auto-scroll) the last field or not
+    /// showing (past the point where it will auto-scroll) the last field or not. This can have an effect on getting the target offset.
     var highlightingAddWordField = false
     
     /// old / new

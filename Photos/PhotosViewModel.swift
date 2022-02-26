@@ -10,6 +10,8 @@ import Photos
 import UIKit
 
 class PhotosViewModel: ObservableObject {
+    // MARK: Base collection view
+
     var realmModel: RealmModel
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
@@ -24,6 +26,8 @@ class PhotosViewModel: ObservableObject {
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
+
+    // MARK: Slides / Results
 
     /// for use inside the slides' `willDisplay` cell - hide the container view if animating.
     var animatingSlides = false
@@ -43,6 +47,8 @@ class PhotosViewModel: ObservableObject {
     /// the photo manager got an image, update the transition image view's image.
     var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
 
+    // MARK: Scanning
+
     var scanningIconTapped: (() -> Void)?
     var photosToScan = [Photo]()
     @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
@@ -51,6 +57,15 @@ class PhotosViewModel: ObservableObject {
     @Published var scanningState = ScanningState.dormant
     @Published var scannedPhotosCount = 0
     @Published var totalPhotosCount = 0
+
+    // MARK: Selection
+
+    @Published var isSelecting = false
+    @Published var selectedPhotos = [Photo]()
+    
+    /// reload the collection view to make it empty
+    var updateSearchCollectionView: (() -> Void)?
+    var deleteSelected: (() -> Void)?
 
     init(realmModel: RealmModel) {
         self.realmModel = realmModel
@@ -117,18 +132,5 @@ extension PhotosViewModel {
         ) { image, _ in
             completion(image)
         }
-    }
-}
-
-extension PHAsset {
-    func getDateCreatedCategorization() -> PhotosSection.Categorization? {
-        if
-            let components = creationDate?.get(.year, .month, .day),
-            let year = components.year, let month = components.month, let day = components.day
-        {
-            let categorization = PhotosSection.Categorization.date(year: year, month: month, day: day)
-            return categorization
-        }
-        return nil
     }
 }

@@ -21,6 +21,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateNavigationBar: (() -> Void)?
     
+    /// selection
+    var selectBarButton: UIBarButtonItem!
     var photosSelectionViewModel = PhotosSelectionViewModel()
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
     lazy var scanningIconController = PhotosScanningIconController(model: model)

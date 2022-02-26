@@ -41,7 +41,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        let offset = getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
+        let (offset, focusedIndex) = getTargetOffsetAndIndex(for: proposedContentOffset, velocity: velocity)
+        collectionViewModel.focusedCellIndex = focusedIndex
         return offset
     }
     
@@ -263,8 +264,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         if !collectionViewModel.preparedOnce {
             collectionViewModel.preparedOnce = true
             
-            /// get the target offset
-            let targetOffset = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0), velocity: .zero)
+            /// get the target offset for the first cell
+            let targetOffset = getPointForCell(at: 0)
+            collectionViewModel.focusedCellIndex = 0
             collectionView.contentOffset.x = targetOffset.x
             currentOffset = targetOffset.x
         }
@@ -298,11 +300,23 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return context
     }
     
-    /// convenience - get the target offset, then you must scroll there.
-    func getTargetOffsetForScrollingThere(for point: CGPoint, velocity: CGPoint) -> CGPoint {
-        let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point, velocity: velocity)
-        collectionViewModel.focusedCellIndex = focusedIndex
-        return targetOffset
+    /// make sure to set the `focused cell` index later.
+    func getPointForCell(at index: Int) -> CGPoint {
+        guard let attributes = layoutAttributes[safe: index] else { return .zero }
+        var offset = attributes.fullOrigin
+        if index == 0 { /// index 0
+            offset -= sidePaddingLeft /// if left edge, account for side padding
+        } else {
+            offset -= sidePeekPaddingLeft /// if inner cell, ignore side padding, instead account for peek padding
+        }
+        
+        if index == layoutAttributes.count - 2 { /// last field before "add new" field
+            collectionViewModel.reachedEndBeforeAddWordField = true
+        } else {
+            collectionViewModel.reachedEndBeforeAddWordField = false
+        }
+        
+        return CGPoint(x: offset, y: 0)
     }
     
     /// get nearest field, then scroll to it (with padding)

@@ -118,11 +118,18 @@ extension PhotosViewController {
             }
         }
 
+        /// update the search view model
+        model.updateSlidesSearchCollectionView?()
+
+        /// set the slides state
         model.slidesState = slidesState
 
+        /// make the destination content view have 0 alpha
         model.animatingSlides = true
+
         /// apply a custom transition
         model.transitionAnimatorsUpdated?(self, viewController)
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

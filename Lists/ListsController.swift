@@ -77,6 +77,11 @@ extension ListsController {
             searchNavigationController.detailsSearchViewController?.collectionViewModel.replaceInPlace(
                 with: searchNavigationController.searchViewController.collectionViewModel
             )
+            
+            /// update the focused index.
+            searchNavigationController.detailsSearchViewController?.collectionViewModel.focusedCellIndex = searchNavigationController.searchViewController?.collectionViewModel.focusedCellIndex
+            
+            /// reload the collection view.
             searchNavigationController.detailsSearchViewController?.reload()
         }
     }

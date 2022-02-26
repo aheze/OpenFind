@@ -97,10 +97,9 @@ extension SearchViewController {
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
             
-            if let origin = self.searchCollectionViewFlowLayout.layoutAttributes[safe: index]?.fullOrigin {
-                let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
-                self.searchCollectionView.setContentOffset(targetOrigin, animated: true)
-            }
+            let targetOrigin = self.searchCollectionViewFlowLayout.getPointForCell(at: index)
+            self.collectionViewModel.focusedCellIndex = index
+            self.searchCollectionView.setContentOffset(targetOrigin, animated: true)
             if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                 cell.textField.becomeFirstResponder()
             }

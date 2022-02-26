@@ -14,12 +14,8 @@ extension SearchViewController {
         searchCollectionView.reloadData()
         searchCollectionView.layoutIfNeeded()
 
-        if
-            let focusedIndex = collectionViewModel.focusedCellIndex,
-            let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: focusedIndex]?.fullOrigin
-        {
-            let targetOrigin = searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
-
+        if let focusedIndex = collectionViewModel.focusedCellIndex {
+            let targetOrigin = searchCollectionViewFlowLayout.getPointForCell(at: focusedIndex)
             searchCollectionView.setContentOffset(targetOrigin, animated: false)
         }
     }

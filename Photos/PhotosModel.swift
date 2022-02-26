@@ -41,12 +41,15 @@ struct FindPhoto: Hashable {
     var thumbnail: UIImage?
     var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
-//    var cellHighlightsViewController: HighlightsViewController?
 
     /// results
     var highlights: Set<Highlight>?
     var descriptionText = ""
     var descriptionLines = [Line]()
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(photo)
+    }
 
     struct Line: Hashable {
         var string: String
@@ -118,5 +121,19 @@ struct PhotosSection: Hashable {
 
             return ""
         }
+    }
+}
+
+
+extension PHAsset {
+    func getDateCreatedCategorization() -> PhotosSection.Categorization? {
+        if
+            let components = creationDate?.get(.year, .month, .day),
+            let year = components.year, let month = components.month, let day = components.day
+        {
+            let categorization = PhotosSection.Categorization.date(year: year, month: month, day: day)
+            return categorization
+        }
+        return nil
     }
 }

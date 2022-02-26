@@ -22,5 +22,6 @@ if viewController is ListsDetailViewController {
 } else {
     self.showDetailsSearchBar(false)
 }
-``` 
+```
 
+`SearchViewModel`'s `highlightingAddWordField` can result in unwanted side effects in getting a target offset for scrolling. Make sure to set this to false first.
