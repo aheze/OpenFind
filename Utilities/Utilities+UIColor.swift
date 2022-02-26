@@ -15,6 +15,17 @@ extension UIColor {
 }
 
 extension UIColor {
+    static var random: UIColor {
+        return UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 1.0
+        )
+    }
+}
+
+extension UIColor {
     convenience init(hex: UInt, alpha: CGFloat = 1) {
         self.init(
             red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,

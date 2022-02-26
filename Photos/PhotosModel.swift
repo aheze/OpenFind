@@ -17,7 +17,7 @@ struct PhotosSlidesState {
 
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: FindPhoto) -> Int? {
-        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo.photo }){
+        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo.photo }) {
             return firstIndex
         }
         return nil
@@ -46,10 +46,6 @@ struct FindPhoto: Hashable {
     var highlights: Set<Highlight>?
     var descriptionText = ""
     var descriptionLines = [Line]()
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(photo)
-    }
 
     struct Line: Hashable {
         var string: String
@@ -73,13 +69,13 @@ struct FindPhoto: Hashable {
 
 extension FindPhoto {
     func dateString() -> String {
-        if let string = self.photo.asset.creationDate?.convertDateToReadableString() {
+        if let string = photo.asset.creationDate?.convertDateToReadableString() {
             return string
         } else {
             return "2022"
         }
     }
-    
+
     func resultsString() -> String {
         let string: String
         let count = highlights?.count ?? 0
@@ -124,7 +120,6 @@ struct PhotosSection: Hashable {
         }
     }
 }
-
 
 extension PHAsset {
     func getDateCreatedCategorization() -> PhotosSection.Categorization? {

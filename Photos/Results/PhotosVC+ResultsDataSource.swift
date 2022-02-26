@@ -36,19 +36,6 @@ extension PhotosViewController {
                 cell.resultsLabel.text = findPhoto.resultsString()
                 cell.descriptionTextView.text = findPhoto.descriptionText
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    let highlights = self.getHighlights(for: cell, with: findPhoto)
-                    if let highlightsViewController = cell.highlightsViewController {
-                        highlightsViewController.highlightsViewModel.highlights = highlights
-                    } else {
-                        let highlightsViewModel = HighlightsViewModel()
-                        highlightsViewModel.highlights = highlights
-                        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
-                        self.addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
-                        cell.highlightsViewController = highlightsViewController
-                    }
-                }
-
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
                 self.model.imageManager.requestImage(
@@ -62,6 +49,25 @@ extension PhotosViewController {
                     if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
                         cell.imageView.image = thumbnail
                         self.model.photoToThumbnail[findPhoto.photo] = thumbnail
+                    }
+                }
+
+                cell.highlightsViewController?.view.alpha = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    guard cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier else { return }
+                    let highlights = self.getHighlights(for: cell, with: findPhoto)
+                    if let highlightsViewController = cell.highlightsViewController {
+                        highlightsViewController.highlightsViewModel.highlights = highlights
+                    } else {
+                        let highlightsViewModel = HighlightsViewModel()
+                        highlightsViewModel.highlights = highlights
+                        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+                        self.addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
+                        cell.highlightsViewController = highlightsViewController
+                    }
+
+                    UIView.animate(withDuration: 0.1) {
+                        cell.highlightsViewController?.view.alpha = 1
                     }
                 }
 
