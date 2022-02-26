@@ -56,6 +56,7 @@ struct FindPhoto: Hashable {
         var lineHighlights: Set<LineHighlight>? /// the frames of these highlights will be relative to the result cell
 
         struct LineHighlight: Hashable {
+            var string: String
             /**
              from the start index to the end index
 

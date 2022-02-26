@@ -32,20 +32,9 @@ extension PhotosViewController {
 
             if textIsSame {
                 /// replace all highlights
-//                self.updateHighlightColors()
+                self.updateHighlightColors()
             } else {
                 self.find()
-//                self.highlightsViewModel.setUpToDate(false)
-//
-//                /// animate the highlight frames instead
-//                if
-//                    self.model.shutterOn,
-//                    let image = self.model.pausedImage
-//                {
-//                    self.findAndAddHighlights(image: image, replace: true) { _ in
-//                        self.highlightsViewModel.setUpToDate(true)
-//                    }
-//                }
             }
             
             if strings.isEmpty {

@@ -22,17 +22,20 @@ extension PhotosViewController {
     func makeResultsDataSource() -> ResultsDataSource {
         let dataSource = ResultsDataSource(
             collectionView: resultsCollectionView,
-            cellProvider: { collectionView, indexPath, findPhoto -> UICollectionViewCell? in
+            cellProvider: { collectionView, indexPath, cachedFindPhoto -> UICollectionViewCell? in
 
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: "PhotosResultsCell",
                     for: indexPath
                 ) as! PhotosResultsCell
 
+                /// get the current up-to-date FindPhoto first.
+                guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
+
                 cell.titleLabel.text = findPhoto.dateString()
                 cell.resultsLabel.text = findPhoto.resultsString()
                 cell.descriptionTextView.text = findPhoto.descriptionText
-                                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     let highlights = self.getHighlights(for: cell, with: findPhoto)
                     if let highlightsViewController = cell.highlightsViewController {
@@ -45,7 +48,6 @@ extension PhotosViewController {
                         cell.highlightsViewController = highlightsViewController
                     }
                 }
-                
 
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier

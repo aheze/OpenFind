@@ -60,6 +60,7 @@ extension PhotosViewController {
                     highlights.insert(highlight)
                     
                     let lineHighlight = FindPhoto.Line.LineHighlight(
+                        string: string,
                         rangeInSentence: index ..< index + string.count,
                         colors: gradient.colors,
                         alpha: gradient.alpha

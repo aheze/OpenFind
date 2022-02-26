@@ -14,3 +14,10 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+/// https://stackoverflow.com/a/29109176/14351818
+extension Set {
+    func mapSet<U>(transform: (Element) -> U) -> Set<U> {
+        return Set<U>(self.lazy.map(transform))
+    }
+}

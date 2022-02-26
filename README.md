@@ -25,3 +25,16 @@ if viewController is ListsDetailViewController {
 ```
 
 `SearchViewModel`'s `highlightingAddWordField` can result in unwanted side effects in getting a target offset for scrolling. Make sure to set this to false first.
+
+
+In Photos, applying a snapshot can be time-consuming when updating highlight colors on the fly. So **don't** call:
+
+```swift
+func updateResults(animate: Bool = true) {
+```
+
+Instead, just get the current find photo inside the cell provider.
+
+```swift
+guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
+```
