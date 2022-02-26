@@ -22,7 +22,8 @@ extension ViewController {
             /// adjust for vision coordinates
             adjustedBoundingBox.origin.y = 1 - tracker.boundingBox.minY - tracker.boundingBox.height
             
-            let adjustedBoundingBoxScaled = adjustedBoundingBox.scaleTo(imageFitViewRect)
+            let adjustedBoundingBoxScaled = adjustedBoundingBox
+//                .scaleTo(imageFitViewRect)
             let newView = UIView(frame: adjustedBoundingBoxScaled)
             
             if tracker.isActive {

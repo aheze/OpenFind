@@ -62,7 +62,8 @@ extension ViewController: VisionEngineDelegate {
             /// adjust for vision coordinates
             adjustedBoundingBox.origin.y = 1 - observation.boundingBox.minY - observation.boundingBox.height
             
-            let adjustedBoundingBoxScaled = adjustedBoundingBox.scaleTo(imageFitViewRect)
+            let adjustedBoundingBoxScaled = adjustedBoundingBox
+//                .scaleTo(imageFitViewRect)
             let newView = UIView(frame: adjustedBoundingBoxScaled)
             
             newView.addDebugBorders(UIColor.yellow, width: 1.5)

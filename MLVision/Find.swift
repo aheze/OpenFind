@@ -106,6 +106,7 @@ extension Find {
         var sentences = [Sentence]()
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
+//            text.boundingBox(for: <#T##Range<String.Index>#>)
             var boundingBox = observation.boundingBox
             boundingBox.origin.y = 1 - boundingBox.minY - boundingBox.height
 

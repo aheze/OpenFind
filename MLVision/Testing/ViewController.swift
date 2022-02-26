@@ -65,7 +65,7 @@ class ViewController: UIViewController {
                     
                     let highlight = Highlight(
                         string: self.textToFind,
-                        frame: word.frame.scaleTo(highlightsView.bounds.size),
+                        frame: word.frame,
                         colors: [UIColor(hex: 0xff2600)]
                     )
                     

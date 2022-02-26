@@ -47,10 +47,9 @@ extension PhotosViewController {
 
         let findPhotos: [FindPhoto] = resultsState.findPhotos.map { findPhoto in
             let thumbnail = self.model.photoToThumbnail[findPhoto.photo] ?? nil
-            return FindPhoto(
-                photo: findPhoto.photo,
-                thumbnail: thumbnail
-            )
+            var newFindPhoto = findPhoto
+            newFindPhoto.thumbnail = thumbnail
+            return newFindPhoto
         }
 
         model.resultsState = resultsState
@@ -91,6 +90,7 @@ extension PhotosViewController {
     }
 
     func presentSlides(startingAt findPhoto: FindPhoto, with slidesState: PhotosSlidesState) {
+        
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in
             PhotosSlidesViewController(

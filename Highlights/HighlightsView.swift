@@ -46,10 +46,10 @@ struct HighlightView: View {
             )
             .opacity(highlight.state == .lingering ? 0.1 : 1)
             .opacity(highlight.alpha)
-            .frame(with: highlight.frame)
+            .frame(with: highlight.frame.scaleTo(viewSize))
     }
 
     func getCornerRadius(rectHeight: CGFloat) -> CGFloat {
-        return rectHeight / 10
+        return (rectHeight * 300) / 4
     }
 }

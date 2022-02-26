@@ -13,7 +13,7 @@ extension CameraViewController {
         /// for highlights, make appear after frames are set
 
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
-        addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
+        scrollZoomViewController.addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
     
     func getHighlights(from sentences: [Sentence]) -> Set<Highlight> {
@@ -26,7 +26,7 @@ extension CameraViewController {
                     
                     let highlight = Highlight(
                         string: string,
-                        frame: word.frame.scaleTo(self.contentContainerViewSize),
+                        frame: word.frame,
                         colors: gradient.colors,
                         alpha: gradient.alpha
                     )

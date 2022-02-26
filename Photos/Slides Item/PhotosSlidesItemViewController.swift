@@ -9,10 +9,13 @@
 import UIKit
 
 class PhotosSlidesItemViewController: UIViewController {
+    var highlightsViewModel = HighlightsViewModel()
     lazy var scrollZoomController = ScrollZoomViewController.make()
+    lazy var highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
  
     var model: PhotosViewModel
     var findPhoto: FindPhoto
+    var imageFrame = CGRect.zero
     
     @IBOutlet var containerView: UIView!
     
@@ -32,7 +35,14 @@ class PhotosSlidesItemViewController: UIViewController {
         
         _ = scrollZoomController
         addChildViewController(scrollZoomController, in: containerView)
+        scrollZoomController.addChildViewController(highlightsViewController, in: scrollZoomController.drawingView)
         reloadImage()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        imageFrame = getImageFrame()
+        highlightsViewController.view.frame = imageFrame
     }
 
     func reloadImage() {
@@ -45,5 +55,13 @@ class PhotosSlidesItemViewController: UIViewController {
                 self.scrollZoomController.imageView.image = image
             }
         }
+    }
+    
+    func getImageFrame() -> CGRect {
+        let asset = findPhoto.photo.asset
+        let aspectRatio = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+        let frame = CGRect.makeRect(aspectRatio: aspectRatio, insideRect: view.bounds)
+        
+        return frame
     }
 }
