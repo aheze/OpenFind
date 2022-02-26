@@ -20,6 +20,8 @@ struct PhotosScanningIcon: View {
                 totalPhotosCount: model.totalPhotosCount,
                 lineWidth: 2.5
             )
+                .padding(4)
+                .padding(.leading, 8)
                 .contentShape(Rectangle())
         }
     }

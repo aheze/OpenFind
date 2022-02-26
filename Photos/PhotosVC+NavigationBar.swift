@@ -19,7 +19,7 @@ extension PhotosViewController {
         )
         self.selectBarButton = selectButton
         
-        let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 21)
+        let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 34)
         navigationItem.rightBarButtonItems = [scanningButton, selectButton]
     }
 
