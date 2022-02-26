@@ -106,13 +106,21 @@ extension Find {
         var sentences = [Sentence]()
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
-//            text.boundingBox(for: <#T##Range<String.Index>#>)
-            var boundingBox = observation.boundingBox
-            boundingBox.origin.y = 1 - boundingBox.minY - boundingBox.height
-
+            
+            do {
+                let firstCharacterFrame = try text.boundingBox(for: text.string.startIndex ..< text.string.index(after: text.string.startIndex))
+                let lastCharacterFrame = try text.boundingBox(for: text.string.index(before: text.string.endIndex) ..< text.string.endIndex)
+                
+                print("foirst: \(firstCharacterFrame),last: \(lastCharacterFrame)")
+            } catch {
+                Global.log("Error: \(error)")
+            }
+            
+//            let lastCharacterFrame = text.boundingBox(for: text.string.endIndex)
+            
             let sentence = Sentence(
                 string: text.string,
-                frame: boundingBox,
+                frame: observation.boundingBox.getNormalizedRectFromVision(),
                 confidence: CGFloat(text.confidence)
             )
             sentences.append(sentence)
@@ -121,3 +129,4 @@ extension Find {
         return sentences
     }
 }
+

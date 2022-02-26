@@ -32,7 +32,7 @@ extension RealmModel {
     }
 
     func addPhotoMetadata(metadata: PhotoMetadata) {
-        let realmSentences = metadata.getRealmSentences()
+        let realmSentences = metadata.0
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
             sentences: realmSentences,

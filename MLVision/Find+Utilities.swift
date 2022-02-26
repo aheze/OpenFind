@@ -30,6 +30,14 @@ extension Sentence {
     }
 }
 
+extension CGRect {
+    func getNormalizedRectFromVision() -> CGRect {
+        var rect = self
+        rect.origin.y = 1 - rect.minY - rect.height
+        return rect
+    }
+}
+
 extension String {
     func indicesOf(string: String) -> [Int] {
         var indices = [Int]()
