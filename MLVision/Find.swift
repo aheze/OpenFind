@@ -107,20 +107,28 @@ extension Find {
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
             
+            var letters = [Letter]()
             do {
-                let firstCharacterFrame = try text.boundingBox(for: text.string.startIndex ..< text.string.index(after: text.string.startIndex))
-                let lastCharacterFrame = try text.boundingBox(for: text.string.index(before: text.string.endIndex) ..< text.string.endIndex)
-                
-                print("foirst: \(firstCharacterFrame),last: \(lastCharacterFrame)")
+                print("Text: \(text.string)")
+                for index in text.string.indices {
+                    let string = String(text.string[index])
+                    
+                    let end = text.string.index(after: index)
+                    guard let rectangleObservation = try text.boundingBox(for: index ..< end) else { continue }
+                    let frame = rectangleObservation.boundingBox.getNormalizedRectFromVision()
+                    
+                    print("         \(string) [\(index) - \(end)] -> frame: \(frame)")
+                    let letter = Letter(
+                        string: string,
+                        frame: frame
+                    )
+                    letters.append(letter)
+                }
             } catch {
                 Global.log("Error: \(error)")
             }
-            
-//            let lastCharacterFrame = text.boundingBox(for: text.string.endIndex)
-            
             let sentence = Sentence(
-                string: text.string,
-                frame: observation.boundingBox.getNormalizedRectFromVision(),
+                letters: letters,
                 confidence: CGFloat(text.confidence)
             )
             sentences.append(sentence)

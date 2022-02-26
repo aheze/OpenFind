@@ -42,9 +42,9 @@ struct Field: Identifiable, Equatable {
     enum FieldValue: Equatable {
         static func == (lhs: Field.FieldValue, rhs: Field.FieldValue) -> Bool {
             switch (lhs, rhs) {
-            case (let .word(lhsWord), .word(let rhsWord)):
+            case (.word(let lhsWord), .word(let rhsWord)):
                 return lhsWord == rhsWord
-            case (let .list(lhsList), .list(let rhsList)):
+            case (.list(let lhsList), .list(let rhsList)):
                 return lhsList == rhsList
             default:
                 return false

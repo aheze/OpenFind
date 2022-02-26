@@ -44,9 +44,19 @@ struct HighlightView: View {
                     .stroke(gradient, lineWidth: 2)
                     .opacity(0.8)
             )
-            .opacity(highlight.state == .lingering ? 0.1 : 1)
+            .opacity(getLingeringOpacity())
             .opacity(highlight.alpha)
+            .rotationEffect(.degrees(highlight.angle))
             .frame(with: highlight.frame.scaleTo(viewSize))
+            
+    }
+    
+    func getLingeringOpacity() -> CGFloat {
+        if case .lingering = highlight.state {
+            return 0.1
+        } else {
+            return 1
+        }
     }
 
     func getCornerRadius(rectHeight: CGFloat) -> CGFloat {

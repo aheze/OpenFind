@@ -12,22 +12,27 @@ import UIKit
 extension Sentence {
     
     /// If self is a sentence
-    func getWord(word: String, at index: Int) -> Sentence {
-        let wordCount = CGFloat(word.count)
-        let individualCharacterLength = self.frame.width / CGFloat(self.string.count)
-        
-        let wordOriginX = self.frame.minX + individualCharacterLength * CGFloat(index)
-        let wordWidth = individualCharacterLength * wordCount
-        let wordFrame = CGRect(x: wordOriginX, y: self.frame.minY, width: wordWidth, height: self.frame.height)
-        
-        let word = Sentence(
-            string: word,
-            frame: wordFrame,
-            confidence: self.confidence
-        )
-        
-        return word
-    }
+//    func getWord(word: String, at index: Int) -> Sentence {
+//        let wordCount = CGFloat(word.count)
+//        let individualCharacterLength = self.frame.width / CGFloat(self.string.count)
+//        
+//        let wordOriginX = self.frame.minX + individualCharacterLength * CGFloat(index)
+//        let wordWidth = individualCharacterLength * wordCount
+//        let wordFrame = CGRect(x: wordOriginX, y: self.frame.minY, width: wordWidth, height: self.frame.height)
+//        
+//        let word = Sentence(
+//            letters: <#T##[Letter]#>,
+//            confidence: <#T##Double#>
+//        )
+//        
+//        Sentence(
+//            string: word,
+//            frame: wordFrame,
+//            confidence: self.confidence
+//        )
+//        
+//        return word
+//    }
 }
 
 extension CGRect {

@@ -30,9 +30,39 @@ struct PhotoMetadata {
 }
 
 struct Sentence {
+    var letters = [Letter]()
+    var confidence: Double
+
+    /// combine the letters
+    func getString() -> String {
+        return self.letters.map { $0.string }.joined()
+    }
+
+    func getFrameAndRotation(for range: Range<Int>) -> (CGRect, CGFloat) {
+        let letters = Array(letters[range])
+        guard
+            let firstLetter = letters.first,
+            let lastLetter = letters.last
+        else {
+            return (.zero, 0)
+        }
+
+        let frame = firstLetter.frame.union(lastLetter.frame)
+
+        let firstLetterMidpoint = CGPoint(x: firstLetter.frame.midX, y: firstLetter.frame.midY)
+        let lastLetterMidpoint = CGPoint(x: lastLetter.frame.midX, y: lastLetter.frame.midY)
+
+        /// from the x axis. 0° is no rotation.
+        let angle = firstLetterMidpoint.angle(to: lastLetterMidpoint)
+
+//        print("frame: \(frame), angle: \(angle). First: \(firstLetterMidpoint) to \(lastLetterMidpoint)")
+        return (frame, angle)
+    }
+}
+
+struct Letter {
     var string = ""
     var frame: CGRect
-    var confidence: Double
 }
 
 /**
@@ -72,13 +102,12 @@ struct List: Identifiable, Equatable {
         return editableList
     }
 
-    
     /// false if words is empty
     var containsWords: Bool {
-        let joined = words.joined()
+        let joined = self.words.joined()
         return !joined.isEmpty
     }
-    
+
     var displayedName: String {
         return self.name.isEmpty ? "Untitled" : self.name
     }

@@ -21,7 +21,11 @@ class HighlightsViewModel: ObservableObject {
         /// lingering last
         var oldHighlights = Array(highlights)
         oldHighlights.sort { _, b in
-            b.state == .lingering
+            if case .lingering = b.state {
+                return true
+            } else {
+                return false
+            }
         }
         
         for newHighlight in newHighlights {
@@ -48,7 +52,6 @@ class HighlightsViewModel: ObservableObject {
             {
                 /// previous highlight existed, animate over
                 var reusedHighlight = nearestHighlight
-                reusedHighlight.cyclesWithoutNeighbor = 0
                 reusedHighlight.frame = newHighlight.frame
                 reusedHighlight.state = .reused
                 reusedHighlight.colors = newHighlight.colors
@@ -63,14 +66,21 @@ class HighlightsViewModel: ObservableObject {
             }
         }
         
-        
         if !replace {
             for oldHighlight in oldHighlights {
+                var shouldInsert = false
                 var lingeringHighlight = oldHighlight
-                lingeringHighlight.cyclesWithoutNeighbor += 1
-                lingeringHighlight.state = .lingering
+                if case .lingering(let currentCyclesWithoutNeighbor) = lingeringHighlight.state {
+                    let cyclesWithoutNeighbor = currentCyclesWithoutNeighbor + 1
+                    lingeringHighlight.state = .lingering(cyclesWithoutNeighbor: cyclesWithoutNeighbor)
+                    shouldInsert = cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights
+                } else {
+                    let cyclesWithoutNeighbor = 1
+                    lingeringHighlight.state = .lingering(cyclesWithoutNeighbor: cyclesWithoutNeighbor)
+                    shouldInsert = cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights
+                }
                 
-                if lingeringHighlight.cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights {
+                if shouldInsert {
                     nextHighlights.insert(lingeringHighlight)
                 }
             }

@@ -45,10 +45,6 @@ extension Optional where Wrapped == Date {
     }
 }
 
-func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
-    return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
-}
-
 /// https://stackoverflow.com/a/56876898/14351818
 extension Array {
     var middleIndex: Int {

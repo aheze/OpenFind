@@ -15,21 +15,24 @@ class ViewController: UIViewController {
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = "pop"
+    let textToFind = "present"
     
     var currentTrackingImageIndex = 0
-    let trackingImages = [
-        UIImage(named: "TrackingImage1")!,
-        UIImage(named: "TrackingImage2")!,
-        UIImage(named: "TrackingImage3")!,
-        UIImage(named: "TrackingImage4")!,
-        UIImage(named: "TrackingImage5")!,
-        UIImage(named: "TrackingImage6")!,
-        UIImage(named: "TrackingImage7")!,
-        UIImage(named: "TrackingImage8")!,
-        UIImage(named: "TrackingImage9")!,
-        UIImage(named: "TrackingImage10")!,
-        UIImage(named: "TrackingImage11")!,
+    let trackingImages: [UIImage] = [
+//        UIImage(named: "TrackingImage1")!,
+//        UIImage(named: "TrackingImage2")!,
+//        UIImage(named: "TrackingImage3")!,
+//        UIImage(named: "TrackingImage4")!,
+//        UIImage(named: "TrackingImage5")!,
+//        UIImage(named: "TrackingImage6")!,
+//        UIImage(named: "TrackingImage7")!,
+//        UIImage(named: "TrackingImage8")!,
+//        UIImage(named: "TrackingImage9")!,
+//        UIImage(named: "TrackingImage10")!,
+//        UIImage(named: "TrackingImage11")!,
+        UIImage(named: "Frame 1")!,
+        UIImage(named: "Frame 2")!,
+        UIImage(named: "Frame 3")!
     ]
     
     override func viewDidLayoutSubviews() {
@@ -55,25 +58,45 @@ class ViewController: UIViewController {
     
     func runFind(in image: CGImage) {
         Task {
-            guard let sentences = await Find.find(in: .cgImage(image), action: .camera, wait: false) else { return }
+            var options = FindOptions()
+            options.level = .accurate
+            guard let sentences = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: false) else { return }
             
             var highlights = Set<Highlight>()
             for sentence in sentences {
-                let indices = sentence.string.lowercased().indicesOf(string: textToFind.lowercased())
+//                for letter in sentence.letters {
+//                    let highlight = Highlight(
+//                        string: letter.string,
+//                        frame: letter.frame,
+//                        colors: [UIColor(hex: 0xff2600)]
+//                    )
+//                    highlights.insert(highlight)
+//                }
+                let sentenceString = sentence.getString()
+                let indices = sentenceString.lowercased().indicesOf(string: textToFind.lowercased())
                 for index in indices {
-                    let word = sentence.getWord(word: textToFind, at: index)
-                    
+//                    let word = sentence.getWord(word: textToFind, at: index)
+
+                    let range = index ..< index + textToFind.count
+                    let (frame, angle) = sentence.getFrameAndRotation(for: range)
                     let highlight = Highlight(
-                        string: self.textToFind,
-                        frame: word.frame,
+                        string: textToFind,
+                        frame: frame,
+                        angle: angle,
                         colors: [UIColor(hex: 0xff2600)]
                     )
-                    
+//                    let highlight = Highlight(
+//                        string: self.textToFind,
+//                        frame: word.frame,
+//                        colors: [UIColor(hex: 0xff2600)]
+//                    )
+
                     highlights.insert(highlight)
                 }
-            
-                highlightsViewModel.update(with: highlights, replace: false)
+//
             }
+            
+            highlightsViewModel.update(with: highlights, replace: false)
         }
     }
 
