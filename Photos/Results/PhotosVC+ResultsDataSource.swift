@@ -52,25 +52,6 @@ extension PhotosViewController {
                     }
                 }
 
-                cell.highlightsViewController?.view.alpha = 0
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                    guard cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier else { return }
-                    let highlights = self.getHighlights(for: cell, with: findPhoto)
-                    if let highlightsViewController = cell.highlightsViewController {
-                        highlightsViewController.highlightsViewModel.highlights = highlights
-                    } else {
-                        let highlightsViewModel = HighlightsViewModel()
-                        highlightsViewModel.highlights = highlights
-                        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
-                        self.addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
-                        cell.highlightsViewController = highlightsViewController
-                    }
-
-                    UIView.animate(withDuration: 0.1) {
-                        cell.highlightsViewController?.view.alpha = 1
-                    }
-                }
-
                 cell.tapped = { [weak self] in
                     guard let self = self else { return }
                     self.presentSlides(startingAtFindPhoto: findPhoto)
