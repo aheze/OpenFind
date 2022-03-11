@@ -40,7 +40,8 @@ extension Sentence {
         var results = [RangeResult]()
 
         for searchString in searchStrings {
-            let indices = string.indicesOf(string: searchString)
+            let indices = string.lowercased().indicesOf(string: searchString.lowercased())
+            if indices.isEmpty { continue }
             let ranges = indices.map { $0 ..< $0 + searchString.count }
             let result = RangeResult(string: searchString, ranges: ranges)
             results.append(result)
@@ -57,7 +58,7 @@ extension Sentence {
         else { return .zero }
 
         let startFrame = characterFrame(for: targetRange.lowerBound, in: (range: startRangeToFrame.key, frame: startRangeToFrame.value))
-        let endFrame = characterFrame(for: targetRange.lowerBound, in: (range: endRangeToFrame.key, frame: endRangeToFrame.value))
+        let endFrame = characterFrame(for: targetRange.upperBound, in: (range: endRangeToFrame.key, frame: endRangeToFrame.value))
 
         let frame = startFrame.union(endFrame)
         return frame
@@ -71,10 +72,19 @@ extension Sentence {
 
         /// length of a character (a square)
         let characterLength = max(gridWidth, gridHeight)
-        let characterX = gridWidth * CGFloat(rangeToFrame.range.count)
-        let characterY = gridHeight * CGFloat(rangeToFrame.range.count)
+        
+        /// get offset within the word's frame. `index - rangeToFrame.range.lowerBound` is the index relative to the word.
+        let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
+        let characterYOffset = gridHeight * CGFloat(index - rangeToFrame.range.lowerBound)
 
-        let frame = CGRect(x: characterX, y: characterY, width: characterLength, height: characterLength)
+        let frame = CGRect(
+            x: rangeToFrame.frame.origin.x + characterXOffset,
+            y: rangeToFrame.frame.origin.y + characterYOffset,
+            width: characterLength,
+            height: characterLength
+        )
+        
+        print("         Char frame for \(index):L \(frame)")
         return frame
     }
 }

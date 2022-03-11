@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = "popovers"
+    let textToFind = ["popovers", "a"]
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [
@@ -66,11 +66,12 @@ class ViewController: UIViewController {
             
             var highlights = Set<Highlight>()
             for sentence in sentences {
-                let rangeResults = sentence.ranges(of: [textToFind])
+                let rangeResults = sentence.ranges(of: textToFind)
+                print("Results: \(rangeResults)")
                 for rangeResult in rangeResults {
                     for range in rangeResult.ranges {
                         let frame = sentence.frame(for: range)
-                        print(frame)
+                        print("         Frame of sentence: \(frame)")
                         let highlight = Highlight(
                             string: rangeResult.string,
                             frame: frame,
