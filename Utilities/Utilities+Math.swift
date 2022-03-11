@@ -39,6 +39,14 @@ extension Double {
     }
 }
 
+extension CGFloat {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places: Int) -> Double {
+        let multiplier = pow(10, Double(places))
+        return (Double(self) * multiplier).rounded() / multiplier
+    }
+}
+
 extension BinaryInteger {
     var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
 }

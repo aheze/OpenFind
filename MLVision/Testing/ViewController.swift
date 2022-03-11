@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = ["popovers", "present", "that works", "SwiftUl"]
+//    let textToFind = ["popovers.", "present"]
+    let textToFind = ["pop"]
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [

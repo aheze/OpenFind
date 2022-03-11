@@ -35,6 +35,26 @@ extension StringProtocol {
 }
 
 extension Sentence {
+    var angle: CGFloat {
+        guard
+            let firstRangeToFrame = rangesToFrames.min(by: { $0.key.lowerBound < $1.key.lowerBound }),
+            let lastRangeToFrame = rangesToFrames.min(by: { $0.key.upperBound > $1.key.upperBound })
+        else { return 0 }
+//        print("First: \(firstRangeToFrame), las: \(lastRangeToFrame)")
+        
+        
+        let firstPoint = CGPoint(x: firstRangeToFrame.value.midX.rounded(toPlaces: 5), y: firstRangeToFrame.value.midY.rounded(toPlaces: 5))
+        let lastPoint = CGPoint(x: lastRangeToFrame.value.midX.rounded(toPlaces: 5), y: lastRangeToFrame.value.midY.rounded(toPlaces: 5))
+        
+        
+        /// differences are the distance from the unit circle origin (`firstRangeToFrame`) to the outside point (`lastRangeToFrame`)
+        let yDifference = firstRangeToFrame.value.midY - lastRangeToFrame.value.midY
+        let xDifference = lastRangeToFrame.value.midX - firstRangeToFrame.value.midX
+        let angle = atan2(yDifference, xDifference).radiansToDegrees
+        print("First: \(firstPoint), last: \(lastPoint)  ----> \(angle)")
+        return angle
+    }
+
     /// get the ranges of search strings in the `string`
     func ranges(of searchStrings: [String]) -> [RangeResult] {
         var results = [RangeResult]()
@@ -62,6 +82,8 @@ extension Sentence {
         let endFrame = characterFrame(for: targetRange.upperBound - 1)
 
         let frame = startFrame.union(endFrame)
+//
+        let _ = angle
         return frame
     }
 
@@ -74,6 +96,10 @@ extension Sentence {
         ) else {
             return .zero
         }
+        
+//        switch angle {
+//        case 0..<
+//        }
 
         let gridWidth = rangeToFrame.value.width / CGFloat(rangeToFrame.key.count)
         let gridHeight = rangeToFrame.value.height / CGFloat(rangeToFrame.key.count)

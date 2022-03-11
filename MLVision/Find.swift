@@ -122,16 +122,11 @@ extension Find {
                 /// In this case, adjust the `rangesToFrames` for keys that encompass all the words.
                 var cleanedRangesToFrames = [Range<Int>: CGRect]()
                 for rangeToFrame in rangesToFrames {
-                    
                     let existingRangeToFrame = cleanedRangesToFrames.first {
-                        
                         /// Sometimes they are very close, so need to check the difference instead of directly using `==`
                         abs($0.value.origin.x - rangeToFrame.value.origin.x) < 0.00001
                     }
                     if let existingRangeToFrame = existingRangeToFrame {
-//                        print("Match. \(text.string[existingRangeToFrame.key])")
-//                        print("     Exists. \(existingRangeToFrame.key) vs \(rangeToFrame.key) [in] \(cleanedRangesToFrames)")
-
                         /// must combine together
                         let initialRange = existingRangeToFrame.key
                         let otherRange = rangeToFrame.key
@@ -145,13 +140,9 @@ extension Find {
 
                         cleanedRangesToFrames[initialRange] = nil
                         cleanedRangesToFrames[newRange] = rangeToFrame.value
-
-//                        print("     now \(newRange): \(cleanedRangesToFrames)")
                     } else {
                         cleanedRangesToFrames[rangeToFrame.key] = rangeToFrame.value
                     }
-
-//                    print(" \(sentence.string(for: rangeToFrame.key)) Fr: \(rangeToFrame.value)")
                 }
 
                 let sentence = Sentence(string: text.string, rangesToFrames: cleanedRangesToFrames)
