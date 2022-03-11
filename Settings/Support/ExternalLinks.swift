@@ -14,18 +14,12 @@ struct ExternalLinks: View {
             Button(action: {
                 if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
                     var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
-                    
-                    // 2.
+
                     components?.queryItems = [
                         URLQueryItem(name: "action", value: "write-review")
                     ]
                     
-                    // 3.
-                    guard let writeReviewURL = components?.url else {
-                        return
-                    }
-                    
-                    // 4.
+                    guard let writeReviewURL = components?.url else { return }
                     UIApplication.shared.open(writeReviewURL)
                 }
             }) {
@@ -33,7 +27,7 @@ struct ExternalLinks: View {
                     Image(systemName: "star.fill")
                         .font(Font.system(size: 20, weight: .medium))
                         .frame(height: 24)
-                    
+
                     Text("Rate the App")
 
                     Spacer()
@@ -48,7 +42,7 @@ struct ExternalLinks: View {
                 .cornerRadius(12)
             }
             .accessibility(hint: Text("Open the App Store to rate Find. Thanks!"))
-            
+
             Button(action: {
                 if let serverURL = URL(string: "https://discord.com/invite/UJpHv8jmN5") {
                     UIApplication.shared.open(serverURL)
@@ -59,7 +53,7 @@ struct ExternalLinks: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 24)
-                    
+
                     Text("Join the Discord")
                     Spacer()
                     Image(systemName: "arrow.up.right")
@@ -76,3 +70,4 @@ struct ExternalLinks: View {
         }
     }
 }
+

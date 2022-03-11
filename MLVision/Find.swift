@@ -88,7 +88,6 @@ enum Find {
                     try imageRequestHandler.perform([request])
                 } catch {
                     Global.log("Error finding: \(error)", .error)
-//                    continuation.resume(returning: [])
                 }
             }
         }
@@ -97,44 +96,30 @@ enum Find {
 
 extension Find {
     static func getSentences(from request: VNRequest) -> [Sentence] {
-        guard
-            let results = request.results
-        else {
-            return []
-        }
+        guard let results = request.results else { return [] }
 
         var sentences = [Sentence]()
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
-            
-            var letters = [Letter]()
+            let ranges = text.string.ranges()
+
             do {
-                print("Text: \(text.string)")
-                for index in text.string.indices {
-                    let string = String(text.string[index])
-                    
-                    let end = text.string.index(after: index)
-                    guard let rectangleObservation = try text.boundingBox(for: index ..< end) else { continue }
-                    let frame = rectangleObservation.boundingBox.getNormalizedRectFromVision()
-                    
-                    print("         \(string) [\(index) - \(end)] -> frame: \(frame)")
-                    let letter = Letter(
-                        string: string,
-                        frame: frame
-                    )
-                    letters.append(letter)
+                var rangesToFrames = [Range<Int> : CGRect]()
+                for range in ranges {
+                    let start = text.string.index(text.string.startIndex, offsetBy: range.lowerBound)
+                    let end = text.string.index(text.string.startIndex, offsetBy: range.upperBound)
+                    guard let rectangleObservation = try text.boundingBox(for: start ..< end) else { continue }
+                    let frame = rectangleObservation.getFrame()
+                    rangesToFrames[range] = frame
                 }
+
+                let sentence = Sentence(string: text.string, rangesToFrames: rangesToFrames)
+                sentences.append(sentence)
             } catch {
                 Global.log("Error: \(error)")
             }
-            let sentence = Sentence(
-                letters: letters,
-                confidence: CGFloat(text.confidence)
-            )
-            sentences.append(sentence)
         }
 
         return sentences
     }
 }
-

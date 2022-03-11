@@ -1613,6 +1613,11 @@
 		3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */; };
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
+		3CE3D4C027DA804B00521735 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3D4BF27DA804B00521735 /* Realm */; };
+		3CE3D4C227DA804B00521735 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3D4C127DA804B00521735 /* RealmSwift */; };
+		3CE3D4C327DA807700521735 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
+		3CE3D4C427DA807700521735 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
+		3CE3D4C527DA807700521735 /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
 		3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
@@ -2772,6 +2777,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE3D4C227DA804B00521735 /* RealmSwift in Frameworks */,
+				3CE3D4C027DA804B00521735 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4926,6 +4933,10 @@
 			dependencies = (
 			);
 			name = Photos;
+			packageProductDependencies = (
+				3CE3D4BF27DA804B00521735 /* Realm */,
+				3CE3D4C127DA804B00521735 /* RealmSwift */,
+			);
 			productName = Photos;
 			productReference = 3C4D39D42747661E0010FD68 /* Photos.app */;
 			productType = "com.apple.product-type.application";
@@ -6113,6 +6124,7 @@
 				3C21EE2427A461820005E183 /* RealmModel+Lists.swift in Sources */,
 				3C08EAFB279C76E400971D60 /* ListsConstants.swift in Sources */,
 				3CB0022E2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
+				3CE3D4C427DA807700521735 /* Field.swift in Sources */,
 				3CBB31AB27BDB99100F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
 				3C0AACB027C8222A009DFC09 /* PhotosVC+ResultsDelegate.swift in Sources */,
 				3CCE2B1E279D008C00F72351 /* ClearIconView.swift in Sources */,
@@ -6159,6 +6171,7 @@
 				3C4D39F1274766590010FD68 /* PhotosViewController.swift in Sources */,
 				3CDD944227C05F9100D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3CDD943C27C05DAF00D3EA1A /* PhotosScanningView.swift in Sources */,
+				3CE3D4C327DA807700521735 /* SearchViewModel.swift in Sources */,
 				3C71EF9E27BF5C2E00F0C0A0 /* PhotosVC+Transition.swift in Sources */,
 				3C1D179227BCAEBA00E82B8B /* PhotosConstants.swift in Sources */,
 				3CBB319E27BD68EC00F25F6A /* PhotosSlidesContentCell.swift in Sources */,
@@ -6173,6 +6186,7 @@
 				3CFD602B278B71E10031BC8B /* SearchNC+SearchBar.swift in Sources */,
 				3C21EE2127A461820005E183 /* RealmModel+Photos.swift in Sources */,
 				3CFD6020278B70970031BC8B /* SearchNavigationConstants.swift in Sources */,
+				3CE3D4C527DA807700521735 /* SearchConfiguration.swift in Sources */,
 				3CFD602C278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C0B5E7027BAC9B700EC881E /* PhotosVC+Setup.swift in Sources */,
 				3CBB318D27BD526200F25F6A /* ScrollZoomHookViewController.swift in Sources */,
@@ -9243,6 +9257,16 @@
 			productName = Realm;
 		};
 		3C93149F27B844D7009E5B6E /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		3CE3D4BF27DA804B00521735 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		3CE3D4C127DA804B00521735 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

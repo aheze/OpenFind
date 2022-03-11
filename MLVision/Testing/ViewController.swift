@@ -10,16 +10,18 @@ import AVFoundation
 import UIKit
 
 class ViewController: UIViewController {
+    let interval: CGFloat? = nil
+    
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var highlightsView: UIView!
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = "present"
+    let textToFind = "popovers"
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [
-//        UIImage(named: "TrackingImage1")!,
+        //        UIImage(named: "TrackingImage1")!,
 //        UIImage(named: "TrackingImage2")!,
 //        UIImage(named: "TrackingImage3")!,
 //        UIImage(named: "TrackingImage4")!,
@@ -41,7 +43,7 @@ class ViewController: UIViewController {
         highlightsView.frame = rect
     }
     
-    func updateTrackingImage(timer: Timer) {
+    func updateTrackingImage(timer: Timer? = nil) {
         let image = trackingImages[currentTrackingImageIndex]
         imageView.image = image
         
@@ -52,7 +54,7 @@ class ViewController: UIViewController {
             currentTrackingImageIndex = 0
         }
         if currentTrackingImageIndex >= 80 {
-            timer.invalidate()
+            timer?.invalidate()
         }
     }
     
@@ -64,35 +66,44 @@ class ViewController: UIViewController {
             
             var highlights = Set<Highlight>()
             for sentence in sentences {
+                let rangeResults = sentence.ranges(of: [textToFind])
+                for rangeResult in rangeResults {
+                    for range in rangeResult.ranges {
+                        let frame = sentence.frame(for: range)
+                        print(frame)
+                        let highlight = Highlight(
+                            string: rangeResult.string,
+                            frame: frame,
+                            colors: [UIColor(hex: 0xff2600)]
+                        )
+                        highlights.insert(highlight)
+                    }
+                }
+                
 //                for letter in sentence.letters {
+
+//                }
+//                let sentenceString = sentence.getString()
+//                let indices = sentenceString.lowercased().indicesOf(string: textToFind.lowercased())
+//                for index in indices {
+                ////                    let word = sentence.getWord(word: textToFind, at: index)
+//
+//                    let range = index ..< index + textToFind.count
+//                    let (frame, angle) = sentence.getFrameAndRotation(for: range)
 //                    let highlight = Highlight(
-//                        string: letter.string,
-//                        frame: letter.frame,
+//                        string: textToFind,
+//                        frame: frame,
+//                        angle: angle,
 //                        colors: [UIColor(hex: 0xff2600)]
 //                    )
+                ////                    let highlight = Highlight(
+                ////                        string: self.textToFind,
+                ////                        frame: word.frame,
+                ////                        colors: [UIColor(hex: 0xff2600)]
+                ////                    )
+//
 //                    highlights.insert(highlight)
 //                }
-                let sentenceString = sentence.getString()
-                let indices = sentenceString.lowercased().indicesOf(string: textToFind.lowercased())
-                for index in indices {
-//                    let word = sentence.getWord(word: textToFind, at: index)
-
-                    let range = index ..< index + textToFind.count
-                    let (frame, angle) = sentence.getFrameAndRotation(for: range)
-                    let highlight = Highlight(
-                        string: textToFind,
-                        frame: frame,
-                        angle: angle,
-                        colors: [UIColor(hex: 0xff2600)]
-                    )
-//                    let highlight = Highlight(
-//                        string: self.textToFind,
-//                        frame: word.frame,
-//                        colors: [UIColor(hex: 0xff2600)]
-//                    )
-
-                    highlights.insert(highlight)
-                }
 //
             }
             
@@ -103,8 +114,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { timer in
-            self.updateTrackingImage(timer: timer)
+        if let interval = interval {
+            Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+                self.updateTrackingImage(timer: timer)
+            }
+        } else { /// just find
+            updateTrackingImage()
         }
         
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
