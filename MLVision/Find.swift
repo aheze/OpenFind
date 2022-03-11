@@ -65,6 +65,7 @@ enum Find {
         }
     }
 
+    /// run Vision
     internal static func run(in image: FindImage, options: FindOptions = FindOptions()) async -> [Sentence] {
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
@@ -101,12 +102,12 @@ extension Find {
         var sentences = [Sentence]()
         for case let observation as VNRecognizedTextObservation in results {
             guard let text = observation.topCandidates(1).first else { continue }
+
             let ranges = text.string.ranges()
 
             do {
-                var rangesToFrames = [Range<Int> : CGRect]()
+                var rangesToFrames = [Range<Int>: CGRect]()
                 for range in ranges {
-                    
                     let start = text.string.index(text.string.startIndex, offsetBy: range.lowerBound)
                     let end = text.string.index(text.string.startIndex, offsetBy: range.upperBound)
                     guard let rectangleObservation = try text.boundingBox(for: start ..< end) else { continue }
@@ -114,7 +115,46 @@ extension Find {
                     rangesToFrames[range] = frame
                 }
 
-                let sentence = Sentence(string: text.string, rangesToFrames: rangesToFrames)
+                if text.string.contains("picture") {
+                    print("String is [\(text.string)]. Ranges:  \(rangesToFrames)")
+                }
+                /// Sometimes Vision returns 1 huge bounding box for multiple words.
+                /// In this case, adjust the `rangesToFrames` for keys that encompass all the words.
+                var cleanedRangesToFrames = [Range<Int>: CGRect]()
+                for rangeToFrame in rangesToFrames {
+                    
+                    let existingRangeToFrame = cleanedRangesToFrames.first {
+                        
+                        /// Sometimes they are very close, so need to check the difference instead of directly using `==`
+                        abs($0.value.origin.x - rangeToFrame.value.origin.x) < 0.00001
+                    }
+                    if let existingRangeToFrame = existingRangeToFrame {
+//                        print("Match. \(text.string[existingRangeToFrame.key])")
+//                        print("     Exists. \(existingRangeToFrame.key) vs \(rangeToFrame.key) [in] \(cleanedRangesToFrames)")
+
+                        /// must combine together
+                        let initialRange = existingRangeToFrame.key
+                        let otherRange = rangeToFrame.key
+
+                        /// take the lowest and highest for a combined word
+                        // 1..<3 and 10..<20 -> 1..<20
+                        // 1..<4 and 2..<10 -> 1 -> 10
+                        let lowerBound = min(initialRange.lowerBound, otherRange.lowerBound)
+                        let upperBound = max(initialRange.upperBound, otherRange.upperBound)
+                        let newRange = lowerBound ..< upperBound
+
+                        cleanedRangesToFrames[initialRange] = nil
+                        cleanedRangesToFrames[newRange] = rangeToFrame.value
+
+//                        print("     now \(newRange): \(cleanedRangesToFrames)")
+                    } else {
+                        cleanedRangesToFrames[rangeToFrame.key] = rangeToFrame.value
+                    }
+
+//                    print(" \(sentence.string(for: rangeToFrame.key)) Fr: \(rangeToFrame.value)")
+                }
+
+                let sentence = Sentence(string: text.string, rangesToFrames: cleanedRangesToFrames)
                 sentences.append(sentence)
             } catch {
                 Global.log("Error: \(error)")

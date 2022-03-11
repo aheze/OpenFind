@@ -17,21 +17,10 @@ class ViewController: UIViewController {
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = ["popovers", "a"]
+    let textToFind = ["popovers", "present", "that works", "SwiftUl"]
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [
-        //        UIImage(named: "TrackingImage1")!,
-//        UIImage(named: "TrackingImage2")!,
-//        UIImage(named: "TrackingImage3")!,
-//        UIImage(named: "TrackingImage4")!,
-//        UIImage(named: "TrackingImage5")!,
-//        UIImage(named: "TrackingImage6")!,
-//        UIImage(named: "TrackingImage7")!,
-//        UIImage(named: "TrackingImage8")!,
-//        UIImage(named: "TrackingImage9")!,
-//        UIImage(named: "TrackingImage10")!,
-//        UIImage(named: "TrackingImage11")!,
         UIImage(named: "Frame 1")!,
         UIImage(named: "Frame 2")!,
         UIImage(named: "Frame 3")!
@@ -62,6 +51,7 @@ class ViewController: UIViewController {
         Task {
             var options = FindOptions()
             options.level = .accurate
+            options.customWords = textToFind
             guard let sentences = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: false) else { return }
             
             var highlights = Set<Highlight>()
@@ -77,6 +67,15 @@ class ViewController: UIViewController {
                         )
                         highlights.insert(highlight)
                     }
+                }
+                
+                for rangeToFrame in sentence.rangesToFrames {
+                    let highlight = Highlight(
+                        string: sentence.string(for: rangeToFrame.key),
+                        frame: rangeToFrame.value,
+                        colors: [UIColor.systemBlue]
+                    )
+                    highlights.insert(highlight)
                 }
             }
             

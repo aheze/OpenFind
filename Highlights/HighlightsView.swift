@@ -41,7 +41,7 @@ struct HighlightView: View {
             .opacity(0.2)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(gradient, lineWidth: 2)
+                    .stroke(gradient, lineWidth: 0.5)
                     .opacity(0.8)
             )
             .opacity(getLingeringOpacity())

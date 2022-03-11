@@ -40,7 +40,6 @@ extension Sentence {
         var results = [RangeResult]()
 
         for searchString in searchStrings {
-            
             let indices = string.lowercased().indicesOf(string: searchString.lowercased())
             if indices.isEmpty { continue }
             let ranges = indices.map { $0 ..< $0 + searchString.count }
@@ -50,16 +49,17 @@ extension Sentence {
         return results
     }
 
+    func string(for targetRange: Range<Int>) -> String {
+        let start = string.index(string.startIndex, offsetBy: targetRange.lowerBound)
+        let end = string.index(string.startIndex, offsetBy: targetRange.upperBound)
+        return String(string[start ..< end])
+    }
+
     /// get the frame for a range. This range doesn't need to be limited to individual words.
     func frame(for targetRange: Range<Int>) -> CGRect {
         /// get the ranges that contains the target range.
-        guard
-            let startRangeToFrame = rangesToFrames.first(where: { range, _ in range.contains(targetRange.lowerBound) }),
-            let endRangeToFrame = rangesToFrames.first(where: { range, _ in range.contains(targetRange.upperBound - 1) })
-        else { return .zero }
-
-        let startFrame = characterFrame(for: targetRange.lowerBound, in: (range: startRangeToFrame.key, frame: startRangeToFrame.value))
-        let endFrame = characterFrame(for: targetRange.upperBound - 1, in: (range: endRangeToFrame.key, frame: endRangeToFrame.value))
+        let startFrame = characterFrame(for: targetRange.lowerBound)
+        let endFrame = characterFrame(for: targetRange.upperBound - 1)
 
         let frame = startFrame.union(endFrame)
         return frame
@@ -67,26 +67,35 @@ extension Sentence {
 
     /// index: The index of the character, inside the parent string from the `sentence`
     /// rangeToFrame: The `rangeToFrame` that contains this index.
-    func characterFrame(for index: Int, in rangeToFrame: (range: Range<Int>, frame: CGRect)) -> CGRect {
-        let gridWidth = rangeToFrame.frame.width / CGFloat(rangeToFrame.range.count)
-        let gridHeight = rangeToFrame.frame.height / CGFloat(rangeToFrame.range.count)
+    func characterFrame(for index: Int) -> CGRect {
+        /// get the ranges that contains the target range.
+        guard let rangeToFrame = rangesToFrames.first(
+            where: { range, _ in range.contains(index) || range.upperBound == index }
+        ) else {
+            return .zero
+        }
+
+        let gridWidth = rangeToFrame.value.width / CGFloat(rangeToFrame.key.count)
+        let gridHeight = rangeToFrame.value.height / CGFloat(rangeToFrame.key.count)
 
         /// length of a character (a square)
         let characterLength = max(gridWidth, gridHeight)
-        
+
         /// get offset within the word's frame. `index - rangeToFrame.range.lowerBound` is the index relative to the word.
-        let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
-        let characterYOffset = gridHeight * CGFloat(index - rangeToFrame.range.lowerBound)
+        let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.key.lowerBound)
+        let characterYOffset = gridHeight * CGFloat(index - rangeToFrame.key.lowerBound)
 
         let frame = CGRect(
-            x: rangeToFrame.frame.origin.x + characterXOffset,
-            y: rangeToFrame.frame.origin.y + characterYOffset,
+            x: rangeToFrame.value.origin.x + characterXOffset,
+            y: rangeToFrame.value.origin.y + characterYOffset,
             width: characterLength,
             height: characterLength
         )
-        
+
         return frame
     }
+
+    func averageAngle() {}
 }
 
 extension String {
