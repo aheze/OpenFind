@@ -40,6 +40,7 @@ extension Sentence {
         var results = [RangeResult]()
 
         for searchString in searchStrings {
+            
             let indices = string.lowercased().indicesOf(string: searchString.lowercased())
             if indices.isEmpty { continue }
             let ranges = indices.map { $0 ..< $0 + searchString.count }
@@ -54,11 +55,11 @@ extension Sentence {
         /// get the ranges that contains the target range.
         guard
             let startRangeToFrame = rangesToFrames.first(where: { range, _ in range.contains(targetRange.lowerBound) }),
-            let endRangeToFrame = rangesToFrames.first(where: { range, _ in range.contains(targetRange.upperBound) })
+            let endRangeToFrame = rangesToFrames.first(where: { range, _ in range.contains(targetRange.upperBound - 1) })
         else { return .zero }
 
         let startFrame = characterFrame(for: targetRange.lowerBound, in: (range: startRangeToFrame.key, frame: startRangeToFrame.value))
-        let endFrame = characterFrame(for: targetRange.upperBound, in: (range: endRangeToFrame.key, frame: endRangeToFrame.value))
+        let endFrame = characterFrame(for: targetRange.upperBound - 1, in: (range: endRangeToFrame.key, frame: endRangeToFrame.value))
 
         let frame = startFrame.union(endFrame)
         return frame
@@ -84,7 +85,6 @@ extension Sentence {
             height: characterLength
         )
         
-        print("         Char frame for \(index):L \(frame)")
         return frame
     }
 }

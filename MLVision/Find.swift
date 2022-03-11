@@ -106,11 +106,11 @@ extension Find {
             do {
                 var rangesToFrames = [Range<Int> : CGRect]()
                 for range in ranges {
+                    
                     let start = text.string.index(text.string.startIndex, offsetBy: range.lowerBound)
                     let end = text.string.index(text.string.startIndex, offsetBy: range.upperBound)
                     guard let rectangleObservation = try text.boundingBox(for: start ..< end) else { continue }
                     let frame = rectangleObservation.getFrame()
-                    print("         frame: \(frame)")
                     rangesToFrames[range] = frame
                 }
 

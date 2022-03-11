@@ -67,11 +67,9 @@ class ViewController: UIViewController {
             var highlights = Set<Highlight>()
             for sentence in sentences {
                 let rangeResults = sentence.ranges(of: textToFind)
-                print("Results: \(rangeResults)")
                 for rangeResult in rangeResults {
                     for range in rangeResult.ranges {
                         let frame = sentence.frame(for: range)
-                        print("         Frame of sentence: \(frame)")
                         let highlight = Highlight(
                             string: rangeResult.string,
                             frame: frame,
@@ -80,32 +78,6 @@ class ViewController: UIViewController {
                         highlights.insert(highlight)
                     }
                 }
-                
-//                for letter in sentence.letters {
-
-//                }
-//                let sentenceString = sentence.getString()
-//                let indices = sentenceString.lowercased().indicesOf(string: textToFind.lowercased())
-//                for index in indices {
-                ////                    let word = sentence.getWord(word: textToFind, at: index)
-//
-//                    let range = index ..< index + textToFind.count
-//                    let (frame, angle) = sentence.getFrameAndRotation(for: range)
-//                    let highlight = Highlight(
-//                        string: textToFind,
-//                        frame: frame,
-//                        angle: angle,
-//                        colors: [UIColor(hex: 0xff2600)]
-//                    )
-                ////                    let highlight = Highlight(
-                ////                        string: self.textToFind,
-                ////                        frame: word.frame,
-                ////                        colors: [UIColor(hex: 0xff2600)]
-                ////                    )
-//
-//                    highlights.insert(highlight)
-//                }
-//
             }
             
             highlightsViewModel.update(with: highlights, replace: false)
