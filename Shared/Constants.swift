@@ -11,6 +11,7 @@ import SwiftUI
 enum Colors {
     static var accent = UIColor(named: "Accent")!
 }
+
 extension Color {
     static var accent = Colors.accent.color
 }
@@ -34,7 +35,6 @@ enum Constants {
     static var toolbarIconDeactivateAnimationSpeed = CGFloat(0.3)
     
     static var defaultHighlightColor = UIColor(hex: 0x00AEEF)
-    
     
     /**
      For toolbars above the keyboard.
@@ -71,7 +71,6 @@ enum ConstantVars {
         let bottomSafeAreaInset = window?.safeAreaInsets.bottom ?? 0
         let deviceHasNotch = bottomSafeAreaInset > 0
         
-        print("Notch? \(deviceHasNotch)")
         if deviceHasNotch {
             let bottomPadding = bottomSafeAreaInset + 4
             toolbarBottomPadding = bottomPadding
@@ -83,8 +82,6 @@ enum ConstantVars {
             tabBarOverflowingIconsBottomPaddingLandscape = bottomSafeAreaInset - 6
             tabBarTotalHeightLandscape = tabBarContentHeight + bottomSafeAreaInset
             tabBarTotalHeightExpandedLandscape = tabBarTotalHeightLandscape
-            
-            print("toolbarBottomPadding: \(tabBarOverflowingIconsBottomPadding)")
             
         } else {
             toolbarBottomPadding = bottomSafeAreaInset

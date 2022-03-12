@@ -12,7 +12,7 @@ struct PhotosButton: View {
     let tabType = TabState.photos
     @ObservedObject var tabViewModel: TabViewModel
     let attributes: PhotosIconAttributes
-    
+
     var body: some View {
         TabButton(tabType: tabType, tabViewModel: tabViewModel) {
             Group {
@@ -30,7 +30,7 @@ struct ListsButton: View {
     let tabType = TabState.lists
     @ObservedObject var tabViewModel: TabViewModel
     let attributes: ListsIconAttributes
-    
+
     var body: some View {
         TabButton(tabType: tabType, tabViewModel: tabViewModel) {
             Group {
@@ -48,10 +48,9 @@ struct TabButton<Content: View>: View {
     let tabType: TabState
     @ObservedObject var tabViewModel: TabViewModel
     @ViewBuilder var content: Content
-    
+
     var body: some View {
         Button {
-            print("oressed")
             tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
         } label: {
             content

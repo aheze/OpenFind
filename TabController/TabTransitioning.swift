@@ -61,7 +61,7 @@ extension TabState {
     func tabBarAttributes() -> TabBarAttributes {
         let lightTabBarAttributes: TabBarAttributes = TabState.isLandscape ? .lightBackgroundLandscape : .lightBackground
         let darkTabBarAttributes: TabBarAttributes = TabState.isLandscape ? .darkBackgroundLandscape : .darkBackground
-        
+
         switch self {
         case .photos:
             return lightTabBarAttributes
@@ -70,7 +70,6 @@ extension TabState {
         case .lists:
             return lightTabBarAttributes
         case .cameraToPhotos(let transitionProgress):
-            print("progress: \(transitionProgress) from \(darkTabBarAttributes) to \(lightTabBarAttributes)")
             return .init(progress: transitionProgress, from: darkTabBarAttributes, to: lightTabBarAttributes)
         case .cameraToLists(let transitionProgress):
             return .init(progress: transitionProgress, from: darkTabBarAttributes, to: lightTabBarAttributes)

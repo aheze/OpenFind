@@ -14,7 +14,7 @@ struct TabBarView: View {
     @ObservedObject var cameraViewModel: CameraViewModel
     
     var body: some View {
-        let _ = print("receied: \(tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)")
+        
         Color.clear
             .overlay(
                 HStack(alignment: .bottom, spacing: 0) {
@@ -22,8 +22,7 @@ struct TabBarView: View {
                     CameraButton(tabViewModel: tabViewModel, cameraViewModel: cameraViewModel, attributes: tabViewModel.cameraIconAttributes)
                     ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
                 }
-//                .padding(.bottom, tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)
-                    .padding(.bottom, 30)
+                .padding(.bottom, tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)
                 .opacity(toolbarViewModel.toolbar == nil ? 1 : 0)
                 
                 /// toolbar for other view controllers

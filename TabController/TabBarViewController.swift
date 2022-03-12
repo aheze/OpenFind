@@ -148,7 +148,6 @@ class TabBarViewController: UIViewController {
     
     /// animated is TODO, since setting `tabState` triggers the `.sink`, which auto calls this function.
     func updateTabContent(_ tabState: TabState, animated: Bool) {
-        print("update.")
         let index: Int
         switch tabState {
         case .photos:
@@ -164,7 +163,6 @@ class TabBarViewController: UIViewController {
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
             let targetOffset = contentPagingLayout.getTargetOffset(for: CGPoint(x: attributes.fullOrigin, y: 0), velocity: 0)
-            print("offst: \(targetOffset)")
             contentCollectionView.setContentOffset(targetOffset, animated: animated)
         }
     }
