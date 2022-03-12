@@ -13,6 +13,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var model: PhotosViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
+    var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
     var slidesSearchViewModel: SearchViewModel
     var permissionsViewModel = PhotosPermissionsViewModel()
@@ -47,12 +48,14 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         model: PhotosViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
+        searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
         slidesSearchViewModel: SearchViewModel
     ) {
         self.model = model
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
+        self.searchNavigationModel = searchNavigationModel
         self.searchViewModel = searchViewModel
         self.slidesSearchViewModel = slidesSearchViewModel
         super.init(coder: coder)

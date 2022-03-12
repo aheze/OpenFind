@@ -1,5 +1,5 @@
 //
-//  PhotosSlidesVC+Dismissal.swift
+//  PhotosSlidesVC+Gestures.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/18/22.
@@ -30,5 +30,16 @@ extension PhotosSlidesViewController {
 
         // We want to update our transition controller, too!
         self.transitionAnimator?.didPanWith(gestureRecognizer: gesture)
+    }
+}
+
+extension PhotosSlidesViewController {
+    func setupTapGesture() {
+        self.view.addGestureRecognizer(self.tapPanGesture)
+        self.tapPanGesture.addTarget(self, action: #selector(self.tapGestureDidChange(_:)))
+    }
+
+    @objc func tapGestureDidChange(_ gesture: UIPanGestureRecognizer) {
+        toggleFullScreen()
     }
 }

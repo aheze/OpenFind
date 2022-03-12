@@ -50,3 +50,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
         }
     }
 }
+
+extension PhotosSlidesViewController: UIGestureRecognizerDelegate {
+//    func gesturere
+}

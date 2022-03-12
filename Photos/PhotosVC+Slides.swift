@@ -82,6 +82,7 @@ extension PhotosViewController {
             PhotosSlidesViewController(
                 coder: coder,
                 model: self.model,
+                searchNavigationModel: self.searchNavigationModel,
                 slidesSearchViewModel: self.slidesSearchViewModel,
                 toolbarViewModel: self.toolbarViewModel
             )
@@ -90,22 +91,6 @@ extension PhotosViewController {
     }
 
     func presentSlides(startingAt findPhoto: FindPhoto, with slidesState: PhotosSlidesState) {
-        
-        let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in
-            PhotosSlidesViewController(
-                coder: coder,
-                model: self.model,
-                slidesSearchViewModel: self.slidesSearchViewModel,
-                toolbarViewModel: self.toolbarViewModel
-            )
-        }
-
-        viewController.updateSearchBarOffset = { [weak self] in
-            guard let self = self else { return }
-            self.updateNavigationBar?()
-        }
-
         Task {
             let fullImage = await model.getFullImage(from: findPhoto.photo)
 
@@ -126,6 +111,13 @@ extension PhotosViewController {
 
         /// make the destination content view have 0 alpha
         model.animatingSlides = true
+
+        /// retrieve the view controller from `slidesState`
+        guard let viewController = slidesState.viewController else { return }
+        viewController.updateSearchBarOffset = { [weak self] in
+            guard let self = self else { return }
+            self.updateNavigationBar?()
+        }
 
         /// apply a custom transition
         model.transitionAnimatorsUpdated?(self, viewController)

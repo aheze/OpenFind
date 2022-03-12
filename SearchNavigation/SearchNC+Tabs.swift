@@ -11,22 +11,22 @@ import UIKit
 
 extension SearchNavigationController {
     func willBecomeActive() {
-        onWillBecomeActive?()
+        model.onWillBecomeActive?()
     }
     
     func didBecomeActive() {
-        onDidBecomeActive?()
+        model.onDidBecomeActive?()
     }
     
     func willBecomeInactive() {
-        onWillBecomeInactive?()
+        model.onWillBecomeInactive?()
     }
     
     func didBecomeInactive() {
-        onDidBecomeInactive?()
+        model.onDidBecomeInactive?()
     }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        onBoundsChange?(size, safeAreaInsets)
+        model.onBoundsChange?(size, safeAreaInsets)
     }
 }

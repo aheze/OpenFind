@@ -33,6 +33,7 @@ enum Tab {
         
         /// 1. the tab, 2. animate or not
         static var moveToOtherTab: ((TabState, Bool) -> Void)?
+        static var showStatusBar: ((Bool) -> Void)?
     }
 
     enum Frames {

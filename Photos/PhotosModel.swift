@@ -14,6 +14,7 @@ struct PhotosSlidesState {
     var findPhotos: [FindPhoto]
     var startingFindPhoto: FindPhoto
     var currentIndex: Int?
+    var isFullScreen = false /// hide the bars
 
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: FindPhoto) -> Int? {

@@ -10,14 +10,9 @@ import UIKit
 
 class SearchNavigationController: UIViewController, PageViewController {
     var tabType: TabState
-    
-    var onWillBecomeActive: (() -> Void)?
-    var onDidBecomeActive: (() -> Void)?
-    var onWillBecomeInactive: (() -> Void)?
-    var onDidBecomeInactive: (() -> Void)?
-    var onBoundsChange: ((CGSize, UIEdgeInsets) -> Void)?
-    
     var rootViewController: UIViewController
+    
+    var model: SearchNavigationModel
     var searchViewModel: SearchViewModel
     var detailsSearchViewModel: SearchViewModel?
     var realmModel: RealmModel /// for the search bar
@@ -48,6 +43,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     
     static func make(
         rootViewController: Searchable,
+        searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
         realmModel: RealmModel,
         tabType: TabState
@@ -57,6 +53,7 @@ class SearchNavigationController: UIViewController, PageViewController {
             SearchNavigationController(
                 coder: coder,
                 rootViewController: rootViewController,
+                searchNavigationModel: searchNavigationModel,
                 searchViewModel: searchViewModel,
                 realmModel: realmModel,
                 tabType: tabType
@@ -68,11 +65,13 @@ class SearchNavigationController: UIViewController, PageViewController {
     init?(
         coder: NSCoder,
         rootViewController: UIViewController,
+        searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
         realmModel: RealmModel,
         tabType: TabState
     ) {
         self.rootViewController = rootViewController
+        self.model = searchNavigationModel
         self.searchViewModel = searchViewModel
         self.realmModel = realmModel
         self.tabType = tabType
@@ -94,6 +93,7 @@ class SearchNavigationController: UIViewController, PageViewController {
         addChildViewController(navigation, in: view)
         setupNavigationBar()
         setupSearchBar()
+        listen()
         
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
@@ -101,7 +101,6 @@ class SearchNavigationController: UIViewController, PageViewController {
             self.setupBlur()
             self.animator?.fractionComplete = self.blurPercentage
         }
-        
     }
     
     deinit {

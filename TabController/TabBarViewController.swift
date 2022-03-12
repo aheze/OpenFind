@@ -48,6 +48,18 @@ class TabBarViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
 
+    var statusBarHidden: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.3) { () in
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
+        }
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return statusBarHidden
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = contentPagingLayout

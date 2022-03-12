@@ -108,6 +108,10 @@ class TabBarController: NSObject, UICollectionViewDelegate, UICollectionViewData
         Tab.Control.moveToOtherTab = { [weak self] tabType, animated in
             self?.tabViewModel.changeTabState(newTab: tabType, animation: animated ? .animate : .clickedTabIcon)
         }
+        
+        Tab.Control.showStatusBar = { [weak self] show in
+            viewController.statusBarHidden = !show
+        }
     }
     
     /// called **even** when programmatically set the tab via the icon button...

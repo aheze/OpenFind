@@ -32,6 +32,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var isInteractivelyDismissing: Bool = false
     
     var model: PhotosViewModel
+    var searchNavigationModel: SearchNavigationModel
     var slidesSearchViewModel: SearchViewModel
     var toolbarViewModel: ToolbarViewModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
@@ -46,16 +47,19 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
 
     // MARK: - Dismissal
 
+    let tapPanGesture = UITapGestureRecognizer()
     let dismissPanGesture = UIPanGestureRecognizer()
     weak var transitionAnimator: PhotosTransitionDismissAnimator? /// auto set via the transition animator
     
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
+        searchNavigationModel: SearchNavigationModel,
         slidesSearchViewModel: SearchViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
+        self.searchNavigationModel = searchNavigationModel
         self.slidesSearchViewModel = slidesSearchViewModel
         self.toolbarViewModel = toolbarViewModel
         super.init(coder: coder)
@@ -74,6 +78,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         
         setup()
         setupDismissGesture()
+        setupTapGesture()
         update(animate: false)
         
         if let slidesState = model.slidesState, let index = slidesState.currentIndex {
@@ -98,6 +103,9 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Tab.Frames.excluded[.photosSlidesItemCollectionView] = nil
+        searchNavigationModel.showNavigationBar?(true)
+        
+        
         withAnimation {
             toolbarViewModel.toolbar = nil
         }

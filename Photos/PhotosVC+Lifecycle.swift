@@ -24,6 +24,9 @@ extension PhotosViewController {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: safeAreaInsets)
         self.updateNavigationBar?()
-        self.model.slidesState?.viewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
+        
+        if let slidesState = model.slidesState {
+            slidesState.viewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
+        }
     }
 }

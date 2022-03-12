@@ -9,6 +9,8 @@
 import SwiftUI
 
 class ViewController: UIViewController {
+    var loaded = false
+    
     let realmModel = RealmModel()
     lazy var photosViewModel = PhotosViewModel(realmModel: realmModel)
     let cameraViewModel = CameraViewModel()
@@ -18,7 +20,6 @@ class ViewController: UIViewController {
     lazy var photos = PhotosController(model: photosViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
     lazy var camera = CameraController(model: cameraViewModel, realmModel: realmModel)
     lazy var lists = ListsController(model: listsViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
-
 
     lazy var tabController: TabBarController = {
         photos.viewController.toolbarViewModel = toolbarViewModel
@@ -35,11 +36,21 @@ class ViewController: UIViewController {
         updateExcludedFrames()
         return tabController
     }()
+    
+    override var childForStatusBarHidden: UIViewController? {
+        if loaded {
+            return tabController.viewController
+        } else {
+            return nil
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("Load!")
         _ = tabController
+        loaded = true
 
         realmModel.loadLists()
         lists.viewController.reload()

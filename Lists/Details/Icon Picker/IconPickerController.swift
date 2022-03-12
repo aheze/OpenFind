@@ -16,7 +16,8 @@ class IconPickerController {
     var realmModel: RealmModel
     
     init(model: IconPickerViewModel, realmModel: RealmModel) {
-        var searchViewModel = SearchViewModel(configuration: .photos)
+        let searchNavigationModel = SearchNavigationModel()
+        let searchViewModel = SearchViewModel(configuration: .photos)
         self.searchViewModel = searchViewModel
         self.realmModel = realmModel
         
@@ -30,6 +31,7 @@ class IconPickerController {
         }
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: iconPickerViewController,
+            searchNavigationModel: searchNavigationModel,
             searchViewModel: searchViewModel,
             realmModel: realmModel,
             tabType: .lists

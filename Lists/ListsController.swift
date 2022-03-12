@@ -12,6 +12,7 @@ class ListsController {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     
+    var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
     var detailsSearchViewModel: SearchViewModel
     var searchNavigationController: SearchNavigationController
@@ -22,6 +23,8 @@ class ListsController {
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         
+        let searchNavigationModel = SearchNavigationModel()
+        self.searchNavigationModel = searchNavigationModel
         let searchViewModel = SearchViewModel(configuration: .lists)
         self.searchViewModel = searchViewModel
         let detailsSearchViewModel = SearchViewModel(configuration: .lists)
@@ -42,6 +45,7 @@ class ListsController {
         self.viewController = viewController
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
+            searchNavigationModel: searchNavigationModel,
             searchViewModel: searchViewModel,
             realmModel: realmModel,
             tabType: .lists
@@ -49,11 +53,11 @@ class ListsController {
         
         /// set the details search view model
         searchNavigationController.detailsSearchViewModel = detailsSearchViewModel
-        searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }
-        searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
-        searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
-        searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
-        searchNavigationController.onBoundsChange = { size, safeAreaInsets in
+        searchNavigationModel.onWillBecomeActive = { viewController.willBecomeActive() }
+        searchNavigationModel.onDidBecomeActive = { viewController.didBecomeActive() }
+        searchNavigationModel.onWillBecomeInactive = { viewController.willBecomeInactive() }
+        searchNavigationModel.onDidBecomeInactive = { viewController.didBecomeInactive() }
+        searchNavigationModel.onBoundsChange = { size, safeAreaInsets in
             viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
         }
         

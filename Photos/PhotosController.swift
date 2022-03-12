@@ -12,6 +12,7 @@ class PhotosController {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     
+    var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
     
     /// for the slides. This will only be up to date when the slides are presented.
@@ -26,6 +27,8 @@ class PhotosController {
         
         self.model.realmModel = realmModel
         
+        let searchNavigationModel = SearchNavigationModel()
+        self.searchNavigationModel = searchNavigationModel
         let searchViewModel = SearchViewModel(configuration: .photos)
         self.searchViewModel = searchViewModel
         let slidesSearchViewModel = SearchViewModel(configuration: .photos)
@@ -39,6 +42,7 @@ class PhotosController {
                 model: model,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
+                searchNavigationModel: searchNavigationModel,
                 searchViewModel: searchViewModel,
                 slidesSearchViewModel: slidesSearchViewModel
             )
@@ -48,6 +52,7 @@ class PhotosController {
     
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
+            searchNavigationModel: searchNavigationModel,
             searchViewModel: searchViewModel,
             realmModel: realmModel,
             tabType: .lists
@@ -55,11 +60,11 @@ class PhotosController {
         
         /// set the details search view model
         searchNavigationController.detailsSearchViewModel = slidesSearchViewModel
-        searchNavigationController.onWillBecomeActive = { viewController.willBecomeActive() }
-        searchNavigationController.onDidBecomeActive = { viewController.didBecomeActive() }
-        searchNavigationController.onWillBecomeInactive = { viewController.willBecomeInactive() }
-        searchNavigationController.onDidBecomeInactive = { viewController.didBecomeInactive() }
-        searchNavigationController.onBoundsChange = { size, safeAreaInset in
+        searchNavigationModel.onWillBecomeActive = { viewController.willBecomeActive() }
+        searchNavigationModel.onDidBecomeActive = { viewController.didBecomeActive() }
+        searchNavigationModel.onWillBecomeInactive = { viewController.willBecomeInactive() }
+        searchNavigationModel.onDidBecomeInactive = { viewController.didBecomeInactive() }
+        searchNavigationModel.onBoundsChange = { size, safeAreaInset in
             viewController.boundsChanged(to: size, safeAreaInsets: safeAreaInset)
         }
         
@@ -68,6 +73,7 @@ class PhotosController {
         viewController.loadViewIfNeeded() /// needed to initialize outlets
         viewController.updateNavigationBar = { [weak self] in
             guard let self = self else { return }
+            
             self.searchNavigationController.updateSearchBarOffset()
             Tab.Frames.excluded[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
