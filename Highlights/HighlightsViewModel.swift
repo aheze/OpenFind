@@ -13,6 +13,9 @@ class HighlightsViewModel: ObservableObject {
     
     /// If not up to date, fade out a bit.
     @Published var upToDate = true
+    
+    /// scale to the container. If false, just display them
+    @Published var shouldScaleHighlights = true
 
     /// If replace, don't check if word is same, but make sure color is same
     func update(with newHighlights: Set<Highlight>, replace: Bool) {

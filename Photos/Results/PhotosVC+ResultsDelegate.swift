@@ -16,12 +16,12 @@ extension PhotosViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             guard cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier else { return }
             let highlights = self.getHighlights(for: cell, with: findPhoto)
-
             if let highlightsViewController = cell.highlightsViewController {
                 highlightsViewController.highlightsViewModel.highlights = highlights
             } else {
                 let highlightsViewModel = HighlightsViewModel()
                 highlightsViewModel.highlights = highlights
+                highlightsViewModel.shouldScaleHighlights = false /// highlights are already scaled
                 let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
                 self.addChildViewController(highlightsViewController, in: cell.descriptionHighlightsContainerView)
                 cell.highlightsViewController = highlightsViewController

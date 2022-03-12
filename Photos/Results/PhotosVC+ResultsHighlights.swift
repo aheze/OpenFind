@@ -9,12 +9,15 @@
 import UIKit
 
 extension PhotosViewController {
-    /// call this inside the cell provider.
+    /// call this inside the cell provider. Frames of returned highlights are already scaled.
     func getHighlights(for cell: PhotosResultsCell, with findPhoto: FindPhoto) -> Set<Highlight> {
-        /// highlights in the cell without a frame - only represented by their ranges
+        
+        /// the highlights to be shown. Create these from `lineHighlights`
         var cellHighlights = Set<Highlight>()
         for index in findPhoto.descriptionLines.indices {
             let line = findPhoto.descriptionLines[index]
+            
+            /// `lineHighlights` - highlights in the cell without a frame - only represented by their ranges
             guard
                 let lineHighlights = line.lineHighlights,
                 let textView = cell.descriptionTextView
