@@ -112,8 +112,6 @@ extension Sentence {
         return CGPoint(x: frame.midX, y: frame.midY)
     }
 
-//    func horizontalOffset(for index: Int, containingRangeToFrame: (range: Range<Int>, frame: CGRect)? = nil) -> CGFloat {
-//        guard let rangeToFrame = containingRangeToFrame ?? rangeToFrame(containing: index) else { return .zero }
     func horizontalOffset(for index: Int) -> CGFloat {
         guard let rangeToFrame = rangeToFrame(containing: index) else { return .zero }
 
@@ -121,8 +119,23 @@ extension Sentence {
         let offsetFromWord = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
 
         /// distance from the beginning of the sentence
-        let wordOffset = CGPointDistance(from: rangeToFrame.frame.origin, to: boundingFrame().origin)
+        let wordOffset = CGPointDistance(
+            from: CGPoint(
+                x: rangeToFrame.frame.minX,
+                y: rangeToFrame.frame.midY
+            ),
+            to: CGPoint(
+                x: boundingFrame().minX,
+                y: boundingFrame().midY
+            )
+        )
         let horizontalOffset = wordOffset + offsetFromWord
+        
+        if string == "Hello, this is some" {
+            print("Off: \(horizontalOffset) -> \(wordOffset) + \(offsetFromWord)")
+        } else {
+            print("                 Off: \(horizontalOffset) -> \(wordOffset) + \(offsetFromWord)")
+        }
         return horizontalOffset
     }
 
@@ -149,32 +162,19 @@ extension Sentence {
     }
 
     /// index: The index of the character, inside the parent string from the `sentence`
-    /// rangeToFrame: The `rangeToFrame` that contains this index.
     func characterFrame(for index: Int) -> CGRect {
-        /// get the ranges that contains the target range.
+        /// get the ranges that contains the target index
         guard let rangeToFrame = rangeToFrame(containing: index) else { return .zero }
-
         let gridWidth = rangeToFrame.frame.width / CGFloat(rangeToFrame.range.count)
+        let characterLength = gridWidth
+        let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
 
-        let frame: CGRect
-        switch angle.radiansToDegrees {
-        /// horizontal
-        case -30 ..< 30:
-            let characterLength = gridWidth
-            let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
-
-            let yInset = rangeToFrame.frame.height * abs(sin(angle)) / 2
-            frame = CGRect(
-                x: rangeToFrame.frame.origin.x + characterXOffset,
-                y: rangeToFrame.frame.origin.y,
-                width: characterLength,
-                height: rangeToFrame.frame.height
-            )
-            .insetBy(dx: 0, dy: yInset)
-        default:
-            frame = rangeToFrame.frame
-        }
-
+        let frame = CGRect(
+            x: rangeToFrame.frame.origin.x + characterXOffset,
+            y: rangeToFrame.frame.origin.y,
+            width: characterLength,
+            height: rangeToFrame.frame.height
+        )
         return frame
     }
 

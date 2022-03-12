@@ -54,7 +54,6 @@ class ViewController: UIViewController {
             
             var highlights = Set<Highlight>()
             for sentence in sentences {
-                print(sentence.string)
                 let rangeResults = sentence.ranges(of: textToFind)
                 for rangeResult in rangeResults {
                     for range in rangeResult.ranges {
