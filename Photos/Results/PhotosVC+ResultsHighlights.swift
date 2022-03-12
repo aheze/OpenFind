@@ -6,14 +6,11 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension PhotosViewController {
-    
     /// call this inside the cell provider.
     func getHighlights(for cell: PhotosResultsCell, with findPhoto: FindPhoto) -> Set<Highlight> {
-        
         /// highlights in the cell without a frame - only represented by their ranges
         var cellHighlights = Set<Highlight>()
         for index in findPhoto.descriptionLines.indices {
@@ -82,8 +79,6 @@ extension PhotosViewController {
                 return highlight
             }
             model.resultsState?.findPhotos[findPhotoIndex].highlights = newHighlights
-            print("updateHighlightColors highlights: \(newHighlights.count)")
-                
             
             /// update the line highlight colors
             for (lineIndex, descriptionLine) in resultsState.findPhotos[findPhotoIndex].descriptionLines.enumerated() {
@@ -108,7 +103,6 @@ extension PhotosViewController {
                 let findPhoto = model.resultsState?.findPhotos[findPhotoIndex]
             {
                 cell.highlightsViewController?.highlightsViewModel.highlights = getHighlights(for: cell, with: findPhoto)
-                print("2 updateHighlightColors highlights: \(newHighlights.count)")
             }
         }
     }

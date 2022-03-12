@@ -42,9 +42,14 @@ class ScrollZoomViewController: UIViewController {
     }
 
     func centerImage() {
-        let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
-        let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
-        scrollView.contentInset = UIEdgeInsets(top: topMargin, left: leftMargin, bottom: 0, right: 0)
+//        print("zoom: \(scrollView.zoomScale).. \(scrollView.contentInset)")
+        if scrollView.zoomScale < 1 {
+            let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
+            let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
+            scrollView.contentInset = UIEdgeInsets(top: topMargin, left: leftMargin, bottom: 0, right: 0)
+        } else {
+            scrollView.contentInset = .zero
+        }
     }
 }
 

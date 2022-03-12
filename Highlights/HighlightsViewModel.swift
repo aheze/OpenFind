@@ -75,12 +75,11 @@ class HighlightsViewModel: ObservableObject {
                     let cyclesWithoutNeighbor = currentCyclesWithoutNeighbor + 1
                     lingeringHighlight.state = .lingering(cyclesWithoutNeighbor: cyclesWithoutNeighbor)
                     shouldInsert = cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights
-                    print("lingering Inset? \(cyclesWithoutNeighbor)")
+                    
                 } else {
                     let cyclesWithoutNeighbor = 1
                     lingeringHighlight.state = .lingering(cyclesWithoutNeighbor: cyclesWithoutNeighbor)
                     shouldInsert = cyclesWithoutNeighbor <= HighlightsConstants.maximumCyclesForLingeringHighlights
-                    print("Inset? \(cyclesWithoutNeighbor)")
                 }
                 
                 if shouldInsert {
@@ -90,7 +89,6 @@ class HighlightsViewModel: ObservableObject {
         }
         
         withAnimation(.easeOut(duration: 0.6)) {
-            print("next: \(nextHighlights)")
             self.highlights = nextHighlights
             self.upToDate = true
         }

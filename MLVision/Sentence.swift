@@ -169,16 +169,6 @@ extension Sentence {
             angle: angle
         )
 
-        if !highlightCenter.x.isNormal || !highlightCenter.x.isNormal || !highlightFrame.size.width.isNormal || !highlightFrame.size.height.isNormal {
-            print("!!!!!! Problem. \(position).")
-            print(" Self: \(self)")
-            print(" targetRange: \(targetRange)")
-            print(" highlightFrame: \(highlightFrame)")
-            print(" boundingFrame: \(boundingFrame)")
-            print(" sentenceFrame: \(sentenceFrame)")
-            print(" cos: \(cos(angle)), sin:\(-sin(angle)).. \(distanceFromCenter)")
-        }
-
         return position
     }
 
