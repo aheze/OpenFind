@@ -84,6 +84,7 @@ class SearchFieldCell: UICollectionViewCell {
         
         contentView.layer.cornerRadius = configuration.fieldCornerRadius
         
+        textField.autocorrectionType = .yes
         textField.font = configuration.fieldFont
         textField.textColor = configuration.fieldFontColor
         textField.tintColor = configuration.fieldTintColor

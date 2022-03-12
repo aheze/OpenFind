@@ -117,6 +117,7 @@ extension PhotosViewController {
         guard let viewController = slidesState.viewController else { return }
         viewController.updateSearchBarOffset = { [weak self] in
             guard let self = self else { return }
+            print("udpoatnig.")
             self.updateNavigationBar?()
         }
 

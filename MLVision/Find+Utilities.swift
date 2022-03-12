@@ -52,7 +52,14 @@ extension Collection {
 
 extension VNRectangleObservation {
     func getFrame() -> CGRect {
-        var frame = boundingBox
+        let frame = boundingBox.normalizeVisionRect()
+        return frame
+    }
+}
+
+extension CGRect {
+    func normalizeVisionRect() -> CGRect {
+        var frame = self
         frame.origin.y = 1 - frame.origin.y - frame.height /// get top-left
         return frame
     }

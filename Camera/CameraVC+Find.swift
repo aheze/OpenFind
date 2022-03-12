@@ -18,14 +18,14 @@ extension CameraViewController {
         options.customWords = searchViewModel.customWords
 
         /// `nil` if was finding before
-        if let sentences = await Find.find(in: .pixelBuffer(pixelBuffer), options: options, action: .camera, wait: false) {
-            let highlights = getHighlights(from: sentences)
+        let request = await Find.find(in: .pixelBuffer(pixelBuffer), options: options, action: .camera, wait: false)
+        let sentences = Find.getFastSentences(from: request)
+        let highlights = getHighlights(from: sentences)
 
-            DispatchQueue.main.async {
-                self.highlightsViewModel.update(with: highlights, replace: false)
-                self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
-                self.checkEvents()
-            }
+        DispatchQueue.main.async {
+            self.highlightsViewModel.update(with: highlights, replace: false)
+            self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
+            self.checkEvents()
         }
     }
 
@@ -36,13 +36,13 @@ extension CameraViewController {
         options.level = .accurate
         options.customWords = searchViewModel.customWords
 
-        if let sentences = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: true) {
-            let highlights = getHighlights(from: sentences)
-            DispatchQueue.main.async {
-                self.highlightsViewModel.update(with: highlights, replace: replace)
-            }
-            return sentences
+        let request = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: true)
+        let sentences = Find.getSentences(from: request)
+        let highlights = getHighlights(from: sentences)
+        DispatchQueue.main.async {
+            self.highlightsViewModel.update(with: highlights, replace: replace)
         }
+        return sentences
 
         return []
     }

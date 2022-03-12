@@ -8,6 +8,28 @@
 
 import UIKit
 
+struct FastSentence {
+    var string: String
+    var frame: CGRect
+
+    /// If self is a sentence
+    func getWord(word: String, at index: Int) -> FastSentence {
+        let wordCount = CGFloat(word.count)
+        let individualCharacterLength = frame.width / CGFloat(string.count)
+
+        let wordOriginX = frame.minX + individualCharacterLength * CGFloat(index)
+        let wordWidth = individualCharacterLength * wordCount
+        let wordFrame = CGRect(x: wordOriginX, y: frame.minY, width: wordWidth, height: frame.height)
+
+        let word = FastSentence(
+            string: word,
+            frame: wordFrame
+        )
+
+        return word
+    }
+}
+
 struct Sentence {
     var string: String
 
