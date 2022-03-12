@@ -144,7 +144,11 @@ extension Find {
                     }
                 }
 
-                let sentence = Sentence(string: text.string, components: cleanedComponents)
+                let sentence = Sentence(
+                    string: text.string,
+                    components: cleanedComponents,
+                    confidence: Double(text.confidence)
+                )
                 sentences.append(sentence)
             } catch {
                 Global.log("Error: \(error)")

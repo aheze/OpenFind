@@ -41,11 +41,11 @@ struct HighlightView: View {
             .opacity(0.2)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(gradient, lineWidth: 0.5)
+                    .stroke(gradient, lineWidth: 1.5)
                     .opacity(0.8)
             )
-//            .opacity(getLingeringOpacity())
-//            .opacity(highlight.alpha)
+            .opacity(getLingeringOpacity())
+            .opacity(highlight.alpha)
             .frame(
                 width: highlight.position.size.width * viewSize.width,
                 height: highlight.position.size.height * viewSize.height

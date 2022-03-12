@@ -9,6 +9,7 @@
 import UIKit
 
 extension PhotosViewController {
+    /// find in all photos and populate `resultsState`
     func find() {
         var findPhotos = [FindPhoto]()
         for photo in model.photos {
@@ -17,6 +18,7 @@ extension PhotosViewController {
             if highlights.count >= 1 {
                 let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                 let description = getCellDescription(from: lines)
+                
                 let findPhoto = FindPhoto(
                     photo: photo,
                     thumbnail: thumbnail,
@@ -45,36 +47,46 @@ extension PhotosViewController {
         for sentence in sentences {
             /// the highlights in this sentence.
             var lineHighlights = Set<FindPhoto.Line.LineHighlight>()
-            for sentence in sentences {
-                let rangeResults = sentence.ranges(of: Array(self.searchViewModel.stringToGradients.keys))
-                for rangeResult in rangeResults {
-                    let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? SearchViewModel.Gradient()
-                    for range in rangeResult.ranges {
-                        let highlight = Highlight(
-                            string: rangeResult.string,
-                            colors: gradient.colors,
-                            alpha: gradient.alpha,
-                            position: sentence.position(for: range)
-                        )
+            
+            /// for debugging - show each sentence
+//            let highlight = Highlight(
+//                string: "",
+//                colors: [.systemBlue],
+//                alpha: 0.5,
+//                position: sentence.position()
+//            )
+//
+//            highlights.insert(highlight)
+                
+            let rangeResults = sentence.ranges(of: Array(self.searchViewModel.stringToGradients.keys))
+            for rangeResult in rangeResults {
+                let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? SearchViewModel.Gradient()
+                for range in rangeResult.ranges {
+                    let highlight = Highlight(
+                        string: rangeResult.string,
+                        colors: gradient.colors,
+                        alpha: gradient.alpha,
+                        position: sentence.position(for: range)
+                    )
+
+                    highlights.insert(highlight)
                         
-                        highlights.insert(highlight)
-                        
-                        let lineHighlight = FindPhoto.Line.LineHighlight(
-                            string: rangeResult.string,
-                            rangeInSentence: range,
-                            colors: gradient.colors,
-                            alpha: gradient.alpha
-                        )
-                        lineHighlights.insert(lineHighlight)
-                    }
+                    let lineHighlight = FindPhoto.Line.LineHighlight(
+                        string: rangeResult.string,
+                        rangeInSentence: range,
+                        colors: gradient.colors,
+                        alpha: gradient.alpha
+                    )
+                    lineHighlights.insert(lineHighlight)
                 }
             }
-                
+            
             if lineHighlights.count > 0 {
                 let line = FindPhoto.Line(string: sentence.string, lineHighlights: lineHighlights)
                 lines.append(line)
             }
         }
+        
         return (highlights, lines)
     }
 }

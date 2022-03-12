@@ -82,7 +82,10 @@ extension PhotosViewController {
                 return highlight
             }
             model.resultsState?.findPhotos[findPhotoIndex].highlights = newHighlights
+            print("updateHighlightColors highlights: \(newHighlights.count)")
                 
+            
+            /// update the line highlight colors
             for (lineIndex, descriptionLine) in resultsState.findPhotos[findPhotoIndex].descriptionLines.enumerated() {
                 guard let lineHighlights = descriptionLine.lineHighlights else { continue }
                     
@@ -99,11 +102,13 @@ extension PhotosViewController {
                 model.resultsState?.findPhotos[findPhotoIndex].descriptionLines[lineIndex].lineHighlights = newLineHighlights
             }
                 
+            /// update visible highlights
             if
                 let cell = resultsCollectionView.cellForItem(at: findPhotoIndex.indexPath) as? PhotosResultsCell,
                 let findPhoto = model.resultsState?.findPhotos[findPhotoIndex]
             {
                 cell.highlightsViewController?.highlightsViewModel.highlights = getHighlights(for: cell, with: findPhoto)
+                print("2 updateHighlightColors highlights: \(newHighlights.count)")
             }
         }
     }

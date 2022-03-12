@@ -16,6 +16,7 @@ extension PhotosViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             guard cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier else { return }
             let highlights = self.getHighlights(for: cell, with: findPhoto)
+            print("Gettomg highlights: \(highlights.count)")
             if let highlightsViewController = cell.highlightsViewController {
                 highlightsViewController.highlightsViewModel.highlights = highlights
             } else {

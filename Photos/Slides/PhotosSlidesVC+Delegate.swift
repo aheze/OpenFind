@@ -30,6 +30,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             }
 
             if let highlights = findPhoto.highlights {
+                print("h: \(highlights.count)")
                 photoSlidesViewController.highlightsViewModel.highlights = highlights
             }
 

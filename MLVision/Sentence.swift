@@ -14,6 +14,8 @@ struct Sentence {
     /// contains ranges of each word in the string
     var components: [Component]
 
+    var confidence: Double
+
     /// average angle of the sentence. Positive = up, negative = down from the right of the x axis
     var angle: CGFloat
 
@@ -22,16 +24,18 @@ struct Sentence {
 
     /// once rotated to the `angle`, this should closely hug the letters.
     var sentenceFrame: CGRect
-    
+
     struct Component {
         var range: Range<Int>
         var frame: CGRect
     }
 
-    init(string: String, components: [Component]) {
+    init(string: String, components: [Component], confidence: Double) {
         self.string = string
         self.components = components
+        self.confidence = confidence
 
+        /// calculate
         self.angle = Sentence.getAngle(components: components)
         self.boundingFrame = Sentence.getBoundingFrame(components: components)
         self.sentenceFrame = Sentence.getSentenceFrame(angle: angle, boundingFrame: boundingFrame)
@@ -69,8 +73,17 @@ extension Sentence {
 
     /// adjust the frame after an angle rotation
     static func insetFrameFromRotation(angle: CGFloat, frame: CGRect) -> CGRect {
-        let width = frame.width / cos(angle)
-        let height = frame.height * cos(angle)
+        var width = frame.width / cos(angle)
+        var height = frame.height * cos(angle)
+
+        if !width.isNormal {
+            print("Width not normal. \(frame.width) -> \(angle)")
+            width = frame.width
+        }
+        if !height.isNormal {
+            print("height not normal. \(angle)")
+            height = frame.width
+        }
 
         let newFrame = frame.insetBy(
             dx: (width - frame.width) / 2,
@@ -109,6 +122,18 @@ extension Sentence {
         let start = string.index(string.startIndex, offsetBy: targetRange.lowerBound)
         let end = string.index(string.startIndex, offsetBy: targetRange.upperBound)
         return String(string[start ..< end])
+    }
+
+    /// position of the entire sentence
+    func position() -> Highlight.Position {
+        let position = Highlight.Position(
+            originalPoint: .zero,
+            pivotPoint: .zero,
+            center: sentenceFrame.center,
+            size: sentenceFrame.size,
+            angle: angle
+        )
+        return position
     }
 
     /// get the position of a highlight

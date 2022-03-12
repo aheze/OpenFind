@@ -19,16 +19,15 @@ extension CameraViewController {
     func getHighlights(from sentences: [Sentence]) -> Set<Highlight> {
         var highlights = Set<Highlight>()
         for sentence in sentences {
-            for (string, gradient) in self.searchViewModel.stringToGradients {
-                let indices = sentence.string.lowercased().indicesOf(string: string.lowercased())
-                for index in indices {
-                    let word = sentence.getWord(word: string, at: index)
-                    
+            let rangeResults = sentence.ranges(of: Array(self.searchViewModel.stringToGradients.keys))
+            for rangeResult in rangeResults {
+                let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? SearchViewModel.Gradient()
+                for range in rangeResult.ranges {
                     let highlight = Highlight(
-                        string: string,
-                        frame: word.frame,
+                        string: rangeResult.string,
                         colors: gradient.colors,
-                        alpha: gradient.alpha
+                        alpha: gradient.alpha,
+                        position: sentence.position(for: range)
                     )
                     highlights.insert(highlight)
                 }

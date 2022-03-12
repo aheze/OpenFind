@@ -6,12 +6,12 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var assetIdentifier = ""
-    @Persisted var sentences: RealmSwift.List<RealmPhotoMetadataSentence>
+    @Persisted var sentences: RealmSwift.List<RealmSentence>
     @Persisted var isScanned = false /// there could be no scan results, but still scanned
     @Persisted var isStarred = false
 
@@ -21,7 +21,7 @@ class RealmPhotoMetadata: Object {
 
     init(
         assetIdentifier: String,
-        sentences: RealmSwift.List<RealmPhotoMetadataSentence>,
+        sentences: RealmSwift.List<RealmSentence>,
         isScanned: Bool,
         isStarred: Bool
     ) {
@@ -30,7 +30,7 @@ class RealmPhotoMetadata: Object {
         self.isScanned = isScanned
         self.isStarred = isStarred
     }
-    
+
     func getPhotoMetadata() -> PhotoMetadata {
         let metadata = PhotoMetadata(
             assetIdentifier: self.assetIdentifier,
@@ -40,29 +40,53 @@ class RealmPhotoMetadata: Object {
         )
         return metadata
     }
-    
 }
 
-class RealmPhotoMetadataSentence: Object {
+class RealmSentence: Object {
     @Persisted var string: String?
-    @Persisted var rangesToFrames: Map<RealmIntRange, RealmRect>
+    @Persisted var components: RealmSwift.List<RealmSentenceComponent>
     @Persisted var confidence: Double?
-    
+
     func getSentence() -> Sentence {
-        let frame = self.frame?.getRect() ?? .zero
+        var components = [Sentence.Component]()
+        for component in self.components {
+            let component = Sentence.Component(
+                range: component.range?.getRange() ?? 0 ..< 1,
+                frame: component.frame?.getRect() ?? .zero
+            )
+            components.append(component)
+        }
+
         let sentence = Sentence(
-            string: string,
-            frame: frame,
-            confidence: confidence
+            string: string ?? "",
+            components: components,
+            confidence: confidence ?? 0
         )
         return sentence
     }
 }
 
-//class RealmRangeToFrame
+class RealmSentenceComponent: Object {
+    @Persisted var range: RealmIntRange?
+    @Persisted var frame: RealmRect?
+}
+
 class RealmIntRange: Object {
     @Persisted var lowerBound = 0
     @Persisted var upperBound = 0
+
+    override init() {
+        super.init()
+    }
+
+    init(lowerBound: Int, upperBound: Int) {
+        self.lowerBound = lowerBound
+        self.upperBound = upperBound
+    }
+
+    func getRange() -> Range<Int> {
+        return self.lowerBound ..< self.upperBound
+    }
 }
 
 class RealmRect: Object {
@@ -70,11 +94,11 @@ class RealmRect: Object {
     @Persisted var y = Double(0)
     @Persisted var width = Double(0)
     @Persisted var height = Double(0)
-    
+
     override init() {
         super.init()
     }
-    
+
     init(
         x: Double,
         y: Double,
@@ -86,7 +110,7 @@ class RealmRect: Object {
         self.width = width
         self.height = height
     }
-    
+
     func getRect() -> CGRect {
         let rect = CGRect(
             x: x,

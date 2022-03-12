@@ -12,6 +12,12 @@ class PhotosSlidesItemViewController: UIViewController {
     var highlightsViewModel = HighlightsViewModel()
     lazy var scrollZoomController = ScrollZoomViewController.make()
     lazy var highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+    
+    /// constraints are much more reliable than setting the frame of the highlights view controller
+    var highlightsVCLeftC: NSLayoutConstraint!
+    var highlightsVCTopC: NSLayoutConstraint!
+    var highlightsVCWidthC: NSLayoutConstraint!
+    var highlightsVCHeightC: NSLayoutConstraint!
  
     var model: PhotosViewModel
     var findPhoto: FindPhoto
@@ -34,18 +40,25 @@ class PhotosSlidesItemViewController: UIViewController {
         super.viewDidLoad()
         
         _ = scrollZoomController
+        _ = highlightsViewController
         addChildViewController(scrollZoomController, in: containerView)
-        scrollZoomController.addChildViewController(highlightsViewController, in: scrollZoomController.drawingView)
+        addHighlightsViewController()
         reloadImage()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageFrame = getImageFrame()
-        highlightsViewController.view.frame = imageFrame
+        imageFrame.setAsConstraints(
+            left: highlightsVCLeftC,
+            top: highlightsVCTopC,
+            width: highlightsVCWidthC,
+            height: highlightsVCHeightC
+        )
     }
 
     func reloadImage() {
+        imageFrame = getImageFrame()
         if let image = findPhoto.fullImage {
             scrollZoomController.imageView.image = image
         } else {
@@ -63,5 +76,36 @@ class PhotosSlidesItemViewController: UIViewController {
         let frame = CGRect.makeRect(aspectRatio: aspectRatio, insideRect: view.bounds)
         
         return frame
+    }
+}
+
+extension PhotosSlidesItemViewController {
+    func addHighlightsViewController() {
+        /// Add Child View Controller
+        scrollZoomController.addChild(highlightsViewController)
+        
+        guard
+            let containerView = scrollZoomController.drawingView,
+            let highlightsView = highlightsViewController.view
+        else { return }
+
+        containerView.insertSubview(highlightsView, at: 0)
+
+        /// Configure Child View
+        highlightsView.translatesAutoresizingMaskIntoConstraints = false
+        highlightsVCLeftC = highlightsView.leftAnchor.constraint(equalTo: containerView.leftAnchor)
+        highlightsVCTopC = highlightsView.topAnchor.constraint(equalTo: containerView.topAnchor)
+        highlightsVCWidthC = highlightsView.widthAnchor.constraint(equalToConstant: containerView.bounds.width)
+        highlightsVCHeightC = highlightsView.heightAnchor.constraint(equalToConstant: containerView.bounds.height)
+        
+        NSLayoutConstraint.activate([
+            highlightsVCLeftC,
+            highlightsVCTopC,
+            highlightsVCWidthC,
+            highlightsVCHeightC
+        ])
+    
+        /// Notify Child View Controller
+        highlightsViewController.didMove(toParent: scrollZoomController)
     }
 }

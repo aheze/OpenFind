@@ -10,8 +10,8 @@ import RealmSwift
 import UIKit
 
 extension PhotoMetadata {
-    func getRealmSentences() -> RealmSwift.List<RealmPhotoMetadataSentence> {
-        let realmSentences = RealmSwift.List<RealmPhotoMetadataSentence>()
+    func getRealmSentences() -> RealmSwift.List<RealmSentence> {
+        let realmSentences = RealmSwift.List<RealmSentence>()
         for sentence in self.sentences {
             let realmSentence = sentence.getRealmSentence()
             realmSentences.append(realmSentence)
@@ -21,17 +21,26 @@ extension PhotoMetadata {
 }
 
 extension Sentence {
-    func getRealmSentence() -> RealmPhotoMetadataSentence {
-        let realmSentence = RealmPhotoMetadataSentence()
+    func getRealmSentence() -> RealmSentence {
+        let realmComponents = RealmSwift.List<RealmSentenceComponent>()
+        for component in components {
+            let realmRange = RealmIntRange(lowerBound: component.range.lowerBound, upperBound: component.range.upperBound)
+            let realmRect = RealmRect(
+                x: component.frame.origin.x,
+                y: component.frame.origin.y,
+                width: component.frame.width,
+                height: component.frame.height
+            )
 
-        let realmRect = RealmRect(
-            x: frame.origin.x,
-            y: frame.origin.y,
-            width: frame.width,
-            height: frame.height
-        )
+            let realmComponent = RealmSentenceComponent()
+            realmComponent.range = realmRange
+            realmComponent.frame = realmRect
+            realmComponents.append(realmComponent)
+        }
+
+        let realmSentence = RealmSentence()
         realmSentence.string = string
-        realmSentence.frame = realmRect
+        realmSentence.components = realmComponents
         realmSentence.confidence = confidence
         return realmSentence
     }

@@ -69,16 +69,6 @@ class ViewController: UIViewController {
                         highlights.insert(highlight)
                     }
                 }
-                
-//                for rangeToFrame in sentence.rangesToFrames {
-//                    let highlight = Highlight(
-//                        string: sentence.string(for: rangeToFrame.key),
-//                        frame: rangeToFrame.value,
-//                        colors: [UIColor.systemBlue],
-//                        alpha: 0.2
-//                    )
-//                    highlights.insert(highlight)
-//                }
             }
             
             highlightsViewModel.update(with: highlights, replace: false)

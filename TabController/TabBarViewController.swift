@@ -54,7 +54,7 @@ class TabBarViewController: UIViewController {
         contentCollectionView.decelerationRate = .fast
         contentCollectionView.showsHorizontalScrollIndicator = false
         contentCollectionView.contentInsetAdjustmentBehavior = .never
-        contentCollectionView.isScrollEnabled = Debug.collectionViewScrollEnabled
+        contentCollectionView.isScrollEnabled = !Debug.collectionViewScrollDisabled
         
         if let view = view as? TabControllerView {
             view.tappedExcludedView = { [weak self] in
