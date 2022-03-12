@@ -11,7 +11,9 @@ import UIKit
 extension SearchNavigationController {
     func setupSearchBar() {
         view.addSubview(searchContainerViewContainer)
-        searchContainerViewContainer.pinEdgesToSuperview()
+        if let topConstraint = searchContainerViewContainer.pinEdgesToSuperviewAndReturnTopConstraint() {
+            self.searchContainerViewContainerTopC = topConstraint
+        }
         
         let searchContainerView = UIView()
         self.searchContainerView = searchContainerView

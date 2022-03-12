@@ -24,8 +24,12 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
                         findPhoto: findPhoto
                     )
                 }
+                
                 photoSlidesViewController = viewController
                 addChildViewController(viewController, in: cell.contentView)
+                
+                /// adding a child seems to take control of the navigation bar. stop this
+                navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = viewController
             }
 
@@ -49,8 +53,4 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             }
         }
     }
-}
-
-extension PhotosSlidesViewController: UIGestureRecognizerDelegate {
-//    func gesturere
 }

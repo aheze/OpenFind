@@ -106,8 +106,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
-        searchNavigationModel.showNavigationBar?(true)
-        
+        switchToFullScreen(false)
         
         withAnimation {
             toolbarViewModel.toolbar = nil

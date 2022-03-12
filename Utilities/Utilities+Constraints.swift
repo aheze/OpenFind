@@ -28,4 +28,18 @@ extension UIView {
             self.leftAnchor.constraint(equalTo: superview.leftAnchor)
         ])
     }
+    
+    func pinEdgesToSuperviewAndReturnTopConstraint() -> NSLayoutConstraint? {
+        guard let superview = superview else { return nil }
+        self.translatesAutoresizingMaskIntoConstraints = false
+        let topConstraint = self.topAnchor.constraint(equalTo: superview.topAnchor)
+        NSLayoutConstraint.activate([
+            topConstraint,
+            self.rightAnchor.constraint(equalTo: superview.rightAnchor),
+            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
+            self.leftAnchor.constraint(equalTo: superview.leftAnchor)
+        ])
+        
+        return topConstraint
+    }
 }

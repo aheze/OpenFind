@@ -19,7 +19,9 @@ class SearchNavigationController: UIViewController, PageViewController {
     var navigation: UINavigationController!
     
     var searchContainerViewContainer = PassthroughView() /// whole screen
-    var searchContainerView: UIView!
+    var searchContainerViewContainerTopC: NSLayoutConstraint? /// whole screen top constraint
+    
+    var searchContainerView: UIView! /// hugs the search bar
     var searchContainerViewTopC: NSLayoutConstraint?
     var searchViewController: SearchViewController!
     var detailsSearchViewController: SearchViewController?

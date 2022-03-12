@@ -13,7 +13,11 @@ extension PhotosSlidesViewController {
         guard let slidesState = model.slidesState else { return }
         let isFullScreen = !slidesState.isFullScreen
         model.slidesState?.isFullScreen = isFullScreen
-        if isFullScreen {
+        switchToFullScreen(isFullScreen)
+    }
+    
+    func switchToFullScreen(_ fullScreen: Bool) {
+        if fullScreen {
             searchNavigationModel.showNavigationBar?(false)
             tabViewModel.showBars(false, with: .tabAndStatusBar)
         } else {

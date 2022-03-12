@@ -89,6 +89,7 @@ class TabViewModel: ObservableObject {
                 barsShown = show
             }
         }
+        barsShownChanged?()
     }
     
     enum TabStateChangeAnimation {
