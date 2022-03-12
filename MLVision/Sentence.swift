@@ -73,21 +73,18 @@ extension Sentence {
 
     /// adjust the frame after an angle rotation
     static func insetFrameFromRotation(angle: CGFloat, frame: CGRect) -> CGRect {
-        var width = frame.width / cos(angle)
-        var height = frame.height * cos(angle)
+        let width = frame.width / cos(angle)
+        let height = frame.height * cos(angle)
 
-        if !width.isNormal {
-            print("Width not normal. \(frame.width) -> \(angle)")
-            width = frame.width
-        }
-        if !height.isNormal {
-            print("height not normal. \(angle)")
-            height = frame.width
-        }
+        let horizontalInset = (width - frame.width) / 2
+        let verticalInset = (frame.height - height) / 2
 
-        let newFrame = frame.insetBy(
-            dx: (width - frame.width) / 2,
-            dy: (frame.height - height) / 2
+        /// avoid using `insetBy` due to `infinite` problems
+        let newFrame = CGRect(
+            x: frame.origin.x - horizontalInset,
+            y: frame.origin.y - verticalInset,
+            width: width,
+            height: height
         )
         return newFrame
     }
@@ -171,6 +168,16 @@ extension Sentence {
             size: highlightFrame.size,
             angle: angle
         )
+
+        if !highlightCenter.x.isNormal || !highlightCenter.x.isNormal || !highlightFrame.size.width.isNormal || !highlightFrame.size.height.isNormal {
+            print("!!!!!! Problem. \(position).")
+            print(" Self: \(self)")
+            print(" targetRange: \(targetRange)")
+            print(" highlightFrame: \(highlightFrame)")
+            print(" boundingFrame: \(boundingFrame)")
+            print(" sentenceFrame: \(sentenceFrame)")
+            print(" cos: \(cos(angle)), sin:\(-sin(angle)).. \(distanceFromCenter)")
+        }
 
         return position
     }
