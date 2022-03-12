@@ -18,14 +18,15 @@ extension CameraViewController {
         blurOverlayView.pinEdgesToSuperview()
         
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
-            self?.blurOverlayView.setupBlur()
-            self?.updateBlurProgress(to: Tab.currentBlurProgress)
+            guard let self = self else { return }
+            self.blurOverlayView.setupBlur()
+            self.updateBlurProgress(to: self.tabViewModel.animatorProgress)
         }
     }
 
     func updateBlurProgress(to progress: CGFloat) {
         blurOverlayView.animator?.fractionComplete = progress
-        switch Tab.currentTabState {
+        switch tabViewModel.tabState {
         case .photos, .cameraToPhotos:
             blurOverlayView.colorView.backgroundColor = .systemBackground
         case .lists, .cameraToLists:

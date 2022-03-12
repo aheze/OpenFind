@@ -15,8 +15,10 @@ extension PhotosSlidesViewController {
         model.slidesState?.isFullScreen = isFullScreen
         if isFullScreen {
             searchNavigationModel.showNavigationBar?(false)
+            tabViewModel.showBars(false, with: .tabAndStatusBar)
         } else {
             searchNavigationModel.showNavigationBar?(true)
+            tabViewModel.showBars(true, with: .tabAndStatusBar)
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 
 class ListsDetailViewController: UIViewController, Searchable {
     var model: ListsDetailViewModel
+    var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
     var detailsSearchViewModel: SearchViewModel
     var realmModel: RealmModel
@@ -93,11 +94,13 @@ class ListsDetailViewController: UIViewController, Searchable {
     init?(
         coder: NSCoder,
         model: ListsDetailViewModel,
+        tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel,
         detailsSearchViewModel: SearchViewModel,
         realmModel: RealmModel
     ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
         self.detailsSearchViewModel = detailsSearchViewModel
         self.realmModel = realmModel
@@ -169,8 +172,7 @@ class ListsDetailViewController: UIViewController, Searchable {
         super.viewDidDisappear(animated)
         model.isEditing = false
         model.isEditingChanged?()
-        
-        Tab.Frames.excluded[.listsDetailsScreenEdge] = nil
+        tabViewModel.excludedFrames[.listsDetailsScreenEdge] = nil
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -14,6 +14,7 @@ class CameraViewController: UIViewController, PageViewController {
     var model: CameraViewModel
     
     /// external models
+    var tabViewModel: TabViewModel
     var realmModel: RealmModel
     
     lazy var zoomViewModel = ZoomViewModel(containerView: zoomContainerView)
@@ -63,9 +64,11 @@ class CameraViewController: UIViewController, PageViewController {
     init?(
         coder: NSCoder,
         model: CameraViewModel,
+        tabViewModel: TabViewModel,
         realmModel: RealmModel
     ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.realmModel = realmModel
         super.init(coder: coder)
     }
@@ -128,7 +131,7 @@ extension CameraViewController {
     func didBecomeInactive() {
         Find.prioritizedAction = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + CameraConstants.cameraCoolDownDuration) {
-            if Tab.currentTabState != .camera {
+            if self.tabViewModel.tabState != .camera {
                 DispatchQueue.global(qos: .userInteractive).async {
                     if self.livePreviewViewController.session.isRunning {
                         self.livePreviewViewController.session.stopRunning()

@@ -13,5 +13,6 @@ import Popovers
 extension ViewController {
     func setup() {
         Popovers.minimumDragDistance = 3
+        setupTabs()
     }
 }

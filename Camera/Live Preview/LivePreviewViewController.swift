@@ -10,6 +10,9 @@ import AVFoundation
 import UIKit
 
 class LivePreviewViewController: UIViewController {
+    
+    var tabViewModel: TabViewModel
+    
     @IBOutlet var previewContainerView: UIView!
     
     /// same bounds as `view`, contains the safe view
@@ -75,6 +78,14 @@ class LivePreviewViewController: UIViewController {
     
     /// `imageSize` updated, now update the aspect ratio
     var needSafeViewUpdate: (() -> Void)?
+    
+    init?(coder: NSCoder, tabViewModel: TabViewModel) {
+        self.tabViewModel = tabViewModel
+        super.init(coder: coder)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with metadata.")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,8 +11,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var tabType: TabState = .photos
     
     var model: PhotosViewModel
+    var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
-    var realmModel: RealmModel
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
     var slidesSearchViewModel: SearchViewModel
@@ -46,15 +46,15 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
+        tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel,
-        realmModel: RealmModel,
         searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
         slidesSearchViewModel: SearchViewModel
     ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
-        self.realmModel = realmModel
         self.searchNavigationModel = searchNavigationModel
         self.searchViewModel = searchViewModel
         self.slidesSearchViewModel = slidesSearchViewModel

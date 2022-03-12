@@ -11,26 +11,26 @@ import SwiftUI
 class ViewController: UIViewController {
     var loaded = false
     
+    let tabViewModel = TabViewModel()
     let realmModel = RealmModel()
     lazy var photosViewModel = PhotosViewModel(realmModel: realmModel)
     let cameraViewModel = CameraViewModel()
     let listsViewModel = ListsViewModel()
     let toolbarViewModel = ToolbarViewModel()
 
-    lazy var photos = PhotosController(model: photosViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
-    lazy var camera = CameraController(model: cameraViewModel, realmModel: realmModel)
-    lazy var lists = ListsController(model: listsViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
+    lazy var photos = PhotosController(model: photosViewModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel)
+    lazy var camera = CameraController(model: cameraViewModel, tabViewModel: tabViewModel, realmModel: realmModel)
+    lazy var lists = ListsController(model: listsViewModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
 
     lazy var tabController: TabBarController = {
         photos.viewController.toolbarViewModel = toolbarViewModel
 
         let tabController = TabBarController(
             pages: [photos.searchNavigationController, camera.viewController, lists.searchNavigationController],
+            model: tabViewModel,
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )
-
-        tabController.delegate = self
 
         self.addChildViewController(tabController.viewController, in: self.view)
         updateExcludedFrames()
@@ -93,43 +93,5 @@ extension ViewController: UIGestureRecognizerDelegate {
         }
 
         return true
-    }
-}
-
-extension ViewController: TabBarControllerDelegate {
-    func willBeginNavigatingTo(tab: TabState) {
-        switch tab {
-        case .photos:
-            photos.viewController.willBecomeActive()
-            camera.viewController.willBecomeInactive()
-            lists.searchNavigationController.willBecomeInactive()
-        case .camera:
-            photos.viewController.willBecomeInactive()
-            camera.viewController.willBecomeActive()
-            lists.searchNavigationController.willBecomeInactive()
-        case .lists:
-            photos.viewController.willBecomeInactive()
-            camera.viewController.willBecomeInactive()
-            lists.searchNavigationController.willBecomeActive()
-        default: break
-        }
-    }
-
-    func didFinishNavigatingTo(tab: TabState) {
-        switch tab {
-        case .photos:
-            photos.viewController.didBecomeActive()
-            camera.viewController.didBecomeInactive()
-            lists.searchNavigationController.didBecomeInactive()
-        case .camera:
-            photos.viewController.didBecomeInactive()
-            camera.viewController.didBecomeActive()
-            lists.searchNavigationController.didBecomeInactive()
-        case .lists:
-            photos.viewController.didBecomeInactive()
-            camera.viewController.didBecomeInactive()
-            lists.searchNavigationController.didBecomeActive()
-        default: break
-        }
     }
 }

@@ -15,7 +15,7 @@ extension LivePreviewViewController {
             self.cameraDevice = cameraDevice
             self.configureSession()
         } else {
-            let cameraNotFoundView = CameraNotFoundView()
+            let cameraNotFoundView = CameraNotFoundView(tabViewModel: tabViewModel)
             let hostingController = UIHostingController(rootView: cameraNotFoundView)
             addChildViewController(hostingController, in: view)
             view.bringSubviewToFront(hostingController.view)

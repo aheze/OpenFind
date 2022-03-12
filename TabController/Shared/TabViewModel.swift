@@ -16,32 +16,49 @@ class TabViewModel: ObservableObject {
             listsIconAttributes = tabState.listsIconAttributes()
             animatorProgress = tabState.getAnimatorProgress()
             
-            Tab.currentTabState = tabState
-            Tab.currentBlurProgress = animatorProgress
-            Tab.blurProgressChanged?(animatorProgress)
+            animatorProgressChanged?(animatorProgress)
+//            Tab.currentTabState = tabState
+//            Tab.currentBlurProgress = animatorProgress
+//            Tab.blurProgressChanged?(animatorProgress)
         }
     }
 
+    var excludedFrames = [Identifier: CGRect]()
+    
     @Published var tabBarAttributes = TabBarAttributes.darkBackground
     @Published var photosIconAttributes = PhotosIconAttributes.inactiveDarkBackground
     @Published var cameraIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
-    @Published var tabBarShown = true
     
+    /// make 0 when the keyboard shows
+    @Published var tabBarOpacity = 1
+    
+    /// hide/show the status bar and tab bar
+    @Published var barsShown = true
+    
+    /// for `TabBarVC`
     var updateTabBarHeight: ((TabState) -> Void)?
     var tabStateChanged: ((TabStateChangeAnimation) -> Void)?
+    var barsShownChanged: (() -> Void)? /// refresh
+    
+    /// for the camera view controller
+    var animatorProgressChanged: ((CGFloat) -> Void)?
+    
+    /// for ViewController
+    var willBeginNavigatingTo: ((TabState) -> Void)?
+    var didFinishNavigatingTo: ((TabState) -> Void)?
     
     init() {
         NotificationCenter.default.addObserver(forName: UIApplication.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] _ in
             withAnimation {
-                self?.tabBarShown = false
+                self?.showBars(false, with: .tabBarOnly)
             }
         }
         
         NotificationCenter.default.addObserver(forName: UIApplication.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
             withAnimation {
-                self?.tabBarShown = true
+                self?.showBars(true, with: .tabBarOnly)
             }
         }
     }
@@ -61,6 +78,22 @@ class TabViewModel: ObservableObject {
         tabStateChanged?(animation)
     }
     
+    /// show/hide the status bar and tab bar
+    func showBars(_ show: Bool, with scope: TabBarVisibilityScope) {
+        withAnimation {
+            switch scope {
+            case .tabBarOnly: /// due to keyboard
+                if show {
+                    tabBarOpacity = 1
+                } else {
+                    tabBarOpacity = 0
+                }
+            case .tabAndStatusBar:
+                barsShown = show
+            }
+        }
+    }
+    
     enum TabStateChangeAnimation {
         /// used when swiping
         case fractionalProgress
@@ -70,5 +103,10 @@ class TabViewModel: ObservableObject {
         
         /// special case, animate transition
         case animate
+    }
+    
+    enum TabBarVisibilityScope {
+        case tabBarOnly
+        case tabAndStatusBar
     }
 }

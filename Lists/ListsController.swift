@@ -9,6 +9,7 @@ import UIKit
 
 class ListsController {
     var model: ListsViewModel
+    var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     
@@ -18,8 +19,14 @@ class ListsController {
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
-    init(model: ListsViewModel, toolbarViewModel: ToolbarViewModel, realmModel: RealmModel) {
+    init(
+        model: ListsViewModel,
+        tabViewModel: TabViewModel,
+        toolbarViewModel: ToolbarViewModel,
+        realmModel: RealmModel
+    ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         
@@ -35,6 +42,7 @@ class ListsController {
             ListsViewController(
                 coder: coder,
                 model: model,
+                tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
                 searchViewModel: searchViewModel,
@@ -67,7 +75,7 @@ class ListsController {
         viewController.updateNavigationBar = { [weak self] in
             guard let self = self else { return }
             self.searchNavigationController.updateSearchBarOffset()
-            Tab.Frames.excluded[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
+            tabViewModel.excludedFrames[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
         
         configureTransitions(for: searchNavigationController)

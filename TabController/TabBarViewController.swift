@@ -10,7 +10,8 @@ import SwiftUI
 import UIKit
 
 class TabBarViewController: UIViewController {
-    var tabViewModel: TabViewModel
+    var pages: [PageViewController]
+    var model: TabViewModel
     
     /// big, general area
     @IBOutlet var contentView: UIView!
@@ -21,8 +22,8 @@ class TabBarViewController: UIViewController {
         let flowLayout = ContentPagingFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.getTabs = { [weak self] in
-            let pages = self?.getPages?() ?? [PageViewController]()
-            return pages.map { $0.tabType }
+            guard let self = self else { return [] }
+            return self.pages.map { $0.tabType }
         }
         
         contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
@@ -30,16 +31,19 @@ class TabBarViewController: UIViewController {
     }()
     
     /// get data from `TabBarController`
-    var getPages: (() -> [PageViewController])?
     var scrollViewDidScroll: ((UIScrollView) -> Void)?
     
     /// for tab bar (SwiftUI)
     @IBOutlet var tabBarContainerView: UIView!
     @IBOutlet var tabBarHeightC: NSLayoutConstraint!
 
-    init?(coder: NSCoder, tabViewModel: TabViewModel) {
-        self.tabViewModel = tabViewModel
-        self.tabViewModel = tabViewModel
+    init?(
+        coder: NSCoder,
+        pages: [PageViewController],
+        model: TabViewModel
+    ) {
+        self.pages = pages
+        self.model = model
         super.init(coder: coder)
     }
 
@@ -48,16 +52,8 @@ class TabBarViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
 
-    var statusBarHidden: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3) { () in
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
-        }
-    }
-
     override var prefersStatusBarHidden: Bool {
-        return statusBarHidden
+        return !model.barsShown
     }
     
     override func viewDidLoad() {
@@ -68,7 +64,11 @@ class TabBarViewController: UIViewController {
         contentCollectionView.contentInsetAdjustmentBehavior = .never
         contentCollectionView.isScrollEnabled = !Debug.collectionViewScrollDisabled
         
+        contentCollectionView.delegate = self
+        contentCollectionView.dataSource = self
+        
         if let view = view as? TabControllerView {
+            view.model = model
             view.tappedExcludedView = { [weak self] in
                 self?.contentCollectionView.isScrollEnabled = false
                 DispatchQueue.main.async {
@@ -83,7 +83,7 @@ class TabBarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateSafeAreaLayoutGuide(
-            bottomHeight: tabViewModel.tabBarAttributes.backgroundHeight,
+            bottomHeight: model.tabBarAttributes.backgroundHeight,
             safeAreaInsets: Global.safeAreaInsets
         )
     }
@@ -93,13 +93,12 @@ class TabBarViewController: UIViewController {
         coordinator.animate { context in
             let insets = self.view.safeAreaInsets
             
-            let pages = self.getPages?() ?? []
-            for page in pages {
+            for page in self.pages {
                 page.boundsChanged(to: size, safeAreaInsets: insets)
             }
             
             self.updateSafeAreaLayoutGuide(
-                bottomHeight: self.tabViewModel.tabBarAttributes.backgroundHeight,
+                bottomHeight: self.model.tabBarAttributes.backgroundHeight,
                 safeAreaInsets: insets
             )
         }
@@ -116,14 +115,12 @@ class TabBarViewController: UIViewController {
         } else {
             TabState.isLandscape = false
         }
-        tabViewModel.changeTabState(newTab: tabViewModel.tabState, animation: .animate)
+        model.changeTabState(newTab: model.tabState, animation: .animate)
     }
 
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat, safeAreaInsets: UIEdgeInsets) {
-        if let pages = getPages?() {
-            for page in pages {
-                page.additionalSafeAreaInsets.bottom = bottomHeight - safeAreaInsets.bottom
-            }
+        for page in pages {
+            page.additionalSafeAreaInsets.bottom = bottomHeight - safeAreaInsets.bottom
         }
     }
     

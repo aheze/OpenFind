@@ -10,8 +10,11 @@ import UIKit
 
 extension CameraViewController {
     func createLivePreview() -> LivePreviewViewController {
+        
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
-        let livePreviewViewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
+        let livePreviewViewController = storyboard.instantiateViewController(identifier: "LivePreviewViewController") { coder in
+            LivePreviewViewController(coder: coder, tabViewModel: self.tabViewModel)
+        }
         
         /// called when an image is first returned
         livePreviewViewController.needSafeViewUpdate = { [weak self] in
@@ -42,7 +45,7 @@ extension CameraViewController {
             if
                 !self.model.shutterOn,
                 self.model.livePreviewScanning,
-                Tab.currentTabState == .camera,
+                self.tabViewModel.tabState == .camera,
                 self.searchViewModel.stringToGradients.count > 0
             {
                 Find.prioritizedAction = .camera

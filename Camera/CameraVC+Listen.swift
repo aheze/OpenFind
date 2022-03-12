@@ -28,7 +28,7 @@ extension CameraViewController {
             self.snapshot()
         }
         
-        Tab.blurProgressChanged = { [weak self] progress in
+        tabViewModel.animatorProgressChanged = { [weak self] progress in
             guard let self = self else { return }
             self.updateBlurProgress(to: progress)
         }

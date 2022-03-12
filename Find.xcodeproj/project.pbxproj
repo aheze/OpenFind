@@ -1635,6 +1635,18 @@
 		3CE3D4E827DD0BE100521735 /* SearchNC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4E427DD0BDB00521735 /* SearchNC+Listen.swift */; };
 		3CE3D4E927DD0BE100521735 /* SearchNC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4E427DD0BDB00521735 /* SearchNC+Listen.swift */; };
 		3CE3D4EA27DD0BE200521735 /* SearchNC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4E427DD0BDB00521735 /* SearchNC+Listen.swift */; };
+		3CE3D4EB27DD2EEF00521735 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
+		3CE3D4EC27DD2EF000521735 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
+		3CE3D4ED27DD2EF100521735 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
+		3CE3D4EF27DD2FF200521735 /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
+		3CE3D4F027DD2FF500521735 /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
+		3CE3D4F127DD2FF600521735 /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
+		3CE3D4F327DD301E00521735 /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3CE3D4F427DD302500521735 /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3CE3D4F527DD302600521735 /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3CE3D4F727DD315700521735 /* VC+Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F627DD315700521735 /* VC+Tabs.swift */; };
+		3CE3D4F927DD33CF00521735 /* TabBarVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */; };
+		3CE3D4FA27DD33D900521735 /* TabBarVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */; };
 		3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
@@ -2607,6 +2619,10 @@
 		3CE3D4DA27DCFA2100521735 /* PhotosSlidesVC+FullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+FullScreen.swift"; sourceTree = "<group>"; };
 		3CE3D4DD27DCFBAB00521735 /* SearchNavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationModel.swift; sourceTree = "<group>"; };
 		3CE3D4E427DD0BDB00521735 /* SearchNC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Listen.swift"; sourceTree = "<group>"; };
+		3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Delegate.swift"; sourceTree = "<group>"; };
+		3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Datasource.swift"; sourceTree = "<group>"; };
+		3CE3D4F627DD315700521735 /* VC+Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Tabs.swift"; sourceTree = "<group>"; };
+		3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Listen.swift"; sourceTree = "<group>"; };
 		3CE9C1EB274B48E1008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1EF274B4911008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1F1274B4937008C903C /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3305,13 +3321,15 @@
 			children = (
 				3C93151B27B97C35009E5B6E /* Shared */,
 				3C4D378C274756470010FD68 /* TabContent.storyboard */,
-				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C08EB74279CAC2C00971D60 /* TabTransitioning.swift */,
 				3CB4C31E27A700D10093155E /* TabAttributes.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
-				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C36434F277C22480038CB18 /* TabControllerView.swift */,
+				3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */,
+				3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */,
+				3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */,
+				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C4D3796274756470010FD68 /* ContentPageViewController.swift */,
 				3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */,
 				3C4D378F274756470010FD68 /* ContentCell.swift */,
@@ -3931,6 +3949,7 @@
 				3C6C7325278193F600E039F0 /* SceneDelegate.swift */,
 				3C6C7327278193F600E039F0 /* ViewController.swift */,
 				3C93149B27B84457009E5B6E /* VC+Setup.swift */,
+				3CE3D4F627DD315700521735 /* VC+Tabs.swift */,
 				3CB4C32127A772030093155E /* VC+Frames.swift */,
 				3C6C7329278193F600E039F0 /* Main.storyboard */,
 				3C6C732C278193F800E039F0 /* NewAssets.xcassets */,
@@ -4045,6 +4064,7 @@
 			children = (
 				3C0AACC327C899CD009DFC09 /* TabConstants.swift */,
 				3CFD5F73278A374B0031BC8B /* TabModel.swift */,
+				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C4D3794274756470010FD68 /* Toolbar.swift */,
 			);
 			path = Shared;
@@ -5867,6 +5887,7 @@
 				3C4D3A19274767410010FD68 /* TabBarViewController.swift in Sources */,
 				3C17686427AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3CDD945927C0687E00D3EA1A /* Defaults.swift in Sources */,
+				3CE3D4F327DD301E00521735 /* TabBarVC+Datasource.swift in Sources */,
 				3C3642D7277BC2E70038CB18 /* Field.swift in Sources */,
 				3C21ED6E27A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C3642DD277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
@@ -5919,6 +5940,7 @@
 				3CFD602F278B71E20031BC8B /* SearchNC+SearchBar.swift in Sources */,
 				3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */,
 				3C6C74302781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
+				3CE3D4EF27DD2FF200521735 /* TabBarVC+Delegate.swift in Sources */,
 				3CCE2B56279D235D00F72351 /* ListsDetailWordCell.swift in Sources */,
 				3C21ED6127A3A8AA0005E183 /* KeyboardToolbarViewModel.swift in Sources */,
 				3CDDAEF327A839E9007F9652 /* SearchTextField.swift in Sources */,
@@ -5939,6 +5961,7 @@
 				3CD7063727A3842200B446D7 /* IconPickerVC+DataSource.swift in Sources */,
 				3C08EB0E279C76E500971D60 /* ListsViewController.swift in Sources */,
 				3C08EB13279C76E500971D60 /* ListsVC+FlowLayout.swift in Sources */,
+				3CE3D4F927DD33CF00521735 /* TabBarVC+Listen.swift in Sources */,
 				3C3642DA277BC2E70038CB18 /* SearchViewController.swift in Sources */,
 				3C08EB40279C76F100971D60 /* ListsDetailViewController.swift in Sources */,
 				3C7E1095279E59DE00ABC016 /* ListsDetailVC+Add.swift in Sources */,
@@ -6022,10 +6045,12 @@
 				3C119977274B348F00D6AFE3 /* CameraUtilities.swift in Sources */,
 				3C67E4F0274840F9001F1B4B /* ZoomView.swift in Sources */,
 				3C7B7A55277EE6D900E1F602 /* CameraVC+Find.swift in Sources */,
+				3CE3D4F427DD302500521735 /* TabBarVC+Datasource.swift in Sources */,
 				3CE3D4EA27DD0BE200521735 /* SearchNC+Listen.swift in Sources */,
 				3C08EB4B279C95F900971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C7B7A6B277F94DD00E1F602 /* Highlight.swift in Sources */,
 				3C4D39C227475E2C0010FD68 /* GeneralUtilities.swift in Sources */,
+				3CE3D4F127DD2FF600521735 /* TabBarVC+Delegate.swift in Sources */,
 				3C3642CA277BC2E70038CB18 /* SearchViewModel.swift in Sources */,
 				3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */,
 				3C93149527B823AE009E5B6E /* SearchVC+Toolbar.swift in Sources */,
@@ -6147,6 +6172,7 @@
 				3C06260027C69FB60078E66F /* PhotosVC+Results.swift in Sources */,
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
+				3CE3D4EB27DD2EEF00521735 /* TabViewModel.swift in Sources */,
 				3CDD945127C0634200D3EA1A /* PhotosScanningViewControllers.swift in Sources */,
 				3CCCCAA027818CE8000381CE /* GeneralViews.swift in Sources */,
 				3CBB319827BD642A00F25F6A /* PhotosSlidesVC+DataSource.swift in Sources */,
@@ -6341,6 +6367,7 @@
 				3C0AACB727C8268E009DFC09 /* Utilities+String.swift in Sources */,
 				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
+				3CE3D4EC27DD2EF000521735 /* TabViewModel.swift in Sources */,
 				3C3642FF277BC2E90038CB18 /* SearchCollectionView.swift in Sources */,
 				3C21EE1C27A461810005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C08EAD1279B0AA300971D60 /* ListsConstants.swift in Sources */,
@@ -6522,6 +6549,7 @@
 				3C4D3B9C27477ABD0010FD68 /* RightView.swift in Sources */,
 				3C4D3BA327477B8A0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C93148627B820F3009E5B6E /* SearchVC+Keyboard.swift in Sources */,
+				3CE3D4ED27DD2EF100521735 /* TabViewModel.swift in Sources */,
 				3C6C7446278221E600E039F0 /* HighlightsView.swift in Sources */,
 				3CDD944827C05F9900D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3C364352277C407F0038CB18 /* SearchVC+Popovers.swift in Sources */,
@@ -6693,6 +6721,7 @@
 				3C9314EA27B86E94009E5B6E /* PhotosViewModel.swift in Sources */,
 				3CCE2B54279D235C00F72351 /* ListsDetailVC+Setup.swift in Sources */,
 				3C17686727AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
+				3CE3D4F027DD2FF500521735 /* TabBarVC+Delegate.swift in Sources */,
 				3C08EB48279C95F500971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C9314F627B8EA93009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CCE2B2A279D008D00F72351 /* ClearIconView.swift in Sources */,
@@ -6745,6 +6774,7 @@
 				3C6C73612781945D00E039F0 /* Highlight.swift in Sources */,
 				3CB181D127A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */,
 				3CB4C32227A772030093155E /* VC+Frames.swift in Sources */,
+				3CE3D4F527DD302600521735 /* TabBarVC+Datasource.swift in Sources */,
 				3C6C7428278194A500E039F0 /* Utilities+UIViewController.swift in Sources */,
 				3C6C73A22781947400E039F0 /* SearchVC+Popovers.swift in Sources */,
 				3CB4C32027A701780093155E /* TabAttributes.swift in Sources */,
@@ -6766,6 +6796,7 @@
 				3C9314B827B851C3009E5B6E /* CameraVC+Snapshot.swift in Sources */,
 				3CDD942927C0587C00D3EA1A /* PhotosSlidesToolbarView.swift in Sources */,
 				3C6C737F2781946B00E039F0 /* SnapshotView.swift in Sources */,
+				3CE3D4FA27DD33D900521735 /* TabBarVC+Listen.swift in Sources */,
 				3C71EFA527BF5D5000F0C0A0 /* PhotosTransitionUtilities.swift in Sources */,
 				3C9314B627B851C3009E5B6E /* CameraVC+Listen.swift in Sources */,
 				3CBB31A927BDB99000F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
@@ -6822,6 +6853,7 @@
 				3C7E1094279E59DE00ABC016 /* ListsDetailVC+Add.swift in Sources */,
 				3C6C737D2781946B00E039F0 /* ZoomViewModel.swift in Sources */,
 				3CB8C30B27C2D0D7000AA3B9 /* Find+Queue.swift in Sources */,
+				3CE3D4F727DD315700521735 /* VC+Tabs.swift in Sources */,
 				3CF76443278D19AD00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3CBB319B27BD643500F25F6A /* PhotosSlidesVC+Delegate.swift in Sources */,
 				3CF7642D278D187200DCA4EA /* SearchNC+Utilities.swift in Sources */,

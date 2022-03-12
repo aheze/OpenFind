@@ -10,11 +10,17 @@ import UIKit
 class CameraController {
     
     var model: CameraViewModel
+    var tabViewModel: TabViewModel
     var realmModel: RealmModel
     var viewController: CameraViewController
     
-    init(model: CameraViewModel, realmModel: RealmModel) {
+    init(
+        model: CameraViewModel,
+        tabViewModel: TabViewModel,
+        realmModel: RealmModel
+    ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.realmModel = realmModel
     
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
@@ -22,6 +28,7 @@ class CameraController {
             CameraViewController(
                 coder: coder,
                 model: model,
+                tabViewModel: tabViewModel,
                 realmModel: realmModel
             )
         }

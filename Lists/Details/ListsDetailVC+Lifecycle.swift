@@ -45,6 +45,6 @@ extension ListsDetailViewController {
             listsDetailsScreenEdgeRect = CGRect(x: 0, y: 0, width: TabConstants.screenEdgeSwipeGestureWidth, height: viewSize.height)
         }
 
-        Tab.Frames.excluded[.listsDetailsScreenEdge] = listsDetailsScreenEdgeRect
+        tabViewModel.excludedFrames[.listsDetailsScreenEdge] = listsDetailsScreenEdgeRect
     }
 }

@@ -30,6 +30,7 @@ extension ListsViewController {
             let viewController = ListsDetailViewController(
                 coder: coder,
                 model: listsDetailViewModel,
+                tabViewModel: self.tabViewModel,
                 toolbarViewModel: self.toolbarViewModel,
                 detailsSearchViewModel: self.detailsSearchViewModel,
                 realmModel: self.realmModel

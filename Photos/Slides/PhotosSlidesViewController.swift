@@ -32,6 +32,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var isInteractivelyDismissing: Bool = false
     
     var model: PhotosViewModel
+    var tabViewModel: TabViewModel
     var searchNavigationModel: SearchNavigationModel
     var slidesSearchViewModel: SearchViewModel
     var toolbarViewModel: ToolbarViewModel
@@ -54,11 +55,13 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
+        tabViewModel: TabViewModel,
         searchNavigationModel: SearchNavigationModel,
         slidesSearchViewModel: SearchViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.searchNavigationModel = searchNavigationModel
         self.slidesSearchViewModel = slidesSearchViewModel
         self.toolbarViewModel = toolbarViewModel
@@ -97,12 +100,12 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        Tab.Frames.excluded[.photosSlidesItemCollectionView] = collectionView.windowFrame()
+        tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = collectionView.windowFrame()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        Tab.Frames.excluded[.photosSlidesItemCollectionView] = nil
+        tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
         searchNavigationModel.showNavigationBar?(true)
         
         

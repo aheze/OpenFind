@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct CameraNotFoundView: View {
+    @ObservedObject var tabViewModel: TabViewModel
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("No Camera Found")
@@ -18,7 +19,7 @@ struct CameraNotFoundView: View {
                 .fontWeight(.medium)
 
             Button {
-                Tab.Control.moveToOtherTab?(.photos, true)
+                tabViewModel.changeTabState(newTab: .photos, animation: .animate)
             } label: {
                 Text("Find From Photos")
                     .fontWeight(.medium)

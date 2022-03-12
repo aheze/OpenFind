@@ -49,7 +49,16 @@ struct TabBarView: View {
                 alignment: .bottom
             )
             .edgesIgnoringSafeArea(.bottom)
-            .opacity(tabViewModel.tabBarShown ? 1 : 0) /// hide the tab bar when the keyboard shows
+            .opacity(getOpacity()) /// hide the tab bar when the keyboard shows
+            .offset(x: 0, y: tabViewModel.barsShown ? 0 : 200)
+    }
+    
+    func getOpacity() -> Double {
+        if !tabViewModel.barsShown {
+            return 0
+        } else {
+            return Double(tabViewModel.tabBarOpacity)
+        }
     }
 }
 

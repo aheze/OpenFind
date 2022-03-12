@@ -19,7 +19,6 @@ extension SearchNavigationController {
     func showNavigationBar(show: Bool) {
         if show {
             navigation.setNavigationBarHidden(false, animated: true)
-            Tab.Control.showStatusBar?(true)
             UIView.animate(withDuration: 0.3) {
                 self.navigationBarBackground.alpha = 1
                 self.searchContainerView.alpha = 1
@@ -31,7 +30,6 @@ extension SearchNavigationController {
             
         } else {
             navigation.setNavigationBarHidden(true, animated: true)
-            Tab.Control.showStatusBar?(false)
             UIView.animate(withDuration: 0.3) {
                 self.navigationBarBackground.alpha = 0
                 self.searchContainerView.alpha = 0

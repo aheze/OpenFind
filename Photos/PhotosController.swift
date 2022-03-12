@@ -9,8 +9,8 @@ import UIKit
 
 class PhotosController {
     var model: PhotosViewModel
+    var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
-    var realmModel: RealmModel
     
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
@@ -20,12 +20,14 @@ class PhotosController {
     var searchNavigationController: SearchNavigationController
     var viewController: PhotosViewController
     
-    init(model: PhotosViewModel, toolbarViewModel: ToolbarViewModel, realmModel: RealmModel) {
+    init(
+        model: PhotosViewModel,
+        tabViewModel: TabViewModel,
+        toolbarViewModel: ToolbarViewModel
+    ) {
         self.model = model
         self.toolbarViewModel = toolbarViewModel
-        self.realmModel = realmModel
-        
-        self.model.realmModel = realmModel
+        self.tabViewModel = tabViewModel
         
         let searchNavigationModel = SearchNavigationModel()
         self.searchNavigationModel = searchNavigationModel
@@ -40,8 +42,8 @@ class PhotosController {
             PhotosViewController(
                 coder: coder,
                 model: model,
+                tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
-                realmModel: realmModel,
                 searchNavigationModel: searchNavigationModel,
                 searchViewModel: searchViewModel,
                 slidesSearchViewModel: slidesSearchViewModel
@@ -54,7 +56,7 @@ class PhotosController {
             rootViewController: viewController,
             searchNavigationModel: searchNavigationModel,
             searchViewModel: searchViewModel,
-            realmModel: realmModel,
+            realmModel: model.realmModel,
             tabType: .lists
         )
         
@@ -75,7 +77,7 @@ class PhotosController {
             guard let self = self else { return }
             
             self.searchNavigationController.updateSearchBarOffset()
-            Tab.Frames.excluded[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
+            tabViewModel.excludedFrames[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
         
         configureTransitions(for: searchNavigationController)

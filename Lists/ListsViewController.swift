@@ -8,8 +8,10 @@
 import UIKit
 
 class ListsViewController: UIViewController, Searchable {
-    /// external models
     var model: ListsViewModel
+    
+    /// external models
+    var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     var searchViewModel: SearchViewModel
@@ -33,12 +35,14 @@ class ListsViewController: UIViewController, Searchable {
     init?(
         coder: NSCoder,
         model: ListsViewModel,
+        tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
         searchViewModel: SearchViewModel,
         detailsSearchViewModel: SearchViewModel
     ) {
         self.model = model
+        self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         self.searchViewModel = searchViewModel

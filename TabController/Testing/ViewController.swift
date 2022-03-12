@@ -61,7 +61,7 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
 }
 
-extension ViewController: TabBarControllerDelegate {
+extension ViewController {
     func willBeginNavigatingTo(tab: TabState) {
         switch tab {
         case .photos:
