@@ -8,15 +8,27 @@
     
 import UIKit
 
+
 struct Highlight: Identifiable, Hashable {
     let id = UUID()
     var string = ""
-    var frame = CGRect.zero
-    var angle = CGFloat(0)
     var colors = [UIColor]()
     var alpha = CGFloat(1)
+    var position = Position()
     
+    /// State
     var state = State.added
+    
+    struct Position: Equatable {
+        /// frame of the container sentence
+        var sentenceFrame = CGRect.zero
+        
+        /// midpoint of the highlight, to the screen
+        var globalCenter = CGPoint.zero
+        var horizontalOffset = CGFloat(0)
+        var length = CGFloat(0)
+        var angle = CGFloat(0)
+    }
     
     enum State: Equatable {
         case reused

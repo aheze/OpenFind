@@ -33,24 +33,32 @@ struct HighlightView: View {
             startPoint: .leading,
             endPoint: .trailing
         )
-        
-        let cornerRadius = getCornerRadius(rectHeight: highlight.frame.height)
-        
-        RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(gradient)
+
+        let cornerRadius = getCornerRadius(rectHeight: highlight.position.sentenceFrame.height)
+
+        Color.blue
             .opacity(0.2)
+            .border(.black, width: 0.5)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(gradient, lineWidth: 0.5)
-                    .opacity(0.8)
+                    .fill(gradient)
+                    .opacity(0.2)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: cornerRadius)
+                            .stroke(gradient, lineWidth: 0.5)
+                            .opacity(0.8)
+                    )
+                    .opacity(getLingeringOpacity())
+                    .opacity(highlight.alpha)
+                    .frame(width: highlight.position.length * viewSize.width)
+                    .padding(.leading, highlight.position.horizontalOffset * viewSize.width),
+                //                    .frame(with: highlight.position.sentenceFrame.scaleTo(viewSize))
+                alignment: .leading
             )
-            .opacity(getLingeringOpacity())
-            .opacity(highlight.alpha)
-            .rotationEffect(.degrees(highlight.angle))
-            .frame(with: highlight.frame.scaleTo(viewSize))
-            
+            .rotationEffect(.radians(-highlight.position.angle))
+            .frame(with: highlight.position.sentenceFrame.scaleTo(viewSize))
     }
-    
+
     func getLingeringOpacity() -> CGFloat {
         if case .lingering = highlight.state {
             return 0.1

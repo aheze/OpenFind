@@ -35,24 +35,35 @@ extension StringProtocol {
 }
 
 extension Sentence {
+    /// average angle of the sentence. Positive = up, negative = down from the right of the x axis
     var angle: CGFloat {
         guard
             let firstRangeToFrame = rangesToFrames.min(by: { $0.key.lowerBound < $1.key.lowerBound }),
             let lastRangeToFrame = rangesToFrames.min(by: { $0.key.upperBound > $1.key.upperBound })
         else { return 0 }
-//        print("First: \(firstRangeToFrame), las: \(lastRangeToFrame)")
-        
-        
-        let firstPoint = CGPoint(x: firstRangeToFrame.value.midX.rounded(toPlaces: 5), y: firstRangeToFrame.value.midY.rounded(toPlaces: 5))
-        let lastPoint = CGPoint(x: lastRangeToFrame.value.midX.rounded(toPlaces: 5), y: lastRangeToFrame.value.midY.rounded(toPlaces: 5))
-        
-        
+
         /// differences are the distance from the unit circle origin (`firstRangeToFrame`) to the outside point (`lastRangeToFrame`)
         let yDifference = firstRangeToFrame.value.midY - lastRangeToFrame.value.midY
         let xDifference = lastRangeToFrame.value.midX - firstRangeToFrame.value.midX
-        let angle = atan2(yDifference, xDifference).radiansToDegrees
-        print("First: \(firstPoint), last: \(lastPoint)  ----> \(angle)")
+        let angle = atan2(yDifference, xDifference)
         return angle
+    }
+
+    var sentenceFrame: CGRect {
+        let boundingFrame = boundingFrame()
+        let yInset = boundingFrame.height * abs(sin(angle))
+        let frame = boundingFrame.insetBy(dx: 0, dy: yInset)
+        return frame
+    }
+
+    /// get the word range that contains a character index
+    func rangeToFrame(containing index: Int) -> (range: Range<Int>, frame: CGRect)? {
+        guard let rangeToFrame = rangesToFrames.first(
+            where: { range, _ in range.contains(index) || range.upperBound == index }
+        ) else {
+            return nil
+        }
+        return (rangeToFrame.key, rangeToFrame.value)
     }
 
     /// get the ranges of search strings in the `string`
@@ -75,15 +86,65 @@ extension Sentence {
         return String(string[start ..< end])
     }
 
+    func boundingFrame() -> CGRect {
+        guard
+            let firstRangeToFrame = rangesToFrames.min(by: { $0.key.lowerBound < $1.key.lowerBound }),
+            let lastRangeToFrame = rangesToFrames.min(by: { $0.key.upperBound > $1.key.upperBound })
+        else { return .zero }
+
+        let frame = firstRangeToFrame.value.union(lastRangeToFrame.value)
+        return frame
+    }
+
+    func position(for targetRange: Range<Int>) -> Highlight.Position {
+        let position = Highlight.Position(
+            sentenceFrame: sentenceFrame,
+            globalCenter: globalCenter(for: targetRange),
+            horizontalOffset: horizontalOffset(for: targetRange.lowerBound),
+            length: length(for: targetRange),
+            angle: angle
+        )
+        return position
+    }
+
+    func globalCenter(for targetRange: Range<Int>) -> CGPoint {
+        let frame = frame(for: targetRange)
+        return CGPoint(x: frame.midX, y: frame.midY)
+    }
+
+//    func horizontalOffset(for index: Int, containingRangeToFrame: (range: Range<Int>, frame: CGRect)? = nil) -> CGFloat {
+//        guard let rangeToFrame = containingRangeToFrame ?? rangeToFrame(containing: index) else { return .zero }
+    func horizontalOffset(for index: Int) -> CGFloat {
+        guard let rangeToFrame = rangeToFrame(containing: index) else { return .zero }
+
+        let gridWidth = rangeToFrame.frame.width / CGFloat(rangeToFrame.range.count)
+        let offsetFromWord = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
+
+        /// distance from the beginning of the sentence
+        let wordOffset = CGPointDistance(from: rangeToFrame.frame.origin, to: boundingFrame().origin)
+        let horizontalOffset = wordOffset + offsetFromWord
+        return horizontalOffset
+    }
+
+    func length(for targetRange: Range<Int>) -> CGFloat {
+        /// get the ranges that contains the target range.
+        let startFrame = characterFrame(for: targetRange.lowerBound)
+        let endFrame = characterFrame(for: targetRange.upperBound - 1)
+        let distance = CGPointDistance(
+            from: CGPoint(x: startFrame.minX, y: startFrame.midY),
+            to: CGPoint(x: endFrame.maxX, y: startFrame.midY)
+        )
+        return distance
+    }
+
     /// get the frame for a range. This range doesn't need to be limited to individual words.
+    /// Usually no need to use this, use `position` instead.
     func frame(for targetRange: Range<Int>) -> CGRect {
         /// get the ranges that contains the target range.
         let startFrame = characterFrame(for: targetRange.lowerBound)
         let endFrame = characterFrame(for: targetRange.upperBound - 1)
 
         let frame = startFrame.union(endFrame)
-//
-        let _ = angle
         return frame
     }
 
@@ -91,32 +152,28 @@ extension Sentence {
     /// rangeToFrame: The `rangeToFrame` that contains this index.
     func characterFrame(for index: Int) -> CGRect {
         /// get the ranges that contains the target range.
-        guard let rangeToFrame = rangesToFrames.first(
-            where: { range, _ in range.contains(index) || range.upperBound == index }
-        ) else {
-            return .zero
+        guard let rangeToFrame = rangeToFrame(containing: index) else { return .zero }
+
+        let gridWidth = rangeToFrame.frame.width / CGFloat(rangeToFrame.range.count)
+
+        let frame: CGRect
+        switch angle.radiansToDegrees {
+        /// horizontal
+        case -30 ..< 30:
+            let characterLength = gridWidth
+            let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
+
+            let yInset = rangeToFrame.frame.height * abs(sin(angle)) / 2
+            frame = CGRect(
+                x: rangeToFrame.frame.origin.x + characterXOffset,
+                y: rangeToFrame.frame.origin.y,
+                width: characterLength,
+                height: rangeToFrame.frame.height
+            )
+            .insetBy(dx: 0, dy: yInset)
+        default:
+            frame = rangeToFrame.frame
         }
-        
-//        switch angle {
-//        case 0..<
-//        }
-
-        let gridWidth = rangeToFrame.value.width / CGFloat(rangeToFrame.key.count)
-        let gridHeight = rangeToFrame.value.height / CGFloat(rangeToFrame.key.count)
-
-        /// length of a character (a square)
-        let characterLength = max(gridWidth, gridHeight)
-
-        /// get offset within the word's frame. `index - rangeToFrame.range.lowerBound` is the index relative to the word.
-        let characterXOffset = gridWidth * CGFloat(index - rangeToFrame.key.lowerBound)
-        let characterYOffset = gridHeight * CGFloat(index - rangeToFrame.key.lowerBound)
-
-        let frame = CGRect(
-            x: rangeToFrame.value.origin.x + characterXOffset,
-            y: rangeToFrame.value.origin.y + characterYOffset,
-            width: characterLength,
-            height: characterLength
-        )
 
         return frame
     }

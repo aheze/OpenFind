@@ -17,14 +17,11 @@ class ViewController: UIViewController {
     
     let highlightsViewModel = HighlightsViewModel()
     
-//    let textToFind = ["popovers.", "present"]
-    let textToFind = ["pop"]
+    let textToFind = ["hello"]
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [
-        UIImage(named: "Frame 1")!,
-        UIImage(named: "Frame 2")!,
-        UIImage(named: "Frame 3")!
+        UIImage(named: "Frame 4")!,
     ]
     
     override func viewDidLayoutSubviews() {
@@ -57,27 +54,29 @@ class ViewController: UIViewController {
             
             var highlights = Set<Highlight>()
             for sentence in sentences {
+                print(sentence.string)
                 let rangeResults = sentence.ranges(of: textToFind)
                 for rangeResult in rangeResults {
                     for range in rangeResult.ranges {
-                        let frame = sentence.frame(for: range)
                         let highlight = Highlight(
                             string: rangeResult.string,
-                            frame: frame,
-                            colors: [UIColor(hex: 0xff2600)]
+                            colors: [UIColor(hex: 0xff2600)],
+                            position: sentence.position(for: range)
                         )
+                        
                         highlights.insert(highlight)
                     }
                 }
                 
-                for rangeToFrame in sentence.rangesToFrames {
-                    let highlight = Highlight(
-                        string: sentence.string(for: rangeToFrame.key),
-                        frame: rangeToFrame.value,
-                        colors: [UIColor.systemBlue]
-                    )
-                    highlights.insert(highlight)
-                }
+//                for rangeToFrame in sentence.rangesToFrames {
+//                    let highlight = Highlight(
+//                        string: sentence.string(for: rangeToFrame.key),
+//                        frame: rangeToFrame.value,
+//                        colors: [UIColor.systemBlue],
+//                        alpha: 0.2
+//                    )
+//                    highlights.insert(highlight)
+//                }
             }
             
             highlightsViewModel.update(with: highlights, replace: false)
