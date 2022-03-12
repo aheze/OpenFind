@@ -13,6 +13,8 @@ extension PhotosViewController {
     
     /// call this inside the cell provider.
     func getHighlights(for cell: PhotosResultsCell, with findPhoto: FindPhoto) -> Set<Highlight> {
+        
+        /// highlights in the cell without a frame - only represented by their ranges
         var cellHighlights = Set<Highlight>()
         for index in findPhoto.descriptionLines.indices {
             let line = findPhoto.descriptionLines[index]
@@ -47,9 +49,15 @@ extension PhotosViewController {
                 
                 let cellHighlight = Highlight(
                     string: lineHighlight.string,
-                    frame: frame,
                     colors: lineHighlight.colors,
-                    alpha: lineHighlight.alpha
+                    alpha: lineHighlight.alpha,
+                    position: .init(
+                        originalPoint: .zero,
+                        pivotPoint: .zero,
+                        center: frame.center,
+                        size: frame.size,
+                        angle: .zero
+                    )
                 )
                 cellHighlights.insert(cellHighlight)
             }

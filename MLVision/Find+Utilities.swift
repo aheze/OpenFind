@@ -9,8 +9,6 @@
 import UIKit
 import Vision
 
-
-
 struct RangeResult: Hashable {
     var string: String
     var ranges: [Range<Int>]
@@ -28,8 +26,6 @@ extension StringProtocol {
         return ranges
     }
 }
-
-
 
 extension String {
     func indicesOf(string: String) -> [Int] {

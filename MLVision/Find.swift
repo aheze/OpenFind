@@ -106,27 +106,30 @@ extension Find {
             let ranges = text.string.ranges()
 
             do {
-                var rangesToFrames = [Range<Int>: CGRect]()
+                var rawComponents = [Sentence.Component]()
                 for range in ranges {
                     let start = text.string.index(text.string.startIndex, offsetBy: range.lowerBound)
                     let end = text.string.index(text.string.startIndex, offsetBy: range.upperBound)
                     guard let rectangleObservation = try text.boundingBox(for: start ..< end) else { continue }
-                    let frame = rectangleObservation.getFrame()
-                    rangesToFrames[range] = frame
+                    let component = Sentence.Component(
+                        range: range,
+                        frame: rectangleObservation.getFrame()
+                    )
+                    rawComponents.append(component)
                 }
 
                 /// Sometimes Vision returns 1 huge bounding box for multiple words.
-                /// In this case, adjust the `rangesToFrames` for keys that encompass all the words.
-                var cleanedRangesToFrames = [Range<Int>: CGRect]()
-                for rangeToFrame in rangesToFrames {
-                    let existingRangeToFrame = cleanedRangesToFrames.first {
+                /// In this case, adjust the `components` for keys that encompass all the words.
+                var cleanedComponents = [Sentence.Component]()
+                for component in rawComponents {
+                    let existingComponentIndex = cleanedComponents.firstIndex {
                         /// Sometimes they are very close, so need to check the difference instead of directly using `==`
-                        abs($0.value.origin.x - rangeToFrame.value.origin.x) < 0.00001
+                        abs($0.frame.origin.x - component.frame.origin.x) < 0.00001
                     }
-                    if let existingRangeToFrame = existingRangeToFrame {
+                    if let existingComponentIndex = existingComponentIndex {
                         /// must combine together
-                        let initialRange = existingRangeToFrame.key
-                        let otherRange = rangeToFrame.key
+                        let initialRange = rawComponents[existingComponentIndex].range
+                        let otherRange = component.range
 
                         /// take the lowest and highest for a combined word
                         // 1..<3 and 10..<20 -> 1..<20
@@ -135,14 +138,13 @@ extension Find {
                         let upperBound = max(initialRange.upperBound, otherRange.upperBound)
                         let newRange = lowerBound ..< upperBound
 
-                        cleanedRangesToFrames[initialRange] = nil
-                        cleanedRangesToFrames[newRange] = rangeToFrame.value
+                        cleanedComponents[existingComponentIndex].range = newRange
                     } else {
-                        cleanedRangesToFrames[rangeToFrame.key] = rangeToFrame.value
+                        cleanedComponents.append(component)
                     }
                 }
 
-                let sentence = Sentence(string: text.string, rangesToFrames: cleanedRangesToFrames)
+                let sentence = Sentence(string: text.string, components: cleanedComponents)
                 sentences.append(sentence)
             } catch {
                 Global.log("Error: \(error)")

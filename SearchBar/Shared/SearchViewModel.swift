@@ -13,7 +13,7 @@ class SearchViewModel: ObservableObject {
         var colors = [UIColor]()
         var alpha = CGFloat(1)
     }
-
+    
     var configuration: SearchConfiguration
     
     /// set from within SearchViewController
@@ -94,7 +94,6 @@ class SearchViewModel: ObservableObject {
 extension SearchViewModel {
     func getBackgroundColor() -> UIColor {
         if !stringToGradients.isEmpty {
-            
             //// active
             return configuration.fieldActiveBackgroundColor
         } else {

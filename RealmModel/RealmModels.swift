@@ -44,9 +44,9 @@ class RealmPhotoMetadata: Object {
 }
 
 class RealmPhotoMetadataSentence: Object {
-    @Persisted var frame: RealmRect?
-    @Persisted var string = ""
-    @Persisted var confidence = Double(0)
+    @Persisted var string: String?
+    @Persisted var rangesToFrames: Map<RealmIntRange, RealmRect>
+    @Persisted var confidence: Double?
     
     func getSentence() -> Sentence {
         let frame = self.frame?.getRect() ?? .zero
@@ -57,6 +57,12 @@ class RealmPhotoMetadataSentence: Object {
         )
         return sentence
     }
+}
+
+//class RealmRangeToFrame
+class RealmIntRange: Object {
+    @Persisted var lowerBound = 0
+    @Persisted var upperBound = 0
 }
 
 class RealmRect: Object {
