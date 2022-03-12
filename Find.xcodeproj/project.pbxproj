@@ -3956,8 +3956,8 @@
 			isa = PBXGroup;
 			children = (
 				3C7B7A68277F94D400E1F602 /* Highlight.swift */,
-				3C7B7A1D277E941B00E1F602 /* HighlightsViewModel.swift */,
 				3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */,
+				3C7B7A1D277E941B00E1F602 /* HighlightsViewModel.swift */,
 				3C7B7A1B277E93F900E1F602 /* HighlightsView.swift */,
 				3C7B7A22277E963700E1F602 /* HighlightsViewController.swift */,
 				3C7B7A1A277E93E300E1F602 /* Testing */,

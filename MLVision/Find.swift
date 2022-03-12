@@ -115,9 +115,6 @@ extension Find {
                     rangesToFrames[range] = frame
                 }
 
-                if text.string.contains("picture") {
-                    print("String is [\(text.string)]. Ranges:  \(rangesToFrames)")
-                }
                 /// Sometimes Vision returns 1 huge bounding box for multiple words.
                 /// In this case, adjust the `rangesToFrames` for keys that encompass all the words.
                 var cleanedRangesToFrames = [Range<Int>: CGRect]()

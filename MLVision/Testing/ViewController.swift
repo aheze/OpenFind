@@ -10,18 +10,21 @@ import AVFoundation
 import UIKit
 
 class ViewController: UIViewController {
-    let interval: CGFloat? = nil
+    let interval: CGFloat? = 1.8
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var highlightsView: UIView!
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = ["hello", "is is"]
+    let textToFind = ["Popovers"]
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [
-        UIImage(named: "Frame 4")!,
+        UIImage(named: "Frame 1")!,
+        UIImage(named: "Frame 2")!,
+        UIImage(named: "Frame 3")!,
+//        UIImage(named: "Frame 4")!,
     ]
     
     override func viewDidLayoutSubviews() {
