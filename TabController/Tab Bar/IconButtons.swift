@@ -51,6 +51,7 @@ struct TabButton<Content: View>: View {
     
     var body: some View {
         Button {
+            print("oressed")
             tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
         } label: {
             content

@@ -70,6 +70,7 @@ extension TabState {
         case .lists:
             return lightTabBarAttributes
         case .cameraToPhotos(let transitionProgress):
+            print("progress: \(transitionProgress) from \(darkTabBarAttributes) to \(lightTabBarAttributes)")
             return .init(progress: transitionProgress, from: darkTabBarAttributes, to: lightTabBarAttributes)
         case .cameraToLists(let transitionProgress):
             return .init(progress: transitionProgress, from: darkTabBarAttributes, to: lightTabBarAttributes)

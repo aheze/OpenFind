@@ -71,6 +71,7 @@ enum ConstantVars {
         let bottomSafeAreaInset = window?.safeAreaInsets.bottom ?? 0
         let deviceHasNotch = bottomSafeAreaInset > 0
         
+        print("Notch? \(deviceHasNotch)")
         if deviceHasNotch {
             let bottomPadding = bottomSafeAreaInset + 4
             toolbarBottomPadding = bottomPadding
@@ -82,6 +83,8 @@ enum ConstantVars {
             tabBarOverflowingIconsBottomPaddingLandscape = bottomSafeAreaInset - 6
             tabBarTotalHeightLandscape = tabBarContentHeight + bottomSafeAreaInset
             tabBarTotalHeightExpandedLandscape = tabBarTotalHeightLandscape
+            
+            print("toolbarBottomPadding: \(tabBarOverflowingIconsBottomPadding)")
             
         } else {
             toolbarBottomPadding = bottomSafeAreaInset

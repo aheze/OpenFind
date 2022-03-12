@@ -15,6 +15,8 @@ extension TabBarViewController {
             guard let self = self else { return }
             self.updateTabBarHeight(tabState)
         }
+        
+        print("isten..")
         model.tabStateChanged = { [weak self] animation in
             guard let self = self else { return }
             let activeTab = self.model.tabState
@@ -23,6 +25,8 @@ extension TabBarViewController {
                 bottomHeight: self.model.tabBarAttributes.backgroundHeight,
                 safeAreaInsets: self.view.safeAreaInsets
             )
+            
+            print("chaned")
             
             switch animation {
             case .fractionalProgress:

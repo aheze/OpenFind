@@ -17,9 +17,6 @@ class TabViewModel: ObservableObject {
             animatorProgress = tabState.getAnimatorProgress()
             
             animatorProgressChanged?(animatorProgress)
-//            Tab.currentTabState = tabState
-//            Tab.currentBlurProgress = animatorProgress
-//            Tab.blurProgressChanged?(animatorProgress)
         }
     }
 
