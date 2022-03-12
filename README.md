@@ -38,3 +38,6 @@ Instead, just get the current find photo inside the cell provider.
 ```swift
 guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
 ```
+
+
+![](Assets/IMG_2486.heic)
