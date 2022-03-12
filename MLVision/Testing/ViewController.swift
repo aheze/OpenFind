@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     let highlightsViewModel = HighlightsViewModel()
     
-    let textToFind = ["hello", "some"]
+    let textToFind = ["hello", "is is"]
     
     var currentTrackingImageIndex = 0
     let trackingImages: [UIImage] = [
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
                     for range in rangeResult.ranges {
                         let highlight = Highlight(
                             string: rangeResult.string,
-                            colors: [UIColor(hex: 0xff2600)],
+                            colors: [UIColor.systemBlue],
                             position: sentence.position(for: range)
                         )
                         
@@ -96,7 +96,6 @@ class ViewController: UIViewController {
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
         addChildViewController(highlightsViewController, in: highlightsView)
         highlightsView.backgroundColor = .clear
-        highlightsView.addDebugBorders(.blue)
         imageView.addDebugBorders(.green)
         view.bringSubviewToFront(highlightsView)
     }
