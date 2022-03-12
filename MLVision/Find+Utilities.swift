@@ -36,7 +36,7 @@ extension StringProtocol {
 
 extension Sentence {
     /// average angle of the sentence. Positive = up, negative = down from the right of the x axis
-    var angle: CGFloat {
+    func angle() -> CGFloat {
         guard
             let firstRangeToFrame = rangesToFrames.min(by: { $0.key.lowerBound < $1.key.lowerBound }),
             let lastRangeToFrame = rangesToFrames.min(by: { $0.key.upperBound > $1.key.upperBound })
@@ -49,9 +49,9 @@ extension Sentence {
         return angle
     }
 
-    var sentenceFrame: CGRect {
+    func sentenceFrame() -> CGRect {
         let boundingFrame = boundingFrame()
-        let yInset = boundingFrame.height * abs(sin(angle))
+        let yInset = boundingFrame.height * abs(sin(angle()))
         let frame = boundingFrame.insetBy(dx: 0, dy: yInset)
         return frame
     }
@@ -97,58 +97,91 @@ extension Sentence {
     }
 
     func position(for targetRange: Range<Int>) -> Highlight.Position {
+        let highlightFrame = frame(for: targetRange)
+        let sentenceFrame = sentenceFrame()
+        let angle = angle()
+        
+        let distanceFromCenter = CGPointDistance(from: highlightFrame.center, to: sentenceFrame.center)
+        
+        /// where the highlight will be located and the angle rotation applied
+        let highlightCenter: CGPoint
+        
+        /// if highlight is to the right of the sentence
+        if highlightFrame.center.x > sentenceFrame.center.x {
+            let offsetXFromCenter = cos(angle) * distanceFromCenter
+            let offsetYFromCenter = -sin(angle) * distanceFromCenter
+            
+            highlightCenter = CGPoint(
+                x: sentenceFrame.midX + offsetXFromCenter,
+                y: sentenceFrame.midY + offsetYFromCenter
+            )
+        } else {
+            let offsetXFromCenter = -cos(angle) * distanceFromCenter
+            let offsetYFromCenter = sin(angle) * distanceFromCenter
+            
+            highlightCenter = CGPoint(
+                x: sentenceFrame.midX + offsetXFromCenter,
+                y: sentenceFrame.midY + offsetYFromCenter
+            )
+        }
+        
+        
         let position = Highlight.Position(
-            sentenceFrame: sentenceFrame,
-            globalCenter: globalCenter(for: targetRange),
-            horizontalOffset: horizontalOffset(for: targetRange.lowerBound),
-            length: length(for: targetRange),
+            originalPoint: highlightFrame.center,
+            pivotPoint: sentenceFrame.center,
+            center: highlightCenter,
+            size: highlightFrame.size,
             angle: angle
         )
+        
+//        Highlight.Position(
+//            sentenceFrame: sentenceFrame,
+//            globalCenter: globalCenter(for: targetRange),
+//            horizontalOffset: horizontalOffset(for: targetRange.lowerBound),
+//            length: length(for: targetRange),
+//            angle: angle
+//        )
         return position
     }
 
-    func globalCenter(for targetRange: Range<Int>) -> CGPoint {
-        let frame = frame(for: targetRange)
-        return CGPoint(x: frame.midX, y: frame.midY)
-    }
 
-    func horizontalOffset(for index: Int) -> CGFloat {
-        guard let rangeToFrame = rangeToFrame(containing: index) else { return .zero }
+//    func horizontalOffset(for index: Int) -> CGFloat {
+//        guard let rangeToFrame = rangeToFrame(containing: index) else { return .zero }
+//
+//        let gridWidth = rangeToFrame.frame.width / CGFloat(rangeToFrame.range.count)
+//        let offsetFromWord = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
+//
+//        /// distance from the beginning of the sentence
+//        let wordOffset = CGPointDistance(
+//            from: CGPoint(
+//                x: rangeToFrame.frame.minX,
+//                y: rangeToFrame.frame.midY
+//            ),
+//            to: CGPoint(
+//                x: boundingFrame().minX,
+//                y: boundingFrame().midY
+//            )
+//        )
+//        let horizontalOffset = wordOffset + offsetFromWord
+//
+//        if string == "Hello, this is some" {
+//            print("Off: \(horizontalOffset) -> \(wordOffset) + \(offsetFromWord)")
+//        } else {
+//            print("                 Off: \(horizontalOffset) -> \(wordOffset) + \(offsetFromWord)")
+//        }
+//        return horizontalOffset
+//    }
 
-        let gridWidth = rangeToFrame.frame.width / CGFloat(rangeToFrame.range.count)
-        let offsetFromWord = gridWidth * CGFloat(index - rangeToFrame.range.lowerBound)
-
-        /// distance from the beginning of the sentence
-        let wordOffset = CGPointDistance(
-            from: CGPoint(
-                x: rangeToFrame.frame.minX,
-                y: rangeToFrame.frame.midY
-            ),
-            to: CGPoint(
-                x: boundingFrame().minX,
-                y: boundingFrame().midY
-            )
-        )
-        let horizontalOffset = wordOffset + offsetFromWord
-        
-        if string == "Hello, this is some" {
-            print("Off: \(horizontalOffset) -> \(wordOffset) + \(offsetFromWord)")
-        } else {
-            print("                 Off: \(horizontalOffset) -> \(wordOffset) + \(offsetFromWord)")
-        }
-        return horizontalOffset
-    }
-
-    func length(for targetRange: Range<Int>) -> CGFloat {
-        /// get the ranges that contains the target range.
-        let startFrame = characterFrame(for: targetRange.lowerBound)
-        let endFrame = characterFrame(for: targetRange.upperBound - 1)
-        let distance = CGPointDistance(
-            from: CGPoint(x: startFrame.minX, y: startFrame.midY),
-            to: CGPoint(x: endFrame.maxX, y: startFrame.midY)
-        )
-        return distance
-    }
+//    func length(for targetRange: Range<Int>) -> CGFloat {
+//        /// get the ranges that contains the target range.
+//        let startFrame = characterFrame(for: targetRange.lowerBound)
+//        let endFrame = characterFrame(for: targetRange.upperBound - 1)
+//        let distance = CGPointDistance(
+//            from: CGPoint(x: startFrame.minX, y: startFrame.midY),
+//            to: CGPoint(x: endFrame.maxX, y: startFrame.midY)
+//        )
+//        return distance
+//    }
 
     /// get the frame for a range. This range doesn't need to be limited to individual words.
     /// Usually no need to use this, use `position` instead.

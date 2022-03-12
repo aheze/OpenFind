@@ -37,7 +37,7 @@ class HighlightsViewModel: ObservableObject {
                 /// don't check if the word is the same if replacing
                 guard (replace && oldHighlight.colors == newHighlight.colors) || (oldHighlight.string == newHighlight.string) else { continue }
                 
-                let distance = relativeDistance(oldHighlight.position.globalCenter, newHighlight.position.globalCenter)
+                let distance = relativeDistance(oldHighlight.position.center, newHighlight.position.center)
                 if distance < minimumDistance {
                     minimumDistance = distance
                     nearestHighlight = oldHighlight

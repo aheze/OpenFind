@@ -8,7 +8,6 @@
     
 import UIKit
 
-
 struct Highlight: Identifiable, Hashable {
     let id = UUID()
     var string = ""
@@ -20,13 +19,19 @@ struct Highlight: Identifiable, Hashable {
     var state = State.added
     
     struct Position: Equatable {
-        /// frame of the container sentence
-        var sentenceFrame = CGRect.zero
+        /// the center that it's originally located
+        var originalPoint = CGPoint.zero
         
-        /// midpoint of the highlight, to the screen
-        var globalCenter = CGPoint.zero
-        var horizontalOffset = CGFloat(0)
-        var length = CGFloat(0)
+        /// where to rotate around
+        var pivotPoint = CGPoint.zero
+        
+        /// midpoint of the highlight, to the screen. Use this in SwiftUI
+        var center = CGPoint.zero
+        
+        /// dimensions
+        var size = CGSize.zero
+            
+        /// how much to rotate by
         var angle = CGFloat(0)
     }
     

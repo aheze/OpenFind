@@ -34,29 +34,39 @@ struct HighlightView: View {
             endPoint: .trailing
         )
 
-        let cornerRadius = getCornerRadius(rectHeight: highlight.position.sentenceFrame.height)
+        let cornerRadius = getCornerRadius(rectHeight: highlight.position.size.height)
 
-        Color.blue
+//        Color.blue
+//            .opacity(0.2)
+//            .border(.black, width: 0.5)
+//            .overlay(
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .fill(gradient)
             .opacity(0.2)
-            .border(.black, width: 0.5)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(gradient)
-                    .opacity(0.2)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(gradient, lineWidth: 0.5)
-                            .opacity(0.8)
-                    )
-                    .opacity(getLingeringOpacity())
-                    .opacity(highlight.alpha)
-                    .frame(width: highlight.position.length * viewSize.width)
-                    .padding(.leading, highlight.position.horizontalOffset * viewSize.width),
-                //                    .frame(with: highlight.position.sentenceFrame.scaleTo(viewSize))
-                alignment: .leading
+                    .stroke(gradient, lineWidth: 0.5)
+                    .opacity(0.8)
+            )
+            .opacity(getLingeringOpacity())
+            .opacity(highlight.alpha)
+            .frame(
+                width: highlight.position.size.width * viewSize.width,
+                height: highlight.position.size.height * viewSize.height
             )
             .rotationEffect(.radians(-highlight.position.angle))
-            .frame(with: highlight.position.sentenceFrame.scaleTo(viewSize))
+            .position(
+                x: highlight.position.center.x * viewSize.width,
+                y: highlight.position.center.y * viewSize.height
+            )
+//            .padding(.leading, highlight.position.horizontalOffset * viewSize.width)
+
+//        ,
+            //                    .frame(with: highlight.position.sentenceFrame.scaleTo(viewSize))
+//                alignment: .leading
+//            )
+            
+//            .frame(with: highlight.position.sentenceFrame.scaleTo(viewSize))
     }
 
     func getLingeringOpacity() -> CGFloat {
