@@ -1615,6 +1615,8 @@
 		3CE3D4C427DA807700521735 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3CE3D4C527DA807700521735 /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
 		3CE3D4CF27DC446400521735 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4CE27DC446400521735 /* Sentence.swift */; };
+		3CE3D4D427DC45A300521735 /* Angles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CE3D4D227DC45A300521735 /* Angles.jpg */; };
+		3CE3D4D527DC45A300521735 /* AnglesLength.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CE3D4D327DC45A300521735 /* AnglesLength.jpg */; };
 		3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
@@ -2582,7 +2584,8 @@
 		3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTransitions.swift; sourceTree = "<group>"; };
 		3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3CE3D4CE27DC446400521735 /* Sentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
-		3CE3D4D127DC44EE00521735 /* IMG_2486.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_2486.HEIC; sourceTree = "<group>"; };
+		3CE3D4D227DC45A300521735 /* Angles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Angles.jpg; sourceTree = "<group>"; };
+		3CE3D4D327DC45A300521735 /* AnglesLength.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AnglesLength.jpg; sourceTree = "<group>"; };
 		3CE9C1EB274B48E1008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1EF274B4911008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1F1274B4937008C903C /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4364,7 +4367,8 @@
 		3CE3D4D027DC44D700521735 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				3CE3D4D127DC44EE00521735 /* IMG_2486.HEIC */,
+				3CE3D4D227DC45A300521735 /* Angles.jpg */,
+				3CE3D4D327DC45A300521735 /* AnglesLength.jpg */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -5314,8 +5318,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE3D4D427DC45A300521735 /* Angles.jpg in Resources */,
 				3C2DBBED277E739400911A74 /* LaunchScreen.storyboard in Resources */,
 				3CFCE8BB27CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3CE3D4D527DC45A300521735 /* AnglesLength.jpg in Resources */,
 				3C2DBBEA277E739400911A74 /* Assets.xcassets in Resources */,
 				3C2DBBE8277E739200911A74 /* Main.storyboard in Resources */,
 				3C7B7A3B277E9D9300E1F602 /* SharedAssets.xcassets in Resources */,

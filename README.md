@@ -40,4 +40,6 @@ guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.phot
 ```
 
 
-![](Assets/IMG_2486.heic)
+Angles rotation | Change the highlight length based on angle
+--- | ---
+![Angles](Assets/Angles.jpg) | ![Angles](Assets/AnglesLength.jpg)
