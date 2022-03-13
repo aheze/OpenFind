@@ -736,6 +736,20 @@
 		3C443F5627DD91600050A0AB /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A68277F94D400E1F602 /* Highlight.swift */; };
 		3C443F5727DD91610050A0AB /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A68277F94D400E1F602 /* Highlight.swift */; };
 		3C443F5827DD91610050A0AB /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A68277F94D400E1F602 /* Highlight.swift */; };
+		3C443F5A27DDA7730050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F5B27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F5C27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F5D27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F5E27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F5F27DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6027DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6127DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6227DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6327DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6427DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6527DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6627DDA7880050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
+		3C443F6727DDA7880050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */; };
 		3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96B125B69038009FDE8D /* InfoView.swift */; };
@@ -2358,6 +2372,7 @@
 		3C443F0527DD90490050A0AB /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		3C443F0727DD90650050A0AB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		3C443F4227DD90C00050A0AB /* GeneralExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralExtensions.swift; sourceTree = "<group>"; };
+		3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtensions.swift; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Draw.swift"; sourceTree = "<group>"; };
 		3C4C96B125B69038009FDE8D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -4245,6 +4260,7 @@
 				3CC594F6279F32E6001D07DC /* ColorPickerView.swift */,
 				3C0B5E6C27BAC05900EC881E /* PhotosPermissionsView.swift */,
 				3C443EF527DD8F610050A0AB /* SliderView.swift */,
+				3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */,
 				3C7B7A7D277FA50B00E1F602 /* Assets.xcassets */,
 				3CCCCAB627818CF1000381CE /* Testing */,
 			);
@@ -5933,6 +5949,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C443F2727DD907A0050A0AB /* Photo.swift in Sources */,
+				3C443F6327DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CB8C31827C31DEF000AA3B9 /* Global+Log.swift in Sources */,
 				3C08EB3C279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3CCCCAAA27818CEA000381CE /* GeneralViews.swift in Sources */,
@@ -6074,6 +6091,7 @@
 				3C443EF827DD8F640050A0AB /* SliderView.swift in Sources */,
 				3C7B7A2A277E9CD300E1F602 /* Utilities+Dates.swift in Sources */,
 				3CCE2B08279D008A00F72351 /* ButtonView.swift in Sources */,
+				3C443F6427DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C2DBBE3277E739200911A74 /* SceneDelegate.swift in Sources */,
 				3C6C73632781945E00E039F0 /* Highlight.swift in Sources */,
 				3CE3D50227DD5B2500521735 /* Find+Sentences.swift in Sources */,
@@ -6182,6 +6200,7 @@
 				3C6D77BD27A5B140005371F3 /* Global.swift in Sources */,
 				3C4D3A1A274767410010FD68 /* Toolbar.swift in Sources */,
 				3CCE2B28279D008C00F72351 /* ButtonView.swift in Sources */,
+				3C443F5C27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C08EB09279C76E500971D60 /* ListsContentCell.swift in Sources */,
 				3C3642D9277BC2E70038CB18 /* SearchUtilities.swift in Sources */,
 				3C364353277C52EE0038CB18 /* SearchVC+Popovers.swift in Sources */,
@@ -6316,6 +6335,7 @@
 				3CE3D4EA27DD0BE200521735 /* SearchNC+Listen.swift in Sources */,
 				3C08EB4B279C95F900971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C7B7A6B277F94DD00E1F602 /* Highlight.swift in Sources */,
+				3C443F5D27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C4D39C227475E2C0010FD68 /* GeneralUtilities.swift in Sources */,
 				3CE3D4F127DD2FF600521735 /* TabBarVC+Delegate.swift in Sources */,
 				3C3642CA277BC2E70038CB18 /* SearchViewModel.swift in Sources */,
@@ -6443,6 +6463,7 @@
 				3C1D1A40275AA25E0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C21EDAF27A45BFF0005E183 /* RealmModels.swift in Sources */,
 				3C443ECB27DD8AC10050A0AB /* ContentPageViewController.swift in Sources */,
+				3C443F5E27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CF7643A278D19AC00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */,
 				3C06260027C69FB60078E66F /* PhotosVC+Results.swift in Sources */,
@@ -6725,6 +6746,7 @@
 				3CF76431278D187300DCA4EA /* SearchNC+Utilities.swift in Sources */,
 				3C443F4A27DD90E80050A0AB /* GeneralExtensions.swift in Sources */,
 				3CCE2B43279D0C6900F72351 /* ListsDetailViewModel.swift in Sources */,
+				3C443F5F27DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C4D3A5F2747691A0010FD68 /* ViewController.swift in Sources */,
 				3C93148027B769A0009E5B6E /* ListsDetailVC+Scroll.swift in Sources */,
 				3C7223CA27C450700085EBF1 /* SpecifiedExtensions.swift in Sources */,
@@ -6842,6 +6864,7 @@
 				3C7B7A97277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3B1C274776D20010FD68 /* TextDetectionView.swift in Sources */,
 				3C4D3B11274776D20010FD68 /* ContactView.swift in Sources */,
+				3C443F6027DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C443EE227DD8C130050A0AB /* CameraNotFoundView.swift in Sources */,
 				3C1D1A39275AA25D0064F2C6 /* Utilities+UIDevice.swift in Sources */,
 				3C4D3B12274776D20010FD68 /* SettingsBridge.swift in Sources */,
@@ -6857,6 +6880,7 @@
 				3C1D1A33275AA25C0064F2C6 /* Utilities+UIDevice.swift in Sources */,
 				3C21EDB427A45C000005E183 /* RealmModel.swift in Sources */,
 				3C08EB28279C76E600971D60 /* ListsConstants.swift in Sources */,
+				3C443F6127DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C443F2227DD907A0050A0AB /* Photo.swift in Sources */,
 				3CCE2B14279D008B00F72351 /* ButtonView.swift in Sources */,
 				3CCCCAA627818CE9000381CE /* GeneralViews.swift in Sources */,
@@ -7143,6 +7167,7 @@
 				3C6C73662781946200E039F0 /* CameraVC+ScrollZoom.swift in Sources */,
 				3C93148A27B82178009E5B6E /* ListsDetailVC+WordsToolbar.swift in Sources */,
 				3C6C73572781945400E039F0 /* ContentPagingFlowLayout.swift in Sources */,
+				3C443F5B27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C08EB1C279C76E500971D60 /* ListsConstants.swift in Sources */,
 				3C6C73362781943B00E039F0 /* UIKitViews.swift in Sources */,
 				3C6C733D2781944700E039F0 /* FindIconView.swift in Sources */,
@@ -7329,6 +7354,7 @@
 				3C443EF727DD8F630050A0AB /* SliderView.swift in Sources */,
 				3C7B7A36277E9CD500E1F602 /* Utilities+Math.swift in Sources */,
 				3CCE2B02279D008900F72351 /* ClearIconView.swift in Sources */,
+				3C443F6527DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C21EDFC27A4617F0005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C21EDF827A4617F0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C7B7A09277E93CA00E1F602 /* AppDelegate.swift in Sources */,
@@ -7359,6 +7385,7 @@
 				3C6D77C727A5B140005371F3 /* Global.swift in Sources */,
 				3C7B7A7C277FA50900E1F602 /* ContentView.swift in Sources */,
 				3C7B7A8E277FA6E300E1F602 /* Utilities+UIFont.swift in Sources */,
+				3C443F5A27DDA7730050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CCE2AFD279D008900F72351 /* SelectionIconView.swift in Sources */,
 				3C443F5127DD911F0050A0AB /* TabAttributes.swift in Sources */,
 				3C7B7A7A277FA50800E1F602 /* SwiftUIViewsApp.swift in Sources */,
@@ -7412,6 +7439,7 @@
 				3C21EDEC27A4617E0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3CCE2AFB279D008800F72351 /* FindIconUIView.swift in Sources */,
 				3C21EDEE27A4617E0005E183 /* RealmModel+Lists.swift in Sources */,
+				3C443F6627DDA7880050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C443EEE27DD8C150050A0AB /* CameraNotFoundView.swift in Sources */,
 				3C8A5246277FC1F4006CF91E /* Utilities+Constraints.swift in Sources */,
 				3CCE2AFA279D008800F72351 /* ClearIconView.swift in Sources */,
@@ -7466,6 +7494,7 @@
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
 				3C7B7A4E277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C6C738D2781946C00E039F0 /* ZoomView.swift in Sources */,
+				3C443F6227DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */,
 				3CCCCAA927818CEA000381CE /* FindIconView.swift in Sources */,
 				3C6C73882781946C00E039F0 /* LivePreviewVC+Photo.swift in Sources */,
@@ -7541,6 +7570,7 @@
 				3CE3D4DE27DCFBAB00521735 /* SearchNavigationModel.swift in Sources */,
 				3CFD6026278B71A50031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3CCE2AF8279D008800F72351 /* ButtonView.swift in Sources */,
+				3C443F6727DDA7880050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CFD6003278B6FA50031BC8B /* Utilities+CGRect.swift in Sources */,
 				3C443F3A27DD907C0050A0AB /* List.swift in Sources */,
 				3C21EDE527A4617D0005E183 /* RealmModel+Photos.swift in Sources */,
