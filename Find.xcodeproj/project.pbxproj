@@ -750,7 +750,6 @@
 		3C443F6527DDA7870050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
 		3C443F6627DDA7880050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
 		3C443F6727DDA7880050A0AB /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
-		3C443F6927DDB2CE0050A0AB /* PhotosVC+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */; };
 		3C443F6A27DDB2D70050A0AB /* PhotosVC+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */; };
 		3C443F6B27DDB2D90050A0AB /* PhotosVC+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */; };
 		3C443F6C27DDB2DA0050A0AB /* PhotosVC+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */; };
@@ -7406,7 +7405,6 @@
 				3CCCCAB427818CEC000381CE /* FindIconView.swift in Sources */,
 				3C443F4327DD90C00050A0AB /* GeneralExtensions.swift in Sources */,
 				3CCCCAB527818CEC000381CE /* ProgressLineView.swift in Sources */,
-				3C443F6927DDB2CE0050A0AB /* PhotosVC+Filters.swift in Sources */,
 				3C6C743A2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C443F0827DD90650050A0AB /* Photo.swift in Sources */,
 				3C7B7A90277FA6E300E1F602 /* Utilities+SwiftUI.swift in Sources */,

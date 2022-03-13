@@ -12,10 +12,8 @@ enum SliderConstants {
     static let selectionEdgeInsets = EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
     static let spacing = CGFloat(8)
     static let font = UIFont.preferredCustomFont(forTextStyle: .body, weight: .semibold)
-    static let height: CGFloat = {
-        font.lineHeight + selectionEdgeInsets.top + selectionEdgeInsets.bottom + outerPadding
-    }()
-    
+    static let height: CGFloat = font.lineHeight + selectionEdgeInsets.top + selectionEdgeInsets.bottom + outerPadding
+
     static let outerPadding = CGFloat(5)
     static let bottomPadding = CGFloat(16)
 }
@@ -46,7 +44,9 @@ class SliderViewModel: ObservableObject {
 
     @Published var selectionType: SelectionType?
     @Published var hoveringSelectionType: SelectionType?
-    @Published var dragEnabled = true
+
+    /// if false, just change opacity
+    @Published var indicatorMovable = true
     @Published var selections: [Selection] = [
         .init(type: .starred),
         .init(type: .screenshots),
@@ -71,26 +71,23 @@ struct SliderView: View {
             ForEach(model.selections.indices) { index in
                 let selection = model.selections[index]
 
-                Button {
-                    model.change(to: selection.type)
-                } label: {
-                    Text(selection.type.getString())
-                        .font(Font(SliderConstants.font as CTFont))
-                        .fixedSize(horizontal: true, vertical: false)
-                        .frame(maxWidth: .infinity)
-                        .padding(SliderConstants.selectionEdgeInsets)
-                        .scaleEffect(getScale(for: selection.type))
-                }
-                .foregroundColor(.white)
-                .colorMultiply(getForegroundColor(for: selection.type).color)
-                .readFrame(in: .named("Slider")) { frame in
-                    model.selections[index].frame = frame
-                }
+                Text(selection.type.getString())
+                    .font(Font(SliderConstants.font as CTFont))
+                    .fixedSize(horizontal: true, vertical: false)
+                    .frame(maxWidth: .infinity)
+                    .padding(SliderConstants.selectionEdgeInsets)
+                    .scaleEffect(getScale(for: selection.type))
+                    .foregroundColor(.white)
+                    .colorMultiply(getForegroundColor(for: selection.type).color)
+                    .readFrame(in: .named("Slider")) { frame in
+                        model.selections[index].frame = frame
+                    }
             }
         }
         .frame(maxWidth: .infinity)
         .padding(SliderConstants.outerPadding)
         .coordinateSpace(name: "Slider")
+        .contentShape(Rectangle())
         .simultaneousGesture(
             DragGesture(minimumDistance: 0, coordinateSpace: .named("Slider"))
                 .onChanged { value in
@@ -106,7 +103,7 @@ struct SliderView: View {
                 .mask(
                     Capsule()
                 )
-                .scaleEffect(model.hoveringSelectionType == nil ? 1 : 0.95)
+                .scaleEffect(model.indicatorMovable ? (model.hoveringSelectionType == nil ? 1 : 0.95) : 1)
                 .frame(with: getFrame())
         )
         .background(
@@ -119,8 +116,15 @@ struct SliderView: View {
     }
 
     func getForegroundColor(for type: SliderViewModel.SelectionType) -> UIColor {
-        if let hoveringSelectionType = model.hoveringSelectionType {
-            if hoveringSelectionType == type {
+        if model.indicatorMovable {
+            if let hoveringSelectionType = model.hoveringSelectionType {
+                if hoveringSelectionType == type {
+                    return .white
+                }
+            } else if
+                let selectionType = model.selectionType,
+                selectionType == type
+            {
                 return .white
             }
         } else {
@@ -129,6 +133,12 @@ struct SliderView: View {
                 selectionType == type
             {
                 return .white
+            } else if
+                let hoveringSelectionType = model.hoveringSelectionType,
+                hoveringSelectionType == type
+            {
+                return .secondaryLabel.toColor(.white, percentage: 0.5)
+
             }
         }
 
@@ -137,7 +147,10 @@ struct SliderView: View {
 
     func getScale(for type: SliderViewModel.SelectionType) -> CGFloat {
         if let hoveringSelectionType = model.hoveringSelectionType {
-            if hoveringSelectionType == type {
+            if
+                model.indicatorMovable,
+                hoveringSelectionType == type
+            {
                 return 0.95
             }
         }
@@ -147,6 +160,7 @@ struct SliderView: View {
 
     func getFrame() -> CGRect {
         if
+            model.indicatorMovable,
             let hoveringSelectionType = model.hoveringSelectionType,
             let selection = model.selections.first(where: { $0.type == hoveringSelectionType })
         {
@@ -165,8 +179,6 @@ struct SliderView: View {
 extension SliderViewModel {
     /// `ended` - call this once right before release, for predicted end
     func onDragGestureChange(value: DragGesture.Value, ended: Bool) {
-        guard dragEnabled else { return }
-
         /// first time
         if hoveringSelectionType == nil {
             if
@@ -175,10 +187,9 @@ extension SliderViewModel {
                 let frame = selection.frame,
                 (frame.minX ..< frame.maxX).contains(value.location.x)
             {
-                dragEnabled = true
+                indicatorMovable = true
             } else {
-                dragEnabled = false
-                return
+                indicatorMovable = false
             }
         }
 
@@ -201,7 +212,7 @@ extension SliderViewModel {
                 selectionType = hoveringSelectionType
             }
             hoveringSelectionType = nil
-            dragEnabled = true
+            indicatorMovable = true
         }
     }
 }
