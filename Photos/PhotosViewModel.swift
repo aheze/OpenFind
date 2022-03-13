@@ -20,8 +20,14 @@ class PhotosViewModel: ObservableObject {
     /// store the cell images
     var photoToThumbnail = [Photo: UIImage?]()
 
-    /// update the collection view. Set inside `PhotosVC+Listen`
+    /// update the entire collection view. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
+    
+    /// reload at a specific index path
+    /// 1. Index path inside `collectionView`
+    /// 2. Index inside `resultsCollectionView`
+    /// 3. the photo metadata
+    var reloadAt: ((IndexPath?, Int?, PhotoMetadata) -> Void)?
 
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
@@ -36,7 +42,7 @@ class PhotosViewModel: ObservableObject {
     var animatingSlides = false
 
     /// the slides' current status
-    var slidesState: PhotosSlidesState?
+    @Published var slidesState: PhotosSlidesState?
 
     /// the state of the results.
     var resultsState: PhotosResultsState?

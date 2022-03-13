@@ -61,3 +61,22 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
     }
 }
 ```
+
+
+`reloadItems` on diffable data sources takes in the old identifier.
+```swift
+/// reload the collection view at an index path.
+func update(at indexPath: IndexPath, with metadata: PhotoMetadata) {
+    guard let existingPhoto = dataSource.itemIdentifier(for: indexPath) else { return }
+    var snapshot = dataSource.snapshot()
+    snapshot.reloadItems([existingPhoto]) /// reload!
+    dataSource.apply(snapshot)
+}
+```
+
+So, you must get the up-to-date item inside `makeDataSource`'s closure.
+
+```swift
+/// get the current up-to-date photo first.
+guard let photo = self.model.photos.first(where: { $0 == cachedPhoto }) else { return cell }
+```

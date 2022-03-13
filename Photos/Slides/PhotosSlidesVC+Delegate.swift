@@ -24,10 +24,10 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
                         findPhoto: findPhoto
                     )
                 }
-                
+
                 photoSlidesViewController = viewController
                 addChildViewController(viewController, in: cell.contentView)
-                
+
                 /// adding a child seems to take control of the navigation bar. stop this
                 navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = viewController
@@ -51,6 +51,24 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
                 removeChildViewController(viewController)
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = nil
             }
+        }
+    }
+}
+
+/// detect stopped at a new photo
+extension PhotosSlidesViewController {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        notifyIfScrolledToStop()
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        notifyIfScrolledToStop()
+    }
+
+    /// stopped scrolling
+    func notifyIfScrolledToStop() {
+        if let slidesState = model.slidesState, let index = slidesState.currentIndex {
+            configureToolbar(for: slidesState.findPhotos[index].photo)
         }
     }
 }

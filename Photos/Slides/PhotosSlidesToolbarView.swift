@@ -17,7 +17,9 @@ struct PhotosSlidesToolbarView: View {
         
             Spacer()
         
-            ToolbarIconButton(iconName: "star") {}
+            ToolbarIconButton(iconName: starIcon()) {
+                toggleStar()
+            }
         
             Spacer()
         
@@ -26,6 +28,32 @@ struct PhotosSlidesToolbarView: View {
             Spacer()
         
             ToolbarIconButton(iconName: "trash") {}
+        }
+    }
+    
+    func starIcon() -> String {
+        if let slidesState = model.slidesState, slidesState.toolbarStarOn {
+            return "star.fill"
+        }
+        return "star"
+    }
+    
+    func toggleStar() {
+        if let (findPhoto, _) = model.slidesState?.getCurrentFindPhotoAndIndex() {
+            if var metadata = findPhoto.photo.metadata {
+                metadata.isStarred.toggle()
+                model.updatePhotoMetadata(photo: findPhoto.photo, metadata: metadata, reloadCell: true)
+                model.slidesState?.toolbarStarOn = metadata.isStarred
+            } else {
+                let metadata = PhotoMetadata(
+                    assetIdentifier: findPhoto.photo.asset.localIdentifier,
+                    sentences: [],
+                    isScanned: false,
+                    isStarred: true
+                )
+                model.updatePhotoMetadata(photo: findPhoto.photo, metadata: metadata, reloadCell: true)
+                model.slidesState?.toolbarStarOn = metadata.isStarred
+            }
         }
     }
 }

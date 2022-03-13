@@ -18,6 +18,15 @@ extension PhotosViewController {
         resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
     }
+    
+    /// reload the collection view at an index path.
+    func updateResults(at index: Int, with metadata: PhotoMetadata) {
+        print("updating results.")
+        guard let existingFindPhoto = resultsDataSource.itemIdentifier(for: index.indexPath) else { return }
+        var snapshot = resultsDataSource.snapshot()
+        snapshot.reloadItems([existingFindPhoto])
+        resultsDataSource.apply(snapshot)
+    }
 
     func makeResultsDataSource() -> ResultsDataSource {
         let dataSource = ResultsDataSource(
@@ -61,5 +70,17 @@ extension PhotosViewController {
             }
         )
         return dataSource
+    }
+    
+    func configureCell(cell: PhotosResultsCell, metadata: PhotoMetadata?) {
+        if let metadata = metadata {
+            if metadata.isStarred {
+                cell.leftOverlayGradientImageView.alpha = 1
+                cell.leftOverlayStarImageView.alpha = 1
+                return
+            }
+        }
+        cell.leftOverlayGradientImageView.alpha = 0
+        cell.leftOverlayStarImageView.alpha = 0
     }
 }

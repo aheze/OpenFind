@@ -24,9 +24,9 @@ enum PhotosConstants {
 /// constants for the square cell
 enum PhotosCellConstants {
     static var starTintColor = UIColor.white
-    static var starFont = UIFont.preferredFont(forTextStyle: .headline)
-    static var starLeftPadding = CGFloat(8)
-    static var starBottomPadding = CGFloat(8)
+    static var starFont = UIFont.preferredFont(forTextStyle: .subheadline)
+    static var starLeftPadding = CGFloat(5)
+    static var starBottomPadding = CGFloat(5)
 }
 
 enum PhotosResultsCellConstants {
@@ -50,5 +50,6 @@ enum PhotosResultsCellConstants {
     static var descriptionFont = UIFont.preferredFont(forTextStyle: .body)
     static var descriptionTextColor = UIColor.label
     
-    static var imageWidth = CGFloat(100)
+    /// width of the image view
+    static var leftContainerWidth = CGFloat(100)
 }

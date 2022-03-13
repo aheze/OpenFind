@@ -28,6 +28,19 @@ struct PhotosSlidesState {
         }
         return nil
     }
+    
+    func getCurrentFindPhotoAndIndex() -> (FindPhoto, Int)? {
+        if let currentIndex = currentIndex {
+            if let findPhoto = findPhotos[safe: currentIndex] {
+                return (findPhoto, currentIndex)
+            }
+        }
+        return nil
+    }
+    
+    /// for the current image
+    var toolbarStarOn = false
+    var toolbarInformationOn = false
 }
 
 struct PhotosResultsState {

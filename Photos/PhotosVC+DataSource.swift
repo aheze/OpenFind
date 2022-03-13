@@ -19,17 +19,28 @@ extension PhotosViewController {
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
 
+    /// reload the collection view at an index path.
+    func update(at indexPath: IndexPath, with metadata: PhotoMetadata) {
+        guard let existingPhoto = dataSource.itemIdentifier(for: indexPath) else { return }
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems([existingPhoto])
+        dataSource.apply(snapshot)
+    }
+
     func sortCollectionView() {}
 
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: collectionView,
-            cellProvider: { collectionView, indexPath, photo -> UICollectionViewCell? in
+            cellProvider: { collectionView, indexPath, cachedPhoto -> UICollectionViewCell? in
 
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: "PhotosCollectionCell",
                     for: indexPath
                 ) as! PhotosCollectionCell
+
+                /// get the current up-to-date photo first.
+                guard let photo = self.model.photos.first(where: { $0 == cachedPhoto }) else { return cell }
 
                 // Request an image for the asset from the PHCachingImageManager.
                 cell.representedAssetIdentifier = photo.asset.localIdentifier
@@ -47,6 +58,8 @@ extension PhotosViewController {
                     }
                 }
 
+                self.configureCell(cell: cell, metadata: photo.metadata)
+
                 cell.tapped = { [weak self] in
                     guard let self = self else { return }
 
@@ -59,4 +72,19 @@ extension PhotosViewController {
 
         return dataSource
     }
+
+    func configureCell(cell: PhotosCollectionCell, metadata: PhotoMetadata?) {
+        if let metadata = metadata {
+            if metadata.isStarred {
+                cell.overlayGradientImageView.alpha = 1
+                cell.overlayStarImageView.alpha = 1
+                return
+            }
+        }
+
+        cell.overlayGradientImageView.alpha = 0
+        cell.overlayStarImageView.alpha = 0
+    }
 }
+
+

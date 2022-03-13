@@ -43,7 +43,7 @@ extension PhotosViewController {
         let rightStackViewSpacing = c.cellSpacing
         
         let contentWidth = availableWidth - (c.cellPadding * 2)
-        let descriptionWidth = contentWidth - c.imageWidth - c.cellSpacing
+        let descriptionWidth = contentWidth - c.leftContainerWidth - c.cellSpacing
         let descriptionHeight = photo.descriptionText.height(withConstrainedWidth: descriptionWidth, font: c.descriptionFont)
         
         let contentHeight = rightTopStackViewHeight + rightStackViewSpacing + descriptionHeight
