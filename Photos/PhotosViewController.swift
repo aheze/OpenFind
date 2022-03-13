@@ -31,6 +31,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         rootViewController: PhotosScanningViewController(model: model)
     )
     
+    // MARK: Collection View
+    @IBOutlet weak var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
     lazy var flowLayout = PhotosCollectionFlowLayout(model: model)
     lazy var dataSource = makeDataSource()
@@ -42,6 +44,11 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     lazy var resultsDataSource = makeResultsDataSource()
     typealias ResultsDataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
+    
+    // MARK: Filtering
+    @IBOutlet weak var sliderContainerView: UIView!
+    @IBOutlet weak var sliderContainerViewHeightC: NSLayoutConstraint!
+    @IBOutlet weak var sliderContainerViewBottomC: NSLayoutConstraint!
     
     init?(
         coder: NSCoder,

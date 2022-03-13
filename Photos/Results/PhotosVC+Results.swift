@@ -17,7 +17,7 @@ extension PhotosViewController {
     func showResults(_ show: Bool) {
         if show {
             if resultsCollectionView.window == nil {
-                view.addSubview(resultsCollectionView)
+                collectionViewContainer.addSubview(resultsCollectionView)
                 resultsCollectionView.pinEdgesToSuperview()
             }
             collectionView.removeFromSuperview()
@@ -25,7 +25,7 @@ extension PhotosViewController {
             showCancelNavigationBar()
         } else {
             if collectionView.window == nil {
-                view.addSubview(collectionView)
+                collectionViewContainer.addSubview(collectionView)
                 collectionView.pinEdgesToSuperview()
             }
             resultsCollectionView.removeFromSuperview()

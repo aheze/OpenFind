@@ -23,6 +23,7 @@ extension PhotosViewController {
         setupNavigationBar()
         checkPermissions()
         listenToModel()
+        setupFiltersView()
     }
 
     func checkPermissions() {
@@ -63,8 +64,11 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
+    
+    
+    /// `addSubview` is also called inside `PhotosVC+Results`
     func setupCollectionView(_ collectionView: UICollectionView, with layout: UICollectionViewFlowLayout) {
-        view.addSubview(collectionView)
+        collectionViewContainer.addSubview(collectionView)
         collectionView.pinEdgesToSuperview()
 
         collectionView.delegate = self

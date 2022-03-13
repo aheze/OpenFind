@@ -50,7 +50,7 @@ struct WordsToolbarView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-            VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            VisualEffectView(.systemChromeMaterial)
                 .edgesIgnoringSafeArea(.all)
         )
     }

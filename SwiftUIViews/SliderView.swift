@@ -11,6 +11,13 @@ import SwiftUI
 enum SliderConstants {
     static let selectionEdgeInsets = EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
     static let spacing = CGFloat(8)
+    static let font = UIFont.preferredCustomFont(forTextStyle: .body, weight: .semibold)
+    static let height: CGFloat = {
+        font.lineHeight + selectionEdgeInsets.top + selectionEdgeInsets.bottom + outerPadding
+    }()
+    
+    static let outerPadding = CGFloat(5)
+    static let bottomPadding = CGFloat(16)
 }
 
 class SliderViewModel: ObservableObject {
@@ -68,7 +75,7 @@ struct SliderView: View {
                     model.change(to: selection.type)
                 } label: {
                     Text(selection.type.getString())
-                        .font(.system(size: 17, weight: .semibold))
+                        .font(Font(SliderConstants.font as CTFont))
                         .fixedSize(horizontal: true, vertical: false)
                         .frame(maxWidth: .infinity)
                         .padding(SliderConstants.selectionEdgeInsets)
@@ -82,7 +89,7 @@ struct SliderView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(5)
+        .padding(SliderConstants.outerPadding)
         .coordinateSpace(name: "Slider")
         .simultaneousGesture(
             DragGesture(minimumDistance: 0, coordinateSpace: .named("Slider"))
@@ -95,7 +102,7 @@ struct SliderView: View {
                 }
         )
         .background(
-            UIColor.secondaryLabel.color
+            UIColor.tertiaryLabel.color
                 .mask(
                     Capsule()
                 )
@@ -107,10 +114,6 @@ struct SliderView: View {
                 VisualEffectView(.prominent)
             }
             .mask(Capsule())
-            .overlay(
-                Capsule()
-                    .stroke(UIColor.secondaryLabel.color, lineWidth: 0.5)
-            )
         )
         .padding()
     }

@@ -26,6 +26,9 @@ class PhotosViewModel: ObservableObject {
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
+    
+    // MARK: Filtering
+    var sliderViewModel = SliderViewModel()
 
     // MARK: Slides / Results
 
