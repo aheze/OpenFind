@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import Photos
+import UIKit
 
 /**
  Models for the search bar. Includes color.
@@ -15,4 +15,9 @@ import Photos
 enum Value {
     case word(Word)
     case list(List)
+}
+
+struct Gradient {
+    var colors = [UIColor]()
+    var alpha = CGFloat(1)
 }

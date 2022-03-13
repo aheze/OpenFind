@@ -15,56 +15,7 @@ extension CameraViewController {
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
         scrollZoomViewController.addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
-    
-    /// fast live preview
-    func getHighlights(from fastSentences: [FastSentence]) -> Set<Highlight> {
-        var highlights = Set<Highlight>()
-        for sentence in fastSentences {
-            for (string, gradient) in self.searchViewModel.stringToGradients {
-                let indices = sentence.string.lowercased().indicesOf(string: string.lowercased())
-                for index in indices {
-                    let word = sentence.getWord(word: string, at: index)
- 
-                    let highlight = Highlight(
-                        string: word.string,
-                        colors: gradient.colors,
-                        alpha: gradient.alpha,
-                        position: .init(
-                            originalPoint: .zero,
-                            pivotPoint: .zero,
-                            center: word.frame.center,
-                            size: word.frame.size,
-                            angle: .zero
-                        )
-                    )
-                    highlights.insert(highlight)
-                }
-            }
-        }
-        return highlights
-    }
-    
-    /// scanned
-    func getHighlights(from sentences: [Sentence]) -> Set<Highlight> {
-        var highlights = Set<Highlight>()
-        for sentence in sentences {
-            let rangeResults = sentence.ranges(of: Array(self.searchViewModel.stringToGradients.keys))
-            for rangeResult in rangeResults {
-                let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? SearchViewModel.Gradient()
-                for range in rangeResult.ranges {
-                    let highlight = Highlight(
-                        string: rangeResult.string,
-                        colors: gradient.colors,
-                        alpha: gradient.alpha,
-                        position: sentence.position(for: range)
-                    )
-                    highlights.insert(highlight)
-                }
-            }
-        }
-        return highlights
-    }
-    
+  
     /// replaces highlights completely
     func updateHighlightColors() {
         var newHighlights = Set<Highlight>()

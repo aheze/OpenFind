@@ -22,8 +22,7 @@ extension PhotosViewController {
         
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
-            let strings = self.searchViewModel.stringToGradients.keys
-
+            
             if textChanged {
                 self.find()
             } else {
@@ -31,12 +30,13 @@ extension PhotosViewController {
                 self.updateHighlightColors()
             }
             
+            let strings = self.searchViewModel.stringToGradients.keys
             if strings.isEmpty {
                 self.showResults(false)
             } else {
                 self.showResults(true)
             }
         }
-        
+       
     }
 }

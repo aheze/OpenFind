@@ -48,19 +48,9 @@ extension PhotosViewController {
             /// the highlights in this sentence.
             var lineHighlights = Set<FindPhoto.Line.LineHighlight>()
             
-            /// for debugging - show each sentence
-//            let highlight = Highlight(
-//                string: "",
-//                colors: [.systemBlue],
-//                alpha: 0.5,
-//                position: sentence.position()
-//            )
-//
-//            highlights.insert(highlight)
-                
             let rangeResults = sentence.ranges(of: Array(self.searchViewModel.stringToGradients.keys))
             for rangeResult in rangeResults {
-                let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? SearchViewModel.Gradient()
+                let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? Gradient()
                 for range in rangeResult.ranges {
                     let highlight = Highlight(
                         string: rangeResult.string,

@@ -80,6 +80,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         navigationItem.largeTitleDisplayMode = .never
         
         setup()
+        listen()
         setupDismissGesture()
         setupTapGesture()
         update(animate: false)

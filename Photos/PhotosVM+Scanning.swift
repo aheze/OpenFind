@@ -9,6 +9,8 @@
 import Foundation
 
 extension PhotosViewModel {
+    
+    /// a photo was just scanned
     func photoScanned(photo: Photo, sentences: [Sentence]) {
         if let metadata = photo.metadata {
             var newMetadata = metadata
@@ -53,6 +55,7 @@ extension PhotosViewModel {
         scanningState = .dormant
     }
 
+    /// scan a photo
     func scanPhoto(_ photo: Photo) {
         Task {
             let image = await getFullImage(from: photo)

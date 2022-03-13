@@ -9,11 +9,7 @@
 import SwiftUI
 
 class SearchViewModel: ObservableObject {
-    struct Gradient {
-        var colors = [UIColor]()
-        var alpha = CGFloat(1)
-    }
-    
+
     var configuration: SearchConfiguration
     
     /// set from within SearchViewController

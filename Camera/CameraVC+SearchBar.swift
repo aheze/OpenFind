@@ -25,7 +25,7 @@ extension CameraViewController {
                     self.model.shutterOn,
                     let sentences = self.model.pausedImage?.sentences
                 {
-                    let highlights = self.getHighlights(from: sentences)
+                    let highlights = sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients)
                     DispatchQueue.main.async {
                         self.highlightsViewModel.update(with: highlights, replace: true)
                     }
