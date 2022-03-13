@@ -1,5 +1,5 @@
 //
-//  Model+Extensions.swift
+//  SpecifiedExtensions.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/21/22.
@@ -8,6 +8,10 @@
 
 import RealmSwift
 import UIKit
+
+/**
+ Might contain some dependencies, like `RealmSwift`
+ */
 
 extension PhotoMetadata {
     func getRealmSentences() -> RealmSwift.List<RealmSentence> {

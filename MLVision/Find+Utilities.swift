@@ -9,11 +9,6 @@
 import UIKit
 import Vision
 
-struct RangeResult: Hashable {
-    var string: String
-    var ranges: [Range<Int>]
-}
-
 extension StringProtocol {
     /// a range of Ints that represent each word in the string
     func ranges() -> [Range<Int>] {
@@ -24,25 +19,6 @@ extension StringProtocol {
             ranges.append(start ..< end)
         }
         return ranges
-    }
-}
-
-extension String {
-    func indicesOf(string: String) -> [Int] {
-        var indices = [Int]()
-        var searchStartIndex = startIndex
-
-        while
-            searchStartIndex < endIndex,
-            let range = range(of: string, range: searchStartIndex ..< endIndex),
-            !range.isEmpty
-        {
-            let index = distance(from: startIndex, to: range.lowerBound)
-            indices.append(index)
-            searchStartIndex = range.upperBound
-        }
-
-        return indices
     }
 }
 
