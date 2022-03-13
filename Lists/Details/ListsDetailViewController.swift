@@ -8,12 +8,14 @@
 
 import SwiftUI
 
-class ListsDetailViewController: UIViewController, Searchable {
+class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     var model: ListsDetailViewModel
     var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
     var detailsSearchViewModel: SearchViewModel
     var realmModel: RealmModel
+    
+    var name: NavigationName? = .listsDetail
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)

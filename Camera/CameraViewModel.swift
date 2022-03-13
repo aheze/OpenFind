@@ -8,7 +8,6 @@
 import CoreMotion
 import SwiftUI
 
-
 class CameraViewModel: ObservableObject {
     @Published var resultsCount = 0
     @Published var showingMessageView = false
@@ -16,15 +15,7 @@ class CameraViewModel: ObservableObject {
     @Published var highlights = [Highlight]()
     
     @Published var snapshotState = SnapshotState.inactive
-    /// If the button is on or not.
-//    @Published var snapshotOn = false
-//
-//    /// snapshot button pressed, start saving.
-//    @Published var snapshotStartedSaving = false
-//
-//    /// If the snapshot has been saved.
-//    var snapshotSaved = false
-    
+ 
     /// shutter on/off
     @Published var shutterOn = false
     @Published var pausedImage: PausedImage?
@@ -38,7 +29,6 @@ class CameraViewModel: ObservableObject {
     init() {}
     
     var recentEvents = [Event]()
-    
     
     /// set to false if no results for a long time, to conserve battery and other system resources
     var livePreviewScanning = true

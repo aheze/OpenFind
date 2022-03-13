@@ -23,7 +23,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
             self.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
             
             /// check if is presenting
-            if viewController is ListsDetailViewController {
+            if let namedViewController = viewController as? NavigationNamed, namedViewController.name == .listsDetail {
                 self.showDetailsSearchBar(true)
             } else {
                 self.showDetailsSearchBar(false)

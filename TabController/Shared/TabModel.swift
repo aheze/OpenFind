@@ -27,23 +27,6 @@ protocol PageViewController: UIViewController {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets)
 }
 
-/// Global access to tab properties
-//enum Tab {
-//    enum Control {
-//
-//        /// 1. the tab, 2. animate or not
-//        static var moveToOtherTab: ((TabState, Bool) -> Void)?
-//        static var showStatusBar: ((Bool) -> Void)?
-//    }
-//
-//    enum Frames {
-//        static var excluded = [Identifier: CGRect]()
-//    }
-//
-//    static var currentTabState = TabState.camera
-//    static var currentBlurProgress = CGFloat(0)
-//    static var blurProgressChanged: ((CGFloat) -> Void)?
-//}
 
 struct Identifier: Hashable {
     var key: String

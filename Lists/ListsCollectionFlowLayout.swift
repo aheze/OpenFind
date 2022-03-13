@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+/// columned layout, used by both Lists and Photos
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     var getIndices: (() -> [Int])?

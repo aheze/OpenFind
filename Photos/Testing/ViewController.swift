@@ -9,11 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var photos: PhotosController = PhotosBridge.makeController()
-    
+    lazy var photos = PhotosController(
+        model: PhotosViewModel(
+            realmModel: RealmModel()
+        ),
+        tabViewModel: TabViewModel(),
+        toolbarViewModel: ToolbarViewModel()
+    )
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addChild(photos.viewController, in: view)
+
+        addChildViewController(photos.searchNavigationController, in: view)
     }
 }
