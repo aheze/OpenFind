@@ -141,8 +141,7 @@ extension ListsDetailViewController {
         containerStackView.backgroundColor = .clear
         
         headerTopLeftImageView.tintColor = .white
-        headerTopLeftImageView.contentMode = .center
-        headerTopLeftImageView.preferredSymbolConfiguration = .init(font: ListsDetailConstants.headerTitleFont)
+        headerTopLeftImageView.setIconFont(font: ListsDetailConstants.headerTitleFont)
         
         wordsTopLeftView.backgroundColor = .clear
         wordsTopCenterView.backgroundColor = .clear
@@ -202,8 +201,7 @@ extension ListsDetailViewController {
         wordsTopCenterLabel.font = c.wordsHeaderTitleFont
         wordsTopCenterLabel.textInsets = c.wordsHeaderTitleEdgeInsets
         
-        wordsTopRightImageView.contentMode = .center
-        wordsTopRightImageView.preferredSymbolConfiguration = .init(font: c.wordsHeaderActionsFont)
+        wordsTopRightImageView.setIconFont(font: c.wordsHeaderActionsFont)
         wordsTopRightImageView.image = UIImage(systemName: "plus")
         
         wordsTopRightImageViewLeftC.constant = c.wordsHeaderActionsEdgeInsets.left

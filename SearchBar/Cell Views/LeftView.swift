@@ -34,8 +34,7 @@ class LeftView: UIView {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        imageView.contentMode = .center
-        imageView.preferredSymbolConfiguration = .init(font: configuration.fieldListIconFont)
+        imageView.setIconFont(font: configuration.fieldListIconFont)
     }
     
     func setConfiguration() {

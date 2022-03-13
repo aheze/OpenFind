@@ -148,7 +148,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 let slidesState = model.slidesState,
                 let currentIndex = slidesState.currentIndex,
                 let findPhoto = slidesState.findPhotos[safe: currentIndex],
-                let findPhotoIndex = slidesState.getFindPhotoIndex(photo: findPhoto)
+                let findPhotoIndex = slidesState.getFindPhotoIndex(findPhoto: findPhoto)
             else {
                 return nil
             }

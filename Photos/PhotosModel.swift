@@ -17,8 +17,13 @@ struct PhotosSlidesState {
     var isFullScreen = false /// hide the bars
 
     /// get from `findPhotos`
-    func getFindPhotoIndex(photo: FindPhoto) -> Int? {
-        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo.photo }) {
+    func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
+        return getFindPhotoIndex(photo: findPhoto.photo)
+    }
+    
+    /// get from `findPhotos`
+    func getFindPhotoIndex(photo: Photo) -> Int? {
+        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo }) {
             return firstIndex
         }
         return nil
@@ -29,14 +34,20 @@ struct PhotosResultsState {
     var findPhotos: [FindPhoto]
 
     /// get from `findPhotos`
-    func getFindPhotoIndex(photo: FindPhoto) -> Int? {
-        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo.photo }) {
+    func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
+        return getFindPhotoIndex(photo: findPhoto.photo)
+    }
+    
+    /// get from `findPhotos`
+    func getFindPhotoIndex(photo: Photo) -> Int? {
+        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo }) {
             return firstIndex
         }
         return nil
     }
 }
 
+/// a photo that contains results to display (in the form of highlights)
 struct FindPhoto: Hashable {
     var photo: Photo
     var thumbnail: UIImage?

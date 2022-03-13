@@ -35,7 +35,7 @@ class SelectionIconView: UIView {
             backgroundView.frame.size = configuration.attributes.size
             backgroundView.centerInParent()
             backgroundView.layer.cornerRadius = backgroundView.bounds.height / 2
-            iconView.preferredSymbolConfiguration = .init(font: configuration.attributes.iconFont)
+            iconView.setIconFont(font: configuration.attributes.iconFont)
         }
     }
     
@@ -58,8 +58,7 @@ class SelectionIconView: UIView {
         let image = UIImage(systemName: "checkmark")
         let imageView = UIImageView(image: image)
         imageView.tintColor = .white
-        imageView.contentMode = .center
-        imageView.preferredSymbolConfiguration = .init(font: configuration.attributes.iconFont)
+        imageView.setIconFont(font: configuration.attributes.iconFont)
         
         imageView.frame = bounds
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

@@ -770,6 +770,26 @@
 		3C443F7D27DDD87A0050A0AB /* PhotosSlidesVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6D27DDD6C60050A0AB /* PhotosSlidesVC+Listen.swift */; };
 		3C443F7E27DDD87B0050A0AB /* PhotosSlidesVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6D27DDD6C60050A0AB /* PhotosSlidesVC+Listen.swift */; };
 		3C443F7F27DDD87B0050A0AB /* PhotosSlidesVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F6D27DDD6C60050A0AB /* PhotosSlidesVC+Listen.swift */; };
+		3C443F8127DDDA5A0050A0AB /* PhotosVM+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */; };
+		3C443F8227DDDA5C0050A0AB /* PhotosVM+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */; };
+		3C443F8327DDDA5D0050A0AB /* PhotosVM+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */; };
+		3C443F8727DE501B0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8827DE51DC0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8927DE51DC0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8A27DE51DC0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8B27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8C27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8D27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8E27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F8F27DE51DE0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9027DE51DE0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9127DE51DE0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9227DE51DF0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9327DE51DF0050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9427DE51E00050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9527DE51E00050A0AB /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C443F9627DE51E40050A0AB /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
+		3C443F9727DE51E40050A0AB /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */; };
 		3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96B125B69038009FDE8D /* InfoView.swift */; };
@@ -2396,6 +2416,8 @@
 		3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Filters.swift"; sourceTree = "<group>"; };
 		3C443F6D27DDD6C60050A0AB /* PhotosSlidesVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Listen.swift"; sourceTree = "<group>"; };
 		3C443F6F27DDD7440050A0AB /* Sentence+Find.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sentence+Find.swift"; sourceTree = "<group>"; };
+		3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Update.swift"; sourceTree = "<group>"; };
+		3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAppIcons.xcassets; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Draw.swift"; sourceTree = "<group>"; };
 		3C4C96B125B69038009FDE8D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -3687,6 +3709,7 @@
 				3C443F0227DD90290050A0AB /* Models */,
 				3CCE2AF4279D007F00F72351 /* UIKit Views */,
 				3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */,
+				3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */,
 				3CDD942A27C05B5A00D3EA1A /* SharedColors.xcassets */,
 			);
 			path = Shared;
@@ -3702,6 +3725,7 @@
 				3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */,
 				3CB8C32827C34CDF000AA3B9 /* PhotosVM+Scanning.swift */,
 				3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */,
+				3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */,
 				3C4D39EC274766580010FD68 /* PhotosController.swift */,
 				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
 				3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */,
@@ -5599,6 +5623,7 @@
 			files = (
 				3C1D1A01275A9F3B0064F2C6 /* LaunchScreen.storyboard in Resources */,
 				3CFCE8BA27CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3C443F9027DE51DE0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C1D19FE275A9F3B0064F2C6 /* Assets.xcassets in Resources */,
 				3C1D19FC275A9F390064F2C6 /* Main.storyboard in Resources */,
 				3C1D1A06275A9F6D0064F2C6 /* SharedAssets.xcassets in Resources */,
@@ -5611,8 +5636,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C21ED8527A3C4AD0005E183 /* LaunchScreen.storyboard in Resources */,
+				3C443F9527DE51E00050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C21ED8227A3C4AD0005E183 /* Assets.xcassets in Resources */,
 				3CFCE8C027CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3C443F9727DE51E40050A0AB /* SharedAssets.xcassets in Resources */,
 				3CDD943927C05B6400D3EA1A /* SharedColors.xcassets in Resources */,
 				3C21ED8027A3C4AB0005E183 /* Main.storyboard in Resources */,
 			);
@@ -5629,6 +5656,7 @@
 				3C2DBBEA277E739400911A74 /* Assets.xcassets in Resources */,
 				3C2DBBE8277E739200911A74 /* Main.storyboard in Resources */,
 				3C7B7A3B277E9D9300E1F602 /* SharedAssets.xcassets in Resources */,
+				3C443F9127DE51DE0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3CDD943427C05B6200D3EA1A /* SharedColors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5644,6 +5672,7 @@
 				3C4D395E274759510010FD68 /* Main.storyboard in Resources */,
 				3CF76442278D19AC00DCA4EA /* SearchNavigationContent.storyboard in Resources */,
 				3C4D3A9127476EC70010FD68 /* SharedAssets.xcassets in Resources */,
+				3C443F8927DE51DC0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3CFCE8B327CACC6B000624D2 /* Rotation.xcassets in Resources */,
 				3C08EB12279C76E500971D60 /* ListsContent.storyboard in Resources */,
 				3C3642DF277BC2E70038CB18 /* SearchBar.storyboard in Resources */,
@@ -5663,6 +5692,7 @@
 				3C4D3A92274771600010FD68 /* SharedAssets.xcassets in Resources */,
 				3C3642C3277BC2E70038CB18 /* RightView.xib in Resources */,
 				3C3642C5277BC2E70038CB18 /* LeftView.xib in Resources */,
+				3C443F8A27DE51DC0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C7B7A72277FA12400E1F602 /* Assets.xcassets in Resources */,
 				3C9314A627B844EC009E5B6E /* TabContent.storyboard in Resources */,
 				3C4D39CD27475F3E0010FD68 /* CameraContent.storyboard in Resources */,
@@ -5684,6 +5714,7 @@
 				3CBB318E27BD526200F25F6A /* ScrollZoomContent.storyboard in Resources */,
 				3CFCE8B527CACC6B000624D2 /* Rotation.xcassets in Resources */,
 				3C4D3A93274771600010FD68 /* SharedAssets.xcassets in Resources */,
+				3C443F8B27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C443EA627DD88FE0050A0AB /* RightView.xib in Resources */,
 				3CDD942B27C05B5A00D3EA1A /* SharedColors.xcassets in Resources */,
 				3C4D39E3274766200010FD68 /* LaunchScreen.storyboard in Resources */,
@@ -5710,6 +5741,7 @@
 				3C443EC327DD8ABD0050A0AB /* TabContent.storyboard in Resources */,
 				3C4D3A82274769C10010FD68 /* Main.storyboard in Resources */,
 				3C4D3A53274768FF0010FD68 /* Assets.xcassets in Resources */,
+				3C443F8C27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3CF76439278D19AB00DCA4EA /* SearchNavigationContent.storyboard in Resources */,
 				3C3642F2277BC2E90038CB18 /* SearchFieldCell.xib in Resources */,
 				3C364301277BC2E90038CB18 /* SearchBar.storyboard in Resources */,
@@ -5728,6 +5760,7 @@
 				3C4D3B74274778CA0010FD68 /* SharedAssets.xcassets in Resources */,
 				3C4D3B7F27477A6B0010FD68 /* Assets.xcassets in Resources */,
 				3CFCE8B727CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3C443F8D27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5735,6 +5768,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C443F8E27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C4D3B9527477ABD0010FD68 /* SearchBar.storyboard in Resources */,
 				3C4D3B702747782D0010FD68 /* LaunchScreen.storyboard in Resources */,
 				3CDD943127C05B6100D3EA1A /* SharedColors.xcassets in Resources */,
@@ -5778,6 +5812,7 @@
 				3C6C73432781944B00E039F0 /* TabContent.storyboard in Resources */,
 				3C08EB1D279C76E500971D60 /* ListsContent.storyboard in Resources */,
 				3C6C73A02781947400E039F0 /* LeftView.xib in Resources */,
+				3C443F8827DE51DC0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C6C73A72781947400E039F0 /* SearchBar.storyboard in Resources */,
 				3CFCE8B227CACC6B000624D2 /* Rotation.xcassets in Resources */,
 				3C6C733B2781944300E039F0 /* ScrollZoomContent.storyboard in Resources */,
@@ -5791,6 +5826,7 @@
 			files = (
 				3C7B7A15277E93CD00E1F602 /* LaunchScreen.storyboard in Resources */,
 				3CFCE8BC27CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3C443F9227DE51DF0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3C7B7A12277E93CD00E1F602 /* Assets.xcassets in Resources */,
 				3C7B7A10277E93CA00E1F602 /* Main.storyboard in Resources */,
 				3C7B7A44277E9D9400E1F602 /* SharedAssets.xcassets in Resources */,
@@ -5806,6 +5842,7 @@
 				3CFCE8BD27CACC6B000624D2 /* Rotation.xcassets in Resources */,
 				3C8A5256277FC92B006CF91E /* SharedAssets.xcassets in Resources */,
 				3CDD943627C05B6300D3EA1A /* SharedColors.xcassets in Resources */,
+				3C443F8727DE501B0050A0AB /* SharedAppIcons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5820,6 +5857,7 @@
 				3C8A523C277FC116006CF91E /* ScrollZoomContent.storyboard in Resources */,
 				3C7B7AAD277FBBC000E1F602 /* Main.storyboard in Resources */,
 				3CFCE8BE27CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3C443F9327DE51DF0050A0AB /* SharedAppIcons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5829,6 +5867,7 @@
 			files = (
 				3CE9C231274EBB72008C903C /* LaunchScreen.storyboard in Resources */,
 				3CFCE8B927CACC6B000624D2 /* Rotation.xcassets in Resources */,
+				3C443F8F27DE51DE0050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3CE9C22E274EBB72008C903C /* Assets.xcassets in Resources */,
 				3CE9C22C274EBB70008C903C /* Main.storyboard in Resources */,
 				3CE9C23E274EC01F008C903C /* SharedAssets.xcassets in Resources */,
@@ -5840,8 +5879,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C443F9427DE51E00050A0AB /* SharedAppIcons.xcassets in Resources */,
 				3CFD5FE2278B6F2D0031BC8B /* LaunchScreen.storyboard in Resources */,
 				3CFD5FFE278B6F950031BC8B /* LeftView.xib in Resources */,
+				3C443F9627DE51E40050A0AB /* SharedAssets.xcassets in Resources */,
 				3CDD943827C05B6400D3EA1A /* SharedColors.xcassets in Resources */,
 				3CFD6024278B70D90031BC8B /* SearchNavigationContent.storyboard in Resources */,
 				3CFD5FF8278B6F950031BC8B /* RightView.xib in Resources */,
@@ -6646,6 +6687,7 @@
 				3C08EB4C279C95F900971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C443EA927DD89010050A0AB /* KeyboardToolbarView.swift in Sources */,
 				3C443ECE27DD8AC40050A0AB /* TabBarView.swift in Sources */,
+				3C443F8327DDDA5D0050A0AB /* PhotosVM+Update.swift in Sources */,
 				3C443EC127DD8ABC0050A0AB /* TabTransitioning.swift in Sources */,
 				3C21EE2627A461820005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C443E9927DD88F80050A0AB /* SearchViewController.swift in Sources */,
@@ -7320,6 +7362,7 @@
 				3C6C73B72781947A00E039F0 /* Find+Utilities.swift in Sources */,
 				3C443F6A27DDB2D70050A0AB /* PhotosVC+Filters.swift in Sources */,
 				3C6C739A2781947400E039F0 /* SearchVC+Delegate.swift in Sources */,
+				3C443F8227DDDA5C0050A0AB /* PhotosVM+Update.swift in Sources */,
 				3CCE2B53279D235C00F72351 /* ColorPickerIcon.swift in Sources */,
 				3C08EB44279C76F100971D60 /* ListsDetailViewController.swift in Sources */,
 				3C6C73BD2781947E00E039F0 /* VisionConstants.swift in Sources */,
@@ -7458,6 +7501,7 @@
 				3C443F5227DD914C0050A0AB /* TabTransitioning.swift in Sources */,
 				3CCCCA95278185AB000381CE /* Model.swift in Sources */,
 				3CC594F7279F32E6001D07DC /* ColorPickerView.swift in Sources */,
+				3C443F8127DDDA5A0050A0AB /* PhotosVM+Update.swift in Sources */,
 				3C7B7A87277FA6E300E1F602 /* GeneralUtilities.swift in Sources */,
 				3C443F3227DD907B0050A0AB /* Sentence.swift in Sources */,
 				3C8A5258277FC92B006CF91E /* UIKitViews.swift in Sources */,

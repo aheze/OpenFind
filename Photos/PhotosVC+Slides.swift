@@ -56,7 +56,7 @@ extension PhotosViewController {
 
         let findPhoto: FindPhoto
         let currentIndex: Int
-        if let photoIndex = resultsState.getFindPhotoIndex(photo: startingFindPhoto) {
+        if let photoIndex = resultsState.getFindPhotoIndex(findPhoto: startingFindPhoto) {
             findPhoto = resultsState.findPhotos[photoIndex]
             currentIndex = photoIndex
         } else {
@@ -98,7 +98,7 @@ extension PhotosViewController {
             /// update the transition with the new image.
             self.model.imageUpdatedWhenPresentingSlides?(fullImage)
 
-            if let index = self.model.slidesState?.getFindPhotoIndex(photo: findPhoto) {
+            if let index = self.model.slidesState?.getFindPhotoIndex(findPhoto: findPhoto) {
                 self.model.slidesState?.findPhotos[index].fullImage = fullImage
                 self.model.slidesState?.findPhotos[index].associatedViewController?.reloadImage()
             }

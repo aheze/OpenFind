@@ -21,3 +21,10 @@ extension Set {
         return Set<U>(self.lazy.map(transform))
     }
 }
+
+extension UIImageView {
+    func setIconFont(font: UIFont) {
+        self.contentMode = .center
+        self.preferredSymbolConfiguration = .init(font: font)
+    }
+}

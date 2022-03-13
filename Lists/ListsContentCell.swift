@@ -51,8 +51,7 @@ class ListsContentCell: UICollectionViewCell {
         headerLeftViewWidthC.constant = c.headerLeftWidth
         headerSelectionIconView.configuration = .listsSelection
         
-        headerImageView.contentMode = .center
-        headerImageView.preferredSymbolConfiguration = .init(font: c.headerDescriptionFont)
+        headerImageView.setIconFont(font: c.headerDescriptionFont)
         headerTitleLabel.font = c.headerTitleFont
         headerDescriptionLabel.font = c.headerDescriptionFont
         

@@ -82,15 +82,6 @@ class PhotosViewModel: ObservableObject {
 }
 
 extension PhotosViewModel {
-    func updatePhotoMetadata(photo: Photo, metadata: PhotoMetadata) {
-        if
-            let index = getPhotoIndex(photo: photo),
-            let indexPath = getPhotoIndexPath(photo: photo)
-        {
-            photos[index].metadata = metadata
-            sections[indexPath.section].photos[indexPath.item].metadata = metadata
-        }
-    }
 
     /// get from `photos`
     func getPhotoIndex(photo: Photo) -> Int? {

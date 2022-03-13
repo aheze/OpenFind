@@ -16,13 +16,29 @@ class PhotosCollectionCell: UICollectionViewCell {
     @IBOutlet var buttonView: ButtonView!
     @IBOutlet var imageView: UIImageView!
     
+    @IBOutlet var overlayView: UIView!
+    @IBOutlet weak var overlayGradientImageView: UIImageView!
+    @IBOutlet var overlayStarImageView: UIImageView!
+    @IBOutlet var overlayStarImageViewLeftC: NSLayoutConstraint!
+    @IBOutlet var overlayStarImageViewBottomC: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         imageView.isUserInteractionEnabled = false
+        imageView.contentMode = .scaleAspectFill
+        overlayView.isUserInteractionEnabled = false
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
-        imageView.contentMode = .scaleAspectFill
+        
+        /// configure constants
+        let c = PhotosCellConstants.self
+        overlayView.backgroundColor = .clear
+        overlayStarImageView.tintColor = c.starTintColor
+        overlayStarImageView.setIconFont(font: c.starFont)
+        overlayStarImageViewLeftC.constant = c.starLeftPadding
+        overlayStarImageViewBottomC.constant = c.starBottomPadding
+        
     }
 }
 
@@ -64,7 +80,6 @@ class PhotosResultsCell: UICollectionViewCell {
         resultsLabel.layer.cornerRadius = resultsLabel.bounds.height / 2
     }
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
 

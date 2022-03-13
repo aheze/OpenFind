@@ -50,8 +50,7 @@ class ListsDetailWordCell: UITableViewCell {
             self?.leftViewTapped?()
         }
         
-        rightDragHandleImageView.contentMode = .center
-        rightDragHandleImageView.preferredSymbolConfiguration = .init(font: .preferredFont(forTextStyle: .title3))
+        rightDragHandleImageView.setIconFont(font: .preferredFont(forTextStyle: .title3))
         rightDragHandleImageView.image = UIImage(systemName: "line.3.horizontal")
         
         applyConstants()

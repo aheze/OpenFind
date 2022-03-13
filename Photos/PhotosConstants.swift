@@ -21,6 +21,14 @@ enum PhotosConstants {
 
 }
 
+/// constants for the square cell
+enum PhotosCellConstants {
+    static var starTintColor = UIColor.white
+    static var starFont = UIFont.preferredFont(forTextStyle: .headline)
+    static var starLeftPadding = CGFloat(8)
+    static var starBottomPadding = CGFloat(8)
+}
+
 enum PhotosResultsCellConstants {
     static var cornerRadius = CGFloat(12)
     static var imageCornerRadius = CGFloat(10)

@@ -75,13 +75,37 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ue9-fo-7Yt">
                                                 <rect key="frame" x="0.0" y="0.0" width="271" height="299"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJf-XJ-qef">
+                                                <rect key="frame" x="0.0" y="0.0" width="271" height="299"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient" translatesAutoresizingMaskIntoConstraints="NO" id="efn-1f-F7I">
+                                                        <rect key="frame" x="0.0" y="0.0" width="271" height="299"/>
+                                                    </imageView>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gAf-Dh-3hw">
+                                                        <rect key="frame" x="10" y="268.5" width="22" height="20"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="gAf-Dh-3hw" secondAttribute="bottom" constant="10" id="0SZ-US-Zso"/>
+                                                    <constraint firstItem="efn-1f-F7I" firstAttribute="top" secondItem="IJf-XJ-qef" secondAttribute="top" id="4NY-Po-CYA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="efn-1f-F7I" secondAttribute="trailing" id="5Lg-HZ-FXC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="efn-1f-F7I" secondAttribute="bottom" id="HEU-Sg-nlL"/>
+                                                    <constraint firstItem="gAf-Dh-3hw" firstAttribute="leading" secondItem="IJf-XJ-qef" secondAttribute="leading" constant="10" id="UqC-cf-LaJ"/>
+                                                    <constraint firstItem="efn-1f-F7I" firstAttribute="leading" secondItem="IJf-XJ-qef" secondAttribute="leading" id="n4B-3H-bE4"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="IJf-XJ-qef" firstAttribute="top" secondItem="edj-rZ-tLD" secondAttribute="top" id="DUz-bL-BYf"/>
+                                            <constraint firstAttribute="bottom" secondItem="IJf-XJ-qef" secondAttribute="bottom" id="Npa-Ql-dFe"/>
                                             <constraint firstItem="Ue9-fo-7Yt" firstAttribute="top" secondItem="edj-rZ-tLD" secondAttribute="top" id="UaU-0h-s1N"/>
                                             <constraint firstAttribute="trailing" secondItem="Ue9-fo-7Yt" secondAttribute="trailing" id="YOG-Vc-Mdu"/>
+                                            <constraint firstAttribute="trailing" secondItem="IJf-XJ-qef" secondAttribute="trailing" id="dD8-QN-UpX"/>
                                             <constraint firstItem="Ue9-fo-7Yt" firstAttribute="leading" secondItem="edj-rZ-tLD" secondAttribute="leading" id="dQL-tY-HW6"/>
                                             <constraint firstAttribute="bottom" secondItem="Ue9-fo-7Yt" secondAttribute="bottom" id="f43-v9-Q4G"/>
+                                            <constraint firstItem="IJf-XJ-qef" firstAttribute="leading" secondItem="edj-rZ-tLD" secondAttribute="leading" id="nOP-o1-7En"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -96,6 +120,11 @@
                             <connections>
                                 <outlet property="buttonView" destination="edj-rZ-tLD" id="PPL-tV-3bX"/>
                                 <outlet property="imageView" destination="Ue9-fo-7Yt" id="ubn-rJ-pL9"/>
+                                <outlet property="overlayGradientImageView" destination="efn-1f-F7I" id="8vB-zf-wbc"/>
+                                <outlet property="overlayStarImageView" destination="gAf-Dh-3hw" id="gVF-rH-aNJ"/>
+                                <outlet property="overlayStarImageViewBottomC" destination="0SZ-US-Zso" id="epi-tX-FR9"/>
+                                <outlet property="overlayStarImageViewLeftC" destination="UqC-cf-LaJ" id="xOa-1C-fFZ"/>
+                                <outlet property="overlayView" destination="IJf-XJ-qef" id="aNY-vS-PRX"/>
                             </connections>
                         </collectionViewCell>
                     </cells>
@@ -314,6 +343,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Gradient" width="100" height="100"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
