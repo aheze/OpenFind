@@ -68,15 +68,14 @@ struct SliderView: View {
                     model.change(to: selection.type)
                 } label: {
                     Text(selection.type.getString())
+                        .font(.system(size: 17, weight: .semibold))
                         .fixedSize(horizontal: true, vertical: false)
                         .frame(maxWidth: .infinity)
                         .padding(SliderConstants.selectionEdgeInsets)
+                        .scaleEffect(getScale(for: selection.type))
                 }
-                .foregroundColor(
-                    model.selectionType ?? .all == selection.type
-                        ? UIColor.systemBlue.color
-                        : UIColor.secondaryLabel.color
-                )
+                .foregroundColor(.white)
+                .colorMultiply(getForegroundColor(for: selection.type).color)
                 .readFrame(in: .named("Slider")) { frame in
                     model.selections[index].frame = frame
                 }
@@ -96,15 +95,16 @@ struct SliderView: View {
                 }
         )
         .background(
-            Capsule()
-                .fill(UIColor.secondarySystemBackground.color)
+            UIColor.secondaryLabel.color
+                .mask(
+                    Capsule()
+                )
+                .scaleEffect(model.hoveringSelectionType == nil ? 1 : 0.95)
                 .frame(with: getFrame())
         )
         .background(
             ZStack {
                 VisualEffectView(.prominent)
-                UIColor.systemBackground.color
-                    .opacity(0.5)
             }
             .mask(Capsule())
             .overlay(
@@ -113,6 +113,33 @@ struct SliderView: View {
             )
         )
         .padding()
+    }
+
+    func getForegroundColor(for type: SliderViewModel.SelectionType) -> UIColor {
+        if let hoveringSelectionType = model.hoveringSelectionType {
+            if hoveringSelectionType == type {
+                return .white
+            }
+        } else {
+            if
+                let selectionType = model.selectionType,
+                selectionType == type
+            {
+                return .white
+            }
+        }
+
+        return .secondaryLabel
+    }
+
+    func getScale(for type: SliderViewModel.SelectionType) -> CGFloat {
+        if let hoveringSelectionType = model.hoveringSelectionType {
+            if hoveringSelectionType == type {
+                return 0.95
+            }
+        }
+
+        return 1
     }
 
     func getFrame() -> CGRect {
