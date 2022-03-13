@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- Global vars
+ Global vars. Make sure to configure `window`
  */
 enum Global {
     static var window: UIWindow?
