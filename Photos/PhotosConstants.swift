@@ -31,7 +31,10 @@ enum PhotosCellConstants {
 
 enum PhotosResultsCellConstants {
     static var cornerRadius = CGFloat(12)
-    static var imageCornerRadius = CGFloat(10)
+    
+    /// corner radius of the image/left container.
+    /// also referenced in `func imageCornerRadius(type: PhotoTransitionAnimatorType) -> CGFloat {`
+    static var leftContainerCornerRadius = CGFloat(10)
 
     /// padding outside the stack view
     static var cellPadding = CGFloat(12)

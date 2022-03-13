@@ -168,8 +168,10 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     
     func imageCornerRadius(type: PhotoTransitionAnimatorType) -> CGFloat {
         if model.resultsState != nil {
-            return PhotosResultsCellConstants.imageCornerRadius
+            return PhotosResultsCellConstants.leftContainerCornerRadius
         }
         return 0
     }
 }
+
+

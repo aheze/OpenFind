@@ -120,7 +120,8 @@ class PhotosResultsCell: UICollectionViewCell {
         stackViewBottomC.constant = c.cellPadding
         stackViewLeftC.constant = c.cellPadding
         
-        imageView.layer.cornerRadius = c.imageCornerRadius
+        leftContainerView.clipsToBounds = true
+        leftContainerView.layer.cornerRadius = c.leftContainerCornerRadius
         
         titleLabel.font = c.titleFont
         resultsLabel.font = c.resultsFont
