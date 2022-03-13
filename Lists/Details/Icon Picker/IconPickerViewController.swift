@@ -47,6 +47,7 @@ class IconPickerViewController: UIViewController, Searchable {
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        collectionView.keyboardDismissMode = .interactive
         
         title = "Icons"
         navigationItem.largeTitleDisplayMode = .never

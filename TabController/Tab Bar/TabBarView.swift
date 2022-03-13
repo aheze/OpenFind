@@ -80,11 +80,11 @@ struct BackgroundView: View {
         .overlay(
             Color.clear
                 .border( /// border is less glitchy than overlay
-                    Color(UIColor.secondaryLabel)
+                    Color(UIColor.opaqueSeparator)
                         .opacity(tabViewModel.tabBarAttributes.topLineAlpha),
-                    width: 0.5
+                    width: 0.25
                 )
-                .padding(-0.5)
+                .padding(-0.25)
         )
     }
 }

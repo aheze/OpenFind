@@ -17,7 +17,7 @@ class IconPickerController {
     
     init(model: IconPickerViewModel, realmModel: RealmModel) {
         let searchNavigationModel = SearchNavigationModel()
-        let searchViewModel = SearchViewModel(configuration: .photos)
+        let searchViewModel = SearchViewModel(configuration: .icons)
         self.searchViewModel = searchViewModel
         self.realmModel = realmModel
         
@@ -46,15 +46,11 @@ class IconPickerController {
             self.searchNavigationController.updateSearchBarOffset()
         }
         
-        searchNavigationController.searchViewModel.fieldsChanged = { [weak self] oldValue, newValue in
+        searchNavigationController.searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             
-            let oldText = oldValue.map { $0.value.getText() }
-            let newText = newValue.map { $0.value.getText() }
-            let textIsSame = oldText == newText
-            
-            if !textIsSame {
-                let search = newText.filter { !$0.isEmpty }
+            if textChanged {
+                let search = self.searchNavigationController.searchViewModel.text.filter { !$0.isEmpty }
                 self.iconPickerViewController.model.filter(search: search) {
                     self.iconPickerViewController.update()
                 }

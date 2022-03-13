@@ -20,21 +20,15 @@ extension PhotosViewController {
             self.present(self.scanningNavigationViewController, animated: true)
         }
         
-        searchViewModel.fieldsChanged = { [weak self] oldValue, newValue in
-            
+        searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
-            
-            let oldText = oldValue.map { $0.value.getText() }
-            let newText = newValue.map { $0.value.getText() }
-            let textIsSame = oldText == newText
-            
             let strings = self.searchViewModel.stringToGradients.keys
 
-            if textIsSame {
+            if textChanged {
+                self.find()
+            } else {
                 /// replace all highlights
                 self.updateHighlightColors()
-            } else {
-                self.find()
             }
             
             if strings.isEmpty {
@@ -43,5 +37,6 @@ extension PhotosViewController {
                 self.showResults(true)
             }
         }
+        
     }
 }

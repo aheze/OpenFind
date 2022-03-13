@@ -23,7 +23,11 @@ class SearchViewModel: ObservableObject {
         didSet {
             updateStringToGradients()
             updateCustomWords()
-            fieldsChanged?(oldValue, fields)
+            
+            let oldText = oldValue.map { $0.value.getText() }
+            let newText = fields.map { $0.value.getText() }
+            let textChanged = oldText != newText
+            fieldsChanged?(textChanged)
         }
     }
     
@@ -31,12 +35,19 @@ class SearchViewModel: ObservableObject {
     var customWords = [String]()
     
     /// must be implemented later on
-    var fieldsChanged: (([Field], [Field]) -> Void)?
+    /// `Bool` - true when **text** has changed, false when text stayed the same
+    var fieldsChanged: ((Bool) -> Void)?
     
     var dismissKeyboard: (() -> Void)?
     
+    /// array of values
     var values: [Field.FieldValue] {
         return fields.dropLast().map { $0.value }
+    }
+    
+    /// array of text
+    var text: [String] {
+        return values.map { $0.getText() }
     }
     
     init(configuration: SearchConfiguration) {

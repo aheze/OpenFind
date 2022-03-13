@@ -108,7 +108,7 @@ struct SliderView: View {
         )
         .background(
             ZStack {
-                VisualEffectView(.prominent)
+                VisualEffectView(.regular)
             }
             .mask(Capsule())
         )
@@ -138,7 +138,6 @@ struct SliderView: View {
                 hoveringSelectionType == type
             {
                 return .secondaryLabel.toColor(.systemBackground, percentage: 0.5)
-
             }
         }
 

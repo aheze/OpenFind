@@ -48,7 +48,7 @@ struct SearchConfiguration: Equatable {
     var addWordFieldHuggingWidth = CGFloat(24)
     var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left
     
-    var addTextPlaceholder = "Find anything"
+    var addTextPlaceholder = "Find Anything"
     var minimumHuggingWidth = CGFloat(36)
     
     var keyboardAppearance = UIKeyboardAppearance.dark
@@ -101,7 +101,7 @@ struct SearchConfiguration: Equatable {
             clearImageColor: .label.withAlphaComponent(0.75),
             addWordFieldHuggingWidth: 20,
             addWordFieldSnappingFactor: 0.25,
-            addTextPlaceholder: "Find lists",
+            addTextPlaceholder: "Find Lists",
             minimumHuggingWidth: 30,
             keyboardAppearance: UIKeyboardAppearance.default,
             showBackground: false,
@@ -122,7 +122,14 @@ struct SearchConfiguration: Equatable {
         var configuration = SearchConfiguration.lists
         configuration.fieldBackgroundColor = .secondarySystemBackground
         configuration.fieldActiveBackgroundColor = .systemBackground
-        configuration.addTextPlaceholder = "Find photos"
+        configuration.addTextPlaceholder = "Find Photos"
+        return configuration
+    }()
+    
+    static var icons: Self = {
+        var configuration = SearchConfiguration.photos
+        configuration.fieldActiveBackgroundColor = .secondarySystemBackground
+        configuration.addTextPlaceholder = "Find Icons"
         return configuration
     }()
 }
