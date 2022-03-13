@@ -15,7 +15,8 @@ struct ContentView: View {
 //        ProgressLineViewTester()
 //        FindIconView(color: 0x00aeef)
 //            .frame(width: 30, height: 30)
-        ColorPickerView(model: model)
+//        ColorPickerView(model: model)
+        SliderViewTester()
     }
 }
 

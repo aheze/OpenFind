@@ -31,31 +31,29 @@ class SliderViewModel: ObservableObject {
         }
     }
 
-    struct Selection: Identifiable, Equatable {
+    struct Selection: Identifiable {
         let id = UUID()
         var type: SelectionType
         var frame: CGRect?
-        
-        static func == (lhs: Selection, rhs: Selection) -> Bool {
-            lhs.type == rhs.type
-        }
     }
 
-    @Published var selection: Selection?
+    @Published var selectionType: SelectionType?
+    @Published var hoveringSelectionType: SelectionType?
+    @Published var dragEnabled = true
     @Published var selections: [Selection] = [
         .init(type: .starred),
         .init(type: .screenshots),
         .init(type: .all)
     ]
-    
-    func change(to selection: Selection) {
+
+    func change(to selectionType: SelectionType) {
         withAnimation(.spring()) {
-            self.selection = selection
+            self.selectionType = selectionType
         }
     }
-    
+
     init() {
-        selection = selections.last
+        selectionType = selections.last?.type
     }
 }
 
@@ -65,36 +63,116 @@ struct SliderView: View {
         HStack(spacing: SliderConstants.spacing) {
             ForEach(model.selections.indices) { index in
                 let selection = model.selections[index]
-                
+
                 Button {
-                    model.change(to: selection)
+                    model.change(to: selection.type)
                 } label: {
                     Text(selection.type.getString())
                         .fixedSize(horizontal: true, vertical: false)
                         .frame(maxWidth: .infinity)
                         .padding(SliderConstants.selectionEdgeInsets)
-                        .background(
-                            Capsule()
-                                .fill(UIColor.secondarySystemBackground.color)
-                        )
                 }
                 .foregroundColor(
-                    model.selection == selection
-                    ? UIColor.systemBlue.color
-                    : UIColor.secondaryLabel.color
+                    model.selectionType ?? .all == selection.type
+                        ? UIColor.systemBlue.color
+                        : UIColor.secondaryLabel.color
                 )
-                .readFrame { frame in
+                .readFrame(in: .named("Slider")) { frame in
                     model.selections[index].frame = frame
                 }
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(4)
+        .padding(5)
+        .coordinateSpace(name: "Slider")
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0, coordinateSpace: .named("Slider"))
+                .onChanged { value in
+                    model.onDragGestureChange(value: value, ended: false)
+                }
+                .onEnded { value in
+                    model.onDragGestureChange(value: value, ended: true)
+                    model.onDragGestureEnd(value: value)
+                }
+        )
         .background(
             Capsule()
-                .fill(UIColor.systemBackground.color)
+                .fill(UIColor.secondarySystemBackground.color)
+                .frame(with: getFrame())
+        )
+        .background(
+            ZStack {
+                VisualEffectView(.prominent)
+                UIColor.systemBackground.color
+                    .opacity(0.5)
+            }
+            .mask(Capsule())
+            .overlay(
+                Capsule()
+                    .stroke(UIColor.secondaryLabel.color, lineWidth: 0.5)
+            )
         )
         .padding()
+    }
+
+    func getFrame() -> CGRect {
+        if
+            let hoveringSelectionType = model.hoveringSelectionType,
+            let selection = model.selections.first(where: { $0.type == hoveringSelectionType })
+        {
+            return selection.frame ?? .zero
+        } else if
+            let selectionType = model.selectionType,
+            let selection = model.selections.first(where: { $0.type == selectionType })
+        {
+            return selection.frame ?? .zero
+        } else {
+            return .zero
+        }
+    }
+}
+
+extension SliderViewModel {
+    /// `ended` - call this once right before release, for predicted end
+    func onDragGestureChange(value: DragGesture.Value, ended: Bool) {
+        guard dragEnabled else { return }
+
+        /// first time
+        if hoveringSelectionType == nil {
+            if
+                let selectionType = selectionType,
+                let selection = selections.first(where: { $0.type == selectionType }),
+                let frame = selection.frame,
+                (frame.minX ..< frame.maxX).contains(value.location.x)
+            {
+                dragEnabled = true
+            } else {
+                dragEnabled = false
+                return
+            }
+        }
+
+        if let selection = selections.first(where: {
+            guard let frame = $0.frame else { return false }
+            let range = frame.minX ..< frame.maxX
+            return range.contains(ended ? value.predictedEndLocation.x : value.location.x)
+        }) {
+            if hoveringSelectionType != selection.type {
+                withAnimation(.spring()) {
+                    hoveringSelectionType = selection.type
+                }
+            }
+        }
+    }
+
+    func onDragGestureEnd(value: DragGesture.Value) {
+        withAnimation(.spring()) {
+            if let hoveringSelectionType = hoveringSelectionType {
+                selectionType = hoveringSelectionType
+            }
+            hoveringSelectionType = nil
+            dragEnabled = true
+        }
     }
 }
 
