@@ -15,7 +15,7 @@ enum SliderConstants {
     static let height: CGFloat = font.lineHeight + selectionEdgeInsets.top + selectionEdgeInsets.bottom + outerPadding
 
     static let outerPadding = CGFloat(5)
-    static let bottomPadding = CGFloat(16)
+    static let bottomPadding = CGFloat(12)
 }
 
 class SliderViewModel: ObservableObject {
@@ -137,7 +137,7 @@ struct SliderView: View {
                 let hoveringSelectionType = model.hoveringSelectionType,
                 hoveringSelectionType == type
             {
-                return .secondaryLabel.toColor(.white, percentage: 0.5)
+                return .secondaryLabel.toColor(.systemBackground, percentage: 0.5)
 
             }
         }
