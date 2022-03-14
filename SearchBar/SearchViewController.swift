@@ -59,7 +59,9 @@ class SearchViewController: UIViewController {
         
         /// inject the configuration for cell width calculations
         for index in searchViewModel.fields.indices {
-            searchViewModel.fields[index].configuration = searchViewModel.configuration
+            var field = self.searchViewModel.fields[index]
+            field.configuration = searchViewModel.configuration
+            self.searchViewModel.updateField(at: index, with: field, notify: true)
         }
         
         super.init(coder: coder)

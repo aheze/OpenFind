@@ -80,3 +80,18 @@ So, you must get the up-to-date item inside `makeDataSource`'s closure.
 /// get the current up-to-date photo first.
 guard let photo = self.model.photos.first(where: { $0 == cachedPhoto }) else { return cell }
 ```
+
+
+Calling `updateHighlightColors` crashes the app when the colors are changed from slides. So, update inside `transitionWillStart` instead.
+```swift
+model.updateSearchCollectionView?()
+updateHighlightColors()
+```
+
+The error:
+```
+2022-03-14 12:02:52.735420-0700 Find-New[2346:1292593] [error] precondition failure: attribute failed to set an initial value: 2106424, ForEachChild<Array<Highlight>, UUID, HighlightView>
+dyld4 config: DYLD_ROOT_PATH=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot DYLD_LIBRARY_PATH=/Users/aheze/Library/Developer/Xcode/DerivedData/Find-cgxoislhsfjnddaeuqparoqndoef/Build/Products/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/system/introspection DYLD_INSERT_LIBRARIES=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libBacktraceRecording.dylib:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks/DTDDISupport.framework/libViewDebuggerSupport.dylib DYLD_FRAMEWORK_PATH=/Users/aheze/Library/Developer/Xcode/DerivedData/Find-cgxoislhsfjnddaeuqparoqndoef/Build/Products/Debug-iphonesimulator:/Users/aheze/Library/Developer/Xcode/DerivedData/Find-cgxoislhsfjnddaeuqparoqndoef/Build/Products/Debug-iphonesimulator/PackageFrameworks
+CoreSimulator 783.5 - Device: iPhone 13 Pro Max (F1EC12A7-4B5F-4462-AC9C-ED54E50CD0C2) - Runtime: iOS 15.2 (19C51) - DeviceType: iPhone 13 Pro Max
+AttributeGraph precondition failure: attribute failed to set an initial value: 2106424, ForEachChild<Array<Highlight>, UUID, HighlightView>.
+```

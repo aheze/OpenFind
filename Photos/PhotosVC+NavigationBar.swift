@@ -38,12 +38,11 @@ extension PhotosViewController {
     
     @objc func cancelPressed() {
         hideCancelNavigationBar()
-        searchViewModel.fields = SearchViewModel.defaultFields
+        searchViewModel.updateFields(fields: SearchViewModel.defaultFields, notify: true)
         model.updateSearchCollectionView?()
     }
 
     
     @objc func selectPressed() {
-//        toggleSelect()
     }
 }

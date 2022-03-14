@@ -83,7 +83,16 @@ struct Field: Identifiable, Equatable {
         var selectedColor: UIColor?
         var alpha: CGFloat = 1
     }
-    
+}
+
+struct FieldOffset {
+    var fullWidth = CGFloat(0)
+    var percentage = CGFloat(0)
+    var shift = CGFloat(0) /// already multiplied by percentage
+    var alpha = CGFloat(1) /// percent visible of add new
+}
+
+extension Field {
     private func getFieldHuggingWidth() -> CGFloat {
         if case .addNew(let word) = value, word.string.isEmpty {
             return configuration.addWordFieldHuggingWidth
@@ -96,13 +105,6 @@ struct Field: Identifiable, Equatable {
             return textWidth + leftPaddingWidth + rightPaddingWidth
         }
     }
-}
-
-struct FieldOffset {
-    var fullWidth = CGFloat(0)
-    var percentage = CGFloat(0)
-    var shift = CGFloat(0) /// already multiplied by percentage
-    var alpha = CGFloat(1) /// percent visible of add new
 }
 
 open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {

@@ -9,26 +9,83 @@
 import SwiftUI
 
 class SearchViewModel: ObservableObject {
-
     var configuration: SearchConfiguration
     
     /// set from within SearchViewController
     var isLandscape = false
     
-    @Published var fields = defaultFields {
+    @Published private(set) var fields = defaultFields {
         didSet {
             updateStringToGradients()
             updateCustomWords()
-            
-            let oldText = oldValue.map { $0.value.getText() }
-            let newText = fields.map { $0.value.getText() }
+        }
+    }
+
+    var stringToGradients = [String: Gradient]()
+    var customWords = [String]()
+    
+    func updateFields(fields: [Field], notify: Bool) {
+        let oldValue = self.fields
+        self.fields = fields
+        
+        if notify {
+            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            fieldsChanged?(textChanged)
+        }
+    }
+    
+    func updateField(at index: Int, with field: Field, notify: Bool) {
+        let oldText = fields[index].value.getText()
+        let newText = field.value.getText()
+        fields[index] = field
+        
+        if notify {
             let textChanged = oldText != newText
             fieldsChanged?(textChanged)
         }
     }
     
-    var stringToGradients = [String: Gradient]()
-    var customWords = [String]()
+    func removeField(at index: Int, notify: Bool) {
+        let oldValue = fields
+        fields.remove(at: index)
+        
+        if notify {
+            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            fieldsChanged?(textChanged)
+        }
+    }
+    
+    func appendField(field: Field, notify: Bool) {
+        let oldValue = fields
+        fields.append(field)
+        
+        if notify {
+            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            fieldsChanged?(textChanged)
+        }
+    }
+    
+    /// true if changed
+    func checkTextChanged(oldValue: [Field], newValue: [Field]) -> Bool {
+        let oldText = oldValue.map { $0.value.getText() }
+        let newText = fields.map { $0.value.getText() }
+        let textChanged = oldText != newText
+        return textChanged
+    }
+    
+    /// set all the properties without creating a new instance
+    func replaceInPlace(with model: SearchViewModel, notify: Bool) {
+        let oldValue = fields
+        isLandscape = model.isLandscape
+        fields = model.fields
+        stringToGradients = model.stringToGradients
+        customWords = model.customWords
+        
+        if notify {
+            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            fieldsChanged?(textChanged)
+        }
+    }
     
     /// must be implemented later on
     /// `Bool` - true when **text** has changed, false when text stayed the same
@@ -49,101 +106,4 @@ class SearchViewModel: ObservableObject {
     init(configuration: SearchConfiguration) {
         self.configuration = configuration
     }
-
-    func setFieldValue(at index: Int, value: () -> Field.FieldValue) {
-        fields[index].value = value()
-    }
-    
-    func updateStringToGradients() {
-        var stringToGradients = [String: Gradient]()
-        for field in fields {
-            switch field.value {
-            case .word(let word):
-                guard !word.string.isEmpty else { continue }
-                var existingGradient = stringToGradients[word.string] ?? Gradient()
-                existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: word.color))
-                existingGradient.alpha = field.overrides.alpha
-                stringToGradients[word.string] = existingGradient
-            case .list(let list):
-                let strings = list.words
-                guard list.containsWords else { continue }
-                for string in strings {
-                    var existingGradient = stringToGradients[string] ?? Gradient()
-                    existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: list.color))
-                    existingGradient.alpha = field.overrides.alpha
-                    stringToGradients[string] = existingGradient
-                }
-            case .addNew:
-                continue
-            }
-        }
-        
-        self.stringToGradients = stringToGradients
-    }
-    
-    func updateCustomWords() {
-        var words = Set<String>()
-        for value in values {
-            switch value {
-            case .word(let word):
-                words.insert(word.string)
-            case .list(let list):
-                let contents = Set(list.words)
-                words.formUnion(contents)
-            case .addNew:
-                continue
-            }
-        }
-        customWords = Array(words)
-    }
-}
-
-extension SearchViewModel {
-    func getBackgroundColor() -> UIColor {
-        if !stringToGradients.isEmpty {
-            //// active
-            return configuration.fieldActiveBackgroundColor
-        } else {
-            return configuration.fieldBackgroundColor
-        }
-    }
-    
-    func getTotalHeight() -> CGFloat {
-        if isLandscape {
-            return configuration.cellHeight + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
-        } else {
-            return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
-        }
-    }
-}
-
-extension SearchViewModel {
-    /// set all the properties without creating a new instance
-    func replaceInPlace(with model: SearchViewModel) {
-        isLandscape = model.isLandscape
-        fields = model.fields
-        stringToGradients = model.stringToGradients
-        customWords = model.customWords
-    }
-}
-
-extension SearchViewModel {
-    static let defaultFields = [
-        Field(
-            value: .word(
-                .init(
-                    string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
-                )
-            )
-        ),
-        Field(
-            value: .addNew(
-                .init(
-                    string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 1).hex
-                )
-            )
-        )
-    ]
 }

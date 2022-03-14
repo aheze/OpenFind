@@ -29,6 +29,20 @@ extension PhotosViewController {
             self.present(self.scanningNavigationViewController, animated: true)
         }
         
+        model.updateFieldOverrides = { [weak self] fields in
+            guard let self = self else { return }
+            
+            var newFields = self.searchViewModel.fields
+            for index in newFields.indices {
+                let field = self.searchViewModel.fields[index]
+                if let matchingField = fields.first(where: { $0.id == field.id }) {
+                    newFields[index].overrides = matchingField.overrides
+                }
+            }
+            
+            /// don't notify yet
+            self.searchViewModel.updateFields(fields: newFields, notify: false)
+        }
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             

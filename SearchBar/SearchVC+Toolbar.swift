@@ -26,10 +26,11 @@ extension SearchViewController {
         keyboardToolbarViewModel.listSelected = { [weak self] list in
             guard let self = self else { return }
             if let currentIndex = self.collectionViewModel.focusedCellIndex {
-                self.searchViewModel.fields[currentIndex] = Field(
+                let field = Field(
                     configuration: self.searchViewModel.configuration,
                     value: .list(list)
                 )
+                self.searchViewModel.updateField(at: currentIndex, with: field, notify: true)
 
                 if let cell = self.searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell {
                     self.configureCell(cell, for: currentIndex)

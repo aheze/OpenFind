@@ -40,7 +40,9 @@ extension SearchViewController {
             if let oldCellIndex = oldCellIndex {
                 if let cell = self.searchCollectionView.cellForItem(at: oldCellIndex.indexPath) as? SearchFieldCell {
                     if self.searchViewModel.fields.indices.contains(oldCellIndex) {
-                        self.searchViewModel.fields[oldCellIndex].showingDeleteButton = false
+                        var field = self.searchViewModel.fields[oldCellIndex]
+                        field.showingDeleteButton = false
+                        self.searchViewModel.updateField(at: oldCellIndex, with: field, notify: true)
                     }
 
                     cell.activate(false)

@@ -69,20 +69,20 @@ extension SearchViewController: UICollectionViewDelegate {
                 )
             )
         )
-        searchViewModel.fields.append(newField)
+        searchViewModel.appendField(field: newField, notify: true)
         
         let indexOfLastField = searchViewModel.fields.count - 2 /// index of the last field (not including "Add New" cell)
         
         /// Set the string of the new word field (previously an add-new field)
         if case .addNew(let word) = searchViewModel.fields[indexOfLastField].value {
-            searchViewModel.setFieldValue(at: indexOfLastField) {
-                .word(
-                    .init(
-                        string: word.string,
-                        color: Constants.defaultHighlightColor.getFieldColor(for: indexOfLastField).hex
-                    )
+            var field = searchViewModel.fields[indexOfLastField]
+            field.value = .word(
+                .init(
+                    string: word.string,
+                    color: Constants.defaultHighlightColor.getFieldColor(for: indexOfLastField).hex
                 )
-            }
+            )
+            searchViewModel.updateField(at: indexOfLastField, with: field, notify: true)
         }
         
         searchCollectionView.reloadData() /// add the new field

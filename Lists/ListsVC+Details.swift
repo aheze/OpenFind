@@ -40,7 +40,7 @@ extension ListsViewController {
         }
         
         /// keep it up to date. replacing!
-        self.detailsSearchViewModel.replaceInPlace(with: searchViewModel)
+        self.detailsSearchViewModel.replaceInPlace(with: searchViewModel, notify: true)
         model.updateDetailsSearchCollectionView?()
         
         self.detailsViewController = viewController

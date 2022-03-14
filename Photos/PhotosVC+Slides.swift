@@ -75,7 +75,7 @@ extension PhotosViewController {
 
     func createSlidesViewController() -> PhotosSlidesViewController {
         /// keep it up to date. replacing!
-        slidesSearchViewModel.replaceInPlace(with: searchViewModel)
+        slidesSearchViewModel.replaceInPlace(with: searchViewModel, notify: true)
         searchViewModel.dismissKeyboard?()
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in

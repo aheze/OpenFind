@@ -16,22 +16,25 @@ extension PhotosSlidesViewController {
             guard let slidesState = self.model.slidesState else { return }
             guard let currentIndex = slidesState.currentIndex else { return }
             let findPhoto = slidesState.findPhotos[currentIndex]
-            
+
             /// metadata already exists, directly find
             if let metadata = findPhoto.photo.metadata {
-                
                 if textChanged {
                     let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
                     DispatchQueue.main.async {
                         findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     }
                 } else {
+
+                    self.model.updateFieldOverrides?(self.slidesSearchViewModel.fields)
+                    
                     /// replace all highlights
-//                    self.updateHighlightColors()
+                    if let model = findPhoto.associatedViewController?.highlightsViewModel {
+                        self.updateHighlightColors(for: model, with: self.slidesSearchViewModel.stringToGradients)
+                    }
                 }
             } else {
                 print("no meta!")
-                
             }
         }
     }

@@ -55,6 +55,9 @@ class PhotosViewModel: ObservableObject {
 
     /// the photo manager got an image, update the transition image view's image.
     var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
+    
+    /// update the color/alpha with those of the specified fields
+    var updateFieldOverrides: (([Field]) -> Void)?
 
     // MARK: Scanning
 

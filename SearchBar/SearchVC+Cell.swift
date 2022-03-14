@@ -44,14 +44,16 @@ extension SearchViewController {
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
             
-            self.searchViewModel.setFieldValue(at: index) {
-                .word(
-                    .init(
-                        string: text,
-                        color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
-                    )
+            
+            
+            var field = self.searchViewModel.fields[index]
+            field.value = .word(
+                .init(
+                    string: text,
+                    color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
                 )
-            }
+            )
+            self.searchViewModel.updateField(at: index, with: field, notify: true)
             self.updateCells(valuesCount: self.searchViewModel.values.count)
         }
         
@@ -72,14 +74,14 @@ extension SearchViewController {
                 self.removeCell(at: index)
             } else {
                 cell.textField.text = ""
-                self.searchViewModel.setFieldValue(at: index) {
-                    .word(
-                        .init(
-                            string: "",
-                            color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
-                        )
+                var field = self.searchViewModel.fields[index]
+                field.value = .word(
+                    .init(
+                        string: "",
+                        color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
                     )
-                }
+                )
+                self.searchViewModel.updateField(at: index, with: field, notify: true)
                 self.updateCells(valuesCount: self.searchViewModel.values.count)
             }
             
@@ -194,7 +196,7 @@ extension SearchViewController {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.collectionViewModel.deletedIndex = nil
                         self.collectionViewModel.fallbackIndex = nil
-                        self.searchViewModel.fields.remove(at: index)
+                        self.searchViewModel.removeField(at: index, notify: true)
                         self.searchCollectionView.deleteItems(at: [index.indexPath])
                         self.searchCollectionView.isUserInteractionEnabled = true
                         self.collectionViewModel.reachedEndBeforeAddWordField = true
@@ -221,7 +223,7 @@ extension SearchViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.collectionViewModel.deletedIndex = nil
                 self.collectionViewModel.fallbackIndex = nil
-                self.searchViewModel.fields.remove(at: index)
+                self.searchViewModel.removeField(at: index, notify: true)
                 self.searchCollectionView.deleteItems(at: [index.indexPath])
                 self.searchCollectionView.isUserInteractionEnabled = true
                 self.collectionViewModel.focusedCellIndex = index

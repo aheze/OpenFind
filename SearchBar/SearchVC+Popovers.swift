@@ -22,8 +22,11 @@ extension SearchViewController {
             model.alpha = field.overrides.alpha
             model.changed = { [weak self] in
                 guard let self = self else { return }
-                self.searchViewModel.fields[index].overrides.selectedColor = model.selectedColor
-                self.searchViewModel.fields[index].overrides.alpha = model.alpha
+                var field = self.searchViewModel.fields[index]
+                field.overrides.selectedColor = model.selectedColor
+                field.overrides.alpha = model.alpha
+                self.searchViewModel.updateField(at: index, with: field, notify: true)
+                
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                     cell.leftView.findIconView.setTint(color: model.selectedColor ?? model.defaultColor, alpha: model.alpha)
                 }
@@ -45,8 +48,10 @@ extension SearchViewController {
             model.words = list.words
             model.changed = { [weak self] in
                 guard let self = self else { return }
-                self.searchViewModel.fields[index].overrides.selectedColor = model.selectedColor
-                self.searchViewModel.fields[index].overrides.alpha = model.alpha
+                var field = self.searchViewModel.fields[index]
+                field.overrides.selectedColor = model.selectedColor
+                field.overrides.alpha = model.alpha
+                self.searchViewModel.updateField(at: index, with: field, notify: true)
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                     cell.leftView.imageView.tintColor = UIColor.white.toColor(model.selectedColor ?? UIColor(hex: list.color), percentage: model.alpha)
                 }
