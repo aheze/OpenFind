@@ -34,12 +34,12 @@ class PhotosScanningViewController: UIViewController {
          Instantiate the base `view`.
          */
         view = UIView()
-        view.backgroundColor = .clear
         
         let containerView = PhotosScanningView(model: model)
         let hostingController = UIHostingController(rootView: containerView)
         hostingController.view.frame = view.bounds
         hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        hostingController.view.backgroundColor = .secondarySystemBackground
 
         addChild(hostingController)
         view.addSubview(hostingController.view)

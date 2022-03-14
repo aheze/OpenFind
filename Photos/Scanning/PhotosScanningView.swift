@@ -17,6 +17,7 @@ struct PhotosScanningView: View {
 
 struct PhotosScanningViewHeader: View {
     @ObservedObject var model: PhotosViewModel
+    @State var showingIgnoredPhotos = false
 
     var body: some View {
         ScrollView {
@@ -30,7 +31,7 @@ struct PhotosScanningViewHeader: View {
                                 totalPhotosCount: model.totalPhotosCount,
                                 lineWidth: 4
                             )
-                                .frame(width: 32, height: 32)
+                            .frame(width: 32, height: 32)
 
                             HStack {
                                 Text("\(model.scannedPhotosCount)")
@@ -58,13 +59,21 @@ struct PhotosScanningViewHeader: View {
                                 }
                             }
 
-                            PhotosScanningButton(image: "speedometer", title: "Turbo") {}
+                            PhotosScanningButton(image: "speedometer", title: "Status") {}
                         }
                     }
                     .padding(PhotosScanningConstants.padding)
                     .background(Color.accent.opacity(0.1))
                     .cornerRadius(PhotosScanningConstants.cornerRadius)
                 }
+
+                PhotoScanningLink(
+                    model: model,
+                    isOn: $showingIgnoredPhotos,
+                    title: "Ignored Photos",
+                    arrowLabel: "30",
+                    description: "Choose which photos to never scan."
+                )
 
                 PhotoScanningRow(
                     model: model,
@@ -133,6 +142,37 @@ struct Container<Content: View>: View {
     }
 }
 
+struct PhotoScanningLink: View {
+    @ObservedObject var model: PhotosViewModel
+    @Binding var isOn: Bool
+    var title: String
+    var arrowLabel: String /// usually a number
+    var description: String
+
+    var body: some View {
+        Container(description: description) {
+            Button {
+                isOn.toggle()
+            } label: {
+                HStack {
+                    Text(title)
+                    Spacer()
+
+                    HStack {
+                        Text(arrowLabel)
+                        Image(systemName: "chevron.forward")
+                    }
+                    .foregroundColor(UIColor.secondaryLabel.color)
+                }
+                .foregroundColor(UIColor.label.color)
+                .padding(PhotosScanningConstants.padding)
+                .background(UIColor.systemBackground.color)
+                .cornerRadius(PhotosScanningConstants.cornerRadius)
+            }
+        }
+    }
+}
+
 struct PhotoScanningRow: View {
     @ObservedObject var model: PhotosViewModel
     var title: String
@@ -150,7 +190,7 @@ struct PhotoScanningRow: View {
                 .labelsHidden()
             }
             .padding(PhotosScanningConstants.padding)
-            .background(UIColor.secondarySystemBackground.color)
+            .background(UIColor.systemBackground.color)
             .cornerRadius(PhotosScanningConstants.cornerRadius)
         }
     }
