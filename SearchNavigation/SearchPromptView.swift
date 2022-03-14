@@ -14,9 +14,17 @@ enum SearchPromptConstants {
 }
 
 class SearchPromptViewModel: ObservableObject {
-    var show = false
+    
+    /// don't set directly, instead use `show()`
+    @Published var show = false
     @Published var resultsText = ""
     @Published var resetText: String?
+    
+    func show(_ show: Bool) {
+        withAnimation {
+            self.show = show
+        }
+    }
 
     func totalText() -> String {
         var text = resultsText
@@ -40,19 +48,24 @@ class SearchPromptViewModel: ObservableObject {
 struct SearchPromptView: View {
     @ObservedObject var model: SearchPromptViewModel
     var body: some View {
-        VStack {
-            if let resetText = model.resetText {
-                Text(model.resultsText)
-                    .font(Font(SearchPromptConstants.font as CTFont))
+        Color.clear.overlay(
+            VStack(alignment: .leading) {
+                if let resetText = model.resetText {
+                    Text(model.resultsText)
+                        .font(Font(SearchPromptConstants.font as CTFont))
 
-                    + Text(#"Reset to "\#(resetText)""#)
-                    .font(Font(SearchPromptConstants.font as CTFont))
-                    .foregroundColor(.accent)
-            } else {
-                Text(model.resultsText)
-                    .font(Font(SearchPromptConstants.font as CTFont))
+                        + Text(#"Reset to "\#(resetText)""#)
+                        .font(Font(SearchPromptConstants.font as CTFont))
+                        .foregroundColor(.accent)
+                } else {
+                    Text(model.resultsText)
+                        .font(Font(SearchPromptConstants.font as CTFont))
+                }
             }
-        }
-        .padding(SearchPromptConstants.padding)
+            .padding(SearchPromptConstants.padding),
+            alignment: .top
+        )
+        .clipped()
+        .opacity(model.show ? 1 : 0)
     }
 }

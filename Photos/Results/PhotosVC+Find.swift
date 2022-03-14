@@ -38,9 +38,6 @@ extension PhotosViewController {
             self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
             self.updateResults(animate: false)
         }
-        
-        self.slidesSearchPromptViewModel.show = true
-        self.slidesSearchPromptViewModel.resultsText = "Hello!"
     }
     
     func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {

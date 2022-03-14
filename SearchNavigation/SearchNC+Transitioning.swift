@@ -46,12 +46,16 @@ extension SearchNavigationController {
     /// move the search bar based on the topmost view controller's `baseSearchBarOffset` and `additionalSearchBarOffset`
     func updateSearchBarOffset() {
         if let topViewController = navigation?.topViewController as? Searchable {
-            var offset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset ?? 0)
-            searchContainerViewTopC?.constant = offset
+            let searchBarOffset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset ?? 0)
+            let promptOffset = searchBarOffset + searchViewModel.getTotalHeight()
+            let promptHeight = getAdditionalSearchPromptHeight(for: topViewController)
+            let barHeight = promptOffset + promptHeight
             
-            offset += getAdditionalSearchPromptHeight(for: topViewController)
+            searchContainerViewTopC?.constant = searchBarOffset
+            detailsSearchPromptViewContainerTopC?.constant = promptOffset
+            detailsSearchPromptViewContainerHeightC?.constant = promptHeight
+            navigationBarBackgroundHeightC?.constant = barHeight
             
-            navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
             self.updateBlur(
                 baseSearchBarOffset: topViewController.baseSearchBarOffset,
                 additionalSearchBarOffset: topViewController.additionalSearchBarOffset

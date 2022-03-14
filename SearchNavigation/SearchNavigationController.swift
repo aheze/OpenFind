@@ -19,14 +19,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     var realmModel: RealmModel /// for the search bar
     var navigation: UINavigationController!
     
-    var searchContainerViewContainer = PassthroughView() /// whole screen
-    var searchContainerViewContainerTopC: NSLayoutConstraint? /// whole screen top constraint
-    
-    var searchContainerView: UIView! /// hugs the search bar
-    var searchContainerViewTopC: NSLayoutConstraint?
-    var searchViewController: SearchViewController!
-    var detailsSearchViewController: SearchViewController?
-    
+
     var navigationBarBackgroundContainer = PassthroughView()
     var navigationBarBackgroundHeightC: NSLayoutConstraint!
     var navigationBarBackground = UIView()
@@ -34,6 +27,19 @@ class SearchNavigationController: UIViewController, PageViewController {
     var navigationBarBackgroundBorderView = UIView()
     var animator: UIViewPropertyAnimator?
     var blurPercentage = CGFloat(0)
+
+    var searchContainerViewContainer = PassthroughView() /// whole screen
+    var searchContainerViewContainerTopC: NSLayoutConstraint? /// whole screen top constraint
+    var searchContainerView: UIView! /// hugs the search bar
+    var searchContainerViewTopC: NSLayoutConstraint?
+    var searchViewController: SearchViewController!
+    var detailsSearchViewController: SearchViewController?
+    
+    /// goes inside `searchContainerViewContainer`
+    var detailsSearchPromptViewContainer = UIView()
+    var detailsSearchPromptViewContainerTopC: NSLayoutConstraint!
+    var detailsSearchPromptViewContainerHeightC: NSLayoutConstraint!
+
     
     // MARK: - Optional Transitioning
 
@@ -96,6 +102,7 @@ class SearchNavigationController: UIViewController, PageViewController {
         addChildViewController(navigation, in: view)
         setupNavigationBar()
         setupSearchBar()
+        setupPrompt()
         listen()
         
         /// refresh the blur after coming back from app switcher

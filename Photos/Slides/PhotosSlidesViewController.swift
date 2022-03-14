@@ -38,6 +38,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var tabViewModel: TabViewModel
     var searchNavigationModel: SearchNavigationModel
     var slidesSearchViewModel: SearchViewModel
+    var slidesSearchPromptViewModel: SearchPromptViewModel
     var toolbarViewModel: ToolbarViewModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
     
@@ -61,12 +62,14 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         tabViewModel: TabViewModel,
         searchNavigationModel: SearchNavigationModel,
         slidesSearchViewModel: SearchViewModel,
+        slidesSearchPromptViewModel: SearchPromptViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
         self.tabViewModel = tabViewModel
         self.searchNavigationModel = searchNavigationModel
         self.slidesSearchViewModel = slidesSearchViewModel
+        self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         self.toolbarViewModel = toolbarViewModel
         super.init(coder: coder)
     }
@@ -101,6 +104,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         withAnimation {
             toolbarViewModel.toolbar = AnyView(toolbarView)
         }
+        self.slidesSearchPromptViewModel.show(true)
+        self.slidesSearchPromptViewModel.resultsText = "Hello!"
     }
 
     override func viewDidAppear(_ animated: Bool) {

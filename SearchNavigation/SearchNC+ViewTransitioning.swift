@@ -39,12 +39,16 @@ extension SearchNavigationController {
 
 extension SearchNavigationController {
     func beginSearchBarTransitionAnimation(to viewController: Searchable, targetPercentage: CGFloat) {
-        var offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
-            
-        searchContainerViewTopC?.constant = offset
+        let searchBarOffset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
+        let promptOffset = searchBarOffset + searchViewModel.getTotalHeight()
+        let promptHeight = getAdditionalSearchPromptHeight(for: viewController)
+        let barHeight = promptOffset + promptHeight
         
-        offset += self.getAdditionalSearchPromptHeight(for: viewController)
-        navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
+        searchContainerViewTopC?.constant = searchBarOffset
+        detailsSearchPromptViewContainerTopC?.constant = promptOffset
+        detailsSearchPromptViewContainerHeightC?.constant = promptHeight
+        navigationBarBackgroundHeightC?.constant = barHeight
+        
         
         /// first reset to start, if there's going to be a change
         if targetPercentage == 0, blurPercentage != 0 {
@@ -100,17 +104,39 @@ extension SearchNavigationController {
     
     /// from = top view controller, to == original view controller
     func setOffset(from: Searchable, to: Searchable, percentage: CGFloat) {
-        var fromOffset = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
-        let toOffset = to.baseSearchBarOffset + max(0, to.additionalSearchBarOffset ?? 0)
+        let searchBarOffsetFrom = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
+        let promptOffsetFrom = searchBarOffsetFrom + searchViewModel.getTotalHeight()
+        let promptHeightFrom = getAdditionalSearchPromptHeight(for: from)
+        let barHeightFrom = promptOffsetFrom + promptHeightFrom
         
-        let offset = fromOffset + (toOffset - fromOffset) * percentage
-        searchContainerViewTopC?.constant = offset
+        let searchBarOffsetTo = to.baseSearchBarOffset + max(0, to.additionalSearchBarOffset ?? 0)
+        let promptOffsetTo = searchBarOffsetTo + searchViewModel.getTotalHeight()
+        let promptHeightTo = getAdditionalSearchPromptHeight(for: to)
+        let barHeightTo = promptOffsetTo + promptHeightTo
         
-        /// navigation bar height
-        fromOffset += self.getAdditionalSearchPromptHeight(for: from)
-        /// recalculate
-        let barHeight = fromOffset + (toOffset - fromOffset) * percentage
-        navigationBarBackgroundHeightC?.constant = barHeight + searchViewModel.getTotalHeight()
+        let searchBarOffset = AnimatableUtilities.mixedValue(from: searchBarOffsetFrom, to: searchBarOffsetTo, progress: percentage)
+        let promptOffset = AnimatableUtilities.mixedValue(from: promptOffsetFrom, to: promptOffsetTo, progress: percentage)
+        let promptHeight = AnimatableUtilities.mixedValue(from: promptHeightFrom, to: promptHeightTo, progress: percentage)
+        let barHeight = AnimatableUtilities.mixedValue(from: barHeightFrom, to: barHeightTo, progress: percentage)
+        
+        searchContainerViewTopC?.constant = searchBarOffset
+        detailsSearchPromptViewContainerTopC?.constant = promptOffset
+        detailsSearchPromptViewContainerHeightC?.constant = promptHeight
+        navigationBarBackgroundHeightC?.constant = barHeight
+        
+//        
+//        
+//        var fromOffset = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
+//        let toOffset = to.baseSearchBarOffset + max(0, to.additionalSearchBarOffset ?? 0)
+//        
+//        let offset = fromOffset + (toOffset - fromOffset) * percentage
+//        searchContainerViewTopC?.constant = offset
+//        
+//        /// navigation bar height
+//        fromOffset += self.getAdditionalSearchPromptHeight(for: from)
+//        /// recalculate
+//        let barHeight = fromOffset + (toOffset - fromOffset) * percentage
+//        navigationBarBackgroundHeightC?.constant = barHeight + searchViewModel.getTotalHeight()
     }
     
     func setBlur(from: Searchable, to: Searchable, percentage: CGFloat) {
