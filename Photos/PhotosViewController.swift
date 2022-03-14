@@ -16,6 +16,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
     var slidesSearchViewModel: SearchViewModel
+    var slidesSearchPromptViewModel: SearchPromptViewModel
     var permissionsViewModel = PhotosPermissionsViewModel()
     
     var baseSearchBarOffset = CGFloat(0)
@@ -57,7 +58,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         toolbarViewModel: ToolbarViewModel,
         searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
-        slidesSearchViewModel: SearchViewModel
+        slidesSearchViewModel: SearchViewModel,
+        slidesSearchPromptViewModel: SearchPromptViewModel
     ) {
         self.model = model
         self.tabViewModel = tabViewModel
@@ -65,6 +67,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         self.searchNavigationModel = searchNavigationModel
         self.searchViewModel = searchViewModel
         self.slidesSearchViewModel = slidesSearchViewModel
+        self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         super.init(coder: coder)
     }
 

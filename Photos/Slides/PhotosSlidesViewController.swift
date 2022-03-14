@@ -20,7 +20,7 @@ class PhotoSlidesSection: Hashable {
     }
 }
 
-class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDismissible {
+class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDismissible, NavigationNamed {
     // MARK: - Searchable
 
     var baseSearchBarOffset = CGFloat(0)
@@ -30,6 +30,9 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     // MARK: - InteractivelyDismissible
 
     var isInteractivelyDismissing: Bool = false
+    
+    // MARK: NavigationNamed
+    var name: NavigationName? = .listsDetail
     
     var model: PhotosViewModel
     var tabViewModel: TabViewModel

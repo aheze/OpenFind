@@ -39,9 +39,11 @@ extension SearchNavigationController {
 
 extension SearchNavigationController {
     func beginSearchBarTransitionAnimation(to viewController: Searchable, targetPercentage: CGFloat) {
-        let offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
+        var offset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
             
         searchContainerViewTopC?.constant = offset
+        
+        offset += self.getAdditionalSearchPromptHeight(for: viewController)
         navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
         
         /// first reset to start, if there's going to be a change
@@ -80,9 +82,12 @@ extension SearchNavigationController {
     
     func cancelSearchBarPopAnimation() {
         if let currentViewController = self.navigation.topViewController as? Searchable {
-            let offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset ?? 0)
+            var offset = currentViewController.baseSearchBarOffset + max(0, currentViewController.additionalSearchBarOffset ?? 0)
                 
             self.searchContainerViewTopC?.constant = offset
+            
+            offset += self.getAdditionalSearchPromptHeight(for: currentViewController)
+            
             self.navigationBarBackgroundHeightC?.constant = offset + self.searchViewModel.getTotalHeight()
             self.updateBlur(
                 baseSearchBarOffset: currentViewController.baseSearchBarOffset,
@@ -93,13 +98,19 @@ extension SearchNavigationController {
     
     // MARK: - Convenience methods for interactive dismissal
     
+    /// from = top view controller, to == original view controller
     func setOffset(from: Searchable, to: Searchable, percentage: CGFloat) {
-        let fromOffset = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
+        var fromOffset = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
         let toOffset = to.baseSearchBarOffset + max(0, to.additionalSearchBarOffset ?? 0)
         
         let offset = fromOffset + (toOffset - fromOffset) * percentage
         searchContainerViewTopC?.constant = offset
-        navigationBarBackgroundHeightC?.constant = offset + searchViewModel.getTotalHeight()
+        
+        /// navigation bar height
+        fromOffset += self.getAdditionalSearchPromptHeight(for: from)
+        /// recalculate
+        let barHeight = fromOffset + (toOffset - fromOffset) * percentage
+        navigationBarBackgroundHeightC?.constant = barHeight + searchViewModel.getTotalHeight()
     }
     
     func setBlur(from: Searchable, to: Searchable, percentage: CGFloat) {
@@ -108,5 +119,18 @@ extension SearchNavigationController {
         
         let blurPercentage = fromBlurPercentage + (toBlurPercentage - fromBlurPercentage) * percentage
         updateBlur(to: blurPercentage)
+    }
+    
+    func getAdditionalSearchPromptHeight(for toViewController: Searchable) -> CGFloat {
+        var additionalBarHeight = CGFloat(0)
+        if
+            let detailsSearchPromptViewModel = detailsSearchPromptViewModel,
+            detailsSearchPromptViewModel.show,
+            let toViewController = toViewController as? NavigationNamed,
+            toViewController.name == .photosDetail || toViewController.name == .listsDetail
+        {
+            additionalBarHeight = detailsSearchPromptViewModel.height()
+        }
+        return additionalBarHeight
     }
 }

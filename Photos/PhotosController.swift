@@ -14,6 +14,7 @@ class PhotosController {
     
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
+    var slidesSearchPromptViewModel: SearchPromptViewModel
     
     /// for the slides. This will only be up to date when the slides are presented.
     var slidesSearchViewModel: SearchViewModel
@@ -30,11 +31,14 @@ class PhotosController {
         self.tabViewModel = tabViewModel
         
         let searchNavigationModel = SearchNavigationModel()
-        self.searchNavigationModel = searchNavigationModel
         let searchViewModel = SearchViewModel(configuration: .photos)
-        self.searchViewModel = searchViewModel
         let slidesSearchViewModel = SearchViewModel(configuration: .photos)
+        let slidesSearchPromptViewModel = SearchPromptViewModel()
+        
+        self.searchNavigationModel = searchNavigationModel
+        self.searchViewModel = searchViewModel
         self.slidesSearchViewModel = slidesSearchViewModel
+        self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
         
@@ -46,7 +50,8 @@ class PhotosController {
                 toolbarViewModel: toolbarViewModel,
                 searchNavigationModel: searchNavigationModel,
                 searchViewModel: searchViewModel,
-                slidesSearchViewModel: slidesSearchViewModel
+                slidesSearchViewModel: slidesSearchViewModel,
+                slidesSearchPromptViewModel: slidesSearchPromptViewModel
             )
         }
         self.viewController = viewController
@@ -62,6 +67,8 @@ class PhotosController {
         
         /// set the details search view model
         searchNavigationController.detailsSearchViewModel = slidesSearchViewModel
+        searchNavigationController.detailsSearchPromptViewModel = slidesSearchPromptViewModel
+        
         searchNavigationModel.onWillBecomeActive = { viewController.willBecomeActive() }
         searchNavigationModel.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationModel.onWillBecomeInactive = { viewController.willBecomeInactive() }

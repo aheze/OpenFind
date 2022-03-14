@@ -9,10 +9,13 @@
 import SwiftUI
 
 enum Colors {
+    
+    /// Main accent color (blue)
     static var accent = UIColor(named: "Accent")!
 }
 
 extension Color {
+    /// Main accent color (blue)
     static var accent = Colors.accent.color
 }
 

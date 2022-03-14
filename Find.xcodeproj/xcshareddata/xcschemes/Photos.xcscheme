@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3C4D39D32747661E0010FD68"
-               BuildableName = "Photos.app"
+               BuildableName = "FindPhotos.app"
                BlueprintName = "FindPhotos"
                ReferencedContainer = "container:Find.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C4D39D32747661E0010FD68"
-            BuildableName = "Photos.app"
+            BuildableName = "FindPhotos.app"
             BlueprintName = "FindPhotos"
             ReferencedContainer = "container:Find.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C4D39D32747661E0010FD68"
-            BuildableName = "Photos.app"
+            BuildableName = "FindPhotos.app"
             BlueprintName = "FindPhotos"
             ReferencedContainer = "container:Find.xcodeproj">
          </BuildableReference>

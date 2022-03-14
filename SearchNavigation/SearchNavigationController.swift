@@ -15,6 +15,7 @@ class SearchNavigationController: UIViewController, PageViewController {
     var model: SearchNavigationModel
     var searchViewModel: SearchViewModel
     var detailsSearchViewModel: SearchViewModel?
+    var detailsSearchPromptViewModel: SearchPromptViewModel?
     var realmModel: RealmModel /// for the search bar
     var navigation: UINavigationController!
     

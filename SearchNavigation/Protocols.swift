@@ -20,6 +20,7 @@ protocol NavigationNamed: UIViewController {
 
 enum NavigationName {
     case listsDetail
+    case photosDetail
 }
 
 protocol InteractivelyDismissible: UIViewController {
