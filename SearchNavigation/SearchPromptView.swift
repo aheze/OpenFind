@@ -14,12 +14,11 @@ enum SearchPromptConstants {
 }
 
 class SearchPromptViewModel: ObservableObject {
-    
     /// don't set directly, instead use `show()`
     @Published var show = false
     @Published var resultsText = ""
     @Published var resetText: String?
-    
+
     func show(_ show: Bool) {
         withAnimation {
             self.show = show
@@ -62,6 +61,7 @@ struct SearchPromptView: View {
                         .font(Font(SearchPromptConstants.font as CTFont))
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(SearchPromptConstants.padding),
             alignment: .top
         )

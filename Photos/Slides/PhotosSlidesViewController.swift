@@ -95,6 +95,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             configureToolbar(for: findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
+            self.slidesSearchPromptViewModel.show(true)
+            self.slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
         }
     }
     
@@ -104,8 +106,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         withAnimation {
             toolbarViewModel.toolbar = AnyView(toolbarView)
         }
-        self.slidesSearchPromptViewModel.show(true)
-        self.slidesSearchPromptViewModel.resultsText = "Hello!"
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -117,6 +117,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         super.viewDidDisappear(animated)
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
         switchToFullScreen(false)
+        slidesSearchPromptViewModel.show(false)
         
         withAnimation {
             toolbarViewModel.toolbar = nil

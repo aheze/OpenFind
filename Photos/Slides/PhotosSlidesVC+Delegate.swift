@@ -68,7 +68,9 @@ extension PhotosSlidesViewController {
     /// stopped scrolling
     func notifyIfScrolledToStop() {
         if let slidesState = model.slidesState, let index = slidesState.currentIndex {
-            configureToolbar(for: slidesState.findPhotos[index].photo)
+            let findPhoto = slidesState.findPhotos[index]
+            slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
+            configureToolbar(for: findPhoto.photo)
         }
     }
 }

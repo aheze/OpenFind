@@ -71,6 +71,21 @@ struct FindPhoto: Hashable {
     var highlights: Set<Highlight>?
     var descriptionText = ""
     var descriptionLines = [Line]()
+    
+    func getResultsText() -> String {
+        if let highlights = highlights {
+            switch highlights.count {
+            case 0:
+                return "No Results"
+            case 1:
+                return "1 Result"
+            default:
+                return "\(highlights.count) Results"
+            }
+        } else {
+            return "No Results"
+        }
+    }
 
     struct Line: Hashable {
         var string: String
