@@ -7,6 +7,7 @@
 //
 
 import Photos
+import SwiftUI
 import UIKit
 
 extension PhotosViewController {
@@ -17,6 +18,7 @@ extension PhotosViewController {
         resultsSnapshot.appendSections([section])
         resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
+        print("Applied.''")
     }
 
     /// reload the collection view at an index path.
@@ -70,6 +72,26 @@ extension PhotosViewController {
                 return cell
             }
         )
+
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+
+            if
+                kind == UICollectionView.elementKindSectionHeader,
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderContentView", for: indexPath) as? HeaderContentView
+            {
+                if headerView.content == nil {
+                    let content = AnyView(ResultsHeaderView(model: self.resultsHeaderViewModel))
+                    headerView.content = content
+                    let hostingController = UIHostingController(rootView: content)
+                    hostingController.view.backgroundColor = .clear
+                    self.addChildViewController(hostingController, in: headerView)
+                }
+                return headerView
+            }
+
+            return nil
+        }
+
         return dataSource
     }
 

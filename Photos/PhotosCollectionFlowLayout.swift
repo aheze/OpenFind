@@ -13,6 +13,7 @@ struct PhotosSectionLayout {
     var headerLayoutAttributes = UICollectionViewLayoutAttributes()
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
 }
+
 class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     var model: PhotosViewModel
     
@@ -81,7 +82,6 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             let section = model.sections[sectionIndex]
             let photos = section.photos
             for photoIndex in photos.indices {
-                
                 /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
                 if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
                     let columnOffset = columnOffsets[shortestColumnIndex]

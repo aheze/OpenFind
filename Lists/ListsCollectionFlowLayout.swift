@@ -8,11 +8,20 @@
 
 import UIKit
 
+struct Section {
+    var index: Int
+    var indices = [Int]()
+}
 
 /// columned layout, used by both Lists and Photos
-class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
+class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
+    var headerHeight: CGFloat = 0
+    
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
-    var getIndices: (() -> [Int])?
+    
+    var getSections: (() -> [Section])?
+    
+    var getSizeForSectionWithWidth: ((Int, CGFloat) -> CGSize)?
     
     /// get the frame of a list cell from available width
     /// 1. index
@@ -39,12 +48,17 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     var columnWidth = CGFloat(0) /// width of each column. Needed for bounds change calculations
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
-    /// get the number of columns and each column's width from available bounds + insets
-    func getColumns(bounds: CGFloat, insets: UIEdgeInsets) -> (Int, CGFloat) {
+    func getAvailableWidth(bounds: CGFloat, insets: UIEdgeInsets) -> CGFloat {
         let availableWidth = bounds
             - ListsCollectionConstants.sidePadding * 2
             - insets.left
             - insets.right
+        return availableWidth
+    }
+
+    /// get the number of columns and each column's width from available bounds + insets
+    func getColumns(bounds: CGFloat, insets: UIEdgeInsets) -> (Int, CGFloat) {
+        let availableWidth = getAvailableWidth(bounds: bounds, insets: insets)
         
         let numberOfColumns = Int(availableWidth / ListsCollectionConstants.minCellWidth)
         
@@ -58,9 +72,10 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-        guard let indices = getIndices?() else { return }
+        guard let sections = getSections?() else { return }
         guard let collectionView = collectionView else { return }
         
+        let availableWidth = getAvailableWidth(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         let (numberOfColumns, columnWidth) = getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
@@ -77,30 +92,57 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
                 leftSpacing = CGFloat(columnIndex) * ListsCollectionConstants.cellSpacing
             }
             
-            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: 0)
+            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: headerHeight)
             columnOffsets.append(offset)
         }
         
-        for index in indices {
-            if let size = getSizeForIndexWithWidth?(index, columnWidth) {
-                /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
-                if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
-                    let columnOffset = columnOffsets[shortestColumnIndex]
-                    let cellFrame = CGRect(
-                        x: columnOffset.width,
-                        y: columnOffset.height,
-                        width: columnWidth,
-                        height: size.height
-                    )
+        for section in sections {
+            /// top out all the columns
+            let maxHeight = columnOffsets.max(by: { $0.height < $1.height })?.height ?? 0
+            for index in columnOffsets.indices {
+                columnOffsets[index].height = maxHeight
+            }
+            
+            if let size = getSizeForSectionWithWidth?(section.index, availableWidth) {
+                print("size: \(size)")
+                let attributes = UICollectionViewLayoutAttributes(
+                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                    with: section.index.indexPath
+                )
+                let headerFrame = CGRect(
+                    x: ListsCollectionConstants.sidePadding,
+                    y: maxHeight + ListsCollectionConstants.cellSpacing,
+                    width: availableWidth,
+                    height: size.height
+                )
+                attributes.frame = headerFrame
+                layoutAttributes.append(attributes)
+                for index in columnOffsets.indices {
+                    columnOffsets[index].height += headerFrame.height + ListsCollectionConstants.cellSpacing
+                }
+            }
+            
+            for index in section.indices {
+                if let size = getSizeForIndexWithWidth?(index, columnWidth) {
+                    /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
+                    if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
+                        let columnOffset = columnOffsets[shortestColumnIndex]
+                        let cellFrame = CGRect(
+                            x: columnOffset.width,
+                            y: columnOffset.height,
+                            width: columnWidth,
+                            height: size.height
+                        )
                 
-                    let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
-                    attributes.frame = cellFrame
-                    layoutAttributes.append(attributes)
-                    columnOffsets[shortestColumnIndex].height += cellFrame.height + ListsCollectionConstants.cellSpacing
+                        let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
+                        attributes.frame = cellFrame
+                        layoutAttributes.append(attributes)
+                        columnOffsets[shortestColumnIndex].height += cellFrame.height + ListsCollectionConstants.cellSpacing
+                    }
                 }
             }
         }
-        
+
         let tallestColumnOffset = columnOffsets.max(by: { $0.height < $1.height }) ?? .zero
         contentSize = CGSize(
             width: collectionView.bounds.width
@@ -111,6 +153,11 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         self.layoutAttributes = layoutAttributes
     }
     
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("layoutAttributesForSupplementaryView? \(indexPath)''")
+        return layoutAttributes[safe: indexPath.item]
+    }
+    
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutAttributes[safe: indexPath.item]
@@ -118,6 +165,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         /// edge cells don't shrink, but the animation is perfect
-        return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
+//        return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
+        return layoutAttributes
     }
 }

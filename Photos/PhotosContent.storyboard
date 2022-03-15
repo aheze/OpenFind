@@ -57,13 +57,13 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kdF-EW-vyd">
                         <size key="itemSize" width="271" height="299"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="headerReferenceSize" width="50" height="50"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells>
                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosCollectionCell" id="dq8-JM-MQE" customClass="PhotosCollectionCell" customModule="FindPhotos" customModuleProvider="target">
-                            <rect key="frame" x="71.5" y="0.0" width="271" height="299"/>
+                            <rect key="frame" x="71.5" y="50" width="271" height="299"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ezz-3v-dka">
                                 <rect key="frame" x="0.0" y="0.0" width="271" height="299"/>
@@ -128,6 +128,11 @@
                             </connections>
                         </collectionViewCell>
                     </cells>
+                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderContentView" id="Jpa-Ci-Vsg" customClass="HeaderContentView" customModule="FindPhotos" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <viewLayoutGuide key="safeArea" id="j6W-eS-Tde"/>
+                    </collectionReusableView>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="35b-X1-iav">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -135,13 +140,13 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AS4-Y2-hHb">
                         <size key="itemSize" width="271" height="388"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="headerReferenceSize" width="50" height="50"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells>
                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosResultsCell" id="6Qe-iX-h3n" customClass="PhotosResultsCell" customModule="FindPhotos" customModuleProvider="target">
-                            <rect key="frame" x="71.5" y="0.0" width="271" height="388"/>
+                            <rect key="frame" x="71.5" y="50" width="271" height="388"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kKw-aS-TWR">
                                 <rect key="frame" x="0.0" y="0.0" width="271" height="388"/>
@@ -288,6 +293,10 @@
                             </connections>
                         </collectionViewCell>
                     </cells>
+                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderContentView" id="aWv-5e-Dm4" customClass="HeaderContentView" customModule="FindPhotos" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </collectionReusableView>
                 </collectionView>
             </objects>
             <point key="canvasLocation" x="-665.21739130434787" y="75.669642857142847"/>
@@ -380,6 +389,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hA-vz-uvn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1563.768115942029" y="75.669642857142847"/>
+        </scene>
+        <!--Ignored Photos View Controller-->
+        <scene sceneID="wqG-qF-O2X">
+            <objects>
+                <viewController storyboardIdentifier="IgnoredPhotosViewController" id="1JL-Wi-qMd" customClass="IgnoredPhotosViewController" customModule="FindPhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6NS-3G-R2N">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="nx8-tx-iU2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkV-zK-PVa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10" y="76"/>
         </scene>
     </scenes>
     <resources>

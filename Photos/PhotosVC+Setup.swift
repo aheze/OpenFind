@@ -64,8 +64,6 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
-    
-    
     /// `addSubview` is also called inside `PhotosVC+Results`
     func setupCollectionView(_ collectionView: UICollectionView, with layout: UICollectionViewFlowLayout) {
         collectionViewContainer.addSubview(collectionView)

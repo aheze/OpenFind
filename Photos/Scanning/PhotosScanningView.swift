@@ -169,6 +169,7 @@ struct PhotoScanningLink: View {
                 .background(UIColor.systemBackground.color)
                 .cornerRadius(PhotosScanningConstants.cornerRadius)
             }
+            
         }
     }
 }

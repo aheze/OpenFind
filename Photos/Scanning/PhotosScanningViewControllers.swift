@@ -49,6 +49,10 @@ class PhotosScanningViewController: UIViewController {
     @objc func dismissSelf() {
         dismiss(animated: true)
     }
+    
+    func presentIgnoredPhotosViewController() {
+        
+    }
 }
 
 class PhotosScanningIconController: UIViewController {

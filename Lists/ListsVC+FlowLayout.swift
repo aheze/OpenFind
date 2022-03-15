@@ -12,9 +12,11 @@ extension ListsViewController {
     func createFlowLayout() -> ListsCollectionFlowLayout {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.getIndices = { [weak self] in
+        flowLayout.getSections = { [weak self] in
             guard let self = self else { return [] }
-            return Array(self.model.displayedLists.indices)
+            let indices = Array(self.model.displayedLists.indices)
+            let section = Section(index: 0, indices: indices)
+            return [section]
         }
         flowLayout.getSizeForIndexWithWidth = { [weak self] listIndex, availableWidth in
             guard let self = self else { return .zero }

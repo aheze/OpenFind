@@ -832,6 +832,9 @@
 		3C443FC627DFCD530050A0AB /* ResultsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FB827DFCD480050A0AB /* ResultsHeaderView.swift */; };
 		3C443FC827DFD1550050A0AB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C443FC727DFD1550050A0AB /* Introspect */; };
 		3C443FCA27DFD1870050A0AB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C443FC927DFD1870050A0AB /* Introspect */; };
+		3C443FCC27DFFF830050A0AB /* IgnoredPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */; };
+		3C443FCD27DFFF870050A0AB /* IgnoredPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */; };
+		3C443FCE27DFFF880050A0AB /* IgnoredPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */; };
 		3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96B125B69038009FDE8D /* InfoView.swift */; };
@@ -2466,6 +2469,7 @@
 		3C443FAB27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Highlights.swift"; sourceTree = "<group>"; };
 		3C443FB027DFBA6D0050A0AB /* SearchVM+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVM+Extensions.swift"; sourceTree = "<group>"; };
 		3C443FB827DFCD480050A0AB /* ResultsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsHeaderView.swift; sourceTree = "<group>"; };
+		3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredPhotosViewController.swift; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Draw.swift"; sourceTree = "<group>"; };
 		3C4C96B125B69038009FDE8D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -4700,6 +4704,7 @@
 			children = (
 				3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */,
 				3CDD943B27C05DAF00D3EA1A /* PhotosScanningView.swift */,
+				3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */,
 				3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */,
 				3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */,
 			);
@@ -6602,6 +6607,7 @@
 			files = (
 				3CE3D50627DD5B3A00521735 /* Find+Sentences.swift in Sources */,
 				3C0B5E6727BABCEA00EC881E /* PhotosCollectionFlowLayout.swift in Sources */,
+				3C443FCE27DFFF880050A0AB /* IgnoredPhotosViewController.swift in Sources */,
 				3CE3D50027DD5B0C00521735 /* VisionModels.swift in Sources */,
 				3C1D1A40275AA25E0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C21EDAF27A45BFF0005E183 /* RealmModels.swift in Sources */,
@@ -7238,6 +7244,7 @@
 				3C0B5E6D27BAC05900EC881E /* PhotosPermissionsView.swift in Sources */,
 				3CC594F8279F3322001D07DC /* ColorPickerView.swift in Sources */,
 				3C6C7427278194A500E039F0 /* GeneralUtilities.swift in Sources */,
+				3C443FCD27DFFF870050A0AB /* IgnoredPhotosViewController.swift in Sources */,
 				3CD7063027A3842200B446D7 /* IconPickerViewModel.swift in Sources */,
 				3CD7063427A3842200B446D7 /* Icons.swift in Sources */,
 				3C443FB227DFBA770050A0AB /* SearchVM+Extensions.swift in Sources */,
@@ -7587,6 +7594,7 @@
 				3C0AACBF27C82692009DFC09 /* Utilities+String.swift in Sources */,
 				3C0AACC927C899D8009DFC09 /* TabConstants.swift in Sources */,
 				3C93152127B991AE009E5B6E /* TabModel.swift in Sources */,
+				3C443FCC27DFFF830050A0AB /* IgnoredPhotosViewController.swift in Sources */,
 				3C7B7A8F277FA6E300E1F602 /* Utilities+UIViewController.swift in Sources */,
 				3CCE2B00279D008900F72351 /* ButtonView.swift in Sources */,
 				3C443F5227DD914C0050A0AB /* TabTransitioning.swift in Sources */,

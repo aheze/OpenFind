@@ -12,19 +12,34 @@ extension PhotosViewController {
     func createFlowLayout() -> ListsCollectionFlowLayout {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.getIndices = { [weak self] in
+        flowLayout.getSections = { [weak self] in
             
             if
                 let self = self,
                 let resultsState = self.model.resultsState
             {
-                return Array(resultsState.findPhotos.indices)
+                let indices = Array(resultsState.findPhotos.indices)
+                let section = Section(index: 0, indices: indices)
+                return [section]
             }
             return []
         }
-        flowLayout.getSizeForIndexWithWidth = { [weak self] listIndex, availableWidth in
+        
+        flowLayout.getSizeForSectionWithWidth = { [weak self] photosSectionIndex, availableWidth in
+            print("getting.")
+            if
+                let self = self,
+                let size = self.resultsHeaderViewModel.size
+            {
+                print("height; \(size)")
+                return CGSize(width: availableWidth, height: size.height)
+            }
+            return .zero
+        }
+        
+        flowLayout.getSizeForIndexWithWidth = { [weak self] photosIndex, availableWidth in
             guard let self = self else { return .zero }
-            return self.getCellSize(photosIndex: listIndex, availableWidth: availableWidth)
+            return self.getCellSize(photosIndex: photosIndex, availableWidth: availableWidth)
         }
         
         resultsCollectionView.setCollectionViewLayout(flowLayout, animated: false)

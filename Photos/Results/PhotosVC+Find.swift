@@ -38,6 +38,9 @@ extension PhotosViewController {
             self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
             self.updateResults(animate: false)
         }
+        
+        self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
+        self.resultsFlowLayout.invalidateLayout()
     }
     
     func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {

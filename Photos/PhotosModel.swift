@@ -20,7 +20,7 @@ struct PhotosSlidesState {
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
         return getFindPhotoIndex(photo: findPhoto.photo)
     }
-    
+
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: Photo) -> Int? {
         if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo }) {
@@ -28,7 +28,7 @@ struct PhotosSlidesState {
         }
         return nil
     }
-    
+
     func getCurrentFindPhotoAndIndex() -> (FindPhoto, Int)? {
         if let currentIndex = currentIndex {
             if let findPhoto = findPhotos[safe: currentIndex] {
@@ -37,7 +37,7 @@ struct PhotosSlidesState {
         }
         return nil
     }
-    
+
     /// for the current image
     var toolbarStarOn = false
     var toolbarInformationOn = false
@@ -50,13 +50,26 @@ struct PhotosResultsState {
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
         return getFindPhotoIndex(photo: findPhoto.photo)
     }
-    
+
     /// get from `findPhotos`
     func getFindPhotoIndex(photo: Photo) -> Int? {
         if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo }) {
             return firstIndex
         }
         return nil
+    }
+
+    func getResultsText() -> String {
+        let highlights = findPhotos.compactMap { $0.highlights }.flatMap { $0 }
+
+        switch highlights.count {
+        case 0:
+            return "No Results"
+        case 1:
+            return "1 Result"
+        default:
+            return "\(highlights.count) Results"
+        }
     }
 }
 
@@ -71,7 +84,7 @@ struct FindPhoto: Hashable {
     var highlights: Set<Highlight>?
     var descriptionText = ""
     var descriptionLines = [Line]()
-    
+
     func getResultsText() -> String {
         if let highlights = highlights {
             switch highlights.count {
@@ -158,6 +171,18 @@ struct PhotosSection: Hashable {
 
             return ""
         }
+    }
+}
+
+struct PhotoSlidesSection: Hashable {
+    let id = 0
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: PhotoSlidesSection, rhs: PhotoSlidesSection) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

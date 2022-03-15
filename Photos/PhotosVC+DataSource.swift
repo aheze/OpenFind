@@ -30,6 +30,7 @@ extension PhotosViewController {
     func sortCollectionView() {}
 
     func makeDataSource() -> DataSource {
+        
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, cachedPhoto -> UICollectionViewCell? in
@@ -69,7 +70,18 @@ extension PhotosViewController {
                 return cell
             }
         )
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            print("supp. in main")
+            if
+                kind == UICollectionView.elementKindSectionHeader,
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderContentView", for: indexPath) as? HeaderContentView
+            {
+                print("...")
+            }
 
+            return nil
+        }
+        
         return dataSource
     }
 

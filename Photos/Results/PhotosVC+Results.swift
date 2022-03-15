@@ -20,6 +20,7 @@ extension PhotosViewController {
                 collectionViewContainer.addSubview(resultsCollectionView)
                 resultsCollectionView.pinEdgesToSuperview()
             }
+
             collectionView.removeFromSuperview()
             updateNavigationBlur(with: resultsCollectionView)
             showCancelNavigationBar()

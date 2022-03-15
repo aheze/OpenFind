@@ -8,18 +8,6 @@
 
 import SwiftUI
 
-class PhotoSlidesSection: Hashable {
-    let id = 0
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: PhotoSlidesSection, rhs: PhotoSlidesSection) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
 class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDismissible, NavigationNamed {
     // MARK: - Searchable
 
@@ -32,6 +20,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var isInteractivelyDismissing: Bool = false
     
     // MARK: NavigationNamed
+
     var name: NavigationName? = .listsDetail
     
     var model: PhotosViewModel
@@ -95,8 +84,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             configureToolbar(for: findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
-            self.slidesSearchPromptViewModel.show(true)
-            self.slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
+            slidesSearchPromptViewModel.show(true)
+            slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
         }
     }
     
