@@ -75,6 +75,7 @@ struct PhotosResultsState {
 
 /// a photo that contains results to display (in the form of highlights)
 struct FindPhoto: Hashable {
+    var id: UUID
     var photo: Photo
     var thumbnail: UIImage?
     var fullImage: UIImage?
@@ -84,20 +85,10 @@ struct FindPhoto: Hashable {
     var highlights: Set<Highlight>?
     var descriptionText = ""
     var descriptionLines = [Line]()
-
-    func getResultsText() -> String {
-        if let highlights = highlights {
-            switch highlights.count {
-            case 0:
-                return "No Results"
-            case 1:
-                return "1 Result"
-            default:
-                return "\(highlights.count) Results"
-            }
-        } else {
-            return "No Results"
-        }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     struct Line: Hashable {
@@ -116,6 +107,21 @@ struct FindPhoto: Hashable {
             var rangeInSentence: Range<Int>
             var colors: [UIColor]
             var alpha: CGFloat
+        }
+    }
+
+    func getResultsText() -> String {
+        if let highlights = highlights {
+            switch highlights.count {
+            case 0:
+                return "No Results"
+            case 1:
+                return "1 Result"
+            default:
+                return "\(highlights.count) Results"
+            }
+        } else {
+            return "No Results"
         }
     }
 }
@@ -175,7 +181,7 @@ struct PhotosSection: Hashable {
 }
 
 struct PhotoSlidesSection: Hashable {
-    let id = 0
+    var id = 0
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

@@ -17,6 +17,10 @@ struct Section {
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
     var headerHeight: CGFloat = 0
     
+    /// attributes for the headers / supplementary views
+    var sectionAttributes = [UICollectionViewLayoutAttributes]()
+    
+    /// attributes for cells
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     
     var getSections: (() -> [Section])?
@@ -115,7 +119,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                     height: size.height
                 )
                 attributes.frame = headerFrame
-                layoutAttributes.append(attributes)
+                sectionAttributes.append(attributes)
                 for index in columnOffsets.indices {
                     columnOffsets[index].height += headerFrame.height + ListsCollectionConstants.cellSpacing
                 }
@@ -153,7 +157,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return layoutAttributes[safe: indexPath.item]
+        return sectionAttributes[safe: indexPath.item]
     }
     
     /// pass attributes to the collection view flow layout
@@ -162,8 +166,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        /// edge cells don't shrink, but the animation is perfect
-//        return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
-        return layoutAttributes
+        let attributes = layoutAttributes + sectionAttributes
+        return attributes.filter { rect.intersects($0.frame) }
     }
 }

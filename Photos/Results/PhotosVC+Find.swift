@@ -20,6 +20,7 @@ extension PhotosViewController {
                 let description = getCellDescription(from: lines)
                 
                 let findPhoto = FindPhoto(
+                    id: UUID(),
                     photo: photo,
                     thumbnail: thumbnail,
                     highlights: highlights,
@@ -36,7 +37,7 @@ extension PhotosViewController {
             self.updateResults(animate: true)
         } else {
             self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
-            self.updateResults(animate: true)
+            self.updateResults(animate: false)
         }
         
         self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""

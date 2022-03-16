@@ -15,6 +15,7 @@ extension PhotosViewController {
         let findPhotos: [FindPhoto] = model.photos.map { photo in
             let thumbnail = self.model.photoToThumbnail[photo] ?? nil
             return FindPhoto(
+                id: UUID(),
                 photo: photo,
                 thumbnail: thumbnail
             )
