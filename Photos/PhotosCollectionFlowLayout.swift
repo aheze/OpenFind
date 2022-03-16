@@ -118,7 +118,6 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("photo..... \(indexPath)")
         return sectionLayouts[safe: indexPath.section]?.layoutAttributes[safe: indexPath.item]
     }
     

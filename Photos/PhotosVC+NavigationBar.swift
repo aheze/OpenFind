@@ -20,6 +20,8 @@ extension PhotosViewController {
         self.selectBarButton = selectButton
         
         let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 34)
+        self.scanningBarButton = scanningButton
+        
         navigationItem.rightBarButtonItems = [scanningButton, selectButton]
     }
 
@@ -34,6 +36,16 @@ extension PhotosViewController {
     }
     func hideCancelNavigationBar() {
         navigationItem.leftBarButtonItem = nil
+    }
+    
+    /// hide when enter results
+    func showScanningButton(_ show: Bool) {
+        guard let scanningBarButton = scanningBarButton, let selectBarButton = selectBarButton else { return }
+        if show {
+            navigationItem.rightBarButtonItems = [scanningBarButton, selectBarButton]
+        } else {
+            navigationItem.rightBarButtonItems = [selectBarButton]
+        }
     }
     
     @objc func cancelPressed() {

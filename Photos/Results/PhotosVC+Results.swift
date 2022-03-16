@@ -24,15 +24,17 @@ extension PhotosViewController {
             collectionView.removeFromSuperview()
             updateNavigationBlur(with: resultsCollectionView)
             showCancelNavigationBar()
+            showScanningButton(false)
         } else {
+            model.resultsState = nil
             if collectionView.window == nil {
                 collectionViewContainer.addSubview(collectionView)
                 collectionView.pinEdgesToSuperview()
             }
             resultsCollectionView.removeFromSuperview()
             updateNavigationBlur(with: collectionView)
-            model.resultsState = nil
             hideCancelNavigationBar()
+            showScanningButton(true)
         }
     }
 

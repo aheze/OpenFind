@@ -34,7 +34,7 @@ extension PhotosSlidesViewController {
                     }
                 }
             } else {
-                print("no meta!")
+                print("No metadata for finding!")
             }
         }
     }

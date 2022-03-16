@@ -29,6 +29,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     
     /// selection
     var selectBarButton: UIBarButtonItem!
+    var scanningBarButton: UIBarButtonItem!
     var photosSelectionViewModel = PhotosSelectionViewModel()
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
     lazy var scanningIconController = PhotosScanningIconController(model: model)
