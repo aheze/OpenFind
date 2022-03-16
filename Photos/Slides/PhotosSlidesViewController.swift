@@ -87,7 +87,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             configureToolbar(for: findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
-            if findPhoto.highlights?.count ?? 0 > 0{
+            if findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
                 slidesSearchPromptViewModel.show(true)
                 slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
             }

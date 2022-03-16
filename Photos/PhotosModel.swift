@@ -60,7 +60,7 @@ struct PhotosResultsState {
     }
 
     func getResultsText() -> String {
-        let highlights = findPhotos.compactMap { $0.highlights }.flatMap { $0 }
+        let highlights = findPhotos.compactMap { $0.highlightsSet?.highlights }.flatMap { $0 }
 
         switch highlights.count {
         case 0:
@@ -81,14 +81,19 @@ struct FindPhoto: Hashable {
     var fullImage: UIImage?
     var associatedViewController: PhotosSlidesItemViewController?
 
-    /// results
-    var highlights: Set<Highlight>?
+    /// results (an array of highlights)
+    var highlightsSet: HighlightsSet?
     var descriptionText = ""
     var descriptionLines = [Line]()
-    
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+    
+    /// stores the search (`stringToGradients`) with the results (`highlights`)
+    struct HighlightsSet: Equatable {
+        var stringToGradients: [String: Gradient]
+        var highlights: Set<Highlight>
     }
 
     struct Line: Hashable {
@@ -111,7 +116,8 @@ struct FindPhoto: Hashable {
     }
 
     func getResultsText() -> String {
-        if let highlights = highlights {
+        if let highlightsSet = highlightsSet {
+            let highlights = highlightsSet.highlights
             switch highlights.count {
             case 0:
                 return "No Results"
@@ -137,7 +143,7 @@ extension FindPhoto {
 
     func resultsString() -> String {
         let string: String
-        let count = highlights?.count ?? 0
+        let count = highlightsSet?.highlights.count ?? 0
         if count == 1 {
             string = "\(count) Result"
         } else {

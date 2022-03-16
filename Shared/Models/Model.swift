@@ -17,7 +17,7 @@ enum Value {
     case list(List)
 }
 
-struct Gradient {
+struct Gradient: Hashable {
     var colors = [UIColor]()
     var alpha = CGFloat(1)
 }

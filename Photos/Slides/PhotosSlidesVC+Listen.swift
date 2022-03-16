@@ -44,10 +44,17 @@ extension PhotosSlidesViewController {
 
                     /// replace all highlights
                     for index in slidesState.findPhotos.indices {
-                        if let highlights = slidesState.findPhotos[index].highlights {
-                            let newHighlights = self.getUpdatedHighlightsColors(oldHighlights: highlights, newStringToGradients: self.slidesSearchViewModel.stringToGradients)
-                            self.model.slidesState?.findPhotos[index].highlights = newHighlights
+                        if let highlightsSet = slidesState.findPhotos[index].highlightsSet {
+                            let newHighlights = self.getUpdatedHighlightsColors(
+                                oldHighlights: highlightsSet.highlights,
+                                newStringToGradients: self.slidesSearchViewModel.stringToGradients
+                            )
+                            let newHighlightsSet = FindPhoto.HighlightsSet(
+                                stringToGradients: self.slidesSearchViewModel.stringToGradients,
+                                highlights: newHighlights
+                            )
                             self.model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.highlights = newHighlights
+                            self.model.slidesState?.findPhotos[index].highlightsSet = newHighlightsSet
                         }
                     }
                 }

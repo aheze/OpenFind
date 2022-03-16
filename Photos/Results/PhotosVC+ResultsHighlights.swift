@@ -67,12 +67,13 @@ extension PhotosViewController {
     
     /// replace the `resultsState`'s current highlight colors. Don't call `update()`, since applying snapshots is laggy.
     /// This only updates the results collection view.
+    /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
     func updateResultsHighlightColors() {
         guard let resultsState = model.resultsState else { return }
         for findPhotoIndex in resultsState.findPhotos.indices {
-            guard let highlights = resultsState.findPhotos[findPhotoIndex].highlights else { return }
+            guard let highlightsSet = resultsState.findPhotos[findPhotoIndex].highlightsSet else { return }
             
-            let newHighlights: Set<Highlight> = highlights.mapSet { highlight in
+            let newHighlights: Set<Highlight> = highlightsSet.highlights.mapSet { highlight in
                 if let gradient = self.searchViewModel.stringToGradients[highlight.string] {
                     var newHighlight = highlight
                     newHighlight.colors = gradient.colors
@@ -81,7 +82,8 @@ extension PhotosViewController {
                 }
                 return highlight
             }
-            model.resultsState?.findPhotos[findPhotoIndex].highlights = newHighlights
+            let newHighlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: newHighlights)
+            model.resultsState?.findPhotos[findPhotoIndex].highlightsSet = newHighlightsSet
             
             /// update the line highlight colors
             for (lineIndex, descriptionLine) in resultsState.findPhotos[findPhotoIndex].descriptionLines.enumerated() {

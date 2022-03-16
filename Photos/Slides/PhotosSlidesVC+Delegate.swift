@@ -33,8 +33,12 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = viewController
             }
 
-            if let highlights = findPhoto.highlights {
-                photoSlidesViewController.highlightsViewModel.highlights = highlights
+            if let highlightsSet = findPhoto.highlightsSet {
+                if highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients {
+                    photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
+                } else {
+                    print("DifferenR!!!")
+                }
             }
 
             if model.animatingSlides {
