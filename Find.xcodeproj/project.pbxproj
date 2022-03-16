@@ -424,6 +424,9 @@
 		3C22D4082702D578001E8474 /* PagingIndexItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3CA2702D578001E8474 /* PagingIndexItem.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
+		3C2C2CDB27E23D0300CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
+		3C2C2CDC27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
+		3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
@@ -2416,6 +2419,7 @@
 		3C22D3CA2702D578001E8474 /* PagingIndexItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingIndexItem.swift; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
+		3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Progress.swift"; sourceTree = "<group>"; };
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
@@ -4832,6 +4836,7 @@
 				3CFD6025278B71A50031BC8B /* SearchNC+NavigationBar.swift */,
 				3CFD6027278B71CE0031BC8B /* SearchNC+SearchBar.swift */,
 				3C443FA427DFA6310050A0AB /* SearchNC+Prompt.swift */,
+				3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */,
 				3CF76427278CC2AE00DCA4EA /* SearchNC+Transitioning.swift */,
 				3CBB31A527BDB98800F25F6A /* SearchNC+ViewTransitioning.swift */,
 				3CF7642B278CE52800DCA4EA /* SearchNC+Utilities.swift */,
@@ -6751,6 +6756,7 @@
 				3C443FBD27DFCD4F0050A0AB /* HeaderContentView.swift in Sources */,
 				3C1D178C27BCA50C00E82B8B /* PhotosCells.swift in Sources */,
 				3CE9C208274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
+				3C2C2CDC27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */,
 				3C4D39D72747661E0010FD68 /* AppDelegate.swift in Sources */,
 				3C443EAB27DD89830050A0AB /* HighlightsConstants.swift in Sources */,
 				3CF76430278D187300DCA4EA /* SearchNC+Utilities.swift in Sources */,
@@ -7237,6 +7243,7 @@
 				3C6C73402781944B00E039F0 /* TabBarController.swift in Sources */,
 				3C17B8EB27C9C4D200B55E97 /* PhotosVC+ResultsHighlights.swift in Sources */,
 				3C6C73A42781947400E039F0 /* SearchVC+Cell.swift in Sources */,
+				3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */,
 				3C93147E27B76129009E5B6E /* ListsDetailVC+Delegate.swift in Sources */,
 				3CAE64F427C6AE34009E8564 /* PhotosVC+Find.swift in Sources */,
 				3C0AACC527C899D4009DFC09 /* TabConstants.swift in Sources */,
@@ -7804,6 +7811,7 @@
 				3C21EDE827A4617D0005E183 /* RealmModel+Lists.swift in Sources */,
 				3C443FAF27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift in Sources */,
 				3CBB31A627BDB98800F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
+				3C2C2CDB27E23D0300CA92EA /* SearchNC+Progress.swift in Sources */,
 				3CDD946527C0688200D3EA1A /* Defaults.swift in Sources */,
 				3CFD6008278B6FA50031BC8B /* Utilities+SwiftUI.swift in Sources */,
 				3C443FA527DFA6310050A0AB /* SearchNC+Prompt.swift in Sources */,

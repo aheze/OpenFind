@@ -39,6 +39,9 @@ class SearchNavigationController: UIViewController, PageViewController {
     var detailsSearchPromptViewContainer = UIView()
     var detailsSearchPromptViewContainerTopC: NSLayoutConstraint!
     var detailsSearchPromptViewContainerHeightC: NSLayoutConstraint!
+    
+    var progressViewModel: ProgressViewModel?
+    var progressContainerView = UIView()
 
     
     // MARK: - Optional Transitioning
@@ -103,6 +106,7 @@ class SearchNavigationController: UIViewController, PageViewController {
         setupNavigationBar()
         setupSearchBar()
         setupPrompt()
+        setupProgress()
         listen()
         
         /// refresh the blur after coming back from app switcher

@@ -35,6 +35,8 @@ extension PhotosSlidesViewController {
                 }
             } else {
                 print("No metadata for finding!")
+                
+                self.searchNavigationProgressViewModel.start(progress: .auto(estimatedTime: 1.5))
             }
         }
     }

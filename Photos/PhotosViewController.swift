@@ -15,6 +15,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var toolbarViewModel: ToolbarViewModel
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
+    var searchNavigationProgressViewModel: ProgressViewModel
     var slidesSearchViewModel: SearchViewModel
     var slidesSearchPromptViewModel: SearchPromptViewModel
     var permissionsViewModel = PhotosPermissionsViewModel()
@@ -63,6 +64,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         toolbarViewModel: ToolbarViewModel,
         searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
+        searchNavigationProgressViewModel: ProgressViewModel,
         slidesSearchViewModel: SearchViewModel,
         slidesSearchPromptViewModel: SearchPromptViewModel
     ) {
@@ -71,6 +73,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         self.toolbarViewModel = toolbarViewModel
         self.searchNavigationModel = searchNavigationModel
         self.searchViewModel = searchViewModel
+        self.searchNavigationProgressViewModel = searchNavigationProgressViewModel
         self.slidesSearchViewModel = slidesSearchViewModel
         self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         super.init(coder: coder)

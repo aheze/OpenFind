@@ -14,6 +14,7 @@ class PhotosController {
     
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
+    var searchNavigationProgressViewModel: ProgressViewModel
     var slidesSearchPromptViewModel: SearchPromptViewModel
     
     /// for the slides. This will only be up to date when the slides are presented.
@@ -32,11 +33,13 @@ class PhotosController {
         
         let searchNavigationModel = SearchNavigationModel()
         let searchViewModel = SearchViewModel(configuration: .photos)
+        let searchNavigationProgressViewModel = ProgressViewModel()
         let slidesSearchViewModel = SearchViewModel(configuration: .photos)
         let slidesSearchPromptViewModel = SearchPromptViewModel()
         
         self.searchNavigationModel = searchNavigationModel
         self.searchViewModel = searchViewModel
+        self.searchNavigationProgressViewModel = searchNavigationProgressViewModel
         self.slidesSearchViewModel = slidesSearchViewModel
         self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         
@@ -50,6 +53,7 @@ class PhotosController {
                 toolbarViewModel: toolbarViewModel,
                 searchNavigationModel: searchNavigationModel,
                 searchViewModel: searchViewModel,
+                searchNavigationProgressViewModel: searchNavigationProgressViewModel,
                 slidesSearchViewModel: slidesSearchViewModel,
                 slidesSearchPromptViewModel: slidesSearchPromptViewModel
             )
@@ -68,6 +72,7 @@ class PhotosController {
         /// set the details search view model
         searchNavigationController.detailsSearchViewModel = slidesSearchViewModel
         searchNavigationController.detailsSearchPromptViewModel = slidesSearchPromptViewModel
+        searchNavigationController.progressViewModel = searchNavigationProgressViewModel
         
         searchNavigationModel.onWillBecomeActive = { viewController.willBecomeActive() }
         searchNavigationModel.onDidBecomeActive = { viewController.didBecomeActive() }
