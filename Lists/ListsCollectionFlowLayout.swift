@@ -80,6 +80,8 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
         guard let collectionView = collectionView else { return }
         
         let availableWidth = getAvailableWidth(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+        
+        var sectionAttributes = [UICollectionViewLayoutAttributes]()
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         let (numberOfColumns, columnWidth) = getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
@@ -110,7 +112,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
             if let size = getSizeForSectionWithWidth?(section.index, availableWidth) {
                 let attributes = UICollectionViewLayoutAttributes(
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                    with: section.index.indexPath
+                    with: IndexPath(item: 0, section: section.index)
                 )
                 let headerFrame = CGRect(
                     x: ListsCollectionConstants.sidePadding,
@@ -119,6 +121,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                     height: size.height
                 )
                 attributes.frame = headerFrame
+                
                 sectionAttributes.append(attributes)
                 for index in columnOffsets.indices {
                     columnOffsets[index].height += headerFrame.height + ListsCollectionConstants.cellSpacing
@@ -137,7 +140,8 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                             height: size.height
                         )
                 
-                        let attributes = UICollectionViewLayoutAttributes(forCellWith: index.indexPath)
+                        let indexPath = IndexPath(item: index, section: section.index)
+                        let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                         attributes.frame = cellFrame
                         layoutAttributes.append(attributes)
                         columnOffsets[shortestColumnIndex].height += cellFrame.height + ListsCollectionConstants.cellSpacing
@@ -153,13 +157,14 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                 - collectionView.safeAreaInsets.right,
             height: tallestColumnOffset.height
         )
+        self.sectionAttributes = sectionAttributes
         self.layoutAttributes = layoutAttributes
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return sectionAttributes[safe: indexPath.item]
     }
-    
+
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutAttributes[safe: indexPath.item]

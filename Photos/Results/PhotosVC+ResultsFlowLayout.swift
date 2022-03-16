@@ -11,17 +11,7 @@ import UIKit
 extension PhotosViewController {
     func createFlowLayout() -> ListsCollectionFlowLayout {
         let flowLayout = ListsCollectionFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-//        flowLayout.getIndices = { [weak self] in
-//            
-//            if
-//                let self = self,
-//                let resultsState = self.model.resultsState
-//            {
-//                return Array(resultsState.findPhotos.indices)
-//            }
-//            return []
-//        }
+        flowLayout.scrollDirection = .vertical
         flowLayout.getSections = { [weak self] in
 
             if

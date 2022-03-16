@@ -19,9 +19,9 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var slidesSearchPromptViewModel: SearchPromptViewModel
     var permissionsViewModel = PhotosPermissionsViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
-    
     var headerContentModel = HeaderContentModel()
-    lazy var resultsHeaderView = ResultsHeaderView(model: resultsHeaderViewModel)
+    
+    lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)

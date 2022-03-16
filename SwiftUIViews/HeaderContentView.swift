@@ -13,24 +13,6 @@ protocol HeaderSettable: UICollectionViewFlowLayout {
     var headerHeight: CGFloat { get set }
 }
 
-class ResultsHeaderViewModel: ObservableObject {
-    @Published var text = "10 Results."
-    @Published var description = " More results will appear as Find scans more photos."
-}
-
-struct ResultsHeaderView: View {
-    @ObservedObject var model: ResultsHeaderViewModel
-    var body: some View {
-        Group {
-            Text(model.text)
-                + Text(model.description)
-                .foregroundColor(UIColor.secondaryLabel.color)
-        }
-        .fixedSize(horizontal: false, vertical: true)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
-
 class HeaderContentModel: ObservableObject {
     var size: CGSize? = CGSize(width: 50, height: 50)
     var sizeChanged: (() -> Void)?

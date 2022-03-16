@@ -80,21 +80,6 @@ extension PhotosViewController {
                 content: self.resultsHeaderView,
                 headerContentModel: self.headerContentModel
             )
-//            if
-//                kind == UICollectionView.elementKindSectionHeader,
-//                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderContentView", for: indexPath) as? HeaderContentView
-//            {
-//                if headerView.content == nil {
-//                    let content = AnyView(ResultsHeaderView(model: self.resultsHeaderViewModel))
-//                    headerView.content = content
-//                    let hostingController = UIHostingController(rootView: content)
-//                    hostingController.view.backgroundColor = .clear
-//                    self.addChildViewController(hostingController, in: headerView)
-//                }
-//                return headerView
-//            }
-
-//            return nil
         }
 
         return dataSource

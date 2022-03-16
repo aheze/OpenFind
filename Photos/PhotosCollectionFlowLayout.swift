@@ -118,11 +118,12 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("photo..... \(indexPath)")
         return sectionLayouts[safe: indexPath.section]?.layoutAttributes[safe: indexPath.item]
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         /// edge cells don't shrink, but the animation is perfect
-        return sectionLayouts.map { $0.layoutAttributes }.joined().filter { rect.intersects($0.frame) } /// try deleting this line
+        return sectionLayouts.map { $0.layoutAttributes }.joined().filter { rect.intersects($0.frame) }
     }
 }

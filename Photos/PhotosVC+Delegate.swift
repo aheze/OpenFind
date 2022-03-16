@@ -29,4 +29,8 @@ extension PhotosViewController: UICollectionViewDelegate {
             willDisplayCell(cell: cell, index: indexPath.item)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        print("sup! \(indexPath)")
+    }
 }

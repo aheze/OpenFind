@@ -25,6 +25,20 @@ extension UIViewController {
         childViewController.didMove(toParent: self)
     }
     
+    func addChildViewControllerWithConstraints(_ childViewController: UIViewController, in inView: UIView) {
+        /// Add Child View Controller
+        addChild(childViewController)
+        
+        /// Add Child View as Subview
+        inView.insertSubview(childViewController.view, at: 0)
+        
+        /// Configure Child View
+        childViewController.view.pinEdgesToSuperview()
+        
+        /// Notify Child View Controller
+        childViewController.didMove(toParent: self)
+    }
+    
     func addResizableChildViewController(_ childViewController: UIViewController, in inView: UIView) {
         /// Add Child View Controller
         addChild(childViewController)
