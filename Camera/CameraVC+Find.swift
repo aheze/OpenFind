@@ -12,13 +12,17 @@ import UIKit
 extension CameraViewController {
     /// use fast mode
     func findAndAddHighlights(pixelBuffer: CVPixelBuffer) async {
-        var options = FindOptions()
-        options.orientation = .right
-        options.level = .fast
-        options.customWords = searchViewModel.customWords
+        var visionOptions = VisionOptions()
+        visionOptions.orientation = .right
+        visionOptions.level = .fast
+        visionOptions.customWords = searchViewModel.customWords
+        
+        var findOptions = FindOptions()
+        findOptions.priority = .cancelIfBusy
+        findOptions.action = .camera
 
         /// `nil` if was finding before
-        let request = await Find.find(in: .pixelBuffer(pixelBuffer), options: options, action: .camera, wait: false)
+        let request = await Find.find(in: .pixelBuffer(pixelBuffer), visionOptions: visionOptions, findOptions: findOptions)
         let sentences = Find.getFastSentences(from: request)
         let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients)
 
@@ -31,12 +35,16 @@ extension CameraViewController {
 
     /// use accurate mode and wait
     func findAndAddHighlights(image: CGImage, replace: Bool = false, wait: Bool) async -> [Sentence] {
-        var options = FindOptions()
-        options.orientation = .up
-        options.level = .accurate
-        options.customWords = searchViewModel.customWords
+        var visionOptions = VisionOptions()
+        visionOptions.orientation = .up
+        visionOptions.level = .accurate
+        visionOptions.customWords = searchViewModel.customWords
+        
+        var findOptions = FindOptions()
+        findOptions.priority = .waitUntilNotBusy
+        findOptions.action = .camera
 
-        let request = await Find.find(in: .cgImage(image), options: options, action: .camera, wait: true)
+        let request = await Find.find(in: .cgImage(image), visionOptions: visionOptions, findOptions: findOptions)
         let sentences = Find.getSentences(from: request)
         let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients)
         DispatchQueue.main.async {

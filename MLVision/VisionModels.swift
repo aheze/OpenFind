@@ -9,10 +9,34 @@
 import UIKit
 import Vision
 
-struct FindOptions {
+struct VisionOptions {
     var level = VNRequestTextRecognitionLevel.fast
     var customWords = [String]()
     var orientation = CGImagePropertyOrientation.up
+}
+
+struct FindOptions {
+    var priority = Priority.cancelIfBusy
+    var action = Action.camera
+
+    enum Priority {
+        /// `startASAP` is for photos scanning. As soon as the current scanning photo is done, go.
+//        case startASAP
+
+        /// As soon as the current scanning photo is done, start.
+        case waitUntilNotBusy
+        case cancelIfBusy /// if `startTime` is nil, don't even start. Returns
+    }
+
+    enum Action {
+        case camera
+        case photosScanning /// photos scanning
+        case individualPhoto
+    }
+}
+
+enum FindError: Error {
+    case startTimeExistedWasBusy
 }
 
 enum FindImage {
@@ -20,14 +44,9 @@ enum FindImage {
     case pixelBuffer(CVPixelBuffer)
 }
 
-enum FindingAction {
-    case camera
-    case photos /// photos scanning
-}
-
 struct QueuedRun {
     var image: FindImage
-    var options: FindOptions
-    var action: FindingAction
+    var visionOptions: VisionOptions
+    var findOptions: FindOptions
     var completion: ((VNRequest) -> ())?
 }

@@ -15,6 +15,7 @@ extension PhotosViewModel {
         /// 2. Index inside `resultsCollectionView`
         var collectionViewIndexPath: IndexPath?
         var resultsCollectionViewIndex: Int?
+        var slidesCollectionViewIndex: Int?
 
         if
             let index = getPhotoIndex(photo: photo),
@@ -36,12 +37,15 @@ extension PhotosViewModel {
                 let slidesState = slidesState,
                 let index = slidesState.getFindPhotoIndex(photo: photo)
             {
+                slidesCollectionViewIndex = index
                 self.slidesState?.findPhotos[index].photo.metadata = metadata
+                
+                print("updating index \(index) metadata. \(self.slidesState?.findPhotos[index].photo.metadata)")
             }
         }
 
         if reloadCell {
-            reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
+            reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata)
         }
 
         if photo.metadata == nil {

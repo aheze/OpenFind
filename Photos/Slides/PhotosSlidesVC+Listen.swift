@@ -10,6 +10,20 @@ import UIKit
 
 extension PhotosSlidesViewController {
     func listen() {
+        model.updateSlidesAt = { [weak self] index, metadata in
+            guard let self = self else { return }
+            if self.searchNavigationProgressViewModel.percentageShowing {
+                self.searchNavigationProgressViewModel.finishAutoProgress()
+                let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
+
+                if let slidesState = self.model.slidesState, let findPhoto = slidesState.findPhotos[safe: index] {
+                    DispatchQueue.main.async {
+                        findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+                    }
+                }
+            }
+        }
+
         slidesSearchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
 
@@ -17,6 +31,7 @@ extension PhotosSlidesViewController {
             guard let currentIndex = slidesState.currentIndex else { return }
             let findPhoto = slidesState.findPhotos[currentIndex]
 
+            print("Is there metadata in this photo? \(currentIndex): \(findPhoto.photo.metadata != nil)")
             /// metadata already exists, directly find
             if let metadata = findPhoto.photo.metadata {
                 if textChanged {
@@ -25,9 +40,8 @@ extension PhotosSlidesViewController {
                         findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     }
                 } else {
-
                     self.model.updateFieldOverrides?(self.slidesSearchViewModel.fields)
-                    
+
                     /// replace all highlights
                     if let model = findPhoto.associatedViewController?.highlightsViewModel {
                         self.updateHighlightColors(for: model, with: self.slidesSearchViewModel.stringToGradients)
@@ -35,8 +49,14 @@ extension PhotosSlidesViewController {
                 }
             } else {
                 print("No metadata for finding!")
-                
+                Find.prioritizedAction = .individualPhoto
                 self.searchNavigationProgressViewModel.start(progress: .auto(estimatedTime: 1.5))
+
+                var findOptions = FindOptions()
+                findOptions.priority = .waitUntilNotBusy
+                findOptions.action = .individualPhoto
+                self.model.scanningState = .scanning
+                self.model.scanPhoto(findPhoto.photo, findOptions: findOptions)
             }
         }
     }

@@ -26,8 +26,9 @@ class PhotosViewModel: ObservableObject {
     /// reload at a specific index path
     /// 1. Index path inside `collectionView`
     /// 2. Index inside `resultsCollectionView`
-    /// 3. the photo metadata
-    var reloadAt: ((IndexPath?, Int?, PhotoMetadata) -> Void)?
+    /// 3. Index inside `slidesState`
+    /// 4. the photo metadata
+    var reloadAt: ((IndexPath?, Int?, Int?, PhotoMetadata) -> Void)?
 
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
@@ -48,8 +49,13 @@ class PhotosViewModel: ObservableObject {
     var resultsState: PhotosResultsState?
 
     /// about to present slides, update the slides search collection view to match the latest search view model
+    /// Set this inside **PhotosController**
     var updateSlidesSearchCollectionView: (() -> Void)?
-
+    
+    /// update a metadata
+    /// Set this inside **PhotosSlidesVC+Listen**
+    var updateSlidesAt: ((Int, PhotoMetadata) -> Void)?
+    
     /// about to present slides, set the transition
     var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
 

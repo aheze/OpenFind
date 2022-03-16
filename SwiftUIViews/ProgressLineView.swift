@@ -15,6 +15,8 @@ class ProgressViewModel: ObservableObject {
     
     /// the actual percentage used by the view
     @Published var percentage = CGFloat(0)
+    
+    /// `true` if the entire progress bar is visible.
     @Published var percentageShowing = false
     
     @Published var shimmerPercentage = CGFloat(0)

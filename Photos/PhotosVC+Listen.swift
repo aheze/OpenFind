@@ -14,7 +14,7 @@ extension PhotosViewController {
             guard let self = self else { return }
             self.update(animate: false)
         }
-        model.reloadAt = { [weak self] collectionViewIndexPath, resultsCollectionViewIndex, metadata in
+        model.reloadAt = { [weak self] collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata in
             guard let self = self else { return }
             if let collectionViewIndexPath = collectionViewIndexPath {
                 self.update(at: collectionViewIndexPath, with: metadata)
@@ -22,6 +22,10 @@ extension PhotosViewController {
             
             if let resultsCollectionViewIndex = resultsCollectionViewIndex {
                 self.updateResults(at: resultsCollectionViewIndex, with: metadata)
+            }
+            
+            if let slidesCollectionViewIndex = slidesCollectionViewIndex {
+                self.model.updateSlidesAt?(slidesCollectionViewIndex, metadata)
             }
         }
         model.scanningIconTapped = { [weak self] in
