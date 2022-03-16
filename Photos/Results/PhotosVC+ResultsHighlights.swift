@@ -65,8 +65,9 @@ extension PhotosViewController {
         return cellHighlights
     }
     
-    /// replace the `resultsState`'s current highlight colors. Don't call `update()`, since apply snapshots is laggy.
-    func updateHighlightColors() {
+    /// replace the `resultsState`'s current highlight colors. Don't call `update()`, since applying snapshots is laggy.
+    /// This only updates the results collection view.
+    func updateResultsHighlightColors() {
         guard let resultsState = model.resultsState else { return }
         for findPhotoIndex in resultsState.findPhotos.indices {
             guard let highlights = resultsState.findPhotos[findPhotoIndex].highlights else { return }

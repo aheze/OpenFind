@@ -30,9 +30,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         case .pop:
             
             /// update the highlight colors if necessary
-
             self.model.updateSearchCollectionView?()
-            self.updateHighlightColors()
+            self.updateResultsHighlightColors()
             
             if let resultsState = model.resultsState {
                 for index in resultsState.findPhotos.indices {

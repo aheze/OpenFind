@@ -12,12 +12,10 @@ extension PhotosViewModel {
     
     /// a photo was just scanned
     func photoScanned(photo: Photo, sentences: [Sentence]) {
-        print("phoot zcanned!")
         if let metadata = photo.metadata {
             var newMetadata = metadata
             newMetadata.sentences = sentences
             newMetadata.isScanned = true
-            print("already meta")
             updatePhotoMetadata(photo: photo, metadata: newMetadata, reloadCell: true)
         } else {
             let metadata = PhotoMetadata(
@@ -26,7 +24,6 @@ extension PhotosViewModel {
                 isScanned: true,
                 isStarred: false
             )
-            print("added meta")
             updatePhotoMetadata(photo: photo, metadata: metadata, reloadCell: true)
         }
 

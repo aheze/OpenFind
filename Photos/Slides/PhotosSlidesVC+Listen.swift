@@ -31,7 +31,6 @@ extension PhotosSlidesViewController {
             guard let currentIndex = slidesState.currentIndex else { return }
             let findPhoto = slidesState.findPhotos[currentIndex]
 
-            print("Is there metadata in this photo? \(currentIndex): \(findPhoto.photo.metadata != nil)")
             /// metadata already exists, directly find
             if let metadata = findPhoto.photo.metadata {
                 if textChanged {
@@ -40,15 +39,19 @@ extension PhotosSlidesViewController {
                         findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     }
                 } else {
+                    /// update the highlights back in `resultsCollectionView`
                     self.model.updateFieldOverrides?(self.slidesSearchViewModel.fields)
 
                     /// replace all highlights
-                    if let model = findPhoto.associatedViewController?.highlightsViewModel {
-                        self.updateHighlightColors(for: model, with: self.slidesSearchViewModel.stringToGradients)
+                    for index in slidesState.findPhotos.indices {
+                        if let highlights = slidesState.findPhotos[index].highlights {
+                            let newHighlights = self.getUpdatedHighlightsColors(oldHighlights: highlights, newStringToGradients: self.slidesSearchViewModel.stringToGradients)
+                            self.model.slidesState?.findPhotos[index].highlights = newHighlights
+                            self.model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.highlights = newHighlights
+                        }
                     }
                 }
             } else {
-                print("No metadata for finding!")
                 Find.prioritizedAction = .individualPhoto
                 self.searchNavigationProgressViewModel.start(progress: .auto(estimatedTime: 1.5))
 

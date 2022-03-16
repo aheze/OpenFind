@@ -39,8 +39,6 @@ extension PhotosViewModel {
             {
                 slidesCollectionViewIndex = index
                 self.slidesState?.findPhotos[index].photo.metadata = metadata
-                
-                print("updating index \(index) metadata. \(self.slidesState?.findPhotos[index].photo.metadata)")
             }
         }
 
