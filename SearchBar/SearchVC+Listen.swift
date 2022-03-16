@@ -32,6 +32,7 @@ extension SearchViewController {
             }
         }
         
+        /// this will update the fields. No need to notify though, otherwise there will be an unwanted animation of the "Cancel" button.
         collectionViewModel.focusedCellIndexChanged = { [weak self] oldCellIndex, newCellIndex in
             guard let self = self else { return }
             
@@ -42,7 +43,7 @@ extension SearchViewController {
                     if self.searchViewModel.fields.indices.contains(oldCellIndex) {
                         var field = self.searchViewModel.fields[oldCellIndex]
                         field.showingDeleteButton = false
-                        self.searchViewModel.updateField(at: oldCellIndex, with: field, notify: true)
+                        self.searchViewModel.updateField(at: oldCellIndex, with: field, notify: false)
                     }
 
                     cell.activate(false)

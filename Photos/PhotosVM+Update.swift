@@ -10,13 +10,12 @@ import UIKit
 
 extension PhotosViewModel {
     func updatePhotoMetadata(photo: Photo, metadata: PhotoMetadata, reloadCell: Bool) {
-        
         /// for reloading at a specific index path
         /// 1. Index path inside `collectionView`
         /// 2. Index inside `resultsCollectionView`
         var collectionViewIndexPath: IndexPath?
         var resultsCollectionViewIndex: Int?
-        
+
         if
             let index = getPhotoIndex(photo: photo),
             let indexPath = getPhotoIndexPath(photo: photo)
@@ -39,9 +38,8 @@ extension PhotosViewModel {
             {
                 self.slidesState?.findPhotos[index].photo.metadata = metadata
             }
-            
         }
-        
+
         if reloadCell {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }

@@ -64,11 +64,11 @@ struct PhotosResultsState {
 
         switch highlights.count {
         case 0:
-            return "No Results"
+            return "No Results."
         case 1:
-            return "1 Result"
+            return "1 Result."
         default:
-            return "\(highlights.count) Results"
+            return "\(highlights.count) Results."
         }
     }
 }

@@ -104,14 +104,13 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
             }
             
             if let size = getSizeForSectionWithWidth?(section.index, availableWidth) {
-                print("size: \(size)")
                 let attributes = UICollectionViewLayoutAttributes(
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                     with: section.index.indexPath
                 )
                 let headerFrame = CGRect(
                     x: ListsCollectionConstants.sidePadding,
-                    y: maxHeight + ListsCollectionConstants.cellSpacing,
+                    y: maxHeight,
                     width: availableWidth,
                     height: size.height
                 )
@@ -154,7 +153,6 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("layoutAttributesForSupplementaryView? \(indexPath)''")
         return layoutAttributes[safe: indexPath.item]
     }
     

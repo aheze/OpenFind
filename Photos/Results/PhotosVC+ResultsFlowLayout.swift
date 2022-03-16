@@ -26,12 +26,11 @@ extension PhotosViewController {
         }
         
         flowLayout.getSizeForSectionWithWidth = { [weak self] photosSectionIndex, availableWidth in
-            print("getting.")
+            
             if
                 let self = self,
-                let size = self.resultsHeaderViewModel.size
+                let size = self.headerContentModel.size
             {
-                print("height; \(size)")
                 return CGSize(width: availableWidth, height: size.height)
             }
             return .zero

@@ -21,16 +21,14 @@ extension PhotosViewController {
 
     /// reload the collection view at an index path.
     func update(at indexPath: IndexPath, with metadata: PhotoMetadata) {
-        guard let existingPhoto = dataSource.itemIdentifier(for: indexPath) else { return }
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems([existingPhoto])
-        dataSource.apply(snapshot)
+        if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
+            configureCell(cell: cell, metadata: metadata)
+        }
     }
 
     func sortCollectionView() {}
 
     func makeDataSource() -> DataSource {
-        
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, cachedPhoto -> UICollectionViewCell? in
@@ -70,18 +68,6 @@ extension PhotosViewController {
                 return cell
             }
         )
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            print("supp. in main")
-            if
-                kind == UICollectionView.elementKindSectionHeader,
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderContentView", for: indexPath) as? HeaderContentView
-            {
-                print("...")
-            }
-
-            return nil
-        }
-        
         return dataSource
     }
 
@@ -98,5 +84,3 @@ extension PhotosViewController {
         cell.overlayStarImageView.alpha = 0
     }
 }
-
-

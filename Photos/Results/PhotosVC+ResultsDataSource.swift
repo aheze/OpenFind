@@ -18,15 +18,13 @@ extension PhotosViewController {
         resultsSnapshot.appendSections([section])
         resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
-        print("Applied.''")
     }
 
     /// reload the collection view at an index path.
     func updateResults(at index: Int, with metadata: PhotoMetadata) {
-        guard let existingFindPhoto = resultsDataSource.itemIdentifier(for: index.indexPath) else { return }
-        var snapshot = resultsDataSource.snapshot()
-        snapshot.reloadItems([existingFindPhoto])
-        resultsDataSource.apply(snapshot)
+        if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
+            configureCell(cell: cell, metadata: metadata)
+        }
     }
 
     func makeResultsDataSource() -> ResultsDataSource {
@@ -75,21 +73,28 @@ extension PhotosViewController {
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
 
-            if
-                kind == UICollectionView.elementKindSectionHeader,
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderContentView", for: indexPath) as? HeaderContentView
-            {
-                if headerView.content == nil {
-                    let content = AnyView(ResultsHeaderView(model: self.resultsHeaderViewModel))
-                    headerView.content = content
-                    let hostingController = UIHostingController(rootView: content)
-                    hostingController.view.backgroundColor = .clear
-                    self.addChildViewController(hostingController, in: headerView)
-                }
-                return headerView
-            }
+            return self.getHeaderContent(
+                collectionView: collectionView,
+                kind: kind,
+                indexPath: indexPath,
+                content: self.resultsHeaderView,
+                headerContentModel: self.headerContentModel
+            )
+//            if
+//                kind == UICollectionView.elementKindSectionHeader,
+//                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderContentView", for: indexPath) as? HeaderContentView
+//            {
+//                if headerView.content == nil {
+//                    let content = AnyView(ResultsHeaderView(model: self.resultsHeaderViewModel))
+//                    headerView.content = content
+//                    let hostingController = UIHostingController(rootView: content)
+//                    hostingController.view.backgroundColor = .clear
+//                    self.addChildViewController(hostingController, in: headerView)
+//                }
+//                return headerView
+//            }
 
-            return nil
+//            return nil
         }
 
         return dataSource

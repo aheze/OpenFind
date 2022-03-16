@@ -60,5 +60,9 @@ extension PhotosViewController {
                 self.showResults(true)
             }
         }
+        
+        headerContentModel.sizeChanged = { [weak self] in
+            self?.resultsFlowLayout.invalidateLayout()
+        }
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 extension SearchViewController {
     /// update the collection view.
     func reload() {
+        searchCollectionViewFlowLayout.invalidateLayout()
         searchCollectionView.reloadData()
         searchCollectionView.layoutIfNeeded()
 
