@@ -13,7 +13,6 @@ import Vision
 enum Find {
     static var startTime: Date? {
         didSet {
-            print("Started: \(startTime)")
             if startTime == nil {
                 continueQueue()
             }

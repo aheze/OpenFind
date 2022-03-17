@@ -10,6 +10,39 @@ import UIKit
 
 extension PhotosSlidesViewController {
     func listen() {
+        slidesSearchViewModel.fieldsChanged = { [weak self] textChanged in
+            guard let self = self else { return }
+
+            guard let slidesState = self.model.slidesState else { return }
+            guard let currentIndex = slidesState.currentIndex else { return }
+            let findPhoto = slidesState.findPhotos[currentIndex]
+
+            /// metadata already exists, directly find
+            if textChanged {
+                self.startFinding(for: findPhoto)
+            } else {
+                /// update the highlights back in `resultsCollectionView`
+                self.model.updateFieldOverrides?(self.slidesSearchViewModel.fields)
+
+                /// replace all highlights
+                for index in slidesState.findPhotos.indices {
+                    if let highlightsSet = slidesState.findPhotos[index].highlightsSet {
+                        let newHighlights = self.getUpdatedHighlightsColors(
+                            oldHighlights: highlightsSet.highlights,
+                            newStringToGradients: self.slidesSearchViewModel.stringToGradients
+                        )
+                        let newHighlightsSet = FindPhoto.HighlightsSet(
+                            stringToGradients: self.slidesSearchViewModel.stringToGradients,
+                            highlights: newHighlights
+                        )
+                        self.model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.highlights = newHighlights
+                        self.model.slidesState?.findPhotos[index].highlightsSet = newHighlightsSet
+                    }
+                }
+            }
+        }
+
+        /// called when `startFinding` finishes.
         model.updateSlidesAt = { [weak self] index, metadata in
             guard let self = self else { return }
             if self.searchNavigationProgressViewModel.percentageShowing {
@@ -21,52 +54,6 @@ extension PhotosSlidesViewController {
                         findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     }
                 }
-            }
-        }
-
-        slidesSearchViewModel.fieldsChanged = { [weak self] textChanged in
-            guard let self = self else { return }
-
-            guard let slidesState = self.model.slidesState else { return }
-            guard let currentIndex = slidesState.currentIndex else { return }
-            let findPhoto = slidesState.findPhotos[currentIndex]
-
-            /// metadata already exists, directly find
-            if let metadata = findPhoto.photo.metadata {
-                if textChanged {
-                    let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
-                    DispatchQueue.main.async {
-                        findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
-                    }
-                } else {
-                    /// update the highlights back in `resultsCollectionView`
-                    self.model.updateFieldOverrides?(self.slidesSearchViewModel.fields)
-
-                    /// replace all highlights
-                    for index in slidesState.findPhotos.indices {
-                        if let highlightsSet = slidesState.findPhotos[index].highlightsSet {
-                            let newHighlights = self.getUpdatedHighlightsColors(
-                                oldHighlights: highlightsSet.highlights,
-                                newStringToGradients: self.slidesSearchViewModel.stringToGradients
-                            )
-                            let newHighlightsSet = FindPhoto.HighlightsSet(
-                                stringToGradients: self.slidesSearchViewModel.stringToGradients,
-                                highlights: newHighlights
-                            )
-                            self.model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.highlights = newHighlights
-                            self.model.slidesState?.findPhotos[index].highlightsSet = newHighlightsSet
-                        }
-                    }
-                }
-            } else {
-                Find.prioritizedAction = .individualPhoto
-                self.searchNavigationProgressViewModel.start(progress: .auto(estimatedTime: 1.5))
-
-                var findOptions = FindOptions()
-                findOptions.priority = .waitUntilNotBusy
-                findOptions.action = .individualPhoto
-                self.model.scanningState = .scanning
-                self.model.scanPhoto(findPhoto.photo, findOptions: findOptions)
             }
         }
     }

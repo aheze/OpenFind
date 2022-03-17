@@ -10,42 +10,45 @@ import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
-            let photoSlidesViewController: PhotosSlidesItemViewController
-            if let viewController = findPhoto.associatedViewController {
-                photoSlidesViewController = viewController
-                addChildViewController(viewController, in: cell.contentView)
-            } else {
-                let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
-                let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
-                    PhotosSlidesItemViewController(
-                        coder: coder,
-                        model: self.model,
-                        findPhoto: findPhoto
-                    )
-                }
-
-                photoSlidesViewController = viewController
-                addChildViewController(viewController, in: cell.contentView)
-
-                /// adding a child seems to take control of the navigation bar. stop this
-                navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
-                model.slidesState?.findPhotos[indexPath.item].associatedViewController = viewController
+        guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
+        
+        let photoSlidesViewController: PhotosSlidesItemViewController
+        if let viewController = findPhoto.associatedViewController {
+            photoSlidesViewController = viewController
+            addChildViewController(viewController, in: cell.contentView)
+        } else {
+            let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
+            let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
+                PhotosSlidesItemViewController(
+                    coder: coder,
+                    model: self.model,
+                    findPhoto: findPhoto
+                )
             }
 
+            photoSlidesViewController = viewController
+            addChildViewController(viewController, in: cell.contentView)
+
+            /// adding a child seems to take control of the navigation bar. stop this
+            navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
+            findPhoto.associatedViewController = viewController
+            model.slidesState?.findPhotos[indexPath.item] = findPhoto
+        }
+
+        if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
             if let highlightsSet = findPhoto.highlightsSet {
                 if highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients {
                     photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
                 } else {
-                    print("DifferenR!!!")
+                    startFinding(for: findPhoto)
                 }
             }
+        }
 
-            if model.animatingSlides {
-                photoSlidesViewController.containerView.alpha = 0
-            } else {
-                photoSlidesViewController.containerView.alpha = 1
-            }
+        if model.animatingSlides {
+            photoSlidesViewController.containerView.alpha = 0
+        } else {
+            photoSlidesViewController.containerView.alpha = 1
         }
     }
 
