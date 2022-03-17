@@ -11,7 +11,7 @@ import UIKit
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
-        
+
         let photoSlidesViewController: PhotosSlidesItemViewController
         if let viewController = findPhoto.associatedViewController {
             photoSlidesViewController = viewController
@@ -35,14 +35,16 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             model.slidesState?.findPhotos[indexPath.item] = findPhoto
         }
 
-        if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
-            if let highlightsSet = findPhoto.highlightsSet {
-                if highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients {
-                    photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
-                } else {
-                    startFinding(for: findPhoto)
-                }
-            }
+        /// if keys are same, show the highlights.
+        if
+            let highlightsSet = findPhoto.highlightsSet,
+            highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients
+        {
+            photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
+        } else {
+            
+            /// else, find again.
+            startFinding(for: findPhoto)
         }
 
         if model.animatingSlides {

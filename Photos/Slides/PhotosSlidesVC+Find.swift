@@ -9,14 +9,19 @@
 import UIKit
 
 extension PhotosSlidesViewController {
-    
     /// start finding for a photo.
     /// If metadata does not exist, start scanning. Once done, `model.updateSlidesAt` in `PhotosSlidesVC+Listen` will be called.
     func startFinding(for findPhoto: FindPhoto) {
-        if let metadata = findPhoto.photo.metadata {
+        if let metadata = findPhoto.photo.metadata, metadata.isScanned {
             let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
-            DispatchQueue.main.async {
-                findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+
+            let highlightSet = FindPhoto.HighlightsSet(
+                stringToGradients: self.slidesSearchViewModel.stringToGradients,
+                highlights: highlights
+            )
+            findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+            if let slidesState = model.slidesState, let index = slidesState.getFindPhotoIndex(photo: findPhoto.photo) {
+                self.model.slidesState?.findPhotos[index].highlightsSet = highlightSet
             }
         } else {
             Find.prioritizedAction = .individualPhoto
