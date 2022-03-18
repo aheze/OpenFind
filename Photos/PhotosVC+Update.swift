@@ -8,6 +8,10 @@
     
 import UIKit
 
+/**
+ Update for finding
+ */
+
 extension PhotosViewController {
     /// find after a new photo was scanned
     func findAfterQueuedSentencesUpdate(in photos: [Photo]) {
@@ -43,14 +47,11 @@ extension PhotosViewController {
             }
                 
             if let slidesState = model.slidesState {
-                let highlights = metadata.sentences.getHighlights(stringToGradients: slidesSearchViewModel.stringToGradients)
-                if highlights.count >= 1 {
-                    let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.slidesSearchViewModel.stringToGradients, highlights: highlights)
-                    
-                    if let index = slidesState.getFindPhotoIndex(photo: photo) {
-                        model.slidesState?.findPhotos[index].highlightsSet = highlightsSet
-                        model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
-                    }
+                if
+                    let index = slidesState.getFindPhotoIndex(photo: photo),
+                    let findPhoto = slidesState.findPhotos[safe: index]
+                {
+                    slidesState.viewController?.find(in: findPhoto)
                 }
                 
                 if self.searchNavigationProgressViewModel.percentageShowing {
