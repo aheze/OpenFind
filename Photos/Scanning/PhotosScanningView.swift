@@ -49,8 +49,8 @@ struct PhotosScanningViewHeader: View {
                         }
 
                         HStack {
-                            let image = model.scanningState == .scanning ? "pause.fill" : "play.fill"
-                            let title = model.scanningState == .scanning ? "Pause" : "Resume"
+                            let image = model.scanningState == .scanningAllPhotos ? "pause.fill" : "play.fill"
+                            let title = model.scanningState == .scanningAllPhotos ? "Pause" : "Resume"
                             PhotosScanningButton(image: image, title: title) {
                                 if model.scanningState == .dormant {
                                     model.startScanning()
@@ -59,7 +59,9 @@ struct PhotosScanningViewHeader: View {
                                 }
                             }
 
-                            PhotosScanningButton(image: "speedometer", title: "Status") {}
+                            PhotosScanningButton(image: "speedometer", title: "Delete All") {
+                                model.deleteAllMetadata()
+                            }
                         }
                     }
                     .padding(PhotosScanningConstants.padding)

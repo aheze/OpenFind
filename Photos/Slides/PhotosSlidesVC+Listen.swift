@@ -19,7 +19,11 @@ extension PhotosSlidesViewController {
 
             /// metadata already exists, directly find
             if textChanged {
-                self.startFinding(for: findPhoto)
+                
+                /// if showing, that means Find is currently scanning, so don't scan a second time.
+                if !self.searchNavigationProgressViewModel.percentageShowing {
+                    self.startFinding(for: findPhoto)
+                }
             } else {
                 /// update the highlights back in `resultsCollectionView`
                 self.model.updateFieldOverrides?(self.slidesSearchViewModel.fields)
@@ -59,11 +63,12 @@ extension PhotosSlidesViewController {
                             highlights: highlights
                         )
                         findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
-
                         self.model.slidesState?.findPhotos[index].highlightsSet = highlightSet
                     }
                 }
+                Find.prioritizedAction = nil
             }
         }
     }
 }
+

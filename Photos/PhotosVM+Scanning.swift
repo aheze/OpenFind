@@ -9,14 +9,15 @@
 import Foundation
 
 extension PhotosViewModel {
-    
     /// a photo was just scanned
     func photoScanned(photo: Photo, sentences: [Sentence]) {
+        var newPhoto = photo
         if let metadata = photo.metadata {
             var newMetadata = metadata
             newMetadata.sentences = sentences
             newMetadata.isScanned = true
-            updatePhotoMetadata(photo: photo, metadata: newMetadata, reloadCell: true)
+            newPhoto.metadata = newMetadata
+            updatePhotoMetadata(photo: newPhoto, reloadCell: true)
         } else {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
@@ -24,22 +25,22 @@ extension PhotosViewModel {
                 isScanned: true,
                 isStarred: false
             )
-            updatePhotoMetadata(photo: photo, metadata: metadata, reloadCell: true)
+            newPhoto.metadata = metadata
+            addPhotoMetadata(photo: newPhoto, reloadCell: true)
         }
 
-        
         photosToScan = photosToScan.filter { $0 != photo }
         scannedPhotosCount = photos.count - photosToScan.count /// update the text
         resumeScanning()
     }
 
     func startScanning() {
-        scanningState = .scanning
+        scanningState = .scanningAllPhotos
         if let lastPhoto = photosToScan.last {
             var findOptions = FindOptions()
             findOptions.priority = .waitUntilNotBusy
             findOptions.action = .photosScanning
-            scanPhoto(lastPhoto, findOptions: findOptions)
+            scanPhoto(lastPhoto, findOptions: findOptions, inBatch: true)
         }
     }
 
@@ -48,11 +49,11 @@ extension PhotosViewModel {
             shouldResumeScanning(),
             let lastPhoto = photosToScan.last
         {
-            scanningState = .scanning
+            scanningState = .scanningAllPhotos
             var findOptions = FindOptions()
             findOptions.priority = .waitUntilNotBusy
             findOptions.action = .photosScanning
-            scanPhoto(lastPhoto, findOptions: findOptions)
+            scanPhoto(lastPhoto, findOptions: findOptions, inBatch: true)
         } else {
             scanningState = .dormant
         }
@@ -63,8 +64,8 @@ extension PhotosViewModel {
     }
 
     /// scan a photo
-    /// make sure to call `self.model.scanningState = .scanning`.
-    func scanPhoto(_ photo: Photo, findOptions: FindOptions) {
+    /// `inBatch`: scanning all photos. If true, check `scanningState == .scanningAllPhotos`.
+    func scanPhoto(_ photo: Photo, findOptions: FindOptions, inBatch: Bool) {
         Task {
             let image = await getFullImage(from: photo)
             if let cgImage = image?.cgImage {
@@ -72,9 +73,9 @@ extension PhotosViewModel {
                 visionOptions.level = .accurate
                 let request = await Find.find(in: .cgImage(cgImage), visionOptions: visionOptions, findOptions: findOptions)
                 let sentences = Find.getSentences(from: request)
-                
-                /// discard value if not scanning
-                if scanningState == .scanning {
+
+                /// discard value if not scanning and `inBatch` is true
+                if !inBatch || scanningState == .scanningAllPhotos {
                     photoScanned(photo: photo, sentences: sentences)
                 }
             }
@@ -83,15 +84,15 @@ extension PhotosViewModel {
 
     /// true if should resume
     func shouldResumeScanning() -> Bool {
+        guard scanningState == .scanningAllPhotos else { return false }
+
         if photosToScan.isEmpty {
             return false
         }
 
-        if scanningState == .dormant {
-            return false
-        }
-
-        if Find.prioritizedAction != .photosScanning {
+        if
+            let prioritizedAction = Find.prioritizedAction, prioritizedAction != .photosScanning
+        {
             return false
         }
 

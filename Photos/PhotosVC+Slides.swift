@@ -29,6 +29,8 @@ extension PhotosViewController {
         } else {
             return
         }
+        
+        print("making stlides state....")
 
         /// set later inside `presentSlides`.
         let slidesState = PhotosSlidesState(
@@ -76,7 +78,7 @@ extension PhotosViewController {
 
     func createSlidesViewController() -> PhotosSlidesViewController {
         /// keep it up to date. replacing!
-        slidesSearchViewModel.replaceInPlace(with: searchViewModel, notify: true)
+        slidesSearchViewModel.replaceInPlace(with: searchViewModel, notify: false)
         searchViewModel.dismissKeyboard?()
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesViewController") { coder in

@@ -56,6 +56,9 @@ class PhotosViewModel: ObservableObject {
     /// Set this inside **PhotosSlidesVC+Listen**
     var updateSlidesAt: ((Int, PhotoMetadata) -> Void)?
     
+    /// a metadata was just added for a photo, find inside it now and append to `resultsState` / `slidesState`.
+    var metadataAddedFor: ((Photo) -> Void)?
+    
     /// about to present slides, set the transition
     var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
 
@@ -92,7 +95,7 @@ class PhotosViewModel: ObservableObject {
 
     enum ScanningState {
         case dormant
-        case scanning
+        case scanningAllPhotos
     }
 }
 

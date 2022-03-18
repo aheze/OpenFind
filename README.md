@@ -180,3 +180,22 @@ terminating with uncaught exception of type NSException
 CoreSimulator 783.5 - Device: iPhone 13 Pro Max (F1EC12A7-4B5F-4462-AC9C-ED54E50CD0C2) - Runtime: iOS 15.2 (19C51) - DeviceType: iPhone 13 Pro Max
 
 ```
+
+
+In `PhotosSlidesVC+Listen`, make sure to check `percentageShowing`.
+```swift
+/// if showing, that means Find is currently scanning, so don't scan a second time.
+if !self.searchNavigationProgressViewModel.percentageShowing {
+    self.startFinding(for: findPhoto)
+}
+```
+
+Otherwise, if typing fast, this error might show up:
+
+```
+SWIFT TASK CONTINUATION MISUSE: find(in:visionOptions:findOptions:) leaked its continuation!
+2022-03-16 20:47:57.193100-0700 Find-New[19880:285440] SWIFT TASK CONTINUATION MISUSE: find(in:visionOptions:findOptions:) leaked its continuation!
+_Concurrency/CheckedContinuation.swift:164: Fatal error: SWIFT TASK CONTINUATION MISUSE: find(in:visionOptions:findOptions:) tried to resume its continuation more than once, returning <VNRecognizeTextRequest: 0x6000012798f0> VNRecognizeTextRequestRevision2 ROI=[0, 0, 1, 1]!
+
+2022-03-16 20:47:57.591709-0700 Find-New[19880:285440] _Concurrency/CheckedContinuation.swift:164: Fatal error: SWIFT TASK CONTINUATION MISUSE: find(in:visionOptions:findOptions:) tried to resume its continuation more than once, returning <VNRecognizeTextRequest: 0x6000012798f0> VNRecognizeTextRequestRevision2 ROI=[0, 0, 1, 1]!
+```

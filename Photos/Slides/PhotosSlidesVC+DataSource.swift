@@ -19,6 +19,8 @@ extension PhotosSlidesViewController {
     }
 
     func makeDataSource() -> DataSource {
+        print("making data source. CV? \(collectionView != nil)")
+        
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, photo -> UICollectionViewCell? in

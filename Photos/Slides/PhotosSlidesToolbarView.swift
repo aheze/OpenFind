@@ -40,9 +40,10 @@ struct PhotosSlidesToolbarView: View {
     
     func toggleStar() {
         if let (findPhoto, _) = model.slidesState?.getCurrentFindPhotoAndIndex() {
-            if var metadata = findPhoto.photo.metadata {
-                metadata.isStarred.toggle()
-                model.updatePhotoMetadata(photo: findPhoto.photo, metadata: metadata, reloadCell: true)
+            var newPhoto = findPhoto.photo
+            if let metadata = newPhoto.metadata {
+                newPhoto.metadata?.isStarred = !metadata.isStarred
+                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                 model.slidesState?.toolbarStarOn = metadata.isStarred
             } else {
                 let metadata = PhotoMetadata(
@@ -51,7 +52,8 @@ struct PhotosSlidesToolbarView: View {
                     isScanned: false,
                     isStarred: true
                 )
-                model.updatePhotoMetadata(photo: findPhoto.photo, metadata: metadata, reloadCell: true)
+                newPhoto.metadata = metadata
+                model.addPhotoMetadata(photo: newPhoto, reloadCell: true)
                 model.slidesState?.toolbarStarOn = metadata.isStarred
             }
         }

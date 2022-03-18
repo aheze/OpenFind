@@ -35,16 +35,17 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             model.slidesState?.findPhotos[indexPath.item] = findPhoto
         }
 
-        /// if keys are same, show the highlights.
-        if
-            let highlightsSet = findPhoto.highlightsSet,
-            highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients
-        {
-            photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
-        } else {
-            
-            /// else, find again.
-            startFinding(for: findPhoto)
+        if !slidesSearchViewModel.stringToGradients.isEmpty {
+            /// if keys are same, show the highlights.
+            if
+                let highlightsSet = findPhoto.highlightsSet,
+                highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients
+            {
+                photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
+            } else {
+                /// else, find again.
+                startFinding(for: findPhoto)
+            }
         }
 
         if model.animatingSlides {

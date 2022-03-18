@@ -44,6 +44,51 @@ extension PhotosViewController {
         self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
     }
     
+    func find(in photo: Photo) {
+        print("Finding in photo.")
+        guard let metadata = photo.metadata else { return }
+        let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
+        print("high gount: \(highlights.count)")
+        if highlights.count >= 1 {
+            let thumbnail = self.model.photoToThumbnail[photo] ?? nil
+            let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: highlights)
+            let description = getCellDescription(from: lines)
+            
+            let findPhoto = FindPhoto(
+                id: UUID(),
+                photo: photo,
+                thumbnail: thumbnail,
+                highlightsSet: highlightsSet,
+                descriptionText: description,
+                descriptionLines: lines
+            )
+            
+            var slidesCurrentFindPhoto: FindPhoto?
+            if let slidesState = self.model.slidesState, let currentIndex = slidesState.currentIndex {
+                slidesCurrentFindPhoto = slidesState.findPhotos[currentIndex]
+            }
+            
+            print("slidessate: \(self.model.slidesState != nil)")
+            self.model.resultsState?.findPhotos.insert(findPhoto, at: 0)
+            self.model.slidesState?.findPhotos.insert(findPhoto, at: 0)
+            self.updateResults(animate: true)
+            self.model.slidesState?.viewController?.update(animate: false)
+            
+            if
+                let slidesState = self.model.slidesState,
+                let slidesCurrentFindPhoto = slidesCurrentFindPhoto,
+                let newIndex = slidesState.getFindPhotoIndex(findPhoto: slidesCurrentFindPhoto)
+            {
+                self.model.slidesState?.currentIndex = newIndex
+                self.model.slidesState?.viewController?.collectionView.scrollToItem(
+                    at: newIndex.indexPath,
+                    at: .centeredHorizontally,
+                    animated: false
+                )
+            }
+        }
+    }
+    
     func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {
         var highlights = Set<Highlight>()
         var lines = [FindPhoto.Line]()

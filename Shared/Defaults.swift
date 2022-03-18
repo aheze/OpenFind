@@ -10,7 +10,7 @@
 import SwiftUI
 
 class Defaults: ObservableObject {
-    static let scanOnLaunch = ("scanOnLaunch", true)
+    static let scanOnLaunch = ("scanOnLaunch", false)
     static let scanInBackground = ("scanInBackground", true)
     static let scanWhileCharging = ("scanWhileCharging", true)
 }

@@ -1,31 +1,21 @@
 //
-//  PhotosVM+Update.swift
+//  PhotosVM+Add.swift
 //  Find
 //
-//  Created by A. Zheng (github.com/aheze) on 3/12/22.
+//  Created by A. Zheng (github.com/aheze) on 3/16/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
 import UIKit
 
+/// Separate add from update
 extension PhotosViewModel {
-    func deleteAllMetadata() {
-        let metadatas = realmModel.realm.objects(RealmPhotoMetadata.self)
+    /// unlike `updatePhotoMetadata`, this doesn't have a `metadata: PhotoMetadata` parameter.
+    /// Instead, the photo should already be loaded with metadata.
+    func addPhotoMetadata(photo: Photo, reloadCell: Bool) {
+        print("adding metadata! \(photo.metadata != nil)")
+        guard let metadata = photo.metadata else { return }
 
-        do {
-            try realmModel.realm.write {
-                realmModel.realm.delete(metadatas)
-            }
-        } catch {
-            print("Error deleting all: \(error)")
-        }
-        
-        print("reloading.")
-        self.load()
-    }
-
-    /// `photo.metadata` should be the new metadata
-    func updatePhotoMetadata(photo: Photo, reloadCell: Bool) {
         /// for reloading at a specific index path
         /// 1. Index path inside `collectionView`
         /// 2. Index inside `resultsCollectionView`
@@ -33,6 +23,7 @@ extension PhotosViewModel {
         var resultsCollectionViewIndex: Int?
         var slidesCollectionViewIndex: Int?
 
+        /// update the main collection view
         if
             let index = getPhotoIndex(photo: photo),
             let indexPath = getPhotoIndexPath(photo: photo)
@@ -42,12 +33,18 @@ extension PhotosViewModel {
             sections[indexPath.section].photos[indexPath.item] = photo
         }
 
+        /// currently in finding mode
+        if self.resultsState != nil, metadata.isScanned {
+            print("finding currently.")
+            metadataAddedFor?(photo)
+        }
+        
         if
             let resultsState = resultsState,
             let index = resultsState.getFindPhotoIndex(photo: photo)
         {
             resultsCollectionViewIndex = index
-            self.resultsState?.findPhotos[index].photo = photo
+            self.resultsState?.findPhotos[index].photo.metadata = metadata
         }
 
         if
@@ -55,15 +52,13 @@ extension PhotosViewModel {
             let index = slidesState.getFindPhotoIndex(photo: photo)
         {
             slidesCollectionViewIndex = index
-            self.slidesState?.findPhotos[index].photo = photo
+            self.slidesState?.findPhotos[index].photo.metadata = metadata
         }
-
-        guard let metadata = photo.metadata else { return }
 
         if reloadCell {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata)
         }
 
-        realmModel.updatePhotoMetadata(metadata: metadata)
+        realmModel.addPhotoMetadata(metadata: metadata)
     }
 }
