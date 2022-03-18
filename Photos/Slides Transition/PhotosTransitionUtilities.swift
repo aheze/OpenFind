@@ -36,10 +36,17 @@ public extension CGRect {
     /// Returns a rectangle of the same aspect ratio, but scaleAspectFit inside the other rectangle.
     static func makeRect(aspectRatio: CGSize, insideRect rect: CGRect) -> CGRect {
         let viewRatio = rect.width / rect.height
-        let imageRatio = aspectRatio.width / aspectRatio.height
+        var imageRatio = aspectRatio.width / aspectRatio.height
         let touchesHorizontalSides = (imageRatio > viewRatio)
         
-        print("     Original rect: \(rect)")
+//        if viewRatio.isNaN
+        
+        print("     aspectRatio: \(aspectRatio) insideRect rect: \(rect). viewRatio: \(viewRatio), imageRatio: \(imageRatio), touchesHorizontalSides: \(touchesHorizontalSides)")
+        
+        if imageRatio.isNaN {
+            imageRatio = 0
+        }
+        
 
         let result: CGRect
         if touchesHorizontalSides {

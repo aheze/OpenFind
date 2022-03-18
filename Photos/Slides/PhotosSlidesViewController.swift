@@ -36,7 +36,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var collectionView: UICollectionView!
     
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
-    lazy var dataSource = makeDataSource()
+    lazy var dataSource: DataSource? = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
 

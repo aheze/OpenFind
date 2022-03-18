@@ -15,10 +15,11 @@ extension PhotosSlidesViewController {
         let section = PhotoSlidesSection()
         snapshot.appendSections([section])
         snapshot.appendItems(slidesState.findPhotos, toSection: section)
-        dataSource.apply(snapshot, animatingDifferences: animate)
+        dataSource?.apply(snapshot, animatingDifferences: animate)
     }
 
-    func makeDataSource() -> DataSource {
+    func makeDataSource() -> DataSource? {
+        guard let collectionView = collectionView else { return nil }
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, photo -> UICollectionViewCell? in
