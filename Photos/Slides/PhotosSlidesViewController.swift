@@ -117,6 +117,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
         switchToFullScreen(false)
         slidesSearchPromptViewModel.show(false)
+        model.updateAllowed = true
         
         withAnimation {
             toolbarViewModel.toolbar = nil

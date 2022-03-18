@@ -16,13 +16,22 @@ extension PhotosViewModel {
 
     func scheduleUpdate(for photo: Photo) {
         photosWithQueuedSentences.append(photo)
-        if self.shouldUpdate() {
-            self.addQueuedSentencesToMetadatas()
+
+        if self.canUpdateDueToTimeout() {
+            if updateAllowed {
+                self.addQueuedSentencesToMetadatas()
+            } else {
+                updateState = .waitingForPermission
+            }
         } else {
-            if !updateScheduled {
-                updateScheduled = true
+            if updateState == nil {
+                updateState = .scheduled
                 DispatchQueue.main.asyncAfter(deadline: .now() + PhotosConstants.minimumResultsUpdateDuration) {
-                    self.addQueuedSentencesToMetadatas()
+                    if self.updateAllowed {
+                        self.addQueuedSentencesToMetadatas()
+                    } else {
+                        self.updateState = .waitingForPermission
+                    }
                 }
             }
         }
@@ -30,7 +39,7 @@ extension PhotosViewModel {
 
     /// update metadata to include sentences
     func addQueuedSentencesToMetadatas() {
-        updateScheduled = false
+        updateState = nil
 
         for photo in photosWithQueuedSentences {
             if
@@ -85,7 +94,7 @@ extension PhotosViewModel {
         lastResultsUpdateTime = Date()
     }
 
-    func shouldUpdate() -> Bool {
+    func canUpdateDueToTimeout() -> Bool {
         if let lastResultsUpdateTime = lastResultsUpdateTime {
             /// check if passed minimum duration
             if abs(lastResultsUpdateTime.timeIntervalSinceNow) > PhotosConstants.minimumResultsUpdateDuration {

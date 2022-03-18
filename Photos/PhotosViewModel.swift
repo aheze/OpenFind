@@ -69,7 +69,18 @@ class PhotosViewModel: ObservableObject {
 
     /// sentences were recently added to these photos, but not applied to the main model yet.
     var photosWithQueuedSentences = [Photo]()
-    var updateScheduled = false
+
+    /// if true, a sentences update is scheduled and should be applied ASAP.
+    var updateState: PhotosSentencesUpdateState?
+
+    /// set to false if finger is still touching
+    var updateAllowed = true {
+        didSet {
+            if updateAllowed, updateState == .waitingForPermission {
+                addQueuedSentencesToMetadatas()
+            }
+        }
+    }
 
     /// sentences were applied! find inside them now and append to `resultsState` / `slidesState`.
     var photosWithQueuedSentencesAdded: (([Photo]) -> Void)?

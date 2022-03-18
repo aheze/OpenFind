@@ -60,10 +60,12 @@ extension PhotosViewController {
             }
         }
         
-        
-        self.model.resultsState?.findPhotos.insert(contentsOf: insertedFindPhotos, at: 0)
-        self.model.slidesState?.findPhotos.insert(contentsOf: insertedFindPhotos, at: 0)
-        self.updateResultsCollectionViews()
+        /// only add live results when results state isn't nil
+        if model.resultsState != nil {
+            self.model.resultsState?.findPhotos.insert(contentsOf: insertedFindPhotos, at: 0)
+            self.model.slidesState?.findPhotos.insert(contentsOf: insertedFindPhotos, at: 0)
+            self.updateResultsCollectionViews()
+        }
     }
 
     /// update the results collection view and the slides collection view
@@ -75,7 +77,6 @@ extension PhotosViewController {
             let slidesState = model.slidesState,
             let currentIndex = slidesState.getCurrentIndex()
         {
-            print("index to scroll to: \(currentIndex)")
             self.model.slidesState?.viewController?.collectionView.scrollToItem(
                 at: currentIndex.indexPath,
                 at: .centeredHorizontally,

@@ -49,6 +49,11 @@ struct PhotosSlidesState {
     var toolbarInformationOn = false
 }
 
+enum PhotosSentencesUpdateState {
+    case scheduled
+    case waitingForPermission
+}
+
 struct PhotosResultsState {
     var findPhotos: [FindPhoto]
 

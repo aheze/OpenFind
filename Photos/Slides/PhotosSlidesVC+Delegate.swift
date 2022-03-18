@@ -10,14 +10,17 @@ import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
         guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
-        
+
         let photoSlidesViewController: PhotosSlidesItemViewController
         if let viewController = findPhoto.associatedViewController {
+            print("resvycle \(indexPath.item)")
+            viewController.loadViewIfNeeded()
+            viewController.reloadImage()
             photoSlidesViewController = viewController
             addChildViewController(viewController, in: cell.contentView)
         } else {
+            print("create \(indexPath.item)")
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
             let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
                 PhotosSlidesItemViewController(
@@ -58,6 +61,9 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
+            /// make sure the photo isn't being shown/focused (prevent white screen)
+            guard model.slidesState?.currentPhoto != findPhoto.photo else { return }
+
             if let viewController = findPhoto.associatedViewController {
                 removeChildViewController(viewController)
                 model.slidesState?.findPhotos[indexPath.item].associatedViewController = nil
@@ -68,8 +74,13 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
 /// detect stopped at a new photo
 extension PhotosSlidesViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        model.updateAllowed = false
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         notifyIfScrolledToStop()
+        model.updateAllowed = true
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
