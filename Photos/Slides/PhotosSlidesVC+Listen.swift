@@ -14,8 +14,7 @@ extension PhotosSlidesViewController {
             guard let self = self else { return }
 
             guard let slidesState = self.model.slidesState else { return }
-            guard let currentIndex = slidesState.getCurrentIndex() else { return }
-            let findPhoto = slidesState.findPhotos[currentIndex]
+            guard let findPhoto = slidesState.getCurrentFindPhoto() else { return }
 
             /// metadata already exists, directly find
             if textChanged {

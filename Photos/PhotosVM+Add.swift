@@ -37,10 +37,21 @@ extension PhotosViewModel {
                 let index = getPhotoIndex(photo: photo),
                 let indexPath = getPhotoIndexPath(photo: photo)
             {
-                photos[index].metadata?.isScanned = photo.metadata?.isScanned ?? false
-                photos[index].metadata?.sentences = photo.metadata?.sentences ?? []
-                sections[indexPath.section].photos[indexPath.item].metadata?.isScanned = photo.metadata?.isScanned ?? false
-                sections[indexPath.section].photos[indexPath.item].metadata?.sentences = photo.metadata?.sentences ?? []
+                
+                /// if not nil, just modify the changed fields - prevent overriding other properties that might have changed while the queue was waiting
+                if photos[index].metadata != nil {
+                    photos[index].metadata?.isScanned = photo.metadata?.isScanned ?? false
+                    photos[index].metadata?.sentences = photo.metadata?.sentences ?? []
+                } else {
+                    photos[index].metadata = photo.metadata
+                }
+
+                if sections[indexPath.section].photos[indexPath.item].metadata != nil {
+                    sections[indexPath.section].photos[indexPath.item].metadata?.isScanned = photo.metadata?.isScanned ?? false
+                    sections[indexPath.section].photos[indexPath.item].metadata?.sentences = photo.metadata?.sentences ?? []
+                } else {
+                    sections[indexPath.section].photos[indexPath.item].metadata = photo.metadata
+                }
             }
 
             /// these should only be called when the results are already there (the photo was not added live)
@@ -49,8 +60,12 @@ extension PhotosViewModel {
                 let index = resultsState.getFindPhotoIndex(photo: photo)
             {
                 print("         Results exists: index \(index)")
-                self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
-                self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+                if resultsState.findPhotos[index].photo.metadata != nil {
+                    self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                    self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+                } else {
+                    self.resultsState?.findPhotos[index].photo.metadata = photo.metadata
+                }
             } else {
                 print("         Results DOES NOT exist.")
             }
@@ -59,9 +74,16 @@ extension PhotosViewModel {
                 let slidesState = slidesState,
                 let index = slidesState.getFindPhotoIndex(photo: photo)
             {
-                print("         Slides exists: index \(index)")
-                self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
-                self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+                print("         Slides exists: index \(index). Count: \(photo.metadata?.sentences.count)")
+
+                if slidesState.findPhotos[index].photo.metadata != nil {
+                    self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                    self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+                } else {
+                    self.slidesState?.findPhotos[index].photo.metadata = photo.metadata
+                }
+
+                print("Count added. \(self.slidesState?.findPhotos[index].photo.metadata?.sentences.count)")
             } else {
                 print("      Slides DOES NOT exist.")
             }

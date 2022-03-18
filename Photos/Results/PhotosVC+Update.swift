@@ -13,7 +13,7 @@ extension PhotosViewController {
     func findAfterQueuedSentencesUpdate(in photos: [Photo]) {
         for photo in photos {
             guard let metadata = photo.metadata else { return }
-            print("->Photo.. Sentences: \(metadata.sentences)")
+            print("->Photo.. Sentences: \(metadata.sentences.count)")
    
             if let resultsState = model.resultsState {
                 let (highlights, lines) = self.getHighlightsAndDescription(

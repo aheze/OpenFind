@@ -29,7 +29,7 @@ extension PhotosViewModel {
             newPhoto.metadata = metadata
             print("scanned.")
             addSentences(of: newPhoto)
-            realmModel.addPhotoMetadata(metadata: metadata)
+            realmModel.updatePhotoMetadata(metadata: metadata)
         }
 
         photosToScan = photosToScan.filter { $0 != photo }

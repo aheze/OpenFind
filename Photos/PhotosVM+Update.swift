@@ -64,10 +64,6 @@ extension PhotosViewModel {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata)
         }
 
-        if isNew {
-            realmModel.addPhotoMetadata(metadata: metadata)
-        } else {
-            realmModel.updatePhotoMetadata(metadata: metadata)
-        }
+        realmModel.updatePhotoMetadata(metadata: metadata)
     }
 }

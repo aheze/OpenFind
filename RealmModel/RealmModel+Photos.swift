@@ -31,24 +31,6 @@ extension RealmModel {
         return nil
     }
 
-    func addPhotoMetadata(metadata: PhotoMetadata) {
-        let realmSentences = metadata.getRealmSentences()
-        let realmMetadata = RealmPhotoMetadata(
-            assetIdentifier: metadata.assetIdentifier,
-            sentences: realmSentences,
-            isScanned: metadata.isScanned,
-            isStarred: metadata.isStarred
-        )
-        
-        do {
-            try realm.write {
-                realm.add(realmMetadata)
-            }
-        } catch {
-            Global.log("Error adding photo metadata: \(error)", .error)
-        }
-    }
-    
     func updatePhotoMetadata(metadata: PhotoMetadata) {
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
             let realmSentences = metadata.getRealmSentences()
@@ -60,6 +42,26 @@ extension RealmModel {
             } catch {
                 Global.log("Error updating photo metadata: \(error)", .error)
             }
+        } else {
+            addPhotoMetadata(metadata: metadata)
+        }
+    }
+
+    private func addPhotoMetadata(metadata: PhotoMetadata) {
+        let realmSentences = metadata.getRealmSentences()
+        let realmMetadata = RealmPhotoMetadata(
+            assetIdentifier: metadata.assetIdentifier,
+            sentences: realmSentences,
+            isScanned: metadata.isScanned,
+            isStarred: metadata.isStarred
+        )
+
+        do {
+            try realm.write {
+                realm.add(realmMetadata)
+            }
+        } catch {
+            Global.log("Error adding photo metadata: \(error)", .error)
         }
     }
 }
