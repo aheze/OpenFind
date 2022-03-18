@@ -16,7 +16,7 @@ extension PhotosViewController {
         }
         
         /// underlying arrays have already been updated, reload the UI.
-        model.reloadAt = { [weak self] collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata in
+        model.reloadAt = { [weak self] collectionViewIndexPath, resultsCollectionViewIndex, metadata in
             guard let self = self else { return }
             if let collectionViewIndexPath = collectionViewIndexPath {
                 self.update(at: collectionViewIndexPath, with: metadata)
@@ -24,6 +24,10 @@ extension PhotosViewController {
             
             if let resultsCollectionViewIndex = resultsCollectionViewIndex {
                 self.updateResults(at: resultsCollectionViewIndex, with: metadata)
+            }
+            
+            if let currentPhoto = self.model.slidesState?.currentPhoto {
+                self.model.slidesState?.viewController?.configureToolbar(for: currentPhoto)
             }
         }
         model.photosWithQueuedSentencesAdded = { [weak self] photos in

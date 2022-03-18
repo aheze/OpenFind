@@ -26,9 +26,8 @@ class PhotosViewModel: ObservableObject {
     /// reload at a specific index path
     /// 1. Index path inside `collectionView`
     /// 2. Index inside `resultsCollectionView`
-    /// 3. Index inside `slidesState`
-    /// 4. the photo metadata
-    var reloadAt: ((IndexPath?, Int?, Int?, PhotoMetadata) -> Void)?
+    /// 3. the photo metadata
+    var reloadAt: ((IndexPath?, Int?, PhotoMetadata) -> Void)?
 
     /// PHAsset caching
     let imageManager = PHCachingImageManager()

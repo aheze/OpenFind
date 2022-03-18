@@ -14,13 +14,11 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
         let photoSlidesViewController: PhotosSlidesItemViewController
         if let viewController = findPhoto.associatedViewController {
-            print("resvycle \(indexPath.item)")
             viewController.loadViewIfNeeded()
             viewController.reloadImage()
             photoSlidesViewController = viewController
             addChildViewController(viewController, in: cell.contentView)
         } else {
-            print("create \(indexPath.item)")
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
             let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
                 PhotosSlidesItemViewController(

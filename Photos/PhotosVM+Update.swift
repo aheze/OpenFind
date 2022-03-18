@@ -31,7 +31,6 @@ extension PhotosViewModel {
         /// 2. Index inside `resultsCollectionView`
         var collectionViewIndexPath: IndexPath?
         var resultsCollectionViewIndex: Int?
-        var slidesCollectionViewIndex: Int?
 
         if
             let index = getPhotoIndex(photo: photo),
@@ -54,14 +53,15 @@ extension PhotosViewModel {
             let slidesState = slidesState,
             let index = slidesState.getFindPhotoIndex(photo: photo)
         {
-            slidesCollectionViewIndex = index
             self.slidesState?.findPhotos[index].photo = photo
         }
 
         guard let metadata = photo.metadata else { return }
 
         if reloadCell {
-            reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata)
+            
+            /// inside `PhotosVC+Listen`
+            reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }
 
         realmModel.updatePhotoMetadata(metadata: metadata)

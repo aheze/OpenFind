@@ -30,7 +30,6 @@ extension PhotosSlidesViewController {
             var findOptions = FindOptions()
             findOptions.priority = .waitUntilNotBusy
             findOptions.action = .individualPhoto
-            print("Starting finding....")
             self.model.scanPhoto(findPhoto.photo, findOptions: findOptions, inBatch: false)
         }
     }

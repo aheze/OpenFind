@@ -41,14 +41,14 @@ struct PhotosSlidesToolbarView: View {
     func toggleStar() {
         if
             let slidesState = model.slidesState,
-            let currentIndex = slidesState.getCurrentIndex(),
-            let findPhoto = slidesState.findPhotos[safe: currentIndex]
+            let findPhoto = slidesState.getCurrentFindPhoto()
         {
             var newPhoto = findPhoto.photo
             if let metadata = newPhoto.metadata {
+                let isStarred = !metadata.isStarred
                 newPhoto.metadata?.isStarred = !metadata.isStarred
                 model.updatePhotoMetadata(photo: newPhoto, reloadCell: true, isNew: false)
-                model.slidesState?.toolbarStarOn = metadata.isStarred
+                model.slidesState?.toolbarStarOn = isStarred
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: findPhoto.photo.asset.localIdentifier,

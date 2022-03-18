@@ -87,10 +87,7 @@ extension PhotosSlidesItemViewController {
         guard
             let containerView = scrollZoomController.drawingView,
             let highlightsView = highlightsViewController.view
-        else {
-            print("returning.")
-            return
-        }
+        else { return }
 
         containerView.insertSubview(highlightsView, at: 0)
 
