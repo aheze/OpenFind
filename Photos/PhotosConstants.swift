@@ -19,6 +19,8 @@ enum PhotosConstants {
         return thumbnailSize
     }()
 
+    /// how often to update results
+    static var minimumResultsUpdateDuration = CGFloat(2.5)
 }
 
 /// constants for the square cell

@@ -83,14 +83,23 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         setupTapGesture()
         update(animate: false)
         
-        if let (findPhoto, currentIndex) = model.slidesState?.getCurrentFindPhotoAndIndex() {
+        print("loaded.")
+        if
+            let slidesState = model.slidesState,
+            let currentIndex = slidesState.getCurrentIndex(),
+            let findPhoto = slidesState.findPhotos[safe: currentIndex]
+        {
+            print("index: \(currentIndex)")
             configureToolbar(for: findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
+            
             if findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
                 slidesSearchPromptViewModel.show(true)
                 slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
             }
+        } else {
+            print("not yet...")
         }
     }
     

@@ -84,7 +84,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         if
-            let index = model.slidesState?.currentIndex,
+            let index = model.slidesState?.getCurrentIndex(),
             let attributes = layoutAttributes[safe: index]
         {
             return CGPoint(x: attributes.frame.origin.x, y: 0)
@@ -132,7 +132,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
             let distance = abs(closestAttributeUnwrapped.fullOrigin - currentOffset)
             if distance > maxDistance {
-                if let currentIndex = model.slidesState?.currentIndex {
+                if let currentIndex = model.slidesState?.getCurrentIndex() {
                     let nextIndex = currentIndex + 1
                     let previousIndex = currentIndex - 1
                     if velocity >= 0, layoutAttributes.indices.contains(nextIndex) {
@@ -147,7 +147,10 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
             }
         }
         
-        model.slidesState?.currentIndex = closestAttributeIndex
+        print("closest: \(closestAttributeIndex)")
+        if let findPhoto = model.slidesState?.findPhotos[safe: closestAttributeIndex] {
+            model.slidesState?.currentPhoto = findPhoto.photo
+        }
         return CGPoint(x: closestAttribute?.frame.origin.x ?? point.x, y: 0)
     }
 }

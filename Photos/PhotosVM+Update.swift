@@ -19,13 +19,13 @@ extension PhotosViewModel {
         } catch {
             print("Error deleting all: \(error)")
         }
-        
-        print("reloading.")
+
         self.load()
     }
 
     /// `photo.metadata` should be the new metadata
-    func updatePhotoMetadata(photo: Photo, reloadCell: Bool) {
+    /// `isNew` determines whether to add or update realm
+    func updatePhotoMetadata(photo: Photo, reloadCell: Bool, isNew: Bool) {
         /// for reloading at a specific index path
         /// 1. Index path inside `collectionView`
         /// 2. Index inside `resultsCollectionView`
@@ -64,6 +64,10 @@ extension PhotosViewModel {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata)
         }
 
-        realmModel.updatePhotoMetadata(metadata: metadata)
+        if isNew {
+            realmModel.addPhotoMetadata(metadata: metadata)
+        } else {
+            realmModel.updatePhotoMetadata(metadata: metadata)
+        }
     }
 }

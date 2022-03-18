@@ -21,7 +21,9 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     }
 
     func transitionDidEnd(type: PhotoTransitionAnimatorType) {
+        print("ended.")
         if let containerView = getCurrentItemContainerView() {
+            print("alpha back to 1")
             containerView.alpha = 1
         }
     }
@@ -35,15 +37,17 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     
     func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect? {
         let frame = getCurrentPhotoFrame() ?? .zero
-        let thumbnail = getCurrentFindPhoto()?.thumbnail
-        let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnail?.size ?? .zero, insideRect: frame)
+        let thumbnail = model.slidesState?.getCurrentFindPhoto()?.thumbnail
+        let thumbnailSize = thumbnail?.size ?? .zero
+        print("     thumb: \(thumbnailSize) vs \(frame)")
+        let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnailSize, insideRect: frame)
         return normalizedFrame
     }
     
     /// read frame directly from the `flowLayout` to prevent incorrect frame
     func getCurrentPhotoFrame() -> CGRect? {
         if
-            let currentIndex = model.slidesState?.currentIndex,
+            let currentIndex = model.slidesState?.getCurrentIndex(),
             let attributes = flowLayout.layoutAttributes[safe: currentIndex]
         {
             let frame = CGRect(origin: .zero, size: attributes.frame.size)
@@ -52,21 +56,11 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         return nil
     }
     
-    func getCurrentFindPhoto() -> FindPhoto? {
-        if
-            let currentIndex = model.slidesState?.currentIndex,
-            let findPhoto = model.slidesState?.findPhotos[safe: currentIndex]
-        {
-            return findPhoto
-        }
-        
-        return nil
-    }
-    
     func getCurrentItemViewController() -> PhotosSlidesItemViewController? {
-        if let viewController = getCurrentFindPhoto()?.associatedViewController {
+        if let viewController = model.slidesState?.getCurrentFindPhoto()?.associatedViewController {
             return viewController
         }
+        print("no vc yet.")
         return nil
     }
     

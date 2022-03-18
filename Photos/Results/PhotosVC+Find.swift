@@ -14,7 +14,7 @@ extension PhotosViewController {
         var findPhotos = [FindPhoto]()
         for photo in model.photos {
             guard let metadata = photo.metadata else { continue }
-            let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
+            let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences, with: self.searchViewModel.stringToGradients)
             if highlights.count >= 1 {
                 let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                 let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: highlights)
@@ -44,50 +44,11 @@ extension PhotosViewController {
         self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
     }
     
-    func find(in photo: Photo) {
-        guard let metadata = photo.metadata else { return }
-        let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
-        
-        if highlights.count >= 1 {
-            let thumbnail = self.model.photoToThumbnail[photo] ?? nil
-            let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: highlights)
-            let description = getCellDescription(from: lines)
-            
-            let findPhoto = FindPhoto(
-                id: UUID(),
-                photo: photo,
-                thumbnail: thumbnail,
-                highlightsSet: highlightsSet,
-                descriptionText: description,
-                descriptionLines: lines
-            )
-            
-            var slidesCurrentFindPhoto: FindPhoto?
-            if let slidesState = self.model.slidesState, let currentIndex = slidesState.currentIndex {
-                slidesCurrentFindPhoto = slidesState.findPhotos[currentIndex]
-            }
-            
-            self.model.resultsState?.findPhotos.insert(findPhoto, at: 0)
-            self.model.slidesState?.findPhotos.insert(findPhoto, at: 0)
-            self.updateResults(animate: true)
-            self.model.slidesState?.viewController?.update(animate: false)
-            
-            if
-                let slidesState = self.model.slidesState,
-                let slidesCurrentFindPhoto = slidesCurrentFindPhoto,
-                let newIndex = slidesState.getFindPhotoIndex(findPhoto: slidesCurrentFindPhoto)
-            {
-                self.model.slidesState?.currentIndex = newIndex
-                self.model.slidesState?.viewController?.collectionView.scrollToItem(
-                    at: newIndex.indexPath,
-                    at: .centeredHorizontally,
-                    animated: false
-                )
-            }
-        }
-    }
     
-    func getHighlightsAndDescription(from sentences: [Sentence]) -> (Set<Highlight>, [FindPhoto.Line]) {
+    func getHighlightsAndDescription(
+        from sentences: [Sentence],
+        with stringToGradients: [String: Gradient]
+    ) -> (Set<Highlight>, [FindPhoto.Line]) {
         var highlights = Set<Highlight>()
         var lines = [FindPhoto.Line]()
         
@@ -95,7 +56,7 @@ extension PhotosViewController {
             /// the highlights in this sentence.
             var lineHighlights = Set<FindPhoto.Line.LineHighlight>()
             
-            let rangeResults = sentence.ranges(of: Array(self.searchViewModel.stringToGradients.keys))
+            let rangeResults = sentence.ranges(of: Array(stringToGradients.keys))
             for rangeResult in rangeResults {
                 let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? Gradient()
                 for range in rangeResult.ranges {

@@ -25,15 +25,11 @@ extension PhotosViewController {
             if let resultsCollectionViewIndex = resultsCollectionViewIndex {
                 self.updateResults(at: resultsCollectionViewIndex, with: metadata)
             }
-            
-            if let slidesCollectionViewIndex = slidesCollectionViewIndex {
-                self.model.updateSlidesAt?(slidesCollectionViewIndex, metadata)
-            }
         }
-        model.metadataAddedFor = { [weak self] photo in
+        model.photosWithQueuedSentencesAdded = { [weak self] photos in
             guard let self = self else { return }
-            print("finding.")
-            self.find(in: photo)
+            print("photosWithQueuedSentencesAdded added")
+            self.findAfterQueuedSentencesUpdate(in: photos)
         }
         model.scanningIconTapped = { [weak self] in
             guard let self = self else { return }
@@ -53,8 +49,6 @@ extension PhotosViewController {
             
             /// don't notify yet
             self.searchViewModel.updateFields(fields: newFields, notify: false)
-            
-            
         }
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }

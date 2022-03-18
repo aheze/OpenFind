@@ -14,12 +14,11 @@ extension PhotosSlidesViewController {
             guard let self = self else { return }
 
             guard let slidesState = self.model.slidesState else { return }
-            guard let currentIndex = slidesState.currentIndex else { return }
+            guard let currentIndex = slidesState.getCurrentIndex() else { return }
             let findPhoto = slidesState.findPhotos[currentIndex]
 
             /// metadata already exists, directly find
             if textChanged {
-                
                 /// if showing, that means Find is currently scanning, so don't scan a second time.
                 if !self.searchNavigationProgressViewModel.percentageShowing {
                     self.startFinding(for: findPhoto)
@@ -47,28 +46,5 @@ extension PhotosSlidesViewController {
                 }
             }
         }
-
-        /// called when `startFinding` finishes.
-        model.updateSlidesAt = { [weak self] index, metadata in
-
-            guard let self = self else { return }
-            if self.searchNavigationProgressViewModel.percentageShowing {
-                self.searchNavigationProgressViewModel.finishAutoProgress()
-                let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
-
-                if let slidesState = self.model.slidesState, let findPhoto = slidesState.findPhotos[safe: index] {
-                    DispatchQueue.main.async {
-                        let highlightSet = FindPhoto.HighlightsSet(
-                            stringToGradients: self.slidesSearchViewModel.stringToGradients,
-                            highlights: highlights
-                        )
-                        findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
-                        self.model.slidesState?.findPhotos[index].highlightsSet = highlightSet
-                    }
-                }
-                Find.prioritizedAction = nil
-            }
-        }
     }
 }
-

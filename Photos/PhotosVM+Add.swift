@@ -10,55 +10,78 @@ import UIKit
 
 /// Separate add from update
 extension PhotosViewModel {
-    /// unlike `updatePhotoMetadata`, this doesn't have a `metadata: PhotoMetadata` parameter.
-    /// Instead, the photo should already be loaded with metadata.
-    func addPhotoMetadata(photo: Photo, reloadCell: Bool) {
-        print("adding metadata! \(photo.metadata != nil)")
-        guard let metadata = photo.metadata else { return }
+    func addSentences(of photo: Photo) {
+        self.scheduleUpdate(for: photo)
+    }
 
-        /// for reloading at a specific index path
-        /// 1. Index path inside `collectionView`
-        /// 2. Index inside `resultsCollectionView`
-        var collectionViewIndexPath: IndexPath?
-        var resultsCollectionViewIndex: Int?
-        var slidesCollectionViewIndex: Int?
+    func scheduleUpdate(for photo: Photo) {
+        photosWithQueuedSentences.append(photo)
+        if self.shouldUpdate() {
+            self.addQueuedSentencesToMetadatas()
+        } else {
+            if !updateScheduled {
+                updateScheduled = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + PhotosConstants.minimumResultsUpdateDuration) {
+                    self.addQueuedSentencesToMetadatas()
+                }
+            }
+        }
+    }
 
-        /// update the main collection view
-        if
-            let index = getPhotoIndex(photo: photo),
-            let indexPath = getPhotoIndexPath(photo: photo)
-        {
-            collectionViewIndexPath = indexPath
-            photos[index] = photo
-            sections[indexPath.section].photos[indexPath.item] = photo
+    /// update metadata to include sentences
+    func addQueuedSentencesToMetadatas() {
+        updateScheduled = false
+
+        for photo in photosWithQueuedSentences {
+            if
+                let index = getPhotoIndex(photo: photo),
+                let indexPath = getPhotoIndexPath(photo: photo)
+            {
+                photos[index].metadata?.isScanned = photo.metadata?.isScanned ?? false
+                photos[index].metadata?.sentences = photo.metadata?.sentences ?? []
+                sections[indexPath.section].photos[indexPath.item].metadata?.isScanned = photo.metadata?.isScanned ?? false
+                sections[indexPath.section].photos[indexPath.item].metadata?.sentences = photo.metadata?.sentences ?? []
+            }
+
+            /// these should only be called when the results are already there (the photo was not added live)
+            if
+                let resultsState = resultsState,
+                let index = resultsState.getFindPhotoIndex(photo: photo)
+            {
+                print("         Results exists: index \(index)")
+                self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+            } else {
+                print("         Results DOES NOT exist.")
+            }
+
+            if
+                let slidesState = slidesState,
+                let index = slidesState.getFindPhotoIndex(photo: photo)
+            {
+                print("         Slides exists: index \(index)")
+                self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+            } else {
+                print("      Slides DOES NOT exist.")
+            }
         }
 
-        /// currently in finding mode
-        if self.resultsState != nil, metadata.isScanned {
-            print("finding currently.")
-            metadataAddedFor?(photo)
-        }
-        
-        if
-            let resultsState = resultsState,
-            let index = resultsState.getFindPhotoIndex(photo: photo)
-        {
-            resultsCollectionViewIndex = index
-            self.resultsState?.findPhotos[index].photo.metadata = metadata
-        }
+        photosWithQueuedSentencesAdded?(photosWithQueuedSentences)
+        photosWithQueuedSentences.removeAll()
+        lastResultsUpdateTime = Date()
+    }
 
-        if
-            let slidesState = slidesState,
-            let index = slidesState.getFindPhotoIndex(photo: photo)
-        {
-            slidesCollectionViewIndex = index
-            self.slidesState?.findPhotos[index].photo.metadata = metadata
+    func shouldUpdate() -> Bool {
+        if let lastResultsUpdateTime = lastResultsUpdateTime {
+            /// check if passed minimum duration
+            if abs(lastResultsUpdateTime.timeIntervalSinceNow) > PhotosConstants.minimumResultsUpdateDuration {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return true
         }
-
-        if reloadCell {
-            reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, slidesCollectionViewIndex, metadata)
-        }
-
-        realmModel.addPhotoMetadata(metadata: metadata)
     }
 }

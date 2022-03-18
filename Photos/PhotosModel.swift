@@ -12,8 +12,7 @@ import UIKit
 struct PhotosSlidesState {
     var viewController: PhotosSlidesViewController?
     var findPhotos: [FindPhoto]
-    var startingFindPhoto: FindPhoto
-    var currentIndex: Int?
+    var currentPhoto: Photo?
     var isFullScreen = false /// hide the bars
 
     /// get from `findPhotos`
@@ -28,15 +27,22 @@ struct PhotosSlidesState {
         }
         return nil
     }
-
-    func getCurrentFindPhotoAndIndex() -> (FindPhoto, Int)? {
-        if let currentIndex = currentIndex {
-            if let findPhoto = findPhotos[safe: currentIndex] {
-                return (findPhoto, currentIndex)
-            }
+    
+    func getCurrentFindPhoto() -> FindPhoto? {
+        if
+            let index = getCurrentIndex(),
+            let findPhoto = findPhotos[safe: index]
+        {
+            return findPhoto
         }
         return nil
     }
+
+    func getCurrentIndex() -> Int? {
+        let index = findPhotos.firstIndex { $0.photo == currentPhoto }
+        return index
+    }
+
 
     /// for the current image
     var toolbarStarOn = false
@@ -89,7 +95,7 @@ struct FindPhoto: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     /// stores the search (`stringToGradients`) with the results (`highlights`)
     struct HighlightsSet: Equatable {
         var stringToGradients: [String: Gradient]

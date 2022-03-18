@@ -17,7 +17,8 @@ extension PhotosViewModel {
             newMetadata.sentences = sentences
             newMetadata.isScanned = true
             newPhoto.metadata = newMetadata
-            updatePhotoMetadata(photo: newPhoto, reloadCell: true)
+            addSentences(of: newPhoto)
+            realmModel.updatePhotoMetadata(metadata: metadata)
         } else {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
@@ -26,7 +27,9 @@ extension PhotosViewModel {
                 isStarred: false
             )
             newPhoto.metadata = metadata
-            addPhotoMetadata(photo: newPhoto, reloadCell: true)
+            print("scanned.")
+            addSentences(of: newPhoto)
+            realmModel.addPhotoMetadata(metadata: metadata)
         }
 
         photosToScan = photosToScan.filter { $0 != photo }
@@ -66,6 +69,7 @@ extension PhotosViewModel {
     /// scan a photo
     /// `inBatch`: scanning all photos. If true, check `scanningState == .scanningAllPhotos`.
     func scanPhoto(_ photo: Photo, findOptions: FindOptions, inBatch: Bool) {
+        print("Go scan photo!!!!")
         Task {
             let image = await getFullImage(from: photo)
             if let cgImage = image?.cgImage {
@@ -76,6 +80,7 @@ extension PhotosViewModel {
 
                 /// discard value if not scanning and `inBatch` is true
                 if !inBatch || scanningState == .scanningAllPhotos {
+                    print("us scanned")
                     photoScanned(photo: photo, sentences: sentences)
                 }
             }

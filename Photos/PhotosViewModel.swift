@@ -22,7 +22,7 @@ class PhotosViewModel: ObservableObject {
 
     /// update the entire collection view. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
-    
+
     /// reload at a specific index path
     /// 1. Index path inside `collectionView`
     /// 2. Index inside `resultsCollectionView`
@@ -33,8 +33,9 @@ class PhotosViewModel: ObservableObject {
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
-    
+
     // MARK: Filtering
+
     var sliderViewModel = SliderViewModel()
 
     // MARK: Slides / Results
@@ -48,25 +49,30 @@ class PhotosViewModel: ObservableObject {
     /// the state of the results.
     var resultsState: PhotosResultsState?
 
+    /// the date when the last results update occurred.
+    var lastResultsUpdateTime: Date?
+
     /// about to present slides, update the slides search collection view to match the latest search view model
     /// Set this inside **PhotosController**
     var updateSlidesSearchCollectionView: (() -> Void)?
-    
-    /// update a metadata
-    /// Set this inside **PhotosSlidesVC+Listen**
-    var updateSlidesAt: ((Int, PhotoMetadata) -> Void)?
-    
-    /// a metadata was just added for a photo, find inside it now and append to `resultsState` / `slidesState`.
-    var metadataAddedFor: ((Photo) -> Void)?
-    
+
     /// about to present slides, set the transition
     var transitionAnimatorsUpdated: ((PhotosViewController, PhotosSlidesViewController) -> Void)?
 
     /// the photo manager got an image, update the transition image view's image.
     var imageUpdatedWhenPresentingSlides: ((UIImage?) -> Void)?
-    
+
     /// update the color/alpha with those of the specified fields
     var updateFieldOverrides: (([Field]) -> Void)?
+
+    // MARK: Find from just-scanned photos
+
+    /// sentences were recently added to these photos, but not applied to the main model yet.
+    var photosWithQueuedSentences = [Photo]()
+    var updateScheduled = false
+
+    /// sentences were applied! find inside them now and append to `resultsState` / `slidesState`.
+    var photosWithQueuedSentencesAdded: (([Photo]) -> Void)?
 
     // MARK: Scanning
 
@@ -83,7 +89,7 @@ class PhotosViewModel: ObservableObject {
 
     @Published var isSelecting = false
     @Published var selectedPhotos = [Photo]()
-    
+
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
     var deleteSelected: (() -> Void)?
@@ -100,7 +106,6 @@ class PhotosViewModel: ObservableObject {
 }
 
 extension PhotosViewModel {
-
     /// get from `photos`
     func getPhotoIndex(photo: Photo) -> Int? {
         if let firstIndex = photos.firstIndex(of: photo) {
@@ -117,6 +122,12 @@ extension PhotosViewModel {
             }
         }
         return nil
+    }
+
+    /// get from `sections`
+    func getPhoto(from metadata: PhotoMetadata) -> Photo? {
+        let photo = photos.first { $0.asset.localIdentifier == metadata.assetIdentifier }
+        return photo
     }
 
     func getFullImage(from photo: Photo) async -> UIImage? {

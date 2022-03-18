@@ -64,6 +64,8 @@ extension PhotosViewController {
 
                 cell.tapped = { [weak self] in
                     guard let self = self else { return }
+                    /// get the current up-to-date FindPhoto first.
+                    guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return }
                     self.presentSlides(startingAtFindPhoto: findPhoto)
                 }
 
@@ -73,7 +75,7 @@ extension PhotosViewController {
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
 
-            return self.getHeaderContent(
+            self.getHeaderContent(
                 collectionView: collectionView,
                 kind: kind,
                 indexPath: indexPath,

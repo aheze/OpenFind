@@ -107,7 +107,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
         if
-            let currentIndex = model.slidesState?.currentIndex,
+            let currentIndex = model.slidesState?.getCurrentIndex(),
             let thumbnail = self.model.slidesState?.findPhotos[currentIndex].thumbnail
         {
             return thumbnail
@@ -146,27 +146,26 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         return nil
     }
     
+    /// get the index path from the photo presented in slides
     func getCurrentPhotoIndexPath() -> IndexPath? {
+        
+        /// get index within the results collection view
         if model.resultsState != nil {
             guard
                 let slidesState = model.slidesState,
-                let currentIndex = slidesState.currentIndex,
-                let findPhoto = slidesState.findPhotos[safe: currentIndex],
-                let findPhotoIndex = slidesState.getFindPhotoIndex(findPhoto: findPhoto)
-            else {
-                return nil
-            }
-            return findPhotoIndex.indexPath
+                let photo = slidesState.currentPhoto,
+                let resultsIndex = model.resultsState?.getFindPhotoIndex(photo: photo)
+            else { return nil }
+            return resultsIndex.indexPath
         } else {
+            
+            /// get index within the main collection view
             guard
                 let slidesState = model.slidesState,
-                let currentIndex = slidesState.currentIndex,
-                let photo = model.photos[safe: currentIndex],
-                let photoIndexPath = model.getPhotoIndexPath(photo: photo)
-            else {
-                return nil
-            }
-            return photoIndexPath
+                let photo = slidesState.currentPhoto,
+                let index = model.getPhotoIndexPath(photo: photo)
+            else { return nil }
+            return index
         }
     }
     

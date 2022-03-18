@@ -34,8 +34,7 @@ extension PhotosViewController {
         let slidesState = PhotosSlidesState(
             viewController: viewController,
             findPhotos: findPhotos,
-            startingFindPhoto: findPhoto,
-            currentIndex: currentIndex
+            currentPhoto: findPhoto.photo
         )
 
         presentSlides(startingAt: findPhoto, with: slidesState)
@@ -55,20 +54,10 @@ extension PhotosViewController {
 
         model.resultsState = resultsState
 
-        let findPhoto: FindPhoto
-        let currentIndex: Int
-        if let photoIndex = resultsState.getFindPhotoIndex(findPhoto: startingFindPhoto) {
-            findPhoto = resultsState.findPhotos[photoIndex]
-            currentIndex = photoIndex
-        } else {
-            return
-        }
-
         let slidesState = PhotosSlidesState(
             viewController: viewController,
             findPhotos: findPhotos,
-            startingFindPhoto: findPhoto, /// should be inside the array
-            currentIndex: currentIndex
+            currentPhoto: startingFindPhoto.photo
         )
 
         presentSlides(startingAt: startingFindPhoto, with: slidesState)

@@ -38,6 +38,8 @@ public extension CGRect {
         let viewRatio = rect.width / rect.height
         let imageRatio = aspectRatio.width / aspectRatio.height
         let touchesHorizontalSides = (imageRatio > viewRatio)
+        
+        print("     Original rect: \(rect)")
 
         let result: CGRect
         if touchesHorizontalSides {
@@ -46,7 +48,11 @@ public extension CGRect {
             result = CGRect(x: rect.origin.x, y: yPoint, width: rect.width, height: height)
         } else {
             let width = rect.height * imageRatio
+            print("     width: \(width)")
+            
             let xPoint = rect.minX + (rect.width - width) / 2
+            
+            print("     xPoint: \(xPoint) from \(rect.minX) + \(rect.width) - \(width)")
             result = CGRect(x: xPoint, y: rect.origin.y, width: width, height: rect.height)
         }
         return result

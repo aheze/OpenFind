@@ -1453,6 +1453,8 @@
 		3C92349F27E2ABE80055061A /* PhotosSlidesVC+Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C92349D27E2ABE70055061A /* PhotosSlidesVC+Find.swift */; };
 		3C9234A127E2EB1C0055061A /* PhotosVM+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */; };
 		3C9234A227E2EB1C0055061A /* PhotosVM+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */; };
+		3C9234A427E454370055061A /* PhotosVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234A327E454370055061A /* PhotosVC+Update.swift */; };
+		3C9234A527E454370055061A /* PhotosVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234A327E454370055061A /* PhotosVC+Update.swift */; };
 		3C93147D27B760F5009E5B6E /* ListsDetailVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */; };
 		3C93147E27B76129009E5B6E /* ListsDetailVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */; };
 		3C93148027B769A0009E5B6E /* ListsDetailVC+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147F27B769A0009E5B6E /* ListsDetailVC+Scroll.swift */; };
@@ -2789,6 +2791,7 @@
 		3C8F116D25AD5DA80091402B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3C92349D27E2ABE70055061A /* PhotosSlidesVC+Find.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Find.swift"; sourceTree = "<group>"; };
 		3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Add.swift"; sourceTree = "<group>"; };
+		3C9234A327E454370055061A /* PhotosVC+Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Update.swift"; sourceTree = "<group>"; };
 		3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Delegate.swift"; sourceTree = "<group>"; };
 		3C93147F27B769A0009E5B6E /* ListsDetailVC+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Scroll.swift"; sourceTree = "<group>"; };
 		3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Listen.swift"; sourceTree = "<group>"; };
@@ -3795,8 +3798,8 @@
 				3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */,
 				3CB8C32827C34CDF000AA3B9 /* PhotosVM+Scanning.swift */,
 				3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */,
-				3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */,
 				3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */,
+				3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */,
 				3C4D39EC274766580010FD68 /* PhotosController.swift */,
 				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
 				3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */,
@@ -4574,6 +4577,7 @@
 			isa = PBXGroup;
 			children = (
 				3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */,
+				3C9234A327E454370055061A /* PhotosVC+Update.swift */,
 				3C0625FF27C69FB60078E66F /* PhotosVC+Results.swift */,
 				3C17B8E927C9C4D000B55E97 /* PhotosVC+ResultsHighlights.swift */,
 				3CAE64ED27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift */,
@@ -6802,6 +6806,7 @@
 				3CBB319A27BD643200F25F6A /* PhotosSlidesVC+Delegate.swift in Sources */,
 				3CBB318C27BD523200F25F6A /* PhotosSlidesViewController.swift in Sources */,
 				3C443F1427DD90790050A0AB /* Word.swift in Sources */,
+				3C9234A527E454370055061A /* PhotosVC+Update.swift in Sources */,
 				3C0B5E6A27BABE1D00EC881E /* PhotosModel.swift in Sources */,
 				3CBB31A227BD6E9200F25F6A /* PhotosSlidesItemViewController.swift in Sources */,
 				3C443E9B27DD88F80050A0AB /* SearchCollectionView.swift in Sources */,
@@ -7410,6 +7415,7 @@
 				3C443F4E27DD90E90050A0AB /* GeneralExtensions.swift in Sources */,
 				3C6C7421278194A100E039F0 /* TipView.swift in Sources */,
 				3C6C73532781945400E039F0 /* ContentPageViewController.swift in Sources */,
+				3C9234A427E454370055061A /* PhotosVC+Update.swift in Sources */,
 				3C6C73592781945400E039F0 /* ContentCell.swift in Sources */,
 				3C6C73BE2781947E00E039F0 /* VisionFindingEngine.swift in Sources */,
 				3C08EB1A279C76E500971D60 /* ListsCollectionFlowLayout.swift in Sources */,
