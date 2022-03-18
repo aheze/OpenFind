@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 extension PhotosSlidesViewController {
     func listen() {
         slidesSearchViewModel.fieldsChanged = { [weak self] textChanged in
