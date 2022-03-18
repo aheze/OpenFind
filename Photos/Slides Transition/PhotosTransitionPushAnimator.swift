@@ -63,6 +63,12 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
         let spring: CGFloat = 0.95
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
             slidesView.alpha = 1
+
+            if let toImageFrame = self.toDelegate.imageFrame(type: .push) {
+                self.transitionImageView.frame = toImageFrame
+            }
+            self.transitionImageView.layer.cornerRadius = self.toDelegate.imageCornerRadius(type: .push)
+            self.additionalAnimations?()
         }
 
         // Once the animation is complete, we'll need to clean up.
@@ -80,20 +86,7 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
             self.additionalCompletion?()
         }
 
-        // HACK: By delaying 0.005s, I get a layout-refresh on the toViewController,
-        // which means its collection view has updated its layout,
-        // and our toDelegate?.imageFrame() is accurate, even if
-        // the device has rotated. :scream_cat:
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
-            self.additionalSetup?()
-            animator.addAnimations {
-                if let toImageFrame = self.toDelegate.imageFrame(type: .push) {
-                    self.transitionImageView.frame = toImageFrame
-                }
-                self.transitionImageView.layer.cornerRadius = self.toDelegate.imageCornerRadius(type: .push)
-                self.additionalAnimations?()
-            }
-        }
+        additionalSetup?()
 
         toDelegate.transitionWillStart(type: .push)
         fromDelegate.transitionWillStart(type: .push)

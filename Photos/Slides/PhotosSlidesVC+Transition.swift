@@ -34,11 +34,20 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     }
     
     func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect? {
-        if let imageView = getCurrentItemImageView() {
-            let frame = imageView.windowFrame()
-            let thumbnail = getCurrentFindPhoto()?.thumbnail
-            let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnail?.size ?? .zero, insideRect: frame)
-            return normalizedFrame
+        let frame = getCurrentPhotoFrame() ?? .zero
+        let thumbnail = getCurrentFindPhoto()?.thumbnail
+        let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnail?.size ?? .zero, insideRect: frame)
+        return normalizedFrame
+    }
+    
+    /// read frame directly from the `flowLayout` to prevent incorrect frame
+    func getCurrentPhotoFrame() -> CGRect? {
+        if
+            let currentIndex = model.slidesState?.currentIndex,
+            let attributes = flowLayout.layoutAttributes[safe: currentIndex]
+        {
+            let frame = CGRect(origin: .zero, size: attributes.frame.size)
+            return frame
         }
         return nil
     }

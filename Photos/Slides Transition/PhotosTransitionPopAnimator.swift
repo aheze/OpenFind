@@ -67,9 +67,17 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
 
         // Now let's animate, using our old friend UIViewPropertyAnimator!
         let spring: CGFloat = 0.95
+
         let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: spring) {
             photosView.alpha = 1
+            if let toImageFrame = self.toDelegate.imageFrame(type: .pop) {
+                self.transitionImageView.frame = toImageFrame
+            }
+            self.transitionImageView.layer.cornerRadius = self.toDelegate.imageCornerRadius(type: .push)
+            self.additionalAnimations?()
         }
+
+        additionalSetup?()
 
         // Once the animation is complete, we'll need to clean up.
         animator.addCompletion { position in
@@ -84,23 +92,6 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
             self.toDelegate.transitionDidEnd(type: .pop)
             self.fromDelegate.transitionDidEnd(type: .pop)
             self.additionalCompletion?()
-        }
-
-        // HACK: By delaying 0.005s, I get a layout-refresh on the toViewController,
-        // which means its collection view has updated its layout,
-        // and our toDelegate?.imageFrame() is accurate, even if
-        // the device has rotated. :scream_cat:
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
-            self.additionalSetup?()
-            animator.addAnimations {
-                if let toImageFrame = self.toDelegate.imageFrame(type: .pop) {
-                    self.transitionImageView.frame = toImageFrame
-                }
-
-                self.transitionImageView.layer.cornerRadius = self.toDelegate.imageCornerRadius(type: .push)
-
-                self.additionalAnimations?()
-            }
         }
 
         animator.startAnimation()

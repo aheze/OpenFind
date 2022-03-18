@@ -62,34 +62,35 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
             let fromVC = transitionContext.viewController(forKey: .from) as? PhotosSlidesViewController,
             let toVC = transitionContext.viewController(forKey: .to),
             let slidesView = transitionContext.view(forKey: .from),
-            let photosView = transitionContext.view(forKey: .to),
-
-            let fromImageViewFrame = fromDelegate.imageFrame(type: .pop),
-            let fromImage = fromDelegate.referenceImage(type: .pop)
+            let photosView = transitionContext.view(forKey: .to)
         else {
-            fatalError("fromImageViewFrame: \(fromDelegate.imageFrame(type: .pop)), fromImage: \(fromDelegate.referenceImage(type: .pop))")
+            fatalError("Could not get view controllers inside `startInteractiveTransition`.")
         }
+        
 
+        
         fromVC.transitionAnimator = self
         self.fromVC = fromVC
         self.toVC = toVC
         self.transitionContext = transitionContext
+        
+        let fromImageViewFrame = fromDelegate.imageFrame(type: .pop) ?? .zero
+        let fromImage = fromDelegate.referenceImage(type: .pop)
+        let toImageViewFrame = toDelegate.imageFrame(type: .pop) ?? .zero
+        let fromCornerRadius = fromDelegate.imageCornerRadius(type: .pop)
+        let toCornerRadius = toDelegate.imageCornerRadius(type: .pop)
+        
         self.fromImageViewFrame = fromImageViewFrame
         self.fromImage = fromImage
-        self.fromCornerRadius = self.fromDelegate.imageCornerRadius(type: .pop)
-        self.toCornerRadius = self.toDelegate.imageCornerRadius(type: .pop)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            if let toImageViewFrame = self.toDelegate.imageFrame(type: .pop) {
-                self.toImageViewFrame = toImageViewFrame
-            }
-        }
+        self.toImageViewFrame = toImageViewFrame
+        self.fromCornerRadius = fromCornerRadius
+        self.toCornerRadius = toCornerRadius
 
         let containerView = transitionContext.containerView
 
         transitionImageView.frame = fromImageViewFrame
         transitionImageView.image = fromImage
-        transitionImageView.layer.cornerRadius = fromCornerRadius ?? 0
+        transitionImageView.layer.cornerRadius = fromCornerRadius
 
         containerView.addSubview(photosView)
         containerView.addSubview(slidesView)

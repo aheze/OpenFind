@@ -29,8 +29,6 @@ extension PhotosViewController {
         } else {
             return
         }
-        
-        print("making stlides state....")
 
         /// set later inside `presentSlides`.
         let slidesState = PhotosSlidesState(

@@ -45,10 +45,9 @@ extension PhotosViewController {
     }
     
     func find(in photo: Photo) {
-        print("Finding in photo.")
         guard let metadata = photo.metadata else { return }
         let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences)
-        print("high gount: \(highlights.count)")
+        
         if highlights.count >= 1 {
             let thumbnail = self.model.photoToThumbnail[photo] ?? nil
             let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: highlights)
@@ -68,7 +67,6 @@ extension PhotosViewController {
                 slidesCurrentFindPhoto = slidesState.findPhotos[currentIndex]
             }
             
-            print("slidessate: \(self.model.slidesState != nil)")
             self.model.resultsState?.findPhotos.insert(findPhoto, at: 0)
             self.model.slidesState?.findPhotos.insert(findPhoto, at: 0)
             self.updateResults(animate: true)
