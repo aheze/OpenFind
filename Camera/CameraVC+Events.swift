@@ -30,7 +30,6 @@ extension CameraViewController {
         let recentFoundHighlights = recentEvents.map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
         
         if recentFoundHighlights.count == 0, recentRecognizedStrings.count <= 20 {
-            print("No text detected.")
             model.recentEvents.removeAll()
             
             /// stop scanning for now, until the phone shakes

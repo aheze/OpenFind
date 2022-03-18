@@ -15,7 +15,7 @@ extension ListsDetailViewController {
                 title: "Share",
                 image: UIImage(systemName: "square.and.arrow.up")
             ) { _ in
-                print("share")
+                
             }
             
             let deleteAction = UIAction(

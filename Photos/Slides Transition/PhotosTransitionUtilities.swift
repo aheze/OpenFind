@@ -39,14 +39,11 @@ public extension CGRect {
         var imageRatio = aspectRatio.width / aspectRatio.height
         let touchesHorizontalSides = (imageRatio > viewRatio)
         
-//        if viewRatio.isNaN
-        
-        print("     aspectRatio: \(aspectRatio) insideRect rect: \(rect). viewRatio: \(viewRatio), imageRatio: \(imageRatio), touchesHorizontalSides: \(touchesHorizontalSides)")
-        
         if imageRatio.isNaN {
+            
+            print("     NAN inside `makeRect`! aspectRatio: \(aspectRatio) insideRect rect: \(rect). viewRatio: \(viewRatio), imageRatio: \(imageRatio), touchesHorizontalSides: \(touchesHorizontalSides)")
             imageRatio = 0
         }
-        
 
         let result: CGRect
         if touchesHorizontalSides {
@@ -55,11 +52,7 @@ public extension CGRect {
             result = CGRect(x: rect.origin.x, y: yPoint, width: rect.width, height: height)
         } else {
             let width = rect.height * imageRatio
-            print("     width: \(width)")
-            
             let xPoint = rect.minX + (rect.width - width) / 2
-            
-            print("     xPoint: \(xPoint) from \(rect.minX) + \(rect.width) - \(width)")
             result = CGRect(x: xPoint, y: rect.origin.y, width: width, height: rect.height)
         }
         return result

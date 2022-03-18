@@ -48,7 +48,7 @@ extension RealmModel {
                 realm.add(realmList)
             }
         } catch {
-            Global.log("Error writing list: \(error)", .error)
+            Debug.log("Error writing list: \(error)", .error)
         }
 
         loadLists()
@@ -67,7 +67,7 @@ extension RealmModel {
                     realmList.dateCreated = list.dateCreated
                 }
             } catch {
-                Global.log("Error updating list: \(error)", .error)
+                Debug.log("Error updating list: \(error)", .error)
             }
         }
 
@@ -81,7 +81,7 @@ extension RealmModel {
                     realm.delete(realmList)
                 }
             } catch {
-                Global.log("Error deleting list: \(error)", .error)
+                Debug.log("Error deleting list: \(error)", .error)
             }
         }
 

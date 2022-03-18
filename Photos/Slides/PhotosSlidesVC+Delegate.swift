@@ -10,10 +10,9 @@ import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("------------ will display\(indexPath)")
+        
         guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
-        print("The count of sentences: \(findPhoto.photo.metadata?.sentences.count)")
-
+        
         let photoSlidesViewController: PhotosSlidesItemViewController
         if let viewController = findPhoto.associatedViewController {
             photoSlidesViewController = viewController
@@ -34,12 +33,10 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             /// adding a child seems to take control of the navigation bar. stop this
             navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
             findPhoto.associatedViewController = viewController
-            print("Setting view controller.")
             model.slidesState?.findPhotos[indexPath.item] = findPhoto
         }
 
         if !slidesSearchViewModel.stringToGradients.isEmpty {
-            print("NOt empty.//....")
             /// if keys are same, show the highlights.
             if
                 let highlightsSet = findPhoto.highlightsSet,
@@ -47,7 +44,6 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             {
                 photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
             } else {
-                print("Find now./")
                 /// else, find again.
                 startFinding(for: findPhoto)
             }

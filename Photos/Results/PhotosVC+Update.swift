@@ -9,15 +9,13 @@
 import UIKit
 
 extension PhotosViewController {
-    /// find after a new photo got metadata
+    /// find after a new photo was scanned
     func findAfterQueuedSentencesUpdate(in photos: [Photo]) {
-        
         var insertedFindPhotos = [FindPhoto]()
         
         for photo in photos {
             guard let metadata = photo.metadata else { return }
-            print("->Photo.. Sentences: \(metadata.sentences.count)")
-   
+            
             if let resultsState = model.resultsState {
                 let (highlights, lines) = self.getHighlightsAndDescription(
                     from: metadata.sentences,
@@ -30,7 +28,6 @@ extension PhotosViewController {
                         model.resultsState?.findPhotos[index].highlightsSet = highlightsSet
                         model.resultsState?.findPhotos[index].associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     } else {
-                        print("New..")
                         let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                         let findPhoto = FindPhoto(
                             id: UUID(),
@@ -63,7 +60,7 @@ extension PhotosViewController {
             }
         }
         
-        print("Inserted: \(insertedFindPhotos.count)")
+        
         self.model.resultsState?.findPhotos.insert(contentsOf: insertedFindPhotos, at: 0)
         self.model.slidesState?.findPhotos.insert(contentsOf: insertedFindPhotos, at: 0)
         self.updateResultsCollectionViews()
@@ -78,7 +75,7 @@ extension PhotosViewController {
             let slidesState = model.slidesState,
             let currentIndex = slidesState.getCurrentIndex()
         {
-            print("ind: \(currentIndex)")
+            print("index to scroll to: \(currentIndex)")
             self.model.slidesState?.viewController?.collectionView.scrollToItem(
                 at: currentIndex.indexPath,
                 at: .centeredHorizontally,

@@ -84,7 +84,7 @@ extension Find {
                 )
                 sentences.append(sentence)
             } catch {
-                Global.log("Error: \(error)")
+                Debug.log("Error: \(error)")
             }
         }
 

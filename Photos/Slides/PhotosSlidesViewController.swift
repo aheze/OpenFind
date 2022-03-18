@@ -83,13 +83,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         setupTapGesture()
         update(animate: false)
         
-        print("loaded.")
         if
             let slidesState = model.slidesState,
             let currentIndex = slidesState.getCurrentIndex(),
             let findPhoto = slidesState.findPhotos[safe: currentIndex]
         {
-            print("index: \(currentIndex)")
             configureToolbar(for: findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
@@ -98,8 +96,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
                 slidesSearchPromptViewModel.show(true)
                 slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
             }
-        } else {
-            print("not yet...")
         }
     }
     

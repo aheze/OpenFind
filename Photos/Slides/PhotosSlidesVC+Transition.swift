@@ -21,9 +21,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     }
 
     func transitionDidEnd(type: PhotoTransitionAnimatorType) {
-        print("ended.")
         if let containerView = getCurrentItemContainerView() {
-            print("alpha back to 1")
             containerView.alpha = 1
         }
     }
@@ -39,7 +37,6 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         let frame = getCurrentPhotoFrame() ?? .zero
         let thumbnail = model.slidesState?.getCurrentFindPhoto()?.thumbnail
         let thumbnailSize = thumbnail?.size ?? .zero
-        print("     thumb: \(thumbnailSize) vs \(frame)")
         let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnailSize, insideRect: frame)
         return normalizedFrame
     }
@@ -60,7 +57,6 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         if let viewController = model.slidesState?.getCurrentFindPhoto()?.associatedViewController {
             return viewController
         }
-        print("no vc yet.")
         return nil
     }
     

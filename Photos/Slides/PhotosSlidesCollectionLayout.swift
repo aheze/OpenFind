@@ -147,7 +147,6 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
             }
         }
         
-        print("closest: \(closestAttributeIndex)")
         if let findPhoto = model.slidesState?.findPhotos[safe: closestAttributeIndex] {
             model.slidesState?.currentPhoto = findPhoto.photo
         }

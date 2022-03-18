@@ -28,7 +28,6 @@ extension PhotosViewController {
         }
         model.photosWithQueuedSentencesAdded = { [weak self] photos in
             guard let self = self else { return }
-            print("photosWithQueuedSentencesAdded added")
             self.findAfterQueuedSentencesUpdate(in: photos)
         }
         model.scanningIconTapped = { [weak self] in

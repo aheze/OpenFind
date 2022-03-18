@@ -37,7 +37,6 @@ extension PhotosViewModel {
                 let index = getPhotoIndex(photo: photo),
                 let indexPath = getPhotoIndexPath(photo: photo)
             {
-                
                 /// if not nil, just modify the changed fields - prevent overriding other properties that might have changed while the queue was waiting
                 if photos[index].metadata != nil {
                     photos[index].metadata?.isScanned = photo.metadata?.isScanned ?? false
@@ -54,38 +53,30 @@ extension PhotosViewModel {
                 }
             }
 
-            /// these should only be called when the results are already there (the photo was not added live)
+            /// these should only be called when the results are already there/exists (the photo was not added dynamically)
+            /// If added dynamically, append inside `findAfterQueuedSentencesUpdate` in `PhotosVC+Update`
             if
                 let resultsState = resultsState,
                 let index = resultsState.getFindPhotoIndex(photo: photo)
             {
-                print("         Results exists: index \(index)")
                 if resultsState.findPhotos[index].photo.metadata != nil {
                     self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
                     self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
                 } else {
                     self.resultsState?.findPhotos[index].photo.metadata = photo.metadata
                 }
-            } else {
-                print("         Results DOES NOT exist.")
             }
 
             if
                 let slidesState = slidesState,
                 let index = slidesState.getFindPhotoIndex(photo: photo)
             {
-                print("         Slides exists: index \(index). Count: \(photo.metadata?.sentences.count)")
-
                 if slidesState.findPhotos[index].photo.metadata != nil {
                     self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
                     self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
                 } else {
                     self.slidesState?.findPhotos[index].photo.metadata = photo.metadata
                 }
-
-                print("Count added. \(self.slidesState?.findPhotos[index].photo.metadata?.sentences.count)")
-            } else {
-                print("      Slides DOES NOT exist.")
             }
         }
 

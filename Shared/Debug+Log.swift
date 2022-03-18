@@ -1,5 +1,5 @@
 //
-//  Global+Log.swift
+//  Debug+Log.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/20/22.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-extension Global {
+extension Debug {
     enum Level: String {
         case error = "Error"
         case warning = "Warning"

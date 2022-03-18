@@ -30,10 +30,8 @@ enum Find {
 
     static func find(in image: FindImage, visionOptions: VisionOptions = VisionOptions(), findOptions: FindOptions) async -> VNRequest {
         if findOptions.priority == .waitUntilNotBusy, startTime != nil {
-            print("Sta ttime is not nil")
             return await withCheckedContinuation { continuation in
                 let queuedRun = QueuedRun(image: image, visionOptions: visionOptions, findOptions: findOptions) { request in
-                    print("resuming... ")
                     continuation.resume(returning: request)
                 }
                 queuedRuns.append(queuedRun)
@@ -69,7 +67,7 @@ enum Find {
                 do {
                     try imageRequestHandler.perform([request])
                 } catch {
-                    Global.log("Error finding: \(error)", .error)
+                    Debug.log("Error finding: \(error)", .error)
                 }
             }
         }

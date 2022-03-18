@@ -17,7 +17,7 @@ extension PhotosViewModel {
                 realmModel.realm.delete(metadatas)
             }
         } catch {
-            print("Error deleting all: \(error)")
+            Debug.log("Error deleting all metadata: \(error)", .error)
         }
 
         self.load()

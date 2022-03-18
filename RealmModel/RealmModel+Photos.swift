@@ -40,7 +40,7 @@ extension RealmModel {
                     realmMetadata.isStarred = metadata.isStarred
                 }
             } catch {
-                Global.log("Error updating photo metadata: \(error)", .error)
+                Debug.log("Error updating photo metadata: \(error)", .error)
             }
         } else {
             addPhotoMetadata(metadata: metadata)
@@ -61,7 +61,7 @@ extension RealmModel {
                 realm.add(realmMetadata)
             }
         } catch {
-            Global.log("Error adding photo metadata: \(error)", .error)
+            Debug.log("Error adding photo metadata: \(error)", .error)
         }
     }
 }
