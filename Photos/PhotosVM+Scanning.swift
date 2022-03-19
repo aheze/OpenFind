@@ -10,14 +10,15 @@ import Foundation
 
 extension PhotosViewModel {
     /// a photo was just scanned
-    func photoScanned(photo: Photo, sentences: [Sentence]) {
+    /// if `inBatch`, no need for immediate add - check if the user's finger is touching the screen first
+    func photoScanned(photo: Photo, sentences: [Sentence], inBatch: Bool) {
         var newPhoto = photo
         if let metadata = photo.metadata {
             var newMetadata = metadata
             newMetadata.sentences = sentences
             newMetadata.isScanned = true
             newPhoto.metadata = newMetadata
-            addSentences(of: newPhoto)
+            addSentences(of: newPhoto, immediately: !inBatch)
             realmModel.updatePhotoMetadata(metadata: metadata)
         } else {
             let metadata = PhotoMetadata(
@@ -27,7 +28,7 @@ extension PhotosViewModel {
                 isStarred: false
             )
             newPhoto.metadata = metadata
-            addSentences(of: newPhoto)
+            addSentences(of: newPhoto, immediately: !inBatch)
             realmModel.updatePhotoMetadata(metadata: metadata)
         }
 
@@ -78,7 +79,7 @@ extension PhotosViewModel {
 
                 /// discard value if not scanning and `inBatch` is true
                 if !inBatch || scanningState == .scanningAllPhotos {
-                    photoScanned(photo: photo, sentences: sentences)
+                    photoScanned(photo: photo, sentences: sentences, inBatch: inBatch)
                 }
             }
         }

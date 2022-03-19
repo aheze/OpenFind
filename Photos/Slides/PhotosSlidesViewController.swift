@@ -91,7 +91,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             configureToolbar(for: findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
-            
+            model.updateAllowed = true
             if findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
                 slidesSearchPromptViewModel.show(true)
                 slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
@@ -101,7 +101,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         withAnimation {
             toolbarViewModel.toolbar = AnyView(toolbarView)
         }

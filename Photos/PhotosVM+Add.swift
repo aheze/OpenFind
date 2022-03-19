@@ -10,16 +10,21 @@ import UIKit
 
 /// Separate add from update
 extension PhotosViewModel {
-    func addSentences(of photo: Photo) {
-        self.scheduleUpdate(for: photo)
+    func addSentences(of photo: Photo, immediately: Bool) {
+        if immediately {
+            applyMetadata(for: photo)
+            photosWithQueuedSentencesAdded?([photo])
+        } else {
+            scheduleUpdate(for: photo)
+        }
     }
 
     func scheduleUpdate(for photo: Photo) {
         photosWithQueuedSentences.append(photo)
 
-        if self.canUpdateDueToTimeout() {
+        if canUpdateDueToTimeout() {
             if updateAllowed {
-                self.addQueuedSentencesToMetadatas()
+                addQueuedSentencesToMetadatas()
             } else {
                 updateState = .waitingForPermission
             }
@@ -37,61 +42,66 @@ extension PhotosViewModel {
         }
     }
 
-    /// update metadata to include sentences
+    /// update each array's photo metadata to include sentences
     func addQueuedSentencesToMetadatas() {
         updateState = nil
 
         for photo in photosWithQueuedSentences {
-            if
-                let index = getPhotoIndex(photo: photo),
-                let indexPath = getPhotoIndexPath(photo: photo)
-            {
-                /// if not nil, just modify the changed fields - prevent overriding other properties that might have changed while the queue was waiting
-                if photos[index].metadata != nil {
-                    photos[index].metadata?.isScanned = photo.metadata?.isScanned ?? false
-                    photos[index].metadata?.sentences = photo.metadata?.sentences ?? []
-                } else {
-                    photos[index].metadata = photo.metadata
-                }
-
-                if sections[indexPath.section].photos[indexPath.item].metadata != nil {
-                    sections[indexPath.section].photos[indexPath.item].metadata?.isScanned = photo.metadata?.isScanned ?? false
-                    sections[indexPath.section].photos[indexPath.item].metadata?.sentences = photo.metadata?.sentences ?? []
-                } else {
-                    sections[indexPath.section].photos[indexPath.item].metadata = photo.metadata
-                }
-            }
-
-            /// these should only be called when the results are already there/exists (the photo was not added dynamically)
-            /// If added dynamically, append inside `findAfterQueuedSentencesUpdate` in `PhotosVC+Update`
-            if
-                let resultsState = resultsState,
-                let index = resultsState.getFindPhotoIndex(photo: photo)
-            {
-                if resultsState.findPhotos[index].photo.metadata != nil {
-                    self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
-                    self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
-                } else {
-                    self.resultsState?.findPhotos[index].photo.metadata = photo.metadata
-                }
-            }
-
-            if
-                let slidesState = slidesState,
-                let index = slidesState.getFindPhotoIndex(photo: photo)
-            {
-                if slidesState.findPhotos[index].photo.metadata != nil {
-                    self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
-                    self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
-                } else {
-                    self.slidesState?.findPhotos[index].photo.metadata = photo.metadata
-                }
-            }
+            applyMetadata(for: photo)
         }
 
         photosWithQueuedSentencesAdded?(photosWithQueuedSentences)
         photosWithQueuedSentences.removeAll()
         lastResultsUpdateTime = Date()
+    }
+
+    func applyMetadata(for photo: Photo) {
+        
+        /// apply metadata to a single photo inside an array of photos
+        func applyMetadata(in photos: inout [Photo], at index: Int, with metadata: PhotoMetadata?) {
+            if photos[index].metadata != nil {
+                photos[index].metadata?.isScanned = metadata?.isScanned ?? false
+                photos[index].metadata?.sentences = metadata?.sentences ?? []
+            } else {
+                photos[index].metadata = metadata
+            }
+        }
+
+        if
+            let index = getPhotoIndex(photo: photo),
+            let indexPath = getPhotoIndexPath(photo: photo)
+        {
+            /// if not nil, just modify the changed fields - prevent overriding other properties that might have changed while the queue was waiting
+
+            applyMetadata(in: &photos, at: index, with: photo.metadata)
+            applyMetadata(in: &sections[indexPath.section].photos, at: indexPath.item, with: photo.metadata)
+        }
+
+        /// these should only be called when the results are already there/exists (the photo was not added dynamically)
+        /// If added dynamically, append inside `findAfterQueuedSentencesUpdate` in `PhotosVC+Update`
+        if
+            let resultsState = resultsState,
+            let index = resultsState.getFindPhotoIndex(photo: photo)
+        {
+            if self.resultsState?.findPhotos[index].photo.metadata != nil {
+                self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+            } else {
+                self.resultsState?.findPhotos[index].photo.metadata = photo.metadata
+            }
+        }
+
+        if
+            let slidesState = slidesState,
+            let index = slidesState.getFindPhotoIndex(photo: photo)
+        {
+            if self.slidesState?.findPhotos[index].photo.metadata != nil {
+                self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
+            } else {
+                self.slidesState?.findPhotos[index].photo.metadata = photo.metadata
+            }
+        }
     }
 
     func canUpdateDueToTimeout() -> Bool {
