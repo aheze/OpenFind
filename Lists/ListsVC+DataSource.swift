@@ -8,19 +8,6 @@
 
 import UIKit
 
-extension ListsViewController {
-    func setupCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.allowsSelection = false
-        collectionView.delaysContentTouches = true
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.keyboardDismissMode = .interactive
-        collectionView.contentInset.top = searchViewModel.getTotalHeight()
-        collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
-    }
-}
-
 extension ListsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model.displayedLists.count
@@ -147,5 +134,3 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
 }
-
-

@@ -65,9 +65,7 @@ class ListsViewController: UIViewController, Searchable {
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear
         
-        setupCollectionView()
-        setupNavigationBar()
-        setupRealm()
+        setup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
