@@ -15,10 +15,8 @@ struct PhotosSectionLayout {
 }
 
 class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
-    var model: PhotosViewModel
-    
-    init(model: PhotosViewModel) {
-        self.model = model
+    var getSections: (() -> [Section])?
+    override init() {
         super.init()
     }
     
@@ -40,12 +38,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
     /// get the number of columns and each column's width from available bounds + insets
-    func getColumns(bounds: CGFloat, insets: UIEdgeInsets) -> (Int, CGFloat) {
-        let availableWidth = bounds
-            - PhotosConstants.sidePadding * 2
-            - insets.left
-            - insets.right
-        
+    func getColumns(availableWidth: CGFloat) -> (Int, CGFloat) {
         let numberOfColumns = Int(availableWidth / PhotosConstants.minCellWidth)
         
         /// space between columns
@@ -60,7 +53,12 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         var sectionLayouts = [PhotosSectionLayout]()
         
-        let (numberOfColumns, columnWidth) = getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+        let availableWidth = collectionView.bounds.width
+            - PhotosConstants.sidePadding * 2
+            - collectionView.safeAreaInsets.left
+            - collectionView.safeAreaInsets.right
+        
+        let (numberOfColumns, columnWidth) = getColumns(availableWidth: availableWidth)
         self.columnWidth = columnWidth
         
         var columnOffsets = [CGSize]()
@@ -78,10 +76,31 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             columnOffsets.append(offset)
         }
         
-        for sectionIndex in model.sections.indices {
-            let section = model.sections[sectionIndex]
-            let photos = section.photos
-            for photoIndex in photos.indices {
+        guard let sections = getSections?() else { return }
+        for sectionIndex in sections.indices {
+            let section = sections[sectionIndex]
+            
+            let headerAttributes = UICollectionViewLayoutAttributes(
+                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                with: IndexPath(item: 0, section: sectionIndex)
+            )
+            headerAttributes.zIndex = 1
+            
+            if let longestColumn = columnOffsets.max(by: { $0.height < $1.height }) {
+                let headerFrame = CGRect(
+                    x: PhotosConstants.sidePadding,
+                    y: longestColumn.height,
+                    width: availableWidth,
+                    height: 30
+                )
+                headerAttributes.frame = headerFrame
+                
+                for index in columnOffsets.indices {
+                    columnOffsets[index].height = longestColumn.height
+                }
+            }
+            
+            for itemIndex in section.items.indices {
                 /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
                 if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
                     let columnOffset = columnOffsets[shortestColumnIndex]
@@ -92,17 +111,28 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                         height: columnWidth
                     )
                 
-                    let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: photoIndex, section: sectionIndex))
+                    let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: itemIndex, section: sectionIndex))
                     attributes.frame = cellFrame
                     columnOffsets[shortestColumnIndex].height += cellFrame.height + PhotosConstants.cellSpacing
                     
-                    if let existingSectionLayoutIndex = sectionLayouts.firstIndex(where: { $0.categorization == section.categorization }) {
-                        sectionLayouts[existingSectionLayoutIndex].layoutAttributes.append(attributes)
-                    } else {
-                        let newSectionLayout = PhotosSectionLayout(categorization: section.categorization, layoutAttributes: [attributes])
-                        sectionLayouts.append(newSectionLayout)
+                    /// handle photos
+                    if case .photosSectionCategorization(let sectionCategorization) = section.category {
+                        if let existingSectionLayoutIndex = sectionLayouts.firstIndex(where: { $0.categorization == sectionCategorization }) {
+                            sectionLayouts[existingSectionLayoutIndex].layoutAttributes.append(attributes)
+                        } else {
+                            let newSectionLayout = PhotosSectionLayout(
+                                categorization: sectionCategorization,
+                                headerLayoutAttributes: headerAttributes,
+                                layoutAttributes: [attributes]
+                            )
+                            sectionLayouts.append(newSectionLayout)
+                        }
                     }
                 }
+            }
+            
+            for index in columnOffsets.indices {
+                columnOffsets[index].height += PhotosConstants.sectionSpacing /// add spacing now
             }
         }
         
@@ -116,6 +146,10 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
         self.sectionLayouts = sectionLayouts
     }
     
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        return sectionLayouts[safe: indexPath.section]?.headerLayoutAttributes
+    }
+
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return sectionLayouts[safe: indexPath.section]?.layoutAttributes[safe: indexPath.item]
@@ -123,6 +157,14 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         /// edge cells don't shrink, but the animation is perfect
-        return sectionLayouts.map { $0.layoutAttributes }.joined().filter { rect.intersects($0.frame) }
+        let layoutAttributes: [[UICollectionViewLayoutAttributes]] = sectionLayouts
+            .map { sectionLayout in
+                var attributes = sectionLayout.layoutAttributes
+                attributes.append(sectionLayout.headerLayoutAttributes)
+                return attributes
+            }
+        
+        let attributes = layoutAttributes.flatMap { $0 }
+        return attributes.filter { rect.intersects($0.frame) }
     }
 }

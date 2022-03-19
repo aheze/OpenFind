@@ -68,6 +68,18 @@ extension PhotosViewController {
                 return cell
             }
         )
+
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: "PhotosCollectionHeader",
+                for: indexPath
+            ) as? PhotosCollectionHeader else { return nil }
+            
+            header.label.text = "Hi!"
+
+            return header
+        }
         return dataSource
     }
 

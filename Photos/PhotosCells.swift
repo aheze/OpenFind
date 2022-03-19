@@ -8,6 +8,13 @@
     
 import UIKit
 
+class PhotosCollectionHeader: UICollectionReusableView {
+    @IBOutlet var label: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imageViewWidthC: NSLayoutConstraint!
+    @IBOutlet var labelLeftC: NSLayoutConstraint!
+}
+
 /// the main photos cell
 class PhotosCollectionCell: UICollectionViewCell {
     var representedAssetIdentifier: String?

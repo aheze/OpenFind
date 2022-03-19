@@ -8,11 +8,6 @@
 
 import UIKit
 
-struct Section {
-    var index: Int
-    var indices = [Int]()
-}
-
 /// columned layout, used by both Lists and Photos
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
     var headerHeight: CGFloat = 0
@@ -102,17 +97,14 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
             columnOffsets.append(offset)
         }
         
-        for section in sections {
+        for sectionIndex in sections.indices {
             /// top out all the columns
             let maxHeight = columnOffsets.max(by: { $0.height < $1.height })?.height ?? 0
-            for index in columnOffsets.indices {
-                columnOffsets[index].height = maxHeight
-            }
             
-            if let size = getSizeForSectionWithWidth?(section.index, availableWidth) {
+            if let size = getSizeForSectionWithWidth?(sectionIndex, availableWidth) {
                 let attributes = UICollectionViewLayoutAttributes(
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                    with: IndexPath(item: 0, section: section.index)
+                    with: IndexPath(item: 0, section: sectionIndex)
                 )
                 let headerFrame = CGRect(
                     x: ListsCollectionConstants.sidePadding,
@@ -124,11 +116,11 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                 
                 sectionAttributes.append(attributes)
                 for index in columnOffsets.indices {
-                    columnOffsets[index].height += headerFrame.height + ListsCollectionConstants.cellSpacing
+                    columnOffsets[index].height = maxHeight + headerFrame.height + ListsCollectionConstants.cellSpacing
                 }
             }
             
-            for index in section.indices {
+            for index in sections[sectionIndex].items.indices {
                 if let size = getSizeForIndexWithWidth?(index, columnWidth) {
                     /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
                     if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
@@ -140,7 +132,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                             height: size.height
                         )
                 
-                        let indexPath = IndexPath(item: index, section: section.index)
+                        let indexPath = IndexPath(item: index, section: sectionIndex)
                         let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                         attributes.frame = cellFrame
                         layoutAttributes.append(attributes)

@@ -14,8 +14,12 @@ extension ListsViewController {
         flowLayout.scrollDirection = .vertical
         flowLayout.getSections = { [weak self] in
             guard let self = self else { return [] }
-            let indices = Array(self.model.displayedLists.indices)
-            let section = Section(index: 0, indices: indices)
+            let section = Section(
+                items: Array(
+                    repeating: Section.Item.placeholder,
+                    count: self.model.displayedLists.count
+                )
+            )
             return [section]
         }
         flowLayout.getSizeForIndexWithWidth = { [weak self] listIndex, availableWidth in

@@ -1462,6 +1462,12 @@
 		3C9234AD27E5734F0055061A /* SearchVM+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234A627E573430055061A /* SearchVM+Get.swift */; };
 		3C9234AE27E5734F0055061A /* SearchVM+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FB027DFBA6D0050A0AB /* SearchVM+Extensions.swift */; };
 		3C9234AF27E5734F0055061A /* SearchVM+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234A627E573430055061A /* SearchVM+Get.swift */; };
+		3C9234D127E660100055061A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
+		3C9234D227E660160055061A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
+		3C9234D327E660170055061A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
+		3C9234D427E660170055061A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
+		3C9234D727E661410055061A /* PhotosVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */; };
+		3C9234D827E661420055061A /* PhotosVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */; };
 		3C93147D27B760F5009E5B6E /* ListsDetailVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */; };
 		3C93147E27B76129009E5B6E /* ListsDetailVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */; };
 		3C93148027B769A0009E5B6E /* ListsDetailVC+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93147F27B769A0009E5B6E /* ListsDetailVC+Scroll.swift */; };
@@ -2800,6 +2806,8 @@
 		3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Add.swift"; sourceTree = "<group>"; };
 		3C9234A327E454370055061A /* PhotosVC+Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Update.swift"; sourceTree = "<group>"; };
 		3C9234A627E573430055061A /* SearchVM+Get.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVM+Get.swift"; sourceTree = "<group>"; };
+		3C9234D027E660100055061A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+FlowLayout.swift"; sourceTree = "<group>"; };
 		3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Delegate.swift"; sourceTree = "<group>"; };
 		3C93147F27B769A0009E5B6E /* ListsDetailVC+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Scroll.swift"; sourceTree = "<group>"; };
 		3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Listen.swift"; sourceTree = "<group>"; };
@@ -3648,6 +3656,7 @@
 				3C7B7A68277F94D400E1F602 /* Highlight.swift */,
 				3C443F4227DD90C00050A0AB /* GeneralExtensions.swift */,
 				3C7223C527C4506C0085EBF1 /* SpecifiedExtensions.swift */,
+				3C9234D027E660100055061A /* Section.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3817,6 +3826,7 @@
 				3C9314F227B8EA50009E5B6E /* PhotosVC+DataSource.swift */,
 				3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */,
 				3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */,
+				3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */,
 				3C9314EB27B86F2B009E5B6E /* PhotosVC+Lifecycle.swift */,
 				3C17B8E627C9ACB700B55E97 /* PhotosVC+NavigationBar.swift */,
 				3CCE2B48279D21C900F72351 /* PhotosVC+Selection.swift */,
@@ -6572,6 +6582,7 @@
 				3CE3D4D727DC486F00521735 /* Sentence.swift in Sources */,
 				3C08EAF7279C76C600971D60 /* ListsModel.swift in Sources */,
 				3C443FBC27DFCD4E0050A0AB /* HeaderContentView.swift in Sources */,
+				3C9234D327E660170055061A /* Section.swift in Sources */,
 				3C2DBBC7277E6F0B00911A74 /* SearchVC+Popovers.swift in Sources */,
 				3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */,
 				3CCE2B22279D008C00F72351 /* ClearIconView.swift in Sources */,
@@ -6780,6 +6791,7 @@
 				3C443FBD27DFCD4F0050A0AB /* HeaderContentView.swift in Sources */,
 				3C1D178C27BCA50C00E82B8B /* PhotosCells.swift in Sources */,
 				3CE9C208274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
+				3C9234D727E661410055061A /* PhotosVC+FlowLayout.swift in Sources */,
 				3C2C2CDC27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */,
 				3C4D39D72747661E0010FD68 /* AppDelegate.swift in Sources */,
 				3C443EAB27DD89830050A0AB /* HighlightsConstants.swift in Sources */,
@@ -6872,6 +6884,7 @@
 				3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C7B7A4B277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
+				3C9234D427E660170055061A /* Section.swift in Sources */,
 				3C443EB127DD898E0050A0AB /* VisionModels.swift in Sources */,
 				3CFD6017278B70940031BC8B /* SearchNavigationController.swift in Sources */,
 				3C9314F027B8EA39009E5B6E /* ListsVC+Delegate.swift in Sources */,
@@ -7124,6 +7137,7 @@
 				3C443F1F27DD907A0050A0AB /* Sentence.swift in Sources */,
 				3C6D77C227A5B140005371F3 /* Global.swift in Sources */,
 				3C7B7A98277FB7C100E1F602 /* ProgressLineView.swift in Sources */,
+				3C9234D127E660100055061A /* Section.swift in Sources */,
 				3C4D3B9427477ABD0010FD68 /* SearchCollectionView.swift in Sources */,
 				3C21EE1227A461800005E183 /* RealmModel+Lists.swift in Sources */,
 				3C4D3B67274777E40010FD68 /* AppDelegate.swift in Sources */,
@@ -7300,6 +7314,7 @@
 				3C6C73642781946200E039F0 /* CameraVC+Zoom.swift in Sources */,
 				3C9314F727B8EAAA009E5B6E /* PhotosVC+Delegate.swift in Sources */,
 				3C01DE472788A9680027B435 /* ZoomModel.swift in Sources */,
+				3C9234D227E660160055061A /* Section.swift in Sources */,
 				3C21ED7127A3ABD30005E183 /* ListsDetailVC+ColorPicker.swift in Sources */,
 				3C6C73562781945400E039F0 /* IconButtons.swift in Sources */,
 				3C21EE2827A461930005E183 /* RealmModel.swift in Sources */,
@@ -7374,6 +7389,7 @@
 				3C17686027AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */,
 				3CDD945527C0654500D3EA1A /* PhotosScanningConstants.swift in Sources */,
 				3CFD6032278B71E20031BC8B /* SearchNC+NavigationBar.swift in Sources */,
+				3C9234D827E661420055061A /* PhotosVC+FlowLayout.swift in Sources */,
 				3C6C737E2781946B00E039F0 /* LivePreviewVC+Zoom.swift in Sources */,
 				3C443F0B27DD90780050A0AB /* Photo.swift in Sources */,
 				3C6C73782781946B00E039F0 /* ResultsIconView.swift in Sources */,

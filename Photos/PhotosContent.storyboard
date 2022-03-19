@@ -62,10 +62,37 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
-                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderContentView" id="Jpa-Ci-Vsg" customClass="HeaderContentView" customModule="FindPhotos" customModuleProvider="target">
+                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosCollectionHeader" id="Jpa-Ci-Vsg" customClass="PhotosCollectionHeader" customModule="FindPhotos" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="67S-ce-m1H">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="76H-Xv-5ic"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIa-Y1-eCK">
+                                <rect key="frame" x="16" y="14.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="j6W-eS-Tde"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="67S-ce-m1H" secondAttribute="bottom" id="Jem-tK-qMW"/>
+                            <constraint firstItem="67S-ce-m1H" firstAttribute="leading" secondItem="j6W-eS-Tde" secondAttribute="leading" id="WID-hQ-hZ6"/>
+                            <constraint firstItem="67S-ce-m1H" firstAttribute="top" secondItem="Jpa-Ci-Vsg" secondAttribute="top" id="em4-Oy-g35"/>
+                            <constraint firstItem="qIa-Y1-eCK" firstAttribute="leading" secondItem="j6W-eS-Tde" secondAttribute="leading" constant="16" id="gu8-6u-iaa"/>
+                            <constraint firstItem="qIa-Y1-eCK" firstAttribute="centerY" secondItem="Jpa-Ci-Vsg" secondAttribute="centerY" id="nPk-V2-IIj"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="imageView" destination="67S-ce-m1H" id="seZ-nq-xvg"/>
+                            <outlet property="imageViewWidthC" destination="76H-Xv-5ic" id="c51-SZ-BPP"/>
+                            <outlet property="label" destination="qIa-Y1-eCK" id="pDh-Bm-JIP"/>
+                            <outlet property="labelLeftC" destination="gu8-6u-iaa" id="N3d-FE-6Gb"/>
+                        </connections>
                     </collectionReusableView>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="35b-X1-iav">
