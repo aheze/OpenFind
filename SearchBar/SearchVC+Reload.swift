@@ -17,7 +17,11 @@ extension SearchViewController {
 
         if let focusedIndex = collectionViewModel.focusedCellIndex {
             let targetOrigin = searchCollectionViewFlowLayout.getPointForCell(at: focusedIndex)
-            searchCollectionView.setContentOffset(targetOrigin, animated: false)
+
+            searchCollectionView.contentOffset = CGPoint(x: 0.5, y: 0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+                self.searchCollectionView.contentOffset = targetOrigin
+            }
         }
     }
 }
