@@ -42,14 +42,15 @@ extension PhotosSlidesViewController {
         if let slidesState = model.slidesState, let index = slidesState.getFindPhotoIndex(photo: findPhoto.photo) {
             self.model.slidesState?.findPhotos[index] = newFindPhoto
         }
-        
-        if model.resultsState != nil {
+
+        let resultsText = newFindPhoto.getResultsText()
+        var resetText: String?
+        if model.resultsState != nil, searchViewModel.text != slidesSearchViewModel.text {
             let summary = searchViewModel.getSummaryString()
-            slidesSearchPromptViewModel.resetText = summary
+            resetText = summary
         }
 
-        slidesSearchPromptViewModel.resultsText = newFindPhoto.getResultsText()
-        slidesSearchPromptViewModel.show(true)
+        slidesSearchPromptViewModel.update(show: true, resultsText: resultsText, resetText: resetText)
         slidesSearchPromptViewModel.updateBarHeight?()
     }
 }

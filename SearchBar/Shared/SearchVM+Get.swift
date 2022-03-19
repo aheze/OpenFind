@@ -13,7 +13,7 @@ extension SearchViewModel {
     
     /// describes the current words
     func getSummaryString() -> String {
-        let strings = values.map { $0.getText() }.filter { !$0.isEmpty }
+        let strings = text.filter { !$0.isEmpty }
         let quotes = strings.map { #""\#($0)""# }
         let summary = quotes.sentence
         return summary

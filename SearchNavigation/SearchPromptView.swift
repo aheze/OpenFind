@@ -21,9 +21,13 @@ class SearchPromptViewModel: ObservableObject {
     var updateBarHeight: (() -> Void)?
     var resetPressed: (() -> Void)?
 
-    func show(_ show: Bool) {
+    func update(show: Bool, resultsText: String? = nil, resetText: String? = nil) {
         withAnimation {
             self.show = show
+            if let resultsText = resultsText {
+                self.resultsText = resultsText
+            }
+            self.resetText = resetText
         }
     }
 
@@ -53,7 +57,6 @@ struct SearchPromptView: View {
             HStack {
                 Text(model.resultsText)
                     .font(Font(SearchPromptConstants.font as CTFont))
-                    .id(UUID()) /// add fade
 
                 if let resetText = model.resetText {
                     Circle()

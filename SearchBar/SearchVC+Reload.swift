@@ -11,17 +11,13 @@ import UIKit
 extension SearchViewController {
     /// update the collection view.
     func reload() {
-        searchCollectionViewFlowLayout.invalidateLayout()
         searchCollectionView.reloadData()
-        searchCollectionView.layoutIfNeeded()
 
         if let focusedIndex = collectionViewModel.focusedCellIndex {
             let targetOrigin = searchCollectionViewFlowLayout.getPointForCell(at: focusedIndex)
 
-            searchCollectionView.contentOffset = CGPoint(x: 0.5, y: 0)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
-                self.searchCollectionView.contentOffset = targetOrigin
-            }
+            searchCollectionView.contentOffset = targetOrigin
+            searchCollectionViewFlowLayout.invalidateLayout()
         }
     }
 }

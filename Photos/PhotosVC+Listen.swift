@@ -77,8 +77,9 @@ extension PhotosViewController {
         
         slidesSearchPromptViewModel.resetPressed = { [weak self] in
             guard let self = self else { return }
-            self.slidesSearchViewModel.replaceInPlace(with: self.searchViewModel, notify: false)
+            self.slidesSearchViewModel.replaceInPlace(with: self.searchViewModel, notify: true)
             self.model.updateSlidesSearchCollectionView?()
+            
         }
     }
 }

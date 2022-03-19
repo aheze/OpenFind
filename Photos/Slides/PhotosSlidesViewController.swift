@@ -96,8 +96,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
             model.updateAllowed = true
             if findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
-                slidesSearchPromptViewModel.show(true)
-                slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
+                slidesSearchPromptViewModel.update(show: true, resultsText: findPhoto.getResultsText(), resetText: nil)
             }
         }
     }
@@ -118,7 +117,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         super.viewDidDisappear(animated)
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
         switchToFullScreen(false)
-        slidesSearchPromptViewModel.show(false)
+        slidesSearchPromptViewModel.update(show: false)
         model.updateAllowed = true
         
         withAnimation {

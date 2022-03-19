@@ -67,6 +67,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x + collectionView.safeAreaInsets.left
+        
         currentOffset = contentOffset
         
         let fields = searchViewModel.fields
