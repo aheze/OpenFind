@@ -11,34 +11,71 @@ import UIKit
 /// the main photos cell
 class PhotosCollectionCell: UICollectionViewCell {
     var representedAssetIdentifier: String?
-    
     var tapped: (() -> Void)?
-    @IBOutlet var buttonView: ButtonView!
-    @IBOutlet var imageView: UIImageView!
     
-    @IBOutlet var overlayView: UIView!
-    @IBOutlet weak var overlayGradientImageView: UIImageView!
-    @IBOutlet var overlayStarImageView: UIImageView!
-    @IBOutlet var overlayStarImageViewLeftC: NSLayoutConstraint!
-    @IBOutlet var overlayStarImageViewBottomC: NSLayoutConstraint!
+    lazy var buttonView = ButtonView()
+    lazy var imageView = UIImageView()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    lazy var overlayView = UIView()
+    lazy var overlayGradientImageView = UIImageView()
+    lazy var overlayStarImageView = UIImageView()
+    var overlayStarImageViewLeftC: NSLayoutConstraint!
+    var overlayStarImageViewBottomC: NSLayoutConstraint!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        commonInit()
+    }
+    
+    func commonInit() {
+        let c = PhotosCellConstants.self
+        
+        addSubview(buttonView)
+        buttonView.pinEdgesToSuperview()
+        buttonView.addSubview(imageView)
+        imageView.pinEdgesToSuperview()
+        buttonView.addSubview(overlayView)
+        overlayView.pinEdgesToSuperview()
+        
+        overlayView.addSubview(overlayGradientImageView)
+        overlayGradientImageView.pinEdgesToSuperview()
+        
+        overlayView.addSubview(overlayStarImageView)
+        overlayStarImageView.translatesAutoresizingMaskIntoConstraints = false
+        let overlayStarImageViewLeftC = overlayStarImageView.leadingAnchor.constraint(
+            equalTo: overlayView.leadingAnchor,
+            constant: c.starLeftPadding
+        )
+        let overlayStarImageViewBottomC = overlayStarImageView.bottomAnchor.constraint(
+            equalTo: overlayView.bottomAnchor,
+            constant: c.starBottomPadding
+        )
+        NSLayoutConstraint.activate([
+            overlayStarImageViewLeftC,
+            overlayStarImageViewBottomC
+        ])
+        self.overlayStarImageViewLeftC = overlayStarImageViewLeftC
+        self.overlayStarImageViewBottomC = overlayStarImageViewBottomC
+        
+        /// setup
         imageView.isUserInteractionEnabled = false
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         overlayView.isUserInteractionEnabled = false
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
         
         /// configure constants
-        let c = PhotosCellConstants.self
         overlayView.backgroundColor = .clear
         overlayStarImageView.tintColor = c.starTintColor
         overlayStarImageView.setIconFont(font: c.starFont)
-        overlayStarImageViewLeftC.constant = c.starLeftPadding
-        overlayStarImageViewBottomC.constant = c.starBottomPadding
-        
+    }
+    
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -61,12 +98,12 @@ class PhotosResultsCell: UICollectionViewCell {
     
     /// image on the left
     
-    @IBOutlet weak var leftContainerView: UIView!
+    @IBOutlet var leftContainerView: UIView!
     @IBOutlet var leftContainerViewWidthC: NSLayoutConstraint!
     @IBOutlet var imageView: UIImageView!
     
     @IBOutlet var leftOverlayView: UIView!
-    @IBOutlet weak var leftOverlayGradientImageView: UIImageView!
+    @IBOutlet var leftOverlayGradientImageView: UIImageView!
     @IBOutlet var leftOverlayStarImageView: UIImageView!
     @IBOutlet var leftOverlayStarImageViewLeftC: NSLayoutConstraint!
     @IBOutlet var leftOverlayStarImageViewBottomC: NSLayoutConstraint!
