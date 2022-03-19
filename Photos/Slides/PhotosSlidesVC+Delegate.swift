@@ -89,6 +89,7 @@ extension PhotosSlidesViewController {
     func notifyIfScrolledToStop() {
         if let slidesState = model.slidesState, let findPhoto = slidesState.getCurrentFindPhoto() {
             slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
+            slidesSearchPromptViewModel.updateBarHeight?()
             configureToolbar(for: findPhoto.photo)
         }
     }

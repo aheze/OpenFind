@@ -27,6 +27,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var tabViewModel: TabViewModel
     var searchNavigationModel: SearchNavigationModel
     var searchNavigationProgressViewModel: ProgressViewModel
+    var searchViewModel: SearchViewModel
     var slidesSearchViewModel: SearchViewModel
     var slidesSearchPromptViewModel: SearchPromptViewModel
     var toolbarViewModel: ToolbarViewModel
@@ -52,6 +53,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         tabViewModel: TabViewModel,
         searchNavigationModel: SearchNavigationModel,
         searchNavigationProgressViewModel: ProgressViewModel,
+        searchViewModel: SearchViewModel,
         slidesSearchViewModel: SearchViewModel,
         slidesSearchPromptViewModel: SearchPromptViewModel,
         toolbarViewModel: ToolbarViewModel
@@ -60,6 +62,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         self.tabViewModel = tabViewModel
         self.searchNavigationModel = searchNavigationModel
         self.searchNavigationProgressViewModel = searchNavigationProgressViewModel
+        self.searchViewModel = searchViewModel
         self.slidesSearchViewModel = slidesSearchViewModel
         self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         self.toolbarViewModel = toolbarViewModel

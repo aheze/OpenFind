@@ -56,25 +56,6 @@ extension SearchViewModel {
 }
 
 extension SearchViewModel {
-    func getBackgroundColor() -> UIColor {
-        if !stringToGradients.isEmpty {
-            //// active
-            return configuration.fieldActiveBackgroundColor
-        } else {
-            return configuration.fieldBackgroundColor
-        }
-    }
-
-    func getTotalHeight() -> CGFloat {
-        if isLandscape {
-            return configuration.cellHeight + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
-        } else {
-            return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
-        }
-    }
-}
-
-extension SearchViewModel {
     static let defaultFields = [
         Field(
             value: .word(

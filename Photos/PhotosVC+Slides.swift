@@ -75,6 +75,7 @@ extension PhotosViewController {
                 tabViewModel: self.tabViewModel,
                 searchNavigationModel: self.searchNavigationModel,
                 searchNavigationProgressViewModel: self.searchNavigationProgressViewModel,
+                searchViewModel: self.searchViewModel,
                 slidesSearchViewModel: self.slidesSearchViewModel,
                 slidesSearchPromptViewModel: self.slidesSearchPromptViewModel,
                 toolbarViewModel: self.toolbarViewModel

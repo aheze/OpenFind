@@ -25,6 +25,7 @@ extension PhotosSlidesViewController {
         }
     }
 
+    /// find and show results
     func find(in findPhoto: FindPhoto) {
         guard let metadata = findPhoto.photo.metadata else { return }
         let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
@@ -33,9 +34,22 @@ extension PhotosSlidesViewController {
             stringToGradients: self.slidesSearchViewModel.stringToGradients,
             highlights: highlights
         )
-        findPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+
+        var newFindPhoto = findPhoto
+        newFindPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+        newFindPhoto.highlightsSet = highlightSet
+
         if let slidesState = model.slidesState, let index = slidesState.getFindPhotoIndex(photo: findPhoto.photo) {
-            self.model.slidesState?.findPhotos[index].highlightsSet = highlightSet
+            self.model.slidesState?.findPhotos[index] = newFindPhoto
         }
+        
+        if model.resultsState != nil {
+            let summary = searchViewModel.getSummaryString()
+            slidesSearchPromptViewModel.resetText = summary
+        }
+
+        slidesSearchPromptViewModel.resultsText = newFindPhoto.getResultsText()
+        slidesSearchPromptViewModel.show(true)
+        slidesSearchPromptViewModel.updateBarHeight?()
     }
 }

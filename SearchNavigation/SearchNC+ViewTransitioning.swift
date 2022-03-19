@@ -8,6 +8,42 @@
 
 import UIKit
 
+/// default push/pop
+extension SearchNavigationController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard
+            let transitionCoordinator = navigation.transitionCoordinator,
+            let viewController = viewController as? Searchable,
+            currentAnimator == nil
+        else { return }
+        
+        let targetPercentage = getViewControllerBlurPercentage(for: viewController)
+        beginSearchBarTransitionAnimation(to: viewController, targetPercentage: targetPercentage)
+    
+        transitionCoordinator.animate { _ in
+            self.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            
+            /// check if is presenting
+            if let namedViewController = viewController as? NavigationNamed, namedViewController.name == .listsDetail {
+                self.showDetailsSearchBar(true)
+            } else {
+                self.showDetailsSearchBar(false)
+            }
+        } completion: { context in
+                
+            /// restart the animator
+            self.setupBlur()
+                
+            if context.isCancelled {
+                self.cancelSearchBarPopAnimation()
+            } else {
+                self.finishSearchBarTransitionAnimation(to: viewController)
+            }
+        }
+    }
+}
+
+/// animations
 extension SearchNavigationController {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         var animator: UIViewControllerAnimatedTransitioning?
@@ -41,14 +77,13 @@ extension SearchNavigationController {
     func beginSearchBarTransitionAnimation(to viewController: Searchable, targetPercentage: CGFloat) {
         let searchBarOffset = viewController.baseSearchBarOffset + max(0, viewController.additionalSearchBarOffset ?? 0)
         let promptOffset = searchBarOffset + searchViewModel.getTotalHeight()
-        let promptHeight = getAdditionalSearchPromptHeight(for: viewController)
+        let promptHeight = self.getAdditionalSearchPromptHeight(for: viewController)
         let barHeight = promptOffset + promptHeight
         
         searchContainerViewTopC?.constant = searchBarOffset
         detailsSearchPromptViewContainerTopC?.constant = promptOffset
         detailsSearchPromptViewContainerHeightC?.constant = promptHeight
         navigationBarBackgroundHeightC?.constant = barHeight
-        
         
         /// first reset to start, if there's going to be a change
         if targetPercentage == 0, blurPercentage != 0 {
@@ -106,12 +141,12 @@ extension SearchNavigationController {
     func setOffset(from: Searchable, to: Searchable, percentage: CGFloat) {
         let searchBarOffsetFrom = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
         let promptOffsetFrom = searchBarOffsetFrom + searchViewModel.getTotalHeight()
-        let promptHeightFrom = getAdditionalSearchPromptHeight(for: from)
+        let promptHeightFrom = self.getAdditionalSearchPromptHeight(for: from)
         let barHeightFrom = promptOffsetFrom + promptHeightFrom
         
         let searchBarOffsetTo = to.baseSearchBarOffset + max(0, to.additionalSearchBarOffset ?? 0)
         let promptOffsetTo = searchBarOffsetTo + searchViewModel.getTotalHeight()
-        let promptHeightTo = getAdditionalSearchPromptHeight(for: to)
+        let promptHeightTo = self.getAdditionalSearchPromptHeight(for: to)
         let barHeightTo = promptOffsetTo + promptHeightTo
         
         let searchBarOffset = AnimatableUtilities.mixedValue(from: searchBarOffsetFrom, to: searchBarOffsetTo, progress: percentage)
@@ -123,20 +158,6 @@ extension SearchNavigationController {
         detailsSearchPromptViewContainerTopC?.constant = promptOffset
         detailsSearchPromptViewContainerHeightC?.constant = promptHeight
         navigationBarBackgroundHeightC?.constant = barHeight
-        
-//        
-//        
-//        var fromOffset = from.baseSearchBarOffset + max(0, from.additionalSearchBarOffset ?? 0)
-//        let toOffset = to.baseSearchBarOffset + max(0, to.additionalSearchBarOffset ?? 0)
-//        
-//        let offset = fromOffset + (toOffset - fromOffset) * percentage
-//        searchContainerViewTopC?.constant = offset
-//        
-//        /// navigation bar height
-//        fromOffset += self.getAdditionalSearchPromptHeight(for: from)
-//        /// recalculate
-//        let barHeight = fromOffset + (toOffset - fromOffset) * percentage
-//        navigationBarBackgroundHeightC?.constant = barHeight + searchViewModel.getTotalHeight()
     }
     
     func setBlur(from: Searchable, to: Searchable, percentage: CGFloat) {

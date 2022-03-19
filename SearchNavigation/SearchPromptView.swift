@@ -18,6 +18,8 @@ class SearchPromptViewModel: ObservableObject {
     @Published var show = false
     @Published var resultsText = ""
     @Published var resetText: String?
+    var updateBarHeight: (() -> Void)?
+    var resetPressed: (() -> Void)?
 
     func show(_ show: Bool) {
         withAnimation {
@@ -48,20 +50,28 @@ struct SearchPromptView: View {
     @ObservedObject var model: SearchPromptViewModel
     var body: some View {
         Color.clear.overlay(
-            VStack(alignment: .leading) {
-                if let resetText = model.resetText {
-                    Text(model.resultsText)
-                        .font(Font(SearchPromptConstants.font as CTFont))
+            HStack {
+                Text(model.resultsText)
+                    .font(Font(SearchPromptConstants.font as CTFont))
+                    .id(UUID()) /// add fade
 
-                        + Text(#"Reset to "\#(resetText)""#)
-                        .font(Font(SearchPromptConstants.font as CTFont))
-                        .foregroundColor(.accent)
-                } else {
-                    Text(model.resultsText)
-                        .font(Font(SearchPromptConstants.font as CTFont))
+                if let resetText = model.resetText {
+                    Circle()
+                        .fill(UIColor.secondaryLabel.color)
+                        .frame(width: 2, height: 2)
+
+                    Button {
+                        model.resetPressed?()
+                    } label: {
+                        Text("Reset to \(resetText)")
+                            .font(Font(SearchPromptConstants.font as CTFont))
+                            .foregroundColor(.accent)
+                    }
                 }
+
+                Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(SearchPromptConstants.padding),
             alignment: .top
         )

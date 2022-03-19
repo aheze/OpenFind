@@ -53,6 +53,7 @@ class PhotosViewModel: ObservableObject {
 
     /// about to present slides, update the slides search collection view to match the latest search view model
     /// Set this inside **PhotosController**
+    /// Must call `replaceInPlace` first
     var updateSlidesSearchCollectionView: (() -> Void)?
 
     /// about to present slides, set the transition

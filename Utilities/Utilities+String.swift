@@ -32,3 +32,12 @@ extension StringProtocol {
     subscript(_ range: PartialRangeUpTo<Int>) -> SubSequence { prefix(range.upperBound) }
     subscript(_ range: PartialRangeFrom<Int>) -> SubSequence { suffix(Swift.max(0, count - range.lowerBound)) }
 }
+
+/// from https://stackoverflow.com/a/41819176/14351818
+extension BidirectionalCollection where Element: StringProtocol {
+    var sentence: String {
+        count <= 2 ?
+            joined(separator: " and ") :
+            dropLast().joined(separator: ", ") + ", and " + last!
+    }
+}

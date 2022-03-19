@@ -8,40 +8,6 @@
 
 import UIKit
 
-extension SearchNavigationController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard
-            let transitionCoordinator = navigation.transitionCoordinator,
-            let viewController = viewController as? Searchable,
-            currentAnimator == nil
-        else { return }
-        
-        let targetPercentage = getViewControllerBlurPercentage(for: viewController)
-        beginSearchBarTransitionAnimation(to: viewController, targetPercentage: targetPercentage)
-    
-        transitionCoordinator.animate { _ in
-            self.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
-            
-            /// check if is presenting
-            if let namedViewController = viewController as? NavigationNamed, namedViewController.name == .listsDetail {
-                self.showDetailsSearchBar(true)
-            } else {
-                self.showDetailsSearchBar(false)
-            }
-        } completion: { context in
-                
-            /// restart the animator
-            self.setupBlur()
-                
-            if context.isCancelled {
-                self.cancelSearchBarPopAnimation()
-            } else {
-                self.finishSearchBarTransitionAnimation(to: viewController)
-            }
-        }
-    }
-}
-
 extension SearchNavigationController {
     /// move the search bar based on the topmost view controller's `baseSearchBarOffset` and `additionalSearchBarOffset`
     func updateSearchBarOffset() {
