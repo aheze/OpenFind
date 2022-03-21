@@ -15,6 +15,12 @@ struct PhotosSlidesState {
     var currentPhoto: Photo?
     var isFullScreen = false /// hide the bars
 
+    
+    /// for the current image
+    var toolbarStarOn = false
+    var toolbarInformationOn = false
+    
+    
     /// get from `findPhotos`
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
         return getFindPhotoIndex(photo: findPhoto.photo)
@@ -44,9 +50,6 @@ struct PhotosSlidesState {
     }
 
 
-    /// for the current image
-    var toolbarStarOn = false
-    var toolbarInformationOn = false
 }
 
 enum PhotosSentencesUpdateState {

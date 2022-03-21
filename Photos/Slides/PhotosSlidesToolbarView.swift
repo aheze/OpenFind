@@ -23,7 +23,9 @@ struct PhotosSlidesToolbarView: View {
         
             Spacer()
         
-            ToolbarIconButton(iconName: "info.circle") {}
+            ToolbarIconButton(iconName: infoIcon()) {
+                toggleToolbar()
+            }
         
             Spacer()
         
@@ -38,6 +40,12 @@ struct PhotosSlidesToolbarView: View {
         return "star"
     }
     
+    func infoIcon() -> String {
+        if let slidesState = model.slidesState, slidesState.toolbarInformationOn {
+            return "info.circle.fill"
+        }
+        return "info.circle"
+    }
     func toggleStar() {
         if
             let slidesState = model.slidesState,
@@ -61,6 +69,12 @@ struct PhotosSlidesToolbarView: View {
                 model.updatePhotoMetadata(photo: newPhoto, reloadCell: true, isNew: true)
                 model.slidesState?.toolbarStarOn = metadata.isStarred
             }
+        }
+    }
+    
+    func toggleToolbar() {
+        if let slidesState = model.slidesState {
+            model.slidesState?.toolbarInformationOn = !slidesState.toolbarInformationOn
         }
     }
 }

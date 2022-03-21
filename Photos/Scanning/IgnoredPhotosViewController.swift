@@ -22,10 +22,6 @@ class IgnoredPhotosViewController: UIViewController {
     lazy var dataSource = makeDataSource()
     lazy var flowLayout = makeFlowLayout()
     
-    
-    
-    
-    
     init(model: PhotosViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)

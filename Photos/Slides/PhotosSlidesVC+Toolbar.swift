@@ -19,6 +19,5 @@ extension PhotosSlidesViewController {
         }
         
         model.slidesState?.toolbarStarOn = false
-        model.slidesState?.toolbarInformationOn = false
     }
 }

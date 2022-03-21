@@ -12,7 +12,10 @@ extension IgnoredPhotosViewController {
     func setup() {
         setupCollectionView()
         setupNavigationBar()
+        
+//        collectionView.contentInset/x
     }
+    
 
     func setupCollectionView() {
         view.addSubview(collectionView)

@@ -200,7 +200,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         if
             let section = model.sections[safe: photoIndexPath.section],
             let headerIndex = flowLayout.sectionLayouts.firstIndex(where: {
-                $0.headerLayoutAttributes.encompassingCategorizations.contains(section.categorization)
+                $0.headerLayoutAttributes.encompassingCategorizations.contains(section.categorization) &&
+                $0.headerLayoutAttributes.isVisible
             }),
             let header = collectionView.supplementaryView(
                 forElementKind: UICollectionView.elementKindSectionHeader,
