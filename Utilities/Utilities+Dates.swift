@@ -71,31 +71,31 @@ extension Date {
     func convertDateToReadableString() -> String {
         /// Initializing a Date object will always return the current date (including time)
         let today = Date()
-        
+
         guard let yesterday = today.subtract(days: 1) else { return "2022" }
         guard let oneWeekAgo = today.subtract(days: 7) else { return "2022" }
         guard let dayBeforeYesterday = today.subtract(days: 1) else { return "2022" }
-        
+
         /// This will be any date from one week ago to the day before yesterday
         let recently = oneWeekAgo ... dayBeforeYesterday
-        
+
         /// convert the date into a string, if the date is before yesterday
         let dateFormatter = DateFormatter()
-        
+
         /// If self (the date that you're comparing) is today
         if Calendar.current.isDate(self, inSameDayAs: today) {
             return "Today"
-            
+
             /// if self is yesterday
         } else if Calendar.current.isDate(self, inSameDayAs: yesterday) {
             return "Yesterday"
-            
+
             /// if self is in between one week ago and the day before yesterday
         } else if recently.contains(self) {
             /// "EEEE" will display something like "Wednesday" (the weekday)
             dateFormatter.dateFormat = "EEEE"
             return dateFormatter.string(from: self)
-            
+
             /// self is before one week ago
         } else {
             /// displays the date as "January 1, 2020"
@@ -104,13 +104,37 @@ extension Date {
             return dateFormatter.string(from: self)
         }
     }
-    
+
     func add(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
         let components = DateComponents(year: years, month: months, day: days, hour: hours, minute: minutes, second: seconds)
         return Calendar.current.date(byAdding: components, to: self)
     }
-    
+
     func subtract(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
         return add(years: -years, months: -months, days: -days, hours: -hours, minutes: -minutes, seconds: -seconds)
     }
+}
+
+/// https://stackoverflow.com/a/43664156/14351818
+extension Date {
+    func isEqual(to date: Date, toGranularity component: Calendar.Component, in calendar: Calendar = .current) -> Bool {
+        calendar.isDate(self, equalTo: date, toGranularity: component)
+    }
+
+    func isInSameYear(as date: Date) -> Bool { isEqual(to: date, toGranularity: .year) }
+    func isInSameMonth(as date: Date) -> Bool { isEqual(to: date, toGranularity: .month) }
+    func isInSameWeek(as date: Date) -> Bool { isEqual(to: date, toGranularity: .weekOfYear) }
+
+    func isInSameDay(as date: Date) -> Bool { Calendar.current.isDate(self, inSameDayAs: date) }
+
+    var isInThisYear: Bool { isInSameYear(as: Date()) }
+    var isInThisMonth: Bool { isInSameMonth(as: Date()) }
+    var isInThisWeek: Bool { isInSameWeek(as: Date()) }
+
+    var isInYesterday: Bool { Calendar.current.isDateInYesterday(self) }
+    var isInToday: Bool { Calendar.current.isDateInToday(self) }
+    var isInTomorrow: Bool { Calendar.current.isDateInTomorrow(self) }
+
+    var isInTheFuture: Bool { self > Date() }
+    var isInThePast: Bool { self < Date() }
 }

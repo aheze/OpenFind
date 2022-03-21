@@ -45,6 +45,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 let hideCell = { [weak self] in
                     if let cell = self?.resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
                         cell.imageView.alpha = 0
+                        cell.leftOverlayView.alpha = 0
                     }
                 }
             
@@ -71,6 +72,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 let hideCell = { [weak self] in
                     if let cell = self?.collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
                         cell.alpha = 0
+                        cell.overlayView.alpha = 0
                     }
                 }
             
@@ -96,10 +98,19 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             if model.resultsState != nil {
                 if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
                     cell.imageView.alpha = 1
+                    
+                    UIView.animate(withDuration: 0.3) {
+                        cell.leftOverlayView.alpha = 1
+                    }
                 }
             } else {
                 if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
                     cell.alpha = 1
+                    
+                    /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
+                    UIView.animate(withDuration: 0.3) {
+                        cell.overlayView.alpha = 1
+                    }
                 }
             }
         }

@@ -67,13 +67,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="67S-ce-m1H">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="76H-Xv-5ic"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="74" height="50"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIa-Y1-eCK">
-                                <rect key="frame" x="16" y="14.5" width="42" height="21"/>
+                                <rect key="frame" x="16" y="0.0" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -81,17 +78,19 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j6W-eS-Tde"/>
                         <constraints>
+                            <constraint firstItem="qIa-Y1-eCK" firstAttribute="trailing" secondItem="67S-ce-m1H" secondAttribute="trailing" constant="-16" id="22K-pP-d66"/>
                             <constraint firstAttribute="bottom" secondItem="67S-ce-m1H" secondAttribute="bottom" id="Jem-tK-qMW"/>
+                            <constraint firstItem="qIa-Y1-eCK" firstAttribute="top" secondItem="j6W-eS-Tde" secondAttribute="top" id="Uci-Uu-Wrf"/>
                             <constraint firstItem="67S-ce-m1H" firstAttribute="leading" secondItem="j6W-eS-Tde" secondAttribute="leading" id="WID-hQ-hZ6"/>
                             <constraint firstItem="67S-ce-m1H" firstAttribute="top" secondItem="Jpa-Ci-Vsg" secondAttribute="top" id="em4-Oy-g35"/>
                             <constraint firstItem="qIa-Y1-eCK" firstAttribute="leading" secondItem="j6W-eS-Tde" secondAttribute="leading" constant="16" id="gu8-6u-iaa"/>
-                            <constraint firstItem="qIa-Y1-eCK" firstAttribute="centerY" secondItem="Jpa-Ci-Vsg" secondAttribute="centerY" id="nPk-V2-IIj"/>
                         </constraints>
                         <connections>
                             <outlet property="imageView" destination="67S-ce-m1H" id="seZ-nq-xvg"/>
-                            <outlet property="imageViewWidthC" destination="76H-Xv-5ic" id="c51-SZ-BPP"/>
                             <outlet property="label" destination="qIa-Y1-eCK" id="pDh-Bm-JIP"/>
                             <outlet property="labelLeftC" destination="gu8-6u-iaa" id="N3d-FE-6Gb"/>
+                            <outlet property="labelRightC" destination="22K-pP-d66" id="2tN-UH-4tW"/>
+                            <outlet property="labelTopC" destination="Uci-Uu-Wrf" id="AI7-PK-E7m"/>
                         </connections>
                     </collectionReusableView>
                 </collectionView>
@@ -128,7 +127,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvv-PU-A1l">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="388"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient" translatesAutoresizingMaskIntoConstraints="NO" id="vQx-yH-vzI">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CellShadow" translatesAutoresizingMaskIntoConstraints="NO" id="vQx-yH-vzI">
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="388"/>
                                                                     </imageView>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hR0-e7-AAs">
@@ -368,7 +367,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gradient" width="100" height="100"/>
+        <image name="CellShadow" width="100" height="100"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

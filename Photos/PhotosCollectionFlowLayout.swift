@@ -9,9 +9,27 @@
 import UIKit
 
 struct PhotosSectionLayout {
-    var categorization: PhotosSection.Categorization
-    var headerLayoutAttributes = UICollectionViewLayoutAttributes()
+    var categorization: PhotosSection.Categorization?
+    var headerLayoutAttributes = PhotosSectionHeaderLayoutAttributes()
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
+}
+
+class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
+    /// the month ranges that are in this row (when multiple months in single row)
+    var encompassingCategorizations = [PhotosSection.Categorization]()
+    
+    override func copy(with zone: NSZone?) -> Any {
+        let copy = super.copy(with: zone) as! Self
+        copy.encompassingCategorizations = encompassingCategorizations
+        
+        return copy
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let attributes = object as? Self else { return false }
+        guard attributes.encompassingCategorizations == encompassingCategorizations else { return false }
+        return super.isEqual(object)
+    }
 }
 
 class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
@@ -48,6 +66,21 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
         return (numberOfColumns, columnWidth)
     }
     
+    func getShortestColumnIndex(from columnOffsets: [CGSize]) -> Int? {
+        guard !columnOffsets.isEmpty else { return nil }
+        var (smallestIndex, smallestHeight) = (0, CGFloat.infinity)
+        for offsetIndex in columnOffsets.indices {
+            let offset = columnOffsets[offsetIndex].height
+            
+            /// add a little padding to favor left alignment
+            if offset + 0.5 < smallestHeight {
+                smallestIndex = offsetIndex
+                smallestHeight = offset
+            }
+        }
+        return smallestIndex
+    }
+
     override func prepare() { /// configure the cells' frames
         super.prepare()
         guard let collectionView = collectionView else { return }
@@ -80,29 +113,28 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
         for sectionIndex in sections.indices {
             let section = sections[sectionIndex]
             
-            let headerAttributes = UICollectionViewLayoutAttributes(
+            let headerAttributes = PhotosSectionHeaderLayoutAttributes(
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                 with: IndexPath(item: 0, section: sectionIndex)
             )
+            
             headerAttributes.zIndex = 1
             
-            if let longestColumn = columnOffsets.max(by: { $0.height < $1.height }) {
+            if let shortestColumn = columnOffsets.min(by: { $0.height < $1.height }) {
+                let height = PhotosHeaderConstants.font.lineHeight + PhotosHeaderConstants.labelTopPadding + PhotosHeaderConstants.labelBottomPadding
+                
                 let headerFrame = CGRect(
                     x: PhotosConstants.sidePadding,
-                    y: longestColumn.height,
+                    y: shortestColumn.height,
                     width: availableWidth,
-                    height: 30
+                    height: height
                 )
                 headerAttributes.frame = headerFrame
-                
-                for index in columnOffsets.indices {
-                    columnOffsets[index].height = longestColumn.height
-                }
             }
             
             for itemIndex in section.items.indices {
                 /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
-                if let shortestColumnIndex = columnOffsets.indices.min(by: { columnOffsets[$0].height < columnOffsets[$1].height }) {
+                if let shortestColumnIndex = getShortestColumnIndex(from: columnOffsets) {
                     let columnOffset = columnOffsets[shortestColumnIndex]
                     let cellFrame = CGRect(
                         x: columnOffset.width,
@@ -117,6 +149,8 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                     
                     /// handle photos
                     if case .photosSectionCategorization(let sectionCategorization) = section.category {
+                        /// add the categorization to the attributes itself
+                        headerAttributes.encompassingCategorizations = [sectionCategorization]
                         if let existingSectionLayoutIndex = sectionLayouts.firstIndex(where: { $0.categorization == sectionCategorization }) {
                             sectionLayouts[existingSectionLayoutIndex].layoutAttributes.append(attributes)
                         } else {
@@ -130,9 +164,25 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                     }
                 }
             }
+        }
+        
+        var cleanedSectionLayouts = [PhotosSectionLayout]()
+        for sectionLayoutIndex in sectionLayouts.indices {
+            let sectionLayout = sectionLayouts[sectionLayoutIndex]
             
-            for index in columnOffsets.indices {
-                columnOffsets[index].height += PhotosConstants.sectionSpacing /// add spacing now
+            /// index of a existing section layout where the header frame is the same
+            let existingSectionLayoutIndex = cleanedSectionLayouts.firstIndex {
+                /// Sometimes they are very close, so need to check the difference instead of directly using `==`
+                abs($0.headerLayoutAttributes.frame.minY - sectionLayout.headerLayoutAttributes.frame.minY) < 0.00001
+            }
+            
+            if let existingSectionLayoutIndex = existingSectionLayoutIndex {
+                let initialCategorizations = sectionLayouts[existingSectionLayoutIndex].headerLayoutAttributes.encompassingCategorizations
+                if let otherCategorization = sectionLayout.categorization {
+                    cleanedSectionLayouts[existingSectionLayoutIndex].headerLayoutAttributes.encompassingCategorizations = initialCategorizations + [otherCategorization]
+                }
+            } else {
+                cleanedSectionLayouts.append(sectionLayout)
             }
         }
         
@@ -143,7 +193,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                 - collectionView.safeAreaInsets.right,
             height: tallestColumnOffset.height
         )
-        self.sectionLayouts = sectionLayouts
+        self.sectionLayouts = cleanedSectionLayouts
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

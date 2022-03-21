@@ -11,8 +11,49 @@ import UIKit
 class PhotosCollectionHeader: UICollectionReusableView {
     @IBOutlet var label: UILabel!
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var imageViewWidthC: NSLayoutConstraint!
     @IBOutlet var labelLeftC: NSLayoutConstraint!
+    @IBOutlet var labelRightC: NSLayoutConstraint! /// space between label right and image right
+    @IBOutlet var labelTopC: NSLayoutConstraint!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        let c = PhotosHeaderConstants.self
+        
+        label.textColor = .white
+        label.font = c.font
+        labelLeftC.constant = c.labelLeftPadding
+        labelRightC.constant = c.labelRightPadding
+        labelTopC.constant = c.labelTopPadding
+        
+        imageView.image = UIImage(named: "HeaderShadow")
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        
+        isUserInteractionEnabled = false
+    }
+    
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        
+        if let attributes = layoutAttributes as? PhotosSectionHeaderLayoutAttributes {
+            var startTitle = ""
+            var endTitle: String?
+            if let firstCategorization = attributes.encompassingCategorizations.first {
+                startTitle = firstCategorization.getTitle()
+            }
+            if let endCategorization = attributes.encompassingCategorizations.last {
+                endTitle = endCategorization.getTitle()
+            }
+            
+            if let endTitle = endTitle, startTitle != endTitle {
+                let title = "\(startTitle) - \(endTitle)"
+                label.text = title
+            } else {
+                label.text = startTitle
+            }
+        }
+    }
 }
 
 /// the main photos cell
@@ -43,6 +84,7 @@ class PhotosCollectionCell: UICollectionViewCell {
         buttonView.addSubview(imageView)
         imageView.pinEdgesToSuperview()
         buttonView.addSubview(overlayView)
+        overlayView.isUserInteractionEnabled = false
         overlayView.pinEdgesToSuperview()
         
         overlayView.addSubview(overlayGradientImageView)
@@ -56,7 +98,7 @@ class PhotosCollectionCell: UICollectionViewCell {
         )
         let overlayStarImageViewBottomC = overlayStarImageView.bottomAnchor.constraint(
             equalTo: overlayView.bottomAnchor,
-            constant: c.starBottomPadding
+            constant: -c.starBottomPadding
         )
         NSLayoutConstraint.activate([
             overlayStarImageViewLeftC,
@@ -69,15 +111,22 @@ class PhotosCollectionCell: UICollectionViewCell {
         imageView.isUserInteractionEnabled = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        overlayView.isUserInteractionEnabled = false
+        
+        overlayGradientImageView.image = UIImage(named: "CellShadow")
+        overlayGradientImageView.isUserInteractionEnabled = false
+        overlayGradientImageView.contentMode = .scaleAspectFill
+        
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
         
         /// configure constants
         overlayView.backgroundColor = .clear
+        overlayStarImageView.image = UIImage(systemName: "star.fill")
         overlayStarImageView.tintColor = c.starTintColor
         overlayStarImageView.setIconFont(font: c.starFont)
+        
+        clipsToBounds = true
     }
     
     @available(*, unavailable)

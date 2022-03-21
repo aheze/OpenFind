@@ -178,15 +178,19 @@ struct PhotosSection: Hashable {
     }
 
     enum Categorization: Equatable, Hashable {
-        case date(year: Int, month: Int, day: Int)
+        case date(year: Int, month: Int)
 
         func getTitle() -> String {
             switch self {
-            case .date(let year, let month, let day):
-                let dateComponents = DateComponents(year: year, month: month, day: day)
+            case .date(let year, let month):
+                let dateComponents = DateComponents(year: year, month: month)
                 if let date = Calendar.current.date(from: dateComponents) {
                     let formatter = DateFormatter()
-                    formatter.dateFormat = "MMM d, yyyy"
+                    if date.isInThisYear {
+                        formatter.dateFormat = "MMMM"
+                    } else {
+                        formatter.dateFormat = "MMMM yyyy" /// add year if before
+                    }
                     let string = formatter.string(from: date)
                     return string
                 }
@@ -212,10 +216,10 @@ struct PhotoSlidesSection: Hashable {
 extension PHAsset {
     func getDateCreatedCategorization() -> PhotosSection.Categorization? {
         if
-            let components = creationDate?.get(.year, .month, .day),
-            let year = components.year, let month = components.month, let day = components.day
+            let components = creationDate?.get(.year, .month),
+            let year = components.year, let month = components.month
         {
-            let categorization = PhotosSection.Categorization.date(year: year, month: month, day: day)
+            let categorization = PhotosSection.Categorization.date(year: year, month: month)
             return categorization
         }
         return nil

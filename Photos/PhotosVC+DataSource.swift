@@ -75,8 +75,6 @@ extension PhotosViewController {
                 withReuseIdentifier: "PhotosCollectionHeader",
                 for: indexPath
             ) as? PhotosCollectionHeader else { return nil }
-            
-            header.label.text = "Hi!"
 
             return header
         }

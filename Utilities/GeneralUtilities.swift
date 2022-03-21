@@ -22,6 +22,7 @@ extension Set {
     }
 }
 
+/// set a symbol configuration
 extension UIImageView {
     func setIconFont(font: UIFont) {
         self.contentMode = .center
