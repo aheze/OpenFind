@@ -52,6 +52,8 @@ class PhotosCollectionHeader: UICollectionReusableView {
             } else {
                 label.text = startTitle
             }
+            
+            self.alpha = attributes.isVisible ? 1 : 0
         }
     }
 }

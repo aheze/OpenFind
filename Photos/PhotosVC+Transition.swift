@@ -70,9 +70,14 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
             
                 let hideCell = { [weak self] in
-                    if let cell = self?.collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
+                    guard let self = self else { return }
+                    if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
                         cell.alpha = 0
                         cell.overlayView.alpha = 0
+                        
+                        if let header = self.getCurrentHeader(for: photoIndexPath) {
+                            header.alpha = 0
+                        }
                     }
                 }
             
@@ -110,6 +115,11 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
                     UIView.animate(withDuration: 0.3) {
                         cell.overlayView.alpha = 1
+                    }
+                }
+                if let header = getCurrentHeader(for: photoIndexPath) {
+                    UIView.animate(withDuration: 0.3) {
+                        header.alpha = 1
                     }
                 }
             }
@@ -159,7 +169,6 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     
     /// get the index path from the photo presented in slides
     func getCurrentPhotoIndexPath() -> IndexPath? {
-        
         /// get index within the results collection view
         if model.resultsState != nil {
             guard
@@ -169,7 +178,6 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             else { return nil }
             return resultsIndex.indexPath
         } else {
-            
             /// get index within the main collection view
             guard
                 let slidesState = model.slidesState,
@@ -185,5 +193,22 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             return PhotosResultsCellConstants.leftContainerCornerRadius
         }
         return 0
+    }
+    
+    /// get the header that is at the top of the current photo's section
+    func getCurrentHeader(for photoIndexPath: IndexPath) -> PhotosCollectionHeader? {
+        if
+            let section = model.sections[safe: photoIndexPath.section],
+            let headerIndex = flowLayout.sectionLayouts.firstIndex(where: {
+                $0.headerLayoutAttributes.encompassingCategorizations.contains(section.categorization)
+            }),
+            let header = collectionView.supplementaryView(
+                forElementKind: UICollectionView.elementKindSectionHeader,
+                at: IndexPath(item: 0, section: headerIndex)
+            ) as? PhotosCollectionHeader
+        {
+            return header
+        }
+        return nil
     }
 }

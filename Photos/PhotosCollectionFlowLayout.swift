@@ -17,17 +17,21 @@ struct PhotosSectionLayout {
 class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
     /// the month ranges that are in this row (when multiple months in single row)
     var encompassingCategorizations = [PhotosSection.Categorization]()
+    var isVisible = false /// hide if already another header with same content
     
     override func copy(with zone: NSZone?) -> Any {
         let copy = super.copy(with: zone) as! Self
         copy.encompassingCategorizations = encompassingCategorizations
-        
+        copy.isVisible = isVisible
         return copy
     }
     
     override func isEqual(_ object: Any?) -> Bool {
         guard let attributes = object as? Self else { return false }
-        guard attributes.encompassingCategorizations == encompassingCategorizations else { return false }
+        guard
+            attributes.encompassingCategorizations == encompassingCategorizations,
+            attributes.isVisible == isVisible
+        else { return false }
         return super.isEqual(object)
     }
 }
@@ -181,9 +185,11 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                 if let otherCategorization = sectionLayout.categorization {
                     cleanedSectionLayouts[existingSectionLayoutIndex].headerLayoutAttributes.encompassingCategorizations = initialCategorizations + [otherCategorization]
                 }
+                sectionLayout.headerLayoutAttributes.isVisible = false
             } else {
-                cleanedSectionLayouts.append(sectionLayout)
+                sectionLayout.headerLayoutAttributes.isVisible = true
             }
+            cleanedSectionLayouts.append(sectionLayout)
         }
         
         let tallestColumnOffset = columnOffsets.max(by: { $0.height < $1.height }) ?? .zero
