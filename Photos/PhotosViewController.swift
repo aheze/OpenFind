@@ -41,13 +41,13 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     // MARK: Collection View
     @IBOutlet weak var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
-    lazy var flowLayout = createFlowLayout()
+    lazy var flowLayout = makeFlowLayout()
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<PhotosSection, Photo>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PhotosSection, Photo>
     
     @IBOutlet var resultsCollectionView: UICollectionView!
-    lazy var resultsFlowLayout = createResultsFlowLayout()
+    lazy var resultsFlowLayout = makeResultsFlowLayout()
     lazy var resultsDataSource = makeResultsDataSource()
     typealias ResultsDataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
     typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>

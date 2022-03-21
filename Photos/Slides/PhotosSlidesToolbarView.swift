@@ -53,8 +53,9 @@ struct PhotosSlidesToolbarView: View {
                 let metadata = PhotoMetadata(
                     assetIdentifier: findPhoto.photo.asset.localIdentifier,
                     sentences: [],
-                    isScanned: false,
-                    isStarred: true
+                    dateScanned: nil,
+                    isStarred: true,
+                    isIgnored: false
                 )
                 newPhoto.metadata = metadata
                 model.updatePhotoMetadata(photo: newPhoto, reloadCell: true, isNew: true)

@@ -9,7 +9,14 @@
 import UIKit
 
 class IgnoredPhotosViewController: UIViewController {
+    
+    /// external models
     var model: PhotosViewModel
+    
+    lazy var collectionView = UICollectionView()
+    lazy var flowLayout = createFlowLayout()
+    
+    
     init(model: PhotosViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)

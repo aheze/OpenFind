@@ -16,7 +16,7 @@ extension PhotosViewModel {
         if let metadata = photo.metadata {
             var newMetadata = metadata
             newMetadata.sentences = sentences
-            newMetadata.isScanned = true
+            newMetadata.dateScanned = Date()
             newPhoto.metadata = newMetadata
             addSentences(of: newPhoto, immediately: !inBatch)
             realmModel.updatePhotoMetadata(metadata: metadata)
@@ -24,8 +24,9 @@ extension PhotosViewModel {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
                 sentences: sentences,
-                isScanned: true,
-                isStarred: false
+                dateScanned: Date(),
+                isStarred: false,
+                isIgnored: false
             )
             newPhoto.metadata = metadata
             addSentences(of: newPhoto, immediately: !inBatch)

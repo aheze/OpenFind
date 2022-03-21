@@ -9,7 +9,7 @@
 import UIKit
 
 extension PhotosViewController {
-    func createFlowLayout() -> PhotosCollectionFlowLayout {
+    func makeFlowLayout() -> PhotosCollectionFlowLayout {
         let flowLayout = PhotosCollectionFlowLayout()
         flowLayout.getSections = { [weak self] in
             guard let self = self else { return [] }
@@ -25,6 +25,7 @@ extension PhotosViewController {
 
             return sections
         }
+        
         return flowLayout
     }
 }

@@ -21,9 +21,7 @@ extension PhotosViewModel {
         )
     }
 
-    @objc func photoMetadatasUpdated(notification: Notification) {
-        
-    }
+    @objc func photoMetadatasUpdated(notification: Notification) {}
     
     /// only call this once!
     func load() {
@@ -51,7 +49,9 @@ extension PhotosViewModel {
         
         DispatchQueue.global(qos: .userInitiated).async {
             /// how many photos that aren't scanned
+            var ignoredPhotos = [Photo]()
             var photosToScan = [Photo]()
+            
             self.assets?.enumerateObjects { [weak self] asset, _, _ in
                 guard let self = self else { return }
                 
@@ -60,7 +60,9 @@ extension PhotosViewModel {
                 if let metadata = self.realmModel.getPhotoMetadata(from: identifier) {
                     photo = Photo(asset: asset, metadata: metadata)
                     
-                    if !metadata.isScanned {
+                    if metadata.isIgnored {
+                        ignoredPhotos.append(photo)
+                    } else if metadata.dateScanned != nil {
                         photosToScan.append(photo)
                     }
                 } else {
@@ -73,6 +75,7 @@ extension PhotosViewModel {
             
             DispatchQueue.main.async {
                 self.photos = photos
+                self.ignoredPhotos = ignoredPhotos
                 self.photosToScan = photosToScan
                 self.scannedPhotosCount = photos.count - photosToScan.count
                 self.totalPhotosCount = photos.count

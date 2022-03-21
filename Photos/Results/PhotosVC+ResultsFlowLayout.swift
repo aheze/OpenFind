@@ -9,7 +9,7 @@
 import UIKit
 
 extension PhotosViewController {
-    func createResultsFlowLayout() -> ListsCollectionFlowLayout {
+    func makeResultsFlowLayout() -> ListsCollectionFlowLayout {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.getSections = { [weak self] in

@@ -18,7 +18,7 @@ struct Event {
 struct PausedImage: Identifiable {
     let id = UUID()
     var cgImage: CGImage?
-    var scanned = false
+    var dateScanned: Date?
     var sentences = [Sentence]()
 
     /// if it's saved to Photos, set this.

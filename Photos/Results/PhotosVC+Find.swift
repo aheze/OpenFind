@@ -13,7 +13,7 @@ extension PhotosViewController {
     func find() {
         var findPhotos = [FindPhoto]()
         for photo in model.photos {
-            guard let metadata = photo.metadata else { continue }
+            guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences, with: self.searchViewModel.stringToGradients)
             if highlights.count >= 1 {
                 let thumbnail = self.model.photoToThumbnail[photo] ?? nil

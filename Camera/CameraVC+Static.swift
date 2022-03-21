@@ -42,11 +42,12 @@ extension CameraViewController {
                 }
 
                 let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
+                let currentDate = Date()
                 guard currentUUID == self.model.pausedImage?.id else { return }
 
                 /// set the sentences
-                self.model.pausedImage?.scanned = true
                 self.model.pausedImage?.sentences = sentences
+                self.model.pausedImage?.dateScanned = currentDate
 
                 /// photo was saved to the photo library. Update the sentences
 
@@ -54,7 +55,7 @@ extension CameraViewController {
                     let metadata = PhotoMetadata(
                         assetIdentifier: assetIdentifier,
                         sentences: sentences,
-                        isScanned: true,
+                        dateScanned: currentDate,
                         isStarred: false
                     )
                     await MainActor.run {

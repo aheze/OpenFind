@@ -9,7 +9,7 @@
 import UIKit
 
 extension ListsViewController {
-    func createFlowLayout() -> ListsCollectionFlowLayout {
+    func makeFlowLayout() -> ListsCollectionFlowLayout {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.getSections = { [weak self] in

@@ -60,7 +60,7 @@ extension PhotosViewModel {
         /// apply metadata to a single photo inside an array of photos
         func applyMetadata(in photos: inout [Photo], at index: Int, with metadata: PhotoMetadata?) {
             if photos[index].metadata != nil {
-                photos[index].metadata?.isScanned = metadata?.isScanned ?? false
+                photos[index].metadata?.dateScanned = metadata?.dateScanned
                 photos[index].metadata?.sentences = metadata?.sentences ?? []
             } else {
                 photos[index].metadata = metadata
@@ -84,7 +84,7 @@ extension PhotosViewModel {
             let index = resultsState.getFindPhotoIndex(photo: photo)
         {
             if self.resultsState?.findPhotos[index].photo.metadata != nil {
-                self.resultsState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                self.resultsState?.findPhotos[index].photo.metadata?.dateScanned = photo.metadata?.dateScanned
                 self.resultsState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
             } else {
                 self.resultsState?.findPhotos[index].photo.metadata = photo.metadata
@@ -96,7 +96,7 @@ extension PhotosViewModel {
             let index = slidesState.getFindPhotoIndex(photo: photo)
         {
             if self.slidesState?.findPhotos[index].photo.metadata != nil {
-                self.slidesState?.findPhotos[index].photo.metadata?.isScanned = photo.metadata?.isScanned ?? false
+                self.slidesState?.findPhotos[index].photo.metadata?.dateScanned = photo.metadata?.dateScanned
                 self.slidesState?.findPhotos[index].photo.metadata?.sentences = photo.metadata?.sentences ?? []
             } else {
                 self.slidesState?.findPhotos[index].photo.metadata = photo.metadata

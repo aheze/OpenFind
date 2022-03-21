@@ -25,6 +25,7 @@ struct Photo: Hashable {
 struct PhotoMetadata {
     var assetIdentifier = ""
     var sentences = [Sentence]()
-    var isScanned = false
+    var dateScanned: Date?
     var isStarred = false
+    var isIgnored = false
 }

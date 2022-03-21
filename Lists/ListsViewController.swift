@@ -23,7 +23,7 @@ class ListsViewController: UIViewController, Searchable {
     var updateNavigationBar: (() -> Void)?
     
     @IBOutlet var collectionView: UICollectionView!
-    lazy var listsFlowLayout: ListsCollectionFlowLayout = createFlowLayout()
+    lazy var listsFlowLayout  = makeFlowLayout()
     
     /// details
     var detailsViewController: ListsDetailViewController?

@@ -46,7 +46,8 @@ extension CameraViewController {
                 DispatchQueue.main.async {
                     let metadata: PhotoMetadata
 
-                    if let currentPausedImage = self.model.pausedImage, currentPausedImage.id == image.id {
+                    guard let currentPausedImage = self.model.pausedImage else { return }
+                    if currentPausedImage.id == image.id {
                         self.model.pausedImage?.assetIdentifier = assetIdentifier
                         self.model.setSnapshotState(to: .saved)
 
@@ -54,15 +55,17 @@ extension CameraViewController {
                         metadata = PhotoMetadata(
                             assetIdentifier: assetIdentifier,
                             sentences: currentPausedImage.sentences,
-                            isScanned: currentPausedImage.scanned,
-                            isStarred: false
+                            dateScanned: currentPausedImage.dateScanned,
+                            isStarred: false,
+                            isIgnored: false
                         )
                     } else {
                         metadata = PhotoMetadata(
                             assetIdentifier: assetIdentifier,
-                            sentences: image.sentences,
-                            isScanned: image.scanned,
-                            isStarred: false
+                            sentences: currentPausedImage.sentences,
+                            dateScanned: currentPausedImage.dateScanned,
+                            isStarred: false,
+                            isIgnored: false
                         )
                     }
                     self.realmModel.updatePhotoMetadata(metadata: metadata)

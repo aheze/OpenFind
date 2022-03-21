@@ -52,8 +52,9 @@ extension RealmModel {
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
             sentences: realmSentences,
-            isScanned: metadata.isScanned,
-            isStarred: metadata.isStarred
+            dateScanned: metadata.dateScanned,
+            isStarred: metadata.isStarred,
+            isIgnored: metadata.isIgnored
         )
 
         do {

@@ -15,6 +15,7 @@ class PhotosViewModel: ObservableObject {
     var realmModel: RealmModel
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
+    var ignoredPhotos = [Photo]()
     var sections = [PhotosSection]()
 
     /// store the cell images
