@@ -17,11 +17,13 @@ struct PhotosSectionLayout {
 class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
     /// the month ranges that are in this row (when multiple months in single row)
     var encompassingCategorizations = [PhotosSection.Categorization]()
+    var originalYOffset = CGFloat(0) /// y origin, without sticky header stuff
     var isVisible = false /// hide if already another header with same content
     
     override func copy(with zone: NSZone?) -> Any {
         let copy = super.copy(with: zone) as! Self
         copy.encompassingCategorizations = encompassingCategorizations
+        copy.originalYOffset = originalYOffset
         copy.isVisible = isVisible
         return copy
     }
@@ -30,6 +32,7 @@ class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
         guard let attributes = object as? Self else { return false }
         guard
             attributes.encompassingCategorizations == encompassingCategorizations,
+            attributes.originalYOffset == originalYOffset,
             attributes.isVisible == isVisible
         else { return false }
         return super.isEqual(object)
@@ -38,6 +41,7 @@ class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
 
 class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     var getSections: (() -> [Section])?
+    
     override init() {
         super.init()
     }
@@ -127,12 +131,24 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             if let shortestColumn = columnOffsets.min(by: { $0.height < $1.height }) {
                 let height = PhotosHeaderConstants.font.lineHeight + PhotosHeaderConstants.labelTopPadding + PhotosHeaderConstants.labelBottomPadding
                 
-                let headerFrame = CGRect(
+                var headerFrame = CGRect(
                     x: PhotosConstants.sidePadding,
                     y: shortestColumn.height,
                     width: availableWidth,
                     height: height
                 )
+                headerAttributes.originalYOffset = headerFrame.origin.y /// set it now
+                
+                /// as scroll up, will get larger
+                let contentOffset = collectionView.contentOffset.y + collectionView.adjustedContentInset.top
+
+                /// negative = scrolled up (origin is higher)
+                let headerOffsetInWindow = headerFrame.origin.y - contentOffset
+
+                if headerOffsetInWindow < 0 {
+                    headerFrame.origin.y = contentOffset
+                }
+
                 headerAttributes.frame = headerFrame
             }
             
@@ -173,13 +189,13 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
         var cleanedSectionLayouts = [PhotosSectionLayout]()
         for sectionLayoutIndex in sectionLayouts.indices {
             let sectionLayout = sectionLayouts[sectionLayoutIndex]
-            
+
             /// index of a existing section layout where the header frame is the same
             let existingSectionLayoutIndex = cleanedSectionLayouts.firstIndex {
                 /// Sometimes they are very close, so need to check the difference instead of directly using `==`
-                abs($0.headerLayoutAttributes.frame.minY - sectionLayout.headerLayoutAttributes.frame.minY) < 0.00001
+                abs($0.headerLayoutAttributes.originalYOffset - sectionLayout.headerLayoutAttributes.originalYOffset) < 0.00001
             }
-            
+
             if let existingSectionLayoutIndex = existingSectionLayoutIndex {
                 let initialCategorizations = sectionLayouts[existingSectionLayoutIndex].headerLayoutAttributes.encompassingCategorizations
                 if let otherCategorization = sectionLayout.categorization {
@@ -189,7 +205,24 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             } else {
                 sectionLayout.headerLayoutAttributes.isVisible = true
             }
+            
             cleanedSectionLayouts.append(sectionLayout)
+        }
+        
+        /// make headers stick to the bottom once scrolled high enough
+        for cleanedSectionLayoutIndex in cleanedSectionLayouts.indices {
+            let cleanedSectionLayout = cleanedSectionLayouts[cleanedSectionLayoutIndex]
+            
+            /// can't just do `cleanedSectionLayouts[safe: cleanedSectionLayoutIndex + 1]` - must check if it's visible first
+            let nextCleanedSectionLayouts = cleanedSectionLayouts.dropFirst(cleanedSectionLayoutIndex + 1)
+            if let nextCleanedSectionLayout = nextCleanedSectionLayouts.first(where: { $0.headerLayoutAttributes.isVisible }) {
+                let nextStartingY = nextCleanedSectionLayout.headerLayoutAttributes.originalYOffset - PhotosConstants.cellSpacing
+                
+                /// stick to bottom
+                if cleanedSectionLayout.headerLayoutAttributes.frame.maxY > nextStartingY {
+                    cleanedSectionLayout.headerLayoutAttributes.frame.origin.y = nextStartingY - cleanedSectionLayout.headerLayoutAttributes.frame.height
+                }
+            }
         }
         
         let tallestColumnOffset = columnOffsets.max(by: { $0.height < $1.height }) ?? .zero
