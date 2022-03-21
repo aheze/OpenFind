@@ -17,7 +17,6 @@ struct PhotosScanningView: View {
 
 struct PhotosScanningViewHeader: View {
     @ObservedObject var model: PhotosViewModel
-    @State var showingIgnoredPhotos = false
 
     var body: some View {
         ScrollView {
@@ -71,11 +70,12 @@ struct PhotosScanningViewHeader: View {
 
                 PhotoScanningLink(
                     model: model,
-                    isOn: $showingIgnoredPhotos,
                     title: "Ignored Photos",
-                    arrowLabel: "30",
+                    arrowLabel: "\(model.ignoredPhotos.count)",
                     description: "Choose which photos to never scan."
-                )
+                ) {
+                    model.ignoredPhotosTapped?()
+                }
 
                 PhotoScanningRow(
                     model: model,
@@ -146,16 +146,14 @@ struct Container<Content: View>: View {
 
 struct PhotoScanningLink: View {
     @ObservedObject var model: PhotosViewModel
-    @Binding var isOn: Bool
     var title: String
     var arrowLabel: String /// usually a number
     var description: String
+    var action: () -> Void
 
     var body: some View {
         Container(description: description) {
-            Button {
-                isOn.toggle()
-            } label: {
+            Button(action: action) {
                 HStack {
                     Text(title)
                     Spacer()
@@ -171,7 +169,6 @@ struct PhotoScanningLink: View {
                 .background(UIColor.systemBackground.color)
                 .cornerRadius(PhotosScanningConstants.cornerRadius)
             }
-            
         }
     }
 }

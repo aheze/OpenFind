@@ -168,6 +168,10 @@
 		3C1A2C0C27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C0A27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift */; };
 		3C1A2C0E27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C0D27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift */; };
 		3C1A2C0F27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C0D27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift */; };
+		3C1A2C1127E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1027E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift */; };
+		3C1A2C1227E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1027E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift */; };
+		3C1A2C1427E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */; };
+		3C1A2C1527E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */; };
 		3C1AB195260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */; };
 		3C1AB199260FE40B009B47C0 /* VoiceOverSlidesControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */; };
 		3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */; };
@@ -2332,6 +2336,8 @@
 		3C17B8E927C9C4D000B55E97 /* PhotosVC+ResultsHighlights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ResultsHighlights.swift"; sourceTree = "<group>"; };
 		3C1A2C0A27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IgnoredPhotosVC+Setup.swift"; sourceTree = "<group>"; };
 		3C1A2C0D27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IgnoredPhotosVC+DataSource.swift"; sourceTree = "<group>"; };
+		3C1A2C1027E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IgnoredPhotosVC+FlowLayout.swift"; sourceTree = "<group>"; };
+		3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredPhotosHeaderView.swift; sourceTree = "<group>"; };
 		3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoiceOverSlidesControl.xib; sourceTree = "<group>"; };
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
@@ -4759,7 +4765,9 @@
 				3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */,
 				3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */,
 				3C1A2C0A27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift */,
+				3C1A2C1027E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift */,
 				3C1A2C0D27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift */,
+				3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */,
 				3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */,
 				3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */,
 			);
@@ -6748,6 +6756,7 @@
 				3C9314E927B86E84009E5B6E /* PhotosViewModel.swift in Sources */,
 				3C7223C827C4506F0085EBF1 /* SpecifiedExtensions.swift in Sources */,
 				3C21EE2227A461820005E183 /* RealmModel+PhotosTesting.swift in Sources */,
+				3C1A2C1227E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift in Sources */,
 				3CBB319227BD611F00F25F6A /* PhotosSlidesCollectionLayout.swift in Sources */,
 				3C443EDB27DD8C100050A0AB /* CameraNotFoundView.swift in Sources */,
 				3CDD942827C0583600D3EA1A /* PhotosSlidesToolbarView.swift in Sources */,
@@ -6849,6 +6858,7 @@
 				3CBB31A227BD6E9200F25F6A /* PhotosSlidesItemViewController.swift in Sources */,
 				3C443E9B27DD88F80050A0AB /* SearchCollectionView.swift in Sources */,
 				3C1D1A41275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,
+				3C1A2C1527E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift in Sources */,
 				3C4D39D92747661E0010FD68 /* SceneDelegate.swift in Sources */,
 				3C21EDB027A45BFF0005E183 /* RealmModel.swift in Sources */,
 				3CDD943E27C05E3400D3EA1A /* PhotosScanningIcon.swift in Sources */,
@@ -7338,6 +7348,7 @@
 				3C443FAC27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift in Sources */,
 				3C6C73C02781947E00E039F0 /* VisionFindingUtilities.swift in Sources */,
 				3CCE2B4F279D235400F72351 /* ListsDetailViewModel.swift in Sources */,
+				3C1A2C1127E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift in Sources */,
 				3C21EE2B27A461930005E183 /* RealmModel+Lists.swift in Sources */,
 				3C0B5E7427BAF5D100EC881E /* PhotosVM+Load.swift in Sources */,
 				3CBB319327BD612500F25F6A /* PhotosSlidesCollectionLayout.swift in Sources */,
@@ -7369,6 +7380,7 @@
 				3CCE2B54279D235C00F72351 /* ListsDetailVC+Setup.swift in Sources */,
 				3C17686727AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
 				3CE3D4F027DD2FF500521735 /* TabBarVC+Delegate.swift in Sources */,
+				3C1A2C1427E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift in Sources */,
 				3C08EB48279C95F500971D60 /* SearchNC+Tabs.swift in Sources */,
 				3C9314F627B8EA93009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CCE2B2A279D008D00F72351 /* ClearIconView.swift in Sources */,

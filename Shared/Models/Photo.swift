@@ -29,3 +29,16 @@ struct PhotoMetadata {
     var isStarred = false
     var isIgnored = false
 }
+
+extension PhotoMetadata {
+    static func apply(metadata: PhotoMetadata?, to cell: PhotosCollectionCell) {
+        if let metadata = metadata, metadata.isStarred {
+            cell.overlayGradientImageView.alpha = 1
+            cell.overlayStarImageView.alpha = 1
+            return
+        }
+
+        cell.overlayGradientImageView.alpha = 0
+        cell.overlayStarImageView.alpha = 0
+    }
+}

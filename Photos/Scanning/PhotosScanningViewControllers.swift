@@ -44,6 +44,10 @@ class PhotosScanningViewController: UIViewController {
         addChild(hostingController)
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
+        
+        model.ignoredPhotosTapped = { [weak self] in
+            self?.presentIgnoredPhotosViewController()
+        }
     }
     
     @objc func dismissSelf() {
@@ -51,7 +55,8 @@ class PhotosScanningViewController: UIViewController {
     }
     
     func presentIgnoredPhotosViewController() {
-        
+        let viewController = IgnoredPhotosViewController(model: model)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

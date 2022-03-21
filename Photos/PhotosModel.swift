@@ -201,14 +201,14 @@ struct PhotosSection: Hashable {
     }
 }
 
-struct PhotoSlidesSection: Hashable {
+struct DataSourceSectionTemplate: Hashable {
     var id = 0
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
-    static func == (lhs: PhotoSlidesSection, rhs: PhotoSlidesSection) -> Bool {
+    static func == (lhs: DataSourceSectionTemplate, rhs: DataSourceSectionTemplate) -> Bool {
         lhs.id == rhs.id
     }
 }

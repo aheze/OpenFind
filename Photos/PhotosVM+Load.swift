@@ -53,6 +53,7 @@ extension PhotosViewModel {
             var photosToScan = [Photo]()
             
             self.assets?.enumerateObjects { [weak self] asset, _, _ in
+                
                 guard let self = self else { return }
                 
                 let photo: Photo
@@ -72,6 +73,9 @@ extension PhotosViewModel {
                 
                 photos.append(photo)
             }
+            
+            /// newest photos go first
+            photosToScan.reverse()
             
             DispatchQueue.main.async {
                 self.photos = photos

@@ -139,19 +139,29 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                 )
                 headerAttributes.originalYOffset = headerFrame.origin.y /// set it now
                 
-                /// as scroll up, will get larger
-                let contentOffset = collectionView.contentOffset.y + collectionView.adjustedContentInset.top
+                switch section.category {
+                /// sticky headers
+                case .photosSectionCategorization:
+                    
+                    /// as scroll up, will get larger
+                    let contentOffset = collectionView.contentOffset.y + collectionView.adjustedContentInset.top
 
-                /// negative = scrolled up (origin is higher)
-                let headerOffsetInWindow = headerFrame.origin.y - contentOffset
+                    /// negative = scrolled up (origin is higher)
+                    let headerOffsetInWindow = headerFrame.origin.y - contentOffset
 
-                if headerOffsetInWindow < 0 {
-                    headerFrame.origin.y = contentOffset
+                    if headerOffsetInWindow < 0 {
+                        headerFrame.origin.y = contentOffset
+                    }
+                    
+                default: break
                 }
 
                 headerAttributes.frame = headerFrame
             }
             
+            // MARK: Create items
+
+            var layoutAttributes = [UICollectionViewLayoutAttributes]()
             for itemIndex in section.items.indices {
                 /// sometimes there are no `columnOffsets` due to `availableWidth` being too small
                 if let shortestColumnIndex = getShortestColumnIndex(from: columnOffsets) {
@@ -165,27 +175,30 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                 
                     let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: itemIndex, section: sectionIndex))
                     attributes.frame = cellFrame
+                    layoutAttributes.append(attributes)
                     columnOffsets[shortestColumnIndex].height += cellFrame.height + PhotosConstants.cellSpacing
-                    
-                    /// handle photos
-                    if case .photosSectionCategorization(let sectionCategorization) = section.category {
-                        /// add the categorization to the attributes itself
-                        headerAttributes.encompassingCategorizations = [sectionCategorization]
-                        if let existingSectionLayoutIndex = sectionLayouts.firstIndex(where: { $0.categorization == sectionCategorization }) {
-                            sectionLayouts[existingSectionLayoutIndex].layoutAttributes.append(attributes)
-                        } else {
-                            let newSectionLayout = PhotosSectionLayout(
-                                categorization: sectionCategorization,
-                                headerLayoutAttributes: headerAttributes,
-                                layoutAttributes: [attributes]
-                            )
-                            sectionLayouts.append(newSectionLayout)
-                        }
-                    }
                 }
             }
+            
+            // MARK: Create section
+
+            var categorization: PhotosSection.Categorization?
+            if case .photosSectionCategorization(let sectionCategorization) = section.category {
+                categorization = sectionCategorization
+                
+                /// add the categorization to the attributes itself
+                headerAttributes.encompassingCategorizations = [sectionCategorization]
+            }
+            let newSectionLayout = PhotosSectionLayout(
+                categorization: categorization,
+                headerLayoutAttributes: headerAttributes,
+                layoutAttributes: layoutAttributes
+            )
+            
+            sectionLayouts.append(newSectionLayout)
         }
         
+        /// remove overlapping headers (multiple months in same row)
         var cleanedSectionLayouts = [PhotosSectionLayout]()
         for sectionLayoutIndex in sectionLayouts.indices {
             let sectionLayout = sectionLayouts[sectionLayoutIndex]

@@ -49,8 +49,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     @IBOutlet var resultsCollectionView: UICollectionView!
     lazy var resultsFlowLayout = makeResultsFlowLayout()
     lazy var resultsDataSource = makeResultsDataSource()
-    typealias ResultsDataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
-    typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
+    typealias ResultsDataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, FindPhoto>
+    typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
     
     // MARK: Filtering
     @IBOutlet weak var sliderContainerView: UIView!

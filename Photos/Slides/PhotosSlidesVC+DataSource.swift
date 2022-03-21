@@ -12,7 +12,7 @@ extension PhotosSlidesViewController {
     func update(animate: Bool = true) {
         guard let slidesState = model.slidesState else { return }
         var snapshot = Snapshot()
-        let section = PhotoSlidesSection()
+        let section = DataSourceSectionTemplate()
         snapshot.appendSections([section])
         snapshot.appendItems(slidesState.findPhotos, toSection: section)
         dataSource?.apply(snapshot, animatingDifferences: animate)
@@ -20,18 +20,16 @@ extension PhotosSlidesViewController {
 
     func makeDataSource() -> DataSource? {
         guard let collectionView = collectionView else { return nil }
-        let dataSource = DataSource(
-            collectionView: collectionView,
-            cellProvider: { collectionView, indexPath, photo -> UICollectionViewCell? in
+        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, photo -> UICollectionViewCell? in
 
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: "PhotosSlidesContentCell",
-                    for: indexPath
-                ) as! PhotosSlidesContentCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "PhotosSlidesContentCell",
+                for: indexPath
+            ) as! PhotosSlidesContentCell
 
-                return cell
-            }
-        )
+            return cell
+        }
+
         return dataSource
     }
 }

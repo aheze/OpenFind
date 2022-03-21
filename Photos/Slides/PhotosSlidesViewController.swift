@@ -38,8 +38,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
     lazy var dataSource: DataSource? = makeDataSource()
-    typealias DataSource = UICollectionViewDiffableDataSource<PhotoSlidesSection, FindPhoto>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<PhotoSlidesSection, FindPhoto>
+    typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, FindPhoto>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
 
     // MARK: - Dismissal
 

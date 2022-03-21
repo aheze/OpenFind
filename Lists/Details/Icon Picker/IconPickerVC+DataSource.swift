@@ -10,50 +10,47 @@ import UIKit
 
 extension IconPickerViewController {
     func makeDataSource() -> DataSource {
-        let dataSource = DataSource(
-            collectionView: collectionView,
-            cellProvider: { collectionView, indexPath, icon -> UICollectionViewCell? in
+        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, icon -> UICollectionViewCell? in
 
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: "IconPickerCell",
-                    for: indexPath
-                ) as! IconPickerCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "IconPickerCell",
+                for: indexPath
+            ) as! IconPickerCell
 
-                if let image = UIImage(systemName: icon) {
-                    cell.imageView.image = image
-                    cell.imageView.tintColor = .label
-                } else {
-                    cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
-                    cell.imageView.tintColor = .systemYellow
-                }
-
-                if icon == self.model.selectedIcon {
-                    cell.buttonView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
-                } else {
-                    cell.buttonView.backgroundColor = .clear
-                }
-
-                cell.tapped = { [weak self] in
-                    guard let self = self else { return }
-                    let previousIcon = self.model.selectedIcon
-                    self.model.selectedIcon = icon
-
-                    var snapshot = self.dataSource.snapshot()
-                    var items = [icon]
-                    if snapshot.itemIdentifiers.contains(previousIcon) {
-                        items.append(previousIcon)
-                    }
-                    if #available(iOS 15.0, *) {
-                        snapshot.reconfigureItems(items)
-                    } else {
-                        snapshot.reloadItems(items)
-                    }
-                    self.dataSource.apply(snapshot, animatingDifferences: true)
-                }
-
-                return cell
+            if let image = UIImage(systemName: icon) {
+                cell.imageView.image = image
+                cell.imageView.tintColor = .label
+            } else {
+                cell.imageView.image = UIImage(systemName: "exclamationmark.triangle.fill")
+                cell.imageView.tintColor = .systemYellow
             }
-        )
+
+            if icon == self.model.selectedIcon {
+                cell.buttonView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
+            } else {
+                cell.buttonView.backgroundColor = .clear
+            }
+
+            cell.tapped = { [weak self] in
+                guard let self = self else { return }
+                let previousIcon = self.model.selectedIcon
+                self.model.selectedIcon = icon
+
+                var snapshot = self.dataSource.snapshot()
+                var items = [icon]
+                if snapshot.itemIdentifiers.contains(previousIcon) {
+                    items.append(previousIcon)
+                }
+                if #available(iOS 15.0, *) {
+                    snapshot.reconfigureItems(items)
+                } else {
+                    snapshot.reloadItems(items)
+                }
+                self.dataSource.apply(snapshot, animatingDifferences: true)
+            }
+
+            return cell
+        }
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if

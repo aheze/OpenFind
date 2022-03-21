@@ -13,6 +13,7 @@ struct Section {
     
     enum Category {
         case photosSectionCategorization(PhotosSection.Categorization)
+        case placeholder
     }
     
     enum Item {

@@ -9,12 +9,21 @@
 import UIKit
 
 class IgnoredPhotosViewController: UIViewController {
-    
     /// external models
     var model: PhotosViewModel
     
-    lazy var collectionView = UICollectionView()
-    lazy var flowLayout = createFlowLayout()
+    var headerContentModel = HeaderContentModel()
+    var ignoredPhotosHeaderViewModel = IgnoredPhotosHeaderViewModel()
+    lazy var headerView = IgnoredPhotosHeaderView(model: model, ignoredPhotosHeaderViewModel: ignoredPhotosHeaderViewModel)
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, Photo>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, Photo>
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    lazy var dataSource = makeDataSource()
+    lazy var flowLayout = makeFlowLayout()
+    
+    
+    
     
     
     init(model: PhotosViewModel) {
@@ -28,14 +37,16 @@ class IgnoredPhotosViewController: UIViewController {
     }
     
     override func loadView() {
-        title = "Scanning Photos"
+        title = "Ignored Photos"
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(dismissSelf), imageName: "Dismiss")
         
         /**
          Instantiate the base `view`.
          */
         view = UIView()
+        
+        setup()
+        update()
     }
     
     @objc func dismissSelf() {

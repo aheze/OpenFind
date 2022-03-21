@@ -89,6 +89,7 @@ class PhotosViewModel: ObservableObject {
     // MARK: Scanning
 
     var scanningIconTapped: (() -> Void)?
+    var ignoredPhotosTapped: (() -> Void)?
     var photosToScan = [Photo]()
     @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
     @Saved(Defaults.scanInBackground.0) var scanInBackground = Defaults.scanInBackground.1
