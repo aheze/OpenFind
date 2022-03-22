@@ -15,8 +15,11 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
-    /// bottom padding for info
-    var getBottomPadding: (() -> CGFloat)?
+    /// top inset for info - make the image smaller when info is shown
+    var getTopInset: (() -> CGFloat)?
+    
+    /// add height back when info scrolling back down
+    var getTopExtraHeight: (() -> CGFloat)?
     
     var layoutAttributes = [PageLayoutAttributes]()
 
@@ -34,9 +37,10 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
             let slidesState = model.slidesState
         else { return }
         
-        let bottomPadding = getBottomPadding?() ?? 0
+        let topInset = getTopInset?() ?? 0
+        let topExtraHeight = getTopExtraHeight?() ?? 0
         let width = collectionView.bounds.width
-        let height = collectionView.bounds.height - bottomPadding
+        let height = collectionView.bounds.height - topInset + topExtraHeight
         
         var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
@@ -44,7 +48,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         for index in slidesState.findPhotos.indices {
             let attributes = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
             
-            let rect = CGRect(x: currentOrigin, y: 0, width: width, height: height)
+            let rect = CGRect(x: currentOrigin, y: topInset - topExtraHeight, width: width, height: height)
             attributes.fullOrigin = currentOrigin
             attributes.frame = rect
             layoutAttributes.append(attributes)

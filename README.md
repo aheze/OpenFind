@@ -1,5 +1,26 @@
 #  Find
 
+### Scroll Views
+
+```
+___________
+|         |
+|    o    |      Finger drag down (scroll up)
+|    |    |      Content offset decreases and becomes negative -
+|    v    |
+|         |
+```
+
+```
+___________
+|         |
+|    ^    |      Finger drag up (scroll down)
+|    |    |      Content offset increases and becomes positive +
+|    o    |
+|         |
+```
+
+
 Find 1.3 is separated into targets. Inside each target, if there is a `Controller`, make one by just calling the initializer. If there is only a view controller, use the static `make` function.
 
 Example:

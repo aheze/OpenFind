@@ -16,14 +16,6 @@ extension PhotosSlidesViewController {
         setupInfo()
     }
     
-    func setupScrollView() {
-        scrollView.contentInsetAdjustmentBehavior = .never
-        
-        /// don't use `scrollView.bounds.height`, it will be less
-        collectionViewContainerHeightC.constant = view.bounds.height
-        infoViewContainerHeightC.constant = 0
-    }
-    
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.allowsSelection = false

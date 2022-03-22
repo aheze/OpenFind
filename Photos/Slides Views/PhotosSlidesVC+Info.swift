@@ -12,6 +12,10 @@ extension PhotosSlidesViewController {
     func setupInfo() {
         let viewController = PhotosSlidesInfoViewController(model: model)
         addChildViewController(viewController, in: infoViewContainer)
+        
+        contentView.addDebugBorders(.red)
+        collectionViewContainer.addDebugBorders(.green)
+        infoViewContainer.addDebugBorders(.blue)
     }
 
     func getInfoHeight() -> CGFloat {
@@ -20,20 +24,25 @@ extension PhotosSlidesViewController {
     }
 
     func showInfo(_ show: Bool) {
+        var offset: CGFloat
         if show {
             infoViewContainerHeightC.constant = getInfoHeight()
             dismissPanGesture.isEnabled = false
+            scrollView.alwaysBounceVertical = true
+            offset = getInfoHeight()
         } else {
             infoViewContainerHeightC.constant = 0
             dismissPanGesture.isEnabled = true
+            scrollView.alwaysBounceVertical = false
+            offset = 0
         }
 
-        UIView.animate(withDuration: 0.3) {
-            self.flowLayout.invalidateLayout()
-            self.contentView.layoutIfNeeded()
-            if let currentViewController = self.model.slidesState?.getCurrentFindPhoto()?.associatedViewController {
-                currentViewController.setAspectRatio(scaleToFill: show)
-            }
+        UIView.animate(duration: 0.6, dampingFraction: 1) {
+            self.scrollView.contentOffset = CGPoint(x: 0, y: offset)
+            
+            /// don't also call `self.flowLayout.invalidateLayout()`, otherwise there will be a glitch
+            /// `currentViewController.setAspectRatio(scaleToFill: show)` also seems to be automatically animated
+            self.scrollView.layoutIfNeeded()
         }
     }
 }

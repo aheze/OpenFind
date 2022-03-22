@@ -57,6 +57,7 @@ class PhotosSlidesItemViewController: UIViewController {
             height: highlightsVCHeightC
         )
         
+        /// automatically animated
         if model.slidesState?.toolbarInformationOn ?? false {
             setAspectRatio(scaleToFill: true)
         } else {

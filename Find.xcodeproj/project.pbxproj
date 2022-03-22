@@ -180,6 +180,8 @@
 		3C1A2C1F27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */; };
 		3C1A2C2127E94D8F00B3D065 /* PhotosSlidesVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */; };
 		3C1A2C2227E94D8F00B3D065 /* PhotosSlidesVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */; };
+		3C1A2C2427EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */; };
+		3C1A2C2527EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */; };
 		3C1AB195260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */; };
 		3C1AB199260FE40B009B47C0 /* VoiceOverSlidesControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */; };
 		3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */; };
@@ -2350,6 +2352,7 @@
 		3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesInfoView.swift; sourceTree = "<group>"; };
 		3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Info.swift"; sourceTree = "<group>"; };
 		3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+FlowLayout.swift"; sourceTree = "<group>"; };
+		3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+ScrollView.swift"; sourceTree = "<group>"; };
 		3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoiceOverSlidesControl.xib; sourceTree = "<group>"; };
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
@@ -3411,6 +3414,7 @@
 			children = (
 				3CDD942727C0583600D3EA1A /* PhotosSlidesToolbarView.swift */,
 				3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */,
+				3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */,
 				3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */,
 				3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */,
 				3C1A2C1627E9010500B3D065 /* PhotosSlidesInfoViewController.swift */,
@@ -6773,6 +6777,7 @@
 				3CAE64F327C6AE2A009E8564 /* PhotosVC+Find.swift in Sources */,
 				3C443F7427DDD74A0050A0AB /* Sentence+Find.swift in Sources */,
 				3CB8C30D27C2D0D8000AA3B9 /* Find+Queue.swift in Sources */,
+				3C1A2C2527EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift in Sources */,
 				3C443ED527DD8BD00050A0AB /* FlashIconView.swift in Sources */,
 				3C443FAE27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift in Sources */,
 				3CFC91C227E187A2006290CD /* PhotosScanningHeader.swift in Sources */,
@@ -7441,6 +7446,7 @@
 				3C08EADA279BA85500971D60 /* Utilities+UIView.swift in Sources */,
 				3C6C73692781946200E039F0 /* CameraController.swift in Sources */,
 				3C443F0127DD8F660050A0AB /* SliderView.swift in Sources */,
+				3C1A2C2427EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift in Sources */,
 				3C443F7F27DDD87B0050A0AB /* PhotosSlidesVC+Listen.swift in Sources */,
 				3C21ED5F27A3A8A90005E183 /* KeyboardToolbarViewModel.swift in Sources */,
 				3C21EE2727A461930005E183 /* RealmModel+Photos.swift in Sources */,

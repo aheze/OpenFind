@@ -30,3 +30,22 @@ extension UIView {
         )
     }
 }
+
+extension UIView {
+    static func animate(
+        duration: CGFloat,
+        dampingFraction: CGFloat,
+        animations: @escaping (() -> Void),
+        completion: (() -> Void)? = nil
+    ) {
+        UIView.animate(
+            withDuration: duration,
+            delay: 0,
+            usingSpringWithDamping: dampingFraction,
+            initialSpringVelocity: 1,
+            animations: animations
+        ) { _ in
+            completion?()
+        }
+    }
+}
