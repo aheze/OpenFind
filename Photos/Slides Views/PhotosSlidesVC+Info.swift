@@ -11,23 +11,29 @@ import UIKit
 extension PhotosSlidesViewController {
     func setupInfo() {
         let viewController = PhotosSlidesInfoViewController(model: model)
-        self.addChildViewController(viewController, in: infoViewContainer)
-        collectionViewContainer.addDebugBorders(.green)
-        infoViewContainer.addDebugBorders(.red)
+        addChildViewController(viewController, in: infoViewContainer)
+    }
+
+    func getInfoHeight() -> CGFloat {
+        let height = PhotosSlidesConstants.infoHeightPercentageOfScreen * view.bounds.height
+        return height
     }
 
     func showInfo(_ show: Bool) {
         if show {
-            let infoHeight = PhotosSlidesConstants.infoHeightPercentageOfScreen * view.bounds.height
-
-            infoViewContainerHeightC.constant = infoHeight
-            collectionViewContainerHeightC.constant = view.bounds.height - infoHeight
+            infoViewContainerHeightC.constant = getInfoHeight()
+            dismissPanGesture.isEnabled = false
         } else {
             infoViewContainerHeightC.constant = 0
-            collectionViewContainerHeightC.constant = view.bounds.height
+            dismissPanGesture.isEnabled = true
         }
-        UIView.animate(withDuration: 1) {
+
+        UIView.animate(withDuration: 0.3) {
+            self.flowLayout.invalidateLayout()
             self.contentView.layoutIfNeeded()
+            if let currentViewController = self.model.slidesState?.getCurrentFindPhoto()?.associatedViewController {
+                currentViewController.setAspectRatio(scaleToFill: show)
+            }
         }
     }
 }

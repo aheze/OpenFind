@@ -11,6 +11,7 @@ import UIKit
 class ScrollZoomViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var baseView: UIView! /// inside `contentView`
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var drawingView: UIView!
 

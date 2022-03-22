@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 2/17/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -38,10 +37,8 @@ public extension CGRect {
         let viewRatio = rect.width / rect.height
         var imageRatio = aspectRatio.width / aspectRatio.height
         let touchesHorizontalSides = (imageRatio > viewRatio)
-        
+
         if imageRatio.isNaN {
-            
-            print("     NAN inside `makeRect`! aspectRatio: \(aspectRatio) insideRect rect: \(rect). viewRatio: \(viewRatio), imageRatio: \(imageRatio), touchesHorizontalSides: \(touchesHorizontalSides)")
             imageRatio = 0
         }
 
@@ -56,5 +53,26 @@ public extension CGRect {
             result = CGRect(x: xPoint, y: rect.origin.y, width: width, height: rect.height)
         }
         return result
+    }
+}
+
+extension CGSize {
+    static func scaleFor(imageSize: CGSize, scaledTo surroundingSize: CGSize) -> CGFloat {
+        var imageRatio = imageSize.height / imageSize.width
+        var rectRatio = surroundingSize.height / surroundingSize.width
+        let overflowsVertical = (imageRatio > rectRatio)
+
+        if imageRatio.isNaN { imageRatio = 0 }
+        if rectRatio.isNaN { rectRatio = 0 }
+
+        let scale: CGFloat
+        if overflowsVertical {
+            let height = imageRatio * surroundingSize.width
+            scale = height / surroundingSize.height
+        } else {
+            let width = 1 / imageRatio * surroundingSize.height
+            scale = width / surroundingSize.width
+        }
+        return scale
     }
 }

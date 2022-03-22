@@ -15,6 +15,9 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
+    /// bottom padding for info
+    var getBottomPadding: (() -> CGFloat)?
+    
     var layoutAttributes = [PageLayoutAttributes]()
 
     /// actual content offset used by `prepare`
@@ -31,8 +34,9 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
             let slidesState = model.slidesState
         else { return }
         
+        let bottomPadding = getBottomPadding?() ?? 0
         let width = collectionView.bounds.width
-        let height = collectionView.bounds.height
+        let height = collectionView.bounds.height - bottomPadding
         
         var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
@@ -74,6 +78,19 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
+    }
+    
+    /// disable fade animation in cells - https://stackoverflow.com/a/55888930/14351818
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+        attributes?.alpha = 1
+        return attributes
+    }
+
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+        attributes?.alpha = 1
+        return attributes
     }
     
     /// called upon finger lift

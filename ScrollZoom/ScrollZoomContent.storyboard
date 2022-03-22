@@ -22,24 +22,36 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-D3-LaR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Os-wy-H5V">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbq-oS-3EX">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0d7-ga-r6h">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Os-wy-H5V">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0d7-ga-r6h">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="3Os-wy-H5V" firstAttribute="top" secondItem="Gbq-oS-3EX" secondAttribute="top" id="Dg0-Ne-v80"/>
+                                                    <constraint firstItem="3Os-wy-H5V" firstAttribute="leading" secondItem="Gbq-oS-3EX" secondAttribute="leading" id="GVg-22-9dG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0d7-ga-r6h" secondAttribute="trailing" id="P0L-0I-crW"/>
+                                                    <constraint firstItem="0d7-ga-r6h" firstAttribute="leading" secondItem="Gbq-oS-3EX" secondAttribute="leading" id="Vu8-Yy-Bel"/>
+                                                    <constraint firstItem="0d7-ga-r6h" firstAttribute="top" secondItem="Gbq-oS-3EX" secondAttribute="top" id="WAM-Fe-Qdt"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3Os-wy-H5V" secondAttribute="bottom" id="acH-nY-PcK"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0d7-ga-r6h" secondAttribute="bottom" id="db2-BA-2cE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3Os-wy-H5V" secondAttribute="trailing" id="g7L-cS-pA0"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="0d7-ga-r6h" firstAttribute="top" secondItem="ayn-D3-LaR" secondAttribute="top" id="CQD-O2-ZTA"/>
-                                            <constraint firstAttribute="bottom" secondItem="3Os-wy-H5V" secondAttribute="bottom" id="EZt-gW-oOe"/>
-                                            <constraint firstItem="3Os-wy-H5V" firstAttribute="leading" secondItem="ayn-D3-LaR" secondAttribute="leading" id="LZQ-jB-EDA"/>
-                                            <constraint firstAttribute="trailing" secondItem="3Os-wy-H5V" secondAttribute="trailing" id="btu-cQ-1Yx"/>
-                                            <constraint firstAttribute="bottom" secondItem="0d7-ga-r6h" secondAttribute="bottom" id="dkW-2B-6qb"/>
-                                            <constraint firstAttribute="trailing" secondItem="0d7-ga-r6h" secondAttribute="trailing" id="fFz-zb-GcA"/>
-                                            <constraint firstItem="3Os-wy-H5V" firstAttribute="top" secondItem="ayn-D3-LaR" secondAttribute="top" id="fwT-0k-rex"/>
-                                            <constraint firstItem="0d7-ga-r6h" firstAttribute="leading" secondItem="ayn-D3-LaR" secondAttribute="leading" id="uPL-zq-4ek"/>
+                                            <constraint firstAttribute="trailing" secondItem="Gbq-oS-3EX" secondAttribute="trailing" id="6j5-13-qdQ"/>
+                                            <constraint firstItem="Gbq-oS-3EX" firstAttribute="leading" secondItem="ayn-D3-LaR" secondAttribute="leading" id="W0A-1y-BDl"/>
+                                            <constraint firstItem="Gbq-oS-3EX" firstAttribute="top" secondItem="ayn-D3-LaR" secondAttribute="top" id="c0V-E1-K7x"/>
+                                            <constraint firstAttribute="bottom" secondItem="Gbq-oS-3EX" secondAttribute="bottom" id="scq-bD-M0i"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -63,6 +75,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="baseView" destination="Gbq-oS-3EX" id="heB-3M-UZA"/>
                         <outlet property="contentView" destination="ayn-D3-LaR" id="5LP-l3-zJJ"/>
                         <outlet property="drawingView" destination="0d7-ga-r6h" id="Zq4-FS-evo"/>
                         <outlet property="imageView" destination="3Os-wy-H5V" id="bRQ-xc-5SH"/>

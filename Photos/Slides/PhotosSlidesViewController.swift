@@ -45,7 +45,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet weak var infoViewContainerHeightC: NSLayoutConstraint!
     
     
-    lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
+    lazy var flowLayout = makeFlowLayout()
     lazy var dataSource: DataSource? = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>

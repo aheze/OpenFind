@@ -14,6 +14,7 @@ class PhotosSlidesItemViewController: UIViewController {
     lazy var highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
     
     /// constraints are much more reliable than setting the frame of the highlights view controller
+    /// these are relative to the drawing view
     var highlightsVCLeftC: NSLayoutConstraint!
     var highlightsVCTopC: NSLayoutConstraint!
     var highlightsVCWidthC: NSLayoutConstraint!
@@ -55,6 +56,12 @@ class PhotosSlidesItemViewController: UIViewController {
             width: highlightsVCWidthC,
             height: highlightsVCHeightC
         )
+        
+        if model.slidesState?.toolbarInformationOn ?? false {
+            setAspectRatio(scaleToFill: true)
+        } else {
+            setAspectRatio(scaleToFill: false)
+        }
     }
 
     func reloadImage() {
@@ -76,6 +83,18 @@ class PhotosSlidesItemViewController: UIViewController {
         let frame = CGRect.makeRect(aspectRatio: aspectRatio, insideRect: view.bounds)
         
         return frame
+    }
+    
+    func setAspectRatio(scaleToFill: Bool) {
+        let asset = findPhoto.photo.asset
+        let imageSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+        if scaleToFill {
+            let scale = CGSize.scaleFor(imageSize: imageSize, scaledTo: view.bounds.size)
+            
+            scrollZoomController.baseView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        } else {
+            scrollZoomController.baseView.transform = .identity
+        }
     }
 }
 

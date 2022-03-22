@@ -19,7 +19,7 @@ enum Debug {
 extension UIView {
     
     /// add a border to a view
-    func addDebugBorders(_ color: UIColor, width: CGFloat = 0.5) {
+    func addDebugBorders(_ color: UIColor, width: CGFloat = 0.75) {
         backgroundColor = color.withAlphaComponent(0.3)
         layer.borderColor = color.cgColor
         layer.borderWidth = width
