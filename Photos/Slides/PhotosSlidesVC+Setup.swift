@@ -6,13 +6,21 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension PhotosSlidesViewController {
     func setup() {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         setupCollectionView()
+        setupScrollView()
+    }
+    
+    func setupScrollView() {
+        scrollView.contentInsetAdjustmentBehavior = .never
+        
+        /// don't use `scrollView.bounds.height`, it will be less
+        collectionViewContainerHeightC.constant = view.bounds.height
+        intoViewContainerHeightC.constant = 0
     }
     
     func setupCollectionView() {

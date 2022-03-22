@@ -269,51 +269,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rK7-Wx-OtW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VDv-5V-ksK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qD1-tb-8vt">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VDv-5V-ksK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hWm-pN-Pim">
+                                                            <size key="itemSize" width="128" height="128"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosSlidesContentCell" id="sVO-w5-oqt" customClass="PhotosSlidesContentCell" customModule="FindPhotos" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UdB-4B-j9i">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </collectionViewCellContentView>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                    </collectionView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="600" id="3xd-XB-bot"/>
+                                                    <constraint firstItem="VDv-5V-ksK" firstAttribute="top" secondItem="Hrf-dC-vKf" secondAttribute="top" id="Aoo-S9-QYi"/>
+                                                    <constraint firstAttribute="bottom" secondItem="VDv-5V-ksK" secondAttribute="bottom" id="lKo-0s-SEG"/>
+                                                    <constraint firstItem="VDv-5V-ksK" firstAttribute="leading" secondItem="Hrf-dC-vKf" secondAttribute="leading" id="qmi-fd-f3n"/>
+                                                    <constraint firstAttribute="trailing" secondItem="VDv-5V-ksK" secondAttribute="trailing" id="rvV-eq-NIX"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaS-Fz-cut">
+                                                <rect key="frame" x="0.0" y="400" width="414" height="200"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="r3Q-6x-J8n"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hWm-pN-Pim">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosSlidesContentCell" id="sVO-w5-oqt" customClass="PhotosSlidesContentCell" customModule="FindPhotos" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UdB-4B-j9i">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="BaS-Fz-cut" secondAttribute="bottom" id="D3H-oC-MHk"/>
+                                            <constraint firstItem="Hrf-dC-vKf" firstAttribute="leading" secondItem="qD1-tb-8vt" secondAttribute="leading" id="J8D-UU-TTE"/>
+                                            <constraint firstAttribute="bottom" secondItem="Hrf-dC-vKf" secondAttribute="bottom" id="NsK-ge-heo"/>
+                                            <constraint firstItem="BaS-Fz-cut" firstAttribute="leading" secondItem="qD1-tb-8vt" secondAttribute="leading" id="cAG-gI-BRA"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hrf-dC-vKf" secondAttribute="trailing" id="rl5-RX-1kJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="BaS-Fz-cut" secondAttribute="trailing" id="rwn-ly-MJ9"/>
+                                            <constraint firstItem="Hrf-dC-vKf" firstAttribute="top" secondItem="qD1-tb-8vt" secondAttribute="top" id="ydQ-Kh-Gn1"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="VDv-5V-ksK" firstAttribute="top" secondItem="Hrf-dC-vKf" secondAttribute="top" id="Aoo-S9-QYi"/>
-                                    <constraint firstAttribute="bottom" secondItem="VDv-5V-ksK" secondAttribute="bottom" id="lKo-0s-SEG"/>
-                                    <constraint firstItem="VDv-5V-ksK" firstAttribute="leading" secondItem="Hrf-dC-vKf" secondAttribute="leading" id="qmi-fd-f3n"/>
-                                    <constraint firstAttribute="trailing" secondItem="VDv-5V-ksK" secondAttribute="trailing" id="rvV-eq-NIX"/>
+                                    <constraint firstItem="qD1-tb-8vt" firstAttribute="top" secondItem="rK7-Wx-OtW" secondAttribute="top" id="BN9-X1-aKr"/>
+                                    <constraint firstItem="qD1-tb-8vt" firstAttribute="width" secondItem="rK7-Wx-OtW" secondAttribute="width" id="UAb-k0-Ugj"/>
+                                    <constraint firstItem="qD1-tb-8vt" firstAttribute="leading" secondItem="rK7-Wx-OtW" secondAttribute="leading" id="ZXl-WC-RW8"/>
+                                    <constraint firstAttribute="bottom" secondItem="qD1-tb-8vt" secondAttribute="bottom" id="gk4-hJ-fux"/>
+                                    <constraint firstAttribute="trailing" secondItem="qD1-tb-8vt" secondAttribute="trailing" id="ztp-1y-3vi"/>
                                 </constraints>
-                            </view>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JMo-kx-sih"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Hrf-dC-vKf" firstAttribute="top" secondItem="mKt-dL-2jI" secondAttribute="top" id="5Kh-b4-ieG"/>
-                            <constraint firstAttribute="trailing" secondItem="Hrf-dC-vKf" secondAttribute="trailing" id="crU-RF-ud7"/>
-                            <constraint firstAttribute="bottom" secondItem="Hrf-dC-vKf" secondAttribute="bottom" id="deF-eQ-clI"/>
-                            <constraint firstItem="Hrf-dC-vKf" firstAttribute="leading" secondItem="mKt-dL-2jI" secondAttribute="leading" id="hMA-l8-BLu"/>
+                            <constraint firstAttribute="trailing" secondItem="rK7-Wx-OtW" secondAttribute="trailing" id="8Hq-sz-3t8"/>
+                            <constraint firstAttribute="bottom" secondItem="rK7-Wx-OtW" secondAttribute="bottom" id="GZY-AF-8pV"/>
+                            <constraint firstItem="rK7-Wx-OtW" firstAttribute="top" secondItem="mKt-dL-2jI" secondAttribute="top" id="HGy-yh-EW0"/>
+                            <constraint firstItem="rK7-Wx-OtW" firstAttribute="leading" secondItem="mKt-dL-2jI" secondAttribute="leading" id="Qqd-R0-dG5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="VDv-5V-ksK" id="5hV-NE-Ntn"/>
-                        <outlet property="containerView" destination="Hrf-dC-vKf" id="rLl-qG-fbf"/>
+                        <outlet property="collectionViewContainer" destination="Hrf-dC-vKf" id="qXn-mh-zrp"/>
+                        <outlet property="collectionViewContainerHeightC" destination="3xd-XB-bot" id="nb9-fS-3TK"/>
+                        <outlet property="contentView" destination="qD1-tb-8vt" id="jGq-fg-Y03"/>
+                        <outlet property="infoViewContainer" destination="BaS-Fz-cut" id="3RD-wI-Uvj"/>
+                        <outlet property="intoViewContainerHeightC" destination="r3Q-6x-J8n" id="9SP-1B-JWl"/>
+                        <outlet property="scrollView" destination="rK7-Wx-OtW" id="Te2-2I-IJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keI-tt-KQh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

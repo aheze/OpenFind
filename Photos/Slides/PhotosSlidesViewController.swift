@@ -33,8 +33,17 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var toolbarViewModel: ToolbarViewModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
     
-    @IBOutlet var containerView: UIView!
+    /// includes collection view and info view
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewContainerHeightC: NSLayoutConstraint!
+
+    @IBOutlet weak var infoViewContainer: UIView!
+    @IBOutlet weak var intoViewContainerHeightC: NSLayoutConstraint!
+    
     
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)
     lazy var dataSource: DataSource? = makeDataSource()
