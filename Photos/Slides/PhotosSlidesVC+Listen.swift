@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension PhotosSlidesViewController {
     func listen() {
         slidesSearchViewModel.fieldsChanged = { [weak self] textChanged in
@@ -44,6 +43,13 @@ extension PhotosSlidesViewController {
                     self.model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.highlights = newHighlights
                     self.model.slidesState?.findPhotos[index].highlightsSet = newHighlightsSet
                 }
+            }
+        }
+
+        model.slidesState?.toolbarInformationOnChanged = { [weak self] in
+            guard let self = self else { return }
+            if let slidesState = self.model.slidesState {
+                self.showInfo(slidesState.toolbarInformationOn)
             }
         }
     }

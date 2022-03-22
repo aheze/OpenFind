@@ -273,7 +273,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qD1-tb-8vt">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
@@ -309,7 +309,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaS-Fz-cut">
-                                                <rect key="frame" x="0.0" y="400" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="600" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="r3Q-6x-J8n"/>
@@ -320,8 +320,8 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="BaS-Fz-cut" secondAttribute="bottom" id="D3H-oC-MHk"/>
                                             <constraint firstItem="Hrf-dC-vKf" firstAttribute="leading" secondItem="qD1-tb-8vt" secondAttribute="leading" id="J8D-UU-TTE"/>
-                                            <constraint firstAttribute="bottom" secondItem="Hrf-dC-vKf" secondAttribute="bottom" id="NsK-ge-heo"/>
                                             <constraint firstItem="BaS-Fz-cut" firstAttribute="leading" secondItem="qD1-tb-8vt" secondAttribute="leading" id="cAG-gI-BRA"/>
+                                            <constraint firstItem="BaS-Fz-cut" firstAttribute="top" secondItem="Hrf-dC-vKf" secondAttribute="bottom" id="db7-tm-sqO"/>
                                             <constraint firstAttribute="trailing" secondItem="Hrf-dC-vKf" secondAttribute="trailing" id="rl5-RX-1kJ"/>
                                             <constraint firstAttribute="trailing" secondItem="BaS-Fz-cut" secondAttribute="trailing" id="rwn-ly-MJ9"/>
                                             <constraint firstItem="Hrf-dC-vKf" firstAttribute="top" secondItem="qD1-tb-8vt" secondAttribute="top" id="ydQ-Kh-Gn1"/>
@@ -352,7 +352,7 @@
                         <outlet property="collectionViewContainerHeightC" destination="3xd-XB-bot" id="nb9-fS-3TK"/>
                         <outlet property="contentView" destination="qD1-tb-8vt" id="jGq-fg-Y03"/>
                         <outlet property="infoViewContainer" destination="BaS-Fz-cut" id="3RD-wI-Uvj"/>
-                        <outlet property="intoViewContainerHeightC" destination="r3Q-6x-J8n" id="9SP-1B-JWl"/>
+                        <outlet property="infoViewContainerHeightC" destination="r3Q-6x-J8n" id="9SP-1B-JWl"/>
                         <outlet property="scrollView" destination="rK7-Wx-OtW" id="Te2-2I-IJb"/>
                     </connections>
                 </viewController>

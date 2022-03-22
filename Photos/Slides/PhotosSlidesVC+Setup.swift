@@ -13,6 +13,7 @@ extension PhotosSlidesViewController {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         setupCollectionView()
         setupScrollView()
+        setupInfo()
     }
     
     func setupScrollView() {
@@ -20,7 +21,7 @@ extension PhotosSlidesViewController {
         
         /// don't use `scrollView.bounds.height`, it will be less
         collectionViewContainerHeightC.constant = view.bounds.height
-        intoViewContainerHeightC.constant = 0
+        infoViewContainerHeightC.constant = 0
     }
     
     func setupCollectionView() {

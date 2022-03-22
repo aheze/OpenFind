@@ -19,6 +19,7 @@ struct PhotosSlidesState {
     /// for the current image
     var toolbarStarOn = false
     var toolbarInformationOn = false
+    var toolbarInformationOnChanged: (() -> Void)?
     
     
     /// get from `findPhotos`

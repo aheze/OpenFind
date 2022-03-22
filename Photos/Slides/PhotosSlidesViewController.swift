@@ -42,7 +42,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet weak var collectionViewContainerHeightC: NSLayoutConstraint!
 
     @IBOutlet weak var infoViewContainer: UIView!
-    @IBOutlet weak var intoViewContainerHeightC: NSLayoutConstraint!
+    @IBOutlet weak var infoViewContainerHeightC: NSLayoutConstraint!
     
     
     lazy var flowLayout = PhotosSlidesCollectionLayout(model: model)

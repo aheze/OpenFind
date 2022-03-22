@@ -22,6 +22,7 @@ enum PhotosConstants {
     /// how often to update results
     static var minimumResultsUpdateDuration = CGFloat(2.5)
 }
+
 enum PhotosHeaderConstants {
     static var font = UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold)
     static var labelLeftPadding = CGFloat(16)
@@ -36,6 +37,10 @@ enum PhotosCellConstants {
     static var starFont = UIFont.preferredFont(forTextStyle: .subheadline)
     static var starLeftPadding = CGFloat(5)
     static var starBottomPadding = CGFloat(5)
+}
+
+enum PhotosSlidesConstants {
+    static var infoHeightPercentageOfScreen = CGFloat(0.4)
 }
 
 enum PhotosResultsCellConstants {

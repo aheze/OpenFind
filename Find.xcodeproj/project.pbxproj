@@ -176,6 +176,8 @@
 		3C1A2C1827E9010500B3D065 /* PhotosSlidesInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1627E9010500B3D065 /* PhotosSlidesInfoViewController.swift */; };
 		3C1A2C1A27E9010C00B3D065 /* PhotosSlidesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */; };
 		3C1A2C1B27E9010C00B3D065 /* PhotosSlidesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */; };
+		3C1A2C1E27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */; };
+		3C1A2C1F27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */; };
 		3C1AB195260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */; };
 		3C1AB199260FE40B009B47C0 /* VoiceOverSlidesControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */; };
 		3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */; };
@@ -2344,6 +2346,7 @@
 		3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredPhotosHeaderView.swift; sourceTree = "<group>"; };
 		3C1A2C1627E9010500B3D065 /* PhotosSlidesInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesInfoViewController.swift; sourceTree = "<group>"; };
 		3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesInfoView.swift; sourceTree = "<group>"; };
+		3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Info.swift"; sourceTree = "<group>"; };
 		3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoiceOverSlidesControl.xib; sourceTree = "<group>"; };
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
@@ -3400,6 +3403,17 @@
 			path = "Words Toolbar";
 			sourceTree = "<group>";
 		};
+		3C1A2C1C27E94A4E00B3D065 /* Slides Views */ = {
+			isa = PBXGroup;
+			children = (
+				3CDD942727C0583600D3EA1A /* PhotosSlidesToolbarView.swift */,
+				3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */,
+				3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */,
+				3C1A2C1627E9010500B3D065 /* PhotosSlidesInfoViewController.swift */,
+			);
+			path = "Slides Views";
+			sourceTree = "<group>";
+		};
 		3C1D19DF2759B7AB0064F2C6 /* Tab Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -3858,6 +3872,7 @@
 				3CAE64E927C6AA5F009E8564 /* Results */,
 				3CDD943A27C05DA600D3EA1A /* Scanning */,
 				3CBB318A27BD522A00F25F6A /* Slides */,
+				3C1A2C1C27E94A4E00B3D065 /* Slides Views */,
 				3CBB31A027BD6E7C00F25F6A /* Slides Item */,
 				3C71EF9927BF48AE00F0C0A0 /* Slides Transition */,
 				3C4D39E82747664C0010FD68 /* Testing */,
@@ -4678,9 +4693,6 @@
 				3C71EF9A27BF4DD900F0C0A0 /* PhotosSlidesVC+Transition.swift */,
 				3CBB319127BD611F00F25F6A /* PhotosSlidesCollectionLayout.swift */,
 				3CBB319D27BD68EC00F25F6A /* PhotosSlidesContentCell.swift */,
-				3CDD942727C0583600D3EA1A /* PhotosSlidesToolbarView.swift */,
-				3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */,
-				3C1A2C1627E9010500B3D065 /* PhotosSlidesInfoViewController.swift */,
 			);
 			path = Slides;
 			sourceTree = "<group>";
@@ -6721,6 +6733,7 @@
 				3C443E9227DD88F80050A0AB /* SuggestionsView.swift in Sources */,
 				3C6D77BF27A5B140005371F3 /* Global.swift in Sources */,
 				3C443E9A27DD88F80050A0AB /* SearchVC+Listen.swift in Sources */,
+				3C1A2C1F27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */,
 				3CCE2B49279D21C900F72351 /* PhotosVC+Selection.swift in Sources */,
 				3CE3D4E227DCFBB700521735 /* SearchNavigationModel.swift in Sources */,
 				3CB8C32927C34CDF000AA3B9 /* PhotosVM+Scanning.swift in Sources */,
@@ -7389,6 +7402,7 @@
 				3C9314EA27B86E94009E5B6E /* PhotosViewModel.swift in Sources */,
 				3CCE2B54279D235C00F72351 /* ListsDetailVC+Setup.swift in Sources */,
 				3C17686727AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
+				3C1A2C1E27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */,
 				3CE3D4F027DD2FF500521735 /* TabBarVC+Delegate.swift in Sources */,
 				3C1A2C1427E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift in Sources */,
 				3C08EB48279C95F500971D60 /* SearchNC+Tabs.swift in Sources */,
