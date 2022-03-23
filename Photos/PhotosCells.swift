@@ -53,7 +53,7 @@ class PhotosCollectionHeader: UICollectionReusableView {
                 label.text = startTitle
             }
             
-            self.alpha = attributes.isVisible ? 1 : 0
+            alpha = attributes.isVisible ? 1 : 0
         }
     }
 }
@@ -61,22 +61,10 @@ class PhotosCollectionHeader: UICollectionReusableView {
 /// the main photos cell
 class PhotosCollectionCell: UICollectionViewCell {
     var representedAssetIdentifier: String?
-    var tapped: (() -> Void)?
-    
+    lazy var view = PhotosCellView()
     lazy var buttonView = ButtonView()
-    lazy var imageView = UIImageView()
-    
-    lazy var overlayView = UIView()
-    lazy var overlayGradientImageView = UIImageView()
-    lazy var overlayStarImageView = UIImageView()
-    var overlayStarImageViewLeftC: NSLayoutConstraint!
-    var overlayStarImageViewBottomC: NSLayoutConstraint!
-    
-    lazy var selectOverlayView = UIView()
-    lazy var selectOverlayIconView = SelectionIconView(configuration: .regular)
-    var selectOverlayIconViewRightC: NSLayoutConstraint!
-    var selectOverlayIconViewBottomC: NSLayoutConstraint!
-    
+    var tapped: (() -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -84,82 +72,14 @@ class PhotosCollectionCell: UICollectionViewCell {
     }
     
     func commonInit() {
-        let c = PhotosCellConstants.self
-        
         addSubview(buttonView)
         buttonView.pinEdgesToSuperview()
-        buttonView.addSubview(imageView)
-        imageView.pinEdgesToSuperview()
-        buttonView.addSubview(overlayView)
-        overlayView.isUserInteractionEnabled = false
-        overlayView.pinEdgesToSuperview()
-        
-        overlayView.addSubview(overlayGradientImageView)
-        overlayGradientImageView.pinEdgesToSuperview()
-        
-        overlayView.addSubview(overlayStarImageView)
-        overlayStarImageView.translatesAutoresizingMaskIntoConstraints = false
-        let overlayStarImageViewLeftC = overlayStarImageView.leadingAnchor.constraint(
-            equalTo: overlayView.leadingAnchor,
-            constant: c.starLeftPadding
-        )
-        let overlayStarImageViewBottomC = overlayStarImageView.bottomAnchor.constraint(
-            equalTo: overlayView.bottomAnchor,
-            constant: -c.starBottomPadding
-        )
-        NSLayoutConstraint.activate([
-            overlayStarImageViewLeftC,
-            overlayStarImageViewBottomC
-        ])
-        self.overlayStarImageViewLeftC = overlayStarImageViewLeftC
-        self.overlayStarImageViewBottomC = overlayStarImageViewBottomC
-        
-        /// setup
-        imageView.isUserInteractionEnabled = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        
-        overlayGradientImageView.image = UIImage(named: "CellShadow")
-        overlayGradientImageView.isUserInteractionEnabled = false
-        overlayGradientImageView.contentMode = .scaleAspectFill
+        buttonView.addSubview(view)
+        view.pinEdgesToSuperview()
         
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
-        
-        /// configure constants
-        overlayView.backgroundColor = .clear
-        overlayStarImageView.image = UIImage(systemName: "star.fill")
-        overlayStarImageView.tintColor = c.starTintColor
-        overlayStarImageView.setIconFont(font: c.starFont)
-        
-        clipsToBounds = true
-        
-        // MARK: Selection
-        selectOverlayView.backgroundColor = .clear
-        addSubview(selectOverlayView)
-        selectOverlayView.pinEdgesToSuperview()
-        
-        selectOverlayIconView.setState(.hidden)
-        selectOverlayView.addSubview(selectOverlayIconView)
-        selectOverlayIconView.translatesAutoresizingMaskIntoConstraints = false
-        let selectOverlayIconViewRightC = selectOverlayIconView.trailingAnchor.constraint(
-            equalTo: selectOverlayView.trailingAnchor,
-            constant: -c.selectRightPadding
-        )
-        let selectOverlayIconViewBottomC = selectOverlayIconView.bottomAnchor.constraint(
-            equalTo: selectOverlayView.bottomAnchor,
-            constant: -c.selectBottomPadding
-        )
-        NSLayoutConstraint.activate([
-            selectOverlayIconViewRightC,
-            selectOverlayIconViewBottomC,
-            selectOverlayIconView.widthAnchor.constraint(equalToConstant: 24),
-            selectOverlayIconView.heightAnchor.constraint(equalToConstant: 24)
-        ])
-        self.selectOverlayIconViewRightC = selectOverlayIconViewRightC
-        self.selectOverlayIconViewBottomC = selectOverlayIconViewBottomC
-        selectOverlayView.isUserInteractionEnabled = false
     }
     
     @available(*, unavailable)

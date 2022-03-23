@@ -73,7 +73,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     guard let self = self else { return }
                     if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
                         cell.alpha = 0
-                        cell.overlayView.alpha = 0
+                        cell.view.overlayView.alpha = 0
                         
                         if let header = self.getCurrentHeader(for: photoIndexPath) {
                             header.alpha = 0
@@ -114,7 +114,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     
                     /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
                     UIView.animate(withDuration: 0.3) {
-                        cell.overlayView.alpha = 1
+                        cell.view.overlayView.alpha = 1
                     }
                 }
                 if let header = getCurrentHeader(for: photoIndexPath) {
@@ -143,7 +143,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 /// If no image is available yet, use what is shown in the collection view cell
                 guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
                 if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                    return cell.imageView.image
+                    return cell.view.imageView.image
                 }
             }
         }
@@ -160,7 +160,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             }
         } else {
             if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                let frame = cell.imageView.windowFrame()
+                let frame = cell.view.imageView.windowFrame()
                 return frame
             }
         }

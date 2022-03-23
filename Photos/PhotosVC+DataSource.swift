@@ -50,7 +50,7 @@ extension PhotosViewController {
                 // UIKit may have recycled this cell by the handler's activation time.
                 // Set the cell's thumbnail image only if it's still showing the same asset.
                 if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                    cell.imageView.image = thumbnail
+                    cell.view.imageView.image = thumbnail
                     self.model.photoToThumbnail[photo] = thumbnail
                 }
             }
@@ -85,6 +85,6 @@ extension PhotosViewController {
 }
 
 func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
-    cell.selectOverlayIconView.setState(selected ? .selected : .hidden)
-    cell.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
+    cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
+    cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
 }

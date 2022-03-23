@@ -39,7 +39,7 @@ extension IgnoredPhotosViewController {
                 // UIKit may have recycled this cell by the handler's activation time.
                 // Set the cell's thumbnail image only if it's still showing the same asset.
                 if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                    cell.imageView.image = thumbnail
+                    cell.view.imageView.image = thumbnail
                     self.model.photoToThumbnail[photo] = thumbnail
                 }
             }
