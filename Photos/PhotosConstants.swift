@@ -37,6 +37,9 @@ enum PhotosCellConstants {
     static var starFont = UIFont.preferredFont(forTextStyle: .subheadline)
     static var starLeftPadding = CGFloat(5)
     static var starBottomPadding = CGFloat(5)
+    
+    static var selectRightPadding = CGFloat(6)
+    static var selectBottomPadding = CGFloat(6)
 }
 
 enum PhotosSlidesConstants {

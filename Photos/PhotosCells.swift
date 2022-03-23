@@ -72,6 +72,11 @@ class PhotosCollectionCell: UICollectionViewCell {
     var overlayStarImageViewLeftC: NSLayoutConstraint!
     var overlayStarImageViewBottomC: NSLayoutConstraint!
     
+    lazy var selectOverlayView = UIView()
+    lazy var selectOverlayIconView = SelectionIconView(configuration: .regular)
+    var selectOverlayIconViewRightC: NSLayoutConstraint!
+    var selectOverlayIconViewBottomC: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -129,6 +134,30 @@ class PhotosCollectionCell: UICollectionViewCell {
         overlayStarImageView.setIconFont(font: c.starFont)
         
         clipsToBounds = true
+        
+        // MARK: Selection
+        selectOverlayView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        addSubview(selectOverlayView)
+        selectOverlayView.pinEdgesToSuperview()
+        
+        selectOverlayIconView.setState(.hidden)
+        selectOverlayView.addSubview(selectOverlayIconView)
+        selectOverlayIconView.translatesAutoresizingMaskIntoConstraints = false
+        let selectOverlayIconViewRightC = selectOverlayIconView.trailingAnchor.constraint(
+            equalTo: selectOverlayView.trailingAnchor,
+            constant: -c.selectRightPadding
+        )
+        let selectOverlayIconViewBottomC = selectOverlayIconView.bottomAnchor.constraint(
+            equalTo: selectOverlayView.bottomAnchor,
+            constant: -c.selectBottomPadding
+        )
+        NSLayoutConstraint.activate([
+            selectOverlayIconViewRightC,
+            selectOverlayIconViewBottomC
+        ])
+        self.selectOverlayIconViewRightC = selectOverlayIconViewRightC
+        self.selectOverlayIconViewBottomC = selectOverlayIconViewBottomC
+        selectOverlayView.isUserInteractionEnabled = false
     }
     
     @available(*, unavailable)

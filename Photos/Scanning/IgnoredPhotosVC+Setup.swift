@@ -13,11 +13,10 @@ extension IgnoredPhotosViewController {
         setupCollectionView()
         setupNavigationBar()
     }
-    
 
     func setupCollectionView() {
         collectionView.register(PhotosCollectionCell.self, forCellWithReuseIdentifier: "PhotosCollectionCell")
-        
+
         view.addSubview(collectionView)
         collectionView.pinEdgesToSuperview()
 
@@ -30,29 +29,17 @@ extension IgnoredPhotosViewController {
     }
 
     func setupNavigationBar() {
-        if #available(iOS 14.0, *) {
-            let addAction = UIAction(
-                title: "Add Photos",
-                image: UIImage(systemName: "plus")
-            ) { _ in
-            }
+        let selectButton = UIBarButtonItem(
+            title: "Select",
+            style: .plain,
+            target: self,
+            action: #selector(selectPressed)
+        )
 
-            let editAction = UIAction(
-                title: "Edit Photos",
-                image: UIImage(systemName: "pencil")
-            ) { _ in
-            }
+        navigationItem.rightBarButtonItem = selectButton
+    }
 
-            let optionsButton = UIBarButtonItem(
-                title: "",
-                image: UIImage(systemName: "ellipsis"),
-                menu: UIMenu(title: "", children: [
-                    addAction,
-                    editAction
-                ])
-            )
-
-            navigationItem.rightBarButtonItem = optionsButton
-        }
+    @objc func selectPressed() {
+        
     }
 }

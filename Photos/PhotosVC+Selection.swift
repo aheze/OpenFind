@@ -8,36 +8,41 @@
 
 import SwiftUI
 
-class PhotosSelectionViewModel: ObservableObject {
-    @Published var selectedCount = 0
-    @Published var starOn = false
-    init() {}
-}
-
-struct PhotosSelectionToolbarView: View {
-    @ObservedObject var model: PhotosSelectionViewModel
-
-    var body: some View {
-        HStack {
-            ToolbarIconButton(iconName: model.starOn ? "star.fill" : "star") {
-                model.starOn.toggle()
-            }
-            .disabled(model.selectedCount == 0)
-
-            Text(selectedText())
-                .font(.system(.headline))
-                .frame(maxWidth: .infinity)
-
-            ToolbarIconButton(iconName: "trash") {}
-                .disabled(model.selectedCount == 0)
-        }
+extension PhotosViewController {
+    func toggleSelect() {
+        model.isSelecting.toggle()
+        updateCollectionViewSelectionState()
     }
 
-    func selectedText() -> String {
-        if model.selectedCount == 1 {
-            return "\(model.selectedCount) Photo Selected"
+    func updateCollectionViewSelectionState() {
+        if model.isSelecting {
+            selectBarButton.title = "Done"
+            toolbarViewModel.toolbar = AnyView(selectionToolbar)
         } else {
-            return "\(model.selectedCount) Photos Selected"
+            selectBarButton.title = "Select"
+            toolbarViewModel.toolbar = nil
+            model.selectedPhotos = []
+        }
+
+        for sectionIndex in model.sections.indices {
+            let section = model.sections[sectionIndex]
+            for photoIndex in section.photos.indices {
+                let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
+                if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
+                    if model.isSelecting {
+                        cell.selectOverlayIconView.setState(.hidden)
+                        UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
+                            cell.selectOverlayView.alpha = 1
+                            cell.selectOverlayIconView.alpha = 1
+                        }
+                    } else {
+                        UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
+                            cell.selectOverlayView.alpha = 0
+                            cell.selectOverlayIconView.alpha = 0
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -56,5 +56,6 @@ extension PhotosViewController {
 
     
     @objc func selectPressed() {
+        toggleSelect()
     }
 }
