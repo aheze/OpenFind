@@ -29,7 +29,7 @@ struct PhotosScanningViewHeader: View {
                                 scannedPhotosCount: model.scannedPhotosCount,
                                 totalPhotosCount: model.totalPhotosCount,
                                 lineWidth: 4,
-                                iconFont: .preferredCustomFont(forTextStyle: .headline, weight: .semibold),
+                                iconFont: .preferredCustomFont(forTextStyle: .headline, weight: PhotosConstants.scanningCheckmarkWeight),
                                 state: model.scanningIconState
                             )
                             .frame(width: 32, height: 32)
@@ -50,8 +50,9 @@ struct PhotosScanningViewHeader: View {
                         }
 
                         HStack {
-                            let image = model.scanningState == .scanningAllPhotos ? "pause.fill" : "play.fill"
-                            let title = model.scanningState == .scanningAllPhotos ? "Pause" : "Resume"
+                            var image = getImage()
+                            var title = getTitle()
+                            
                             PhotosScanningButton(image: image, title: title) {
                                 if model.scanningState == .dormant {
                                     model.startScanning()
@@ -104,6 +105,22 @@ struct PhotosScanningViewHeader: View {
             }
             .padding(PhotosScanningConstants.padding)
         }
+    }
+
+    func getImage() -> String {
+        var image = model.scanningState == .scanningAllPhotos ? "pause.fill" : "play.fill"
+        if model.scannedPhotosCount == model.totalPhotosCount {
+            image = "checkmark"
+        }
+        return image
+    }
+
+    func getTitle() -> String {
+        var title = model.scanningState == .scanningAllPhotos ? "Pause" : "Resume"
+        if model.scannedPhotosCount == model.totalPhotosCount {
+            title = "Scanning Done"
+        }
+        return title
     }
 }
 

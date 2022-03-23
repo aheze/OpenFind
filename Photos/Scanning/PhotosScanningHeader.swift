@@ -19,7 +19,7 @@ struct PhotosScanningHeader: View {
                     scannedPhotosCount: model.scannedPhotosCount,
                     totalPhotosCount: model.totalPhotosCount,
                     lineWidth: 3,
-                    iconFont: .preferredCustomFont(forTextStyle: .footnote, weight: .semibold),
+                    iconFont: .preferredCustomFont(forTextStyle: .footnote, weight: PhotosConstants.scanningCheckmarkWeight),
                     state: model.scanningIconState
                 )
                 .frame(width: 26, height: 26)

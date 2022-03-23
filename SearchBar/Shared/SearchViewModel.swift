@@ -103,6 +103,12 @@ class SearchViewModel: ObservableObject {
         return values.map { $0.getText() }
     }
     
+    /// if the search text is empty or not
+    var isEmpty: Bool {
+        let isEmpty = text.joined().trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        return isEmpty
+    }
+    
     init(configuration: SearchConfiguration) {
         self.configuration = configuration
     }

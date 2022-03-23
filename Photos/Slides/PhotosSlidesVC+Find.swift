@@ -12,10 +12,9 @@ extension PhotosSlidesViewController {
     /// start finding for a photo.
     /// If metadata does not exist, start scanning. Once done, `model.updateSlidesAt` in `PhotosSlidesVC+Listen` will be called.
     func startFinding(for findPhoto: FindPhoto) {
-        
         /// if is ignored, don't find
         guard findPhoto.photo.metadata.map({ !$0.isIgnored }) ?? true else { return }
-        
+
         if let metadata = findPhoto.photo.metadata, metadata.dateScanned != nil {
             self.find(in: findPhoto)
         } else {
@@ -31,7 +30,6 @@ extension PhotosSlidesViewController {
 
     /// find and show results
     func find(in findPhoto: FindPhoto) {
-        print("finding in.")
         guard let metadata = findPhoto.photo.metadata else { return }
         let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
 

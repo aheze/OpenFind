@@ -21,6 +21,8 @@ enum PhotosConstants {
 
     /// how often to update results
     static var minimumResultsUpdateDuration = CGFloat(2.5)
+    
+    static var scanningCheckmarkWeight = UIFont.Weight.bold
 }
 
 enum PhotosHeaderConstants {

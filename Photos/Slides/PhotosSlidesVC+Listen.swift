@@ -18,8 +18,21 @@ extension PhotosSlidesViewController {
 
             /// metadata already exists, directly find
             if textChanged {
-                /// if showing, that means Find is currently scanning, so don't scan a second time.
-                if !self.searchNavigationProgressViewModel.percentageShowing {
+                if self.slidesSearchViewModel.isEmpty {
+                    self.slidesSearchPromptViewModel.update(show: false)
+                    self.slidesSearchPromptViewModel.updateBarHeight?()
+
+                    if let index = slidesState.getFindPhotoIndex(photo: findPhoto.photo) {
+                        let highlightSet = FindPhoto.HighlightsSet(
+                            stringToGradients: [:],
+                            highlights: []
+                        )
+                        findPhoto.associatedViewController?.highlightsViewModel.update(with: [], replace: true)
+                        self.model.slidesState?.findPhotos[index].highlightsSet = highlightSet
+                    }
+
+                    /// if showing, that means Find is currently scanning, so don't scan a second time.
+                } else if !self.searchNavigationProgressViewModel.percentageShowing {
                     self.startFinding(for: findPhoto)
                 }
             } else {

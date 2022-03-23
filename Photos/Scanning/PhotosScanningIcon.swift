@@ -24,7 +24,7 @@ struct PhotosScanningIcon: View {
                 scannedPhotosCount: model.scannedPhotosCount,
                 totalPhotosCount: model.totalPhotosCount,
                 lineWidth: 2.5,
-                iconFont: .preferredCustomFont(forTextStyle: .caption2, weight: .semibold),
+                iconFont: .preferredCustomFont(forTextStyle: .caption2, weight: PhotosConstants.scanningCheckmarkWeight),
                 state: model.scanningIconState
             )
                 .padding(4)
