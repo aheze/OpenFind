@@ -39,10 +39,16 @@ extension PhotosViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        photoSelected(at: indexPath)
+        if model.isSelecting {
+            photoSelected(at: indexPath)
+        } else {
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        photoDeselected(at: indexPath)
+        if model.isSelecting {
+            photoDeselected(at: indexPath)
+        }
     }
 }

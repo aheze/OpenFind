@@ -68,8 +68,11 @@ extension PhotosViewController {
                             cell.selectOverlayView.backgroundColor = .clear
                             cell.selectOverlayView.alpha = 0
                         }
-                        collectionView.deselectItem(at: indexPath, animated: false)
                     }
+                }
+
+                if !model.isSelecting {
+                    collectionView.deselectItem(at: indexPath, animated: false)
                 }
             }
         }

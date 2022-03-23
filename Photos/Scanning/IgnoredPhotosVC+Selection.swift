@@ -16,6 +16,7 @@ extension IgnoredPhotosViewController {
 
     func photoSelected(at indexPath: IndexPath) {
         guard let photo = model.ignoredPhotos[safe: indexPath.item] else { return }
+
         if !model.ignoredPhotosSelectedPhotos.contains(photo) {
             model.ignoredPhotosSelectedPhotos.append(photo)
 
@@ -41,7 +42,7 @@ extension IgnoredPhotosViewController {
             selectBarButton.title = "Done"
         } else {
             selectBarButton.title = "Select"
-            model.selectedPhotos = []
+            model.ignoredPhotosSelectedPhotos = []
         }
 
         for index in model.ignoredPhotos.indices {
@@ -58,8 +59,11 @@ extension IgnoredPhotosViewController {
                         cell.selectOverlayView.backgroundColor = .clear
                         cell.selectOverlayView.alpha = 0
                     }
-                    collectionView.deselectItem(at: index.indexPath, animated: false)
                 }
+            }
+
+            if !model.ignoredPhotosIsSelecting {
+                collectionView.deselectItem(at: index.indexPath, animated: false)
             }
         }
     }
