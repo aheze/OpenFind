@@ -21,3 +21,4 @@ struct PhotosSlidesInfoView: View {
         .frame(maxWidth: .infinity)
     }
 }
+ 

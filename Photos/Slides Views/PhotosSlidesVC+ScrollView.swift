@@ -21,20 +21,31 @@ extension PhotosSlidesViewController {
 }
 
 extension PhotosSlidesViewController {
+    /// update the photo height
     func infoScrollViewDidScroll() {
-        flowLayout.invalidateLayout()
+        /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
+            flowLayout.invalidateLayout()
+        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         /// make sure it's the info scroll view
         guard scrollView == self.scrollView else { return }
         let currentOffset = scrollView.contentOffset.y /// make positive for now
-        let threshold = getInfoHeight() / 2
-        print("currentOffset \(currentOffset) vs threshold \(threshold)")
+        let threshold = getInfoHeight() / 4 * 3
         if currentOffset < threshold {
             targetContentOffset.pointee.y = 0
             model.slidesState?.toolbarInformationOn = false
-            model.slidesState?.toolbarInformationOnChanged?()
+        } else {
+            targetContentOffset.pointee.y = getInfoHeight()
+        }
+    }
+
+    /// reset to hidden after `scrollViewWillEndDragging`
+    func infoScrollViewDidEndDecelerating() {
+        if let slidesState = model.slidesState, !slidesState.toolbarInformationOn {
+            resetInfoToHidden()
         }
     }
 }

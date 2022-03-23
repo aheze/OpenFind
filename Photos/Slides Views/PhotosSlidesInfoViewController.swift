@@ -26,7 +26,7 @@ class PhotosSlidesInfoViewController: UIViewController {
          Instantiate the base `view`.
          */
         view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = .systemBackground
         
         let contentView = PhotosSlidesInfoView(model: model)
         let hostingController = UIHostingController(rootView: contentView)

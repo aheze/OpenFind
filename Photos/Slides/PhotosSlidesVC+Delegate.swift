@@ -74,7 +74,6 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 extension PhotosSlidesViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
-            print("cv")
             model.updateAllowed = false
         } else if scrollView == self.scrollView {
             self.infoScrollViewDidScroll()
@@ -82,8 +81,12 @@ extension PhotosSlidesViewController {
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        notifyIfScrolledToStop()
-        model.updateAllowed = true
+        if scrollView == collectionView {
+            notifyIfScrolledToStop()
+            model.updateAllowed = true
+        } else if scrollView == self.scrollView {
+            self.infoScrollViewDidEndDecelerating()
+        }
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
