@@ -52,7 +52,6 @@ extension PhotosViewModel {
             let slidesState = slidesState,
             let index = slidesState.getFindPhotoIndex(photo: photo)
         {
-
             /// must update `currentPhoto` as well
             if let currentIndex = slidesState.getCurrentIndex() {
                 if currentIndex == index {
@@ -65,12 +64,12 @@ extension PhotosViewModel {
         guard let metadata = photo.metadata else { return }
 
         if reloadCell {
-            
             /// inside `PhotosVC+Listen`
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }
 
         realmModel.updatePhotoMetadata(metadata: metadata)
         ignoredPhotos = photos.filter { $0.metadata?.isIgnored ?? false }
+        photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
     }
 }

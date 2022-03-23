@@ -63,7 +63,7 @@ extension PhotosViewModel {
                     
                     if metadata.isIgnored {
                         ignoredPhotos.append(photo)
-                    } else if metadata.dateScanned != nil {
+                    } else if metadata.dateScanned == nil {
                         photosToScan.append(photo)
                     }
                 } else {
@@ -81,8 +81,6 @@ extension PhotosViewModel {
                 self.photos = photos
                 self.ignoredPhotos = ignoredPhotos
                 self.photosToScan = photosToScan
-                self.scannedPhotosCount = photos.count - photosToScan.count
-                self.totalPhotosCount = photos.count
                 completion?()
             }
         }

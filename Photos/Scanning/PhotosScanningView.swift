@@ -28,7 +28,9 @@ struct PhotosScanningViewHeader: View {
                             PhotosScanningProgressView(
                                 scannedPhotosCount: model.scannedPhotosCount,
                                 totalPhotosCount: model.totalPhotosCount,
-                                lineWidth: 4
+                                lineWidth: 4,
+                                iconFont: .preferredCustomFont(forTextStyle: .headline, weight: .semibold),
+                                state: model.scanningIconState
                             )
                             .frame(width: 32, height: 32)
 

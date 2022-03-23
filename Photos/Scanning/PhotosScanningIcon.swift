@@ -8,6 +8,11 @@
 
 import SwiftUI
 
+enum PhotosScanningIconState {
+    case scanning
+    case paused
+    case done
+}
 struct PhotosScanningIcon: View {
     @ObservedObject var model: PhotosViewModel
 
@@ -18,7 +23,9 @@ struct PhotosScanningIcon: View {
             PhotosScanningProgressView(
                 scannedPhotosCount: model.scannedPhotosCount,
                 totalPhotosCount: model.totalPhotosCount,
-                lineWidth: 2.5
+                lineWidth: 2.5,
+                iconFont: .preferredCustomFont(forTextStyle: .caption2, weight: .semibold),
+                state: model.scanningIconState
             )
                 .padding(4)
                 .padding(.leading, 8)
@@ -31,6 +38,8 @@ struct PhotosScanningProgressView: View {
     var scannedPhotosCount: Int
     var totalPhotosCount: Int
     var lineWidth: CGFloat
+    var iconFont: UIFont
+    var state: PhotosScanningIconState
     
     var body: some View {
         Circle()
@@ -53,6 +62,17 @@ struct PhotosScanningProgressView: View {
                     )
             )
             .rotationEffect(.degrees(-90))
+            .overlay(
+                VStack {
+                    if state == .done {
+                        Image(systemName: "checkmark")
+                    } else if state == .paused {
+                        Image(systemName: "pause.fill")
+                    }
+                }
+                    .font(Font(iconFont as CTFont))
+                    .foregroundColor(.accent)
+            )
     }
 
     func getTrimPercentage() -> CGFloat {

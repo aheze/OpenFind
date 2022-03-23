@@ -15,7 +15,6 @@ class PhotosViewModel: ObservableObject {
     var realmModel: RealmModel
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
-    var ignoredPhotos = [Photo]()
     var sections = [PhotosSection]()
 
     /// store the cell images
@@ -88,25 +87,44 @@ class PhotosViewModel: ObservableObject {
 
     // MARK: Scanning
 
+    var photosToScan = [Photo]() {
+        didSet {
+            totalPhotosCount = photos.filter { $0.metadata.map { !$0.isIgnored } ?? true }.count
+            scannedPhotosCount = totalPhotosCount - photosToScan.count
+        }
+    }
+
+    var scanningIconState: PhotosScanningIconState {
+        if photosToScan.isEmpty {
+            return .done
+        }
+        if scanningState == .dormant {
+            return .paused
+        }
+        return .scanning
+    }
+
     var scanningIconTapped: (() -> Void)?
     var ignoredPhotosTapped: (() -> Void)?
-    var photosToScan = [Photo]()
     @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
     @Saved(Defaults.scanInBackground.0) var scanInBackground = Defaults.scanInBackground.1
     @Saved(Defaults.scanWhileCharging.0) var scanWhileCharging = Defaults.scanWhileCharging.1
     @Published var scanningState = ScanningState.dormant
     @Published var scannedPhotosCount = 0
-    @Published var totalPhotosCount = 0
+    @Published var totalPhotosCount = 0 /// total where not ignored
 
     // MARK: Selection
 
     @Published var isSelecting = false
     @Published var selectedPhotos = [Photo]()
-    
+
     // MARK: Ignored Photos
+
+    var ignoredPhotos = [Photo]()
     @Published var ignoredPhotosIsSelecting = false
     @Published var ignoredPhotosSelectedPhotos = [Photo]()
-    
+    var ignoredPhotosUpdated: (() -> Void)? /// unignored photos, update collection view and selection state
+
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
     var deleteSelected: (() -> Void)?

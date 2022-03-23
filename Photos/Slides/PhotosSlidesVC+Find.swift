@@ -31,6 +31,7 @@ extension PhotosSlidesViewController {
 
     /// find and show results
     func find(in findPhoto: FindPhoto) {
+        print("finding in.")
         guard let metadata = findPhoto.photo.metadata else { return }
         let highlights = metadata.sentences.getHighlights(stringToGradients: self.slidesSearchViewModel.stringToGradients)
 

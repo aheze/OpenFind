@@ -36,12 +36,18 @@ extension IgnoredPhotosViewController {
             }
         }
     }
+    
+    func getSelectButtonTitle() -> String {
+        if model.ignoredPhotosIsSelecting {
+            return "Done"
+        } else {
+            return "Select"
+        }
+    }
 
     func updateCollectionViewSelectionState() {
-        if model.ignoredPhotosIsSelecting {
-            selectBarButton.title = "Done"
-        } else {
-            selectBarButton.title = "Select"
+        selectBarButton.title = getSelectButtonTitle()
+        if !model.ignoredPhotosIsSelecting {
             model.ignoredPhotosSelectedPhotos = []
         }
 

@@ -20,7 +20,19 @@ extension PhotosViewController {
         for photo in photos {
             guard let metadata = photo.metadata else { return }
             
-            if let resultsState = model.resultsState {
+            if let slidesState = model.slidesState {
+                if self.searchNavigationProgressViewModel.percentageShowing {
+                    self.searchNavigationProgressViewModel.finishAutoProgress()
+                    
+                    if
+                        let index = slidesState.getFindPhotoIndex(photo: photo),
+                        let findPhoto = slidesState.findPhotos[safe: index]
+                    {
+                        slidesState.viewController?.find(in: findPhoto)
+                    }
+                    Find.prioritizedAction = nil
+                }
+            } else if let resultsState = model.resultsState {
                 let (highlights, lines) = self.getHighlightsAndDescription(
                     from: metadata.sentences,
                     with: searchViewModel.stringToGradients
@@ -43,20 +55,6 @@ extension PhotosViewController {
                         )
                         insertedFindPhotos.append(findPhoto)
                     }
-                }
-            }
-                
-            if let slidesState = model.slidesState {
-                if
-                    let index = slidesState.getFindPhotoIndex(photo: photo),
-                    let findPhoto = slidesState.findPhotos[safe: index]
-                {
-                    slidesState.viewController?.find(in: findPhoto)
-                }
-                
-                if self.searchNavigationProgressViewModel.percentageShowing {
-                    self.searchNavigationProgressViewModel.finishAutoProgress()
-                    Find.prioritizedAction = nil
                 }
             }
         }

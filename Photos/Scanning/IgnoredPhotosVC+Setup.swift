@@ -42,7 +42,7 @@ extension IgnoredPhotosViewController {
 
     func setupNavigationBar() {
         let selectButton = UIBarButtonItem(
-            title: "Select",
+            title: getSelectButtonTitle(),
             style: .plain,
             target: self,
             action: #selector(selectPressed)

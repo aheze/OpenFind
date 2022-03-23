@@ -47,6 +47,13 @@ class IgnoredPhotosViewController: UIViewController {
         view = UIView()
         
         setup()
+        
+        model.ignoredPhotosUpdated = { [weak self] in
+            guard let self = self else { return }
+            self.update(animate: true)
+            self.model.ignoredPhotosIsSelecting = false
+            self.updateCollectionViewSelectionState()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

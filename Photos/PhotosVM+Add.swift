@@ -56,7 +56,6 @@ extension PhotosViewModel {
     }
 
     func applyMetadata(for photo: Photo) {
-        
         /// apply metadata to a single photo inside an array of photos
         func applyMetadata(in photos: inout [Photo], at index: Int, with metadata: PhotoMetadata?) {
             if photos[index].metadata != nil {
