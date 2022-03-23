@@ -32,13 +32,20 @@ extension RealmModel {
     }
 
     /// handles both add or update
-    func updatePhotoMetadata(metadata: PhotoMetadata) {
+    /// Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata`
+    func updatePhotoMetadata(metadata: PhotoMetadata?) {
+        guard let metadata = metadata else {
+            Debug.log("No metadata.")
+            return
+        }
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
             let realmSentences = metadata.getRealmSentences()
             do {
                 try realm.write {
+                    realmMetadata.dateScanned = metadata.dateScanned
                     realmMetadata.sentences = realmSentences
                     realmMetadata.isStarred = metadata.isStarred
+                    realmMetadata.isIgnored = metadata.isIgnored
                 }
             } catch {
                 Debug.log("Error updating photo metadata: \(error)", .error)

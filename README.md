@@ -220,3 +220,5 @@ _Concurrency/CheckedContinuation.swift:164: Fatal error: SWIFT TASK CONTINUATION
 
 2022-03-16 20:47:57.591709-0700 Find-New[19880:285440] _Concurrency/CheckedContinuation.swift:164: Fatal error: SWIFT TASK CONTINUATION MISUSE: find(in:visionOptions:findOptions:) tried to resume its continuation more than once, returning <VNRecognizeTextRequest: 0x6000012798f0> VNRecognizeTextRequestRevision2 ROI=[0, 0, 1, 1]!
 ```
+
+Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata` when saving.

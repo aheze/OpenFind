@@ -70,6 +70,7 @@ extension PhotosViewModel {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }
 
+        print("UPdateing now. \(metadata.isIgnored)")
         realmModel.updatePhotoMetadata(metadata: metadata)
     }
 }
