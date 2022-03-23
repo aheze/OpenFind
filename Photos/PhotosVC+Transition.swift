@@ -20,7 +20,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             
             if model.resultsState != nil {
                 if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                    cell.imageView.alpha = 0
+                    cell.view.imageView.alpha = 0
                 }
             } else {
                 if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
@@ -36,7 +36,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             if let resultsState = model.resultsState {
                 for index in resultsState.findPhotos.indices {
                     if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
-                        cell.imageView.alpha = 1
+                        cell.view.imageView.alpha = 1
                     }
                 }
                 
@@ -44,8 +44,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             
                 let hideCell = { [weak self] in
                     if let cell = self?.resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                        cell.imageView.alpha = 0
-                        cell.leftOverlayView.alpha = 0
+                        cell.view.imageView.alpha = 0
+                        cell.view.overlayView.alpha = 0
                     }
                 }
             
@@ -102,10 +102,10 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
             if model.resultsState != nil {
                 if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                    cell.imageView.alpha = 1
+                    cell.view.imageView.alpha = 1
                     
                     UIView.animate(withDuration: 0.3) {
-                        cell.leftOverlayView.alpha = 1
+                        cell.view.overlayView.alpha = 1
                     }
                 }
             } else {
@@ -137,7 +137,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 /// If no image is available yet, use what is shown in the collection view cell
                 guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
                 if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                    return cell.imageView.image
+                    return cell.view.imageView.image
                 }
             } else {
                 /// If no image is available yet, use what is shown in the collection view cell
@@ -155,7 +155,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
         if model.resultsState != nil {
             if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                let frame = cell.imageView.windowFrame()
+                let frame = cell.view.imageView.windowFrame()
                 return frame
             }
         } else {

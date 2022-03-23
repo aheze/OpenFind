@@ -53,7 +53,7 @@ extension PhotosViewController {
                 // UIKit may have recycled this cell by the handler's activation time.
                 // Set the cell's thumbnail image only if it's still showing the same asset.
                 if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
-                    cell.imageView.image = thumbnail
+                    cell.view.imageView.image = thumbnail
                     self.model.photoToThumbnail[findPhoto.photo] = thumbnail
                 }
             }
@@ -87,12 +87,12 @@ extension PhotosViewController {
     func configureCell(cell: PhotosResultsCell, metadata: PhotoMetadata?) {
         if let metadata = metadata {
             if metadata.isStarred {
-                cell.leftOverlayGradientImageView.alpha = 1
-                cell.leftOverlayStarImageView.alpha = 1
+                cell.view.overlayGradientImageView.alpha = 1
+                cell.view.overlayStarImageView.alpha = 1
                 return
             }
         }
-        cell.leftOverlayGradientImageView.alpha = 0
-        cell.leftOverlayStarImageView.alpha = 0
+        cell.view.overlayGradientImageView.alpha = 0
+        cell.view.overlayStarImageView.alpha = 0
     }
 }

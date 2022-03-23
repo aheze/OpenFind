@@ -109,13 +109,7 @@ class PhotosResultsCell: UICollectionViewCell {
     
     @IBOutlet var leftContainerView: UIView!
     @IBOutlet var leftContainerViewWidthC: NSLayoutConstraint!
-    @IBOutlet var imageView: UIImageView!
-    
-    @IBOutlet var leftOverlayView: UIView!
-    @IBOutlet var leftOverlayGradientImageView: UIImageView!
-    @IBOutlet var leftOverlayStarImageView: UIImageView!
-    @IBOutlet var leftOverlayStarImageViewLeftC: NSLayoutConstraint!
-    @IBOutlet var leftOverlayStarImageViewBottomC: NSLayoutConstraint!
+    lazy var view = PhotosCellView()
     
     /// vertical stack view on right
     @IBOutlet var rightStackView: UIStackView!
@@ -144,11 +138,13 @@ class PhotosResultsCell: UICollectionViewCell {
         descriptionTextView.textContainerInset = .zero
         descriptionTextView.backgroundColor = .clear
         
+        leftContainerView.addSubview(view)
+        view.pinEdgesToSuperview()
+        
         buttonView.tapped = { [weak self] in
             self?.tapped?()
         }
         
-        imageView.contentMode = .scaleAspectFill
         descriptionTextView.isEditable = false
         
         let c = PhotosResultsCellConstants.self
@@ -176,13 +172,6 @@ class PhotosResultsCell: UICollectionViewCell {
         titleLabel.textColor = c.titleTextColor
         resultsLabel.textColor = c.resultsLabelTextColor
         descriptionTextView.textColor = c.descriptionTextColor
-        
-        /// configure constants for the image
-        leftOverlayView.backgroundColor = .clear
-        leftOverlayStarImageView.tintColor = PhotosCellConstants.starTintColor
-        leftOverlayStarImageView.setIconFont(font: PhotosCellConstants.starFont)
-        leftOverlayStarImageViewLeftC.constant = PhotosCellConstants.starLeftPadding
-        leftOverlayStarImageViewBottomC.constant = PhotosCellConstants.starBottomPadding
     }
     
     override func prepareForReuse() {
