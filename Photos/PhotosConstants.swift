@@ -40,6 +40,8 @@ enum PhotosCellConstants {
     
     static var selectRightPadding = CGFloat(6)
     static var selectBottomPadding = CGFloat(6)
+    
+    static var selectedBackgroundColor = UIColor.white.withAlphaComponent(0.1)
 }
 
 enum PhotosSlidesConstants {

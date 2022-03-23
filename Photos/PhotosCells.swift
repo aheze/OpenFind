@@ -136,7 +136,7 @@ class PhotosCollectionCell: UICollectionViewCell {
         clipsToBounds = true
         
         // MARK: Selection
-        selectOverlayView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        selectOverlayView.backgroundColor = .clear
         addSubview(selectOverlayView)
         selectOverlayView.pinEdgesToSuperview()
         
@@ -153,7 +153,9 @@ class PhotosCollectionCell: UICollectionViewCell {
         )
         NSLayoutConstraint.activate([
             selectOverlayIconViewRightC,
-            selectOverlayIconViewBottomC
+            selectOverlayIconViewBottomC,
+            selectOverlayIconView.widthAnchor.constraint(equalToConstant: 24),
+            selectOverlayIconView.heightAnchor.constraint(equalToConstant: 24)
         ])
         self.selectOverlayIconViewRightC = selectOverlayIconViewRightC
         self.selectOverlayIconViewBottomC = selectOverlayIconViewBottomC

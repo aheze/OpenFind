@@ -18,9 +18,14 @@ class IgnoredPhotosViewController: UIViewController {
     
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, Photo>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, Photo>
+    lazy var collectionContainer = UIView()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     lazy var dataSource = makeDataSource()
     lazy var flowLayout = makeFlowLayout()
+    
+    var selectBarButton: UIBarButtonItem!
+    lazy var toolbarContainer = UIView()
+    lazy var toolbarView = IgnoredPhotosToolbarView(model: model)
     
     init(model: PhotosViewModel) {
         self.model = model

@@ -56,12 +56,17 @@ extension PhotosViewController {
             }
 
             PhotoMetadata.apply(metadata: photo.metadata, to: cell)
-            
+
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
 
                 self.presentSlides(startingAtPhoto: photo)
             }
+
+            cell.buttonView.isUserInteractionEnabled = !self.model.isSelecting
+
+            let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+            self.configureCellSelection(cell: cell, selected: selected)
 
             return cell
         }

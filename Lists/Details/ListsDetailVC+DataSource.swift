@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension ListsDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.list.words.count
@@ -21,6 +20,7 @@ extension ListsDetailViewController: UITableViewDataSource {
         ) as? ListsDetailWordCell else {
             fatalError()
         }
+        cell.selectionStyle = .none
 
         /// basics
         let word = model.list.words[indexPath.item]
@@ -36,7 +36,7 @@ extension ListsDetailViewController: UITableViewDataSource {
 
         /// set the toolbar
         cell.textField.inputAccessoryView = wordsKeyboardToolbarViewController.view
-        
+
         cell.startedEditing = { [weak self] in
             guard let self = self else { return }
             if let index = self.model.list.words.firstIndex(where: { $0.id == word.id }) {
@@ -48,11 +48,10 @@ extension ListsDetailViewController: UITableViewDataSource {
                         self.scrollToCell(at: index)
                     }
                 } else {
-                    
                     /// otherwise, directly scroll
                     self.scrollToCell(at: index)
                 }
-                
+
                 self.model.activeWord = word
             }
         }

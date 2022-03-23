@@ -31,15 +31,15 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     /// selection
     var selectBarButton: UIBarButtonItem!
     var scanningBarButton: UIBarButtonItem!
-    var photosSelectionViewModel = PhotosSelectionViewModel()
-    lazy var selectionToolbar = PhotosSelectionToolbarView(model: photosSelectionViewModel)
+    lazy var selectionToolbar = PhotosSelectionToolbarView(model: model)
     lazy var scanningIconController = PhotosScanningIconController(model: model)
     lazy var scanningNavigationViewController = UINavigationController(
         rootViewController: PhotosScanningViewController(model: model)
     )
     
     // MARK: Collection View
-    @IBOutlet weak var collectionViewContainer: UIView!
+
+    @IBOutlet var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
     lazy var flowLayout = makeFlowLayout()
     lazy var dataSource = makeDataSource()
@@ -53,9 +53,10 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
     
     // MARK: Filtering
-    @IBOutlet weak var sliderContainerView: UIView!
-    @IBOutlet weak var sliderContainerViewHeightC: NSLayoutConstraint!
-    @IBOutlet weak var sliderContainerViewBottomC: NSLayoutConstraint!
+
+    @IBOutlet var sliderContainerView: UIView!
+    @IBOutlet var sliderContainerViewHeightC: NSLayoutConstraint!
+    @IBOutlet var sliderContainerViewBottomC: NSLayoutConstraint!
     
     init?(
         coder: NSCoder,

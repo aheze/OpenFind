@@ -32,18 +32,21 @@ class SelectionIconView: UIView {
     
     var configuration = Configuration.regular {
         didSet {
-            backgroundView.frame.size = configuration.attributes.size
+            attributes = configuration.getAttributes()
+            backgroundView.frame.size = attributes.size
             backgroundView.centerInParent()
             backgroundView.layer.cornerRadius = backgroundView.bounds.height / 2
-            iconView.setIconFont(font: configuration.attributes.iconFont)
+            iconView.setIconFont(font: attributes.iconFont)
         }
     }
+
+    var attributes = Configuration.Attributes()
     
     lazy var backgroundView: UIView = {
         let view = UIView()
         addSubview(view)
         
-        view.frame.size = configuration.attributes.size
+        view.frame.size = attributes.size
         view.centerInParent()
         
         view.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.05)
@@ -58,7 +61,7 @@ class SelectionIconView: UIView {
         let image = UIImage(systemName: "checkmark")
         let imageView = UIImageView(image: image)
         imageView.tintColor = .white
-        imageView.setIconFont(font: configuration.attributes.iconFont)
+        imageView.setIconFont(font: attributes.iconFont)
         
         imageView.frame = bounds
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -67,7 +70,9 @@ class SelectionIconView: UIView {
     }()
     
     private func commonInit() {
+        attributes = configuration.getAttributes()
         backgroundColor = .clear
+        
         _ = backgroundView
         _ = iconView
         isUserInteractionEnabled = false
@@ -84,12 +89,12 @@ class SelectionIconView: UIView {
             case .empty:
                 self.backgroundView.alpha = 1
                 self.backgroundView.backgroundColor = .clear
-                self.backgroundView.layer.borderColor = self.configuration.attributes.rimColor.cgColor
+                self.backgroundView.layer.borderColor = self.attributes.rimUnselectedColor.cgColor
                 self.iconView.alpha = 0
             case .selected:
                 self.backgroundView.alpha = 1
-                self.backgroundView.backgroundColor = .systemBlue
-                self.backgroundView.layer.borderColor = UIColor.systemBlue.cgColor
+                self.backgroundView.backgroundColor = self.attributes.backgroundColor
+                self.backgroundView.layer.borderColor = self.attributes.rimSelectedColor.cgColor
                 self.iconView.alpha = 1
             }
         }
@@ -97,29 +102,32 @@ class SelectionIconView: UIView {
     
     enum Configuration {
         struct Attributes {
-            var size = CGSize(width: 18, height: 18)
+            var size = CGSize(width: 20, height: 20)
             var iconFont = UIFont.systemFont(ofSize: 11, weight: .medium)
-            var rimColor = UIColor.secondaryLabel
+            var backgroundColor = Colors.accent
+            var rimUnselectedColor = UIColor.white
+            var rimSelectedColor = UIColor.white
         }
         
         case regular
-        case large
+        case listsDetail
         case listsSelection
         
-        var attributes: Attributes {
+        func getAttributes() -> Attributes {
             switch self {
             case .regular:
                 return Attributes()
-            case .large:
+            case .listsDetail:
                 var attributes = Attributes()
                 attributes.size = CGSize(width: 22, height: 22)
                 attributes.iconFont = .systemFont(ofSize: 14, weight: .medium)
+                attributes.rimUnselectedColor = .secondaryLabel
+                attributes.rimSelectedColor = Colors.accent
                 return attributes
             case .listsSelection:
                 var attributes = Attributes()
                 attributes.size = CGSize(width: 22, height: 22)
                 attributes.iconFont = .systemFont(ofSize: 14, weight: .medium)
-                attributes.rimColor = .white
                 return attributes
             }
         }

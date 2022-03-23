@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension IgnoredPhotosViewController {
     func setup() {
         setupCollectionView()
         setupNavigationBar()
+        setupToolbar()
     }
 
     func setupCollectionView() {
         collectionView.register(PhotosCollectionCell.self, forCellWithReuseIdentifier: "PhotosCollectionCell")
 
-        view.addSubview(collectionView)
+        view.addSubview(collectionContainer)
+        collectionContainer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionContainer.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionContainer.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        
+        collectionContainer.addSubview(collectionView)
         collectionView.pinEdgesToSuperview()
 
         collectionView.allowsSelection = false
@@ -37,9 +47,25 @@ extension IgnoredPhotosViewController {
         )
 
         navigationItem.rightBarButtonItem = selectButton
+        self.selectBarButton = selectButton
+    }
+    
+    func setupToolbar() {
+        view.addSubview(toolbarContainer)
+        toolbarContainer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            toolbarContainer.leftAnchor.constraint(equalTo: view.leftAnchor),
+            toolbarContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            toolbarContainer.rightAnchor.constraint(equalTo: view.rightAnchor),
+            toolbarContainer.heightAnchor.constraint(equalToConstant: ConstantVars.tabBarContentHeight),
+            toolbarContainer.topAnchor.constraint(equalTo: collectionContainer.bottomAnchor)
+        ])
+        
+        let hostingController = UIHostingController(rootView: toolbarView)
+        addChildViewController(hostingController, in: toolbarContainer)
     }
 
     @objc func selectPressed() {
-        
+        toggleSelect()
     }
 }

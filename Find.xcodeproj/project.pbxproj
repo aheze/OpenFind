@@ -1449,6 +1449,10 @@
 		3C875DEA27EAC28B00EC35ED /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
 		3C875E0C27EB690700EC35ED /* PhotosSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E0B27EB690700EC35ED /* PhotosSelectionToolbarView.swift */; };
 		3C875E0D27EB690700EC35ED /* PhotosSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E0B27EB690700EC35ED /* PhotosSelectionToolbarView.swift */; };
+		3C875E0F27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */; };
+		3C875E1027EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */; };
+		3C875E1227EB807C00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */; };
+		3C875E1327EB807D00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */; };
 		3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */; };
 		3C8A523C277FC116006CF91E /* ScrollZoomContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */; };
 		3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
@@ -2839,6 +2843,8 @@
 		3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Defaults.swift"; sourceTree = "<group>"; };
 		3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Settings.swift"; sourceTree = "<group>"; };
 		3C875E0B27EB690700EC35ED /* PhotosSelectionToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSelectionToolbarView.swift; sourceTree = "<group>"; };
+		3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IgnoredPhotosVC+Selection.swift"; sourceTree = "<group>"; };
+		3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredPhotosToolbarView.swift; sourceTree = "<group>"; };
 		3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollZoomViewController.swift; sourceTree = "<group>"; };
 		3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScrollZoomContent.storyboard; sourceTree = "<group>"; };
 		3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+ScrollZoom.swift"; sourceTree = "<group>"; };
@@ -4817,7 +4823,9 @@
 				3C1A2C0A27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift */,
 				3C1A2C1027E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift */,
 				3C1A2C0D27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift */,
+				3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */,
 				3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */,
+				3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */,
 				3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */,
 				3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */,
 			);
@@ -6741,6 +6749,7 @@
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
 				3C443FA927DFA6370050A0AB /* SearchNC+Prompt.swift in Sources */,
+				3C875E1027EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */,
 				3CE3D4EB27DD2EEF00521735 /* TabViewModel.swift in Sources */,
 				3C443F1527DD90790050A0AB /* Photo.swift in Sources */,
 				3CDD945127C0634200D3EA1A /* PhotosScanningViewControllers.swift in Sources */,
@@ -6768,6 +6777,7 @@
 				3C443E9227DD88F80050A0AB /* SuggestionsView.swift in Sources */,
 				3C6D77BF27A5B140005371F3 /* Global.swift in Sources */,
 				3C443E9A27DD88F80050A0AB /* SearchVC+Listen.swift in Sources */,
+				3C875E1327EB807D00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */,
 				3C1A2C1F27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */,
 				3CCE2B49279D21C900F72351 /* PhotosVC+Selection.swift in Sources */,
 				3CE3D4E227DCFBB700521735 /* SearchNavigationModel.swift in Sources */,
@@ -7391,6 +7401,7 @@
 				3CFD601C278B70950031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3C93148727B82101009E5B6E /* SearchVC+Keyboard.swift in Sources */,
 				3C6C73762781946B00E039F0 /* LivePreviewView.swift in Sources */,
+				3C875E0F27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */,
 				3C6C7429278194A500E039F0 /* Utilities+Constraints.swift in Sources */,
 				3CE3D4D627DC486E00521735 /* Sentence.swift in Sources */,
 				3C0B5E6D27BAC05900EC881E /* PhotosPermissionsView.swift in Sources */,
@@ -7418,6 +7429,7 @@
 				3C1A2C1127E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift in Sources */,
 				3C21EE2B27A461930005E183 /* RealmModel+Lists.swift in Sources */,
 				3C0B5E7427BAF5D100EC881E /* PhotosVM+Load.swift in Sources */,
+				3C875E1227EB807C00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */,
 				3CBB319327BD612500F25F6A /* PhotosSlidesCollectionLayout.swift in Sources */,
 				3C6C73BC2781947E00E039F0 /* VisionTrackingEngine.swift in Sources */,
 				3C21EE2927A461930005E183 /* RealmModel+PhotosTesting.swift in Sources */,

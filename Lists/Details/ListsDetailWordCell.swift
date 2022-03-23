@@ -45,7 +45,7 @@ class ListsDetailWordCell: UITableViewCell {
         super.awakeFromNib()
         
         leftView.backgroundColor = .clear
-        leftSelectionIconView.configuration = .large
+        leftSelectionIconView.configuration = .listsDetail
         leftView.tapped = { [weak self] in
             self?.leftViewTapped?()
         }

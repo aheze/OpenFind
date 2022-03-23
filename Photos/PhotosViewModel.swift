@@ -102,7 +102,11 @@ class PhotosViewModel: ObservableObject {
 
     @Published var isSelecting = false
     @Published var selectedPhotos = [Photo]()
-
+    
+    // MARK: Ignored Photos
+    @Published var ignoredPhotosIsSelecting = false
+    @Published var ignoredPhotosSelectedPhotos = [Photo]()
+    
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
     var deleteSelected: (() -> Void)?
