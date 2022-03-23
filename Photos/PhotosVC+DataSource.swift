@@ -63,8 +63,8 @@ extension PhotosViewController {
                 self.presentSlides(startingAtPhoto: photo)
             }
 
+            /// selection
             cell.buttonView.isUserInteractionEnabled = !self.model.isSelecting
-
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
             self.configureCellSelection(cell: cell, selected: selected)
 
@@ -82,4 +82,9 @@ extension PhotosViewController {
         }
         return dataSource
     }
+}
+
+func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
+    cell.selectOverlayIconView.setState(selected ? .selected : .hidden)
+    cell.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
 }

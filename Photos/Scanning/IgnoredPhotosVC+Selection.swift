@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 3/23/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -15,23 +14,25 @@ extension IgnoredPhotosViewController {
         updateCollectionViewSelectionState()
     }
 
-    /// toggle select
-    func photoTapped(photo: Photo) {
-        let photoSelected: Bool
+    func photoSelected(at indexPath: IndexPath) {
+        guard let photo = model.ignoredPhotos[safe: indexPath.item] else { return }
+        if !model.ignoredPhotosSelectedPhotos.contains(photo) {
+            model.ignoredPhotosSelectedPhotos.append(photo)
+
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
+                configureCellSelection(cell: cell, selected: true)
+            }
+        }
+    }
+
+    func photoDeselected(at indexPath: IndexPath) {
+        guard let photo = model.ignoredPhotos[safe: indexPath.item] else { return }
         if model.ignoredPhotosSelectedPhotos.contains(photo) {
             model.ignoredPhotosSelectedPhotos = model.ignoredPhotosSelectedPhotos.filter { $0 != photo }
-            photoSelected = false
-        } else {
-            model.ignoredPhotosSelectedPhotos.append(photo)
-            photoSelected = true
-        }
 
-        if
-            let indexPath = model.ignoredPhotos.firstIndex(of: photo)?.indexPath,
-            let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell
-        {
-            cell.selectOverlayIconView.setState(photoSelected ? .selected : .hidden)
-            cell.selectOverlayView.backgroundColor = photoSelected ? PhotosCellConstants.selectedBackgroundColor : .clear
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
+                configureCellSelection(cell: cell, selected: false)
+            }
         }
     }
 
@@ -43,25 +44,28 @@ extension IgnoredPhotosViewController {
             model.selectedPhotos = []
         }
 
-        for sectionIndex in model.sections.indices {
-            let section = model.sections[sectionIndex]
-            for photoIndex in section.photos.indices {
-                let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
-                if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                    if model.ignoredPhotosIsSelecting {
-                        cell.selectOverlayIconView.setState(.hidden)
-                        UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                            cell.selectOverlayView.alpha = 1
-                        }
-                    } else {
-                        UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                            cell.selectOverlayView.backgroundColor = .clear
-                            cell.selectOverlayView.alpha = 0
-                        }
+        for index in model.ignoredPhotos.indices {
+            if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCollectionCell {
+                if model.ignoredPhotosIsSelecting {
+                    cell.buttonView.isUserInteractionEnabled = false
+                    cell.selectOverlayIconView.setState(.hidden)
+                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
+                        cell.selectOverlayView.alpha = 1
                     }
+                } else {
+                    cell.buttonView.isUserInteractionEnabled = true
+                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
+                        cell.selectOverlayView.backgroundColor = .clear
+                        cell.selectOverlayView.alpha = 0
+                    }
+                    collectionView.deselectItem(at: index.indexPath, animated: false)
                 }
             }
         }
     }
-}
 
+    func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
+        cell.selectOverlayIconView.setState(selected ? .selected : .hidden)
+        cell.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
+    }
+}

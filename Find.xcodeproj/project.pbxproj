@@ -1453,6 +1453,8 @@
 		3C875E1027EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */; };
 		3C875E1227EB807C00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */; };
 		3C875E1327EB807D00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */; };
+		3C875E1527EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E1427EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift */; };
+		3C875E1627EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C875E1427EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift */; };
 		3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */; };
 		3C8A523C277FC116006CF91E /* ScrollZoomContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */; };
 		3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
@@ -2845,6 +2847,7 @@
 		3C875E0B27EB690700EC35ED /* PhotosSelectionToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSelectionToolbarView.swift; sourceTree = "<group>"; };
 		3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IgnoredPhotosVC+Selection.swift"; sourceTree = "<group>"; };
 		3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredPhotosToolbarView.swift; sourceTree = "<group>"; };
+		3C875E1427EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IgnoredPhotosVC+Delegate.swift"; sourceTree = "<group>"; };
 		3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollZoomViewController.swift; sourceTree = "<group>"; };
 		3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScrollZoomContent.storyboard; sourceTree = "<group>"; };
 		3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+ScrollZoom.swift"; sourceTree = "<group>"; };
@@ -4823,6 +4826,7 @@
 				3C1A2C0A27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift */,
 				3C1A2C1027E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift */,
 				3C1A2C0D27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift */,
+				3C875E1427EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift */,
 				3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */,
 				3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */,
 				3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */,
@@ -6753,6 +6757,7 @@
 				3CE3D4EB27DD2EEF00521735 /* TabViewModel.swift in Sources */,
 				3C443F1527DD90790050A0AB /* Photo.swift in Sources */,
 				3CDD945127C0634200D3EA1A /* PhotosScanningViewControllers.swift in Sources */,
+				3C875E1627EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift in Sources */,
 				3C1A2C1B27E9010C00B3D065 /* PhotosSlidesInfoView.swift in Sources */,
 				3C443EA827DD89010050A0AB /* KeyboardToolbarViewController.swift in Sources */,
 				3C443ED227DD8AE40050A0AB /* CameraModel.swift in Sources */,
@@ -7599,6 +7604,7 @@
 				3C6C73992781947400E039F0 /* RightView.swift in Sources */,
 				3C443F0A27DD90780050A0AB /* Word.swift in Sources */,
 				3C6C73792781946B00E039F0 /* SettingsIconView.swift in Sources */,
+				3C875E1527EB874900EC35ED /* IgnoredPhotosVC+Delegate.swift in Sources */,
 				3CCE2B4A279D233E00F72351 /* PhotosVC+Selection.swift in Sources */,
 				3C7223CF27C453A80085EBF1 /* CameraMessageView.swift in Sources */,
 				3C71EFAD27BFFBC000F0C0A0 /* PhotosSlidesVC+Gestures.swift in Sources */,

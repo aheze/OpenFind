@@ -35,7 +35,7 @@ extension PhotosViewController {
             }
         }
     }
-    
+
     func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
         cell.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
@@ -68,6 +68,7 @@ extension PhotosViewController {
                             cell.selectOverlayView.backgroundColor = .clear
                             cell.selectOverlayView.alpha = 0
                         }
+                        collectionView.deselectItem(at: indexPath, animated: false)
                     }
                 }
             }
