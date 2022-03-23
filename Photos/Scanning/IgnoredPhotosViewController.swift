@@ -42,6 +42,10 @@ class IgnoredPhotosViewController: UIViewController {
         view = UIView()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         update()
     }
     
