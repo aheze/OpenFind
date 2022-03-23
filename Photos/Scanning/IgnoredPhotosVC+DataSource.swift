@@ -49,15 +49,15 @@ extension IgnoredPhotosViewController {
             return cell
         }
 
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            self.getHeaderContent(
-                collectionView: collectionView,
-                kind: kind,
-                indexPath: indexPath,
-                content: self.headerView,
-                headerContentModel: self.headerContentModel
-            )
-        }
+//        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+//            self.getHeaderContent(
+//                collectionView: collectionView,
+//                kind: kind,
+//                indexPath: indexPath,
+//                content: self.headerView,
+//                headerContentModel: self.headerContentModel
+//            )
+//        }
         return dataSource
     }
 }

@@ -217,15 +217,3 @@ struct DataSourceSectionTemplate: Hashable {
     }
 }
 
-extension PHAsset {
-    func getDateCreatedCategorization() -> PhotosSection.Categorization? {
-        if
-            let components = creationDate?.get(.year, .month),
-            let year = components.year, let month = components.month
-        {
-            let categorization = PhotosSection.Categorization.date(year: year, month: month)
-            return categorization
-        }
-        return nil
-    }
-}

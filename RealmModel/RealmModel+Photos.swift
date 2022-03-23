@@ -31,6 +31,7 @@ extension RealmModel {
         return nil
     }
 
+    /// handles both add or update
     func updatePhotoMetadata(metadata: PhotoMetadata) {
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
             let realmSentences = metadata.getRealmSentences()

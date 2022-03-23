@@ -198,8 +198,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     /// get the header that is at the top of the current photo's section
     func getCurrentHeader(for photoIndexPath: IndexPath) -> PhotosCollectionHeader? {
         if
+            case .sections(let sectionLayouts) = flowLayout.photosAttributes,
             let section = model.sections[safe: photoIndexPath.section],
-            let headerIndex = flowLayout.sectionLayouts.firstIndex(where: {
+            let headerIndex = sectionLayouts.firstIndex(where: {
                 $0.headerLayoutAttributes.encompassingCategorizations.contains(section.categorization) &&
                 $0.headerLayoutAttributes.isVisible
             }),

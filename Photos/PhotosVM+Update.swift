@@ -24,8 +24,7 @@ extension PhotosViewModel {
     }
 
     /// `photo.metadata` should be the new metadata
-    /// `isNew` determines whether to add or update realm
-    func updatePhotoMetadata(photo: Photo, reloadCell: Bool, isNew: Bool) {
+    func updatePhotoMetadata(photo: Photo, reloadCell: Bool) {
         /// for reloading at a specific index path
         /// 1. Index path inside `collectionView`
         /// 2. Index inside `resultsCollectionView`
@@ -53,6 +52,13 @@ extension PhotosViewModel {
             let slidesState = slidesState,
             let index = slidesState.getFindPhotoIndex(photo: photo)
         {
+
+            /// must update `currentPhoto` as well
+            if let currentIndex = slidesState.getCurrentIndex() {
+                if currentIndex == index {
+                    self.slidesState?.currentPhoto = photo
+                }
+            }
             self.slidesState?.findPhotos[index].photo = photo
         }
 

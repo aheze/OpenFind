@@ -12,6 +12,7 @@ extension PhotosSlidesViewController {
     func setupInfo() {
         let viewController = PhotosSlidesInfoViewController(model: model)
         addChildViewController(viewController, in: infoViewContainer)
+        infoViewContainer.clipsToBounds = true
     }
 
     func getInfoHeight() -> CGFloat {

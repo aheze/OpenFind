@@ -46,8 +46,7 @@ struct PhotosScanningHeader: View {
                 }
             }
             .padding(PhotosScanningConstants.padding)
-            .background(Color.accent.opacity(0.1))
-            .cornerRadius(PhotosResultsCellConstants.cornerRadius)
+            .blueBackground()
         }
     }
 }

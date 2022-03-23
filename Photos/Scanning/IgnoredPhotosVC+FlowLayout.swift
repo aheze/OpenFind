@@ -11,17 +11,10 @@ import UIKit
 extension IgnoredPhotosViewController {
     func makeFlowLayout() -> PhotosCollectionFlowLayout {
         let flowLayout = PhotosCollectionFlowLayout()
-        flowLayout.getSections = { [weak self] in
-            guard let self = self else { return [] }
-
-            let section = Section(
-                items: Array(
-                    repeating: Section.Item.placeholder,
-                    count: self.model.ignoredPhotos.count
-                )
-            )
-
-            return [section]
+        flowLayout.getContent = { [weak self] in
+            guard let self = self else { return .photos([]) }
+            let type = PhotosCollectionType.photos(self.model.ignoredPhotos)
+            return type
         }
 
         return flowLayout

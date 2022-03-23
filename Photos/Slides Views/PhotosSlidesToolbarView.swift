@@ -55,7 +55,7 @@ struct PhotosSlidesToolbarView: View {
             if let metadata = newPhoto.metadata {
                 let isStarred = !metadata.isStarred
                 newPhoto.metadata?.isStarred = !metadata.isStarred
-                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true, isNew: false)
+                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                 model.slidesState?.toolbarStarOn = isStarred
             } else {
                 let metadata = PhotoMetadata(
@@ -66,7 +66,7 @@ struct PhotosSlidesToolbarView: View {
                     isIgnored: false
                 )
                 newPhoto.metadata = metadata
-                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true, isNew: true)
+                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                 model.slidesState?.toolbarStarOn = metadata.isStarred
             }
         }

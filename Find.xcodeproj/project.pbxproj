@@ -182,6 +182,21 @@
 		3C1A2C2227E94D8F00B3D065 /* PhotosSlidesVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */; };
 		3C1A2C2427EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */; };
 		3C1A2C2527EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */; };
+		3C1A2C2727EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2827EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2927EAB7A600B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2A27EAB7A600B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2B27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2C27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2D27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2E27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C2F27EAB7A800B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C3027EAB7A800B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C3127EAB7A800B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C3227EAB7A900B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C3427EAB7A900B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C3527EAB7AA00B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
+		3C1A2C3627EAB7AA00B3D065 /* Utilities+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */; };
 		3C1AB195260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */; };
 		3C1AB199260FE40B009B47C0 /* VoiceOverSlidesControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */; };
 		3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */; };
@@ -1431,6 +1446,7 @@
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
+		3C875DEA27EAC28B00EC35ED /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
 		3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A5239277FC0F6006CF91E /* ScrollZoomViewController.swift */; };
 		3C8A523C277FC116006CF91E /* ScrollZoomContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A523B277FC116006CF91E /* ScrollZoomContent.storyboard */; };
 		3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
@@ -2353,6 +2369,7 @@
 		3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Info.swift"; sourceTree = "<group>"; };
 		3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+FlowLayout.swift"; sourceTree = "<group>"; };
 		3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+ScrollView.swift"; sourceTree = "<group>"; };
+		3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+PHAsset.swift"; sourceTree = "<group>"; };
 		3C1AB194260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoiceOverSlidesControl.xib; sourceTree = "<group>"; };
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
@@ -3827,6 +3844,7 @@
 				3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */,
 				3CDD944127C05F9100D3EA1A /* Utilities+NavigationBar.swift */,
 				3C0AACB227C82684009DFC09 /* Utilities+String.swift */,
+				3C1A2C2627EAB79D00B3D065 /* Utilities+PHAsset.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -6195,6 +6213,7 @@
 				3C443EE927DD8C140050A0AB /* PhotosPermissionsView.swift in Sources */,
 				3C7B7A4F277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
 				3CCCCAAB27818CEA000381CE /* FindIconView.swift in Sources */,
+				3C1A2C2F27EAB7A800B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C08EB39279C76E700971D60 /* ListsModel.swift in Sources */,
 				3C6D77C427A5B140005371F3 /* Global.swift in Sources */,
 				3C7BADB0275C12BA0030F0D2 /* TipView.swift in Sources */,
@@ -6264,6 +6283,7 @@
 				3C21EE3627A4619E0005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C443F3F27DD907C0050A0AB /* List.swift in Sources */,
 				3C21EDA227A45B2E0005E183 /* Utilities+CGRect.swift in Sources */,
+				3C1A2C3627EAB7AA00B3D065 /* Utilities+PHAsset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6288,6 +6308,7 @@
 				3C7B7A26277E9CD300E1F602 /* Utilities+UIDevice.swift in Sources */,
 				3C7B7A01277E8DF900E1F602 /* Find+Utilities.swift in Sources */,
 				3C0AACBC27C82690009DFC09 /* Utilities+String.swift in Sources */,
+				3C1A2C3027EAB7A800B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C7B7A29277E9CD300E1F602 /* Utilities+Constraints.swift in Sources */,
 				3C7B7A50277EB19800E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C443F2A27DD907A0050A0AB /* Word.swift in Sources */,
@@ -6468,6 +6489,7 @@
 				3CC594F9279F3323001D07DC /* ColorPickerView.swift in Sources */,
 				3CD7063727A3842200B446D7 /* IconPickerVC+DataSource.swift in Sources */,
 				3C08EB0E279C76E500971D60 /* ListsViewController.swift in Sources */,
+				3C1A2C2927EAB7A600B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C08EB13279C76E500971D60 /* ListsVC+FlowLayout.swift in Sources */,
 				3CE3D4F927DD33CF00521735 /* TabBarVC+Listen.swift in Sources */,
 				3C3642DA277BC2E70038CB18 /* SearchViewController.swift in Sources */,
@@ -6599,6 +6621,7 @@
 				3C93149A27B823C9009E5B6E /* SearchTextField.swift in Sources */,
 				3C4D39C827475E8A0010FD68 /* Constants.swift in Sources */,
 				3C443EB827DD8ABC0050A0AB /* TabBarVC+Listen.swift in Sources */,
+				3C1A2C2A27EAB7A600B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C1D1A43275AA25F0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C443FA827DFA6340050A0AB /* SearchNC+Prompt.swift in Sources */,
 				3C4D39A227475C7C0010FD68 /* SceneDelegate.swift in Sources */,
@@ -6783,6 +6806,7 @@
 				3CFC91C227E187A2006290CD /* PhotosScanningHeader.swift in Sources */,
 				3C4D3A792747696F0010FD68 /* GeneralUtilities.swift in Sources */,
 				3CCE2B1D279D008C00F72351 /* SelectionIconView.swift in Sources */,
+				3C1A2C2827EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C9314F527B8EA56009E5B6E /* PhotosVC+Delegate.swift in Sources */,
 				3CFD601F278B70970031BC8B /* SearchNavigationController.swift in Sources */,
 				3C9314E927B86E84009E5B6E /* PhotosViewModel.swift in Sources */,
@@ -6884,6 +6908,7 @@
 				3C443EFE27DD8F650050A0AB /* SliderView.swift in Sources */,
 				3CBB319A27BD643200F25F6A /* PhotosSlidesVC+Delegate.swift in Sources */,
 				3CBB318C27BD523200F25F6A /* PhotosSlidesViewController.swift in Sources */,
+				3C875DEA27EAC28B00EC35ED /* Section.swift in Sources */,
 				3C443F1427DD90790050A0AB /* Word.swift in Sources */,
 				3C9234A527E454370055061A /* PhotosVC+Update.swift in Sources */,
 				3C0B5E6A27BABE1D00EC881E /* PhotosModel.swift in Sources */,
@@ -6935,6 +6960,7 @@
 				3C443EC227DD8ABD0050A0AB /* TabBarVC+Listen.swift in Sources */,
 				3C21EDAD27A45BFE0005E183 /* RealmModels.swift in Sources */,
 				3CBB31AC27BDB99200F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
+				3C1A2C2B27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C08EAE8279BA94A00971D60 /* ListsVC+Details.swift in Sources */,
 				3C4D3A67274769370010FD68 /* ListsController.swift in Sources */,
 				3C6C74332781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
@@ -7137,6 +7163,7 @@
 				3C443EFC27DD8F650050A0AB /* SliderView.swift in Sources */,
 				3C443F1927DD90790050A0AB /* SpecifiedExtensions.swift in Sources */,
 				3C606672274ECCBA000A5BDE /* Debug.swift in Sources */,
+				3C1A2C2C27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C4D3B21274776D20010FD68 /* SingleWebView.swift in Sources */,
 				3C4D3B18274776D20010FD68 /* ExternalLinks.swift in Sources */,
 				3C7B7A4C277EB19700E1F602 /* Utilities+CGRect.swift in Sources */,
@@ -7192,6 +7219,7 @@
 				3C443FC027DFCD500050A0AB /* HeaderContentView.swift in Sources */,
 				3C08EB23279C76E600971D60 /* ListsModel.swift in Sources */,
 				3C4D3BA227477ABD0010FD68 /* Field.swift in Sources */,
+				3C1A2C2D27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C443F1F27DD907A0050A0AB /* Sentence.swift in Sources */,
 				3C6D77C227A5B140005371F3 /* Global.swift in Sources */,
 				3C7B7A98277FB7C100E1F602 /* ProgressLineView.swift in Sources */,
@@ -7584,6 +7612,7 @@
 				3C7223D227C475310085EBF1 /* ExtendedCurveConnector.swift in Sources */,
 				3C7223CD27C4537A0085EBF1 /* CameraVC+Toolbar.swift in Sources */,
 				3C08EAF2279C76BD00971D60 /* ListsViewModel.swift in Sources */,
+				3C1A2C2727EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C6C742B278194A500E039F0 /* Utilities+CGRect.swift in Sources */,
 				3C6C73A82781947400E039F0 /* SearchVC+Datasource.swift in Sources */,
 				3C21EE2E27A461930005E183 /* RealmModel+ListsTesting.swift in Sources */,
@@ -7644,6 +7673,7 @@
 				3CFCE8AC27CA9D5F000624D2 /* Utilities+CGPoint.swift in Sources */,
 				3C7B7A2F277E9CD500E1F602 /* Utilities+UIDevice.swift in Sources */,
 				3CCE2B03279D008900F72351 /* FindIconUIView.swift in Sources */,
+				3C1A2C3127EAB7A800B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3CCCCAAF27818CEB000381CE /* FindIconView.swift in Sources */,
 				3C7B7A69277F94D400E1F602 /* Highlight.swift in Sources */,
 				3CCCCA94278185AB000381CE /* Model.swift in Sources */,
@@ -7700,6 +7730,7 @@
 				3C7B7A8A277FA6E300E1F602 /* Utilities+UIDevice.swift in Sources */,
 				3CCE2AFF279D008900F72351 /* FindIconUIView.swift in Sources */,
 				3CDD944E27C05F9B00D3EA1A /* Utilities+NavigationBar.swift in Sources */,
+				3C1A2C3227EAB7A900B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C6D77C727A5B140005371F3 /* Global.swift in Sources */,
 				3C443FB927DFCD480050A0AB /* HeaderContentView.swift in Sources */,
 				3C7B7A7C277FA50900E1F602 /* ContentView.swift in Sources */,
@@ -7759,6 +7790,7 @@
 				3CCE2AFC279D008800F72351 /* ButtonView.swift in Sources */,
 				3CDD944D27C05F9B00D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3C8A523A277FC0F6006CF91E /* ScrollZoomViewController.swift in Sources */,
+				3C1A2C3527EAB7AA00B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C443FC527DFCD530050A0AB /* HeaderContentView.swift in Sources */,
 				3C21EDEC27A4617E0005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3CCE2AFB279D008800F72351 /* FindIconUIView.swift in Sources */,
@@ -7827,6 +7859,7 @@
 				3C7BAD9B275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CE9C229274EBB70008C903C /* ViewController.swift in Sources */,
 				3C443F7827DDD74B0050A0AB /* Sentence+Find.swift in Sources */,
+				3C1A2C2E27EAB7A700B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C0AACBA27C8268F009DFC09 /* Utilities+String.swift in Sources */,
 				3CE9C23B274EBCB1008C903C /* VC+CameraSetup.swift in Sources */,
 				3C4D20A62750A7EB00090AF9 /* VisionEngine.swift in Sources */,
@@ -7913,6 +7946,7 @@
 				3CFD5FFF278B6F950031BC8B /* Field.swift in Sources */,
 				3CFD5FF0278B6F950031BC8B /* SearchVC+Popovers.swift in Sources */,
 				3CCE2AF7279D008800F72351 /* FindIconUIView.swift in Sources */,
+				3C1A2C3427EAB7A900B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3CFD600F278B6FAA0031BC8B /* Model.swift in Sources */,
 				3C21EDEA27A4617D0005E183 /* RealmModel+ListsTesting.swift in Sources */,
 				3C443F5727DD91610050A0AB /* Highlight.swift in Sources */,

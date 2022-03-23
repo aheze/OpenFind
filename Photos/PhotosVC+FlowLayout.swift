@@ -11,8 +11,8 @@ import UIKit
 extension PhotosViewController {
     func makeFlowLayout() -> PhotosCollectionFlowLayout {
         let flowLayout = PhotosCollectionFlowLayout()
-        flowLayout.getSections = { [weak self] in
-            guard let self = self else { return [] }
+        flowLayout.getContent = { [weak self] in
+            guard let self = self else { return .photos([]) }
 
             let sections: [Section] = self.model.sections.map { photosSection in
                 let items = photosSection.photos.map { Section.Item.photo($0) }
@@ -23,9 +23,8 @@ extension PhotosViewController {
                 return section
             }
 
-            return sections
+            return .sections(sections)
         }
-        
         return flowLayout
     }
 }

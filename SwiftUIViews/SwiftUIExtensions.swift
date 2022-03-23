@@ -56,3 +56,12 @@ struct ContentSizeReaderPreferenceKey: PreferenceKey {
     static var defaultValue: CGSize { return CGSize() }
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) { value = nextValue() }
 }
+
+extension View {
+    func blueBackground(highlighted: Bool = false) -> some View {
+        self
+            .background(highlighted ? Color.accent : Color.accent.opacity(0.1))
+            .cornerRadius(PhotosResultsCellConstants.cornerRadius)
+    }
+    
+}
