@@ -40,7 +40,11 @@ extension PhotosViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if model.isSelecting {
-            photoSelected(at: indexPath)
+            if model.resultsState != nil {
+                photoResultsSelected(at: indexPath)
+            } else {
+                photoSelected(at: indexPath)
+            }
         } else {
             collectionView.deselectItem(at: indexPath, animated: false)
         }
@@ -48,7 +52,11 @@ extension PhotosViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if model.isSelecting {
-            photoDeselected(at: indexPath)
+            if model.resultsState != nil {
+                photoResultsDeselected(at: indexPath)
+            } else {
+                photoDeselected(at: indexPath)
+            }
         }
     }
 }

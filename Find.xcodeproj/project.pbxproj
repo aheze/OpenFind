@@ -1319,6 +1319,8 @@
 		3C7223D327C475320085EBF1 /* ExtendedCurveConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223D027C4752D0085EBF1 /* ExtendedCurveConnector.swift */; };
 		3C7A43EC27EBE90000DFF76F /* PhotosCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */; };
 		3C7A43ED27EBE90000DFF76F /* PhotosCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */; };
+		3C7A43EF27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */; };
+		3C7A43F027EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */; };
 		3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */; };
 		3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
 		3C7B7A01277E8DF900E1F602 /* Find+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */; };
@@ -2805,6 +2807,7 @@
 		3C7223CB27C453760085EBF1 /* CameraVC+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Toolbar.swift"; sourceTree = "<group>"; };
 		3C7223D027C4752D0085EBF1 /* ExtendedCurveConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedCurveConnector.swift; sourceTree = "<group>"; };
 		3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCellView.swift; sourceTree = "<group>"; };
+		3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ResultsSelection.swift"; sourceTree = "<group>"; };
 		3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionSamplingEngine.swift; sourceTree = "<group>"; };
 		3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarView.swift; sourceTree = "<group>"; };
 		3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Find+Utilities.swift"; sourceTree = "<group>"; };
@@ -4681,6 +4684,7 @@
 				3C17B8E927C9C4D000B55E97 /* PhotosVC+ResultsHighlights.swift */,
 				3CAE64ED27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift */,
 				3C0AACAF27C8222A009DFC09 /* PhotosVC+ResultsDelegate.swift */,
+				3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */,
 				3CAE64EA27C6AA73009E8564 /* PhotosVC+ResultsFlowLayout.swift */,
 				3CFC91C327E188C4006290CD /* ResultsHeaderView.swift */,
 			);
@@ -6757,6 +6761,7 @@
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
 				3C443FA927DFA6370050A0AB /* SearchNC+Prompt.swift in Sources */,
+				3C7A43F027EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */,
 				3C875E1027EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */,
 				3CE3D4EB27DD2EEF00521735 /* TabViewModel.swift in Sources */,
 				3C443F1527DD90790050A0AB /* Photo.swift in Sources */,
@@ -7535,6 +7540,7 @@
 				3C6C73612781945D00E039F0 /* Highlight.swift in Sources */,
 				3CB181D127A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */,
 				3CB4C32227A772030093155E /* VC+Frames.swift in Sources */,
+				3C7A43EF27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */,
 				3CE3D4F527DD302600521735 /* TabBarVC+Datasource.swift in Sources */,
 				3C6C7428278194A500E039F0 /* Utilities+UIViewController.swift in Sources */,
 				3C6C73A22781947400E039F0 /* SearchVC+Popovers.swift in Sources */,

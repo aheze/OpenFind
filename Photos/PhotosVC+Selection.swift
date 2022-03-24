@@ -11,7 +11,25 @@ import SwiftUI
 extension PhotosViewController {
     func toggleSelect() {
         model.isSelecting.toggle()
-        updateCollectionViewSelectionState()
+        if model.isSelecting {
+            selectBarButton.title = "Done"
+            toolbarViewModel.toolbar = AnyView(selectionToolbar)
+        } else {
+            resetSelectingState()
+        }
+        
+        if model.resultsState != nil {
+            updateResultsCollectionViewSelectionState()
+        } else {
+            updateCollectionViewSelectionState()
+        }
+    }
+    
+    /// reset the state after finding from selected photos or pressing done
+    func resetSelectingState() {
+        selectBarButton.title = "Select"
+        toolbarViewModel.toolbar = nil
+        model.selectedPhotos = []
     }
 
     func photoSelected(at indexPath: IndexPath) {
@@ -42,15 +60,6 @@ extension PhotosViewController {
     }
 
     func updateCollectionViewSelectionState() {
-        if model.isSelecting {
-            selectBarButton.title = "Done"
-            toolbarViewModel.toolbar = AnyView(selectionToolbar)
-        } else {
-            selectBarButton.title = "Select"
-            toolbarViewModel.toolbar = nil
-            model.selectedPhotos = []
-        }
-
         for sectionIndex in model.sections.indices {
             let section = model.sections[sectionIndex]
             for photoIndex in section.photos.indices {

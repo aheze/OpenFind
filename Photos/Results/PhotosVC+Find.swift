@@ -33,12 +33,16 @@ extension PhotosViewController {
             }
         }
         
-        if self.model.resultsState != nil {
-            self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
-            self.updateResults(animate: true)
+        if model.resultsState != nil {
+            model.resultsState = PhotosResultsState(findPhotos: findPhotos)
+            updateResults(animate: true)
         } else {
-            self.model.resultsState = PhotosResultsState(findPhotos: findPhotos)
-            self.updateResults(animate: false)
+            model.resultsState = PhotosResultsState(findPhotos: findPhotos)
+            updateResults(animate: false)
+            if model.isSelecting {
+                resetSelectingState()
+                updateCollectionViewSelectionState()
+            }
         }
         
         self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
