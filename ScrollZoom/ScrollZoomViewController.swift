@@ -28,6 +28,7 @@ class ScrollZoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        baseView.backgroundColor = .clear
         contentView.backgroundColor = .clear
         imageView.backgroundColor = .clear
         imageView.clipsToBounds = true
