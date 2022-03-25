@@ -45,7 +45,7 @@ extension PhotosViewController {
 
         guard let resultsState = model.resultsState else { return }
 
-        let findPhotos: [FindPhoto] = resultsState.findPhotos.map { findPhoto in
+        let findPhotos: [FindPhoto] = resultsState.displayedFindPhotos.map { findPhoto in
             let thumbnail = self.model.photoToThumbnail[findPhoto.photo] ?? nil
             var newFindPhoto = findPhoto
             newFindPhoto.thumbnail = thumbnail

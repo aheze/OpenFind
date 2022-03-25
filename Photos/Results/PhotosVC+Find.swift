@@ -11,7 +11,11 @@ import UIKit
 extension PhotosViewController {
     /// find in all photos and populate `resultsState`
     func find() {
-        var findPhotos = [FindPhoto]()
+        let displayedFindPhotos: [FindPhoto]
+        var allFindPhotos = [FindPhoto]()
+        var starredFindPhotos = [FindPhoto]()
+        var screenshotsFindPhotos = [FindPhoto]()
+        
         for photo in model.photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences, with: self.searchViewModel.stringToGradients)
@@ -29,15 +33,37 @@ extension PhotosViewController {
                     descriptionLines: lines
                 )
             
-                findPhotos.append(findPhoto)
+                allFindPhotos.append(findPhoto)
+                
+                if findPhoto.photo.isStarred() {
+                    starredFindPhotos.append(findPhoto)
+                }
+                if findPhoto.photo.isScreenshot() {
+                    screenshotsFindPhotos.append(findPhoto)
+                }
             }
         }
         
-        if model.resultsState != nil {
-            model.resultsState = PhotosResultsState(findPhotos: findPhotos)
+        switch model.sliderViewModel.selectedFilter ?? .all {
+        case .starred:
+            displayedFindPhotos = starredFindPhotos
+        case .screenshots:
+            displayedFindPhotos = screenshotsFindPhotos
+        case .all:
+            displayedFindPhotos = allFindPhotos
+        }
+        
+        let resultsStateExisted = model.resultsState != nil
+        model.resultsState = PhotosResultsState(
+            displayedFindPhotos: displayedFindPhotos,
+            allFindPhotos: allFindPhotos,
+            starredFindPhotos: starredFindPhotos,
+            screenshotsFindPhotos: screenshotsFindPhotos
+        )
+        
+        if resultsStateExisted {
             updateResults(animate: true)
         } else {
-            model.resultsState = PhotosResultsState(findPhotos: findPhotos)
             updateResults(animate: false)
             if model.isSelecting {
                 resetSelectingState()

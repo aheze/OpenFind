@@ -10,7 +10,7 @@ import UIKit
 
 extension PhotosViewController {
     func photoResultsSelected(at indexPath: IndexPath) {
-        guard let resultsState = model.resultsState, let photo = resultsState.findPhotos[safe: indexPath.item]?.photo else { return }
+        guard let resultsState = model.resultsState, let photo = resultsState.displayedFindPhotos[safe: indexPath.item]?.photo else { return }
 
         if !model.selectedPhotos.contains(photo) {
             model.selectedPhotos.append(photo)
@@ -22,7 +22,7 @@ extension PhotosViewController {
     }
 
     func photoResultsDeselected(at indexPath: IndexPath) {
-        guard let resultsState = model.resultsState, let photo = resultsState.findPhotos[safe: indexPath.item]?.photo else { return }
+        guard let resultsState = model.resultsState, let photo = resultsState.displayedFindPhotos[safe: indexPath.item]?.photo else { return }
 
         if model.selectedPhotos.contains(photo) {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
@@ -40,7 +40,7 @@ extension PhotosViewController {
 
     func updateResultsCollectionViewSelectionState() {
         guard let resultsState = model.resultsState else { return }
-        for index in resultsState.findPhotos.indices {
+        for index in resultsState.displayedFindPhotos.indices {
             let indexPath = index.indexPath
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
                 if model.isSelecting {

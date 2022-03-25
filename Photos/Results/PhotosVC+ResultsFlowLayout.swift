@@ -22,7 +22,7 @@ extension PhotosViewController {
             let section = Section(
                 items: Array(
                     repeating: Section.Item.placeholder,
-                    count: resultsState.findPhotos.count
+                    count: resultsState.displayedFindPhotos.count
                 )
             )
             return [section]
@@ -50,7 +50,7 @@ extension PhotosViewController {
     
     func getCellSize(photosIndex: Int, availableWidth: CGFloat) -> CGSize {
         guard let resultsState = model.resultsState else { return .zero }
-        let photo = resultsState.findPhotos[photosIndex]
+        let photo = resultsState.displayedFindPhotos[photosIndex]
         let c = PhotosResultsCellConstants.self
 
         let rightTopStackViewHeight = c.resultsFont.lineHeight

@@ -24,6 +24,8 @@ extension PhotosViewModel {
     }
 
     /// `photo.metadata` should be the new metadata
+    /// Update realm and reload cell if needed
+    /// This does not add append/remove photos from starred. To update that, use `sort`.
     func updatePhotoMetadata(photo: Photo, reloadCell: Bool) {
         /// for reloading at a specific index path
         /// 1. Index path inside `collectionView`
@@ -31,21 +33,44 @@ extension PhotosViewModel {
         var collectionViewIndexPath: IndexPath?
         var resultsCollectionViewIndex: Int?
 
-        if
-            let index = getPhotoIndex(photo: photo),
-            let indexPath = getPhotoIndexPath(photo: photo)
-        {
-            collectionViewIndexPath = indexPath
+        /// update the main array
+        if let index = getPhotoIndex(photo: photo) {
             photos[index] = photo
-            sections[indexPath.section].photos[indexPath.item] = photo
         }
 
-        if
-            let resultsState = resultsState,
-            let index = resultsState.getFindPhotoIndex(photo: photo)
-        {
-            resultsCollectionViewIndex = index
-            self.resultsState?.findPhotos[index].photo = photo
+        /// update displayed collection view
+        if let indexPath = getIndexPath(for: photo, in: \.displayedSections) {
+            collectionViewIndexPath = indexPath
+            displayedSections[indexPath.section].photos[indexPath.item] = photo
+        }
+
+        if let indexPath = getIndexPath(for: photo, in: \.allSections) {
+            allSections[indexPath.section].photos[indexPath.item] = photo
+        }
+        if let indexPath = getIndexPath(for: photo, in: \.starredSections) {
+            starredSections[indexPath.section].photos[indexPath.item] = photo
+        }
+        if let indexPath = getIndexPath(for: photo, in: \.screenshotsSections) {
+            screenshotsSections[indexPath.section].photos[indexPath.item] = photo
+        }
+
+        if let resultsState = resultsState {
+            if let index = resultsState.getFindPhotoIndex(for: photo, in: \.displayedFindPhotos) {
+                resultsCollectionViewIndex = index
+                self.resultsState?.displayedFindPhotos[index].photo = photo
+            }
+
+            if let index = resultsState.getFindPhotoIndex(for: photo, in: \.allFindPhotos) {
+                self.resultsState?.allFindPhotos[index].photo = photo
+            }
+
+            if let index = resultsState.getFindPhotoIndex(for: photo, in: \.starredFindPhotos) {
+                self.resultsState?.starredFindPhotos[index].photo = photo
+            }
+
+            if let index = resultsState.getFindPhotoIndex(for: photo, in: \.screenshotsFindPhotos) {
+                self.resultsState?.screenshotsFindPhotos[index].photo = photo
+            }
         }
 
         if

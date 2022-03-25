@@ -15,13 +15,11 @@ struct PhotosSlidesState {
     var currentPhoto: Photo?
     var isFullScreen = false /// hide the bars
 
-    
     /// for the current image
     var toolbarStarOn = false
     var toolbarInformationOn = false
     var toolbarInformationOnChanged: (() -> Void)?
-    
-    
+
     /// get from `findPhotos`
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
         return getFindPhotoIndex(photo: findPhoto.photo)
@@ -34,7 +32,7 @@ struct PhotosSlidesState {
         }
         return nil
     }
-    
+
     func getCurrentFindPhoto() -> FindPhoto? {
         if
             let index = getCurrentIndex(),
@@ -49,8 +47,6 @@ struct PhotosSlidesState {
         let index = findPhotos.firstIndex { $0.photo == currentPhoto }
         return index
     }
-
-
 }
 
 enum PhotosSentencesUpdateState {
@@ -59,15 +55,15 @@ enum PhotosSentencesUpdateState {
 }
 
 struct PhotosResultsState {
-    var findPhotos: [FindPhoto]
+    var displayedFindPhotos: [FindPhoto]
+
+    var allFindPhotos: [FindPhoto]
+    var starredFindPhotos: [FindPhoto]
+    var screenshotsFindPhotos: [FindPhoto]
 
     /// get from `findPhotos`
-    func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
-        return getFindPhotoIndex(photo: findPhoto.photo)
-    }
-
-    /// get from `findPhotos`
-    func getFindPhotoIndex(photo: Photo) -> Int? {
+    func getFindPhotoIndex(for photo: Photo, in keyPath: KeyPath<PhotosResultsState, [FindPhoto]>) -> Int? {
+        let findPhotos = self[keyPath: keyPath]
         if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo }) {
             return firstIndex
         }
@@ -75,7 +71,7 @@ struct PhotosResultsState {
     }
 
     func getResultsText() -> String {
-        let highlights = findPhotos.compactMap { $0.highlightsSet?.highlights }.flatMap { $0 }
+        let highlights = displayedFindPhotos.compactMap { $0.highlightsSet?.highlights }.flatMap { $0 }
 
         switch highlights.count {
         case 0:
@@ -84,6 +80,24 @@ struct PhotosResultsState {
             return "1 Result."
         default:
             return "\(highlights.count) Results."
+        }
+    }
+    
+    mutating func update(findPhoto: FindPhoto) {
+        if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.displayedFindPhotos) {
+            self.displayedFindPhotos[index].photo = findPhoto.photo
+        }
+
+        if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.allFindPhotos) {
+            self.allFindPhotos[index].photo = findPhoto.photo
+        }
+
+        if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.starredFindPhotos) {
+            self.starredFindPhotos[index].photo = findPhoto.photo
+        }
+
+        if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.screenshotsFindPhotos) {
+            self.screenshotsFindPhotos[index].photo = findPhoto.photo
         }
     }
 }
@@ -205,6 +219,29 @@ struct PhotosSection: Hashable {
     }
 }
 
+
+extension Array where Element == FindPhoto {
+    mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
+        if self[index].photo.metadata != nil {
+            self[index].photo.metadata?.dateScanned = metadata?.dateScanned
+            self[index].photo.metadata?.sentences = metadata?.sentences ?? []
+        } else {
+            self[index].photo.metadata = metadata
+        }
+    }
+}
+
+
+//func applyMetadata(in photos: inout [Photo], at index: Int, with metadata: PhotoMetadata?) {
+//    if photos[index].metadata != nil {
+//        photos[index].metadata?.dateScanned = metadata?.dateScanned
+//        photos[index].metadata?.sentences = metadata?.sentences ?? []
+//    } else {
+//        photos[index].metadata = metadata
+//    }
+//}
+
+
 struct DataSourceSectionTemplate: Hashable {
     var id = 0
 
@@ -216,4 +253,5 @@ struct DataSourceSectionTemplate: Hashable {
         lhs.id == rhs.id
     }
 }
+
 

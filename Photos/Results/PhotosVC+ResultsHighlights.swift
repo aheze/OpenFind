@@ -65,13 +65,10 @@ extension PhotosViewController {
         return cellHighlights
     }
     
-    /// replace the `resultsState`'s current highlight colors. Don't call `update()`, since applying snapshots is laggy.
-    /// This only updates the results collection view.
-    /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
-    func updateResultsHighlightColors() {
-        guard let resultsState = model.resultsState else { return }
-        for findPhotoIndex in resultsState.findPhotos.indices {
-            guard let highlightsSet = resultsState.findPhotos[findPhotoIndex].highlightsSet else { return }
+    func updateResultsHighlightColors(in keyPath: WritableKeyPath<PhotosResultsState, [FindPhoto]>, loop: ((Int) -> Void)? = nil) {
+        guard let findPhotos = model.resultsState?[keyPath: keyPath] else { return }
+        for findPhotoIndex in findPhotos.indices {
+            guard let highlightsSet = findPhotos[findPhotoIndex].highlightsSet else { return }
             
             let newHighlights: Set<Highlight> = highlightsSet.highlights.mapSet { highlight in
                 if let gradient = self.searchViewModel.stringToGradients[highlight.string] {
@@ -82,11 +79,11 @@ extension PhotosViewController {
                 }
                 return highlight
             }
-            let newHighlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: newHighlights)
-            model.resultsState?.findPhotos[findPhotoIndex].highlightsSet = newHighlightsSet
+            let newHighlightsSet = FindPhoto.HighlightsSet(stringToGradients: searchViewModel.stringToGradients, highlights: newHighlights)
+            model.resultsState?[keyPath: keyPath][findPhotoIndex].highlightsSet = newHighlightsSet
             
             /// update the line highlight colors
-            for (lineIndex, descriptionLine) in resultsState.findPhotos[findPhotoIndex].descriptionLines.enumerated() {
+            for (lineIndex, descriptionLine) in findPhotos[findPhotoIndex].descriptionLines.enumerated() {
                 guard let lineHighlights = descriptionLine.lineHighlights else { continue }
                     
                 let newLineHighlights: Set<FindPhoto.Line.LineHighlight> = lineHighlights.mapSet { highlight in
@@ -99,16 +96,29 @@ extension PhotosViewController {
                     return highlight
                 }
                 
-                model.resultsState?.findPhotos[findPhotoIndex].descriptionLines[lineIndex].lineHighlights = newLineHighlights
+                model.resultsState?[keyPath: keyPath][findPhotoIndex].descriptionLines[lineIndex].lineHighlights = newLineHighlights
             }
-                
+            
+            loop?(findPhotoIndex)
+        }
+    }
+    
+    /// replace the `resultsState`'s current highlight colors. Don't call `update()`, since applying snapshots is laggy.
+    /// This only updates the results collection view.
+    /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
+    func updateResultsHighlightColors() {
+        updateResultsHighlightColors(in: \PhotosResultsState.displayedFindPhotos) { [weak self] index in
+            guard let self = self else { return }
             /// update visible highlights
             if
-                let cell = resultsCollectionView.cellForItem(at: findPhotoIndex.indexPath) as? PhotosResultsCell,
-                let findPhoto = model.resultsState?.findPhotos[findPhotoIndex]
+                let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
+                let findPhoto = self.model.resultsState?.displayedFindPhotos[index]
             {
-                cell.highlightsViewController?.highlightsViewModel.highlights = getHighlights(for: cell, with: findPhoto)
+                cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: findPhoto)
             }
         }
+        updateResultsHighlightColors(in: \PhotosResultsState.allFindPhotos)
+        updateResultsHighlightColors(in: \PhotosResultsState.starredFindPhotos)
+        updateResultsHighlightColors(in: \PhotosResultsState.screenshotsFindPhotos)
     }
 }

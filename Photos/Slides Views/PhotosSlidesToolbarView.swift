@@ -69,6 +69,8 @@ struct PhotosSlidesToolbarView: View {
                 model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                 model.slidesState?.toolbarStarOn = metadata.isStarred
             }
+            
+            model.sortNeeded = true
         }
     }
     

@@ -13,14 +13,24 @@ class PhotosViewModel: ObservableObject {
     // MARK: Base collection view
 
     var realmModel: RealmModel
+    
+    /// all photos and assets
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
-    var sections = [PhotosSection]()
+    var displayedSections = [PhotosSection]() /// this is fed into the collection view
+    
+    /// when star/unstar
+    var sortNeeded = false
+    
+    /// storage
+    var starredSections = [PhotosSection]()
+    var screenshotsSections = [PhotosSection]()
+    var allSections = [PhotosSection]()
 
     /// store the cell images
     var photoToThumbnail = [Photo: UIImage?]()
 
-    /// update the entire collection view. Set inside `PhotosVC+Listen`
+    /// update the entire collection view, only called once at first. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
 
     /// reload at a specific index path
@@ -135,58 +145,5 @@ class PhotosViewModel: ObservableObject {
     enum ScanningState {
         case dormant
         case scanningAllPhotos
-    }
-}
-
-extension PhotosViewModel {
-    /// get from `photos`
-    func getPhotoIndex(photo: Photo) -> Int? {
-        if let firstIndex = photos.firstIndex(of: photo) {
-            return firstIndex
-        }
-        return nil
-    }
-
-    /// get from `sections`
-    func getPhotoIndexPath(photo: Photo) -> IndexPath? {
-        for sectionIndex in sections.indices {
-            if let photoIndex = sections[sectionIndex].photos.firstIndex(of: photo) {
-                return IndexPath(item: photoIndex, section: sectionIndex)
-            }
-        }
-        return nil
-    }
-
-    /// get from `sections`
-    func getPhoto(from metadata: PhotoMetadata) -> Photo? {
-        let photo = photos.first { $0.asset.localIdentifier == metadata.assetIdentifier }
-        return photo
-    }
-
-    func getFullImage(from photo: Photo) async -> UIImage? {
-        return await withCheckedContinuation { continuation in
-            let options = PHImageRequestOptions()
-            options.deliveryMode = .highQualityFormat
-            imageManager.requestImage(
-                for: photo.asset,
-                targetSize: .zero,
-                contentMode: .aspectFit,
-                options: options
-            ) { image, _ in
-                continuation.resume(returning: image)
-            }
-        }
-    }
-
-    /// closure-based for immediate return
-    func getFullImage(from photo: Photo, completion: @escaping ((UIImage?) -> Void)) {
-        imageManager.requestImage(
-            for: photo.asset,
-            targetSize: .zero,
-            contentMode: .aspectFit,
-            options: nil
-        ) { image, _ in
-            completion(image)
-        }
     }
 }

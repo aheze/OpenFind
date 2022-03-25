@@ -14,7 +14,7 @@ extension PhotosViewController {
         flowLayout.getContent = { [weak self] in
             guard let self = self else { return .photos([]) }
 
-            let sections: [Section] = self.model.sections.map { photosSection in
+            let sections: [Section] = self.model.displayedSections.map { photosSection in
                 let items = photosSection.photos.map { Section.Item.photo($0) }
                 let section = Section(
                     category: .photosSectionCategorization(photosSection.categorization),

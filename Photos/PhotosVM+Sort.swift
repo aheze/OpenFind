@@ -10,20 +10,44 @@ import UIKit
 
 extension PhotosViewModel {
     func sort() {
-        var sections = [PhotosSection]()
+        var allSections = [PhotosSection]()
+        var starredSections = [PhotosSection]()
+        var screenshotsSections = [PhotosSection]()
+
         for photo in photos {
-            if let dateCreatedCategorization = photo.asset.getDateCreatedCategorization() {
-                let existingSectionIndex = sections.firstIndex { $0.categorization == dateCreatedCategorization }
+            guard let dateCreatedCategorization = photo.asset.getDateCreatedCategorization() else { continue }
+            let existingSectionIndex = allSections.firstIndex { $0.categorization == dateCreatedCategorization }
+
+            if let existingSectionIndex = existingSectionIndex {
+                allSections[existingSectionIndex].photos.append(photo)
+            } else {
+                let newSection = PhotosSection(title: dateCreatedCategorization.getTitle(), categorization: dateCreatedCategorization, photos: [photo])
+                allSections.append(newSection)
+            }
+
+            if photo.isStarred() {
+                let existingSectionIndex = starredSections.firstIndex { $0.categorization == dateCreatedCategorization }
                 if let existingSectionIndex = existingSectionIndex {
-                    sections[existingSectionIndex].photos.append(photo)
+                    starredSections[existingSectionIndex].photos.append(photo)
                 } else {
                     let newSection = PhotosSection(title: dateCreatedCategorization.getTitle(), categorization: dateCreatedCategorization, photos: [photo])
-                    sections.append(newSection)
+                    starredSections.append(newSection)
+                }
+            }
+
+            if photo.isScreenshot() {
+                let existingSectionIndex = screenshotsSections.firstIndex { $0.categorization == dateCreatedCategorization }
+                if let existingSectionIndex = existingSectionIndex {
+                    screenshotsSections[existingSectionIndex].photos.append(photo)
+                } else {
+                    let newSection = PhotosSection(title: dateCreatedCategorization.getTitle(), categorization: dateCreatedCategorization, photos: [photo])
+                    screenshotsSections.append(newSection)
                 }
             }
         }
-        self.sections = sections
-    }
 
-    func checkIfPhotoHas(same component: DateComponents) {}
+        self.allSections = allSections
+        self.starredSections = starredSections
+        self.screenshotsSections = screenshotsSections
+    }
 }

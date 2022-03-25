@@ -19,7 +19,7 @@ enum SliderConstants {
 }
 
 class SliderViewModel: ObservableObject {
-    enum SelectionType {
+    enum Filter {
         case starred
         case screenshots
         case all
@@ -36,31 +36,42 @@ class SliderViewModel: ObservableObject {
         }
     }
 
+    /// A UI selection (wraps a filter)
     struct Selection: Identifiable {
         let id = UUID()
-        var type: SelectionType
+        var filter: Filter
         var frame: CGRect?
     }
 
-    @Published var selectionType: SelectionType?
-    @Published var hoveringSelectionType: SelectionType?
+    @Published var selectedFilter: Filter? {
+        didSet {
+            if let selectedFilter = selectedFilter {
+                filterChanged?(selectedFilter)
+            }
+        }
+    }
+
+    /// selection changed
+    var filterChanged: ((Filter) -> Void)?
+
+    @Published var hoveringFilter: Filter?
 
     /// if false, just change opacity
     @Published var indicatorMovable = true
     @Published var selections: [Selection] = [
-        .init(type: .starred),
-        .init(type: .screenshots),
-        .init(type: .all)
+        .init(filter: .starred),
+        .init(filter: .screenshots),
+        .init(filter: .all)
     ]
 
-    func change(to selectionType: SelectionType) {
+    func change(to filter: Filter) {
         withAnimation(.spring()) {
-            self.selectionType = selectionType
+            self.selectedFilter = filter
         }
     }
 
     init() {
-        selectionType = selections.last?.type
+        selectedFilter = selections.last?.filter
     }
 }
 
@@ -71,14 +82,14 @@ struct SliderView: View {
             ForEach(model.selections.indices) { index in
                 let selection = model.selections[index]
 
-                Text(selection.type.getString())
+                Text(selection.filter.getString())
                     .font(Font(SliderConstants.font as CTFont))
                     .fixedSize(horizontal: true, vertical: false)
                     .frame(maxWidth: .infinity)
                     .padding(SliderConstants.selectionEdgeInsets)
-                    .scaleEffect(getScale(for: selection.type))
+                    .scaleEffect(getScale(for: selection.filter))
                     .foregroundColor(.white)
-                    .colorMultiply(getForegroundColor(for: selection.type).color)
+                    .colorMultiply(getForegroundColor(for: selection.filter).color)
                     .readFrame(in: .named("Slider")) { frame in
                         model.selections[index].frame = frame
                     }
@@ -103,7 +114,7 @@ struct SliderView: View {
                 .mask(
                     Capsule()
                 )
-                .scaleEffect(model.indicatorMovable ? (model.hoveringSelectionType == nil ? 1 : 0.95) : 1)
+                .scaleEffect(model.indicatorMovable ? (model.hoveringFilter == nil ? 1 : 0.95) : 1)
                 .frame(with: getFrame())
         )
         .background(
@@ -115,40 +126,40 @@ struct SliderView: View {
         .padding()
     }
 
-    func getForegroundColor(for type: SliderViewModel.SelectionType) -> UIColor {
+    func getForegroundColor(for filter: SliderViewModel.Filter) -> UIColor {
         if model.indicatorMovable {
-            if let hoveringSelectionType = model.hoveringSelectionType {
-                if hoveringSelectionType == type {
+            if let hoveringFilter = model.hoveringFilter {
+                if hoveringFilter == filter {
                     return .white
                 }
             } else if
-                let selectionType = model.selectionType,
-                selectionType == type
+                let selectedFilter = model.selectedFilter,
+                selectedFilter == filter
             {
                 return .white
             }
         } else {
             if
-                let selectionType = model.selectionType,
-                selectionType == type
-            {
-                return .white
-            } else if
-                let hoveringSelectionType = model.hoveringSelectionType,
-                hoveringSelectionType == type
+                let hoveringFilter = model.hoveringFilter,
+                hoveringFilter == filter
             {
                 return .secondaryLabel.toColor(.systemBackground, percentage: 0.5)
+            } else if
+                let selectedFilter = model.selectedFilter,
+                selectedFilter == filter
+            {
+                return .white
             }
         }
 
         return .secondaryLabel
     }
 
-    func getScale(for type: SliderViewModel.SelectionType) -> CGFloat {
-        if let hoveringSelectionType = model.hoveringSelectionType {
+    func getScale(for filter: SliderViewModel.Filter) -> CGFloat {
+        if let hoveringFilter = model.hoveringFilter {
             if
                 model.indicatorMovable,
-                hoveringSelectionType == type
+                hoveringFilter == filter
             {
                 return 0.95
             }
@@ -158,20 +169,20 @@ struct SliderView: View {
     }
 
     func getFrame() -> CGRect {
+        var frame: CGRect?
         if
             model.indicatorMovable,
-            let hoveringSelectionType = model.hoveringSelectionType,
-            let selection = model.selections.first(where: { $0.type == hoveringSelectionType })
+            let hoveringFilter = model.hoveringFilter,
+            let selection = model.selections.first(where: { $0.filter == hoveringFilter })
         {
-            return selection.frame ?? .zero
+            frame = selection.frame
         } else if
-            let selectionType = model.selectionType,
-            let selection = model.selections.first(where: { $0.type == selectionType })
+            let selectedFilter = model.selectedFilter,
+            let selection = model.selections.first(where: { $0.filter == selectedFilter })
         {
-            return selection.frame ?? .zero
-        } else {
-            return .zero
+            frame = selection.frame
         }
+        return frame ?? .zero
     }
 }
 
@@ -179,10 +190,10 @@ extension SliderViewModel {
     /// `ended` - call this once right before release, for predicted end
     func onDragGestureChange(value: DragGesture.Value, ended: Bool) {
         /// first time
-        if hoveringSelectionType == nil {
+        if hoveringFilter == nil {
             if
-                let selectionType = selectionType,
-                let selection = selections.first(where: { $0.type == selectionType }),
+                let selectedFilter = selectedFilter,
+                let selection = selections.first(where: { $0.filter == selectedFilter }),
                 let frame = selection.frame,
                 (frame.minX ..< frame.maxX).contains(value.location.x)
             {
@@ -197,9 +208,9 @@ extension SliderViewModel {
             let range = frame.minX ..< frame.maxX
             return range.contains(ended ? value.predictedEndLocation.x : value.location.x)
         }) {
-            if hoveringSelectionType != selection.type {
+            if hoveringFilter != selection.filter {
                 withAnimation(.spring()) {
-                    hoveringSelectionType = selection.type
+                    hoveringFilter = selection.filter
                 }
             }
         }
@@ -207,10 +218,10 @@ extension SliderViewModel {
 
     func onDragGestureEnd(value: DragGesture.Value) {
         withAnimation(.spring()) {
-            if let hoveringSelectionType = hoveringSelectionType {
-                selectionType = hoveringSelectionType
+            if let hoveringFilter = hoveringFilter {
+                selectedFilter = hoveringFilter
             }
-            hoveringSelectionType = nil
+            hoveringFilter = nil
             indicatorMovable = true
         }
     }

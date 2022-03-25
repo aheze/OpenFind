@@ -34,7 +34,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             self.updateResultsHighlightColors()
             
             if let resultsState = model.resultsState {
-                for index in resultsState.findPhotos.indices {
+                for index in resultsState.displayedFindPhotos.indices {
                     if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
                         cell.view.imageView.alpha = 1
                     }
@@ -58,8 +58,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     }
                 }
             } else {
-                for sectionIndex in model.sections.indices {
-                    for photoIndex in model.sections[sectionIndex].photos.indices {
+                for sectionIndex in model.displayedSections.indices {
+                    for photoIndex in model.displayedSections[sectionIndex].photos.indices {
                         let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
                         if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
                             cell.alpha = 1
@@ -123,6 +123,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     }
                 }
             }
+            if model.sortNeeded, let selectedFilter = model.sliderViewModel.selectedFilter {
+                self.load(for: selectedFilter)
+            }
         }
     }
     
@@ -174,7 +177,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             guard
                 let slidesState = model.slidesState,
                 let photo = slidesState.currentPhoto,
-                let resultsIndex = model.resultsState?.getFindPhotoIndex(photo: photo)
+                let resultsIndex = model.resultsState?.getFindPhotoIndex(for: photo, in: \.displayedFindPhotos)
             else { return nil }
             return resultsIndex.indexPath
         } else {
@@ -182,9 +185,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             guard
                 let slidesState = model.slidesState,
                 let photo = slidesState.currentPhoto,
-                let index = model.getPhotoIndexPath(photo: photo)
+                let indexPath = model.getIndexPath(for: photo, in: \.displayedSections)
             else { return nil }
-            return index
+            return indexPath
         }
     }
     
@@ -199,7 +202,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     func getCurrentHeader(for photoIndexPath: IndexPath) -> PhotosCollectionHeader? {
         if
             case .sections(let sectionLayouts) = flowLayout.photosAttributes,
-            let section = model.sections[safe: photoIndexPath.section],
+            let section = model.displayedSections[safe: photoIndexPath.section],
             let headerIndex = sectionLayouts.firstIndex(where: {
                 $0.headerLayoutAttributes.encompassingCategorizations.contains(section.categorization) &&
                 $0.headerLayoutAttributes.isVisible

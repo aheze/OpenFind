@@ -16,7 +16,7 @@ extension PhotosViewController {
         var resultsSnapshot = ResultsSnapshot()
         let section = DataSourceSectionTemplate()
         resultsSnapshot.appendSections([section])
-        resultsSnapshot.appendItems(resultsState.findPhotos, toSection: section)
+        resultsSnapshot.appendItems(resultsState.displayedFindPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
     }
 
@@ -36,7 +36,7 @@ extension PhotosViewController {
             ) as! PhotosResultsCell
 
             /// get the current up-to-date FindPhoto first.
-            guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
+            guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
 
             cell.titleLabel.text = findPhoto.dateString()
             cell.resultsLabel.text = findPhoto.resultsString()
@@ -63,7 +63,7 @@ extension PhotosViewController {
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
                 /// get the current up-to-date FindPhoto first.
-                guard let findPhoto = self.model.resultsState?.findPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return }
+                guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return }
                 self.presentSlides(startingAtFindPhoto: findPhoto)
             }
 

@@ -61,7 +61,6 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
         containerView.addSubview(transitionImageView)
 
         if let fromImageFrame = fromDelegate.imageFrame(type: .pop) {
-            print("Got fram. \(fromImageFrame)_")
             transitionImageView.frame = fromImageFrame
         }
         transitionImageView.layer.cornerRadius = fromDelegate.imageCornerRadius(type: .push)

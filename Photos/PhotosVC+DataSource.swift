@@ -10,10 +10,26 @@ import Photos
 import UIKit
 
 extension PhotosViewController {
+    
+    /// sort and update data for a specified filter
+    func load(for filter: SliderViewModel.Filter) {
+        model.sort()
+        switch filter {
+        case .starred:
+            model.displayedSections = model.starredSections
+        case .screenshots:
+            model.displayedSections = model.screenshotsSections
+        case .all:
+            model.displayedSections = model.allSections
+        }
+        update()
+        updateResults()
+    }
+
     func update(animate: Bool = true) {
         var snapshot = Snapshot()
-        snapshot.appendSections(model.sections)
-        model.sections.forEach { section in
+        snapshot.appendSections(model.displayedSections)
+        model.displayedSections.forEach { section in
             snapshot.appendItems(section.photos, toSection: section)
         }
         dataSource.apply(snapshot, animatingDifferences: animate)

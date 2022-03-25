@@ -20,6 +20,14 @@ struct Photo: Hashable {
     static func == (lhs: Photo, rhs: Photo) -> Bool {
         lhs.asset == rhs.asset
     }
+    
+    func isStarred() -> Bool  {
+        metadata.map { $0.isStarred } ?? false
+    }
+    
+    func isScreenshot() -> Bool {
+        asset.mediaSubtypes.contains(.photoScreenshot)
+    }
 }
 
 struct PhotoMetadata {

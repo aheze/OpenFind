@@ -33,7 +33,7 @@ extension PhotosViewController {
     }
 
     func photoSelected(at indexPath: IndexPath) {
-        guard let photo = model.sections[safe: indexPath.section]?.photos[safe: indexPath.item] else { return }
+        guard let photo = model.displayedSections[safe: indexPath.section]?.photos[safe: indexPath.item] else { return }
         if !model.selectedPhotos.contains(photo) {
             model.selectedPhotos.append(photo)
 
@@ -44,7 +44,7 @@ extension PhotosViewController {
     }
 
     func photoDeselected(at indexPath: IndexPath) {
-        guard let photo = model.sections[safe: indexPath.section]?.photos[safe: indexPath.item] else { return }
+        guard let photo = model.displayedSections[safe: indexPath.section]?.photos[safe: indexPath.item] else { return }
         if model.selectedPhotos.contains(photo) {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
 
@@ -60,8 +60,8 @@ extension PhotosViewController {
     }
 
     func updateCollectionViewSelectionState() {
-        for sectionIndex in model.sections.indices {
-            let section = model.sections[sectionIndex]
+        for sectionIndex in model.displayedSections.indices {
+            let section = model.displayedSections[sectionIndex]
             for photoIndex in section.photos.indices {
                 let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
                 if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
