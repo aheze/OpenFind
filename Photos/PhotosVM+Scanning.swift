@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension PhotosViewModel {
     /// a photo was just scanned
@@ -101,5 +101,17 @@ extension PhotosViewModel {
         }
 
         return true
+    }
+    
+    func getRemainingTime() -> String? {
+        guard scannedPhotosCount != totalPhotosCount else { return nil }
+        
+        let secondsPerPhoto = CGFloat(1.2)
+        let seconds = secondsPerPhoto * CGFloat(photosToScan.count)
+        if seconds > 60 {
+            let minutes = Int(seconds / 60)
+            return "~\(minutes) minutes left"
+        }
+        return "~\(seconds) seconds left"
     }
 }

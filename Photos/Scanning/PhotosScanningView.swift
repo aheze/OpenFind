@@ -37,7 +37,7 @@ struct PhotosScanningViewHeader: View {
                         .blueBackground()
 
                         VStack(alignment: .leading) {
-                            Text("~3 Minutes Left")
+                            Text(model.getRemainingTime() ?? "All Photos Scanned")
                                 .foregroundColor(.accent.opacity(0.75))
                                 .font(.headline.weight(.medium))
 
