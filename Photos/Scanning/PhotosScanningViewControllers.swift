@@ -25,8 +25,7 @@ class PhotosScanningViewController: UIViewController {
     }
     
     override func loadView() {
-        
-        self.title = "Scanning Photos"
+        title = "Scanning Photos"
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(dismissSelf), imageName: "Dismiss")
         
@@ -88,6 +87,5 @@ class PhotosScanningIconController: UIViewController {
         addChild(hostingController)
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
-
     }
 }

@@ -23,16 +23,23 @@ struct PhotosScanningViewHeader: View {
             VStack(spacing: 20) {
                 /// Header
                 Container(description: "Find works completely offline, so your photos and other data never leave your phone.") {
-                    VStack(spacing: 14) {
-                        HStack(spacing: 12) {
-                            PhotosScanningProgressView(
-                                scannedPhotosCount: model.scannedPhotosCount,
-                                totalPhotosCount: model.totalPhotosCount,
-                                lineWidth: 4,
-                                iconFont: .preferredCustomFont(forTextStyle: .headline, weight: PhotosConstants.scanningCheckmarkWeight),
-                                state: model.scanningIconState
-                            )
-                            .frame(width: 32, height: 32)
+                    HStack(spacing: 16) {
+                        PhotosScanningGradientProgressView(
+                            scannedPhotosCount: model.scannedPhotosCount,
+                            totalPhotosCount: model.totalPhotosCount,
+                            lineWidth: 10,
+                            iconFont: .systemFont(ofSize: 52, weight: PhotosConstants.scanningCheckmarkWeight),
+                            state: model.scanningIconState
+                        )
+                        .frame(width: 90, height: 90)
+                        .padding(20)
+                        .frame(maxHeight: .infinity)
+                        .blueBackground()
+
+                        VStack(alignment: .leading) {
+                            Text("~3 Minutes Left")
+                                .foregroundColor(.accent.opacity(0.75))
+                                .font(.headline.weight(.medium))
 
                             HStack {
                                 Text("\(model.scannedPhotosCount)")
@@ -46,13 +53,9 @@ struct PhotosScanningViewHeader: View {
                             }
                             .font(.largeTitle.weight(.semibold))
 
-                            Spacer()
-                        }
+                            let image = getImage()
+                            let title = getTitle()
 
-                        HStack {
-                            var image = getImage()
-                            var title = getTitle()
-                            
                             PhotosScanningButton(image: image, title: title) {
                                 if model.scanningState == .dormant {
                                     model.startScanning()
@@ -60,15 +63,11 @@ struct PhotosScanningViewHeader: View {
                                     model.pauseScanning()
                                 }
                             }
-
-                            PhotosScanningButton(image: "speedometer", title: "Delete All") {
-                                model.deleteAllMetadata()
-                            }
                         }
                     }
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding(PhotosScanningConstants.padding)
-                    .background(Color.accent.opacity(0.1))
-                    .cornerRadius(PhotosScanningConstants.cornerRadius)
+                    .blueBackground()
                 }
 
                 PhotoScanningLink(
@@ -85,20 +84,6 @@ struct PhotosScanningViewHeader: View {
                     title: "Scan on Launch",
                     description: "Find will start scanning photos as soon as you open the app.",
                     binding: \PhotosViewModel.$scanOnLaunch
-                )
-
-                PhotoScanningRow(
-                    model: model,
-                    title: "Background Scanning",
-                    description: "Find will scan photos when the app is inactive and in the background.",
-                    binding: \PhotosViewModel.$scanInBackground
-                )
-
-                PhotoScanningRow(
-                    model: model,
-                    title: "Scan While Charging",
-                    description: "Find will scan photos when your phone is plugged in.",
-                    binding: \PhotosViewModel.$scanWhileCharging
                 )
 
                 Spacer()

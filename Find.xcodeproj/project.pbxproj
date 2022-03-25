@@ -4829,6 +4829,7 @@
 			children = (
 				3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */,
 				3CDD943B27C05DAF00D3EA1A /* PhotosScanningView.swift */,
+				3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */,
 				3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */,
 				3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */,
 				3C1A2C0A27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift */,
@@ -4838,7 +4839,6 @@
 				3C875E0E27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift */,
 				3C1A2C1327E8EDD200B3D065 /* IgnoredPhotosHeaderView.swift */,
 				3C875E1127EB807C00EC35ED /* IgnoredPhotosToolbarView.swift */,
-				3CDD943D27C05E3400D3EA1A /* PhotosScanningIcon.swift */,
 				3CDD945027C0634200D3EA1A /* PhotosScanningViewControllers.swift */,
 			);
 			path = Scanning;

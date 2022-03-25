@@ -13,6 +13,7 @@ enum PhotosScanningIconState {
     case paused
     case done
 }
+
 struct PhotosScanningIcon: View {
     @ObservedObject var model: PhotosViewModel
 
@@ -27,9 +28,9 @@ struct PhotosScanningIcon: View {
                 iconFont: .preferredCustomFont(forTextStyle: .caption2, weight: PhotosConstants.scanningCheckmarkWeight),
                 state: model.scanningIconState
             )
-                .padding(4)
-                .padding(.leading, 8)
-                .contentShape(Rectangle())
+            .padding(4)
+            .padding(.leading, 8)
+            .contentShape(Rectangle())
         }
     }
 }
@@ -40,7 +41,7 @@ struct PhotosScanningProgressView: View {
     var lineWidth: CGFloat
     var iconFont: UIFont
     var state: PhotosScanningIconState
-    
+
     var body: some View {
         Circle()
             .trim(from: 0, to: getTrimPercentage())
@@ -70,8 +71,71 @@ struct PhotosScanningProgressView: View {
                         Image(systemName: "pause.fill")
                     }
                 }
-                    .font(Font(iconFont as CTFont))
-                    .foregroundColor(.accent)
+                .font(Font(iconFont as CTFont))
+                .foregroundColor(.accent)
+            )
+    }
+
+    func getTrimPercentage() -> CGFloat {
+        return CGFloat(scannedPhotosCount) / CGFloat(totalPhotosCount)
+    }
+}
+
+
+struct PhotosScanningGradientProgressView: View {
+    var scannedPhotosCount: Int
+    var totalPhotosCount: Int
+    var lineWidth: CGFloat
+    var iconFont: UIFont
+    var state: PhotosScanningIconState
+    @State var color = Colors.accent
+
+    var body: some View {
+        Circle()
+            .trim(from: 0, to: getTrimPercentage())
+            .stroke(
+                Color.accent,
+                style: StrokeStyle(
+                    lineWidth: lineWidth,
+                    lineCap: .round
+                )
+            )
+            .background(
+                Circle()
+                    .stroke(
+                        Color.accent.opacity(0.25),
+                        style: StrokeStyle(
+                            lineWidth: lineWidth,
+                            lineCap: .round
+                        )
+                    )
+            )
+            .rotationEffect(.degrees(-90))
+            .overlay(
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                color.color,
+                                color.offset(by: 0.01).withAlphaComponent(0.5).color
+                            ],
+                            startPoint: .bottomLeading,
+                            endPoint: .topTrailing
+                        )
+                    )
+                    .padding(lineWidth / 2)
+                    .opacity(0.5)
+            )
+            .overlay(
+                VStack {
+                    if state == .done {
+                        Image(systemName: "checkmark")
+                    } else if state == .paused {
+                        Image(systemName: "pause.fill")
+                    }
+                }
+                .font(Font(iconFont as CTFont))
+                .foregroundColor(.accent)
             )
     }
 

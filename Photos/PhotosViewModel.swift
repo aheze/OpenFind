@@ -103,12 +103,10 @@ class PhotosViewModel: ObservableObject {
         }
         return .scanning
     }
-
-    var scanningIconTapped: (() -> Void)?
+    
+    var scanningIconTapped: (() -> Void)? /// tapped icon in navigation bar
     var ignoredPhotosTapped: (() -> Void)?
     @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
-    @Saved(Defaults.scanInBackground.0) var scanInBackground = Defaults.scanInBackground.1
-    @Saved(Defaults.scanWhileCharging.0) var scanWhileCharging = Defaults.scanWhileCharging.1
     @Published var scanningState = ScanningState.dormant
     @Published var scannedPhotosCount = 0
     @Published var totalPhotosCount = 0 /// total where not ignored
