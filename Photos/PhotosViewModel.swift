@@ -15,7 +15,7 @@ class PhotosViewModel: ObservableObject {
     var realmModel: RealmModel
 
     /// all photos and assets
-    var assets: PHFetchResult<PHAsset>?
+    var assets: PHFetchResult<PHAsset>? /// could become inaccurate after deletion.
     var photos = [Photo]()
     var displayedSections = [PhotosSection]() /// this is fed into the collection view
 

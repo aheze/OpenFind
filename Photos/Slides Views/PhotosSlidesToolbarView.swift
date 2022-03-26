@@ -85,12 +85,10 @@ struct PhotosSlidesToolbarView: View {
     }
     
     func deletePhoto() {
-        print("Slidesstatephoto: \(model.slidesState?.currentPhoto != nil)")
         if
             let slidesState = model.slidesState,
             let findPhoto = slidesState.getCurrentFindPhoto()
         {
-            print("redeling")
             model.delete(photos: [findPhoto.photo])
         }
     }

@@ -11,7 +11,6 @@ import UIKit
 
 extension PhotosViewModel {
     func delete(photos: [Photo]) {
-        print("delete photos.")
         let assetIdentifiers = photos.map { $0.asset.localIdentifier }
         let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
         PHPhotoLibrary.shared().performChanges {
@@ -33,6 +32,8 @@ extension PhotosViewModel {
     }
 
     func refresh(afterDeleting photos: [Photo]) {
+        self.photos = self.photos.filter { !photos.contains($0) }
+
         deletePhotos(deletedPhotos: photos, in: &displayedSections)
         deletePhotos(deletedPhotos: photos, in: &allSections)
         deletePhotos(deletedPhotos: photos, in: &starredSections)
@@ -43,8 +44,6 @@ extension PhotosViewModel {
             deletePhotos(deletedPhotos: photos, in: \PhotosResultsState.starredFindPhotos)
             deletePhotos(deletedPhotos: photos, in: \PhotosResultsState.screenshotsFindPhotos)
         }
-        
-        print("Current count: \(slidesState?.findPhotos.count)")
 
         /// if `slidesState` exists, then it must be a singular photo that's deleted.
         if let slidesState = slidesState {
@@ -57,7 +56,7 @@ extension PhotosViewModel {
                     slidesTargetIndexAfterDeletion = nil
                 } else if currentIndex == slidesState.findPhotos.count - 1 { /// rightmost photo
                     slidesTargetIndexBeforeDeletion = currentIndex - 1
-                    
+
                     /// no need for this actually, will already be scrolled here.
                     /// But `reloadAfterDeletion` checks for both `slidesTargetIndexBeforeDeletion` and `slidesTargetIndexAfterDeletion` being not nil,
                     /// so set this too.
@@ -72,8 +71,6 @@ extension PhotosViewModel {
             }
 
             deletePhotos(deletedPhotos: photos, in: \PhotosSlidesState.findPhotos)
-            
-            print("NOW count: \(self.slidesState?.findPhotos.count)")
         }
     }
 

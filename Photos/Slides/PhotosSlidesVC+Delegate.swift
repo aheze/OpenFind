@@ -9,18 +9,19 @@
 import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
- 
-
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        print("-- Will display at \(indexPath)")
         guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
 
         let photoSlidesViewController: PhotosSlidesItemViewController
         if let viewController = findPhoto.associatedViewController {
+            print("vc exis findPhoto: \(findPhoto.photo.asset.localIdentifier).")
             viewController.loadViewIfNeeded()
             viewController.reloadImage()
             photoSlidesViewController = viewController
             addChildViewController(viewController, in: cell.contentView)
         } else {
+            print("vc not exist. findPhoto: \(findPhoto.photo.asset.localIdentifier)")
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
             let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
                 PhotosSlidesItemViewController(

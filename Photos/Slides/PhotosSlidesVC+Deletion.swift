@@ -18,25 +18,24 @@ extension PhotosSlidesViewController {
 
         /// update the current photo
 
-        print("Current: \(self.model.slidesState?.currentPhoto?.asset.localIdentifier)")
         self.model.slidesState?.currentPhoto = self.model.slidesState?.findPhotos[safe: slidesTargetIndexAfterDeletion]?.photo
-        print("Changed ro: \(self.model.slidesState?.currentPhoto?.asset.localIdentifier)")
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let indexPath = slidesTargetIndexBeforeDeletion.indexPath
-            print("scrolling to \(indexPath)")
-            
-
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
 
     func finishDeleting() {
         if let slidesTargetIndexAfterDeletion = model.slidesTargetIndexAfterDeletion {
-            print("updating -> \(slidesTargetIndexAfterDeletion)")
-            print("NOW: \(self.model.slidesState?.currentPhoto?.asset.localIdentifier). Findphotos: \(self.model.slidesState?.findPhotos.map { $0.photo.asset.localIdentifier })")
-            print("get? \(self.model.slidesState?.getCurrentFindPhoto()?.photo.asset.localIdentifier)")
+            print("         updating -> \(slidesTargetIndexAfterDeletion)")
+            print("         NOW: \(self.model.slidesState?.currentPhoto?.asset.localIdentifier). Findphotos: \(self.model.slidesState?.findPhotos.map { $0.photo.asset.localIdentifier })")
+            print("         get? \(self.model.slidesState?.getCurrentFindPhoto()?.photo.asset.localIdentifier)")
             update(animate: false)
+            if let cell = collectionView.cellForItem(at: slidesTargetIndexAfterDeletion.indexPath) {
+                print("manual allll")
+                self.collectionView(self.collectionView, willDisplay: cell, forItemAt: slidesTargetIndexAfterDeletion.indexPath)
+            }
             collectionView.layoutIfNeeded()
             DispatchQueue.main.async {
                 self.collectionView.scrollToItem(at: slidesTargetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
