@@ -124,7 +124,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 }
             }
             if model.sortNeeded {
-                if let selectedFilter = model.sliderViewModel.selectedFilter {
+                if let selectedFilter = sliderViewModel.selectedFilter {
                     self.load(for: selectedFilter)
                 }
                 if model.resultsState != nil {

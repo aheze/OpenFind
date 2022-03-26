@@ -13,15 +13,15 @@ class PhotosViewModel: ObservableObject {
     // MARK: Base collection view
 
     var realmModel: RealmModel
-    
+
     /// all photos and assets
     var assets: PHFetchResult<PHAsset>?
     var photos = [Photo]()
     var displayedSections = [PhotosSection]() /// this is fed into the collection view
-    
+
     /// when star/unstar
     var sortNeeded = false
-    
+
     /// storage
     var starredSections = [PhotosSection]()
     var screenshotsSections = [PhotosSection]()
@@ -42,10 +42,6 @@ class PhotosViewModel: ObservableObject {
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
-
-    // MARK: Filtering
-
-    var sliderViewModel = SliderViewModel()
 
     // MARK: Slides / Results
 
@@ -113,7 +109,7 @@ class PhotosViewModel: ObservableObject {
         }
         return .scanning
     }
-    
+
     var scanningIconTapped: (() -> Void)? /// tapped icon in navigation bar
     var ignoredPhotosTapped: (() -> Void)?
     @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1

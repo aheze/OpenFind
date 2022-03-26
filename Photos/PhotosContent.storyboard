@@ -28,22 +28,31 @@
                                     <constraint firstAttribute="height" constant="100" id="TSm-5I-VLi"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N9-y7-OlV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="718"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8N9-y7-OlV" secondAttribute="trailing" id="6Oj-nw-Swi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2Bf-JN-X1q" secondAttribute="trailing" id="7CG-hW-NbD"/>
                             <constraint firstItem="2Bf-JN-X1q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="J8D-3C-pRn"/>
                             <constraint firstAttribute="trailing" secondItem="x8e-h3-3O9" secondAttribute="trailing" id="RAU-9K-jFh"/>
+                            <constraint firstItem="8N9-y7-OlV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Svy-IL-AoK"/>
                             <constraint firstItem="x8e-h3-3O9" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="aRg-rg-1WQ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2Bf-JN-X1q" secondAttribute="bottom" id="qM2-Kj-Ix4"/>
+                            <constraint firstItem="2Bf-JN-X1q" firstAttribute="top" secondItem="8N9-y7-OlV" secondAttribute="bottom" id="uwy-qZ-HkD"/>
                             <constraint firstItem="x8e-h3-3O9" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="w7j-UT-DyU"/>
+                            <constraint firstItem="8N9-y7-OlV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wfU-ge-whu"/>
                             <constraint firstAttribute="bottom" secondItem="x8e-h3-3O9" secondAttribute="bottom" id="y5P-du-4A1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="O5v-kT-adL" id="qdP-Fg-lQL"/>
                         <outlet property="collectionViewContainer" destination="x8e-h3-3O9" id="ZoD-Cu-pkR"/>
+                        <outlet property="contentContainer" destination="8N9-y7-OlV" id="1z9-df-bez"/>
                         <outlet property="resultsCollectionView" destination="35b-X1-iav" id="wpz-f5-Ob9"/>
                         <outlet property="sliderContainerView" destination="2Bf-JN-X1q" id="FIN-tb-6Yi"/>
                         <outlet property="sliderContainerViewBottomC" destination="qM2-Kj-Ix4" id="b1Q-wD-VHg"/>

@@ -24,6 +24,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var permissionsViewModel = PhotosPermissionsViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
     var headerContentModel = HeaderContentModel()
+    var sliderViewModel = SliderViewModel()
     lazy var resultsHeaderContainer = UIView()
     lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
     var resultsHeaderHeightC: NSLayoutConstraint!
@@ -55,6 +56,10 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     lazy var resultsDataSource = makeResultsDataSource()
     typealias ResultsDataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, FindPhoto>
     typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
+    
+    /// for SwiftUI views
+    @IBOutlet weak var contentContainer: UIView!
+    
     
     // MARK: Filtering
 

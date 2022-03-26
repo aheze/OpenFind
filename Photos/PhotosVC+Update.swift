@@ -71,13 +71,20 @@ extension PhotosViewController {
                         model.resultsState?.screenshotsFindPhotos.append(findPhoto)
                     }
                     
-                    switch model.sliderViewModel.selectedFilter ?? .all {
+                    let filter = sliderViewModel.selectedFilter ?? .all
+                    switch filter {
                     case .starred:
-                        model.resultsState?.displayedFindPhotos = model.resultsState?.starredFindPhotos ?? []
+                        if let starredFindPhotos = model.resultsState?.starredFindPhotos {
+                            model.resultsState?.displayedFindPhotos = starredFindPhotos
+                        }
                     case .screenshots:
-                        model.resultsState?.displayedFindPhotos = model.resultsState?.screenshotsFindPhotos ?? []
+                        if let screenshotsFindPhotos = model.resultsState?.screenshotsFindPhotos {
+                            model.resultsState?.displayedFindPhotos = screenshotsFindPhotos
+                        }
                     case .all:
-                        model.resultsState?.displayedFindPhotos = model.resultsState?.allFindPhotos ?? []
+                        if let allFindPhotos = model.resultsState?.allFindPhotos {
+                            model.resultsState?.displayedFindPhotos = allFindPhotos
+                        }
                     }
                 }
             }

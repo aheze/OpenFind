@@ -88,7 +88,7 @@ extension PhotosViewController {
         
         headerContentModel.sizeChanged = { [weak self] in
             guard let self = self else { return }
-            print("changed: \(self.headerContentModel.size?.height ?? 0)")
+            
             self.resultsHeaderHeightC.constant = self.headerContentModel.size?.height ?? 0
             self.collectionView.setNeedsLayout()
             self.collectionView.layoutIfNeeded()

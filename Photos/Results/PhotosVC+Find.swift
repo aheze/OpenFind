@@ -44,7 +44,7 @@ extension PhotosViewController {
             }
         }
         
-        switch model.sliderViewModel.selectedFilter ?? .all {
+        switch sliderViewModel.selectedFilter ?? .all {
         case .starred:
             displayedFindPhotos = starredFindPhotos
         case .screenshots:

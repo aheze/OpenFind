@@ -10,7 +10,6 @@ import Photos
 import UIKit
 
 extension PhotosViewController {
-    
     /// sort and update data for a specified filter - for the collection view, not results
     func load(for filter: SliderViewModel.Filter) {
         model.sort()
@@ -22,7 +21,7 @@ extension PhotosViewController {
         case .all:
             model.displayedSections = model.allSections
         }
-        
+
         update()
         updateResults()
     }
@@ -34,6 +33,8 @@ extension PhotosViewController {
             snapshot.appendItems(section.photos, toSection: section)
         }
         dataSource.apply(snapshot, animatingDifferences: animate)
+
+        showEmptyContent(model.displayedSections.isEmpty)
     }
 
     /// reload the collection view at an index path.

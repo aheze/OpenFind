@@ -20,7 +20,12 @@ extension PhotosViewController {
         setupCollectionView(resultsCollectionView, with: resultsFlowLayout)
         showResults(false)
         resultsCollectionView.backgroundColor = .secondarySystemBackground
-
+        
+        /// SwiftUI container
+        contentContainer.backgroundColor = .clear
+        contentContainer.isUserInteractionEnabled = false
+        setupEmptyContent()
+        
         setupNavigationBar()
         checkPermissions()
         listenToModel()
@@ -49,7 +54,6 @@ extension PhotosViewController {
         let permissionsView = PhotosPermissionsView(model: permissionsViewModel)
         let hostingController = UIHostingController(rootView: permissionsView)
         addChildViewController(hostingController, in: view)
-        view.bringSubviewToFront(hostingController.view)
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.model.load()
@@ -72,13 +76,12 @@ extension PhotosViewController {
 
         collectionView.delegate = self
         collectionView.allowsSelection = true
-        collectionView.allowsMultipleSelection = true
         collectionView.delaysContentTouches = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.keyboardDismissMode = .interactive
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
-        collectionView.contentInset.bottom = SliderConstants.height /// padding for the slider
+        collectionView.contentInset.bottom = PhotosConstants.bottomPadding + SliderConstants.height /// padding for the slider
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = layout

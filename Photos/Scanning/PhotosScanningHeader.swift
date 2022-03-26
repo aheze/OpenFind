@@ -47,9 +47,15 @@ struct PhotosScanningHeader: View {
                         Spacer()
 
                         if let time = time {
-                            Text(time)
-                                .font(.caption.weight(.semibold))
-                                .foregroundColor(.accent)
+                            if model.scanningState == .dormant {
+                                Text("Paused")
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundColor(.red)
+                            } else {
+                                Text(time)
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundColor(.accent)
+                            }
                         }
                     }
                 }

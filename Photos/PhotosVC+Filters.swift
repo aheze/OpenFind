@@ -11,7 +11,7 @@ import SwiftUI
 extension PhotosViewController {
     func setupFiltersView() {
         sliderContainerView.backgroundColor = .clear
-        let sliderView = SliderView(model: model.sliderViewModel)
+        let sliderView = SliderView(model: sliderViewModel)
         let hostingController = UIHostingController(rootView: sliderView)
         hostingController.view.backgroundColor = .clear
         addChildViewController(hostingController, in: sliderContainerView)
@@ -19,7 +19,7 @@ extension PhotosViewController {
         sliderContainerViewHeightC.constant = SliderConstants.height
         sliderContainerViewBottomC.constant = SliderConstants.bottomPadding
 
-        model.sliderViewModel.filterChanged = { [weak self] filter in
+        sliderViewModel.filterChanged = { [weak self] filter in
             guard let self = self else { return }
             self.sliderChanged(filter: filter)
         }
@@ -59,14 +59,14 @@ extension PhotosViewController {
     /// update the counts of the slider filter
     func updateCounts(allCount: Int?, starredCount: Int?, screenshotsCount: Int?) {
         withAnimation {
-            if let index = model.sliderViewModel.selections.firstIndex(where: { $0.filter == .all }) {
-                model.sliderViewModel.selections[index].count = allCount
+            if let index = sliderViewModel.selections.firstIndex(where: { $0.filter == .all }) {
+                sliderViewModel.selections[index].count = allCount
             }
-            if let index = model.sliderViewModel.selections.firstIndex(where: { $0.filter == .starred }) {
-                model.sliderViewModel.selections[index].count = starredCount
+            if let index = sliderViewModel.selections.firstIndex(where: { $0.filter == .starred }) {
+                sliderViewModel.selections[index].count = starredCount
             }
-            if let index = model.sliderViewModel.selections.firstIndex(where: { $0.filter == .screenshots }) {
-                model.sliderViewModel.selections[index].count = screenshotsCount
+            if let index = sliderViewModel.selections.firstIndex(where: { $0.filter == .screenshots }) {
+                sliderViewModel.selections[index].count = screenshotsCount
             }
         }
     }

@@ -28,7 +28,7 @@ struct PhotosScanningViewHeader: View {
                             scannedPhotosCount: model.scannedPhotosCount,
                             totalPhotosCount: model.totalPhotosCount,
                             lineWidth: 10,
-                            iconFont: .systemFont(ofSize: 46, weight: PhotosConstants.scanningCheckmarkWeight),
+                            iconFont: .systemFont(ofSize: 42, weight: PhotosConstants.scanningCheckmarkWeight),
                             state: model.scanningIconState
                         )
                         .frame(width: 90, height: 90)

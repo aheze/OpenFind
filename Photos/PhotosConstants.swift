@@ -23,6 +23,7 @@ enum PhotosConstants {
     static var minimumResultsUpdateDuration = CGFloat(2.5)
     
     static var scanningCheckmarkWeight = UIFont.Weight.bold
+    static var bottomPadding = CGFloat(16) /// extra padding, on top of the slider
 }
 
 enum PhotosHeaderConstants {

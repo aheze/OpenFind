@@ -12,6 +12,8 @@ extension PhotosViewController {
     func toggleSelect() {
         model.isSelecting.toggle()
         if model.isSelecting {
+            collectionView.allowsMultipleSelection = true
+            resultsCollectionView.allowsMultipleSelection = true
             selectBarButton.title = "Done"
             toolbarViewModel.toolbar = AnyView(selectionToolbar)
         } else {
@@ -27,6 +29,8 @@ extension PhotosViewController {
     
     /// reset the state after finding from selected photos or pressing done
     func resetSelectingState() {
+        collectionView.allowsMultipleSelection = false
+        resultsCollectionView.allowsMultipleSelection = false
         selectBarButton.title = "Select"
         toolbarViewModel.toolbar = nil
         model.selectedPhotos = []
