@@ -75,11 +75,11 @@ struct PhotosResultsState {
 
         switch highlights.count {
         case 0:
-            return "No Results."
+            return "No results."
         case 1:
-            return "1 Result."
+            return "1 result in \(displayedFindPhotos.count) photos."
         default:
-            return "\(highlights.count) Results."
+            return "\(highlights.count) results in \(displayedFindPhotos.count) photos."
         }
     }
     

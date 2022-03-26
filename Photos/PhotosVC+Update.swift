@@ -91,7 +91,7 @@ extension PhotosViewController {
 
     /// update the results collection view and the slides collection view
     func updateResultsCollectionViews() {
-        self.updateResults(animate: true)
+        self.updateResults()
         self.model.slidesState?.viewController?.update(animate: false)
   
         if

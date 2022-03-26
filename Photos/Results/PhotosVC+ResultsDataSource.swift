@@ -18,6 +18,13 @@ extension PhotosViewController {
         resultsSnapshot.appendSections([section])
         resultsSnapshot.appendItems(resultsState.displayedFindPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
+
+        
+        updateCounts(
+            allCount: resultsState.allFindPhotos.count,
+            starredCount: resultsState.starredFindPhotos.count,
+            screenshotsCount: resultsState.screenshotsFindPhotos.count
+        )
     }
 
     /// reload the collection view at an index path.

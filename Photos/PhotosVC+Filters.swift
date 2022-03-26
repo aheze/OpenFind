@@ -55,4 +55,19 @@ extension PhotosViewController {
         update()
         updateResults()
     }
+    
+    /// update the counts of the slider filter
+    func updateCounts(allCount: Int?, starredCount: Int?, screenshotsCount: Int?) {
+        withAnimation {
+            if let index = model.sliderViewModel.selections.firstIndex(where: { $0.filter == .all }) {
+                model.sliderViewModel.selections[index].count = allCount
+            }
+            if let index = model.sliderViewModel.selections.firstIndex(where: { $0.filter == .starred }) {
+                model.sliderViewModel.selections[index].count = starredCount
+            }
+            if let index = model.sliderViewModel.selections.firstIndex(where: { $0.filter == .screenshots }) {
+                model.sliderViewModel.selections[index].count = screenshotsCount
+            }
+        }
+    }
 }

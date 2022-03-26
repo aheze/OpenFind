@@ -4505,9 +4505,9 @@
 				3CCCCA9827818CAF000381CE /* FindIconView.swift */,
 				3CC594F6279F32E6001D07DC /* ColorPickerView.swift */,
 				3C0B5E6C27BAC05900EC881E /* PhotosPermissionsView.swift */,
-				3C443EF527DD8F610050A0AB /* SliderView.swift */,
 				3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */,
 				3C443FB827DFCD480050A0AB /* HeaderContentView.swift */,
+				3C443EF527DD8F610050A0AB /* SliderView.swift */,
 				3C7B7A7D277FA50B00E1F602 /* Assets.xcassets */,
 				3CCCCAB627818CF1000381CE /* Testing */,
 			);

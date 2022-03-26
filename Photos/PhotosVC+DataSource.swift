@@ -11,7 +11,7 @@ import UIKit
 
 extension PhotosViewController {
     
-    /// sort and update data for a specified filter
+    /// sort and update data for a specified filter - for the collection view, not results
     func load(for filter: SliderViewModel.Filter) {
         model.sort()
         switch filter {
@@ -22,6 +22,7 @@ extension PhotosViewController {
         case .all:
             model.displayedSections = model.allSections
         }
+        
         update()
         updateResults()
     }

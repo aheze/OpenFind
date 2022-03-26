@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension PhotosViewController {
@@ -17,10 +16,10 @@ extension PhotosViewController {
             target: self,
             action: #selector(selectPressed)
         )
-        self.selectBarButton = selectButton
+        selectBarButton = selectButton
         
         let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 34)
-        self.scanningBarButton = scanningButton
+        scanningBarButton = scanningButton
         
         navigationItem.rightBarButtonItems = [scanningButton, selectButton]
     }
@@ -34,6 +33,7 @@ extension PhotosViewController {
         )
         navigationItem.leftBarButtonItem = cancelButton
     }
+
     func hideCancelNavigationBar() {
         navigationItem.leftBarButtonItem = nil
     }
@@ -52,9 +52,9 @@ extension PhotosViewController {
         hideCancelNavigationBar()
         searchViewModel.updateFields(fields: SearchViewModel.defaultFields, notify: true)
         model.updateSearchCollectionView?()
+        resetSelectingState()
     }
 
-    
     @objc func selectPressed() {
         toggleSelect()
     }

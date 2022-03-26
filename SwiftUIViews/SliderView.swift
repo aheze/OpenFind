@@ -14,6 +14,10 @@ enum SliderConstants {
     static let font = UIFont.preferredCustomFont(forTextStyle: .body, weight: .semibold)
     static let height: CGFloat = font.lineHeight + selectionEdgeInsets.top + selectionEdgeInsets.bottom + outerPadding
 
+    /// number of photos count
+    static let countFont = UIFont.preferredCustomFont(forTextStyle: .caption1, weight: .semibold)
+    static let countPadding = EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8)
+
     static let outerPadding = CGFloat(5)
     static let bottomPadding = CGFloat(12)
 }
@@ -41,6 +45,7 @@ class SliderViewModel: ObservableObject {
         let id = UUID()
         var filter: Filter
         var frame: CGRect?
+        var count: Int?
     }
 
     @Published var selectedFilter: Filter? {
@@ -82,17 +87,33 @@ struct SliderView: View {
             ForEach(model.selections.indices) { index in
                 let selection = model.selections[index]
 
-                Text(selection.filter.getString())
-                    .font(Font(SliderConstants.font as CTFont))
-                    .fixedSize(horizontal: true, vertical: false)
-                    .frame(maxWidth: .infinity)
-                    .padding(SliderConstants.selectionEdgeInsets)
-                    .scaleEffect(getScale(for: selection.filter))
-                    .foregroundColor(.white)
-                    .colorMultiply(getForegroundColor(for: selection.filter).color)
-                    .readFrame(in: .named("Slider")) { frame in
-                        model.selections[index].frame = frame
+                HStack {
+                    if let count = selection.count {
+                        let (foregroundColor, backgroundColor) = getCountColor(for: selection.filter)
+                        Text("\(count)")
+                            .foregroundColor(foregroundColor.color)
+                            .font(Font(SliderConstants.countFont as CTFont))
+                            .padding(SliderConstants.countPadding)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .background(
+                                Capsule()
+                                    .fill(backgroundColor.color)
+                            )
                     }
+
+                    Text(selection.filter.getString())
+                        .font(Font(SliderConstants.font as CTFont))
+                        .colorMultiply(getForegroundColor(for: selection.filter).color)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(SliderConstants.selectionEdgeInsets)
+                .scaleEffect(getScale(for: selection.filter))
+                .foregroundColor(.white)
+                .opacity(getAlpha(for: selection.filter))
+                .readFrame(in: .named("Slider")) { frame in
+                    model.selections[index].frame = frame
+                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -126,43 +147,45 @@ struct SliderView: View {
         .padding()
     }
 
+    /// 1. foreground, 2. background
+    func getCountColor(for filter: SliderViewModel.Filter) -> (UIColor, UIColor) {
+        return (.white, .black.withAlphaComponent(0.5))
+//        if
+//            model.indicatorMovable && model.hoveringFilter == filter
+//            || !model.indicatorMovable && model.selectedFilter == filter
+//            || model.hoveringFilter == nil && model.selectedFilter == filter
+//        {
+//
+//        }
+//        return (.secondaryLabel, .label.withAlphaComponent(0.08))
+    }
+
     func getForegroundColor(for filter: SliderViewModel.Filter) -> UIColor {
-        if model.indicatorMovable {
-            if let hoveringFilter = model.hoveringFilter {
-                if hoveringFilter == filter {
-                    return .white
-                }
-            } else if
-                let selectedFilter = model.selectedFilter,
-                selectedFilter == filter
-            {
-                return .white
-            }
-        } else {
-            if
-                let hoveringFilter = model.hoveringFilter,
-                hoveringFilter == filter
-            {
-                return .secondaryLabel.toColor(.systemBackground, percentage: 0.5)
-            } else if
-                let selectedFilter = model.selectedFilter,
-                selectedFilter == filter
-            {
-                return .white
-            }
+        if
+            model.indicatorMovable && model.hoveringFilter == filter
+            || !model.indicatorMovable && model.selectedFilter == filter
+            || model.hoveringFilter == nil && model.selectedFilter == filter
+        {
+            return .white
+        }
+        return UIColor(named: "SliderActiveBackground")!
+    }
+
+    func getAlpha(for filter: SliderViewModel.Filter) -> CGFloat {
+        if !model.indicatorMovable && model.hoveringFilter == filter {
+            return 0.5
         }
 
-        return .secondaryLabel
+        return 1
     }
 
     func getScale(for filter: SliderViewModel.Filter) -> CGFloat {
-        if let hoveringFilter = model.hoveringFilter {
-            if
-                model.indicatorMovable,
-                hoveringFilter == filter
-            {
-                return 0.95
-            }
+        if
+            let hoveringFilter = model.hoveringFilter,
+            hoveringFilter == filter,
+            model.indicatorMovable
+        {
+            return 0.95
         }
 
         return 1

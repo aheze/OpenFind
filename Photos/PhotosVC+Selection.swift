@@ -30,6 +30,7 @@ extension PhotosViewController {
         selectBarButton.title = "Select"
         toolbarViewModel.toolbar = nil
         model.selectedPhotos = []
+        model.ignoredPhotosSelectedPhotos = []
     }
 
     func photoSelected(at indexPath: IndexPath) {
