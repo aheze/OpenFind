@@ -9,6 +9,8 @@
 import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
+ 
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
 
@@ -76,7 +78,13 @@ extension PhotosSlidesViewController {
         if scrollView == collectionView {
             model.updateAllowed = false
         } else if scrollView == self.scrollView {
-            self.infoScrollViewDidScroll()
+            infoScrollViewDidScroll()
+        }
+    }
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        if scrollView == collectionView {
+            finishDeleting()
         }
     }
 
@@ -85,7 +93,7 @@ extension PhotosSlidesViewController {
             notifyIfScrolledToStop()
             model.updateAllowed = true
         } else if scrollView == self.scrollView {
-            self.infoScrollViewDidEndDecelerating()
+            infoScrollViewDidEndDecelerating()
         }
     }
 
@@ -95,10 +103,13 @@ extension PhotosSlidesViewController {
 
     /// stopped scrolling
     func notifyIfScrolledToStop() {
-        if let slidesState = model.slidesState, let findPhoto = slidesState.getCurrentFindPhoto() {
-            slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
-            slidesSearchPromptViewModel.updateBarHeight?()
-            configureToolbar(for: findPhoto.photo)
+        if let slidesState = model.slidesState {
+            /// update header
+            if let findPhoto = slidesState.getCurrentFindPhoto() {
+                slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
+                slidesSearchPromptViewModel.updateBarHeight?()
+                configureToolbar(for: findPhoto.photo)
+            }
         }
     }
 }

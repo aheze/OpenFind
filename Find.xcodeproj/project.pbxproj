@@ -1344,6 +1344,10 @@
 		3C7A440C27EF734900DFF76F /* PhotosEmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440A27EF734900DFF76F /* PhotosEmptyContentView.swift */; };
 		3C7A440E27EF747000DFF76F /* PhotosVC+EmptyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440D27EF746F00DFF76F /* PhotosVC+EmptyContent.swift */; };
 		3C7A440F27EF747000DFF76F /* PhotosVC+EmptyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440D27EF746F00DFF76F /* PhotosVC+EmptyContent.swift */; };
+		3C7A441127EF791800DFF76F /* PhotosVM+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */; };
+		3C7A441227EF791800DFF76F /* PhotosVM+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */; };
+		3C7A441427EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A441327EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift */; };
+		3C7A441527EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A441327EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift */; };
 		3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */; };
 		3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
 		3C7B7A01277E8DF900E1F602 /* Find+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */; };
@@ -2836,6 +2840,8 @@
 		3C7A440727EECEA100DFF76F /* PhotosVC+ResultsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ResultsHeader.swift"; sourceTree = "<group>"; };
 		3C7A440A27EF734900DFF76F /* PhotosEmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEmptyContentView.swift; sourceTree = "<group>"; };
 		3C7A440D27EF746F00DFF76F /* PhotosVC+EmptyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+EmptyContent.swift"; sourceTree = "<group>"; };
+		3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Delete.swift"; sourceTree = "<group>"; };
+		3C7A441327EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+Deletion.swift"; sourceTree = "<group>"; };
 		3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionSamplingEngine.swift; sourceTree = "<group>"; };
 		3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarView.swift; sourceTree = "<group>"; };
 		3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Find+Utilities.swift"; sourceTree = "<group>"; };
@@ -3926,6 +3932,7 @@
 				3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */,
 				3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */,
 				3C9234A027E2EB1B0055061A /* PhotosVM+Add.swift */,
+				3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */,
 				3C4D39EC274766580010FD68 /* PhotosController.swift */,
 				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
 				3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */,
@@ -4767,6 +4774,7 @@
 				3C443FAB27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift */,
 				3CBB319727BD642A00F25F6A /* PhotosSlidesVC+DataSource.swift */,
 				3CBB319927BD643200F25F6A /* PhotosSlidesVC+Delegate.swift */,
+				3C7A441327EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift */,
 				3C443F9827DE55C80050A0AB /* PhotosSlidesVC+Toolbar.swift */,
 				3CE3D4DA27DCFA2100521735 /* PhotosSlidesVC+FullScreen.swift */,
 				3C71EFAB27BFFBBB00F0C0A0 /* PhotosSlidesVC+Gestures.swift */,
@@ -6794,6 +6802,7 @@
 				3C443ECB27DD8AC10050A0AB /* ContentPageViewController.swift in Sources */,
 				3C443F5E27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CF7643A278D19AC00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
+				3C7A441527EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift in Sources */,
 				3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */,
 				3C06260027C69FB60078E66F /* PhotosVC+Results.swift in Sources */,
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
@@ -6906,6 +6915,7 @@
 				3C1A2C0C27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift in Sources */,
 				3C443ECD27DD8AC10050A0AB /* ContentPagingFlowLayout.swift in Sources */,
 				3C443ED627DD8BD00050A0AB /* SnapshotView.swift in Sources */,
+				3C7A441227EF791800DFF76F /* PhotosVM+Delete.swift in Sources */,
 				3C443E9627DD88F80050A0AB /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3CDD945727C0685500D3EA1A /* Defaults.swift in Sources */,
 				3C443ECF27DD8AC40050A0AB /* CameraButton.swift in Sources */,
@@ -7660,6 +7670,7 @@
 				3C6C733C2781944300E039F0 /* ScrollZoomViewController.swift in Sources */,
 				3CCE2B51279D235C00F72351 /* ListsDetailWordCell.swift in Sources */,
 				3C08EB1E279C76E500971D60 /* ListsVC+FlowLayout.swift in Sources */,
+				3C7A441427EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift in Sources */,
 				3C6C743F2781958E00E039F0 /* ColorsVC+Accessibility.swift in Sources */,
 				3C08EB19279C76E500971D60 /* ListsViewController.swift in Sources */,
 				3C6C73992781947400E039F0 /* RightView.swift in Sources */,
@@ -7685,6 +7696,7 @@
 				3CBB319B27BD643500F25F6A /* PhotosSlidesVC+Delegate.swift in Sources */,
 				3CF7642D278D187200DCA4EA /* SearchNC+Utilities.swift in Sources */,
 				3C443F7127DDD7490050A0AB /* Sentence+Find.swift in Sources */,
+				3C7A441127EF791800DFF76F /* PhotosVM+Delete.swift in Sources */,
 				3C6C736F2781946200E039F0 /* CameraVC+Find.swift in Sources */,
 				3C9234A127E2EB1C0055061A /* PhotosVM+Add.swift in Sources */,
 				3C6C73B62781947A00E039F0 /* Find.swift in Sources */,

@@ -16,6 +16,7 @@ extension PhotosSlidesViewController {
         snapshot.appendSections([section])
         snapshot.appendItems(slidesState.findPhotos, toSection: section)
         dataSource?.apply(snapshot, animatingDifferences: animate)
+        print("updating slides.")
     }
 
     func makeDataSource() -> DataSource? {

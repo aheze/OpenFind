@@ -100,5 +100,20 @@ extension PhotosViewController {
             self.slidesSearchViewModel.replaceInPlace(with: self.searchViewModel, notify: true)
             self.model.updateSlidesSearchCollectionView?()
         }
+        
+        model.reloadAfterDeletion = { [weak self] in
+            guard let self = self else { return }
+            self.update()
+            self.updateResults()
+            if let slidesState = self.model.slidesState {
+                print("Count; \(slidesState.findPhotos.count)")
+                if slidesState.findPhotos.isEmpty {
+                    print("empty.")
+                    slidesState.viewController?.navigationController?.popViewController(animated: true)
+                } else {
+                    slidesState.viewController?.reloadAfterDeletion()
+                }
+            }
+        }
     }
 }

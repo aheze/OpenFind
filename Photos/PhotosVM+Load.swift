@@ -10,19 +10,6 @@ import Photos
 import UIKit
 
 extension PhotosViewModel {
-    // MARK: - Listen to realm refreshes
-
-    func listenToRealm() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(photoMetadatasUpdated),
-            name: .photoMetadatasUpdated,
-            object: nil
-        )
-    }
-
-    @objc func photoMetadatasUpdated(notification: Notification) {}
-    
     /// only call this once!
     func load() {
         realmModel.loadPhotoMetadatas()

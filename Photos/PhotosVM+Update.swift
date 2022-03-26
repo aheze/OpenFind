@@ -34,7 +34,7 @@ extension PhotosViewModel {
         var resultsCollectionViewIndex: Int?
 
         /// update the main array
-        if let index = getPhotoIndex(photo: photo) {
+        if let index = getIndex(for: photo, in: \.photos) {
             photos[index] = photo
         }
 

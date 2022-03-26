@@ -29,7 +29,9 @@ struct PhotosSlidesToolbarView: View {
         
             Spacer()
         
-            ToolbarIconButton(iconName: "trash") {}
+            ToolbarIconButton(iconName: "trash") {
+                deletePhoto()
+            }
         }
     }
     
@@ -46,6 +48,7 @@ struct PhotosSlidesToolbarView: View {
         }
         return "info.circle"
     }
+
     func toggleStar() {
         if
             let slidesState = model.slidesState,
@@ -78,6 +81,17 @@ struct PhotosSlidesToolbarView: View {
         if let slidesState = model.slidesState {
             model.slidesState?.toolbarInformationOn = !slidesState.toolbarInformationOn
             model.slidesState?.toolbarInformationOnChanged?()
+        }
+    }
+    
+    func deletePhoto() {
+        print("Slidesstatephoto: \(model.slidesState?.currentPhoto != nil)")
+        if
+            let slidesState = model.slidesState,
+            let findPhoto = slidesState.getCurrentFindPhoto()
+        {
+            print("redeling")
+            model.delete(photos: [findPhoto.photo])
         }
     }
 }

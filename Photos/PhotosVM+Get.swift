@@ -11,7 +11,8 @@ import Photos
 
 extension PhotosViewModel {
     /// get from `photos`
-    func getPhotoIndex(photo: Photo) -> Int? {
+    func getIndex(for photo: Photo, in keyPath: KeyPath<PhotosViewModel, Array<Photo>>) -> Int? {
+        let photos = self[keyPath: keyPath]
         if let firstIndex = photos.firstIndex(of: photo) {
             return firstIndex
         }

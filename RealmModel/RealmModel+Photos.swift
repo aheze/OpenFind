@@ -20,7 +20,6 @@ extension RealmModel {
             photoMetadatas.append(metadata)
         }
         self.photoMetadatas = photoMetadatas
-        photoMetadatasUpdated()
     }
 
     /// get the photo metadata of an photo if it exists
@@ -55,6 +54,7 @@ extension RealmModel {
         }
     }
 
+    /// call this inside `updatePhotoMetadata`
     private func addPhotoMetadata(metadata: PhotoMetadata) {
         let realmSentences = metadata.getRealmSentences()
         let realmMetadata = RealmPhotoMetadata(
@@ -72,5 +72,19 @@ extension RealmModel {
         } catch {
             Debug.log("Error adding photo metadata: \(error)", .error)
         }
+    }
+
+    func deletePhotoMetadata(metadata: PhotoMetadata) {
+        if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
+            do {
+                try realm.write {
+                    realm.delete(realmMetadata)
+                }
+            } catch {
+                Debug.log("Error deleting metadata: \(error)", .error)
+            }
+        }
+
+        loadLists()
     }
 }

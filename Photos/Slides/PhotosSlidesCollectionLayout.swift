@@ -170,6 +170,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         
         if let findPhoto = model.slidesState?.findPhotos[safe: closestAttributeIndex] {
             model.slidesState?.currentPhoto = findPhoto.photo
+            print("Setting to \(findPhoto.photo.asset.localIdentifier) when scrolled to \(closestAttributeIndex).")
         }
         return CGPoint(x: closestAttribute?.frame.origin.x ?? point.x, y: 0)
     }

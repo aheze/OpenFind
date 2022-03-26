@@ -12,7 +12,7 @@ extension PhotosViewController {
     func presentSlides(startingAtPhoto startingPhoto: Photo) {
         let viewController = createSlidesViewController()
 
-        let findPhotos: [FindPhoto] = model.photos.map { photo in
+        let findPhotos: [FindPhoto] = model.displayedSections.flatMap { $0.photos }.map { photo in
             let thumbnail = self.model.photoToThumbnail[photo] ?? nil
             return FindPhoto(
                 id: UUID(),
@@ -21,14 +21,7 @@ extension PhotosViewController {
             )
         }
 
-        let findPhoto: FindPhoto
-        let currentIndex: Int
-        if let photoIndex = model.getPhotoIndex(photo: startingPhoto) {
-            findPhoto = findPhotos[photoIndex]
-            currentIndex = photoIndex
-        } else {
-            return
-        }
+        guard let findPhoto = findPhotos.first(where: { $0.photo == startingPhoto }) else { return }
 
         /// set later inside `presentSlides`.
         let slidesState = PhotosSlidesState(

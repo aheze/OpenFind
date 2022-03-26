@@ -131,11 +131,22 @@ class PhotosViewModel: ObservableObject {
 
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
+
+    // MARK: Deletion
+
+    /// model updated, refresh collection views
+    var reloadAfterDeletion: (() -> Void)?
     var deleteSelected: (() -> Void)?
+
+    /// the index to scroll to before reload data, in `slidesState`
+    /// Need to scroll first, then snap to actual index right after reload
+    var slidesTargetIndexBeforeDeletion: Int?
+
+    /// snap to this after update
+    var slidesTargetIndexAfterDeletion: Int?
 
     init(realmModel: RealmModel) {
         self.realmModel = realmModel
-        listenToRealm()
     }
 
     enum ScanningState {
