@@ -29,6 +29,9 @@ extension PhotosViewController {
     func sliderChanged(filter: SliderViewModel.Filter) {
         if model.sortNeeded {
             model.sort()
+            if model.resultsState != nil {
+                find() /// find again (handles star/unstar)
+            }
         }
         
         switch filter {

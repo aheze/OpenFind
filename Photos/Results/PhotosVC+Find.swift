@@ -53,27 +53,13 @@ extension PhotosViewController {
             displayedFindPhotos = allFindPhotos
         }
         
-        let resultsStateExisted = model.resultsState != nil
         model.resultsState = PhotosResultsState(
             displayedFindPhotos: displayedFindPhotos,
             allFindPhotos: allFindPhotos,
             starredFindPhotos: starredFindPhotos,
             screenshotsFindPhotos: screenshotsFindPhotos
         )
-        
-        if resultsStateExisted {
-            updateResults(animate: true)
-        } else {
-            updateResults(animate: false)
-            if model.isSelecting {
-                resetSelectingState()
-                updateCollectionViewSelectionState()
-            }
-        }
-        
-        self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
     }
-    
     
     func getHighlightsAndDescription(
         from sentences: [Sentence],

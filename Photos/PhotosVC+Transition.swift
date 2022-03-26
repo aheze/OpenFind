@@ -123,8 +123,14 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     }
                 }
             }
-            if model.sortNeeded, let selectedFilter = model.sliderViewModel.selectedFilter {
-                self.load(for: selectedFilter)
+            if model.sortNeeded {
+                if let selectedFilter = model.sliderViewModel.selectedFilter {
+                    self.load(for: selectedFilter)
+                }
+                if model.resultsState != nil {
+                    find() /// find again (handles star/unstar)
+                    updateResults()
+                }
             }
         }
     }
@@ -205,7 +211,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             let section = model.displayedSections[safe: photoIndexPath.section],
             let headerIndex = sectionLayouts.firstIndex(where: {
                 $0.headerLayoutAttributes.encompassingCategorizations.contains(section.categorization) &&
-                $0.headerLayoutAttributes.isVisible
+                    $0.headerLayoutAttributes.isVisible
             }),
             let header = collectionView.supplementaryView(
                 forElementKind: UICollectionView.elementKindSectionHeader,

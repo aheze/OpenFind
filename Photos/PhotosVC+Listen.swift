@@ -10,7 +10,6 @@ import SwiftUI
 
 extension PhotosViewController {
     func listenToModel() {
-        
         /// only called at first
         model.reload = { [weak self] in
             guard let self = self else { return }
@@ -61,7 +60,19 @@ extension PhotosViewController {
             guard let self = self else { return }
             
             if textChanged {
+                let resultsStateExisted = self.model.resultsState != nil
                 self.find()
+                self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
+                
+                if resultsStateExisted {
+                    self.updateResults(animate: true)
+                } else {
+                    self.updateResults(animate: false)
+                    if self.model.isSelecting {
+                        self.resetSelectingState()
+                        self.updateCollectionViewSelectionState()
+                    }
+                }
             } else {
                 /// replace all highlights
                 self.updateResultsHighlightColors()
@@ -83,7 +94,6 @@ extension PhotosViewController {
             guard let self = self else { return }
             self.slidesSearchViewModel.replaceInPlace(with: self.searchViewModel, notify: true)
             self.model.updateSlidesSearchCollectionView?()
-            
         }
     }
 }
