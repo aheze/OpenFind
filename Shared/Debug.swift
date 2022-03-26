@@ -12,7 +12,7 @@ enum Debug {
     
     /// Everything should be false on release
     static var tabBarAlwaysTransparent = false
-    static var navigationBarAlwaysTransparent = false
+    static var navigationBarAlwaysTransparent = true
     static var collectionViewScrollDisabled = false
 }
 

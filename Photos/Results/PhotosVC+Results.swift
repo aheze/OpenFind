@@ -19,6 +19,7 @@ extension PhotosViewController {
             if resultsCollectionView.window == nil {
                 collectionViewContainer.addSubview(resultsCollectionView)
                 resultsCollectionView.pinEdgesToSuperview()
+                setupResultsHeader()
             }
 
             collectionView.removeFromSuperview()

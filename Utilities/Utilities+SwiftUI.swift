@@ -55,3 +55,11 @@ extension InsettableShape {
             .background(self.fill(fillStyle))
     }
 }
+
+final class HostingController<Content: View>: UIHostingController<Content> {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        view.setNeedsUpdateConstraints()
+    }
+}

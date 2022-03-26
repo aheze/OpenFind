@@ -24,7 +24,9 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var permissionsViewModel = PhotosPermissionsViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
     var headerContentModel = HeaderContentModel()
+    lazy var resultsHeaderContainer = UIView()
     lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
+    var resultsHeaderHeightC: NSLayoutConstraint!
     
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)

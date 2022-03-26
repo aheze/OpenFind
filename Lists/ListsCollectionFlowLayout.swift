@@ -19,8 +19,8 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     
     var getSections: (() -> [Section])?
-    
     var getSizeForSectionWithWidth: ((Int, CGFloat) -> CGSize)?
+    var getTopPadding: (() -> CGFloat)?
     
     /// get the frame of a list cell from available width
     /// 1. index
@@ -73,10 +73,11 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
         
         guard let sections = getSections?() else { return }
         guard let collectionView = collectionView else { return }
-        
+        let topPadding = getTopPadding?() ?? .zero
+
         let availableWidth = getAvailableWidth(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
-        
         var sectionAttributes = [UICollectionViewLayoutAttributes]()
+        
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         let (numberOfColumns, columnWidth) = getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
@@ -93,14 +94,14 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                 leftSpacing = CGFloat(columnIndex) * ListsCollectionConstants.cellSpacing
             }
             
-            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: headerHeight)
+            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: headerHeight + topPadding)
             columnOffsets.append(offset)
         }
         
         for sectionIndex in sections.indices {
             /// top out all the columns
             let maxHeight = columnOffsets.max(by: { $0.height < $1.height })?.height ?? 0
-            
+
             if let size = getSizeForSectionWithWidth?(sectionIndex, availableWidth) {
                 let attributes = UICollectionViewLayoutAttributes(
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -113,7 +114,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                     height: size.height
                 )
                 attributes.frame = headerFrame
-                
+
                 sectionAttributes.append(attributes)
                 for index in columnOffsets.indices {
                     columnOffsets[index].height = maxHeight + headerFrame.height + ListsCollectionConstants.cellSpacing

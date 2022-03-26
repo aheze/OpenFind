@@ -28,13 +28,12 @@ extension PhotosViewController {
             return [section]
         }
         
-        flowLayout.getSizeForSectionWithWidth = { [weak self] photosSectionIndex, availableWidth in
-
+        flowLayout.getTopPadding = { [weak self] in
             if
                 let self = self,
                 let size = self.headerContentModel.size
             {
-                return CGSize(width: availableWidth, height: size.height)
+                return size.height
             }
             return .zero
         }

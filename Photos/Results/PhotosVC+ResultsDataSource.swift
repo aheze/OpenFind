@@ -19,7 +19,7 @@ extension PhotosViewController {
         resultsSnapshot.appendItems(resultsState.displayedFindPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
 
-        resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
+        resultsHeaderViewModel.text = model.resultsState?.getResultsText() ?? ""
         if model.scannedPhotosCount == model.totalPhotosCount {
             resultsHeaderViewModel.description = nil
         } else {
@@ -80,17 +80,6 @@ extension PhotosViewController {
             }
 
             return cell
-        }
-
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-
-            self.getHeaderContent(
-                collectionView: collectionView,
-                kind: kind,
-                indexPath: indexPath,
-                content: self.resultsHeaderView,
-                headerContentModel: self.headerContentModel
-            )
         }
 
         return dataSource

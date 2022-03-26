@@ -87,7 +87,12 @@ extension PhotosViewController {
         }
         
         headerContentModel.sizeChanged = { [weak self] in
-            self?.resultsFlowLayout.invalidateLayout()
+            guard let self = self else { return }
+            print("changed: \(self.headerContentModel.size?.height ?? 0)")
+            self.resultsHeaderHeightC.constant = self.headerContentModel.size?.height ?? 0
+            self.collectionView.setNeedsLayout()
+            self.collectionView.layoutIfNeeded()
+            self.resultsFlowLayout.invalidateLayout()
         }
         
         slidesSearchPromptViewModel.resetPressed = { [weak self] in

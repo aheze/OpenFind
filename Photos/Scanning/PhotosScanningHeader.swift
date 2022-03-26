@@ -57,5 +57,6 @@ struct PhotosScanningHeader: View {
             .padding(PhotosScanningConstants.padding)
             .blueBackground()
         }
+        .padding(.bottom, ListsCollectionConstants.cellSpacing)
     }
 }

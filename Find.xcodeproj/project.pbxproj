@@ -1338,6 +1338,8 @@
 		3C7A440327EE3AFA00DFF76F /* Utilities+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43F427EE3AEF00DFF76F /* Utilities+Array.swift */; };
 		3C7A440527EE464800DFF76F /* PhotosVM+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440427EE464800DFF76F /* PhotosVM+Get.swift */; };
 		3C7A440627EE464800DFF76F /* PhotosVM+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440427EE464800DFF76F /* PhotosVM+Get.swift */; };
+		3C7A440827EECEA100DFF76F /* PhotosVC+ResultsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440727EECEA100DFF76F /* PhotosVC+ResultsHeader.swift */; };
+		3C7A440927EECEA100DFF76F /* PhotosVC+ResultsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A440727EECEA100DFF76F /* PhotosVC+ResultsHeader.swift */; };
 		3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */; };
 		3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
 		3C7B7A01277E8DF900E1F602 /* Find+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */; };
@@ -2827,6 +2829,7 @@
 		3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ResultsSelection.swift"; sourceTree = "<group>"; };
 		3C7A43F427EE3AEF00DFF76F /* Utilities+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Array.swift"; sourceTree = "<group>"; };
 		3C7A440427EE464800DFF76F /* PhotosVM+Get.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Get.swift"; sourceTree = "<group>"; };
+		3C7A440727EECEA100DFF76F /* PhotosVC+ResultsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ResultsHeader.swift"; sourceTree = "<group>"; };
 		3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionSamplingEngine.swift; sourceTree = "<group>"; };
 		3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarView.swift; sourceTree = "<group>"; };
 		3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Find+Utilities.swift"; sourceTree = "<group>"; };
@@ -4706,6 +4709,7 @@
 				3CAE64ED27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift */,
 				3C0AACAF27C8222A009DFC09 /* PhotosVC+ResultsDelegate.swift */,
 				3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */,
+				3C7A440727EECEA100DFF76F /* PhotosVC+ResultsHeader.swift */,
 				3CAE64EA27C6AA73009E8564 /* PhotosVC+ResultsFlowLayout.swift */,
 				3CFC91C327E188C4006290CD /* ResultsHeaderView.swift */,
 			);
@@ -6944,6 +6948,7 @@
 				3CFD6020278B70970031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3CE3D4C527DA807700521735 /* SearchConfiguration.swift in Sources */,
 				3C443ED327DD8BD00050A0AB /* SettingsIconView.swift in Sources */,
+				3C7A440927EECEA100DFF76F /* PhotosVC+ResultsHeader.swift in Sources */,
 				3CFD602C278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C0B5E7027BAC9B700EC881E /* PhotosVC+Setup.swift in Sources */,
 				3CBB318D27BD526200F25F6A /* ScrollZoomHookViewController.swift in Sources */,
@@ -7454,6 +7459,7 @@
 				3CC594F8279F3322001D07DC /* ColorPickerView.swift in Sources */,
 				3C6C7427278194A500E039F0 /* GeneralUtilities.swift in Sources */,
 				3C443FCD27DFFF870050A0AB /* IgnoredPhotosViewController.swift in Sources */,
+				3C7A440827EECEA100DFF76F /* PhotosVC+ResultsHeader.swift in Sources */,
 				3CD7063027A3842200B446D7 /* IconPickerViewModel.swift in Sources */,
 				3CD7063427A3842200B446D7 /* Icons.swift in Sources */,
 				3C443FB227DFBA770050A0AB /* SearchVM+Extensions.swift in Sources */,
