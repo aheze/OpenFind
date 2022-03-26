@@ -25,22 +25,30 @@ extension PhotosViewController {
         }
     }
 
+    /// slider changed to a new selection
     func sliderChanged(filter: SliderViewModel.Filter) {
-        print("slider changed")
         if model.sortNeeded {
             model.sort()
         }
+        
         switch filter {
         case .starred:
             model.displayedSections = model.starredSections
-            model.resultsState?.displayedFindPhotos = model.resultsState?.starredFindPhotos ?? []
+            if let starredFindPhotos = model.resultsState?.starredFindPhotos {
+                model.resultsState?.displayedFindPhotos = starredFindPhotos
+            }
         case .screenshots:
             model.displayedSections = model.screenshotsSections
-            model.resultsState?.displayedFindPhotos = model.resultsState?.screenshotsFindPhotos ?? []
+            if let screenshotsFindPhotos = model.resultsState?.screenshotsFindPhotos {
+                model.resultsState?.displayedFindPhotos = screenshotsFindPhotos
+            }
         case .all:
             model.displayedSections = model.allSections
-            model.resultsState?.displayedFindPhotos = model.resultsState?.allFindPhotos ?? []
+            if let allFindPhotos = model.resultsState?.allFindPhotos {
+                model.resultsState?.displayedFindPhotos = allFindPhotos
+            }
         }
+
         update()
         updateResults()
     }
