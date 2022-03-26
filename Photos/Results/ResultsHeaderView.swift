@@ -10,7 +10,9 @@ import SwiftUI
 
 class ResultsHeaderViewModel: ObservableObject {
     @Published var text = "10 Results."
-    @Published var description = " More results will appear as Find scans more photos."
+    @Published var description: String? = defaultDescription
+
+    static let defaultDescription = "More results will appear as Find scans more photos."
 }
 
 struct ResultsHeaderView: View {
@@ -21,7 +23,8 @@ struct ResultsHeaderView: View {
         VStack(alignment: .leading) {
             Group {
                 Text(resultsHeaderViewModel.text)
-                    + Text(resultsHeaderViewModel.description)
+                    + Text(" ")
+                    + Text(resultsHeaderViewModel.description ?? "")
                     .foregroundColor(UIColor.secondaryLabel.color)
             }
             .fixedSize(horizontal: false, vertical: true)

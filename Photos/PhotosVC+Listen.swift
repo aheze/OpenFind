@@ -13,7 +13,7 @@ extension PhotosViewController {
         /// only called at first
         model.reload = { [weak self] in
             guard let self = self else { return }
-            print("reloading")
+            
             self.model.displayedSections = self.model.allSections
             self.update(animate: false)
         }

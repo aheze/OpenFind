@@ -25,7 +25,7 @@ struct PhotosScanningIcon: View {
                 scannedPhotosCount: model.scannedPhotosCount,
                 totalPhotosCount: model.totalPhotosCount,
                 lineWidth: 2.5,
-                iconFont: .preferredCustomFont(forTextStyle: .caption2, weight: PhotosConstants.scanningCheckmarkWeight),
+                iconFont: .systemFont(ofSize: 9, weight: PhotosConstants.scanningCheckmarkWeight),
                 state: model.scanningIconState
             )
             .padding(4)
@@ -52,6 +52,7 @@ struct PhotosScanningProgressView: View {
                     lineCap: .round
                 )
             )
+            .animation(.spring(), value: scannedPhotosCount)
             .background(
                 Circle()
                     .stroke(
@@ -81,7 +82,6 @@ struct PhotosScanningProgressView: View {
     }
 }
 
-
 struct PhotosScanningGradientProgressView: View {
     var scannedPhotosCount: Int
     var totalPhotosCount: Int
@@ -100,6 +100,7 @@ struct PhotosScanningGradientProgressView: View {
                     lineCap: .round
                 )
             )
+            .animation(.spring(), value: scannedPhotosCount)
             .background(
                 Circle()
                     .stroke(
@@ -130,12 +131,27 @@ struct PhotosScanningGradientProgressView: View {
                 VStack {
                     if state == .done {
                         Image(systemName: "checkmark")
+                            .transition(
+                                .asymmetric(
+                                    insertion: .move(edge: .bottom),
+                                    removal: .move(edge: .top)
+                                )
+                                .combined(with: .opacity)
+                            )
                     } else if state == .paused {
                         Image(systemName: "pause.fill")
+                            .transition(
+                                .asymmetric(
+                                    insertion: .move(edge: .bottom),
+                                    removal: .move(edge: .top)
+                                )
+                                .combined(with: .opacity)
+                            )
                     }
                 }
                 .font(Font(iconFont as CTFont))
                 .foregroundColor(.accent)
+                .animation(.spring(), value: state)
             )
     }
 

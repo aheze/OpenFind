@@ -78,6 +78,7 @@ extension PhotosViewController {
         collectionView.keyboardDismissMode = .interactive
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
+        collectionView.contentInset.bottom = SliderConstants.height /// padding for the slider
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = layout

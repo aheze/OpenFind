@@ -10,6 +10,7 @@ import SwiftUI
 class PhotosViewController: UIViewController, PageViewController, Searchable {
     var tabType: TabState = .photos
     
+    /// external models
     var model: PhotosViewModel
     var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
@@ -18,10 +19,11 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var searchNavigationProgressViewModel: ProgressViewModel
     var slidesSearchViewModel: SearchViewModel
     var slidesSearchPromptViewModel: SearchPromptViewModel
+    
+    /// internal models
     var permissionsViewModel = PhotosPermissionsViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
     var headerContentModel = HeaderContentModel()
-    
     lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
     
     var baseSearchBarOffset = CGFloat(0)

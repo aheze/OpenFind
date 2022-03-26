@@ -33,7 +33,7 @@ extension PhotosViewController {
                 find() /// find again (handles star/unstar)
             }
         }
-        
+
         switch filter {
         case .starred:
             model.displayedSections = model.starredSections
@@ -55,7 +55,7 @@ extension PhotosViewController {
         update()
         updateResults()
     }
-    
+
     /// update the counts of the slider filter
     func updateCounts(allCount: Int?, starredCount: Int?, screenshotsCount: Int?) {
         withAnimation {
