@@ -82,22 +82,22 @@ struct PhotosResultsState {
             return "\(highlights.count) results in \(displayedFindPhotos.count) photos."
         }
     }
-    
+
     mutating func update(findPhoto: FindPhoto) {
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.displayedFindPhotos) {
-            self.displayedFindPhotos[index].photo = findPhoto.photo
+            displayedFindPhotos[index].photo = findPhoto.photo
         }
 
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.allFindPhotos) {
-            self.allFindPhotos[index].photo = findPhoto.photo
+            allFindPhotos[index].photo = findPhoto.photo
         }
 
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.starredFindPhotos) {
-            self.starredFindPhotos[index].photo = findPhoto.photo
+            starredFindPhotos[index].photo = findPhoto.photo
         }
 
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.screenshotsFindPhotos) {
-            self.screenshotsFindPhotos[index].photo = findPhoto.photo
+            screenshotsFindPhotos[index].photo = findPhoto.photo
         }
     }
 }
@@ -184,7 +184,7 @@ extension FindPhoto {
 
 struct PhotosSection: Hashable {
     var title: String
-    var categorization: Categorization
+    var categorization: PhotosSectionCategorization
     var photos = [Photo]()
 
     func hash(into hasher: inout Hasher) {
@@ -194,31 +194,7 @@ struct PhotosSection: Hashable {
     static func == (lhs: PhotosSection, rhs: PhotosSection) -> Bool {
         lhs.categorization == rhs.categorization
     }
-
-    enum Categorization: Equatable, Hashable {
-        case date(year: Int, month: Int)
-
-        func getTitle() -> String {
-            switch self {
-            case .date(let year, let month):
-                let dateComponents = DateComponents(year: year, month: month)
-                if let date = Calendar.current.date(from: dateComponents) {
-                    let formatter = DateFormatter()
-                    if date.isInThisYear {
-                        formatter.dateFormat = "MMMM"
-                    } else {
-                        formatter.dateFormat = "MMMM yyyy" /// add year if before
-                    }
-                    let string = formatter.string(from: date)
-                    return string
-                }
-            }
-
-            return ""
-        }
-    }
 }
-
 
 extension Array where Element == FindPhoto {
     mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
@@ -231,17 +207,6 @@ extension Array where Element == FindPhoto {
     }
 }
 
-
-//func applyMetadata(in photos: inout [Photo], at index: Int, with metadata: PhotoMetadata?) {
-//    if photos[index].metadata != nil {
-//        photos[index].metadata?.dateScanned = metadata?.dateScanned
-//        photos[index].metadata?.sentences = metadata?.sentences ?? []
-//    } else {
-//        photos[index].metadata = metadata
-//    }
-//}
-
-
 struct DataSourceSectionTemplate: Hashable {
     var id = 0
 
@@ -253,5 +218,3 @@ struct DataSourceSectionTemplate: Hashable {
         lhs.id == rhs.id
     }
 }
-
-

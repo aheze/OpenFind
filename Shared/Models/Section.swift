@@ -13,7 +13,7 @@ struct Section {
     var items = [Item]()
     
     enum Category {
-        case photosSectionCategorization(PhotosSection.Categorization)
+        case photosSectionCategorization(PhotosSectionCategorization)
         case placeholder
     }
     

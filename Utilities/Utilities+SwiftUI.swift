@@ -15,14 +15,13 @@ struct FrameRectModifier: ViewModifier {
         content
             .frame(width: rect.width, height: rect.height, alignment: .topLeading)
             .position(x: rect.origin.x + rect.width / 2, y: rect.origin.y + rect.height / 2)
-        
     }
 }
 
 public extension View {
     /// Position a view using a rectangular frame.
     func frame(with rect: CGRect) -> some View {
-        return self.modifier(FrameRectModifier(rect: rect))
+        return modifier(FrameRectModifier(rect: rect))
     }
 }
 
@@ -34,32 +33,22 @@ extension Color {
 
 /// from https://forums.swift.org/t/swiftui-extension-for-os-specific-view-modifiers-that-seems-too-arcane-to-implement/30897/13
 extension View {
-  @inlinable
-  func modify<T: View>(@ViewBuilder modifier: ( Self ) -> T) -> T {
-    return modifier(self)
-  }
+    @inlinable
+    func modify<T: View>(@ViewBuilder modifier: (Self) -> T) -> T {
+        return modifier(self)
+    }
 }
 
 extension Shape {
     func fill<Fill: ShapeStyle, Stroke: ShapeStyle>(_ fillStyle: Fill, strokeBorder strokeStyle: Stroke, lineWidth: CGFloat = 1) -> some View {
-        self
-            .stroke(strokeStyle, lineWidth: lineWidth)
-            .background(self.fill(fillStyle))
+        stroke(strokeStyle, lineWidth: lineWidth)
+            .background(fill(fillStyle))
     }
 }
 
 extension InsettableShape {
     func fill<Fill: ShapeStyle, Stroke: ShapeStyle>(_ fillStyle: Fill, strokeBorder strokeStyle: Stroke, lineWidth: CGFloat = 1) -> some View {
-        self
-            .strokeBorder(strokeStyle, lineWidth: lineWidth)
-            .background(self.fill(fillStyle))
-    }
-}
-
-final class HostingController<Content: View>: UIHostingController<Content> {
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        view.setNeedsUpdateConstraints()
+        strokeBorder(strokeStyle, lineWidth: lineWidth)
+            .background(fill(fillStyle))
     }
 }

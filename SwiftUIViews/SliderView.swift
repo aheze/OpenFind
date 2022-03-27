@@ -99,6 +99,7 @@ struct SliderView: View {
                                 Capsule()
                                     .fill(backgroundColor.color)
                             )
+                            .transition(.scale)
                     }
 
                     Text(selection.filter.getString())
@@ -253,7 +254,28 @@ extension SliderViewModel {
 struct SliderViewTester: View {
     @StateObject var model = SliderViewModel()
     var body: some View {
-        SliderView(model: model)
+        VStack {
+            SliderView(model: model)
+            Button {
+                withAnimation {
+                    model.selections[0].count = 50
+                    model.selections[1].count = 190
+                    model.selections[2].count = 1
+                }
+            } label: {
+                Text("add")
+            }
+
+            Button {
+                withAnimation {
+                    model.selections[0].count = nil
+                    model.selections[1].count = nil
+                    model.selections[2].count = nil
+                }
+            } label: {
+                Text("remove")
+            }
+        }
     }
 }
 

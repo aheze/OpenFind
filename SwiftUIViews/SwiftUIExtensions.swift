@@ -58,10 +58,9 @@ struct ContentSizeReaderPreferenceKey: PreferenceKey {
 }
 
 extension View {
-    func blueBackground(highlighted: Bool = false) -> some View {
+    func blueBackground(highlighted: Bool = false, cornerRadius: CGFloat = 16) -> some View {
         self
             .background(highlighted ? Color.accent : Color.accent.opacity(0.1))
-            .cornerRadius(PhotosResultsCellConstants.cornerRadius)
+            .cornerRadius(cornerRadius)
     }
-    
 }
