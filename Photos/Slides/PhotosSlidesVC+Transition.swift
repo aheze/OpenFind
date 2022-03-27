@@ -14,7 +14,6 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         case .push:
             break
         case .pop:
-//            print("photo when dismiss: \(model.slidesState?.getCurrentSlidesPhoto()?.photo.asset.localIdentifier)")
             if let containerView = getCurrentItemContainerView() {
                 containerView.alpha = 0
             }

@@ -169,7 +169,6 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         }
         
         if let slidesPhoto = model.slidesState?.slidesPhotos[safe: closestAttributeIndex] {
-            print("scrolling to target \(closestAttributeIndex).")
             model.slidesState?.currentPhoto = slidesPhoto.findPhoto.photo
         }
         return CGPoint(x: closestAttribute?.frame.origin.x ?? point.x, y: 0)

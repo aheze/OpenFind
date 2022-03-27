@@ -98,13 +98,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         setupTapGesture()
         update(animate: false)
         
-        print("laoded!")
         if
             let slidesState = model.slidesState,
             let currentIndex = slidesState.getCurrentIndex(),
             let slidesPhoto = slidesState.slidesPhotos[safe: currentIndex]
         {
-            print("scrolling.")
             configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)

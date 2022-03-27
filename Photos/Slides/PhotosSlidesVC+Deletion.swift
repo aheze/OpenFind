@@ -44,21 +44,18 @@ extension PhotosSlidesViewController {
 
     func finishDeleting() {
         guard let photoToDelete = photoToDelete else { return }
-//        print("beofre: \(self.model.slidesState?.findPhotos.count). Deleting: \(photoToDelete.asset.localIdentifier)")
         self.model.slidesState?.slidesPhotos = self.model.slidesState?.slidesPhotos.filter { $0.findPhoto.photo != photoToDelete } ?? []
-//        print("after: \(self.model.slidesState?.findPhotos.count)")
         update(animate: false)
 
-//        if let targetIndexAfterDeletion = targetIndexAfterDeletion {
-//            print("target: \(targetIndexAfterDeletion)")
-//            self.model.slidesState?.currentPhoto = self.model.slidesState?.findPhotos[safe: targetIndexAfterDeletion]?.photo
-//
-//            DispatchQueue.main.async {
-//                self.collectionView.layoutIfNeeded()
-//                self.collectionView.scrollToItem(at: targetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
-//            }
-//
-//            self.targetIndexAfterDeletion = nil
-//        }
+        if let targetIndexAfterDeletion = targetIndexAfterDeletion {
+            self.model.slidesState?.currentPhoto = self.model.slidesState?.slidesPhotos[safe: targetIndexAfterDeletion]?.findPhoto.photo
+
+            DispatchQueue.main.async {
+                self.collectionView.layoutIfNeeded()
+                self.collectionView.scrollToItem(at: targetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
+            }
+
+            self.targetIndexAfterDeletion = nil
+        }
     }
 }

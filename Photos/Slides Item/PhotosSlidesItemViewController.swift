@@ -67,15 +67,12 @@ class PhotosSlidesItemViewController: UIViewController {
     }
 
     func reloadImage() {
+        
         imageFrame = getImageFrame()
-        if let image = findPhoto.fullImage {
-            scrollZoomController.imageView.image = image
-        } else {
-            model.getFullImage(from: findPhoto.photo) { [weak self] image in
-                guard let self = self else { return }
-                self.findPhoto.fullImage = image
-                self.scrollZoomController.imageView.image = image
-            }
+        model.getFullImage(from: findPhoto.photo) { [weak self] image in
+            guard let self = self else { return }
+            self.findPhoto.fullImage = image
+            self.scrollZoomController.imageView.image = image
         }
     }
     

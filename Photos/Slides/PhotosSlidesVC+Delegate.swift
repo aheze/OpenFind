@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("     -- Will display at \(indexPath)")
         guard var slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] else { return }
 
         let photoSlidesViewController: PhotosSlidesItemViewController
@@ -32,13 +31,13 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
             photoSlidesViewController = viewController
             addChildViewController(viewController, in: cell.contentView)
+            cell.contentView.bringSubviewToFront(viewController.view)
 
             /// adding a child seems to take control of the navigation bar. stop this
             navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
-            print("Setting assoc view cotnroller/")
             slidesPhoto.associatedViewController = viewController
         }
-        
+
         model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto
 
         if !slidesSearchViewModel.stringToGradients.isEmpty {
