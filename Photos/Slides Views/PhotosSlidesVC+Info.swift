@@ -28,7 +28,7 @@ extension PhotosSlidesViewController {
                 var attributes = Popover.Attributes()
                 attributes.tag = "Popover"
                 attributes.position = .relative(popoverAnchors: [.topRight])
-                attributes.dismissal.mode == .none
+                attributes.dismissal.mode = .none
                 attributes.sourceFrame = { [weak self] in
                     guard let self = self else { return .zero }
                     var rect = self.view.bounds

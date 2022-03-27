@@ -50,6 +50,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, SlidesPhoto>
     
     // MARK: - Deletion
+
     var photoToDelete: Photo?
     var targetIndexAfterDeletion: Int?
 
@@ -125,6 +126,12 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = collectionView.windowFrame()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if let popover = view.popover(tagged: "Popover") {
+            popover.dismiss()
+        }
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
@@ -137,11 +144,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         }
     }
     
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         resetInfoToHidden()
     }
+
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
