@@ -111,5 +111,9 @@ extension PhotosViewController {
             guard let self = self else { return }
             self.resetSelectingState()
         }
+        model.shareSelected = { [weak self] in
+            guard let self = self else { return }
+            self.share(photos: self.model.selectedPhotos, model: self.model)
+        }
     }
 }

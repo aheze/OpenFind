@@ -137,6 +137,8 @@ class PhotosViewModel: ObservableObject {
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
 
+    // MARK: Share
+    var shareSelected: (() -> Void)?
     // MARK: Deletion
     var deleteSelected: (() -> Void)?
     
