@@ -46,8 +46,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     
     lazy var flowLayout = makeFlowLayout()
     lazy var dataSource: DataSource? = makeDataSource()
-    typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, FindPhoto>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
+    typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, SlidesPhoto>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, SlidesPhoto>
     
     // MARK: - Deletion
     var photoToDelete: Photo?
@@ -98,17 +98,19 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         setupTapGesture()
         update(animate: false)
         
+        print("laoded!")
         if
             let slidesState = model.slidesState,
             let currentIndex = slidesState.getCurrentIndex(),
-            let findPhoto = slidesState.findPhotos[safe: currentIndex]
+            let slidesPhoto = slidesState.slidesPhotos[safe: currentIndex]
         {
-            configureToolbar(for: findPhoto.photo)
+            print("scrolling.")
+            configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
             model.updateAllowed = true
-            if findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
-                slidesSearchPromptViewModel.update(show: true, resultsText: findPhoto.getResultsText(), resetText: nil)
+            if slidesPhoto.findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
+                slidesSearchPromptViewModel.update(show: true, resultsText: slidesPhoto.findPhoto.getResultsText(), resetText: nil)
             }
         }
     }

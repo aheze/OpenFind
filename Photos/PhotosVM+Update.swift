@@ -75,7 +75,7 @@ extension PhotosViewModel {
 
         if
             let slidesState = slidesState,
-            let index = slidesState.getFindPhotoIndex(photo: photo)
+            let index = slidesState.getSlidesPhotoIndex(photo: photo)
         {
             /// must update `currentPhoto` as well
             if let currentIndex = slidesState.getCurrentIndex() {
@@ -83,7 +83,7 @@ extension PhotosViewModel {
                     self.slidesState?.currentPhoto = photo
                 }
             }
-            self.slidesState?.findPhotos[index].photo = photo
+            self.slidesState?.slidesPhotos[index].findPhoto.photo = photo
         }
 
         guard let metadata = photo.metadata else { return }

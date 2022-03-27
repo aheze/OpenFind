@@ -109,9 +109,9 @@ extension PhotosViewModel {
 
         if
             let slidesState = slidesState,
-            let index = slidesState.getFindPhotoIndex(photo: photo)
+            let index = slidesState.getSlidesPhotoIndex(photo: photo)
         {
-            self.slidesState?.findPhotos.applyMetadata(at: index, with: photo.metadata)
+            self.slidesState?.slidesPhotos.applyMetadata(at: index, with: photo.metadata)
         }
     }
 

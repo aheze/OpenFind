@@ -14,6 +14,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         case .push:
             break
         case .pop:
+//            print("photo when dismiss: \(model.slidesState?.getCurrentSlidesPhoto()?.photo.asset.localIdentifier)")
             if let containerView = getCurrentItemContainerView() {
                 containerView.alpha = 0
             }
@@ -38,7 +39,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         if model.slidesState?.toolbarInformationOn ?? false {
             return frame
         } else {
-            let thumbnail = model.slidesState?.getCurrentFindPhoto()?.thumbnail
+            let thumbnail = model.slidesState?.getCurrentSlidesPhoto()?.findPhoto.thumbnail
             let thumbnailSize = thumbnail?.size ?? .zero
             let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnailSize, insideRect: frame)
             return normalizedFrame
@@ -58,18 +59,17 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     }
     
     func getCurrentItemViewController() -> PhotosSlidesItemViewController? {
-        if let viewController = model.slidesState?.getCurrentFindPhoto()?.associatedViewController {
+        if let viewController = model.slidesState?.getCurrentSlidesPhoto()?.associatedViewController {
             return viewController
         }
         return nil
     }
     
     func getCurrentItemContainerView() -> UIView? {
-        if
-            let viewController = getCurrentItemViewController(),
-            let containerView = viewController.containerView
-        {
-            return containerView
+        if let viewController = getCurrentItemViewController() {
+            if let containerView = viewController.containerView {
+                return containerView
+            }
         }
         return nil
     }

@@ -14,7 +14,7 @@ extension PhotosSlidesViewController {
             guard let self = self else { return }
 
             guard let slidesState = self.model.slidesState else { return }
-            guard let findPhoto = slidesState.getCurrentFindPhoto() else { return }
+            guard let slidesPhoto = slidesState.getCurrentSlidesPhoto() else { return }
 
             /// metadata already exists, directly find
             if textChanged {
@@ -22,18 +22,18 @@ extension PhotosSlidesViewController {
                     self.slidesSearchPromptViewModel.update(show: false)
                     self.slidesSearchPromptViewModel.updateBarHeight?()
 
-                    if let index = slidesState.getFindPhotoIndex(photo: findPhoto.photo) {
+                    if let index = slidesState.getSlidesPhotoIndex(photo: slidesPhoto.findPhoto.photo) {
                         let highlightSet = FindPhoto.HighlightsSet(
                             stringToGradients: [:],
                             highlights: []
                         )
-                        findPhoto.associatedViewController?.highlightsViewModel.update(with: [], replace: true)
-                        self.model.slidesState?.findPhotos[index].highlightsSet = highlightSet
+                        slidesPhoto.associatedViewController?.highlightsViewModel.update(with: [], replace: true)
+                        self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
                     }
 
                     /// if showing, that means Find is currently scanning, so don't scan a second time.
                 } else if !self.searchNavigationProgressViewModel.percentageShowing {
-                    self.startFinding(for: findPhoto)
+                    self.startFinding(for: slidesPhoto)
                 }
             } else {
                 /// update the highlights back in `resultsCollectionView`
@@ -42,8 +42,8 @@ extension PhotosSlidesViewController {
                 /// replace highlights for this photo only - update other photo colors once they are scrolled to.
                 if
                     let slidesState = self.model.slidesState,
-                    let index = slidesState.getFindPhotoIndex(photo: findPhoto.photo),
-                    let highlightsSet = slidesState.findPhotos[index].highlightsSet
+                    let index = slidesState.getSlidesPhotoIndex(photo: slidesPhoto.findPhoto.photo),
+                    let highlightsSet = slidesState.slidesPhotos[index].findPhoto.highlightsSet
                 {
                     let newHighlights = self.getUpdatedHighlightsColors(
                         oldHighlights: highlightsSet.highlights,
@@ -53,8 +53,8 @@ extension PhotosSlidesViewController {
                         stringToGradients: self.slidesSearchViewModel.stringToGradients,
                         highlights: newHighlights
                     )
-                    self.model.slidesState?.findPhotos[index].associatedViewController?.highlightsViewModel.highlights = newHighlights
-                    self.model.slidesState?.findPhotos[index].highlightsSet = newHighlightsSet
+                    slidesPhoto.associatedViewController?.highlightsViewModel.highlights = newHighlights
+                    self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = newHighlightsSet
                 }
             }
         }

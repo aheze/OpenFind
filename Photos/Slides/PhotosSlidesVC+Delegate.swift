@@ -10,24 +10,23 @@ import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("-- Will display at \(indexPath)")
-        guard var findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] else { return }
+        print("     -- Will display at \(indexPath)")
+        guard var slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] else { return }
 
         let photoSlidesViewController: PhotosSlidesItemViewController
-        if let viewController = findPhoto.associatedViewController {
-            print("vc exis findPhoto: \(findPhoto.photo.asset.localIdentifier).")
+        if let viewController = slidesPhoto.associatedViewController {
+            viewController.findPhoto = slidesPhoto.findPhoto
             viewController.loadViewIfNeeded()
             viewController.reloadImage()
             photoSlidesViewController = viewController
             addChildViewController(viewController, in: cell.contentView)
         } else {
-            print("vc not exist. findPhoto: \(findPhoto.photo.asset.localIdentifier)")
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
             let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
                 PhotosSlidesItemViewController(
                     coder: coder,
                     model: self.model,
-                    findPhoto: findPhoto
+                    findPhoto: slidesPhoto.findPhoto
                 )
             }
 
@@ -36,20 +35,22 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
             /// adding a child seems to take control of the navigation bar. stop this
             navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
-            findPhoto.associatedViewController = viewController
-            model.slidesState?.findPhotos[indexPath.item] = findPhoto
+            print("Setting assoc view cotnroller/")
+            slidesPhoto.associatedViewController = viewController
         }
+        
+        model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto
 
         if !slidesSearchViewModel.stringToGradients.isEmpty {
             /// if keys are same, show the highlights.
             if
-                let highlightsSet = findPhoto.highlightsSet,
+                let highlightsSet = slidesPhoto.findPhoto.highlightsSet,
                 highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients
             {
                 photoSlidesViewController.highlightsViewModel.highlights = highlightsSet.highlights
             } else {
                 /// else, find again.
-                startFinding(for: findPhoto)
+                startFinding(for: slidesPhoto)
             }
         }
 
@@ -61,13 +62,13 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let findPhoto = model.slidesState?.findPhotos[safe: indexPath.item] {
+        if let slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] {
             /// make sure the photo isn't being shown/focused (prevent white screen)
-            guard model.slidesState?.currentPhoto != findPhoto.photo else { return }
+            guard model.slidesState?.currentPhoto != slidesPhoto.findPhoto.photo else { return }
 
-            if let viewController = findPhoto.associatedViewController {
+            if let viewController = slidesPhoto.associatedViewController {
                 removeChildViewController(viewController)
-                model.slidesState?.findPhotos[indexPath.item].associatedViewController = nil
+                model.slidesState?.slidesPhotos[indexPath.item].associatedViewController = nil
             }
         }
     }
@@ -106,10 +107,10 @@ extension PhotosSlidesViewController {
     func notifyIfScrolledToStop() {
         if let slidesState = model.slidesState {
             /// update header
-            if let findPhoto = slidesState.getCurrentFindPhoto() {
-                slidesSearchPromptViewModel.resultsText = findPhoto.getResultsText()
+            if let slidesPhoto = slidesState.getCurrentSlidesPhoto() {
+                slidesSearchPromptViewModel.resultsText = slidesPhoto.findPhoto.getResultsText()
                 slidesSearchPromptViewModel.updateBarHeight?()
-                configureToolbar(for: findPhoto.photo)
+                configureToolbar(for: slidesPhoto.findPhoto.photo)
             }
         }
     }

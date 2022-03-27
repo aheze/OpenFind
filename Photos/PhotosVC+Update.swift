@@ -23,10 +23,10 @@ extension PhotosViewController {
                     self.searchNavigationProgressViewModel.finishAutoProgress()
                     
                     if
-                        let index = slidesState.getFindPhotoIndex(photo: photo),
-                        let findPhoto = slidesState.findPhotos[safe: index]
+                        let index = slidesState.getSlidesPhotoIndex(photo: photo),
+                        let slidesPhoto = slidesState.slidesPhotos[safe: index]
                     {
-                        slidesState.viewController?.find(in: findPhoto)
+                        slidesState.viewController?.find(in: slidesPhoto)
                     }
                     Find.prioritizedAction = nil
                 }
@@ -40,7 +40,7 @@ extension PhotosViewController {
                     
                     if let index = resultsState.getFindPhotoIndex(for: photo, in: \.displayedFindPhotos) {
                         model.resultsState?.displayedFindPhotos[index].highlightsSet = highlightsSet
-                        model.resultsState?.displayedFindPhotos[index].associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+//                        model.resultsState?.displayedFindPhotos[index].associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     }
 
                     let thumbnail = self.model.photoToThumbnail[photo] ?? nil

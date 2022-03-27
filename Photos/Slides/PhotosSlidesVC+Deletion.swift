@@ -15,10 +15,10 @@ extension PhotosSlidesViewController {
 
         var targetIndexBeforeDeletion: Int?
         var targetIndexAfterDeletion: Int?
-        if slidesState.findPhotos.count == 1 { /// last photo. After deletion, go back to the collection view.
+        if slidesState.slidesPhotos.count == 1 { /// last photo. After deletion, go back to the collection view.
             targetIndexBeforeDeletion = nil
             targetIndexAfterDeletion = nil
-        } else if currentIndex == slidesState.findPhotos.count - 1 { /// rightmost photo
+        } else if currentIndex == slidesState.slidesPhotos.count - 1 { /// rightmost photo
             targetIndexBeforeDeletion = currentIndex - 1
 
             /// no need for this actually, will already be scrolled here.
@@ -36,8 +36,6 @@ extension PhotosSlidesViewController {
         DispatchQueue.main.async {
             if let targetIndexBeforeDeletion = targetIndexBeforeDeletion {
                 self.collectionView.scrollToItem(at: targetIndexBeforeDeletion.indexPath, at: .centeredHorizontally, animated: true)
-
-                self.collectionView.layoutIfNeeded()
             } else {
                 self.navigationController?.popViewController(animated: true)
             }
@@ -46,18 +44,21 @@ extension PhotosSlidesViewController {
 
     func finishDeleting() {
         guard let photoToDelete = photoToDelete else { return }
-        self.model.slidesState?.findPhotos = self.model.slidesState?.findPhotos.filter { $0.photo != photoToDelete } ?? []
+//        print("beofre: \(self.model.slidesState?.findPhotos.count). Deleting: \(photoToDelete.asset.localIdentifier)")
+        self.model.slidesState?.slidesPhotos = self.model.slidesState?.slidesPhotos.filter { $0.findPhoto.photo != photoToDelete } ?? []
+//        print("after: \(self.model.slidesState?.findPhotos.count)")
         update(animate: false)
 
-        if let targetIndexAfterDeletion = targetIndexAfterDeletion {
-            self.model.slidesState?.currentPhoto = self.model.slidesState?.findPhotos[safe: targetIndexAfterDeletion]?.photo
-
-            DispatchQueue.main.async {
-                self.collectionView.layoutIfNeeded()
-                self.collectionView.scrollToItem(at: targetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
-            }
-
-            self.targetIndexAfterDeletion = nil
-        }
+//        if let targetIndexAfterDeletion = targetIndexAfterDeletion {
+//            print("target: \(targetIndexAfterDeletion)")
+//            self.model.slidesState?.currentPhoto = self.model.slidesState?.findPhotos[safe: targetIndexAfterDeletion]?.photo
+//
+//            DispatchQueue.main.async {
+//                self.collectionView.layoutIfNeeded()
+//                self.collectionView.scrollToItem(at: targetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
+//            }
+//
+//            self.targetIndexAfterDeletion = nil
+//        }
     }
 }

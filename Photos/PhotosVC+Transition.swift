@@ -138,7 +138,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
         if
             let currentIndex = model.slidesState?.getCurrentIndex(),
-            let thumbnail = self.model.slidesState?.findPhotos[currentIndex].thumbnail
+            let thumbnail = self.model.slidesState?.slidesPhotos[currentIndex].findPhoto.thumbnail
         {
             return thumbnail
         } else {

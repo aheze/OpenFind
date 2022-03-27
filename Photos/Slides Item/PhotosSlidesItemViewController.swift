@@ -45,6 +45,7 @@ class PhotosSlidesItemViewController: UIViewController {
         addChildViewController(scrollZoomController, in: containerView)
         addHighlightsViewController()
         reloadImage()
+        view.addDebugBorders(.systemBlue)
     }
     
     override func viewDidLayoutSubviews() {

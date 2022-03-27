@@ -9,9 +9,19 @@
 import Photos
 import UIKit
 
+
+struct SlidesPhoto: Hashable {
+    var findPhoto: FindPhoto
+    var associatedViewController: PhotosSlidesItemViewController?
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(findPhoto)
+    }
+}
+
 struct PhotosSlidesState {
     var viewController: PhotosSlidesViewController?
-    var findPhotos: [FindPhoto]
+    var slidesPhotos: [SlidesPhoto]
     var currentPhoto: Photo?
     var isFullScreen = false /// hide the bars
 
@@ -22,29 +32,29 @@ struct PhotosSlidesState {
 
     /// get from `findPhotos`
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
-        return getFindPhotoIndex(photo: findPhoto.photo)
+        return getSlidesPhotoIndex(photo: findPhoto.photo)
     }
 
     /// get from `findPhotos`
-    func getFindPhotoIndex(photo: Photo) -> Int? {
-        if let firstIndex = findPhotos.firstIndex(where: { $0.photo == photo }) {
+    func getSlidesPhotoIndex(photo: Photo) -> Int? {
+        if let firstIndex = slidesPhotos.firstIndex(where: { $0.findPhoto.photo == photo }) {
             return firstIndex
         }
         return nil
     }
 
-    func getCurrentFindPhoto() -> FindPhoto? {
+    func getCurrentSlidesPhoto() -> SlidesPhoto? {
         if
             let index = getCurrentIndex(),
-            let findPhoto = findPhotos[safe: index]
+            let slidesPhoto = slidesPhotos[safe: index]
         {
-            return findPhoto
+            return slidesPhoto
         }
         return nil
     }
 
     func getCurrentIndex() -> Int? {
-        let index = findPhotos.firstIndex { $0.photo == currentPhoto }
+        let index = slidesPhotos.firstIndex { $0.findPhoto.photo == currentPhoto }
         return index
     }
 }
@@ -108,7 +118,6 @@ struct FindPhoto: Hashable {
     var photo: Photo
     var thumbnail: UIImage?
     var fullImage: UIImage?
-    var associatedViewController: PhotosSlidesItemViewController?
 
     /// results (an array of highlights)
     var highlightsSet: HighlightsSet?
@@ -161,6 +170,7 @@ struct FindPhoto: Hashable {
     }
 }
 
+
 extension FindPhoto {
     func dateString() -> String {
         if let string = photo.asset.creationDate?.convertDateToReadableString() {
@@ -203,6 +213,17 @@ extension Array where Element == FindPhoto {
             self[index].photo.metadata?.sentences = metadata?.sentences ?? []
         } else {
             self[index].photo.metadata = metadata
+        }
+    }
+}
+
+extension Array where Element == SlidesPhoto {
+    mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
+        if self[index].findPhoto.photo.metadata != nil {
+            self[index].findPhoto.photo.metadata?.dateScanned = metadata?.dateScanned
+            self[index].findPhoto.photo.metadata?.sentences = metadata?.sentences ?? []
+        } else {
+            self[index].findPhoto.photo.metadata = metadata
         }
     }
 }

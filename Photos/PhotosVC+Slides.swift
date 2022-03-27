@@ -12,25 +12,27 @@ extension PhotosViewController {
     func presentSlides(startingAtPhoto startingPhoto: Photo) {
         let viewController = createSlidesViewController()
 
-        let findPhotos: [FindPhoto] = model.displayedSections.flatMap { $0.photos }.map { photo in
+        let slidesPhotos: [SlidesPhoto] = model.displayedSections.flatMap { $0.photos }.map { photo in
             let thumbnail = self.model.photoToThumbnail[photo] ?? nil
-            return FindPhoto(
-                id: UUID(),
-                photo: photo,
-                thumbnail: thumbnail
+            return SlidesPhoto(
+                findPhoto: FindPhoto(
+                    id: UUID(),
+                    photo: photo,
+                    thumbnail: thumbnail
+                )
             )
         }
 
-        guard let findPhoto = findPhotos.first(where: { $0.photo == startingPhoto }) else { return }
+        guard let currentPhoto = slidesPhotos.first(where: { $0.findPhoto.photo == startingPhoto }) else { return }
 
         /// set later inside `presentSlides`.
         let slidesState = PhotosSlidesState(
             viewController: viewController,
-            findPhotos: findPhotos,
-            currentPhoto: findPhoto.photo
+            slidesPhotos: slidesPhotos,
+            currentPhoto: currentPhoto.findPhoto.photo
         )
 
-        presentSlides(startingAt: findPhoto, with: slidesState)
+        presentSlides(startingAt: currentPhoto.findPhoto, with: slidesState)
     }
 
     func presentSlides(startingAtFindPhoto startingFindPhoto: FindPhoto) {
@@ -38,18 +40,18 @@ extension PhotosViewController {
 
         guard let resultsState = model.resultsState else { return }
 
-        let findPhotos: [FindPhoto] = resultsState.displayedFindPhotos.map { findPhoto in
+        let slidesPhotos: [SlidesPhoto] = resultsState.displayedFindPhotos.map { findPhoto in
             let thumbnail = self.model.photoToThumbnail[findPhoto.photo] ?? nil
             var newFindPhoto = findPhoto
             newFindPhoto.thumbnail = thumbnail
-            return newFindPhoto
+            return SlidesPhoto(findPhoto: newFindPhoto)
         }
 
         model.resultsState = resultsState
 
         let slidesState = PhotosSlidesState(
             viewController: viewController,
-            findPhotos: findPhotos,
+            slidesPhotos: slidesPhotos,
             currentPhoto: startingFindPhoto.photo
         )
 
@@ -85,8 +87,8 @@ extension PhotosViewController {
             self.model.imageUpdatedWhenPresentingSlides?(fullImage)
 
             if let index = self.model.slidesState?.getFindPhotoIndex(findPhoto: findPhoto) {
-                self.model.slidesState?.findPhotos[index].fullImage = fullImage
-                self.model.slidesState?.findPhotos[index].associatedViewController?.reloadImage()
+                self.model.slidesState?.slidesPhotos[index].findPhoto.fullImage = fullImage
+                self.model.slidesState?.slidesPhotos[index].associatedViewController?.reloadImage()
             }
         }
 

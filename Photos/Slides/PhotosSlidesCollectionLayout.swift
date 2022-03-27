@@ -45,7 +45,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
         
-        for index in slidesState.findPhotos.indices {
+        for index in slidesState.slidesPhotos.indices {
             let attributes = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
             
             let rect = CGRect(x: currentOrigin, y: topInset - topExtraHeight, width: width, height: height)
@@ -168,9 +168,9 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
             }
         }
         
-        if let findPhoto = model.slidesState?.findPhotos[safe: closestAttributeIndex] {
-            model.slidesState?.currentPhoto = findPhoto.photo
-            print("             -> Setting to \(findPhoto.photo.asset.localIdentifier) when scrolled to \(closestAttributeIndex).")
+        if let slidesPhoto = model.slidesState?.slidesPhotos[safe: closestAttributeIndex] {
+            print("scrolling to target \(closestAttributeIndex).")
+            model.slidesState?.currentPhoto = slidesPhoto.findPhoto.photo
         }
         return CGPoint(x: closestAttribute?.frame.origin.x ?? point.x, y: 0)
     }
