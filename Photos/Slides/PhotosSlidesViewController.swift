@@ -34,21 +34,24 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
     
     /// includes collection view and info view
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
     
     @IBOutlet var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewContainerHeightC: NSLayoutConstraint!
+    @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
 
-    @IBOutlet weak var infoViewContainer: UIView!
-    @IBOutlet weak var infoViewContainerHeightC: NSLayoutConstraint!
-    
+    @IBOutlet var infoViewContainer: UIView!
+    @IBOutlet var infoViewContainerHeightC: NSLayoutConstraint!
     
     lazy var flowLayout = makeFlowLayout()
     lazy var dataSource: DataSource? = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
+    
+    // MARK: - Deletion
+    var photoToDelete: Photo?
+    var targetIndexAfterDeletion: Int?
 
     // MARK: - Dismissal
 

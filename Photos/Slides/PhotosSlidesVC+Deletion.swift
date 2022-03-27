@@ -9,40 +9,55 @@
 import Foundation
 
 extension PhotosSlidesViewController {
-    /// called when scrollview stops scrolling, so check if a deletion is really needed (`slidesTargetIndexBeforeDeletion` is not nil)
-    func reloadAfterDeletion() {
-        guard
-            let slidesTargetIndexBeforeDeletion = model.slidesTargetIndexBeforeDeletion,
-            let slidesTargetIndexAfterDeletion = model.slidesTargetIndexAfterDeletion
-        else { return }
+    func delete(photo: Photo) {
+        guard let slidesState = model.slidesState else { return }
+        guard let currentIndex = slidesState.getCurrentIndex() else { return }
 
-        /// update the current photo
+        var targetIndexBeforeDeletion: Int?
+        var targetIndexAfterDeletion: Int?
+        if slidesState.findPhotos.count == 1 { /// last photo. After deletion, go back to the collection view.
+            targetIndexBeforeDeletion = nil
+            targetIndexAfterDeletion = nil
+        } else if currentIndex == slidesState.findPhotos.count - 1 { /// rightmost photo
+            targetIndexBeforeDeletion = currentIndex - 1
 
-        self.model.slidesState?.currentPhoto = self.model.slidesState?.findPhotos[safe: slidesTargetIndexAfterDeletion]?.photo
+            /// no need for this actually, will already be scrolled here.
+            /// But `reloadAfterDeletion` checks for both `slidesTargetIndexBeforeDeletion` and `slidesTargetIndexAfterDeletion` being not nil,
+            /// so set this too.
+            targetIndexAfterDeletion = currentIndex - 1
+        } else {
+            targetIndexBeforeDeletion = currentIndex + 1 /// photo slides in from the right
+            targetIndexAfterDeletion = currentIndex
+        }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let indexPath = slidesTargetIndexBeforeDeletion.indexPath
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        self.photoToDelete = photo
+        self.targetIndexAfterDeletion = targetIndexAfterDeletion
+
+        DispatchQueue.main.async {
+            if let targetIndexBeforeDeletion = targetIndexBeforeDeletion {
+                self.collectionView.scrollToItem(at: targetIndexBeforeDeletion.indexPath, at: .centeredHorizontally, animated: true)
+
+                self.collectionView.layoutIfNeeded()
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 
     func finishDeleting() {
-        if let slidesTargetIndexAfterDeletion = model.slidesTargetIndexAfterDeletion {
-            print("         updating -> \(slidesTargetIndexAfterDeletion)")
-            print("         NOW: \(self.model.slidesState?.currentPhoto?.asset.localIdentifier). Findphotos: \(self.model.slidesState?.findPhotos.map { $0.photo.asset.localIdentifier })")
-            print("         get? \(self.model.slidesState?.getCurrentFindPhoto()?.photo.asset.localIdentifier)")
-            update(animate: false)
-            if let cell = collectionView.cellForItem(at: slidesTargetIndexAfterDeletion.indexPath) {
-                print("manual allll")
-                self.collectionView(self.collectionView, willDisplay: cell, forItemAt: slidesTargetIndexAfterDeletion.indexPath)
-            }
-            collectionView.layoutIfNeeded()
+        guard let photoToDelete = photoToDelete else { return }
+        self.model.slidesState?.findPhotos = self.model.slidesState?.findPhotos.filter { $0.photo != photoToDelete } ?? []
+        update(animate: false)
+
+        if let targetIndexAfterDeletion = targetIndexAfterDeletion {
+            self.model.slidesState?.currentPhoto = self.model.slidesState?.findPhotos[safe: targetIndexAfterDeletion]?.photo
+
             DispatchQueue.main.async {
-                self.collectionView.scrollToItem(at: slidesTargetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
+                self.collectionView.layoutIfNeeded()
+                self.collectionView.scrollToItem(at: targetIndexAfterDeletion.indexPath, at: .centeredHorizontally, animated: false)
             }
 
-            model.slidesTargetIndexBeforeDeletion = nil
-            model.slidesTargetIndexAfterDeletion = nil
+            self.targetIndexAfterDeletion = nil
         }
     }
 }

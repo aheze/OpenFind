@@ -18,7 +18,7 @@ enum PhotosAttributes {
     case attributes([UICollectionViewLayoutAttributes]) /// photos only
     
     struct SectionLayout {
-        var categorization: PhotosSection.Categorization?
+        var categorization: PhotosSectionCategorization?
         var headerLayoutAttributes = PhotosSectionHeaderLayoutAttributes()
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
     }
@@ -26,7 +26,7 @@ enum PhotosAttributes {
 
 class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
     /// the month ranges that are in this row (when multiple months in single row)
-    var encompassingCategorizations = [PhotosSection.Categorization]()
+    var encompassingCategorizations = [PhotosSectionCategorization]()
     var originalYOffset = CGFloat(0) /// y origin, without sticky header stuff
     var isVisible = false /// hide if already another header with same content
     
@@ -195,7 +195,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                 
                 // MARK: Create section
 
-                var categorization: PhotosSection.Categorization?
+                var categorization: PhotosSectionCategorization?
                 if case .photosSectionCategorization(let sectionCategorization) = section.category {
                     categorization = sectionCategorization
                     

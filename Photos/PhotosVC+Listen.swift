@@ -101,17 +101,10 @@ extension PhotosViewController {
             self.model.updateSlidesSearchCollectionView?()
         }
         
-        model.reloadAfterDeletion = { [weak self] in
+        model.reloadCollectionViewsAfterDeletion = { [weak self] in
             guard let self = self else { return }
             self.update()
             self.updateResults()
-            if let slidesState = self.model.slidesState {
-                if slidesState.findPhotos.isEmpty {
-                    slidesState.viewController?.navigationController?.popViewController(animated: true)
-                } else {
-                    slidesState.viewController?.reloadAfterDeletion()
-                }
-            }
         }
     }
 }

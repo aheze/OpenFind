@@ -133,17 +133,20 @@ class PhotosViewModel: ObservableObject {
     var updateSearchCollectionView: (() -> Void)?
 
     // MARK: Deletion
-
-    /// model updated, refresh collection views
-    var reloadAfterDeletion: (() -> Void)?
     var deleteSelected: (() -> Void)?
-
+    
+    /// model updated, refresh collection views
+    var reloadCollectionViewsAfterDeletion: (() -> Void)?
+    
+    /// don't update `slidesState` until this closure is called.
+    var deletePhotoInSlides: ((Photo) -> Void)?
+    
     /// the index to scroll to before reload data, in `slidesState`
     /// Need to scroll first, then snap to actual index right after reload
-    var slidesTargetIndexBeforeDeletion: Int?
+//    var slidesTargetIndexBeforeDeletion: Int?
 
     /// snap to this after update
-    var slidesTargetIndexAfterDeletion: Int?
+//    var slidesTargetIndexAfterDeletion: Int?
 
     init(realmModel: RealmModel) {
         self.realmModel = realmModel

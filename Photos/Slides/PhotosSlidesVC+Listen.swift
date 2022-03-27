@@ -65,5 +65,10 @@ extension PhotosSlidesViewController {
                 self.showInfo(slidesState.toolbarInformationOn)
             }
         }
+        
+        model.deletePhotoInSlides = { [weak self] photo in
+            guard let self = self else { return }
+            self.delete(photo: photo)
+        }
     }
 }
