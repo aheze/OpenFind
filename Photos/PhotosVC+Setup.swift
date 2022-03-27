@@ -75,7 +75,7 @@ extension PhotosViewController {
         collectionView.pinEdgesToSuperview()
 
         collectionView.delegate = self
-        collectionView.allowsSelection = true
+        collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.keyboardDismissMode = .interactive

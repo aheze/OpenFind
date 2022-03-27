@@ -40,7 +40,6 @@ extension PhotosViewController {
                     
                     if let index = resultsState.getFindPhotoIndex(for: photo, in: \.displayedFindPhotos) {
                         model.resultsState?.displayedFindPhotos[index].highlightsSet = highlightsSet
-//                        model.resultsState?.displayedFindPhotos[index].associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
                     }
 
                     let thumbnail = self.model.photoToThumbnail[photo] ?? nil

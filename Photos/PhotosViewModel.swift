@@ -19,6 +19,8 @@ class PhotosViewModel: ObservableObject {
     var photos = [Photo]()
     var displayedSections = [PhotosSection]() /// this is fed into the collection view
 
+    @Published var photosEditable = false /// select button enabled
+    
     /// when star/unstar
     var sortNeeded = false
 
@@ -121,13 +123,16 @@ class PhotosViewModel: ObservableObject {
 
     @Published var isSelecting = false
     @Published var selectedPhotos = [Photo]()
+    var stopSelecting: (() -> Void)? /// call from within the SwiftUI toolbar
 
     // MARK: Ignored Photos
 
     var ignoredPhotos = [Photo]()
+    var ignoredPhotosChanged: (() -> Void)?
     @Published var ignoredPhotosIsSelecting = false
     @Published var ignoredPhotosSelectedPhotos = [Photo]()
-    var ignoredPhotosUpdated: (() -> Void)? /// unignored photos, update collection view and selection state
+    @Published var ignoredPhotosEditable = false /// select button enabled
+    var ignoredPhotosFinishedUpdating: (() -> Void)? /// some photos were unignored from the scanning modal, update collection view and selection state
 
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
@@ -141,12 +146,6 @@ class PhotosViewModel: ObservableObject {
     /// don't update `slidesState` until this closure is called.
     var deletePhotoInSlides: ((Photo) -> Void)?
     
-    /// the index to scroll to before reload data, in `slidesState`
-    /// Need to scroll first, then snap to actual index right after reload
-//    var slidesTargetIndexBeforeDeletion: Int?
-
-    /// snap to this after update
-//    var slidesTargetIndexAfterDeletion: Int?
 
     init(realmModel: RealmModel) {
         self.realmModel = realmModel

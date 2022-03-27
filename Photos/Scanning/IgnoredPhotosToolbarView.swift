@@ -31,7 +31,7 @@ struct IgnoredPhotosToolbarView: View {
                     newPhoto.metadata?.isIgnored = false
                     model.updatePhotoMetadata(photo: newPhoto, reloadCell: false)
                 }
-                model.ignoredPhotosUpdated?()
+                model.ignoredPhotosChanged?()
             }
 
         } label: {
@@ -52,6 +52,7 @@ struct IgnoredPhotosToolbarView: View {
                         .edgesIgnoringSafeArea(.all)
                 )
         }
+        .disabled(!model.ignoredPhotosEditable)
         .actionSheet(isPresented: $showingWarning) {
             ActionSheet(
                 title: Text("All photos will be unignored."),
@@ -62,7 +63,7 @@ struct IgnoredPhotosToolbarView: View {
                             newPhoto.metadata?.isIgnored = false
                             model.updatePhotoMetadata(photo: newPhoto, reloadCell: false)
                         }
-                        model.ignoredPhotosUpdated?()
+                        model.ignoredPhotosChanged?()
                     },
                     .cancel()
                 ]

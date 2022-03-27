@@ -33,6 +33,15 @@ extension PhotosViewController {
         )
         navigationItem.leftBarButtonItem = cancelButton
     }
+    
+    func updateViewsEnabled() {
+        if let resultsState = model.resultsState {
+            model.photosEditable = !resultsState.displayedFindPhotos.isEmpty
+        } else {
+            model.photosEditable = !model.displayedSections.isEmpty
+        }
+        selectBarButton?.isEnabled = model.photosEditable
+    }
 
     func hideCancelNavigationBar() {
         navigationItem.leftBarButtonItem = nil
@@ -52,7 +61,6 @@ extension PhotosViewController {
         hideCancelNavigationBar()
         searchViewModel.updateFields(fields: SearchViewModel.defaultFields, notify: true)
         model.updateSearchCollectionView?()
-        resetSelectingState()
     }
 
     @objc func selectPressed() {

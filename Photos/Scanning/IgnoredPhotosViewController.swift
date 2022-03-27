@@ -47,18 +47,24 @@ class IgnoredPhotosViewController: UIViewController {
         view = UIView()
         
         setup()
-        
-        model.ignoredPhotosUpdated = { [weak self] in
+        model.ignoredPhotosChanged = { [weak self] in
             guard let self = self else { return }
+            self.updateViewsEnabled()
             self.update(animate: true)
             self.model.ignoredPhotosIsSelecting = false
             self.updateCollectionViewSelectionState()
         }
     }
     
+    func updateViewsEnabled() {
+        model.ignoredPhotosEditable = !model.ignoredPhotos.isEmpty
+        selectBarButton.isEnabled = model.ignoredPhotosEditable
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         update()
+        self.updateViewsEnabled()
     }
     
     @objc func dismissSelf() {

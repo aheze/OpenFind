@@ -44,6 +44,8 @@ extension PhotosViewController {
             )
             contentContainer.isHidden = false
         }
+        updateViewsEnabled()
+        resetSelectingState()
     }
 
     /// get the text to show in the cell's text view

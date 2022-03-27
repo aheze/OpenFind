@@ -30,6 +30,7 @@ extension PhotosViewController {
             starredCount: resultsState.starredFindPhotos.count,
             screenshotsCount: resultsState.screenshotsFindPhotos.count
         )
+        updateViewsEnabled()
     }
 
     /// reload the collection view at an index path.

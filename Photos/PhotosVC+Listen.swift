@@ -106,5 +106,10 @@ extension PhotosViewController {
             self.update()
             self.updateResults()
         }
+        
+        model.stopSelecting = { [weak self] in
+            guard let self = self else { return }
+            self.resetSelectingState()
+        }
     }
 }

@@ -30,6 +30,8 @@ extension PhotosViewModel {
                 if let photo = photos.first {
                     self.deletePhotoInSlides?(photo)
                 }
+                self.ignoredPhotos = photos.filter { $0.metadata?.isIgnored ?? false }
+                self.photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
             }
         }
     }

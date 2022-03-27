@@ -35,6 +35,7 @@ extension PhotosViewController {
         dataSource.apply(snapshot, animatingDifferences: animate)
 
         showEmptyContent(model.displayedSections.isEmpty)
+        updateViewsEnabled()
     }
 
     /// reload the collection view at an index path.

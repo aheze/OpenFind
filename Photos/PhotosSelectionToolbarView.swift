@@ -14,14 +14,16 @@ struct PhotosSelectionToolbarView: View {
     var body: some View {
         HStack {
             ToolbarIconButton(iconName: "square.and.arrow.up") {}
-            .disabled(model.selectedPhotos.count == 0)
+                .disabled(model.selectedPhotos.count == 0)
 
             Text(selectedText())
                 .font(.system(.headline))
                 .frame(maxWidth: .infinity)
 
-            ToolbarIconButton(iconName: "trash") {}
-                .disabled(model.selectedPhotos.count == 0)
+            ToolbarIconButton(iconName: "trash") {
+                deleteSelected()
+            }
+            .disabled(model.selectedPhotos.count == 0)
         }
     }
 
@@ -31,5 +33,10 @@ struct PhotosSelectionToolbarView: View {
         } else {
             return "\(model.selectedPhotos.count) Photos Selected"
         }
+    }
+
+    func deleteSelected() {
+        model.delete(photos: model.selectedPhotos)
+        model.stopSelecting?()
     }
 }

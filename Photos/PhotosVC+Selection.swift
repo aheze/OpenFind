@@ -12,29 +12,42 @@ extension PhotosViewController {
     func toggleSelect() {
         model.isSelecting.toggle()
         if model.isSelecting {
-            collectionView.allowsMultipleSelection = true
-            resultsCollectionView.allowsMultipleSelection = true
-            selectBarButton.title = "Done"
-            toolbarViewModel.toolbar = AnyView(selectionToolbar)
+            startSelecting()
         } else {
             resetSelectingState()
         }
-        
+    }
+
+    func startSelecting() {
+        collectionView.allowsSelection = true
+        collectionView.allowsMultipleSelection = true
+        resultsCollectionView.allowsSelection = true
+        resultsCollectionView.allowsMultipleSelection = true
+        selectBarButton?.title = "Done"
+        toolbarViewModel.toolbar = AnyView(selectionToolbar)
         if model.resultsState != nil {
             updateResultsCollectionViewSelectionState()
         } else {
             updateCollectionViewSelectionState()
         }
     }
-    
+
     /// reset the state after finding from selected photos or pressing done
     func resetSelectingState() {
+        model.isSelecting = false
+        collectionView.allowsSelection = false
         collectionView.allowsMultipleSelection = false
+        resultsCollectionView.allowsSelection = false
         resultsCollectionView.allowsMultipleSelection = false
-        selectBarButton.title = "Select"
+        selectBarButton?.title = "Select"
         toolbarViewModel.toolbar = nil
         model.selectedPhotos = []
         model.ignoredPhotosSelectedPhotos = []
+        if model.resultsState != nil {
+            updateResultsCollectionViewSelectionState()
+        } else {
+            updateCollectionViewSelectionState()
+        }
     }
 
     func photoSelected(at indexPath: IndexPath) {
