@@ -70,5 +70,10 @@ extension PhotosSlidesViewController {
             guard let self = self else { return }
             self.delete(photo: photo)
         }
+        
+        model.sharePhotoInSlides = { [weak self] photo in
+            guard let self = self else { return }
+            self.share(photos: [photo], model: self.model)
+        }
     }
 }

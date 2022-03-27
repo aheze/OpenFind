@@ -13,7 +13,9 @@ struct PhotosSlidesToolbarView: View {
 
     var body: some View {
         HStack {
-            ToolbarIconButton(iconName: "square.and.arrow.up") {}
+            ToolbarIconButton(iconName: "square.and.arrow.up") {
+                sharePhoto()
+            }
         
             Spacer()
         
@@ -90,6 +92,15 @@ struct PhotosSlidesToolbarView: View {
             let slidesPhoto = slidesState.getCurrentSlidesPhoto()
         {
             model.delete(photos: [slidesPhoto.findPhoto.photo])
+        }
+    }
+    
+    func sharePhoto() {
+        if
+            let slidesState = model.slidesState,
+            let slidesPhoto = slidesState.getCurrentSlidesPhoto()
+        {
+            model.sharePhotoInSlides?(slidesPhoto.findPhoto.photo)
         }
     }
 }

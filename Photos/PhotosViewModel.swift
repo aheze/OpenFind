@@ -138,7 +138,8 @@ class PhotosViewModel: ObservableObject {
     var updateSearchCollectionView: (() -> Void)?
 
     // MARK: Share
-    var shareSelected: (() -> Void)?
+    var shareSelected: (() -> Void)? /// multiple
+    var sharePhotoInSlides: ((Photo) -> Void)? /// single photo
     // MARK: Deletion
     var deleteSelected: (() -> Void)?
     
