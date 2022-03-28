@@ -14,7 +14,11 @@ extension PhotosSlidesViewController {
     /// Once done, `model.photosWithQueuedSentencesAdded` in `PhotosVC+Listen` will be called.
     func startFinding(for slidesPhoto: SlidesPhoto) {
         /// if is ignored, don't find
-        guard slidesPhoto.findPhoto.photo.metadata.map({ !$0.isIgnored }) ?? true else { return }
+        guard slidesPhoto.findPhoto.photo.metadata.map({ !$0.isIgnored }) ?? true else {
+            slidesSearchPromptViewModel.update(show: true, resultsText: "Photo is ignored")
+            slidesSearchPromptViewModel.updateBarHeight?()
+            return
+        }
 
         if let metadata = slidesPhoto.findPhoto.photo.metadata, metadata.dateScanned != nil {
             self.findFromMetadata(in: slidesPhoto)
