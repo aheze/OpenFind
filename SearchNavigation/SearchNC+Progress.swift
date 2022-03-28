@@ -11,12 +11,16 @@ import SwiftUI
 extension SearchNavigationController {
     func setupProgress() {
         guard let progressViewModel = progressViewModel else { return }
-        searchContainerView.addSubview(progressContainerView)
+        
+        /// constrain to `searchContainerViewContainer`, since that's where the prompt is added too
+        searchContainerViewContainer.addSubview(progressContainerView)
         progressContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            progressContainerView.bottomAnchor.constraint(equalTo: searchContainerView.bottomAnchor),
-            progressContainerView.leftAnchor.constraint(equalTo: searchContainerView.leftAnchor),
-            progressContainerView.rightAnchor.constraint(equalTo: searchContainerView.rightAnchor),
+            
+            /// ensure the progress bar is at the bottom
+            progressContainerView.bottomAnchor.constraint(equalTo: detailsSearchPromptViewContainer.bottomAnchor),
+            progressContainerView.leftAnchor.constraint(equalTo: searchContainerViewContainer.leftAnchor),
+            progressContainerView.rightAnchor.constraint(equalTo: searchContainerViewContainer.rightAnchor),
             progressContainerView.heightAnchor.constraint(equalToConstant: 4)
         ])
         
