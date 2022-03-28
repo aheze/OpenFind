@@ -75,15 +75,6 @@ class IconPickerViewController: UIViewController, Searchable {
         }
     }
     
-    func update(animate: Bool = true) {
-        var snapshot = Snapshot()
-        snapshot.appendSections(model.filteredCategories)
-        model.filteredCategories.forEach { category in
-            snapshot.appendItems(category.icons, toSection: category)
-        }
-        dataSource.apply(snapshot, animatingDifferences: animate)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: .zero)
@@ -101,7 +92,6 @@ class IconPickerViewController: UIViewController, Searchable {
 extension IconPickerViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        let baseSearchBarOffset = baseSearchBarOffset ?? 0
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateSearchBarOffset?()
     }

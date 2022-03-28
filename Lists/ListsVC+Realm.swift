@@ -21,15 +21,15 @@ extension ListsViewController {
             object: nil
         )
     }
-    
-    @objc func listsUpdated(notification: Notification) {
-        
-    }
 
+    @objc func listsUpdated(notification: Notification) {}
+
+    /// call this in `Find-New`'s `viewDidLoad`, after loading realm
     func reload() {
         reloadDisplayedLists()
-        collectionView.reloadData()
+        update(animate: false)
     }
+
     func reloadDisplayedLists() {
         model.displayedLists = realmModel.lists.map { .init(list: $0) }.sorted(by: { $0.list.dateCreated > $1.list.dateCreated })
     }
@@ -60,9 +60,8 @@ extension ListsViewController {
             }
         }
 
-        let indexPaths = indices.map { $0.indexPath }
         reloadDisplayedLists()
-        collectionView.deleteItems(at: indexPaths)
+        update()
     }
 }
 
@@ -71,7 +70,7 @@ extension ListsViewController {
     func listUpdated(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
             model.displayedLists[firstIndex].list = list
-            collectionView.reloadItems(at: [firstIndex.indexPath])
+            update(at: firstIndex.indexPath, with: list)
         }
     }
 
@@ -79,16 +78,14 @@ extension ListsViewController {
         let newList = List()
         realmModel.addList(list: newList)
         reloadDisplayedLists()
-        if let index = model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
-            collectionView.insertItems(at: [index.indexPath])
-        }
+        update()
         presentDetails(list: newList)
     }
 
     func listDeleted(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
             model.displayedLists.remove(at: firstIndex)
-            collectionView.deleteItems(at: [firstIndex.indexPath])
+            update()
         }
     }
 }

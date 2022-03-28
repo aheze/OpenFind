@@ -40,6 +40,10 @@ struct List: Identifiable, Equatable {
     var displayedName: String {
         return self.name.isEmpty ? "Untitled" : self.name
     }
+    
+    static func == (lhs: List, rhs: List) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 struct EditableList {

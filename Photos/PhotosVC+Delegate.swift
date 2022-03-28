@@ -20,7 +20,6 @@ extension PhotosViewController: UICollectionViewDelegate {
     /// update the blur with a scroll view's content offset
     func updateNavigationBlur(with scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        let baseSearchBarOffset = self.baseSearchBarOffset ?? 0
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateNavigationBar?()
     }

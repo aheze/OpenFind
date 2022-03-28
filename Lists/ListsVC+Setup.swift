@@ -17,7 +17,6 @@ extension ListsViewController {
     }
     
     func setupCollectionView() {
-        collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.allowsSelection = false
         collectionView.delaysContentTouches = true

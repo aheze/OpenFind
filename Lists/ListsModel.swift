@@ -8,9 +8,17 @@
 
 import UIKit
 
-struct DisplayedList {
+struct DisplayedList: Hashable {
     var list = List()
     var frame = ListFrame()
+
+    static func == (lhs: DisplayedList, rhs: DisplayedList) -> Bool {
+        lhs.list.id == rhs.list.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.list.id)
+    }
 }
 
 struct ListFrame {

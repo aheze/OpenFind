@@ -23,6 +23,9 @@ class ListsViewController: UIViewController, Searchable {
     var updateNavigationBar: (() -> Void)?
     
     @IBOutlet var collectionView: UICollectionView!
+    lazy var dataSource = makeDataSource()
+    typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, DisplayedList>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, DisplayedList>
     lazy var listsFlowLayout = makeFlowLayout()
     
     /// details

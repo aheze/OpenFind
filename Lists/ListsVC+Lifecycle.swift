@@ -43,6 +43,5 @@ extension ListsViewController {
         self.updateNavigationBar?()
         
         detailsViewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
-
     }
 }

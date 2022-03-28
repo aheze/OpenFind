@@ -9,6 +9,17 @@
 import UIKit
 
 extension IconPickerViewController {
+    
+    func update(animate: Bool = true) {
+        var snapshot = Snapshot()
+        snapshot.appendSections(model.filteredCategories)
+        model.filteredCategories.forEach { category in
+            snapshot.appendItems(category.icons, toSection: category)
+        }
+        dataSource.apply(snapshot, animatingDifferences: animate)
+    }
+    
+    
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, icon -> UICollectionViewCell? in
 

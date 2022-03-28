@@ -151,7 +151,6 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
-        
         withAnimation {
             toolbarViewModel.toolbar = nil
         }

@@ -8,20 +8,26 @@
 
 import UIKit
 
-extension ListsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.displayedLists.count
+extension ListsViewController {
+    func update(animate: Bool = true) {
+        var snapshot = Snapshot()
+        let section = DataSourceSectionTemplate()
+        snapshot.appendSections([section])
+        snapshot.appendItems(model.displayedLists, toSection: section)
+        dataSource.apply(snapshot, animatingDifferences: animate)
+
+//        showEmptyContent(model.displayedSections.isEmpty)
+//        updateViewsEnabled()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "Cell",
-            for: indexPath
-        ) as? ListsContentCell else {
-            fatalError()
+    /// reload the collection view at an index path.
+    func update(at indexPath: IndexPath, with list: List) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? ListsContentCell {
+            self.configureCellData(cell: cell, list: list)
         }
-        
-        let list = model.displayedLists[indexPath.item].list
+    }
+    
+    func configureCellData(cell: ListsContentCell, list: List) {
         let color = UIColor(hex: list.color)
         cell.headerView.backgroundColor = color
         cell.headerImageView.image = UIImage(systemName: list.icon)
@@ -38,50 +44,73 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.headerTitleLabel.textColor = ListsCellConstants.titleColorWhite
             cell.headerDescriptionLabel.textColor = ListsCellConstants.titleColorWhite
         }
-        
-        if model.isSelecting {
-            cell.chipsContainerView.isUserInteractionEnabled = false
+    }
+
+    func configureCellSelection(cell: ListsContentCell, selected: Bool) {
+        cell.contentView.isUserInteractionEnabled = !self.model.isSelecting
+        if self.model.isSelecting {
             cell.headerSelectionIconView.isHidden = false
             cell.headerSelectionIconView.alpha = 1
-            if model.selectedLists.contains(where: { $0.id == list.id }) {
+            if selected {
                 cell.headerSelectionIconView.setState(.selected)
             } else {
                 cell.headerSelectionIconView.setState(.empty)
             }
         } else {
-            cell.chipsContainerView.isUserInteractionEnabled = true
             cell.headerSelectionIconView.isHidden = true
             cell.headerSelectionIconView.alpha = 0
             cell.headerSelectionIconView.setState(.empty)
         }
-        
-        cell.tapped = { [weak self] in
-            guard let self = self else { return }
+    }
+
+    func makeDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, cachedDisplayedList -> UICollectionViewCell? in
+
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "Cell",
+                for: indexPath
+            ) as! ListsContentCell
             
-            if self.model.isSelecting {
-                if self.model.selectedLists.contains(where: { $0.id == list.id }) {
-                    self.model.selectedLists = self.model.selectedLists.filter { $0.id != list.id }
-                    cell.headerSelectionIconView.setState(.empty)
+            guard let displayedList = self.model.displayedLists.first(where: { $0.list.id == cachedDisplayedList.list.id }) else { return cell }
+            let list = displayedList.list
+            
+            self.configureCellData(cell: cell, list: list)
+            let selected = self.model.selectedLists.contains(where: { $0.id == list.id })
+            self.configureCellSelection(cell: cell, selected: selected)
+            
+            cell.tapped = { [weak self] in
+                guard let self = self else { return }
+                
+                if self.model.isSelecting {
+                    if self.model.selectedLists.contains(where: { $0.id == list.id }) {
+                        self.model.selectedLists = self.model.selectedLists.filter { $0.id != list.id }
+                        cell.headerSelectionIconView.setState(.empty)
+                    } else {
+                        self.model.selectedLists.append(list)
+                        cell.headerSelectionIconView.setState(.selected)
+                    }
                 } else {
-                    self.model.selectedLists.append(list)
-                    cell.headerSelectionIconView.setState(.selected)
-                }
-            } else {
-                if let displayedList = self.model.displayedLists.first(where: { $0.list.id == list.id }) {
-                    self.presentDetails(list: displayedList.list)
+                    if let displayedList = self.model.displayedLists.first(where: { $0.list.id == list.id }) {
+                        self.presentDetails(list: displayedList.list)
+                    }
                 }
             }
+            
+            return cell
         }
-        return cell
+        
+        return dataSource
     }
- 
+}
+
+extension ListsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? ListsContentCell else {
             fatalError()
         }
         
         let displayedList = model.displayedLists[indexPath.item]
-        addChipViews(to: cell, with: displayedList)
+        self.addChipViews(to: cell, with: displayedList)
     }
     
     func addChipViews(to cell: ListsContentCell, with displayedList: DisplayedList) {
