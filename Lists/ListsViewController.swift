@@ -15,15 +15,15 @@ class ListsViewController: UIViewController, Searchable {
     var toolbarViewModel: ToolbarViewModel
     var realmModel: RealmModel
     var searchViewModel: SearchViewModel
-    var detailsSearchViewModel: SearchViewModel
     
+    var showSearchBar = true
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     
     var updateNavigationBar: (() -> Void)?
     
     @IBOutlet var collectionView: UICollectionView!
-    lazy var listsFlowLayout  = makeFlowLayout()
+    lazy var listsFlowLayout = makeFlowLayout()
     
     /// details
     var detailsViewController: ListsDetailViewController?
@@ -38,15 +38,13 @@ class ListsViewController: UIViewController, Searchable {
         tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel,
         realmModel: RealmModel,
-        searchViewModel: SearchViewModel,
-        detailsSearchViewModel: SearchViewModel
+        searchViewModel: SearchViewModel
     ) {
         self.model = model
         self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
         self.realmModel = realmModel
         self.searchViewModel = searchViewModel
-        self.detailsSearchViewModel = detailsSearchViewModel
         super.init(coder: coder)
     }
 
@@ -70,7 +68,8 @@ class ListsViewController: UIViewController, Searchable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        let baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        self.baseSearchBarOffset = baseSearchBarOffset
         additionalSearchBarOffset = -collectionView.contentOffset.y - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateNavigationBar?()
     }

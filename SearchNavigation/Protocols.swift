@@ -9,6 +9,7 @@
 import UIKit
 
 protocol Searchable: UIViewController {
+    var showSearchBar: Bool { get set }
     var baseSearchBarOffset: CGFloat { get set }
     var additionalSearchBarOffset: CGFloat? { get set }
 }

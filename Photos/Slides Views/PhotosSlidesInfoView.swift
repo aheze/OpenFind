@@ -32,7 +32,6 @@ struct PhotosSlidesInfoView: View {
                         description: isScanned ? "Tap to Rescan" : nil,
                         isOn: isScanned
                     ) {
-                        print("Scan now")
                         scanNow()
                     }
                     .transition(.scale)

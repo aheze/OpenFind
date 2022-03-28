@@ -10,35 +10,42 @@ import UIKit
 
 extension SearchNavigationController {
     func setupSearchBar() {
+        
+        // MARK: Setup container view
+        
         view.addSubview(searchContainerViewContainer)
         if let topConstraint = searchContainerViewContainer.pinEdgesToSuperviewAndReturnTopConstraint() {
-            self.searchContainerViewContainerTopC = topConstraint
+            searchContainerViewContainerTopC = topConstraint
         }
         
         let searchContainerView = UIView()
-        self.searchContainerView = searchContainerView
         searchContainerView.backgroundColor = .clear
         searchContainerViewContainer.addSubview(searchContainerView)
+        self.searchContainerView = searchContainerView
         
         let searchContainerViewTopC = searchContainerView.topAnchor.constraint(equalTo: searchContainerViewContainer.topAnchor, constant: 0)
-        self.searchContainerViewTopC = searchContainerViewTopC
+        let searchContainerViewLeftC = searchContainerView.leftAnchor.constraint(equalTo: searchContainerViewContainer.leftAnchor)
         searchContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchContainerView.leftAnchor.constraint(equalTo: searchContainerViewContainer.leftAnchor),
-            searchContainerView.rightAnchor.constraint(equalTo: searchContainerViewContainer.rightAnchor),
-            searchContainerViewTopC
+            searchContainerViewTopC,
+            searchContainerViewLeftC,
+            searchContainerView.widthAnchor.constraint(equalTo: searchContainerViewContainer.widthAnchor),
         ])
+        self.searchContainerViewTopC = searchContainerViewTopC
+        self.searchContainerViewLeftC = searchContainerViewLeftC
+        
+        // MARK: Add search collection views
         
         /// standard search bar
         let searchViewController = SearchViewController.make(searchViewModel: searchViewModel, realmModel: realmModel)
-        self.searchViewController = searchViewController
         addResizableChildViewController(searchViewController, in: searchContainerView)
+        self.searchViewController = searchViewController
         
         /// search bar for details/slides
         if let detailsSearchViewModel = detailsSearchViewModel {
             let detailsSearchViewController = SearchViewController.make(searchViewModel: detailsSearchViewModel, realmModel: realmModel)
-            self.detailsSearchViewController = detailsSearchViewController
             addResizableChildViewController(detailsSearchViewController, in: searchContainerView)
+            self.detailsSearchViewController = detailsSearchViewController
         }
         
         showDetailsSearchBar(false)

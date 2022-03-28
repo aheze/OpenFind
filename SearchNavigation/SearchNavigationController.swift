@@ -31,7 +31,8 @@ class SearchNavigationController: UIViewController, PageViewController {
     var searchContainerViewContainer = PassthroughView() /// whole screen
     var searchContainerViewContainerTopC: NSLayoutConstraint? /// whole screen top constraint
     var searchContainerView: UIView! /// hugs the search bar
-    var searchContainerViewTopC: NSLayoutConstraint?
+    var searchContainerViewTopC: NSLayoutConstraint? /// top of the container view, animate this to adjust y offset of search bar
+    var searchContainerViewLeftC: NSLayoutConstraint? /// left of the container view, adjust to negative value when presenting detail view controllers without search bar
     var searchViewController: SearchViewController!
     var detailsSearchViewController: SearchViewController?
     

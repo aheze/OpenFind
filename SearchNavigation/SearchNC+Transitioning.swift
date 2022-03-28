@@ -13,7 +13,8 @@ extension SearchNavigationController {
     func updateSearchBarOffset() {
         if let topViewController = navigation?.topViewController as? Searchable {
             let searchBarOffset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset ?? 0)
-            let promptOffset = searchBarOffset + searchViewModel.getTotalHeight()
+            let searchBarHeight = topViewController.showSearchBar ? searchViewModel.getTotalHeight() : 0
+            let promptOffset = searchBarOffset + searchBarHeight
             let promptHeight = getAdditionalSearchPromptHeight(for: topViewController)
             let barHeight = promptOffset + promptHeight
             
@@ -44,16 +45,16 @@ extension SearchNavigationController {
     }
     
     /// 0 is nil, 1 is blur
-    func getBlurPercentage(baseSearchBarOffset: CGFloat, additionalSearchBarOffset: CGFloat) -> CGFloat {
+    func getBlurPercentage(baseSearchBarOffset: CGFloat?, additionalSearchBarOffset: CGFloat?) -> CGFloat {
         /// make sure `additionalSearchBarOffset` is negative (scrolling up)
+        let additionalSearchBarOffset = additionalSearchBarOffset ?? 0
         guard additionalSearchBarOffset <= 0 else { return 0 }
-        
         let percentage = additionalSearchBarOffset / -SearchNavigationConstants.blurFadeRange
         let constrainedPercentage = min(1, percentage)
         return constrainedPercentage
     }
     
-    func updateBlur(baseSearchBarOffset: CGFloat, additionalSearchBarOffset: CGFloat?) {
+    func updateBlur(baseSearchBarOffset: CGFloat?, additionalSearchBarOffset: CGFloat?) {
         /// make sure no transition is happening currently
         guard navigation.transitionCoordinator == nil else { return }
         

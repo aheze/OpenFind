@@ -15,7 +15,6 @@ class ListsController {
     
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
-    var detailsSearchViewModel: SearchViewModel
     var searchNavigationController: SearchNavigationController
     var viewController: ListsViewController
     
@@ -34,8 +33,6 @@ class ListsController {
         self.searchNavigationModel = searchNavigationModel
         let searchViewModel = SearchViewModel(configuration: .lists)
         self.searchViewModel = searchViewModel
-        let detailsSearchViewModel = SearchViewModel(configuration: .lists)
-        self.detailsSearchViewModel = detailsSearchViewModel
         
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "ListsViewController") { coder in
@@ -45,8 +42,7 @@ class ListsController {
                 tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
                 realmModel: realmModel,
-                searchViewModel: searchViewModel,
-                detailsSearchViewModel: detailsSearchViewModel
+                searchViewModel: searchViewModel
             )
         }
         
@@ -60,7 +56,6 @@ class ListsController {
         )
         
         /// set the details search view model
-        searchNavigationController.detailsSearchViewModel = detailsSearchViewModel
         searchNavigationModel.onWillBecomeActive = { viewController.willBecomeActive() }
         searchNavigationModel.onDidBecomeActive = { viewController.didBecomeActive() }
         searchNavigationModel.onWillBecomeInactive = { viewController.willBecomeInactive() }
@@ -76,25 +71,6 @@ class ListsController {
             guard let self = self else { return }
             self.searchNavigationController.updateSearchBarOffset()
             tabViewModel.excludedFrames[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
-        }
-        
-        configureTransitions(for: searchNavigationController)
-    }
-}
-
-extension ListsController {
-    func configureTransitions(for searchNavigationController: SearchNavigationController) {
-        model.updateDetailsSearchCollectionView = {
-            /// reload the details search bar.
-            searchNavigationController.detailsSearchViewController?.collectionViewModel.replaceInPlace(
-                with: searchNavigationController.searchViewController.collectionViewModel
-            )
-            
-            /// update the focused index.
-            searchNavigationController.detailsSearchViewController?.collectionViewModel.focusedCellIndex = searchNavigationController.searchViewController?.collectionViewModel.focusedCellIndex
-            
-            /// reload the collection view.
-            searchNavigationController.detailsSearchViewController?.reload()
         }
     }
 }

@@ -34,7 +34,7 @@ class PhotosController {
         let searchNavigationModel = SearchNavigationModel()
         let searchViewModel = SearchViewModel(configuration: .photos)
         let searchNavigationProgressViewModel = ProgressViewModel()
-        let slidesSearchViewModel = SearchViewModel(configuration: .photos)
+        let slidesSearchViewModel = SearchViewModel(configuration: .photosSlides)
         let slidesSearchPromptViewModel = SearchPromptViewModel()
         
         self.searchNavigationModel = searchNavigationModel

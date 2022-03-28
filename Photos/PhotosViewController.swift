@@ -29,6 +29,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
     var resultsHeaderHeightC: NSLayoutConstraint!
     
+    /// Searchable
+    var showSearchBar = true
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateNavigationBar: (() -> Void)?

@@ -43,7 +43,7 @@ extension SearchNavigationController {
             let promptHeight: CGFloat
             let barHeight: CGFloat
             
-            let searchBarOffset = slides.baseSearchBarOffset + max(0, slides.additionalSearchBarOffset ?? 0)
+            let searchBarOffset = slides.baseSearchBarOffset ?? 0 + max(0, slides.additionalSearchBarOffset ?? 0)
             let promptOffset = searchBarOffset + slidesSearchViewModel.getTotalHeight()
             if self.detailsSearchPromptViewModel?.show ?? false {
                 promptHeight = detailsSearchPromptViewModel.height()

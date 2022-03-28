@@ -11,6 +11,7 @@ import SwiftUI
 class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDismissible, NavigationNamed {
     // MARK: - Searchable
 
+    var showSearchBar = true
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? /// nil to always have blur
     var updateSearchBarOffset: (() -> Void)?

@@ -32,7 +32,6 @@ extension ListsViewController {
                 model: listsDetailViewModel,
                 tabViewModel: self.tabViewModel,
                 toolbarViewModel: self.toolbarViewModel,
-                detailsSearchViewModel: self.detailsSearchViewModel,
                 realmModel: self.realmModel
             )
             
@@ -40,8 +39,6 @@ extension ListsViewController {
         }
         
         /// keep it up to date. replacing!
-        self.detailsSearchViewModel.replaceInPlace(with: searchViewModel, notify: true)
-        model.updateDetailsSearchCollectionView?()
         
         self.detailsViewController = viewController
         navigationController?.pushViewController(viewController, animated: true)

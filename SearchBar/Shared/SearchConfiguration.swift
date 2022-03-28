@@ -126,6 +126,12 @@ struct SearchConfiguration: Equatable {
         return configuration
     }()
     
+    static var photosSlides: Self = {
+        var configuration = SearchConfiguration.photos
+        configuration.addTextPlaceholder = "Find in Photo"
+        return configuration
+    }()
+    
     static var icons: Self = {
         var configuration = SearchConfiguration.photos
         configuration.fieldActiveBackgroundColor = .secondarySystemBackground

@@ -30,7 +30,6 @@ extension ListsDetailViewController {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
-
         updateSwipeBackTouchTarget(viewSize: size)
     }
 

@@ -10,6 +10,7 @@ import UIKit
 
 class IconPickerViewController: UIViewController, Searchable {
     /// searchable
+    var showSearchBar = true
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
@@ -100,6 +101,7 @@ class IconPickerViewController: UIViewController, Searchable {
 extension IconPickerViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
+        let baseSearchBarOffset = baseSearchBarOffset ?? 0
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateSearchBarOffset?()
     }

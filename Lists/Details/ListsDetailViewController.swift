@@ -12,11 +12,12 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     var model: ListsDetailViewModel
     var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
-    var detailsSearchViewModel: SearchViewModel
     var realmModel: RealmModel
     
     var name: NavigationName? = .listsDetail
     
+    /// Searchable
+    var showSearchBar = false
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
@@ -98,13 +99,11 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
         model: ListsDetailViewModel,
         tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel,
-        detailsSearchViewModel: SearchViewModel,
         realmModel: RealmModel
     ) {
         self.model = model
         self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
-        self.detailsSearchViewModel = detailsSearchViewModel
         self.realmModel = realmModel
         super.init(coder: coder)
     }
@@ -128,10 +127,10 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
         updateWordsKeyboardToolbar()
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        
         additionalSearchBarOffset = 0
         
-        scrollView.contentInset.top = detailsSearchViewModel.getTotalHeight()
-        scrollView.verticalScrollIndicatorInsets.top = detailsSearchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        scrollView.verticalScrollIndicatorInsets.top = SearchNavigationConstants.scrollIndicatorTopPadding
         scrollView.delegate = self
         
         headerTopCenterTextField.delegate = self

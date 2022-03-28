@@ -16,8 +16,4 @@ class ListsViewModel: ObservableObject {
     @Published var selectedLists = [List]()
     
     var deleteSelected: (() -> Void)?
-    
-    
-    /// about to present details, update the details search collection view to match the latest search view model
-    var updateDetailsSearchCollectionView: (() -> Void)?
 }
