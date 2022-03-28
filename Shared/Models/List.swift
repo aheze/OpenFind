@@ -11,8 +11,8 @@ import UIKit
 
 struct List: Identifiable, Equatable {
     var id = UUID()
-    var name = ""
-    var desc = ""
+    var title = ""
+    var description = ""
     var icon = "bubble.left"
     var color: UInt = 0x007EEF
     var words: [String] = [""]
@@ -21,8 +21,8 @@ struct List: Identifiable, Equatable {
     func getEditableList() -> EditableList {
         let editableList = EditableList(
             id: self.id,
-            name: self.name,
-            desc: self.desc,
+            title: self.title,
+            description: self.description,
             icon: self.icon,
             color: self.color,
             words: self.words.map { EditableWord(string: $0) },
@@ -37,8 +37,8 @@ struct List: Identifiable, Equatable {
         return !joined.isEmpty
     }
 
-    var displayedName: String {
-        return self.name.isEmpty ? "Untitled" : self.name
+    var displayedTitle: String {
+        return self.title.isEmpty ? "Untitled" : self.title
     }
     
     static func == (lhs: List, rhs: List) -> Bool {
@@ -48,8 +48,8 @@ struct List: Identifiable, Equatable {
 
 struct EditableList {
     var id: UUID
-    var name: String
-    var desc: String
+    var title: String
+    var description: String
     var icon: String
     var color: UInt
     var words: [EditableWord]
@@ -58,8 +58,8 @@ struct EditableList {
     func getList() -> List {
         let list = List(
             id: self.id,
-            name: self.name,
-            desc: self.desc,
+            title: self.title,
+            description: self.description,
             icon: self.icon,
             color: self.color,
             words: self.words.map { $0.string },

@@ -11,8 +11,7 @@ import SwiftUI
 
 class Defaults: ObservableObject {
     static let scanOnLaunch = ("scanOnLaunch", false)
-    static let scanInBackground = ("scanInBackground", true)
-    static let scanWhileCharging = ("scanWhileCharging", true)
+    static let scanOnFind = ("scanOnFind", true)
 }
 
 /// A property wrapper type that reflects a value from `UserDefaults` and

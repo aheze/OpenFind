@@ -85,6 +85,13 @@ struct PhotosScanningViewHeader: View {
                     description: "Find will start scanning photos as soon as you open the app.",
                     binding: \PhotosViewModel.$scanOnLaunch
                 )
+                
+                PhotoScanningRow(
+                    model: model,
+                    title: "Scan on Find",
+                    description: "Automatically start scanning photos when you type in the search bar.",
+                    binding: \PhotosViewModel.$scanOnFind
+                )
 
                 Spacer()
             }

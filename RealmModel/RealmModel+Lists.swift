@@ -17,8 +17,8 @@ extension RealmModel {
         for realmList in realmLists {
             let list = List(
                 id: realmList.id,
-                name: realmList.name,
-                desc: realmList.desc,
+                title: realmList.title,
+                description: realmList.desc,
                 icon: realmList.icon,
                 color: UInt(realmList.color),
                 words: realmList.words.map { $0 },
@@ -35,8 +35,8 @@ extension RealmModel {
         words.append(objectsIn: list.words)
         let realmList = RealmList(
             id: list.id,
-            name: list.name,
-            desc: list.desc,
+            title: list.title,
+            desc: list.description,
             words: words,
             icon: list.icon,
             color: Int(list.color),
@@ -59,8 +59,8 @@ extension RealmModel {
             let words = list.getRealmWords()
             do {
                 try realm.write {
-                    realmList.name = list.name
-                    realmList.desc = list.desc
+                    realmList.title = list.title
+                    realmList.desc = list.description
                     realmList.words = words
                     realmList.icon = list.icon
                     realmList.color = Int(list.color)

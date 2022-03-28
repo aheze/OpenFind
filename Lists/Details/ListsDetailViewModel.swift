@@ -48,8 +48,8 @@ class ListsDetailViewModel: ObservableObject {
         savedList = list
         self.list = EditableList(
             id: savedList.id,
-            name: savedList.name,
-            desc: savedList.desc,
+            title: savedList.title,
+            description: savedList.description,
             icon: savedList.icon,
             color: savedList.color,
             words: savedList.words.map { EditableWord(string: $0) },

@@ -60,3 +60,5 @@ enum PhotosSectionCategorization: Equatable, Hashable {
         return ""
     }
 }
+
+

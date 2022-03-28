@@ -48,6 +48,7 @@ extension PhotosViewModel {
         }
     }
 
+    /// call this after a photo was just scanned
     func resumeScanning() {
         if
             shouldResumeScanning(),

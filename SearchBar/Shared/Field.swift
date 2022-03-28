@@ -61,7 +61,7 @@ struct Field: Identifiable, Equatable {
             case .word(let word):
                 return word.string
             case .list(let list):
-                return list.name.isEmpty ? "Untitled" : list.name
+                return list.displayedTitle
             case .addNew(let word):
                 return word.string
             }

@@ -20,12 +20,12 @@ extension PhotosViewController {
         setupCollectionView(resultsCollectionView, with: resultsFlowLayout)
         showResults(false)
         resultsCollectionView.backgroundColor = .secondarySystemBackground
-        
+
         /// SwiftUI container
         contentContainer.backgroundColor = .clear
         contentContainer.isUserInteractionEnabled = false
         setupEmptyContent()
-        
+
         setupNavigationBar()
         checkPermissions()
         listenToModel()
@@ -51,9 +51,12 @@ extension PhotosViewController {
 
     func showPermissionsView() {
         collectionView.alpha = 0
+        contentContainer.alpha = 0
+        sliderContainerView.alpha = 0
         let permissionsView = PhotosPermissionsView(model: permissionsViewModel)
         let hostingController = UIHostingController(rootView: permissionsView)
         addChildViewController(hostingController, in: view)
+        view.bringSubviewToFront(hostingController.view)
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.model.load()
@@ -61,6 +64,8 @@ extension PhotosViewController {
             UIView.animate(withDuration: 0.5) { [weak hostingController] in
                 hostingController?.view.alpha = 0
                 self.collectionView.alpha = 1
+                self.contentContainer.alpha = 1
+                self.sliderContainerView.alpha = 1
             } completion: { [weak hostingController] _ in
                 hostingController?.view.removeFromSuperview()
             }

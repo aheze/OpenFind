@@ -55,8 +55,8 @@ extension ListsDetailViewController {
         wordsTopCenterLabel.textColor = color
         wordsTopRightImageView.tintColor = color
         
-        headerTopCenterTextField.text = model.list.name
-        headerBottomTextField.text = model.list.desc
+        headerTopCenterTextField.text = model.list.title
+        headerBottomTextField.text = model.list.description
         
         let textColor: UIColor
         let placeholderColor: UIColor

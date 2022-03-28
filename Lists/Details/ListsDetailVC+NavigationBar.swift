@@ -50,7 +50,7 @@ extension ListsDetailViewController {
     @objc func optionsPressed() {}
     
     func deleteList() {
-        let listName = model.list.name.isEmpty ? "This List" : #""\#(model.list.name)""#
+        let listName = model.list.title.isEmpty ? "This List" : #""\#(model.list.title)""#
         let alert = UIAlertController(title: "Delete \(listName)?", message: "Are you sure you want to delete this list? This can't be undone.", preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in

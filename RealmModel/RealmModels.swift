@@ -128,7 +128,7 @@ class RealmRect: Object {
 
 class RealmList: Object {
     @Persisted(primaryKey: true) var id = UUID()
-    @Persisted var name = ""
+    @Persisted var title = ""
     @Persisted var desc = ""
     @Persisted var words: RealmSwift.List<String>
     @Persisted var icon = ""
@@ -141,7 +141,7 @@ class RealmList: Object {
 
     init(
         id: UUID,
-        name: String,
+        title: String,
         desc: String,
         words: RealmSwift.List<String>,
         icon: String,
@@ -149,7 +149,7 @@ class RealmList: Object {
         dateCreated: Date
     ) {
         self.id = id
-        self.name = name
+        self.title = title
         self.desc = desc
         self.words = words
         self.icon = icon

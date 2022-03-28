@@ -11,6 +11,10 @@ import UIKit
 extension PhotosViewController {
     /// find in all photos and populate `resultsState`
     func find() {
+        if !model.photosToScan.isEmpty, model.scanningState == .dormant, model.scanOnFind {
+            model.startScanning()
+        }
+        
         let displayedFindPhotos: [FindPhoto]
         var allFindPhotos = [FindPhoto]()
         var starredFindPhotos = [FindPhoto]()

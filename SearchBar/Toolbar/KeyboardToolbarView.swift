@@ -47,7 +47,7 @@ struct KeyboardToolbarView: View {
                 return model.displayedLists
             }
 
-            let lists = model.displayedLists.filter { $0.displayedName.lowercased().contains(text) }
+            let lists = model.displayedLists.filter { $0.displayedTitle.lowercased().contains(text) }
             return lists
         }
 
@@ -64,7 +64,7 @@ struct ListWidgetView: View {
         } label: {
             HStack {
                 Image(systemName: list.icon)
-                Text(list.displayedName)
+                Text(list.displayedTitle)
             }
             .foregroundColor(
                 Color(textColor())

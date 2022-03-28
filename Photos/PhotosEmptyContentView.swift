@@ -23,6 +23,7 @@ struct PhotosEmptyContentView: View {
                     .fontWeight(.medium)
                     .opacity(0.5)
                     .padding(.horizontal, 32)
+                    .multilineTextAlignment(.center)
             }
         }
     }

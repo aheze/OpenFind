@@ -30,9 +30,9 @@ extension ListsDetailViewController: UITextFieldDelegate {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
 
             if textField == headerTopCenterTextField {
-                model.list.name = updatedText
+                model.list.title = updatedText
             } else if textField == headerBottomTextField {
-                model.list.desc = updatedText
+                model.list.description = updatedText
             }
         }
 

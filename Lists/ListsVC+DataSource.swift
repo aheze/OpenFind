@@ -31,8 +31,8 @@ extension ListsViewController {
         let color = UIColor(hex: list.color)
         cell.headerView.backgroundColor = color
         cell.headerImageView.image = UIImage(systemName: list.icon)
-        cell.headerTitleLabel.text = list.displayedName
-        cell.headerDescriptionLabel.text = list.desc
+        cell.headerTitleLabel.text = list.displayedTitle
+        cell.headerDescriptionLabel.text = list.description
         cell.layer.cornerRadius = ListsCellConstants.cornerRadius
         
         if color.isLight {
