@@ -25,8 +25,10 @@ extension PhotosViewModel {
                         self.realmModel.deletePhotoMetadata(metadata: metadata)
                     }
                 }
-                self.refresh(afterDeleting: photos)
+                self.refreshCollectionViews(afterDeleting: photos)
                 self.reloadCollectionViewsAfterDeletion?()
+                
+                /// refresh slides model and reload slides collection view
                 if let photo = photos.first {
                     self.deletePhotoInSlides?(photo)
                 }
@@ -36,7 +38,8 @@ extension PhotosViewModel {
         }
     }
 
-    func refresh(afterDeleting photos: [Photo]) {
+    /// refresh collection view and results collection view models, not slides
+    func refreshCollectionViews(afterDeleting photos: [Photo]) {
         self.photos = self.photos.filter { !photos.contains($0) }
 
         deletePhotos(deletedPhotos: photos, in: &displayedSections)
@@ -49,35 +52,6 @@ extension PhotosViewModel {
             deletePhotos(deletedPhotos: photos, in: \PhotosResultsState.starredFindPhotos)
             deletePhotos(deletedPhotos: photos, in: \PhotosResultsState.screenshotsFindPhotos)
         }
-
-
-        /// if `slidesState` exists, then it must be a singular photo that's deleted.
-//        if let slidesState = slidesState {
-//            /// check indices before deletion
-//            if let currentIndex = slidesState.getCurrentIndex() {
-//                var slidesTargetIndexBeforeDeletion: Int?
-//                var slidesTargetIndexAfterDeletion: Int?
-//                if slidesState.findPhotos.count == 1 { /// last photo. After deletion, go back to the collection view.
-//                    slidesTargetIndexBeforeDeletion = nil
-//                    slidesTargetIndexAfterDeletion = nil
-//                } else if currentIndex == slidesState.findPhotos.count - 1 { /// rightmost photo
-//                    slidesTargetIndexBeforeDeletion = currentIndex - 1
-//
-//                    /// no need for this actually, will already be scrolled here.
-//                    /// But `reloadAfterDeletion` checks for both `slidesTargetIndexBeforeDeletion` and `slidesTargetIndexAfterDeletion` being not nil,
-//                    /// so set this too.
-//                    slidesTargetIndexAfterDeletion = currentIndex - 1
-//                } else {
-//                    slidesTargetIndexBeforeDeletion = currentIndex + 1 /// photo slides in from the right
-//                    slidesTargetIndexAfterDeletion = currentIndex
-//                }
-//
-//                self.slidesTargetIndexBeforeDeletion = slidesTargetIndexBeforeDeletion
-//                self.slidesTargetIndexAfterDeletion = slidesTargetIndexAfterDeletion
-//            }
-//
-//            deletePhotos(deletedPhotos: photos, in: \PhotosSlidesState.findPhotos)
-//        }
     }
 
     func deletePhotos(deletedPhotos: [Photo], in sections: inout [PhotosSection]) {

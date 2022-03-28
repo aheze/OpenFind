@@ -66,7 +66,7 @@ extension PhotosViewModel {
                 photos[index].metadata = metadata
             }
         }
-        
+
         /// update main array
         if let index = getIndex(for: photo, in: \.photos) {
             /// if `index` is not nil, just modify the changed properties - prevent overriding other properties that might have changed while the queue was waiting
@@ -111,6 +111,12 @@ extension PhotosViewModel {
             let slidesState = slidesState,
             let index = slidesState.getSlidesPhotoIndex(photo: photo)
         {
+            /// must update `currentPhoto` as well
+            if let currentIndex = slidesState.getCurrentIndex() {
+                if currentIndex == index {
+                    self.slidesState?.currentPhoto?.metadata = photo.metadata
+                }
+            }
             self.slidesState?.slidesPhotos.applyMetadata(at: index, with: photo.metadata)
         }
     }

@@ -47,6 +47,7 @@ struct PhotosSlidesInfoView: View {
                     /// metadata exists, delete sentences
                     if newPhoto.metadata != nil {
                         newPhoto.metadata?.isIgnored = isIgnored
+                        newPhoto.metadata?.dateScanned = nil /// delete saved sentences anyway
                         newPhoto.metadata?.sentences = []
                         withAnimation {
                             model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
