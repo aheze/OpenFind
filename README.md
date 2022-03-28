@@ -222,3 +222,10 @@ _Concurrency/CheckedContinuation.swift:164: Fatal error: SWIFT TASK CONTINUATION
 ```
 
 Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata` when saving.
+
+---
+
+To hide a search bar in a `Searchable` view controller (one that can be embedded in a `SearchNavigationController`), set `showSearchBar` to false. Then, pass in the navigation bar's compact height for `baseSearchBarOffset`.
+
+**Note:** Inside `SearchNavigationController`, the search bar height is calculated from the main view controller's search view model. Since the main and details heights should be the same, this shouldn't matter yet.
+
