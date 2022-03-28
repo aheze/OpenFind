@@ -26,12 +26,14 @@ struct PhotosSlidesInfoView: View {
                 let ignored = photo.metadata?.isIgnored ?? false
 
                 if !ignored {
-                    let scanState = getScanState(from: photo)
+                    let (isScanned, scanTitle) = getScanState(from: photo)
                     PhotosScanningInfoButton(
-                        title: scanState.1,
-                        isOn: scanState.0
+                        title: scanTitle,
+                        description: isScanned ? "Tap to Rescan" : nil,
+                        isOn: isScanned
                     ) {
                         print("Scan now")
+                        scanNow()
                     }
                     .transition(.scale)
                 }
@@ -42,8 +44,11 @@ struct PhotosSlidesInfoView: View {
                 ) {
                     var newPhoto = photo
                     let isIgnored = !ignored
+
+                    /// metadata exists, delete sentences
                     if newPhoto.metadata != nil {
                         newPhoto.metadata?.isIgnored = isIgnored
+                        newPhoto.metadata?.sentences = []
                         withAnimation {
                             model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                         }
@@ -62,11 +67,17 @@ struct PhotosSlidesInfoView: View {
                     }
                 }
             }
+            .fixedSize(horizontal: false, vertical: true)
         }
         .foregroundColor(.accent)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(16)
         .edgesIgnoringSafeArea(.all)
+    }
+
+    func scanNow() {
+        guard let slidesPhoto = model.slidesState?.getCurrentSlidesPhoto() else { return }
+        model.scanSlidesPhoto?(slidesPhoto)
     }
 
     func getDateString(from photo: Photo) -> String {
@@ -88,15 +99,23 @@ struct PhotosSlidesInfoView: View {
 
 struct PhotosScanningInfoButton: View {
     let title: String
+    var description: String?
     let isOn: Bool
     let action: () -> Void
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .foregroundColor(isOn ? .white : .accent)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .blueBackground(highlighted: isOn)
+            VStack {
+                Text(title)
+
+                if let description = description {
+                    Text(description)
+                        .font(.subheadline)
+                }
+            }
+            .foregroundColor(isOn ? .white : .accent)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding()
+            .blueBackground(highlighted: isOn)
         }
     }
 }

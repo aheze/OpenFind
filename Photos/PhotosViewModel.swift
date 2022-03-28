@@ -91,9 +91,16 @@ class PhotosViewModel: ObservableObject {
     }
 
     /// sentences were applied! find inside them now and append to `resultsState` / `slidesState`.
+    /// This is called when:
+    ///     - **Scenario 1:** Searching inside slides when photo has no metadata yet and `startFinding` called
+    ///     - **Scenario 2:** Searching for results in the results screen while scanning photos live
     var photosWithQueuedSentencesAdded: (([Photo]) -> Void)?
 
     // MARK: Scanning
+    
+    /// call this when pressed "scan now" in info
+    /// this closure should call `scanPhoto` in `PhotosSlidesVC+Find`
+    var scanSlidesPhoto: ((SlidesPhoto) -> Void)?
 
     var photosToScan = [Photo]() {
         didSet {

@@ -29,6 +29,7 @@ extension PhotosSlidesViewController {
                 attributes.tag = "Popover"
                 attributes.position = .relative(popoverAnchors: [.topRight])
                 attributes.dismissal.mode = .none
+                attributes.sourceFrameInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
                 attributes.sourceFrame = { [weak self] in
                     guard let self = self else { return .zero }
                     var rect = self.view.bounds

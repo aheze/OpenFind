@@ -18,6 +18,7 @@ extension PhotosViewController {
         for photo in photos {
             guard let metadata = photo.metadata else { return }
             
+            /// **Scenario 1:** searching inside a single photo in slides
             if let slidesState = model.slidesState {
                 if self.searchNavigationProgressViewModel.percentageShowing {
                     self.searchNavigationProgressViewModel.finishAutoProgress()
@@ -26,10 +27,13 @@ extension PhotosViewController {
                         let index = slidesState.getSlidesPhotoIndex(photo: photo),
                         let slidesPhoto = slidesState.slidesPhotos[safe: index]
                     {
-                        slidesState.viewController?.find(in: slidesPhoto)
+                        slidesState.viewController?.findFromMetadata(in: slidesPhoto)
                     }
+                    
                     Find.prioritizedAction = nil
                 }
+                
+                /// **Scenario 2:** searching inside results screen while scanning
             } else if let resultsState = model.resultsState {
                 let (highlights, lines) = self.getHighlightsAndDescription(
                     from: metadata.sentences,

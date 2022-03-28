@@ -33,6 +33,8 @@ extension PhotosViewController {
                 self.model.slidesState?.viewController?.configureToolbar(for: currentPhoto)
             }
         }
+        
+        /// called when finding from slides or new results came live when scanning results
         model.photosWithQueuedSentencesAdded = { [weak self] photos in
             guard let self = self else { return }
             self.findAfterQueuedSentencesUpdate(in: photos)
