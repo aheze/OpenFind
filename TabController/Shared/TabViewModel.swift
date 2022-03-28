@@ -36,15 +36,20 @@ class TabViewModel: ObservableObject {
     
     /// for `TabBarVC`
     var updateTabBarHeight: ((TabState) -> Void)?
-    var tabStateChanged: ((TabStateChangeAnimation) -> Void)?
+    
+    /// 1. current tab
+    /// 2. new tab
+    /// 3. the animation
+    var tabStateChanged: ((TabState, TabState, TabStateChangeAnimation) -> Void)?
     var barsShownChanged: (() -> Void)? /// refresh
     
     /// for the camera view controller
     var animatorProgressChanged: ((CGFloat) -> Void)?
     
     /// for ViewController
-    var willBeginNavigatingTo: ((TabState) -> Void)?
-    var didFinishNavigatingTo: ((TabState) -> Void)?
+    /// 1. old, 2. new
+    var willBeginNavigating: ((TabState, TabState) -> Void)?
+    var didFinishNavigating: ((TabState, TabState) -> Void)?
     
     init() {
         NotificationCenter.default.addObserver(forName: UIApplication.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] _ in
@@ -62,6 +67,7 @@ class TabViewModel: ObservableObject {
     
     /// animated = clicked
     func changeTabState(newTab: TabState, animation: TabStateChangeAnimation = .fractionalProgress) {
+        let currentTab = tabState
         if animation == .clickedTabIcon || animation == .animate {
             withAnimation(.easeOut(duration: 0.3)) {
                 tabState = newTab
@@ -72,7 +78,7 @@ class TabViewModel: ObservableObject {
         } else {
             tabState = newTab
         }
-        tabStateChanged?(animation)
+        tabStateChanged?(currentTab, newTab, animation)
     }
     
     /// show/hide the status bar and tab bar

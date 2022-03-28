@@ -67,20 +67,6 @@ class ViewController: UIViewController {
             self.updateExcludedFrames()
         }
     }
-    
-    
-//    override var keyCommands: [UIKeyCommand]? {
-//        return [
-//            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(findPressed), discoverabilityTitle: "Find")
-//        ]
-//    }
-//
-//    override var canBecomeFirstResponder: Bool {
-//        return true
-//    }
-//    @objc func findPressed() {
-
-//    }
 }
 
 public extension UIView {

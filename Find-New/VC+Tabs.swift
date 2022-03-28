@@ -10,50 +10,70 @@ import UIKit
 
 extension ViewController {
     func setupTabs() {
-        tabViewModel.willBeginNavigatingTo = { [weak self] tabState in
+        tabViewModel.willBeginNavigating = { [weak self] oldTabState, newTabState in
             guard let self = self else { return }
-            self.willBeginNavigatingTo(tab: tabState)
+            self.willBeginNavigating(from: oldTabState, to: newTabState)
         }
 
-        tabViewModel.didFinishNavigatingTo = { [weak self] tabState in
+        tabViewModel.didFinishNavigating = { [weak self] oldTabState, newTabState in
             guard let self = self else { return }
-            self.didFinishNavigatingTo(tab: tabState)
+            self.didFinishNavigating(from: oldTabState, to: newTabState)
         }
     }
 }
 
 extension ViewController {
-    func willBeginNavigatingTo(tab: TabState) {
-        switch tab {
+    func willBeginNavigating(from oldTabState: TabState, to newTabState: TabState) {
+        switch newTabState {
         case .photos:
             photos.viewController.willBecomeActive()
+            
             camera.viewController.willBecomeInactive()
+            
             lists.searchNavigationController.willBecomeInactive()
+            
         case .camera:
+            
             photos.viewController.willBecomeInactive()
+            
             camera.viewController.willBecomeActive()
+            
             lists.searchNavigationController.willBecomeInactive()
+            
         case .lists:
+            
             photos.viewController.willBecomeInactive()
+            
             camera.viewController.willBecomeInactive()
+            
             lists.searchNavigationController.willBecomeActive()
         default: break
         }
     }
 
-    func didFinishNavigatingTo(tab: TabState) {
-        switch tab {
+    func didFinishNavigating(from oldTabState: TabState, to newTabState: TabState) {
+        switch newTabState {
         case .photos:
             photos.viewController.didBecomeActive()
+            
             camera.viewController.didBecomeInactive()
+            
             lists.searchNavigationController.didBecomeInactive()
+            
         case .camera:
+            
             photos.viewController.didBecomeInactive()
+            
             camera.viewController.didBecomeActive()
+            
             lists.searchNavigationController.didBecomeInactive()
+            
         case .lists:
+            
             photos.viewController.didBecomeInactive()
+            
             camera.viewController.didBecomeInactive()
+            
             lists.searchNavigationController.didBecomeActive()
         default: break
         }

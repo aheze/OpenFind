@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-import UIKit
+import SwiftUI
 
 /// All called manually via `ListsController`
 extension ListsViewController {
@@ -19,6 +19,9 @@ extension ListsViewController {
     }
     
     func willBecomeInactive() {
+        withAnimation {
+            resetSelectingState()
+        }
         detailsViewController?.willBecomeInactive()
     }
     

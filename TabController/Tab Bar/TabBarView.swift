@@ -14,7 +14,6 @@ struct TabBarView: View {
     @ObservedObject var cameraViewModel: CameraViewModel
     
     var body: some View {
-        
         Color.clear
             .overlay(
                 HStack(alignment: .bottom, spacing: 0) {

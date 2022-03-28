@@ -6,11 +6,9 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
-extension TabBarViewController: UICollectionViewDelegate  {
-    
+extension TabBarViewController: UICollectionViewDelegate {
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -47,7 +45,7 @@ extension TabBarViewController: UICollectionViewDelegate  {
             }
             
             if let newTab = TabState.notifyBeginChange(current: model.tabState, new: newTab) {
-                model.willBeginNavigatingTo?(newTab)
+                model.willBeginNavigating?(model.tabState, newTab)
             }
             model.changeTabState(newTab: newTab)
         }
@@ -65,7 +63,7 @@ extension TabBarViewController: UICollectionViewDelegate  {
     func notifyIfScrolledToStop() {
         switch model.tabState {
         case .photos, .camera, .lists:
-            model.didFinishNavigatingTo?(model.tabState)
+            model.didFinishNavigating?(model.tabState, model.tabState)
         default: break
         }
     }

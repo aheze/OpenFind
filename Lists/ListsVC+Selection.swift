@@ -27,6 +27,7 @@ extension ListsViewController {
     }
 
     func resetSelectingState() {
+        model.isSelecting = false
         selectBarButton.title = "Select"
         toolbarViewModel.toolbar = nil
         model.selectedLists = []

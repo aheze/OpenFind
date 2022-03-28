@@ -15,15 +15,15 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? /// nil to always have blur
     var updateSearchBarOffset: (() -> Void)?
-    
+
     // MARK: - InteractivelyDismissible
 
     var isInteractivelyDismissing: Bool = false
-    
+
     // MARK: NavigationNamed
 
     var name: NavigationName? = .listsDetail
-    
+
     var model: PhotosViewModel
     var tabViewModel: TabViewModel
     var searchNavigationModel: SearchNavigationModel
@@ -33,23 +33,23 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var slidesSearchPromptViewModel: SearchPromptViewModel
     var toolbarViewModel: ToolbarViewModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
-    
+
     /// includes collection view and info view
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
-    
+
     @IBOutlet var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
 
     @IBOutlet var infoViewContainer: UIView!
     @IBOutlet var infoViewContainerHeightC: NSLayoutConstraint!
-    
+
     lazy var flowLayout = makeFlowLayout()
     lazy var dataSource: DataSource? = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, SlidesPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, SlidesPhoto>
-    
+
     // MARK: - Deletion
 
     var photoToDelete: Photo?
@@ -60,7 +60,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     let tapPanGesture = UITapGestureRecognizer()
     let dismissPanGesture = UIPanGestureRecognizer()
     weak var transitionAnimator: PhotosTransitionDismissAnimator? /// auto set via the transition animator
-    
+
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
@@ -90,16 +90,16 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = "Photo"
         navigationItem.largeTitleDisplayMode = .never
-        
+
         setup()
         listen()
         setupDismissGesture()
         setupTapGesture()
         update(animate: false)
-        
+
         if
             let slidesState = model.slidesState,
             let currentIndex = slidesState.getCurrentIndex(),
@@ -114,7 +114,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         withAnimation {
@@ -139,12 +139,12 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         switchToFullScreen(false)
         slidesSearchPromptViewModel.update(show: false)
         model.updateAllowed = true
-        
+
         withAnimation {
             toolbarViewModel.toolbar = nil
         }
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         resetInfoToHidden()

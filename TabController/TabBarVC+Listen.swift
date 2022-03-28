@@ -16,7 +16,7 @@ extension TabBarViewController {
             self.updateTabBarHeight(tabState)
         }
         
-        model.tabStateChanged = { [weak self] animation in
+        model.tabStateChanged = { [weak self] oldTabState, newTabState, animation in
             guard let self = self else { return }
             let activeTab = self.model.tabState
             
@@ -30,8 +30,8 @@ extension TabBarViewController {
                 self.updateTabContent(activeTab, animated: false)
             case .clickedTabIcon:
                 TabState.modifyProgress(new: activeTab) /// make sure to modify first, so `willBeginNavigatingTo` will be accurate on swipe
-                self.model.willBeginNavigatingTo?(activeTab) /// always call will begin anyway
-                self.model.didFinishNavigatingTo?(activeTab) /// scroll view delegates not called, so call manually
+                self.model.willBeginNavigating?(oldTabState, newTabState) /// always call will begin anyway
+                self.model.didFinishNavigating?(oldTabState, newTabState) /// scroll view delegates not called, so call manually
                 
                 UIView.animate(withDuration: 0.3) { self.view.layoutIfNeeded() }
                 self.updateTabContent(activeTab, animated: false)
