@@ -74,10 +74,8 @@ extension List {
             let dateCreatedQuery = queries.first(where: { $0.name == List.dateCreatedQueryName }),
             let dateCreated = dateCreatedQuery.value.decodeQueryValue()
         {
-            print("dateCreated string: \(dateCreated)")
             let dateFormatter = ISO8601DateFormatter()
             if let date = dateFormatter.date(from: dateCreated) {
-                print("date: \(date)")
                 list.dateCreated = date
             }
         }
@@ -93,8 +91,7 @@ extension List {
 
             list.words = words
         }
-        
-        print("List made! \(list)")
+
         return list
     }
 }

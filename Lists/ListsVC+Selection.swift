@@ -61,21 +61,21 @@ extension ListsViewController {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
                 if model.isSelecting {
                     cell.contentView.isUserInteractionEnabled = false
-                    cell.headerSelectionIconView.alpha = 0
+                    cell.view.headerSelectionIconView.alpha = 0
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                        cell.headerSelectionIconView.isHidden = false
-                        cell.headerStackView.layoutIfNeeded()
-                        cell.headerSelectionIconView.alpha = 1
+                        cell.view.headerSelectionIconView.isHidden = false
+                        cell.view.headerStackView.layoutIfNeeded()
+                        cell.view.headerSelectionIconView.alpha = 1
                     }
                 } else {
                     cell.contentView.isUserInteractionEnabled = true
-                    cell.headerSelectionIconView.alpha = 1
+                    cell.view.headerSelectionIconView.alpha = 1
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                        cell.headerSelectionIconView.isHidden = true
-                        cell.headerStackView.layoutIfNeeded()
-                        cell.headerSelectionIconView.alpha = 0
+                        cell.view.headerSelectionIconView.isHidden = true
+                        cell.view.headerStackView.layoutIfNeeded()
+                        cell.view.headerSelectionIconView.alpha = 0
                     } completion: { _ in
-                        cell.headerSelectionIconView.setState(.empty)
+                        cell.view.headerSelectionIconView.setState(.empty)
                     }
                 }
             }

@@ -5,11 +5,10 @@
 //  Created by A. Zheng (github.com/aheze) on 3/12/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
-struct List: Identifiable, Equatable {
+struct List: Identifiable, Hashable {
     var id = UUID()
     var title = ""
     var description = ""
@@ -39,10 +38,6 @@ struct List: Identifiable, Equatable {
 
     var displayedTitle: String {
         return self.title.isEmpty ? "Untitled" : self.title
-    }
-    
-    static func == (lhs: List, rhs: List) -> Bool {
-        lhs.id == rhs.id
     }
 }
 

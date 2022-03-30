@@ -33,6 +33,7 @@ extension ListsViewController {
     
     func getCellSize(listIndex: Int, availableWidth: CGFloat) -> CGSize {
         let list = self.model.displayedLists[listIndex].list
+        
         let c = ListsCellConstants.self
         
         let headerHeight = c.headerTitleFont.lineHeight

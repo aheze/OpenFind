@@ -70,7 +70,7 @@ extension ListsViewController {
     func listUpdated(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
             model.displayedLists[firstIndex].list = list
-            update(at: firstIndex.indexPath, with: list)
+            update(at: firstIndex.indexPath, with: model.displayedLists[firstIndex])
         }
     }
 

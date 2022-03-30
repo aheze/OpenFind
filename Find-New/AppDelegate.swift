@@ -28,34 +28,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-//        // 1
-//        guard
-//            userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-//            let url = userActivity.webpageURL,
-//            let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-//        else {
-//            return false
-//        }
-//        
-//        Debug.show("URL: \(url)", message: "Components: \(components)")
-//        print("url: \(url) -> Components: \(components)")
-//
-////        // 2
-////        if let computer = ItemHandler.sharedInstance.items
-////            .filter({ $0.path == components.path }).first
-////        {
-////            presentDetailViewController(computer)
-////            return true
-////        }
-////
-////        // 3
-////        if let webpageUrl = URL(string: "http://rw-universal-links-final.herokuapp.com") {
-////            application.open(webpageUrl)
-////            return false
-////        }
-//
-//        return false
-//    }
 }

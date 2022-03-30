@@ -9,97 +9,16 @@
 import UIKit
 
 class ListsContentCell: UICollectionViewCell {
-    @IBOutlet var headerView: ButtonView!
-    
-    @IBOutlet var headerViewHeightC: NSLayoutConstraint!
-    @IBOutlet var headerStackView: UIStackView!
-    
-    @IBOutlet var headerStackViewTopC: NSLayoutConstraint!
-    @IBOutlet var headerStackViewRightC: NSLayoutConstraint!
-    @IBOutlet var headerStackViewBottomC: NSLayoutConstraint!
-    @IBOutlet var headerStackViewLeftC: NSLayoutConstraint!
-    
-    @IBOutlet var headerLeftView: UIView!
-    @IBOutlet var headerLeftViewWidthC: NSLayoutConstraint!
-    @IBOutlet var headerImageView: UIImageView!
-    @IBOutlet var headerSelectionIconView: SelectionIconView!
-    
-    @IBOutlet var headerTitleLabel: UILabel!
-    @IBOutlet var headerDescriptionLabel: UILabel!
-
-    @IBOutlet var containerView: UIView!
-    @IBOutlet var containerButtonView: ButtonView!
-    @IBOutlet var chipsContainerView: UIView!
-    
-    @IBOutlet var chipsContainerViewTopC: NSLayoutConstraint!
-    @IBOutlet var chipsContainerViewRightC: NSLayoutConstraint!
-    @IBOutlet var chipsContainerViewBottomC: NSLayoutConstraint!
-    @IBOutlet var chipsContainerViewLeftC: NSLayoutConstraint!
-    
     var tapped: (() -> Void)?
+    @IBOutlet weak var view: ListsContentView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        let c = ListsCellConstants.self
-        
-        /// allow button view to be pressed
-        headerStackView.isUserInteractionEnabled = false
-
-        headerStackView.backgroundColor = .clear
-        headerLeftView.backgroundColor = .clear
-        chipsContainerView.backgroundColor = .clear
-        
-        headerLeftViewWidthC.constant = c.headerLeftWidth
-        headerSelectionIconView.configuration = .listsSelection
-        
-        headerImageView.setIconFont(font: c.headerDescriptionFont)
-        headerTitleLabel.font = c.headerTitleFont
-        headerDescriptionLabel.font = c.headerDescriptionFont
-        
-        headerViewHeightC.constant = c.headerTitleFont.lineHeight
-            + c.headerEdgeInsets.top
-            + c.headerEdgeInsets.bottom
-        
-        headerStackViewTopC.constant = c.headerEdgeInsets.top
-        headerStackViewRightC.constant = c.headerEdgeInsets.right
-        headerStackViewBottomC.constant = c.headerEdgeInsets.bottom
-        headerStackViewLeftC.constant = c.headerEdgeInsets.left
-        
-        chipsContainerViewTopC.constant = c.contentEdgeInsets.top
-        chipsContainerViewRightC.constant = c.contentEdgeInsets.right
-        chipsContainerViewBottomC.constant = c.contentEdgeInsets.bottom
-        chipsContainerViewLeftC.constant = c.contentEdgeInsets.left
-        
-        headerStackView.setCustomSpacing(c.headerImageRightPadding, after: headerImageView)
-        headerStackView.spacing = c.headerTextSpacing
-        
-        headerView.shouldFade = false
-        headerView.tapped = { [weak self] in
+        view.tapped = { [weak self] in
             self?.tapped?()
-        }
-        headerView.touchedDown = { [weak self] down in
-            self?.touchedDown(down)
-        }
-        
-        containerButtonView.shouldFade = false
-        containerButtonView.tapped = { [weak self] in
-            self?.tapped?()
-        }
-        containerButtonView.touchedDown = { [weak self] down in
-            self?.touchedDown(down)
         }
     }
     
-    func touchedDown(_ down: Bool) {
-        if down {
-            UIView.animate(withDuration: 0.2) {
-                self.alpha = 0.8
-            }
-        } else {
-            UIView.animate(withDuration: 0.2) {
-                self.alpha = 1
-            }
-        }
-    }
 }
 
 class ListChipView: UIView {

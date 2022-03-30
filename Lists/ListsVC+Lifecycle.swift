@@ -38,7 +38,7 @@ extension ListsViewController {
             let newDisplayedList = model.displayedLists[index]
             
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
-                addChipViews(to: cell, with: newDisplayedList)
+                cell.view.addChipViews(with: newDisplayedList)
             }
         }
         
