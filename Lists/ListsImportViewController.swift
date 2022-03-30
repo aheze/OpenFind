@@ -9,7 +9,10 @@
 import SwiftUI
 
 enum ListsImportConstants {
-    static var font = UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium)
+    static var titleFont = UIFont.preferredCustomFont(forTextStyle: .headline, weight: .medium)
+    static var headerPadding = UIEdgeInsets(top: 14, left: 32, bottom: 14, right: 32)
+    
+    static var buttonFont = UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium)
     static var labelInset = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     static var labelPadding = CGFloat(16)
     static var importButtonPadding = UIEdgeInsets(top: 14, left: 24, bottom: 14, right: 24)
@@ -98,16 +101,34 @@ class ListsImportViewController: UIViewController {
         self.widthC = widthC
         self.heightC = heightC
 
+        
+        // MARK: Title
+        let titleLabel = UILabel()
+        titleLabel.text = "Would you like to import this list?"
+        titleLabel.textColor = .secondaryLabel
+        titleLabel.font = ListsImportConstants.titleFont
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        
+        view.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ListsImportConstants.headerPadding.top),
+            titleLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -ListsImportConstants.headerPadding.right),
+            titleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: ListsImportConstants.headerPadding.left)
+        ])
+        
+        // MARK: Bottom button
         let imageView = UIImageView(image: UIImage(systemName: "square.and.arrow.down"))
-        let label = UILabel()
+        let buttonLabel = UILabel()
 
-        label.text = "Import List"
-        label.textColor = Colors.accent
-        label.font = ListsImportConstants.font
-        imageView.setIconFont(font: ListsImportConstants.font)
+        buttonLabel.text = "Import List"
+        buttonLabel.textColor = Colors.accent
+        buttonLabel.font = ListsImportConstants.buttonFont
+        imageView.setIconFont(font: ListsImportConstants.buttonFont)
         imageView.tintColor = Colors.accent
 
-        let stackView = UIStackView(arrangedSubviews: [imageView, label])
+        let stackView = UIStackView(arrangedSubviews: [imageView, buttonLabel])
         stackView.distribution = .equalSpacing
         stackView.spacing = 8
         stackView.isUserInteractionEnabled = false
@@ -128,16 +149,6 @@ class ListsImportViewController: UIViewController {
             buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -ListsImportConstants.labelPadding)
         ])
-
-//        let button = UIButton(type: .system)
-//        button.setImage(UIImage(systemName: "square.and.arrow.down"), for: .normal)
-//        button.setTitle("Import List", for: .normal)
-//        button.contentVerticalAlignment = .fill
-//        button.contentHorizontalAlignment = .fill
-//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-//        button.imageView?.setIconFont(font: ListsImportConstants.font)
-//        button.titleLabel?.font = ListsImportConstants.font
-//        view.addSubview(button)
     }
 
     @objc func importTapped() {
@@ -149,41 +160,3 @@ class ListsImportViewController: UIViewController {
         dismiss(animated: true)
     }
 }
-
-// struct ListsImportView: View {
-//    let list: List
-//    @State var size = CGSize(width: 300, height: 100)
-//    @State var chipFrames = [ListFrame.ChipFrame]()
-//
-//    var body: some View {
-//        GeometryReader { geometry in
-//            let _ = setDisplayedSize(from: geometry.size.width)
-//
-//            ListsContentViewRepresentable(list: list, chipFrames: chipFrames)
-//                .frame(width: size.width, height: size.height)
-//        }
-//    }
-//
-//    func setDisplayedSize(from viewWidth: CGFloat) {
-//        let availableWidth = viewWidth - (ListsCollectionConstants.sidePadding * 2)
-//        let (size, chipFrames) = list.getContentViewSize(availableWidth: availableWidth)
-//        DispatchQueue.main.async {
-//            self.size = size
-//            self.chipFrames = chipFrames
-//        }
-//    }
-// }
-
-// struct ListsContentViewRepresentable: UIViewRepresentable {
-//    var list: List
-//    var chipFrames: [ListFrame.ChipFrame]
-//
-//    func makeUIView(context: Context) -> ListsContentView {
-//        let view = ListsContentView()
-//        return view
-//    }
-//
-//    func updateUIView(_ uiView: ListsContentView, context: Context) {
-//        uiView.addChipViews(with: list, chipFrames: chipFrames)
-//    }
-// }
