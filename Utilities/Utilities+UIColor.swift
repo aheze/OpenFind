@@ -112,12 +112,6 @@ extension UIColor {
         return self.offset(by: offset)
     }
 
-    var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
-        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return (h: h, s: s, b: b, a: a)
-    }
-
     var rgb: (r: CGFloat, g: CGFloat, b: CGFloat) {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
@@ -125,6 +119,12 @@ extension UIColor {
         } else {
             return (0, 0, 0)
         }
+    }
+
+    var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
+        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (h: h, s: s, b: b, a: a)
     }
 
     /// get a gradient color

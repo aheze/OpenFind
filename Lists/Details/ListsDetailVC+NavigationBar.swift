@@ -14,8 +14,12 @@ extension ListsDetailViewController {
             let shareAction = UIAction(
                 title: "Share",
                 image: UIImage(systemName: "square.and.arrow.up")
-            ) { _ in
-                
+            ) { [weak self] _ in
+                if let string = self?.model.list.getList().getURLString() {
+                    print("got url: \(string)")
+                    let pasteboard = UIPasteboard.general
+                    pasteboard.string = string
+                }
             }
             
             let deleteAction = UIAction(
