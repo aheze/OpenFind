@@ -25,3 +25,10 @@ extension UIView {
         layer.borderWidth = width
     }
 }
+
+extension Debug {
+    static func show(_ title: String, message: String? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+    }
+}

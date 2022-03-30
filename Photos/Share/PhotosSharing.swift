@@ -30,15 +30,21 @@ extension UIViewController {
             }
 
             let dataSource = PhotosSharingDataSource(model: model, assets: assets)
-            let activityViewController = UIActivityViewController(activityItems: urls as [Any] + [dataSource], applicationActivities: nil)
-
-            if let popoverController = activityViewController.popoverPresentationController {
-                popoverController.sourceRect = CGRect(x: 10, y: self.view.bounds.height - 50, width: 20, height: 20)
-                popoverController.sourceView = self.view
-            }
-
-            self.present(activityViewController, animated: true)
+            let items = urls as [Any] + [dataSource]
+            presentShareSheet(items: items)
         }
+    }
+}
+
+extension UIViewController {
+    func presentShareSheet(items: [Any]) {
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceRect = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
+            popoverController.sourceView = self.view
+        }
+
+        self.present(activityViewController, animated: true)
     }
 }
 
@@ -79,7 +85,7 @@ class PhotosSharingDataSource: NSObject, UIActivityItemSource {
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
-        metadata.title = "\(assets.count) Photos"
+        metadata.title = "\(self.assets.count) Photos"
         return metadata
     }
 }

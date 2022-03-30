@@ -127,6 +127,7 @@
 		3C0B5E7327BAF5CB00EC881E /* PhotosVM+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */; };
 		3C0B5E7427BAF5D100EC881E /* PhotosVM+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */; };
 		3C0CC69E25CE0385008E5737 /* unused.rb in Resources */ = {isa = PBXBuildFile; fileRef = 3C0CC69D25CE0385008E5737 /* unused.rb */; };
+		3C0F239827F3FA5A00BCBFAE /* VC+AppLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F239727F3FA5A00BCBFAE /* VC+AppLink.swift */; };
 		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
 		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
@@ -2380,6 +2381,8 @@
 		3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Setup.swift"; sourceTree = "<group>"; };
 		3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Load.swift"; sourceTree = "<group>"; };
 		3C0CC69D25CE0385008E5737 /* unused.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unused.rb; sourceTree = "<group>"; };
+		3C0F239627F3EDD800BCBFAE /* Find-New.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find-New.entitlements"; sourceTree = "<group>"; };
+		3C0F239727F3FA5A00BCBFAE /* VC+AppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+AppLink.swift"; sourceTree = "<group>"; };
 		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
 		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
@@ -4460,12 +4463,14 @@
 		3C6C7322278193F600E039F0 /* Find-New */ = {
 			isa = PBXGroup;
 			children = (
+				3C0F239627F3EDD800BCBFAE /* Find-New.entitlements */,
 				3C6C7323278193F600E039F0 /* AppDelegate.swift */,
 				3C6C7325278193F600E039F0 /* SceneDelegate.swift */,
 				3C6C7327278193F600E039F0 /* ViewController.swift */,
 				3C93149B27B84457009E5B6E /* VC+Setup.swift */,
 				3CE3D4F627DD315700521735 /* VC+Tabs.swift */,
 				3CB4C32127A772030093155E /* VC+Frames.swift */,
+				3C0F239727F3FA5A00BCBFAE /* VC+AppLink.swift */,
 				3C6C7329278193F600E039F0 /* Main.storyboard */,
 				3C6C732C278193F800E039F0 /* NewAssets.xcassets */,
 				3C6C732E278193F800E039F0 /* LaunchScreen.storyboard */,
@@ -7726,6 +7731,7 @@
 				3C7A441127EF791800DFF76F /* PhotosVM+Delete.swift in Sources */,
 				3C6C736F2781946200E039F0 /* CameraVC+Find.swift in Sources */,
 				3C9234A127E2EB1C0055061A /* PhotosVM+Add.swift in Sources */,
+				3C0F239827F3FA5A00BCBFAE /* VC+AppLink.swift in Sources */,
 				3C0B12CD27F13E840013688E /* ListsVC+Delegate.swift in Sources */,
 				3C6C73B62781947A00E039F0 /* Find.swift in Sources */,
 				3C6C7426278194A500E039F0 /* Utilities+UIDevice.swift in Sources */,
@@ -9394,13 +9400,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5132;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-New/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Find;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera to find text";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -9411,8 +9419,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aheze.Find-New-1";
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -9427,13 +9435,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5132;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-New/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Find;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera to find text";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -9444,8 +9454,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aheze.Find-New-1";
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
