@@ -128,6 +128,7 @@
 		3C0B5E7427BAF5D100EC881E /* PhotosVM+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */; };
 		3C0CC69E25CE0385008E5737 /* unused.rb in Resources */ = {isa = PBXBuildFile; fileRef = 3C0CC69D25CE0385008E5737 /* unused.rb */; };
 		3C0F239827F3FA5A00BCBFAE /* VC+AppLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F239727F3FA5A00BCBFAE /* VC+AppLink.swift */; };
+		3C0F239A27F4045A00BCBFAE /* List+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F239927F4045A00BCBFAE /* List+Import.swift */; };
 		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
 		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
@@ -2383,6 +2384,7 @@
 		3C0CC69D25CE0385008E5737 /* unused.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unused.rb; sourceTree = "<group>"; };
 		3C0F239627F3EDD800BCBFAE /* Find-New.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find-New.entitlements"; sourceTree = "<group>"; };
 		3C0F239727F3FA5A00BCBFAE /* VC+AppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+AppLink.swift"; sourceTree = "<group>"; };
+		3C0F239927F4045A00BCBFAE /* List+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Import.swift"; sourceTree = "<group>"; };
 		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
 		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
@@ -3786,6 +3788,7 @@
 				3C443F6F27DDD7440050A0AB /* Sentence+Find.swift */,
 				3C443F0327DD90390050A0AB /* List.swift */,
 				3CDAF25827F2335700467B31 /* List+Share.swift */,
+				3C0F239927F4045A00BCBFAE /* List+Import.swift */,
 				3C443F0727DD90650050A0AB /* Photo.swift */,
 				3C7B7A68277F94D400E1F602 /* Highlight.swift */,
 				3C443F4227DD90C00050A0AB /* GeneralExtensions.swift */,
@@ -7593,6 +7596,7 @@
 				3C0B5E7127BACBF600EC881E /* PhotosVC+Setup.swift in Sources */,
 				3C9314ED27B86F45009E5B6E /* PhotosVC+Lifecycle.swift in Sources */,
 				3C08EADA279BA85500971D60 /* Utilities+UIView.swift in Sources */,
+				3C0F239A27F4045A00BCBFAE /* List+Import.swift in Sources */,
 				3C9CA8AB27EFFA3400D087F2 /* PhotosExtensions.swift in Sources */,
 				3C6C73692781946200E039F0 /* CameraController.swift in Sources */,
 				3C443F0127DD8F660050A0AB /* SliderView.swift in Sources */,

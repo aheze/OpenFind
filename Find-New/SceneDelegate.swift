@@ -37,9 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         if
-            
+
             /// Universal Links
             let userActivity = connectionOptions.userActivities.first,
             userActivity.activityType == NSUserActivityTypeBrowsingWeb,
@@ -47,11 +46,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         {
             handleIncomingURL(incomingURL)
         } else if
-            
+
             /// URL Schemes
             let urlContext = connectionOptions.urlContexts.first
         {
-            let sendingAppID = urlContext.options.sourceApplication
             let incomingURL = urlContext.url
             handleIncomingURL(incomingURL)
         }

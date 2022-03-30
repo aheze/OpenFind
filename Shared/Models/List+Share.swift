@@ -20,10 +20,11 @@ extension List {
     static let colorQueryName = "color"
     static let dateCreatedQueryName = "dateCreated"
     static let wordsQueryName = "words"
+    static let wordsSeparator = ","
+    static let allowedCharacters = CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[] ").inverted
     
     func getURLString() -> String? {
-        let allowedCharacters = CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[] ").inverted
-        
+        let allowedCharacters = List.allowedCharacters
         guard let titleQuery = title.addingPercentEncoding(withAllowedCharacters: allowedCharacters) else { return nil }
         guard let descriptionQuery = description.addingPercentEncoding(withAllowedCharacters: allowedCharacters) else { return nil }
         guard let iconQuery = icon.addingPercentEncoding(withAllowedCharacters: allowedCharacters) else { return nil }
@@ -34,7 +35,7 @@ extension List {
         guard let dateCreatedQuery = dateString.addingPercentEncoding(withAllowedCharacters: allowedCharacters) else { return nil }
         
         let wordsEncoded = words.compactMap { $0.addingPercentEncoding(withAllowedCharacters: allowedCharacters) }
-        let wordsQuery = wordsEncoded.joined(separator: ",")
+        let wordsQuery = wordsEncoded.joined(separator: List.wordsSeparator)
         
         let queries: [Query] = [
             .init(name: List.titleQueryName, value: titleQuery),
@@ -57,8 +58,7 @@ extension List {
             queriesString.append(queryString)
         }
         
-//        let baseString = "https://lists.getfind.app/list"
-        let baseString = "file:///Users/aheze/Desktop/Code/Web/FindLists/list.html"
+        let baseString = "https://lists.getfind.app/list"
         let urlString = baseString + queriesString
         return urlString
     }
