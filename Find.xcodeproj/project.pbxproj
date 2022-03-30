@@ -133,6 +133,12 @@
 		3C0F239E27F4271500BCBFAE /* ListsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F239D27F4271500BCBFAE /* ListsContentView.xib */; };
 		3C0F239F27F42A2F00BCBFAE /* ListsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F239B27F4270E00BCBFAE /* ListsContentView.swift */; };
 		3C0F23A027F42A2F00BCBFAE /* ListsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F239D27F4271500BCBFAE /* ListsContentView.xib */; };
+		3C0F23A227F4B20C00BCBFAE /* ListsImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A127F4B20C00BCBFAE /* ListsImportViewController.swift */; };
+		3C0F23A327F4B2E500BCBFAE /* ListsImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A127F4B20C00BCBFAE /* ListsImportViewController.swift */; };
+		3C0F23A527F4B4A600BCBFAE /* List+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A427F4B4A600BCBFAE /* List+Display.swift */; };
+		3C0F23A627F4B4C200BCBFAE /* List+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A427F4B4A600BCBFAE /* List+Display.swift */; };
+		3C0F23A827F4BBC100BCBFAE /* ListsVC+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */; };
+		3C0F23A927F4BBC400BCBFAE /* ListsVC+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */; };
 		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
 		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
@@ -2391,6 +2397,9 @@
 		3C0F239927F4045A00BCBFAE /* List+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Import.swift"; sourceTree = "<group>"; };
 		3C0F239B27F4270E00BCBFAE /* ListsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsContentView.swift; sourceTree = "<group>"; };
 		3C0F239D27F4271500BCBFAE /* ListsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListsContentView.xib; sourceTree = "<group>"; };
+		3C0F23A127F4B20C00BCBFAE /* ListsImportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsImportViewController.swift; sourceTree = "<group>"; };
+		3C0F23A427F4B4A600BCBFAE /* List+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Display.swift"; sourceTree = "<group>"; };
+		3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Add.swift"; sourceTree = "<group>"; };
 		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
 		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
@@ -3795,6 +3804,7 @@
 				3C443F0327DD90390050A0AB /* List.swift */,
 				3CDAF25827F2335700467B31 /* List+Share.swift */,
 				3C0F239927F4045A00BCBFAE /* List+Import.swift */,
+				3C0F23A427F4B4A600BCBFAE /* List+Display.swift */,
 				3C443F0727DD90650050A0AB /* Photo.swift */,
 				3C7B7A68277F94D400E1F602 /* Highlight.swift */,
 				3C443F4227DD90C00050A0AB /* GeneralExtensions.swift */,
@@ -4029,8 +4039,10 @@
 				3C08EAD4279B0C5400971D60 /* ListsVC+FlowLayout.swift */,
 				3C08EAE7279BA94A00971D60 /* ListsVC+Details.swift */,
 				3C21EE3727A463B40005E183 /* ListsVC+Realm.swift */,
+				3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */,
 				3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */,
 				3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */,
+				3C0F23A127F4B20C00BCBFAE /* ListsImportViewController.swift */,
 				3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */,
 				3C0F239B27F4270E00BCBFAE /* ListsContentView.swift */,
 				3C0F239D27F4271500BCBFAE /* ListsContentView.xib */,
@@ -7079,6 +7091,7 @@
 				3CCE2B41279D093600F72351 /* ListsDetailVC+DataSource.swift in Sources */,
 				3C443F1627DD90790050A0AB /* List.swift in Sources */,
 				3CCE2B96279D29D000F72351 /* ListsDetailVC+Lifecycle.swift in Sources */,
+				3C0F23A527F4B4A600BCBFAE /* List+Display.swift in Sources */,
 				3CD706FE27A3925200B446D7 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C1D19E7275A93700064F2C6 /* ListsViewModel.swift in Sources */,
 				3C21EE1E27A461810005E183 /* RealmModel+Lists.swift in Sources */,
@@ -7107,6 +7120,7 @@
 				3C1D1A1E275AA1720064F2C6 /* UIKitViews.swift in Sources */,
 				3C9CA8A727EFF9F700D087F2 /* TabAttributes.swift in Sources */,
 				3CFD5F82278A56BB0031BC8B /* ListsVC+NavigationBar.swift in Sources */,
+				3C0F23A827F4BBC100BCBFAE /* ListsVC+Add.swift in Sources */,
 				3CCE2B19279D008B00F72351 /* SelectionIconView.swift in Sources */,
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */,
@@ -7177,6 +7191,7 @@
 				3C93148027B769A0009E5B6E /* ListsDetailVC+Scroll.swift in Sources */,
 				3C7223CA27C450700085EBF1 /* SpecifiedExtensions.swift in Sources */,
 				3CCE2B45279D149800F72351 /* ListsDetailVC+Listen.swift in Sources */,
+				3C0F23A227F4B20C00BCBFAE /* ListsImportViewController.swift in Sources */,
 				3C08EB71279CAC0600971D60 /* TabModel.swift in Sources */,
 				3C364300277BC2E90038CB18 /* SearchFieldCell.swift in Sources */,
 				3C08EAEF279BAAD400971D60 /* ListsDetailViewController.swift in Sources */,
@@ -7548,6 +7563,7 @@
 				3C0B5E7427BAF5D100EC881E /* PhotosVM+Load.swift in Sources */,
 				3C875E1227EB807C00EC35ED /* IgnoredPhotosToolbarView.swift in Sources */,
 				3CBB319327BD612500F25F6A /* PhotosSlidesCollectionLayout.swift in Sources */,
+				3C0F23A627F4B4C200BCBFAE /* List+Display.swift in Sources */,
 				3C6C73BC2781947E00E039F0 /* VisionTrackingEngine.swift in Sources */,
 				3C21EE2927A461930005E183 /* RealmModel+PhotosTesting.swift in Sources */,
 				3C93149C27B84457009E5B6E /* VC+Setup.swift in Sources */,
@@ -7588,6 +7604,7 @@
 				3CBB319027BD52DC00F25F6A /* PhotosSlidesViewController.swift in Sources */,
 				3C08EB15279C76E500971D60 /* ListsVC+Details.swift in Sources */,
 				3C6C73AA2781947400E039F0 /* SuggestionsView.swift in Sources */,
+				3C0F23A927F4BBC400BCBFAE /* ListsVC+Add.swift in Sources */,
 				3CE3D4E627DD0BDF00521735 /* SearchNC+Listen.swift in Sources */,
 				3C6C742A278194A500E039F0 /* Utilities+UIColor.swift in Sources */,
 				3C6C73972781947400E039F0 /* SearchViewModel.swift in Sources */,
@@ -7600,6 +7617,7 @@
 				3CC00EC427A6517700F6CF9C /* ListsVC+Selection.swift in Sources */,
 				3C6C739E2781947400E039F0 /* SearchCollectionView.swift in Sources */,
 				3C7223C927C450700085EBF1 /* SpecifiedExtensions.swift in Sources */,
+				3C0F23A327F4B2E500BCBFAE /* ListsImportViewController.swift in Sources */,
 				3C71EFA827BF6A4F00F0C0A0 /* PhotosTransitionPopAnimator.swift in Sources */,
 				3C6C735A2781945A00E039F0 /* PhotosController.swift in Sources */,
 				3C6C73A32781947400E039F0 /* SearchViewController.swift in Sources */,

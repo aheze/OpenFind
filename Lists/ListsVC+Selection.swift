@@ -40,7 +40,7 @@ extension ListsViewController {
             model.selectedLists.append(displayedList.list)
 
             if let cell = collectionView.cellForItem(at: indexPath) as? ListsContentCell {
-                configureCellSelection(cell: cell, selected: true)
+                cell.view.configureSelection(selected: true, modelSelecting: model.isSelecting)
             }
         }
     }
@@ -51,7 +51,7 @@ extension ListsViewController {
             model.selectedLists = model.selectedLists.filter { $0 != displayedList.list }
 
             if let cell = collectionView.cellForItem(at: indexPath) as? ListsContentCell {
-                configureCellSelection(cell: cell, selected: false)
+                cell.view.configureSelection(selected: false, modelSelecting: model.isSelecting)
             }
         }
     }

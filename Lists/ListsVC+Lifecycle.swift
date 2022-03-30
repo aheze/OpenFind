@@ -34,11 +34,11 @@ extension ListsViewController {
         let (_, columnWidth) = listsFlowLayout.getColumns(bounds: size.width, insets: safeAreaInsets)
         
         for index in model.displayedLists.indices {
-            _ = getCellSize(listIndex: index, availableWidth: columnWidth)
+            _ = writeCellFrameAndReturnSize(index: index, availableWidth: columnWidth)
             let newDisplayedList = model.displayedLists[index]
             
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
-                cell.view.addChipViews(with: newDisplayedList)
+                cell.view.addChipViews(with: newDisplayedList.list, chipFrames: newDisplayedList.frame.chipFrames)
             }
         }
         

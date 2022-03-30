@@ -74,14 +74,6 @@ extension ListsViewController {
         }
     }
 
-    func addNewList() {
-        let newList = List()
-        realmModel.addList(list: newList)
-        reloadDisplayedLists()
-        update()
-        presentDetails(list: newList)
-    }
-
     func listDeleted(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
             model.displayedLists.remove(at: firstIndex)

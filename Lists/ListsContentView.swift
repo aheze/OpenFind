@@ -61,6 +61,8 @@ class ListsContentView: UIView {
     func setup() {
         let c = ListsCellConstants.self
         
+        clipsToBounds = true
+        
         /// allow button view to be pressed
         headerStackView.isUserInteractionEnabled = false
 
@@ -123,14 +125,49 @@ class ListsContentView: UIView {
 }
 
 extension ListsContentView {
+    func configureData(list: List) {
+        let color = UIColor(hex: list.color)
+        headerView.backgroundColor = color
+        headerImageView.image = UIImage(systemName: list.icon)
+        headerTitleLabel.text = list.displayedTitle
+        headerDescriptionLabel.text = list.description
+        layer.cornerRadius = ListsCellConstants.cornerRadius
+        
+        if color.isLight {
+            headerImageView.tintColor = ListsCellConstants.titleColorBlack
+            headerTitleLabel.textColor = ListsCellConstants.titleColorBlack
+            headerDescriptionLabel.textColor = ListsCellConstants.descriptionColorBlack
+        } else {
+            headerImageView.tintColor = ListsCellConstants.titleColorWhite
+            headerTitleLabel.textColor = ListsCellConstants.titleColorWhite
+            headerDescriptionLabel.textColor = ListsCellConstants.titleColorWhite
+        }
+    }
+
+    func configureSelection(selected: Bool, modelSelecting: Bool) {
+        isUserInteractionEnabled = !modelSelecting
+        if modelSelecting {
+            headerSelectionIconView.isHidden = false
+            headerSelectionIconView.alpha = 1
+            if selected {
+                headerSelectionIconView.setState(.selected)
+            } else {
+                headerSelectionIconView.setState(.empty)
+            }
+        } else {
+            headerSelectionIconView.isHidden = true
+            headerSelectionIconView.alpha = 0
+            headerSelectionIconView.setState(.empty)
+        }
+    }
+    
     /// tapped parameter = focus or don't focus first word
-    func addChipViews(with displayedList: DisplayedList, tapped: ((Bool) -> Void)? = nil) {
+    func addChipViews(with list: List, chipFrames: [ListFrame.ChipFrame], tapped: ((Bool) -> Void)? = nil) {
         chipsContainerView.subviews.forEach { $0.removeFromSuperview() }
         
-        let frame = displayedList.frame
-        let color = UIColor(hex: displayedList.list.color)
+        let color = UIColor(hex: list.color)
         
-        for chipFrame in frame.chipFrames {
+        for chipFrame in chipFrames {
             let chipView = ListChipView(type: chipFrame.chipType)
             chipView.frame = chipFrame.frame
             chipView.label.text = chipFrame.string
@@ -140,27 +177,24 @@ extension ListsContentView {
             switch chipFrame.chipType {
             case .word:
                 chipView.backgroundView.backgroundColor = ListsCellConstants.chipBackgroundColor
-                chipView.tapped = {
-                    tapped?(false)
-//                    if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
-//                        self?.presentDetails(list: displayedList.list)
-//                    }
+                if let tapped = tapped {
+                    chipView.tapped = {
+                        tapped(false)
+                    }
                 }
             case .wordsLeft:
                 chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
-                chipView.tapped = { [weak self] in
-                    tapped?(false)
-//                    if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
-//                        self?.presentDetails(list: displayedList.list)
-//                    }
+                if let tapped = tapped {
+                    chipView.tapped = {
+                        tapped(false)
+                    }
                 }
             case .addWords:
                 chipView.backgroundView.backgroundColor = color.withAlphaComponent(0.1)
-                chipView.tapped = { [weak self] in
-                    tapped?(true)
-//                    if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
-//                        self?.presentDetails(list: displayedList.list, focusFirstWord: true)
-//                    }
+                if let tapped = tapped {
+                    chipView.tapped = {
+                        tapped(true)
+                    }
                 }
             }
             chipsContainerView.addSubview(chipView)

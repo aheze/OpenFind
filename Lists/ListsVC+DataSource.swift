@@ -23,53 +23,17 @@ extension ListsViewController {
     /// reload the collection view at an index path.
     func update(at indexPath: IndexPath, with displayedList: DisplayedList) {
         if let cell = collectionView.cellForItem(at: indexPath) as? ListsContentCell {
-            self.configureCellData(cell: cell, list: displayedList.list)
+            cell.view.configureData(list: displayedList.list)
             
             DispatchQueue.main.async {
                 let (_, columnWidth) = self.listsFlowLayout.getColumns(bounds: self.view.bounds.width, insets: Global.safeAreaInsets)
-                _ = self.getCellSize(listIndex: indexPath.item, availableWidth: columnWidth)
+                _ = self.writeCellFrameAndReturnSize(index: indexPath.item, availableWidth: columnWidth)
                 
-                cell.view.addChipViews(with: displayedList)
+                cell.view.addChipViews(with: displayedList.list, chipFrames: displayedList.frame.chipFrames)
             }
         }
     }
     
-    func configureCellData(cell: ListsContentCell, list: List) {
-        let color = UIColor(hex: list.color)
-        cell.view.headerView.backgroundColor = color
-        cell.view.headerImageView.image = UIImage(systemName: list.icon)
-        cell.view.headerTitleLabel.text = list.displayedTitle
-        cell.view.headerDescriptionLabel.text = list.description
-        cell.layer.cornerRadius = ListsCellConstants.cornerRadius
-        
-        if color.isLight {
-            cell.view.headerImageView.tintColor = ListsCellConstants.titleColorBlack
-            cell.view.headerTitleLabel.textColor = ListsCellConstants.titleColorBlack
-            cell.view.headerDescriptionLabel.textColor = ListsCellConstants.descriptionColorBlack
-        } else {
-            cell.view.headerImageView.tintColor = ListsCellConstants.titleColorWhite
-            cell.view.headerTitleLabel.textColor = ListsCellConstants.titleColorWhite
-            cell.view.headerDescriptionLabel.textColor = ListsCellConstants.titleColorWhite
-        }
-    }
-
-    func configureCellSelection(cell: ListsContentCell, selected: Bool) {
-        cell.contentView.isUserInteractionEnabled = !self.model.isSelecting
-        if self.model.isSelecting {
-            cell.view.headerSelectionIconView.isHidden = false
-            cell.view.headerSelectionIconView.alpha = 1
-            if selected {
-                cell.view.headerSelectionIconView.setState(.selected)
-            } else {
-                cell.view.headerSelectionIconView.setState(.empty)
-            }
-        } else {
-            cell.view.headerSelectionIconView.isHidden = true
-            cell.view.headerSelectionIconView.alpha = 0
-            cell.view.headerSelectionIconView.setState(.empty)
-        }
-    }
-
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, cachedDisplayedList -> UICollectionViewCell? in
 
@@ -81,9 +45,9 @@ extension ListsViewController {
             guard let displayedList = self.model.displayedLists.first(where: { $0.list.id == cachedDisplayedList.list.id }) else { return cell }
             let list = displayedList.list
             
-            self.configureCellData(cell: cell, list: list)
             let selected = self.model.selectedLists.contains(where: { $0.id == list.id })
-            self.configureCellSelection(cell: cell, selected: selected)
+            cell.view.configureSelection(selected: selected, modelSelecting: self.model.isSelecting)
+            cell.view.configureData(list: list)
             
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
@@ -117,7 +81,11 @@ extension ListsViewController: UICollectionViewDelegate {
         }
         
         let displayedList = model.displayedLists[indexPath.item]
-        cell.view.addChipViews(with: displayedList)
+        cell.view.addChipViews(with: displayedList.list, chipFrames: displayedList.frame.chipFrames) { [weak self] focus in
+            if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
+                self?.presentDetails(list: displayedList.list, focusFirstWord: true)
+            }
+        }
     }
 
     func updateCellColors() {
