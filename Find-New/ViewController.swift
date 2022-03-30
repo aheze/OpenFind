@@ -59,8 +59,6 @@ class ViewController: UIViewController {
         realmModel.loadLists()
         lists.viewController.reload()
         updateExcludedFrames()
-        
-        importList(list: List())
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

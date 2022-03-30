@@ -12,6 +12,7 @@ enum ListsImportConstants {
     static var font = UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium)
     static var labelInset = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     static var labelPadding = CGFloat(16)
+    static var importButtonPadding = UIEdgeInsets(top: 14, left: 24, bottom: 14, right: 24)
 }
 
 class ListsImportViewController: UIViewController {
@@ -53,7 +54,9 @@ class ListsImportViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        layout()
+        UIView.performWithoutAnimation {
+            self.layout()
+        }
     }
 
     func getSizes() {
@@ -110,13 +113,16 @@ class ListsImportViewController: UIViewController {
         stackView.isUserInteractionEnabled = false
 
         let buttonView = ButtonView()
+        buttonView.backgroundColor = Colors.accent.withAlphaComponent(0.1)
+        buttonView.clipsToBounds = true
+        buttonView.layer.cornerRadius = 12
         buttonView.tapped = { [weak self] in
             self?.importTapped()
         }
 
         view.addSubview(buttonView)
         buttonView.addSubview(stackView)
-        stackView.pinEdgesToSuperview()
+        stackView.pinEdgesToSuperview(padding: ListsImportConstants.importButtonPadding)
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

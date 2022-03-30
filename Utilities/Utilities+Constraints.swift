@@ -18,14 +18,14 @@ extension CGRect {
 }
 
 extension UIView {
-    func pinEdgesToSuperview() {
+    func pinEdgesToSuperview(padding: UIEdgeInsets = .zero) {
         guard let superview = superview else { return }
         self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.topAnchor.constraint(equalTo: superview.topAnchor),
-            self.rightAnchor.constraint(equalTo: superview.rightAnchor),
-            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-            self.leftAnchor.constraint(equalTo: superview.leftAnchor)
+            self.topAnchor.constraint(equalTo: superview.topAnchor, constant: padding.top),
+            self.rightAnchor.constraint(equalTo: superview.rightAnchor, constant: -padding.right),
+            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -padding.bottom),
+            self.leftAnchor.constraint(equalTo: superview.leftAnchor, constant: padding.left)
         ])
     }
     

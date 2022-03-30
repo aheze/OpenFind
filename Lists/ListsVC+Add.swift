@@ -20,7 +20,9 @@ extension ListsViewController {
     func importList(list: List) {
         let viewController = ListsImportViewController(list: list) { [weak self] in
             guard let self = self else { return }
-            self.realmModel.addList(list: list)
+            var newList = list
+            newList.id = UUID()
+            self.realmModel.addList(list: newList)
             self.reloadDisplayedLists()
             self.update()
         }
