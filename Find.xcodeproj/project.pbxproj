@@ -139,6 +139,8 @@
 		3C0F23A627F4B4C200BCBFAE /* List+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A427F4B4A600BCBFAE /* List+Display.swift */; };
 		3C0F23A827F4BBC100BCBFAE /* ListsVC+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */; };
 		3C0F23A927F4BBC400BCBFAE /* ListsVC+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */; };
+		3C0F23AB27F4EB6700BCBFAE /* ListsVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23AA27F4EB6700BCBFAE /* ListsVC+Listen.swift */; };
+		3C0F23AC27F4EB6D00BCBFAE /* ListsVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F23AA27F4EB6700BCBFAE /* ListsVC+Listen.swift */; };
 		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
 		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
@@ -2400,6 +2402,7 @@
 		3C0F23A127F4B20C00BCBFAE /* ListsImportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsImportViewController.swift; sourceTree = "<group>"; };
 		3C0F23A427F4B4A600BCBFAE /* List+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Display.swift"; sourceTree = "<group>"; };
 		3C0F23A727F4BBC100BCBFAE /* ListsVC+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Add.swift"; sourceTree = "<group>"; };
+		3C0F23AA27F4EB6700BCBFAE /* ListsVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Listen.swift"; sourceTree = "<group>"; };
 		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
 		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
@@ -4030,6 +4033,7 @@
 				3C4D3A63274769370010FD68 /* ListsController.swift */,
 				3C4D3A65274769370010FD68 /* ListsViewController.swift */,
 				3C9234D927E663280055061A /* ListsVC+Setup.swift */,
+				3C0F23AA27F4EB6700BCBFAE /* ListsVC+Listen.swift */,
 				3CFD5F7B278A486D0031BC8B /* ListsVC+DataSource.swift */,
 				3C0B12CB27F13D9A0013688E /* ListsVC+Delegate.swift */,
 				3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */,
@@ -7155,6 +7159,7 @@
 				3CC594FC279F3324001D07DC /* ColorPickerView.swift in Sources */,
 				3C9CA8A827EFFA0F00D087F2 /* Section.swift in Sources */,
 				3C443F1727DD90790050A0AB /* Word.swift in Sources */,
+				3C0F23AB27F4EB6700BCBFAE /* ListsVC+Listen.swift in Sources */,
 				3C0AACC827C899D5009DFC09 /* TabConstants.swift in Sources */,
 				3CD7061227A1BCC800B446D7 /* IconPickerController.swift in Sources */,
 				3CCE2B1A279D008B00F72351 /* ClearIconView.swift in Sources */,
@@ -7794,6 +7799,7 @@
 				3C6C73BD2781947E00E039F0 /* VisionConstants.swift in Sources */,
 				3C71EF9827BED24900F0C0A0 /* PhotosTransitionAnimator.swift in Sources */,
 				3CFD6031278B71E20031BC8B /* SearchNC+SearchBar.swift in Sources */,
+				3C0F23AC27F4EB6D00BCBFAE /* ListsVC+Listen.swift in Sources */,
 				3C6C743C2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CB8C32A27C34CF5000AA3B9 /* PhotosVM+Scanning.swift in Sources */,
 				3C6C73352781943600E039F0 /* Constants.swift in Sources */,

@@ -13,7 +13,6 @@ extension ListsViewController {
     func setup() {
         setupCollectionView()
         setupNavigationBar()
-        setupRealm()
     }
     
     func setupCollectionView() {

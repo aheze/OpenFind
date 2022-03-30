@@ -16,4 +16,5 @@ class ListsViewModel: ObservableObject {
     @Published var selectedLists = [List]()
     
     var deleteSelected: (() -> Void)?
+    var shareSelected: (() -> Void)?
 }

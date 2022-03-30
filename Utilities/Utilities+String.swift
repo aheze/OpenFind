@@ -34,6 +34,7 @@ extension StringProtocol {
 }
 
 /// from https://stackoverflow.com/a/41819176/14351818
+/// join strings with `, and`
 extension BidirectionalCollection where Element: StringProtocol {
     var sentence: String {
         count <= 2 ?

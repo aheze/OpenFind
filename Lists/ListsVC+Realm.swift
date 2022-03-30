@@ -9,21 +9,6 @@
 import UIKit
 
 extension ListsViewController {
-    func setupRealm() {
-        model.deleteSelected = { [weak self] in
-            guard let self = self else { return }
-            self.deleteSelectedLists()
-        }
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(listsUpdated),
-            name: .listsUpdated,
-            object: nil
-        )
-    }
-
-    @objc func listsUpdated(notification: Notification) {}
-
     /// call this in `Find-New`'s `viewDidLoad`, after loading realm
     func reload() {
         reloadDisplayedLists()
@@ -41,8 +26,7 @@ extension ListsViewController {
             UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
                 guard let self = self else { return }
                 self.deleteLists(lists: self.model.selectedLists)
-                self.model.isSelecting = false
-                self.updateCollectionViewSelectionState()
+                self.resetSelectingState()
             }
         )
         alert.addAction(

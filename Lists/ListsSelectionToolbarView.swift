@@ -14,6 +14,7 @@ struct ListsSelectionToolbarView: View {
     var body: some View {
         HStack {
             ToolbarIconButton(iconName: "square.and.arrow.up") {
+                model.shareSelected?()
             }
             .disabled(model.selectedLists.count == 0)
 
@@ -35,4 +36,6 @@ struct ListsSelectionToolbarView: View {
             return "\(model.selectedLists.count) Lists Selected"
         }
     }
+    
+    
 }

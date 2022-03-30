@@ -15,8 +15,11 @@ extension ListsDetailViewController {
                 title: "Share",
                 image: UIImage(systemName: "square.and.arrow.up")
             ) { [weak self] _ in
-                if let url = self?.model.list.getList().getURL() {
-                    self?.presentShareSheet(items: [url])
+                guard let self = self else { return }
+                let list = self.model.list.getList()
+                if let url = list.getURL() {
+                    let dataSource = ListsSharingDataSource(lists: [list])
+                    self.presentShareSheet(items: [url, dataSource])
                 }
             }
             
