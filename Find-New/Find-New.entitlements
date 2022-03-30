@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:link.getfind.app</string>
+		<string>applinks:lists.getfind.app</string>
 	</array>
 </dict>
 </plist>

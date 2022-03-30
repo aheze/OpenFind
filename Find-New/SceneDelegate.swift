@@ -11,13 +11,14 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
+    /// handle a deeplinked URL
     func handleIncomingURL(_ url: URL) {
-        print(url)
         if let viewController = window?.rootViewController as? ViewController {
-            print("yep!!!")
+            viewController.handleIncomingURL(url)
         }
     }
 
+    /// Universal Links
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         if
             userActivity.activityType == NSUserActivityTypeBrowsingWeb,
@@ -27,15 +28,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        print("Connecting!")
+    /// URL Schemes
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let urlContext = URLContexts.first {
+            let incomingURL = urlContext.url
+            handleIncomingURL(incomingURL)
+        }
+    }
 
-        // Get URL components from the incoming user activity.
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         if
+            
+            /// Universal Links
             let userActivity = connectionOptions.userActivities.first,
             userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let incomingURL = userActivity.webpageURL
         {
+            handleIncomingURL(incomingURL)
+        } else if
+            
+            /// URL Schemes
+            let urlContext = connectionOptions.urlContexts.first
+        {
+            let sendingAppID = urlContext.options.sourceApplication
+            let incomingURL = urlContext.url
             handleIncomingURL(incomingURL)
         }
 

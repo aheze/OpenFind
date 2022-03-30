@@ -10,5 +10,7 @@
 import UIKit
 
 extension ViewController {
-    
+    func handleIncomingURL(_ incomingURL: URL) {
+        
+    }
 }
