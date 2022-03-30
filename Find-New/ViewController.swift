@@ -10,6 +10,7 @@ import SwiftUI
 
 class ViewController: UIViewController {
     var loaded = false
+    var listToLoad: List?
 
     /// lazy load everything
     lazy var tabViewModel = TabViewModel()
@@ -59,6 +60,7 @@ class ViewController: UIViewController {
         realmModel.loadLists()
         lists.viewController.reload()
         updateExcludedFrames()
+        importListIfNeeded()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
