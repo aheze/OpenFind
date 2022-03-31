@@ -31,6 +31,11 @@ class SettingsDetailViewController: UIViewController {
         self.model = model
         super.init(coder: coder)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addDebugBorders(.green)
+    }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {

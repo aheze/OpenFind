@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 class SettingsController {
@@ -19,9 +18,13 @@ class SettingsController {
         let model = SettingsViewModel()
         self.model = model
         
-        let viewController = SettingsViewController.make(model: model)
         let mainViewController = SettingsMainViewController.make(model: model)
         let detailViewController = SettingsDetailViewController.make(model: model)
+        let viewController = SettingsViewController.make(
+            model: model,
+            mainViewController: mainViewController,
+            detailViewController: detailViewController
+        )
         
         self.viewController = viewController
         self.mainViewController = mainViewController
