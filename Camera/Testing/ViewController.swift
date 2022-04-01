@@ -9,13 +9,30 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var camera = CameraController(model: CameraViewModel(), realmModel: RealmModel())
+    let realmModel = RealmModel()
+    lazy var tabViewModel = TabViewModel()
+    lazy var toolbarViewModel = ToolbarViewModel()
     
+    lazy var camera = CameraController(
+        model: CameraViewModel(),
+        tabViewModel: tabViewModel,
+        realmModel: RealmModel()
+    )
+
+    lazy var tabController: TabBarController = {
+        let tabController = TabBarController(
+            pages: [camera.viewController],
+            model: tabViewModel,
+            cameraViewModel: CameraViewModel(),
+            toolbarViewModel: toolbarViewModel
+        )
+
+        return tabController
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .green
-        addChildViewController(camera.viewController, in: view)
-        camera.viewController.addTestingTabBar(add: true)
+        tabViewModel.tabState = .camera
+        addChildViewController(tabController.viewController, in: view)
     }
 }

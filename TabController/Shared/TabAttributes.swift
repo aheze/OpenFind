@@ -15,19 +15,6 @@ protocol AnimatableAttributes {
     init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self)
 }
 
-enum AnimatableUtilities {
-    static func mixedValue(from: CGFloat, to: CGFloat, progress: CGFloat) -> CGFloat {
-        let value = from + (to - from) * progress
-        return value
-    }
-
-    static func mixedValue(from: CGPoint, to: CGPoint, progress: CGFloat) -> CGPoint {
-        let valueX = from.x + (to.x - from.x) * progress
-        let valueY = from.y + (to.y - from.y) * progress
-        return CGPoint(x: valueX, y: valueY)
-    }
-}
-
 struct TabBarAttributes: AnimatableAttributes {
     /// color of the tab bar
     var backgroundColor: UIColor

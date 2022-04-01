@@ -138,4 +138,10 @@ struct SearchConfiguration: Equatable {
         configuration.addTextPlaceholder = "Find Icons"
         return configuration
     }()
+    
+    static var settings: Self = {
+        var configuration = SearchConfiguration.lists
+        configuration.addTextPlaceholder = "Find Settings"
+        return configuration
+    }()
 }

@@ -45,8 +45,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let window = window {
             Global.window = window
         }
-        
-        print("containur")
 
         if
 

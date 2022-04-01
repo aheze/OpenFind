@@ -42,15 +42,17 @@ extension RealmContainer {
             dateCreated: list.dateCreated
         )
 
-        do {
-            try realm.write {
-                realm.add(realmList)
+        /// make sure hasn't added yet
+        if realm.object(ofType: RealmList.self, forPrimaryKey: list.id) == nil {
+            do {
+                try realm.write {
+                    realm.add(realmList)
+                }
+            } catch {
+                Debug.log("Error writing list: \(error)", .error)
             }
-        } catch {
-            Debug.log("Error writing list: \(error)", .error)
+            loadLists()
         }
-
-        loadLists()
     }
 
     func updateList(list: List) {

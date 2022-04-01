@@ -11,7 +11,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    lazy var settingsController = SettingsController()
+    lazy var realmModel = RealmModel()
+    lazy var settingsController = SettingsController(realmModel: realmModel)
     
     override func viewDidLoad() {
         super.viewDidLoad()

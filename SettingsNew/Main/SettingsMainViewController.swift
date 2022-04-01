@@ -8,7 +8,13 @@
     
 import UIKit
 
-class SettingsMainViewController: UIViewController {
+class SettingsMainViewController: UIViewController, Searchable {
+    
+    var showSearchBar = true
+    var baseSearchBarOffset = CGFloat(0)
+    var additionalSearchBarOffset: CGFloat? = 0
+    var updateSearchBarOffset: (() -> Void)?
+    
     var model: SettingsViewModel
     
     @IBOutlet var scrollView: UIScrollView!
@@ -45,6 +51,11 @@ class SettingsMainViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Settings"
         
+        setup()
+        scrollView.alwaysBounceVertical = true
         scrollView.backgroundColor = .secondarySystemBackground
+        contentView.backgroundColor = .systemBlue
+        
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
     }
 }
