@@ -27,13 +27,12 @@ class ViewController: UIViewController {
             toolbarViewModel: toolbarViewModel
         )
 
-        self.addChildViewController(tabController.viewController, in: self.view)
         return tabController
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tabViewModel.tabState = .photos
         addChildViewController(tabController.viewController, in: view)
     }

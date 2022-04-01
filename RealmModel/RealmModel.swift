@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import RealmSwift
 import SwiftUI
 
 class RealmModel: ObservableObject {
@@ -16,7 +15,6 @@ class RealmModel: ObservableObject {
     @Published var photoMetadatas = [PhotoMetadata]()
 
     init() {
-        print("init!!!!")
         container.listsUpdated = { [weak self] lists in
             self?.lists = lists
         }

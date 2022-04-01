@@ -151,7 +151,6 @@
 		3C119971274B32B400D6AFE3 /* LivePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119970274B32B400D6AFE3 /* LivePreviewView.swift */; };
 		3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
 		3C119975274B345000D6AFE3 /* LivePreviewVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */; };
-		3C119977274B348F00D6AFE3 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C119979274B351700D6AFE3 /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
 		3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */; };
 		3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */; };
@@ -227,7 +226,6 @@
 		3C1D179227BCAEBA00E82B8B /* PhotosConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D179127BCAEBA00E82B8B /* PhotosConstants.swift */; };
 		3C1D179327BCAEC400E82B8B /* PhotosConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D179127BCAEBA00E82B8B /* PhotosConstants.swift */; };
 		3C1D19D82759A13B0064F2C6 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
-		3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C1D19DB2759A5870064F2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C11996D274A385200D6AFE3 /* Assets.xcassets */; };
 		3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */; };
 		3C1D19E12759B7CC0064F2C6 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
@@ -354,10 +352,6 @@
 		3C21EE3827A463B40005E183 /* ListsVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Realm.swift */; };
 		3C21EE3927A463E30005E183 /* ListsVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Realm.swift */; };
 		3C21EE3A27A463E50005E183 /* ListsVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EE3727A463B40005E183 /* ListsVC+Realm.swift */; };
-		3C21EE3C27A4CEFF0005E183 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE3B27A4CEFF0005E183 /* Realm */; };
-		3C21EE3E27A4CEFF0005E183 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE3D27A4CEFF0005E183 /* RealmSwift */; };
-		3C21EE4527A5297C0005E183 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE4427A5297C0005E183 /* Realm */; };
-		3C21EE4727A5297C0005E183 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C21EE4627A5297C0005E183 /* RealmSwift */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -1118,7 +1112,6 @@
 		3C6C737D2781946B00E039F0 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C6C737E2781946B00E039F0 /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
 		3C6C737F2781946B00E039F0 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
-		3C6C73812781946B00E039F0 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C6C73822781946B00E039F0 /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
 		3C6C73832781946B00E039F0 /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
 		3C6C73842781946B00E039F0 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
@@ -1130,7 +1123,6 @@
 		3C6C738E2781946C00E039F0 /* ZoomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomConstants.swift */; };
 		3C6C738F2781946C00E039F0 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C6C73902781946C00E039F0 /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
-		3C6C73932781946C00E039F0 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C6C73942781946C00E039F0 /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
 		3C6C73952781946C00E039F0 /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
 		3C6C73972781947400E039F0 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
@@ -1232,8 +1224,6 @@
 		3C71EFAE27BFFC7000F0C0A0 /* PhotosTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71EFA927BFFB2900F0C0A0 /* PhotosTransitionDismissAnimator.swift */; };
 		3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */; };
 		3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */; };
-		3C7223AD27C414250085EBF1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7223AC27C414250085EBF1 /* Realm */; };
-		3C7223AF27C414250085EBF1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7223AE27C414250085EBF1 /* RealmSwift */; };
 		3C7223B527C440050085EBF1 /* CameraConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223B427C440050085EBF1 /* CameraConstants.swift */; };
 		3C7223B627C440090085EBF1 /* CameraConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223B427C440050085EBF1 /* CameraConstants.swift */; };
 		3C7223B827C442640085EBF1 /* CameraVC+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223B727C442640085EBF1 /* CameraVC+Events.swift */; };
@@ -1338,6 +1328,29 @@
 		3C798EF027F6A2F1007BF68D /* List+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC727A45DC60005E183 /* List+Testing.swift */; };
 		3C798EF127F6A2F2007BF68D /* List+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC727A45DC60005E183 /* List+Testing.swift */; };
 		3C798EF227F6A2F2007BF68D /* List+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21EDC727A45DC60005E183 /* List+Testing.swift */; };
+		3C798EF327F6A577007BF68D /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378F274756470010FD68 /* ContentCell.swift */; };
+		3C798EF427F6A577007BF68D /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
+		3C798EF527F6A577007BF68D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
+		3C798EF627F6A577007BF68D /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
+		3C798EF727F6A577007BF68D /* TabContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* TabContent.storyboard */; };
+		3C798EF827F6A577007BF68D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
+		3C798EF927F6A577007BF68D /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3C798EFA27F6A577007BF68D /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
+		3C798EFB27F6A577007BF68D /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3796274756470010FD68 /* ContentPageViewController.swift */; };
+		3C798EFC27F6A577007BF68D /* TabBarVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */; };
+		3C798EFD27F6A577007BF68D /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */; };
+		3C798EFE27F6A577007BF68D /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378A274756460010FD68 /* TabBarView.swift */; };
+		3C798EFF27F6A577007BF68D /* ContentPagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */; };
+		3C798F0127F6A5C0007BF68D /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */; };
+		3C798F0227F6A5CF007BF68D /* CameraConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223B427C440050085EBF1 /* CameraConstants.swift */; };
+		3C798F0327F6A5CF007BF68D /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223BA27C4427B0085EBF1 /* CameraModel.swift */; };
+		3C798F0427F6A5CF007BF68D /* CameraConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223B427C440050085EBF1 /* CameraConstants.swift */; };
+		3C798F0527F6A5E6007BF68D /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
+		3C798F0627F6A5E6007BF68D /* CameraToolbarUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9314B027B84822009E5B6E /* CameraToolbarUtilities.swift */; };
+		3C798F0727F6A5E6007BF68D /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
+		3C798F0827F6A5E6007BF68D /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
+		3C798F0927F6A5E6007BF68D /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
+		3C798F0A27F6A5E6007BF68D /* ResultsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397F27475BB10010FD68 /* ResultsIconView.swift */; };
 		3C7A43EC27EBE90000DFF76F /* PhotosCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */; };
 		3C7A43ED27EBE90000DFF76F /* PhotosCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */; };
 		3C7A43EF27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EE27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift */; };
@@ -1586,8 +1599,6 @@
 		3C93149827B823C8009E5B6E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3C93149A27B823C9009E5B6E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3C93149C27B84457009E5B6E /* VC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93149B27B84457009E5B6E /* VC+Setup.swift */; };
-		3C93149E27B844D7009E5B6E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C93149D27B844D7009E5B6E /* Realm */; };
-		3C9314A027B844D7009E5B6E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C93149F27B844D7009E5B6E /* RealmSwift */; };
 		3C9314A127B844EC009E5B6E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
 		3C9314A227B844EC009E5B6E /* TabAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4C31E27A700D10093155E /* TabAttributes.swift */; };
 		3C9314A327B844EC009E5B6E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
@@ -2031,8 +2042,6 @@
 		3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */; };
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
-		3CE3D4C027DA804B00521735 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3D4BF27DA804B00521735 /* Realm */; };
-		3CE3D4C227DA804B00521735 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE3D4C127DA804B00521735 /* RealmSwift */; };
 		3CE3D4C327DA807700521735 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
 		3CE3D4C427DA807700521735 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3CE3D4C527DA807700521735 /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
@@ -2445,7 +2454,6 @@
 		3C119970274B32B400D6AFE3 /* LivePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePreviewView.swift; sourceTree = "<group>"; };
 		3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePreviewViewController.swift; sourceTree = "<group>"; };
 		3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Delegate.swift"; sourceTree = "<group>"; };
-		3C119976274B348F00D6AFE3 /* CameraUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUtilities.swift; sourceTree = "<group>"; };
 		3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Setup.swift"; sourceTree = "<group>"; };
 		3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Finding.swift"; sourceTree = "<group>"; };
 		3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Populate.swift"; sourceTree = "<group>"; };
@@ -3317,8 +3325,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C7223AF27C414250085EBF1 /* RealmSwift in Frameworks */,
-				3C7223AD27C414250085EBF1 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3334,8 +3340,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C9314A027B844D7009E5B6E /* RealmSwift in Frameworks */,
-				3C93149E27B844D7009E5B6E /* Realm in Frameworks */,
 				3C3642BB277BC1340038CB18 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3346,8 +3350,6 @@
 			files = (
 				3C443EF327DD8C5B0050A0AB /* Popovers in Frameworks */,
 				3C443FC827DFD1550050A0AB /* Introspect in Frameworks */,
-				3CE3D4C227DA804B00521735 /* RealmSwift in Frameworks */,
-				3CE3D4C027DA804B00521735 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3355,8 +3357,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C21EE3E27A4CEFF0005E183 /* RealmSwift in Frameworks */,
-				3C21EE3C27A4CEFF0005E183 /* Realm in Frameworks */,
 				3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3375,8 +3375,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C21EE4727A5297C0005E183 /* RealmSwift in Frameworks */,
-				3C21EE4527A5297C0005E183 /* Realm in Frameworks */,
 				3C36434E277C1B980038CB18 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3925,10 +3923,8 @@
 		3C4D396527475AB00010FD68 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				3C798F0027F6A5B8007BF68D /* Shared */,
 				3C4D398327475BB10010FD68 /* CameraContent.storyboard */,
-				3C7223B427C440050085EBF1 /* CameraConstants.swift */,
-				3C7223BA27C4427B0085EBF1 /* CameraModel.swift */,
-				3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */,
 				3C4D398527475BB10010FD68 /* CameraController.swift */,
 				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
 				3C9314B227B84EF7009E5B6E /* CameraVC+Listen.swift */,
@@ -3949,7 +3945,6 @@
 				3C11996F274B329E00D6AFE3 /* Live Preview */,
 				3C11996627499A3E00D6AFE3 /* Zoom */,
 				3C2DBBCB277E6F3600911A74 /* Toolbar */,
-				3C119976274B348F00D6AFE3 /* CameraUtilities.swift */,
 				3C11996D274A385200D6AFE3 /* Assets.xcassets */,
 				3C4D399427475BC00010FD68 /* Testing */,
 			);
@@ -4620,6 +4615,16 @@
 				3C798EC027F69829007BF68D /* RC+Photos.swift */,
 			);
 			path = Template;
+			sourceTree = "<group>";
+		};
+		3C798F0027F6A5B8007BF68D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3C7223B427C440050085EBF1 /* CameraConstants.swift */,
+				3C7223BA27C4427B0085EBF1 /* CameraModel.swift */,
+				3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		3C7B7A07277E93CA00E1F602 /* Highlights */ = {
@@ -5611,8 +5616,6 @@
 			);
 			name = MLVision;
 			packageProductDependencies = (
-				3C7223AC27C414250085EBF1 /* Realm */,
-				3C7223AE27C414250085EBF1 /* RealmSwift */,
 			);
 			productName = MLVision;
 			productReference = 3C2DBBDE277E739200911A74 /* MLVision.app */;
@@ -5653,8 +5656,6 @@
 			name = Camera;
 			packageProductDependencies = (
 				3C3642BA277BC1340038CB18 /* Popovers */,
-				3C93149D27B844D7009E5B6E /* Realm */,
-				3C93149F27B844D7009E5B6E /* RealmSwift */,
 			);
 			productName = Camera;
 			productReference = 3C4D396A27475B890010FD68 /* Camera.app */;
@@ -5674,8 +5675,6 @@
 			);
 			name = FindPhotos;
 			packageProductDependencies = (
-				3CE3D4BF27DA804B00521735 /* Realm */,
-				3CE3D4C127DA804B00521735 /* RealmSwift */,
 				3C443EF227DD8C5B0050A0AB /* Popovers */,
 				3C443FC727DFD1550050A0AB /* Introspect */,
 			);
@@ -5698,8 +5697,6 @@
 			name = Lists;
 			packageProductDependencies = (
 				3CFD5F79278A37F00031BC8B /* Popovers */,
-				3C21EE3B27A4CEFF0005E183 /* Realm */,
-				3C21EE3D27A4CEFF0005E183 /* RealmSwift */,
 			);
 			productName = Lists;
 			productReference = 3C4D3A47274768FE0010FD68 /* Lists.app */;
@@ -5742,8 +5739,6 @@
 			name = SearchBar;
 			packageProductDependencies = (
 				3C36434D277C1B980038CB18 /* Popovers */,
-				3C21EE4427A5297C0005E183 /* Realm */,
-				3C21EE4627A5297C0005E183 /* RealmSwift */,
 			);
 			productName = SearchBar;
 			productReference = 3C4D3B30274776E90010FD68 /* SearchBar.app */;
@@ -6164,6 +6159,7 @@
 				3C0F239E27F4271500BCBFAE /* ListsContentView.xib in Resources */,
 				3C3642F6277BC2E90038CB18 /* RightView.xib in Resources */,
 				3C3642F8277BC2E90038CB18 /* LeftView.xib in Resources */,
+				3C798EF727F6A577007BF68D /* TabContent.storyboard in Resources */,
 				3C4D3A82274769C10010FD68 /* Main.storyboard in Resources */,
 				3C4D3A53274768FF0010FD68 /* Assets.xcassets in Resources */,
 				3C443F8C27DE51DD0050A0AB /* SharedAppIcons.xcassets in Resources */,
@@ -6735,7 +6731,6 @@
 				3CCE2B9B279D2B5200F72351 /* ListsDetailVC+Lifecycle.swift in Sources */,
 				3CE9C1FA274B4E44008C903C /* LivePreviewVC+Setup.swift in Sources */,
 				3CFD602F278B71E20031BC8B /* SearchNC+SearchBar.swift in Sources */,
-				3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */,
 				3C443E9F27DD88F90050A0AB /* SearchCollectionViewModel.swift in Sources */,
 				3C6C74302781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CE3D4EF27DD2FF200521735 /* TabBarVC+Delegate.swift in Sources */,
@@ -6857,7 +6852,6 @@
 				3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CCE2B23279D008C00F72351 /* FindIconUIView.swift in Sources */,
 				3CF76436278D197000DCA4EA /* Protocols.swift in Sources */,
-				3C119977274B348F00D6AFE3 /* CameraUtilities.swift in Sources */,
 				3C67E4F0274840F9001F1B4B /* ZoomView.swift in Sources */,
 				3C7B7A55277EE6D900E1F602 /* CameraVC+Find.swift in Sources */,
 				3CE3D4F427DD302500521735 /* TabBarVC+Datasource.swift in Sources */,
@@ -7103,6 +7097,7 @@
 				3C443E9727DD88F80050A0AB /* SearchVC+Cell.swift in Sources */,
 				3C443E9827DD88F80050A0AB /* SearchVC+Keyboard.swift in Sources */,
 				3C798ECE27F69837007BF68D /* RC+Photos.swift in Sources */,
+				3C798F0427F6A5CF007BF68D /* CameraConstants.swift in Sources */,
 				3C443ED127DD8ADA0050A0AB /* CameraViewModel.swift in Sources */,
 				3C606674274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C1D178927BCA4A300E82B8B /* PhotosVC+Listen.swift in Sources */,
@@ -7224,8 +7219,10 @@
 				3C08EB7A279CBFDF00971D60 /* ListsDetailVC+Setup.swift in Sources */,
 				3CB8C31427C31DED000AA3B9 /* Debug+Log.swift in Sources */,
 				3CE3D4E927DD0BE100521735 /* SearchNC+Listen.swift in Sources */,
+				3C798EFB27F6A577007BF68D /* ContentPageViewController.swift in Sources */,
 				3CCCCAA227818CE9000381CE /* GeneralViews.swift in Sources */,
 				3C08EB49279C95F700971D60 /* SearchNC+Tabs.swift in Sources */,
+				3C798F0727F6A5E6007BF68D /* CameraToolbarView.swift in Sources */,
 				3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */,
 				3C4D3A78274769660010FD68 /* Constants.swift in Sources */,
 				3C9234AC27E5734E0055061A /* SearchVM+Get.swift in Sources */,
@@ -7242,14 +7239,17 @@
 				3C798ECF27F69837007BF68D /* RC+Lists.swift in Sources */,
 				3CDAF25D27F2336400467B31 /* List+Share.swift in Sources */,
 				3CBB31AC27BDB99200F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
+				3C798EF427F6A577007BF68D /* TabControllerView.swift in Sources */,
 				3C08EAE8279BA94A00971D60 /* ListsVC+Details.swift in Sources */,
 				3C4D3A67274769370010FD68 /* ListsController.swift in Sources */,
+				3C798EF327F6A577007BF68D /* ContentCell.swift in Sources */,
 				3C798EE227F69FF2007BF68D /* List+Testing.swift in Sources */,
 				3C6C74332781955C00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3C7A43F927EE3AF500DFF76F /* Utilities+Array.swift in Sources */,
 				3C3642F1277BC2E90038CB18 /* SearchVC+Delegate.swift in Sources */,
 				3C7B7A4B277EB19600E1F602 /* Utilities+CGRect.swift in Sources */,
+				3C798EF527F6A577007BF68D /* TabBarController.swift in Sources */,
 				3C443EB127DD898E0050A0AB /* VisionModels.swift in Sources */,
 				3CFD6017278B70940031BC8B /* SearchNavigationController.swift in Sources */,
 				3C3642F4277BC2E90038CB18 /* LeftView.swift in Sources */,
@@ -7269,18 +7269,24 @@
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */,
 				3C9CA8B027EFFAAE00D087F2 /* TabTransitioning.swift in Sources */,
+				3C798EFA27F6A577007BF68D /* TabBarVC+Delegate.swift in Sources */,
 				3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */,
 				3C9CA8AF27EFFA9500D087F2 /* SearchNC+Progress.swift in Sources */,
 				3CD706FC27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift in Sources */,
+				3C798EFE27F6A577007BF68D /* TabBarView.swift in Sources */,
 				3C21EE3827A463B40005E183 /* ListsVC+Realm.swift in Sources */,
+				3C798EFC27F6A577007BF68D /* TabBarVC+Listen.swift in Sources */,
 				3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
+				3C798EF827F6A577007BF68D /* TabBarViewController.swift in Sources */,
 				3CFD6018278B70940031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3C08EB78279CBD8100971D60 /* ColorPickerIcon.swift in Sources */,
 				3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */,
 				3CC00EC127A6507500F6CF9C /* ListsVC+Selection.swift in Sources */,
 				3C08EAD3279B0B4100971D60 /* ListsModel.swift in Sources */,
+				3C798F0227F6A5CF007BF68D /* CameraConstants.swift in Sources */,
 				3C3642FE277BC2E90038CB18 /* RightView.swift in Sources */,
 				3C4D3A7C274769700010FD68 /* GeneralUtilities.swift in Sources */,
+				3C798F0827F6A5E6007BF68D /* SnapshotView.swift in Sources */,
 				3C443EE127DD8C130050A0AB /* PhotosPermissionsView.swift in Sources */,
 				3CFD5F7C278A486D0031BC8B /* ListsVC+DataSource.swift in Sources */,
 				3C08EAD5279B0C5400971D60 /* ListsVC+FlowLayout.swift in Sources */,
@@ -7288,13 +7294,16 @@
 				3C606673274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3CCE2B94279D297200F72351 /* ListsVC+Lifecycle.swift in Sources */,
 				3C17685F27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */,
+				3C798EF627F6A577007BF68D /* IconButtons.swift in Sources */,
 				3C443F7527DDD74A0050A0AB /* Sentence+Find.swift in Sources */,
 				3CD6228327C5E63400DF9AE8 /* SearchCollectionViewModel.swift in Sources */,
 				3CC5951F27A0EA24001D07DC /* IconPickerViewController.swift in Sources */,
 				3C443EE027DD8C120050A0AB /* CameraNotFoundView.swift in Sources */,
 				3CD7061027A11E6D00B446D7 /* Icons.swift in Sources */,
+				3C798F0127F6A5C0007BF68D /* CameraViewModel.swift in Sources */,
 				3C93147D27B760F5009E5B6E /* ListsDetailVC+Delegate.swift in Sources */,
 				3C3642FD277BC2E90038CB18 /* SearchViewModel.swift in Sources */,
+				3C798F0527F6A5E6007BF68D /* SettingsIconView.swift in Sources */,
 				3CFD6029278B71E10031BC8B /* SearchNC+SearchBar.swift in Sources */,
 				3CC594FC279F3324001D07DC /* ColorPickerView.swift in Sources */,
 				3C9CA8A827EFFA0F00D087F2 /* Section.swift in Sources */,
@@ -7304,6 +7313,7 @@
 				3CD7061227A1BCC800B446D7 /* IconPickerController.swift in Sources */,
 				3CCE2B1A279D008B00F72351 /* ClearIconView.swift in Sources */,
 				3CCCCA8F278185A9000381CE /* Model.swift in Sources */,
+				3C798EF927F6A577007BF68D /* TabBarVC+Datasource.swift in Sources */,
 				3C7BADAC275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C9234DA27E663280055061A /* ListsVC+Setup.swift in Sources */,
 				3C1D1A3C275AA25E0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
@@ -7319,6 +7329,7 @@
 				3CE9C1F8274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C0AACB727C8268E009DFC09 /* Utilities+String.swift in Sources */,
 				3C443EFD27DD8F650050A0AB /* SliderView.swift in Sources */,
+				3C798F0627F6A5E6007BF68D /* CameraToolbarUtilities.swift in Sources */,
 				3C7B7A96277FB7C000E1F602 /* ProgressLineView.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3CE3D4EC27DD2EF000521735 /* TabViewModel.swift in Sources */,
@@ -7329,6 +7340,7 @@
 				3CFD602A278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3CF76431278D187300DCA4EA /* SearchNC+Utilities.swift in Sources */,
 				3C443F4A27DD90E80050A0AB /* GeneralExtensions.swift in Sources */,
+				3C798F0327F6A5CF007BF68D /* CameraModel.swift in Sources */,
 				3CCE2B43279D0C6900F72351 /* ListsDetailViewModel.swift in Sources */,
 				3C443F5F27DDA7860050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3C798ED027F69837007BF68D /* RC+Photos.swift in Sources */,
@@ -7336,6 +7348,7 @@
 				3C93148027B769A0009E5B6E /* ListsDetailVC+Scroll.swift in Sources */,
 				3CCE2B45279D149800F72351 /* ListsDetailVC+Listen.swift in Sources */,
 				3C0F23A227F4B20C00BCBFAE /* ListsImportViewController.swift in Sources */,
+				3C798F0927F6A5E6007BF68D /* FlashIconView.swift in Sources */,
 				3C08EB71279CAC0600971D60 /* TabModel.swift in Sources */,
 				3C364300277BC2E90038CB18 /* SearchFieldCell.swift in Sources */,
 				3C08EAEF279BAAD400971D60 /* ListsDetailViewController.swift in Sources */,
@@ -7345,6 +7358,7 @@
 				3C7E1093279DDF5D00ABC016 /* ListsDetailVC+Add.swift in Sources */,
 				3CD6227D27C5D79A00DF9AE8 /* SearchVC+Reload.swift in Sources */,
 				3CCE2B47279D207F00F72351 /* ListsDetailToolbarView.swift in Sources */,
+				3C798EFD27F6A577007BF68D /* CameraButton.swift in Sources */,
 				3C443FAA27DFA6370050A0AB /* SearchNC+Prompt.swift in Sources */,
 				3C17686E27AAEED20099D1CE /* SearchVC+Toolbar.swift in Sources */,
 				3C3642FA277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */,
@@ -7352,11 +7366,13 @@
 				3C93148927B82167009E5B6E /* ListsDetailVC+WordsToolbar.swift in Sources */,
 				3C08EB7C279CFBAB00971D60 /* ListsDetailWordCell.swift in Sources */,
 				3C4D3A6E2747694F0010FD68 /* Toolbar.swift in Sources */,
+				3C798EFF27F6A577007BF68D /* ContentPagingFlowLayout.swift in Sources */,
 				3CF76435278D196B00DCA4EA /* Protocols.swift in Sources */,
 				3C6D77C027A5B140005371F3 /* Global.swift in Sources */,
 				3C4D3A5E2747691A0010FD68 /* AppDelegate.swift in Sources */,
 				3C3642F5277BC2E90038CB18 /* SearchConfiguration.swift in Sources */,
 				3C443FBE27DFCD4F0050A0AB /* HeaderContentView.swift in Sources */,
+				3C798F0A27F6A5E6007BF68D /* ResultsIconView.swift in Sources */,
 				3C0B12CC27F13D9A0013688E /* ListsVC+Delegate.swift in Sources */,
 				3CFCE8A627CA9D5F000624D2 /* Utilities+CGPoint.swift in Sources */,
 				3C443FA327DEBA4D0050A0AB /* SearchPromptView.swift in Sources */,
@@ -7719,7 +7735,6 @@
 				3C6C73602781945D00E039F0 /* HighlightsView.swift in Sources */,
 				3C1A2C0E27E8DE8D00B3D065 /* IgnoredPhotosVC+DataSource.swift in Sources */,
 				3C7223BF27C44C0B0085EBF1 /* CameraVC+Conserving.swift in Sources */,
-				3C6C73812781946B00E039F0 /* CameraUtilities.swift in Sources */,
 				3C6C7424278194A500E039F0 /* Utilities+Math.swift in Sources */,
 				3C0B5E6827BABDC000EC881E /* PhotosCollectionFlowLayout.swift in Sources */,
 				3CFD5F78278A37D00031BC8B /* TabModel.swift in Sources */,
@@ -8194,7 +8209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C1D1A2F275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
-				3C6C73932781946C00E039F0 /* CameraUtilities.swift in Sources */,
 				3CCE2B0F279D008A00F72351 /* FindIconUIView.swift in Sources */,
 				3C1D1A2E275AA25B0064F2C6 /* Utilities+UIFont.swift in Sources */,
 				3C443FC127DFCD500050A0AB /* HeaderContentView.swift in Sources */,
@@ -10498,26 +10512,6 @@
 			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		3C21EE3B27A4CEFF0005E183 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		3C21EE3D27A4CEFF0005E183 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		3C21EE4427A5297C0005E183 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		3C21EE4627A5297C0005E183 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		3C2DBBD8277E734300911A74 /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
@@ -10597,36 +10591,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
 			productName = Popovers;
-		};
-		3C7223AC27C414250085EBF1 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		3C7223AE27C414250085EBF1 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		3C93149D27B844D7009E5B6E /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		3C93149F27B844D7009E5B6E /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		3CE3D4BF27DA804B00521735 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		3CE3D4C127DA804B00521735 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		3CFD5F79278A37F00031BC8B /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;

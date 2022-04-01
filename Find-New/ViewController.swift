@@ -55,7 +55,6 @@ class ViewController: UIViewController {
         _ = tabController
 
         setup()
-        lists.viewController.reload()
         updateExcludedFrames()
         importListIfNeeded()
     }
