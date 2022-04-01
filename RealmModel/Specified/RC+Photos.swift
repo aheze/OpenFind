@@ -22,6 +22,18 @@ extension RealmContainer {
 
         self.photoMetadatas = photoMetadatas
     }
+    
+    func deleteAllMetadatas() {
+        let metadatas = realmModel.container.realm.objects(RealmPhotoMetadata.self)
+
+        do {
+            try realmModel.container.realm.write {
+                realmModel.container.realm.delete(metadatas)
+            }
+        } catch {
+            Debug.log("Error deleting all metadata: \(error)", .error)
+        }
+    }
 
     /// get the photo metadata of an photo if it exists
     func getPhotoMetadata(from identifier: String) -> PhotoMetadata? {

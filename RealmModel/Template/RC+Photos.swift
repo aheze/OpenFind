@@ -8,7 +8,10 @@
 
 import UIKit
 
-extension RealmModel {
+extension RealmContainer {
+    func loadPhotoMetadatas() {
+    }
+    
     /// get the photo metadata of an photo if it exists
     func getPhotoMetadata(from identifier: String) -> PhotoMetadata? {
         if let photoMetadata = photoMetadatas.first(where: { $0.assetIdentifier == identifier }) {

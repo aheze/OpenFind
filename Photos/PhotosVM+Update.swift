@@ -10,15 +10,7 @@ import UIKit
 
 extension PhotosViewModel {
     func deleteAllMetadata() {
-        let metadatas = realmModel.container.realm.objects(RealmPhotoMetadata.self)
-
-        do {
-            try realmModel.container.realm.write {
-                realmModel.container.realm.delete(metadatas)
-            }
-        } catch {
-            Debug.log("Error deleting all metadata: \(error)", .error)
-        }
+        
 
         self.load()
     }
