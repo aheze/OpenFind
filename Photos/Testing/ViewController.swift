@@ -9,17 +9,32 @@
 import UIKit
 
 class ViewController: UIViewController {
+    lazy var tabViewModel = TabViewModel()
+    lazy var toolbarViewModel = ToolbarViewModel()
     lazy var photos = PhotosController(
         model: PhotosViewModel(
             realmModel: RealmModel()
         ),
-        tabViewModel: TabViewModel(),
-        toolbarViewModel: ToolbarViewModel()
+        tabViewModel: tabViewModel,
+        toolbarViewModel: toolbarViewModel
     )
+
+    lazy var tabController: TabBarController = {
+        let tabController = TabBarController(
+            pages: [photos.searchNavigationController],
+            model: tabViewModel,
+            cameraViewModel: CameraViewModel(),
+            toolbarViewModel: toolbarViewModel
+        )
+
+        self.addChildViewController(tabController.viewController, in: self.view)
+        return tabController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addChildViewController(photos.searchNavigationController, in: view)
+        
+        tabViewModel.tabState = .photos
+        addChildViewController(tabController.viewController, in: view)
     }
 }

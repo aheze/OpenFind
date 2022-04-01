@@ -26,8 +26,6 @@ class ViewController: UIViewController {
 
     /// loading this in `viewDidLoad` will cascade and load everything else
     lazy var tabController: TabBarController = {
-        photos.viewController.toolbarViewModel = toolbarViewModel
-
         let tabController = TabBarController(
             pages: [photos.searchNavigationController, camera.viewController, lists.searchNavigationController],
             model: tabViewModel,

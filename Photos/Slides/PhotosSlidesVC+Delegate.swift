@@ -77,6 +77,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 extension PhotosSlidesViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
+            print("faklse..")
             model.updateAllowed = false
         } else if scrollView == self.scrollView {
             infoScrollViewDidScroll()
@@ -92,6 +93,7 @@ extension PhotosSlidesViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
             notifyIfScrolledToStop()
+            print("allowed..")
             model.updateAllowed = true
         } else if scrollView == self.scrollView {
             infoScrollViewDidEndDecelerating()
