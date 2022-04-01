@@ -128,6 +128,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        model.updateAllowed = true
         if let popover = view.popover(tagged: "Popover") {
             popover.dismiss()
         }

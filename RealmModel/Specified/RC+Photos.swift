@@ -24,11 +24,11 @@ extension RealmContainer {
     }
     
     func deleteAllMetadatas() {
-        let metadatas = realmModel.container.realm.objects(RealmPhotoMetadata.self)
+        let metadatas = realm.objects(RealmPhotoMetadata.self)
 
         do {
-            try realmModel.container.realm.write {
-                realmModel.container.realm.delete(metadatas)
+            try realm.write {
+                realm.delete(metadatas)
             }
         } catch {
             Debug.log("Error deleting all metadata: \(error)", .error)

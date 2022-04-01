@@ -16,6 +16,8 @@ extension ListsViewController {
         snapshot.appendItems(model.displayedLists, toSection: section)
         dataSource.apply(snapshot, animatingDifferences: animate)
 
+//        Thread 1: "Diffable data source detected item identifiers that are equal but have different hash values. Two identifiers which compare as equal must return the same hash value. You must fix this in the Hashable (Swift) or hash property (Objective-C) implementation for the type of these identifiers. Identifiers that are equal but have different hash values: (Find_New.DisplayedList(list: Find_New.List(id: C096B168-A362-418E-B9CB-CCC46F4412CC, title: \"my list\", description: \"\", icon: \"bubble.left\", color: 4286779648, words: [\"a\", \"name\", \"typo\"], dateCreated: 2022-03-30 17:04:35 +0000), frame: Find_New.ListFrame(chipFrames: []))) and (Find_New.DisplayedList(list: Find_New.List(id: C096B168-A362-418E-B9CB-CCC46F4412CC, title: \"my list\", description: \"\", icon: \"bubble.left\", color: 4278190080, words: [\"and Dbd\", \"name\", \"typo\"], dateCreated: 2022-03-30 17:04:35 +0000), frame: Find_New.ListFrame(chipFrames: [])))"
+        
 //        showEmptyContent(model.displayedSections.isEmpty)
 //        updateViewsEnabled()
     }
