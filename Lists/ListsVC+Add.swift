@@ -11,7 +11,7 @@ import UIKit
 extension ListsViewController {
     func addNewList() {
         let newList = List()
-        realmModel.addList(list: newList)
+        realmModel.container.addList(list: newList)
         reloadDisplayedLists()
         update()
         presentDetails(list: newList)
@@ -22,7 +22,7 @@ extension ListsViewController {
             guard let self = self else { return }
             var newList = list
             newList.id = UUID()
-            self.realmModel.addList(list: newList)
+            self.realmModel.container.addList(list: newList)
             self.reloadDisplayedLists()
             self.update()
         }

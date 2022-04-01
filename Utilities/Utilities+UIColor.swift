@@ -46,6 +46,10 @@ extension UIColor {
         var fBlue: CGFloat = 0
         var fAlpha: CGFloat = 0
         if getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
+            fRed = abs(fRed)
+            fGreen = abs(fGreen)
+            fBlue = abs(fBlue)
+            fAlpha = abs(fAlpha)
             let iRed = UInt(fRed * 255.0)
             let iGreen = UInt(fGreen * 255.0)
             let iBlue = UInt(fBlue * 255.0)

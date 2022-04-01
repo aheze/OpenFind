@@ -40,7 +40,7 @@ extension ListsViewController {
         for list in lists {
             if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
                 indices.append(firstIndex)
-                realmModel.deleteList(list: list)
+                realmModel.container.deleteList(list: list)
             }
         }
 

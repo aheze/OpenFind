@@ -12,7 +12,7 @@ import UIKit
 extension PhotosViewModel {
     /// only call this once!
     func load() {
-        realmModel.loadPhotoMetadatas()
+        realmModel.container.loadPhotoMetadatas()
         loadAssets()
         loadPhotos { [weak self] in
             guard let self = self else { return }
@@ -45,7 +45,7 @@ extension PhotosViewModel {
                 
                 let photo: Photo
                 let identifier = asset.localIdentifier
-                if let metadata = self.realmModel.getPhotoMetadata(from: identifier) {
+                if let metadata = self.realmModel.container.getPhotoMetadata(from: identifier) {
                     photo = Photo(asset: asset, metadata: metadata)
                     
                     if metadata.isIgnored {

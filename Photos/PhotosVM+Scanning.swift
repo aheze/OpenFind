@@ -19,7 +19,7 @@ extension PhotosViewModel {
             newMetadata.dateScanned = Date()
             newPhoto.metadata = newMetadata
             addSentences(of: newPhoto, immediately: !inBatch)
-            realmModel.updatePhotoMetadata(metadata: newMetadata)
+            realmModel.container.updatePhotoMetadata(metadata: newMetadata)
         } else {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
@@ -30,7 +30,7 @@ extension PhotosViewModel {
             )
             newPhoto.metadata = metadata
             addSentences(of: newPhoto, immediately: !inBatch)
-            realmModel.updatePhotoMetadata(metadata: metadata)
+            realmModel.container.updatePhotoMetadata(metadata: metadata)
         }
 
         photosToScan = photosToScan.filter { $0 != photo }

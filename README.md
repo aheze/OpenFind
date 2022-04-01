@@ -229,3 +229,8 @@ To hide a search bar in a `Searchable` view controller (one that can be embedded
 
 **Note:** Inside `SearchNavigationController`, the search bar height is calculated from the main view controller's search view model. Since the main and details heights should be the same, this shouldn't matter yet.
 
+
+
+### Make Realm compile times shorter
+Specified = with actual realm. Only use in Find-New
+Template = with mock Realm data, speed up. Use this for other targets.

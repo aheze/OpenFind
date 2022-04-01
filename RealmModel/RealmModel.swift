@@ -10,16 +10,21 @@ import RealmSwift
 import SwiftUI
 
 class RealmModel: ObservableObject {
-    let realm = try! Realm()
+    var container = RealmContainer()
 
     @Published var lists = [List]()
     @Published var photoMetadatas = [PhotoMetadata]()
 
-    func listsUpdated() {
-        NotificationCenter.default.post(name: .listsUpdated, object: nil)
-    }
-}
+    init() {
+        print("init!!!!")
+        container.listsUpdated = { [weak self] lists in
+            self?.lists = lists
+        }
+        container.photoMetadatasUpdated = { [weak self] photoMetadatas in
+            self?.photoMetadatas = photoMetadatas
+        }
 
-extension Notification.Name {
-    static var listsUpdated = Notification.Name("Lists Updated")
+        container.loadLists()
+        container.loadPhotoMetadatas()
+    }
 }

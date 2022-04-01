@@ -1,5 +1,5 @@
 //
-//  RealmModel+Lists.swift
+//  RC+Lists.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/28/22.
@@ -8,10 +8,9 @@
 
 import RealmSwift
 
-extension RealmModel {
+extension RealmContainer {
     func loadLists() {
         var lists = [List]()
-
         /// convert realm lists to normal lists
         let realmLists = realm.objects(RealmList.self)
         for realmList in realmLists {
@@ -26,8 +25,8 @@ extension RealmModel {
             )
             lists.append(list)
         }
+
         self.lists = lists
-        listsUpdated()
     }
 
     func addList(list: List) {

@@ -68,7 +68,7 @@ extension CameraViewController {
                             isIgnored: false
                         )
                     }
-                    self.realmModel.updatePhotoMetadata(metadata: metadata)
+                    self.realmModel.container.updatePhotoMetadata(metadata: metadata)
                 }
             }
         }

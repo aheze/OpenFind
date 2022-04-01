@@ -59,7 +59,7 @@ extension CameraViewController {
                         isStarred: false
                     )
                     await MainActor.run {
-                        realmModel.updatePhotoMetadata(metadata: metadata)
+                        realmModel.container.updatePhotoMetadata(metadata: metadata)
                     }
                 }
 

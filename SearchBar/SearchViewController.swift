@@ -83,7 +83,6 @@ class SearchViewController: UIViewController {
         backgroundView.isHidden = !searchViewModel.configuration.showBackground
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
-        setupToolbar()
         
         listenToToolbar()
         listenToCollectionView()

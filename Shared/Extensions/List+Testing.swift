@@ -1,5 +1,5 @@
 //
-//  RealmModel+ListsTesting.swift
+//  List+Testing.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/28/22.
@@ -8,20 +8,8 @@
 
 import UIKit
 
-extension RealmModel {
-    func loadSampleLists() {
-        loadLists()
-        let lists = getSampleLists()
-        for list in lists {
-            if !self.lists.contains(where: { $0.id == list.id }) {
-                addList(list: list)
-            }
-        }
-    }
-}
-
-extension RealmModel {
-    func getSampleLists() -> [List] {
+extension List {
+    static func getSampleLists() -> [List] {
         let lists = [
             List(
                 title: "Nature",
@@ -96,7 +84,7 @@ extension RealmModel {
                 dateCreated: Date()
             )
         ]
-        
+
         return lists
     }
 }

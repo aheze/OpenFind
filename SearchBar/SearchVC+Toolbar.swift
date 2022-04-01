@@ -9,19 +9,6 @@
 import UIKit
 
 extension SearchViewController {
-    func setupToolbar() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(listsUpdated),
-            name: .listsUpdated,
-            object: nil
-        )
-    }
-
-    @objc func listsUpdated(notification: Notification) {
-        keyboardToolbarViewModel.reloadDisplayedLists()
-    }
-
     func listenToToolbar() {
         keyboardToolbarViewModel.listSelected = { [weak self] list in
             guard let self = self else { return }

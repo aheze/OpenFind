@@ -14,11 +14,11 @@ extension ListsViewController {
         let listsDetailViewModel = ListsDetailViewModel(
             list: list,
             listUpdated: { [weak self] newList in
-                self?.realmModel.updateList(list: newList)
+                self?.realmModel.container.updateList(list: newList)
                 self?.listUpdated(list: newList)
             },
             listDeleted: { [weak self] listToDelete in
-                self?.realmModel.deleteList(list: listToDelete)
+                self?.realmModel.container.deleteList(list: listToDelete)
                 self?.listDeleted(list: listToDelete)
             },
             realmModel: self.realmModel

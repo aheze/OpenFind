@@ -10,11 +10,11 @@ import UIKit
 
 extension PhotosViewModel {
     func deleteAllMetadata() {
-        let metadatas = realmModel.realm.objects(RealmPhotoMetadata.self)
+        let metadatas = realmModel.container.realm.objects(RealmPhotoMetadata.self)
 
         do {
-            try realmModel.realm.write {
-                realmModel.realm.delete(metadatas)
+            try realmModel.container.realm.write {
+                realmModel.container.realm.delete(metadatas)
             }
         } catch {
             Debug.log("Error deleting all metadata: \(error)", .error)
@@ -93,7 +93,7 @@ extension PhotosViewModel {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }
 
-        realmModel.updatePhotoMetadata(metadata: metadata)
+        realmModel.container.updatePhotoMetadata(metadata: metadata)
         ignoredPhotos = photos.filter { $0.metadata?.isIgnored ?? false }
         photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
     }

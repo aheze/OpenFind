@@ -66,6 +66,7 @@ class ListsViewController: UIViewController, Searchable {
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear
         
+        print("loaded@ \(realmModel.lists)")
         setup()
         listen()
     }

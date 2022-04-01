@@ -57,7 +57,6 @@ class ViewController: UIViewController {
         _ = tabController
 
         setup()
-        realmModel.loadLists()
         lists.viewController.reload()
         updateExcludedFrames()
         importListIfNeeded()

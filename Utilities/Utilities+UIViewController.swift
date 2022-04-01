@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIViewController {
-    
     func addChildViewController(_ childViewController: UIViewController, in inView: UIView) {
         /// Add Child View Controller
         addChild(childViewController)
@@ -72,5 +71,17 @@ extension UIViewController {
 
         /// Notify Child View Controller
         childViewController.removeFromParent()
+    }
+}
+
+extension UIViewController {
+    func presentShareSheet(items: [Any]) {
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceRect = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
+            popoverController.sourceView = self.view
+        }
+
+        self.present(activityViewController, animated: true)
     }
 }

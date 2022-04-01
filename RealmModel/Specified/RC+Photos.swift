@@ -1,5 +1,5 @@
 //
-//  RealmModel+Photos.swift
+//  RC+Photos.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 1/28/22.
@@ -9,7 +9,7 @@
 import RealmSwift
 import UIKit
 
-extension RealmModel {
+extension RealmContainer {
     func loadPhotoMetadatas() {
         var photoMetadatas = [PhotoMetadata]()
 
@@ -19,6 +19,7 @@ extension RealmModel {
             let metadata = realmPhotoMetadata.getPhotoMetadata()
             photoMetadatas.append(metadata)
         }
+
         self.photoMetadatas = photoMetadatas
     }
 
@@ -54,6 +55,18 @@ extension RealmModel {
         }
     }
 
+    func deletePhotoMetadata(metadata: PhotoMetadata) {
+        if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
+            do {
+                try realm.write {
+                    realm.delete(realmMetadata)
+                }
+            } catch {
+                Debug.log("Error deleting metadata: \(error)", .error)
+            }
+        }
+    }
+
     /// call this inside `updatePhotoMetadata`
     private func addPhotoMetadata(metadata: PhotoMetadata) {
         let realmSentences = metadata.getRealmSentences()
@@ -72,19 +85,5 @@ extension RealmModel {
         } catch {
             Debug.log("Error adding photo metadata: \(error)", .error)
         }
-    }
-
-    func deletePhotoMetadata(metadata: PhotoMetadata) {
-        if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
-            do {
-                try realm.write {
-                    realm.delete(realmMetadata)
-                }
-            } catch {
-                Debug.log("Error deleting metadata: \(error)", .error)
-            }
-        }
-
-        loadLists()
     }
 }
