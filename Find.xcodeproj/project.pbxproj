@@ -421,6 +421,7 @@
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
 		3C2D228B27FAD2F900D413B7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
+		3C2D228D27FAD35F00D413B7 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D228C27FAD35F00D413B7 /* SettingsModel.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2730,6 +2731,7 @@
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
+		3C2D228C27FAD35F00D413B7 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -5229,6 +5231,7 @@
 			isa = PBXGroup;
 			children = (
 				3CE40B9827F611F800CADCBF /* SettingsContent.storyboard */,
+				3C2D228C27FAD35F00D413B7 /* SettingsModel.swift */,
 				3C798DE827F612B9007BF68D /* SettingsViewModel.swift */,
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
 				3CE40B9027F5287000CADCBF /* SettingsViewController.swift */,
@@ -5612,10 +5615,10 @@
 				3CE9C223274EBB70008C903C /* ARVision */,
 				3C1D19F3275A9F390064F2C6 /* Popover */,
 				3CE40B7C27F5281F00CADCBF /* SettingsNew */,
-				3C4D3A9A274775D80010FD68 /* Settings */,
 				3C4D39A427475D5F0010FD68 /* Utilities */,
 				4999AC922353A80A00AB06A7 /* Find */,
 				3C643F1A26057806001E6FA1 /* FindClip */,
+				3C4D3A9A274775D80010FD68 /* Settings */,
 				4999AC912353A80A00AB06A7 /* Products */,
 				F1113DDE71BB4BA2CD714E1A /* Pods */,
 				D0464F2926E9ACFCA3CD293D /* Frameworks */,
@@ -8413,6 +8416,7 @@
 				3C798FAA27F782ED007BF68D /* TabModel.swift in Sources */,
 				3C798FA727F782ED007BF68D /* TabAttributes.swift in Sources */,
 				3C798F9E27F782C4007BF68D /* ColorPickerView.swift in Sources */,
+				3C2D228D27FAD35F00D413B7 /* SettingsModel.swift in Sources */,
 				3CE40B8027F5281F00CADCBF /* SceneDelegate.swift in Sources */,
 				3CE40B9127F5287000CADCBF /* SettingsViewController.swift in Sources */,
 				3C798F5127F78284007BF68D /* Protocols.swift in Sources */,
