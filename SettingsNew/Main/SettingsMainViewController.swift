@@ -54,7 +54,7 @@ class SettingsMainViewController: UIViewController, Searchable {
         setup()
         scrollView.alwaysBounceVertical = true
         scrollView.backgroundColor = .secondarySystemBackground
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = .systemGreen
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
     }

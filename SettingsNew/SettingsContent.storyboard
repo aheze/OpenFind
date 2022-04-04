@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,14 +13,14 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsMainViewController" id="Y6W-OH-hqX" customClass="SettingsMainViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXo-CW-Dvz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-af-Omp">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="896" height="100"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Fv7-Cw-DMM"/>
@@ -60,7 +60,7 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsDetailViewController" id="6NH-18-tfr" customClass="SettingsDetailViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IWx-qQ-9PE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="0TR-9x-ARe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,15 +75,42 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsViewController" id="DBq-3O-BS4" customClass="SettingsViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQe-sE-DIJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEW-hi-0ej">
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="414"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="2qv-xX-dv5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cyw-Jr-WGH">
+                                <rect key="frame" x="350" y="0.0" width="546" height="414"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="j1m-Pr-TPO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uEW-hi-0ej" firstAttribute="top" secondItem="j1m-Pr-TPO" secondAttribute="top" id="3Np-lf-goQ"/>
+                            <constraint firstItem="uEW-hi-0ej" firstAttribute="leading" secondItem="OQe-sE-DIJ" secondAttribute="leading" id="8ai-Q3-YYH"/>
+                            <constraint firstAttribute="bottom" secondItem="Cyw-Jr-WGH" secondAttribute="bottom" id="GAa-6j-tje"/>
+                            <constraint firstAttribute="trailing" secondItem="Cyw-Jr-WGH" secondAttribute="trailing" id="GQW-c1-j96"/>
+                            <constraint firstAttribute="bottom" secondItem="uEW-hi-0ej" secondAttribute="bottom" id="W56-CM-GF5"/>
+                            <constraint firstItem="Cyw-Jr-WGH" firstAttribute="leading" secondItem="uEW-hi-0ej" secondAttribute="trailing" id="ixv-V9-ibQ"/>
+                            <constraint firstItem="Cyw-Jr-WGH" firstAttribute="top" secondItem="OQe-sE-DIJ" secondAttribute="top" id="lZr-NP-mbC"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="detailContainer" destination="uEW-hi-0ej" id="SVC-Xj-kOf"/>
+                        <outlet property="mainContainer" destination="uEW-hi-0ej" id="JAE-XH-jYB"/>
+                        <outlet property="mainContainerWidthC" destination="2qv-xX-dv5" id="ot9-sO-Lja"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jyx-lE-shI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-575" y="78"/>
+            <point key="canvasLocation" x="-575.22321428571422" y="76.811594202898561"/>
         </scene>
     </scenes>
     <resources>

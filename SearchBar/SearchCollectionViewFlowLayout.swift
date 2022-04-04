@@ -36,8 +36,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        /// edge cells don't shrink, but the animation is perfect
-        return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
+        return layoutAttributes.filter { rect.intersects($0.frame) }
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
@@ -66,7 +65,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.prepare()
         
         guard let collectionView = collectionView else { return }
-        let contentOffset = collectionView.contentOffset.x + collectionView.safeAreaInsets.left
+        let contentOffset = collectionView.contentOffset.x
         
         currentOffset = contentOffset
         
@@ -88,19 +87,18 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let fullCellWidth = collectionViewModel.getFullCellWidth?(index) ?? 0
 
             var adjustedSidePadding = CGFloat(0)
-            var cellOriginWithoutSidePadding: CGFloat
+            var cellOriginWithoutSidePadding: CGFloat /// the cell's origin if there was no left padding (focused cell would have 0)
             
             if index == 0 {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
                 adjustedSidePadding = searchViewModel.configuration.cellSpacing - (sidePeekPaddingLeft - sidePaddingLeft)
-                cellOriginWithoutSidePadding = cellOrigin - searchViewModel.configuration.sidePadding
+                cellOriginWithoutSidePadding = cellOrigin - sidePaddingLeft
             } else if index == fieldHuggingWidths.count - 2 {
                 adjustedSidePadding = searchViewModel.configuration.cellSpacing - (sidePeekPaddingLeft - sidePaddingLeft)
                 cellOriginWithoutSidePadding = cellOrigin - sidePeekPaddingLeft
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
-                adjustedSidePadding = -collectionView.safeAreaInsets.right /// account for safe area for last cell
-                cellOriginWithoutSidePadding = cellOrigin - sidePeekPaddingRight
+                cellOriginWithoutSidePadding = cellOrigin - sidePeekPaddingLeft
             } else {
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
                 adjustedSidePadding = searchViewModel.configuration.cellSpacing
@@ -273,20 +271,23 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
+    var safeAreaInsets: UIEdgeInsets {
+        collectionView?.safeAreaInsets ?? .zero
+    }
     var sidePeekPaddingLeft: CGFloat {
-        return searchViewModel.configuration.sidePeekPadding + Global.safeAreaInsets.left
+        return searchViewModel.configuration.sidePeekPadding + safeAreaInsets.left
     }
     
     var sidePeekPaddingRight: CGFloat {
-        return searchViewModel.configuration.sidePeekPadding + Global.safeAreaInsets.right
+        return searchViewModel.configuration.sidePeekPadding + safeAreaInsets.right
     }
     
     var sidePaddingLeft: CGFloat {
-        return searchViewModel.configuration.sidePadding + Global.safeAreaInsets.left
+        return searchViewModel.configuration.sidePadding + safeAreaInsets.left
     }
     
     var sidePaddingRight: CGFloat {
-        return searchViewModel.configuration.sidePadding + Global.safeAreaInsets.right
+        return searchViewModel.configuration.sidePadding + safeAreaInsets.right
     }
     
     /// boilerplate code
