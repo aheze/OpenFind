@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 struct SettingsModel {
     var sections = [SettingsSection]()
@@ -14,8 +14,10 @@ struct SettingsModel {
 }
 
 struct Page {
-    var explanation: String? /// shown at top
+    var title: String /// shown in navigation bar
+    var explanation: String? /// shown at top of page, under navigation bar
     var configuration: Configuration
+    var bottomViewIdentifier: AnyHashable? /// description at bottom, like `Version 1.3.0 - See What's New`
 
     enum Configuration {
         case sections(sections: [SettingsSection])
@@ -38,7 +40,7 @@ struct SettingsRow {
     var configuration: Configuration
     enum Configuration {
         case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: Page?)
-        case toggle(title: String, storageKey: String)
+        case toggle(title: String, storage: KeyPath<SettingsViewModel, Binding<Bool>>)
         case button(title: String, action: (() -> Void)?)
 
         /// if `numberOfSteps` is nil, smooth slider
@@ -54,7 +56,7 @@ struct SettingsRow {
         )
 
         /// open in new page
-        case picker(choices: [PickerChoice], storageKey: String)
+        case picker(choices: [PickerChoice], storage: KeyPath<SettingsViewModel, Binding<String>>)
         case custom(identifier: AnyHashable)
     }
 

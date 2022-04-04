@@ -422,6 +422,7 @@
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
 		3C2D228B27FAD2F900D413B7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C2D228D27FAD35F00D413B7 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D228C27FAD35F00D413B7 /* SettingsModel.swift */; };
+		3C2D228F27FB5B6200D413B7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D228E27FB5B6200D413B7 /* SettingsData.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2732,6 +2733,7 @@
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
 		3C2D228C27FAD35F00D413B7 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		3C2D228E27FB5B6200D413B7 /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -5233,6 +5235,7 @@
 				3CE40B9827F611F800CADCBF /* SettingsContent.storyboard */,
 				3C2D228C27FAD35F00D413B7 /* SettingsModel.swift */,
 				3C798DE827F612B9007BF68D /* SettingsViewModel.swift */,
+				3C2D228E27FB5B6200D413B7 /* SettingsData.swift */,
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
 				3CE40B9027F5287000CADCBF /* SettingsViewController.swift */,
 				3C798FCD27F784DE007BF68D /* Main */,
@@ -8432,6 +8435,7 @@
 				3C798E0327F61591007BF68D /* Sentence.swift in Sources */,
 				3C798DF527F61582007BF68D /* Utilities+Dates.swift in Sources */,
 				3C798EDD27F6983B007BF68D /* RealmContainer.swift in Sources */,
+				3C2D228F27FB5B6200D413B7 /* SettingsData.swift in Sources */,
 				3C798F6A27F7829F007BF68D /* SearchViewController.swift in Sources */,
 				3C798DF727F61582007BF68D /* Utilities+UIDevice.swift in Sources */,
 				3C798F6427F7829F007BF68D /* KeyboardToolbarViewModel.swift in Sources */,

@@ -10,7 +10,10 @@
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
+    @Saved("swipeToNavigate") var swipeToNavigate = true
     
+    @Saved("scanOnLaunch") var scanOnLaunch = false
+    @Saved("scanOnFind") var scanOnFind = true
 }
 
 
