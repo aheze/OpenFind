@@ -91,6 +91,11 @@ extension SearchViewController: UICollectionViewDelegate {
         /// make sure the last field stays first responder
         if let cell = searchCollectionView.cellForItem(at: indexOfLastField.indexPath) as? SearchFieldCell {
             cell.textField.becomeFirstResponder()
+            
+            /// just in case
+            DispatchQueue.main.async {
+                cell.textField.becomeFirstResponder()
+            }
         }
         
         if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexOfLastField]?.fullOrigin { /// the last field that's not the "add new" field

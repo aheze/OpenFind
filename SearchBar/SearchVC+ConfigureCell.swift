@@ -1,5 +1,5 @@
 //
-//  SearchVC+Cell.swift
+//  SearchVC+ConfigureCell.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 12/29/21.
@@ -25,7 +25,7 @@ extension SearchViewController {
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         
-        let text = field.value.getText()
+        configureCell(cell: cell, field: field, valuesCount: searchViewModel.values.count)
         
         if case .addNew = field.value {
             cell.configureAddNew(isAddNew: true)
@@ -33,10 +33,8 @@ extension SearchViewController {
             cell.configureAddNew(isAddNew: false)
         }
         
-        cell.textField.text = text
+        cell.textField.text = field.value.getText()
         cell.textField.inputAccessoryView = toolbarViewController.view
-        
-        updateCell(cell: cell, field: field, valuesCount: searchViewModel.values.count)
         
         cell.textChanged = { [weak self] text in
             guard let self = self else { return }
@@ -54,7 +52,7 @@ extension SearchViewController {
                 )
             )
             self.searchViewModel.updateField(at: index, with: field, notify: true)
-            self.updateCells(valuesCount: self.searchViewModel.values.count)
+            self.configureCells(valuesCount: self.searchViewModel.values.count)
         }
         
         cell.leftViewTapped = { [weak self] in
@@ -82,7 +80,7 @@ extension SearchViewController {
                     )
                 )
                 self.searchViewModel.updateField(at: index, with: field, notify: true)
-                self.updateCells(valuesCount: self.searchViewModel.values.count)
+                self.configureCells(valuesCount: self.searchViewModel.values.count)
             }
             
             cell.textField.becomeFirstResponder()
@@ -109,16 +107,16 @@ extension SearchViewController {
     }
     
     /// `valuesCount` = `searchViewModel.values.count` usually. But if deleting, subtract 1.
-    func updateCells(valuesCount: Int) {
+    func configureCells(valuesCount: Int) {
         for index in searchViewModel.fields.indices {
             let field = searchViewModel.fields[index]
             if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-                updateCell(cell: cell, field: field, valuesCount: valuesCount)
+                configureCell(cell: cell, field: field, valuesCount: valuesCount)
             }
         }
     }
     
-    func updateCell(cell: SearchFieldCell, field: Field, valuesCount: Int) {
+    func configureCell(cell: SearchFieldCell, field: Field, valuesCount: Int) {
         setClearIcon(for: cell, text: field.value.getText(), valuesCount: valuesCount)
         setLeftView(cell, for: field)
         setBackgroundColor(cell)
@@ -177,7 +175,7 @@ extension SearchViewController {
             collectionViewModel.fallbackIndex = targetIndex
             collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
-            updateCells(valuesCount: searchViewModel.values.count - 1)
+            configureCells(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()
@@ -214,7 +212,7 @@ extension SearchViewController {
             collectionViewModel.fallbackIndex = nil
             collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
-            updateCells(valuesCount: searchViewModel.values.count - 1)
+            configureCells(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()

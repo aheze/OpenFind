@@ -420,9 +420,9 @@
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
-		3C2DBBC4277D5D7900911A74 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
-		3C2DBBC5277E3A8000911A74 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
-		3C2DBBC6277E6F0000911A74 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
+		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
+		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC7277E6F0B00911A74 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C2DBBD9277E734300911A74 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2DBBD8277E734300911A74 /* Popovers */; };
 		3C2DBBE1277E739200911A74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBE0277E739200911A74 /* AppDelegate.swift */; };
@@ -448,7 +448,7 @@
 		3C3642C4277BC2E70038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
 		3C3642C5277BC2E70038CB18 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
 		3C3642C6277BC2E70038CB18 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
-		3C3642C7277BC2E70038CB18 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C3642C7277BC2E70038CB18 /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C3642C8277BC2E70038CB18 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3C3642C9277BC2E70038CB18 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
 		3C3642CA277BC2E70038CB18 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
@@ -464,7 +464,7 @@
 		3C3642D5277BC2E70038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
 		3C3642D6277BC2E70038CB18 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
 		3C3642D7277BC2E70038CB18 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
-		3C3642D8277BC2E70038CB18 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C3642D8277BC2E70038CB18 /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C3642D9277BC2E70038CB18 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3C3642DA277BC2E70038CB18 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
 		3C3642DB277BC2E70038CB18 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
@@ -480,7 +480,7 @@
 		3C3642F7277BC2E90038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
 		3C3642F8277BC2E90038CB18 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
 		3C3642F9277BC2E90038CB18 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
-		3C3642FA277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C3642FA277BC2E90038CB18 /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C3642FB277BC2E90038CB18 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
 		3C3642FD277BC2E90038CB18 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
@@ -544,13 +544,13 @@
 		3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3C443E9527DD88F80050A0AB /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
 		3C443E9627DD88F80050A0AB /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
-		3C443E9727DD88F80050A0AB /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C443E9727DD88F80050A0AB /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C443E9827DD88F80050A0AB /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
 		3C443E9927DD88F80050A0AB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
 		3C443E9A27DD88F80050A0AB /* SearchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */; };
 		3C443E9B27DD88F80050A0AB /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
 		3C443E9C27DD88F80050A0AB /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
-		3C443E9D27DD88F80050A0AB /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C443E9D27DD88F80050A0AB /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C443E9E27DD88F90050A0AB /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
 		3C443E9F27DD88F90050A0AB /* SearchCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227E27C5E62C00DF9AE8 /* SearchCollectionViewModel.swift */; };
 		3C443EA027DD88FE0050A0AB /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
@@ -584,7 +584,7 @@
 		3C443EBC27DD8ABC0050A0AB /* TabAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4C31E27A700D10093155E /* TabAttributes.swift */; };
 		3C443EBD27DD8ABC0050A0AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
 		3C443EBE27DD8ABC0050A0AB /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
-		3C443EBF27DD8ABC0050A0AB /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3C443EBF27DD8ABC0050A0AB /* TabBarVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */; };
 		3C443EC027DD8ABC0050A0AB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
 		3C443EC127DD8ABC0050A0AB /* TabTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EB74279CAC2C00971D60 /* TabTransitioning.swift */; };
 		3C443ECB27DD8AC10050A0AB /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3796274756470010FD68 /* ContentPageViewController.swift */; };
@@ -925,7 +925,7 @@
 		3C4D3B9327477ABD0010FD68 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
 		3C4D3B9427477ABD0010FD68 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
 		3C4D3B9527477ABD0010FD68 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
-		3C4D3B9727477ABD0010FD68 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C4D3B9727477ABD0010FD68 /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C4D3B9827477ABD0010FD68 /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
 		3C4D3B9927477ABD0010FD68 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
 		3C4D3B9A27477ABD0010FD68 /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
@@ -1137,17 +1137,17 @@
 		3C6C73A12781947400E039F0 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3C6C73A22781947400E039F0 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C6C73A32781947400E039F0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
-		3C6C73A42781947400E039F0 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C6C73A42781947400E039F0 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C6C73A52781947400E039F0 /* SearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */; };
 		3C6C73A62781947400E039F0 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3C6C73A72781947400E039F0 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
-		3C6C73A82781947400E039F0 /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C6C73A82781947400E039F0 /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C6C73A92781947400E039F0 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3C6C73AA2781947400E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73AE2781947600E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73AF2781947600E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73B32781947700E039F0 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
-		3C6C73B42781947700E039F0 /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C6C73B42781947700E039F0 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C6C73B52781947700E039F0 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C6C73B62781947A00E039F0 /* Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBF5277E73E700911A74 /* Find.swift */; };
 		3C6C73B72781947A00E039F0 /* Find+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A00277E8DF900E1F602 /* Find+Utilities.swift */; };
@@ -1334,7 +1334,7 @@
 		3C798EF627F6A577007BF68D /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
 		3C798EF727F6A577007BF68D /* TabContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* TabContent.storyboard */; };
 		3C798EF827F6A577007BF68D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
-		3C798EF927F6A577007BF68D /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3C798EF927F6A577007BF68D /* TabBarVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */; };
 		3C798EFA27F6A577007BF68D /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
 		3C798EFB27F6A577007BF68D /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3796274756470010FD68 /* ContentPageViewController.swift */; };
 		3C798EFC27F6A577007BF68D /* TabBarVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */; };
@@ -1370,7 +1370,7 @@
 		3C798F5327F7829F007BF68D /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C798F5427F7829F007BF68D /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8B27477ABC0010FD68 /* RightView.swift */; };
 		3C798F5527F7829F007BF68D /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
-		3C798F5627F7829F007BF68D /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C798F5627F7829F007BF68D /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C798F5727F7829F007BF68D /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
 		3C798F5827F7829F007BF68D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
 		3C798F5927F7829F007BF68D /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
@@ -1395,7 +1395,7 @@
 		3C798F6C27F7829F007BF68D /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C798F6D27F7829F007BF68D /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C798F6E27F7829F007BF68D /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
-		3C798F6F27F7829F007BF68D /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C798F6F27F7829F007BF68D /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C798F7027F7829F007BF68D /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3C798F7127F782A0007BF68D /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C798F7227F782A0007BF68D /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
@@ -1408,7 +1408,7 @@
 		3C798F7927F782A1007BF68D /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C798F7A27F782A1007BF68D /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8B27477ABC0010FD68 /* RightView.swift */; };
 		3C798F7B27F782A1007BF68D /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
-		3C798F7C27F782A1007BF68D /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3C798F7C27F782A1007BF68D /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C798F7D27F782A1007BF68D /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
 		3C798F7E27F782A1007BF68D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
 		3C798F7F27F782A1007BF68D /* SearchVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */; };
@@ -1432,7 +1432,7 @@
 		3C798F9127F782A1007BF68D /* KeyboardToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED6827A3A8D10005E183 /* KeyboardToolbarViewController.swift */; };
 		3C798F9227F782A1007BF68D /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C798F9327F782A1007BF68D /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
-		3C798F9427F782A1007BF68D /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
+		3C798F9427F782A1007BF68D /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
 		3C798F9527F782B0007BF68D /* SelectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF2279D007000F72351 /* SelectionIconView.swift */; };
 		3C798F9627F782B0007BF68D /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEE279D004F00F72351 /* ButtonView.swift */; };
 		3C798F9727F782B0007BF68D /* ClearIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF0279D006300F72351 /* ClearIconView.swift */; };
@@ -2203,9 +2203,9 @@
 		3CE3D4EF27DD2FF200521735 /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
 		3CE3D4F027DD2FF500521735 /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
 		3CE3D4F127DD2FF600521735 /* TabBarVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */; };
-		3CE3D4F327DD301E00521735 /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
-		3CE3D4F427DD302500521735 /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
-		3CE3D4F527DD302600521735 /* TabBarVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */; };
+		3CE3D4F327DD301E00521735 /* TabBarVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */; };
+		3CE3D4F427DD302500521735 /* TabBarVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */; };
+		3CE3D4F527DD302600521735 /* TabBarVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */; };
 		3CE3D4F727DD315700521735 /* VC+Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F627DD315700521735 /* VC+Tabs.swift */; };
 		3CE3D4F927DD33CF00521735 /* TabBarVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */; };
 		3CE3D4FA27DD33D900521735 /* TabBarVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */; };
@@ -2359,8 +2359,8 @@
 		3CFD5FF2278B6F950031BC8B /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3CFD5FF3278B6F950031BC8B /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
 		3CFD5FF4278B6F950031BC8B /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
-		3CFD5FF5278B6F950031BC8B /* SearchVC+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */; };
-		3CFD5FF7278B6F950031BC8B /* SearchVC+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */; };
+		3CFD5FF5278B6F950031BC8B /* SearchVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */; };
+		3CFD5FF7278B6F950031BC8B /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3CFD5FF8278B6F950031BC8B /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3CFD5FF9278B6F950031BC8B /* SearchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConfiguration.swift */; };
 		3CFD5FFA278B6F950031BC8B /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
@@ -2729,7 +2729,7 @@
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
-		3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Cell.swift"; sourceTree = "<group>"; };
+		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C2DBBE2277E739200911A74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -2887,7 +2887,7 @@
 		3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionView.swift; sourceTree = "<group>"; };
 		3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchBar.storyboard; sourceTree = "<group>"; };
-		3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchVC+Datasource.swift"; sourceTree = "<group>"; };
+		3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchVC+Delegate.swift"; sourceTree = "<group>"; };
 		3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchFieldCell.xib; sourceTree = "<group>"; };
 		3C4D3B8927477ABC0010FD68 /* LeftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftView.swift; sourceTree = "<group>"; };
@@ -3273,7 +3273,7 @@
 		3CE3D4DD27DCFBAB00521735 /* SearchNavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationModel.swift; sourceTree = "<group>"; };
 		3CE3D4E427DD0BDB00521735 /* SearchNC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Listen.swift"; sourceTree = "<group>"; };
 		3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Delegate.swift"; sourceTree = "<group>"; };
-		3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Datasource.swift"; sourceTree = "<group>"; };
+		3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+DataSource.swift"; sourceTree = "<group>"; };
 		3CE3D4F627DD315700521735 /* VC+Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Tabs.swift"; sourceTree = "<group>"; };
 		3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Listen.swift"; sourceTree = "<group>"; };
 		3CE3D4FB27DD5AF800521735 /* VisionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionModels.swift; sourceTree = "<group>"; };
@@ -4029,7 +4029,7 @@
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
 				3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */,
-				3CE3D4F227DD301E00521735 /* TabBarVC+Datasource.swift */,
+				3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */,
 				3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */,
 				3C36434F277C22480038CB18 /* TabControllerView.swift */,
 				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
@@ -4343,8 +4343,8 @@
 				3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */,
 				3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */,
 				3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */,
-				3C4D3B8527477ABC0010FD68 /* SearchVC+Datasource.swift */,
-				3C2DBBC3277D5D7900911A74 /* SearchVC+Cell.swift */,
+				3C4D3B8527477ABC0010FD68 /* SearchVC+DataSource.swift */,
+				3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */,
 				3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */,
 				3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */,
 				3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */,
@@ -6618,7 +6618,7 @@
 				3C08EB3C279C76E700971D60 /* ListsConstants.swift in Sources */,
 				3C798F7927F782A1007BF68D /* SearchVC+Toolbar.swift in Sources */,
 				3CCCCAAA27818CEA000381CE /* GeneralViews.swift in Sources */,
-				3C798F9427F782A1007BF68D /* SearchVC+Datasource.swift in Sources */,
+				3C798F9427F782A1007BF68D /* SearchVC+DataSource.swift in Sources */,
 				3C798F8A27F782A1007BF68D /* SearchVM+Get.swift in Sources */,
 				3C798F8227F782A1007BF68D /* SearchUtilities.swift in Sources */,
 				3C1D1A28275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
@@ -6683,7 +6683,7 @@
 				3C798F8627F782A1007BF68D /* SearchVM+Extensions.swift in Sources */,
 				3C1D19F7275A9F390064F2C6 /* SceneDelegate.swift in Sources */,
 				3C443EF927DD8F640050A0AB /* SliderView.swift in Sources */,
-				3C798F7C27F782A1007BF68D /* SearchVC+Cell.swift in Sources */,
+				3C798F7C27F782A1007BF68D /* SearchVC+ConfigureCell.swift in Sources */,
 				3C1D1A29275AA25B0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C7BAD9C275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C443F5527DD915F0050A0AB /* Highlight.swift in Sources */,
@@ -6842,7 +6842,7 @@
 				3C8A5248277FC55A006CF91E /* ScrollZoomViewController.swift in Sources */,
 				3C1D19E12759B7CC0064F2C6 /* IconButtons.swift in Sources */,
 				3CBB31A827BDB98F00F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
-				3C2DBBC5277E3A8000911A74 /* SearchVC+Cell.swift in Sources */,
+				3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */,
 				3C08EB0F279C76E500971D60 /* ListsCollectionFlowLayout.swift in Sources */,
 				3CE9C206274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */,
@@ -6860,7 +6860,7 @@
 				3C4D3A19274767410010FD68 /* TabBarViewController.swift in Sources */,
 				3C17686427AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3CDD945927C0687E00D3EA1A /* Defaults.swift in Sources */,
-				3CE3D4F327DD301E00521735 /* TabBarVC+Datasource.swift in Sources */,
+				3CE3D4F327DD301E00521735 /* TabBarVC+DataSource.swift in Sources */,
 				3C3642D7277BC2E70038CB18 /* Field.swift in Sources */,
 				3C21ED6E27A3ABD30005E183 /* ListsDetailVC+IconPicker.swift in Sources */,
 				3C3642DD277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
@@ -6990,7 +6990,7 @@
 				3C3642D3277BC2E70038CB18 /* SearchConfiguration.swift in Sources */,
 				3C0AACC427C899CD009DFC09 /* TabConstants.swift in Sources */,
 				3C443FB327DFBA780050A0AB /* SearchVM+Extensions.swift in Sources */,
-				3C3642D8277BC2E70038CB18 /* SearchVC+Datasource.swift in Sources */,
+				3C3642D8277BC2E70038CB18 /* SearchVC+DataSource.swift in Sources */,
 				3C443FBB27DFCD4E0050A0AB /* HeaderContentView.swift in Sources */,
 				3C7B7A94277FB7BD00E1F602 /* ProgressLineView.swift in Sources */,
 				3CF76432278D196A00DCA4EA /* Protocols.swift in Sources */,
@@ -7044,7 +7044,7 @@
 				3CF76436278D197000DCA4EA /* Protocols.swift in Sources */,
 				3C67E4F0274840F9001F1B4B /* ZoomView.swift in Sources */,
 				3C7B7A55277EE6D900E1F602 /* CameraVC+Find.swift in Sources */,
-				3CE3D4F427DD302500521735 /* TabBarVC+Datasource.swift in Sources */,
+				3CE3D4F427DD302500521735 /* TabBarVC+DataSource.swift in Sources */,
 				3CE3D4FF27DD5B0C00521735 /* VisionModels.swift in Sources */,
 				3CE3D4EA27DD0BE200521735 /* SearchNC+Listen.swift in Sources */,
 				3C08EB4B279C95F900971D60 /* SearchNC+Tabs.swift in Sources */,
@@ -7066,7 +7066,7 @@
 				3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C4D39A127475C7C0010FD68 /* AppDelegate.swift in Sources */,
 				3CE3D4E127DCFBB600521735 /* SearchNavigationModel.swift in Sources */,
-				3C3642C7277BC2E70038CB18 /* SearchVC+Datasource.swift in Sources */,
+				3C3642C7277BC2E70038CB18 /* SearchVC+DataSource.swift in Sources */,
 				3CDD945A27C0687E00D3EA1A /* Defaults.swift in Sources */,
 				3CF7643C278D19AC00DCA4EA /* SearchNavigationConstants.swift in Sources */,
 				3C9314AF27B844FA009E5B6E /* ListsViewModel.swift in Sources */,
@@ -7095,7 +7095,7 @@
 				3CF7643E278D19AC00DCA4EA /* SearchNavigationController.swift in Sources */,
 				3CB8C31127C31DEC000AA3B9 /* Debug+Log.swift in Sources */,
 				3C3642C1277BC2E70038CB18 /* LeftView.swift in Sources */,
-				3C2DBBC6277E6F0000911A74 /* SearchVC+Cell.swift in Sources */,
+				3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */,
 				3C7B7A93277FB7BD00E1F602 /* ProgressLineView.swift in Sources */,
 				3C9314A927B844EC009E5B6E /* TabBarView.swift in Sources */,
 				3C0AACC627C899D5009DFC09 /* TabConstants.swift in Sources */,
@@ -7258,7 +7258,7 @@
 				3C7BAD97275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C443ECC27DD8AC10050A0AB /* ContentCell.swift in Sources */,
 				3C1A2C2227E94D8F00B3D065 /* PhotosSlidesVC+FlowLayout.swift in Sources */,
-				3C443EBF27DD8ABC0050A0AB /* TabBarVC+Datasource.swift in Sources */,
+				3C443EBF27DD8ABC0050A0AB /* TabBarVC+DataSource.swift in Sources */,
 				3CCE2B1F279D008C00F72351 /* FindIconUIView.swift in Sources */,
 				3C443EAA27DD89830050A0AB /* Highlight.swift in Sources */,
 				3C71EFAC27BFFBBB00F0C0A0 /* PhotosSlidesVC+Gestures.swift in Sources */,
@@ -7285,7 +7285,7 @@
 				3C443FA227DEBA4D0050A0AB /* SearchPromptView.swift in Sources */,
 				3C71EFA327BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift in Sources */,
 				3C798ECD27F69837007BF68D /* RC+Lists.swift in Sources */,
-				3C443E9727DD88F80050A0AB /* SearchVC+Cell.swift in Sources */,
+				3C443E9727DD88F80050A0AB /* SearchVC+ConfigureCell.swift in Sources */,
 				3C443E9827DD88F80050A0AB /* SearchVC+Keyboard.swift in Sources */,
 				3C798ECE27F69837007BF68D /* RC+Photos.swift in Sources */,
 				3C798F0427F6A5CF007BF68D /* CameraConstants.swift in Sources */,
@@ -7300,7 +7300,7 @@
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
 				3C0AACC727C899D5009DFC09 /* TabConstants.swift in Sources */,
 				3C443E9527DD88F80050A0AB /* SearchVC+Delegate.swift in Sources */,
-				3C443E9D27DD88F80050A0AB /* SearchVC+Datasource.swift in Sources */,
+				3C443E9D27DD88F80050A0AB /* SearchVC+DataSource.swift in Sources */,
 				3C443EC027DD8ABC0050A0AB /* TabBarViewController.swift in Sources */,
 				3C1A2C0C27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift in Sources */,
 				3C443ECD27DD8AC10050A0AB /* ContentPagingFlowLayout.swift in Sources */,
@@ -7449,7 +7449,7 @@
 				3C3642F9277BC2E90038CB18 /* Field.swift in Sources */,
 				3C17686527AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3C17686927AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */,
-				3C6C73B42781947700E039F0 /* SearchVC+Cell.swift in Sources */,
+				3C6C73B42781947700E039F0 /* SearchVC+ConfigureCell.swift in Sources */,
 				3CE3D4E327DCFBB700521735 /* SearchNavigationModel.swift in Sources */,
 				3C21EDAE27A45BFE0005E183 /* RealmModel.swift in Sources */,
 				3C21ED5D27A3A8A70005E183 /* KeyboardToolbarViewModel.swift in Sources */,
@@ -7507,7 +7507,7 @@
 				3CD7061227A1BCC800B446D7 /* IconPickerController.swift in Sources */,
 				3CCE2B1A279D008B00F72351 /* ClearIconView.swift in Sources */,
 				3CCCCA8F278185A9000381CE /* Model.swift in Sources */,
-				3C798EF927F6A577007BF68D /* TabBarVC+Datasource.swift in Sources */,
+				3C798EF927F6A577007BF68D /* TabBarVC+DataSource.swift in Sources */,
 				3C7BADAC275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C9234DA27E663280055061A /* ListsVC+Setup.swift in Sources */,
 				3C1D1A3C275AA25E0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
@@ -7556,7 +7556,7 @@
 				3C443FAA27DFA6370050A0AB /* SearchNC+Prompt.swift in Sources */,
 				3C17686E27AAEED20099D1CE /* SearchVC+Toolbar.swift in Sources */,
 				3C798FB827F782FF007BF68D /* ExtendedCurveConnector.swift in Sources */,
-				3C3642FA277BC2E90038CB18 /* SearchVC+Datasource.swift in Sources */,
+				3C3642FA277BC2E90038CB18 /* SearchVC+DataSource.swift in Sources */,
 				3C21ED6D27A3A9330005E183 /* KeyboardToolbarViewController.swift in Sources */,
 				3C93148927B82167009E5B6E /* ListsDetailVC+WordsToolbar.swift in Sources */,
 				3C08EB7C279CFBAB00971D60 /* ListsDetailWordCell.swift in Sources */,
@@ -7709,8 +7709,8 @@
 				3C21ED5927A3A7EF0005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C9234AE27E5734F0055061A /* SearchVM+Extensions.swift in Sources */,
 				3CC594FE279F3324001D07DC /* ColorPickerView.swift in Sources */,
-				3C4D3B9727477ABD0010FD68 /* SearchVC+Datasource.swift in Sources */,
-				3C2DBBC4277D5D7900911A74 /* SearchVC+Cell.swift in Sources */,
+				3C4D3B9727477ABD0010FD68 /* SearchVC+DataSource.swift in Sources */,
+				3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */,
 				3C798FB027F782EF007BF68D /* Toolbar.swift in Sources */,
 				3CCCCAA727818CE9000381CE /* FindIconView.swift in Sources */,
 				3C6C74352781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
@@ -7877,7 +7877,7 @@
 				3CCE2B50279D235C00F72351 /* ListsDetailVC+Listen.swift in Sources */,
 				3C6C73402781944B00E039F0 /* TabBarController.swift in Sources */,
 				3C17B8EB27C9C4D200B55E97 /* PhotosVC+ResultsHighlights.swift in Sources */,
-				3C6C73A42781947400E039F0 /* SearchVC+Cell.swift in Sources */,
+				3C6C73A42781947400E039F0 /* SearchVC+ConfigureCell.swift in Sources */,
 				3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */,
 				3C93147E27B76129009E5B6E /* ListsDetailVC+Delegate.swift in Sources */,
 				3CAE64F427C6AE34009E8564 /* PhotosVC+Find.swift in Sources */,
@@ -8023,7 +8023,7 @@
 				3CB181D127A5F84400933372 /* ListsDetailVC+NavigationBar.swift in Sources */,
 				3CB4C32227A772030093155E /* VC+Frames.swift in Sources */,
 				3C7A43EF27EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */,
-				3CE3D4F527DD302600521735 /* TabBarVC+Datasource.swift in Sources */,
+				3CE3D4F527DD302600521735 /* TabBarVC+DataSource.swift in Sources */,
 				3C6C7428278194A500E039F0 /* Utilities+UIViewController.swift in Sources */,
 				3C6C73A22781947400E039F0 /* SearchVC+Popovers.swift in Sources */,
 				3CB4C32027A701780093155E /* TabAttributes.swift in Sources */,
@@ -8139,7 +8139,7 @@
 				3C1A2C2727EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C7A440527EE464800DFF76F /* PhotosVM+Get.swift in Sources */,
 				3C6C742B278194A500E039F0 /* Utilities+CGRect.swift in Sources */,
-				3C6C73A82781947400E039F0 /* SearchVC+Datasource.swift in Sources */,
+				3C6C73A82781947400E039F0 /* SearchVC+DataSource.swift in Sources */,
 				3C17686C27AAEECF0099D1CE /* SearchVC+Toolbar.swift in Sources */,
 				3C6C7425278194A500E039F0 /* Utilities+SwiftUI.swift in Sources */,
 				3C7223BC27C4427D0085EBF1 /* CameraModel.swift in Sources */,
@@ -8372,14 +8372,14 @@
 				3C798DFB27F61589007BF68D /* Defaults.swift in Sources */,
 				3C798F4B27F78284007BF68D /* SearchNavigationModel.swift in Sources */,
 				3C798DFD27F61589007BF68D /* Debug+Log.swift in Sources */,
-				3C798F6F27F7829F007BF68D /* SearchVC+Datasource.swift in Sources */,
+				3C798F6F27F7829F007BF68D /* SearchVC+DataSource.swift in Sources */,
 				3C798F6527F7829F007BF68D /* SearchVM+Get.swift in Sources */,
 				3C798F5D27F7829F007BF68D /* SearchUtilities.swift in Sources */,
 				3C798FC927F78307007BF68D /* TipView.swift in Sources */,
 				3CE40B9727F6110600CADCBF /* SettingsDetailViewController.swift in Sources */,
 				3CE40B8227F5281F00CADCBF /* ViewController.swift in Sources */,
 				3C798F6B27F7829F007BF68D /* SearchCollectionView.swift in Sources */,
-				3C798F5627F7829F007BF68D /* SearchVC+Cell.swift in Sources */,
+				3C798F5627F7829F007BF68D /* SearchVC+ConfigureCell.swift in Sources */,
 				3C798F4927F78284007BF68D /* SearchNavigationController.swift in Sources */,
 				3C798EDC27F6983B007BF68D /* RC+Photos.swift in Sources */,
 				3C798FCA27F78307007BF68D /* ExtendedCurveConnector.swift in Sources */,
@@ -8610,7 +8610,7 @@
 				3C7A440327EE3AFA00DFF76F /* Utilities+Array.swift in Sources */,
 				3CFD5FDA278B6F2B0031BC8B /* ViewController.swift in Sources */,
 				3C08EB47279C959800971D60 /* SearchNC+Tabs.swift in Sources */,
-				3CFD5FF7278B6F950031BC8B /* SearchVC+Cell.swift in Sources */,
+				3CFD5FF7278B6F950031BC8B /* SearchVC+ConfigureCell.swift in Sources */,
 				3C443FAF27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift in Sources */,
 				3CBB31A627BDB98800F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
 				3C2C2CDB27E23D0300CA92EA /* SearchNC+Progress.swift in Sources */,
@@ -8630,7 +8630,7 @@
 				3CDD944F27C05F9C00D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3CFD5FD8278B6F2B0031BC8B /* SceneDelegate.swift in Sources */,
 				3CFD600B278B6FAA0031BC8B /* Toolbar.swift in Sources */,
-				3CFD5FF5278B6F950031BC8B /* SearchVC+Datasource.swift in Sources */,
+				3CFD5FF5278B6F950031BC8B /* SearchVC+DataSource.swift in Sources */,
 				3CF76428278CC2AE00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3CFD600A278B6FA50031BC8B /* Utilities+Constraints.swift in Sources */,
 				3C21EDC227A45C040005E183 /* RealmModel.swift in Sources */,
