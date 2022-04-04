@@ -420,6 +420,7 @@
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
+		3C2D228B27FAD2F900D413B7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -6451,6 +6452,7 @@
 				3CE40B9927F611F800CADCBF /* SettingsContent.storyboard in Resources */,
 				3C798F5F27F7829F007BF68D /* LeftView.xib in Resources */,
 				3C798F5C27F7829F007BF68D /* SearchFieldCell.xib in Resources */,
+				3C2D228B27FAD2F900D413B7 /* SharedAssets.xcassets in Resources */,
 				3C798F5527F7829F007BF68D /* RightView.xib in Resources */,
 				3CE40B8727F5282100CADCBF /* Assets.xcassets in Resources */,
 				3C798F6227F7829F007BF68D /* SearchBar.storyboard in Resources */,

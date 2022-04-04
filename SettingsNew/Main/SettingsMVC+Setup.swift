@@ -12,5 +12,8 @@ import UIKit
 extension SettingsMainViewController {
     func setup() {
         scrollView.delegate = self
+        scrollView.contentInset.top = searchViewModel.getTotalHeight()
+        scrollView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        scrollView.keyboardDismissMode = .interactive
     }
 }

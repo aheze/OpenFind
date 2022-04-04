@@ -26,7 +26,10 @@ class SettingsController {
         self.searchViewModel = searchViewModel
         
         self.realmModel = realmModel
-        let mainViewController = SettingsMainViewController.make(model: model)
+        let mainViewController = SettingsMainViewController.make(
+            model: model,
+            searchViewModel: searchViewModel
+        )
         let searchController = SearchNavigationController.make(
             rootViewController: mainViewController,
             searchNavigationModel: SearchNavigationModel(),

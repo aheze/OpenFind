@@ -69,12 +69,11 @@ class SettingsViewController: UIViewController {
     }
     
     func updateLayout() {
-        mainContainerWidthC.constant = view.bounds.width
-//        if traitCollection.horizontalSizeClass == .compact {
-//            mainContainerWidthC.constant = view.bounds.width
-//        } else {
-//            mainContainerWidthC.constant = view.bounds.width * 0.3
-//        }
+        if traitCollection.horizontalSizeClass == .compact {
+            mainContainerWidthC.constant = view.bounds.width
+        } else {
+            mainContainerWidthC.constant = view.bounds.width * 0.4
+        }
     }
 
     @available(*, unavailable)
