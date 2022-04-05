@@ -53,9 +53,18 @@ struct SettingsSectionRows: View {
                     minSymbol: let minSymbol,
                     maxSymbol: let maxSymbol,
                     saveAsInt: let saveAsInt,
-                    storage: let storages
+                    storage: let storage
                 ):
-                    EmptyView()
+                    SettingsSlider(
+                        model: model,
+                        numberOfSteps: numberOfSteps,
+                        minValue: minValue,
+                        maxValue: maxValue,
+                        minSymbol: minSymbol,
+                        maxSymbol: maxSymbol,
+                        saveAsInt: saveAsInt,
+                        storage: storage
+                    )
                 case .picker(
                     choices: let choices,
                     storage: let storage

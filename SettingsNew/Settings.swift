@@ -12,18 +12,22 @@ enum Settings {
     /// for the view
     enum Identifier: String {
         case hapticFeedbackLevel
-        
+
         case highlightsIcon
         case highlightsColor
         case highlightsBorderWidth
         case highlightsBackgroundOpacity
     }
 
+    enum StringIdentifier: String {
+        case asd
+    }
+
     /// for storage
     enum Values {
         enum HapticFeedbackLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
-            
+
             case none
             case light
             case heavy

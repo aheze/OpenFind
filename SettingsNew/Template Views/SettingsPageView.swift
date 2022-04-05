@@ -39,10 +39,8 @@ struct SettingsPageView: View {
                                     case .constant(string: let string):
                                         Text(string)
 
-                                    case .dynamic(getString: let getString):
-                                        if let string = getString() {
-                                            Text(string)
-                                        }
+                                    case .dynamic(identifier: let identifier):
+                                        Text(model.getString(for: identifier))
                                     }
                                 }
                                 .settingsDescriptionStyle()

@@ -83,7 +83,8 @@ extension SettingsViewModel {
                                 )
                             )
                         ],
-                        description: .constant(string: "Swipe left and right to change tabs.")
+//                        description: .constant(string: "Swipe left and right to change tabs.")
+                        description: .dynamic(identifier: .asd)
                     )
                 ]
             )
@@ -120,7 +121,6 @@ extension SettingsViewModel {
             configuration: .sections(
                 sections: [
                     .init(
-                        header: "Default Color",
                         rows: [
                             .init(configuration: .custom(identifier: .highlightsColor))
                         ],

@@ -29,6 +29,11 @@ enum SettingsConstants {
     static var descriptionFont = UIFont.preferredFont(forTextStyle: .footnote)
     static var iconFont = UIFont.preferredCustomFont(forTextStyle: .footnote, weight: .semibold)
     
+    
+    // MARK: - Insets
     static var rowVerticalInsetsFromText = EdgeInsets(top: 14, leading: 0, bottom: 14, trailing: 0)
+    
+    /// slightly less
+    static var rowVerticalInsetsFromSlider = EdgeInsets(top: 9, leading: 0, bottom: 9, trailing: 0)
     static var rowHorizontalInsets = EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
 }

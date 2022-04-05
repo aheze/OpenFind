@@ -29,7 +29,7 @@ struct SettingsSection: Identifiable {
 
     enum Description {
         case constant(string: String)
-        case dynamic(getString: () -> String)
+        case dynamic(identifier: Settings.StringIdentifier)
     }
 }
 

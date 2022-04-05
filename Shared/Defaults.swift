@@ -132,6 +132,7 @@ public extension Saved where Value == Double {
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
+            print("set.. \(newValue)")
             store.setValue(newValue, forKey: key)
         })
     }

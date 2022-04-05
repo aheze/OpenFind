@@ -14,17 +14,6 @@ struct SettingsHighlightsColor: View {
     //    @ObservedObject var colorPickerModel = ColorPickerViewModel()
 
     var body: some View {
-//        ColorPaletteView(model: colorPickerModel)
-        ////            .frame(height: 200)
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .fixedSize(horizontal: false, vertical: true)
-//            .padding(SettingsConstants.rowVerticalInsetsFromText)
-//            .padding(SettingsConstants.rowHorizontalInsets)
-//            .onValueChange(of: colorPickerModel.selectedColor) { _, newValue in
-//                print("changed!")
-        ////                model.highlightsColor = Int(newValue.hex)
-//            }
-
         let color = UIColor(hex: UInt(model.highlightsColor))
 
         HStack {
