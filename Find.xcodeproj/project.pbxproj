@@ -427,6 +427,13 @@
 		3C2D229327FBA69900D413B7 /* SettingsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229227FBA69900D413B7 /* SettingsPageView.swift */; };
 		3C2D229827FBBA0200D413B7 /* SwiftPrettyPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2D229727FBBA0200D413B7 /* SwiftPrettyPrint */; };
 		3C2D229A27FBC5AC00D413B7 /* SettingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */; };
+		3C2D229C27FBCBD800D413B7 /* SettingsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229B27FBCBD800D413B7 /* SettingsResultsView.swift */; };
+		3C2D229E27FBD46400D413B7 /* SettingsResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229D27FBD46400D413B7 /* SettingsResultsViewController.swift */; };
+		3C2D22A027FBD56000D413B7 /* SettingsScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229F27FBD56000D413B7 /* SettingsScrollViewController.swift */; };
+		3C2D22A227FBD5CB00D413B7 /* SettingsMVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22A127FBD5CB00D413B7 /* SettingsMVC+Listen.swift */; };
+		3C2D22A327FBD63200D413B7 /* SharedAppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C443F8627DE501B0050A0AB /* SharedAppIcons.xcassets */; };
+		3C2D22A427FBD63200D413B7 /* SharedColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CDD942A27C05B5A00D3EA1A /* SharedColors.xcassets */; };
+		3C2D22A627FBD67E00D413B7 /* SettingsMVC+Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22A527FBD67E00D413B7 /* SettingsMVC+Results.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2741,6 +2748,11 @@
 		3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsPage+Generate.swift"; sourceTree = "<group>"; };
 		3C2D229227FBA69900D413B7 /* SettingsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageView.swift; sourceTree = "<group>"; };
 		3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageViewController.swift; sourceTree = "<group>"; };
+		3C2D229B27FBCBD800D413B7 /* SettingsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResultsView.swift; sourceTree = "<group>"; };
+		3C2D229D27FBD46400D413B7 /* SettingsResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResultsViewController.swift; sourceTree = "<group>"; };
+		3C2D229F27FBD56000D413B7 /* SettingsScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScrollViewController.swift; sourceTree = "<group>"; };
+		3C2D22A127FBD5CB00D413B7 /* SettingsMVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsMVC+Listen.swift"; sourceTree = "<group>"; };
+		3C2D22A527FBD67E00D413B7 /* SettingsMVC+Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsMVC+Results.swift"; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -4778,6 +4790,10 @@
 			isa = PBXGroup;
 			children = (
 				3CE40B9427F610F200CADCBF /* SettingsMainViewController.swift */,
+				3C2D22A127FBD5CB00D413B7 /* SettingsMVC+Listen.swift */,
+				3C2D22A527FBD67E00D413B7 /* SettingsMVC+Results.swift */,
+				3C2D229B27FBCBD800D413B7 /* SettingsResultsView.swift */,
+				3C2D229D27FBD46400D413B7 /* SettingsResultsViewController.swift */,
 				3C798FCF27F784EE007BF68D /* SettingsMVC+Setup.swift */,
 				3C798FD127F7850D007BF68D /* SettingsMVC+Delegate.swift */,
 			);
@@ -5245,6 +5261,7 @@
 				3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */,
 				3C2D229227FBA69900D413B7 /* SettingsPageView.swift */,
 				3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */,
+				3C2D229F27FBD56000D413B7 /* SettingsScrollViewController.swift */,
 				3C798DE827F612B9007BF68D /* SettingsViewModel.swift */,
 				3C2D228E27FB5B6200D413B7 /* SettingsData.swift */,
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
@@ -6466,7 +6483,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2D22A327FBD63200D413B7 /* SharedAppIcons.xcassets in Resources */,
 				3CE40B8A27F5282100CADCBF /* LaunchScreen.storyboard in Resources */,
+				3C2D22A427FBD63200D413B7 /* SharedColors.xcassets in Resources */,
 				3C798F4827F78284007BF68D /* SearchNavigationContent.storyboard in Resources */,
 				3CE40B9927F611F800CADCBF /* SettingsContent.storyboard in Resources */,
 				3C798F5F27F7829F007BF68D /* LeftView.xib in Resources */,
@@ -8416,7 +8435,9 @@
 				3C2D229327FBA69900D413B7 /* SettingsPageView.swift in Sources */,
 				3C798E0627F61591007BF68D /* GeneralExtensions.swift in Sources */,
 				3C798F6D27F7829F007BF68D /* SearchVC+Popovers.swift in Sources */,
+				3C2D22A627FBD67E00D413B7 /* SettingsMVC+Results.swift in Sources */,
 				3C798F5827F7829F007BF68D /* SearchViewModel.swift in Sources */,
+				3C2D22A027FBD56000D413B7 /* SettingsScrollViewController.swift in Sources */,
 				3C798E0727F61591007BF68D /* Photo.swift in Sources */,
 				3C798F9B27F782C4007BF68D /* GeneralViews.swift in Sources */,
 				3C798F5227F78284007BF68D /* SearchNC+Listen.swift in Sources */,
@@ -8465,11 +8486,13 @@
 				3C798F7027F7829F007BF68D /* Field.swift in Sources */,
 				3C798F9D27F782C4007BF68D /* FindIconView.swift in Sources */,
 				3C798E0827F61591007BF68D /* Word.swift in Sources */,
+				3C2D22A227FBD5CB00D413B7 /* SettingsMVC+Listen.swift in Sources */,
 				3C798FC827F78307007BF68D /* CameraMessageView.swift in Sources */,
 				3C798F9527F782B0007BF68D /* SelectionIconView.swift in Sources */,
 				3C2D229127FBA54100D413B7 /* SettingsPage+Generate.swift in Sources */,
 				3C798F6C27F7829F007BF68D /* KeyboardToolbarViewController.swift in Sources */,
 				3C798F5A27F7829F007BF68D /* KeyboardToolbarView.swift in Sources */,
+				3C2D229C27FBCBD800D413B7 /* SettingsResultsView.swift in Sources */,
 				3C798F4D27F78284007BF68D /* SearchNC+Tabs.swift in Sources */,
 				3C798F9627F782B0007BF68D /* ButtonView.swift in Sources */,
 				3C798F5E27F7829F007BF68D /* SearchFieldCell.swift in Sources */,
@@ -8481,6 +8504,7 @@
 				3C798DEC27F61582007BF68D /* Utilities+Constraints.swift in Sources */,
 				3C798DF827F61582007BF68D /* Utilities+Math.swift in Sources */,
 				3C798F6E27F7829F007BF68D /* SearchCollectionViewFlowLayout.swift in Sources */,
+				3C2D229E27FBD46400D413B7 /* SettingsResultsViewController.swift in Sources */,
 				3C798F6127F7829F007BF68D /* SearchVM+Extensions.swift in Sources */,
 				3C798DF927F61582007BF68D /* Utilities+UIFont.swift in Sources */,
 				3C798F4C27F78284007BF68D /* SearchNC+Prompt.swift in Sources */,

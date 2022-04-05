@@ -59,9 +59,6 @@ class SettingsViewController: UIViewController {
         addChildViewController(detailViewController, in: detailContainer)
         updateLayout()
         
-        let mainPage = model.page.generateViewController()
-        mainViewController.loadViewIfNeeded()
-        mainViewController.addResizableChildViewController(mainPage, in: mainViewController.contentView)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

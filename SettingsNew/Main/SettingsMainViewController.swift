@@ -20,6 +20,11 @@ class SettingsMainViewController: UIViewController, Searchable {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
     
+    lazy var pageViewController: SettingsPageViewController = {
+        let viewController = model.page.generateViewController()
+        return viewController
+    }()
+    lazy var resultsViewController = SettingsResultsViewController(paths: model.paths)
     
     static func make(
         model: SettingsViewModel,
@@ -57,8 +62,12 @@ class SettingsMainViewController: UIViewController, Searchable {
         
         setup()
         scrollView.alwaysBounceVertical = true
-        scrollView.backgroundColor = .secondarySystemBackground
-        contentView.backgroundColor = .systemGreen
+        
+        addResizableChildViewController(pageViewController, in: contentView)
+        addResizableChildViewController(resultsViewController, in: contentView)
+        
+        listen()
+        showResults(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
