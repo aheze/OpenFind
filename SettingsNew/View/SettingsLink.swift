@@ -23,12 +23,16 @@ struct SettingsLink: View {
                 if let leftIcon = leftIcon {
                     switch leftIcon {
                     case .template(iconName: let iconName, backgroundColor: let backgroundColor):
-                        Image(systemName: iconName)
-                            .foregroundColor(.white)
-                            .font(SettingsConstants.iconFont.font)
-                            .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
-                            .background(backgroundColor.color)
-                            .cornerRadius(SettingsConstants.iconCornerRadius)
+                        Color.clear
+                            .frame(width: SettingsConstants.iconSize.width)
+                            .overlay(
+                                Image(systemName: iconName)
+                                    .foregroundColor(.white)
+                                    .font(SettingsConstants.iconFont.font)
+                                    .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
+                                    .background(backgroundColor.color)
+                                    .cornerRadius(SettingsConstants.iconCornerRadius)
+                            )
                         
                     case .custom(identifier: let identifier):
                         SettingsCustomView(identifier: identifier)

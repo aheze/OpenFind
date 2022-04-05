@@ -4824,12 +4824,12 @@
 			isa = PBXGroup;
 			children = (
 				3CE40B9427F610F200CADCBF /* SettingsMainViewController.swift */,
+				3C798FCF27F784EE007BF68D /* SettingsMVC+Setup.swift */,
+				3C798FD127F7850D007BF68D /* SettingsMVC+Delegate.swift */,
 				3C2D22A127FBD5CB00D413B7 /* SettingsMVC+Listen.swift */,
 				3C2D22A527FBD67E00D413B7 /* SettingsMVC+Results.swift */,
 				3C2D229B27FBCBD800D413B7 /* SettingsResultsView.swift */,
 				3C2D229D27FBD46400D413B7 /* SettingsResultsViewController.swift */,
-				3C798FCF27F784EE007BF68D /* SettingsMVC+Setup.swift */,
-				3C798FD127F7850D007BF68D /* SettingsMVC+Delegate.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";

@@ -9,7 +9,7 @@
 import SwiftUI
 
 enum SettingsConstants {
-    static var sidePadding = CGFloat(16)
+    static var sidePadding = CGFloat(20)
     static var sectionCornerRadius = CGFloat(12)
     static var sectionSpacing = CGFloat(20)
     static var iconSize = CGSize(width: 28, height: 28)
@@ -22,5 +22,5 @@ enum SettingsConstants {
     static var descriptionFont = UIFont.preferredFont(forTextStyle: .footnote)
     static var iconFont = UIFont.preferredCustomFont(forTextStyle: .footnote, weight: .semibold)
     
-    static var rowInsets = EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+    static var rowInsets = EdgeInsets(top: 14, leading: 16, bottom: 14, trailing: 16)
 }

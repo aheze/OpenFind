@@ -29,10 +29,11 @@ class SettingsScrollViewController: UIViewController, Searchable {
         scrollView.delegate = self
         scrollView.backgroundColor = .clear
         scrollView.alwaysBounceVertical = true
+        scrollView.verticalScrollIndicatorInsets.top = SearchNavigationConstants.scrollIndicatorTopPadding
         self.scrollView = scrollView
         return scrollView
     }()
-    
+
     lazy var contentView: UIView = {
         let contentView = UIView()
         scrollView.addSubview(contentView)
@@ -75,14 +76,13 @@ class SettingsScrollViewController: UIViewController, Searchable {
         _ = scrollView
         _ = contentView
         addResizableChildViewController(pageViewController, in: contentView)
-        
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset
+        additionalSearchBarOffset = 0
     }
 }
 

@@ -142,6 +142,8 @@ struct SearchConfiguration: Equatable {
     static var settings: Self = {
         var configuration = SearchConfiguration.lists
         configuration.addTextPlaceholder = "Find Settings"
+        configuration.sidePadding = 20
+        configuration.sidePeekPadding = 36
         return configuration
     }()
 }
