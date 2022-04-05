@@ -27,18 +27,6 @@ protocol PageViewController: UIViewController {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets)
 }
 
-
-/// identify something, usually for search bar excluded frames
-struct Identifier: Hashable {
-    var key: String
-
-    static var cameraSearchBar = Identifier(key: "cameraSearchBar")
-    static var photosSearchBar = Identifier(key: "photosSearchBar")
-    static var photosSlidesItemCollectionView = Identifier(key: "photosSlidesItemCollectionView")
-    static var listsSearchBar = Identifier(key: "listsSearchBar") /// for both the gallery and individual detail search bar, since they share same navigation controller
-    static var listsDetailsScreenEdge = Identifier(key: "listsDetailsScreenEdge") /// for the navigation controller
-}
-
 enum TabState: Equatable {
     case photos
     case camera

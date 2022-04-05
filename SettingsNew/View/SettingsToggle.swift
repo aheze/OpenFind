@@ -7,4 +7,21 @@
 //
     
 
-import Foundation
+import SwiftUI
+
+struct SettingsToggle: View {
+    @ObservedObject var model: SettingsViewModel
+    let title: String
+    let storage: KeyPath<SettingsViewModel, Binding<Bool>>
+    
+    var body: some View {
+        HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Toggle("", isOn: model[keyPath: storage])
+                .labelsHidden()
+        }
+        .padding(SettingsConstants.rowInsets)
+    }
+}

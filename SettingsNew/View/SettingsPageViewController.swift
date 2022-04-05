@@ -9,8 +9,8 @@
 import SwiftUI
 
 class SettingsPageViewController: UIViewController {
-    let model: SettingsViewModel
-    let page: SettingsPage
+    var model: SettingsViewModel
+    var page: SettingsPage
 
     var contentViewHeightC: NSLayoutConstraint?
     lazy var contentView: UIView = {
@@ -57,7 +57,6 @@ class SettingsPageViewController: UIViewController {
             model: model,
             page: page
         ) { [weak self] size in
-            print("height: \(size.height)")
             self?.contentViewHeightC?.constant = size.height
         }
 

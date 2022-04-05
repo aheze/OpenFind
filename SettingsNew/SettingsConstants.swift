@@ -18,6 +18,8 @@ enum SettingsConstants {
     static var dividerHeight = CGFloat(0.3)
     static var dividerColor = UIColor.secondaryLabel.withAlphaComponent(0.2)
     
+    /// spacing between icon and title
+    static var rowIconTitleSpacing = CGFloat(12)
     
     static var descriptionFont = UIFont.preferredFont(forTextStyle: .footnote)
     static var iconFont = UIFont.preferredCustomFont(forTextStyle: .footnote, weight: .semibold)

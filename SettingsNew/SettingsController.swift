@@ -54,6 +54,8 @@ class SettingsController {
         )
         
         self.viewController = viewController
+        
+        /// listen to closures
         listen()
     }
 }

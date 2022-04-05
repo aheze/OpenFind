@@ -10,6 +10,11 @@
 import SwiftUI
 import SwiftPrettyPrint
 
+/// for the view
+enum SettingsIdentifiers {
+    static var hapticFeedbackLevel = "hapticFeedbackLevel"
+}
+
 class SettingsViewModel: ObservableObject {
     @Saved("swipeToNavigate") var swipeToNavigate = true
     @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = "low"
@@ -28,6 +33,12 @@ class SettingsViewModel: ObservableObject {
     init() {
         let paths = page.generatePaths()
         self.paths = paths
+        
+        print("swipe? \(swipeToNavigate)")
+        
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            print("\(key) = \(value)")
+        }
     }
 }
 

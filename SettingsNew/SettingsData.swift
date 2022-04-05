@@ -110,10 +110,7 @@ extension SettingsViewModel {
                     .init(
                         rows: [
                             .init(
-                                configuration: .toggle(
-                                    title: "Haptic Feedback",
-                                    storage: \SettingsViewModel.$swipeToNavigate
-                                )
+                                configuration: .custom(identifier: SettingsIdentifiers.hapticFeedbackLevel)
                             )
                         ]
                     ),

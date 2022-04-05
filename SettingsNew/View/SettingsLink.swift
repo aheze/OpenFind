@@ -19,7 +19,7 @@ struct SettingsLink: View {
         SettingsButton {
             model.show?(destination)
         } content: {
-            HStack {
+            HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
                 if let leftIcon = leftIcon {
                     switch leftIcon {
                     case .template(iconName: let iconName, backgroundColor: let backgroundColor):
