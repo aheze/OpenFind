@@ -9,6 +9,7 @@
 import SwiftUI
 
 class SettingsPageViewController: UIViewController {
+    let model: SettingsViewModel
     let page: SettingsPage
 
     var contentViewHeightC: NSLayoutConstraint?
@@ -30,7 +31,8 @@ class SettingsPageViewController: UIViewController {
         return contentView
     }()
 
-    init(page: SettingsPage) {
+    init(model: SettingsViewModel, page: SettingsPage) {
+        self.model = model
         self.page = page
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,8 +53,10 @@ class SettingsPageViewController: UIViewController {
         
         _ = contentView
 
-        let settingsPageView = SettingsPageView(page: page) { [weak self] size in
-            print("size: \(size)")
+        let settingsPageView = SettingsPageView(
+            model: model,
+            page: page
+        ) { [weak self] size in
             self?.contentViewHeightC?.constant = size.height
         }
 

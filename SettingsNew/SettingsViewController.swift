@@ -14,10 +14,10 @@ class SettingsViewController: UIViewController {
     var mainViewController: SettingsMainViewController
     var detailViewController: SettingsDetailViewController
 
-    @IBOutlet weak var mainContainer: UIView!
-    @IBOutlet weak var detailContainer: UIView!
-    @IBOutlet weak var mainContainerWidthC: NSLayoutConstraint!
-    
+    @IBOutlet var mainContainer: UIView!
+    @IBOutlet var detailContainer: UIView!
+    @IBOutlet var mainContainerWidthC: NSLayoutConstraint!
+
     static func make(
         model: SettingsViewModel,
         searchController: SearchNavigationController,
@@ -53,22 +53,20 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addDebugBorders(.green)
-        
         addChildViewController(searchController, in: mainContainer)
         addChildViewController(detailViewController, in: detailContainer)
         updateLayout()
-        
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayout()
     }
+
     override func viewDidLayoutSubviews() {
         updateLayout()
     }
-    
+
     func updateLayout() {
         if traitCollection.horizontalSizeClass == .compact {
             mainContainerWidthC.constant = view.bounds.width

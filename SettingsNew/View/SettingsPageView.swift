@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct SettingsPageView: View {
+    var model: SettingsViewModel
     var page: SettingsPage
     var sizeChanged: ((CGSize) -> Void)?
     var body: some View {
-//            .fixedSize(horizontal: false, vertical: true)
 
         VStack {
             if let explanation = page.explanation {
@@ -26,7 +26,9 @@ struct SettingsPageView: View {
                 VStack(spacing: SettingsConstants.sectionSpacing) {
                     ForEach(sections) { section in
                         VStack(spacing: 0) {
-                            ForEach(section.rows) { row in
+                            ForEach(Array(zip(section.rows.indices, section.rows)), id: \.1.id) { index, row in
+
+                                let leftDividerPadding = SettingsConstants.rowInsets.leading
 
                                 switch row.configuration {
                                 case .link(
@@ -35,7 +37,13 @@ struct SettingsPageView: View {
                                     showRightIndicator: let showRightIndicator,
                                     destination: let destination
                                 ):
-                                    SettingsLink(title: title, leftIcon: leftIcon, showRightIndicator: showRightIndicator, destination: destination)
+                                    SettingsLink(
+                                        model: model,
+                                        title: title,
+                                        leftIcon: leftIcon,
+                                        showRightIndicator: showRightIndicator,
+                                        destination: destination
+                                    )
                                 case .toggle(
                                     title: let title,
                                     storage: let storage
@@ -67,13 +75,19 @@ struct SettingsPageView: View {
                                 ):
                                     SettingsCustomView(identifier: identifier)
                                 }
+
+                                if index < section.rows.count - 1 {
+                                    Rectangle()
+                                        .fill(SettingsConstants.dividerColor.color)
+                                        .frame(height: SettingsConstants.dividerHeight)
+                                        .padding(.leading, leftDividerPadding)
+                                }
                             }
                         }
+                        .background(UIColor.systemBackground.color)
+                        .cornerRadius(SettingsConstants.sectionCornerRadius)
                     }
                 }
-                .padding()
-                .background(UIColor.systemBackground.color)
-                .cornerRadius(SettingsConstants.sectionCornerRadius)
             case .custom(identifier: let identifier):
                 SettingsCustomView(identifier: identifier)
             }

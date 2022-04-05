@@ -12,8 +12,11 @@ enum SettingsConstants {
     static var sidePadding = CGFloat(16)
     static var sectionCornerRadius = CGFloat(12)
     static var sectionSpacing = CGFloat(20)
-    static var iconSize = CGSize(width: 24, height: 24)
+    static var iconSize = CGSize(width: 28, height: 28)
     static var iconCornerRadius = CGFloat(6)
+    
+    static var dividerHeight = CGFloat(0.3)
+    static var dividerColor = UIColor.secondaryLabel.withAlphaComponent(0.2)
     
     
     static var descriptionFont = UIFont.preferredFont(forTextStyle: .footnote)

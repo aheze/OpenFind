@@ -21,7 +21,7 @@ class SettingsMainViewController: UIViewController, Searchable {
     @IBOutlet var contentView: UIView!
     
     lazy var pageViewController: SettingsPageViewController = {
-        let viewController = model.page.generateViewController()
+        let viewController = model.page.generateViewController(model: model)
         return viewController
     }()
     lazy var resultsViewController = SettingsResultsViewController(paths: model.paths)
@@ -72,13 +72,16 @@ class SettingsMainViewController: UIViewController, Searchable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: .zero)
+        print("sart: \(Global.safeAreaInsets)")
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        print("base: \(self.baseSearchBarOffset)")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate { _ in
-            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: .zero)
+            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+            self.updateSearchBarOffset?()
         }
     }
 }

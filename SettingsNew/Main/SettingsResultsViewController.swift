@@ -55,7 +55,6 @@ class SettingsResultsViewController: UIViewController {
         _ = contentView
 
         let settingsResultsView = SettingsResultsView(paths: paths) { [weak self] size in
-            print("size: \(size)")
             self?.contentViewHeightC?.constant = size.height
         }
 

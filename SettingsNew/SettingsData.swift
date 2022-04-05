@@ -41,8 +41,8 @@ extension SettingsViewModel {
                         configuration: .link(
                             title: "Finding",
                             leftIcon: .template(
-                                iconName: "gear",
-                                backgroundColor: UIColor(hex: 0x565656)
+                                iconName: "magnifyingglass",
+                                backgroundColor: UIColor(hex: 0x008BEF)
                             ),
                             showRightIndicator: true,
                             destination: findingPage

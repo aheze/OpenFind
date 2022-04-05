@@ -75,7 +75,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEW-hi-0ej">
-                                <rect key="frame" x="0.0" y="44" width="350" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="2qv-xX-dv5"/>
@@ -89,7 +89,7 @@
                         <viewLayoutGuide key="safeArea" id="j1m-Pr-TPO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="uEW-hi-0ej" firstAttribute="top" secondItem="j1m-Pr-TPO" secondAttribute="top" id="3Np-lf-goQ"/>
+                            <constraint firstItem="uEW-hi-0ej" firstAttribute="top" secondItem="OQe-sE-DIJ" secondAttribute="top" id="3Np-lf-goQ"/>
                             <constraint firstItem="uEW-hi-0ej" firstAttribute="leading" secondItem="OQe-sE-DIJ" secondAttribute="leading" id="8ai-Q3-YYH"/>
                             <constraint firstAttribute="bottom" secondItem="Cyw-Jr-WGH" secondAttribute="bottom" id="GAa-6j-tje"/>
                             <constraint firstAttribute="trailing" secondItem="Cyw-Jr-WGH" secondAttribute="trailing" id="GQW-c1-j96"/>
@@ -99,7 +99,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailContainer" destination="uEW-hi-0ej" id="SVC-Xj-kOf"/>
+                        <outlet property="detailContainer" destination="Cyw-Jr-WGH" id="61I-EB-66X"/>
                         <outlet property="mainContainer" destination="uEW-hi-0ej" id="JAE-XH-jYB"/>
                         <outlet property="mainContainerWidthC" destination="2qv-xX-dv5" id="ot9-sO-Lja"/>
                     </connections>

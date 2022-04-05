@@ -18,7 +18,7 @@ class SettingsScrollViewController: UIViewController, Searchable {
     let page: SettingsPage
 
     lazy var pageViewController: SettingsPageViewController = {
-        let viewController = page.generateViewController()
+        let viewController = page.generateViewController(model: model)
         return viewController
     }()
 

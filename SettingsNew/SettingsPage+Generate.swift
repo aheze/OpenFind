@@ -54,8 +54,8 @@ extension SettingsPage {
         }
     }
 
-    func generateViewController() -> SettingsPageViewController {
-        let viewController = SettingsPageViewController(page: self)
+    func generateViewController(model: SettingsViewModel) -> SettingsPageViewController {
+        let viewController = SettingsPageViewController(model: model, page: self)
         return viewController
     }
 }
