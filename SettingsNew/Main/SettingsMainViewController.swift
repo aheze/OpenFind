@@ -72,9 +72,7 @@ class SettingsMainViewController: UIViewController, Searchable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("sart: \(Global.safeAreaInsets)")
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-        print("base: \(self.baseSearchBarOffset)")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

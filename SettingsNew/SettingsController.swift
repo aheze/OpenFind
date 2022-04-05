@@ -54,9 +54,6 @@ class SettingsController {
         )
         
         self.viewController = viewController
-        
-        model.updateNavigationBar = {
-            searchController.updateSearchBarOffset()
-        }
+        listen()
     }
 }

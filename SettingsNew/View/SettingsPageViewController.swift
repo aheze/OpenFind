@@ -57,6 +57,7 @@ class SettingsPageViewController: UIViewController {
             model: model,
             page: page
         ) { [weak self] size in
+            print("height: \(size.height)")
             self?.contentViewHeightC?.constant = size.height
         }
 

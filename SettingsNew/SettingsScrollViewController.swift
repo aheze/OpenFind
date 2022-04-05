@@ -25,10 +25,26 @@ class SettingsScrollViewController: UIViewController, Searchable {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
+        scrollView.pinEdgesToSuperview()
         scrollView.delegate = self
         scrollView.backgroundColor = .clear
+        scrollView.alwaysBounceVertical = true
         self.scrollView = scrollView
         return scrollView
+    }()
+    
+    lazy var contentView: UIView = {
+        let contentView = UIView()
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        return contentView
     }()
 
     init(
@@ -49,6 +65,7 @@ class SettingsScrollViewController: UIViewController, Searchable {
 
     override func loadView() {
         title = page.title
+        navigationItem.largeTitleDisplayMode = .never
         /**
          Instantiate the base `view`.
          */
@@ -56,19 +73,23 @@ class SettingsScrollViewController: UIViewController, Searchable {
         view.backgroundColor = .secondarySystemBackground
 
         _ = scrollView
+        _ = contentView
+        addResizableChildViewController(pageViewController, in: contentView)
+        
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        additionalSearchBarOffset = -scrollView.contentOffset.y - baseSearchBarOffset
     }
 }
 
 extension SettingsScrollViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset
         model.updateNavigationBar?()
     }
 }
