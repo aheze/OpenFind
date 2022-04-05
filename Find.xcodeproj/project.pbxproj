@@ -462,6 +462,7 @@
 		3C2D22CE27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
 		3C2D22D127FCD4CA00D413B7 /* SettingsHapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */; };
 		3C2D22D327FCD5A300D413B7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D227FCD5A300D413B7 /* Settings.swift */; };
+		3C2D22D527FCE34F00D413B7 /* SettingsHighlightsIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2794,6 +2795,7 @@
 		3C2D22BC27FC1A6500D413B7 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHapticFeedback.swift; sourceTree = "<group>"; };
 		3C2D22D227FCD5A300D413B7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHighlightsIcon.swift; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -3999,8 +4001,17 @@
 			children = (
 				3C2D22A827FBD9B500D413B7 /* SettingsCustomView.swift */,
 				3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */,
+				3C2D22D627FCE35900D413B7 /* Highlights */,
 			);
 			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		3C2D22D627FCE35900D413B7 /* Highlights */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */,
+			);
+			path = Highlights;
 			sourceTree = "<group>";
 		};
 		3C2DBBCB277E6F3600911A74 /* Toolbar */ = {
@@ -8536,6 +8547,7 @@
 				3C798FC727F78307007BF68D /* FieldSettingsView.swift in Sources */,
 				3C798F9927F782B0007BF68D /* FindIconUIView.swift in Sources */,
 				3CE40B7E27F5281F00CADCBF /* AppDelegate.swift in Sources */,
+				3C2D22D527FCE34F00D413B7 /* SettingsHighlightsIcon.swift in Sources */,
 				3C798F9727F782B0007BF68D /* ClearIconView.swift in Sources */,
 				3C798F5727F7829F007BF68D /* SearchVC+Delegate.swift in Sources */,
 				3C798F4F27F78284007BF68D /* SearchPromptView.swift in Sources */,

@@ -43,14 +43,13 @@ struct SettingsRow: Identifiable {
 
         /// if `numberOfSteps` is nil, smooth slider
         case slider(
-            title: String,
             numberOfSteps: Int?,
             minValue: Double,
             maxValue: Double,
             minSymbol: Symbol,
             maxSymbol: Symbol,
-            numberOfDecimalPlaces: Int,
-            storageKey: String
+            saveAsInt: Bool, /// precision
+            storage: KeyPath<SettingsViewModel, Binding<Double>>
         )
 
         /// open in new page
@@ -64,7 +63,7 @@ struct SettingsRow: Identifiable {
     }
 
     enum Symbol {
-        case system(name: String)
+        case system(name: String, weight: UIFont.Weight)
         case text(string: String) /// text
     }
 

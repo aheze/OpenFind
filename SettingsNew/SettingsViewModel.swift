@@ -22,7 +22,13 @@ class SettingsViewModel: ObservableObject {
 
     @Saved("scanOnLaunch") var scanOnLaunch = false { willSet { self.objectWillChange.send() } }
     @Saved("scanOnFind") var scanOnFind = true { willSet { self.objectWillChange.send() } }
-
+    
+    // MARK: - Highlights
+    @Saved("highlightsColor") var highlightsColor = Int(0x00aeef) { willSet { self.objectWillChange.send() } }
+    @Saved("cycleSearchBarColors") var cycleSearchBarColors = true { willSet { self.objectWillChange.send() } }
+    @Saved("highlightsBorderWidth") var highlightsBorderWidth = Double(1.2) { willSet { self.objectWillChange.send() } }
+    @Saved("highlightsBackgroundOpacity") var highlightsBackgroundOpacity = Double(0.3) { willSet { self.objectWillChange.send() } }
+    
     var page = mainPage
     var paths: [[SettingsRow]] /// all possible paths in the tree, including incomplete/unfinished paths (paths that stop before hitting the last option)
 

@@ -18,7 +18,8 @@ struct SettingsHapticFeedback: View {
                 SettingsHapticFeedbackButton(model: model, level: level)
             }
         }
-        .frame(height: 100)
+        .frame(height: 80)
+        .frame(maxWidth: .infinity)
         .padding(SettingsConstants.rowHorizontalInsets)
         .padding(SettingsConstants.rowVerticalInsetsFromText)
     }
@@ -40,6 +41,7 @@ struct SettingsHapticFeedbackButton: View {
                 .cornerRadius(cornerRadius)
                 .overlay(
                     Text(level.rawValue)
+                        .foregroundColor(UIColor.label.color)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)

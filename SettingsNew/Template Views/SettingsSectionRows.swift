@@ -47,14 +47,13 @@ struct SettingsSectionRows: View {
                 ):
                     EmptyView()
                 case .slider(
-                    title: let title,
                     numberOfSteps: let numberOfSteps,
                     minValue: let minValue,
                     maxValue: let maxValue,
                     minSymbol: let minSymbol,
                     maxSymbol: let maxSymbol,
-                    numberOfDecimalPlaces: let numberOfDecimalPlaces,
-                    storageKey: let storageKey
+                    saveAsInt: let saveAsInt,
+                    storage: let storages
                 ):
                     EmptyView()
                 case .picker(

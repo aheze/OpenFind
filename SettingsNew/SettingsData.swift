@@ -47,10 +47,47 @@ extension SettingsViewModel {
                             showRightIndicator: true,
                             destination: findingPage
                         )
+                    ),
+                    .init(
+                        configuration: .link(
+                            title: "Highlights",
+                            leftIcon: .custom(identifier: .highlightsIcon),
+                            showRightIndicator: true,
+                            destination: highlightsPage
+                        )
                     )
                 ]
             )
         ]
+    }()
+
+    static var generalPage: SettingsPage = {
+        .init(
+            title: "General",
+            configuration: .sections(
+                sections: [
+                    .init(
+                        header: "Haptic Feedback",
+                        rows: [
+                            .init(
+                                configuration: .custom(identifier: .hapticFeedbackLevel)
+                            )
+                        ]
+                    ),
+                    .init(
+                        rows: [
+                            .init(
+                                configuration: .toggle(
+                                    title: "Swipe To Navigate",
+                                    storage: \SettingsViewModel.$swipeToNavigate
+                                )
+                            )
+                        ],
+                        description: .constant(string: "Swipe left and right to change tabs.")
+                    )
+                ]
+            )
+        )
     }()
 
     static var findingPage: SettingsPage = {
@@ -77,6 +114,53 @@ extension SettingsViewModel {
         )
     }()
 
+    static var highlightsPage: SettingsPage = {
+        .init(
+            title: "Highlights",
+            configuration: .sections(
+                sections: [
+                    .init(
+                        header: "Default Color",
+                        rows: [
+                            .init(configuration: .custom(identifier: .highlightsColor))
+                        ],
+                        description: .constant(string: "The default color for highlights.")
+                    ),
+                    .init(
+                        rows: [
+                            .init(configuration: .toggle(title: "Cycle Search Bar Colors", storage: \SettingsViewModel.$cycleSearchBarColors))
+                        ],
+                        description: .constant(string: "Automatically adjust the color of each additional search bar added")
+                    ),
+                    .init(
+                        header: "Border Width",
+                        rows: [
+                            .init(
+                                configuration: .slider(
+                                    numberOfSteps: nil,
+                                    minValue: 0,
+                                    maxValue: 4,
+                                    minSymbol: .system(name: "line.diagonal", weight: .ultraLight),
+                                    maxSymbol: .system(name: "line.diagonal", weight: .black),
+                                    saveAsInt: false,
+                                    storage: \SettingsViewModel.$highlightsBorderWidth
+                                )
+                            )
+                        ],
+                        description: .constant(string: "The default color for highlights.")
+                    ),
+                    .init(
+                        header: "Background Opacity",
+                        rows: [
+                            .init(configuration: .custom(identifier: .highlightsBackgroundOpacity))
+                        ],
+                        description: .constant(string: "The default color for highlights.")
+                    )
+                ]
+            )
+        )
+    }()
+
     static var subPage: SettingsPage = {
         .init(
             title: "SubPage",
@@ -88,34 +172,6 @@ extension SettingsViewModel {
                                 configuration: .button(title: "Last button", action: {})
                             )
                         ]
-                    )
-                ]
-            )
-        )
-    }()
-
-    static var generalPage: SettingsPage = {
-        .init(
-            title: "General",
-            configuration: .sections(
-                sections: [
-                    .init(
-                        rows: [
-                            .init(
-                                configuration: .custom(identifier: .hapticFeedbackLevel)
-                            )
-                        ]
-                    ),
-                    .init(
-                        rows: [
-                            .init(
-                                configuration: .toggle(
-                                    title: "Swipe To Navigate",
-                                    storage: \SettingsViewModel.$swipeToNavigate
-                                )
-                            )
-                        ],
-                        description: .constant(string: "Swipe left and right to change tabs.")
                     )
                 ]
             )

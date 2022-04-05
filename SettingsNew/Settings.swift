@@ -12,6 +12,11 @@ enum Settings {
     /// for the view
     enum Identifier: String {
         case hapticFeedbackLevel
+        
+        case highlightsIcon
+        case highlightsColor
+        case highlightsBorderWidth
+        case highlightsBackgroundOpacity
     }
 
     /// for storage

@@ -16,10 +16,11 @@ struct SettingsCustomView: View {
             switch identifier {
             case .hapticFeedbackLevel:
                 SettingsHapticFeedback(model: model)
+            case .highlightsIcon:
+                SettingsHighlightsIcon(model: model)
             default:
                 Text(verbatim: "Custom view: \(identifier)")
             }
         }
-        .frame(maxWidth: .infinity)
     }
 }
