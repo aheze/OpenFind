@@ -58,6 +58,10 @@ class SettingsViewController: UIViewController {
         addChildViewController(searchController, in: mainContainer)
         addChildViewController(detailViewController, in: detailContainer)
         updateLayout()
+        
+        let mainPage = model.page.generate()
+        mainViewController.loadViewIfNeeded()
+        mainViewController.addChildViewController(mainPage, in: mainViewController.contentView)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

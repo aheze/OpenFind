@@ -1,5 +1,5 @@
 //
-//  SettingsModel.swift
+//  SettingsModels.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 4/4/22.
@@ -8,12 +8,7 @@
 
 import SwiftUI
 
-struct SettingsModel {
-    var sections = [SettingsSection]()
-    var pagePaths: [Page]? /// all possible paths in the tree, including incomplete/unfinished paths (paths that stop before hitting the last option)
-}
-
-struct Page {
+struct SettingsPage {
     var title: String /// shown in navigation bar
     var explanation: String? /// shown at top of page, under navigation bar
     var configuration: Configuration
@@ -32,14 +27,14 @@ struct SettingsSection {
 
     enum Description {
         case constant(string: String)
-        case dynamic(getString: (() -> String))
+        case dynamic(getString: () -> String)
     }
 }
 
 struct SettingsRow {
     var configuration: Configuration
     enum Configuration {
-        case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: Page?)
+        case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: SettingsPage)
         case toggle(title: String, storage: KeyPath<SettingsViewModel, Binding<Bool>>)
         case button(title: String, action: (() -> Void)?)
 
