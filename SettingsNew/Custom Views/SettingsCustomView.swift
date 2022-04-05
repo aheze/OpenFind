@@ -18,6 +18,8 @@ struct SettingsCustomView: View {
                 SettingsHapticFeedback(model: model)
             case .highlightsIcon:
                 SettingsHighlightsIcon(model: model)
+            case .highlightsColor:
+                SettingsHighlightsColor(model: model)
             default:
                 Text(verbatim: "Custom view: \(identifier)")
             }

@@ -28,7 +28,7 @@ extension UIColor {
 extension UIColor {
     convenience init(hex: UInt, alpha: CGFloat = 1) {
         self.init(
-            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            displayP3Red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(hex & 0x0000FF) / 255.0,
             alpha: alpha
@@ -45,6 +45,7 @@ extension UIColor {
         var fGreen: CGFloat = 0
         var fBlue: CGFloat = 0
         var fAlpha: CGFloat = 0
+        
         if getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
             fRed = abs(fRed)
             fGreen = abs(fGreen)

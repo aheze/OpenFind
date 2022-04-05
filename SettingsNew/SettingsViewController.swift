@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController {
     var searchController: SearchNavigationController
     var mainViewController: SettingsMainViewController
     var detailViewController: SettingsDetailViewController
+    
+    let colorPickerViewModel = ColorPickerViewModel()
 
     @IBOutlet var mainContainer: UIView!
     @IBOutlet var detailContainer: UIView!
@@ -80,3 +82,5 @@ class SettingsViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
 }
+
+

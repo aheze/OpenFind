@@ -463,6 +463,8 @@
 		3C2D22D127FCD4CA00D413B7 /* SettingsHapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */; };
 		3C2D22D327FCD5A300D413B7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D227FCD5A300D413B7 /* Settings.swift */; };
 		3C2D22D527FCE34F00D413B7 /* SettingsHighlightsIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */; };
+		3C2D22D827FCE50200D413B7 /* SettingsHighlightsColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D727FCE50200D413B7 /* SettingsHighlightsColor.swift */; };
+		3C2D22DA27FCF01D00D413B7 /* SettingsVC+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D927FCF01C00D413B7 /* SettingsVC+UIKit.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2796,6 +2798,8 @@
 		3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHapticFeedback.swift; sourceTree = "<group>"; };
 		3C2D22D227FCD5A300D413B7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHighlightsIcon.swift; sourceTree = "<group>"; };
+		3C2D22D727FCE50200D413B7 /* SettingsHighlightsColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHighlightsColor.swift; sourceTree = "<group>"; };
+		3C2D22D927FCF01C00D413B7 /* SettingsVC+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsVC+UIKit.swift"; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -4010,6 +4014,7 @@
 			isa = PBXGroup;
 			children = (
 				3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */,
+				3C2D22D727FCE50200D413B7 /* SettingsHighlightsColor.swift */,
 			);
 			path = Highlights;
 			sourceTree = "<group>";
@@ -5345,6 +5350,7 @@
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
 				3C2D22B827FC0EB800D413B7 /* SettingsController+Listen.swift */,
 				3CE40B9027F5287000CADCBF /* SettingsViewController.swift */,
+				3C2D22D927FCF01C00D413B7 /* SettingsVC+UIKit.swift */,
 				3C2D22A727FBD99800D413B7 /* Template Views */,
 				3C2D22CF27FCD4A200D413B7 /* Custom Views */,
 				3C798FCD27F784DE007BF68D /* Main */,
@@ -8500,6 +8506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE40B9527F610F200CADCBF /* SettingsMainViewController.swift in Sources */,
+				3C2D22D827FCE50200D413B7 /* SettingsHighlightsColor.swift in Sources */,
 				3C798DFF27F61589007BF68D /* Debug.swift in Sources */,
 				3C798E0127F61591007BF68D /* Highlight.swift in Sources */,
 				3C798FA927F782ED007BF68D /* TabConstants.swift in Sources */,
@@ -8577,6 +8584,7 @@
 				3C798EDD27F6983B007BF68D /* RealmContainer.swift in Sources */,
 				3C2D228F27FB5B6200D413B7 /* SettingsData.swift in Sources */,
 				3C798F6A27F7829F007BF68D /* SearchViewController.swift in Sources */,
+				3C2D22DA27FCF01D00D413B7 /* SettingsVC+UIKit.swift in Sources */,
 				3C798DF727F61582007BF68D /* Utilities+UIDevice.swift in Sources */,
 				3C798F6427F7829F007BF68D /* KeyboardToolbarViewModel.swift in Sources */,
 				3C798F4727F78284007BF68D /* SearchNC+ViewTransitioning.swift in Sources */,

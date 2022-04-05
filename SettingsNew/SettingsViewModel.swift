@@ -37,6 +37,8 @@ class SettingsViewModel: ObservableObject {
 
     /// show a page
     var show: ((SettingsPage) -> Void)?
+    
+    var showHighlightColorPicker: (() -> Void)?
 
     init() {
         let paths = page.generatePaths()
