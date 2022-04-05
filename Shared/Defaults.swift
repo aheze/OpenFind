@@ -18,6 +18,7 @@ class Defaults: ObservableObject {
 @frozen @propertyWrapper public struct Saved<Value>: DynamicProperty {
     @ObservedObject private var _value: Storage<Value>
     private let saveValue: (Value) -> Void
+    var valueChanged: (() -> Void)?
 
     private init(value: Value, store: UserDefaults, key: String, transform: @escaping (Any?) -> Value?, saveValue: @escaping (Value) -> Void) {
         self._value = Storage(value: value, store: store, key: key, transform: transform)
@@ -31,6 +32,8 @@ class Defaults: ObservableObject {
         nonmutating set {
             saveValue(newValue)
             _value.value = newValue
+            print("changed!!")
+            valueChanged?()
         }
     }
 
@@ -132,7 +135,6 @@ public extension Saved where Value == Double {
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            print("set.. \(newValue)")
             store.setValue(newValue, forKey: key)
         })
     }

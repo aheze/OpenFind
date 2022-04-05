@@ -10,25 +10,24 @@ import SwiftPrettyPrint
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
-    @Saved("swipeToNavigate") var swipeToNavigate = true { willSet { self.objectWillChange.send() } }
-    @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = Settings.Values.HapticFeedbackLevel.light { willSet { self.objectWillChange.send() } }
+    @Saved("swipeToNavigate") var swipeToNavigate = true
+    @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = Settings.Values.HapticFeedbackLevel.light
 
     // MARK: - Finding
 
-    @Saved("keepWhitespace") var keepWhitespace = false { willSet { self.objectWillChange.send() } }
-    @Saved("matchAccents") var matchAccents = false { willSet { self.objectWillChange.send() } }
-    @Saved("matchCase") var matchCase = false { willSet { self.objectWillChange.send() } }
-    @Saved("filterLists") var filterLists = true { willSet { self.objectWillChange.send() } }
-
-    @Saved("scanOnLaunch") var scanOnLaunch = false { willSet { self.objectWillChange.send() } }
-    @Saved("scanOnFind") var scanOnFind = true { willSet { self.objectWillChange.send() } }
+    @Saved("keepWhitespace") var keepWhitespace = false
+    @Saved("matchAccents") var matchAccents = false
+    @Saved("matchCase") var matchCase = false
+    @Saved("filterLists") var filterLists = true
+    @Saved("scanOnLaunch") var scanOnLaunch = false
+    @Saved("scanOnFind") var scanOnFind = true
 
     // MARK: - Highlights
 
-    @Saved("highlightsColor") var highlightsColor = Int(0x00aeef) { willSet { self.objectWillChange.send() } }
-    @Saved("cycleSearchBarColors") var cycleSearchBarColors = true { willSet { self.objectWillChange.send() } }
-    @Saved("highlightsBorderWidth") var highlightsBorderWidth = Double(1.2) { willSet { self.objectWillChange.send() } }
-    @Saved("highlightsBackgroundOpacity") var highlightsBackgroundOpacity = Double(0.3) { willSet { self.objectWillChange.send() } }
+    @Saved("highlightsColor") var highlightsColor = Int(0x00aeef)
+    @Saved("cycleSearchBarColors") var cycleSearchBarColors = true
+    @Saved("highlightsBorderWidth") var highlightsBorderWidth = Double(1.2)
+    @Saved("highlightsBackgroundOpacity") var highlightsBackgroundOpacity = Double(0.3)
 
     var page = mainPage
     var paths: [[SettingsRow]] /// all possible paths in the tree, including incomplete/unfinished paths (paths that stop before hitting the last option)
@@ -44,5 +43,21 @@ class SettingsViewModel: ObservableObject {
     init() {
         let paths = self.page.generatePaths()
         self.paths = paths
+
+        _highlightsBorderWidth.configureValueChanged(with: self)
     }
+}
+
+extension Saved {
+    mutating func configureValueChanged(with model: SettingsViewModel) {
+        self.valueChanged = { [weak model] in
+            model?.objectWillChange.send()
+        }
+    }
+
+//    func configureValueChanged<Value>(for variable: inout Saved<Value>) {
+//        variable.valueChanged = { [weak self] in
+//            self?.objectWillChange.send()
+//        }
+//    }
 }

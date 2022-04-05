@@ -58,6 +58,7 @@ class SettingsViewController: UIViewController {
         addChildViewController(searchController, in: mainContainer)
         addChildViewController(detailViewController, in: detailContainer)
         updateLayout()
+        listen()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

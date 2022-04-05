@@ -54,7 +54,7 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     
     @IBOutlet var headerTopRightView: ButtonView!
     @IBOutlet var headerTopRightViewLeftC: NSLayoutConstraint!
-    var headerTopRightColorPickerModel = ColorPickerViewModel()
+    lazy var headerTopRightColorPickerModel = ColorPickerViewModel(selectedColor: UIColor(hex: model.list.color))
 
     /// **bottom**
     @IBOutlet var headerBottomView: UIView!

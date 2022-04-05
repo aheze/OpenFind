@@ -24,8 +24,5 @@ extension SettingsController {
             )
             self.searchController.navigation.pushViewController(scrollViewController, animated: true)
         }
-        model.showHighlightColorPicker = { [weak self] in
-            self?.viewController.presentColorPicker()
-        }
     }
 }

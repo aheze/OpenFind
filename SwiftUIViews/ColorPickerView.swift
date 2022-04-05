@@ -8,35 +8,45 @@
 
 import SwiftUI
 
+struct ColorColumn: Identifiable, Hashable {
+    let id = UUID()
+    var colors = [UIColor]()
+}
+
 class ColorPickerViewModel: ObservableObject {
-    
     /// for the color picker icon
     @Published var tintColor = UIColor.systemBackground
     @Published var selectedColor = UIColor(hex: 0x00a1d8)
-    
-    @Published var selectedIndex = (0, 0)
-    let colors: [[UIColor]]
+    var selectedColorChanged: (() -> Void)?
 
-    init() {
-        var colors = [[UIColor]]()
+    @Published var selectedIndex = (0, 0)
+    let colorColumns: [ColorColumn]
+
+    init(selectedColor: UIColor?) {
+        var colorColumns = [ColorColumn]()
 
         /// leftmost color, vertically centered
         let baseColor = UIColor(hex: 0x00a1d8)
         for column in 0..<12 {
             let columnColor = baseColor.offset(by: -CGFloat(column) / CGFloat(12))
 
-            var columnColors = [UIColor]()
+            var colors = [UIColor]()
             for row in -3..<5 {
                 let color = columnColor.adjust(by: CGFloat(row) / CGFloat(6))
-                columnColors.append(color)
+                colors.append(color)
             }
 
-            colors.append(columnColors)
+            let colorColumn = ColorColumn(colors: colors)
+            colorColumns.append(colorColumn)
+        }
+        self.colorColumns = colorColumns
+
+        if let selectedColor = selectedColor {
+            self.selectedColor = selectedColor
         }
 
-        self.colors = colors
-        for (column, columnColors) in colors.enumerated() {
-            if let row = columnColors.firstIndex(where: { $0 == selectedColor }) {
+        for (column, columnColors) in colorColumns.enumerated() {
+            if let row = columnColors.colors.firstIndex(where: { $0.hex == self.selectedColor.hex }) {
                 self.selectedIndex = (column, row)
             }
         }
@@ -71,7 +81,7 @@ class ColorPickerNavigationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let viewController = colorPickerViewController {
             viewController.title = "Colors"
             viewController.navigationItem.largeTitleDisplayMode = .never
@@ -83,7 +93,6 @@ class ColorPickerNavigationViewController: UIViewController {
         self.dismiss(animated: true)
     }
 }
-
 
 class ColorPickerViewController: UIViewController {
     var model: ColorPickerViewModel
@@ -131,14 +140,15 @@ struct ColorPaletteView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             HStack(spacing: 0) {
-                ForEach(model.colors, id: \.self) { columnColors in
+                ForEach(model.colorColumns, id: \.self) { colorColumn in
                     VStack(spacing: 0) {
-                        ForEach(columnColors, id: \.self) { color in
+                        ForEach(colorColumn.colors, id: \.self) { color in
                             Color(color)
                         }
                     }
                 }
             }
+
             .aspectRatio(CGFloat(12) / 8, contentMode: .fit)
             .coordinateSpace(name: "Color")
             .readSize {
@@ -151,15 +161,16 @@ struct ColorPaletteView: View {
                         let x = value.location.x / colorPaletteSize.width
                         let y = value.location.y / colorPaletteSize.height
 
-                        let column = Int(x * 12)
-                        let row = Int(y * 8)
+                        let column = min(11, Int(x * 12))
+                        let row = min(7, Int(y * 8))
 
                         if
-                            model.colors.indices.contains(column),
-                            model.colors[column].indices.contains(row)
+                            model.colorColumns.indices.contains(column),
+                            model.colorColumns[column].colors.indices.contains(row)
                         {
-                            model.selectedColor = model.colors[column][row]
+                            model.selectedColor = model.colorColumns[column].colors[row]
                             model.selectedIndex = (column, row)
+                            model.selectedColorChanged?()
                         }
                     }
             )
@@ -177,6 +188,3 @@ struct ColorPaletteView: View {
         }
     }
 }
-
-
-

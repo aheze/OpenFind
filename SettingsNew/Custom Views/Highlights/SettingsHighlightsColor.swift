@@ -11,8 +11,6 @@ import SwiftUI
 struct SettingsHighlightsColor: View {
     @ObservedObject var model: SettingsViewModel
 
-    //    @ObservedObject var colorPickerModel = ColorPickerViewModel()
-
     var body: some View {
         let color = UIColor(hex: UInt(model.highlightsColor))
 
