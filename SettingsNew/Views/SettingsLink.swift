@@ -23,17 +23,14 @@ struct SettingsLink: View {
                 if let leftIcon = leftIcon {
                     switch leftIcon {
                     case .template(iconName: let iconName, backgroundColor: let backgroundColor):
-                        Color.clear
-                            .frame(width: SettingsConstants.iconSize.width)
-                            .overlay(
-                                Image(systemName: iconName)
-                                    .foregroundColor(.white)
-                                    .font(SettingsConstants.iconFont.font)
-                                    .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
-                                    .background(backgroundColor.color)
-                                    .cornerRadius(SettingsConstants.iconCornerRadius)
-                            )
-                        
+
+                        Image(systemName: iconName)
+                            .foregroundColor(.white)
+                            .font(SettingsConstants.iconFont.font)
+                            .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
+                            .background(backgroundColor.color)
+                            .cornerRadius(SettingsConstants.iconCornerRadius)
+                            
                     case .custom(identifier: let identifier):
                         SettingsCustomView(identifier: identifier)
                     }
@@ -41,8 +38,14 @@ struct SettingsLink: View {
                 
                 Text(title)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(SettingsConstants.rowVerticalInsetsFromText)
+                
+                if showRightIndicator {
+                    Image(systemName: "chevron.forward")
+                        .foregroundColor(UIColor.secondaryLabel.color)
+                }
             }
-            .padding(SettingsConstants.rowInsets)
+            .padding(SettingsConstants.rowHorizontalInsets)
         }
     }
 }

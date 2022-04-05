@@ -16,8 +16,7 @@ struct SettingsPageView: View {
         VStack {
             if let explanation = page.explanation {
                 Text(explanation)
-                    .foregroundColor(UIColor.secondaryLabel.color)
-                    .padding(.horizontal, SettingsConstants.sidePadding) /// extra padding
+                    .settingsDescriptionStyle()
             }
 
             switch page.configuration {
@@ -26,22 +25,27 @@ struct SettingsPageView: View {
                     ForEach(sections) { section in
 
                         /// encompass each section
-                        VStack {
+                        VStack(spacing: 0) {
+                            if let header = section.header {
+                                Text(header.uppercased())
+                                    .settingsHeaderStyle()
+                            }
+
                             SettingsSectionRows(model: model, section: section)
 
                             if let description = section.description {
-                                switch description {
-                                case .constant(string: let string):
-                                    Text(string)
-                                        .foregroundColor(UIColor.secondaryLabel.color)
-                                        .padding(.horizontal, SettingsConstants.sidePadding) /// extra padding
-                                case .dynamic(getString: let getString):
-                                    if let string = getString() {
+                                Group {
+                                    switch description {
+                                    case .constant(string: let string):
                                         Text(string)
-                                            .foregroundColor(UIColor.secondaryLabel.color)
-                                            .padding(.horizontal, SettingsConstants.sidePadding) /// extra padding
+
+                                    case .dynamic(getString: let getString):
+                                        if let string = getString() {
+                                            Text(string)
+                                        }
                                     }
                                 }
+                                .settingsDescriptionStyle()
                             }
                         }
                     }
@@ -50,7 +54,7 @@ struct SettingsPageView: View {
                 SettingsCustomView(identifier: identifier)
             }
         }
-        .padding(.horizontal, SettingsConstants.sidePadding)
+        .padding(SettingsConstants.edgeInsets)
         .readSize {
             self.sizeChanged?($0)
         }

@@ -16,7 +16,7 @@ struct SettingsSectionRows: View {
         VStack(spacing: 0) {
             ForEach(Array(zip(section.rows.indices, section.rows)), id: \.1.id) { index, row in
 
-                let leftDividerPadding = SettingsConstants.rowInsets.leading
+                let leftDividerPadding = SettingsConstants.rowHorizontalInsets.leading
 
                 switch row.configuration {
                 case .link(

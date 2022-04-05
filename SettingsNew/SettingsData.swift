@@ -59,30 +59,24 @@ extension SettingsViewModel {
             configuration: .sections(
                 sections: [
                     .init(
+                        header: "Options",
                         rows: [
-                            .init(
-                                configuration: .picker(
-                                    choices: [
-                                        .init(title: "", storageValue: "")
-                                    ],
-                                    storage: \SettingsViewModel.$hapticFeedbackLevel
-                                )
-                            ),
-                            .init(
-                                configuration: .link(
-                                    title: "Go to sub page",
-                                    leftIcon: nil,
-                                    showRightIndicator: true,
-                                    destination: subPage
-                                )
-                            )
+                            .init(configuration: .toggle(title: "Keep Whitespace", storage: \SettingsViewModel.$keepWhitespace)),
+                            .init(configuration: .toggle(title: "Match Accents", storage: \SettingsViewModel.$matchAccents)),
+                            .init(configuration: .toggle(title: "Match Case", storage: \SettingsViewModel.$matchCase))
                         ]
+                    ),
+                    .init(
+                        rows: [
+                            .init(configuration: .toggle(title: "Filter Lists", storage: \SettingsViewModel.$filterLists))
+                        ],
+                        description: .constant(string: "Filter lists when typing in the search bar")
                     )
                 ]
             )
         )
     }()
-    
+
     static var subPage: SettingsPage = {
         .init(
             title: "SubPage",
@@ -91,9 +85,7 @@ extension SettingsViewModel {
                     .init(
                         rows: [
                             .init(
-                                configuration: .button(title: "Last button", action: {
-                                    
-                                })
+                                configuration: .button(title: "Last button", action: {})
                             )
                         ]
                     )

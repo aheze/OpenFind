@@ -3975,7 +3975,7 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
-		3C2D22A727FBD99800D413B7 /* View */ = {
+		3C2D22A727FBD99800D413B7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */,
@@ -3989,7 +3989,7 @@
 				3C2D22A827FBD9B500D413B7 /* SettingsCustomView.swift */,
 				3C2D22B627FBF65800D413B7 /* SettingsViews.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3C2DBBCB277E6F3600911A74 /* Toolbar */ = {
@@ -5321,7 +5321,7 @@
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
 				3C2D22B827FC0EB800D413B7 /* SettingsController+Listen.swift */,
 				3CE40B9027F5287000CADCBF /* SettingsViewController.swift */,
-				3C2D22A727FBD99800D413B7 /* View */,
+				3C2D22A727FBD99800D413B7 /* Views */,
 				3C798FCD27F784DE007BF68D /* Main */,
 				3C798FCE27F784E3007BF68D /* Detail */,
 				3CE40B8F27F5284A00CADCBF /* Testing */,

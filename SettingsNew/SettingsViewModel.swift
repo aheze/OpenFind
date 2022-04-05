@@ -18,6 +18,13 @@ enum SettingsIdentifiers {
 class SettingsViewModel: ObservableObject {
     @Saved("swipeToNavigate") var swipeToNavigate = true
     @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = "low"
+    
+    // MARK: - Finding
+    @Saved("keepWhitespace") var keepWhitespace = false
+    @Saved("matchAccents") var matchAccents = false
+    @Saved("matchCase") var matchCase = false
+    @Saved("filterLists") var filterLists = true
+    
     @Saved("scanOnLaunch") var scanOnLaunch = false
     @Saved("scanOnFind") var scanOnFind = true
     
@@ -33,12 +40,12 @@ class SettingsViewModel: ObservableObject {
     init() {
         let paths = page.generatePaths()
         self.paths = paths
-        
-        print("swipe? \(swipeToNavigate)")
-        
-        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-            print("\(key) = \(value)")
-        }
+
+//        print("swipe? \(swipeToNavigate)")
+//
+//        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+//            print("\(key) = \(value)")
+//        }
     }
 }
 

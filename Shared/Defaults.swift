@@ -29,7 +29,6 @@ class Defaults: ObservableObject {
             _value.value
         }
         nonmutating set {
-            print("saving: \(newValue)")
             saveValue(newValue)
             _value.value = newValue
         }

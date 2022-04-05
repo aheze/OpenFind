@@ -18,10 +18,11 @@ struct SettingsToggle: View {
         HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(SettingsConstants.rowVerticalInsetsFromText)
             
             Toggle("", isOn: model[keyPath: storage])
                 .labelsHidden()
         }
-        .padding(SettingsConstants.rowInsets)
+        .padding(SettingsConstants.rowHorizontalInsets)
     }
 }
