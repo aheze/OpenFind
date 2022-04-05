@@ -32,7 +32,6 @@ class Defaults: ObservableObject {
         nonmutating set {
             saveValue(newValue)
             _value.value = newValue
-            print("changed!!")
             valueChanged?()
         }
     }

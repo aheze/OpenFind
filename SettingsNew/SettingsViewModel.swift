@@ -19,8 +19,6 @@ class SettingsViewModel: ObservableObject {
     @Saved("matchAccents") var matchAccents = false
     @Saved("matchCase") var matchCase = false
     @Saved("filterLists") var filterLists = true
-    @Saved("scanOnLaunch") var scanOnLaunch = false
-    @Saved("scanOnFind") var scanOnFind = true
 
     // MARK: - Highlights
 
@@ -29,6 +27,11 @@ class SettingsViewModel: ObservableObject {
     @Saved("highlightsBorderWidth") var highlightsBorderWidth = Double(1.2)
     @Saved("highlightsBackgroundOpacity") var highlightsBackgroundOpacity = Double(0.3)
 
+    // MARK: - Photos
+    @Saved("scanOnLaunch") var scanOnLaunch = false
+    @Saved("scanOnFind") var scanOnFind = true
+
+    
     var page = mainPage
     var paths: [[SettingsRow]] /// all possible paths in the tree, including incomplete/unfinished paths (paths that stop before hitting the last option)
 
@@ -44,20 +47,29 @@ class SettingsViewModel: ObservableObject {
         let paths = self.page.generatePaths()
         self.paths = paths
 
+        _swipeToNavigate.configureValueChanged(with: self)
+        _hapticFeedbackLevel.configureValueChanged(with: self)
+        
+        _keepWhitespace.configureValueChanged(with: self)
+        _matchCase.configureValueChanged(with: self)
+        _filterLists.configureValueChanged(with: self)
+
+        _highlightsColor.configureValueChanged(with: self)
+        _cycleSearchBarColors.configureValueChanged(with: self)
         _highlightsBorderWidth.configureValueChanged(with: self)
+        _highlightsBackgroundOpacity.configureValueChanged(with: self)
+        
+        _scanOnLaunch.configureValueChanged(with: self)
+        _scanOnFind.configureValueChanged(with: self)
     }
 }
 
 extension Saved {
+    
+    /// listen to value changed
     mutating func configureValueChanged(with model: SettingsViewModel) {
         self.valueChanged = { [weak model] in
             model?.objectWillChange.send()
         }
     }
-
-//    func configureValueChanged<Value>(for variable: inout Saved<Value>) {
-//        variable.valueChanged = { [weak self] in
-//            self?.objectWillChange.send()
-//        }
-//    }
 }

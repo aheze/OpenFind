@@ -56,3 +56,11 @@ extension FloatingPoint {
     var radiansToDegrees: Self { self * 180 / .pi }
 }
 
+extension Int {
+    /// unsigned positive int
+    var uInt: UInt {
+        let positiveInt = abs(self)
+        let uInt = UInt(positiveInt)
+        return uInt
+    }
+}

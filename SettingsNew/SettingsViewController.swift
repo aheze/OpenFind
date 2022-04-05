@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
     var mainViewController: SettingsMainViewController
     var detailViewController: SettingsDetailViewController
     
-    let colorPickerViewModel = ColorPickerViewModel()
+    lazy var colorPickerViewModel = ColorPickerViewModel(selectedColor: UIColor(hex: model.highlightsColor.uInt))
 
     @IBOutlet var mainContainer: UIView!
     @IBOutlet var detailContainer: UIView!
