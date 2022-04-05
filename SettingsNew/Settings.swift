@@ -9,14 +9,13 @@
 import Foundation
 
 enum Settings {
-    /// for the view
-    enum Identifier: String {
+    /// for views
+    enum ViewIdentifier: String {
         case hapticFeedbackLevel
 
+        case highlightsPreview
         case highlightsIcon
         case highlightsColor
-        case highlightsBorderWidth
-        case highlightsBackgroundOpacity
     }
 
     enum StringIdentifier: String {

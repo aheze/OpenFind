@@ -13,11 +13,11 @@ struct SettingsPage {
     var title: String /// shown in navigation bar
     var explanation: String? /// shown at top of page, under navigation bar
     var configuration: Configuration
-    var bottomViewIdentifier: Settings.Identifier? /// description at bottom, like `Version 1.3.0 - See What's New`
+    var bottomViewIdentifier: Settings.ViewIdentifier? /// description at bottom, like `Version 1.3.0 - See What's New`
 
     enum Configuration {
         case sections(sections: [SettingsSection])
-        case custom(identifier: Settings.Identifier)
+        case custom(identifier: Settings.ViewIdentifier)
     }
 }
 
@@ -25,6 +25,7 @@ struct SettingsSection: Identifiable {
     let id = UUID()
     var header: String? /// shown at top
     var rows = [SettingsRow]()
+    var customViewIdentifier: Settings.ViewIdentifier? /// show above the rows
     var description: Description? /// shown at bottom of rows
 
     enum Description {
@@ -54,12 +55,12 @@ struct SettingsRow: Identifiable {
 
         /// open in new page
         case picker(choices: [PickerChoice], storage: KeyPath<SettingsViewModel, Binding<String>>)
-        case custom(identifier: Settings.Identifier)
+        case custom(identifier: Settings.ViewIdentifier)
     }
 
     enum Icon {
         case template(iconName: String, backgroundColor: UIColor)
-        case custom(identifier: Settings.Identifier)
+        case custom(identifier: Settings.ViewIdentifier)
     }
 
     enum Symbol {

@@ -121,6 +121,10 @@ extension SettingsViewModel {
             configuration: .sections(
                 sections: [
                     .init(
+                        rows: [],
+                        customViewIdentifier: .highlightsPreview
+                    ),
+                    .init(
                         rows: [
                             .init(configuration: .custom(identifier: .highlightsColor))
                         ],
@@ -146,15 +150,23 @@ extension SettingsViewModel {
                                     storage: \SettingsViewModel.$highlightsBorderWidth
                                 )
                             )
-                        ],
-                        description: .constant(string: "The default color for highlights.")
+                        ]
                     ),
                     .init(
                         header: "Background Opacity",
                         rows: [
-                            .init(configuration: .custom(identifier: .highlightsBackgroundOpacity))
-                        ],
-                        description: .constant(string: "The default color for highlights.")
+                            .init(
+                                configuration: .slider(
+                                    numberOfSteps: nil,
+                                    minValue: 0,
+                                    maxValue: 0.5,
+                                    minSymbol: .system(name: "rectangle", weight: .regular),
+                                    maxSymbol: .system(name: "rectangle.fill", weight: .regular),
+                                    saveAsInt: false,
+                                    storage: \SettingsViewModel.$highlightsBackgroundOpacity
+                                )
+                            )
+                        ]
                     )
                 ]
             )

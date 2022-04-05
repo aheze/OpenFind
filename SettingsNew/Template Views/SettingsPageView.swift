@@ -26,9 +26,15 @@ struct SettingsPageView: View {
 
                         /// encompass each section
                         VStack(spacing: 0) {
-                            if let header = section.header {
-                                Text(header.uppercased())
-                                    .settingsHeaderStyle()
+                            VStack {
+                                if let header = section.header {
+                                    Text(header.uppercased())
+                                        .settingsHeaderStyle()
+                                }
+
+                                if let customViewIdentifier = section.customViewIdentifier {
+                                    SettingsCustomView(model: model, identifier: customViewIdentifier)
+                                }
                             }
 
                             SettingsSectionRows(model: model, section: section)
