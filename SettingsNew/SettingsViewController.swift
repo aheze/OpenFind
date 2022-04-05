@@ -59,7 +59,7 @@ class SettingsViewController: UIViewController {
         addChildViewController(detailViewController, in: detailContainer)
         updateLayout()
         
-        let mainPage = model.page.generate()
+        let mainPage = model.page.generateViewController()
         mainViewController.loadViewIfNeeded()
         mainViewController.addChildViewController(mainPage, in: mainViewController.contentView)
     }

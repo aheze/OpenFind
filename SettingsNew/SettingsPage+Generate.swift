@@ -9,6 +9,7 @@
 import SwiftUI
 
 extension SettingsPage {
+    /// generate all possibile paths
     func generatePaths() -> [[SettingsRow]] {
         switch configuration {
         case .sections(sections: let sections):
@@ -31,7 +32,10 @@ extension SettingsPage {
         case .link(title: _, leftIcon: _, showRightIndicator: _, destination: let destination):
             switch destination.configuration {
             case .sections(sections: let sections):
-                var paths = [[SettingsRow]]()
+                
+                /// include the current row as a path
+                var paths = [path]
+                
                 for section in sections {
                     for row in section.rows {
                         let currentPath = path + [row]
@@ -48,34 +52,7 @@ extension SettingsPage {
         }
     }
 
-//    func generateRowPaths(from row: SettingsRow, appendingTo existingPath: [SettingsRow]) -> [[SettingsRow]] {
-//
-//
-    ////        print("Generating from \(row)")
-//        switch row.configuration {
-//        case .link(title: _, leftIcon: _, showRightIndicator: _, destination: let destination):
-//            switch destination.configuration {
-//            case .sections(sections: let sections):
-//                var paths = [[SettingsRow]]()
-//                for section in sections {
-//                    for row in section.rows {
-//                        let currentPath = existingPath + [row]
-//                        let generatedPaths = generateRowPaths(from: row, appendingTo: currentPath)
-//                        paths += generatedPaths
-//                    }
-//                }
-//                return paths
-//            default: break
-//            }
-//        default: break
-//        }
-//
-//        return [[row]]
-    ////        let newPath = existingPath + [row]
-    ////        return [newPath]
-//    }
-
-    func generate() -> UIViewController {
+    func generateViewController() -> UIViewController {
         let contentView = SettingsPageView(page: self)
         let viewController = HostingController(content: contentView)
         return viewController
