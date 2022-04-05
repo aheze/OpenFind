@@ -32,7 +32,7 @@ struct SettingsLink: View {
                             .cornerRadius(SettingsConstants.iconCornerRadius)
                             
                     case .custom(identifier: let identifier):
-                        SettingsCustomView(identifier: identifier)
+                        SettingsCustomView(model: model, identifier: identifier)
                     }
                 }
                 

@@ -8,15 +8,16 @@
 
 import SwiftUI
 
+
 struct SettingsPage {
     var title: String /// shown in navigation bar
     var explanation: String? /// shown at top of page, under navigation bar
     var configuration: Configuration
-    var bottomViewIdentifier: AnyHashable? /// description at bottom, like `Version 1.3.0 - See What's New`
+    var bottomViewIdentifier: Settings.Identifier? /// description at bottom, like `Version 1.3.0 - See What's New`
 
     enum Configuration {
         case sections(sections: [SettingsSection])
-        case custom(identifier: AnyHashable)
+        case custom(identifier: Settings.Identifier)
     }
 }
 
@@ -54,12 +55,12 @@ struct SettingsRow: Identifiable {
 
         /// open in new page
         case picker(choices: [PickerChoice], storage: KeyPath<SettingsViewModel, Binding<String>>)
-        case custom(identifier: AnyHashable)
+        case custom(identifier: Settings.Identifier)
     }
 
     enum Icon {
         case template(iconName: String, backgroundColor: UIColor)
-        case custom(identifier: AnyHashable)
+        case custom(identifier: Settings.Identifier)
     }
 
     enum Symbol {

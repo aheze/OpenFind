@@ -5,48 +5,35 @@
 //  Created by A. Zheng (github.com/aheze) on 3/31/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
-import SwiftUI
 import SwiftPrettyPrint
-
-/// for the view
-enum SettingsIdentifiers {
-    static var hapticFeedbackLevel = "hapticFeedbackLevel"
-}
+import SwiftUI
 
 class SettingsViewModel: ObservableObject {
-    @Saved("swipeToNavigate") var swipeToNavigate = true
-    @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = "low"
-    
+    @Saved("swipeToNavigate") var swipeToNavigate = true { willSet { self.objectWillChange.send() } }
+    @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = Settings.Values.HapticFeedbackLevel.light { willSet { self.objectWillChange.send() } }
+
     // MARK: - Finding
-    @Saved("keepWhitespace") var keepWhitespace = false
-    @Saved("matchAccents") var matchAccents = false
-    @Saved("matchCase") var matchCase = false
-    @Saved("filterLists") var filterLists = true
-    
-    @Saved("scanOnLaunch") var scanOnLaunch = false
-    @Saved("scanOnFind") var scanOnFind = true
-    
+
+    @Saved("keepWhitespace") var keepWhitespace = false { willSet { self.objectWillChange.send() } }
+    @Saved("matchAccents") var matchAccents = false { willSet { self.objectWillChange.send() } }
+    @Saved("matchCase") var matchCase = false { willSet { self.objectWillChange.send() } }
+    @Saved("filterLists") var filterLists = true { willSet { self.objectWillChange.send() } }
+
+    @Saved("scanOnLaunch") var scanOnLaunch = false { willSet { self.objectWillChange.send() } }
+    @Saved("scanOnFind") var scanOnFind = true { willSet { self.objectWillChange.send() } }
+
     var page = mainPage
     var paths: [[SettingsRow]] /// all possible paths in the tree, including incomplete/unfinished paths (paths that stop before hitting the last option)
 
     /// update navigation bar height from within a page view controller
     var updateNavigationBar: (() -> Void)?
-    
+
     /// show a page
     var show: ((SettingsPage) -> Void)?
-    
+
     init() {
         let paths = page.generatePaths()
         self.paths = paths
-
-//        print("swipe? \(swipeToNavigate)")
-//
-//        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-//            print("\(key) = \(value)")
-//        }
     }
 }
-
-

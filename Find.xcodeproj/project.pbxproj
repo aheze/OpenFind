@@ -460,6 +460,8 @@
 		3C2D22CC27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
 		3C2D22CD27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
 		3C2D22CE27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
+		3C2D22D127FCD4CA00D413B7 /* SettingsHapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */; };
+		3C2D22D327FCD5A300D413B7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D227FCD5A300D413B7 /* Settings.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2790,6 +2792,8 @@
 		3C2D22B827FC0EB800D413B7 /* SettingsController+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsController+Listen.swift"; sourceTree = "<group>"; };
 		3C2D22BA27FC189600D413B7 /* SettingsSectionRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionRows.swift; sourceTree = "<group>"; };
 		3C2D22BC27FC1A6500D413B7 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHapticFeedback.swift; sourceTree = "<group>"; };
+		3C2D22D227FCD5A300D413B7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -3975,10 +3979,9 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
-		3C2D22A727FBD99800D413B7 /* Views */ = {
+		3C2D22A727FBD99800D413B7 /* Template Views */ = {
 			isa = PBXGroup;
 			children = (
-				3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */,
 				3C2D229227FBA69900D413B7 /* SettingsPageView.swift */,
 				3C2D22BA27FC189600D413B7 /* SettingsSectionRows.swift */,
 				3C2D22AC27FBDCA100D413B7 /* SettingsLink.swift */,
@@ -3986,10 +3989,18 @@
 				3C2D22B027FBDCA900D413B7 /* SettingsButton.swift */,
 				3C2D22B227FBDCAE00D413B7 /* SettingsSlider.swift */,
 				3C2D22B427FBDCB500D413B7 /* SettingsPicker.swift */,
-				3C2D22A827FBD9B500D413B7 /* SettingsCustomView.swift */,
 				3C2D22B627FBF65800D413B7 /* SettingsViews.swift */,
 			);
-			path = Views;
+			path = "Template Views";
+			sourceTree = "<group>";
+		};
+		3C2D22CF27FCD4A200D413B7 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D22A827FBD9B500D413B7 /* SettingsCustomView.swift */,
+				3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		3C2DBBCB277E6F3600911A74 /* Toolbar */ = {
@@ -5312,16 +5323,19 @@
 			isa = PBXGroup;
 			children = (
 				3CE40B9827F611F800CADCBF /* SettingsContent.storyboard */,
+				3C2D22D227FCD5A300D413B7 /* Settings.swift */,
 				3C2D22AA27FBDAAF00D413B7 /* SettingsConstants.swift */,
 				3C2D228C27FAD35F00D413B7 /* SettingsModels.swift */,
 				3C2D228E27FB5B6200D413B7 /* SettingsData.swift */,
 				3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */,
+				3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */,
 				3C798DE827F612B9007BF68D /* SettingsViewModel.swift */,
 				3C2D229F27FBD56000D413B7 /* SettingsScrollViewController.swift */,
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
 				3C2D22B827FC0EB800D413B7 /* SettingsController+Listen.swift */,
 				3CE40B9027F5287000CADCBF /* SettingsViewController.swift */,
-				3C2D22A727FBD99800D413B7 /* Views */,
+				3C2D22A727FBD99800D413B7 /* Template Views */,
+				3C2D22CF27FCD4A200D413B7 /* Custom Views */,
 				3C798FCD27F784DE007BF68D /* Main */,
 				3C798FCE27F784E3007BF68D /* Detail */,
 				3CE40B8F27F5284A00CADCBF /* Testing */,
@@ -8528,10 +8542,12 @@
 				3C798DF627F61582007BF68D /* Utilities+PHAsset.swift in Sources */,
 				3C798FAA27F782ED007BF68D /* TabModel.swift in Sources */,
 				3C798FA727F782ED007BF68D /* TabAttributes.swift in Sources */,
+				3C2D22D127FCD4CA00D413B7 /* SettingsHapticFeedback.swift in Sources */,
 				3C798F9E27F782C4007BF68D /* ColorPickerView.swift in Sources */,
 				3C2D228D27FAD35F00D413B7 /* SettingsModels.swift in Sources */,
 				3C2D22B727FBF65800D413B7 /* SettingsViews.swift in Sources */,
 				3CE40B8027F5281F00CADCBF /* SceneDelegate.swift in Sources */,
+				3C2D22D327FCD5A300D413B7 /* Settings.swift in Sources */,
 				3CE40B9127F5287000CADCBF /* SettingsViewController.swift in Sources */,
 				3C798F5127F78284007BF68D /* Protocols.swift in Sources */,
 				3C798F5027F78284007BF68D /* SearchNavigationConstants.swift in Sources */,

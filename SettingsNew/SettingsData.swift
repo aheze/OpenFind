@@ -102,7 +102,7 @@ extension SettingsViewModel {
                     .init(
                         rows: [
                             .init(
-                                configuration: .custom(identifier: SettingsIdentifiers.hapticFeedbackLevel)
+                                configuration: .custom(identifier: .hapticFeedbackLevel)
                             )
                         ]
                     ),

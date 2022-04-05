@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsPageView: View {
-    var model: SettingsViewModel
+    @ObservedObject var model: SettingsViewModel
     var page: SettingsPage
     var sizeChanged: ((CGSize) -> Void)?
     var body: some View {
@@ -51,7 +51,7 @@ struct SettingsPageView: View {
                     }
                 }
             case .custom(identifier: let identifier):
-                SettingsCustomView(identifier: identifier)
+                SettingsCustomView(model: model, identifier: identifier)
             }
         }
         .padding(SettingsConstants.edgeInsets)

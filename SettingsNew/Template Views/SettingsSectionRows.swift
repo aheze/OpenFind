@@ -65,7 +65,7 @@ struct SettingsSectionRows: View {
                 case .custom(
                     identifier: let identifier
                 ):
-                    SettingsCustomView(identifier: identifier)
+                    SettingsCustomView(model: model, identifier: identifier)
                 }
 
                 if index < section.rows.count - 1 {
