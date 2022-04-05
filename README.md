@@ -234,3 +234,25 @@ To hide a search bar in a `Searchable` view controller (one that can be embedded
 ### Make Realm compile times shorter
 Specified = with actual realm. Only use in Find-New
 Template = with mock Realm data, speed up. Use this for other targets.
+
+
+If hierarchy is like this:
+
+- `Container View`
+    - Child View Controller
+        - `View`
+            - **Embedded View** with height constraint of 100
+            
+            
+To allow the container view to autoresize its height, do this:
+
+1. Set the **Embedded View**'s constraints
+2. Enable auto layout in `View` which contains the embedded view 
+```swift
+view.translatesAutoresizingMaskIntoConstraints = false /// allow auto sizing
+```
+3. If using storyboard set an intrinsic size placeholder for `Container View`
+4. 
+```swift
+viewController.addResizableChildViewController(childViewController, in: containerView)
+```

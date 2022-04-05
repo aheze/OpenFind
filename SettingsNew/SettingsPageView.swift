@@ -11,7 +11,11 @@ import SwiftUI
 
 struct SettingsPageView: View {
     var page: SettingsPage
+    var sizeChanged: ((CGSize) -> Void)?
     var body: some View {
         Text("HI!!!!!")
+            .readSize {
+                self.sizeChanged?($0)
+            }
     }
 }

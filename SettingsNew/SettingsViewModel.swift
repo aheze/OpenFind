@@ -21,7 +21,7 @@ class SettingsViewModel: ObservableObject {
 
     init() {
         let paths = page.generatePaths()
-        Pretty.prettyPrint(paths)
+//        Pretty.prettyPrint(paths)
         self.paths = paths
     }
 }

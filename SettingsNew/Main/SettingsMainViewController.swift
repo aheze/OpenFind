@@ -19,7 +19,7 @@ class SettingsMainViewController: UIViewController, Searchable {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
-    @IBOutlet var contentViewHeightC: NSLayoutConstraint!
+    
     
     static func make(
         model: SettingsViewModel,

@@ -426,6 +426,7 @@
 		3C2D229127FBA54100D413B7 /* SettingsPage+Generate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */; };
 		3C2D229327FBA69900D413B7 /* SettingsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229227FBA69900D413B7 /* SettingsPageView.swift */; };
 		3C2D229827FBBA0200D413B7 /* SwiftPrettyPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2D229727FBBA0200D413B7 /* SwiftPrettyPrint */; };
+		3C2D229A27FBC5AC00D413B7 /* SettingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2739,6 +2740,7 @@
 		3C2D228E27FB5B6200D413B7 /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsPage+Generate.swift"; sourceTree = "<group>"; };
 		3C2D229227FBA69900D413B7 /* SettingsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageView.swift; sourceTree = "<group>"; };
+		3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageViewController.swift; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -5242,6 +5244,7 @@
 				3C2D228C27FAD35F00D413B7 /* SettingsModels.swift */,
 				3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */,
 				3C2D229227FBA69900D413B7 /* SettingsPageView.swift */,
+				3C2D229927FBC5AC00D413B7 /* SettingsPageViewController.swift */,
 				3C798DE827F612B9007BF68D /* SettingsViewModel.swift */,
 				3C2D228E27FB5B6200D413B7 /* SettingsData.swift */,
 				3CE40B9227F5287D00CADCBF /* SettingsController.swift */,
@@ -8391,6 +8394,7 @@
 				3C798F4B27F78284007BF68D /* SearchNavigationModel.swift in Sources */,
 				3C798DFD27F61589007BF68D /* Debug+Log.swift in Sources */,
 				3C798F6F27F7829F007BF68D /* SearchVC+DataSource.swift in Sources */,
+				3C2D229A27FBC5AC00D413B7 /* SettingsPageViewController.swift in Sources */,
 				3C798F6527F7829F007BF68D /* SearchVM+Get.swift in Sources */,
 				3C798F5D27F7829F007BF68D /* SearchUtilities.swift in Sources */,
 				3C798FC927F78307007BF68D /* TipView.swift in Sources */,

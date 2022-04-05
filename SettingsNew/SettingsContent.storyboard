@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,18 +13,15 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsMainViewController" id="Y6W-OH-hqX" customClass="SettingsMainViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXo-CW-Dvz">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-af-Omp">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="100"/>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="600" translatesAutoresizingMaskIntoConstraints="NO" id="xL9-af-Omp">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="Fv7-Cw-DMM"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -47,7 +44,6 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="xL9-af-Omp" id="CjI-xa-UuE"/>
-                        <outlet property="contentViewHeightC" destination="Fv7-Cw-DMM" id="icj-rB-HhN"/>
                         <outlet property="scrollView" destination="VXo-CW-Dvz" id="dFP-ND-pfA"/>
                     </connections>
                 </viewController>
@@ -60,7 +56,7 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsDetailViewController" id="6NH-18-tfr" customClass="SettingsDetailViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IWx-qQ-9PE">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="0TR-9x-ARe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,18 +71,18 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsViewController" id="DBq-3O-BS4" customClass="SettingsViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQe-sE-DIJ">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEW-hi-0ej">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="414"/>
+                                <rect key="frame" x="0.0" y="44" width="350" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="2qv-xX-dv5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cyw-Jr-WGH">
-                                <rect key="frame" x="350" y="0.0" width="546" height="414"/>
+                                <rect key="frame" x="350" y="0.0" width="64" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
