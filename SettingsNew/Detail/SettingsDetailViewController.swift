@@ -34,7 +34,7 @@ class SettingsDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addDebugBorders(.green)
+        
     }
 
     @available(*, unavailable)

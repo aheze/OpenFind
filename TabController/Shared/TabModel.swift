@@ -28,6 +28,7 @@ protocol PageViewController: UIViewController {
 }
 
 
+/// identify something, usually for search bar excluded frames
 struct Identifier: Hashable {
     var key: String
 

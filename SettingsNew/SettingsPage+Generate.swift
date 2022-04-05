@@ -28,6 +28,8 @@ extension SettingsPage {
     /// `path` - a path of rows whose last element is the row to generate
     func generateRowPaths(for path: [SettingsRow]) -> [[SettingsRow]] {
         guard let latestRow = path.last else { return [[]] }
+        
+        
         switch latestRow.configuration {
         case .link(title: _, leftIcon: _, showRightIndicator: _, destination: let destination):
             switch destination.configuration {

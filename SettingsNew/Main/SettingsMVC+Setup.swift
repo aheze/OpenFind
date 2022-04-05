@@ -11,6 +11,8 @@ import UIKit
 
 extension SettingsMainViewController {
     func setup() {
+        contentView.backgroundColor = .clear
+        view.backgroundColor = .secondarySystemBackground
         scrollView.delegate = self
         scrollView.contentInset.top = searchViewModel.getTotalHeight()
         scrollView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding

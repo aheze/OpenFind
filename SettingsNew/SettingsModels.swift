@@ -20,7 +20,8 @@ struct SettingsPage {
     }
 }
 
-struct SettingsSection {
+struct SettingsSection: Identifiable {
+    let id = UUID()
     var header: String? /// shown at top
     var rows = [SettingsRow]()
     var description: Description? /// shown at bottom of rows
@@ -31,7 +32,8 @@ struct SettingsSection {
     }
 }
 
-struct SettingsRow {
+struct SettingsRow: Identifiable {
+    let id = UUID()
     var configuration: Configuration
     enum Configuration {
         case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: SettingsPage)

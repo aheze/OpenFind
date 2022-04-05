@@ -19,6 +19,9 @@ class SettingsViewModel: ObservableObject {
     var page = mainPage
     var paths: [[SettingsRow]] /// all possible paths in the tree, including incomplete/unfinished paths (paths that stop before hitting the last option)
 
+    var updateNavigationBar: (() -> Void)? /// update navigation bar height from within a page view controller
+    var show: ((SettingsPage) -> Void)? /// show a page
+    
     init() {
         let paths = page.generatePaths()
         self.paths = paths

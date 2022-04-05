@@ -6,7 +6,7 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 extension UIFont {
     /// https://mackarous.com/dev/2018/12/4/dynamic-type-at-any-font-weight
@@ -30,6 +30,14 @@ extension UIFont {
         let fontAttributes = [NSAttributedString.Key.font: self]
         let size = (string as NSString).size(withAttributes: fontAttributes)
         return size
+    }
+}
+
+extension UIFont {
+    
+    /// SwiftUI font
+    var font: Font {
+        return Font(self as CTFont)
     }
 }
 
