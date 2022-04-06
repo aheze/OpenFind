@@ -34,7 +34,8 @@ enum Settings {
             case heavy = "Heavy"
         }
         
-        enum PauseScanningAfterLevel: String, CaseIterable, Identifiable {
+        
+        enum ScanningDurationUntilPauseLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
             case never = "0"
@@ -42,6 +43,16 @@ enum Settings {
             case thirtySeconds = "30"
             case sixtySeconds = "60"
         }
+        enum ScanningFrequencyLevel: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case continuous = "0"
+            case halfSecond = "0.5"
+            case oneSecond = "1"
+            case twoSeconds = "2"
+            case threeSeconds = "3"
+        }
+        
     }
 }
 

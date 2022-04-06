@@ -21,26 +21,29 @@ class RealmModel: ObservableObject {
 
     // MARK: Finding
 
-    @Saved("keepWhitespace") var keepWhitespace = false
-    @Saved("matchAccents") var matchAccents = false
-    @Saved("matchCase") var matchCase = false
-    @Saved("filterLists") var filterLists = true
+    @Saved("findingKeepWhitespace") var findingKeepWhitespace = false
+    @Saved("findingMatchAccents") var findingMatchAccents = false
+    @Saved("findingMatchCase") var findingMatchCase = false
+    @Saved("findingFilterLists") var findingFilterLists = true
 
     // MARK: Highlights
 
     @Saved("highlightsColor") var highlightsColor = Int(0x00aeef)
-    @Saved("cycleSearchBarColors") var cycleSearchBarColors = true
+    @Saved("highlightsCycleSearchBarColors") var highlightsCycleSearchBarColors = true
     @Saved("highlightsBorderWidth") var highlightsBorderWidth = Double(1.2)
     @Saved("highlightsBackgroundOpacity") var highlightsBackgroundOpacity = Double(0.3)
 
     // MARK: Photos
 
-    @Saved("scanOnLaunch") var scanOnLaunch = false
-    @Saved("scanOnFind") var scanOnFind = true
-    @Saved("minimumCellLength") var minimumCellLength = CGFloat(80)
+    @Saved("photosScanOnLaunch") var photosScanOnLaunch = false
+    @Saved("photosScanOnFind") var photosScanOnFind = true
+    @Saved("photosMinimumCellLength") var photosMinimumCellLength = CGFloat(80)
     
     // MARK: Camera
-    @Saved("pauseScanningAfter") var pauseScanningAfter = Settings.Values.PauseScanningAfterLevel.thirtySeconds.rawValue
+    @Saved("cameraScanningFrequency") var cameraScanningFrequency = Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue
+    @Saved("cameraScanningDurationUntilPause") var cameraScanningDurationUntilPause = Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue
+
+    
 
     init() {
         container.listsUpdated = { [weak self] lists in
@@ -60,19 +63,21 @@ class RealmModel: ObservableObject {
         _swipeToNavigate.configureValueChanged(with: self)
         _hapticFeedbackLevel.configureValueChanged(with: self)
 
-        _keepWhitespace.configureValueChanged(with: self)
-        _matchCase.configureValueChanged(with: self)
-        _filterLists.configureValueChanged(with: self)
+        _findingKeepWhitespace.configureValueChanged(with: self)
+        _findingMatchAccents.configureValueChanged(with: self)
+        _findingMatchCase.configureValueChanged(with: self)
+        _findingFilterLists.configureValueChanged(with: self)
 
         _highlightsColor.configureValueChanged(with: self)
-        _cycleSearchBarColors.configureValueChanged(with: self)
+        _highlightsCycleSearchBarColors.configureValueChanged(with: self)
         _highlightsBorderWidth.configureValueChanged(with: self)
         _highlightsBackgroundOpacity.configureValueChanged(with: self)
 
-        _scanOnLaunch.configureValueChanged(with: self)
-        _scanOnFind.configureValueChanged(with: self)
-        _minimumCellLength.configureValueChanged(with: self)
+        _photosScanOnLaunch.configureValueChanged(with: self)
+        _photosScanOnFind.configureValueChanged(with: self)
+        _photosMinimumCellLength.configureValueChanged(with: self)
         
-        _pauseScanningAfter.configureValueChanged(with: self)
+        _cameraScanningFrequency.configureValueChanged(with: self)
+        _cameraScanningDurationUntilPause.configureValueChanged(with: self)
     }
 }

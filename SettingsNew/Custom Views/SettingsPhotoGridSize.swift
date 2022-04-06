@@ -50,14 +50,14 @@ struct SettingsPhotoGridSize: View {
                 minSymbol: .system(name: "square.split.2x2", weight: .regular),
                 maxSymbol: .system(name: "square", weight: .regular),
                 saveAsInt: false,
-                storage: \.$minimumCellLength
+                storage: \.$photosMinimumCellLength
             )
         }
         .frame(maxWidth: .infinity)
     }
 
     func getNumberOfColumns(from availableWidth: CGFloat) -> Int {
-        let minimumCellLength = CGFloat(realmModel[keyPath: \.minimumCellLength])
+        let minimumCellLength = CGFloat(realmModel[keyPath: \.photosMinimumCellLength])
         let (numberOfColumns, _) = minimumCellLength.getColumns(availableWidth: availableWidth)
         return numberOfColumns
     }

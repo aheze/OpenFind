@@ -43,14 +43,14 @@ extension SettingsData {
                     .init(
                         header: "Options",
                         rows: [
-                            .init(configuration: .toggle(title: "Keep Whitespace", storage: \.$keepWhitespace)),
-                            .init(configuration: .toggle(title: "Match Accents", storage: \.$matchAccents)),
-                            .init(configuration: .toggle(title: "Match Case", storage: \.$matchCase))
+                            .init(configuration: .toggle(title: "Keep Whitespace", storage: \.$findingKeepWhitespace)),
+                            .init(configuration: .toggle(title: "Match Accents", storage: \.$findingMatchAccents)),
+                            .init(configuration: .toggle(title: "Match Case", storage: \.$findingMatchCase))
                         ]
                     ),
                     .init(
                         rows: [
-                            .init(configuration: .toggle(title: "Filter Lists", storage: \.$filterLists))
+                            .init(configuration: .toggle(title: "Filter Lists", storage: \.$findingFilterLists))
                         ],
                         description: .constant(string: "Filter lists when typing in the search bar")
                     )
@@ -76,7 +76,7 @@ extension SettingsData {
                     ),
                     .init(
                         rows: [
-                            .init(configuration: .toggle(title: "Cycle Search Bar Colors", storage: \.$cycleSearchBarColors))
+                            .init(configuration: .toggle(title: "Cycle Search Bar Colors", storage: \.$highlightsCycleSearchBarColors))
                         ],
                         description: .constant(string: "Automatically adjust the color of each additional search bar added.")
                     ),

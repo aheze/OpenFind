@@ -115,6 +115,26 @@ extension SettingsData {
             configuration: .sections(
                 sections: [
                     .init(
+                        header: "Frequency",
+                        rows: [
+                            .init(
+                                configuration:
+                                .picker(
+                                    title: "Scan Every...",
+                                    choices: [
+                                        SettingsRow.PickerChoice(title: "Continuous", storageValue: Settings.Values.ScanningFrequencyLevel.continuous.rawValue),
+                                        SettingsRow.PickerChoice(title: "0.5s", storageValue: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue),
+                                        SettingsRow.PickerChoice(title: "1s", storageValue: Settings.Values.ScanningFrequencyLevel.oneSecond.rawValue),
+                                        SettingsRow.PickerChoice(title: "2s", storageValue: Settings.Values.ScanningFrequencyLevel.twoSeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "3s", storageValue: Settings.Values.ScanningFrequencyLevel.threeSeconds.rawValue)
+                                    ],
+                                    storage: \RealmModel.$cameraScanningFrequency
+                                )
+                            )
+                        ],
+                        description: .constant(string: "Control how often to scan the live preview.")
+                    ),
+                    .init(
                         header: "Conserving",
                         rows: [
                             .init(
@@ -122,12 +142,12 @@ extension SettingsData {
                                 .picker(
                                     title: "Pause Scanning After...",
                                     choices: [
-                                        SettingsRow.PickerChoice(title: "Never", storageValue: Settings.Values.PauseScanningAfterLevel.never.rawValue),
-                                        SettingsRow.PickerChoice(title: "10s", storageValue: Settings.Values.PauseScanningAfterLevel.tenSeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "30s", storageValue: Settings.Values.PauseScanningAfterLevel.thirtySeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "1m", storageValue: Settings.Values.PauseScanningAfterLevel.sixtySeconds.rawValue)
+                                        SettingsRow.PickerChoice(title: "Never", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.never.rawValue),
+                                        SettingsRow.PickerChoice(title: "10s", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "30s", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "1m", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.sixtySeconds.rawValue)
                                     ],
-                                    storage: \RealmModel.$pauseScanningAfter
+                                    storage: \RealmModel.$cameraScanningDurationUntilPause
                                 )
                             )
                         ],
