@@ -73,6 +73,13 @@ struct SettingsPageView: View {
                     choices: choices,
                     storage: storage
                 )
+                
+            case .license(license: let license):
+                SettingsLicensePage(
+                    model: model,
+                    realmModel: realmModel,
+                    license: license
+                )
             }
         }
         .padding(SettingsConstants.edgeInsets)

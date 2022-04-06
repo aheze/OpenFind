@@ -54,7 +54,7 @@ extension SettingsData {
     static var licensesPage: SettingsPage = {
         .init(
             title: "Licenses",
-            explanation: nil,
+            explanation: "Find is built using several open-source libraries — thank you to the developers!",
             configuration: .custom(identifier: .licenses),
             bottomViewIdentifier: nil,
             addTopPadding: true

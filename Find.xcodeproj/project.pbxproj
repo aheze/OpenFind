@@ -484,6 +484,8 @@
 		3C2D22F727FD7AE200D413B7 /* SettingsCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22F627FD7AE200D413B7 /* SettingsCredits.swift */; };
 		3C2D22F927FD7AFF00D413B7 /* SettingsLicenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22F827FD7AFF00D413B7 /* SettingsLicenses.swift */; };
 		3C2D22FB27FD7B0400D413B7 /* SettingsLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22FA27FD7B0400D413B7 /* SettingsLinks.swift */; };
+		3C2D22FD27FE00CF00D413B7 /* SD+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22FC27FE00CF00D413B7 /* SD+Misc.swift */; };
+		3C2D22FF27FE016400D413B7 /* SettingsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22FE27FE016400D413B7 /* SettingsFooter.swift */; };
 		3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC5277E3A8000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
 		3C2DBBC6277E6F0000911A74 /* SearchVC+ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */; };
@@ -2831,6 +2833,8 @@
 		3C2D22F627FD7AE200D413B7 /* SettingsCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCredits.swift; sourceTree = "<group>"; };
 		3C2D22F827FD7AFF00D413B7 /* SettingsLicenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLicenses.swift; sourceTree = "<group>"; };
 		3C2D22FA27FD7B0400D413B7 /* SettingsLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLinks.swift; sourceTree = "<group>"; };
+		3C2D22FC27FE00CF00D413B7 /* SD+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SD+Misc.swift"; sourceTree = "<group>"; };
+		3C2D22FE27FE016400D413B7 /* SettingsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooter.swift; sourceTree = "<group>"; };
 		3C2DBBC3277D5D7900911A74 /* SearchVC+ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+ConfigureCell.swift"; sourceTree = "<group>"; };
 		3C2DBBDE277E739200911A74 /* MLVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2DBBE0277E739200911A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -4041,6 +4045,7 @@
 				3C2D22F627FD7AE200D413B7 /* SettingsCredits.swift */,
 				3C2D22F827FD7AFF00D413B7 /* SettingsLicenses.swift */,
 				3C2D22FA27FD7B0400D413B7 /* SettingsLinks.swift */,
+				3C2D22FE27FE016400D413B7 /* SettingsFooter.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -4064,6 +4069,7 @@
 				3C2D22E427FD407C00D413B7 /* SD+Tabs.swift */,
 				3C2D22E627FD408600D413B7 /* SD+Feedback.swift */,
 				3C2D22E827FD408E00D413B7 /* SD+About.swift */,
+				3C2D22FC27FE00CF00D413B7 /* SD+Misc.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -8616,6 +8622,7 @@
 				3C798FC727F78307007BF68D /* FieldSettingsView.swift in Sources */,
 				3C2D22F927FD7AFF00D413B7 /* SettingsLicenses.swift in Sources */,
 				3C798F9927F782B0007BF68D /* FindIconUIView.swift in Sources */,
+				3C2D22FD27FE00CF00D413B7 /* SD+Misc.swift in Sources */,
 				3CE40B7E27F5281F00CADCBF /* AppDelegate.swift in Sources */,
 				3C2D22D527FCE34F00D413B7 /* SettingsHighlightsIcon.swift in Sources */,
 				3C798F9727F782B0007BF68D /* ClearIconView.swift in Sources */,
@@ -8666,6 +8673,7 @@
 				3C798F7027F7829F007BF68D /* Field.swift in Sources */,
 				3C798F9D27F782C4007BF68D /* FindIconView.swift in Sources */,
 				3C798E0827F61591007BF68D /* Word.swift in Sources */,
+				3C2D22FF27FE016400D413B7 /* SettingsFooter.swift in Sources */,
 				3C2D22A227FBD5CB00D413B7 /* SettingsMVC+Listen.swift in Sources */,
 				3C2D22A927FBD9B500D413B7 /* SettingsCustomView.swift in Sources */,
 				3C798FC827F78307007BF68D /* CameraMessageView.swift in Sources */,

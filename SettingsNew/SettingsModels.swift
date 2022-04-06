@@ -14,7 +14,7 @@ struct SettingsPage {
     var configuration: Configuration
     var bottomViewIdentifier: Settings.ViewIdentifier? /// description at bottom, like `Version 1.3.0 - See What's New`
     var addTopPadding = true
-    
+
     enum Configuration {
         case sections(sections: [SettingsSection])
         case custom(identifier: Settings.ViewIdentifier)
@@ -22,6 +22,9 @@ struct SettingsPage {
             title: String,
             choices: [SettingsRow.PickerChoice],
             storage: KeyPath<RealmModel, Binding<String>>
+        )
+        case license(
+            license: License
         )
     }
 }
@@ -83,7 +86,7 @@ struct SettingsRow: Identifiable {
         case system(name: String, weight: UIFont.Weight)
         case text(string: String) /// text
     }
-    
+
     enum IndicatorStyle {
         case forwards
         case modal

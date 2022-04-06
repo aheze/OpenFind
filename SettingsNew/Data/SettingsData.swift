@@ -12,6 +12,17 @@ struct SettingsData {
     static var showScanningOptions: (() -> Void)?
     static var exportAllLists: (() -> Void)?
     
+    /// feedback
+    static var rateTheApp: (() -> Void)?
+    static var reportABug: (() -> Void)?
+    static var suggestNewFeatures: (() -> Void)?
+    static var helpCenter: (() -> Void)?
+    static var joinTheDiscord: (() -> Void)?
+    
+    /// sharing
+    static var shareLink: (() -> Void)?
+    static var shareQRCode: (() -> Void)?
+    
     static var mainPage: SettingsPage = .init(
         title: "Main Settings",
         configuration: .sections(sections: mainSections),
@@ -34,7 +45,13 @@ struct SettingsData {
             feedbackSection,
             
             /// credits, licenses
-            aboutSection
+            aboutSection,
+            
+            /// share app
+            linksSection,
+            
+            /// what's new
+            footerSection
         ]
     }()
 }

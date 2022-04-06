@@ -23,7 +23,9 @@ enum Settings {
         
         case credits
         case licenses
+        
         case links
+        case footer
     }
 
     enum StringIdentifier: String {

@@ -19,7 +19,9 @@ extension SettingsData {
                         leftIcon: .template(iconName: "star.fill", backgroundColor: UIColor(hex: 0xFFB800)),
                         indicatorStyle: .modal,
                         destination: nil
-                    ) {}
+                    ) {
+                        rateTheApp?()
+                    }
                 ),
                 .init(
                     configuration: .link(
@@ -27,7 +29,9 @@ extension SettingsData {
                         leftIcon: .template(iconName: "exclamationmark.triangle.fill", backgroundColor: UIColor(hex: 0xFF0000)),
                         indicatorStyle: .modal,
                         destination: nil
-                    ) {}
+                    ) {
+                        reportABug?()
+                    }
                 ),
                 .init(
                     configuration: .link(
@@ -35,7 +39,9 @@ extension SettingsData {
                         leftIcon: .template(iconName: "sparkles", backgroundColor: UIColor(hex: 0x9E00FF)),
                         indicatorStyle: .modal,
                         destination: nil
-                    ) {}
+                    ) {
+                        suggestNewFeatures?()
+                    }
                 ),
                 .init(
                     configuration: .link(
@@ -43,7 +49,9 @@ extension SettingsData {
                         leftIcon: .template(iconName: "questionmark.circle.fill", backgroundColor: UIColor(hex: 0x44AB00)),
                         indicatorStyle: .modal,
                         destination: nil
-                    ) {}
+                    ) {
+                        helpCenter?()
+                    }
                 ),
                 .init(
                     configuration: .link(
@@ -51,7 +59,9 @@ extension SettingsData {
                         leftIcon: .image(imageName: "DiscordIcon", inset: 5, backgroundColor: UIColor(hex: 0x5865F2)),
                         indicatorStyle: .modal,
                         destination: nil
-                    ) {}
+                    ) {
+                        joinTheDiscord?()
+                    }
                 )
             ]
         )
