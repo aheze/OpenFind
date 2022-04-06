@@ -18,6 +18,10 @@ enum Settings {
         case highlightsColor
 
         case photosGridSize
+        
+        case credits
+        case licenses
+        case links
     }
 
     enum StringIdentifier: String {

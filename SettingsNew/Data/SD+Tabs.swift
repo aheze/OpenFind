@@ -19,8 +19,9 @@ extension SettingsData {
                             iconName: "photo",
                             backgroundColor: UIColor(hex: 0x00AD30)
                         ),
-                        showRightIndicator: true,
-                        destination: photosPage
+                        indicatorStyle: .forwards,
+                        destination: photosPage,
+                        action: nil
                     )
                 ),
                 .init(
@@ -30,8 +31,9 @@ extension SettingsData {
                             iconName: "camera.fill",
                             backgroundColor: UIColor(hex: 0x007EEF)
                         ),
-                        showRightIndicator: true,
-                        destination: cameraPage
+                        indicatorStyle: .forwards,
+                        destination: cameraPage,
+                        action: nil
                     )
                 ),
                 .init(
@@ -41,8 +43,9 @@ extension SettingsData {
                             iconName: "rectangle.on.rectangle",
                             backgroundColor: UIColor(hex: 0xEAA800)
                         ),
-                        showRightIndicator: true,
-                        destination: listsPage
+                        indicatorStyle: .forwards,
+                        destination: listsPage,
+                        action: nil
                     )
                 )
             ]
@@ -76,8 +79,9 @@ extension SettingsData {
                                 configuration: .link(
                                     title: "Advanced",
                                     leftIcon: nil,
-                                    showRightIndicator: true,
-                                    destination: photosAdvancedPage
+                                    indicatorStyle: .forwards,
+                                    destination: photosAdvancedPage,
+                                    action: nil
                                 )
                             )
                         ]

@@ -28,7 +28,13 @@ struct SettingsData {
             findingAndHighlightsSection,
 
             /// photos, camera, lists
-            tabsSection
+            tabsSection,
+            
+            /// rate, report, suggest, help, Discord
+            feedbackSection,
+            
+            /// credits, licenses
+            aboutSection
         ]
     }()
 }

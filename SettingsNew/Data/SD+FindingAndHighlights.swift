@@ -15,20 +15,23 @@ extension SettingsData {
                 .init(
                     configuration: .link(
                         title: "Finding",
-                        leftIcon: .template(
-                            iconName: "magnifyingglass",
+                        leftIcon: .image(
+                            imageName: "Find",
+                            inset: 8,
                             backgroundColor: UIColor(hex: 0x008BEF)
                         ),
-                        showRightIndicator: true,
-                        destination: findingPage
+                        indicatorStyle: .forwards,
+                        destination: findingPage,
+                        action: nil
                     )
                 ),
                 .init(
                     configuration: .link(
                         title: "Highlights",
                         leftIcon: .custom(identifier: .highlightsIcon),
-                        showRightIndicator: true,
-                        destination: highlightsPage
+                        indicatorStyle: .forwards,
+                        destination: highlightsPage,
+                        action: nil
                     )
                 )
             ]

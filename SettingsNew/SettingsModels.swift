@@ -43,7 +43,13 @@ struct SettingsRow: Identifiable {
     let id = UUID()
     var configuration: Configuration
     enum Configuration {
-        case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: SettingsPage)
+        case link(
+            title: String,
+            leftIcon: Icon?,
+            indicatorStyle: IndicatorStyle?,
+            destination: SettingsPage?,
+            action: (() -> Void)? /// called when row tapped
+        )
         case toggle(title: String, storage: KeyPath<RealmModel, Binding<Bool>>)
         case button(title: String, tintColor: UIColor?, rightIconName: String?, action: (() -> Void)?)
 
@@ -69,12 +75,18 @@ struct SettingsRow: Identifiable {
 
     enum Icon {
         case template(iconName: String, backgroundColor: UIColor)
+        case image(imageName: String, inset: CGFloat, backgroundColor: UIColor)
         case custom(identifier: Settings.ViewIdentifier)
     }
 
     enum Symbol {
         case system(name: String, weight: UIFont.Weight)
         case text(string: String) /// text
+    }
+    
+    enum IndicatorStyle {
+        case forwards
+        case modal
     }
 
     struct PickerChoice: Identifiable {

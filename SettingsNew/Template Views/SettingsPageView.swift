@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingsPageView: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
-    
+
     var page: SettingsPage
     var sizeChanged: ((CGSize) -> Void)?
     var body: some View {
@@ -39,7 +39,9 @@ struct SettingsPageView: View {
                                 }
                             }
 
-                            SettingsSectionRows(model: model, realmModel: realmModel, section: section)
+                            if !section.rows.isEmpty {
+                                SettingsSectionRows(model: model, realmModel: realmModel, section: section)
+                            }
 
                             if let description = section.description {
                                 Group {
@@ -62,7 +64,7 @@ struct SettingsPageView: View {
                     realmModel: realmModel,
                     identifier: identifier
                 )
-                
+
             case .picker(title: let title, choices: let choices, storage: let storage):
                 SettingsPickerPage(
                     model: model,

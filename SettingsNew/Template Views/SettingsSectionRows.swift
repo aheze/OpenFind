@@ -24,16 +24,18 @@ struct SettingsSectionRows: View {
                 case .link(
                     title: let title,
                     leftIcon: let leftIcon,
-                    showRightIndicator: let showRightIndicator,
-                    destination: let destination
+                    indicatorStyle: let indicatorStyle,
+                    destination: let destination,
+                    action: let action
                 ):
                     SettingsLink(
                         model: model,
                         realmModel: realmModel,
                         title: title,
                         leftIcon: leftIcon,
-                        showRightIndicator: showRightIndicator,
-                        destination: destination
+                        indicatorStyle: indicatorStyle,
+                        destination: destination,
+                        action: action
                     )
                 case .toggle(
                     title: let title,

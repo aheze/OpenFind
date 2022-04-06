@@ -85,3 +85,6 @@ class RealmModel: ObservableObject {
         _listsSortBy.configureValueChanged(with: self)
     }
 }
+
+
+

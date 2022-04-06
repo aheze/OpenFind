@@ -12,14 +12,18 @@ struct SettingsLink: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     
-    let title: String
-    let leftIcon: SettingsRow.Icon?
-    let showRightIndicator: Bool
-    let destination: SettingsPage
+    var title: String
+    var leftIcon: SettingsRow.Icon?
+    var indicatorStyle: SettingsRow.IndicatorStyle?
+    var destination: SettingsPage?
+    var action: (() -> Void)?
     
     var body: some View {
         SettingsRowButton {
-            model.show?(destination)
+            action?()
+            if let destination = destination {
+                model.show?(destination)
+            }
         } content: {
             HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
                 if let leftIcon = leftIcon {
@@ -27,12 +31,15 @@ struct SettingsLink: View {
                     case .template(iconName: let iconName, backgroundColor: let backgroundColor):
 
                         Image(systemName: iconName)
-                            .foregroundColor(.white)
-                            .font(SettingsConstants.iconFont.font)
-                            .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
-                            .background(backgroundColor.color)
-                            .cornerRadius(SettingsConstants.iconCornerRadius)
-                            
+                            .settingsRowIconStyle(backgroundColor: backgroundColor)
+                        
+                    case .image(imageName: let imageName, inset: let inset, backgroundColor: let backgroundColor):
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(inset)
+                            .settingsRowIconStyle(backgroundColor: backgroundColor)
+                        
                     case .custom(identifier: let identifier):
                         SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
                     }
@@ -42,12 +49,28 @@ struct SettingsLink: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(SettingsConstants.rowVerticalInsetsFromText)
                 
-                if showRightIndicator {
-                    Image(systemName: "chevron.forward")
-                        .foregroundColor(UIColor.secondaryLabel.color)
+                if let indicatorStyle = indicatorStyle {
+                    switch indicatorStyle {
+                    case .forwards:
+                        Image(systemName: "chevron.forward")
+                            .foregroundColor(UIColor.secondaryLabel.color)
+                    case .modal:
+                        Image(systemName: "arrow.up.forward")
+                            .foregroundColor(UIColor.secondaryLabel.color)
+                    }
                 }
             }
             .padding(SettingsConstants.rowHorizontalInsets)
         }
+    }
+}
+
+extension View {
+    func settingsRowIconStyle(backgroundColor: UIColor) -> some View {
+        self.foregroundColor(.white)
+            .font(SettingsConstants.iconFont.font)
+            .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
+            .background(backgroundColor.color)
+            .cornerRadius(SettingsConstants.iconCornerRadius)
     }
 }

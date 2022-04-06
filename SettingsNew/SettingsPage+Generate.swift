@@ -28,30 +28,30 @@ extension SettingsPage {
     /// `path` - a path of rows whose last element is the row to generate
     func generateRowPaths(for path: [SettingsRow]) -> [[SettingsRow]] {
         guard let latestRow = path.last else { return [[]] }
-        
-        
+
         switch latestRow.configuration {
-        case .link(title: _, leftIcon: _, showRightIndicator: _, destination: let destination):
-            switch destination.configuration {
-            case .sections(sections: let sections):
-                
-                /// include the current row as a path
-                var paths = [path]
-                
-                for section in sections {
-                    for row in section.rows {
-                        let currentPath = path + [row]
-                        let generatedPaths = generateRowPaths(for: currentPath)
-                        paths += generatedPaths
+        case .link(title: _, leftIcon: _, indicatorStyle: _, destination: let destination, action: _):
+            if let destination = destination {
+                switch destination.configuration {
+                case .sections(sections: let sections):
+
+                    /// include the current row as a path
+                    var paths = [path]
+
+                    for section in sections {
+                        for row in section.rows {
+                            let currentPath = path + [row]
+                            let generatedPaths = generateRowPaths(for: currentPath)
+                            paths += generatedPaths
+                        }
                     }
+                    return paths
+                default: break
                 }
-                return paths
-            default:
-                return [path]
             }
-        default:
-            return [path]
+        default: break
         }
+        return [path]
     }
 
     func generateViewController(model: SettingsViewModel, realmModel: RealmModel) -> SettingsPageViewController {

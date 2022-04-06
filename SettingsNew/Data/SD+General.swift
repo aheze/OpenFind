@@ -20,8 +20,9 @@ extension SettingsData {
                             iconName: "gear",
                             backgroundColor: UIColor(hex: 0x565656)
                         ),
-                        showRightIndicator: true,
-                        destination: generalPage
+                        indicatorStyle: .forwards,
+                        destination: generalPage,
+                        action: nil
                     )
                 )
             ]
