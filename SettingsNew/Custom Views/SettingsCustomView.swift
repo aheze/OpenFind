@@ -16,8 +16,6 @@ struct SettingsCustomView: View {
     var body: some View {
         VStack {
             switch identifier {
-            case .hapticFeedbackLevel:
-                SettingsHapticFeedback(model: model, realmModel: realmModel)
             case .highlightsPreview:
                 SettingsHighlightsPreview(model: model, realmModel: realmModel)
             case .highlightsIcon:
@@ -26,6 +24,8 @@ struct SettingsCustomView: View {
                 SettingsHighlightsColor(model: model, realmModel: realmModel)
             case .photosGridSize:
                 SettingsPhotoGridSize(model: model, realmModel: realmModel)
+            case .cameraHapticFeedbackLevel:
+                SettingsCameraHapticFeedback(model: model, realmModel: realmModel)
             case .credits:
                 SettingsCredits(model: model, realmModel: realmModel)
             case .licenses:

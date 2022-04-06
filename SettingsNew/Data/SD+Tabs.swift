@@ -119,6 +119,15 @@ extension SettingsData {
             configuration: .sections(
                 sections: [
                     .init(
+                        header: "Haptic Feedback",
+                        rows: [
+                            .init(
+                                configuration: .custom(identifier: .cameraHapticFeedbackLevel)
+                            )
+                        ],
+                        description: .constant(string: "Vibrate when results are found in the live preview.")
+                    ),
+                    .init(
                         header: "Frequency",
                         rows: [
                             .init(

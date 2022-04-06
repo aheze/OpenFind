@@ -460,7 +460,7 @@
 		3C2D22CC27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
 		3C2D22CD27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
 		3C2D22CE27FC1A7300D413B7 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
-		3C2D22D127FCD4CA00D413B7 /* SettingsHapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */; };
+		3C2D22D127FCD4CA00D413B7 /* SettingsCameraHapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D027FCD4CA00D413B7 /* SettingsCameraHapticFeedback.swift */; };
 		3C2D22D327FCD5A300D413B7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D227FCD5A300D413B7 /* Settings.swift */; };
 		3C2D22D527FCE34F00D413B7 /* SettingsHighlightsIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */; };
 		3C2D22D827FCE50200D413B7 /* SettingsHighlightsColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22D727FCE50200D413B7 /* SettingsHighlightsColor.swift */; };
@@ -2814,7 +2814,7 @@
 		3C2D22B827FC0EB800D413B7 /* SettingsController+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsController+Listen.swift"; sourceTree = "<group>"; };
 		3C2D22BA27FC189600D413B7 /* SettingsSectionRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionRows.swift; sourceTree = "<group>"; };
 		3C2D22BC27FC1A6500D413B7 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
-		3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHapticFeedback.swift; sourceTree = "<group>"; };
+		3C2D22D027FCD4CA00D413B7 /* SettingsCameraHapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCameraHapticFeedback.swift; sourceTree = "<group>"; };
 		3C2D22D227FCD5A300D413B7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3C2D22D427FCE34F00D413B7 /* SettingsHighlightsIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHighlightsIcon.swift; sourceTree = "<group>"; };
 		3C2D22D727FCE50200D413B7 /* SettingsHighlightsColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHighlightsColor.swift; sourceTree = "<group>"; };
@@ -4035,9 +4035,9 @@
 			isa = PBXGroup;
 			children = (
 				3C2D22A827FBD9B500D413B7 /* SettingsCustomView.swift */,
-				3C2D22D027FCD4CA00D413B7 /* SettingsHapticFeedback.swift */,
 				3C2D22D627FCE35900D413B7 /* Highlights */,
 				3C2D22F027FD528200D413B7 /* SettingsPhotoGridSize.swift */,
+				3C2D22D027FCD4CA00D413B7 /* SettingsCameraHapticFeedback.swift */,
 				3C2D22F627FD7AE200D413B7 /* SettingsCredits.swift */,
 				3C2D22F827FD7AFF00D413B7 /* SettingsLicenses.swift */,
 				3C2D22FA27FD7B0400D413B7 /* SettingsLinks.swift */,
@@ -8624,7 +8624,7 @@
 				3C798DF627F61582007BF68D /* Utilities+PHAsset.swift in Sources */,
 				3C798FAA27F782ED007BF68D /* TabModel.swift in Sources */,
 				3C798FA727F782ED007BF68D /* TabAttributes.swift in Sources */,
-				3C2D22D127FCD4CA00D413B7 /* SettingsHapticFeedback.swift in Sources */,
+				3C2D22D127FCD4CA00D413B7 /* SettingsCameraHapticFeedback.swift in Sources */,
 				3C798F9E27F782C4007BF68D /* ColorPickerView.swift in Sources */,
 				3C2D228D27FAD35F00D413B7 /* SettingsModels.swift in Sources */,
 				3C2D22B727FBF65800D413B7 /* SettingsViews.swift in Sources */,

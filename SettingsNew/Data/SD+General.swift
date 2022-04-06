@@ -35,14 +35,6 @@ extension SettingsData {
             configuration: .sections(
                 sections: [
                     .init(
-                        header: "Haptic Feedback",
-                        rows: [
-                            .init(
-                                configuration: .custom(identifier: .hapticFeedbackLevel)
-                            )
-                        ]
-                    ),
-                    .init(
                         rows: [
                             .init(
                                 configuration: .toggle(

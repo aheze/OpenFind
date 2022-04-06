@@ -17,7 +17,6 @@ class RealmModel: ObservableObject {
     // MARK: - Defaults
 
     @Saved("swipeToNavigate") var swipeToNavigate = true
-    @Saved("hapticFeedbackLevel") var hapticFeedbackLevel = Settings.Values.HapticFeedbackLevel.light
 
     // MARK: Finding
 
@@ -40,6 +39,8 @@ class RealmModel: ObservableObject {
     @Saved("photosMinimumCellLength") var photosMinimumCellLength = CGFloat(80)
     
     // MARK: Camera
+    
+    @Saved("cameraHapticFeedbackLevel") var cameraHapticFeedbackLevel = Settings.Values.HapticFeedbackLevel.light
     @Saved("cameraScanningFrequency") var cameraScanningFrequency = Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue
     @Saved("cameraScanningDurationUntilPause") var cameraScanningDurationUntilPause = Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue
 
@@ -63,7 +64,6 @@ class RealmModel: ObservableObject {
 
     func listenToDefaults() {
         _swipeToNavigate.configureValueChanged(with: self)
-        _hapticFeedbackLevel.configureValueChanged(with: self)
 
         _findingKeepWhitespace.configureValueChanged(with: self)
         _findingMatchAccents.configureValueChanged(with: self)
@@ -79,6 +79,7 @@ class RealmModel: ObservableObject {
         _photosScanOnFind.configureValueChanged(with: self)
         _photosMinimumCellLength.configureValueChanged(with: self)
         
+        _cameraHapticFeedbackLevel.configureValueChanged(with: self)
         _cameraScanningFrequency.configureValueChanged(with: self)
         _cameraScanningDurationUntilPause.configureValueChanged(with: self)
         

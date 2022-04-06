@@ -13,7 +13,7 @@ extension Settings.StringIdentifier {
     func getString(realmModel: RealmModel) -> String {
         switch self {
         case .asd:
-            switch realmModel.hapticFeedbackLevel {
+            switch realmModel.cameraHapticFeedbackLevel {
             case .none:
                 return "none"
             case .light:

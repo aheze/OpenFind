@@ -1,5 +1,5 @@
 //
-//  SettingsHapticFeedback.swift
+//  SettingsCameraHapticFeedback.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 4/5/22.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SettingsHapticFeedback: View {
+struct SettingsCameraHapticFeedback: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
 
@@ -16,7 +16,7 @@ struct SettingsHapticFeedback: View {
         
         HStack {
             ForEach(Settings.Values.HapticFeedbackLevel.allCases) { level in
-                SettingsHapticFeedbackButton(model: model, realmModel: realmModel, level: level)
+                SettingsCameraHapticFeedbackButton(model: model, realmModel: realmModel, level: level)
             }
         }
         .frame(height: 80)
@@ -26,7 +26,7 @@ struct SettingsHapticFeedback: View {
     }
 }
 
-struct SettingsHapticFeedbackButton: View {
+struct SettingsCameraHapticFeedbackButton: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     
@@ -37,7 +37,7 @@ struct SettingsHapticFeedbackButton: View {
     var body: some View {
         Button {
             withAnimation {
-                realmModel.hapticFeedbackLevel = level
+                realmModel.cameraHapticFeedbackLevel = level
             }
         } label: {
             UIColor.label.color.opacity(getBackgroundOpacity())
@@ -49,7 +49,7 @@ struct SettingsHapticFeedbackButton: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(lineWidth: lineWidth)
-                        .opacity(realmModel.hapticFeedbackLevel == level ? 1 : 0)
+                        .opacity(realmModel.cameraHapticFeedbackLevel == level ? 1 : 0)
                 )
         }
     }

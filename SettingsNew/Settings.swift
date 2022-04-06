@@ -11,12 +11,14 @@ import Foundation
 enum Settings {
     /// for views
     enum ViewIdentifier: String {
-        case hapticFeedbackLevel
+        
 
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
 
+        case cameraHapticFeedbackLevel
+        
         case photosGridSize
         
         case credits
