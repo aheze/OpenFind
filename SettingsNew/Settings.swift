@@ -11,19 +11,20 @@ import Foundation
 enum Settings {
     /// for views
     enum ViewIdentifier: String {
+        case primaryRecognitionLanguage
+        case secondaryRecognitionLanguage
         
-
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
 
         case cameraHapticFeedbackLevel
-        
+
         case photosGridSize
-        
+
         case credits
         case licenses
-        
+
         case links
         case footer
     }
@@ -34,6 +35,88 @@ enum Settings {
 
     /// for storage
     enum Values {
+        enum RecognitionLanguage: String, CaseIterable, Identifiable {
+            var id: Self { self }
+            case none = ""
+            case english = "en-US"
+            case french = "fr-FR"
+            case italian = "it-IT"
+            case german = "de-DE"
+            case spanish = "es-ES"
+            case portuguese = "pt-BR"
+            case chineseSimplified = "zh-Hans"
+            case chineseTraditional = "zh-Hant"
+            
+            func getTitle() -> String {
+                switch self {
+                case .none:
+                    return "None"
+                case .english:
+                    return "English"
+                case .french:
+                    return "French"
+                case .italian:
+                    return "Italian"
+                case .german:
+                    return "German"
+                case .spanish:
+                    return "Spanish"
+                case .portuguese:
+                    return "Portuguese"
+                case .chineseSimplified:
+                    return "Chinese (Simplified)"
+                case .chineseTraditional:
+                    return "Chinese (Traditional)"
+                }
+            }
+
+            func versionNeeded() -> Int {
+                switch self {
+                case .none:
+                    return 0
+                case .english:
+                    return 13
+                case .french:
+                    return 14
+                case .italian:
+                    return 14
+                case .german:
+                    return 14
+                case .spanish:
+                    return 14
+                case .portuguese:
+                    return 14
+                case .chineseSimplified:
+                    return 14
+                case .chineseTraditional:
+                    return 14
+                }
+            }
+
+            func requiresAccurateMode() -> Bool {
+                switch self {
+                case .none:
+                    return false
+                case .english:
+                    return false
+                case .french:
+                    return false
+                case .italian:
+                    return false
+                case .german:
+                    return false
+                case .spanish:
+                    return false
+                case .portuguese:
+                    return false
+                case .chineseSimplified:
+                    return true
+                case .chineseTraditional:
+                    return true
+                }
+            }
+        }
+
         enum HapticFeedbackLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
@@ -64,10 +147,9 @@ enum Settings {
         enum ListsSortByLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
-            case newestFirst = "newestFirst"
-            case oldestFirst = "oldestFirst"
-            case title = "title"
-
+            case newestFirst
+            case oldestFirst
+            case title
         }
     }
 }

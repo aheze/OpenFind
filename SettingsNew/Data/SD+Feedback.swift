@@ -56,7 +56,7 @@ extension SettingsData {
                 .init(
                     configuration: .link(
                         title: "Join the Discord",
-                        leftIcon: .image(imageName: "DiscordIcon", inset: 5, backgroundColor: UIColor(hex: 0x5865F2)),
+                        leftIcon: .image(imageName: "DiscordIcon", inset: 6, backgroundColor: UIColor(hex: 0x5865F2)),
                         indicatorStyle: .modal,
                         destination: nil
                     ) {

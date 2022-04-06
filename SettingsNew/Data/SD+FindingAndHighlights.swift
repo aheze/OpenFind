@@ -44,6 +44,37 @@ extension SettingsData {
             configuration: .sections(
                 sections: [
                     .init(
+                        header: "Recognition Languages",
+                        rows: [
+                            .init(
+                                configuration: .dynamicPicker(
+                                    title: "Primary",
+                                    valueToChoiceTitle: { string in
+                                        if let language = Settings.Values.RecognitionLanguage(rawValue: string) {
+                                            return language.getTitle()
+                                        }
+                                        return string
+                                    },
+                                    identifier: .primaryRecognitionLanguage,
+                                    storage: \.$findingPrimaryRecognitionLanguage
+                                )
+                            ),
+                            .init(
+                                configuration: .dynamicPicker(
+                                    title: "Secondary",
+                                    valueToChoiceTitle: { string in
+                                        if let language = Settings.Values.RecognitionLanguage(rawValue: string) {
+                                            return language.getTitle()
+                                        }
+                                        return string
+                                    },
+                                    identifier: .secondaryRecognitionLanguage,
+                                    storage: \.$findingSecondaryRecognitionLanguage
+                                )
+                            )
+                        ]
+                    ),
+                    .init(
                         header: "Options",
                         rows: [
                             .init(configuration: .toggle(title: "Keep Whitespace", storage: \.$findingKeepWhitespace)),

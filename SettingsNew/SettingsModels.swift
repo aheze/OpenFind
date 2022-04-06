@@ -73,6 +73,14 @@ struct SettingsRow: Identifiable {
             choices: [PickerChoice],
             storage: KeyPath<RealmModel, Binding<String>>
         )
+        
+        case dynamicPicker(
+            title: String,
+            valueToChoiceTitle: ((String) -> String), /// convert value to readable title
+            identifier: Settings.ViewIdentifier,
+            storage: KeyPath<RealmModel, Binding<String>>
+        )
+        
         case custom(identifier: Settings.ViewIdentifier)
     }
 

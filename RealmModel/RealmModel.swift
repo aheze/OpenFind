@@ -19,7 +19,9 @@ class RealmModel: ObservableObject {
     @Saved("swipeToNavigate") var swipeToNavigate = true
 
     // MARK: Finding
-
+    @Saved("findingPrimaryRecognitionLanguage") var findingPrimaryRecognitionLanguage = Settings.Values.RecognitionLanguage.english.rawValue
+    @Saved("findingSecondaryRecognitionLanguage") var findingSecondaryRecognitionLanguage = Settings.Values.RecognitionLanguage.none.rawValue
+    
     @Saved("findingKeepWhitespace") var findingKeepWhitespace = false
     @Saved("findingMatchAccents") var findingMatchAccents = false
     @Saved("findingMatchCase") var findingMatchCase = false
@@ -65,6 +67,8 @@ class RealmModel: ObservableObject {
     func listenToDefaults() {
         _swipeToNavigate.configureValueChanged(with: self)
 
+        _findingPrimaryRecognitionLanguage.configureValueChanged(with: self)
+        _findingSecondaryRecognitionLanguage.configureValueChanged(with: self)
         _findingKeepWhitespace.configureValueChanged(with: self)
         _findingMatchAccents.configureValueChanged(with: self)
         _findingMatchCase.configureValueChanged(with: self)
