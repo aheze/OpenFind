@@ -13,7 +13,16 @@ extension SettingsViewModel {
     func getString(for identifier: Settings.StringIdentifier) -> String {
         switch identifier {
         case .asd:
-            return "asdas"
+            switch hapticFeedbackLevel {
+                
+            case .none:
+                return "none"
+            case .light:
+                return "light"
+            case .heavy:
+                return "heavy"
+            }
+            
         }
     }
 }
