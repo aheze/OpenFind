@@ -21,7 +21,6 @@ struct SettingsData {
     
     /// sharing
     static var shareLink: (() -> Void)?
-    static var shareQRCode: (() -> Void)?
     
     static var mainPage: SettingsPage = .init(
         title: "Main Settings",
