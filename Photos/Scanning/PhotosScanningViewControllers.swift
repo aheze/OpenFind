@@ -14,8 +14,11 @@ import SwiftUI
 
 class PhotosScanningViewController: UIViewController {
     var model: PhotosViewModel
-    init(model: PhotosViewModel) {
+    var realmModel: RealmModel
+    
+    init(model: PhotosViewModel, realmModel: RealmModel) {
         self.model = model
+        self.realmModel = realmModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,7 +37,7 @@ class PhotosScanningViewController: UIViewController {
          */
         view = UIView()
         
-        let containerView = PhotosScanningView(model: model)
+        let containerView = PhotosScanningView(model: model, realmModel: realmModel)
         let hostingController = UIHostingController(rootView: containerView)
         hostingController.view.frame = view.bounds
         hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

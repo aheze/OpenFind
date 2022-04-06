@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SettingsButton<Content: View>: View {
+struct SettingsRowButton<Content: View>: View {
     let action: () -> Void
     @ViewBuilder let content: Content
 

@@ -10,13 +10,15 @@ import SwiftUI
 
 struct PhotosScanningView: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var realmModel: RealmModel
     var body: some View {
-        PhotosScanningViewHeader(model: model)
+        PhotosScanningViewHeader(model: model, realmModel: realmModel)
     }
 }
 
 struct PhotosScanningViewHeader: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var realmModel: RealmModel
 
     var body: some View {
         ScrollView {
@@ -81,16 +83,18 @@ struct PhotosScanningViewHeader: View {
 
                 PhotoScanningRow(
                     model: model,
+                    realmModel: realmModel,
                     title: "Scan on Launch",
                     description: "Find will start scanning photos as soon as you open the app.",
-                    binding: \PhotosViewModel.$scanOnLaunch
+                    storage: \.$scanOnLaunch
                 )
                 
                 PhotoScanningRow(
                     model: model,
+                    realmModel: realmModel,
                     title: "Scan on Find",
                     description: "Automatically start scanning photos when you type in the search bar.",
-                    binding: \PhotosViewModel.$scanOnFind
+                    storage: \.$scanOnFind
                 )
 
                 Spacer()
@@ -186,16 +190,17 @@ struct PhotoScanningLink: View {
 
 struct PhotoScanningRow: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var realmModel: RealmModel
     var title: String
     var description: String
-    var binding: KeyPath<PhotosViewModel, Binding<Bool>>
+    var storage: KeyPath<RealmModel, Binding<Bool>>
 
     var body: some View {
         Container(description: description) {
             HStack {
                 Text(title)
                 Spacer()
-                Toggle(isOn: model[keyPath: binding]) {
+                Toggle(isOn: realmModel[keyPath: storage]) {
                     EmptyView()
                 }
                 .labelsHidden()

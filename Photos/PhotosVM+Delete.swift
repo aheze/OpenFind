@@ -22,7 +22,7 @@ extension PhotosViewModel {
             DispatchQueue.main.async {
                 for photo in photos {
                     if let metadata = photo.metadata {
-                        self.realmModel.container.deletePhotoMetadata(metadata: metadata)
+                        self.getRealmModel?().container.deletePhotoMetadata(metadata: metadata)
                     }
                 }
                 self.refreshCollectionViews(afterDeleting: photos)

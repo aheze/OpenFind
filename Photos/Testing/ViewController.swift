@@ -12,9 +12,8 @@ class ViewController: UIViewController {
     lazy var tabViewModel = TabViewModel()
     lazy var toolbarViewModel = ToolbarViewModel()
     lazy var photos = PhotosController(
-        model: PhotosViewModel(
-            realmModel: RealmModel()
-        ),
+        model: PhotosViewModel(),
+        realmModel: RealmModel(),
         tabViewModel: tabViewModel,
         toolbarViewModel: toolbarViewModel
     )

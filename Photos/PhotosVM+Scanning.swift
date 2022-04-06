@@ -19,7 +19,7 @@ extension PhotosViewModel {
             newMetadata.dateScanned = Date()
             newPhoto.metadata = newMetadata
             addSentences(of: newPhoto, immediately: !inBatch)
-            realmModel.container.updatePhotoMetadata(metadata: newMetadata)
+            getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata)
         } else {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
@@ -30,7 +30,7 @@ extension PhotosViewModel {
             )
             newPhoto.metadata = metadata
             addSentences(of: newPhoto, immediately: !inBatch)
-            realmModel.container.updatePhotoMetadata(metadata: metadata)
+            getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
         }
 
         photosToScan = photosToScan.filter { $0 != photo }
@@ -81,7 +81,9 @@ extension PhotosViewModel {
 
                 /// discard value if not scanning and `inBatch` is true
                 if !inBatch || scanningState == .scanningAllPhotos {
-                    photoScanned(photo: photo, sentences: sentences, inBatch: inBatch)
+                    await MainActor.run {
+                        photoScanned(photo: photo, sentences: sentences, inBatch: inBatch)
+                    }
                 }
             }
         }

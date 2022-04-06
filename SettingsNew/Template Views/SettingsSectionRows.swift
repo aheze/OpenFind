@@ -50,7 +50,13 @@ struct SettingsSectionRows: View {
                     rightIconName: let rightIconName,
                     action: let action
                 ):
-                    EmptyView()
+                    SettingsButton(
+                        model: model,
+                        realmModel: realmModel,
+                        title: title,
+                        rightIconName: rightIconName,
+                        action: action
+                    )
                 case .slider(
                     numberOfSteps: let numberOfSteps,
                     minValue: let minValue,

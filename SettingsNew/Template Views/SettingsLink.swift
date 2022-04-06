@@ -18,7 +18,7 @@ struct SettingsLink: View {
     let destination: SettingsPage
     
     var body: some View {
-        SettingsButton {
+        SettingsRowButton {
             model.show?(destination)
         } content: {
             HStack(spacing: SettingsConstants.rowIconTitleSpacing) {

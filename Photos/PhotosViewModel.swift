@@ -12,7 +12,7 @@ import UIKit
 class PhotosViewModel: ObservableObject {
     // MARK: Base collection view
 
-    var realmModel: RealmModel
+    var getRealmModel: (() -> RealmModel)?
 
     /// all photos and assets
     var assets: PHFetchResult<PHAsset>? /// could become inaccurate after deletion.
@@ -20,7 +20,7 @@ class PhotosViewModel: ObservableObject {
     var displayedSections = [PhotosSection]() /// this is fed into the collection view
 
     @Published var photosEditable = false /// select button enabled
-    
+
     /// when star/unstar
     var sortNeeded = false
 
@@ -97,7 +97,7 @@ class PhotosViewModel: ObservableObject {
     var photosWithQueuedSentencesAdded: (([Photo]) -> Void)?
 
     // MARK: Scanning
-    
+
     /// call this when pressed "scan now" in info
     /// this closure should call `scanPhoto` in `PhotosSlidesVC+Find`
     var scanSlidesPhoto: ((SlidesPhoto) -> Void)?
@@ -121,8 +121,6 @@ class PhotosViewModel: ObservableObject {
 
     var scanningIconTapped: (() -> Void)? /// tapped icon in navigation bar
     var ignoredPhotosTapped: (() -> Void)?
-    @Saved(Defaults.scanOnLaunch.0) var scanOnLaunch = Defaults.scanOnLaunch.1
-    @Saved(Defaults.scanOnFind.0) var scanOnFind = Defaults.scanOnFind.1
     @Published var scanningState = ScanningState.dormant
     @Published var scannedPhotosCount = 0
     @Published var totalPhotosCount = 0 /// total where not ignored
@@ -146,21 +144,19 @@ class PhotosViewModel: ObservableObject {
     var updateSearchCollectionView: (() -> Void)?
 
     // MARK: Share
+
     var shareSelected: (() -> Void)? /// multiple
     var sharePhotoInSlides: ((Photo) -> Void)? /// single photo
+
     // MARK: Deletion
+
     var deleteSelected: (() -> Void)?
-    
+
     /// model updated, refresh collection views
     var reloadCollectionViewsAfterDeletion: (() -> Void)?
-    
+
     /// don't update `slidesState` until this closure is called.
     var deletePhotoInSlides: ((Photo) -> Void)?
-    
-
-    init(realmModel: RealmModel) {
-        self.realmModel = realmModel
-    }
 
     enum ScanningState {
         case dormant

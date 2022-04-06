@@ -12,6 +12,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     
     /// external models
     var model: PhotosViewModel
+    var realmModel: RealmModel
     var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
     var searchNavigationModel: SearchNavigationModel
@@ -41,7 +42,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     lazy var selectionToolbar = PhotosSelectionToolbarView(model: model)
     lazy var scanningIconController = PhotosScanningIconController(model: model)
     lazy var scanningNavigationViewController = UINavigationController(
-        rootViewController: PhotosScanningViewController(model: model)
+        rootViewController: PhotosScanningViewController(model: model, realmModel: realmModel)
     )
     
     // MARK: Collection View
@@ -72,6 +73,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
+        realmModel: RealmModel,
         tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel,
         searchNavigationModel: SearchNavigationModel,
@@ -81,6 +83,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         slidesSearchPromptViewModel: SearchPromptViewModel
     ) {
         self.model = model
+        self.realmModel = realmModel
         self.tabViewModel = tabViewModel
         self.toolbarViewModel = toolbarViewModel
         self.searchNavigationModel = searchNavigationModel

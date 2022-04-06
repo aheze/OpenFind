@@ -9,6 +9,7 @@ import UIKit
 
 class PhotosController {
     var model: PhotosViewModel
+    var realmModel: RealmModel
     var tabViewModel: TabViewModel
     var toolbarViewModel: ToolbarViewModel
     
@@ -24,10 +25,12 @@ class PhotosController {
     
     init(
         model: PhotosViewModel,
+        realmModel: RealmModel,
         tabViewModel: TabViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
+        self.realmModel = realmModel
         self.toolbarViewModel = toolbarViewModel
         self.tabViewModel = tabViewModel
         
@@ -49,6 +52,7 @@ class PhotosController {
             PhotosViewController(
                 coder: coder,
                 model: model,
+                realmModel: realmModel,
                 tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
                 searchNavigationModel: searchNavigationModel,
@@ -65,7 +69,7 @@ class PhotosController {
             rootViewController: viewController,
             searchNavigationModel: searchNavigationModel,
             searchViewModel: searchViewModel,
-            realmModel: model.realmModel,
+            realmModel: realmModel,
             tabType: .lists
         )
         
@@ -93,6 +97,10 @@ class PhotosController {
         }
         
         configureTransitions(for: searchNavigationController)
+        
+        model.getRealmModel = {
+            return realmModel
+        }
     }
 }
 
