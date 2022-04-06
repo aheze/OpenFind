@@ -12,13 +12,11 @@ struct SettingsSectionRows: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     let section: SettingsSection
-    
+
     var body: some View {
         /// encompass section rows
         VStack(spacing: 0) {
             ForEach(Array(zip(section.rows.indices, section.rows)), id: \.1.id) { index, row in
-
-                let leftDividerPadding = SettingsConstants.rowHorizontalInsets.leading
 
                 switch row.configuration {
                 case .link(
@@ -100,11 +98,34 @@ struct SettingsSectionRows: View {
                 }
 
                 if index < section.rows.count - 1 {
-                    SettingsRowDivider(leftDividerPadding: leftDividerPadding)
+                    SettingsRowDivider(leftDividerPadding: getLeftDividerPadding(for: row))
                 }
             }
         }
         .background(UIColor.systemBackground.color)
         .cornerRadius(SettingsConstants.sectionCornerRadius)
+    }
+    
+    func getLeftDividerPadding(for row: SettingsRow) -> CGFloat {
+        let leftDividerPadding = SettingsConstants.rowHorizontalInsets.leading
+        var additionalPadding = CGFloat(0)
+        switch row.configuration {
+        case .link(title: _, leftIcon: let leftIcon, indicatorStyle: _, destination: _, action: _):
+            if leftIcon != nil {
+                additionalPadding = SettingsConstants.iconSize.width + SettingsConstants.rowIconTitleSpacing
+            }
+        case .toggle:
+            break
+        case .button:
+            break
+        case .slider:
+            break
+        case .picker:
+            break
+        case .custom:
+            break
+        }
+        
+        return leftDividerPadding + additionalPadding
     }
 }
