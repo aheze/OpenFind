@@ -124,6 +124,18 @@ class SearchNavigationController: UIViewController, PageViewController {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            
+            /// update the blur after changing to dark mode
+            DispatchQueue.main.async {
+                self.setupBlur()
+                self.animator?.fractionComplete = self.blurPercentage
+            }
+        }
+    }
+    
     deinit {
         animator?.stopAnimation(true)
     }

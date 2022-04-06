@@ -64,6 +64,7 @@ class SettingsMainViewController: UIViewController, Searchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings"
+        navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(dismissSelf), imageName: "Dismiss")
         
         setup()
         scrollView.alwaysBounceVertical = true
@@ -73,6 +74,10 @@ class SettingsMainViewController: UIViewController, Searchable {
         
         listen()
         showResults(false)
+    }
+    
+    @objc func dismissSelf() {
+        self.dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
