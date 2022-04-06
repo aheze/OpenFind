@@ -19,7 +19,6 @@ class SearchNavigationController: UIViewController, PageViewController {
     var realmModel: RealmModel /// for the search bar
     var navigation: UINavigationController!
     
-
     var navigationBarBackgroundContainer = PassthroughView()
     var navigationBarBackgroundHeightC: NSLayoutConstraint!
     var navigationBarBackground = UIView()
@@ -44,7 +43,6 @@ class SearchNavigationController: UIViewController, PageViewController {
     var progressViewModel: ProgressViewModel?
     var progressContainerView = UIView()
 
-    
     // MARK: - Optional Transitioning
 
     var pushAnimator: UIViewControllerAnimatedTransitioning?
@@ -115,6 +113,14 @@ class SearchNavigationController: UIViewController, PageViewController {
             guard let self = self else { return }
             self.setupBlur()
             self.animator?.fractionComplete = self.blurPercentage
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { context in
+            let insets = self.view.safeAreaInsets
+            self.model.onBoundsChange?(size, insets)
         }
     }
     

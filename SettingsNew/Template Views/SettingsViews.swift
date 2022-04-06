@@ -43,6 +43,7 @@ extension View {
             .multilineTextAlignment(.leading)
             .foregroundColor(UIColor.secondaryLabel.color)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, SettingsConstants.rowHorizontalInsets.leading) /// extra padding
     }
 

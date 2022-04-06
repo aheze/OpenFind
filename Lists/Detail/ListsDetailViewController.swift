@@ -127,6 +127,7 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
         updateWordsKeyboardToolbar()
         
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        print("base: \(baseSearchBarOffset)")
         additionalSearchBarOffset = 0
         
         scrollView.verticalScrollIndicatorInsets.top = SearchNavigationConstants.scrollIndicatorTopPadding

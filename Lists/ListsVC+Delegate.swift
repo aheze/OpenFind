@@ -11,6 +11,10 @@ import UIKit
 /// Scroll view
 extension ListsViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateSearchBarOffsetFromScroll(scrollView: scrollView)
+    }
+    
+    func updateSearchBarOffsetFromScroll(scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
         self.additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
         updateNavigationBar?()

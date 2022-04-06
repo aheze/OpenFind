@@ -26,7 +26,8 @@ extension SearchNavigationController {
         model.onDidBecomeInactive?()
     }
     
+    /// don't use this because search navigation controller doesn't need to be a tab
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        model.onBoundsChange?(size, safeAreaInsets)
+//        model.onBoundsChange?(size, safeAreaInsets)
     }
 }

@@ -84,10 +84,22 @@ class SettingsScrollViewController: UIViewController, Searchable {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
         additionalSearchBarOffset = 0
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { _ in
+            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+            self.updateSearchBarOffsetFromScroll(scrollView: self.scrollView)
+        }
+    }
 }
 
 extension SettingsScrollViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateSearchBarOffsetFromScroll(scrollView: scrollView)
+    }
+
+    func updateSearchBarOffsetFromScroll(scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
         additionalSearchBarOffset = contentOffset - baseSearchBarOffset
         model.updateNavigationBar?()

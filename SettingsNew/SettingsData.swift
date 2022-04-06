@@ -134,7 +134,7 @@ extension SettingsViewModel {
                         rows: [
                             .init(configuration: .toggle(title: "Cycle Search Bar Colors", storage: \SettingsViewModel.$cycleSearchBarColors))
                         ],
-                        description: .constant(string: "Automatically adjust the color of each additional search bar added")
+                        description: .constant(string: "Automatically adjust the color of each additional search bar added.")
                     ),
                     .init(
                         header: "Border Width",

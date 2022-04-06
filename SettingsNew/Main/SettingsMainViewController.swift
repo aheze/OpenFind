@@ -79,7 +79,7 @@ class SettingsMainViewController: UIViewController, Searchable {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate { _ in
             self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
-            self.updateSearchBarOffset?()
+            self.updateSearchBarOffsetFromScroll(scrollView: self.scrollView)
         }
     }
 }

@@ -42,9 +42,8 @@ extension ListsViewController {
             }
         }
         
-        self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: safeAreaInsets)
-        self.updateNavigationBar?()
-        
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        updateSearchBarOffsetFromScroll(scrollView: collectionView)
         detailsViewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)
     }
 }

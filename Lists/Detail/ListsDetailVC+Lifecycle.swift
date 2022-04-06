@@ -28,7 +28,9 @@ extension ListsDetailViewController {
     func didBecomeInactive() {}
 
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
+        print("b change")
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        print("base now: \(baseSearchBarOffset)")
         updateSearchBarOffset?()
         updateSwipeBackTouchTarget(viewSize: size)
     }
