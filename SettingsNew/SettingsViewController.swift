@@ -10,11 +10,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     var model: SettingsViewModel
+    var realmModel: RealmModel
     var searchController: SearchNavigationController
     var mainViewController: SettingsMainViewController
     var detailViewController: SettingsDetailViewController
     
-    lazy var colorPickerViewModel = ColorPickerViewModel(selectedColor: UIColor(hex: model.highlightsColor.uInt))
+    lazy var colorPickerViewModel = ColorPickerViewModel(selectedColor: UIColor(hex: realmModel.highlightsColor.uInt))
 
     @IBOutlet var mainContainer: UIView!
     @IBOutlet var detailContainer: UIView!
@@ -22,6 +23,7 @@ class SettingsViewController: UIViewController {
 
     static func make(
         model: SettingsViewModel,
+        realmModel: RealmModel,
         searchController: SearchNavigationController,
         mainViewController: SettingsMainViewController,
         detailViewController: SettingsDetailViewController
@@ -31,6 +33,7 @@ class SettingsViewController: UIViewController {
             SettingsViewController(
                 coder: coder,
                 model: model,
+                realmModel: realmModel,
                 searchController: searchController,
                 mainViewController: mainViewController,
                 detailViewController: detailViewController
@@ -42,11 +45,13 @@ class SettingsViewController: UIViewController {
     init?(
         coder: NSCoder,
         model: SettingsViewModel,
+        realmModel: RealmModel,
         searchController: SearchNavigationController,
         mainViewController: SettingsMainViewController,
         detailViewController: SettingsDetailViewController
     ) {
         self.model = model
+        self.realmModel = realmModel
         self.searchController = searchController
         self.mainViewController = mainViewController
         self.detailViewController = detailViewController

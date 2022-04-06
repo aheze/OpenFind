@@ -28,6 +28,7 @@ class SettingsController {
         self.realmModel = realmModel
         let mainViewController = SettingsMainViewController.make(
             model: model,
+            realmModel: realmModel,
             searchViewModel: searchViewModel
         )
         let searchController = SearchNavigationController.make(
@@ -48,6 +49,7 @@ class SettingsController {
         
         let viewController = SettingsViewController.make(
             model: model,
+            realmModel: realmModel,
             searchController: searchController,
             mainViewController: mainViewController,
             detailViewController: detailViewController

@@ -10,12 +10,13 @@ import SwiftUI
 
 struct SettingsHapticFeedback: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
 
     var body: some View {
         
         HStack {
             ForEach(Settings.Values.HapticFeedbackLevel.allCases) { level in
-                SettingsHapticFeedbackButton(model: model, level: level)
+                SettingsHapticFeedbackButton(model: model, realmModel: realmModel, level: level)
             }
         }
         .frame(height: 80)
@@ -27,6 +28,8 @@ struct SettingsHapticFeedback: View {
 
 struct SettingsHapticFeedbackButton: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
+    
     let level: Settings.Values.HapticFeedbackLevel
     let cornerRadius = CGFloat(10)
     let lineWidth = CGFloat(4)
@@ -34,7 +37,7 @@ struct SettingsHapticFeedbackButton: View {
     var body: some View {
         Button {
             withAnimation {
-                model.hapticFeedbackLevel = level
+                realmModel.hapticFeedbackLevel = level
             }
         } label: {
             UIColor.label.color.opacity(getBackgroundOpacity())
@@ -46,7 +49,7 @@ struct SettingsHapticFeedbackButton: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(lineWidth: lineWidth)
-                        .opacity(model.hapticFeedbackLevel == level ? 1 : 0)
+                        .opacity(realmModel.hapticFeedbackLevel == level ? 1 : 0)
                 )
         }
     }

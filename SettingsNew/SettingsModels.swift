@@ -39,8 +39,8 @@ struct SettingsRow: Identifiable {
     var configuration: Configuration
     enum Configuration {
         case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: SettingsPage)
-        case toggle(title: String, storage: KeyPath<SettingsViewModel, Binding<Bool>>)
-        case button(title: String, action: (() -> Void)?)
+        case toggle(title: String, storage: KeyPath<RealmModel, Binding<Bool>>)
+        case button(title: String, rightIconName: String?, action: (() -> Void)?)
 
         /// if `numberOfSteps` is nil, smooth slider
         case slider(
@@ -50,11 +50,11 @@ struct SettingsRow: Identifiable {
             minSymbol: Symbol,
             maxSymbol: Symbol,
             saveAsInt: Bool, /// precision
-            storage: KeyPath<SettingsViewModel, Binding<Double>>
+            storage: KeyPath<RealmModel, Binding<Double>>
         )
 
         /// open in new page
-        case picker(choices: [PickerChoice], storage: KeyPath<SettingsViewModel, Binding<String>>)
+        case picker(choices: [PickerChoice], storage: KeyPath<RealmModel, Binding<String>>)
         case custom(identifier: Settings.ViewIdentifier)
     }
 

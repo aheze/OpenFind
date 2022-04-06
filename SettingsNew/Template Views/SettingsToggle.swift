@@ -11,8 +11,9 @@ import SwiftUI
 
 struct SettingsToggle: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
     let title: String
-    let storage: KeyPath<SettingsViewModel, Binding<Bool>>
+    let storage: KeyPath<RealmModel, Binding<Bool>>
     
     var body: some View {
         HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
@@ -20,7 +21,7 @@ struct SettingsToggle: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(SettingsConstants.rowVerticalInsetsFromText)
             
-            Toggle("", isOn: model[keyPath: storage])
+            Toggle("", isOn: realmModel[keyPath: storage])
                 .labelsHidden()
         }
         .padding(SettingsConstants.rowHorizontalInsets)

@@ -15,19 +15,21 @@ class SettingsMainViewController: UIViewController, Searchable {
     var updateSearchBarOffset: (() -> Void)?
     
     var model: SettingsViewModel
+    var realmModel: RealmModel
     var searchViewModel: SearchViewModel
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
     
     lazy var pageViewController: SettingsPageViewController = {
-        let viewController = model.page.generateViewController(model: model)
+        let viewController = model.page.generateViewController(model: model, realmModel: realmModel)
         return viewController
     }()
     lazy var resultsViewController = SettingsResultsViewController(paths: model.paths)
     
     static func make(
         model: SettingsViewModel,
+        realmModel: RealmModel,
         searchViewModel: SearchViewModel
     ) -> SettingsMainViewController {
         let storyboard = UIStoryboard(name: "SettingsContent", bundle: nil)
@@ -35,6 +37,7 @@ class SettingsMainViewController: UIViewController, Searchable {
             SettingsMainViewController(
                 coder: coder,
                 model: model,
+                realmModel: realmModel,
                 searchViewModel: searchViewModel
             )
         }
@@ -44,9 +47,11 @@ class SettingsMainViewController: UIViewController, Searchable {
     init?(
         coder: NSCoder,
         model: SettingsViewModel,
+        realmModel: RealmModel,
         searchViewModel: SearchViewModel
     ) {
         self.model = model
+        self.realmModel = realmModel
         self.searchViewModel = searchViewModel
         super.init(coder: coder)
     }

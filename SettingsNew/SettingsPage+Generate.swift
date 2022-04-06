@@ -54,8 +54,8 @@ extension SettingsPage {
         }
     }
 
-    func generateViewController(model: SettingsViewModel) -> SettingsPageViewController {
-        let viewController = SettingsPageViewController(model: model, page: self)
+    func generateViewController(model: SettingsViewModel, realmModel: RealmModel) -> SettingsPageViewController {
+        let viewController = SettingsPageViewController(model: model, realmModel: realmModel, page: self)
         return viewController
     }
 }

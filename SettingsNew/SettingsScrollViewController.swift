@@ -14,11 +14,12 @@ class SettingsScrollViewController: UIViewController, Searchable {
     var additionalSearchBarOffset: CGFloat?
 
     let model: SettingsViewModel
+    let realmModel: RealmModel
     let searchViewModel: SearchViewModel
     let page: SettingsPage
 
     lazy var pageViewController: SettingsPageViewController = {
-        let viewController = page.generateViewController(model: model)
+        let viewController = page.generateViewController(model: model, realmModel: realmModel)
         return viewController
     }()
 
@@ -50,10 +51,12 @@ class SettingsScrollViewController: UIViewController, Searchable {
 
     init(
         model: SettingsViewModel,
+        realmModel: RealmModel,
         searchViewModel: SearchViewModel,
         page: SettingsPage
     ) {
         self.model = model
+        self.realmModel = realmModel
         self.searchViewModel = searchViewModel
         self.page = page
         super.init(nibName: nil, bundle: nil)

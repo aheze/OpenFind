@@ -19,6 +19,7 @@ extension SettingsController {
             guard let self = self else { return }
             let scrollViewController = SettingsScrollViewController(
                 model: self.model,
+                realmModel: self.realmModel,
                 searchViewModel: self.searchViewModel,
                 page: page
             )

@@ -10,9 +10,10 @@ import SwiftUI
 
 struct SettingsHighlightsColor: View {
     @ObservedObject var model: SettingsViewModel
-
+    @ObservedObject var realmModel: RealmModel
+    
     var body: some View {
-        let color = UIColor(hex: UInt(model.highlightsColor))
+        let color = UIColor(hex: UInt(realmModel.highlightsColor))
 
         HStack {
             Text("Default Color")

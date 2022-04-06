@@ -10,17 +10,19 @@ import SwiftUI
 
 struct SettingsSlider: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
+    
     var numberOfSteps: Int?
     var minValue: Double
     var maxValue: Double
     var minSymbol: SettingsRow.Symbol
     var maxSymbol: SettingsRow.Symbol
     var saveAsInt: Bool /// precision
-    var storage: KeyPath<SettingsViewModel, Binding<Double>>
+    var storage: KeyPath<RealmModel, Binding<Double>>
 
     var body: some View {
         Slider(
-            value: model[keyPath: storage],
+            value: realmModel[keyPath: storage],
             in: minValue ... maxValue
         ) {
             EmptyView()

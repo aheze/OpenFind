@@ -10,15 +10,17 @@ import SwiftUI
 
 struct SettingsHighlightsIcon: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
+    
     var body: some View {
-        let color = UIColor(hex: UInt(model.highlightsColor))
+        let color = UIColor(hex: UInt(realmModel.highlightsColor))
 
         color.color
-            .opacity(model.highlightsBackgroundOpacity)
+            .opacity(realmModel.highlightsBackgroundOpacity)
             .cornerRadius(SettingsConstants.iconCornerRadius)
             .overlay(
                 RoundedRectangle(cornerRadius: SettingsConstants.iconCornerRadius)
-                    .strokeBorder(color.color, lineWidth: model.highlightsBorderWidth)
+                    .strokeBorder(color.color, lineWidth: realmModel.highlightsBorderWidth)
             )
             .frame(width: SettingsConstants.iconSize.width, height: SettingsConstants.iconSize.height)
     }

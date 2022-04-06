@@ -10,7 +10,9 @@ import SwiftUI
 
 struct SettingsSectionRows: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
     let section: SettingsSection
+    
     var body: some View {
         /// encompass section rows
         VStack(spacing: 0) {
@@ -27,6 +29,7 @@ struct SettingsSectionRows: View {
                 ):
                     SettingsLink(
                         model: model,
+                        realmModel: realmModel,
                         title: title,
                         leftIcon: leftIcon,
                         showRightIndicator: showRightIndicator,
@@ -38,11 +41,13 @@ struct SettingsSectionRows: View {
                 ):
                     SettingsToggle(
                         model: model,
+                        realmModel: realmModel,
                         title: title,
                         storage: storage
                     )
                 case .button(
                     title: let title,
+                    rightIconName: let rightIconName,
                     action: let action
                 ):
                     EmptyView()
@@ -57,6 +62,7 @@ struct SettingsSectionRows: View {
                 ):
                     SettingsSlider(
                         model: model,
+                        realmModel: realmModel,
                         numberOfSteps: numberOfSteps,
                         minValue: minValue,
                         maxValue: maxValue,
@@ -73,7 +79,7 @@ struct SettingsSectionRows: View {
                 case .custom(
                     identifier: let identifier
                 ):
-                    SettingsCustomView(model: model, identifier: identifier)
+                    SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
                 }
 
                 if index < section.rows.count - 1 {

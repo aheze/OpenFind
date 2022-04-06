@@ -276,3 +276,12 @@ public extension Saved where Value: RawRepresentable, Value.RawValue == String {
         })
     }
 }
+
+extension Saved {
+    /// listen to value changed
+    mutating func configureValueChanged(with model: RealmModel) {
+        valueChanged = { [weak model] in
+            model?.objectWillChange.send()
+        }
+    }
+}

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SettingsLink: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
+    
     let title: String
     let leftIcon: SettingsRow.Icon?
     let showRightIndicator: Bool
@@ -32,7 +34,7 @@ struct SettingsLink: View {
                             .cornerRadius(SettingsConstants.iconCornerRadius)
                             
                     case .custom(identifier: let identifier):
-                        SettingsCustomView(model: model, identifier: identifier)
+                        SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
                     }
                 }
                 

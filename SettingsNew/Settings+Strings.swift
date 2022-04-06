@@ -9,12 +9,11 @@
 
 import SwiftUI
 
-extension SettingsViewModel {
-    func getString(for identifier: Settings.StringIdentifier) -> String {
-        switch identifier {
+extension Settings.StringIdentifier {
+    func getString(realmModel: RealmModel) -> String {
+        switch self {
         case .asd:
-            switch hapticFeedbackLevel {
-                
+            switch realmModel.hapticFeedbackLevel {
             case .none:
                 return "none"
             case .light:

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SettingsPageView: View {
     @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
+    
     var page: SettingsPage
     var sizeChanged: ((CGSize) -> Void)?
     var body: some View {
@@ -33,11 +35,11 @@ struct SettingsPageView: View {
                                 }
 
                                 if let customViewIdentifier = section.customViewIdentifier {
-                                    SettingsCustomView(model: model, identifier: customViewIdentifier)
+                                    SettingsCustomView(model: model, realmModel: realmModel, identifier: customViewIdentifier)
                                 }
                             }
 
-                            SettingsSectionRows(model: model, section: section)
+                            SettingsSectionRows(model: model, realmModel: realmModel, section: section)
 
                             if let description = section.description {
                                 Group {
@@ -46,7 +48,7 @@ struct SettingsPageView: View {
                                         Text(string)
 
                                     case .dynamic(identifier: let identifier):
-                                        Text(model.getString(for: identifier))
+                                        Text(identifier.getString(realmModel: realmModel))
                                     }
                                 }
                                 .settingsDescriptionStyle()
@@ -55,7 +57,7 @@ struct SettingsPageView: View {
                     }
                 }
             case .custom(identifier: let identifier):
-                SettingsCustomView(model: model, identifier: identifier)
+                SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
             }
         }
         .padding(SettingsConstants.edgeInsets)
