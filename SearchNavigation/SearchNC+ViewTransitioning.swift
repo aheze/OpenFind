@@ -21,7 +21,7 @@ extension SearchNavigationController: UINavigationControllerDelegate {
         beginSearchBarTransitionAnimation(to: viewController, targetPercentage: targetPercentage)
     
         transitionCoordinator.animate { _ in
-            self.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+            self.continueSearchBarTransitionAnimation(to: viewController, targetPercentage: targetPercentage)
             
             /// check if is presenting
             if let namedViewController = viewController as? NavigationNamed, namedViewController.name == .listsDetail {
@@ -99,9 +99,15 @@ extension SearchNavigationController {
         }
     }
     
-    func continueSearchBarTransitionAnimation(targetPercentage: CGFloat) {
+    func continueSearchBarTransitionAnimation(to viewController: Searchable, targetPercentage: CGFloat) {
         self.searchContainerViewContainer.layoutIfNeeded()
         self.navigationBarBackgroundContainer.layoutIfNeeded()
+        
+        if viewController.showSearchBar {
+            searchContainerView.alpha = 1
+        } else {
+            searchContainerView.alpha = 0
+        }
             
         /// manually animate the line
         if targetPercentage == 0, self.blurPercentage != 0 {

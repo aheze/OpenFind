@@ -23,8 +23,6 @@ extension SearchNavigationController {
             detailsSearchPromptViewContainerHeightC?.constant = promptHeight
             navigationBarBackgroundHeightC?.constant = barHeight
             
-//            print("height: \(barHeight)")
-            
             self.updateBlur(
                 baseSearchBarOffset: topViewController.baseSearchBarOffset,
                 additionalSearchBarOffset: topViewController.additionalSearchBarOffset

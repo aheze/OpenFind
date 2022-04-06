@@ -16,7 +16,6 @@ class SettingsController {
     
     var searchController: SearchNavigationController
     var mainViewController: SettingsMainViewController
-    var detailViewController: SettingsDetailViewController
     
     init(realmModel: RealmModel) {
         let model = SettingsViewModel()
@@ -44,15 +43,11 @@ class SettingsController {
         }
         self.searchController = searchController
         
-        let detailViewController = SettingsDetailViewController.make(model: model)
-        self.detailViewController = detailViewController
-        
         let viewController = SettingsViewController.make(
             model: model,
             realmModel: realmModel,
             searchController: searchController,
-            mainViewController: mainViewController,
-            detailViewController: detailViewController
+            mainViewController: mainViewController
         )
         
         self.viewController = viewController

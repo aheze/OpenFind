@@ -150,7 +150,7 @@ extension PhotosController {
             }
             pushAnimator?.additionalAnimations = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
-                searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                searchNavigationController.continueSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
                 searchNavigationController.showDetailsSearchBar(true)
             }
             pushAnimator?.additionalCompletion = {
@@ -163,7 +163,7 @@ extension PhotosController {
             }
             popAnimator?.additionalAnimations = {
                 let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
-                searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                searchNavigationController.continueSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
                 searchNavigationController.showDetailsSearchBar(false)
             }
             popAnimator?.additionalCompletion = {
@@ -181,12 +181,12 @@ extension PhotosController {
                 if completed {
                     let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: photos)
                     searchNavigationController.beginSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
-                    searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                    searchNavigationController.continueSearchBarTransitionAnimation(to: photos, targetPercentage: targetPercentage)
                     searchNavigationController.showDetailsSearchBar(false)
                 } else {
                     let targetPercentage = searchNavigationController.getViewControllerBlurPercentage(for: slides)
                     searchNavigationController.beginSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
-                    searchNavigationController.continueSearchBarTransitionAnimation(targetPercentage: targetPercentage)
+                    searchNavigationController.continueSearchBarTransitionAnimation(to: slides, targetPercentage: targetPercentage)
                     searchNavigationController.showDetailsSearchBar(true)
                 }
             }

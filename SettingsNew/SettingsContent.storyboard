@@ -51,21 +51,6 @@
             </objects>
             <point key="canvasLocation" x="121.73913043478262" y="77.678571428571431"/>
         </scene>
-        <!--Settings Detail View Controller-->
-        <scene sceneID="V0w-SL-Ko9">
-            <objects>
-                <viewController storyboardIdentifier="SettingsDetailViewController" id="6NH-18-tfr" customClass="SettingsDetailViewController" customModule="SettingsNew" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IWx-qQ-9PE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="0TR-9x-ARe"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k0b-FU-8rq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="817" y="78"/>
-        </scene>
         <!--Settings View Controller-->
         <scene sceneID="cOC-Ms-rct">
             <objects>
@@ -75,14 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEW-hi-0ej">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="2qv-xX-dv5"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cyw-Jr-WGH">
-                                <rect key="frame" x="350" y="0.0" width="64" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -90,18 +68,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="uEW-hi-0ej" firstAttribute="top" secondItem="OQe-sE-DIJ" secondAttribute="top" id="3Np-lf-goQ"/>
+                            <constraint firstAttribute="trailing" secondItem="uEW-hi-0ej" secondAttribute="trailing" id="7HW-0P-L2a"/>
                             <constraint firstItem="uEW-hi-0ej" firstAttribute="leading" secondItem="OQe-sE-DIJ" secondAttribute="leading" id="8ai-Q3-YYH"/>
-                            <constraint firstAttribute="bottom" secondItem="Cyw-Jr-WGH" secondAttribute="bottom" id="GAa-6j-tje"/>
-                            <constraint firstAttribute="trailing" secondItem="Cyw-Jr-WGH" secondAttribute="trailing" id="GQW-c1-j96"/>
                             <constraint firstAttribute="bottom" secondItem="uEW-hi-0ej" secondAttribute="bottom" id="W56-CM-GF5"/>
-                            <constraint firstItem="Cyw-Jr-WGH" firstAttribute="leading" secondItem="uEW-hi-0ej" secondAttribute="trailing" id="ixv-V9-ibQ"/>
-                            <constraint firstItem="Cyw-Jr-WGH" firstAttribute="top" secondItem="OQe-sE-DIJ" secondAttribute="top" id="lZr-NP-mbC"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailContainer" destination="Cyw-Jr-WGH" id="61I-EB-66X"/>
                         <outlet property="mainContainer" destination="uEW-hi-0ej" id="JAE-XH-jYB"/>
-                        <outlet property="mainContainerWidthC" destination="2qv-xX-dv5" id="ot9-sO-Lja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jyx-lE-shI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

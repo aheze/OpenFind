@@ -13,20 +13,17 @@ class SettingsViewController: UIViewController {
     var realmModel: RealmModel
     var searchController: SearchNavigationController
     var mainViewController: SettingsMainViewController
-    var detailViewController: SettingsDetailViewController
     
     lazy var colorPickerViewModel = ColorPickerViewModel(selectedColor: UIColor(hex: realmModel.highlightsColor.uInt))
 
     @IBOutlet var mainContainer: UIView!
-    @IBOutlet var detailContainer: UIView!
-    @IBOutlet var mainContainerWidthC: NSLayoutConstraint!
+
 
     static func make(
         model: SettingsViewModel,
         realmModel: RealmModel,
         searchController: SearchNavigationController,
-        mainViewController: SettingsMainViewController,
-        detailViewController: SettingsDetailViewController
+        mainViewController: SettingsMainViewController
     ) -> SettingsViewController {
         let storyboard = UIStoryboard(name: "SettingsContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "SettingsViewController") { coder in
@@ -35,8 +32,7 @@ class SettingsViewController: UIViewController {
                 model: model,
                 realmModel: realmModel,
                 searchController: searchController,
-                mainViewController: mainViewController,
-                detailViewController: detailViewController
+                mainViewController: mainViewController
             )
         }
         return viewController
@@ -47,43 +43,28 @@ class SettingsViewController: UIViewController {
         model: SettingsViewModel,
         realmModel: RealmModel,
         searchController: SearchNavigationController,
-        mainViewController: SettingsMainViewController,
-        detailViewController: SettingsDetailViewController
+        mainViewController: SettingsMainViewController
     ) {
         self.model = model
         self.realmModel = realmModel
         self.searchController = searchController
         self.mainViewController = mainViewController
-        self.detailViewController = detailViewController
         super.init(coder: coder)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViewController(searchController, in: mainContainer)
-        addChildViewController(detailViewController, in: detailContainer)
-        updateLayout()
+        updatePageWidth()
         listen()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        updateLayout()
-    }
-
     override func viewDidLayoutSubviews() {
-        updateLayout()
+        updatePageWidth()
     }
 
-    func updateLayout() {
-        if traitCollection.horizontalSizeClass == .compact {
-            mainContainerWidthC.constant = view.bounds.width
-            model.pageWidth = view.bounds.width
-        } else {
-            mainContainerWidthC.constant = view.bounds.width * 0.4
-            model.pageWidth = view.bounds.width
-        }
-        
+    func updatePageWidth() {
+        model.pageWidth = view.bounds.width
     }
 
     @available(*, unavailable)

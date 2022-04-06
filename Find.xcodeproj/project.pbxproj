@@ -2295,7 +2295,6 @@
 		3CE40B9127F5287000CADCBF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE40B9027F5287000CADCBF /* SettingsViewController.swift */; };
 		3CE40B9327F5287D00CADCBF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE40B9227F5287D00CADCBF /* SettingsController.swift */; };
 		3CE40B9527F610F200CADCBF /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE40B9427F610F200CADCBF /* SettingsMainViewController.swift */; };
-		3CE40B9727F6110600CADCBF /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE40B9627F6110600CADCBF /* SettingsDetailViewController.swift */; };
 		3CE40B9927F611F800CADCBF /* SettingsContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CE40B9827F611F800CADCBF /* SettingsContent.storyboard */; };
 		3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
 		3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */; };
@@ -3396,7 +3395,6 @@
 		3CE40B9027F5287000CADCBF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3CE40B9227F5287D00CADCBF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		3CE40B9427F610F200CADCBF /* SettingsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
-		3CE40B9627F6110600CADCBF /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		3CE40B9827F611F800CADCBF /* SettingsContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsContent.storyboard; sourceTree = "<group>"; };
 		3CE9C1EB274B48E1008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE9C1EF274B4911008C903C /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4940,14 +4938,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		3C798FCE27F784E3007BF68D /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				3CE40B9627F6110600CADCBF /* SettingsDetailViewController.swift */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
 		3C7B7A07277E93CA00E1F602 /* Highlights */ = {
 			isa = PBXGroup;
 			children = (
@@ -5409,11 +5399,10 @@
 				3C2D22B827FC0EB800D413B7 /* SettingsController+Listen.swift */,
 				3CE40B9027F5287000CADCBF /* SettingsViewController.swift */,
 				3C2D22D927FCF01C00D413B7 /* SettingsVC+Listen.swift */,
+				3C798FCD27F784DE007BF68D /* Main */,
 				3C2D22DF27FD401700D413B7 /* Data */,
 				3C2D22A727FBD99800D413B7 /* Template Views */,
 				3C2D22CF27FCD4A200D413B7 /* Custom Views */,
-				3C798FCD27F784DE007BF68D /* Main */,
-				3C798FCE27F784E3007BF68D /* Detail */,
 				3CE40B8F27F5284A00CADCBF /* Testing */,
 			);
 			path = SettingsNew;
@@ -8589,7 +8578,6 @@
 				3C798F6527F7829F007BF68D /* SearchVM+Get.swift in Sources */,
 				3C798F5D27F7829F007BF68D /* SearchUtilities.swift in Sources */,
 				3C798FC927F78307007BF68D /* TipView.swift in Sources */,
-				3CE40B9727F6110600CADCBF /* SettingsDetailViewController.swift in Sources */,
 				3CE40B8227F5281F00CADCBF /* ViewController.swift in Sources */,
 				3C2D22BD27FC1A6500D413B7 /* Identifier.swift in Sources */,
 				3C798F6B27F7829F007BF68D /* SearchCollectionView.swift in Sources */,
