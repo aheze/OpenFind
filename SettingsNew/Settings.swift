@@ -33,6 +33,15 @@ enum Settings {
             case light
             case heavy
         }
+        
+        enum PauseScanningAfterLevel: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case never = "0"
+            case tenSeconds = "10"
+            case thirtySeconds = "30"
+            case sixtySeconds = "60"
+        }
     }
 }
 

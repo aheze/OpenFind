@@ -38,6 +38,9 @@ class RealmModel: ObservableObject {
     @Saved("scanOnLaunch") var scanOnLaunch = false
     @Saved("scanOnFind") var scanOnFind = true
     @Saved("minimumCellLength") var minimumCellLength = CGFloat(80)
+    
+    // MARK: Camera
+    @Saved("pauseScanningAfter") var pauseScanningAfter = Settings.Values.PauseScanningAfterLevel.thirtySeconds.rawValue
 
     init() {
         container.listsUpdated = { [weak self] lists in
@@ -69,5 +72,7 @@ class RealmModel: ObservableObject {
         _scanOnLaunch.configureValueChanged(with: self)
         _scanOnFind.configureValueChanged(with: self)
         _minimumCellLength.configureValueChanged(with: self)
+        
+        _pauseScanningAfter.configureValueChanged(with: self)
     }
 }

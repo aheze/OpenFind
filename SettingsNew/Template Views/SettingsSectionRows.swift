@@ -80,10 +80,17 @@ struct SettingsSectionRows: View {
                         storage: storage
                     )
                 case .picker(
+                    title: let title,
                     choices: let choices,
                     storage: let storage
                 ):
-                    EmptyView()
+                    SettingsPicker(
+                        model: model,
+                        realmModel: realmModel,
+                        title: title,
+                        choices: choices,
+                        storage: storage
+                    )
                 case .custom(
                     identifier: let identifier
                 ):
@@ -91,10 +98,7 @@ struct SettingsSectionRows: View {
                 }
 
                 if index < section.rows.count - 1 {
-                    Rectangle()
-                        .fill(SettingsConstants.dividerColor.color)
-                        .frame(height: SettingsConstants.dividerHeight)
-                        .padding(.leading, leftDividerPadding)
+                    SettingsRowDivider(leftDividerPadding: leftDividerPadding)
                 }
             }
         }

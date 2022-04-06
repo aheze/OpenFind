@@ -34,7 +34,6 @@ struct SettingsHighlightsPreview: View {
         }
         .font(UIFont.preferredFont(forTextStyle: .title3).font)
         .fixedSize(horizontal: true, vertical: false)
-        .padding(.top, 16)
         .padding(.vertical, highlightSidePadding)
         .mask(
             LinearGradient(

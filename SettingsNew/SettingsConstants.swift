@@ -12,6 +12,11 @@ enum SettingsConstants {
     
     /// insets around all content
     static var edgeInsets = EdgeInsets(top: 4, leading: 20, bottom: 20, trailing: 20)
+    
+    /// for subpages
+    static var additionalTopInset = CGFloat(16)
+    
+    
     static var sectionCornerRadius = CGFloat(12)
     static var sectionSpacing = CGFloat(20)
     static var iconSize = CGSize(width: 28, height: 28)
@@ -32,6 +37,7 @@ enum SettingsConstants {
     
     // MARK: - Insets
     static var rowVerticalInsetsFromText = EdgeInsets(top: 14, leading: 0, bottom: 14, trailing: 0)
+    
     
     /// slightly less
     static var rowVerticalInsetsFromSlider = EdgeInsets(top: 9, leading: 0, bottom: 9, trailing: 0)

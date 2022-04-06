@@ -8,16 +8,21 @@
 
 import SwiftUI
 
-
 struct SettingsPage {
     var title: String /// shown in navigation bar
     var explanation: String? /// shown at top of page, under navigation bar
     var configuration: Configuration
     var bottomViewIdentifier: Settings.ViewIdentifier? /// description at bottom, like `Version 1.3.0 - See What's New`
-
+    var addTopPadding = true
+    
     enum Configuration {
         case sections(sections: [SettingsSection])
         case custom(identifier: Settings.ViewIdentifier)
+        case picker(
+            title: String,
+            choices: [SettingsRow.PickerChoice],
+            storage: KeyPath<RealmModel, Binding<String>>
+        )
     }
 }
 
@@ -54,7 +59,11 @@ struct SettingsRow: Identifiable {
         )
 
         /// open in new page
-        case picker(choices: [PickerChoice], storage: KeyPath<RealmModel, Binding<String>>)
+        case picker(
+            title: String,
+            choices: [PickerChoice],
+            storage: KeyPath<RealmModel, Binding<String>>
+        )
         case custom(identifier: Settings.ViewIdentifier)
     }
 
@@ -68,7 +77,8 @@ struct SettingsRow: Identifiable {
         case text(string: String) /// text
     }
 
-    struct PickerChoice {
+    struct PickerChoice: Identifiable {
+        let id = UUID()
         var title: String
         var storageValue: String
     }

@@ -57,10 +57,24 @@ struct SettingsPageView: View {
                     }
                 }
             case .custom(identifier: let identifier):
-                SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
+                SettingsCustomView(
+                    model: model,
+                    realmModel: realmModel,
+                    identifier: identifier
+                )
+                
+            case .picker(title: let title, choices: let choices, storage: let storage):
+                SettingsPickerPage(
+                    model: model,
+                    realmModel: realmModel,
+                    title: title,
+                    choices: choices,
+                    storage: storage
+                )
             }
         }
         .padding(SettingsConstants.edgeInsets)
+        .padding(.top, page.addTopPadding ? SettingsConstants.additionalTopInset : 0)
         .readSize {
             self.sizeChanged?($0)
         }

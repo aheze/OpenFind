@@ -31,7 +31,7 @@ extension SettingsData {
                             backgroundColor: UIColor(hex: 0x007EEF)
                         ),
                         showRightIndicator: true,
-                        destination: highlightsPage
+                        destination: cameraPage
                     )
                 ),
                 .init(
@@ -103,6 +103,35 @@ extension SettingsData {
                             )
                         ],
                         description: .constant(string: "All scanned data will be deleted. You will need to rescan photos to find in them.")
+                    )
+                ]
+            )
+        )
+    }()
+
+    static var cameraPage: SettingsPage = {
+        .init(
+            title: "Camera",
+            configuration: .sections(
+                sections: [
+                    .init(
+                        header: "Conserving",
+                        rows: [
+                            .init(
+                                configuration:
+                                .picker(
+                                    title: "Pause Scanning After...",
+                                    choices: [
+                                        SettingsRow.PickerChoice(title: "Never", storageValue: Settings.Values.PauseScanningAfterLevel.never.rawValue),
+                                        SettingsRow.PickerChoice(title: "10s", storageValue: Settings.Values.PauseScanningAfterLevel.tenSeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "30s", storageValue: Settings.Values.PauseScanningAfterLevel.thirtySeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "1m", storageValue: Settings.Values.PauseScanningAfterLevel.sixtySeconds.rawValue)
+                                    ],
+                                    storage: \RealmModel.$pauseScanningAfter
+                                )
+                            )
+                        ],
+                        description: .constant(string: "Pause scanning after a certain amount of time to conserve CPU usage.")
                     )
                 ]
             )

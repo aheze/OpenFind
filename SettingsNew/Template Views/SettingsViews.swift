@@ -8,6 +8,16 @@
 
 import SwiftUI
 
+struct SettingsRowDivider: View {
+    var leftDividerPadding = SettingsConstants.rowHorizontalInsets.leading
+    var body: some View {
+        Rectangle()
+            .fill(SettingsConstants.dividerColor.color)
+            .frame(height: SettingsConstants.dividerHeight)
+            .padding(.leading, leftDividerPadding)
+    }
+}
+
 struct SettingsRowButton<Content: View>: View {
     let action: () -> Void
     @ViewBuilder let content: Content

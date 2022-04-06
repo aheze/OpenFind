@@ -14,7 +14,8 @@ struct SettingsData {
     static var mainPage: SettingsPage = .init(
         title: "Main Settings",
         configuration: .sections(sections: mainSections),
-        bottomViewIdentifier: nil
+        bottomViewIdentifier: nil,
+        addTopPadding: false
     )
 
     static var mainSections: [SettingsSection] = {
