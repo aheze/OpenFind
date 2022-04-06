@@ -12,6 +12,7 @@ struct SettingsButton: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     var title: String
+    var tintColor: UIColor?
     var rightIconName: String?
     var action: (() -> Void)?
 
@@ -26,9 +27,10 @@ struct SettingsButton: View {
 
                 if let rightIconName = rightIconName {
                     Image(systemName: rightIconName)
-                        .foregroundColor(UIColor.secondaryLabel.color)
+                        .foregroundColor(tintColor?.color ?? UIColor.secondaryLabel.color)
                 }
             }
+            .foregroundColor(tintColor?.color)
             .padding(SettingsConstants.rowHorizontalInsets)
         }
     }

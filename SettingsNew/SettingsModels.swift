@@ -40,7 +40,7 @@ struct SettingsRow: Identifiable {
     enum Configuration {
         case link(title: String, leftIcon: Icon?, showRightIndicator: Bool, destination: SettingsPage)
         case toggle(title: String, storage: KeyPath<RealmModel, Binding<Bool>>)
-        case button(title: String, rightIconName: String?, action: (() -> Void)?)
+        case button(title: String, tintColor: UIColor?, rightIconName: String?, action: (() -> Void)?)
 
         /// if `numberOfSteps` is nil, smooth slider
         case slider(

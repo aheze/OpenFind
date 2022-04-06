@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 4/5/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -49,7 +48,7 @@ extension SettingsData {
             ]
         )
     }()
-    
+
     static var photosPage: SettingsPage = {
         .init(
             title: "Photos",
@@ -58,7 +57,7 @@ extension SettingsData {
                     .init(
                         rows: [
                             .init(
-                                configuration: .button(title: "Scanning Options", rightIconName: "arrow.up.forward") {
+                                configuration: .button(title: "Scanning Options", tintColor: nil, rightIconName: "arrow.up.forward") {
                                     showScanningOptions?()
                                 }
                             )
@@ -70,6 +69,40 @@ extension SettingsData {
                             .init(configuration: .custom(identifier: .photosGridSize))
                         ],
                         description: .constant(string: "Configure the size of the grid in the Photos tab.")
+                    ),
+                    .init(
+                        rows: [
+                            .init(
+                                configuration: .link(
+                                    title: "Advanced",
+                                    leftIcon: nil,
+                                    showRightIndicator: true,
+                                    destination: photosAdvancedPage
+                                )
+                            )
+                        ]
+                    )
+                ]
+            )
+        )
+    }()
+
+    static var photosAdvancedPage: SettingsPage = {
+        .init(
+            title: "Advanced",
+            configuration: .sections(
+                sections: [
+                    .init(
+                        rows: [
+                            .init(
+                                configuration: .button(
+                                    title: "Delete All Scanned Data",
+                                    tintColor: UIColor.systemRed,
+                                    rightIconName: "trash"
+                                ) {}
+                            )
+                        ],
+                        description: .constant(string: "All scanned data will be deleted. You will need to rescan photos to find in them.")
                     )
                 ]
             )

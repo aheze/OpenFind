@@ -47,6 +47,7 @@ struct SettingsSectionRows: View {
                     )
                 case .button(
                     title: let title,
+                    tintColor: let tintColor,
                     rightIconName: let rightIconName,
                     action: let action
                 ):
@@ -54,6 +55,7 @@ struct SettingsSectionRows: View {
                         model: model,
                         realmModel: realmModel,
                         title: title,
+                        tintColor: tintColor,
                         rightIconName: rightIconName,
                         action: action
                     )
