@@ -1885,6 +1885,7 @@
 		3CAC4DCD25BF5E4900CC7948 /* CameraVC+FinishedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DCC25BF5E4900CC7948 /* CameraVC+FinishedCache.swift */; };
 		3CAC4DD025BF611100CC7948 /* CameraVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */; };
 		3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */; };
+		3CADD80227FE4B7A009BBBDA /* SupportDocs in Frameworks */ = {isa = PBXBuildFile; productRef = 3CADD80127FE4B7A009BBBDA /* SupportDocs */; };
 		3CAE64EB27C6AA73009E8564 /* PhotosVC+ResultsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE64EA27C6AA73009E8564 /* PhotosVC+ResultsFlowLayout.swift */; };
 		3CAE64EC27C6AA80009E8564 /* PhotosVC+ResultsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE64EA27C6AA73009E8564 /* PhotosVC+ResultsFlowLayout.swift */; };
 		3CAE64EE27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE64ED27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift */; };
@@ -3661,6 +3662,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CADD80227FE4B7A009BBBDA /* SupportDocs in Frameworks */,
 				3C2D229827FBBA0200D413B7 /* SwiftPrettyPrint in Frameworks */,
 				3C798FCC27F78481007BF68D /* Popovers in Frameworks */,
 			);
@@ -6182,6 +6184,7 @@
 			packageProductDependencies = (
 				3C798FCB27F78481007BF68D /* Popovers */,
 				3C2D229727FBBA0200D413B7 /* SwiftPrettyPrint */,
+				3CADD80127FE4B7A009BBBDA /* SupportDocs */,
 			);
 			productName = SettingsNew;
 			productReference = 3CE40B7B27F5281F00CADCBF /* SettingsNew.app */;
@@ -11140,6 +11143,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
 			productName = Popovers;
+		};
+		3CADD80127FE4B7A009BBBDA /* SupportDocs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
+			productName = SupportDocs;
 		};
 		3CFD5F79278A37F00031BC8B /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;

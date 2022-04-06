@@ -15,10 +15,10 @@ struct SettingsLinks: View {
 
     var body: some View {
         HStack {
-            SettingsLinksButton(iconName: "link", title: "Link", color: UIColor(hex: 0x0085FF)) {
+            SettingsLinksButton(iconName: "link", title: "Link", color: UIColor(hex: 0x002eff)) {
                 SettingsData.shareLink?()
             }
-            SettingsLinksButton(iconName: "qrcode", title: "QR Code", color: UIColor(hex: 0x1DCE0)) {
+            SettingsLinksButton(iconName: "qrcode", title: "QR Code", color: UIColor(hex: 0x00bb11)) {
                 showingQRCode = true
             }
         }
