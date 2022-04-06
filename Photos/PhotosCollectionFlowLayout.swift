@@ -73,17 +73,6 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     var columnWidth = CGFloat(0) /// width of each column. Needed for bounds change calculations
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
-    /// get the number of columns and each column's width from available bounds + insets
-    func getColumns(availableWidth: CGFloat) -> (Int, CGFloat) {
-        let numberOfColumns = Int(availableWidth / PhotosConstants.minCellWidth)
-        
-        /// space between columns
-        let columnSpacing = CGFloat(numberOfColumns - 1) * PhotosConstants.cellSpacing
-        let columnWidth = (availableWidth - columnSpacing) / CGFloat(numberOfColumns)
-        
-        return (numberOfColumns, columnWidth)
-    }
-    
     func getShortestColumnIndex(from columnOffsets: [CGSize]) -> Int? {
         guard !columnOffsets.isEmpty else { return nil }
         var (smallestIndex, smallestHeight) = (0, CGFloat.infinity)
@@ -137,7 +126,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             - collectionView.safeAreaInsets.left
             - collectionView.safeAreaInsets.right
         
-        let (numberOfColumns, columnWidth) = getColumns(availableWidth: availableWidth)
+        let (numberOfColumns, columnWidth) = PhotosConstants.minCellWidth.getColumns(availableWidth: availableWidth)
         self.columnWidth = columnWidth
         
         var columnOffsets = [CGSize]()

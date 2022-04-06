@@ -32,7 +32,12 @@ class Defaults: ObservableObject {
         nonmutating set {
             saveValue(newValue)
             _value.value = newValue
-            valueChanged?()
+
+            if let valueChanged = valueChanged {
+                valueChanged()
+            } else {
+                assert(false, "`valueChanged` not set for \(self)")
+            }
         }
     }
 

@@ -78,9 +78,12 @@ class SettingsViewController: UIViewController {
     func updateLayout() {
         if traitCollection.horizontalSizeClass == .compact {
             mainContainerWidthC.constant = view.bounds.width
+            model.pageWidth = view.bounds.width
         } else {
             mainContainerWidthC.constant = view.bounds.width * 0.4
+            model.pageWidth = view.bounds.width
         }
+        
     }
 
     @available(*, unavailable)

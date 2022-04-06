@@ -16,6 +16,8 @@ enum Settings {
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
+        
+        case photosGridSize
     }
 
     enum StringIdentifier: String {

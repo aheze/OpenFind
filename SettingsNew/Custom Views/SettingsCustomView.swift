@@ -24,6 +24,8 @@ struct SettingsCustomView: View {
                 SettingsHighlightsIcon(model: model, realmModel: realmModel)
             case .highlightsColor:
                 SettingsHighlightsColor(model: model, realmModel: realmModel)
+            case .photosGridSize:
+                SettingsPhotoGridSize(model: model, realmModel: realmModel)
             }
         }
     }

@@ -59,21 +59,17 @@ extension SettingsData {
                         rows: [
                             .init(
                                 configuration: .button(title: "Scanning Options", rightIconName: "arrow.up.forward") {
-                                    
+                                    showScanningOptions?()
                                 }
                             )
                         ]
                     ),
                     .init(
+                        header: "Gallery Grid Size",
                         rows: [
-                            .init(
-                                configuration: .toggle(
-                                    title: "Swipe To Navigate",
-                                    storage: \.$swipeToNavigate
-                                )
-                            )
+                            .init(configuration: .custom(identifier: .photosGridSize))
                         ],
-                        description: .constant(string: "Swipe left and right to change tabs.")
+                        description: .constant(string: "Configure the size of the grid in the Photos tab.")
                     )
                 ]
             )

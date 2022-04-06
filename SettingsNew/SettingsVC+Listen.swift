@@ -14,10 +14,6 @@ extension SettingsViewController {
             guard let self = self else { return }
             self.presentColorPicker()
         }
-        model.showScanningOptions = { [weak self] in
-            guard let self = self else { return }
-            
-        }
     }
 
     func presentColorPicker() {
