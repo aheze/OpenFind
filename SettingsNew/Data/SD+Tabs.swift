@@ -42,7 +42,7 @@ extension SettingsData {
                             backgroundColor: UIColor(hex: 0xEAA800)
                         ),
                         showRightIndicator: true,
-                        destination: highlightsPage
+                        destination: listsPage
                     )
                 )
             ]
@@ -118,9 +118,8 @@ extension SettingsData {
                         header: "Frequency",
                         rows: [
                             .init(
-                                configuration:
-                                .picker(
-                                    title: "Scan Every...",
+                                configuration: .picker(
+                                    title: "Scan Every",
                                     choices: [
                                         SettingsRow.PickerChoice(title: "Continuous", storageValue: Settings.Values.ScanningFrequencyLevel.continuous.rawValue),
                                         SettingsRow.PickerChoice(title: "0.5s", storageValue: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue),
@@ -138,9 +137,8 @@ extension SettingsData {
                         header: "Conserving",
                         rows: [
                             .init(
-                                configuration:
-                                .picker(
-                                    title: "Pause Scanning After...",
+                                configuration: .picker(
+                                    title: "Pause Scanning After",
                                     choices: [
                                         SettingsRow.PickerChoice(title: "Never", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.never.rawValue),
                                         SettingsRow.PickerChoice(title: "10s", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue),
@@ -152,6 +150,44 @@ extension SettingsData {
                             )
                         ],
                         description: .constant(string: "Pause scanning after a certain amount of time to conserve CPU usage.")
+                    )
+                ]
+            )
+        )
+    }()
+
+    static var listsPage: SettingsPage = {
+        .init(
+            title: "Lists",
+            configuration: .sections(
+                sections: [
+                    .init(
+                        rows: [
+                            .init(
+                                configuration: .picker(
+                                    title: "Sort By",
+                                    choices: [
+                                        SettingsRow.PickerChoice(title: "Newest First", storageValue: Settings.Values.ListsSortByLevel.newestFirst.rawValue),
+                                        SettingsRow.PickerChoice(title: "Oldest First", storageValue: Settings.Values.ListsSortByLevel.oldestFirst.rawValue),
+                                        SettingsRow.PickerChoice(title: "Title", storageValue: Settings.Values.ListsSortByLevel.title.rawValue)
+                                    ],
+                                    storage: \RealmModel.$listsSortBy
+                                )
+                            )
+                        ]
+                    ),
+                    .init(
+                        rows: [
+                            .init(
+                                configuration: .button(
+                                    title: "Export All Lists",
+                                    tintColor: Colors.accent,
+                                    rightIconName: "square.and.arrow.up"
+                                ) {
+                                    exportAllLists?()
+                                }
+                            )
+                        ]
                     )
                 ]
             )

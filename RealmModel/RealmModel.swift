@@ -43,6 +43,8 @@ class RealmModel: ObservableObject {
     @Saved("cameraScanningFrequency") var cameraScanningFrequency = Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue
     @Saved("cameraScanningDurationUntilPause") var cameraScanningDurationUntilPause = Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue
 
+    // MARK: Lists
+    @Saved("listsSortBy") var listsSortBy = Settings.Values.ListsSortByLevel.newestFirst.rawValue
     
 
     init() {
@@ -79,5 +81,7 @@ class RealmModel: ObservableObject {
         
         _cameraScanningFrequency.configureValueChanged(with: self)
         _cameraScanningDurationUntilPause.configureValueChanged(with: self)
+        
+        _listsSortBy.configureValueChanged(with: self)
     }
 }

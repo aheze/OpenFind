@@ -20,7 +20,11 @@ class ViewController: UIViewController {
 
         SettingsData.showScanningOptions = { [weak self] in
             guard let self = self else { return }
-            print("Show scanning options!")
+            print("Show scanning options")
+        }
+        SettingsData.exportAllLists = { [weak self] in
+            guard let self = self else { return }
+            print("Export all lists")
         }
     }
 }

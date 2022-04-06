@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsData {
     static var showScanningOptions: (() -> Void)?
+    static var exportAllLists: (() -> Void)?
     
     static var mainPage: SettingsPage = .init(
         title: "Main Settings",

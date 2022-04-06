@@ -16,7 +16,7 @@ enum Settings {
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
-        
+
         case photosGridSize
     }
 
@@ -33,8 +33,7 @@ enum Settings {
             case light = "Light"
             case heavy = "Heavy"
         }
-        
-        
+
         enum ScanningDurationUntilPauseLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
@@ -43,6 +42,7 @@ enum Settings {
             case thirtySeconds = "30"
             case sixtySeconds = "60"
         }
+
         enum ScanningFrequencyLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
@@ -52,8 +52,14 @@ enum Settings {
             case twoSeconds = "2"
             case threeSeconds = "3"
         }
-        
+
+        enum ListsSortByLevel: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case newestFirst = "newestFirst"
+            case oldestFirst = "oldestFirst"
+            case title = "title"
+
+        }
     }
 }
-
-
