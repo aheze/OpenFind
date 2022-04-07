@@ -32,7 +32,7 @@ enum Settings {
     }
 
     enum StringIdentifier: String {
-        case asd
+        case filterLists
     }
 
     /// for storage

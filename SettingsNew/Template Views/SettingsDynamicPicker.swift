@@ -57,40 +57,49 @@ struct SettingsDynamicPickerPage: View {
 
     var body: some View {
         let values = getValues()
+
         VStack(spacing: 0) {
-            ForEach(Array(zip(values.indices, values)), id: \.1.self) { index, value in
-                let softwareLimitationString = softwareLimitationString(value: value)
+            /// encompass section rows
+            VStack(spacing: 0) {
+                ForEach(Array(zip(values.indices, values)), id: \.1.self) { index, value in
+                    let softwareLimitationString = softwareLimitationString(value: value)
 
-                SettingsRowButton {
-                    valuePressed(value: value)
-                } content: {
-                    HStack {
-                        Text(getTitle(value: value))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(SettingsConstants.rowVerticalInsetsFromText)
-                            .opacity(softwareLimitationString != nil ? 0.5 : 1)
+                    SettingsRowButton {
+                        valuePressed(value: value)
+                    } content: {
+                        HStack {
+                            Text(getTitle(value: value))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(SettingsConstants.rowVerticalInsetsFromText)
+                                .opacity(softwareLimitationString != nil ? 0.5 : 1)
 
-                        if let softwareLimitationString = softwareLimitationString {
-                            Text(softwareLimitationString)
-                                .capsuleTipStyle()
+                            if let softwareLimitationString = softwareLimitationString {
+                                Text(softwareLimitationString)
+                                    .capsuleTipStyle()
+                            }
+
+                            if valueIsSelected(value: value) {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.accent)
+                            }
                         }
-
-                        if valueIsSelected(value: value) {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.accent)
-                        }
+                        .padding(SettingsConstants.rowHorizontalInsets)
                     }
-                    .padding(SettingsConstants.rowHorizontalInsets)
-                }
-                .disabled(softwareLimitationString != nil)
+                    .disabled(softwareLimitationString != nil)
 
-                if index < values.count - 1 {
-                    SettingsRowDivider()
+                    if index < values.count - 1 {
+                        SettingsRowDivider()
+                    }
                 }
             }
+            .background(UIColor.systemBackground.color)
+            .cornerRadius(SettingsConstants.sectionCornerRadius)
+
+            if let description = getDescription() {
+                Text(description)
+                    .settingsDescriptionStyle()
+            }
         }
-        .background(UIColor.systemBackground.color)
-        .cornerRadius(SettingsConstants.sectionCornerRadius)
     }
 
     func valuePressed(value: String) {
@@ -183,6 +192,16 @@ struct SettingsDynamicPickerPage: View {
             return selectedLanguage.rawValue
         }
         return nil
+    }
+
+    /// footer description
+    func getDescription() -> String? {
+        switch identifier {
+        case .primaryRecognitionLanguage:
+            return "Due to its complexity, Chinese does not work in the Camera live preview."
+        case .secondaryRecognitionLanguage:
+            return nil
+        }
     }
 }
 

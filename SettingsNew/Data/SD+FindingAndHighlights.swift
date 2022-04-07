@@ -58,7 +58,8 @@ extension SettingsData {
                                     identifier: .secondaryRecognitionLanguage
                                 )
                             )
-                        ]
+                        ],
+                        description: .constant(string: "Choose the languages for text scanning.")
                     ),
                     .init(
                         header: "Options",
@@ -72,7 +73,7 @@ extension SettingsData {
                         rows: [
                             .init(configuration: .toggle(title: "Filter Lists", storage: \.$findingFilterLists))
                         ],
-                        description: .constant(string: "Filter lists when typing in the search bar")
+                        description: .dynamic(identifier: .filterLists)
                     )
                 ]
             )

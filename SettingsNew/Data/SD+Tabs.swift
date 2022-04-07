@@ -135,10 +135,10 @@ extension SettingsData {
                                     title: "Scan Every",
                                     choices: [
                                         SettingsRow.PickerChoice(title: "Continuous", storageValue: Settings.Values.ScanningFrequencyLevel.continuous.rawValue),
-                                        SettingsRow.PickerChoice(title: "0.5s", storageValue: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue),
-                                        SettingsRow.PickerChoice(title: "1s", storageValue: Settings.Values.ScanningFrequencyLevel.oneSecond.rawValue),
-                                        SettingsRow.PickerChoice(title: "2s", storageValue: Settings.Values.ScanningFrequencyLevel.twoSeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "3s", storageValue: Settings.Values.ScanningFrequencyLevel.threeSeconds.rawValue)
+                                        SettingsRow.PickerChoice(title: "0.5 Seconds", storageValue: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue),
+                                        SettingsRow.PickerChoice(title: "1 Second", storageValue: Settings.Values.ScanningFrequencyLevel.oneSecond.rawValue),
+                                        SettingsRow.PickerChoice(title: "2 Seconds", storageValue: Settings.Values.ScanningFrequencyLevel.twoSeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "3 Seconds", storageValue: Settings.Values.ScanningFrequencyLevel.threeSeconds.rawValue)
                                     ],
                                     storage: \RealmModel.$cameraScanningFrequency
                                 )
@@ -154,9 +154,9 @@ extension SettingsData {
                                     title: "Pause Scanning After",
                                     choices: [
                                         SettingsRow.PickerChoice(title: "Never", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.never.rawValue),
-                                        SettingsRow.PickerChoice(title: "10s", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "30s", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "1m", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.sixtySeconds.rawValue)
+                                        SettingsRow.PickerChoice(title: "10 Seconds", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "30 Seconds", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue),
+                                        SettingsRow.PickerChoice(title: "1 Minute", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.sixtySeconds.rawValue)
                                     ],
                                     storage: \RealmModel.$cameraScanningDurationUntilPause
                                 )
