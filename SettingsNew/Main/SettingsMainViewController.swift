@@ -77,6 +77,7 @@ class SettingsMainViewController: UIViewController, Searchable {
     }
     
     @objc func dismissSelf() {
+        model.dismissed?()
         self.dismiss(animated: true)
     }
     

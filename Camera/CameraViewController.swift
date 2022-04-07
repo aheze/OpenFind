@@ -115,31 +115,3 @@ class CameraViewController: UIViewController, PageViewController {
     }
 }
 
-extension CameraViewController {
-    func willBecomeActive() {
-        if !livePreviewViewController.session.isRunning {
-            DispatchQueue.global(qos: .userInteractive).async {
-                self.livePreviewViewController.session.startRunning()
-            }
-        }
-    }
-    
-    func didBecomeActive() {}
-    
-    func willBecomeInactive() {}
-    
-    func didBecomeInactive() {
-        Find.prioritizedAction = nil
-        DispatchQueue.main.asyncAfter(deadline: .now() + CameraConstants.cameraCoolDownDuration) {
-            if self.tabViewModel.tabState != .camera {
-                DispatchQueue.global(qos: .userInteractive).async {
-                    if self.livePreviewViewController.session.isRunning {
-                        self.livePreviewViewController.session.stopRunning()
-                    }
-                }
-            }
-        }
-    }
-    
-    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {}
-}

@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import SwiftPrettyPrint
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
@@ -29,6 +28,8 @@ class SettingsViewModel: ObservableObject {
 
     /// callback from the settings page. Listen inside `SettingsVC+Listen`
     var showHighlightColorPicker: (() -> Void)?
+    
+    var dismissed: (() -> Void)?
 
     init() {
         let paths = self.page.generatePaths()
