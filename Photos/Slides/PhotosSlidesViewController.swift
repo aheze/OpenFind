@@ -103,7 +103,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
-            model.updateAllowed = true
             if slidesPhoto.findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {
                 slidesSearchPromptViewModel.update(show: true, resultsText: slidesPhoto.findPhoto.getResultsText(), resetText: nil)
             }
@@ -123,7 +122,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        model.updateAllowed = true
         if let popover = view.popover(tagged: "Popover") {
             popover.dismiss()
         }
@@ -134,7 +132,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = nil
         switchToFullScreen(false)
         slidesSearchPromptViewModel.update(show: false)
-        model.updateAllowed = true
 
         withAnimation {
             toolbarViewModel.toolbar = nil

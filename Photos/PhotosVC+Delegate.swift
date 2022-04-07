@@ -24,12 +24,6 @@ extension PhotosViewController: UICollectionViewDelegate {
         updateNavigationBar?()
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PhotosResultsCell {
-            willDisplayCell(cell: cell, index: indexPath.item)
-        }
-    }
-
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
         if model.isSelecting {
             return true

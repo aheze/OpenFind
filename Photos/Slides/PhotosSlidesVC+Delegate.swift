@@ -35,12 +35,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 /// detect stopped at a new photo
 extension PhotosSlidesViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == collectionView {
-            /// only disallow if **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
-            if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
-                model.updateAllowed = false
-            }
-        } else if scrollView == self.scrollView {
+        if scrollView == self.scrollView {
             infoScrollViewDidScroll()
         }
     }
@@ -48,7 +43,6 @@ extension PhotosSlidesViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
             notifyIfScrolledToStop()
-            model.updateAllowed = true
         } else if scrollView == self.scrollView {
             infoScrollViewDidEndDecelerating()
         }

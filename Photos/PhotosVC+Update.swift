@@ -59,19 +59,19 @@ extension PhotosViewController {
                     if let index = resultsState.getFindPhotoIndex(for: photo, in: \.allFindPhotos) {
                         model.resultsState?.allFindPhotos[index].highlightsSet = highlightsSet
                     } else {
-                        model.resultsState?.allFindPhotos.append(findPhoto)
+                        model.resultsState?.allFindPhotos.insert(findPhoto, at: 0)
                     }
 
                     if let index = resultsState.getFindPhotoIndex(for: photo, in: \.starredFindPhotos) {
                         model.resultsState?.starredFindPhotos[index].highlightsSet = highlightsSet
                     } else {
-                        model.resultsState?.starredFindPhotos.append(findPhoto)
+                        model.resultsState?.starredFindPhotos.insert(findPhoto, at: 0)
                     }
 
                     if let index = resultsState.getFindPhotoIndex(for: photo, in: \.screenshotsFindPhotos) {
                         model.resultsState?.screenshotsFindPhotos[index].highlightsSet = highlightsSet
                     } else {
-                        model.resultsState?.screenshotsFindPhotos.append(findPhoto)
+                        model.resultsState?.screenshotsFindPhotos.insert(findPhoto, at: 0)
                     }
                     
                     let filter = sliderViewModel.selectedFilter ?? .all

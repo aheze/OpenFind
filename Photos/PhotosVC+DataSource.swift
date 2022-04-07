@@ -23,6 +23,7 @@ extension PhotosViewController {
         }
 
         update()
+        print("load.\(filter)")
         updateResults()
     }
 

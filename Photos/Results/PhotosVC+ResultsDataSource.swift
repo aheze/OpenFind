@@ -71,6 +71,7 @@ extension PhotosViewController {
             }
 
             self.configureCell(cell: cell, metadata: findPhoto.photo.metadata)
+            self.loadHighlights(for: cell, findPhoto: findPhoto)
 
             cell.tapped = { [weak self] in
                 guard let self = self else { return }

@@ -19,6 +19,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
             
             if model.resultsState != nil {
+                self.model.updateAllowed = false
                 if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
                     cell.view.imageView.alpha = 0
                 }
@@ -101,7 +102,6 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         case .pop:
             guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
             
-            
             /// make sure completed first
             if completed {
                 if model.resultsState != nil {
@@ -129,6 +129,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 }
                 
                 if model.sortNeeded {
+                    model.sortNeeded = false
                     if let selectedFilter = sliderViewModel.selectedFilter {
                         self.load(for: selectedFilter)
                     }
@@ -140,6 +141,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 
                 /// remove slides state to keep finding in `PhotosVM+Update`
                 self.model.slidesState = nil
+                self.model.updateAllowed = true
             }
         }
     }

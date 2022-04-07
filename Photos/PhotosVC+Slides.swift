@@ -88,8 +88,6 @@ extension PhotosViewController {
 
             if let index = self.model.slidesState?.getFindPhotoIndex(findPhoto: findPhoto) {
                 self.model.slidesState?.slidesPhotos[index].findPhoto.fullImage = fullImage
-                
-//                self.model.slidesState?.slidesPhotos[index].associatedViewController?.reloadImage()
             }
         }
 
