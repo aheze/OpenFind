@@ -35,6 +35,16 @@ struct SettingsSectionRows: View {
                         destination: destination,
                         action: action
                     )
+                case .deepLink(
+                    title: let title,
+                    rows: let rows
+                ):
+                    SettingsDeepLink(
+                        model: model,
+                        realmModel: realmModel,
+                        title: title,
+                        rows: rows
+                    )
                 case .toggle(
                     title: let title,
                     storage: let storage
@@ -124,6 +134,8 @@ struct SettingsSectionRows: View {
             if leftIcon != nil {
                 additionalPadding = SettingsConstants.iconSize.width + SettingsConstants.rowIconTitleSpacing
             }
+        case .deepLink:
+            break
         case .toggle:
             break
         case .button:

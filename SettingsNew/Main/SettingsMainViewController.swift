@@ -25,7 +25,7 @@ class SettingsMainViewController: UIViewController, Searchable {
         let viewController = model.page.generateViewController(model: model, realmModel: realmModel)
         return viewController
     }()
-    lazy var resultsViewController = SettingsResultsViewController(paths: model.paths)
+    lazy var resultsViewController = SettingsResultsViewController(model: model, realmModel: realmModel)
     
     static func make(
         model: SettingsViewModel,

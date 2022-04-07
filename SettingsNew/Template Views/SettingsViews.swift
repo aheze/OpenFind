@@ -28,6 +28,32 @@ struct SettingsRowButton<Content: View>: View {
     }
 }
 
+struct SettingsIconView: View {
+    @ObservedObject var model: SettingsViewModel
+    @ObservedObject var realmModel: RealmModel
+    let icon: SettingsRow.Icon
+    var body: some View {
+        VStack {
+            switch icon {
+            case .template(iconName: let iconName, backgroundColor: let backgroundColor):
+
+                Image(systemName: iconName)
+                    .settingsRowIconStyle(backgroundColor: backgroundColor)
+
+            case .image(imageName: let imageName, inset: let inset, backgroundColor: let backgroundColor):
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(inset)
+                    .settingsRowIconStyle(backgroundColor: backgroundColor)
+
+            case .custom(identifier: let identifier):
+                SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
+            }
+        }
+    }
+}
+
 struct SettingsButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -46,13 +72,15 @@ struct SettingsButtonStyle: ButtonStyle {
 }
 
 extension View {
-    func settingsSmallTextStyle() -> some View {
+    
+    /// `addHorizontalPadding` is false inside `SettingsResultsSectionHeaderView`
+    func settingsSmallTextStyle(addHorizontalPadding: Bool = true) -> some View {
         font(.system(.subheadline))
             .multilineTextAlignment(.leading)
             .foregroundColor(UIColor.secondaryLabel.color)
             .frame(maxWidth: .infinity, alignment: .leading)
             .fixedSize(horizontal: false, vertical: true)
-            .padding(.horizontal, SettingsConstants.rowHorizontalInsets.leading) /// extra padding
+            .padding(.horizontal, addHorizontalPadding ? SettingsConstants.rowHorizontalInsets.leading : 0) /// extra padding
     }
 
     func settingsHeaderStyle() -> some View {

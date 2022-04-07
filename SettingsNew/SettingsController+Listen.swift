@@ -25,5 +25,10 @@ extension SettingsController {
             )
             self.searchController.navigation.pushViewController(scrollViewController, animated: true)
         }
+        
+        model.showRows = { [weak self] path in
+            guard let self = self else { return }
+            print("show// \(path.count)")
+        }
     }
 }

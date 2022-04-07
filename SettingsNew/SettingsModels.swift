@@ -36,6 +36,7 @@ struct SettingsPage {
 
 struct SettingsSection: Identifiable {
     let id = UUID()
+    var icon: SettingsRow.Icon? /// shown at top
     var header: String? /// shown at top
     var rows = [SettingsRow]()
     var customViewIdentifier: Settings.ViewIdentifier? /// show above the rows
@@ -58,6 +59,13 @@ struct SettingsRow: Identifiable {
             destination: SettingsPage?,
             action: (() -> Void)? /// called when row tapped
         )
+        
+        /// for results
+        case deepLink(
+            title: String,
+            rows: [SettingsRow]
+        )
+        
         case toggle(title: String, storage: KeyPath<RealmModel, Binding<Bool>>)
         case button(title: String, tintColor: UIColor?, rightIconName: String?, action: (() -> Void)?)
 

@@ -5,16 +5,16 @@
 //  Created by A. Zheng (github.com/aheze) on 4/4/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import SwiftUI
 
 class SettingsResultsViewController: UIViewController {
-    let paths: [[SettingsRow]]
+    var model: SettingsViewModel
+    var realmModel: RealmModel
 
     var contentViewHeightC: NSLayoutConstraint?
     var contentViewBottomC: NSLayoutConstraint? /// set this to active/inactive when showing/hiding results
-    
+
     lazy var contentView: UIView = {
         let contentView = UIView()
         view.addSubview(contentView)
@@ -34,8 +34,12 @@ class SettingsResultsViewController: UIViewController {
         return contentView
     }()
 
-    init(paths: [[SettingsRow]]) {
-        self.paths = paths
+    init(
+        model: SettingsViewModel,
+        realmModel: RealmModel
+    ) {
+        self.model = model
+        self.realmModel = realmModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -51,10 +55,10 @@ class SettingsResultsViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         _ = contentView
 
-        let settingsResultsView = SettingsResultsView(paths: paths) { [weak self] size in
+        let settingsResultsView = SettingsResultsView(model: model, realmModel: realmModel) { [weak self] size in
             self?.contentViewHeightC?.constant = size.height
         }
 

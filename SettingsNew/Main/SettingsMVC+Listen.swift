@@ -23,12 +23,9 @@ extension SettingsMainViewController {
             }
         
             if textChanged {
-
-            } else {
-                
+                self.find(text: self.searchViewModel.text)
             }
         }
-        
         
     }
 }

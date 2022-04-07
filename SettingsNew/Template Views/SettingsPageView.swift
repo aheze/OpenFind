@@ -73,7 +73,7 @@ struct SettingsPageView: View {
                     choices: choices,
                     storage: storage
                 )
-                
+
             case .dynamicPicker(title: let title, identifier: let identifier):
                 SettingsDynamicPickerPage(
                     model: model,
@@ -81,7 +81,7 @@ struct SettingsPageView: View {
                     title: title,
                     identifier: identifier
                 )
-                
+
             case .license(license: let license):
                 SettingsLicensePage(
                     model: model,

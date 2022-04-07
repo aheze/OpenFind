@@ -27,22 +27,7 @@ struct SettingsLink: View {
         } content: {
             HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
                 if let leftIcon = leftIcon {
-                    switch leftIcon {
-                    case .template(iconName: let iconName, backgroundColor: let backgroundColor):
-
-                        Image(systemName: iconName)
-                            .settingsRowIconStyle(backgroundColor: backgroundColor)
-                        
-                    case .image(imageName: let imageName, inset: let inset, backgroundColor: let backgroundColor):
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .padding(inset)
-                            .settingsRowIconStyle(backgroundColor: backgroundColor)
-                        
-                    case .custom(identifier: let identifier):
-                        SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)
-                    }
+                    SettingsIconView(model: model, realmModel: realmModel, icon: leftIcon)
                 }
                 
                 Text(title)
