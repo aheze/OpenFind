@@ -30,6 +30,7 @@ struct SettingsDeepLink: View {
                     HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
                         VStack(spacing: 6) {
                             Text(getDestinationTitle())
+                                .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
                             HStack(spacing: 2) {

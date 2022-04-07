@@ -69,6 +69,7 @@ struct SettingsDynamicPickerPage: View {
                     } content: {
                         HStack {
                             Text(getTitle(value: value))
+                                .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(SettingsConstants.rowVerticalInsetsFromText)
                                 .opacity(softwareLimitationString != nil ? 0.5 : 1)

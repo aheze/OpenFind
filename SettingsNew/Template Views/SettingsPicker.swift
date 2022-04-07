@@ -22,6 +22,7 @@ struct SettingsPicker: View {
         } content: {
             HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
                 Text(title)
+                    .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(SettingsConstants.rowVerticalInsetsFromText)
 
