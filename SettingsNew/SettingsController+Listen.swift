@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import SwiftUI
 
 extension SettingsController {
@@ -28,7 +27,39 @@ extension SettingsController {
         
         model.showRows = { [weak self] path in
             guard let self = self else { return }
-            print("show// \(path.count)")
+            
+            var viewControllers = [SettingsScrollViewController]()
+            for row in path {
+                if case .link(title: _, leftIcon: _, indicatorStyle: _, destination: let destination, action: let action) = row.configuration {
+                    if let destination = destination {
+                        let scrollViewController = SettingsScrollViewController(
+                            model: self.model,
+                            realmModel: self.realmModel,
+                            searchViewModel: self.searchViewModel,
+                            page: destination
+                        )
+                        viewControllers.append(scrollViewController)
+                        
+                        /// external link
+                    } else if let action = action {
+                        action()
+                        return
+                    }
+                }
+            }
+            
+            self.searchController.navigation.pushViewControllers(viewControllers, animated: true)
         }
+    }
+}
+
+
+extension UINavigationController {
+    
+    /// https://stackoverflow.com/a/50991286/14351818
+    func pushViewControllers(_ inViewControllers: [UIViewController], animated: Bool) {
+        var stack = self.viewControllers
+        stack.append(contentsOf: inViewControllers)
+        self.setViewControllers(stack, animated: animated)
     }
 }

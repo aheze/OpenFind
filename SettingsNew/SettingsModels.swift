@@ -56,16 +56,16 @@ struct SettingsRow: Identifiable {
             title: String,
             leftIcon: Icon?,
             indicatorStyle: IndicatorStyle?,
-            destination: SettingsPage?,
+            destination: SettingsPage?, /// nil if external link
             action: (() -> Void)? /// called when row tapped
         )
-        
+
         /// for results
         case deepLink(
             title: String,
             rows: [SettingsRow]
         )
-        
+
         case toggle(title: String, storage: KeyPath<RealmModel, Binding<Bool>>)
         case button(title: String, tintColor: UIColor?, rightIconName: String?, action: (() -> Void)?)
 
@@ -86,14 +86,35 @@ struct SettingsRow: Identifiable {
             choices: [PickerChoice],
             storage: KeyPath<RealmModel, Binding<String>>
         )
-        
+
         /// open in new page
         case dynamicPicker(
             title: String,
             identifier: Settings.DynamicPickerIdentifier
         )
-        
+
         case custom(identifier: Settings.ViewIdentifier)
+
+        func getTitle() -> String? {
+            switch self {
+            case .link(title: let title, leftIcon: _, indicatorStyle: _, destination: _, action: _):
+                return title
+            case .deepLink(title: let title, rows: _):
+                return title
+            case .toggle(title: let title, storage: _):
+                return title
+            case .button(title: let title, tintColor: _, rightIconName: _, action: _):
+                return title
+            case .slider(numberOfSteps: _, minValue: _, maxValue: _, minSymbol: _, maxSymbol: _, saveAsInt: _, storage: _):
+                return nil
+            case .picker(title: let title, choices: _, storage: _):
+                return title
+            case .dynamicPicker(title: let title, identifier: _):
+                return title
+            case .custom(identifier: _):
+                return nil
+            }
+        }
     }
 
     enum Icon {

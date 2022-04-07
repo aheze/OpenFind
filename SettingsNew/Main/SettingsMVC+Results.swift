@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 extension SettingsMainViewController {
     func find(text: [String]) {
@@ -47,30 +47,16 @@ extension SettingsMainViewController {
             }
         }
         
-        model.resultsSections = sections
-        
-        print("paths: \(paths.count)")
+        withAnimation {
+            model.resultsSections = sections
+        }
     }
     
     func checkIf(row: SettingsRow, contains text: [String]) -> Bool {
-        switch row.configuration {
-        case .link(title: let title, leftIcon: let leftIcon, indicatorStyle: let indicatorStyle, destination: let destination, action: let action):
-            return text.contains { title.contains($0) }
-        case .deepLink(title: let title, rows: let rows):
-            return false
-        case .toggle(title: let title, storage: let storage):
-            return text.contains { title.contains($0) }
-        case .button(title: let title, tintColor: let tintColor, rightIconName: let rightIconName, action: let action):
-            return text.contains { title.contains($0) }
-        case .slider(numberOfSteps: let numberOfSteps, minValue: let minValue, maxValue: let maxValue, minSymbol: let minSymbol, maxSymbol: let maxSymbol, saveAsInt: let saveAsInt, storage: let storage):
-            return false
-        case .picker(title: let title, choices: let choices, storage: let storage):
-            return text.contains { title.contains($0) }
-        case .dynamicPicker(title: let title, identifier: let identifier):
-            return text.contains { title.contains($0) }
-        case .custom(identifier: let identifier):
-            return false
+        if let title = row.configuration.getTitle() {
+            return text.contains { title.localizedCaseInsensitiveContains($0) }
         }
+        return false
     }
 
     func showResults(_ show: Bool) {

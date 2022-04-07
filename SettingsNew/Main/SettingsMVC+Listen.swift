@@ -23,6 +23,7 @@ extension SettingsMainViewController {
             }
         
             if textChanged {
+//                let lowercasedText = self.searchViewModel.text.map { $0.lowercased() }
                 self.find(text: self.searchViewModel.text)
             }
         }

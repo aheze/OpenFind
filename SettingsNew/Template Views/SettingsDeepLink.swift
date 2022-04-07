@@ -26,46 +26,53 @@ struct SettingsDeepLink: View {
                 destination: _,
                 action: _
             ) = rows.first?.configuration {
-                HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
-                    Text(getDestinationTitle())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(SettingsConstants.rowVerticalInsetsFromText)
+                VStack {
+                    HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
+                        VStack(spacing: 6) {
+                            Text(getDestinationTitle())
+                                .frame(maxWidth: .infinity, alignment: .leading)
 
-                    if let indicatorStyle = indicatorStyle {
-                        switch indicatorStyle {
-                        case .forwards:
-                            Image(systemName: "chevron.forward")
-                                .foregroundColor(UIColor.secondaryLabel.color)
-                        case .modal:
-                            Image(systemName: "arrow.up.forward")
-                                .foregroundColor(UIColor.secondaryLabel.color)
+                            HStack(spacing: 2) {
+                                let titles = getPathTitles()
+                                ForEach(Array(zip(titles.indices, titles)), id: \.1.self) { index, title in
+                                    Text(title)
+
+                                    if index < titles.count - 1 {
+                                        Image(systemName: "arrow.right")
+                                    }
+                                }
+                            }
+                            .font(.footnote)
+                            .foregroundColor(UIColor.secondaryLabel.color)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        
+                        if let indicatorStyle = indicatorStyle {
+                            switch indicatorStyle {
+                            case .forwards:
+                                Image(systemName: "chevron.forward")
+                                    .foregroundColor(UIColor.secondaryLabel.color)
+                            case .modal:
+                                Image(systemName: "arrow.up.forward")
+                                    .foregroundColor(UIColor.secondaryLabel.color)
+                            }
                         }
                     }
                 }
+                .padding(SettingsConstants.rowVerticalInsetsFromText)
                 .padding(SettingsConstants.rowHorizontalInsets)
             }
         }
     }
 
+    func getPathTitles() -> [String] {
+        let titles = rows.compactMap { $0.configuration.getTitle() }
+        return titles
+    }
+
     func getDestinationTitle() -> String {
         guard let row = rows.last else { return "" }
-        switch row.configuration {
-        case .link(title: let title, leftIcon: let leftIcon, indicatorStyle: let indicatorStyle, destination: let destination, action: let action):
-            return title
-        case .deepLink(title: let title, rows: let rows):
-            return title
-        case .toggle(title: let title, storage: let storage):
-            return title
-        case .button(title: let title, tintColor: let tintColor, rightIconName: let rightIconName, action: let action):
-            return title
-        case .slider(numberOfSteps: let numberOfSteps, minValue: let minValue, maxValue: let maxValue, minSymbol: let minSymbol, maxSymbol: let maxSymbol, saveAsInt: let saveAsInt, storage: let storage):
-            return ""
-        case .picker(title: let title, choices: let choices, storage: let storage):
-            return title
-        case .dynamicPicker(title: let title, identifier: let identifier):
-            return title
-        case .custom(identifier: let identifier):
-            return ""
-        }
+        let title = row.configuration.getTitle() ?? ""
+        return title
     }
 }
