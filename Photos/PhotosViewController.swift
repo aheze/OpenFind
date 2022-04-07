@@ -103,7 +103,6 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         super.viewDidLoad()
         
         title = "Photos"
-        print("setting up/")
         setup()
     }
     

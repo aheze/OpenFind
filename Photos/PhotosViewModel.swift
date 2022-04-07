@@ -85,8 +85,6 @@ class PhotosViewModel: ObservableObject {
     /// set to false if finger is still touching
     var updateAllowed = true {
         didSet {
-            print("state: \(updateState)")
-//            if updateAllowed, updateState == .waitingForPermission || updateState == .scheduled {
             if updateAllowed, updateState == .waitingForPermission {
                 addQueuedSentencesToMetadatas()
             }

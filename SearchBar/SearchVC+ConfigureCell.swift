@@ -42,8 +42,6 @@ extension SearchViewController {
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
             
-            
-            
             var field = self.searchViewModel.fields[index]
             field.value = .word(
                 .init(
@@ -233,6 +231,7 @@ extension SearchViewController {
                 
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                     cell.activate(true)
+                    
                     cell.textField.becomeFirstResponder()
                 }
             }

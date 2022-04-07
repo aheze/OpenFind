@@ -33,10 +33,8 @@ extension PhotosViewModel {
                 updateState = .scheduled
                 DispatchQueue.main.asyncAfter(deadline: .now() + PhotosConstants.minimumResultsUpdateDuration) {
                     if self.updateAllowed {
-                        print("adding right now")
                         self.addQueuedSentencesToMetadatas()
                     } else {
-                        print("wait for permissions")
                         self.updateState = .waitingForPermission
                     }
                 }

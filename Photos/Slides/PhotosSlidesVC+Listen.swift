@@ -16,7 +16,6 @@ extension PhotosSlidesViewController {
             guard let slidesState = self.model.slidesState else { return }
             guard let slidesPhoto = slidesState.getCurrentSlidesPhoto() else { return }
 
-            print("t changed? \(textChanged)")
             /// metadata already exists, directly find
             if textChanged {
                 if self.slidesSearchViewModel.isEmpty {
