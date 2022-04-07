@@ -49,27 +49,13 @@ extension SettingsData {
                             .init(
                                 configuration: .dynamicPicker(
                                     title: "Primary",
-                                    valueToChoiceTitle: { string in
-                                        if let language = Settings.Values.RecognitionLanguage(rawValue: string) {
-                                            return language.getTitle()
-                                        }
-                                        return string
-                                    },
-                                    identifier: .primaryRecognitionLanguage,
-                                    storage: \.$findingPrimaryRecognitionLanguage
+                                    identifier: .primaryRecognitionLanguage
                                 )
                             ),
                             .init(
                                 configuration: .dynamicPicker(
                                     title: "Secondary",
-                                    valueToChoiceTitle: { string in
-                                        if let language = Settings.Values.RecognitionLanguage(rawValue: string) {
-                                            return language.getTitle()
-                                        }
-                                        return string
-                                    },
-                                    identifier: .secondaryRecognitionLanguage,
-                                    storage: \.$findingSecondaryRecognitionLanguage
+                                    identifier: .secondaryRecognitionLanguage
                                 )
                             )
                         ]

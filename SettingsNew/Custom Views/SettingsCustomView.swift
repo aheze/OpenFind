@@ -16,10 +16,8 @@ struct SettingsCustomView: View {
     var body: some View {
         VStack {
             switch identifier {
-            case .primaryRecognitionLanguage:
-                SettingsPrimaryRecognitionLanguage(model: model, realmModel: realmModel)
-            case .secondaryRecognitionLanguage:
-                SettingsSecondaryRecognitionLanguage(model: model, realmModel: realmModel)
+//            case .primaryRecognitionLanguage, .secondaryRecognitionLanguage:
+//                SettingsDynamicPickerPage(model: model, realmModel: realmModel, identifier: identifier)
             case .highlightsPreview:
                 SettingsHighlightsPreview(model: model, realmModel: realmModel)
             case .highlightsIcon:

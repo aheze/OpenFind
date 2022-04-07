@@ -11,9 +11,6 @@ import Foundation
 enum Settings {
     /// for views
     enum ViewIdentifier: String {
-        case primaryRecognitionLanguage
-        case secondaryRecognitionLanguage
-        
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
@@ -27,6 +24,11 @@ enum Settings {
 
         case links
         case footer
+    }
+
+    enum DynamicPickerIdentifier {
+        case primaryRecognitionLanguage
+        case secondaryRecognitionLanguage
     }
 
     enum StringIdentifier: String {
@@ -46,7 +48,7 @@ enum Settings {
             case portuguese = "pt-BR"
             case chineseSimplified = "zh-Hans"
             case chineseTraditional = "zh-Hant"
-            
+
             func getTitle() -> String {
                 switch self {
                 case .none:

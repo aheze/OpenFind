@@ -93,17 +93,13 @@ struct SettingsSectionRows: View {
                     )
                 case .dynamicPicker(
                     title: let title,
-                    valueToChoiceTitle: let valueToChoiceTitle,
-                    identifier: let identifier,
-                    storage: let storage
+                    identifier: let identifier
                 ):
                     SettingsDynamicPicker(
                         model: model,
                         realmModel: realmModel,
                         title: title,
-                        valueToChoiceTitle: valueToChoiceTitle,
-                        identifier: identifier,
-                        storage: storage
+                        identifier: identifier
                     )
                 case .custom(
                     identifier: let identifier

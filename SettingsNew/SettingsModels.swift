@@ -15,6 +15,7 @@ struct SettingsPage {
     var bottomViewIdentifier: Settings.ViewIdentifier? /// description at bottom, like `Version 1.3.0 - See What's New`
     var addTopPadding = true
 
+    /// pass in information to a page
     enum Configuration {
         case sections(sections: [SettingsSection])
         case custom(identifier: Settings.ViewIdentifier)
@@ -25,6 +26,10 @@ struct SettingsPage {
         )
         case license(
             license: License
+        )
+        case dynamicPicker(
+            title: String,
+            identifier: Settings.DynamicPickerIdentifier
         )
     }
 }
@@ -74,11 +79,10 @@ struct SettingsRow: Identifiable {
             storage: KeyPath<RealmModel, Binding<String>>
         )
         
+        /// open in new page
         case dynamicPicker(
             title: String,
-            valueToChoiceTitle: ((String) -> String), /// convert value to readable title
-            identifier: Settings.ViewIdentifier,
-            storage: KeyPath<RealmModel, Binding<String>>
+            identifier: Settings.DynamicPickerIdentifier
         )
         
         case custom(identifier: Settings.ViewIdentifier)

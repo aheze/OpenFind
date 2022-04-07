@@ -74,6 +74,14 @@ struct SettingsPageView: View {
                     storage: storage
                 )
                 
+            case .dynamicPicker(title: let title, identifier: let identifier):
+                SettingsDynamicPickerPage(
+                    model: model,
+                    realmModel: realmModel,
+                    title: title,
+                    identifier: identifier
+                )
+                
             case .license(license: let license):
                 SettingsLicensePage(
                     model: model,
