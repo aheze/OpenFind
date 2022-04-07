@@ -59,6 +59,7 @@ struct SettingsDynamicPickerPage: View {
         let values = getValues()
         VStack(spacing: 0) {
             ForEach(Array(zip(values.indices, values)), id: \.1.self) { index, value in
+                let softwareLimitationString = softwareLimitationString(value: value)
 
                 SettingsRowButton {
                     valuePressed(value: value)
@@ -67,8 +68,9 @@ struct SettingsDynamicPickerPage: View {
                         Text(getTitle(value: value))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(SettingsConstants.rowVerticalInsetsFromText)
+                            .opacity(softwareLimitationString != nil ? 0.5 : 1)
 
-                        if let softwareLimitationString = softwareLimitationString(value: value) {
+                        if let softwareLimitationString = softwareLimitationString {
                             Text(softwareLimitationString)
                                 .capsuleTipStyle()
                         }
@@ -80,6 +82,7 @@ struct SettingsDynamicPickerPage: View {
                     }
                     .padding(SettingsConstants.rowHorizontalInsets)
                 }
+                .disabled(softwareLimitationString != nil)
 
                 if index < values.count - 1 {
                     SettingsRowDivider()
@@ -123,6 +126,7 @@ struct SettingsDynamicPickerPage: View {
         return false
     }
 
+    /// if return something, the value is not available and so disable the row.
     func softwareLimitationString(value: String) -> String? {
         switch identifier {
         case .primaryRecognitionLanguage, .secondaryRecognitionLanguage:
