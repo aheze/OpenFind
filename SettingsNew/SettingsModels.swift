@@ -105,7 +105,7 @@ struct SettingsRow: Identifiable {
     }
 
     struct PickerChoice: Identifiable {
-        let id = UUID()
+        var id = UUID()
         var title: String
         var storageValue: String
     }

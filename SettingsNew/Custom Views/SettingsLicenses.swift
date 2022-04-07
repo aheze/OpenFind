@@ -41,13 +41,7 @@ struct SettingsLicenses: View {
                             switch attributes {
                             case .ownPackage:
                                 Text("Custom")
-                                    .foregroundColor(.white)
-                                    .font(UIFont.preferredFont(forTextStyle: .footnote).font)
-                                    .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-                                    .background(
-                                        Capsule()
-                                            .fill(Color.accent)
-                                    )
+                                    .capsuleTipStyle()
                             }
                         }
                     }

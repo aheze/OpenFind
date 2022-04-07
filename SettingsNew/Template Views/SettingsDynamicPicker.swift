@@ -56,19 +56,24 @@ struct SettingsDynamicPickerPage: View {
     var identifier: Settings.DynamicPickerIdentifier
 
     var body: some View {
-        let choices = getChoices()
+        let values = getValues()
         VStack(spacing: 0) {
-            ForEach(Array(zip(choices.indices, choices)), id: \.1.id) { index, choice in
+            ForEach(Array(zip(values.indices, values)), id: \.1.self) { index, value in
 
                 SettingsRowButton {
-                    choicePressed(choice: choice)
+                    valuePressed(value: value)
                 } content: {
                     HStack {
-                        Text(choice.title)
+                        Text(getTitle(value: value))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(SettingsConstants.rowVerticalInsetsFromText)
 
-                        if choiceIsSelected(choice: choice) {
+                        if let softwareLimitationString = softwareLimitationString(value: value) {
+                            Text(softwareLimitationString)
+                                .capsuleTipStyle()
+                        }
+
+                        if valueIsSelected(value: value) {
                             Image(systemName: "checkmark")
                                 .foregroundColor(.accent)
                         }
@@ -76,7 +81,7 @@ struct SettingsDynamicPickerPage: View {
                     .padding(SettingsConstants.rowHorizontalInsets)
                 }
 
-                if index < choices.count - 1 {
+                if index < values.count - 1 {
                     SettingsRowDivider()
                 }
             }
@@ -85,60 +90,95 @@ struct SettingsDynamicPickerPage: View {
         .cornerRadius(SettingsConstants.sectionCornerRadius)
     }
 
-    func choicePressed(choice: SettingsRow.PickerChoice) {
-        switch identifier {
-        case .primaryRecognitionLanguage:
-            realmModel.findingPrimaryRecognitionLanguage = choice.storageValue
-            
-            
-            /// if primary and secondary are the same, set secondary to `.none`.
-            if realmModel.findingPrimaryRecognitionLanguage == realmModel.findingSecondaryRecognitionLanguage {
-                realmModel.findingSecondaryRecognitionLanguage = Settings.Values.RecognitionLanguage.none.rawValue
+    func valuePressed(value: String) {
+        withAnimation {
+            switch identifier {
+            case .primaryRecognitionLanguage:
+                realmModel.findingPrimaryRecognitionLanguage = value
+
+                /// if primary and secondary are the same, set secondary to `.none`.
+                if realmModel.findingPrimaryRecognitionLanguage == realmModel.findingSecondaryRecognitionLanguage {
+                    realmModel.findingSecondaryRecognitionLanguage = Settings.Values.RecognitionLanguage.none.rawValue
+                }
+            case .secondaryRecognitionLanguage:
+                realmModel.findingSecondaryRecognitionLanguage = value
             }
-        case .secondaryRecognitionLanguage:
-            realmModel.findingSecondaryRecognitionLanguage = choice.storageValue
         }
     }
 
-    func getChoices() -> [SettingsRow.PickerChoice] {
+    func getTitle(value: String) -> String {
+        switch identifier {
+        case .primaryRecognitionLanguage, .secondaryRecognitionLanguage:
+            if let selectedLanguage = Settings.Values.RecognitionLanguage(rawValue: value) {
+                return selectedLanguage.getTitle()
+            }
+        }
+        return ""
+    }
+
+    func valueIsSelected(value: String) -> Bool {
+        if let selectedValue = getSelectedValue() {
+            return selectedValue == value
+        }
+        return false
+    }
+
+    func softwareLimitationString(value: String) -> String? {
+        switch identifier {
+        case .primaryRecognitionLanguage, .secondaryRecognitionLanguage:
+            if let selectedLanguage = Settings.Values.RecognitionLanguage(rawValue: value) {
+                let versionNeeded = selectedLanguage.versionNeeded()
+                let versionUpdateNeeded = selectedLanguage.versionNeeded() > deviceVersion()
+
+                if versionUpdateNeeded {
+                    return "iOS \(versionNeeded)"
+                }
+            }
+        }
+        return nil
+    }
+
+    func deviceVersion() -> Int {
+        if #available(iOS 14, *) {
+            return 14
+        } else {
+            return 13
+        }
+    }
+
+    func getValues() -> [String] {
         switch identifier {
         case .primaryRecognitionLanguage:
             let languages = Settings.Values.RecognitionLanguage.allCases.filter { $0 != .none }
-            let choices = languages.map { SettingsRow.PickerChoice(title: $0.getTitle(), storageValue: $0.rawValue) }
-            return choices
+            let values = languages.map { $0.rawValue }
+            return values
         case .secondaryRecognitionLanguage:
             let languages: [Settings.Values.RecognitionLanguage]
             let selectedPrimaryRecognitionLanguageString = realmModel.findingPrimaryRecognitionLanguage
             if let selectedPrimaryRecognitionLanguage = Settings.Values.RecognitionLanguage(rawValue: selectedPrimaryRecognitionLanguageString) {
                 languages = Settings.Values.RecognitionLanguage.allCases.filter {
                     $0 != selectedPrimaryRecognitionLanguage
-                    && !$0.requiresAccurateMode()
+                        && !$0.requiresAccurateMode()
                 }
             } else {
                 languages = Settings.Values.RecognitionLanguage.allCases
             }
 
-            let choices = languages.map { SettingsRow.PickerChoice(title: $0.getTitle(), storageValue: $0.rawValue) }
-            return choices
+            let values = languages.map { $0.rawValue }
+            return values
         }
     }
 
-    func getSelectedChoice() -> SettingsRow.PickerChoice {
+    func getSelectedValue() -> String? {
         switch identifier {
         case .primaryRecognitionLanguage:
             guard let selectedLanguage = Settings.Values.RecognitionLanguage(rawValue: realmModel.findingPrimaryRecognitionLanguage) else { break }
-            let choice = SettingsRow.PickerChoice(title: selectedLanguage.getTitle(), storageValue: selectedLanguage.rawValue)
-            return choice
+            return selectedLanguage.rawValue
         case .secondaryRecognitionLanguage:
             guard let selectedLanguage = Settings.Values.RecognitionLanguage(rawValue: realmModel.findingSecondaryRecognitionLanguage) else { break }
-            let choice = SettingsRow.PickerChoice(title: selectedLanguage.getTitle(), storageValue: selectedLanguage.rawValue)
-            return choice
+            return selectedLanguage.rawValue
         }
-        return .init(title: "", storageValue: "")
-    }
-
-    func choiceIsSelected(choice: SettingsRow.PickerChoice) -> Bool {
-        return getSelectedChoice().storageValue == choice.storageValue
+        return nil
     }
 }
 

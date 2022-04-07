@@ -64,4 +64,14 @@ extension View {
         settingsSmallTextStyle()
             .padding(.top, SettingsConstants.descriptionTopPadding)
     }
+
+    func capsuleTipStyle() -> some View {
+        foregroundColor(.white)
+            .font(UIFont.preferredFont(forTextStyle: .footnote).font)
+            .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
+            .background(
+                Capsule()
+                    .fill(Color.accent)
+            )
+    }
 }
