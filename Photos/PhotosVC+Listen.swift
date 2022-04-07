@@ -36,6 +36,7 @@ extension PhotosViewController {
         
         /// called when finding from slides or new results came live when scanning results
         model.photosWithQueuedSentencesAdded = { [weak self] photos in
+            print("new pohitos: \(photos.count)")
             guard let self = self else { return }
             self.findAfterQueuedSentencesUpdate(in: photos)
         }

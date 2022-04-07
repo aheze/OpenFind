@@ -11,7 +11,7 @@ import UIKit
 extension PhotosViewController {
     /// find in all photos and populate `resultsState`
     func find() {
-        if !model.photosToScan.isEmpty, model.scanningState == .dormant, realmModel.scanOnFind {
+        if !model.photosToScan.isEmpty, model.scanningState == .dormant, realmModel.photosScanOnFind {
             model.startScanning()
         }
         

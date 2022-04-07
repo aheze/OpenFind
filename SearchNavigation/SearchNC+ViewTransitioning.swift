@@ -11,11 +11,16 @@ import UIKit
 /// default push/pop
 extension SearchNavigationController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
         guard
             let transitionCoordinator = navigation.transitionCoordinator,
             let viewController = viewController as? Searchable,
             currentAnimator == nil
         else { return }
+        
+        
+        /// dismiss keyboard when going to a detail view
+        searchViewModel.dismissKeyboard?()
         
         let targetPercentage = getViewControllerBlurPercentage(for: viewController)
         beginSearchBarTransitionAnimation(to: viewController, targetPercentage: targetPercentage)

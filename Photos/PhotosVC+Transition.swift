@@ -33,6 +33,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             self.model.updateSearchCollectionView?()
             self.updateResultsHighlightColors()
             
+            /// remove slides state to keep finding in `PhotosVM+Update`
+            self.model.slidesState = nil
+            
             if let resultsState = model.resultsState {
                 for index in resultsState.displayedFindPhotos.indices {
                     if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {

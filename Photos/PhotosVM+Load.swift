@@ -19,7 +19,7 @@ extension PhotosViewModel {
             self.sort()
             self.reload?()
             
-            if self.getRealmModel?().scanOnLaunch ?? false {
+            if self.getRealmModel?().photosScanOnLaunch ?? false {
                 self.startScanning()
             }
         }

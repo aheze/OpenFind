@@ -140,6 +140,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         switchToFullScreen(false)
         slidesSearchPromptViewModel.update(show: false)
         model.updateAllowed = true
+        print("allowed!")
 
         withAnimation {
             toolbarViewModel.toolbar = nil

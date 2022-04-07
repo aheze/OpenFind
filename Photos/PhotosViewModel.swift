@@ -78,12 +78,15 @@ class PhotosViewModel: ObservableObject {
     /// sentences were recently added to these photos, but not applied to the main model yet.
     var photosWithQueuedSentences = [Photo]()
 
-    /// if true, a sentences update is scheduled and should be applied ASAP.
+    /// if `waitingForPermission`, a sentences update should be applied ASAP
+    /// `waitingForPermission` = not allowed at the moment, apply
     var updateState: PhotosSentencesUpdateState?
 
     /// set to false if finger is still touching
     var updateAllowed = true {
         didSet {
+            print("state: \(updateState)")
+//            if updateAllowed, updateState == .waitingForPermission || updateState == .scheduled {
             if updateAllowed, updateState == .waitingForPermission {
                 addQueuedSentencesToMetadatas()
             }

@@ -79,6 +79,7 @@ extension PhotosSlidesViewController {
         if scrollView == collectionView {
             /// only disallow if **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
             if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
+                print("false update")
                 model.updateAllowed = false
             }
         } else if scrollView == self.scrollView {
