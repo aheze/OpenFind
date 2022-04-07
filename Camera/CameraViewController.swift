@@ -91,6 +91,8 @@ class CameraViewController: UIViewController, PageViewController {
         contentContainerViewSize = contentContainerView.bounds.size
     }
     
+    var count = 0
+    
     func setup() {
         _ = livePreviewViewController
         _ = searchViewController

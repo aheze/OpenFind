@@ -29,7 +29,6 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet var safeViewWidthC: NSLayoutConstraint!
     @IBOutlet var safeViewHeightC: NSLayoutConstraint!
     
-    
     /// original, unscaled image size (pretty large)
 //    var imageSize: LivePreviewImageSize?
     var imageSize: CGSize?
@@ -110,12 +109,13 @@ class LivePreviewViewController: UIViewController {
         livePreviewView.videoPreviewLayer.frame = previewFitView.bounds
         CATransaction.commit()
         needSafeViewUpdate?()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
+//    }
+//
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+
         if let connection = livePreviewView.videoPreviewLayer.connection {
+            print("conenction exists")
             switch UIDevice.current.orientation {
             case .portrait: connection.videoOrientation = .portrait
             case .landscapeRight: connection.videoOrientation = .landscapeLeft
@@ -124,9 +124,9 @@ class LivePreviewViewController: UIViewController {
             default: connection.videoOrientation = .portrait
             }
         }
-        
     }
-    
+
+//
 //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 //        super.viewWillTransition(to: size, with: coordinator)
 //

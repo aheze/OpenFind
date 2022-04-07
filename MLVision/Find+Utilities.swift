@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VideoToolbox
 import Vision
 
 extension StringProtocol {
@@ -41,20 +42,34 @@ extension CGRect {
     }
 }
 
-extension UIDeviceOrientation {
+extension UIInterfaceOrientation {
     func getVisionOrientation() -> CGImagePropertyOrientation {
+//        return .up
         switch self {
         case .portrait:
+            print("right")
             return .right
-        case .landscapeRight:
+        case .landscapeRight: /// home button right
+            print("landscapeRight -> up")
             return .up
-        case .landscapeLeft:
+        case .landscapeLeft: /// home button left
+            print("landscapeLeft -> down")
             return .down
         case .portraitUpsideDown:
+            print("portraitUpsideDown -> left")
             return .left
         default:
+            print("default.")
             return .right
         }
     }
 }
 
+extension CVPixelBuffer {
+    /// Returns a Core Graphics image from the pixel buffer's current contents.
+    func toCGImage() -> CGImage? {
+        var cgImage: CGImage?
+        VTCreateCGImageFromCVPixelBuffer(self, options: nil, imageOut: &cgImage)
+        return cgImage
+    }
+}

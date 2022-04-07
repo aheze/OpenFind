@@ -60,6 +60,19 @@ enum Find {
             case .cgImage(let image):
                 imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: visionOptions.orientation)
             case .pixelBuffer(let pixelBuffer):
+//                switch visionOptions.orientation {
+//                case .up:
+//                    print("portrait")
+//                case .right:
+//                    print("landscapeRight")
+//                case .left:
+//                    print("landscapeLeft")
+//                case .down:
+//                    print("portraitUpsideDown")
+//                default:
+//                    print("default")
+//                }
+                
                 imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: visionOptions.orientation)
             }
 

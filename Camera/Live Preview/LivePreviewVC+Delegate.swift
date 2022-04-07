@@ -16,7 +16,6 @@ extension LivePreviewViewController: AVCaptureVideoDataOutputSampleBufferDelegat
         frameCaptured?(pixelBuffer)
         
         let size = CVImageBufferGetDisplaySize(pixelBuffer)
-        print("size: \(size)")
         
         if imageSize == nil {
             imageSize = CGSize(width: size.height, height: size.width)

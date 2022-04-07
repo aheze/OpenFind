@@ -1122,6 +1122,21 @@
 		3C5B377A27FEB06000801FEE /* VC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377927FEB06000801FEE /* VC+Listen.swift */; };
 		3C5B377C27FEB6E900801FEE /* CameraVC+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377B27FEB6E900801FEE /* CameraVC+Lifecycle.swift */; };
 		3C5B377D27FEB7DE00801FEE /* CameraVC+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377B27FEB6E900801FEE /* CameraVC+Lifecycle.swift */; };
+		3C5B377F27FF575200801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378027FF575600801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378127FF575600801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378227FF575600801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378327FF575700801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378427FF575700801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378527FF575700801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378627FF575800801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378727FF575800801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378827FF575800801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378927FF575900801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378A27FF575900801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378D27FF575A00801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378E27FF575B00801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B378F27FF575B00801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
 		3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5F1FA427121BB200143BDD /* WhatsNewKit */; };
 		3C60666F274EC6A9000A5BDE /* VisionTrackingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */; };
@@ -3127,6 +3142,7 @@
 		3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+NavBar.swift"; sourceTree = "<group>"; };
 		3C5B377927FEB06000801FEE /* VC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Listen.swift"; sourceTree = "<group>"; };
 		3C5B377B27FEB6E900801FEE /* CameraVC+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Lifecycle.swift"; sourceTree = "<group>"; };
+		3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIWindow.swift"; sourceTree = "<group>"; };
 		3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTrackingEngine.swift; sourceTree = "<group>"; };
 		3C606675274F5343000A5BDE /* VisionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionUtilities.swift; sourceTree = "<group>"; };
@@ -4368,6 +4384,7 @@
 				3C4D39A527475D690010FD68 /* GeneralUtilities.swift */,
 				3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */,
 				3C08EAD8279BA84C00971D60 /* Utilities+UIView.swift */,
+				3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */,
 				3C7A43F427EE3AEF00DFF76F /* Utilities+Array.swift */,
 				3C1D1A0D275AA0CE0064F2C6 /* Utilities+SwiftUI.swift */,
 				3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */,
@@ -6942,6 +6959,7 @@
 				3C7BADB0275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C443F7927DDD74B0050A0AB /* Sentence+Find.swift in Sources */,
 				3C7A43FD27EE3AF700DFF76F /* Utilities+Array.swift in Sources */,
+				3C5B378727FF575800801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C798F8F27F782A1007BF68D /* SearchViewController.swift in Sources */,
 				3C1D1A2B275AA25B0064F2C6 /* Utilities+UIColor.swift in Sources */,
 				3C798F8927F782A1007BF68D /* KeyboardToolbarViewModel.swift in Sources */,
@@ -6985,6 +7003,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5B378D27FF575A00801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C21ED7D27A3C4AB0005E183 /* ViewController.swift in Sources */,
 				3C443F4027DD907C0050A0AB /* Word.swift in Sources */,
 				3C798EC227F69832007BF68D /* RC+Photos.swift in Sources */,
@@ -7031,6 +7050,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5B378827FF575800801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CCCCA93278185AA000381CE /* Model.swift in Sources */,
 				3C7B7A39277E9D9300E1F602 /* UIKitViews.swift in Sources */,
 				3C443EEA27DD8C140050A0AB /* CameraNotFoundView.swift in Sources */,
@@ -7137,6 +7157,7 @@
 				3C443E9E27DD88F90050A0AB /* SearchVC+Reload.swift in Sources */,
 				3CCE2B4E279D235300F72351 /* ListsDetailViewModel.swift in Sources */,
 				3CC5951C27A0EA24001D07DC /* IconPickerViewController.swift in Sources */,
+				3C5B378127FF575600801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C08EAF3279C76BD00971D60 /* ListsViewModel.swift in Sources */,
 				3C7BADA9275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C4D3A15274767400010FD68 /* ContentPageViewController.swift in Sources */,
@@ -7508,6 +7529,7 @@
 				3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */,
 				3C5B370B27FEAEDF00801FEE /* SettingsMVC+Delegate.swift in Sources */,
 				3C5B36EE27FEAEDF00801FEE /* SettingsPageViewController.swift in Sources */,
+				3C5B377F27FF575200801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CC594FA279F3323001D07DC /* ColorPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7552,6 +7574,7 @@
 				3CD6227C27C5D79A00DF9AE8 /* SearchVC+Reload.swift in Sources */,
 				3C443F4B27DD90E80050A0AB /* GeneralExtensions.swift in Sources */,
 				3C443EAE27DD89830050A0AB /* HighlightsViewModel.swift in Sources */,
+				3C5B378227FF575600801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C71EFA127BF5D3F00F0C0A0 /* PhotosTransitionUtilities.swift in Sources */,
 				3C0B12C927F025310013688E /* PhotosSharing.swift in Sources */,
 				3C443EBD27DD8ABC0050A0AB /* TabBarController.swift in Sources */,
@@ -7757,6 +7780,7 @@
 				3C93FC4627A0EF3A00EBBC81 /* IconPickerCell.swift in Sources */,
 				3C4D3A78274769660010FD68 /* Constants.swift in Sources */,
 				3C9234AC27E5734E0055061A /* SearchVM+Get.swift in Sources */,
+				3C5B378327FF575700801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C3642F7277BC2E90038CB18 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3CCE2B1B279D008B00F72351 /* FindIconUIView.swift in Sources */,
 				3C93148E27B823AD009E5B6E /* SearchVC+Listen.swift in Sources */,
@@ -7945,6 +7969,7 @@
 				3CCCCAA427818CE9000381CE /* GeneralViews.swift in Sources */,
 				3C7BAD99275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C443F5427DD915E0050A0AB /* Highlight.swift in Sources */,
+				3C5B378427FF575700801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C443F4927DD90E80050A0AB /* GeneralExtensions.swift in Sources */,
 				3CDD944627C05F9800D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3CCE2B17279D008B00F72351 /* FindIconUIView.swift in Sources */,
@@ -8035,6 +8060,7 @@
 				3CCCCAA627818CE9000381CE /* GeneralViews.swift in Sources */,
 				3C1D1A35275AA25C0064F2C6 /* Utilities+Constraints.swift in Sources */,
 				3C1D1A32275AA25C0064F2C6 /* Utilities+UIFont.swift in Sources */,
+				3C5B378627FF575800801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C2D22C627FC1A7100D413B7 /* Identifier.swift in Sources */,
 				3C443EE527DD8C130050A0AB /* PhotosPermissionsView.swift in Sources */,
 				3C4D3B9B27477ABD0010FD68 /* SearchFieldCell.swift in Sources */,
@@ -8371,6 +8397,7 @@
 				3CD7063327A3842200B446D7 /* IconPickerCell.swift in Sources */,
 				3C17685D27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */,
 				3CC00EC527A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */,
+				3C5B378027FF575600801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C6D77BC27A5B140005371F3 /* Global.swift in Sources */,
 				3C6C73662781946200E039F0 /* CameraVC+ScrollZoom.swift in Sources */,
 				3C93148A27B82178009E5B6E /* ListsDetailVC+WordsToolbar.swift in Sources */,
@@ -8587,6 +8614,7 @@
 				3CB8C31927C31DEF000AA3B9 /* Debug+Log.swift in Sources */,
 				3C6C74392781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3C2D22C927FC1A7100D413B7 /* Identifier.swift in Sources */,
+				3C5B378927FF575900801FEE /* Utilities+UIWindow.swift in Sources */,
 				3C443F2D27DD907B0050A0AB /* Sentence.swift in Sources */,
 				3C443F2E27DD907B0050A0AB /* List.swift in Sources */,
 				3C7B7A42277E9D9400E1F602 /* UIKitViews.swift in Sources */,
@@ -8649,6 +8677,7 @@
 				3C7B7A8C277FA6E300E1F602 /* Utilities+Math.swift in Sources */,
 				3C798EEE27F6A2F0007BF68D /* List+Testing.swift in Sources */,
 				3C7B7A8A277FA6E300E1F602 /* Utilities+UIDevice.swift in Sources */,
+				3C5B378F27FF575B00801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CCE2AFF279D008900F72351 /* FindIconUIView.swift in Sources */,
 				3CDD944E27C05F9B00D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3C6D77C727A5B140005371F3 /* Global.swift in Sources */,
@@ -8737,6 +8766,7 @@
 				3CCE2AF9279D008800F72351 /* SelectionIconView.swift in Sources */,
 				3C35A97A278979700003D7A0 /* ScrollZoomHookViewController.swift in Sources */,
 				3C8A5244277FC1F4006CF91E /* Utilities+SwiftUI.swift in Sources */,
+				3C5B378A27FF575900801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CDD946327C0688100D3EA1A /* Defaults.swift in Sources */,
 				3C0AACC027C82693009DFC09 /* Utilities+String.swift in Sources */,
 				3C8A523D277FC1F4006CF91E /* Utilities+UIViewController.swift in Sources */,
@@ -8925,6 +8955,7 @@
 				3C798EE927F6A2ED007BF68D /* List+Testing.swift in Sources */,
 				3CBEAC0E2754867300D04B39 /* GeneralUtilities.swift in Sources */,
 				3C4D209E2750A48500090AF9 /* VisionFindingEngine.swift in Sources */,
+				3C5B378527FF575700801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CBEAC0B2753584800D04B39 /* VC+DrawTrackers.swift in Sources */,
 				3C4D209F2750A6A800090AF9 /* Constants.swift in Sources */,
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
@@ -9066,6 +9097,7 @@
 				3C798F7627F782A0007BF68D /* KeyboardToolbarViewModel.swift in Sources */,
 				3CDD944F27C05F9C00D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3CFD5FD8278B6F2B0031BC8B /* SceneDelegate.swift in Sources */,
+				3C5B378E27FF575B00801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CFD600B278B6FAA0031BC8B /* Toolbar.swift in Sources */,
 				3CFD5FF5278B6F950031BC8B /* SearchVC+DataSource.swift in Sources */,
 				3CF76428278CC2AE00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
@@ -10385,6 +10417,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -10420,6 +10453,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
