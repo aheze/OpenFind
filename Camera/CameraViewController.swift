@@ -114,4 +114,3 @@ class CameraViewController: UIViewController, PageViewController {
         addTestingTabBar(add: false)
     }
 }
-

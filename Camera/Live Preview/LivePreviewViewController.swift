@@ -9,8 +9,12 @@
 import AVFoundation
 import UIKit
 
+struct LivePreviewImageSize {
+    var viewSize: CGSize
+    var size: CGSize
+}
+
 class LivePreviewViewController: UIViewController {
-    
     var tabViewModel: TabViewModel
     
     @IBOutlet var previewContainerView: UIView!
@@ -25,7 +29,9 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet var safeViewWidthC: NSLayoutConstraint!
     @IBOutlet var safeViewHeightC: NSLayoutConstraint!
     
+    
     /// original, unscaled image size (pretty large)
+//    var imageSize: LivePreviewImageSize?
     var imageSize: CGSize?
     
     /// image scaled down to the view
@@ -83,6 +89,8 @@ class LivePreviewViewController: UIViewController {
         self.tabViewModel = tabViewModel
         super.init(coder: coder)
     }
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("You must create this view controller with metadata.")
     }
@@ -101,8 +109,47 @@ class LivePreviewViewController: UIViewController {
         CATransaction.setValue(true, forKey: kCATransactionDisableActions)
         livePreviewView.videoPreviewLayer.frame = previewFitView.bounds
         CATransaction.commit()
+        needSafeViewUpdate?()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if let connection = livePreviewView.videoPreviewLayer.connection {
+            switch UIDevice.current.orientation {
+            case .portrait: connection.videoOrientation = .portrait
+            case .landscapeRight: connection.videoOrientation = .landscapeLeft
+            case .landscapeLeft: connection.videoOrientation = .landscapeRight
+            case .portraitUpsideDown: connection.videoOrientation = .portraitUpsideDown
+            default: connection.videoOrientation = .portrait
+            }
+        }
+        
+    }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//
+//        let cameraPreviewTransform = livePreviewView.transform
+//        needSafeViewUpdate?()
+//
+//        coordinator.animate { context in
+//
+//            let deltaTransform = coordinator.targetTransform
+//            let deltaAngle: CGFloat = atan2(deltaTransform.b, deltaTransform.a)
+//
+//            var currentRotation = atan2(cameraPreviewTransform.b, cameraPreviewTransform.a)
+//
+//            // Adding a small value to the rotation angle forces the animation to occur in a the desired direction, preventing an issue where the view would appear to rotate 2PI radians during a rotation from LandscapeRight -> LandscapeLeft.
+//            currentRotation += -1 * deltaAngle + 0.0001
+//            self.livePreviewView.layer.setValue(currentRotation, forKeyPath: "transform.rotation.z")
+//            self.livePreviewView.layer.frame = self.previewFitView.bounds
+//        } completion: { context in
+//            let currentTransform: CGAffineTransform = self.livePreviewView.transform
+//            self.livePreviewView.transform = currentTransform
+//        }
+//    }
+
     func setup() {
         pausedImageView.alpha = 0
         livePreviewView.backgroundColor = .clear

@@ -40,3 +40,21 @@ extension CGRect {
         return frame
     }
 }
+
+extension UIDeviceOrientation {
+    func getVisionOrientation() -> CGImagePropertyOrientation {
+        switch self {
+        case .portrait:
+            return .right
+        case .landscapeRight:
+            return .up
+        case .landscapeLeft:
+            return .down
+        case .portraitUpsideDown:
+            return .left
+        default:
+            return .right
+        }
+    }
+}
+

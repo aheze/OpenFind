@@ -17,7 +17,7 @@ extension ViewController {
         }
         SettingsData.showScanningOptions = { [weak self] in
             guard let self = self else { return }
-            self.present(self.photos.viewController.scanningNavigationViewController, animated: true)
+            self.settingsController.viewController.present(self.photos.viewController.scanningNavigationViewController, animated: true)
         }
         SettingsData.exportAllLists = { [weak self] in
             guard let self = self else { return }

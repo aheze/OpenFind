@@ -13,7 +13,8 @@ extension CameraViewController {
     /// use fast mode
     func findAndAddHighlights(pixelBuffer: CVPixelBuffer) async {
         var visionOptions = VisionOptions()
-        visionOptions.orientation = .right
+        
+        visionOptions.orientation = UIDevice.current.orientation.getVisionOrientation()
         visionOptions.level = .fast
         visionOptions.customWords = searchViewModel.customWords
         
