@@ -14,7 +14,7 @@ struct HighlightsView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ForEach(Array(highlightsViewModel.highlights)) { highlight in
+                ForEach(highlightsViewModel.highlights) { highlight in
                     HighlightView(
                         model: highlightsViewModel,
                         highlight: highlight,

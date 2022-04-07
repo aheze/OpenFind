@@ -10,8 +10,8 @@ import UIKit
 
 extension Array where Element == Sentence {
     /// scanned
-    func getHighlights(stringToGradients: [String: Gradient]) -> Set<Highlight> {
-        var highlights = Set<Highlight>()
+    func getHighlights(stringToGradients: [String: Gradient]) -> [Highlight] {
+        var highlights = [Highlight]()
         for sentence in self {
             let search = Swift.Array(stringToGradients.keys)
             let rangeResults = sentence.ranges(of: search)
@@ -24,7 +24,7 @@ extension Array where Element == Sentence {
                         alpha: gradient.alpha,
                         position: sentence.position(for: range)
                     )
-                    highlights.insert(highlight)
+                    highlights.append(highlight)
                 }
             }
         }

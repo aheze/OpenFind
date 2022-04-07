@@ -9,7 +9,7 @@
 import SwiftUI
 
 class HighlightsViewModel: ObservableObject {
-    @Published var highlights = Set<Highlight>()
+    @Published var highlights = [Highlight]()
     
     /// If not up to date, fade out a bit.
     @Published var upToDate = true
@@ -18,11 +18,11 @@ class HighlightsViewModel: ObservableObject {
     @Published var shouldScaleHighlights = true
 
     /// If replace, don't check if word is same, but make sure color is same
-    func update(with newHighlights: Set<Highlight>, replace: Bool) {
-        var nextHighlights = Set<Highlight>()
+    func update(with newHighlights: [Highlight], replace: Bool) {
+        var nextHighlights = [Highlight]()
         
         /// lingering last
-        var oldHighlights = Array(highlights)
+        var oldHighlights = highlights
         oldHighlights.sort { _, b in
             if case .lingering = b.state {
                 return true
@@ -59,13 +59,13 @@ class HighlightsViewModel: ObservableObject {
                 reusedHighlight.state = .reused
                 reusedHighlight.colors = newHighlight.colors
                 reusedHighlight.alpha = newHighlight.alpha
-                nextHighlights.insert(reusedHighlight)
+                nextHighlights.append(reusedHighlight)
                 oldHighlights.remove(at: nearestHighlightIndex)
             } else {
                 /// add the new highlight (fade in)
                 var addedHighlight = newHighlight
                 addedHighlight.state = .added
-                nextHighlights.insert(addedHighlight)
+                nextHighlights.append(addedHighlight)
             }
         }
         
@@ -86,7 +86,7 @@ class HighlightsViewModel: ObservableObject {
                 }
                 
                 if shouldInsert {
-                    nextHighlights.insert(lingeringHighlight)
+                    nextHighlights.append(lingeringHighlight)
                 }
             }
         }

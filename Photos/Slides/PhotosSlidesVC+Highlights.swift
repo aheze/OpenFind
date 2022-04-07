@@ -16,8 +16,8 @@ extension PhotosSlidesViewController {
         model.highlights = newHighlights
     }
     
-    func getUpdatedHighlightsColors(oldHighlights: Set<Highlight>, newStringToGradients: [String: Gradient]) -> Set<Highlight> {
-        var newHighlights = Set<Highlight>()
+    func getUpdatedHighlightsColors(oldHighlights: [Highlight], newStringToGradients: [String: Gradient]) -> [Highlight] {
+        var newHighlights = [Highlight]()
         
         for index in oldHighlights.indices {
             let highlight = oldHighlights[index]
@@ -29,7 +29,7 @@ extension PhotosSlidesViewController {
                 newHighlight.alpha = gradient.alpha
             }
             
-            newHighlights.insert(newHighlight)
+            newHighlights.append(newHighlight)
         }
         
         return newHighlights

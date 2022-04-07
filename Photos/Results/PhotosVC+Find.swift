@@ -68,13 +68,13 @@ extension PhotosViewController {
     func getHighlightsAndDescription(
         from sentences: [Sentence],
         with stringToGradients: [String: Gradient]
-    ) -> (Set<Highlight>, [FindPhoto.Line]) {
-        var highlights = Set<Highlight>()
+    ) -> ([Highlight], [FindPhoto.Line]) {
+        var highlights = [Highlight]()
         var lines = [FindPhoto.Line]()
         
         for sentence in sentences {
             /// the highlights in this sentence.
-            var lineHighlights = Set<FindPhoto.Line.LineHighlight>()
+            var lineHighlights = [FindPhoto.Line.LineHighlight]()
             
             let rangeResults = sentence.ranges(of: Array(stringToGradients.keys))
             for rangeResult in rangeResults {
@@ -87,7 +87,7 @@ extension PhotosViewController {
                         position: sentence.position(for: range)
                     )
 
-                    highlights.insert(highlight)
+                    highlights.append(highlight)
                         
                     let lineHighlight = FindPhoto.Line.LineHighlight(
                         string: rangeResult.string,
@@ -95,7 +95,7 @@ extension PhotosViewController {
                         colors: gradient.colors,
                         alpha: gradient.alpha
                     )
-                    lineHighlights.insert(lineHighlight)
+                    lineHighlights.append(lineHighlight)
                 }
             }
             

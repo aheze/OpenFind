@@ -131,12 +131,12 @@ struct FindPhoto: Hashable {
     /// stores the search (`stringToGradients`) with the results (`highlights`)
     struct HighlightsSet: Equatable {
         var stringToGradients: [String: Gradient]
-        var highlights: Set<Highlight>
+        var highlights: [Highlight]
     }
 
     struct Line: Hashable {
         var string: String
-        var lineHighlights: Set<LineHighlight>? /// the frames of these highlights will be relative to the result cell
+        var lineHighlights: [LineHighlight]? /// the frames of these highlights will be relative to the result cell
 
         struct LineHighlight: Hashable {
             var string: String
