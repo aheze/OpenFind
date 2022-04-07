@@ -26,6 +26,7 @@ class CameraViewModel: ObservableObject {
     /// press the snapshot/camera button
     var snapshotPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
+    var settingsPressed: (() -> Void)?
     init() {}
     
     var recentEvents = [Event]()

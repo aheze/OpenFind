@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OpenSettingsIconView: View {
+    @ObservedObject var model: CameraViewModel
     @State var scaleAnimationActive = false
     
     var body: some View {
@@ -17,6 +18,8 @@ struct OpenSettingsIconView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
                 withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
             }
+            
+            model.settingsPressed?()
         } label: {
             Image(systemName: "gearshape.fill")
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)

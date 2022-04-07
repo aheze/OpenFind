@@ -12,8 +12,7 @@ class CameraController {
     var tabViewModel: TabViewModel
     var realmModel: RealmModel
     var viewController: CameraViewController
-    var settingsController: SettingsController
-    
+
     init(
         model: CameraViewModel,
         tabViewModel: TabViewModel,
@@ -22,7 +21,7 @@ class CameraController {
         self.model = model
         self.tabViewModel = tabViewModel
         self.realmModel = realmModel
-    
+
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "CameraViewController") { coder in
             CameraViewController(
@@ -32,11 +31,8 @@ class CameraController {
                 realmModel: realmModel
             )
         }
-        
+
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
-    
-        let settingsController = SettingsController(realmModel: realmModel)
-        self.settingsController = settingsController
     }
 }

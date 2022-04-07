@@ -13,11 +13,10 @@ class SettingsViewController: UIViewController {
     var realmModel: RealmModel
     var searchController: SearchNavigationController
     var mainViewController: SettingsMainViewController
-    
+
     lazy var colorPickerViewModel = ColorPickerViewModel(selectedColor: UIColor(hex: realmModel.highlightsColor.uInt))
 
     @IBOutlet var mainContainer: UIView!
-
 
     static func make(
         model: SettingsViewModel,
@@ -72,5 +71,3 @@ class SettingsViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
 }
-
-

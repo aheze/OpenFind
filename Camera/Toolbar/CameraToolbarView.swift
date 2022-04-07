@@ -31,7 +31,7 @@ struct CameraToolbarView: View {
             HStack {
                 FlashIconView(isOn: $model.flash, isEnabled: flashEnabled)
                 Spacer()
-                OpenSettingsIconView()
+                OpenSettingsIconView(model: model)
             }
             .frame(maxWidth: .infinity)
         }

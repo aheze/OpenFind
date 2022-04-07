@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     lazy var listsViewModel = ListsViewModel()
     lazy var toolbarViewModel = ToolbarViewModel()
 
+    lazy var settingsController = SettingsController(realmModel: realmModel)
     lazy var photos = PhotosController(model: photosViewModel, realmModel: realmModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel)
     lazy var camera = CameraController(model: cameraViewModel, tabViewModel: tabViewModel, realmModel: realmModel)
     lazy var lists = ListsController(model: listsViewModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
@@ -55,6 +56,7 @@ class ViewController: UIViewController {
         _ = tabController
 
         setup()
+        listen()
         updateExcludedFrames()
         importListIfNeeded()
     }

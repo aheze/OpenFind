@@ -82,13 +82,13 @@ class SettingsMainViewController: UIViewController, Searchable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: .zero)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate { _ in
-            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+            self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: .zero)
             self.updateSearchBarOffsetFromScroll(scrollView: self.scrollView)
         }
     }
