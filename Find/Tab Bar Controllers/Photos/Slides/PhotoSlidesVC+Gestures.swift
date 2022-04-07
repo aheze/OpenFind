@@ -60,7 +60,7 @@ extension PhotoSlidesViewController: UIGestureRecognizerDelegate {
             
             var velocityCheck = false
             
-            if UIDevice.current.orientation.isLandscape {
+            if UIWindow.currentInterfaceOrientation?.isLandscape ?? false {
                 velocityCheck = velocity.x < 0
             } else {
                 velocityCheck = velocity.y < 0

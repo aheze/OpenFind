@@ -52,7 +52,7 @@ class LivePreviewViewController: UIViewController {
     var safeViewFrameFromPreviewFit = CGRect.zero
     
     /// update the frames of the camera
-    var changeContentContainerViewFrame: ((CGRect) -> Void)?
+    var changeContentContainerViewFrame: ((CGRect) -> Void)? /// called inside `changeAspectProgress`
     var changeSimulatedSafeViewFrame: ((CGRect) -> Void)?
     
     /// directly in view hierarchy

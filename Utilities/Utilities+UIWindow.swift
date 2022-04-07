@@ -9,10 +9,20 @@
 import UIKit
 
 extension UIWindow {
+    
+    /// without async
+    static var currentInterfaceOrientation: UIInterfaceOrientation? {
+        return UIApplication.shared.windows
+            .first?
+            .windowScene?
+            .interfaceOrientation
+    }
+
+    /// with async
     static var interfaceOrientation: UIInterfaceOrientation? {
         get async {
             await MainActor.run {
-                return UIApplication.shared.windows
+                UIApplication.shared.windows
                     .first?
                     .windowScene?
                     .interfaceOrientation

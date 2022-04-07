@@ -68,10 +68,6 @@ extension CameraViewController {
         let sentences = Find.getFastSentences(from: request)
         let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients)
 
-        if count % 10 == 0 {
-            print("-> \(sentences.map { $0.string })")
-        }
-        
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: false)
             self.createLivePreviewEvent(sentences: sentences, highlights: highlights)

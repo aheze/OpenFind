@@ -86,9 +86,11 @@ class CameraViewController: UIViewController, PageViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
-        livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
-        contentContainerViewSize = contentContainerView.bounds.size
+        Task {
+            await livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
+            livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
+            contentContainerViewSize = contentContainerView.bounds.size
+        }
     }
     
     var count = 0

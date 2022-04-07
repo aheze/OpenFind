@@ -44,22 +44,16 @@ extension CGRect {
 
 extension UIInterfaceOrientation {
     func getVisionOrientation() -> CGImagePropertyOrientation {
-//        return .up
         switch self {
         case .portrait:
-            print("right")
             return .right
         case .landscapeRight: /// home button right
-            print("landscapeRight -> up")
             return .up
         case .landscapeLeft: /// home button left
-            print("landscapeLeft -> down")
             return .down
         case .portraitUpsideDown:
-            print("portraitUpsideDown -> left")
             return .left
         default:
-            print("default.")
             return .right
         }
     }

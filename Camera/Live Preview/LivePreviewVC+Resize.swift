@@ -9,12 +9,13 @@
 import UIKit
 
 extension LivePreviewViewController {
-    func updateViewportSize(safeViewFrame: CGRect) {
+    func updateViewportSize(safeViewFrame: CGRect) async {
         guard var imageSize = imageSize else { return }
-        if UIDevice.current.orientation.isLandscape {
+            
+        if await UIWindow.interfaceOrientation?.isLandscape ?? false {
             imageSize = CGSize(width: imageSize.height, height: imageSize.width)
         }
-        
+
         self.safeViewFrame = safeViewFrame
         
         let updatedSafeViewFrame = updatedSafeViewSize(aspectFill: hitAspectTarget)

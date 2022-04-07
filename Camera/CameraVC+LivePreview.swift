@@ -10,7 +10,6 @@ import UIKit
 
 extension CameraViewController {
     func createLivePreview() -> LivePreviewViewController {
-        
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let livePreviewViewController = storyboard.instantiateViewController(identifier: "LivePreviewViewController") { coder in
             LivePreviewViewController(coder: coder, tabViewModel: self.tabViewModel)
@@ -20,8 +19,8 @@ extension CameraViewController {
         livePreviewViewController.needSafeViewUpdate = { [weak self] in
             guard let self = self else { return }
             
-            DispatchQueue.main.async {
-                livePreviewViewController.updateViewportSize(safeViewFrame: self.safeView.frame)
+            Task {
+                await livePreviewViewController.updateViewportSize(safeViewFrame: self.safeView.frame)
                 livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
                 livePreviewViewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress, animated: false)
             }
