@@ -58,7 +58,6 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     }
     
     func getCurrentItemViewController() -> PhotosSlidesItemViewController? {
-        
         if let photo = model.slidesState?.currentPhoto, let viewController = self.getViewController(for: photo) {
             return viewController   
         }

@@ -50,11 +50,6 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, SlidesPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, SlidesPhoto>
 
-    // MARK: - Deletion
-
-    var photoToDelete: Photo?
-    var targetIndexAfterDeletion: Int?
-
     // MARK: - Dismissal
 
     let tapPanGesture = UITapGestureRecognizer()
@@ -155,14 +150,14 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
     }
-    
+
+    /// get associated view controller
     func getViewController(for photo: Photo) -> PhotosSlidesItemViewController? {
         if
             let index = model.slidesState?.getSlidesPhotoIndex(photo: photo),
             let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosSlidesContentCell,
             let viewController = cell.viewController
         {
-            print("viewController exists")
             return viewController
         }
         return nil

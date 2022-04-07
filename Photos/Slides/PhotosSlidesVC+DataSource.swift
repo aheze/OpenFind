@@ -26,16 +26,54 @@ extension PhotosSlidesViewController {
                 withReuseIdentifier: "PhotosSlidesContentCell",
                 for: indexPath
             ) as! PhotosSlidesContentCell
-            
-            print("indexpath: \(indexPath)")
-            cell.contentView.transform = .identity
-            cell.contentView.alpha = 1
-            
-            self.display(cell: cell, indexPath: indexPath)
+
+            self.load(cell: cell, indexPath: indexPath)
 
             return cell
         }
 
         return dataSource
+    }
+
+    func load(cell: PhotosSlidesContentCell, indexPath: IndexPath) {
+        guard let slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] else { return }
+
+        let photoSlidesViewController: PhotosSlidesItemViewController
+        if let viewController = cell.viewController {
+            
+            /// recover after deletion
+            viewController.view.alpha = 1
+            viewController.view.transform = .identity
+            
+            viewController.findPhoto = slidesPhoto.findPhoto
+            viewController.loadViewIfNeeded()
+            viewController.reloadImage()
+            photoSlidesViewController = viewController
+        } else {
+            let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
+            let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
+                PhotosSlidesItemViewController(
+                    coder: coder,
+                    model: self.model,
+                    findPhoto: slidesPhoto.findPhoto
+                )
+            }
+
+            photoSlidesViewController = viewController
+            addChildViewController(viewController, in: cell.contentView)
+            cell.contentView.bringSubviewToFront(viewController.view)
+
+            /// adding a child seems to take control of the navigation bar. stop this
+            navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
+            cell.viewController = viewController
+        }
+
+        model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto
+
+        if model.animatingSlides {
+            photoSlidesViewController.containerView.alpha = 0
+        } else {
+            photoSlidesViewController.containerView.alpha = 1
+        }
     }
 }

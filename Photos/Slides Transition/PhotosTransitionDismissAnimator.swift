@@ -66,20 +66,18 @@ final class PhotosTransitionDismissAnimator: NSObject, UIViewControllerInteracti
         else {
             fatalError("Could not get view controllers inside `startInteractiveTransition`.")
         }
-        
 
-        
         fromVC.transitionAnimator = self
         self.fromVC = fromVC
         self.toVC = toVC
         self.transitionContext = transitionContext
-        
+
         let fromImageViewFrame = fromDelegate.imageFrame(type: .pop) ?? .zero
         let fromImage = fromDelegate.referenceImage(type: .pop)
         let toImageViewFrame = toDelegate.imageFrame(type: .pop) ?? .zero
         let fromCornerRadius = fromDelegate.imageCornerRadius(type: .pop)
         let toCornerRadius = toDelegate.imageCornerRadius(type: .pop)
-        
+
         self.fromImageViewFrame = fromImageViewFrame
         self.fromImage = fromImage
         self.toImageViewFrame = toImageViewFrame
@@ -192,14 +190,13 @@ extension PhotosTransitionDismissAnimator {
             self?.transitionImageView.removeFromSuperview()
             self?.transitionImageView.image = nil
 
-            print("cancleed?? \(didCancel)")
             if didCancel {
                 transitionContext.cancelInteractiveTransition()
             } else {
                 transitionContext.finishInteractiveTransition()
             }
             transitionContext.completeTransition(!didCancel)
-            
+
             self?.toDelegate.transitionDidEnd(type: .pop, completed: !didCancel)
             self?.fromDelegate.transitionDidEnd(type: .pop, completed: !didCancel)
             self?.transitionContext = nil
