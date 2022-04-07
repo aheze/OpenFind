@@ -15,12 +15,12 @@ class ViewController: UIViewController {
     /// lazy load everything
     lazy var tabViewModel = TabViewModel()
     lazy var realmModel = RealmModel()
-    lazy var photosViewModel = PhotosViewModel(realmModel: realmModel)
+    lazy var photosViewModel = PhotosViewModel()
     lazy var cameraViewModel = CameraViewModel()
     lazy var listsViewModel = ListsViewModel()
     lazy var toolbarViewModel = ToolbarViewModel()
 
-    lazy var photos = PhotosController(model: photosViewModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel)
+    lazy var photos = PhotosController(model: photosViewModel, realmModel: realmModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel)
     lazy var camera = CameraController(model: cameraViewModel, tabViewModel: tabViewModel, realmModel: realmModel)
     lazy var lists = ListsController(model: listsViewModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
 

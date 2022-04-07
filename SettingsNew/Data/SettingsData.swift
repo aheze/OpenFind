@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct SettingsData {
+    
+    /// set this inside the actual app
     static var showScanningOptions: (() -> Void)?
     static var exportAllLists: (() -> Void)?
     

@@ -8,11 +8,11 @@
 import UIKit
 
 class CameraController {
-    
     var model: CameraViewModel
     var tabViewModel: TabViewModel
     var realmModel: RealmModel
     var viewController: CameraViewController
+    var settingsController: SettingsController
     
     init(
         model: CameraViewModel,
@@ -35,5 +35,8 @@ class CameraController {
         
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
+    
+        let settingsController = SettingsController(realmModel: realmModel)
+        self.settingsController = settingsController
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Photos
-import SwiftUI
 import UIKit
 
 extension PhotosViewController {

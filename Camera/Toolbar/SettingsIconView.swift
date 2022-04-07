@@ -1,5 +1,5 @@
 //
-//  SettingsIconView.swift
+//  OpenSettingsIconView.swift
 //  TabBarControllerTesting
 //
 //  Created by Zheng on 11/11/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsIconView: View {
+struct OpenSettingsIconView: View {
     @State var scaleAnimationActive = false
     
     var body: some View {
