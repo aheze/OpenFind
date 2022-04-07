@@ -13,6 +13,7 @@ struct SettingsData {
     /// set this inside the actual app
     static var showScanningOptions: (() -> Void)?
     static var exportAllLists: (() -> Void)?
+    static var deleteAllPhotoMetadata: (() -> Void)?
     
     /// feedback
     static var rateTheApp: (() -> Void)?

@@ -9,10 +9,17 @@
 import UIKit
 
 extension PhotosViewModel {
+    
+    /// delete metadata and load
     func deleteAllMetadata() {
-        
-
-        self.load()
+        getRealmModel?().container.deleteAllMetadata()
+        getRealmModel?().container.loadPhotoMetadatas()
+        loadAssets()
+        loadPhotos { [weak self] in
+            guard let self = self else { return }
+            self.sort()
+            self.reload?()
+        }
     }
 
     /// `photo.metadata` should be the new metadata

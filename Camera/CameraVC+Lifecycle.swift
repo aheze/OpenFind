@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension CameraViewController {
@@ -25,13 +24,9 @@ extension CameraViewController {
     func didBecomeInactive() {
         Find.prioritizedAction = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + CameraConstants.cameraCoolDownDuration) {
-//            if self.tabViewModel.tabState != .camera {
-                DispatchQueue.global(qos: .userInteractive).async {
-                    if self.livePreviewViewController.session.isRunning {
-                        self.livePreviewViewController.session.stopRunning()
-                    }
-                }
-//            }
+            if self.tabViewModel.tabState != .camera {
+                self.stopRunning()
+            }
         }
     }
     

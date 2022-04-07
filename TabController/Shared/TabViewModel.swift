@@ -33,6 +33,10 @@ class TabViewModel: ObservableObject {
     
     /// hide/show the status bar and tab bar
     @Published var barsShown = true
+    var barsShownChanged: (() -> Void)? /// refresh
+    
+    @Published var statusBarStyle = UIStatusBarStyle.lightContent
+    var statusBarStyleChanged: (() -> Void)? /// refresh
     
     /// for `TabBarVC`
     var updateTabBarHeight: ((TabState) -> Void)?
@@ -41,7 +45,6 @@ class TabViewModel: ObservableObject {
     /// 2. new tab
     /// 3. the animation
     var tabStateChanged: ((TabState, TabState, TabStateChangeAnimation) -> Void)?
-    var barsShownChanged: (() -> Void)? /// refresh
     
     /// for the camera view controller
     var animatorProgressChanged: ((CGFloat) -> Void)?

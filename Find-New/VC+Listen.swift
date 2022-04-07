@@ -13,15 +13,19 @@ extension ViewController {
         cameraViewModel.settingsPressed = { [weak self] in
             guard let self = self else { return }
             self.present(self.settingsController.viewController, animated: true)
-            self.camera.viewController.didBecomeInactive()
+            self.camera.viewController.stopRunning()
         }
         SettingsData.showScanningOptions = { [weak self] in
             guard let self = self else { return }
-            print("Show scanning options")
+            self.present(self.photos.viewController.scanningNavigationViewController, animated: true)
         }
         SettingsData.exportAllLists = { [weak self] in
             guard let self = self else { return }
-            print("Export all lists")
+            self.exportAllLists()
+        }
+        SettingsData.deleteAllPhotoMetadata = { [weak self] in
+            guard let self = self else { return }
+            self.deleteAllPhotoMetadata()
         }
 
         self.settingsController.viewController.presentationController?.delegate = self
@@ -29,6 +33,27 @@ extension ViewController {
             guard let self = self else { return }
             self.camera.viewController.willBecomeActive()
         }
+    }
+
+    func exportAllLists() {
+        let displayedLists = lists.model.displayedLists.map { $0.list }
+        let urls = displayedLists.compactMap { $0.getURL() }
+        let dataSource = ListsSharingDataSource(lists: displayedLists)
+        self.settingsController.viewController.presentShareSheet(items: urls + [dataSource])
+    }
+
+    func deleteAllPhotoMetadata() {
+        let alert = UIAlertController(title: "Delete All Scanned Data?", message: "Are you sure you want to delete all scanned data? This can't be undone.", preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
+                guard let self = self else { return }
+                self.photosViewModel.deleteAllMetadata()
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        )
+        self.settingsController.viewController.present(alert, animated: true, completion: nil)
     }
 }
 

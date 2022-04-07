@@ -26,5 +26,9 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             print("Export all lists")
         }
+        SettingsData.deleteAllPhotoMetadata = { [weak self] in
+            guard let self = self else { return }
+            print("Delete all metadata")
+        }
     }
 }

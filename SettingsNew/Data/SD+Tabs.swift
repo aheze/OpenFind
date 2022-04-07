@@ -103,7 +103,9 @@ extension SettingsData {
                                     title: "Delete All Scanned Data",
                                     tintColor: UIColor.systemRed,
                                     rightIconName: "trash"
-                                ) {}
+                                ) {
+                                    SettingsData.deleteAllPhotoMetadata?()
+                                }
                             )
                         ],
                         description: .constant(string: "All scanned data will be deleted. You will need to rescan photos to find in them.")

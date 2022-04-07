@@ -56,6 +56,10 @@ class TabBarViewController: UIViewController {
         return !model.barsShown
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return model.statusBarStyle
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = contentPagingLayout

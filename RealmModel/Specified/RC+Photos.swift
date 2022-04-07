@@ -23,7 +23,7 @@ extension RealmContainer {
         self.photoMetadatas = photoMetadatas
     }
     
-    func deleteAllMetadatas() {
+    func deleteAllMetadata() {
         let metadatas = realm.objects(RealmPhotoMetadata.self)
 
         do {

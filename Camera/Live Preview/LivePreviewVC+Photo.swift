@@ -15,20 +15,22 @@ extension LivePreviewViewController {
         let videoPreviewLayerOrientation = livePreviewView.videoPreviewLayer.connection?.videoOrientation
 
         if
+            session.isRunning,
             let photoOutputConnection = photoDataOutput.connection(with: .video),
             let photoPreviewType = photoSettings.availablePreviewPhotoPixelFormatTypes.first
         {
             photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
             photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: photoPreviewType]
             photoDataOutput.capturePhoto(with: photoSettings, delegate: self)
-            
+
             return await withCheckedContinuation { continuation in
                 photoCaptured = { [weak self] image in
                     self?.photoCaptured = nil
                     continuation.resume(returning: image)
                 }
             }
+        } else {
+            return UIImage()
         }
-        return UIImage()
     }
 }

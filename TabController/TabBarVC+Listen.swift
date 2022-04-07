@@ -46,5 +46,10 @@ extension TabBarViewController {
                 self?.setNeedsStatusBarAppearanceUpdate()
             }
         }
+        model.statusBarStyleChanged = { [weak self] in
+            UIView.animate(withDuration: 0.3) {
+                self?.setNeedsStatusBarAppearanceUpdate()
+            }
+        }
     }
 }
