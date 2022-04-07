@@ -191,15 +191,17 @@ extension PhotosTransitionDismissAnimator {
         foregroundAnimator.addCompletion { [weak self] position in
             self?.transitionImageView.removeFromSuperview()
             self?.transitionImageView.image = nil
-            self?.toDelegate.transitionDidEnd(type: .pop)
-            self?.fromDelegate.transitionDidEnd(type: .pop)
 
+            print("cancleed?? \(didCancel)")
             if didCancel {
                 transitionContext.cancelInteractiveTransition()
             } else {
                 transitionContext.finishInteractiveTransition()
             }
             transitionContext.completeTransition(!didCancel)
+            
+            self?.toDelegate.transitionDidEnd(type: .pop, completed: !didCancel)
+            self?.fromDelegate.transitionDidEnd(type: .pop, completed: !didCancel)
             self?.transitionContext = nil
             self?.additionalCompletion?(!didCancel)
         }

@@ -81,8 +81,8 @@ final class PhotosTransitionPushAnimator: NSObject, UIViewControllerAnimatedTran
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 
             // Tell our view controllers that we're done, too.
-            self.toDelegate.transitionDidEnd(type: .push)
-            self.fromDelegate.transitionDidEnd(type: .push)
+            self.toDelegate.transitionDidEnd(type: .push, completed: true)
+            self.fromDelegate.transitionDidEnd(type: .push, completed: true)
             self.additionalCompletion?()
         }
 

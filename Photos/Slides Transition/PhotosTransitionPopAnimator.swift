@@ -89,8 +89,8 @@ final class PhotosTransitionPopAnimator: NSObject, UIViewControllerAnimatedTrans
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 
             // Tell our view controllers that we're done, too.
-            self.toDelegate.transitionDidEnd(type: .pop)
-            self.fromDelegate.transitionDidEnd(type: .pop)
+            self.toDelegate.transitionDidEnd(type: .pop, completed: true)
+            self.fromDelegate.transitionDidEnd(type: .pop, completed: true)
             self.additionalCompletion?()
         }
 

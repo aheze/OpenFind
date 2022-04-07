@@ -21,7 +21,7 @@ protocol PhotoTransitionAnimatorDelegate: UIViewController {
 
     /// Called right-after the transition animation ends.
     /// Use this to clean up after the transition.
-    func transitionDidEnd(type: PhotoTransitionAnimatorType)
+    func transitionDidEnd(type: PhotoTransitionAnimatorType, completed: Bool)
 
     /// The animator needs a UIImageView for the transition;
     /// eg the Photo Detail screen should provide a snapshotView of its image,

@@ -20,7 +20,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         }
     }
 
-    func transitionDidEnd(type: PhotoTransitionAnimatorType) {
+    func transitionDidEnd(type: PhotoTransitionAnimatorType, completed: Bool) {
         if let containerView = getCurrentItemContainerView() {
             containerView.alpha = 1
         }

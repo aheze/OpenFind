@@ -93,48 +93,54 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         }
     }
     
-    func transitionDidEnd(type: PhotoTransitionAnimatorType) {
+    func transitionDidEnd(type: PhotoTransitionAnimatorType, completed: Bool) {
         model.animatingSlides = false
         switch type {
         case .push:
             break
         case .pop:
             guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
-            if model.resultsState != nil {
-                if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                    cell.view.imageView.alpha = 1
-                    
-                    UIView.animate(withDuration: 0.3) {
-                        cell.view.overlayView.alpha = 1
-                    }
-                }
-            } else {
-                if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                    cell.alpha = 1
-                    
-                    /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
-                    UIView.animate(withDuration: 0.3) {
-                        cell.view.overlayView.alpha = 1
-                    }
-                }
-                if let header = getCurrentHeader(for: photoIndexPath) {
-                    UIView.animate(withDuration: 0.3) {
-                        header.alpha = 1
-                    }
-                }
-            }
-            if model.sortNeeded {
-                if let selectedFilter = sliderViewModel.selectedFilter {
-                    self.load(for: selectedFilter)
-                }
-                if model.resultsState != nil {
-                    find() /// find again (handles star/unstar)
-                    updateResults()
-                }
-            }
             
-            /// remove slides state to keep finding in `PhotosVM+Update`
-            self.model.slidesState = nil
+            
+            /// make sure completed first
+            if completed {
+                if model.resultsState != nil {
+                    if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
+                        cell.view.imageView.alpha = 1
+                    
+                        UIView.animate(withDuration: 0.3) {
+                            cell.view.overlayView.alpha = 1
+                        }
+                    }
+                } else {
+                    if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
+                        cell.alpha = 1
+                    
+                        /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
+                        UIView.animate(withDuration: 0.3) {
+                            cell.view.overlayView.alpha = 1
+                        }
+                    }
+                    if let header = getCurrentHeader(for: photoIndexPath) {
+                        UIView.animate(withDuration: 0.3) {
+                            header.alpha = 1
+                        }
+                    }
+                }
+                
+                if model.sortNeeded {
+                    if let selectedFilter = sliderViewModel.selectedFilter {
+                        self.load(for: selectedFilter)
+                    }
+                    if model.resultsState != nil {
+                        find() /// find again (handles star/unstar)
+                        updateResults()
+                    }
+                }
+                
+                /// remove slides state to keep finding in `PhotosVM+Update`
+                self.model.slidesState = nil
+            }
         }
     }
     
