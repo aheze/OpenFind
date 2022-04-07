@@ -10,14 +10,8 @@ import SwiftUI
 
 struct CameraToolbarView: View {
     @ObservedObject var model: CameraViewModel
-    
-    var body: some View {
-        let flashEnabled = Binding {
-            !model.shutterOn
-        } set: { newValue in
-            model.shutterOn = !newValue
-        }
 
+    var body: some View {
         HStack(alignment: .top, spacing: 0) {
             HStack {
                 ResultsIconView(count: $model.resultsCount)
@@ -29,7 +23,7 @@ struct CameraToolbarView: View {
             Color.clear
 
             HStack {
-                FlashIconView(isOn: $model.flash, isEnabled: flashEnabled)
+                FlashIconView(model: model, isEnabled: !model.shutterOn)
                 Spacer()
                 OpenSettingsIconView(model: model)
             }
@@ -37,5 +31,3 @@ struct CameraToolbarView: View {
         }
     }
 }
-
-

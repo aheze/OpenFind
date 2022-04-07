@@ -25,6 +25,7 @@ class CameraViewModel: ObservableObject {
     
     /// press the snapshot/camera button
     var snapshotPressed: (() -> Void)?
+    var flashPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
     var settingsPressed: (() -> Void)?
     init() {}

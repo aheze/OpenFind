@@ -106,15 +106,15 @@ class CameraViewController: UIViewController, PageViewController {
         scrollZoomHookContainerView.backgroundColor = .clear
         simulatedSafeView.backgroundColor = .clear
         simulatedSafeView.isHidden = true
-        
-        scrollZoomContainerView.addDebugBorders(.blue)
-        
+
         setupZoom()
         setupHighlights()
         setupProgress()
         setupBlur()
         
         listenToModel()
+        
+//        scrollZoomViewController.view.addDebugBorders(.systemBlue, width: 5)
         
         /// A testing tab bar
         addTestingTabBar(add: false)

@@ -1137,6 +1137,8 @@
 		3C5B378D27FF575A00801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
 		3C5B378E27FF575B00801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
 		3C5B378F27FF575B00801FEE /* Utilities+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */; };
+		3C5B379127FF5F1900801FEE /* CameraVC+Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */; };
+		3C5B379227FF603600801FEE /* CameraVC+Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */; };
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
 		3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5F1FA427121BB200143BDD /* WhatsNewKit */; };
 		3C60666F274EC6A9000A5BDE /* VisionTrackingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */; };
@@ -3143,6 +3145,7 @@
 		3C5B377927FEB06000801FEE /* VC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Listen.swift"; sourceTree = "<group>"; };
 		3C5B377B27FEB6E900801FEE /* CameraVC+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Lifecycle.swift"; sourceTree = "<group>"; };
 		3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIWindow.swift"; sourceTree = "<group>"; };
+		3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Flash.swift"; sourceTree = "<group>"; };
 		3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTrackingEngine.swift; sourceTree = "<group>"; };
 		3C606675274F5343000A5BDE /* VisionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionUtilities.swift; sourceTree = "<group>"; };
@@ -4349,6 +4352,7 @@
 				3C7223BD27C44C070085EBF1 /* CameraVC+Conserving.swift */,
 				3C7223CB27C453760085EBF1 /* CameraVC+Toolbar.swift */,
 				3C7B7A6C277F9CB200E1F602 /* CameraVC+Static.swift */,
+				3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */,
 				3C9314B427B84F7B009E5B6E /* CameraVC+Snapshot.swift */,
 				3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */,
 				3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */,
@@ -7528,6 +7532,7 @@
 				3C119975274B345000D6AFE3 /* LivePreviewVC+Delegate.swift in Sources */,
 				3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */,
 				3C5B370B27FEAEDF00801FEE /* SettingsMVC+Delegate.swift in Sources */,
+				3C5B379127FF5F1900801FEE /* CameraVC+Flash.swift in Sources */,
 				3C5B36EE27FEAEDF00801FEE /* SettingsPageViewController.swift in Sources */,
 				3C5B377F27FF575200801FEE /* Utilities+UIWindow.swift in Sources */,
 				3CC594FA279F3323001D07DC /* ColorPickerView.swift in Sources */,
@@ -8477,6 +8482,7 @@
 				3C21EE2C27A461930005E183 /* RealmModels.swift in Sources */,
 				3C21EE3927A463E30005E183 /* ListsVC+Realm.swift in Sources */,
 				3C6C737B2781946B00E039F0 /* ZoomView.swift in Sources */,
+				3C5B379227FF603600801FEE /* CameraVC+Flash.swift in Sources */,
 				3C6C73772781946B00E039F0 /* ZoomView+Utilities.swift in Sources */,
 				3C7A440B27EF734900DFF76F /* PhotosEmptyContentView.swift in Sources */,
 				3C6C73722781946B00E039F0 /* LivePreviewVC+Delegate.swift in Sources */,

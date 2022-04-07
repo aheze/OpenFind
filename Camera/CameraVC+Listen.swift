@@ -11,15 +11,26 @@ import UIKit
 
 extension CameraViewController {
     func listenToModel() {
+        model.flashPressed = { [weak self] in
+            guard let self = self else { return }
+            self.toggleFlashlight(self.model.flash)
+        }
+        
         /// Listen to shutter press events
         model.shutterPressed = { [weak self] in
             guard let self = self else { return }
             
             if self.model.shutterOn {
                 self.pause()
+                if self.model.flash  {
+                    self.toggleFlashlight(false)
+                }
             } else {
                 self.resume()
                 self.model.resume() /// reset the image back to `nil`
+                if self.model.flash  {
+                    self.toggleFlashlight(true)
+                }
             }
         }
         
