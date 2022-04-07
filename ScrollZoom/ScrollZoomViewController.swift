@@ -41,9 +41,13 @@ class ScrollZoomViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
 
         scrollView.contentInsetAdjustmentBehavior = .never
+        
+        scrollView.addDebugBorders(.red)
+        contentView.addDebugBorders(.green)
     }
 
     func centerImage() {
+        
         if scrollView.zoomScale < 1 {
             let leftMargin = (scrollView.bounds.width - contentView.frame.width) * 0.5
             let topMargin = (scrollView.bounds.height - contentView.frame.height) * 0.5
@@ -51,6 +55,7 @@ class ScrollZoomViewController: UIViewController {
         } else {
             scrollView.contentInset = .zero
         }
+        print("cenbtering!!\(scrollView.bounds) and \(contentView.frame.width) ->  \(scrollView.contentInset)")
     }
 }
 

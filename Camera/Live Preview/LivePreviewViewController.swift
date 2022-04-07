@@ -108,47 +108,23 @@ class LivePreviewViewController: UIViewController {
         CATransaction.setValue(true, forKey: kCATransactionDisableActions)
         livePreviewView.videoPreviewLayer.frame = previewFitView.bounds
         CATransaction.commit()
-        needSafeViewUpdate?()
-//    }
-//
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
 
-        if let connection = livePreviewView.videoPreviewLayer.connection {
-            print("conenction exists")
-            switch UIDevice.current.orientation {
-            case .portrait: connection.videoOrientation = .portrait
-            case .landscapeRight: connection.videoOrientation = .landscapeLeft
-            case .landscapeLeft: connection.videoOrientation = .landscapeRight
-            case .portraitUpsideDown: connection.videoOrientation = .portraitUpsideDown
-            default: connection.videoOrientation = .portrait
+        Task {
+            let orientation = await UIWindow.interfaceOrientation
+            
+            if let connection = livePreviewView.videoPreviewLayer.connection {
+                switch orientation ?? .portrait {
+                case .portrait: connection.videoOrientation = .portrait
+                case .landscapeRight: connection.videoOrientation = .landscapeRight
+                case .landscapeLeft: connection.videoOrientation = .landscapeLeft
+                case .portraitUpsideDown: connection.videoOrientation = .portraitUpsideDown
+                default: connection.videoOrientation = .portrait
+                }
             }
+            
+            needSafeViewUpdate?()
         }
     }
-
-//
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//
-//        let cameraPreviewTransform = livePreviewView.transform
-//        needSafeViewUpdate?()
-//
-//        coordinator.animate { context in
-//
-//            let deltaTransform = coordinator.targetTransform
-//            let deltaAngle: CGFloat = atan2(deltaTransform.b, deltaTransform.a)
-//
-//            var currentRotation = atan2(cameraPreviewTransform.b, cameraPreviewTransform.a)
-//
-//            // Adding a small value to the rotation angle forces the animation to occur in a the desired direction, preventing an issue where the view would appear to rotate 2PI radians during a rotation from LandscapeRight -> LandscapeLeft.
-//            currentRotation += -1 * deltaAngle + 0.0001
-//            self.livePreviewView.layer.setValue(currentRotation, forKeyPath: "transform.rotation.z")
-//            self.livePreviewView.layer.frame = self.previewFitView.bounds
-//        } completion: { context in
-//            let currentTransform: CGAffineTransform = self.livePreviewView.transform
-//            self.livePreviewView.transform = currentTransform
-//        }
-//    }
 
     func setup() {
         pausedImageView.alpha = 0
