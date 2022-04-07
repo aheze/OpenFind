@@ -26,6 +26,12 @@ extension PhotosSlidesViewController {
                 withReuseIdentifier: "PhotosSlidesContentCell",
                 for: indexPath
             ) as! PhotosSlidesContentCell
+            
+            print("indexpath: \(indexPath)")
+            cell.contentView.transform = .identity
+            cell.contentView.alpha = 1
+            
+            self.display(cell: cell, indexPath: indexPath)
 
             return cell
         }

@@ -27,7 +27,7 @@ extension PhotosSlidesViewController {
                             stringToGradients: [:],
                             highlights: []
                         )
-                        slidesPhoto.associatedViewController?.highlightsViewModel.update(with: [], replace: true)
+                        self.getViewController(for: slidesPhoto.findPhoto.photo)?.highlightsViewModel.update(with: [], replace: true)
                         self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
                     }
 
@@ -53,7 +53,7 @@ extension PhotosSlidesViewController {
                         stringToGradients: self.slidesSearchViewModel.stringToGradients,
                         highlights: newHighlights
                     )
-                    slidesPhoto.associatedViewController?.highlightsViewModel.highlights = newHighlights
+                    self.getViewController(for: slidesPhoto.findPhoto.photo)?.highlightsViewModel.highlights = newHighlights
                     self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = newHighlightsSet
                 }
             }

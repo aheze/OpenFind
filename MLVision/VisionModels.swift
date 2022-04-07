@@ -39,7 +39,7 @@ enum FindError: Error {
     case startTimeExistedWasBusy
 }
 
-enum FindImage {
+enum FindImage: Equatable {
     case cgImage(CGImage)
     case pixelBuffer(CVPixelBuffer)
 }

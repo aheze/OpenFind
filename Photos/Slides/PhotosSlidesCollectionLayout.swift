@@ -85,17 +85,17 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
     }
     
     /// disable fade animation in cells - https://stackoverflow.com/a/55888930/14351818
-    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-        attributes?.alpha = 1
-        return attributes
-    }
-
-    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
-        attributes?.alpha = 1
-        return attributes
-    }
+//    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+//        attributes?.alpha = 1
+//        return attributes
+//    }
+//
+//    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+//        attributes?.alpha = 1
+//        return attributes
+//    }
     
     /// called upon finger lift
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {

@@ -11,11 +11,11 @@ import UIKit
 
 
 struct SlidesPhoto: Hashable {
+    var id = UUID()
     var findPhoto: FindPhoto
-    var associatedViewController: PhotosSlidesItemViewController?
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(findPhoto)
+        hasher.combine(id)
     }
 }
 

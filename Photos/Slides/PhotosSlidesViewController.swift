@@ -155,4 +155,16 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateSearchBarOffset?()
     }
+    
+    func getViewController(for photo: Photo) -> PhotosSlidesItemViewController? {
+        if
+            let index = model.slidesState?.getSlidesPhotoIndex(photo: photo),
+            let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosSlidesContentCell,
+            let viewController = cell.viewController
+        {
+            print("viewController exists")
+            return viewController
+        }
+        return nil
+    }
 }

@@ -9,4 +9,7 @@
 
 import UIKit
 
-class PhotosSlidesContentCell: UICollectionViewCell {}
+class PhotosSlidesContentCell: UICollectionViewCell {
+    var viewController: PhotosSlidesItemViewController?
+    
+}

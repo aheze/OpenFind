@@ -48,7 +48,7 @@ extension PhotosSlidesViewController {
             highlights: highlights
         )
 
-        slidesPhoto.associatedViewController?.highlightsViewModel.update(with: highlights, replace: true)
+        getViewController(for: slidesPhoto.findPhoto.photo)?.highlightsViewModel.update(with: highlights, replace: true)
         if let slidesState = model.slidesState, let index = slidesState.getSlidesPhotoIndex(photo: slidesPhoto.findPhoto.photo) {
             self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
 

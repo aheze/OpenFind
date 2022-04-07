@@ -21,8 +21,12 @@ extension Find {
                         visionOptions: queuedRun.visionOptions,
                         findOptions: queuedRun.findOptions
                     )
+
+                    /// check if the run still exists (should be unnecessary)
+                    guard queuedRuns.contains(where: { $0.image == queuedRun.image }) else { return }
+
                     queuedRun.completion?(sentences)
-                    queuedRuns.removeFirst()
+                    queuedRuns = queuedRuns.filter { $0.image != queuedRun.image } /// remove image
                     startTime = nil
                 }
                 break

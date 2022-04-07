@@ -9,16 +9,15 @@
 import UIKit
 
 extension PhotosSlidesViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard var slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] else { return }
+    func display(cell: PhotosSlidesContentCell, indexPath: IndexPath) {
+        guard let slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] else { return }
 
         let photoSlidesViewController: PhotosSlidesItemViewController
-        if let viewController = slidesPhoto.associatedViewController {
+        if let viewController = cell.viewController {
             viewController.findPhoto = slidesPhoto.findPhoto
             viewController.loadViewIfNeeded()
             viewController.reloadImage()
             photoSlidesViewController = viewController
-            addChildViewController(viewController, in: cell.contentView)
         } else {
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
             let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
@@ -35,9 +34,9 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
             /// adding a child seems to take control of the navigation bar. stop this
             navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
-            slidesPhoto.associatedViewController = viewController
+            cell.viewController = viewController
         }
-
+        
         model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto
 
         if !slidesSearchViewModel.stringToGradients.isEmpty {
@@ -61,15 +60,15 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] {
-            /// make sure the photo isn't being shown/focused (prevent white screen)
-            guard model.slidesState?.currentPhoto != slidesPhoto.findPhoto.photo else { return }
-
-            if let viewController = slidesPhoto.associatedViewController {
-                removeChildViewController(viewController)
-                model.slidesState?.slidesPhotos[indexPath.item].associatedViewController = nil
-            }
-        }
+//        if let slidesPhoto = model.slidesState?.slidesPhotos[safe: indexPath.item] {
+//            /// make sure the photo isn't being shown/focused (prevent white screen)
+//            guard model.slidesState?.currentPhoto != slidesPhoto.findPhoto.photo else { return }
+//
+//            if let viewController = slidesPhoto.associatedViewController {
+//                removeChildViewController(viewController)
+//                model.slidesState?.slidesPhotos[indexPath.item].associatedViewController = nil
+//            }
+//        }
     }
 }
 
@@ -86,11 +85,11 @@ extension PhotosSlidesViewController {
         }
     }
 
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        if scrollView == collectionView {
-            finishDeleting()
-        }
-    }
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//        if scrollView == collectionView {
+//            finishDeleting()
+//        }
+//    }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
