@@ -30,9 +30,17 @@ extension SearchViewModel {
 
     func getTotalHeight() -> CGFloat {
         if isLandscape {
-            return configuration.cellHeight + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
+            return getCellHeight() + configuration.barTopPaddingLandscape + configuration.barBottomPaddingLandscape
         } else {
-            return configuration.cellHeight + configuration.barTopPadding + configuration.barBottomPadding
+            return getCellHeight() + configuration.barTopPadding + configuration.barBottomPadding
+        }
+    }
+    
+    func getCellHeight() -> CGFloat {
+        if isLandscape {
+            return configuration.cellHeightLandscape
+        } else {
+            return configuration.cellHeight
         }
     }
 }

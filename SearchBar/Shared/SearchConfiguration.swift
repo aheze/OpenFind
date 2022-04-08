@@ -9,6 +9,7 @@ import UIKit
 
 struct SearchConfiguration: Equatable {
     var cellHeight = CGFloat(60)
+    var cellHeightLandscape = CGFloat(60) /// smaller cell height for camera. modify this later
     var cellSpacing = CGFloat(8)
     
     /// padding on the left and right at edge cells
@@ -62,8 +63,9 @@ struct SearchConfiguration: Equatable {
     var barBottomPaddingLandscape = CGFloat(16)
     
     // MARK: - Popovers
+
     var popoverBackgroundBlurStyle = UIBlurEffect.Style.systemUltraThinMaterialDark
-    var popoverBackgroundColor = UIColor(hex: 0x0070AF).withAlphaComponent(0.5)
+    var popoverBackgroundColor = UIColor(hex: 0x0070af).withAlphaComponent(0.5)
     var popoverButtonColor = UIColor.black.withAlphaComponent(0.5)
     var popoverTextColor = UIColor.white
     var popoverDividerColor = UIColor.white.withAlphaComponent(0.2)
@@ -76,6 +78,7 @@ struct SearchConfiguration: Equatable {
     static var lists: Self = {
         var configuration = SearchConfiguration(
             cellHeight: 44,
+            cellHeightLandscape: 44,
             cellSpacing: 8,
             sidePadding: 16,
             sidePeekPadding: 30,

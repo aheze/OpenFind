@@ -199,7 +199,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 x: origin,
                 y: searchViewModel.isLandscape ? searchViewModel.configuration.barTopPaddingLandscape : searchViewModel.configuration.barTopPadding,
                 width: width,
-                height: searchViewModel.configuration.cellHeight
+                height: searchViewModel.getCellHeight()
             )
             attributes.alpha = fieldOffset.alpha
             attributes.percentage = fieldOffset.percentage
@@ -243,13 +243,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         if collectionViewModel.shouldUseOffsetWithAddNew {
             contentSize = CGSize(
                 width: fullOrigin + sidePaddingRight,
-                height: searchViewModel.configuration.cellHeight +
+                height: searchViewModel.getCellHeight() +
                     (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
             )
         } else {
             contentSize = CGSize(
                 width: fullOriginWithoutAddNew + sidePaddingRight,
-                height: searchViewModel.configuration.cellHeight +
+                height: searchViewModel.getCellHeight() +
                     (searchViewModel.isLandscape ? searchViewModel.configuration.barBottomPaddingLandscape : searchViewModel.configuration.barBottomPadding)
             )
         }
