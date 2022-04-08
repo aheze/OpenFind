@@ -40,13 +40,14 @@ extension PhotosViewController {
                     with: searchViewModel.stringToGradients
                 )
                 if highlights.count >= 1 {
+                    let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                     let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: highlights)
+                    let description = getCellDescription(from: lines) /// don't forget this!
                     
                     if let index = resultsState.getFindPhotoIndex(for: photo, in: \.displayedFindPhotos) {
                         model.resultsState?.displayedFindPhotos[index].highlightsSet = highlightsSet
                     }
 
-                    let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                     let findPhoto = FindPhoto(
                         id: UUID(),
                         photo: photo,

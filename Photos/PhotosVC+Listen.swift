@@ -68,10 +68,8 @@ extension PhotosViewController {
                 self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
                 
                 if resultsStateExisted {
-                    print("update again...")
                     self.updateResults()
                 } else {
-                    print("t changed")
                     self.updateResults(animate: false)
                     if self.model.isSelecting {
                         self.resetSelectingState()

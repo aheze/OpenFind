@@ -53,7 +53,6 @@ extension PhotosViewController {
         }
 
         update()
-        print("filt")
         updateResults()
     }
 

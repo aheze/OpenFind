@@ -71,8 +71,7 @@ extension PhotosViewController {
             }
 
             self.configureCell(cell: cell, metadata: findPhoto.photo.metadata)
-            
-            print("loading at \(indexPath): \(findPhoto.dateString()) ... \(findPhoto.descriptionText)")
+
             self.loadHighlights(for: cell, findPhoto: findPhoto)
 
             cell.tapped = { [weak self] in
