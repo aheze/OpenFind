@@ -149,6 +149,7 @@ struct ZoomView: View {
                 .fixedSize(horizontal: !zoomViewModel.isExpanded, vertical: false)
                 .cornerRadius(50)
                 .padding(.horizontal, ZoomConstants.containerEdgePadding)
+                .padding(.bottom, ZoomConstants.bottomPadding)
                 .opacity(zoomViewModel.ready ? 1 : 0),
             alignment: getAlignment()
         )
@@ -204,11 +205,11 @@ struct ZoomView: View {
     func getAlignment() -> Alignment {
         switch zoomViewModel.alignment {
         case .left:
-            return .leading
+            return .bottomLeading
         case .center:
-            return .center
+            return .bottom
         case .right:
-            return .trailing
+            return .bottomTrailing
         }
     }
 }

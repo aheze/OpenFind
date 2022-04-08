@@ -37,12 +37,14 @@ extension CameraViewController {
             )
         }
     }
+
     func showZoomView() {
         UIView.animate(withDuration: 0.5) {
             self.zoomContainerView.alpha = 1
             self.zoomContainerView.transform = .identity
         }
     }
+
     func hideZoomView() {
         UIView.animate(withDuration: 0.3) {
             self.zoomContainerView.alpha = 0

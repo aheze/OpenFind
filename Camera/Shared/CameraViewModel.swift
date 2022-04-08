@@ -14,7 +14,6 @@ class CameraViewModel: ObservableObject {
     
     /// this will be slightly delayed/debounced
     @Published var displayedResultsCount = 0
-    @Published var showingMessageView = false
     
     @Published var snapshotState = SnapshotState.inactive
  

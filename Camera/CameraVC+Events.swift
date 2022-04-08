@@ -20,12 +20,15 @@ extension CameraViewController {
     
     func checkEvents() {
         if model.recentEvents.count >= CameraConstants.maximumHistoryCount {
-            checkDormant()
+            if !model.resultsOn {
+                checkDormant()
+            }
         }
     }
     
     func checkDormant() {
-        let recentEvents = model.recentEvents.suffix(25)
+        let recentEvents = model.recentEvents.suffix(30)
+        
         let recentRecognizedStrings = recentEvents.map { $0.sentences }.flatMap { $0 }.map { $0.string } as [String]
         let recentFoundHighlights = recentEvents.map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
         

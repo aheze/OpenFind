@@ -95,7 +95,7 @@ enum ConstantVars {
             toolbarBottomPaddingLandscape = toolbarBottomPadding
             tabBarOverflowingIconsBottomPaddingLandscape = tabBarOverflowingIconsBottomPadding
             tabBarTotalHeightLandscape = tabBarTotalHeight
-            tabBarTotalHeightExpandedLandscape = tabBarTotalHeightExpanded
+            tabBarTotalHeightExpandedLandscape = tabBarTotalHeight
         }
     }
 }
