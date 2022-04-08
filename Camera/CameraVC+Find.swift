@@ -70,6 +70,7 @@ extension CameraViewController {
 
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: false)
+            self.highlightsAdded()
             self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
             self.checkEvents()
         }
@@ -91,6 +92,7 @@ extension CameraViewController {
         let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients)
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: replace)
+            self.highlightsAdded()
         }
         return sentences
     }

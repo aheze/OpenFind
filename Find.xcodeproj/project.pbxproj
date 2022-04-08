@@ -2003,6 +2003,7 @@
 		3CAD45B627FFDF4600B0A0A9 /* Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD45B427FFDF4200B0A0A9 /* Finding.swift */; };
 		3CAD45B727FFDF4700B0A0A9 /* Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD45B427FFDF4200B0A0A9 /* Finding.swift */; };
 		3CAD45B827FFDF4700B0A0A9 /* Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD45B427FFDF4200B0A0A9 /* Finding.swift */; };
+		3CAD45BA27FFE12500B0A0A9 /* SupportDocs in Frameworks */ = {isa = PBXBuildFile; productRef = 3CAD45B927FFE12500B0A0A9 /* SupportDocs */; };
 		3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */; };
 		3CADD80227FE4B7A009BBBDA /* SupportDocs in Frameworks */ = {isa = PBXBuildFile; productRef = 3CADD80127FE4B7A009BBBDA /* SupportDocs */; };
 		3CADD80927FE52F7009BBBDA /* SettingsDynamicPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADD80827FE52F7009BBBDA /* SettingsDynamicPicker.swift */; };
@@ -4225,6 +4226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C3642BB277BC1340038CB18 /* Popovers in Frameworks */,
+				3CAD45BA27FFE12500B0A0A9 /* SupportDocs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6634,6 +6636,7 @@
 			name = Camera;
 			packageProductDependencies = (
 				3C3642BA277BC1340038CB18 /* Popovers */,
+				3CAD45B927FFE12500B0A0A9 /* SupportDocs */,
 			);
 			productName = Camera;
 			productReference = 3C4D396A27475B890010FD68 /* Camera.app */;
@@ -12435,6 +12438,11 @@
 			productName = Popovers;
 		};
 		3CAD45AC27FFDC0000B0A0A9 /* SupportDocs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
+			productName = SupportDocs;
+		};
+		3CAD45B927FFE12500B0A0A9 /* SupportDocs */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
 			productName = SupportDocs;

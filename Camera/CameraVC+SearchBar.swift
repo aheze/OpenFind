@@ -28,6 +28,7 @@ extension CameraViewController {
                     let highlights = sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients)
                     DispatchQueue.main.async {
                         self.highlightsViewModel.update(with: highlights, replace: true)
+                        self.highlightsAdded()
                     }
                 }
             } else {

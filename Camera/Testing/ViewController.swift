@@ -12,9 +12,9 @@ class ViewController: UIViewController {
     let realmModel = RealmModel()
     lazy var tabViewModel = TabViewModel()
     lazy var toolbarViewModel = ToolbarViewModel()
-    
+    lazy var cameraViewModel = CameraViewModel()
     lazy var camera = CameraController(
-        model: CameraViewModel(),
+        model: cameraViewModel,
         tabViewModel: tabViewModel,
         realmModel: RealmModel()
     )
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         let tabController = TabBarController(
             pages: [camera.viewController],
             model: tabViewModel,
-            cameraViewModel: CameraViewModel(),
+            cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )
 

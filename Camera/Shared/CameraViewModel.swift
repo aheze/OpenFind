@@ -5,14 +5,16 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
+import Combine
 import CoreMotion
 import SwiftUI
 
 class CameraViewModel: ObservableObject {
-    @Published var resultsCount = 0
-    @Published var showingMessageView = false
+    @Published var actualResultsCount = 0
     
-    @Published var highlights = [Highlight]()
+    /// this will be slightly delayed/debounced
+    @Published var displayedResultsCount = 0
+    @Published var showingMessageView = false
     
     @Published var snapshotState = SnapshotState.inactive
  
@@ -28,7 +30,6 @@ class CameraViewModel: ObservableObject {
     var flashPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
     var settingsPressed: (() -> Void)?
-    init() {}
     
     var recentEvents = [Event]()
     
@@ -49,5 +50,15 @@ class CameraViewModel: ObservableObject {
         withAnimation {
             snapshotState = state
         }
+    }
+    
+    var resultsCountCancellable: AnyCancellable?
+    
+    init() {
+        resultsCountCancellable = $actualResultsCount
+            .throttle(for: .seconds(CameraConstants.resultsCountUpdateDuration), scheduler: RunLoop.main, latest: true)
+            .sink { [weak self] resultsCount in
+                self?.displayedResultsCount = resultsCount
+            }
     }
 }

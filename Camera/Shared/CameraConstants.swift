@@ -15,4 +15,6 @@ enum CameraConstants {
     
     /// once the history reaches this, remove the first history, and append the new history to the end.
     static var maximumHistoryCount = 50
+    
+    static var resultsCountUpdateDuration = CGFloat(0.8)
 }
