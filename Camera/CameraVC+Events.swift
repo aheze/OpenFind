@@ -29,11 +29,11 @@ extension CameraViewController {
         let recentRecognizedStrings = recentEvents.map { $0.sentences }.flatMap { $0 }.map { $0.string } as [String]
         let recentFoundHighlights = recentEvents.map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
         
-//        if recentFoundHighlights.count == 0, recentRecognizedStrings.count <= 20 {
-//            model.recentEvents.removeAll()
-//            
-//            /// stop scanning for now, until the phone shakes
-//            stopLivePreviewScanning()
-//        }
+        if recentFoundHighlights.count == 0, recentRecognizedStrings.count <= 20 {
+            model.recentEvents.removeAll()
+            
+            /// stop scanning for now, until the phone shakes
+            stopLivePreviewScanning()
+        }
     }
 }

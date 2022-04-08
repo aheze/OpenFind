@@ -96,10 +96,14 @@ struct CameraStatusView: View {
         if model.shutterOn {
             status.title = "\(model.displayedResultsCount) Results"
 
-            if model.pausedImage != nil {
-                status.actionTitle = "Rescan"
-                status.action = { [weak model] in
-                    model?.rescan?()
+            if let pausedImage = model.pausedImage {
+                if pausedImage.dateScanned != nil {
+                    status.actionTitle = "Rescan"
+                    status.action = { [weak model] in
+                        model?.rescan?()
+                    }
+                } else {
+                    status.description = "Scanning..."
                 }
             }
         } else {

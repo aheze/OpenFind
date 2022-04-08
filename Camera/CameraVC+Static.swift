@@ -22,13 +22,16 @@ extension CameraViewController {
     }
 
     func pause() {
-        let pausedImage = PausedImage()
-        model.pausedImage = pausedImage
-        livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = false
-        startAutoProgress()
-        hideZoomView()
-
         Task {
+            let pausedImage = PausedImage()
+
+            await MainActor.run {
+                model.pausedImage = pausedImage
+                livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = false
+                startAutoProgress()
+                hideZoomView()
+            }
+
             let currentUUID = pausedImage.id
             let image = await livePreviewViewController.takePhoto()
             guard currentUUID == self.model.pausedImage?.id else { return }
@@ -55,9 +58,11 @@ extension CameraViewController {
         let currentDate = Date()
         guard currentUUID == self.model.pausedImage?.id else { return }
 
-        /// set the sentences
-        self.model.pausedImage?.sentences = sentences
-        self.model.pausedImage?.dateScanned = currentDate
+        await MainActor.run {
+            /// set the sentences
+            self.model.pausedImage?.sentences = sentences
+            self.model.pausedImage?.dateScanned = currentDate
+        }
 
         /// photo was saved to the photo library. Update the sentences
 

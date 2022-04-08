@@ -29,18 +29,16 @@ extension CameraViewController {
         model.shutterPressed = { [weak self] in
             guard let self = self else { return }
             
-            DispatchQueue.main.async {
-                if self.model.shutterOn {
-                    self.pause()
-                    if self.model.flash {
-                        self.toggleFlashlight(false)
-                    }
-                } else {
-                    self.resume()
-                    self.model.resume() /// reset the image back to `nil`
-                    if self.model.flash {
-                        self.toggleFlashlight(true)
-                    }
+            if self.model.shutterOn {
+                self.pause()
+                if self.model.flash {
+                    self.toggleFlashlight(false)
+                }
+            } else {
+                self.resume()
+                self.model.resume() /// reset the image back to `nil`
+                if self.model.flash {
+                    self.toggleFlashlight(true)
                 }
             }
         }
@@ -48,12 +46,17 @@ extension CameraViewController {
         /// rescan from indicator
         model.rescan = { [weak self] in
             guard let self = self else { return }
-            if let image = self.model.pausedImage, let cgImage = image.cgImage {
-                self.startAutoProgress()
-                Task {
-                    await self.scan(currentUUID: image.id, cgImage: cgImage)
-                    self.endAutoProgress()
-                }
+            print("showing? \(self.progressViewModel.percentageShowing)")
+            guard
+                !self.progressViewModel.percentageShowing,
+                let image = self.model.pausedImage,
+                let cgImage = image.cgImage
+            else { return }
+            
+            self.startAutoProgress()
+            Task {
+                await self.scan(currentUUID: image.id, cgImage: cgImage)
+                self.endAutoProgress()
             }
         }
         

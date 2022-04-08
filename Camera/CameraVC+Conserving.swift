@@ -15,7 +15,7 @@ extension CameraViewController {
     func stopLivePreviewScanning() {
         Find.prioritizedAction = nil
         model.livePreviewScanning = false
-        showNoTextRecognized()
+        presentStatusView()
 
         model.motionManager = CMMotionManager()
         model.motionManager?.accelerometerUpdateInterval = 0.2
@@ -38,6 +38,6 @@ extension CameraViewController {
         model.motionManager?.stopAccelerometerUpdates()
         model.motionManager = nil
         model.livePreviewScanning = true
-        hideNoTextRecognized()
+        hideStatusView()
     }
 }
