@@ -37,6 +37,7 @@ class RealmModel: ObservableObject {
     // MARK: Photos
 
     @Saved("photosScanOnLaunch") var photosScanOnLaunch = false
+    @Saved("photosScanOnAddition") var photosScanOnAddition = true
     @Saved("photosScanOnFind") var photosScanOnFind = true
     @Saved("photosMinimumCellLength") var photosMinimumCellLength = CGFloat(80)
     
@@ -80,6 +81,7 @@ class RealmModel: ObservableObject {
         _highlightsBackgroundOpacity.configureValueChanged(with: self)
 
         _photosScanOnLaunch.configureValueChanged(with: self)
+        _photosScanOnAddition.configureValueChanged(with: self)
         _photosScanOnFind.configureValueChanged(with: self)
         _photosMinimumCellLength.configureValueChanged(with: self)
         

@@ -19,11 +19,15 @@ extension PhotosViewController {
         }
         
         /// call this after new external photos added, or star change
-        model.reloadAndFind = { [weak self] in
+        model.reloadAfterStarChanged = { [weak self] in
             guard let self = self else { return }
-            if let selectedFilter = self.sliderViewModel.selectedFilter {
-                self.sliderChanged(filter: selectedFilter)
-            }
+            
+            self.findAndUpdateDisplayedPhotos(context: .justFindFromExistingDoNotScan)
+        }
+        
+        model.reloadAfterExternalPhotosChanged = { [weak self] in
+            guard let self = self else { return }
+            self.findAndUpdateDisplayedPhotos(context: .findingAfterNewPhotosAdded)
         }
         
         /// underlying arrays have already been updated, reload the UI.

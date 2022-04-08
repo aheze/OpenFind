@@ -85,15 +85,23 @@ struct PhotosScanningViewHeader: View {
                     model: model,
                     realmModel: realmModel,
                     title: "Scan on Launch",
-                    description: "Find will start scanning photos as soon as you open the app.",
+                    description: "Automatically scan photos as soon as you open the app.",
                     storage: \.$photosScanOnLaunch
                 )
                 
                 PhotoScanningRow(
                     model: model,
                     realmModel: realmModel,
+                    title: "Scan on Addition",
+                    description: "Automatically scan photos when they are added.",
+                    storage: \.$photosScanOnAddition
+                )
+                
+                PhotoScanningRow(
+                    model: model,
+                    realmModel: realmModel,
                     title: "Scan on Find",
-                    description: "Automatically start scanning photos when you type in the search bar.",
+                    description: "Automatically scan photos when you type in the search bar.",
                     storage: \.$photosScanOnFind
                 )
 

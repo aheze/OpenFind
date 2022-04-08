@@ -24,7 +24,7 @@ extension PhotosViewModel {
     func updateAfterStarChange() {
         sortNeededAfterStarChanged = false
         sort()
-        reloadAndFind?()
+        reloadAfterStarChanged?()
     }
 }
 
@@ -47,7 +47,7 @@ extension PhotosViewModel {
                 self.photos = photos
                 self.ignoredPhotos = ignoredPhotos
                 self.photosToScan = photosToScan.reversed() /// newest photos go first
-                self.reloadAndFind?()
+                self.reloadAfterExternalPhotosChanged?()
                 if self.getRealmModel?().photosScanOnLaunch ?? false {
                     self.startScanning()
                 }

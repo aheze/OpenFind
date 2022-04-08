@@ -29,21 +29,8 @@ extension PhotosViewController {
     /// slider changed to a new selection
     /// If `model.resultsState != nil`, will find again
     func sliderChanged(filter: SliderViewModel.Filter) {
-        if model.resultsState != nil {
-            self.findAndUpdateResultsState(context: .justFindFromExistingDoNotScan) /// find again (handles star/unstar)
-        }
-
-        switch filter {
-        case .starred:
-            model.displayedSections = model.starredSections
-        case .screenshots:
-            model.displayedSections = model.screenshotsSections
-        case .all:
-            model.displayedSections = model.allSections
-        }
-
-        update()
-        updateResults()
+        /// find again (handles star/unstar)
+        findAndUpdateDisplayedPhotos(context: .justFindFromExistingDoNotScan)
     }
 
     /// update the counts of the slider filter

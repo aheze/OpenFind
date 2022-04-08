@@ -23,7 +23,10 @@ class PhotosViewModel: ObservableObject {
 
     /// when star/unstar
     var sortNeededAfterStarChanged = false
-
+    
+    /// reload collection views and find.
+    var reloadAfterStarChanged: (() -> Void)?
+    
     /// storage
     var starredSections = [PhotosSection]()
     var screenshotsSections = [PhotosSection]()
@@ -34,9 +37,6 @@ class PhotosViewModel: ObservableObject {
 
     /// update the entire collection view, only called once at first. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
-
-    /// call this after added an external photo or star/unstar - reload collection views and find.
-    var reloadAndFind: (() -> Void)?
 
     /// reload at a specific index path
     /// 1. Index path inside `collectionView`
@@ -51,6 +51,8 @@ class PhotosViewModel: ObservableObject {
     // MARK: Observed external changes
 
     var waitingToAddExternalPhotos = false
+    /// reload collection views and find.
+    var reloadAfterExternalPhotosChanged: (() -> Void)?
 
     // MARK: Slides / Results
 
@@ -85,6 +87,12 @@ class PhotosViewModel: ObservableObject {
     /// sentences were recently added to these photos, but not applied to the main model yet.
     var photosWithQueuedSentences = [Photo]()
 
+    /// sentences were applied! find inside them now and append to `resultsState` / `slidesState`.
+    /// This is called when:
+    ///     - **Scenario 1:** Searching inside slides when photo has no metadata yet and `startFinding` called
+    ///     - **Scenario 2:** Searching for results in the results screen while scanning photos live
+    var photosWithQueuedSentencesAdded: (([Photo]) -> Void)?
+
     /// if `waitingForPermission`, a sentences update should be applied ASAP
     /// `waitingForPermission` = not allowed at the moment, apply
     var updateState: PhotosSentencesUpdateState?
@@ -100,18 +108,12 @@ class PhotosViewModel: ObservableObject {
             if waitingToAddExternalPhotos {
                 loadExternalPhotos()
             }
-            
+
             if sortNeededAfterStarChanged {
                 updateAfterStarChange()
             }
         }
     }
-
-    /// sentences were applied! find inside them now and append to `resultsState` / `slidesState`.
-    /// This is called when:
-    ///     - **Scenario 1:** Searching inside slides when photo has no metadata yet and `startFinding` called
-    ///     - **Scenario 2:** Searching for results in the results screen while scanning photos live
-    var photosWithQueuedSentencesAdded: (([Photo]) -> Void)?
 
     // MARK: Scanning
 
