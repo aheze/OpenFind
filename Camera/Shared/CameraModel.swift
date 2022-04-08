@@ -31,3 +31,10 @@ enum SnapshotState {
     case noImageYet /// no image yet, call the save function once the image is gotten.
     case saved
 }
+
+
+enum ToolbarState {
+    case inTabBar
+    case sideCompact /// horizontal iPhone, double row of buttons
+    case sideExpanded /// iPad
+}

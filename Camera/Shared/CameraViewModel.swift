@@ -10,6 +10,9 @@ import CoreMotion
 import SwiftUI
 
 class CameraViewModel: ObservableObject {
+    
+    @Published var toolbarState = ToolbarState.inTabBar
+    
     @Published var actualResultsCount = 0
     
     /// this will be slightly delayed/debounced

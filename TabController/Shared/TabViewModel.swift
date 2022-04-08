@@ -13,6 +13,7 @@ class TabViewModel: ObservableObject {
             tabBarAttributes = tabState.tabBarAttributes()
             photosIconAttributes = tabState.photosIconAttributes()
             cameraIconAttributes = tabState.cameraIconAttributes()
+            cameraLandscapeIconAttributes = tabState.cameraLandscapeIconAttributes()
             listsIconAttributes = tabState.listsIconAttributes()
             animatorProgress = tabState.getAnimatorProgress()
             
@@ -25,6 +26,7 @@ class TabViewModel: ObservableObject {
     @Published var tabBarAttributes = TabBarAttributes.darkBackground
     @Published var photosIconAttributes = PhotosIconAttributes.inactiveDarkBackground
     @Published var cameraIconAttributes = CameraIconAttributes.active
+    @Published var cameraLandscapeIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
     

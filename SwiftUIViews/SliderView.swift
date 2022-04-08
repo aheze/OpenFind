@@ -20,6 +20,8 @@ enum SliderConstants {
 
     static let outerPadding = CGFloat(5)
     static let bottomPadding = CGFloat(12)
+    
+    static let maxWidth = CGFloat(500)
 }
 
 class SliderViewModel: ObservableObject {
@@ -117,7 +119,7 @@ struct SliderView: View {
                 }
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: SliderConstants.maxWidth)
         .padding(SliderConstants.outerPadding)
         .coordinateSpace(name: "Slider")
         .contentShape(Rectangle())

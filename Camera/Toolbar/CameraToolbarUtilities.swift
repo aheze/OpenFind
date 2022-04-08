@@ -22,9 +22,16 @@ extension View {
     func enabledModifier(isEnabled: Bool, linePadding: CGFloat) -> some View {
         modifier(EnabledModifier(isEnabled: isEnabled, linePadding: linePadding))
     }
-    func cameraToolbarIconBackground() -> some View {
+
+    func cameraToolbarIconBackground(toolbarState: ToolbarState) -> some View {
         background(
-            Color.white.opacity(0.15)
+            VStack {
+                if toolbarState == .inTabBar {
+                    Color.white.opacity(0.15)
+                } else {
+                    Color.black.opacity(0.3)
+                }
+            }
         )
         .cornerRadius(20)
     }
@@ -42,7 +49,6 @@ struct EnabledModifier: ViewModifier {
                     .overlay(
                         LineShape(progress: !isEnabled ? 1 : 0)
                             .stroke(Color.black, style: .init(lineWidth: 5, lineCap: .round))
-                            
                     )
                     .compositingGroup()
                     .luminanceToAlpha()

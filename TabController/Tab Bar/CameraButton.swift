@@ -12,7 +12,7 @@ struct CameraButton: View {
     let tabType = TabState.camera
     @ObservedObject var tabViewModel: TabViewModel
     @ObservedObject var cameraViewModel: CameraViewModel
-    let attributes: CameraIconAttributes
+    var attributes: CameraIconAttributes
 
     var body: some View {
         Button {

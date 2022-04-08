@@ -29,10 +29,7 @@ struct ResultsIconView: View {
                 .padding(5) /// add some padding constraints to the text when it's long
                 .frame(width: 40, height: 40)
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
-                .background(
-                    Color.white.opacity(0.15)
-                )
-                .cornerRadius(20)
+                .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
         .frameTag(CameraStatusConstants.sourceViewIdentifier)
     }

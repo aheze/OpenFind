@@ -53,7 +53,7 @@ struct SnapshotView: View {
                 .frame(width: 40, height: 40)
                 .enabledModifier(isEnabled: isEnabled, linePadding: 11)
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
-                .cameraToolbarIconBackground()
+                .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
         .disabled(!isEnabled)
     }

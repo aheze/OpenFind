@@ -31,11 +31,15 @@ class CameraViewController: UIViewController, PageViewController {
     lazy var scrollZoomViewController = createScrollZoom()
     lazy var scrollZoomHookViewController = createScrollZoomHook()
     
+    // MARK: Search bar
+
     @IBOutlet var searchContainerView: UIView!
     
     var progressViewModel = ProgressViewModel()
     @IBOutlet var progressContainerView: UIView!
     
+    // MARK: Camera content
+
     /// should match the frame of the image
     @IBOutlet var contentContainerView: UIView!
 
@@ -48,18 +52,19 @@ class CameraViewController: UIViewController, PageViewController {
     
     /// inside the drawing view, should match the safe view
     @IBOutlet var simulatedSafeView: UIView!
-    
-    @IBOutlet var livePreviewContainerView: UIView!
-    
-    @IBOutlet var zoomContainerView: UIView!
-    @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
-    
     @IBOutlet var safeView: UIView!
+    @IBOutlet var livePreviewContainerView: UIView!
     
     var blurOverlayView = CameraBlurOverlayView()
     
-    /// Testing tab bar view
-    @IBOutlet var testingTabBarContainerView: UIView!
+    // MARK: Zoom
+
+    @IBOutlet var zoomContainerView: UIView!
+    @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
+    
+    // MARK: Landscape
+    @IBOutlet weak var landscapeToolbarContainer: UIView!
+    @IBOutlet weak var landscapeToolbarWidthC: NSLayoutConstraint!
     
     init?(
         coder: NSCoder,
@@ -109,12 +114,17 @@ class CameraViewController: UIViewController, PageViewController {
         setupHighlights()
         setupProgress()
         setupBlur()
+        setupLandscapeToolbar()
         
         listenToModel()
         
 //        scrollZoomViewController.view.addDebugBorders(.systemBlue, width: 5)
         
-        /// A testing tab bar
-        addTestingTabBar(add: false)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        updateLandscapeToolbar()
     }
 }

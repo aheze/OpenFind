@@ -10,6 +10,7 @@ import SwiftUI
 struct FlashIconView: View {
     @ObservedObject var model: CameraViewModel
     var isEnabled: Bool
+    
     @State var scaleAnimationActive = false
 
     var body: some View {
@@ -23,7 +24,7 @@ struct FlashIconView: View {
                 .font(.system(size: 19))
                 .enabledModifier(isEnabled: isEnabled, linePadding: 13)
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
-                .cameraToolbarIconBackground()
+                .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
         .disabled(!isEnabled)
     }

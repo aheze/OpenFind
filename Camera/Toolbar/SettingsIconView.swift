@@ -26,10 +26,7 @@ struct OpenSettingsIconView: View {
                 .frame(width: 40, height: 40)
                 .foregroundColor(.white)
                 .font(.system(size: 19))
-                .background(
-                    Color.white.opacity(0.15)
-                )
-                .cornerRadius(20)
+                .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
     }
 }
