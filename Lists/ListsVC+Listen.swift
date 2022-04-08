@@ -16,12 +16,19 @@ extension ListsViewController {
         }
         model.shareSelected = { [weak self] in
             guard let self = self else { return }
-            
+
             let lists = self.model.selectedLists
             let urls = lists.compactMap { $0.getURL() }
             let dataSource = ListsSharingDataSource(lists: lists)
             self.presentShareSheet(items: urls + [dataSource])
             self.resetSelectingState()
+        }
+
+        searchViewModel.fieldsChanged = { [weak self] textChanged in
+            guard let self = self else { return }
+            guard textChanged else { return }
+            let search = self.searchViewModel.text
+            self.find(text: search)
         }
     }
 }

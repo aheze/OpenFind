@@ -50,7 +50,7 @@ class IconPickerController {
             guard let self = self else { return }
             
             if textChanged {
-                let search = self.searchNavigationController.searchViewModel.text.filter { !$0.isEmpty }
+                let search = self.searchNavigationController.searchViewModel.text
                 self.iconPickerViewController.model.filter(search: search) {
                     self.iconPickerViewController.update()
                 }

@@ -86,7 +86,8 @@ class IconPickerViewModel {
         guard !searchedWords.isEmpty else { return icons }
         for category in categories {
             for icon in category.icons {
-                if searchedWords.contains(where: { icon.hasPrefix($0) }) {
+                let contains = searchedWords.contains { icon.localizedCaseInsensitiveContains($0) }
+                if contains {
                     if let existingCategoryIndex = filteredCategories
                         .firstIndex(where: { $0.categoryName == category.categoryName })
                     {

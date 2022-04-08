@@ -100,7 +100,7 @@ class SearchViewModel: ObservableObject {
     
     /// array of text
     var text: [String] {
-        return values.map { $0.getText() }
+        return values.map { $0.getText().trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
     }
     
     /// if the search text is empty or not

@@ -107,7 +107,6 @@ extension PhotosViewController {
         model.reloadCollectionViewsAfterDeletion = { [weak self] in
             guard let self = self else { return }
             self.update()
-            print("after de;")
             self.updateResults()
         }
         
