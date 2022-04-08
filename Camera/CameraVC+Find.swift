@@ -7,22 +7,7 @@
 //
 
 import AVFoundation
-import Popovers
-import SwiftUI
 import UIKit
-
-struct PopoverView: View {
-    let image: UIImage
-    var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .background(Color.white)
-            .cornerRadius(16)
-            .popoverShadow()
-            .frame(width: 150, height: 150)
-    }
-}
 
 extension CameraViewController {
     /// use fast mode
@@ -33,32 +18,6 @@ extension CameraViewController {
         visionOptions.level = .fast
         visionOptions.customWords = searchViewModel.customWords
 
-        count += 1
-        if count >= 40 {
-            count = 0
-            DispatchQueue.main.async {
-                if let popover = self.view.popover(tagged: "Popover") {
-                    popover.dismiss()
-                }
-
-                if let cgImage = pixelBuffer.toCGImage() {
-                    let uiImage = UIImage(cgImage: cgImage)
-                    var attributes = Popover.Attributes()
-                    attributes.tag = "Popover"
-                    attributes.position = .relative(popoverAnchors: [.topRight])
-                    attributes.dismissal.mode = .none
-                    attributes.sourceFrame = { [weak self] in
-                        guard let self = self else { return .zero }
-                        let rect = self.view.bounds.insetBy(dx: 20, dy: 120)
-                        return rect
-                    }
-                    let popover = Popover(attributes: attributes) {
-                        PopoverView(image: uiImage)
-                    }
-                    self.present(popover)
-                }
-            }
-        }
         var findOptions = FindOptions()
         findOptions.priority = .cancelIfBusy
         findOptions.action = .camera

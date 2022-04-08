@@ -93,8 +93,6 @@ class CameraViewController: UIViewController, PageViewController {
         }
     }
     
-    var count = 0
-    
     func setup() {
         _ = livePreviewViewController
         _ = searchViewController
