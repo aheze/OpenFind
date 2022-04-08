@@ -25,7 +25,6 @@ class ZoomViewModel: ObservableObject {
     /// the percent zoomed via sliding or pinch
     @Published var percentage: CGFloat = 0
     
-    
     /// 0 = aspect fit
     /// 1 = aspect fill
     @Published var aspectProgress: CGFloat = 0
@@ -167,7 +166,7 @@ class ZoomViewModel: ObservableObject {
     }
     
     /// return (`totalExpandedOffset`, `newTranslation`)
-    func update(translation: CGFloat, ended: Bool, changeDraggingAmount: ((CGFloat, CGFloat) -> Void)) {
+    func update(translation: CGFloat, ended: Bool, changeDraggingAmount: (CGFloat, CGFloat) -> Void) {
         let offset = savedExpandedOffset + translation
         
         var newSavedExpandedOffset = savedExpandedOffset
@@ -194,11 +193,10 @@ class ZoomViewModel: ObservableObject {
         let percentage = percentage(totalOffset: totalExpandedOffset)
         self.percentage = percentage
         
-
-        self.expand()
-        self.setZoom(percentage: percentage)
-        self.updateActivationProgress(percentage: percentage)
-        self.zoomChanged?()
+        expand()
+        setZoom(percentage: percentage)
+        updateActivationProgress(percentage: percentage)
+        zoomChanged?()
         
         if ended {
             changeDraggingAmount(totalExpandedOffset, newTranslation)
@@ -239,7 +237,9 @@ class ZoomViewModel: ObservableObject {
         let safeArea = containerView.safeAreaInsets
         let safeAreaHorizontalInset = safeArea.left + safeArea.right
         let containerEdgePadding = ZoomConstants.containerEdgePadding * 2
-        return availableWidth - containerEdgePadding - safeAreaHorizontalInset
+        let availableScreenWidth = availableWidth - containerEdgePadding - safeAreaHorizontalInset
+        
+        return min(availableScreenWidth, ZoomConstants.maxWidth)
     }
     
     /// width of a dot view
@@ -303,7 +303,6 @@ class ZoomViewModel: ObservableObject {
     }
     
     func setZoom(percentage rawSliderPosition: CGFloat) {
-        
         /// trap between 0 and 1
         let percentage = max(0, min(1, rawSliderPosition))
         
@@ -311,7 +310,6 @@ class ZoomViewModel: ObservableObject {
         if let zoomFactor = ZoomConstants.zoomFactors.first(
             where: { $0.positionRange.contains(percentage) }
         ) {
-            
             let positionRangeLower = zoomFactor.positionRange.lowerBound
             let positionRangeUpper = zoomFactor.positionRange.upperBound
             
@@ -343,9 +341,9 @@ class ZoomViewModel: ObservableObject {
                 generator.selectionChanged()
             }
             
-            self.zoom = newZoom
-            self.zoomLabel = newZoomLabel
-            self.aspectProgress = newAspectRatio
+            zoom = newZoom
+            zoomLabel = newZoomLabel
+            aspectProgress = newAspectRatio
         }
     }
     
