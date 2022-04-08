@@ -9,6 +9,15 @@
 import SwiftUI
 
 class ZoomViewModel: ObservableObject {
+    enum ZoomAlignment {
+        case left
+        case center
+        case right
+    }
+    
+    /// shift aside when results indicator is on
+    @Published var alignment = ZoomAlignment.center
+    
     @Published var ready = false
     @Published var zoomLabel: CGFloat = 1
     @Published var zoom: CGFloat = 2

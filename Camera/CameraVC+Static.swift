@@ -41,32 +41,37 @@ extension CameraViewController {
                     saveImage(pausedImage)
                 }
 
-                let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
-                let currentDate = Date()
-                guard currentUUID == self.model.pausedImage?.id else { return }
-
-                /// set the sentences
-                self.model.pausedImage?.sentences = sentences
-                self.model.pausedImage?.dateScanned = currentDate
-
-                /// photo was saved to the photo library. Update the sentences
-
-                if let assetIdentifier = self.model.pausedImage?.assetIdentifier {
-                    let metadata = PhotoMetadata(
-                        assetIdentifier: assetIdentifier,
-                        sentences: sentences,
-                        dateScanned: currentDate,
-                        isStarred: false
-                    )
-                    await MainActor.run {
-                        realmModel.container.updatePhotoMetadata(metadata: metadata)
-                    }
-                }
-
-                Find.prioritizedAction = nil
+                await scan(currentUUID: currentUUID, cgImage: cgImage)
                 self.endAutoProgress()
                 self.hideLivePreview()
             }
         }
+    }
+
+    /// currentUUID is the id of the image to scan from
+    func scan(currentUUID: UUID, cgImage: CGImage) async {
+        Find.prioritizedAction = .camera
+        let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
+        let currentDate = Date()
+        guard currentUUID == self.model.pausedImage?.id else { return }
+
+        /// set the sentences
+        self.model.pausedImage?.sentences = sentences
+        self.model.pausedImage?.dateScanned = currentDate
+
+        /// photo was saved to the photo library. Update the sentences
+
+        if let assetIdentifier = self.model.pausedImage?.assetIdentifier {
+            let metadata = PhotoMetadata(
+                assetIdentifier: assetIdentifier,
+                sentences: sentences,
+                dateScanned: currentDate,
+                isStarred: false
+            )
+            await MainActor.run {
+                realmModel.container.updatePhotoMetadata(metadata: metadata)
+            }
+        }
+        Find.prioritizedAction = nil /// paused now, do whatever
     }
 }

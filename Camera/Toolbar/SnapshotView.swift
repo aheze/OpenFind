@@ -63,7 +63,6 @@ struct SnapshotView: View {
     }
 
     func startTrim() -> CGFloat {
-//        return 0
         switch model.snapshotState {
         case .inactive:
             return 0
@@ -77,7 +76,6 @@ struct SnapshotView: View {
     }
 
     func endTrim() -> CGFloat {
-//        return SnapshotConstants.checkStartTrim
         switch model.snapshotState {
         case .inactive:
             return SnapshotConstants.checkStartTrim

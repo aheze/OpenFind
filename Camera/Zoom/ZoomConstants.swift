@@ -12,7 +12,8 @@ struct ZoomConstants {
     /// padding underneath blue capsule
     static let bottomPadding = CGFloat(16)
     
-    static let containerEdgePadding = CGFloat(64)
+    static let maxWidth = CGFloat(300)
+    static let containerEdgePadding = CGFloat(16) /// horizontal padding
     
     static var edgePadding = CGFloat(4)
     static var zoomFactorPadding = CGFloat(4)

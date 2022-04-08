@@ -13,7 +13,7 @@ struct DotSpacerView: View {
     var body: some View {
         Color.clear.overlay(
             HStack(spacing: 0) {
-                ForEach(0..<numberOfDots, id: \.self) { _ in
+                ForEach(0 ..< numberOfDots, id: \.self) { _ in
                     HStack {
                         Circle()
                             .fill(Color.white)
@@ -145,9 +145,12 @@ struct ZoomView: View {
                     .offset(x: zoomViewModel.isExpanded ? (zoomViewModel.savedExpandedOffset + draggingAmount + zoomViewModel.sliderLeftPadding) : 0, y: 0),
                     alignment: zoomViewModel.isExpanded ? .leading : .center
                 )
+                .frame(maxWidth: ZoomConstants.maxWidth)
+                .fixedSize(horizontal: !zoomViewModel.isExpanded, vertical: false)
                 .cornerRadius(50)
                 .padding(.horizontal, ZoomConstants.containerEdgePadding)
-                .opacity(zoomViewModel.ready ? 1 : 0)
+                .opacity(zoomViewModel.ready ? 1 : 0),
+            alignment: getAlignment()
         )
         .simultaneousGesture(
             /// if expanded, immediately keep expanded
@@ -196,6 +199,17 @@ struct ZoomView: View {
                         }
                 )
         )
+    }
+    
+    func getAlignment() -> Alignment {
+        switch zoomViewModel.alignment {
+        case .left:
+            return .leading
+        case .center:
+            return .center
+        case .right:
+            return .trailing
+        }
     }
 }
 

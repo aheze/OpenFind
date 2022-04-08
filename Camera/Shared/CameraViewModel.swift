@@ -18,6 +18,7 @@ class CameraViewModel: ObservableObject {
     
     @Published var snapshotState = SnapshotState.inactive
  
+    @Published var resultsOn = false
     /// shutter on/off
     @Published var shutterOn = false
     @Published var pausedImage: PausedImage?
@@ -25,11 +26,17 @@ class CameraViewModel: ObservableObject {
     @Published var flash = false
     @Published var cacheOn = false
     
-    /// press the snapshot/camera button
-    var snapshotPressed: (() -> Void)?
+    var resultsPressed: (() -> Void)?
+    var snapshotPressed: (() -> Void)? /// press the snapshot/camera button
     var flashPressed: (() -> Void)?
     var shutterPressed: (() -> Void)?
     var settingsPressed: (() -> Void)?
+    
+    /// from the status view
+    var rescan: (() -> Void)?
+    
+    /// keep scanning after tapping the status view
+    var resumeScanning: (() -> Void)?
     
     var recentEvents = [Event]()
     

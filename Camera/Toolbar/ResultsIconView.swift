@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResultsIconView: View {
-    var count: Int
+    @ObservedObject var model: CameraViewModel
     @State var scaleAnimationActive = false
 
     var body: some View {
@@ -18,9 +18,11 @@ struct ResultsIconView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
                 withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
             }
+            model.resultsOn.toggle()
+            model.resultsPressed?()
         } label: {
-            Text("\(count)")
-                .foregroundColor(.white)
+            Text("\(model.displayedResultsCount)")
+                .foregroundColor(model.resultsOn ? Color(Constants.activeIconColor) : .white)
                 .font(.system(size: 19))
                 .lineLimit(1)
                 .minimumScaleFactor(0.3)
@@ -32,6 +34,6 @@ struct ResultsIconView: View {
                 )
                 .cornerRadius(20)
         }
-        .frameTag("ResultsIconView")
+        .frameTag(CameraStatusConstants.sourceViewIdentifier)
     }
 }

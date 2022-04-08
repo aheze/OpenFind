@@ -6,8 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
-import UIKit
+import SwiftUI
 
 extension CameraViewController {
     func listenToModel() {
@@ -16,22 +15,51 @@ extension CameraViewController {
             self.toggleFlashlight(self.model.flash)
         }
         
+        model.resultsPressed = { [weak self] in
+            guard let self = self else { return }
+            
+            if self.model.resultsOn {
+                self.presentStatusView()
+            } else {
+                self.hideStatusView()
+            }
+        }
+        
         /// Listen to shutter press events
         model.shutterPressed = { [weak self] in
             guard let self = self else { return }
             
-            if self.model.shutterOn {
-                self.pause()
-                if self.model.flash  {
-                    self.toggleFlashlight(false)
-                }
-            } else {
-                self.resume()
-                self.model.resume() /// reset the image back to `nil`
-                if self.model.flash  {
-                    self.toggleFlashlight(true)
+            DispatchQueue.main.async {
+                if self.model.shutterOn {
+                    self.pause()
+                    if self.model.flash {
+                        self.toggleFlashlight(false)
+                    }
+                } else {
+                    self.resume()
+                    self.model.resume() /// reset the image back to `nil`
+                    if self.model.flash {
+                        self.toggleFlashlight(true)
+                    }
                 }
             }
+        }
+        
+        /// rescan from indicator
+        model.rescan = { [weak self] in
+            guard let self = self else { return }
+            if let image = self.model.pausedImage, let cgImage = image.cgImage {
+                self.startAutoProgress()
+                Task {
+                    await self.scan(currentUUID: image.id, cgImage: cgImage)
+                    self.endAutoProgress()
+                }
+            }
+        }
+        
+        model.resumeScanning = { [weak self] in
+            guard let self = self else { return }
+            self.resumeLivePreviewScanning()
         }
         
         model.snapshotPressed = { [weak self] in

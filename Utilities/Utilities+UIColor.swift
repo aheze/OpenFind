@@ -14,6 +14,12 @@ extension UIColor {
     }
 }
 
+extension Color {
+    init(hex: UInt, alpha: CGFloat = 1) {
+        self.init(UIColor(hex: hex, alpha: alpha))
+    }
+}
+
 extension UIColor {
     static var random: UIColor {
         return UIColor(

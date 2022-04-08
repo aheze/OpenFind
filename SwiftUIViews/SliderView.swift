@@ -151,14 +151,6 @@ struct SliderView: View {
     /// 1. foreground, 2. background
     func getCountColor(for filter: SliderViewModel.Filter) -> (UIColor, UIColor) {
         return (.white, .black.withAlphaComponent(0.5))
-//        if
-//            model.indicatorMovable && model.hoveringFilter == filter
-//            || !model.indicatorMovable && model.selectedFilter == filter
-//            || model.hoveringFilter == nil && model.selectedFilter == filter
-//        {
-//
-//        }
-//        return (.secondaryLabel, .label.withAlphaComponent(0.08))
     }
 
     func getForegroundColor(for filter: SliderViewModel.Filter) -> UIColor {

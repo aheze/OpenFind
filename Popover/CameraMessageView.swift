@@ -67,50 +67,50 @@ struct CameraMessagesView: View {
     }
 }
 
-struct CameraMessagesBackground: View {
-    @State var appeared = false
-    var body: some View {
-        PopoverReader { context in
-            let popoverTopLeftPoint = context.frame.point(at: .topLeft)
-            let popoverBottomLeftPoint = context.frame.point(at: .bottomLeft)
-            let resultsRect = context.window.frameTagged("ResultsIconView")
-            let leftDifference = resultsRect.midX - context.staticFrame.minX
-            
-            let start = CGPoint(
-                x: popoverTopLeftPoint.x + leftDifference,
-                y: popoverTopLeftPoint.y + CameraMessagesConstants.padding.top
-            )
-
-            let middle = CGPoint(
-                x: popoverBottomLeftPoint.x + leftDifference,
-                y: popoverBottomLeftPoint.y
-            )
-            
-            let end = context.window.frameTagged("ResultsIconView").point(at: .top)
-
-            ExtendedCurveConnector(
-                start: start,
-                middle: middle,
-                end: end
-            )
-            .trim(from: appeared ? 0 : 1, to: 1)
-            .stroke(
-                Color.white,
-                style: .init(
-                    lineWidth: 2,
-                    lineCap: .round,
-                    lineJoin: .round
-                )
-            )
-            .opacity(appeared ? 1 : 0)
-            .onAppear {
-                withAnimation(.easeOut) {
-                    appeared = true
-                }
-            }
-        }
-    }
-}
+//struct CameraMessagesBackground: View {
+//    @State var appeared = false
+//    var body: some View {
+//        PopoverReader { context in
+//            let popoverTopLeftPoint = context.frame.point(at: .topLeft)
+//            let popoverBottomLeftPoint = context.frame.point(at: .bottomLeft)
+//            let resultsRect = context.window.frameTagged("ResultsIconView")
+//            let leftDifference = resultsRect.midX - context.staticFrame.minX
+//            
+//            let start = CGPoint(
+//                x: popoverTopLeftPoint.x + leftDifference,
+//                y: popoverTopLeftPoint.y + CameraMessagesConstants.padding.top
+//            )
+//
+//            let middle = CGPoint(
+//                x: popoverBottomLeftPoint.x + leftDifference,
+//                y: popoverBottomLeftPoint.y
+//            )
+//            
+//            let end = context.window.frameTagged("ResultsIconView").point(at: .top)
+//
+//            ExtendedCurveConnector(
+//                start: start,
+//                middle: middle,
+//                end: end
+//            )
+//            .trim(from: appeared ? 0 : 1, to: 1)
+//            .stroke(
+//                Color.white,
+//                style: .init(
+//                    lineWidth: 2,
+//                    lineCap: .round,
+//                    lineJoin: .round
+//                )
+//            )
+//            .opacity(appeared ? 1 : 0)
+//            .onAppear {
+//                withAnimation(.easeOut) {
+//                    appeared = true
+//                }
+//            }
+//        }
+//    }
+//}
 
 struct CameraMessageButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {

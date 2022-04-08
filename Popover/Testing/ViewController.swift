@@ -26,8 +26,8 @@ class ViewController: UIViewController {
         Field(
             value: .list(
                 .init(
-                    name: "List",
-                    desc: "Desc",
+                    title: "List",
+                    description: "Desc",
                     icon: "plus",
                     color: 0x00AEEF,
                     words: ["Word", "Branch", "Water", "Dirt"],
@@ -128,7 +128,33 @@ class ViewController: UIViewController {
     @IBAction func holdUp(_ sender: Any) {}
     
     @IBOutlet var purpleButton: UIButton!
-    @IBAction func purpleButtonPressed(_ sender: Any) {}
+    @IBAction func purpleButtonPressed(_ sender: Any) {
+        let model = CameraViewModel()
+        var popover = Popover(attributes: .init()) {
+            CameraStatusView(model: model)
+        }
+        
+        popover.attributes.sourceFrame = { [weak purpleButton] in purpleButton.windowFrame() }
+        popover.attributes.rubberBandingMode = .none
+        popover.attributes.presentation.animation = .spring()
+        popover.attributes.presentation.transition = .opacity
+        popover.attributes.dismissal.animation = .spring()
+        popover.attributes.dismissal.transition = .opacity
+        popover.attributes.dismissal.excludedFrames = {
+            [
+                self.purpleButton.windowFrame(),
+                self.listButton.windowFrame(),
+                self.listLabel.windowFrame()
+            ]
+        }
+        popover.attributes.tag = "Status Popover"
+        
+        if let oldPopover = self.popover(tagged: "Status Popover") {
+            replace(oldPopover, with: popover)
+        } else {
+            present(popover)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
