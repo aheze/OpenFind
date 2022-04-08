@@ -18,10 +18,9 @@ extension ListsViewController {
         }
 
         let filteredDisplayedLists = displayedLists.filter { displayedList in
-            text.contains { word in
-                displayedList.list.displayedTitle.localizedCaseInsensitiveContains(word)
-                    || displayedList.list.description.localizedCaseInsensitiveContains(word)
-            }
+
+            Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.displayedTitle, matches: text)
+                || Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.description, matches: text)
         }
 
         model.displayedLists = filteredDisplayedLists

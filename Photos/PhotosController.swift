@@ -98,8 +98,8 @@ class PhotosController {
         
         configureTransitions(for: searchNavigationController)
         
-        model.getRealmModel = {
-            return realmModel
+        model.getRealmModel = { [weak self] in
+            return self?.realmModel ?? RealmModel()
         }
     }
 }

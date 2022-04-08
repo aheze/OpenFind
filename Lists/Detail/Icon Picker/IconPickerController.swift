@@ -56,5 +56,9 @@ class IconPickerController {
                 }
             }
         }
+        
+        model.getRealmModel = { [weak self] in
+            return self?.realmModel ?? RealmModel()
+        }
     }
 }
