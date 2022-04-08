@@ -18,7 +18,7 @@ extension CameraViewController {
   
     /// replaces highlights completely
     func updateHighlightColors() {
-        var newHighlights = Set<Highlight>()
+        var newHighlights = [Highlight]()
         let stringToGradients = searchViewModel.stringToGradients
         
         for index in highlightsViewModel.highlights.indices {
@@ -31,7 +31,7 @@ extension CameraViewController {
                 newHighlight.alpha = gradient.alpha
             }
             
-            newHighlights.insert(newHighlight)
+            newHighlights.append(newHighlight)
         }
         
         self.highlightsViewModel.highlights = newHighlights

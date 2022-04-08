@@ -12,7 +12,7 @@ import UIKit
 struct Event {
     var date: Date
     var sentences = [FastSentence]()
-    var highlights = Set<Highlight>()
+    var highlights = [Highlight]()
 }
 
 struct PausedImage: Identifiable {

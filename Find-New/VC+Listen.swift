@@ -28,8 +28,7 @@ extension ViewController {
             self.deleteAllPhotoMetadata()
         }
 
-        self.settingsController.viewController.presentationController?.delegate = self
-        self.settingsController.model.dismissed = { [weak self] in
+        self.settingsController.model.startedToDismiss = { [weak self] in
             guard let self = self else { return }
             self.camera.viewController.willBecomeActive()
         }
@@ -54,11 +53,5 @@ extension ViewController {
             UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         )
         self.settingsController.viewController.present(alert, animated: true, completion: nil)
-    }
-}
-
-extension ViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        camera.viewController.willBecomeActive()
     }
 }

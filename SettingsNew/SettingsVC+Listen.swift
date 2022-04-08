@@ -11,6 +11,8 @@ import UIKit
 
 extension SettingsViewController {
     func listen() {
+        presentationController?.delegate = self
+        
         model.showHighlightColorPicker = { [weak self] in
             guard let self = self else { return }
             self.presentColorPicker()
@@ -138,5 +140,12 @@ extension SettingsViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
         realmModel.highlightsColor = Int(color.hex)
         realmModel.objectWillChange.send()
+    }
+}
+
+extension SettingsViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        mainViewController.searchViewModel.dismissKeyboard?()
+        model.startedToDismiss?()
     }
 }

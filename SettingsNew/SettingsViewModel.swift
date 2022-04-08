@@ -29,7 +29,8 @@ class SettingsViewModel: ObservableObject {
     /// callback from the settings page. Listen inside `SettingsVC+Listen`
     var showHighlightColorPicker: (() -> Void)?
     
-    var dismissed: (() -> Void)?
+    /// resume the camera
+    var startedToDismiss: (() -> Void)?
 
     init() {
         let paths = self.page.generatePaths()

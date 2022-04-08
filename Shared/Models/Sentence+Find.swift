@@ -34,8 +34,8 @@ extension Array where Element == Sentence {
 
 extension Array where Element == FastSentence {
     /// fast live preview
-    func getHighlights(stringToGradients: [String: Gradient]) -> Set<Highlight> {
-        var highlights = Set<Highlight>()
+    func getHighlights(stringToGradients: [String: Gradient]) -> [Highlight] {
+        var highlights = [Highlight]()
         for sentence in self {
             for (string, gradient) in stringToGradients {
                 let indices = sentence.string.lowercased().indicesOf(string: string.lowercased())
@@ -54,7 +54,7 @@ extension Array where Element == FastSentence {
                             angle: .zero
                         )
                     )
-                    highlights.insert(highlight)
+                    highlights.append(highlight)
                 }
             }
         }
