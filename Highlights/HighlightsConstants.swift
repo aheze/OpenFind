@@ -13,5 +13,5 @@ enum HighlightsConstants {
     static var maximumHighlightTransitionProximitySquared = pow(maximumHighlightTransitionProximity, 2)
     
     /// checked right before inserting highlights. 0 for no lingering state
-    static var maximumCyclesForLingeringHighlights = 3
+    static var maximumCyclesForLingeringHighlights = 5
 }

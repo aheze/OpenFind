@@ -123,6 +123,7 @@ class TabBarViewController: UIViewController {
             TabState.isLandscape = false
         }
         model.changeTabState(newTab: model.tabState, animation: .animate)
+        updateTabBarHeight(model.tabState)
     }
 
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat, safeAreaInsets: UIEdgeInsets) {
@@ -132,22 +133,7 @@ class TabBarViewController: UIViewController {
     }
     
     func updateTabBarHeight(_ tabState: TabState) {
-        func changeTabHeight(constant: CGFloat) {
-            DispatchQueue.main.async {
-                self.tabBarHeightC.constant = constant
-            }
-        }
-        
-        switch tabState {
-        case .photos:
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
-        case .camera:
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
-        case .lists:
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
-        default:
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
-        }
+        tabBarHeightC.constant = model.tabBarAttributes.backgroundHeight
     }
     
     /// animated is TODO, since setting `tabState` triggers the `.sink`, which auto calls this function.

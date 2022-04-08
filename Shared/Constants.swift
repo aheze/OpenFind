@@ -9,7 +9,6 @@
 import SwiftUI
 
 enum Colors {
-    
     /// Main accent color (blue)
     static var accent = UIColor(named: "Accent")!
 }
@@ -71,8 +70,29 @@ enum ConstantVars {
     static var toolbarBottomPaddingLandscape = CGFloat(0)
     
     static func configure(window: UIWindow?) {
-        let bottomSafeAreaInset = window?.safeAreaInsets.bottom ?? 0
-        let deviceHasNotch = bottomSafeAreaInset > 0
+        let safeAreaInsets = window?.safeAreaInsets ?? .zero
+        let orientation = UIWindow.currentInterfaceOrientation ?? .portrait
+        
+        let bottomSafeAreaInset: CGFloat /// bottom inset for the physical device
+        let deviceHasNotch: Bool
+        if orientation.isLandscape {
+            deviceHasNotch = safeAreaInsets.left > 0 || safeAreaInsets.right > 0
+        } else {
+            deviceHasNotch = safeAreaInsets.bottom > 0
+        }
+        
+        switch orientation {
+        case .portrait:
+            bottomSafeAreaInset = safeAreaInsets.bottom
+        case .portraitUpsideDown:
+            bottomSafeAreaInset = safeAreaInsets.bottom
+        case .landscapeLeft: /// home button left
+            bottomSafeAreaInset = safeAreaInsets.left
+        case .landscapeRight: /// home button right
+            bottomSafeAreaInset = safeAreaInsets.right
+        default:
+            bottomSafeAreaInset = 0
+        }
         
         if deviceHasNotch {
             let bottomPadding = bottomSafeAreaInset + 4

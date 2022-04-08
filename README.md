@@ -256,3 +256,23 @@ view.translatesAutoresizingMaskIntoConstraints = false /// allow auto sizing
 ```swift
 viewController.addResizableChildViewController(childViewController, in: containerView)
 ```
+
+For `UIInterfaceOrientation`, `landscapeLeft` and `landscapeRight` are flipped/
+```swift
+extension UIInterfaceOrientation {
+    func getVisionOrientation() -> CGImagePropertyOrientation {
+        switch self {
+        case .portrait:
+            return .right
+        case .landscapeRight: /// home button is actually right
+            return .up
+        case .landscapeLeft: /// home button is actually left
+            return .down
+        case .portraitUpsideDown:
+            return .left
+        default:
+            return .right
+        }
+    }
+}
+```

@@ -24,6 +24,7 @@ extension CameraViewController {
         popover.attributes.sourceFrame = { [weak view] in
             view?.window?.frameTagged(CameraStatusConstants.sourceViewIdentifier) ?? .zero
         }
+        popover.attributes.screenEdgePadding = view.safeAreaInsets
         popover.attributes.sourceFrameInset.top = -16 - ZoomConstants.bottomPadding /// past the space between the button and the tab bar + extra padding
         popover.attributes.position = .absolute(originAnchor: .top, popoverAnchor: .bottom)
         popover.attributes.rubberBandingMode = .none
