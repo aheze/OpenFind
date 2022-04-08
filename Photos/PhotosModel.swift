@@ -22,7 +22,13 @@ struct SlidesPhoto: Hashable {
 struct PhotosSlidesState {
     var viewController: PhotosSlidesViewController?
     var slidesPhotos: [SlidesPhoto]
-    var currentPhoto: Photo?
+    var currentPhoto: Photo? {
+        didSet {
+            currentPhotoChanged?()
+        }
+    }
+    var currentPhotoChanged: (() -> Void)?
+    
     var isFullScreen = false /// hide the bars
 
     /// for the current image

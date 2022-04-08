@@ -14,6 +14,7 @@ extension PhotosSlidesViewController {
         setupCollectionView()
         setupScrollView()
         setupInfo()
+        setupNavigationBar()
     }
     
     func setupCollectionView() {

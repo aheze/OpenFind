@@ -75,28 +75,3 @@ extension ListsViewController {
         return dataSource
     }
 }
-
-extension ListsViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? ListsContentCell else {
-            fatalError()
-        }
-        
-        let displayedList = model.displayedLists[indexPath.item]
-        cell.view.addChipViews(with: displayedList.list, chipFrames: displayedList.frame.chipFrames) { [weak self] focus in
-            if let displayedList = self?.model.displayedLists.first(where: { $0.list.id == displayedList.list.id }) {
-                self?.presentDetails(list: displayedList.list, focusFirstWord: true)
-            }
-        }
-    }
-
-    func updateCellColors() {
-        for index in model.displayedLists.indices {
-            if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
-                for case let subview as ListChipView in cell.view.chipsContainerView.subviews {
-                    subview.setColors()
-                }
-            }
-        }
-    }
-}

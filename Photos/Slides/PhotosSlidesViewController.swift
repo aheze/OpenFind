@@ -23,6 +23,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     // MARK: NavigationNamed
 
     var name: NavigationName? = .listsDetail
+    
+    /// navigation title
+    var navigationTitleStackView: UIStackView!
+    var titleLabel: UILabel!
+    var subtitleLabel: UILabel!
 
     var model: PhotosViewModel
     var tabViewModel: TabViewModel
