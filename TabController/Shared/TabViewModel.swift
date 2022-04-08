@@ -13,7 +13,7 @@ class TabViewModel: ObservableObject {
             tabBarAttributes = tabState.tabBarAttributes()
             photosIconAttributes = tabState.photosIconAttributes()
             cameraIconAttributes = tabState.cameraIconAttributes()
-            cameraLandscapeIconAttributes = tabState.cameraLandscapeIconAttributes()
+            cameraLandscapeIconAttributes = CameraIconAttributes.active
             listsIconAttributes = tabState.listsIconAttributes()
             animatorProgress = tabState.getAnimatorProgress()
             

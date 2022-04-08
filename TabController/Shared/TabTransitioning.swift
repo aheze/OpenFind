@@ -91,30 +91,8 @@ extension TabState {
         }
     }
 
-    
-    
     func cameraIconAttributes() -> CameraIconAttributes {
         let activeCameraIconAttributes: CameraIconAttributes = TabState.isLandscape ? .activeLandscape : .active
-        switch self {
-        case .photos:
-            return .inactive
-        case .camera:
-            return activeCameraIconAttributes
-        case .lists:
-            return .inactive
-        case .cameraToPhotos(let transitionProgress):
-
-            /// camera is opposite (camera to photos, so need to reverse)
-            let cameraProgress = max(0, 1 - transitionProgress)
-            return .init(progress: cameraProgress, from: .inactive, to: activeCameraIconAttributes)
-        case .cameraToLists(let transitionProgress):
-            let cameraProgress = max(0, 1 - transitionProgress)
-            return .init(progress: cameraProgress, from: .inactive, to: activeCameraIconAttributes)
-        }
-    }
-    
-    func cameraLandscapeIconAttributes() -> CameraIconAttributes {
-        let activeCameraIconAttributes: CameraIconAttributes = .active
         switch self {
         case .photos:
             return .inactive
