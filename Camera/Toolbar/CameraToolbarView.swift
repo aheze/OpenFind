@@ -15,6 +15,8 @@ struct CameraToolbarView: View {
         HStack(alignment: .top, spacing: 0) {
             HStack {
                 ResultsIconView(model: model)
+                    .frameTag(CameraStatusConstants.sourceViewIdentifier)
+                
                 Spacer()
                 SnapshotView(model: model, isEnabled: $model.shutterOn)
             }

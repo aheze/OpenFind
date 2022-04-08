@@ -19,10 +19,12 @@ struct CameraLandscapeToolbarView: View {
                 if model.toolbarState == .sideCompact {
                     HStack {
                         ResultsIconView(model: model)
+                            .frameTag(CameraStatusConstants.landscapeSourceViewIdentifier)
                         SnapshotView(model: model, isEnabled: $model.shutterOn)
                     }
                 } else {
                     ResultsIconView(model: model)
+                        .frameTag(CameraStatusConstants.landscapeSourceViewIdentifier)
                     SnapshotView(model: model, isEnabled: $model.shutterOn)
                 }
 

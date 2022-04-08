@@ -18,6 +18,7 @@ extension CameraViewController {
         model.resultsPressed = { [weak self] in
             guard let self = self else { return }
             
+            print("ON? \(self.model.resultsOn)")
             if self.model.resultsOn {
                 self.presentStatusView()
             } else {
@@ -46,7 +47,7 @@ extension CameraViewController {
         /// rescan from indicator
         model.rescan = { [weak self] in
             guard let self = self else { return }
-            print("showing? \(self.progressViewModel.percentageShowing)")
+            
             guard
                 !self.progressViewModel.percentageShowing,
                 let image = self.model.pausedImage,

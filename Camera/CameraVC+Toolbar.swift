@@ -11,22 +11,32 @@ import SwiftUI
 
 extension CameraViewController {
     func presentStatusView() {
-        withAnimation {
-            self.zoomViewModel.alignment = .right
-        }
-
         var popover = Popover(attributes: .init()) { [weak self] in
             if let self = self {
                 CameraStatusView(model: self.model)
             }
         }
 
-        popover.attributes.sourceFrame = { [weak view] in
-            view?.window?.frameTagged(CameraStatusConstants.sourceViewIdentifier) ?? .zero
+        if model.toolbarState == .inTabBar {
+            popover.attributes.sourceFrame = { [weak view] in
+                view?.window?.frameTagged(CameraStatusConstants.sourceViewIdentifier) ?? .zero
+            }
+            popover.attributes.screenEdgePadding = view.safeAreaInsets
+            popover.attributes.sourceFrameInset.top = -16 - ZoomConstants.bottomPadding /// past the space between the button and the tab bar + extra padding
+            popover.attributes.position = .absolute(originAnchor: .top, popoverAnchor: .bottom)
+            withAnimation(
+                .spring(response: 0.4, dampingFraction: 0.8, blendDuration: 1)
+            ) {
+                model.resultsOn = true
+                zoomViewModel.alignment = .right
+            }
+        } else {
+            popover.attributes.sourceFrame = { [weak safeView] in
+                safeView?.windowFrame() ?? .zero
+            }
+            popover.attributes.sourceFrameInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            popover.attributes.position = .relative(popoverAnchors: [.bottomLeft])
         }
-        popover.attributes.screenEdgePadding = view.safeAreaInsets
-        popover.attributes.sourceFrameInset.top = -16 - ZoomConstants.bottomPadding /// past the space between the button and the tab bar + extra padding
-        popover.attributes.position = .absolute(originAnchor: .top, popoverAnchor: .bottom)
         popover.attributes.rubberBandingMode = .none
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
@@ -34,7 +44,8 @@ extension CameraViewController {
         popover.attributes.dismissal.transition = .opacity
         popover.attributes.dismissal.excludedFrames = { [weak self] in
             [
-                self?.view.window?.frameTagged(CameraStatusConstants.sourceViewIdentifier) ?? .zero
+                self?.view.window?.frameTagged(CameraStatusConstants.sourceViewIdentifier) ?? .zero,
+                self?.view.window?.frameTagged(CameraStatusConstants.landscapeSourceViewIdentifier) ?? .zero
             ]
         }
         popover.attributes.tag = CameraStatusConstants.statusViewIdentifier

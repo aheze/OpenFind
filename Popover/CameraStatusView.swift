@@ -26,6 +26,7 @@ enum CameraStatusConstants {
     static var popoverDividerColor = UIColor.white.withAlphaComponent(0.2)
 
     static var sourceViewIdentifier = "Camera Status Source View"
+    static var landscapeSourceViewIdentifier = "Camera Status Landscape Source View"
     static var statusViewIdentifier = "Camera Status Popover"
 }
 

@@ -31,6 +31,5 @@ struct ResultsIconView: View {
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
                 .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
-        .frameTag(CameraStatusConstants.sourceViewIdentifier)
     }
 }
