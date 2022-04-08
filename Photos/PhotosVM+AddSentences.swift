@@ -1,5 +1,5 @@
 //
-//  PhotosVM+Add.swift
+//  PhotosVM+AddSentences.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 3/16/22.
@@ -7,6 +7,10 @@
 //
 
 import UIKit
+
+/**
+ Add sentence metadata
+ */
 
 /// Separate add from update
 extension PhotosViewModel {

@@ -8,19 +8,62 @@
     
 import UIKit
 
+/// control how to find
+enum FindContext {
+    case findingAfterNewPhotosAdded
+    case findingAfterTextChange
+    
+    /// no need to scan again if:
+    ///     - photo starred/unstarred
+    ///     - photo added via live results
+    case justFindFromExistingDoNotScan
+}
+
 extension PhotosViewController {
     /// find in all photos and populate `resultsState`
-    func find() {
-        if !model.photosToScan.isEmpty, model.scanningState == .dormant, realmModel.photosScanOnFind {
-            model.startScanning()
+    func findAndUpdateResultsState(context: FindContext) {
+        if !model.photosToScan.isEmpty, model.scanningState == .dormant {
+            switch context {
+            case .findingAfterNewPhotosAdded:
+                if realmModel.photosScanOnLaunch {
+                    model.startScanning()
+                }
+            case .findingAfterTextChange:
+                if realmModel.photosScanOnFind {
+                    model.startScanning()
+                }
+            case .justFindFromExistingDoNotScan:
+                break
+            }
         }
         
         let displayedFindPhotos: [FindPhoto]
+        let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = self.findAndGetFindPhotos(from: model.photos)
+        
+        switch sliderViewModel.selectedFilter ?? .all {
+        case .starred:
+            displayedFindPhotos = starredFindPhotos
+        case .screenshots:
+            displayedFindPhotos = screenshotsFindPhotos
+        case .all:
+            displayedFindPhotos = allFindPhotos
+        }
+        
+        model.resultsState = PhotosResultsState(
+            displayedFindPhotos: displayedFindPhotos,
+            allFindPhotos: allFindPhotos,
+            starredFindPhotos: starredFindPhotos,
+            screenshotsFindPhotos: screenshotsFindPhotos
+        )
+    }
+    
+    /// get FindPhotos from specified photos
+    func findAndGetFindPhotos(from photos: [Photo]) -> ([FindPhoto], [FindPhoto], [FindPhoto]) {
         var allFindPhotos = [FindPhoto]()
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
         
-        for photo in model.photos {
+        for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences, with: self.searchViewModel.stringToGradients)
             if highlights.count >= 1 {
@@ -48,21 +91,7 @@ extension PhotosViewController {
             }
         }
         
-        switch sliderViewModel.selectedFilter ?? .all {
-        case .starred:
-            displayedFindPhotos = starredFindPhotos
-        case .screenshots:
-            displayedFindPhotos = screenshotsFindPhotos
-        case .all:
-            displayedFindPhotos = allFindPhotos
-        }
-        
-        model.resultsState = PhotosResultsState(
-            displayedFindPhotos: displayedFindPhotos,
-            allFindPhotos: allFindPhotos,
-            starredFindPhotos: starredFindPhotos,
-            screenshotsFindPhotos: screenshotsFindPhotos
-        )
+        return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos)
     }
     
     func getHighlightsAndDescription(

@@ -41,12 +41,17 @@ extension PhotosViewController {
         case .denied:
             showPermissionsView()
         case .authorized:
-            model.load()
+            load()
         case .limited:
-            model.load()
+            load()
         @unknown default:
             fatalError()
         }
+    }
+
+    func load() {
+        model.load()
+        startObservingChanges()
     }
 
     func showPermissionsView() {
@@ -59,7 +64,7 @@ extension PhotosViewController {
         view.bringSubviewToFront(hostingController.view)
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
-            self.model.load()
+            self.load()
 
             UIView.animate(withDuration: 0.5) { [weak hostingController] in
                 hostingController?.view.alpha = 0

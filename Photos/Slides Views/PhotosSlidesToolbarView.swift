@@ -75,7 +75,7 @@ struct PhotosSlidesToolbarView: View {
                 model.slidesState?.toolbarStarOn = metadata.isStarred
             }
             
-            model.sortNeeded = true
+            model.sortNeededAfterStarChanged = true
         }
     }
     

@@ -22,7 +22,7 @@ class PhotosViewModel: ObservableObject {
     @Published var photosEditable = false /// select button enabled
 
     /// when star/unstar
-    var sortNeeded = false
+    var sortNeededAfterStarChanged = false
 
     /// storage
     var starredSections = [PhotosSection]()
@@ -35,6 +35,9 @@ class PhotosViewModel: ObservableObject {
     /// update the entire collection view, only called once at first. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
 
+    /// call this after added an external photo or star/unstar - reload collection views and find.
+    var reloadAndFind: (() -> Void)?
+
     /// reload at a specific index path
     /// 1. Index path inside `collectionView`
     /// 2. Index inside `resultsCollectionView`
@@ -44,6 +47,10 @@ class PhotosViewModel: ObservableObject {
     /// PHAsset caching
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
+
+    // MARK: Observed external changes
+
+    var waitingToAddExternalPhotos = false
 
     // MARK: Slides / Results
 
@@ -85,8 +92,17 @@ class PhotosViewModel: ObservableObject {
     /// set to false if finger is still touching
     var updateAllowed = true {
         didSet {
-            if updateAllowed, updateState == .waitingForPermission {
+            guard updateAllowed else { return }
+            if updateState == .waitingForPermission {
                 addQueuedSentencesToMetadatas()
+            }
+
+            if waitingToAddExternalPhotos {
+                loadExternalPhotos()
+            }
+            
+            if sortNeededAfterStarChanged {
+                updateAfterStarChange()
             }
         }
     }

@@ -24,18 +24,17 @@ extension PhotosViewModel {
             }
         }
     }
-    
+
     func loadAssets() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
     }
     
-    func loadPhotos(completion: (() -> Void)?) {
-        var photos = [Photo]()
-        
+    /// 1. all photos, 2. ignored photos, 3. photos to scan
+    func getPhotos(completion: (([Photo], [Photo], [Photo]) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
-            /// how many photos that aren't scanned
+            var photos = [Photo]()
             var ignoredPhotos = [Photo]()
             var photosToScan = [Photo]()
             
@@ -60,14 +59,16 @@ extension PhotosViewModel {
                 
                 photos.append(photo)
             }
-            
-            /// newest photos go first
-            photosToScan.reverse()
-            
+            completion?(photos, ignoredPhotos, photosToScan)
+        }
+    }
+    
+    func loadPhotos(completion: (() -> Void)?) {
+        getPhotos { photos, ignoredPhotos, photosToScan in
             DispatchQueue.main.async {
                 self.photos = photos
                 self.ignoredPhotos = ignoredPhotos
-                self.photosToScan = photosToScan
+                self.photosToScan = photosToScan.reversed() /// newest photos go first
                 completion?()
             }
         }

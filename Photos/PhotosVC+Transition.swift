@@ -127,18 +127,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                         }
                     }
                 }
-                
-                if model.sortNeeded {
-                    model.sortNeeded = false
-                    if let selectedFilter = sliderViewModel.selectedFilter {
-                        self.load(for: selectedFilter)
-                    }
-                    if model.resultsState != nil {
-                        find() /// find again (handles star/unstar)
-                        updateResults()
-                    }
-                }
-                
+
                 /// remove slides state to keep finding in `PhotosVM+Update`
                 self.model.slidesState = nil
                 self.model.updateAllowed = true

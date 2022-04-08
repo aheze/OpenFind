@@ -18,6 +18,14 @@ extension PhotosViewController {
             self.update(animate: false)
         }
         
+        /// call this after new external photos added, or star change
+        model.reloadAndFind = { [weak self] in
+            guard let self = self else { return }
+            if let selectedFilter = self.sliderViewModel.selectedFilter {
+                self.sliderChanged(filter: selectedFilter)
+            }
+        }
+        
         /// underlying arrays have already been updated, reload the UI.
         model.reloadAt = { [weak self] collectionViewIndexPath, resultsCollectionViewIndex, metadata in
             guard let self = self else { return }
@@ -63,10 +71,10 @@ extension PhotosViewController {
             guard let self = self else { return }
             
             if textChanged {
-                let resultsStateExisted = self.model.resultsState != nil
-                self.find()
+                self.findAndUpdateResultsState(context: .findingAfterTextChange)
                 self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
                 
+                let resultsStateExisted = self.model.resultsState != nil
                 if resultsStateExisted {
                     self.updateResults()
                 } else {
