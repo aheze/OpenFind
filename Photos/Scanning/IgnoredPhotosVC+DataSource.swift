@@ -32,7 +32,7 @@ extension IgnoredPhotosViewController {
             cell.representedAssetIdentifier = photo.asset.localIdentifier
             self.model.imageManager.requestImage(
                 for: photo.asset,
-                targetSize: PhotosConstants.thumbnailSize,
+                targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero,
                 contentMode: .aspectFill,
                 options: nil
             ) { thumbnail, _ in

@@ -56,8 +56,7 @@ extension SettingsData {
                                     SettingsData.resetAllSettings?()
                                 }
                             )
-                        ],
-                        description: .constant(string: "Swipe left and right to change tabs.")
+                        ]
                     )
                 ]
             )

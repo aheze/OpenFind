@@ -87,7 +87,6 @@ class PhotosController {
         
         self.searchNavigationController = searchNavigationController
         
-//        viewController.loadViewIfNeeded() /// needed to initialize outlets
         viewController.updateNavigationBar = { [weak self] in
             guard let self = self else { return }
             

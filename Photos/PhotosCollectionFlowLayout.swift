@@ -51,6 +51,7 @@ class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
 
 class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     var getContent: (() -> PhotosCollectionType)?
+    var getMinCellWidth: (() -> CGFloat)?
     
     override init() {
         super.init()
@@ -126,7 +127,8 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             - collectionView.safeAreaInsets.left
             - collectionView.safeAreaInsets.right
         
-        let (numberOfColumns, columnWidth) = PhotosConstants.minCellWidth.getColumns(availableWidth: availableWidth)
+        let minCellWidth = getMinCellWidth?() ?? 0
+        let (numberOfColumns, columnWidth) = minCellWidth.getColumns(availableWidth: availableWidth)
         self.columnWidth = columnWidth
         
         var columnOffsets = [CGSize]()

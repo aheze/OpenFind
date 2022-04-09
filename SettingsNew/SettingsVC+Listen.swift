@@ -20,7 +20,7 @@ extension SettingsViewController {
 
         SettingsData.resetAllSettings = { [weak self] in
             guard let self = self else { return }
-            self.realmModel.resetAllSettings()
+            self.resetAllSettings()
         }
         
         SettingsData.shareLink = { [weak self] in
@@ -70,6 +70,20 @@ extension SettingsViewController {
         }
 
         self.present(activityViewController, animated: true)
+    }
+    
+    func resetAllSettings() {
+        let alert = UIAlertController(title: "Reset All Settings?", message: "Are you sure you want to reset all settings?", preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Reset", style: .default) { [weak self] action in
+                guard let self = self else { return }
+                self.realmModel.resetAllSettings()
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        )
+        self.present(alert, animated: true, completion: nil)
     }
 
     func presentColorPicker() {

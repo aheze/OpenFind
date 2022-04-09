@@ -27,8 +27,9 @@ extension PhotosViewController {
         setupEmptyContent()
 
         setupNavigationBar()
-        listenToModel()
         setupFiltersView()
+        
+        listen()
 
         checkPermissions()
     }

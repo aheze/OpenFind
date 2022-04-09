@@ -74,8 +74,6 @@ class SearchViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
     
-    private var listsCancellable: AnyCancellable?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false /// allow auto sizing
@@ -90,11 +88,11 @@ class SearchViewController: UIViewController {
         
         listen()
         
-        listsCancellable = realmModel.$lists.sink { [weak self] lists in
+        realmModel.$lists.sink { [weak self] lists in
             guard let self = self else { return }
-            
             self.listsChanged(newLists: lists)
         }
+        .store(in: &realmModel.cancellables)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

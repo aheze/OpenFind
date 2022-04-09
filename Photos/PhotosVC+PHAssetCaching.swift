@@ -41,11 +41,11 @@ extension PhotosViewController {
         // Update the assets the PHCachingImageManager is caching.
         model.imageManager.startCachingImages(
             for: addedAssets,
-            targetSize: PhotosConstants.thumbnailSize, contentMode: .aspectFill, options: nil
+            targetSize: realmModel.thumbnailSize, contentMode: .aspectFill, options: nil
         )
         model.imageManager.stopCachingImages(
             for: removedAssets,
-            targetSize: PhotosConstants.thumbnailSize, contentMode: .aspectFill, options: nil
+            targetSize: realmModel.thumbnailSize, contentMode: .aspectFill, options: nil
         )
         // Store the computed rectangle for future comparison.
         model.previousPreheatRect = preheatRect

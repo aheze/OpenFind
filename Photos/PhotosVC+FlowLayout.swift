@@ -25,6 +25,10 @@ extension PhotosViewController {
 
             return .sections(sections)
         }
+        flowLayout.getMinCellWidth = { [weak self] in
+            guard let self = self else { return 0 }
+            return self.realmModel.photosMinimumCellLength
+        }
         return flowLayout
     }
 }

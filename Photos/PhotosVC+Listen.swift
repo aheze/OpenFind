@@ -9,6 +9,15 @@
 import SwiftUI
 
 extension PhotosViewController {
+    func listen() {
+//        realmModel.$photosMinimumCellLength.sink { [weak self] photosMinimumCellLength in
+//            guard let self = self else { return }
+//            self.
+//        }
+//        .store(in: &realmModel.cancellables)
+        
+        listenToModel()
+    }
     func listenToModel() {
         /// only called at first
         model.reload = { [weak self] in

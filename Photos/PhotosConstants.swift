@@ -11,17 +11,10 @@ import UIKit
 enum PhotosConstants {
     static var sidePadding = CGFloat(0)
     static var cellSpacing = CGFloat(2)
-    static var minCellWidth = CGFloat(80)
-    static var thumbnailSize: CGSize = {
-        let scale = UIScreen.main.scale
-        let length = minCellWidth * 3 / 2 /// slightly clearer
-        let thumbnailSize = CGSize(width: length * scale, height: minCellWidth * scale)
-        return thumbnailSize
-    }()
 
     /// how often to update results
     static var minimumResultsUpdateDuration = CGFloat(2.5)
-    
+
     static var scanningCheckmarkWeight = UIFont.Weight.bold
     static var bottomPadding = CGFloat(16) /// extra padding, on top of the slider
 }
@@ -40,10 +33,10 @@ enum PhotosCellConstants {
     static var starFont = UIFont.preferredFont(forTextStyle: .subheadline)
     static var starLeftPadding = CGFloat(5)
     static var starBottomPadding = CGFloat(5)
-    
+
     static var selectRightPadding = CGFloat(6)
     static var selectBottomPadding = CGFloat(6)
-    
+
     static var selectedBackgroundColor = UIColor.white.withAlphaComponent(0.1)
 }
 

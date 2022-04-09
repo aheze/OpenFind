@@ -11,6 +11,8 @@ import UIKit
 extension TabBarViewController {
     /// listen to changes in the model
     func listen() {
+        
+        
         model.updateTabBarHeight = { [weak self] tabState in
             guard let self = self else { return }
             self.updateTabBarHeight(tabState)

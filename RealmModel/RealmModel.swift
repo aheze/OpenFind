@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class RealmModel: ObservableObject {
     var container = RealmContainer()
@@ -16,6 +17,8 @@ class RealmModel: ObservableObject {
 
     static let data = RealmModelData.self
 
+    var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Defaults
 
     @Saved(data.swipeToNavigate.key) var swipeToNavigate = data.swipeToNavigate.value
