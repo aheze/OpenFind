@@ -12,6 +12,7 @@ import UIKit
 extension CameraViewController {
     func toggleFlashlight(_ on: Bool) {
         guard
+            let livePreviewViewController = livePreviewViewController,
             let device = livePreviewViewController.cameraDevice,
             device.hasTorch
         else {

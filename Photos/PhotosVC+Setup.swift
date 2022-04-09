@@ -60,6 +60,7 @@ extension PhotosViewController {
         sliderContainerView.alpha = 0
         let permissionsView = PhotosPermissionsView(model: permissionsViewModel)
         let hostingController = UIHostingController(rootView: permissionsView)
+        hostingController.view.backgroundColor = .clear
         addChildViewController(hostingController, in: view)
         view.bringSubviewToFront(hostingController.view)
         permissionsViewModel.permissionsGranted = { [weak self] in

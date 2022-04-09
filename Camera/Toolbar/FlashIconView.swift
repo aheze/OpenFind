@@ -20,7 +20,7 @@ struct FlashIconView: View {
         } label: {
             Image(systemName: "bolt.fill")
                 .frame(width: 40, height: 40)
-                .foregroundColor(model.flash ? Color(Constants.activeIconColor) : .white)
+                .foregroundColor(model.flash ? .activeIconColor : .white)
                 .font(.system(size: 19))
                 .enabledModifier(isEnabled: isEnabled, linePadding: 13)
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)

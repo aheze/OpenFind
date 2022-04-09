@@ -11,18 +11,20 @@ import SwiftUI
 enum Colors {
     /// Main accent color (blue)
     static var accent = UIColor(named: "Accent")!
+    static var accentDarkBackground = UIColor(hex: 0x005099) /// `0x007EEF` but darker
+    static var activeIconColor = UIColor(hex: 0x8AF9FF)
 }
 
 extension Color {
     /// Main accent color (blue)
     static var accent = Colors.accent.color
+    static var accentDarkBackground = Colors.accentDarkBackground.color
+    static var activeIconColor = Colors.activeIconColor.color
 }
 
 enum Constants {
-    static var activeIconColor = UIColor(hex: 0x8AF9FF)
-    static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
-    static var darkBlueBackground = UIColor(hex: 0x006186)
+    static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)
     static var tabBarLightBackgroundColor = UIColor.systemBackground

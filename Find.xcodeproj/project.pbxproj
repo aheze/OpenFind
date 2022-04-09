@@ -416,7 +416,10 @@
 		3C29947B2800F08F00AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
 		3C29947C2800F09A00AE1AEC /* CameraLandscapeToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994792800DA5C00AE1AEC /* CameraLandscapeToolbarView.swift */; };
 		3C29947E280157F100AE1AEC /* CameraPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */; };
-		3C29947F2801594600AE1AEC /* CameraPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */; };
+		3C29948128015C9A00AE1AEC /* CameraVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29948028015C9A00AE1AEC /* CameraVC+Setup.swift */; };
+		3C29948228015C9D00AE1AEC /* CameraVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29948028015C9A00AE1AEC /* CameraVC+Setup.swift */; };
+		3C29948328015CCB00AE1AEC /* CameraPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */; };
+		3C29948428015CCC00AE1AEC /* CameraPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */; };
 		3C2C2CDB27E23D0300CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C2CDC27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
@@ -3480,6 +3483,7 @@
 		3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Landscape.swift"; sourceTree = "<group>"; };
 		3C2994792800DA5C00AE1AEC /* CameraLandscapeToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLandscapeToolbarView.swift; sourceTree = "<group>"; };
 		3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionsView.swift; sourceTree = "<group>"; };
+		3C29948028015C9A00AE1AEC /* CameraVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Setup.swift"; sourceTree = "<group>"; };
 		3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Progress.swift"; sourceTree = "<group>"; };
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
@@ -4931,6 +4935,7 @@
 				3C4D398327475BB10010FD68 /* CameraContent.storyboard */,
 				3C4D398527475BB10010FD68 /* CameraController.swift */,
 				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
+				3C29948028015C9A00AE1AEC /* CameraVC+Setup.swift */,
 				3C9314B227B84EF7009E5B6E /* CameraVC+Listen.swift */,
 				3C5B377B27FEB6E900801FEE /* CameraVC+Lifecycle.swift */,
 				3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */,
@@ -8250,6 +8255,7 @@
 				3C5B36F727FEAEDF00801FEE /* SettingsLinks.swift in Sources */,
 				3C9314A227B844EC009E5B6E /* TabAttributes.swift in Sources */,
 				3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */,
+				3C29948128015C9A00AE1AEC /* CameraVC+Setup.swift in Sources */,
 				3C7223BB27C4427B0085EBF1 /* CameraModel.swift in Sources */,
 				3C5B36F027FEAEDF00801FEE /* SettingsResultsViewController.swift in Sources */,
 				3CFCE8A427CA9D5F000624D2 /* Utilities+CGPoint.swift in Sources */,
@@ -8292,6 +8298,7 @@
 				3C5B36FC27FEAEDF00801FEE /* SettingsPageView.swift in Sources */,
 				3C3642CD277BC2E70038CB18 /* SearchFieldCell.swift in Sources */,
 				3C5B36F227FEAEDF00801FEE /* SettingsHighlightsPreview.swift in Sources */,
+				3C29948328015CCB00AE1AEC /* CameraPermissionsView.swift in Sources */,
 				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,
 				3C9314A327B844EC009E5B6E /* TabBarViewController.swift in Sources */,
 				3CD6227B27C5D79A00DF9AE8 /* SearchVC+Reload.swift in Sources */,
@@ -8391,7 +8398,6 @@
 				3CF15B3727FF8AEA00D51E9B /* SettingsPhotoGridSize.swift in Sources */,
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
-				3C29947F2801594600AE1AEC /* CameraPermissionsView.swift in Sources */,
 				3C443FA927DFA6370050A0AB /* SearchNC+Prompt.swift in Sources */,
 				3C7A43F027EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */,
 				3C875E1027EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */,
@@ -9363,6 +9369,7 @@
 				3C17686027AA0F4A0099D1CE /* WordsKeyboardToolbarViewModel.swift in Sources */,
 				3CDD945527C0654500D3EA1A /* PhotosScanningConstants.swift in Sources */,
 				3C7A43F527EE3AEF00DFF76F /* Utilities+Array.swift in Sources */,
+				3C29948428015CCC00AE1AEC /* CameraPermissionsView.swift in Sources */,
 				3CFD6032278B71E20031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C2D22BE27FC1A6A00D413B7 /* Identifier.swift in Sources */,
 				3C9234D827E661420055061A /* PhotosVC+FlowLayout.swift in Sources */,
@@ -9533,6 +9540,7 @@
 				3CDD945827C0687D00D3EA1A /* Defaults.swift in Sources */,
 				3C17B8E827C9ACC300B55E97 /* PhotosVC+NavigationBar.swift in Sources */,
 				3C7223D227C475310085EBF1 /* ExtendedCurveConnector.swift in Sources */,
+				3C29948228015C9D00AE1AEC /* CameraVC+Setup.swift in Sources */,
 				3C5B36BC27FEAEDE00801FEE /* SettingsSlider.swift in Sources */,
 				3C7223CD27C4537A0085EBF1 /* CameraVC+Toolbar.swift in Sources */,
 				3C08EAF2279C76BD00971D60 /* ListsViewModel.swift in Sources */,

@@ -17,6 +17,7 @@ class CameraViewController: UIViewController, PageViewController {
     var tabViewModel: TabViewModel
     var realmModel: RealmModel
     
+    lazy var permissionsViewModel = CameraPermissionsViewModel()
     lazy var zoomViewModel = ZoomViewModel(containerView: zoomContainerView)
     var aspectProgressCancellable: AnyCancellable?
     
@@ -26,7 +27,7 @@ class CameraViewController: UIViewController, PageViewController {
     
     // MARK: - Sub view controllers
 
-    lazy var livePreviewViewController = createLivePreview()
+    var livePreviewViewController: LivePreviewViewController?
     lazy var searchViewController = createSearchBar()
     lazy var scrollZoomViewController = createScrollZoom()
     lazy var scrollZoomHookViewController = createScrollZoomHook()
@@ -40,7 +41,7 @@ class CameraViewController: UIViewController, PageViewController {
     
     // MARK: Camera content
 
-    /// should match the frame of the image
+    /// should match the frame of the image, includes highlights
     @IBOutlet var contentContainerView: UIView!
 
     /// saved for background thread access
@@ -86,12 +87,15 @@ class CameraViewController: UIViewController, PageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        _ = searchViewController
         setup()
+        listenToModel()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        guard let livePreviewViewController = livePreviewViewController else { return }
         Task {
             await livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
             livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
@@ -99,26 +103,7 @@ class CameraViewController: UIViewController, PageViewController {
         }
     }
     
-    func setup() {
-        _ = livePreviewViewController
-        _ = searchViewController
-        
-        view.backgroundColor = Constants.darkBlueBackground
-        safeView.backgroundColor = .clear
-        contentContainerView.backgroundColor = .clear
-        scrollZoomContainerView.backgroundColor = .clear
-        scrollZoomHookContainerView.backgroundColor = .clear
-        simulatedSafeView.backgroundColor = .clear
-        simulatedSafeView.isHidden = true
 
-        setupZoom()
-        setupHighlights()
-        setupProgress()
-        setupBlur()
-        setupLandscapeToolbar()
-        
-        listenToModel()
-    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

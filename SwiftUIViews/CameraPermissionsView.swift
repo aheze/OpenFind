@@ -59,7 +59,7 @@ class CameraPermissionsViewModel: ObservableObject {
 }
 
 struct CameraPermissionsView: View {
-    @ObservedObject var model: PhotosPermissionsViewModel
+    @ObservedObject var model: CameraPermissionsViewModel
     var body: some View {
         switch model.currentStatus {
         case .notDetermined, .restricted:
@@ -72,7 +72,7 @@ struct CameraPermissionsView: View {
             }
         default:
             CameraPermissionsActionView(
-                title: "Find Photos",
+                title: "Camera Permissions",
                 description: "Finding text in real life requires permission to access the camera. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Go to Settings"
             ) {
@@ -130,7 +130,7 @@ struct CameraPermissionsActionView: View {
 }
 
 struct CameraPermissionsViewTester: View {
-    @StateObject var model = PhotosPermissionsViewModel()
+    @StateObject var model = CameraPermissionsViewModel()
     var body: some View {
         CameraPermissionsView(model: model)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

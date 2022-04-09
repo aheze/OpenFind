@@ -10,9 +10,9 @@ import UIKit
 
 extension CameraViewController {
     func willBecomeActive() {
-        if !livePreviewViewController.session.isRunning {
+        if let livePreviewViewController = livePreviewViewController, !livePreviewViewController.session.isRunning {
             DispatchQueue.global(qos: .userInteractive).async {
-                self.livePreviewViewController.session.startRunning()
+                self.livePreviewViewController?.session.startRunning()
             }
         }
     }

@@ -21,15 +21,15 @@ extension CameraViewController {
         zoomViewModel.zoomChanged = { [weak self] in
             guard let self = self else { return }
             
-            self.livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: true)
+            self.livePreviewViewController?.changeZoom(to: self.zoomViewModel.zoom, animated: true)
             let scrollViewZoom = self.getScrollViewZoomFrom(percentage: self.zoomViewModel.percentage)
             self.scrollZoomHookViewController.scrollView.zoomScale = scrollViewZoom
         }
         aspectProgressCancellable = zoomViewModel.$aspectProgress.sink { [weak self] aspectProgress in
-            self?.livePreviewViewController.changeAspectProgress(to: aspectProgress, animated: true)
+            self?.livePreviewViewController?.changeAspectProgress(to: aspectProgress, animated: true)
         }
         
-        if let camera = livePreviewViewController.cameraDevice {
+        if let camera = livePreviewViewController?.cameraDevice {
             zoomViewModel.configureZoomFactors(
                 minZoom: camera.minAvailableVideoZoomFactor,
                 maxZoom: camera.maxAvailableVideoZoomFactor,

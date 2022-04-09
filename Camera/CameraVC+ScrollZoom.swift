@@ -30,7 +30,7 @@ extension CameraViewController {
                 self.zoomViewModel.keepingExpandedUUID = nil
                 self.zoomViewModel.setZoom(percentage: percentage)
                 self.zoomViewModel.updateActivationProgress(percentage: percentage)
-                self.livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: true)
+                self.livePreviewViewController?.changeZoom(to: self.zoomViewModel.zoom, animated: true)
                 
                 self.zoomViewModel.savedExpandedOffset = -percentage * self.zoomViewModel.sliderWidth
                 self.zoomViewModel.updateActivationProgress(

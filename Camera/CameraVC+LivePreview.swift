@@ -74,8 +74,8 @@ extension CameraViewController {
     /// stop running the preview when go to a different tab
     func stopRunning() {
         DispatchQueue.global(qos: .userInteractive).async {
-            if self.livePreviewViewController.session.isRunning {
-                self.livePreviewViewController.session.stopRunning()
+            if let livePreviewViewController = self.livePreviewViewController, livePreviewViewController.session.isRunning {
+                self.livePreviewViewController?.session.stopRunning()
             }
         }
     }

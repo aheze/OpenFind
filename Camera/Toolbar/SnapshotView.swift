@@ -28,10 +28,10 @@ struct SnapshotView: View {
             Color.clear
                 .overlay(
                     Image("CameraRim") /// rim of camera
-                        .foregroundColor(model.snapshotState == .saved ? Color(Constants.activeIconColor) : .white)
+                        .foregroundColor(model.snapshotState == .saved ? .activeIconColor : .white)
                 )
                 .overlay(
-                    Color(model.snapshotState == .saved ? Constants.activeIconColor : .white)
+                    Color(model.snapshotState == .saved ? Colors.activeIconColor : .white)
 
                         /// prevent animation glitches
                         .mask(

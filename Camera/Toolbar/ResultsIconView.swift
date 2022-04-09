@@ -22,7 +22,7 @@ struct ResultsIconView: View {
             model.resultsPressed?()
         } label: {
             Text("\(model.displayedResultsCount)")
-                .foregroundColor(model.resultsOn ? Color(Constants.activeIconColor) : .white)
+                .foregroundColor(model.resultsOn ? .activeIconColor : .white)
                 .font(.system(size: 19))
                 .lineLimit(1)
                 .minimumScaleFactor(0.3)

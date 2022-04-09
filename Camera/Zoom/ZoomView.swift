@@ -108,7 +108,7 @@ struct ZoomFactorContent: View {
             
             Text(text)
                 .font(.system(size: 16, weight: isActive ? .semibold : .medium))
-                .foregroundColor(isActive ? Color(Constants.activeIconColor) : .white)
+                .foregroundColor(isActive ? .activeIconColor : .white)
         }
         .frame(width: ZoomConstants.zoomFactorLength, height: ZoomConstants.zoomFactorLength)
     }

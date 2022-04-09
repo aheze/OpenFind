@@ -14,7 +14,7 @@ import UIKit
 
 extension CameraViewController {
     func resume() {
-        livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
+        livePreviewViewController?.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
         removeScrollZoomImage()
         showLivePreview()
@@ -22,6 +22,7 @@ extension CameraViewController {
     }
 
     func pause() {
+        guard let livePreviewViewController = livePreviewViewController else { return }
         Task {
             let pausedImage = PausedImage()
 
