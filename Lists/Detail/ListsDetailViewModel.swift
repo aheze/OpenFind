@@ -17,8 +17,14 @@ class ListsDetailViewModel: ObservableObject {
     var listDeleted: ((List) -> Void)?
     @Published var list: EditableList
     
+    // MARK: Initial Configuration
     /// Focus the first word when the view controller appears. For use when the "Add Words" button is pressed on an empty list.
     var focusFirstWord = false
+    
+    /// add if presenting and not pushing
+    var addDismissButton = false
+    
+    // MARK: Misc
     
     /// if the current color is light or not. Store this to prevent over animations
     var colorIsLight = false

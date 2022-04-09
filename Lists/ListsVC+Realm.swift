@@ -36,12 +36,9 @@ extension ListsViewController {
     }
 
     func deleteLists(lists: [List]) {
-        var indices = [Int]()
+        print("deleting!")
         for list in lists {
-            if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
-                indices.append(firstIndex)
-                realmModel.container.deleteList(list: list)
-            }
+            realmModel.container.deleteList(list: list)
         }
 
         reloadDisplayedLists()
@@ -49,6 +46,7 @@ extension ListsViewController {
     }
 }
 
+/// these are called after realm has updated
 extension ListsViewController {
     /// single list updated
     func listUpdated(list: List) {
@@ -58,6 +56,7 @@ extension ListsViewController {
         }
     }
 
+    /// single list deleted
     func listDeleted(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
             model.displayedLists.remove(at: firstIndex)

@@ -12,7 +12,7 @@ extension ListsViewController {
     func presentDetails(list: List, focusFirstWord: Bool = false) {
         /// keep it up to date. replacing!
         
-        let viewController = self.getDetailViewController(list: list, focusFirstWord: focusFirstWord)
+        let viewController = self.getDetailViewController(list: list, focusFirstWord: focusFirstWord, addDismissButton: false)
         self.detailsViewController = viewController
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -22,7 +22,7 @@ extension ListsViewController {
         }
     }
     
-    func getDetailViewController(list: List, focusFirstWord: Bool) -> ListsDetailViewController {
+    func getDetailViewController(list: List, focusFirstWord: Bool, addDismissButton: Bool) -> ListsDetailViewController {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let listsDetailViewModel = ListsDetailViewModel(
             list: list,
@@ -31,6 +31,7 @@ extension ListsViewController {
                 self?.listUpdated(list: newList)
             },
             listDeleted: { [weak self] listToDelete in
+                print("deleting.")
                 self?.realmModel.container.deleteList(list: listToDelete)
                 self?.listDeleted(list: listToDelete)
             },
@@ -38,6 +39,7 @@ extension ListsViewController {
         )
         
         listsDetailViewModel.focusFirstWord = focusFirstWord
+        listsDetailViewModel.addDismissButton = addDismissButton
         let viewController: ListsDetailViewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
             
             ListsDetailViewController(

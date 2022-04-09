@@ -11,11 +11,22 @@ import UIKit
 
 extension SearchViewController {
     func presentPopover(for index: Int, from cell: UICollectionViewCell) {
+        let popover = getPopover(for: index, from: cell)
+        if let existingPopover = view.popover(tagged: PopoverIdentifier.fieldSettingsIdentifier) {
+            print("existing!")
+            replace(existingPopover, with: popover)
+        } else {
+            present(popover)
+        }
+    }
+
+    func getPopover(for index: Int, from cell: UICollectionViewCell) -> Popover {
+        let model = FieldSettingsModel()
+
         let field = searchViewModel.fields[index]
         switch field.value {
         case .word(let word):
 
-            let model = FieldSettingsModel()
             model.header = "WORD"
             model.defaultColor = UIColor(hex: word.color)
             model.selectedColor = field.overrides.selectedColor
@@ -26,28 +37,25 @@ extension SearchViewController {
                 field.overrides.selectedColor = model.selectedColor
                 field.overrides.alpha = model.alpha
                 self.searchViewModel.updateField(at: index, with: field, notify: true)
-                
+
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
                     cell.leftView.findIconView.setTint(color: model.selectedColor ?? model.defaultColor, alpha: model.alpha)
                 }
             }
 
-            let configuration = self.searchViewModel.configuration
-            var popover = Popover { FieldSettingsView(model: model, configuration: configuration) }
-            popover.attributes.rubberBandingMode = .none
-            popover.attributes.sourceFrame = { cell.windowFrame() }
-            popover.attributes.sourceFrameInset.bottom = 8
-            popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
-            present(popover)
         case .list(let list):
-            let model = FieldSettingsModel()
+
             model.header = "LIST"
             model.defaultColor = UIColor(hex: list.color)
             model.selectedColor = field.overrides.selectedColor
             model.alpha = field.overrides.alpha
             model.words = list.words
-            model.editListPressed = {
-                ViewControllerCallback.showList?(list)
+            model.editListPressed = { [weak self] in
+                guard let self = self else { return }
+                guard let viewController = ViewControllerCallback.getListDetailController?(list) else { return }
+
+                let navigationController = UINavigationController(rootViewController: viewController)
+                self.present(navigationController, animated: true)
             }
             model.changed = { [weak self] in
                 guard let self = self else { return }
@@ -60,15 +68,18 @@ extension SearchViewController {
                 }
             }
 
-            let configuration = self.searchViewModel.configuration
-            var popover = Popover { FieldSettingsView(model: model, configuration: configuration) }
-            popover.attributes.rubberBandingMode = .none
-            popover.attributes.sourceFrame = { cell.windowFrame() }
-            popover.attributes.sourceFrameInset.bottom = 8
-            popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
-            present(popover)
         case .addNew:
             break
         }
+
+        let configuration = self.searchViewModel.configuration
+        var popover = Popover { FieldSettingsView(model: model, configuration: configuration) }
+        popover.attributes.rubberBandingMode = .none
+        popover.attributes.sourceFrame = { cell.windowFrame() }
+        popover.attributes.sourceFrameInset.bottom = 8
+        popover.attributes.position = .absolute(originAnchor: .bottomLeft, popoverAnchor: .topLeft)
+        popover.attributes.tag = PopoverIdentifier.fieldSettingsIdentifier
+
+        return popover
     }
 }

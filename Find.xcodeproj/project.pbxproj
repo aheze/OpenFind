@@ -173,7 +173,6 @@
 		3C17686927AA24710099D1CE /* ListsDetailVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686627AA24710099D1CE /* ListsDetailVC+Keyboard.swift */; };
 		3C17686B27AAEE1A0099D1CE /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C17686C27AAEECF0099D1CE /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
-		3C17686D27AAEED00099D1CE /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C17686E27AAEED20099D1CE /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
 		3C17B8E727C9ACB700B55E97 /* PhotosVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17B8E627C9ACB700B55E97 /* PhotosVC+NavigationBar.swift */; };
 		3C17B8E827C9ACC300B55E97 /* PhotosVC+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17B8E627C9ACB700B55E97 /* PhotosVC+NavigationBar.swift */; };
@@ -426,6 +425,16 @@
 		3C29948A280168F900AE1AEC /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C299485280168F200AE1AEC /* Callback.swift */; };
 		3C29948C280168FA00AE1AEC /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C299485280168F200AE1AEC /* Callback.swift */; };
 		3C299493280168FC00AE1AEC /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C299485280168F200AE1AEC /* Callback.swift */; };
+		3C2994972802133E00AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C2994982802134200AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C29949A2802134300AE1AEC /* SearchVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */; };
+		3C29949B2802134300AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C29949C2802134400AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C29949D2802134400AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C29949E2802134400AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C29949F2802134500AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C2994A02802134600AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
+		3C2994A12802134600AE1AEC /* SearchVC+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994962802133E00AE1AEC /* SearchVC+Update.swift */; };
 		3C2C2CDB27E23D0300CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C2CDC27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
@@ -3491,6 +3500,7 @@
 		3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionsView.swift; sourceTree = "<group>"; };
 		3C29948028015C9A00AE1AEC /* CameraVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Setup.swift"; sourceTree = "<group>"; };
 		3C299485280168F200AE1AEC /* Callback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
+		3C2994962802133E00AE1AEC /* SearchVC+Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Update.swift"; sourceTree = "<group>"; };
 		3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Progress.swift"; sourceTree = "<group>"; };
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
@@ -5240,6 +5250,7 @@
 				3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */,
 				3C93148527B820F3009E5B6E /* SearchVC+Keyboard.swift */,
 				3C17686A27AAEE1A0099D1CE /* SearchVC+Toolbar.swift */,
+				3C2994962802133E00AE1AEC /* SearchVC+Update.swift */,
 				3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */,
 				3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */,
 				3CCCCA89278182F1000381CE /* SuggestionsView.swift */,
@@ -7627,6 +7638,7 @@
 				3CF15BC927FF8AEF00D51E9B /* SettingsMVC+Listen.swift in Sources */,
 				3CF15BB627FF8AEF00D51E9B /* SettingsCameraHapticFeedback.swift in Sources */,
 				3CF15BC227FF8AEF00D51E9B /* SettingsLink.swift in Sources */,
+				3C29949F2802134500AE1AEC /* SearchVC+Update.swift in Sources */,
 				3CF15BA127FF8AEF00D51E9B /* SettingsViews.swift in Sources */,
 				3C798F8F27F782A1007BF68D /* SearchViewController.swift in Sources */,
 				3C1D1A2B275AA25B0064F2C6 /* Utilities+UIColor.swift in Sources */,
@@ -7912,6 +7924,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CCE2B55279D235D00F72351 /* ListsDetailVC+Listen.swift in Sources */,
+				3C29949B2802134300AE1AEC /* SearchVC+Update.swift in Sources */,
 				3C1D1A45275AA2600064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C4D39CB27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C364350277C22480038CB18 /* TabControllerView.swift in Sources */,
@@ -7965,7 +7978,6 @@
 				3C08EAF3279C76BD00971D60 /* ListsViewModel.swift in Sources */,
 				3C7BADA9275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C4D3A15274767400010FD68 /* ContentPageViewController.swift in Sources */,
-				3C17686D27AAEED00099D1CE /* SearchVC+Toolbar.swift in Sources */,
 				3CE9C1FC274B4E44008C903C /* LivePreviewViewController.swift in Sources */,
 				3CCCCA9D27818CE7000381CE /* FindIconView.swift in Sources */,
 				3CFCE8A327CA9D5F000624D2 /* Utilities+CGPoint.swift in Sources */,
@@ -8118,6 +8130,7 @@
 				3C443EB627DD898F0050A0AB /* Sentence.swift in Sources */,
 				3CF15D3C27FF8AFE00D51E9B /* SettingsPhotoGridSize.swift in Sources */,
 				3CB8C31027C31DEB000AA3B9 /* Debug+Log.swift in Sources */,
+				3C29949A2802134300AE1AEC /* SearchVC+Toolbar.swift in Sources */,
 				3CF15D2C27FF8AFE00D51E9B /* SettingsVC+Listen.swift in Sources */,
 				3C1D1A44275AA2600064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3CF15D1527FF8AFE00D51E9B /* SettingsController.swift in Sources */,
@@ -8196,6 +8209,7 @@
 				3C01DE452788A93E0027B435 /* ZoomModel.swift in Sources */,
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
+				3C29949C2802134400AE1AEC /* SearchVC+Update.swift in Sources */,
 				3C443F4C27DD90E80050A0AB /* GeneralExtensions.swift in Sources */,
 				3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
@@ -8627,6 +8641,7 @@
 				3C7A43ED27EBE90000DFF76F /* PhotosCellView.swift in Sources */,
 				3C443EC127DD8ABC0050A0AB /* TabTransitioning.swift in Sources */,
 				3C443E9927DD88F80050A0AB /* SearchViewController.swift in Sources */,
+				3C29949D2802134400AE1AEC /* SearchVC+Update.swift in Sources */,
 				3C443EFE27DD8F650050A0AB /* SliderView.swift in Sources */,
 				3CF15B3827FF8AEA00D51E9B /* SettingsCredits.swift in Sources */,
 				3CBB319A27BD643200F25F6A /* PhotosSlidesVC+Delegate.swift in Sources */,
@@ -8747,6 +8762,7 @@
 				3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */,
 				3C2D22C427FC1A6F00D413B7 /* Identifier.swift in Sources */,
 				3C9CA8AF27EFFA9500D087F2 /* SearchNC+Progress.swift in Sources */,
+				3C29949E2802134400AE1AEC /* SearchVC+Update.swift in Sources */,
 				3CD706FC27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift in Sources */,
 				3C798EFE27F6A577007BF68D /* TabBarView.swift in Sources */,
 				3C21EE3827A463B40005E183 /* ListsVC+Realm.swift in Sources */,
@@ -9102,6 +9118,7 @@
 				3CBEAC0F2754867400D04B39 /* GeneralUtilities.swift in Sources */,
 				3CD6227F27C5E62C00DF9AE8 /* SearchCollectionViewModel.swift in Sources */,
 				3C6C7449278221E600E039F0 /* HighlightsViewController.swift in Sources */,
+				3C2994972802133E00AE1AEC /* SearchVC+Update.swift in Sources */,
 				3CF15B6D27FF8AEE00D51E9B /* SettingsDeepLink.swift in Sources */,
 				3C1D1A22275AA1740064F2C6 /* UIKitViews.swift in Sources */,
 				3CF15B7027FF8AEE00D51E9B /* SettingsPage+Generate.swift in Sources */,
@@ -9422,6 +9439,7 @@
 				3C6C733F2781944700E039F0 /* ProgressLineView.swift in Sources */,
 				3CD7062F27A3842200B446D7 /* IconPickerController.swift in Sources */,
 				3C5B369E27FEAEDE00801FEE /* SettingsVC+Listen.swift in Sources */,
+				3C2994982802134200AE1AEC /* SearchVC+Update.swift in Sources */,
 				3CC5951B27A0EA24001D07DC /* IconPickerViewController.swift in Sources */,
 				3C6C73A52781947400E039F0 /* SearchFieldCell.swift in Sources */,
 				3C6C73372781943B00E039F0 /* Model.swift in Sources */,
@@ -10005,6 +10023,7 @@
 				3CE40B8027F5281F00CADCBF /* SceneDelegate.swift in Sources */,
 				3C2D22F427FD553F00D413B7 /* PhotosConstants.swift in Sources */,
 				3C2D22D327FCD5A300D413B7 /* Settings.swift in Sources */,
+				3C2994A12802134600AE1AEC /* SearchVC+Update.swift in Sources */,
 				3CE40B9127F5287000CADCBF /* SettingsViewController.swift in Sources */,
 				3C2D22E727FD408600D413B7 /* SD+Feedback.swift in Sources */,
 				3C798F5127F78284007BF68D /* Protocols.swift in Sources */,
@@ -10230,6 +10249,7 @@
 				3CF15CA427FF8AF200D51E9B /* SettingsPicker.swift in Sources */,
 				3CFD5FF0278B6F950031BC8B /* SearchVC+Popovers.swift in Sources */,
 				3C798FAC27F782EE007BF68D /* TabAttributes.swift in Sources */,
+				3C2994A02802134600AE1AEC /* SearchVC+Update.swift in Sources */,
 				3CCE2AF7279D008800F72351 /* FindIconUIView.swift in Sources */,
 				3C1A2C3427EAB7A900B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3CFD600F278B6FAA0031BC8B /* Model.swift in Sources */,

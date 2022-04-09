@@ -40,19 +40,35 @@ extension ListsDetailViewController {
                 ])
             )
             
-            navigationItem.rightBarButtonItem = optionsButton
+            if model.addDismissButton {
+                navigationItem.leftBarButtonItem = optionsButton
+                navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(self.dismissSelf), imageName: "Dismiss")
+            } else {
+                navigationItem.rightBarButtonItem = optionsButton
+            }
+            
         } else {
             let optionsButton = UIBarButtonItem(
                 image: UIImage(systemName: "ellipsis"),
                 style: .plain,
                 target: self,
-                action: #selector(optionsPressed)
+                action: #selector(self.optionsPressed)
             )
-            navigationItem.rightBarButtonItem = optionsButton
+            
+            if model.addDismissButton {
+                navigationItem.leftBarButtonItem = optionsButton
+                navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(self.dismissSelf), imageName: "Dismiss")
+            } else {
+                navigationItem.rightBarButtonItem = optionsButton
+            }
         }
     }
 
     @objc func optionsPressed() {}
+    
+    @objc func dismissSelf() {
+        self.dismiss(animated: true)
+    }
     
     func deleteList() {
         let listName = model.list.title.isEmpty ? "This List" : #""\#(model.list.title)""#
@@ -61,7 +77,12 @@ extension ListsDetailViewController {
             UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
                 guard let self = self else { return }
                 self.model.listDeleted?(self.model.list.getList())
-                self.navigationController?.popViewController(animated: true)
+                
+                if self.model.addDismissButton {
+                    self.dismiss(animated: true)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         )
         alert.addAction(
