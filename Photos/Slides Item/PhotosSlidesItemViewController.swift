@@ -57,7 +57,6 @@ class PhotosSlidesItemViewController: UIViewController {
             width: highlightsVCWidthC,
             height: highlightsVCHeightC
         )
-        highlightsViewController.view.addDebugBorders(.random)
         
         /// automatically animated
         if model.slidesState?.toolbarInformationOn ?? false {

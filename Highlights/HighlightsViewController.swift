@@ -33,7 +33,7 @@ class HighlightsViewController: UIViewController {
          */
         view = UIView()
         view.backgroundColor = .clear
-        view.addDebugBorders(.green)
+        
         let highlightsView = HighlightsView(
             highlightsViewModel: highlightsViewModel
         )
