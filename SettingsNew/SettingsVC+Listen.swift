@@ -18,6 +18,11 @@ extension SettingsViewController {
             self.presentColorPicker()
         }
 
+        SettingsData.resetAllSettings = { [weak self] in
+            guard let self = self else { return }
+            self.realmModel.resetAllSettings()
+        }
+        
         SettingsData.shareLink = { [weak self] in
             guard let self = self else { return }
             self.presentShareScreen()

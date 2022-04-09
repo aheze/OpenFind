@@ -44,6 +44,20 @@ extension SettingsData {
                             )
                         ],
                         description: .constant(string: "Swipe left and right to change tabs.")
+                    ),
+                    .init(
+                        rows: [
+                            .init(
+                                configuration: .button(
+                                    title: "Reset All Settings",
+                                    tintColor: nil,
+                                    rightIconName: "arrow.clockwise"
+                                ) {
+                                    SettingsData.resetAllSettings?()
+                                }
+                            )
+                        ],
+                        description: .constant(string: "Swipe left and right to change tabs.")
                     )
                 ]
             )

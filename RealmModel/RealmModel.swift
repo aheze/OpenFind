@@ -14,9 +14,8 @@ class RealmModel: ObservableObject {
     @Published var lists = [List]()
     @Published var photoMetadatas = [PhotoMetadata]()
 
-    
     static let data = RealmModelData.self
-    
+
     // MARK: - Defaults
 
     @Saved(data.swipeToNavigate.key) var swipeToNavigate = data.swipeToNavigate.value
@@ -94,5 +93,30 @@ class RealmModel: ObservableObject {
         _cameraScanningDurationUntilPause.configureValueChanged(with: self)
 
         _listsSortBy.configureValueChanged(with: self)
+    }
+}
+
+extension RealmModel {
+    func resetAllSettings() {
+        let data = RealmModelData.self
+        
+        swipeToNavigate = data.swipeToNavigate.value
+        findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value
+        findingSecondaryRecognitionLanguage = data.findingSecondaryRecognitionLanguage.value
+        findingKeepWhitespace = data.findingKeepWhitespace.value
+        findingMatchAccents = data.findingMatchAccents.value
+        findingMatchCase = data.findingMatchCase.value
+        findingFilterLists = data.findingFilterLists.value
+        highlightsColor = data.highlightsColor.value
+        highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
+        highlightsBorderWidth = data.highlightsBorderWidth.value
+        highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
+        photosScanOnLaunch = data.photosScanOnLaunch.value
+        photosScanOnAddition = data.photosScanOnAddition.value
+        photosScanOnFind = data.photosScanOnFind.value
+        photosMinimumCellLength = data.photosMinimumCellLength.value
+        cameraHapticFeedbackLevel = data.cameraHapticFeedbackLevel.value
+        cameraScanningFrequency = data.cameraScanningFrequency.value
+        cameraScanningDurationUntilPause = data.cameraScanningDurationUntilPause.value
     }
 }

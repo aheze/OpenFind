@@ -10,11 +10,13 @@ import SwiftUI
 
 struct SettingsData {
     
-    /// set this inside the actual app
+    // MARK: Set this inside the actual app
     static var showScanningOptions: (() -> Void)?
     static var exportAllLists: (() -> Void)?
     static var deleteAllPhotoMetadata: (() -> Void)?
     
+    // MARK: Internal callback
+    static var resetAllSettings: (() -> Void)?
     /// feedback
     static var rateTheApp: (() -> Void)?
     static var reportABug: (() -> Void)?
