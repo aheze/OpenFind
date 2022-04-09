@@ -73,8 +73,8 @@ extension CameraViewController {
                 dateScanned: currentDate,
                 isStarred: false
             )
-            await MainActor.run {
-                realmModel.container.updatePhotoMetadata(metadata: metadata)
+            DispatchQueue.main.async {
+                self.realmModel.container.updatePhotoMetadata(metadata: metadata)
             }
         }
         Find.prioritizedAction = nil /// paused now, do whatever

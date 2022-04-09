@@ -33,7 +33,10 @@ extension PhotosSlidesViewController {
 
                     /// if showing, that means Find is currently scanning, so don't scan a second time.
                 } else if !self.searchNavigationProgressViewModel.percentageShowing {
-                    self.startFinding(for: slidesPhoto)
+                    if let viewController = self.getViewController(for: slidesPhoto.findPhoto.photo) {
+                        self.startFinding(for: slidesPhoto, viewController: viewController, animate: true)
+                        self.updatePrompt()
+                    }
                 }
             } else {
                 /// update the highlights back in `resultsCollectionView`
@@ -64,6 +67,7 @@ extension PhotosSlidesViewController {
 
             if let currentPhoto = self.model.slidesState?.currentPhoto {
                 self.updateNavigationBarTitle(to: currentPhoto)
+                self.updatePrompt()
             }
         }
 

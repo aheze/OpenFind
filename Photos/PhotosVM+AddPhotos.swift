@@ -39,17 +39,19 @@ extension PhotosViewModel {
 
     /// add photos that were just added
     func loadExternalPhotos() {
-        waitingToAddExternalPhotos = false
-        getRealmModel?().container.loadPhotoMetadatas()
-        loadAssets()
-        getPhotos { photos, ignoredPhotos, photosToScan in
-            DispatchQueue.main.async {
-                self.photos = photos
-                self.ignoredPhotos = ignoredPhotos
-                self.photosToScan = photosToScan.reversed() /// newest photos go first
-                self.reloadAfterExternalPhotosChanged?()
-                if self.getRealmModel?().photosScanOnLaunch ?? false {
-                    self.startScanning()
+        DispatchQueue.main.async {
+            self.waitingToAddExternalPhotos = false
+            self.loadAssets()
+            self.getPhotos { photos, ignoredPhotos, photosToScan in
+                
+                DispatchQueue.main.async {
+                    self.photos = photos
+                    self.ignoredPhotos = ignoredPhotos
+                    self.photosToScan = photosToScan.reversed() /// newest photos go first
+                    
+                    self.sort()
+                        
+                    self.reloadAfterExternalPhotosChanged?()
                 }
             }
         }

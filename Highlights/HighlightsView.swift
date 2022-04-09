@@ -12,17 +12,20 @@ struct HighlightsView: View {
     @ObservedObject var highlightsViewModel: HighlightsViewModel
 
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ForEach(highlightsViewModel.highlights) { highlight in
-                    HighlightView(
-                        model: highlightsViewModel,
-                        highlight: highlight,
-                        viewSize: geometry.size
-                    )
+        Color.clear.overlay(
+            GeometryReader { geometry in
+                ZStack {
+                    ForEach(highlightsViewModel.highlights) { highlight in
+                        HighlightView(
+                            model: highlightsViewModel,
+                            highlight: highlight,
+                            viewSize: geometry.size
+                        )
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-        }
+        )
         .edgesIgnoringSafeArea(.all)
         .opacity(highlightsViewModel.upToDate ? 1 : 0.5)
     }

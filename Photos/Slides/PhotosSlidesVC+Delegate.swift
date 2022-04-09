@@ -11,23 +11,34 @@ import UIKit
 extension PhotosSlidesViewController: UICollectionViewDelegate {
     /// find when swipe to new cell
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? PhotosSlidesContentCell {
+            load(cell: cell, indexPath: indexPath)
+        }
+
         guard
             let slidesPhoto = model.slidesState?.slidesPhotos[indexPath.item],
             let cell = cell as? PhotosSlidesContentCell,
             let viewController = cell.viewController
         else { return }
+        
 
+        viewController.highlightsViewModel.highlights.removeAll()
         if !slidesSearchViewModel.stringToGradients.isEmpty {
             /// if keys are same, show the highlights.
             if
                 let highlightsSet = slidesPhoto.findPhoto.highlightsSet,
-                highlightsSet.stringToGradients == slidesSearchViewModel.stringToGradients
+                highlightsSet.stringToGradients == self.slidesSearchViewModel.stringToGradients
             {
                 viewController.highlightsViewModel.highlights = highlightsSet.highlights
+
             } else {
                 /// else, find again.
-                startFinding(for: slidesPhoto)
+                startFinding(for: slidesPhoto, viewController: viewController, animate: false)
             }
+        }
+
+        DispatchQueue.main.async {
+            viewController.viewDidLayoutSubviews()
         }
     }
 }

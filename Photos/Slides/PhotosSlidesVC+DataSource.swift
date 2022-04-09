@@ -27,8 +27,6 @@ extension PhotosSlidesViewController {
                 for: indexPath
             ) as! PhotosSlidesContentCell
 
-            self.load(cell: cell, indexPath: indexPath)
-
             return cell
         }
 
@@ -40,11 +38,10 @@ extension PhotosSlidesViewController {
 
         let photoSlidesViewController: PhotosSlidesItemViewController
         if let viewController = cell.viewController {
-            
             /// recover after deletion
             viewController.view.alpha = 1
             viewController.view.transform = .identity
-            
+
             viewController.findPhoto = slidesPhoto.findPhoto
             viewController.loadViewIfNeeded()
             viewController.reloadImage()
@@ -66,6 +63,7 @@ extension PhotosSlidesViewController {
             /// adding a child seems to take control of the navigation bar. stop this
             navigationController?.isNavigationBarHidden = model.slidesState?.isFullScreen ?? false
             cell.viewController = viewController
+            viewController.view.layoutIfNeeded()
         }
 
         model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto

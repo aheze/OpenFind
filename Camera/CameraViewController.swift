@@ -63,8 +63,9 @@ class CameraViewController: UIViewController, PageViewController {
     @IBOutlet var zoomContainerHeightC: NSLayoutConstraint!
     
     // MARK: Landscape
-    @IBOutlet weak var landscapeToolbarContainer: UIView!
-    @IBOutlet weak var landscapeToolbarWidthC: NSLayoutConstraint!
+
+    @IBOutlet var landscapeToolbarContainer: UIView!
+    @IBOutlet var landscapeToolbarWidthC: NSLayoutConstraint!
     
     init?(
         coder: NSCoder,
@@ -117,9 +118,6 @@ class CameraViewController: UIViewController, PageViewController {
         setupLandscapeToolbar()
         
         listenToModel()
-        
-//        scrollZoomViewController.view.addDebugBorders(.systemBlue, width: 5)
-        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

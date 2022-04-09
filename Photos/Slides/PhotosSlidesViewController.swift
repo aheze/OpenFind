@@ -23,7 +23,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     // MARK: NavigationNamed
 
     var name: NavigationName? = .listsDetail
-    
+
     /// navigation title
     var navigationTitleStackView: UIStackView!
     var titleLabel: UILabel!
@@ -155,13 +155,10 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
 
     /// get associated view controller
     func getViewController(for photo: Photo) -> PhotosSlidesItemViewController? {
-        if
-            let index = model.slidesState?.getSlidesPhotoIndex(photo: photo),
-            let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosSlidesContentCell,
-            let viewController = cell.viewController
-        {
-            return viewController
-        }
-        return nil
+        guard let index = model.slidesState?.getSlidesPhotoIndex(photo: photo) else { return nil }
+        guard let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosSlidesContentCell else { return nil }
+        guard let viewController = cell.viewController else { return nil }
+
+        return viewController
     }
 }

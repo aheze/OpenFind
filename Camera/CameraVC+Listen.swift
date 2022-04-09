@@ -18,7 +18,6 @@ extension CameraViewController {
         model.resultsPressed = { [weak self] in
             guard let self = self else { return }
             
-            print("ON? \(self.model.resultsOn)")
             if self.model.resultsOn {
                 self.presentStatusView()
             } else {

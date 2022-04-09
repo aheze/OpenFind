@@ -45,11 +45,11 @@ class PhotosSlidesItemViewController: UIViewController {
         addChildViewController(scrollZoomController, in: containerView)
         addHighlightsViewController()
         reloadImage()
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         imageFrame = getImageFrame()
         imageFrame.setAsConstraints(
             left: highlightsVCLeftC,
@@ -57,6 +57,7 @@ class PhotosSlidesItemViewController: UIViewController {
             width: highlightsVCWidthC,
             height: highlightsVCHeightC
         )
+        highlightsViewController.view.addDebugBorders(.random)
         
         /// automatically animated
         if model.slidesState?.toolbarInformationOn ?? false {
@@ -67,7 +68,6 @@ class PhotosSlidesItemViewController: UIViewController {
     }
 
     func reloadImage() {
-        
         imageFrame = getImageFrame()
         model.getFullImage(from: findPhoto.photo) { [weak self] image in
             guard let self = self else { return }

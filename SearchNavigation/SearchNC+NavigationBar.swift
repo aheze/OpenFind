@@ -56,7 +56,7 @@ extension SearchNavigationController {
     
     func setupBorder() {
         navigationBarBackground.addSubview(navigationBarBackgroundBorderView)
-        navigationBarBackgroundBorderView.backgroundColor = Debug.navigationBarAlwaysTransparent ? .systemRed : .secondaryLabel
+        navigationBarBackgroundBorderView.backgroundColor = Debug.navigationBarAlwaysTransparent ? .systemBrown : .secondaryLabel
         navigationBarBackgroundBorderView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             navigationBarBackgroundBorderView.leftAnchor.constraint(equalTo: navigationBarBackground.leftAnchor),

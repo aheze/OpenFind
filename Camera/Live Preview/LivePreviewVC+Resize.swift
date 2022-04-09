@@ -26,12 +26,20 @@ extension LivePreviewViewController {
             height: safeViewHeightC
         )
         
-        let imageFitViewCenteredRect = calculateContentRect(imageSize: imageSize, containerSize: view.frame.size, aspectMode: .scaleAspectFit)
+        let imageFitViewCenteredRect = calculateContentRect(imageSize: imageSize, containerSize: safeViewFrame.size, aspectMode: .scaleAspectFit)
         let imageFillSafeCenteredRect = calculateContentRect(imageSize: imageFitViewCenteredRect.size, containerSize: safeViewFrame.size, aspectMode: .scaleAspectFill)
         
         /// only care about the fill rect - fills the safe area, with gap on left and right
         var imageFillSafeRect = imageFillSafeCenteredRect
-        imageFillSafeRect.origin.y = safeViewFrame.origin.y
+        imageFillSafeRect.origin.x = safeViewFrame.origin.x
+        
+        
+        if traitCollection.horizontalSizeClass == .compact {
+            imageFillSafeRect.origin.y = safeViewFrame.origin.y
+        } else {
+            imageFillSafeRect.origin.y = 0
+        }
+        
         
         imageFitViewSize = imageFitViewCenteredRect.size
         self.imageFillSafeRect = imageFillSafeRect

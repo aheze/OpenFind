@@ -25,7 +25,9 @@ extension PhotosViewController {
                     let index = slidesState.getSlidesPhotoIndex(photo: photo),
                     let slidesPhoto = slidesState.slidesPhotos[safe: index]
                 {
-                    slidesState.viewController?.findFromMetadata(in: slidesPhoto)
+                    if let viewController = slidesState.viewController?.getViewController(for: slidesPhoto.findPhoto.photo) {
+                        slidesState.viewController?.findFromMetadata(in: slidesPhoto, viewController: viewController, animate: false)
+                    }
                 }
                     
                 Find.prioritizedAction = nil
