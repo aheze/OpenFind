@@ -415,6 +415,8 @@
 		3C29947A2800DA5C00AE1AEC /* CameraLandscapeToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994792800DA5C00AE1AEC /* CameraLandscapeToolbarView.swift */; };
 		3C29947B2800F08F00AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
 		3C29947C2800F09A00AE1AEC /* CameraLandscapeToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994792800DA5C00AE1AEC /* CameraLandscapeToolbarView.swift */; };
+		3C29947E280157F100AE1AEC /* CameraPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */; };
+		3C29947F2801594600AE1AEC /* CameraPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */; };
 		3C2C2CDB27E23D0300CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C2CDC27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
 		3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */; };
@@ -3477,6 +3479,7 @@
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
 		3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Landscape.swift"; sourceTree = "<group>"; };
 		3C2994792800DA5C00AE1AEC /* CameraLandscapeToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLandscapeToolbarView.swift; sourceTree = "<group>"; };
+		3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionsView.swift; sourceTree = "<group>"; };
 		3C2C2CDA27E23D0300CA92EA /* SearchNC+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Progress.swift"; sourceTree = "<group>"; };
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
@@ -5687,6 +5690,7 @@
 				3CCCCA9827818CAF000381CE /* FindIconView.swift */,
 				3CC594F6279F32E6001D07DC /* ColorPickerView.swift */,
 				3C0B5E6C27BAC05900EC881E /* PhotosPermissionsView.swift */,
+				3C29947D280157F100AE1AEC /* CameraPermissionsView.swift */,
 				3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */,
 				3C443FB827DFCD480050A0AB /* HeaderContentView.swift */,
 				3C443EF527DD8F610050A0AB /* SliderView.swift */,
@@ -8387,6 +8391,7 @@
 				3CF15B3727FF8AEA00D51E9B /* SettingsPhotoGridSize.swift in Sources */,
 				3C9314F327B8EA50009E5B6E /* PhotosVC+DataSource.swift in Sources */,
 				3CF76434278D196B00DCA4EA /* Protocols.swift in Sources */,
+				3C29947F2801594600AE1AEC /* CameraPermissionsView.swift in Sources */,
 				3C443FA927DFA6370050A0AB /* SearchNC+Prompt.swift in Sources */,
 				3C7A43F027EBEC2700DFF76F /* PhotosVC+ResultsSelection.swift in Sources */,
 				3C875E1027EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */,
@@ -9785,6 +9790,7 @@
 				3CCCCA95278185AB000381CE /* Model.swift in Sources */,
 				3CF15C4727FF8AF100D51E9B /* SettingsSlider.swift in Sources */,
 				3CDAF26827F2337000467B31 /* List+Share.swift in Sources */,
+				3C29947E280157F100AE1AEC /* CameraPermissionsView.swift in Sources */,
 				3CC594F7279F32E6001D07DC /* ColorPickerView.swift in Sources */,
 				3C7B7A87277FA6E300E1F602 /* GeneralUtilities.swift in Sources */,
 				3CF15C4A27FF8AF100D51E9B /* SettingsMVC+Delegate.swift in Sources */,

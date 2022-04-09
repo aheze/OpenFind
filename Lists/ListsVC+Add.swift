@@ -25,6 +25,10 @@ extension ListsViewController {
             self.realmModel.container.addList(list: newList)
             self.reloadDisplayedLists()
             self.update()
+            if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
+                print("IUNdex scroll: \(index)")
+                self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
+            }
         }
         let navigationController = UINavigationController(rootViewController: viewController)
         if #available(iOS 15.0, *) {

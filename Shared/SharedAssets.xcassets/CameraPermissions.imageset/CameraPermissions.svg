@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="516px" height="516px" viewBox="0 0 516 516" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CameraPermissions</title>
+    <g id="CameraPermissions" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(188.000000, 187.000000)" fill="#FFFFFF" opacity="0.25">
+            <rect id="Rectangle" x="0" y="0" width="142" height="142" rx="24"></rect>
+        </g>
+        <path d="M281.861328,306.65625 C288.599609,306.65625 291.871094,303.287109 291.871094,296.011719 L291.871094,259.048828 C291.871094,252.505859 289.136719,249.087891 283.619141,248.550781 L283.619141,236.685547 C283.619141,217.984375 271.021484,209 257.935547,209 C244.849609,209 232.300781,217.984375 232.300781,236.685547 L232.300781,248.697266 C227.027344,249.429688 224,252.798828 224,259.048828 L224,296.011719 C224,303.287109 227.320312,306.65625 234.058594,306.65625 L281.861328,306.65625 Z M242.603516,248.501953 L242.603516,235.806641 C242.603516,224.966797 249.488281,218.912109 257.935547,218.912109 C266.382812,218.912109 273.267578,224.966797 273.267578,235.806641 L273.267578,248.453125 L242.603516,248.501953 Z" id="􀎡" fill="#FFFFFF" fill-rule="nonzero"></path>
+        <rect id="Rectangle" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" opacity="0.5" x="19" y="357" width="140" height="140" rx="24"></rect>
+        <rect id="Rectangle-Copy-2" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" opacity="0.5" x="19" y="19" width="140" height="140" rx="24"></rect>
+        <rect id="Rectangle-Copy-3" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" opacity="0.5" x="357" y="19" width="140" height="140" rx="24"></rect>
+        <rect id="Rectangle-Copy-4" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" x="177" y="8" width="162" height="162" rx="24"></rect>
+        <rect id="Rectangle-Copy-5" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" x="346" y="177" width="162" height="162" rx="24"></rect>
+        <rect id="Rectangle-Copy-6" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" x="177" y="346" width="162" height="162" rx="24"></rect>
+        <rect id="Rectangle-Copy-7" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" opacity="0.5" x="357" y="357" width="140" height="140" rx="24"></rect>
+        <rect id="Rectangle-Copy" stroke="#FFFFFF" stroke-width="5" fill-opacity="0.5" fill="#FFFFFF" x="8" y="177" width="162" height="162" rx="24"></rect>
+    </g>
+</svg>

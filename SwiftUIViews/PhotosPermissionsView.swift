@@ -85,16 +85,16 @@ struct PhotosPermissionsView: View {
         switch model.currentStatus {
         case .notDetermined, .restricted:
             PermissionsActionView(
-                title: "Find from Photos",
-                description: "Find needs permissions to access the photo library.",
+                title: "Find Photos",
+                description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Allow Access"
             ) {
                 model.requestAuthorization()
             }
         default:
             PermissionsActionView(
-                title: "Find from Photos",
-                description: "Find needs permissions to access the photo library.",
+                title: "Find Photos",
+                description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Go to Settings"
             ) {
                 model.goToSettings()
@@ -110,25 +110,54 @@ struct PermissionsActionView: View {
     let action: () -> Void
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text(title)
-                .font(.title)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
+        VStack(spacing: 32) {
+            VStack(spacing: 12) {
+                Image("PhotosPermissions")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 160, height: 160)
 
-            Text(description)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
+                Text(title)
+                    .font(UIFont.preferredFont(forTextStyle: .title1).font)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.center)
+
+                Text(description)
+                    .foregroundColor(UIColor.secondaryLabel.color)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 36)
+            }
 
             Button(action: action) {
                 Text(actionLabel)
-                    .font(.headline)
+                    .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold).font)
                     .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
-                    .background(Color.accentColor)
+                    .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
+                    .background(
+                        LinearGradient(
+                            colors: [
+                                Colors.accent.color,
+                                Colors.accent.offset(by: 0.02).color
+                            ],
+                            startPoint: .bottom,
+                            endPoint: .top
+                        )
+                    )
                     .cornerRadius(12)
             }
         }
-        .padding(36)
+    }
+}
+
+struct PhotosPermissionsViewTester: View {
+    @StateObject var model = PhotosPermissionsViewModel()
+    var body: some View {
+        PhotosPermissionsView(model: model)
+    }
+}
+
+struct PhotosPermissionsView_Previews: PreviewProvider {
+    static var previews: some View {
+        PhotosPermissionsViewTester()
     }
 }

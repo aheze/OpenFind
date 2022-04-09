@@ -18,25 +18,20 @@ extension CameraViewController {
         }
 
         if model.toolbarState == .inTabBar {
-            popover.attributes.sourceFrame = { [weak view] in
-                view?.window?.frameTagged(CameraStatusConstants.sourceViewIdentifier) ?? .zero
-            }
-            popover.attributes.screenEdgePadding = view.safeAreaInsets
-            popover.attributes.sourceFrameInset.top = -16 - ZoomConstants.bottomPadding /// past the space between the button and the tab bar + extra padding
-            popover.attributes.position = .absolute(originAnchor: .top, popoverAnchor: .bottom)
             withAnimation(
                 .spring(response: 0.4, dampingFraction: 0.8, blendDuration: 1)
             ) {
                 model.resultsOn = true
                 zoomViewModel.alignment = .right
             }
-        } else {
-            popover.attributes.sourceFrame = { [weak safeView] in
-                safeView?.windowFrame() ?? .zero
-            }
-            popover.attributes.sourceFrameInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-            popover.attributes.position = .relative(popoverAnchors: [.bottomLeft])
         }
+        popover.attributes.sourceFrame = { [weak safeView] in
+            safeView?.windowFrame() ?? .zero
+        }
+        popover.attributes.screenEdgePadding = view.safeAreaInsets
+        popover.attributes.sourceFrameInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        popover.attributes.position = .relative(popoverAnchors: [.bottomLeft])
+
         popover.attributes.rubberBandingMode = .none
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
