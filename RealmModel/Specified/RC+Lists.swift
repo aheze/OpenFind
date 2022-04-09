@@ -26,6 +26,7 @@ extension RealmContainer {
             lists.append(list)
         }
 
+        lists = lists.sorted { $0.dateCreated > $1.dateCreated }
         self.lists = lists
     }
 

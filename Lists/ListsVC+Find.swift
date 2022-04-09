@@ -10,7 +10,7 @@ import UIKit
 
 extension ListsViewController {
     func find(text: [String]) {
-        let displayedLists = getLists().map { DisplayedList(list: $0) }
+        let displayedLists = realmModel.lists.map { DisplayedList(list: $0) }
         guard !text.isEmpty else {
             model.displayedLists = displayedLists
             update()

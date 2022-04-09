@@ -9,7 +9,9 @@
 import SwiftUI
 
 extension PhotosViewController {
-    func willBecomeActive() {}
+    func willBecomeActive() {
+        
+    }
     
     func didBecomeActive() {}
     

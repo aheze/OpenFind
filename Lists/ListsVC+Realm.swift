@@ -14,13 +14,9 @@ extension ListsViewController {
         reloadDisplayedLists()
         update(animate: false)
     }
-    
-    func getLists() -> [List] {
-        return realmModel.lists.sorted(by: { $0.dateCreated > $1.dateCreated })
-    }
 
     func reloadDisplayedLists() {
-        model.displayedLists = getLists().map { .init(list: $0) }
+        model.displayedLists = realmModel.lists.map { .init(list: $0) }
     }
 
     func deleteSelectedLists() {

@@ -32,6 +32,8 @@ struct PhotosScanningIcon: View {
             .padding(.leading, 8)
             .contentShape(Rectangle())
         }
+        .opacity(model.photosEditable ? 1 : 0.5)
+        .disabled(!model.photosEditable)
     }
 }
 

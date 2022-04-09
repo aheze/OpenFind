@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             return nil
         }
     }
-    
+
     override var childForStatusBarStyle: UIViewController? {
         if loaded {
             return tabController.viewController

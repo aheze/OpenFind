@@ -87,6 +87,8 @@ class SearchNavigationController: UIViewController, PageViewController {
         self.realmModel = realmModel
         self.tabType = tabType
         super.init(coder: coder)
+        
+        
     }
     
     @available(*, unavailable)

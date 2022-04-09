@@ -10,6 +10,19 @@ import UIKit
 
 extension ListsViewController {
     func presentDetails(list: List, focusFirstWord: Bool = false) {
+        /// keep it up to date. replacing!
+        
+        let viewController = self.getDetailViewController(list: list, focusFirstWord: focusFirstWord)
+        self.detailsViewController = viewController
+        navigationController?.pushViewController(viewController, animated: true)
+        
+        viewController.updateSearchBarOffset = { [weak self] in
+            guard let self = self else { return }
+            self.updateNavigationBar?()
+        }
+    }
+    
+    func getDetailViewController(list: List, focusFirstWord: Bool) -> ListsDetailViewController {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let listsDetailViewModel = ListsDetailViewModel(
             list: list,
@@ -27,25 +40,14 @@ extension ListsViewController {
         listsDetailViewModel.focusFirstWord = focusFirstWord
         let viewController: ListsDetailViewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
             
-            let viewController = ListsDetailViewController(
+            ListsDetailViewController(
                 coder: coder,
                 model: listsDetailViewModel,
                 tabViewModel: self.tabViewModel,
                 toolbarViewModel: self.toolbarViewModel,
                 realmModel: self.realmModel
             )
-            
-            return viewController
         }
-        
-        /// keep it up to date. replacing!
-        
-        self.detailsViewController = viewController
-        navigationController?.pushViewController(viewController, animated: true)
-        
-        viewController.updateSearchBarOffset = { [weak self] in
-            guard let self = self else { return }
-            self.updateNavigationBar?()
-        }
+        return viewController
     }
 }

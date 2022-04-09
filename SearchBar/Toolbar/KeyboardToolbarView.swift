@@ -10,6 +10,7 @@ import SwiftUI
 
 struct KeyboardToolbarView: View {
     @ObservedObject var searchViewModel: SearchViewModel
+    @ObservedObject var realmModel: RealmModel
     @ObservedObject var model: KeyboardToolbarViewModel
     @ObservedObject var collectionViewModel: SearchCollectionViewModel
 
@@ -44,14 +45,14 @@ struct KeyboardToolbarView: View {
         {
             let text = field.value.getText().lowercased()
             if text.isEmpty {
-                return model.displayedLists
+                return realmModel.lists
             }
 
-            let lists = model.displayedLists.filter { $0.displayedTitle.lowercased().contains(text) }
+            let lists = realmModel.lists.filter { Finding.checkIf(realmModel: realmModel, string: $0.displayedTitle, contains: text) }
             return lists
         }
 
-        return model.displayedLists
+        return realmModel.lists
     }
 }
 

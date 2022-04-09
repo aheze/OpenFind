@@ -9,12 +9,24 @@
 import UIKit
 
 extension SearchViewController {
-    func listenToCollectionView() {
+    func listen() {
+        listenToCollectionView()
+        listenToToolbar()
+        listenToKeyboard()
+        
         searchViewModel.dismissKeyboard = { [weak self] in
             guard let self = self else { return }
             self.view.endEditing(true)
         }
         
+        searchViewModel.enabledChanged = { [weak self] in
+            guard let self = self else { return }
+            let enabled = self.searchViewModel.enabled
+            self.view.isUserInteractionEnabled = enabled
+        }
+    }
+
+    func listenToCollectionView() {
         collectionViewModel.getFullCellWidth = { [weak self] index in
             self?.getWidthOfExpandedCell(for: index) ?? 300
         }

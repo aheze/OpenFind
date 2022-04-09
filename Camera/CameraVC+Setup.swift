@@ -46,6 +46,7 @@ extension CameraViewController {
     func showPermissionsView() {
         livePreviewContainerView.alpha = 0
         zoomContainerView.alpha = 0
+        searchViewModel.enabled = false
 
         let permissionsView = CameraPermissionsView(model: permissionsViewModel)
         let hostingController = UIHostingController(rootView: permissionsView)
@@ -55,6 +56,7 @@ extension CameraViewController {
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.setupLivePreview()
+            self.searchViewModel.enabled = true
 
             UIView.animate(withDuration: 0.5) { [weak hostingController] in
                 hostingController?.view.alpha = 0

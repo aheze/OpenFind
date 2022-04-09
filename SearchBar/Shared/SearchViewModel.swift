@@ -14,6 +14,14 @@ class SearchViewModel: ObservableObject {
     /// set from within SearchViewController
     var isLandscape = false
     
+    /// set to false if permissions not yet granted
+    var enabled = true {
+        didSet {
+            enabledChanged?()
+        }
+    }
+    var enabledChanged: (() -> Void)?
+    
     @Published private(set) var fields = defaultFields {
         didSet {
             updateStringToGradients()

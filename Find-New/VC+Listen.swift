@@ -10,6 +10,15 @@ import UIKit
 
 extension ViewController {
     func listen() {
+        
+        ViewControllerCallback.showList = { [weak self] list in
+            guard let self = self else { return }
+            let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false)
+            let navigationController = UINavigationController(rootViewController: viewController)
+            
+            self.present(navigationController, animated: true)
+        }
+        
         cameraViewModel.settingsPressed = { [weak self] in
             guard let self = self else { return }
             self.present(self.settingsController.viewController, animated: true)

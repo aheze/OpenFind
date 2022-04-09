@@ -10,15 +10,18 @@ import SwiftUI
 
 class KeyboardToolbarViewController: UIViewController {
     var searchViewModel: SearchViewModel
+    var realmModel: RealmModel
     var model: KeyboardToolbarViewModel
     var collectionViewModel: SearchCollectionViewModel
     
     init(
         searchViewModel: SearchViewModel,
+        realmModel: RealmModel,
         model: KeyboardToolbarViewModel,
         collectionViewModel: SearchCollectionViewModel
     ) {
         self.searchViewModel = searchViewModel
+        self.realmModel = realmModel
         self.model = model
         self.collectionViewModel = collectionViewModel
         super.init(nibName: nil, bundle: nil)
@@ -39,6 +42,7 @@ class KeyboardToolbarViewController: UIViewController {
         
         let containerView = KeyboardToolbarView(
             searchViewModel: searchViewModel,
+            realmModel: realmModel,
             model: model,
             collectionViewModel: collectionViewModel
         )

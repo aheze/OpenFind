@@ -46,8 +46,8 @@ extension SearchViewController {
             model.selectedColor = field.overrides.selectedColor
             model.alpha = field.overrides.alpha
             model.words = list.words
-            model.editListPressed = { [weak self] in
-                guard let self = self else { return }
+            model.editListPressed = {
+                ViewControllerCallback.showList?(list)
             }
             model.changed = { [weak self] in
                 guard let self = self else { return }

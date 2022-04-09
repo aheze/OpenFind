@@ -27,9 +27,10 @@ extension PhotosViewController {
         setupEmptyContent()
 
         setupNavigationBar()
-        checkPermissions()
         listenToModel()
         setupFiltersView()
+
+        checkPermissions()
     }
 
     func checkPermissions() {
@@ -58,6 +59,10 @@ extension PhotosViewController {
         collectionView.alpha = 0
         contentContainer.alpha = 0
         sliderContainerView.alpha = 0
+
+        searchViewModel.enabled = false
+        slidesSearchViewModel.enabled = false
+
         let permissionsView = PhotosPermissionsView(model: permissionsViewModel)
         let hostingController = UIHostingController(rootView: permissionsView)
         hostingController.view.backgroundColor = .clear
@@ -66,7 +71,8 @@ extension PhotosViewController {
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.load()
-
+            self.searchViewModel.enabled = true
+            self.slidesSearchViewModel.enabled = true
             UIView.animate(withDuration: 0.5) { [weak hostingController] in
                 hostingController?.view.alpha = 0
                 self.collectionView.alpha = 1

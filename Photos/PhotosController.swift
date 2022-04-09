@@ -63,8 +63,7 @@ class PhotosController {
             )
         }
         self.viewController = viewController
-        viewController.loadViewIfNeeded() /// needed to initialize outlets
-    
+        
         let searchNavigationController = SearchNavigationController.make(
             rootViewController: viewController,
             searchNavigationModel: searchNavigationModel,
@@ -88,7 +87,7 @@ class PhotosController {
         
         self.searchNavigationController = searchNavigationController
         
-        viewController.loadViewIfNeeded() /// needed to initialize outlets
+//        viewController.loadViewIfNeeded() /// needed to initialize outlets
         viewController.updateNavigationBar = { [weak self] in
             guard let self = self else { return }
             
@@ -99,7 +98,7 @@ class PhotosController {
         configureTransitions(for: searchNavigationController)
         
         model.getRealmModel = { [weak self] in
-            return self?.realmModel ?? RealmModel()
+            self?.realmModel ?? RealmModel()
         }
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Zheng on 10/14/21.
 //
 
+import Combine
 import UIKit
 
 class SearchViewController: UIViewController {
@@ -28,9 +29,10 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBarView: UIView!
     @IBOutlet var searchCollectionView: SearchCollectionView!
     
-    lazy var keyboardToolbarViewModel = KeyboardToolbarViewModel(realmModel: realmModel)
+    lazy var keyboardToolbarViewModel = KeyboardToolbarViewModel()
     lazy var toolbarViewController = KeyboardToolbarViewController(
         searchViewModel: searchViewModel,
+        realmModel: realmModel,
         model: keyboardToolbarViewModel,
         collectionViewModel: collectionViewModel
     )
@@ -72,6 +74,8 @@ class SearchViewController: UIViewController {
         fatalError("You must create this view controller with metadata.")
     }
     
+    private var listsCancellable: AnyCancellable?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false /// allow auto sizing
@@ -84,9 +88,10 @@ class SearchViewController: UIViewController {
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
         
-        listenToToolbar()
-        listenToCollectionView()
-        listenToKeyboard()
+        listen()
+        
+        listsCancellable = realmModel.$lists.sink { [weak self] _ in
+        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -70,6 +70,8 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     @IBOutlet var sliderContainerViewHeightC: NSLayoutConstraint!
     @IBOutlet var sliderContainerViewBottomC: NSLayoutConstraint!
     
+    
+    var loadedPhotos = false
     init?(
         coder: NSCoder,
         model: PhotosViewModel,
