@@ -8,11 +8,6 @@
 
 import SwiftUI
 
-class Defaults: ObservableObject {
-    static let scanOnLaunch = ("scanOnLaunch", false)
-    static let scanOnFind = ("scanOnFind", true)
-}
-
 /// A property wrapper type that reflects a value from `UserDefaults` and
 /// invalidates a view on a change in value in that user default.
 @frozen @propertyWrapper public struct Saved<Value>: DynamicProperty {
@@ -36,7 +31,7 @@ class Defaults: ObservableObject {
             if let valueChanged = valueChanged {
                 valueChanged()
             } else {
-                assert(false, "`valueChanged` not set for \(self)")
+                assertionFailure("`valueChanged` not set for \(self)")
             }
         }
     }

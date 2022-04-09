@@ -14,42 +14,46 @@ class RealmModel: ObservableObject {
     @Published var lists = [List]()
     @Published var photoMetadatas = [PhotoMetadata]()
 
+    
+    static let data = RealmModelData.self
+    
     // MARK: - Defaults
 
-    @Saved("swipeToNavigate") var swipeToNavigate = true
+    @Saved(data.swipeToNavigate.key) var swipeToNavigate = data.swipeToNavigate.value
 
     // MARK: Finding
-    @Saved("findingPrimaryRecognitionLanguage") var findingPrimaryRecognitionLanguage = Settings.Values.RecognitionLanguage.english.rawValue
-    @Saved("findingSecondaryRecognitionLanguage") var findingSecondaryRecognitionLanguage = Settings.Values.RecognitionLanguage.none.rawValue
-    
-    @Saved("findingKeepWhitespace") var findingKeepWhitespace = false
-    @Saved("findingMatchAccents") var findingMatchAccents = false
-    @Saved("findingMatchCase") var findingMatchCase = false
-    @Saved("findingFilterLists") var findingFilterLists = true
+
+    @Saved(data.findingPrimaryRecognitionLanguage.key) var findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value
+    @Saved(data.findingSecondaryRecognitionLanguage.key) var findingSecondaryRecognitionLanguage = data.findingSecondaryRecognitionLanguage.value
+
+    @Saved(data.findingKeepWhitespace.key) var findingKeepWhitespace = data.findingKeepWhitespace.value
+    @Saved(data.findingMatchAccents.key) var findingMatchAccents = data.findingMatchAccents.value
+    @Saved(data.findingMatchCase.key) var findingMatchCase = data.findingMatchCase.value
+    @Saved(data.findingFilterLists.key) var findingFilterLists = data.findingFilterLists.value
 
     // MARK: Highlights
 
-    @Saved("highlightsColor") var highlightsColor = Int(0x00aeef)
-    @Saved("highlightsCycleSearchBarColors") var highlightsCycleSearchBarColors = true
-    @Saved("highlightsBorderWidth") var highlightsBorderWidth = Double(1.2)
-    @Saved("highlightsBackgroundOpacity") var highlightsBackgroundOpacity = Double(0.3)
+    @Saved(data.highlightsColor.key) var highlightsColor = data.highlightsColor.value
+    @Saved(data.highlightsCycleSearchBarColors.key) var highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
+    @Saved(data.highlightsBorderWidth.key) var highlightsBorderWidth = data.highlightsBorderWidth.value
+    @Saved(data.highlightsBackgroundOpacity.key) var highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
 
     // MARK: Photos
 
-    @Saved("photosScanOnLaunch") var photosScanOnLaunch = false
-    @Saved("photosScanOnAddition") var photosScanOnAddition = true
-    @Saved("photosScanOnFind") var photosScanOnFind = true
-    @Saved("photosMinimumCellLength") var photosMinimumCellLength = CGFloat(80)
-    
+    @Saved(data.photosScanOnLaunch.key) var photosScanOnLaunch = data.photosScanOnLaunch.value
+    @Saved(data.photosScanOnAddition.key) var photosScanOnAddition = data.photosScanOnAddition.value
+    @Saved(data.photosScanOnFind.key) var photosScanOnFind = data.photosScanOnFind.value
+    @Saved(data.photosMinimumCellLength.key) var photosMinimumCellLength = data.photosMinimumCellLength.value
+
     // MARK: Camera
-    
-    @Saved("cameraHapticFeedbackLevel") var cameraHapticFeedbackLevel = Settings.Values.HapticFeedbackLevel.light
-    @Saved("cameraScanningFrequency") var cameraScanningFrequency = Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue
-    @Saved("cameraScanningDurationUntilPause") var cameraScanningDurationUntilPause = Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue
+
+    @Saved(data.cameraHapticFeedbackLevel.key) var cameraHapticFeedbackLevel = data.cameraHapticFeedbackLevel.value
+    @Saved(data.cameraScanningFrequency.key) var cameraScanningFrequency = data.cameraScanningFrequency.value
+    @Saved(data.cameraScanningDurationUntilPause.key) var cameraScanningDurationUntilPause = data.cameraScanningDurationUntilPause.value
 
     // MARK: Lists
-    @Saved("listsSortBy") var listsSortBy = Settings.Values.ListsSortByLevel.newestFirst.rawValue
-    
+
+    @Saved(data.listsSortBy.key) var listsSortBy = data.listsSortBy.value
 
     init() {
         container.listsUpdated = { [weak self] lists in
@@ -84,14 +88,11 @@ class RealmModel: ObservableObject {
         _photosScanOnAddition.configureValueChanged(with: self)
         _photosScanOnFind.configureValueChanged(with: self)
         _photosMinimumCellLength.configureValueChanged(with: self)
-        
+
         _cameraHapticFeedbackLevel.configureValueChanged(with: self)
         _cameraScanningFrequency.configureValueChanged(with: self)
         _cameraScanningDurationUntilPause.configureValueChanged(with: self)
-        
+
         _listsSortBy.configureValueChanged(with: self)
     }
 }
-
-
-
