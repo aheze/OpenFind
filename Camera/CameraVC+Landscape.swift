@@ -15,7 +15,6 @@ extension CameraViewController {
         }
         let hostingController = UIHostingController(rootView: landscapeToolbar)
         hostingController.view.backgroundColor = .clear
-        landscapeToolbarContainer.backgroundColor = .clear
         addChildViewController(hostingController, in: landscapeToolbarContainer)
         
         updateLandscapeToolbar()

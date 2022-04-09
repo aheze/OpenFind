@@ -11,11 +11,9 @@ import SwiftUI
 extension CameraViewController {
     func setup() {
         setupContent()
-        setupZoom()
         setupHighlights()
         setupProgress()
         setupBlur()
-        setupLandscapeToolbar()
         checkPermissions()
     }
 
@@ -27,6 +25,7 @@ extension CameraViewController {
         scrollZoomHookContainerView.backgroundColor = .clear
         simulatedSafeView.backgroundColor = .clear
         simulatedSafeView.isHidden = true
+        landscapeToolbarContainer.backgroundColor = .clear
     }
 
     func checkPermissions() {
@@ -71,5 +70,7 @@ extension CameraViewController {
     /// setup after permissions got
     func setupLivePreview() {
         livePreviewViewController = createLivePreview()
+        setupZoom()
+        setupLandscapeToolbar()
     }
 }

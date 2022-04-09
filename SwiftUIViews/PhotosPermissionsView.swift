@@ -85,65 +85,23 @@ struct PhotosPermissionsView: View {
         switch model.currentStatus {
         case .notDetermined, .restricted:
             PermissionsActionView(
+                image: "PhotosPermissions",
                 title: "Find Photos",
                 description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
-                actionLabel: "Allow Access"
+                actionLabel: "Allow Access",
+                dark: false
             ) {
                 model.requestAuthorization()
             }
         default:
             PermissionsActionView(
+                image: "PhotosPermissions",
                 title: "Find Photos",
                 description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
-                actionLabel: "Go to Settings"
+                actionLabel: "Go to Settings",
+                dark: false
             ) {
                 model.goToSettings()
-            }
-        }
-    }
-}
-
-struct PermissionsActionView: View {
-    let title: String
-    let description: String
-    let actionLabel: String
-    let action: () -> Void
-
-    var body: some View {
-        VStack(spacing: 32) {
-            VStack(spacing: 12) {
-                Image("PhotosPermissions")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 160, height: 160)
-
-                Text(title)
-                    .font(UIFont.preferredFont(forTextStyle: .title1).font)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-
-                Text(description)
-                    .foregroundColor(UIColor.secondaryLabel.color)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 36)
-            }
-
-            Button(action: action) {
-                Text(actionLabel)
-                    .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold).font)
-                    .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
-                    .background(
-                        LinearGradient(
-                            colors: [
-                                Colors.accent.color,
-                                Colors.accent.offset(by: 0.02).color
-                            ],
-                            startPoint: .bottom,
-                            endPoint: .top
-                        )
-                    )
-                    .cornerRadius(12)
             }
         }
     }

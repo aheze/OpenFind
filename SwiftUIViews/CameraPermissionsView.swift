@@ -63,18 +63,22 @@ struct CameraPermissionsView: View {
     var body: some View {
         switch model.currentStatus {
         case .notDetermined, .restricted:
-            CameraPermissionsActionView(
+            PermissionsActionView(
+                image: "CameraPermissions",
                 title: "Camera Permissions",
                 description: "Finding text in real life requires permission to access the camera. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
-                actionLabel: "Allow Access"
+                actionLabel: "Allow Access",
+                dark: true
             ) {
                 model.requestAuthorization()
             }
         default:
-            CameraPermissionsActionView(
+            PermissionsActionView(
+                image: "CameraPermissions",
                 title: "Camera Permissions",
                 description: "Finding text in real life requires permission to access the camera. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
-                actionLabel: "Go to Settings"
+                actionLabel: "Go to Settings",
+                dark: true
             ) {
                 model.goToSettings()
             }
@@ -82,50 +86,71 @@ struct CameraPermissionsView: View {
     }
 }
 
-struct CameraPermissionsActionView: View {
+struct PermissionsActionView: View {
+    let image: String
     let title: String
     let description: String
     let actionLabel: String
+    let dark: Bool
     let action: () -> Void
 
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
     var body: some View {
-        VStack(spacing: 32) {
-            VStack(spacing: 12) {
-                Image("CameraPermissions")
+        Color.clear.overlay(
+            AdaptiveStack(vertical: verticalSizeClass != .compact, spacing: 32) {
+                Image(image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 160, height: 160)
 
-                Text(title)
-                    .font(UIFont.preferredFont(forTextStyle: .title1).font)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
+                let alignment: HorizontalAlignment = verticalSizeClass != .compact ? .center : .leading
+                let labelAlignment: Alignment = verticalSizeClass != .compact ? .center : .leading
+                let textAlignment: TextAlignment = verticalSizeClass != .compact ? .center : .leading
 
-                Text(description)
-                    .foregroundColor(.white.opacity(0.75))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 36)
-            }
-            .foregroundColor(.white)
+                VStack(alignment: alignment, spacing: 12) {
+                    Text(title)
+                        .font(UIFont.preferredFont(forTextStyle: .title1).font)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(dark ? UIColor.white.color : UIColor.label.color)
 
-            Button(action: action) {
-                Text(actionLabel)
-                    .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold).font)
-                    .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
-                    .background(
-                        LinearGradient(
-                            colors: [
+                    Text(description)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: labelAlignment)
+                        .multilineTextAlignment(textAlignment)
+                        .foregroundColor(dark ? UIColor.white.withAlphaComponent(0.75).color : UIColor.secondaryLabel.color)
+
+                    Button(action: action) {
+                        let colors = dark
+                            ? [
                                 Colors.accent.toColor(.black, percentage: 0.75).color,
                                 Colors.accent.toColor(.black, percentage: 0.75).withAlphaComponent(0.5).color
-                            ],
-                            startPoint: .bottom,
-                            endPoint: .top
-                        )
-                    )
-                    .cornerRadius(12)
+                            ]
+                            : [
+                                Colors.accent.color,
+                                Colors.accent.offset(by: 0.02).color
+                            ]
+
+                        Text(actionLabel)
+                            .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold).font)
+                            .foregroundColor(.white)
+                            .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
+                            .background(
+                                LinearGradient(
+                                    colors: colors,
+                                    startPoint: .bottom,
+                                    endPoint: .top
+                                )
+                            )
+                            .cornerRadius(12)
+                    }
+                }
+                .padding(.horizontal, verticalSizeClass != .compact ? 36 : 0)
             }
-        }
+        )
+        .edgesIgnoringSafeArea(.all)
+        .padding(.horizontal, verticalSizeClass != .compact ? 0 : 64)
     }
 }
 
@@ -138,8 +163,36 @@ struct CameraPermissionsViewTester: View {
     }
 }
 
+@available(iOS 15.0, *)
 struct CameraPermissionsView_Previews: PreviewProvider {
     static var previews: some View {
         CameraPermissionsViewTester()
+            .previewInterfaceOrientation(.landscapeLeft)
+    }
+}
+
+struct AdaptiveStack<Content: View>: View {
+    let vertical: Bool
+    let horizontalAlignment: HorizontalAlignment
+    let verticalAlignment: VerticalAlignment
+    let spacing: CGFloat?
+    let content: () -> Content
+
+    init(vertical: Bool, horizontalAlignment: HorizontalAlignment = .center, verticalAlignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> Content) {
+        self.vertical = vertical
+        self.horizontalAlignment = horizontalAlignment
+        self.verticalAlignment = verticalAlignment
+        self.spacing = spacing
+        self.content = content
+    }
+
+    var body: some View {
+        Group {
+            if vertical {
+                VStack(alignment: horizontalAlignment, spacing: spacing, content: content)
+            } else {
+                HStack(alignment: verticalAlignment, spacing: spacing, content: content)
+            }
+        }
     }
 }
