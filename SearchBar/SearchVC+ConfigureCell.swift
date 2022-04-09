@@ -25,7 +25,7 @@ extension SearchViewController {
         /// the field, currently. Won't update even if it changes, so must compare id later.
         let field = searchViewModel.fields[index]
         
-        configureCell(cell: cell, field: field, valuesCount: searchViewModel.values.count)
+        configureAppearance(cell: cell, field: field, valuesCount: searchViewModel.values.count)
         
         if case .addNew = field.value {
             cell.configureAddNew(isAddNew: true)
@@ -50,7 +50,7 @@ extension SearchViewController {
                 )
             )
             self.searchViewModel.updateField(at: index, with: field, notify: true)
-            self.configureCells(valuesCount: self.searchViewModel.values.count)
+            self.configureAppearances(valuesCount: self.searchViewModel.values.count)
         }
         
         cell.leftViewTapped = { [weak self] in
@@ -78,7 +78,7 @@ extension SearchViewController {
                     )
                 )
                 self.searchViewModel.updateField(at: index, with: field, notify: true)
-                self.configureCells(valuesCount: self.searchViewModel.values.count)
+                self.configureAppearances(valuesCount: self.searchViewModel.values.count)
             }
             
             cell.textField.becomeFirstResponder()
@@ -105,16 +105,16 @@ extension SearchViewController {
     }
     
     /// `valuesCount` = `searchViewModel.values.count` usually. But if deleting, subtract 1.
-    func configureCells(valuesCount: Int) {
+    func configureAppearances(valuesCount: Int) {
         for index in searchViewModel.fields.indices {
             let field = searchViewModel.fields[index]
             if let cell = searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-                configureCell(cell: cell, field: field, valuesCount: valuesCount)
+                configureAppearance(cell: cell, field: field, valuesCount: valuesCount)
             }
         }
     }
     
-    func configureCell(cell: SearchFieldCell, field: Field, valuesCount: Int) {
+    func configureAppearance(cell: SearchFieldCell, field: Field, valuesCount: Int) {
         setClearIcon(for: cell, text: field.value.getText(), valuesCount: valuesCount)
         setLeftView(cell, for: field)
         setBackgroundColor(cell)
@@ -173,7 +173,7 @@ extension SearchViewController {
             collectionViewModel.fallbackIndex = targetIndex
             collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
-            configureCells(valuesCount: searchViewModel.values.count - 1)
+            configureAppearances(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()
@@ -210,7 +210,7 @@ extension SearchViewController {
             collectionViewModel.fallbackIndex = nil
             collectionViewModel.focusedCellIndex = nil /// prevent target offset
             searchCollectionView.isUserInteractionEnabled = false
-            configureCells(valuesCount: searchViewModel.values.count - 1)
+            configureAppearances(valuesCount: searchViewModel.values.count - 1)
             UIView.animate(withDuration: 0.4) {
                 self.searchCollectionViewFlowLayout.invalidateLayout()
                 self.searchCollectionView.layoutIfNeeded()

@@ -31,7 +31,6 @@ extension ListsViewController {
                 self?.listUpdated(list: newList)
             },
             listDeleted: { [weak self] listToDelete in
-                print("deleting.")
                 self?.realmModel.container.deleteList(list: listToDelete)
                 self?.listDeleted(list: listToDelete)
             },

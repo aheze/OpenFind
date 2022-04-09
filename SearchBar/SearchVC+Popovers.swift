@@ -13,7 +13,6 @@ extension SearchViewController {
     func presentPopover(for index: Int, from cell: UICollectionViewCell) {
         let popover = getPopover(for: index, from: cell)
         if let existingPopover = view.popover(tagged: PopoverIdentifier.fieldSettingsIdentifier) {
-            print("existing!")
             replace(existingPopover, with: popover)
         } else {
             present(popover)
@@ -52,8 +51,10 @@ extension SearchViewController {
             model.words = list.words
             model.editListPressed = { [weak self] in
                 guard let self = self else { return }
+                if let existingPopover = self.view.popover(tagged: PopoverIdentifier.fieldSettingsIdentifier) {
+                    existingPopover.dismiss()
+                }
                 guard let viewController = ViewControllerCallback.getListDetailController?(list) else { return }
-
                 let navigationController = UINavigationController(rootViewController: viewController)
                 self.present(navigationController, animated: true)
             }

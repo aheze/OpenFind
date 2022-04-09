@@ -94,8 +94,7 @@ extension PhotosViewController {
                 self.updateResultsHighlightColors()
             }
             
-            let strings = self.searchViewModel.stringToGradients.keys
-            if strings.isEmpty {
+            if self.searchViewModel.isEmpty {
                 self.showResults(false)
             } else {
                 self.showResults(true)

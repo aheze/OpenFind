@@ -92,7 +92,7 @@ class SearchViewController: UIViewController {
         
         listsCancellable = realmModel.$lists.sink { [weak self] lists in
             guard let self = self else { return }
-            print("lists changed!")
+            
             self.listsChanged(newLists: lists)
         }
     }

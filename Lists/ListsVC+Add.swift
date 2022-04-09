@@ -26,7 +26,6 @@ extension ListsViewController {
             self.reloadDisplayedLists()
             self.update()
             if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
-                print("IUNdex scroll: \(index)")
                 self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
             }
         }

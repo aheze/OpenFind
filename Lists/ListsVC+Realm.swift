@@ -36,7 +36,6 @@ extension ListsViewController {
     }
 
     func deleteLists(lists: [List]) {
-        print("deleting!")
         for list in lists {
             realmModel.container.deleteList(list: list)
         }

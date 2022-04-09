@@ -85,7 +85,6 @@ extension RealmContainer {
             } catch {
                 Debug.log("Error deleting list: \(error)", .error)
             }
-            print("list was deleted.")
         }
 
         loadLists()

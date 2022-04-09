@@ -20,6 +20,7 @@ class SearchViewModel: ObservableObject {
             enabledChanged?()
         }
     }
+
     var enabledChanged: (() -> Void)?
     
     @Published private(set) var fields = defaultFields {
@@ -32,12 +33,21 @@ class SearchViewModel: ObservableObject {
     var stringToGradients = [String: Gradient]()
     var customWords = [String]()
     
+    /// true if changed
+    func checkTextChanged(oldFields: [Field], newFields: [Field]) -> Bool {
+        let textIsSame = oldFields.elementsEqual(newFields) { oldField, newField in
+            oldField.value == newField.value
+        }
+        
+        return !textIsSame
+    }
+    
     func updateFields(fields: [Field], notify: Bool) {
         let oldValue = self.fields
         self.fields = fields
         
         if notify {
-            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            let textChanged = checkTextChanged(oldFields: oldValue, newFields: fields)
             fieldsChanged?(textChanged)
         }
     }
@@ -58,7 +68,7 @@ class SearchViewModel: ObservableObject {
         fields.remove(at: index)
         
         if notify {
-            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            let textChanged = checkTextChanged(oldFields: oldValue, newFields: fields)
             fieldsChanged?(textChanged)
         }
     }
@@ -68,17 +78,9 @@ class SearchViewModel: ObservableObject {
         fields.append(field)
         
         if notify {
-            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            let textChanged = checkTextChanged(oldFields: oldValue, newFields: fields)
             fieldsChanged?(textChanged)
         }
-    }
-    
-    /// true if changed
-    func checkTextChanged(oldValue: [Field], newValue: [Field]) -> Bool {
-        let oldText = oldValue.map { $0.value.getText() }
-        let newText = fields.map { $0.value.getText() }
-        let textChanged = oldText != newText
-        return textChanged
     }
     
     /// set all the properties without creating a new instance
@@ -90,7 +92,7 @@ class SearchViewModel: ObservableObject {
         customWords = model.customWords
         
         if notify {
-            let textChanged = checkTextChanged(oldValue: oldValue, newValue: fields)
+            let textChanged = checkTextChanged(oldFields: oldValue, newFields: fields)
             fieldsChanged?(textChanged)
         }
     }
@@ -100,23 +102,7 @@ class SearchViewModel: ObservableObject {
     var fieldsChanged: ((Bool) -> Void)?
     
     var dismissKeyboard: (() -> Void)?
-    
-    /// array of values
-    var values: [Field.FieldValue] {
-        return fields.dropLast().map { $0.value }
-    }
-    
-    /// array of text
-    var text: [String] {
-        return values.map { $0.getText().trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
-    }
-    
-    /// if the search text is empty or not
-    var isEmpty: Bool {
-        let isEmpty = text.joined().trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        return isEmpty
-    }
-    
+
     init(configuration: SearchConfiguration) {
         self.configuration = configuration
     }
