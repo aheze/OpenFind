@@ -87,7 +87,7 @@ class SettingsScrollViewController: UIViewController, Searchable {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: .zero)
         additionalSearchBarOffset = 0
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate { _ in
@@ -100,6 +100,14 @@ class SettingsScrollViewController: UIViewController, Searchable {
 extension SettingsScrollViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateSearchBarOffsetFromScroll(scrollView: scrollView)
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        model.touchesEnabled = false
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        model.touchesEnabled = true
     }
 
     func updateSearchBarOffsetFromScroll(scrollView: UIScrollView) {

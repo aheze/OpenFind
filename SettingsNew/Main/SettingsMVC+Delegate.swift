@@ -12,10 +12,18 @@ extension SettingsMainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateSearchBarOffsetFromScroll(scrollView: scrollView)
     }
-    
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        model.touchesEnabled = false
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        model.touchesEnabled = true
+    }
+
     func updateSearchBarOffsetFromScroll(scrollView: UIScrollView) {
         let contentOffset = -scrollView.contentOffset.y
-        self.additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
-        updateSearchBarOffset?()
+        additionalSearchBarOffset = contentOffset - baseSearchBarOffset - searchViewModel.getTotalHeight()
+        model.updateNavigationBar?()
     }
 }

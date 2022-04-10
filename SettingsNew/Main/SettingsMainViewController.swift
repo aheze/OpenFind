@@ -12,7 +12,6 @@ class SettingsMainViewController: UIViewController, Searchable {
     var showSearchBar = true
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = 0
-    var updateSearchBarOffset: (() -> Void)?
     
     var model: SettingsViewModel
     var realmModel: RealmModel
@@ -25,6 +24,7 @@ class SettingsMainViewController: UIViewController, Searchable {
         let viewController = model.page.generateViewController(model: model, realmModel: realmModel)
         return viewController
     }()
+
     lazy var resultsViewController = SettingsResultsViewController(model: model, realmModel: realmModel)
     
     static func make(
@@ -79,7 +79,7 @@ class SettingsMainViewController: UIViewController, Searchable {
     @objc func dismissSelf() {
         searchViewModel.dismissKeyboard?()
         model.startedToDismiss?()
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

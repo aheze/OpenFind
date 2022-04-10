@@ -31,6 +31,8 @@ class SettingsViewModel: ObservableObject {
     
     /// resume the camera
     var startedToDismiss: (() -> Void)?
+    
+    @Published var touchesEnabled = true
 
     init() {
         let paths = self.page.generatePaths()

@@ -38,9 +38,6 @@ class SettingsController {
             tabType: .photos
         )
         self.mainViewController = mainViewController
-        mainViewController.updateSearchBarOffset = {
-            searchController.updateSearchBarOffset()
-        }
         self.searchController = searchController
         
         let viewController = SettingsViewController.make(

@@ -90,6 +90,7 @@ struct SettingsPageView: View {
                 )
             }
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
         .padding(SettingsConstants.edgeInsets)
         .padding(.top, page.addTopPadding ? SettingsConstants.additionalTopInset : 0)
         .readSize {

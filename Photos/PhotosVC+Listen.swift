@@ -18,6 +18,7 @@ extension PhotosViewController {
         
         listenToModel()
     }
+
     func listenToModel() {
         /// only called at first
         model.reload = { [weak self] in
