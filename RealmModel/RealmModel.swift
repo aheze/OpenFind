@@ -136,7 +136,10 @@ extension Saved {
 }
 
 extension NSObject {
+    
+    /// listen to a Realm Defaults notification, calling the selector at first too
     func listen(to key: String, selector: Selector) {
         NotificationCenter.default.addObserver(self, selector: selector, name: NSNotification.Name(key), object: nil)
+        perform(selector)
     }
 }
