@@ -12,6 +12,7 @@ import UIKit
 class TabBarViewController: UIViewController {
     var pages: [PageViewController]
     var model: TabViewModel
+    var realmModel: RealmModel
     
     /// big, general area
     @IBOutlet var contentView: UIView!
@@ -40,10 +41,12 @@ class TabBarViewController: UIViewController {
     init?(
         coder: NSCoder,
         pages: [PageViewController],
-        model: TabViewModel
+        model: TabViewModel,
+        realmModel: RealmModel
     ) {
         self.pages = pages
         self.model = model
+        self.realmModel = realmModel
         super.init(coder: coder)
     }
 

@@ -11,9 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     lazy var tabViewModel = TabViewModel()
     lazy var toolbarViewModel = ToolbarViewModel()
+    lazy var realmModel = RealmModel()
     lazy var photos = PhotosController(
         model: PhotosViewModel(),
-        realmModel: RealmModel(),
+        realmModel: realmModel,
         tabViewModel: tabViewModel,
         toolbarViewModel: toolbarViewModel
     )
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
         let tabController = TabBarController(
             pages: [photos.searchNavigationController],
             model: tabViewModel,
+            realmModel: realmModel,
             cameraViewModel: CameraViewModel(),
             toolbarViewModel: toolbarViewModel
         )

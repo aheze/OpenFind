@@ -6,8 +6,8 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 class RealmModel: ObservableObject {
     var container = RealmContainer()
@@ -18,7 +18,7 @@ class RealmModel: ObservableObject {
     static let data = RealmModelData.self
 
     var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Defaults
 
     @Saved(data.swipeToNavigate.key) var swipeToNavigate = data.swipeToNavigate.value
@@ -102,7 +102,7 @@ class RealmModel: ObservableObject {
 extension RealmModel {
     func resetAllSettings() {
         let data = RealmModelData.self
-        
+
         swipeToNavigate = data.swipeToNavigate.value
         findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value
         findingSecondaryRecognitionLanguage = data.findingSecondaryRecognitionLanguage.value
@@ -121,5 +121,22 @@ extension RealmModel {
         cameraHapticFeedbackLevel = data.cameraHapticFeedbackLevel.value
         cameraScanningFrequency = data.cameraScanningFrequency.value
         cameraScanningDurationUntilPause = data.cameraScanningDurationUntilPause.value
+    }
+}
+
+extension Saved {
+    /// listen to value changed
+    mutating func configureValueChanged(with model: RealmModel) {
+        let key = self.key
+        valueChanged = { [weak model] in
+            model?.objectWillChange.send()
+            NotificationCenter.default.post(name: Notification.Name(key), object: nil)
+        }
+    }
+}
+
+extension NSObject {
+    func listen(to key: String, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: NSNotification.Name(key), object: nil)
     }
 }

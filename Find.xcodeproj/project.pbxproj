@@ -2343,6 +2343,11 @@
 		3CCF61FB266EFE1F00109C2F /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCF61FA266EFE1F00109C2F /* EmptyListView.swift */; };
 		3CD388BD25C11AB900B67B13 /* CameraVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */; };
 		3CD388C125C122BC00B67B13 /* ViewController+ShutterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */; };
+		3CD3A10128027095007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
+		3CD3A102280270AA007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
+		3CD3A103280270AC007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
+		3CD3A104280270AC007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
+		3CD3A105280270AD007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
 		3CD6227927C5D79100DF9AE8 /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
 		3CD6227A27C5D79900DF9AE8 /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
 		3CD6227B27C5D79A00DF9AE8 /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
@@ -4093,6 +4098,7 @@
 		3CCF61FA266EFE1F00109C2F /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Tips.swift"; sourceTree = "<group>"; };
 		3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ShutterPosition.swift"; sourceTree = "<group>"; };
+		3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Defaults.swift"; sourceTree = "<group>"; };
 		3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Reload.swift"; sourceTree = "<group>"; };
 		3CD6227E27C5E62C00DF9AE8 /* SearchCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewModel.swift; sourceTree = "<group>"; };
 		3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerConstants.swift; sourceTree = "<group>"; };
@@ -4959,6 +4965,7 @@
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
 				3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */,
+				3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */,
 				3CE3D4F227DD301E00521735 /* TabBarVC+DataSource.swift */,
 				3CE3D4EE27DD2FF200521735 /* TabBarVC+Delegate.swift */,
 				3C36434F277C22480038CB18 /* TabControllerView.swift */,
@@ -8151,6 +8158,7 @@
 				3C08EB13279C76E500971D60 /* ListsVC+FlowLayout.swift in Sources */,
 				3CE3D4F927DD33CF00521735 /* TabBarVC+Listen.swift in Sources */,
 				3C3642DA277BC2E70038CB18 /* SearchViewController.swift in Sources */,
+				3CD3A10128027095007A2593 /* TabBarVC+Defaults.swift in Sources */,
 				3C7E1095279E59DE00ABC016 /* ListsDetailVC+Add.swift in Sources */,
 				3CF76441278D19AC00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3CF15D3427FF8AFE00D51E9B /* SettingsViewController.swift in Sources */,
@@ -8297,6 +8305,7 @@
 				3C3642C7277BC2E70038CB18 /* SearchVC+DataSource.swift in Sources */,
 				3CDD945A27C0687E00D3EA1A /* Saved.swift in Sources */,
 				3CF7643C278D19AC00DCA4EA /* SearchNavigationConstants.swift in Sources */,
+				3CD3A103280270AC007A2593 /* TabBarVC+Defaults.swift in Sources */,
 				3C9314AF27B844FA009E5B6E /* ListsViewModel.swift in Sources */,
 				3C5B36EC27FEAEDF00801FEE /* SettingsConstants.swift in Sources */,
 				3C7B7A6F277F9CFA00E1F602 /* LivePreviewVC+Photo.swift in Sources */,
@@ -8601,6 +8610,7 @@
 				3CF15B1E27FF8AEA00D51E9B /* SettingsHighlightsPreview.swift in Sources */,
 				3C1A2C0C27E8C3CF00B3D065 /* IgnoredPhotosVC+Setup.swift in Sources */,
 				3C443ECD27DD8AC10050A0AB /* ContentPagingFlowLayout.swift in Sources */,
+				3CD3A104280270AC007A2593 /* TabBarVC+Defaults.swift in Sources */,
 				3C443ED627DD8BD00050A0AB /* SnapshotView.swift in Sources */,
 				3CAD45E62800942B00B0A0A9 /* PhotosSlidesVC+NavigationBar.swift in Sources */,
 				3C7A441227EF791800DFF76F /* PhotosVM+Delete.swift in Sources */,
@@ -8916,6 +8926,7 @@
 				3C364300277BC2E90038CB18 /* SearchFieldCell.swift in Sources */,
 				3CF15B4B27FF8AEA00D51E9B /* SettingsModels.swift in Sources */,
 				3C08EAEF279BAAD400971D60 /* ListsDetailViewController.swift in Sources */,
+				3CD3A105280270AD007A2593 /* TabBarVC+Defaults.swift in Sources */,
 				3CFD5F84278A586B0031BC8B /* ListsVC+SearchBar.swift in Sources */,
 				3C443EB227DD898E0050A0AB /* Find.swift in Sources */,
 				3C4D3A7E274769700010FD68 /* Utilities+UIColor.swift in Sources */,
@@ -9613,6 +9624,7 @@
 				3C7A441127EF791800DFF76F /* PhotosVM+Delete.swift in Sources */,
 				3C6C736F2781946200E039F0 /* CameraVC+Find.swift in Sources */,
 				3C9234A127E2EB1C0055061A /* PhotosVM+AddSentences.swift in Sources */,
+				3CD3A102280270AA007A2593 /* TabBarVC+Defaults.swift in Sources */,
 				3C0F239827F3FA5A00BCBFAE /* VC+AppLink.swift in Sources */,
 				3C0B12CD27F13E840013688E /* ListsVC+Delegate.swift in Sources */,
 				3C6C73B62781947A00E039F0 /* Find.swift in Sources */,

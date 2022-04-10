@@ -10,4 +10,5 @@ import UIKit
 
 enum ViewControllerCallback {
     static var getListDetailController: ((List) -> UIViewController?)?
+    
 }

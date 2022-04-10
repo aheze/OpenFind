@@ -12,12 +12,14 @@ import SwiftUI
 /// invalidates a view on a change in value in that user default.
 @frozen @propertyWrapper public struct Saved<Value>: DynamicProperty {
     @ObservedObject private var _value: Storage<Value>
-    private let saveValue: (Value) -> Void
+    let saveValue: (Value) -> Void
+    let key: String
     var valueChanged: (() -> Void)?
 
     private init(value: Value, store: UserDefaults, key: String, transform: @escaping (Any?) -> Value?, saveValue: @escaping (Value) -> Void) {
         self._value = Storage(value: value, store: store, key: key, transform: transform)
         self.saveValue = saveValue
+        self.key = key
     }
 
     public var wrappedValue: Value {
@@ -277,11 +279,3 @@ public extension Saved where Value: RawRepresentable, Value.RawValue == String {
     }
 }
 
-extension Saved {
-    /// listen to value changed
-    mutating func configureValueChanged(with model: RealmModel) {
-        valueChanged = { [weak model] in
-            model?.objectWillChange.send()
-        }
-    }
-}

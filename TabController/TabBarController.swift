@@ -14,18 +14,21 @@ class TabBarController: NSObject {
     
     /// model
     var model: TabViewModel
+    var realmModel: RealmModel
     var cameraViewModel: CameraViewModel
     var toolbarViewModel: ToolbarViewModel
     
     init(
         pages: [PageViewController],
         model: TabViewModel,
+        realmModel: RealmModel,
         cameraViewModel: CameraViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         // MARK: - init first
 
         self.model = model
+        self.realmModel = realmModel
         self.cameraViewModel = cameraViewModel
         self.toolbarViewModel = toolbarViewModel
         
@@ -34,7 +37,8 @@ class TabBarController: NSObject {
             TabBarViewController(
                 coder: coder,
                 pages: pages,
-                model: model
+                model: model,
+                realmModel: realmModel
             )
         }
         self.viewController = viewController

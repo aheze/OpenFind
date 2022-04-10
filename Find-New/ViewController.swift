@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         let tabController = TabBarController(
             pages: [photos.searchNavigationController, camera.viewController, lists.searchNavigationController],
             model: tabViewModel,
+            realmModel: realmModel,
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )

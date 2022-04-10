@@ -6,12 +6,15 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
+import Combine
 import UIKit
 
 extension TabBarViewController {
+   
+
     /// listen to changes in the model
     func listen() {
-        
+        listenToDefaults()
         
         model.updateTabBarHeight = { [weak self] tabState in
             guard let self = self else { return }
