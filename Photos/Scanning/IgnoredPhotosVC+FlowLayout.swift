@@ -16,7 +16,10 @@ extension IgnoredPhotosViewController {
             let type = PhotosCollectionType.photos(self.model.ignoredPhotos)
             return type
         }
-
+        flowLayout.getMinCellWidth = { [weak self] in
+            guard let self = self else { return 0 }
+            return self.realmModel.photosMinimumCellLength
+        }
         return flowLayout
     }
 }

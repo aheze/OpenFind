@@ -70,6 +70,7 @@ struct SettingsSectionRows: View {
                         action: action
                     )
                 case .slider(
+                    title: _,
                     numberOfSteps: let numberOfSteps,
                     minValue: let minValue,
                     maxValue: let maxValue,
@@ -112,6 +113,7 @@ struct SettingsSectionRows: View {
                         identifier: identifier
                     )
                 case .custom(
+                    title: _,
                     identifier: let identifier
                 ):
                     SettingsCustomView(model: model, realmModel: realmModel, identifier: identifier)

@@ -24,6 +24,7 @@ extension PhotosViewController {
         model.reload = { [weak self] in
             guard let self = self else { return }
             
+            print("Rleoaded!!")
             self.model.displayedSections = self.model.allSections
             self.update(animate: false)
         }

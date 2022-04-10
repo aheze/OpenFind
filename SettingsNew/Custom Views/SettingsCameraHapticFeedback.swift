@@ -48,7 +48,7 @@ struct SettingsCameraHapticFeedbackButton: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(lineWidth: lineWidth)
+                        .stroke(Color.accent, lineWidth: lineWidth)
                         .opacity(realmModel.cameraHapticFeedbackLevel == level ? 1 : 0)
                 )
         }

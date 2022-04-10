@@ -57,7 +57,7 @@ class PhotosScanningViewController: UIViewController {
     }
     
     func presentIgnoredPhotosViewController() {
-        let viewController = IgnoredPhotosViewController(model: model)
+        let viewController = IgnoredPhotosViewController(model: model, realmModel: realmModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

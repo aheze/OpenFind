@@ -128,6 +128,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
             - collectionView.safeAreaInsets.right
         
         let minCellWidth = getMinCellWidth?() ?? 0
+        
         let (numberOfColumns, columnWidth) = minCellWidth.getColumns(availableWidth: availableWidth)
         self.columnWidth = columnWidth
         

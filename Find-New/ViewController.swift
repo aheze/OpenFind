@@ -21,9 +21,23 @@ class ViewController: UIViewController {
     lazy var toolbarViewModel = ToolbarViewModel()
 
     lazy var settingsController = SettingsController(realmModel: realmModel)
-    lazy var photos = PhotosController(model: photosViewModel, realmModel: realmModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel)
-    lazy var camera = CameraController(model: cameraViewModel, tabViewModel: tabViewModel, realmModel: realmModel)
-    lazy var lists = ListsController(model: listsViewModel, tabViewModel: tabViewModel, toolbarViewModel: toolbarViewModel, realmModel: realmModel)
+    lazy var photos = PhotosController(
+        model: photosViewModel,
+        realmModel: realmModel,
+        tabViewModel: tabViewModel,
+        toolbarViewModel: toolbarViewModel
+    )
+    lazy var camera = CameraController(
+        model: cameraViewModel,
+        tabViewModel: tabViewModel,
+        realmModel: realmModel
+    )
+    lazy var lists = ListsController(
+        model: listsViewModel,
+        tabViewModel: tabViewModel,
+        toolbarViewModel: toolbarViewModel,
+        realmModel: realmModel
+    )
 
     /// loading this in `viewDidLoad` will cascade and load everything else
     lazy var tabController: TabBarController = {

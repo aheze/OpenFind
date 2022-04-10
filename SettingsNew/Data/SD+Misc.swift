@@ -15,7 +15,10 @@ extension SettingsData {
             header: "Share Find :)",
             rows: [
                 .init(
-                    configuration: .custom(identifier: .links)
+                    configuration: .custom(
+                        title: "Share Find :)",
+                        identifier: .links
+                    )
                 )
             ]
         )

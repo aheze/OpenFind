@@ -91,7 +91,7 @@ extension SettingsData {
                     ),
                     .init(
                         rows: [
-                            .init(configuration: .custom(identifier: .highlightsColor))
+                            .init(configuration: .custom(title: "Default Color", identifier: .highlightsColor))
                         ],
                         description: .constant(string: "The default color for highlights.")
                     ),
@@ -106,6 +106,7 @@ extension SettingsData {
                         rows: [
                             .init(
                                 configuration: .slider(
+                                    title: "Border Width",
                                     numberOfSteps: nil,
                                     minValue: 0,
                                     maxValue: 4,
@@ -122,6 +123,7 @@ extension SettingsData {
                         rows: [
                             .init(
                                 configuration: .slider(
+                                    title: "Background Opacity",
                                     numberOfSteps: nil,
                                     minValue: 0,
                                     maxValue: 0.5,

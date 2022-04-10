@@ -69,7 +69,7 @@ extension SettingsData {
                     .init(
                         header: "Gallery Grid Size",
                         rows: [
-                            .init(configuration: .custom(identifier: .photosGridSize))
+                            .init(configuration: .custom(title: "Gallery Grid Size", identifier: .photosGridSize))
                         ],
                         description: .constant(string: "Configure the size of the grid in the Photos tab.")
                     ),
@@ -124,7 +124,10 @@ extension SettingsData {
                         header: "Haptic Feedback",
                         rows: [
                             .init(
-                                configuration: .custom(identifier: .cameraHapticFeedbackLevel)
+                                configuration: .custom(
+                                    title: "Haptic Feedback",
+                                    identifier: .cameraHapticFeedbackLevel
+                                )
                             )
                         ],
                         description: .constant(string: "Vibrate when results are found in the live preview.")

@@ -23,10 +23,10 @@ class PhotosViewModel: ObservableObject {
 
     /// when star/unstar
     var sortNeededAfterStarChanged = false
-    
+
     /// reload collection views and find.
     var reloadAfterStarChanged: (() -> Void)?
-    
+
     /// storage
     var starredSections = [PhotosSection]()
     var screenshotsSections = [PhotosSection]()

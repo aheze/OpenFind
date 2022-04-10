@@ -17,6 +17,7 @@ extension PhotosViewController {
             )
         )
         addChildViewController(viewController, in: contentContainer)
+        contentContainer.alpha = 0
     }
 
     func showEmptyContent(_ show: Bool) {

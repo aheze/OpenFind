@@ -66,6 +66,7 @@ struct SettingsResultsView: View {
                 }
             }
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
         .padding(SettingsConstants.edgeInsets)
         .readSize {
             self.sizeChanged?($0)

@@ -71,6 +71,7 @@ struct SettingsRow: Identifiable {
 
         /// if `numberOfSteps` is nil, smooth slider
         case slider(
+            title: String,
             numberOfSteps: Int?,
             minValue: Double,
             maxValue: Double,
@@ -93,7 +94,7 @@ struct SettingsRow: Identifiable {
             identifier: Settings.DynamicPickerIdentifier
         )
 
-        case custom(identifier: Settings.ViewIdentifier)
+        case custom(title: String, identifier: Settings.ViewIdentifier)
 
         func getTitle() -> String? {
             switch self {
@@ -105,14 +106,14 @@ struct SettingsRow: Identifiable {
                 return title
             case .button(title: let title, tintColor: _, rightIconName: _, action: _):
                 return title
-            case .slider(numberOfSteps: _, minValue: _, maxValue: _, minSymbol: _, maxSymbol: _, saveAsInt: _, storage: _):
-                return nil
+            case .slider(title: let title, numberOfSteps: _, minValue: _, maxValue: _, minSymbol: _, maxSymbol: _, saveAsInt: _, storage: _):
+                return title
             case .picker(title: let title, choices: _, storage: _):
                 return title
             case .dynamicPicker(title: let title, identifier: _):
                 return title
-            case .custom(identifier: _):
-                return nil
+            case .custom(title: let title, identifier: _):
+                return title
             }
         }
     }

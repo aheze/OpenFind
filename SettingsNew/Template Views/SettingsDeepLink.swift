@@ -20,7 +20,7 @@ struct SettingsDeepLink: View {
             model.showRows?(rows)
         } content: {
             if case .link(
-                title: let title,
+                title: _,
                 leftIcon: _,
                 indicatorStyle: let indicatorStyle,
                 destination: _,
@@ -33,8 +33,10 @@ struct SettingsDeepLink: View {
                                 .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
+                            let titles = getPathTitles()
+                            
+                            /// empty title
                             HStack(spacing: 2) {
-                                let titles = getPathTitles()
                                 ForEach(Array(zip(titles.indices, titles)), id: \.1.self) { index, title in
                                     Text(title)
 

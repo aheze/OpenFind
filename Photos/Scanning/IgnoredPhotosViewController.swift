@@ -11,6 +11,7 @@ import UIKit
 class IgnoredPhotosViewController: UIViewController {
     /// external models
     var model: PhotosViewModel
+    var realmModel: RealmModel
     
     var headerContentModel = HeaderContentModel()
     var ignoredPhotosHeaderViewModel = IgnoredPhotosHeaderViewModel()
@@ -27,8 +28,12 @@ class IgnoredPhotosViewController: UIViewController {
     lazy var toolbarContainer = UIView()
     lazy var toolbarView = IgnoredPhotosToolbarView(model: model)
     
-    init(model: PhotosViewModel) {
+    init(
+        model: PhotosViewModel,
+        realmModel: RealmModel
+    ) {
         self.model = model
+        self.realmModel = realmModel
         super.init(nibName: nil, bundle: nil)
     }
     
