@@ -14,6 +14,7 @@ struct SavedData<Value> {
 }
 
 enum RealmModelData {
+    static var defaultTab = SavedData(key: "defaultTab", value: Settings.Values.Tab.camera)
     static var swipeToNavigate = SavedData(key: "swipeToNavigate", value: true)
     
     // MARK: Finding

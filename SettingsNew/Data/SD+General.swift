@@ -35,6 +35,17 @@ extension SettingsData {
             configuration: .sections(
                 sections: [
                     .init(
+                        header: "Default Tab",
+                        rows: [
+                            .init(
+                                configuration: .custom(
+                                    title: "Default Tab",
+                                    identifier: .defaultTab
+                                )
+                            )
+                        ]
+                    ),
+                    .init(
                         rows: [
                             .init(
                                 configuration: .toggle(

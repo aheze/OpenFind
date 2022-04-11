@@ -21,6 +21,7 @@ class RealmModel: ObservableObject {
 
     // MARK: - Defaults
 
+    @Saved(data.defaultTab.key) var defaultTab = data.defaultTab.value
     @Saved(data.swipeToNavigate.key) var swipeToNavigate = data.swipeToNavigate.value
 
     // MARK: Finding
@@ -72,6 +73,7 @@ class RealmModel: ObservableObject {
     }
 
     func listenToDefaults() {
+        _defaultTab.configureValueChanged(with: self)
         _swipeToNavigate.configureValueChanged(with: self)
 
         _findingPrimaryRecognitionLanguage.configureValueChanged(with: self)
@@ -136,7 +138,6 @@ extension Saved {
 }
 
 extension NSObject {
-    
     /// listen to a Realm Defaults notification, calling the selector at first too
     func listen(to key: String, selector: Selector) {
         NotificationCenter.default.addObserver(self, selector: selector, name: NSNotification.Name(key), object: nil)

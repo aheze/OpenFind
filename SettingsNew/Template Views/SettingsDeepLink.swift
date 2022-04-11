@@ -34,22 +34,25 @@ struct SettingsDeepLink: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
                             let titles = getPathTitles()
-                            
-                            /// empty title
-                            HStack(spacing: 2) {
-                                ForEach(Array(zip(titles.indices, titles)), id: \.1.self) { index, title in
-                                    Text(title)
 
-                                    if index < titles.count - 1 {
-                                        Image(systemName: "arrow.right")
+                            /// only show titles if more than 1 (no need to say "General" underneath "General")
+                            if titles.count > 1 {
+                                /// empty title
+                                HStack(spacing: 2) {
+                                    ForEach(Array(zip(titles.indices, titles)), id: \.1.self) { index, title in
+                                        Text(title)
+
+                                        if index < titles.count - 1 {
+                                            Image(systemName: "arrow.right")
+                                        }
                                     }
                                 }
+                                .font(.footnote)
+                                .foregroundColor(UIColor.secondaryLabel.color)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            .font(.footnote)
-                            .foregroundColor(UIColor.secondaryLabel.color)
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        
+
                         if let indicatorStyle = indicatorStyle {
                             switch indicatorStyle {
                             case .forwards:

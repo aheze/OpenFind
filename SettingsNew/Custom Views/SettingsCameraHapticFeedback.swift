@@ -43,7 +43,7 @@ struct SettingsCameraHapticFeedbackButton: View {
             UIColor.label.color.opacity(getBackgroundOpacity())
                 .cornerRadius(cornerRadius)
                 .overlay(
-                    Text(level.rawValue)
+                    Text(level.getTitle())
                         .foregroundColor(UIColor.label.color)
                 )
                 .overlay(

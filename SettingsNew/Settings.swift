@@ -11,6 +11,8 @@ import Foundation
 enum Settings {
     /// for views
     enum ViewIdentifier: String {
+        case defaultTab
+        
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
@@ -119,12 +121,42 @@ enum Settings {
             }
         }
 
+        enum Tab: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case photos
+            case camera
+            case lists
+            
+            func getTitle() -> String {
+                switch self {
+                case .photos:
+                    return "Photos"
+                case .camera:
+                    return "Camera"
+                case .lists:
+                    return "Lists"
+                }
+            }
+        }
+        
         enum HapticFeedbackLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
-            case none = "None"
-            case light = "Light"
-            case heavy = "Heavy"
+            case none
+            case light
+            case heavy
+            
+            func getTitle() -> String {
+                switch self {
+                case .none:
+                    return "None"
+                case .light:
+                    return "Light"
+                case .heavy:
+                    return "heavy"
+                }
+            }
         }
 
         enum ScanningDurationUntilPauseLevel: String, CaseIterable, Identifiable {
