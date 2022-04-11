@@ -53,6 +53,9 @@ class PhotosViewModel: ObservableObject {
     var waitingToAddExternalPhotos = false
     /// reload collection views and find.
     var reloadAfterExternalPhotosChanged: (() -> Void)?
+    
+    /// reload the collection view to make it empty
+    var updateSearchCollectionView: (() -> Void)?
 
     // MARK: Slides / Results
 
@@ -159,8 +162,9 @@ class PhotosViewModel: ObservableObject {
     @Published var ignoredPhotosEditable = false /// select button enabled
     var ignoredPhotosFinishedUpdating: (() -> Void)? /// some photos were unignored from the scanning modal, update collection view and selection state
 
-    /// reload the collection view to make it empty
-    var updateSearchCollectionView: (() -> Void)?
+    /// focus a photo after tapping it in the ignored photos collection view
+    var getSlidesViewControllerFor: ((Photo) -> PhotosSlidesItemViewController?)?
+    
 
     // MARK: Share
 

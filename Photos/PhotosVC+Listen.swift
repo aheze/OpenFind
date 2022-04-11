@@ -47,6 +47,19 @@ extension PhotosViewController {
             }
         }
         
+        model.getSlidesViewControllerFor = { [weak self] photo in
+            guard let self = self else { return nil }
+            let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)
+            let viewController = storyboard.instantiateViewController(identifier: "PhotosSlidesItemViewController") { coder in
+                PhotosSlidesItemViewController(
+                    coder: coder,
+                    model: self.model,
+                    findPhoto: FindPhoto(id: UUID(), photo: photo)
+                )
+            }
+            return viewController
+        }
+        
         /// called when finding from slides or new results came live when scanning results
         model.photosWithQueuedSentencesAdded = { [weak self] photos in
             guard let self = self else { return }

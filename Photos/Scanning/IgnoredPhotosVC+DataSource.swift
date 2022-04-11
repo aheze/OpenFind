@@ -50,6 +50,15 @@ extension IgnoredPhotosViewController {
             cell.buttonView.isUserInteractionEnabled = !self.model.ignoredPhotosIsSelecting
             let selected = self.model.ignoredPhotosIsSelecting && self.model.ignoredPhotosSelectedPhotos.contains(photo)
             self.configureCellSelection(cell: cell, selected: selected)
+            
+            cell.tapped = { [weak self] in
+                guard let self = self else { return }
+                guard let photo = self.model.ignoredPhotos.first(where: { $0 == cachedPhoto }) else { return }
+                if let viewController = self.model.getSlidesViewControllerFor?(photo) {
+                    viewController.navigationItem.scrollEdgeAppearance = UINavigationBarAppearance()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
 
             return cell
         }
