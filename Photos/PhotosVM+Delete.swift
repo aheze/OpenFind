@@ -27,13 +27,13 @@ extension PhotosViewModel {
                 }
                 self.refreshCollectionViews(afterDeleting: photos)
                 self.reloadCollectionViewsAfterDeletion?()
-                
+
                 /// refresh slides model and reload slides collection view
                 if let photo = photos.first {
                     self.deletePhotoInSlides?(photo)
                 }
                 self.ignoredPhotos = photos.filter { $0.metadata?.isIgnored ?? false }
-                print("deleting")
+
                 self.photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
             }
         }

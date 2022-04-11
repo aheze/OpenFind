@@ -38,8 +38,8 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         if model.slidesState?.toolbarInformationOn ?? false {
             return frame
         } else {
-            let thumbnail = model.slidesState?.getCurrentSlidesPhoto()?.findPhoto.thumbnail
-            let thumbnailSize = thumbnail?.size ?? .zero
+            let currentPhoto = model.slidesState?.getCurrentSlidesPhoto()?.findPhoto.photo
+            let thumbnailSize = currentPhoto?.asset.getSize() ?? .zero
             let normalizedFrame = CGRect.makeRect(aspectRatio: thumbnailSize, insideRect: frame)
             return normalizedFrame
         }

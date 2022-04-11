@@ -33,7 +33,6 @@ extension PhotosViewModel {
             getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
         }
 
-        print("setting scanning")
         photosToScan = photosToScan.filter { $0 != photo }
         scannedPhotosCount = photos.count - photosToScan.count /// update the text
         resumeScanning()
@@ -106,10 +105,10 @@ extension PhotosViewModel {
 
         return true
     }
-    
+
     func getRemainingTime() -> String? {
         guard scannedPhotosCount != totalPhotosCount else { return nil }
-        
+
         let secondsPerPhoto = CGFloat(1.2)
         let seconds = Int(secondsPerPhoto * CGFloat(photosToScan.count))
         if seconds > 60 {

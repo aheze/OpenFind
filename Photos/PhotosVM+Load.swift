@@ -12,16 +12,19 @@ import UIKit
 extension PhotosViewModel {
     /// only call this once!
     func load() {
-        Task(priority: .background) {
+        
+//        Task(priority: .low) {
+        
+        Task {
             print("loading")
-            await loadAsync()
+            await self.loadAsync()
             print(";loaded!")
         }
+        
+        print("task ended")
     }
     
     func loadAsync() async {
-        let scan = await getRealmModel?().photosScanOnLaunch
-        
         let time = TimeElapsed()
         await getRealmModel?().container.loadPhotoMetadatas()
         print(time.stop())
@@ -29,7 +32,7 @@ extension PhotosViewModel {
         await loadPhotos()
             
         sort()
-        
+        let scan = await getRealmModel?().photosScanOnLaunch
         await MainActor.run {
             reload?()
         

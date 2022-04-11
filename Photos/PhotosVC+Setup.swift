@@ -28,7 +28,7 @@ extension PhotosViewController {
 
         setupNavigationBar()
         setupFiltersView()
-        
+
         listen()
 
         checkPermissions()
@@ -52,8 +52,8 @@ extension PhotosViewController {
     }
 
     func load() {
-        model.load()
         startObservingChanges()
+        model.load()
     }
 
     func showPermissionsView() {

@@ -122,7 +122,6 @@ struct PhotosResultsState {
 struct FindPhoto: Hashable {
     var id: UUID
     var photo: Photo
-    var thumbnail: UIImage?
     var fullImage: UIImage?
 
     /// results (an array of highlights)

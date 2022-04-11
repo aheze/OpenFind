@@ -87,14 +87,12 @@ extension PhotosViewController {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let (highlights, lines) = self.getHighlightsAndDescription(from: metadata.sentences, with: self.searchViewModel.stringToGradients)
             if highlights.count >= 1 {
-                let thumbnail = self.model.photoToThumbnail[photo] ?? nil
                 let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: self.searchViewModel.stringToGradients, highlights: highlights)
                 let description = getCellDescription(from: lines)
                 
                 let findPhoto = FindPhoto(
                     id: UUID(),
                     photo: photo,
-                    thumbnail: thumbnail,
                     highlightsSet: highlightsSet,
                     descriptionText: description,
                     descriptionLines: lines

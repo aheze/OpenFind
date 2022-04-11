@@ -32,9 +32,6 @@ class PhotosViewModel: ObservableObject {
     var screenshotsSections = [PhotosSection]()
     var allSections = [PhotosSection]()
 
-    /// store the cell images
-    var photoToThumbnail = [Photo: UIImage?]()
-
     /// update the entire collection view, only called once at first. Set inside `PhotosVC+Listen`
     var reload: (() -> Void)?
 

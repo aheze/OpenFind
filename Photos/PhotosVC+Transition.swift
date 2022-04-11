@@ -136,24 +136,20 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     }
     
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
-        if
-            let currentIndex = model.slidesState?.getCurrentIndex(),
-            let thumbnail = self.model.slidesState?.slidesPhotos[currentIndex].findPhoto.thumbnail
-        {
-            return thumbnail
+        guard let currentPhoto = model.slidesState?.currentPhoto else { return nil }
+        if let resultsState = model.resultsState {
+            if
+                let index = resultsState.getFindPhotoIndex(for: currentPhoto, in: \.displayedFindPhotos),
+                let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell
+            {
+                return cell.view.imageView.image
+            }
         } else {
-            if model.resultsState != nil {
-                /// If no image is available yet, use what is shown in the collection view cell
-                guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
-                if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                    return cell.view.imageView.image
-                }
-            } else {
-                /// If no image is available yet, use what is shown in the collection view cell
-                guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
-                if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                    return cell.view.imageView.image
-                }
+            if
+                let indexPath = model.getIndexPath(for: currentPhoto, in: \.displayedSections),
+                let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell
+            {
+                return cell.view.imageView.image
             }
         }
         

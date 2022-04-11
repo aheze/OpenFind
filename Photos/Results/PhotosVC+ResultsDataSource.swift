@@ -66,7 +66,6 @@ extension PhotosViewController {
                 // Set the cell's thumbnail image only if it's still showing the same asset.
                 if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
                     cell.view.imageView.image = thumbnail
-                    self.model.photoToThumbnail[findPhoto.photo] = thumbnail
                 }
             }
 
