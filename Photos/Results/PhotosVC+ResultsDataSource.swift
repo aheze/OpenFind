@@ -35,7 +35,7 @@ extension PhotosViewController {
     /// reload the collection view at an index path.
     func updateResults(at index: Int, with metadata: PhotoMetadata) {
         if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
-            configureCell(cell: cell, metadata: metadata)
+            PhotoMetadata.apply(metadata: metadata, to: cell.view)
         }
     }
 
@@ -58,7 +58,7 @@ extension PhotosViewController {
             cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
             self.model.imageManager.requestImage(
                 for: findPhoto.photo.asset,
-                   targetSize: self.realmModel.thumbnailSize,
+                targetSize: self.realmModel.thumbnailSize,
                 contentMode: .aspectFill,
                 options: nil
             ) { thumbnail, _ in
@@ -70,7 +70,7 @@ extension PhotosViewController {
                 }
             }
 
-            self.configureCell(cell: cell, metadata: findPhoto.photo.metadata)
+            PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
 
             self.loadHighlights(for: cell, findPhoto: findPhoto)
 
@@ -85,17 +85,5 @@ extension PhotosViewController {
         }
 
         return dataSource
-    }
-
-    func configureCell(cell: PhotosResultsCell, metadata: PhotoMetadata?) {
-        if let metadata = metadata {
-            if metadata.isStarred {
-                cell.view.overlayGradientImageView.alpha = 1
-                cell.view.overlayStarImageView.alpha = 1
-                return
-            }
-        }
-        cell.view.overlayGradientImageView.alpha = 0
-        cell.view.overlayStarImageView.alpha = 0
     }
 }

@@ -9,14 +9,26 @@
 import UIKit
 
 extension PhotoMetadata {
-    static func apply(metadata: PhotoMetadata?, to cell: PhotosCollectionCell) {
-        if let metadata = metadata, metadata.isStarred {
-            cell.view.overlayGradientImageView.alpha = 1
-            cell.view.overlayStarImageView.alpha = 1
-            return
-        }
+    static func apply(metadata: PhotoMetadata?, to view: PhotosCellView) {
+        if let metadata = metadata {
+            if metadata.isIgnored {
+                view.shadeView.alpha = 1
+            } else {
+                view.shadeView.alpha = 0
+            }
+            if metadata.isStarred {
+                view.overlayGradientImageView.alpha = 1
+                view.overlayStarImageView.alpha = 1
+            } else {
+                view.overlayGradientImageView.alpha = 0
+                view.overlayStarImageView.alpha = 0
+            }
 
-        cell.view.overlayGradientImageView.alpha = 0
-        cell.view.overlayStarImageView.alpha = 0
+            /// make set to reset if metadata doesn't exist - cells get reused
+        } else {
+            view.shadeView.alpha = 0
+            view.overlayGradientImageView.alpha = 0
+            view.overlayStarImageView.alpha = 0
+        }
     }
 }

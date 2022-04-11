@@ -44,11 +44,13 @@ extension UIViewController {
                 } else {
                     model.updateAfterStarChange()
                 }
+                model.stopSelecting?()
             }
             
             let ignoreActivity = IgnoreActivity { [weak model] in
                 guard let model = model else { return }
                 model.ignore(photos: photos)
+                model.stopSelecting?()
             }
             presentShareSheet(items: items, applicationActivities: [starActivity, ignoreActivity])
         }

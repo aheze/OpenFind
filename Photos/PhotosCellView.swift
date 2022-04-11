@@ -11,6 +11,9 @@ import UIKit
 class PhotosCellView: UIView {
     lazy var imageView = UIImageView()
     
+    /// if ignored, add black shade
+    lazy var shadeView = UIView()
+    
     lazy var overlayView = UIView()
     lazy var overlayGradientImageView = UIImageView()
     lazy var overlayStarImageView = UIImageView()
@@ -33,8 +36,12 @@ class PhotosCellView: UIView {
         
         addSubview(imageView)
         imageView.pinEdgesToSuperview()
+        
         addSubview(overlayView)
         overlayView.pinEdgesToSuperview()
+        
+        overlayView.addSubview(shadeView)
+        shadeView.pinEdgesToSuperview()
         
         overlayView.addSubview(overlayGradientImageView)
         overlayGradientImageView.pinEdgesToSuperview()
@@ -65,6 +72,7 @@ class PhotosCellView: UIView {
         overlayGradientImageView.contentMode = .scaleAspectFill
        
         /// configure constants
+        shadeView.backgroundColor = Colors.accent.toColor(.black, percentage: 0.5).withAlphaComponent(0.75)
         overlayView.backgroundColor = .clear
         overlayStarImageView.image = UIImage(systemName: "star.fill")
         overlayStarImageView.tintColor = c.starTintColor
@@ -99,7 +107,7 @@ class PhotosCellView: UIView {
         self.selectOverlayIconViewBottomC = selectOverlayIconViewBottomC
         
         /// embedded in a button view, so don't take touches
-        self.isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
     }
     
     @available(*, unavailable)

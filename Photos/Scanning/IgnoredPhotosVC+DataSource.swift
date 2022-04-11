@@ -44,7 +44,7 @@ extension IgnoredPhotosViewController {
                 }
             }
 
-            PhotoMetadata.apply(metadata: photo.metadata, to: cell)
+            PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
 
             /// selection
             cell.buttonView.isUserInteractionEnabled = !self.model.ignoredPhotosIsSelecting

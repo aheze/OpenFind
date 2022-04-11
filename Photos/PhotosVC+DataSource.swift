@@ -25,7 +25,7 @@ extension PhotosViewController {
     /// reload the collection view at an index path.
     func update(at indexPath: IndexPath, with metadata: PhotoMetadata) {
         if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-            PhotoMetadata.apply(metadata: metadata, to: cell)
+            PhotoMetadata.apply(metadata: metadata, to: cell.view)
         }
     }
 
@@ -58,7 +58,7 @@ extension PhotosViewController {
                 }
             }
 
-            PhotoMetadata.apply(metadata: photo.metadata, to: cell)
+            PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
 
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
