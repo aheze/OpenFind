@@ -42,30 +42,7 @@ struct PhotosSlidesInfoView: View {
                     description: ignored ? "Tap to Unignore" : nil,
                     isOn: ignored
                 ) {
-                    var newPhoto = photo
-                    let isIgnored = !ignored
-
-                    /// metadata exists, delete sentences
-                    if newPhoto.metadata != nil {
-                        newPhoto.metadata?.isIgnored = isIgnored
-                        newPhoto.metadata?.dateScanned = nil /// delete saved sentences anyway
-                        newPhoto.metadata?.sentences = []
-                        withAnimation {
-                            model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
-                        }
-                    } else {
-                        let metadata = PhotoMetadata(
-                            assetIdentifier: photo.asset.localIdentifier,
-                            sentences: [],
-                            dateScanned: nil,
-                            isStarred: false,
-                            isIgnored: isIgnored
-                        )
-                        newPhoto.metadata = metadata
-                        withAnimation {
-                            model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
-                        }
-                    }
+                    ignore(photo: photo)
                 }
             }
             .fixedSize(horizontal: false, vertical: true)
@@ -79,6 +56,10 @@ struct PhotosSlidesInfoView: View {
     func scanNow() {
         guard let slidesPhoto = model.slidesState?.getCurrentSlidesPhoto() else { return }
         model.scanSlidesPhoto?(slidesPhoto)
+    }
+
+    func ignore(photo: Photo) {
+        model.ignore(photos: [photo])
     }
 
     func getDateString(from photo: Photo) -> String {

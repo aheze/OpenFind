@@ -56,7 +56,9 @@ struct PhotosSlidesToolbarView: View {
             model.star(photos: [photo])
         }
         if let photo = model.slidesState?.currentPhoto {
-            model.configureToolbar(for: photo)
+            withAnimation {
+                model.configureToolbar(for: photo)
+            }
         }
         model.sortNeededAfterStarChanged = true
     }

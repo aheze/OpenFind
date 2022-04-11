@@ -31,10 +31,26 @@ extension UIViewController {
 
             let dataSource = PhotosSharingDataSource(model: model, assets: assets)
             let items = urls as [Any] + [dataSource]
-            let starActivity = StarActivity { [weak self] in
-                
+            
+            let starActivity = StarActivity { [weak model] in
+                guard let model = model else { return }
+                model.star(photos: photos)
+                if model.slidesState != nil {
+                    
+                    if let photo = model.slidesState?.currentPhoto {
+                        model.configureToolbar(for: photo)
+                    }
+                    model.sortNeededAfterStarChanged = true
+                } else {
+                    model.updateAfterStarChange()
+                }
             }
-            presentShareSheet(items: items, applicationActivities: [starActivity])
+            
+            let ignoreActivity = IgnoreActivity { [weak model] in
+                guard let model = model else { return }
+                model.ignore(photos: photos)
+            }
+            presentShareSheet(items: items, applicationActivities: [starActivity, ignoreActivity])
         }
     }
 }
@@ -44,18 +60,39 @@ class StarActivity: UIActivity {
     init(tapped: (() -> Void)?) {
         self.tapped = tapped
     }
-    
+
     override var activityTitle: String? { "Star" }
     override var activityType: UIActivity.ActivityType? { UIActivity.ActivityType("Star") }
     override var activityImage: UIImage? { UIImage(systemName: "star") }
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         true
     }
+
     override class var activityCategory: UIActivity.Category { .action }
-    override func prepare(withActivityItems activityItems: [Any]) {
-    }
+    override func prepare(withActivityItems activityItems: [Any]) {}
+
     override func perform() {
-        print("Performed Foo!")
+        tapped?()
+    }
+}
+
+class IgnoreActivity: UIActivity {
+    var tapped: (() -> Void)?
+    init(tapped: (() -> Void)?) {
+        self.tapped = tapped
+    }
+
+    override var activityTitle: String? { "Ignore" }
+    override var activityType: UIActivity.ActivityType? { UIActivity.ActivityType("Ignore") }
+    override var activityImage: UIImage? { UIImage(systemName: "nosign") }
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+        true
+    }
+
+    override class var activityCategory: UIActivity.Category { .action }
+    override func prepare(withActivityItems activityItems: [Any]) {}
+
+    override func perform() {
         tapped?()
     }
 }
@@ -97,7 +134,7 @@ class PhotosSharingDataSource: NSObject, UIActivityItemSource {
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
-        metadata.title = "\(self.assets.count) Photos"
+        metadata.title = "\(assets.count) Photos"
         return metadata
     }
 }
