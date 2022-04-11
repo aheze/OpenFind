@@ -126,11 +126,8 @@ class PhotosViewModel: ObservableObject {
 
     var photosToScan = [Photo]() {
         didSet {
-            print("Set!")
-            DispatchQueue.main.async {
-                self.totalPhotosCount = self.photos.filter { $0.metadata.map { !$0.isIgnored } ?? true }.count
-                self.scannedPhotosCount = self.totalPhotosCount - self.photosToScan.count
-            }
+            totalPhotosCount = photos.filter { $0.metadata.map { !$0.isIgnored } ?? true }.count
+            scannedPhotosCount = totalPhotosCount - photosToScan.count
         }
     }
 

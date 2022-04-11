@@ -40,18 +40,14 @@ extension PhotosViewModel {
     /// add photos that were just added
     func loadExternalPhotos() {
         Task {
-            self.waitingToAddExternalPhotos = false
-            self.loadAssets()
-            let (photos, ignoredPhotos, photosToScan) = await self.getPhotos()
-
-            self.photos = photos
-            self.ignoredPhotos = ignoredPhotos
-            print("setting add")
-            self.photosToScan = photosToScan.reversed() /// newest photos go first
-
+            waitingToAddExternalPhotos = false
+            loadAssets()
+            await loadPhotos()
             self.sort()
-
-            self.reloadAfterExternalPhotosChanged?()
+            
+            await MainActor.run {
+                self.reloadAfterExternalPhotosChanged?()
+            }
         }
     }
 }

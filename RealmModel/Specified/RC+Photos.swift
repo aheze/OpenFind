@@ -19,10 +19,11 @@ extension RealmContainer {
             $0.getPhotoMetadata()
         }
 
-        let time = TimeElapsed()
-
-        print(time.stop())
-        self.photoMetadatas = Array(photoMetadatas)
+        let array = Array(photoMetadatas)
+        
+        await MainActor.run {
+            self.photoMetadatas = array
+        }
     }
 
     func deleteAllMetadata() {

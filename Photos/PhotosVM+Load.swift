@@ -22,7 +22,9 @@ extension PhotosViewModel {
     func loadAsync() async {
         let scan = await getRealmModel?().photosScanOnLaunch
         
+        let time = TimeElapsed()
         await getRealmModel?().container.loadPhotoMetadatas()
+        print(time.stop())
         loadAssets()
         await loadPhotos()
             
