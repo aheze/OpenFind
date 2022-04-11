@@ -67,7 +67,6 @@ class RealmModel: ObservableObject {
         }
 
         container.loadLists()
-        container.loadPhotoMetadatas()
 
         listenToDefaults()
     }

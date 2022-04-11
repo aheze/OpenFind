@@ -88,6 +88,21 @@ class TabBarViewController: UIViewController {
         
         /// listen to the model and handle tab changes
         listen()
+        
+        switch realmModel.defaultTab {
+        case .photos:
+            contentCollectionView.contentOffset.x = 0
+            model.changeTabState(newTab: .photos, animation: .fractionalProgress)
+            model.statusBarStyle = .default
+        case .camera:
+            contentCollectionView.contentOffset.x = contentCollectionView.bounds.width
+            model.changeTabState(newTab: .camera, animation: .fractionalProgress)
+            model.statusBarStyle = .lightContent
+        case .lists:
+            contentCollectionView.contentOffset.x = contentCollectionView.bounds.width * 2
+            model.changeTabState(newTab: .lists, animation: .fractionalProgress)
+            model.statusBarStyle = .default
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,7 +154,6 @@ class TabBarViewController: UIViewController {
         tabBarHeightC.constant = model.tabBarAttributes.backgroundHeight
     }
     
-    /// animated is TODO, since setting `tabState` triggers the `.sink`, which auto calls this function.
     func updateTabContent(_ tabState: TabState, animated: Bool) {
         let index: Int
         switch tabState {

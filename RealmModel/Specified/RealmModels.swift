@@ -52,21 +52,18 @@ class RealmSentence: Object {
     @Persisted var confidence: Double?
 
     func getSentence() -> Sentence {
-        var components = [Sentence.Component]()
-        for component in self.components {
-            let component = Sentence.Component(
-                range: component.range?.getRange() ?? 0 ..< 1,
-                frame: component.frame?.getRect() ?? .zero
+        let components = self.components.map {
+            Sentence.Component(
+                range: $0.range?.getRange() ?? 0 ..< 1,
+                frame: $0.frame?.getRect() ?? .zero
             )
-            components.append(component)
         }
 
-        let sentence = Sentence(
-            string: string ?? "",
-            components: components,
-            confidence: confidence ?? 0
+        return Sentence(
+            string: self.string ?? "",
+            components: Array(components),
+            confidence: self.confidence ?? 0
         )
-        return sentence
     }
 }
 
@@ -127,7 +124,7 @@ class RealmRect: Object {
 }
 
 class RealmList: Object {
-    @Persisted(primaryKey: true) var id = UUID()
+    @Persisted(primaryKey: true) var id: UUID
     @Persisted var title = ""
     @Persisted var desc = ""
     @Persisted var words: RealmSwift.List<String>
@@ -148,6 +145,7 @@ class RealmList: Object {
         color: Int,
         dateCreated: Date
     ) {
+        super.init()
         self.id = id
         self.title = title
         self.desc = desc
@@ -159,7 +157,7 @@ class RealmList: Object {
 }
 
 class RealmWord: Object {
-    @Persisted(primaryKey: true) var id = UUID()
+    @Persisted(primaryKey: true) var id: UUID
     @Persisted var string = ""
 }
 

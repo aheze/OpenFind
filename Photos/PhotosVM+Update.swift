@@ -10,14 +10,16 @@ import UIKit
 
 extension PhotosViewModel {
     /// delete metadata and load
-    func deleteAllMetadata() {
-        getRealmModel?().container.deleteAllMetadata()
-        getRealmModel?().container.loadPhotoMetadatas()
+    func deleteAllMetadata() async {
+        await getRealmModel?().container.deleteAllMetadata()
+        await getRealmModel?().container.loadPhotoMetadatas()
         loadAssets()
-        loadPhotos { [weak self] in
-            guard let self = self else { return }
-            self.sort()
-            self.reload?()
+
+        await loadPhotos()
+        sort()
+        
+        await MainActor.run {
+            reload?()
         }
     }
 
@@ -94,6 +96,7 @@ extension PhotosViewModel {
 
         getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
         ignoredPhotos = photos.filter { $0.metadata?.isIgnored ?? false }
+        print("setting update")
         photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
     }
 }

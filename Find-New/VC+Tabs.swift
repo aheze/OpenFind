@@ -65,7 +65,7 @@ extension ViewController {
             tabViewModel.statusBarStyle = .default
         default: break
         }
-        
+
         tabViewModel.statusBarStyleChanged?()
     }
 }

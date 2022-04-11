@@ -30,6 +30,7 @@ struct IgnoredPhotosHeaderView: View {
             if model.ignoredPhotos.isEmpty {
                 Text("No ignored photos.")
                     .foregroundColor(UIColor.secondaryLabel.color)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }

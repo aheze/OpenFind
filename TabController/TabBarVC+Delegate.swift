@@ -78,6 +78,7 @@ extension TabBarViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pageViewController = pages[indexPath.item]
+        
         addChildViewController(pageViewController, in: cell.contentView)
     }
 

@@ -33,6 +33,7 @@ extension PhotosViewModel {
             getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
         }
 
+        print("setting scanning")
         photosToScan = photosToScan.filter { $0 != photo }
         scannedPhotosCount = photos.count - photosToScan.count /// update the text
         resumeScanning()

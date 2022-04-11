@@ -20,7 +20,7 @@ class TabViewModel: ObservableObject {
             animatorProgressChanged?(animatorProgress)
         }
     }
-
+    
     var excludedFrames = [Identifier: CGRect]()
     
     @Published var tabBarAttributes = TabBarAttributes.darkBackground

@@ -53,7 +53,7 @@ class PhotosViewModel: ObservableObject {
     var waitingToAddExternalPhotos = false
     /// reload collection views and find.
     var reloadAfterExternalPhotosChanged: (() -> Void)?
-    
+
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
 
@@ -126,8 +126,11 @@ class PhotosViewModel: ObservableObject {
 
     var photosToScan = [Photo]() {
         didSet {
-            totalPhotosCount = photos.filter { $0.metadata.map { !$0.isIgnored } ?? true }.count
-            scannedPhotosCount = totalPhotosCount - photosToScan.count
+            print("Set!")
+            DispatchQueue.main.async {
+                self.totalPhotosCount = self.photos.filter { $0.metadata.map { !$0.isIgnored } ?? true }.count
+                self.scannedPhotosCount = self.totalPhotosCount - self.photosToScan.count
+            }
         }
     }
 
@@ -164,7 +167,6 @@ class PhotosViewModel: ObservableObject {
 
     /// focus a photo after tapping it in the ignored photos collection view
     var getSlidesViewControllerFor: ((Photo) -> PhotosSlidesItemViewController?)?
-    
 
     // MARK: Share
 

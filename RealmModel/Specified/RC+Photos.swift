@@ -10,19 +10,21 @@ import RealmSwift
 import UIKit
 
 extension RealmContainer {
-    func loadPhotoMetadatas() {
-        var photoMetadatas = [PhotoMetadata]()
-
+    func loadPhotoMetadatas() async {
+        let realm = try! await Realm()
         /// convert realm lists to normal lists
         let realmPhotoMetadatas = realm.objects(RealmPhotoMetadata.self)
-        for realmPhotoMetadata in realmPhotoMetadatas {
-            let metadata = realmPhotoMetadata.getPhotoMetadata()
-            photoMetadatas.append(metadata)
+
+        let photoMetadatas = realmPhotoMetadatas.map {
+            $0.getPhotoMetadata()
         }
 
-        self.photoMetadatas = photoMetadatas
+        let time = TimeElapsed()
+
+        print(time.stop())
+        self.photoMetadatas = Array(photoMetadatas)
     }
-    
+
     func deleteAllMetadata() {
         let metadatas = realm.objects(RealmPhotoMetadata.self)
 

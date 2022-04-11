@@ -12,15 +12,27 @@ import UIKit
 extension PhotosViewModel {
     /// only call this once!
     func load() {
-        getRealmModel?().container.loadPhotoMetadatas()
+        Task(priority: .background) {
+            print("loading")
+            await loadAsync()
+            print(";loaded!")
+        }
+    }
+    
+    func loadAsync() async {
+        let scan = await getRealmModel?().photosScanOnLaunch
+        
+        await getRealmModel?().container.loadPhotoMetadatas()
         loadAssets()
-        loadPhotos { [weak self] in
-            guard let self = self else { return }
-            self.sort()
-            self.reload?()
+        await loadPhotos()
             
-            if self.getRealmModel?().photosScanOnLaunch ?? false {
-                self.startScanning()
+        sort()
+        
+        await MainActor.run {
+            reload?()
+        
+            if scan ?? false {
+                startScanning()
             }
         }
     }
@@ -31,6 +43,14 @@ extension PhotosViewModel {
         assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
     }
     
+    func getPhotos() async -> ([Photo], [Photo], [Photo]) {
+        await withCheckedContinuation { continuation in
+            getPhotos { photos, ignoredPhotos, photosToScan in
+                continuation.resume(returning: (photos, ignoredPhotos, photosToScan))
+            }
+        }
+    }
+
     /// 1. all photos, 2. ignored photos, 3. photos to scan
     func getPhotos(completion: (([Photo], [Photo], [Photo]) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -63,14 +83,13 @@ extension PhotosViewModel {
         }
     }
     
-    func loadPhotos(completion: (() -> Void)?) {
-        getPhotos { photos, ignoredPhotos, photosToScan in
-            DispatchQueue.main.async {
-                self.photos = photos
-                self.ignoredPhotos = ignoredPhotos
-                self.photosToScan = photosToScan.reversed() /// newest photos go first
-                completion?()
-            }
+    func loadPhotos() async {
+        let (photos, ignoredPhotos, photosToScan) = await getPhotos()
+        
+        await MainActor.run {
+            self.photos = photos
+            self.ignoredPhotos = ignoredPhotos
+            self.photosToScan = photosToScan.reversed() /// newest photos go first
         }
     }
 }

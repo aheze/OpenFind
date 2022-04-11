@@ -32,9 +32,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
-    /// prepared before?
-    var preparedOnce = false
-    
     /// get data
     var getTabs: (() -> [TabState])?
     
@@ -69,11 +66,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         
         var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
-        
-        if !preparedOnce {
-            preparedOnce = true
-            collectionView.contentOffset.x = width /// start at camera
-        }
         
         guard let tabs = getTabs?() else { return }
         for index in tabs.indices {

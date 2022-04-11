@@ -10,13 +10,12 @@ import UIKit
 
 extension ViewController {
     func listen() {
-        
         ViewControllerCallback.getListDetailController = { [weak self] list in
             guard let self = self else { return nil }
             let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false, addDismissButton: true)
             return viewController
         }
-        
+
         cameraViewModel.settingsPressed = { [weak self] in
             guard let self = self else { return }
             self.present(self.settingsController.viewController, animated: true)
@@ -53,7 +52,9 @@ extension ViewController {
         alert.addAction(
             UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
                 guard let self = self else { return }
-                self.photosViewModel.deleteAllMetadata()
+                Task {
+                    await self.photosViewModel.deleteAllMetadata()
+                }
             }
         )
         alert.addAction(
