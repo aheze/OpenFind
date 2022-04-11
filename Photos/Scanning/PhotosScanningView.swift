@@ -22,7 +22,7 @@ struct PhotosScanningViewHeader: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: SettingsConstants.sectionSpacing) {
                 /// Header
                 Container(description: "Find works completely offline, so your photos and other data never leave your phone.") {
                     HStack(spacing: 16) {
@@ -68,7 +68,7 @@ struct PhotosScanningViewHeader: View {
                         }
                     }
                     .fixedSize(horizontal: false, vertical: true)
-                    .padding(PhotosScanningConstants.padding)
+                    .padding(16)
                     .blueBackground()
                 }
 
@@ -82,32 +82,29 @@ struct PhotosScanningViewHeader: View {
                 }
 
                 PhotoScanningRow(
-                    model: model,
                     realmModel: realmModel,
                     title: "Scan on Launch",
                     description: "Automatically scan photos as soon as you open the app.",
                     storage: \.$photosScanOnLaunch
                 )
-                
+
                 PhotoScanningRow(
-                    model: model,
-                    realmModel: realmModel,
-                    title: "Scan on Addition",
-                    description: "Automatically scan photos when they are added.",
-                    storage: \.$photosScanOnAddition
-                )
-                
-                PhotoScanningRow(
-                    model: model,
                     realmModel: realmModel,
                     title: "Scan on Find",
                     description: "Automatically scan photos when you type in the search bar.",
                     storage: \.$photosScanOnFind
                 )
 
+                PhotoScanningRow(
+                    realmModel: realmModel,
+                    title: "Scan New Photos",
+                    description: "Automatically scan new photos when finding.",
+                    storage: \.$photosScanOnAddition
+                )
+
                 Spacer()
             }
-            .padding(PhotosScanningConstants.padding)
+            .padding(SettingsConstants.edgeInsets)
         }
     }
 
@@ -146,7 +143,7 @@ struct PhotosScanningButton: View {
             .frame(maxWidth: .infinity)
             .padding(16)
             .background(Color.accent.opacity(0.15))
-            .cornerRadius(PhotosScanningConstants.innerCornerRadius)
+            .cornerRadius(10)
         }
     }
 }
@@ -156,13 +153,12 @@ struct Container<Content: View>: View {
     @ViewBuilder let content: Content
 
     var body: some View {
-        VStack(spacing: 10) {
+        /// encompass each section
+        VStack(spacing: 0) {
             content
 
             Text(description)
-                .foregroundColor(UIColor.secondaryLabel.color)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, PhotosScanningConstants.padding)
+                .settingsDescriptionStyle()
         }
     }
 }
@@ -179,6 +175,9 @@ struct PhotoScanningLink: View {
             Button(action: action) {
                 HStack {
                     Text(title)
+                        .foregroundColor(UIColor.label.color)
+                        .padding(SettingsConstants.rowVerticalInsetsFromText)
+
                     Spacer()
 
                     HStack {
@@ -187,17 +186,15 @@ struct PhotoScanningLink: View {
                     }
                     .foregroundColor(UIColor.secondaryLabel.color)
                 }
-                .foregroundColor(UIColor.label.color)
-                .padding(PhotosScanningConstants.padding)
+                .padding(SettingsConstants.rowHorizontalInsets)
                 .background(UIColor.systemBackground.color)
-                .cornerRadius(PhotosScanningConstants.cornerRadius)
+                .cornerRadius(SettingsConstants.sectionCornerRadius)
             }
         }
     }
 }
 
 struct PhotoScanningRow: View {
-    @ObservedObject var model: PhotosViewModel
     @ObservedObject var realmModel: RealmModel
     var title: String
     var description: String
@@ -205,17 +202,13 @@ struct PhotoScanningRow: View {
 
     var body: some View {
         Container(description: description) {
-            HStack {
-                Text(title)
-                Spacer()
-                Toggle(isOn: realmModel[keyPath: storage]) {
-                    EmptyView()
-                }
-                .labelsHidden()
-            }
-            .padding(PhotosScanningConstants.padding)
+            SettingsToggle(
+                realmModel: realmModel,
+                title: title,
+                storage: storage
+            )
             .background(UIColor.systemBackground.color)
-            .cornerRadius(PhotosScanningConstants.cornerRadius)
+            .cornerRadius(SettingsConstants.sectionCornerRadius)
         }
     }
 }

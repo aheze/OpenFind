@@ -39,6 +39,7 @@ struct PhotosSlidesInfoView: View {
 
                 PhotosScanningInfoButton(
                     title: ignored ? "Ignored" : "Ignore",
+                    description: ignored ? "Tap to Unignore" : nil,
                     isOn: ignored
                 ) {
                     var newPhoto = photo

@@ -8,13 +8,9 @@
 
 import SwiftUI
 
-/// conform to this to get extra space for top content
-protocol HeaderSettable: UICollectionViewFlowLayout {
-    var headerHeight: CGFloat { get set }
-}
-
 class HeaderContentModel: ObservableObject {
-    var size: CGSize? = CGSize(width: 50, height: 50)
+    var size: CGSize? = CGSize(width: 0, height: 0)
+    var added = false /// true if added as subview
     var sizeChanged: (() -> Void)?
 }
 
@@ -61,5 +57,36 @@ extension UIViewController {
             return headerView
         }
         return nil
+    }
+}
+
+extension UIViewController {
+    func setupHeaderView<Content: View>(view: Content, headerContentModel: HeaderContentModel, sidePadding: CGFloat, in collectionView: UICollectionView) -> NSLayoutConstraint? {
+        /// called every time show results, show make sure to not add duplicate subviews
+        guard !headerContentModel.added else { return nil }
+
+        let container = UIView()
+        collectionView.addSubview(container)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        let heightC = container.heightAnchor.constraint(equalToConstant: 100)
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            container.leftAnchor.constraint(equalTo: collectionView.leftAnchor, constant: sidePadding),
+            container.widthAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.widthAnchor, constant: -sidePadding * 2),
+            heightC
+        ])
+
+        let headerContent = HeaderContent(headerContentModel: headerContentModel) { view }
+        let hostingController = UIHostingController(rootView: headerContent)
+        self.addChildViewController(hostingController, in: container)
+
+        hostingController.view.backgroundColor = .clear
+        hostingController.view.pinEdgesToSuperview()
+
+        collectionView.setNeedsLayout()
+        collectionView.layoutIfNeeded()
+
+        headerContentModel.added = true
+        return heightC
     }
 }

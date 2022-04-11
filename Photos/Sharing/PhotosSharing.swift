@@ -31,8 +31,32 @@ extension UIViewController {
 
             let dataSource = PhotosSharingDataSource(model: model, assets: assets)
             let items = urls as [Any] + [dataSource]
-            presentShareSheet(items: items)
+            let starActivity = StarActivity { [weak self] in
+                
+            }
+            presentShareSheet(items: items, applicationActivities: [starActivity])
         }
+    }
+}
+
+class StarActivity: UIActivity {
+    var tapped: (() -> Void)?
+    init(tapped: (() -> Void)?) {
+        self.tapped = tapped
+    }
+    
+    override var activityTitle: String? { "Star" }
+    override var activityType: UIActivity.ActivityType? { UIActivity.ActivityType("Star") }
+    override var activityImage: UIImage? { UIImage(systemName: "star") }
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+        true
+    }
+    override class var activityCategory: UIActivity.Category { .action }
+    override func prepare(withActivityItems activityItems: [Any]) {
+    }
+    override func perform() {
+        print("Performed Foo!")
+        tapped?()
     }
 }
 

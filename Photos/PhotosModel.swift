@@ -54,6 +54,7 @@ struct PhotosSlidesState {
             let index = getCurrentIndex(),
             let slidesPhoto = slidesPhotos[safe: index]
         {
+            print("index: \(index).. \(slidesPhoto.findPhoto.photo)")
             return slidesPhoto
         }
         return nil

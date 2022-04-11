@@ -70,7 +70,7 @@ extension PhotosSlidesViewController {
             if let slidesPhoto = slidesState.getCurrentSlidesPhoto() {
                 slidesSearchPromptViewModel.resultsText = slidesPhoto.findPhoto.getResultsText()
                 slidesSearchPromptViewModel.updateBarHeight?()
-                configureToolbar(for: slidesPhoto.findPhoto.photo)
+                model.configureToolbar(for: slidesPhoto.findPhoto.photo)
             }
         }
     }

@@ -105,7 +105,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             let currentIndex = slidesState.getCurrentIndex(),
             let slidesPhoto = slidesState.slidesPhotos[safe: currentIndex]
         {
-            configureToolbar(for: slidesPhoto.findPhoto.photo)
+            model.configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
             if slidesPhoto.findPhoto.highlightsSet?.highlights.count ?? 0 > 0 {

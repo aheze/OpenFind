@@ -16,6 +16,15 @@ extension IgnoredPhotosViewController {
             let type = PhotosCollectionType.photos(self.model.ignoredPhotos)
             return type
         }
+        flowLayout.getTopPadding = { [weak self] in
+            if
+                let self = self,
+                let size = self.headerContentModel.size
+            {
+                return size.height + 16
+            }
+            return .zero
+        }
         flowLayout.getMinCellWidth = { [weak self] in
             guard let self = self else { return 0 }
             return self.realmModel.photosMinimumCellLength

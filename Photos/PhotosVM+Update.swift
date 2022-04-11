@@ -9,7 +9,6 @@
 import UIKit
 
 extension PhotosViewModel {
-    
     /// delete metadata and load
     func deleteAllMetadata() {
         getRealmModel?().container.deleteAllMetadata()
@@ -82,6 +81,7 @@ extension PhotosViewModel {
                     self.slidesState?.currentPhoto = photo
                 }
             }
+            /// the actual photo within the larger array
             self.slidesState?.slidesPhotos[index].findPhoto.photo = photo
         }
 

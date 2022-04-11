@@ -9,8 +9,3 @@
 
 import UIKit
 
-enum PhotosScanningConstants {
-    static var padding = CGFloat(16)
-    static var cornerRadius = CGFloat(16)
-    static var innerCornerRadius = CGFloat(12)
-}

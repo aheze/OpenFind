@@ -50,7 +50,6 @@ struct SettingsSectionRows: View {
                     storage: let storage
                 ):
                     SettingsToggle(
-                        model: model,
                         realmModel: realmModel,
                         title: title,
                         storage: storage

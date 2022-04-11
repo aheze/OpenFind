@@ -10,21 +10,10 @@ import SwiftUI
 
 extension PhotosViewController {
     func listen() {
-//        realmModel.$photosMinimumCellLength.sink { [weak self] photosMinimumCellLength in
-//            guard let self = self else { return }
-//            self.
-//        }
-//        .store(in: &realmModel.cancellables)
-        
-        listenToModel()
-    }
-
-    func listenToModel() {
         /// only called at first
         model.reload = { [weak self] in
             guard let self = self else { return }
             
-            print("Rleoaded!!")
             self.model.displayedSections = self.model.allSections
             self.update(animate: false)
         }
@@ -54,7 +43,7 @@ extension PhotosViewController {
             }
             
             if let currentPhoto = self.model.slidesState?.currentPhoto {
-                self.model.slidesState?.viewController?.configureToolbar(for: currentPhoto)
+                self.model.configureToolbar(for: currentPhoto)
             }
         }
         
@@ -112,12 +101,10 @@ extension PhotosViewController {
             }
         }
         
+        /// results top header
         headerContentModel.sizeChanged = { [weak self] in
             guard let self = self else { return }
-            
-            self.resultsHeaderHeightC.constant = self.headerContentModel.size?.height ?? 0
-            self.collectionView.setNeedsLayout()
-            self.collectionView.layoutIfNeeded()
+            self.resultsHeaderHeightC?.constant = self.headerContentModel.size?.height ?? 0
             self.resultsFlowLayout.invalidateLayout()
         }
         

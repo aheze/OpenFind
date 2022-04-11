@@ -52,6 +52,7 @@ class PhotosSectionHeaderLayoutAttributes: UICollectionViewLayoutAttributes {
 class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
     var getContent: (() -> PhotosCollectionType)?
     var getMinCellWidth: (() -> CGFloat)?
+    var getTopPadding: (() -> CGFloat)?
     
     override init() {
         super.init()
@@ -122,6 +123,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         var photosAttributes = PhotosAttributes.attributes([])
         
+        let topPadding = getTopPadding?() ?? .zero
         let availableWidth = collectionView.bounds.width
             - PhotosConstants.sidePadding * 2
             - collectionView.safeAreaInsets.left
@@ -143,7 +145,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
                 leftSpacing = CGFloat(columnIndex) * PhotosConstants.cellSpacing
             }
             
-            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: 0)
+            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: topPadding)
             columnOffsets.append(offset)
         }
         

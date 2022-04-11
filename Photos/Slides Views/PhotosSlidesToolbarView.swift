@@ -52,31 +52,13 @@ struct PhotosSlidesToolbarView: View {
     }
 
     func toggleStar() {
-        if
-            let slidesState = model.slidesState,
-            let slidesPhoto = slidesState.getCurrentSlidesPhoto()
-        {
-            var newPhoto = slidesPhoto.findPhoto.photo
-            if let metadata = newPhoto.metadata {
-                let isStarred = !metadata.isStarred
-                newPhoto.metadata?.isStarred = !metadata.isStarred
-                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
-                model.slidesState?.toolbarStarOn = isStarred
-            } else {
-                let metadata = PhotoMetadata(
-                    assetIdentifier: slidesPhoto.findPhoto.photo.asset.localIdentifier,
-                    sentences: [],
-                    dateScanned: nil,
-                    isStarred: true,
-                    isIgnored: false
-                )
-                newPhoto.metadata = metadata
-                model.updatePhotoMetadata(photo: newPhoto, reloadCell: true)
-                model.slidesState?.toolbarStarOn = metadata.isStarred
-            }
-            
-            model.sortNeededAfterStarChanged = true
+        if let photo = model.slidesState?.currentPhoto {
+            model.star(photos: [photo])
         }
+        if let photo = model.slidesState?.currentPhoto {
+            model.configureToolbar(for: photo)
+        }
+        model.sortNeededAfterStarChanged = true
     }
     
     func toggleToolbar() {

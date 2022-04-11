@@ -45,7 +45,7 @@ extension ViewController {
         let displayedLists = lists.model.displayedLists.map { $0.list }
         let urls = displayedLists.compactMap { $0.getURL() }
         let dataSource = ListsSharingDataSource(lists: displayedLists)
-        self.settingsController.viewController.presentShareSheet(items: urls + [dataSource])
+        self.settingsController.viewController.presentShareSheet(items: urls + [dataSource], applicationActivities: nil)
     }
 
     func deleteAllPhotoMetadata() {

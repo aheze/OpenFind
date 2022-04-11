@@ -20,7 +20,7 @@ extension ListsViewController {
             let lists = self.model.selectedLists
             let urls = lists.compactMap { $0.getURL() }
             let dataSource = ListsSharingDataSource(lists: lists)
-            self.presentShareSheet(items: urls + [dataSource])
+            self.presentShareSheet(items: urls + [dataSource], applicationActivities: nil)
             self.resetSelectingState()
         }
 

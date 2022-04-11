@@ -13,9 +13,7 @@ class IgnoredPhotosViewController: UIViewController {
     var model: PhotosViewModel
     var realmModel: RealmModel
     
-    var headerContentModel = HeaderContentModel()
-    var ignoredPhotosHeaderViewModel = IgnoredPhotosHeaderViewModel()
-    lazy var headerView = IgnoredPhotosHeaderView(model: model, ignoredPhotosHeaderViewModel: ignoredPhotosHeaderViewModel)
+    
     
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, Photo>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, Photo>
@@ -27,6 +25,10 @@ class IgnoredPhotosViewController: UIViewController {
     var selectBarButton: UIBarButtonItem!
     lazy var toolbarContainer = UIView()
     lazy var toolbarView = IgnoredPhotosToolbarView(model: model)
+    
+    lazy var headerContentModel = HeaderContentModel()
+    lazy var ignoredPhotosHeaderView = IgnoredPhotosHeaderView(model: model)
+    var ignoredPhotosHeaderHeightC: NSLayoutConstraint?
     
     init(
         model: PhotosViewModel,
@@ -52,6 +54,7 @@ class IgnoredPhotosViewController: UIViewController {
         view = UIView()
         
         setup()
+        listen()
         model.ignoredPhotosChanged = { [weak self] in
             guard let self = self else { return }
             self.updateViewsEnabled()

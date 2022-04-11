@@ -6,14 +6,18 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 extension IgnoredPhotosViewController {
     func setup() {
         setupCollectionView()
         setupNavigationBar()
         setupToolbar()
+
+        DispatchQueue.main.async {
+            self.setupHeader()
+        }
     }
 
     func setupCollectionView() {
@@ -26,7 +30,7 @@ extension IgnoredPhotosViewController {
             collectionContainer.topAnchor.constraint(equalTo: view.topAnchor),
             collectionContainer.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-        
+
         collectionContainer.addSubview(collectionView)
         collectionView.pinEdgesToSuperview()
 
@@ -40,6 +44,15 @@ extension IgnoredPhotosViewController {
         collectionView.contentInsetAdjustmentBehavior = .always
     }
 
+    func setupHeader() {
+        ignoredPhotosHeaderHeightC = setupHeaderView(
+            view: ignoredPhotosHeaderView,
+            headerContentModel: headerContentModel,
+            sidePadding: 16,
+            in: collectionView
+        )
+    }
+
     func setupNavigationBar() {
         let selectButton = UIBarButtonItem(
             title: getSelectButtonTitle(),
@@ -49,9 +62,9 @@ extension IgnoredPhotosViewController {
         )
 
         navigationItem.rightBarButtonItem = selectButton
-        self.selectBarButton = selectButton
+        selectBarButton = selectButton
     }
-    
+
     func setupToolbar() {
         view.addSubview(toolbarContainer)
         toolbarContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +75,7 @@ extension IgnoredPhotosViewController {
             toolbarContainer.heightAnchor.constraint(equalToConstant: ConstantVars.tabBarContentHeight),
             toolbarContainer.topAnchor.constraint(equalTo: collectionContainer.bottomAnchor)
         ])
-        
+
         let hostingController = UIHostingController(rootView: toolbarView)
         addChildViewController(hostingController, in: toolbarContainer)
     }

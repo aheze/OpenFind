@@ -24,11 +24,10 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     /// internal models
     var permissionsViewModel = PhotosPermissionsViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
-    var headerContentModel = HeaderContentModel()
     var sliderViewModel = SliderViewModel()
-    lazy var resultsHeaderContainer = UIView()
+    lazy var headerContentModel = HeaderContentModel()
     lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
-    var resultsHeaderHeightC: NSLayoutConstraint!
+    var resultsHeaderHeightC: NSLayoutConstraint?
     
     /// Searchable
     var showSearchBar = true

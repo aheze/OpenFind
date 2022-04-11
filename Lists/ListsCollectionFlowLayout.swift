@@ -9,8 +9,7 @@
 import UIKit
 
 /// columned layout, used by both Lists and Photos
-class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
-    var headerHeight: CGFloat = 0
+class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     
     /// attributes for the headers / supplementary views
     var sectionAttributes = [UICollectionViewLayoutAttributes]()
@@ -94,7 +93,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout, HeaderSettable {
                 leftSpacing = CGFloat(columnIndex) * ListsCollectionConstants.cellSpacing
             }
             
-            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: headerHeight + topPadding)
+            let offset = CGSize(width: initialXOffset + additionalXOffset + leftSpacing, height: topPadding)
             columnOffsets.append(offset)
         }
         

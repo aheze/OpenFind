@@ -8,23 +8,29 @@
 
 import SwiftUI
 
-class IgnoredPhotosHeaderViewModel: ObservableObject {
-    @Published var show = false
-}
-
 struct IgnoredPhotosHeaderView: View {
     @ObservedObject var model: PhotosViewModel
-    @ObservedObject var ignoredPhotosHeaderViewModel: IgnoredPhotosHeaderViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Image(systemName: "info")
-            Text("Find will never scan these photos")
+        VStack {
+            HStack {
+                Image(systemName: "info.circle.fill")
+                    .font(UIFont.preferredFont(forTextStyle: .title3).font)
+                    .foregroundColor(Color.accent)
+
+                Text("Find will never scan these photos.")
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .foregroundColor(Color.accent)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(16)
+            .background(Color.accent.opacity(0.1))
+            .cornerRadius(PhotosResultsCellConstants.cornerRadius)
+
+            if model.ignoredPhotos.isEmpty {
+                Text("No ignored photos.")
+                    .foregroundColor(UIColor.secondaryLabel.color)
+            }
         }
-        .foregroundColor(Color.accent)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(PhotosScanningConstants.padding)
-        .background(Color.accent.opacity(0.1))
-        .cornerRadius(PhotosResultsCellConstants.cornerRadius)
     }
 }

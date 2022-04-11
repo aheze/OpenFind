@@ -10,7 +10,6 @@
 import SwiftUI
 
 struct SettingsToggle: View {
-    @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     let title: String
     let storage: KeyPath<RealmModel, Binding<Bool>>

@@ -60,7 +60,7 @@ struct PhotosScanningHeader: View {
                     }
                 }
             }
-            .padding(PhotosScanningConstants.padding)
+            .padding(16)
             .blueBackground()
         }
         .padding(.bottom, ListsCollectionConstants.cellSpacing)
