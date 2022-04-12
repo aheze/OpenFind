@@ -90,7 +90,7 @@ class CameraViewController: UIViewController, PageViewController {
         
         _ = searchViewController
         setup()
-        listenToModel()
+        listen()
     }
     
     override func viewDidLayoutSubviews() {

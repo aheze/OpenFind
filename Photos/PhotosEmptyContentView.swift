@@ -44,14 +44,11 @@ struct PhotosEmptyContentView: View {
                     HStack(spacing: PhotosConstants.cellSpacing) {
                         ForEach(0 ..< numberOfColumns, id: \.self) { column in
                             let offset = CGFloat(row * column)
-                            UIColor.systemBackground.color
-                                .overlay(
-                                    Colors
-                                        .accent
-                                        .offset(by: offset * 0.001)
-                                        .color
-                                        .opacity(flash ? 1 : 0)
-                                )
+                            Colors
+                                .accent
+                                .offset(by: offset * 0.001)
+                                .color
+                                .opacity(flash ? 1 : 0)
                                 .animation(.linear(duration: 0.5).delay(offset * 0.02), value: flash)
                         }
                     }
@@ -63,7 +60,6 @@ struct PhotosEmptyContentView: View {
             .padding(.top, model.emptyContentTopPadding)
             .onAppear {
                 flash = true
-                
             }
         }
     }

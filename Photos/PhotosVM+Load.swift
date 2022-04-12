@@ -13,10 +13,12 @@ extension PhotosViewModel {
     /// only call this once!
     func load() {
         Task {
-            
-            /// this line takes a while to execute
-            await self.getRealmModel?().container.loadPhotoMetadatas()
-//            await try! Task.sleep(nanoseconds: 20_000_000_000)
+            if Debug.photosTestEmptyLoading {
+                try! await Task.sleep(nanoseconds: 60_000_000_000)
+            } else {
+                /// this line takes a while to execute
+                await self.getRealmModel?().container.loadPhotoMetadatas()
+            }
             
             self.loadAssets()
             await self.loadPhotos()

@@ -9,7 +9,9 @@
 import SwiftUI
 
 extension CameraViewController {
-    func listenToModel() {
+    func listen() {
+        listenToDefaults()
+        
         model.flashPressed = { [weak self] in
             guard let self = self else { return }
             self.toggleFlashlight(self.model.flash)

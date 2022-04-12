@@ -19,6 +19,7 @@ enum RealmModelData {
     
     // MARK: Finding
 
+    /// for both Photos and Camera
     static var findingPrimaryRecognitionLanguage = SavedData(key: "findingPrimaryRecognitionLanguage", value: Settings.Values.RecognitionLanguage.english.rawValue)
     static var findingSecondaryRecognitionLanguage = SavedData(key: "findingSecondaryRecognitionLanguage", value: Settings.Values.RecognitionLanguage.none.rawValue)
     

@@ -10,6 +10,7 @@ import UIKit
 
 extension SearchViewController {
     func listen() {
+        listenToDefaults()
         listenToCollectionView()
         listenToToolbar()
         listenToKeyboard()
