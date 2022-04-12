@@ -12,36 +12,28 @@ import UIKit
 extension PhotosViewModel {
     /// only call this once!
     func load() {
-        
-//        Task(priority: .low) {
-        
         Task {
-            print("loading")
-            await self.loadAsync()
-            print(";loaded!")
+            
+            /// this line takes a while to execute
+            await self.getRealmModel?().container.loadPhotoMetadatas()
+            
+            self.loadAssets()
+            await self.loadPhotos()
+                
+            self.sort()
+            await self.reloadAfterLoad()
         }
-        
-        print("task ended")
     }
     
-    func loadAsync() async {
-        let time = TimeElapsed()
-        await getRealmModel?().container.loadPhotoMetadatas()
-        print(time.stop())
-        loadAssets()
-        await loadPhotos()
-            
-        sort()
-        let scan = await getRealmModel?().photosScanOnLaunch
-        await MainActor.run {
-            reload?()
-        
-            if scan ?? false {
-                startScanning()
-            }
+    @MainActor func reloadAfterLoad() {
+        print("reloading!!!")
+        reload?()
+        let scan = getRealmModel?().photosScanOnLaunch
+        if scan ?? false {
+            startScanning()
         }
     }
-
+    
     func loadAssets() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]

@@ -53,6 +53,7 @@ extension PhotosViewController {
 
     func load() {
         startObservingChanges()
+
         model.load()
     }
 
