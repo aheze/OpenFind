@@ -59,6 +59,8 @@ struct PhotosScanningViewHeader: View {
                             let title = getTitle()
 
                             PhotosScanningButton(image: image, title: title) {
+                                guard model.scannedPhotosCount < model.totalPhotosCount else { return }
+
                                 if model.scanningState == .dormant {
                                     model.startScanning()
                                 } else {

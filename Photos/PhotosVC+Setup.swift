@@ -25,8 +25,9 @@ extension PhotosViewController {
         contentContainer.backgroundColor = .clear
         contentContainer.isUserInteractionEnabled = false
         setupEmptyContent()
-
         setupNavigationBar()
+
+        /// filters
         setupFiltersView()
 
         listen()
@@ -53,14 +54,24 @@ extension PhotosViewController {
 
     func load() {
         startObservingChanges()
-
         model.load()
+        searchViewModel.enabled = true
+        slidesSearchViewModel.enabled = true
+    }
+
+    func finishedLoading() {
+        /// show views again
+        UIView.animate(duration: 0.3, dampingFraction: 0.8) {
+            self.collectionView.alpha = 1
+            self.showFiltersView()
+        }
+
+        model.displayedSections = model.allSections
+        update(animate: false)
     }
 
     func showPermissionsView() {
         collectionView.alpha = 0
-        contentContainer.alpha = 0
-        sliderContainerView.alpha = 0
 
         searchViewModel.enabled = false
         slidesSearchViewModel.enabled = false
@@ -73,13 +84,9 @@ extension PhotosViewController {
         permissionsViewModel.permissionsGranted = { [weak self] in
             guard let self = self else { return }
             self.load()
-            self.searchViewModel.enabled = true
-            self.slidesSearchViewModel.enabled = true
+
             UIView.animate(withDuration: 0.5) { [weak hostingController] in
                 hostingController?.view.alpha = 0
-                self.collectionView.alpha = 1
-                self.contentContainer.alpha = 1
-                self.sliderContainerView.alpha = 1
             } completion: { [weak hostingController] _ in
                 hostingController?.view.removeFromSuperview()
             }

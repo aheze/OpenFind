@@ -34,7 +34,6 @@ extension PhotosViewModel {
         }
 
         photosToScan = photosToScan.filter { $0 != photo }
-        scannedPhotosCount = photos.count - photosToScan.count /// update the text
         resumeScanning()
     }
 

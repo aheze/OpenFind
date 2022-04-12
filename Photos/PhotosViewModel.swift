@@ -11,6 +11,9 @@ import UIKit
 
 class PhotosViewModel: ObservableObject {
     // MARK: Base collection view
+    
+    /// show loading indicator
+    @Published var loaded = false
 
     var getRealmModel: (() -> RealmModel)?
 

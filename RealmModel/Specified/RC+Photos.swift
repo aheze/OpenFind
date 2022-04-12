@@ -17,10 +17,15 @@ extension RealmContainer {
         /// convert realm lists to normal lists
         let realmPhotoMetadatas = realm.objects(RealmPhotoMetadata.self)
 
-        /// this line is very fast actually
-        let photoMetadatas = realmPhotoMetadatas.map {
-            $0.getPhotoMetadata()
+        var items = [String]()
+        for i in 0 ..< 9_000_000 { /// this usually takes a couple seconds
+            items.append("\(i)")
         }
+        
+//        /// this line is very fast actually
+//        let photoMetadatas = realmPhotoMetadatas.map {
+//            $0.getPhotoMetadata()
+//        }
         let array = Array(photoMetadatas)
         applyPhotoMetadatas(array)
     }

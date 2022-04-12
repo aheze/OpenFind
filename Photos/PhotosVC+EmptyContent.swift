@@ -13,11 +13,11 @@ extension PhotosViewController {
         let viewController = UIHostingController(
             rootView: PhotosEmptyContentView(
                 model: model,
+                realmModel: realmModel,
                 sliderViewModel: sliderViewModel
             )
         )
         addChildViewController(viewController, in: contentContainer)
-        contentContainer.alpha = 0
     }
 
     func showEmptyContent(_ show: Bool) {

@@ -24,6 +24,14 @@ extension PhotosViewController {
 
             self.sliderChanged(filter: filter)
         }
+        
+        sliderContainerView.alpha = 0
+        sliderContainerView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+    }
+    
+    func showFiltersView() {
+        sliderContainerView.alpha = 1
+        sliderContainerView.transform = .identity
     }
 
     /// slider changed to a new selection

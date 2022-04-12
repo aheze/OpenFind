@@ -7,7 +7,7 @@
 //
     
 import Photos
-import UIKit
+import SwiftUI
 
 extension PhotosViewModel {
     /// only call this once!
@@ -25,8 +25,11 @@ extension PhotosViewModel {
         }
     }
     
+    /// Main queue for `@Published`
     @MainActor func reloadAfterLoad() {
-        print("reloading!!!")
+        withAnimation {
+            loaded = true
+        }
         reload?()
         let scan = getRealmModel?().photosScanOnLaunch
         if scan ?? false {

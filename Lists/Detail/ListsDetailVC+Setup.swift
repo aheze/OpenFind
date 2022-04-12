@@ -40,6 +40,9 @@ extension ListsDetailViewController {
             bottom: ListsDetailConstants.listSpacing / 2,
             right: 0
         )
+        
+        headerTopCenterTextField.autocapitalizationType = .words
+        headerBottomTextField.autocapitalizationType = .sentences
     }
     
     func loadListContents(animate: Bool = true) {

@@ -115,14 +115,12 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     
     /// called upon finger lift
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        print("get lift")
         return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
     }
     
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         let attributes = layoutAttributes[safe: currentIndex]
-        print("get rot")
         return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
     }
     
@@ -172,7 +170,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         
         currentIndex = closestAttributeIndex
-        print("closest: \(currentIndex)")
         return CGPoint(x: closestAttribute?.fullOrigin ?? point.x, y: 0)
     }
 }
