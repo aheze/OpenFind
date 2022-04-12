@@ -10,6 +10,7 @@ import UIKit
 
 extension RealmContainer {
     func loadPhotoMetadatas() {
+        self.photoMetadatas = []
     }
     
     func deleteAllMetadata() {

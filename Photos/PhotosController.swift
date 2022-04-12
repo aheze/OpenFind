@@ -89,7 +89,6 @@ class PhotosController {
         
         viewController.updateNavigationBar = { [weak self] in
             guard let self = self else { return }
-            
             self.searchNavigationController.updateSearchBarOffset()
             tabViewModel.excludedFrames[.photosSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }

@@ -16,6 +16,7 @@ extension PhotosViewModel {
             
             /// this line takes a while to execute
             await self.getRealmModel?().container.loadPhotoMetadatas()
+//            await try! Task.sleep(nanoseconds: 20_000_000_000)
             
             self.loadAssets()
             await self.loadPhotos()

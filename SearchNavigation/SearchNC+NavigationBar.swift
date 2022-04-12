@@ -90,7 +90,15 @@ extension UINavigationBar {
         /// Loop through the navigation bar's subviews.
         for subview in subviews {
             /// Check if the subview is pinned to the top (compact bar) and contains a title label
-            if subview.frame.origin.y == 0, subview.subviews.contains(where: { $0 is UILabel }) {
+            if
+                subview.frame.origin.y == 0,
+                subview.subviews.contains(where: {
+                    $0 is UILabel /// title label
+                    || $0.subviews.contains(where: { /// other view with sub label (Photos)
+                        $0 is UILabel
+                    })
+                })
+            {
                 return subview.bounds.height
             }
         }

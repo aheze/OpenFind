@@ -62,9 +62,6 @@ class RealmModel: ObservableObject {
         container.listsUpdated = { [weak self] lists in
             self?.lists = lists
         }
-        container.photoMetadatasUpdated = { [weak self] photoMetadatas in
-            self?.photoMetadatas = photoMetadatas
-        }
 
         container.loadLists()
 

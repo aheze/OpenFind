@@ -33,6 +33,7 @@ struct PhotosEmptyContentView: View {
         }
     }
     
+    @State var flash = false
     var gridPreview: some View {
         GeometryReader { geometry in
             let (numberOfColumns, columnWidth) = getNumberOfColumnsAndWidth(from: geometry.size.width)
@@ -42,8 +43,16 @@ struct PhotosEmptyContentView: View {
                 ForEach(0 ..< numberOfRows, id: \.self) { row in
                     HStack(spacing: PhotosConstants.cellSpacing) {
                         ForEach(0 ..< numberOfColumns, id: \.self) { column in
-                            Colors.accent.offset(by: CGFloat(row * column) * 0.001)
-                                .color
+                            let offset = CGFloat(row * column)
+                            UIColor.systemBackground.color
+                                .overlay(
+                                    Colors
+                                        .accent
+                                        .offset(by: offset * 0.001)
+                                        .color
+                                        .opacity(flash ? 1 : 0)
+                                )
+                                .animation(.linear(duration: 0.5).delay(offset * 0.02), value: flash)
                         }
                     }
                     .aspectRatio(CGFloat(numberOfColumns), contentMode: .fit)
@@ -51,6 +60,11 @@ struct PhotosEmptyContentView: View {
                 }
             }
             .opacity(0.5)
+            .padding(.top, model.emptyContentTopPadding)
+            .onAppear {
+                flash = true
+                
+            }
         }
     }
 

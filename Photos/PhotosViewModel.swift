@@ -14,6 +14,7 @@ class PhotosViewModel: ObservableObject {
     
     /// show loading indicator
     @Published var loaded = false
+    @Published var emptyContentTopPadding = CGFloat(0) /// search bar offset
 
     var getRealmModel: (() -> RealmModel)?
 

@@ -110,6 +110,10 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets)
+        
+        /// set the top padding for the empty content view
+        model.emptyContentTopPadding = searchViewModel.getTotalHeight()
+        
         if model.resultsState != nil {
             updateNavigationBlur(with: resultsCollectionView)
         } else {

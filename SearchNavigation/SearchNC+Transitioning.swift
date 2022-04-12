@@ -13,6 +13,7 @@ extension SearchNavigationController {
     func updateSearchBarOffset() {
         if let topViewController = navigation?.topViewController as? Searchable {
             let searchBarOffset = topViewController.baseSearchBarOffset + max(0, topViewController.additionalSearchBarOffset ?? 0)
+            
             let searchBarHeight = topViewController.showSearchBar ? searchViewModel.getTotalHeight() : 0
             let promptOffset = searchBarOffset + searchBarHeight
             let promptHeight = getAdditionalSearchPromptHeight(for: topViewController)

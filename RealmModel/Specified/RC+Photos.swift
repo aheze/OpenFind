@@ -10,22 +10,16 @@ import RealmSwift
 import UIKit
 
 extension RealmContainer {
-    
     /// this function takes a while to run, add `await`
     func loadPhotoMetadatas() {
         let realm = try! Realm()
         /// convert realm lists to normal lists
         let realmPhotoMetadatas = realm.objects(RealmPhotoMetadata.self)
 
-        var items = [String]()
-        for i in 0 ..< 9_000_000 { /// this usually takes a couple seconds
-            items.append("\(i)")
+        /// this line is very fast actually
+        let photoMetadatas = realmPhotoMetadatas.map {
+            $0.getPhotoMetadata()
         }
-        
-//        /// this line is very fast actually
-//        let photoMetadatas = realmPhotoMetadatas.map {
-//            $0.getPhotoMetadata()
-//        }
         let array = Array(photoMetadatas)
         applyPhotoMetadatas(array)
     }

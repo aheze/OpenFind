@@ -13,12 +13,7 @@ class RealmContainer {
         }
     }
 
-    var photoMetadatas = [PhotoMetadata]() {
-        didSet {
-            photoMetadatasUpdated?(photoMetadatas)
-        }
-    }
+    var photoMetadatas = [PhotoMetadata]()
 
     var listsUpdated: (([List]) -> Void)?
-    var photoMetadatasUpdated: (([PhotoMetadata]) -> Void)?
 }
