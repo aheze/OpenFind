@@ -27,6 +27,19 @@ class TabBarViewController: UIViewController {
             return self.pages.map { $0.tabType }
         }
         
+        /// get initial offset
+        flowLayout.getInitialContentOffset = { [weak self] in
+            guard let self = self else { return nil }
+            switch self.realmModel.defaultTab {
+            case .photos:
+                return 0
+            case .camera:
+                return self.contentCollectionView.bounds.width
+            case .lists:
+                return self.contentCollectionView.bounds.width * 2
+            }
+        }
+        
         contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
@@ -89,17 +102,15 @@ class TabBarViewController: UIViewController {
         /// listen to the model and handle tab changes
         listen()
         
+        /// set tab bar colors
         switch realmModel.defaultTab {
         case .photos:
-            contentCollectionView.contentOffset.x = 0
             model.changeTabState(newTab: .photos, animation: .fractionalProgress)
             model.statusBarStyle = .default
         case .camera:
-            contentCollectionView.contentOffset.x = contentCollectionView.bounds.width
             model.changeTabState(newTab: .camera, animation: .fractionalProgress)
             model.statusBarStyle = .lightContent
         case .lists:
-            contentCollectionView.contentOffset.x = contentCollectionView.bounds.width * 2
             model.changeTabState(newTab: .lists, animation: .fractionalProgress)
             model.statusBarStyle = .default
         }
@@ -171,6 +182,13 @@ class TabBarViewController: UIViewController {
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
             let targetOffset = contentPagingLayout.getTargetOffset(for: CGPoint(x: attributes.fullOrigin, y: 0), velocity: 0)
             contentCollectionView.setContentOffset(targetOffset, animated: animated)
+        }
+    }
+    
+    func scrollAtLaunch(to index: Int) {
+        DispatchQueue.main.async {
+            self.contentCollectionView.layoutIfNeeded()
+            self.contentCollectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: false)
         }
     }
 }

@@ -35,11 +35,12 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// get data
     var getTabs: (() -> [TabState])?
     
+    /// if not prepared, get initial offset
+    var prepared = false
+    var getInitialContentOffset: (() -> CGFloat?)?
+    
     var layoutAttributes = [PageLayoutAttributes]()
 
-    /// actual content offset used by `prepare`
-    var currentOffset = CGFloat(0)
-   
     /// calculated from `getTargetOffset`
     var currentIndex = 1
     
@@ -61,10 +62,18 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
         
+        if !prepared {
+            prepared = true
+            let offset = getInitialContentOffset?() ?? .zero
+            collectionView.contentOffset.x = offset
+        }
+        
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
         
         var layoutAttributes = [PageLayoutAttributes]()
+        
+        /// current origin of a page
         var currentOrigin = CGFloat(0)
         
         guard let tabs = getTabs?() else { return }
@@ -88,9 +97,8 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
 
         contentSize = CGSize(width: currentOrigin, height: height)
-        self.layoutAttributes = layoutAttributes
         
-        currentOffset = collectionView.contentOffset.x
+        self.layoutAttributes = layoutAttributes
     }
     
     /// boilerplate code
@@ -107,12 +115,14 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     
     /// called upon finger lift
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        print("get lift")
         return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
     }
     
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         let attributes = layoutAttributes[safe: currentIndex]
+        print("get rot")
         return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
     }
     
@@ -152,6 +162,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             }
         }
         
+        let currentOffset = collectionView?.contentOffset.x ?? 0
         if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
             let distance = abs(closestAttributeUnwrapped.fullOrigin - currentOffset)
             if distance > maxDistance {
@@ -161,6 +172,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         
         currentIndex = closestAttributeIndex
+        print("closest: \(currentIndex)")
         return CGPoint(x: closestAttribute?.fullOrigin ?? point.x, y: 0)
     }
 }
