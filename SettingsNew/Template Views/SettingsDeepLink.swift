@@ -69,6 +69,7 @@ struct SettingsDeepLink: View {
                 .padding(SettingsConstants.rowHorizontalInsets)
             }
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
     }
 
     func getPathTitles() -> [String] {

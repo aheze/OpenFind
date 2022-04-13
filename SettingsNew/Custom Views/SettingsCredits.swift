@@ -21,10 +21,11 @@ struct Person: Identifiable {
     var picture: ProfilePicture
     var description: String
     var urlString: String
+    var showUrl = true
 
     enum ProfilePicture {
         case image(imageName: String)
-        case symbol(iconName: String, backgroundColor: UIColor)
+        case symbol(iconName: String, foregroundColor: UIColor, backgroundColor: UIColor)
     }
 
     func getUrlSummary() -> String {
@@ -52,6 +53,13 @@ extension Person {
                 picture: .image(imageName: "WinKProfile"),
                 description: "Made the app promo music",
                 urlString: "https://soundcloud.com/winksounds"
+            ),
+            .init(
+                name: "Want to help?",
+                picture: .symbol(iconName: "plus", foregroundColor: UIColor.secondaryLabel, backgroundColor: UIColor.secondarySystemBackground),
+                description: "Find is a completely free app — got something you want to add? It could be a translation or a feature or anything, just DM me on Twitter!",
+                urlString: "https://twitter.com/aheze0",
+                showUrl: false
             ),
         ]
     }()
@@ -129,59 +137,7 @@ struct SettingsCredits: View {
                     .padding(.horizontal, 32)
 
                 ForEach(Person.people) { person in
-                    Button {
-                        if let url = URL(string: person.urlString) {
-                            UIApplication.shared.open(url)
-                        }
-                    } label: {
-                        HStack(spacing: 20) {
-                            VStack {
-                                switch person.picture {
-                                case .image(imageName: let imageName):
-                                    Image(imageName)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                case .symbol(iconName: let iconName, backgroundColor: let backgroundColor):
-                                    backgroundColor.color
-                                        .overlay(
-                                            Image(systemName: iconName)
-                                                .font(UIFont.preferredFont(forTextStyle: .title2).font)
-                                                .foregroundColor(.white)
-                                        )
-                                }
-                            }
-                            .frame(width: 80, height: 80)
-                            .roundedCircleBorder(borderRadius: 3)
-
-                            VStack(alignment: .leading) {
-                                Text(person.name)
-                                    .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
-                                    .foregroundColor(UIColor.label.color)
-
-                                Text(person.description)
-                                    .foregroundColor(UIColor.secondaryLabel.color)
-
-                                Spacer()
-
-                                Text(person.getUrlSummary())
-                                    .font(.footnote)
-                                    .foregroundColor(UIColor.secondaryLabel.color)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.vertical, 4)
-                        }
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(SettingsConstants.rowVerticalInsetsFromText)
-                        .padding(SettingsConstants.rowHorizontalInsets)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: SettingsConstants.sectionCornerRadius)
-                                .strokeBorder(
-                                    UIColor.secondaryLabel.color,
-                                    lineWidth: 0.25
-                                )
-                        )
-                    }
+                    PersonView(person: person)
                 }
 
                 Button {
@@ -192,6 +148,7 @@ struct SettingsCredits: View {
                     VStack {
                         if toggled {
                             Text("❤️")
+                                .font(UIFont.preferredFont(forTextStyle: .title1).font)
                                 .transition(.scale(scale: 2).combined(with: .opacity))
                         } else {
                             Text("Natalie, thank you for everything. We will always remember you ❤️")
@@ -210,13 +167,91 @@ struct SettingsCredits: View {
                         }
                     }
                 }
-                .buttonStyle(PlainButtonStyle())
             }
         }
     }
 }
 
+struct PersonView: View {
+    let person: Person
+    var body: some View {
+        Button {
+            if let url = URL(string: person.urlString) {
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            HStack(spacing: 20) {
+                VStack {
+                    switch person.picture {
+                    case .image(imageName: let imageName):
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    case .symbol(iconName: let iconName, foregroundColor: let foregroundColor, backgroundColor: let backgroundColor):
+                        backgroundColor.color
+                            .overlay(
+                                Image(systemName: iconName)
+                                    .font(UIFont.preferredFont(forTextStyle: .largeTitle).font)
+                                    .foregroundColor(foregroundColor.color)
+                            )
+                    }
+                }
+                .frame(width: 80, height: 80)
+                .roundedCircleBorderSmall()
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(person.name)
+                        .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
+                        .foregroundColor(UIColor.label.color)
+
+                    Text(person.description)
+                        .foregroundColor(UIColor.secondaryLabel.color)
+                        .multilineTextAlignment(.leading)
+
+                    if person.showUrl {
+                        Spacer()
+                        Text(person.getUrlSummary())
+                            .font(.footnote)
+                            .foregroundColor(UIColor.secondaryLabel.color)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 4)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(SettingsConstants.rowVerticalInsetsFromText)
+            .padding(SettingsConstants.rowHorizontalInsets)
+            .overlay(
+                RoundedRectangle(cornerRadius: SettingsConstants.sectionCornerRadius)
+                    .strokeBorder(
+                        UIColor.secondaryLabel.color,
+                        lineWidth: 0.25
+                    )
+            )
+        }
+    }
+}
+
 extension View {
+    func roundedCircleBorderSmall() -> some View {
+        self.clipShape(Circle())
+            .overlay(
+                Circle()
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [
+                                UIColor.systemBackground.toColor(Colors.accent, percentage: 0.1).color,
+                                UIColor.systemBackground.toColor(Colors.accent, percentage: 0.25).color
+                            ],
+                            startPoint: .bottom,
+                            endPoint: .top
+                        ),
+                        lineWidth: 3
+                    )
+            )
+    }
+
     func roundedCircleBorder(borderRadius: CGFloat) -> some View {
         self.clipShape(Circle())
             .overlay(
@@ -224,8 +259,8 @@ extension View {
                     .strokeBorder(
                         LinearGradient(
                             colors: [
-                                UIColor.systemBackground.color,
-                                UIColor.systemBackground.toColor(.label, percentage: 0.1).color,
+                                UIColor.systemBackground.toColor(Colors.accent, percentage: 0.1).color,
+                                UIColor.systemBackground.toColor(Colors.accent, percentage: 0.25).color
                             ],
                             startPoint: .bottom,
                             endPoint: .top
@@ -234,7 +269,7 @@ extension View {
                     )
             )
             .shadow(
-                color: UIColor.label.color.opacity(0.25),
+                color: UIColor.label.toColor(Colors.accent, percentage: 0.25).color.opacity(0.25),
                 radius: borderRadius,
                 x: 0,
                 y: borderRadius / 2

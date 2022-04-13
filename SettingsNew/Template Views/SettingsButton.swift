@@ -34,5 +34,6 @@ struct SettingsButton: View {
             .foregroundColor(tintColor?.color)
             .padding(SettingsConstants.rowHorizontalInsets)
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
     }
 }

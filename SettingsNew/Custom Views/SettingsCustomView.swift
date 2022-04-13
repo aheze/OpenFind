@@ -38,5 +38,6 @@ struct SettingsCustomView: View {
                 SettingsFooter(model: model, realmModel: realmModel)
             }
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
     }
 }

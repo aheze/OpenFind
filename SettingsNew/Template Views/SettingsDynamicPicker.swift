@@ -32,6 +32,7 @@ struct SettingsDynamicPicker: View {
             }
             .padding(SettingsConstants.rowHorizontalInsets)
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
     }
 
     func getSelectedChoice() -> SettingsRow.PickerChoice {
@@ -87,6 +88,7 @@ struct SettingsDynamicPickerPage: View {
                         .padding(SettingsConstants.rowHorizontalInsets)
                     }
                     .disabled(softwareLimitationString != nil)
+                    .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
 
                     if index < values.count - 1 {
                         SettingsRowDivider()

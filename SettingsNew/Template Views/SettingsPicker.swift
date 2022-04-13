@@ -34,6 +34,7 @@ struct SettingsPicker: View {
             }
             .padding(SettingsConstants.rowHorizontalInsets)
         }
+        .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
     }
 
     func getSelectedChoiceTitle() -> String {
@@ -71,6 +72,7 @@ struct SettingsPickerPage: View {
                     }
                     .padding(SettingsConstants.rowHorizontalInsets)
                 }
+                .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll
 
                 if index < choices.count - 1 {
                     SettingsRowDivider()
