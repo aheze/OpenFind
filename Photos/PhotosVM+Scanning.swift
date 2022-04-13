@@ -112,8 +112,17 @@ extension PhotosViewModel {
         let seconds = Int(secondsPerPhoto * CGFloat(photosToScan.count))
         if seconds > 60 {
             let minutes = Int(seconds / 60)
-            return "~\(minutes) minutes left"
+            if minutes == 1 {
+                return "~\(minutes) minute left"
+            } else {
+                return "~\(minutes) minutes left"
+            }
         }
-        return "~\(seconds) seconds left"
+
+        if seconds == 1 {
+            return "~\(seconds) second left"
+        } else {
+            return "~\(seconds) seconds left"
+        }
     }
 }
