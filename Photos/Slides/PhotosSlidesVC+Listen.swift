@@ -35,7 +35,6 @@ extension PhotosSlidesViewController {
                 } else if !self.searchNavigationProgressViewModel.percentageShowing {
                     if let viewController = self.getViewController(for: slidesPhoto.findPhoto.photo) {
                         self.startFinding(for: slidesPhoto, viewController: viewController, animate: true)
-                        self.updatePrompt()
                     }
                 }
             } else {

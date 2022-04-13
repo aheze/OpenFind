@@ -41,11 +41,12 @@ extension PhotosSlidesViewController {
         } else {
             viewController.highlightsViewModel.highlights = highlights
         }
-        updatePrompt()
-        
+
         if let slidesState = model.slidesState, let index = slidesState.getSlidesPhotoIndex(photo: slidesPhoto.findPhoto.photo) {
             self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
         }
+
+        self.updatePrompt()
     }
 
     func scanPhoto(slidesPhoto: SlidesPhoto) {
@@ -71,6 +72,10 @@ extension PhotosSlidesViewController {
             slidesSearchPromptViewModel.update(show: true, resultsText: "Photo is ignored")
             slidesSearchPromptViewModel.updateBarHeight?()
         } else {
+            
+            /// do nothing if not scanned yet
+            guard self.model.slidesState?.slidesPhotos[index].findPhoto.photo.metadata?.dateScanned != nil else { return }
+
             let resultsText = self.model.slidesState?.slidesPhotos[index].findPhoto.getResultsText() ?? ""
             var resetText: String?
             if model.resultsState != nil, searchViewModel.text != slidesSearchViewModel.text {
