@@ -61,6 +61,7 @@ struct SettingsCredits: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     @State var transform: SettingsProfileTransformState?
+    @State var toggled = false
 
     var body: some View {
         VStack {
@@ -156,7 +157,7 @@ struct SettingsCredits: View {
                                 Text(person.name)
                                     .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
                                     .foregroundColor(UIColor.label.color)
-                                
+
                                 Text(person.description)
                                     .foregroundColor(UIColor.secondaryLabel.color)
 
@@ -182,6 +183,34 @@ struct SettingsCredits: View {
                         )
                     }
                 }
+
+                Button {
+                    withAnimation(.easeOut(duration: 0.75)) {
+                        toggled = true
+                    }
+                } label: {
+                    VStack {
+                        if toggled {
+                            Text("❤️")
+                                .transition(.scale(scale: 2).combined(with: .opacity))
+                        } else {
+                            Text("Natalie, thank you for everything. We will always remember you ❤️")
+                                .italic()
+                                .fixedSize(horizontal: false, vertical: true)
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(UIColor.secondaryLabel.color)
+                                .padding(.horizontal, 32)
+                                .transition(
+                                    .asymmetric(
+                                        insertion: .identity,
+                                        removal: .scale(scale: 0.5).combined(with: .opacity)
+                                    )
+                                )
+                        }
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
             }
         }
     }
