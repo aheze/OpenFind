@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Popovers
 
 class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     var model: ListsDetailViewModel
@@ -21,6 +22,10 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     var baseSearchBarOffset = CGFloat(0)
     var additionalSearchBarOffset: CGFloat? = CGFloat(0)
     var updateSearchBarOffset: (() -> Void)?
+    
+    /// backported menu
+    var popoversOptionsButton: UIButton?
+    var popoversMenu: Templates.UIKitMenu? /// if under iOS 14, this will contain the popovers menu.
     
     @IBOutlet var scrollView: ListsDetailScrollView!
     @IBOutlet var contentView: UIView!
