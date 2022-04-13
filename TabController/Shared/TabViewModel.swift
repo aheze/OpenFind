@@ -48,6 +48,10 @@ class TabViewModel: ObservableObject {
     /// 3. the animation
     var tabStateChanged: ((TabState, TabState, TabStateChangeAnimation) -> Void)?
     
+    /// tap same tab when already there
+    /// shouldn't be camera since custom logic is already handled inside `CameraButton` for toggling the shutter
+    var tappedTabAgain: ((TabState) -> Void)?
+    
     /// for the camera view controller
     var animatorProgressChanged: ((CGFloat) -> Void)?
     

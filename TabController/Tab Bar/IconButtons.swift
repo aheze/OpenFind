@@ -51,7 +51,11 @@ struct TabButton<Content: View>: View {
 
     var body: some View {
         Button {
-            tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
+            if tabViewModel.tabState == tabType {
+                tabViewModel.tappedTabAgain?(tabType)
+            } else {
+                tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
+            }
         } label: {
             content
         }

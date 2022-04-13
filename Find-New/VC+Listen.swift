@@ -15,6 +15,31 @@ extension ViewController {
             let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false, addDismissButton: true)
             return viewController
         }
+        tabViewModel.tappedTabAgain = { [weak self] tab in
+            guard let self = self else { return }
+
+            /// should just be photos or lists, camera is already handled
+            switch tab {
+            case .photos:
+                if self.photosViewModel.resultsState != nil {
+                    let topOffset = self.photos.viewController.view.safeAreaInsets.top + self.photos.viewController.searchViewModel.getTotalHeight()
+                    self.photos.viewController.resultsCollectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
+                } else {
+                    let topOffset = self.photos.viewController.view.safeAreaInsets.top + self.photos.viewController.searchViewModel.getTotalHeight()
+                    self.photos.viewController.collectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
+                }
+            case .lists:
+                
+                /// can't check `detailsViewController` because it's not released on dismiss
+                if self.lists.viewController.navigationController.map({ $0.viewControllers.count > 1 }) ?? false {
+                    self.lists.viewController.navigationController?.popViewController(animated: true)
+                } else {
+                    let topOffset = self.lists.viewController.view.safeAreaInsets.top + self.lists.viewController.searchViewModel.getTotalHeight()
+                    self.lists.viewController.collectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
+                }
+            default: break
+            }
+        }
 
         cameraViewModel.settingsPressed = { [weak self] in
             guard let self = self else { return }
