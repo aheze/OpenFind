@@ -34,6 +34,7 @@ enum Settings {
     }
 
     enum StringIdentifier: String {
+//        case findingKeepWhitespace
         case filterLists
     }
 

@@ -64,10 +64,15 @@ extension SettingsData {
                     .init(
                         header: "Options",
                         rows: [
-                            .init(configuration: .toggle(title: "Keep Whitespace", storage: \.$findingKeepWhitespace)),
                             .init(configuration: .toggle(title: "Match Accents", storage: \.$findingMatchAccents)),
                             .init(configuration: .toggle(title: "Match Case", storage: \.$findingMatchCase))
                         ]
+                    ),
+                    .init(
+                        rows: [
+                            .init(configuration: .toggle(title: "Keep Whitespace", storage: \.$findingKeepWhitespace))
+                        ],
+                        description: .dynamic(identifier: .filterLists)
                     ),
                     .init(
                         rows: [
