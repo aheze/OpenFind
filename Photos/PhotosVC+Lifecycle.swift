@@ -17,6 +17,8 @@ extension PhotosViewController {
     
     func willBecomeInactive() {
         withAnimation {
+            
+            /// make sure that views are loaded inside here
             resetSelectingState()
         }
     }

@@ -29,14 +29,15 @@ extension PhotosViewController {
         sliderContainerView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
     }
 
+    /// views need to be optional if Photos not loaded yet (this is called during `resetSelectingState` on `willBecomeInactive`)
     func showFiltersView(_ show: Bool, animate: Bool) {
         func changeFiltersViewVisibility() {
             if show {
-                sliderContainerView.alpha = 1
-                sliderContainerView.transform = .identity
+                sliderContainerView?.alpha = 1
+                sliderContainerView?.transform = .identity
             } else {
-                sliderContainerView.alpha = 0
-                sliderContainerView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                sliderContainerView?.alpha = 0
+                sliderContainerView?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }
         }
 
