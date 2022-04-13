@@ -31,12 +31,11 @@ extension UIViewController {
 
             let dataSource = PhotosSharingDataSource(model: model, assets: assets)
             let items = urls as [Any] + [dataSource]
-            
+
             let starActivity = StarActivity { [weak model] in
                 guard let model = model else { return }
                 model.star(photos: photos)
                 if model.slidesState != nil {
-                    
                     if let photo = model.slidesState?.currentPhoto {
                         model.configureToolbar(for: photo)
                     }
@@ -46,7 +45,7 @@ extension UIViewController {
                 }
                 model.stopSelecting?()
             }
-            
+
             let ignoreActivity = IgnoreActivity { [weak model] in
                 guard let model = model else { return }
                 model.ignore(photos: photos)
@@ -136,7 +135,14 @@ class PhotosSharingDataSource: NSObject, UIActivityItemSource {
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
-        metadata.title = "\(assets.count) Photos"
+
+        if assets.count == 1 {
+            if let firstAsset = assets.first, let originalFilename = firstAsset.originalFilename {
+                metadata.title = originalFilename
+            }
+        } else {
+            metadata.title = "\(assets.count) Photos"
+        }
         return metadata
     }
 }

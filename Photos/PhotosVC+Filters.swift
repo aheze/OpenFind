@@ -24,14 +24,29 @@ extension PhotosViewController {
 
             self.sliderChanged(filter: filter)
         }
-        
+
         sliderContainerView.alpha = 0
         sliderContainerView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
     }
-    
-    func showFiltersView() {
-        sliderContainerView.alpha = 1
-        sliderContainerView.transform = .identity
+
+    func showFiltersView(_ show: Bool, animate: Bool) {
+        func changeFiltersViewVisibility() {
+            if show {
+                sliderContainerView.alpha = 1
+                sliderContainerView.transform = .identity
+            } else {
+                sliderContainerView.alpha = 0
+                sliderContainerView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }
+        }
+
+        if animate {
+            UIView.animate(duration: 0.5, dampingFraction: 0.8) {
+                changeFiltersViewVisibility()
+            }
+        } else {
+            changeFiltersViewVisibility()
+        }
     }
 
     /// slider changed to a new selection

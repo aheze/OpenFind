@@ -98,10 +98,15 @@ class ListsSharingDataSource: NSObject, UIActivityItemSource {
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
         
-        let titles = lists.map { $0.title }
+        let titles = lists.map { $0.displayedTitle }
         let sentence = titles.sentence
         metadata.title = sentence
-        metadata.url = URL(string: "\(lists.count) lists - lists.getfind.app")
+        if lists.count == 1 {
+            metadata.url = URL(string: "\(lists.count) list - lists.getfind.app")
+        } else {
+            metadata.url = URL(string: "\(lists.count) lists - lists.getfind.app")
+        }
+        
         return metadata
     }
 }

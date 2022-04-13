@@ -25,6 +25,7 @@ extension PhotosViewController {
         resultsCollectionView.allowsMultipleSelection = true
         selectBarButton?.title = "Done"
         toolbarViewModel.toolbar = AnyView(selectionToolbar)
+        showFiltersView(false, animate: true)
         if model.resultsState != nil {
             updateResultsCollectionViewSelectionState()
         } else {
@@ -41,6 +42,7 @@ extension PhotosViewController {
         resultsCollectionView.allowsMultipleSelection = false
         selectBarButton?.title = "Select"
         toolbarViewModel.toolbar = nil
+        showFiltersView(true, animate: true)
         model.selectedPhotos = []
         model.ignoredPhotosSelectedPhotos = []
         if model.resultsState != nil {

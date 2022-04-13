@@ -19,6 +19,7 @@ extension ListsDetailViewController {
         setupDismissButton()
     }
     
+    /// sharing logic inside `ListsSharingDataSource`
     func share() {
         let list = model.list.getList()
         if let url = list.getURL() {
