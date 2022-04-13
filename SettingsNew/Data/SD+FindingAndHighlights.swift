@@ -62,7 +62,6 @@ extension SettingsData {
                         description: .constant(string: "Choose the languages for text scanning.")
                     ),
                     .init(
-                        header: "Options",
                         rows: [
                             .init(configuration: .toggle(title: "Match Accents", storage: \.$findingMatchAccents)),
                             .init(configuration: .toggle(title: "Match Case", storage: \.$findingMatchCase))
@@ -72,7 +71,7 @@ extension SettingsData {
                         rows: [
                             .init(configuration: .toggle(title: "Keep Whitespace", storage: \.$findingKeepWhitespace))
                         ],
-                        description: .dynamic(identifier: .filterLists)
+                        description: .dynamic(identifier: .keepWhitespace)
                     ),
                     .init(
                         rows: [

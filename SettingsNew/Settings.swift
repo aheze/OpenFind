@@ -33,8 +33,8 @@ enum Settings {
         case secondaryRecognitionLanguage
     }
 
-    enum StringIdentifier: String {
-//        case findingKeepWhitespace
+    enum StringIdentifier {
+        case keepWhitespace
         case filterLists
     }
 

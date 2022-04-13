@@ -11,12 +11,12 @@ import SwiftUI
 extension Settings.StringIdentifier {
     func getString(realmModel: RealmModel) -> String {
         switch self {
-//        case .findingKeepWhitespace:
-//            if realmModel.findingKeepWhitespace {
-//                return "Filter lists when typing in the search bar."
-//            } else {
-//                return "Always show all lists in the search bar."
-//            }
+        case .keepWhitespace:
+            if realmModel.findingKeepWhitespace {
+                return "Keep leading and trailing whitespace in entered text in the search bar. Also affects words inside lists."
+            } else {
+                return "Trim whitespace from entered text in the search bar. Also affects words inside lists."
+            }
         case .filterLists:
             if realmModel.findingFilterLists {
                 return "Filter lists when typing in the search bar."
