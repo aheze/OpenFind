@@ -11,20 +11,35 @@ import UIKit
 // MARK: Update properties after fields change
 
 extension SearchViewModel {
+    func trimWhitespaceIfNeeded(from string: String) -> String {
+        let shouldKeepWhitespace = getShouldKeepWhitespace?() ?? false
+
+        if shouldKeepWhitespace {
+            return string
+        } else {
+            return string.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+    }
+
     func updateStringToGradients() {
         var stringToGradients = [String: Gradient]()
         for field in fields {
             switch field.value {
             case .word(let word):
-                guard !word.string.isEmpty else { continue }
-                var existingGradient = stringToGradients[word.string] ?? Gradient()
+                let string = trimWhitespaceIfNeeded(from: word.string)
+                guard !string.isEmpty else { continue }
+
+                var existingGradient = stringToGradients[string] ?? Gradient()
                 existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: word.color))
                 existingGradient.alpha = field.overrides.alpha
-                stringToGradients[word.string] = existingGradient
+                stringToGradients[string] = existingGradient
             case .list(let list):
+
                 let strings = list.words
                 guard list.containsWords else { continue }
                 for string in strings {
+                    let string = trimWhitespaceIfNeeded(from: string)
+
                     var existingGradient = stringToGradients[string] ?? Gradient()
                     existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: list.color))
                     existingGradient.alpha = field.overrides.alpha

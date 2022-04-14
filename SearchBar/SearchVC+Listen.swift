@@ -20,6 +20,11 @@ extension SearchViewController {
             self.view.endEditing(true)
         }
         
+        searchViewModel.getShouldKeepWhitespace = { [weak self] in
+            guard let self = self else { return false }
+            return self.realmModel.findingKeepWhitespace
+        }
+        
         searchViewModel.enabledChanged = { [weak self] in
             guard let self = self else { return }
             let enabled = self.searchViewModel.enabled

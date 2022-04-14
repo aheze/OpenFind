@@ -21,6 +21,7 @@ class SearchViewModel: ObservableObject {
         }
     }
 
+    var getShouldKeepWhitespace: (() -> Bool)?
     var enabledChanged: (() -> Void)?
     
     @Published private(set) var fields = defaultFields {
