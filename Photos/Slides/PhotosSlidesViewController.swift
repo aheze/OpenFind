@@ -37,6 +37,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     var slidesSearchViewModel: SearchViewModel
     var slidesSearchPromptViewModel: SearchPromptViewModel
     var toolbarViewModel: ToolbarViewModel
+    var realmModel: RealmModel
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
 
     /// includes collection view and info view
@@ -70,7 +71,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         searchViewModel: SearchViewModel,
         slidesSearchViewModel: SearchViewModel,
         slidesSearchPromptViewModel: SearchPromptViewModel,
-        toolbarViewModel: ToolbarViewModel
+        toolbarViewModel: ToolbarViewModel,
+        realmModel: RealmModel
     ) {
         self.model = model
         self.tabViewModel = tabViewModel
@@ -80,6 +82,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         self.slidesSearchViewModel = slidesSearchViewModel
         self.slidesSearchPromptViewModel = slidesSearchPromptViewModel
         self.toolbarViewModel = toolbarViewModel
+        self.realmModel = realmModel
         super.init(coder: coder)
     }
 

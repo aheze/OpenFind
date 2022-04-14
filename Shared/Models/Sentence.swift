@@ -112,6 +112,8 @@ extension Sentence {
     }
 }
 
+
+
 extension Sentence {
     /// get the component/word range that contains a character index
     /// also adjusts the frame to fit the angle of rotation
@@ -121,20 +123,6 @@ extension Sentence {
         }
         component.frame = Sentence.insetFrameFromRotation(angle: angle, frame: component.frame)
         return component
-    }
-
-    /// get the ranges of search strings in the `string`
-    func ranges(of searchStrings: [String]) -> [RangeResult] {
-        var results = [RangeResult]()
-
-        for searchString in searchStrings {
-            let indices = string.lowercased().indicesOf(string: searchString.lowercased())
-            if indices.isEmpty { continue }
-            let ranges = indices.map { $0 ..< $0 + searchString.count }
-            let result = RangeResult(string: searchString, ranges: ranges)
-            results.append(result)
-        }
-        return results
     }
 
     func string(for targetRange: Range<Int>) -> String {

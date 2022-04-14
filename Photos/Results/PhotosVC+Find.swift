@@ -123,7 +123,7 @@ extension PhotosViewController {
             /// the highlights in this sentence.
             var lineHighlights = [FindPhoto.Line.LineHighlight]()
             
-            let rangeResults = sentence.ranges(of: Array(stringToGradients.keys))
+            let rangeResults = sentence.ranges(of: Array(stringToGradients.keys), realmModel: realmModel)
             for rangeResult in rangeResults {
                 let gradient = self.searchViewModel.stringToGradients[rangeResult.string] ?? Gradient()
                 for range in rangeResult.ranges {

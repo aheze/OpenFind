@@ -25,7 +25,7 @@ extension CameraViewController {
         /// `nil` if was finding before
         let request = await Find.find(in: .pixelBuffer(pixelBuffer), visionOptions: visionOptions, findOptions: findOptions)
         let sentences = Find.getFastSentences(from: request)
-        let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients)
+        let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients, realmModel: realmModel)
 
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: false)
@@ -48,7 +48,7 @@ extension CameraViewController {
 
         let request = await Find.find(in: .cgImage(image), visionOptions: visionOptions, findOptions: findOptions)
         let sentences = Find.getSentences(from: request)
-        let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients)
+        let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients, realmModel: realmModel)
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: replace)
             self.highlightsAdded()

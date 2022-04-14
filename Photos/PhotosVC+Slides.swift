@@ -68,7 +68,8 @@ extension PhotosViewController {
                 searchViewModel: self.searchViewModel,
                 slidesSearchViewModel: self.slidesSearchViewModel,
                 slidesSearchPromptViewModel: self.slidesSearchPromptViewModel,
-                toolbarViewModel: self.toolbarViewModel
+                toolbarViewModel: self.toolbarViewModel,
+                realmModel: self.realmModel
             )
         }
         return viewController
