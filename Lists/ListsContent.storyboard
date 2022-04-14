@@ -55,7 +55,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Mf-09-576">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -64,12 +64,12 @@
                         <constraints>
                             <constraint firstItem="8Mf-09-576" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="49w-sa-qW4"/>
                             <constraint firstAttribute="bottom" secondItem="Mse-Qz-3Qw" secondAttribute="bottom" id="ITg-8H-eus"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8Mf-09-576" secondAttribute="bottom" id="WLU-gd-b3J"/>
+                            <constraint firstAttribute="bottom" secondItem="8Mf-09-576" secondAttribute="bottom" id="WLU-gd-b3J"/>
                             <constraint firstItem="Mse-Qz-3Qw" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="a9F-OA-d2x"/>
                             <constraint firstAttribute="trailing" secondItem="Mse-Qz-3Qw" secondAttribute="trailing" id="d9Z-56-52c"/>
                             <constraint firstItem="8Mf-09-576" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="haV-Nn-tYF"/>
                             <constraint firstItem="Mse-Qz-3Qw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="j2x-5B-cvR"/>
-                            <constraint firstItem="8Mf-09-576" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ywp-BZ-sa6"/>
+                            <constraint firstItem="8Mf-09-576" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="ywp-BZ-sa6"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

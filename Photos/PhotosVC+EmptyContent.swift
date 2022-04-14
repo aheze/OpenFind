@@ -17,6 +17,7 @@ extension PhotosViewController {
                 sliderViewModel: sliderViewModel
             )
         )
+        viewController.view.backgroundColor = .clear
         addChildViewController(viewController, in: contentContainer)
     }
 

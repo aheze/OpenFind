@@ -13,6 +13,8 @@ extension ListsViewController {
     func setup() {
         setupCollectionView()
         setupNavigationBar()
+        setupEmptyContent()
+        contentContainer.alpha = 0
     }
     
     func setupCollectionView() {

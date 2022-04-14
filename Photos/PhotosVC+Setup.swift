@@ -24,7 +24,6 @@ extension PhotosViewController {
         /// SwiftUI container
         contentContainer.backgroundColor = .clear
         contentContainer.isUserInteractionEnabled = false
-        setupEmptyContent()
         setupNavigationBar()
 
         /// filters
@@ -53,6 +52,7 @@ extension PhotosViewController {
     }
 
     func load() {
+        setupEmptyContent()
         startObservingChanges()
         model.load()
         searchViewModel.enabled = true
