@@ -20,7 +20,6 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             let cell = cell as? PhotosSlidesContentCell,
             let viewController = cell.viewController
         else { return }
-        
 
         viewController.highlightsViewModel.highlights.removeAll()
         if !slidesSearchViewModel.stringToGradients.isEmpty {
@@ -52,26 +51,8 @@ extension PhotosSlidesViewController {
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == collectionView {
-            notifyIfScrolledToStop()
-        } else if scrollView == self.scrollView {
+        if scrollView == self.scrollView {
             infoScrollViewDidEndDecelerating()
-        }
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        notifyIfScrolledToStop()
-    }
-
-    /// stopped scrolling
-    func notifyIfScrolledToStop() {
-        if let slidesState = model.slidesState {
-            /// update header
-            if let slidesPhoto = slidesState.getCurrentSlidesPhoto() {
-                slidesSearchPromptViewModel.resultsText = slidesPhoto.findPhoto.getResultsText()
-                slidesSearchPromptViewModel.updateBarHeight?()
-                model.configureToolbar(for: slidesPhoto.findPhoto.photo)
-            }
         }
     }
 }

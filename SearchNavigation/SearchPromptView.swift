@@ -15,19 +15,20 @@ enum SearchPromptConstants {
 
 class SearchPromptViewModel: ObservableObject {
     /// don't set directly, instead use `show()`
-    @Published var show = false
-    @Published var resultsText = ""
-    @Published var resetText: String?
+    @Published private(set) var show = false
+    @Published private(set) var resultsText = ""
+    @Published private(set) var resetText: String?
     var updateBarHeight: (() -> Void)?
     var resetPressed: (() -> Void)?
 
     func update(show: Bool, resultsText: String? = nil, resetText: String? = nil) {
         withAnimation {
             self.show = show
-            if let resultsText = resultsText {
-                self.resultsText = resultsText
-            }
             self.resetText = resetText
+        }
+
+        if let resultsText = resultsText {
+            self.resultsText = resultsText
         }
     }
 

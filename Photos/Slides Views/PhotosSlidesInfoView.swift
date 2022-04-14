@@ -23,7 +23,7 @@ struct PhotosSlidesInfoView: View {
                 .blueBackground()
 
             HStack {
-                let ignored = photo.metadata?.isIgnored ?? false
+                let ignored = photo.isIgnored
 
                 if !ignored {
                     let (isScanned, scanTitle) = getScanState(from: photo)

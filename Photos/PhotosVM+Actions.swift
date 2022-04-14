@@ -13,17 +13,15 @@ import SwiftUI
  */
 
 extension PhotosViewModel {
-    
     /// toggle star for a single photo. If multiple photos and one photo is unstarred, star all.
     func star(photos: [Photo]) {
-        
         let photosStarred: [Bool] = photos.map {
             let starred = $0.metadata.map { $0.isStarred } ?? false
             return starred
         }
-        
+
         let shouldStar = photosStarred.contains(false)
-        
+
         for photo in photos {
             var newPhoto = photo
             if newPhoto.metadata != nil {
@@ -44,13 +42,15 @@ extension PhotosViewModel {
     }
 
     func ignore(photos: [Photo]) {
+        
+        /// see which of the passed-in photos are ignored
         let photosIgnored: [Bool] = photos.map {
-            let ignored = $0.metadata.map { $0.isIgnored } ?? false
+            let ignored = $0.isIgnored
             return ignored
         }
-        
+
         let shouldIgnore = photosIgnored.contains(false)
-        
+
         for photo in photos {
             var newPhoto = photo
             /// metadata exists, delete sentences
@@ -82,11 +82,10 @@ extension PhotosViewModel {
     func configureToolbar(for photo: Photo) {
         if let metadata = photo.metadata {
             if metadata.isStarred {
-                slidesState?.toolbarStarOn = true
+                self.slidesState?.toolbarStarOn = true
                 return
             }
         }
-
-        slidesState?.toolbarStarOn = false
+        self.slidesState?.toolbarStarOn = false
     }
 }

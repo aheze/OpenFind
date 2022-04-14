@@ -61,16 +61,17 @@ extension PhotosSlidesViewController {
             }
         }
 
-        model.slidesState?.currentPhotoChanged = { [weak self] in
+        model.slidesCurrentPhotoChanged = { [weak self] in
             guard let self = self else { return }
 
             if let currentPhoto = self.model.slidesState?.currentPhoto {
-                self.updateNavigationBarTitle(to: currentPhoto)
-                self.updatePrompt()
+                self.updateNavigationBarTitle(for: currentPhoto)
+                self.updatePrompt(for: currentPhoto)
+                self.model.configureToolbar(for: currentPhoto)
             }
         }
 
-        model.slidesState?.toolbarInformationOnChanged = { [weak self] in
+        model.slidesToolbarInformationOnChanged = { [weak self] in
             guard let self = self else { return }
             if let slidesState = self.model.slidesState {
                 self.showInfo(slidesState.toolbarInformationOn)

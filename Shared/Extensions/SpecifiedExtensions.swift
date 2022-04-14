@@ -13,6 +13,7 @@ import UIKit
  Might contain some dependencies, like `RealmSwift`
  */
 
+
 extension PhotoMetadata {
     func getRealmSentences() -> RealmSwift.List<RealmSentence> {
         let realmSentences = RealmSwift.List<RealmSentence>()

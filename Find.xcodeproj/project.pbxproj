@@ -907,7 +907,6 @@
 		3C443FC527DFCD530050A0AB /* HeaderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FB827DFCD480050A0AB /* HeaderContentView.swift */; };
 		3C443FC627DFCD530050A0AB /* HeaderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FB827DFCD480050A0AB /* HeaderContentView.swift */; };
 		3C443FC827DFD1550050A0AB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C443FC727DFD1550050A0AB /* Introspect */; };
-		3C443FCA27DFD1870050A0AB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C443FC927DFD1870050A0AB /* Introspect */; };
 		3C443FCD27DFFF870050A0AB /* IgnoredPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */; };
 		3C443FCE27DFFF880050A0AB /* IgnoredPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443FCB27DFFF830050A0AB /* IgnoredPhotosViewController.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
@@ -4413,7 +4412,6 @@
 			files = (
 				3C5B377827FEAF6100801FEE /* SupportDocs in Frameworks */,
 				3C21EDC627A45C130005E183 /* RealmSwift in Frameworks */,
-				3C443FCA27DFD1870050A0AB /* Introspect in Frameworks */,
 				3C21EDC427A45C130005E183 /* Realm in Frameworks */,
 				3C6C7441278195E200E039F0 /* Popovers in Frameworks */,
 			);
@@ -6921,7 +6919,6 @@
 				3C6C7440278195E200E039F0 /* Popovers */,
 				3C21EDC327A45C130005E183 /* Realm */,
 				3C21EDC527A45C130005E183 /* RealmSwift */,
-				3C443FC927DFD1870050A0AB /* Introspect */,
 				3C5B377727FEAF6100801FEE /* SupportDocs */,
 			);
 			productName = "Find-New";
@@ -12671,11 +12668,6 @@
 			productName = Popovers;
 		};
 		3C443FC727DFD1550050A0AB /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		3C443FC927DFD1870050A0AB /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;

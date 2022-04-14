@@ -66,7 +66,7 @@ struct PhotosSlidesToolbarView: View {
     func toggleToolbar() {
         if let slidesState = model.slidesState {
             model.slidesState?.toolbarInformationOn = !slidesState.toolbarInformationOn
-            model.slidesState?.toolbarInformationOnChanged?()
+            model.slidesToolbarInformationOnChanged?()
         }
     }
     

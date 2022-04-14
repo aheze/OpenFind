@@ -13,15 +13,17 @@ extension PhotosSlidesViewController {
     /// If metadata does not exist, start scanning.
     /// Once done, `model.photosWithQueuedSentencesAdded` in `PhotosVC+Listen` will be called.
     func startFinding(for slidesPhoto: SlidesPhoto, viewController: PhotosSlidesItemViewController, animate: Bool) {
-        /// if is ignored, don't find
-        guard slidesPhoto.findPhoto.photo.metadata.map({ !$0.isIgnored }) ?? true else {
-            return
-        }
-
-        if let metadata = slidesPhoto.findPhoto.photo.metadata, metadata.dateScanned != nil {
+        let photoIgnored = slidesPhoto.findPhoto.photo.isIgnored
+        if
+            let metadata = slidesPhoto.findPhoto.photo.metadata,
+            metadata.dateScanned != nil || photoIgnored /// find from metadata even if ignored (show prompt)
+        {
             self.findFromMetadata(in: slidesPhoto, viewController: viewController, animate: animate)
         } else {
-            self.scanPhoto(slidesPhoto: slidesPhoto)
+            /// if is ignored, don't scan
+            if !photoIgnored {
+                self.scanPhoto(slidesPhoto: slidesPhoto)
+            }
         }
     }
 
@@ -46,7 +48,7 @@ extension PhotosSlidesViewController {
             self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
         }
 
-        self.updatePrompt()
+        self.updatePrompt(for: slidesPhoto.findPhoto.photo)
     }
 
     func scanPhoto(slidesPhoto: SlidesPhoto) {
@@ -59,23 +61,18 @@ extension PhotosSlidesViewController {
         self.model.scanPhoto(slidesPhoto.findPhoto.photo, findOptions: findOptions, inBatch: false)
     }
 
-    func updatePrompt() {
+    func updatePrompt(for currentPhoto: Photo) {
+        guard !slidesSearchViewModel.isEmpty else { return }
         guard
-            let slidesState = model.slidesState,
-            let index = model.slidesState?.getCurrentIndex(),
-            !slidesSearchViewModel.isEmpty
+            let slidesPhotoIndex = model.slidesState?.getSlidesPhotoIndex(photo: currentPhoto),
+            let slidesPhoto = model.slidesState?.slidesPhotos[safe: slidesPhotoIndex]
         else { return }
 
-        let slidesPhoto = slidesState.slidesPhotos[index]
-
-        if slidesPhoto.findPhoto.photo.metadata.map({ $0.isIgnored }) ?? false {
+        if slidesPhoto.findPhoto.photo.isIgnored {
             slidesSearchPromptViewModel.update(show: true, resultsText: "Photo is ignored")
             slidesSearchPromptViewModel.updateBarHeight?()
         } else {
-            
-            /// do nothing if not scanned yet              guard self.model.slidesState?.slidesPhotos[index].findPhoto.photo.metadata?.dateScanned != nil else { return }
-
-            let resultsText = self.model.slidesState?.slidesPhotos[index].findPhoto.getResultsText() ?? ""
+            let resultsText = slidesPhoto.findPhoto.getResultsText()
             var resetText: String?
             if model.resultsState != nil, searchViewModel.text != slidesSearchViewModel.text {
                 let summary = searchViewModel.getSummaryString()

@@ -43,11 +43,11 @@ extension PhotosSlidesViewController {
         self.subtitleLabel = subtitleLabel
         
         if let currentPhoto = model.slidesState?.currentPhoto {
-            updateNavigationBarTitle(to: currentPhoto)
+            updateNavigationBarTitle(for: currentPhoto)
         }
     }
     
-    func updateNavigationBarTitle(to photo: Photo) {
+    func updateNavigationBarTitle(for photo: Photo) {
         if let dateCreated = photo.asset.creationDate {
             let dateAsString = dateCreated.convertDateToReadableString()
             

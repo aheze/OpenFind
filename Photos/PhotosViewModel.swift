@@ -65,6 +65,10 @@ class PhotosViewModel: ObservableObject {
 
     /// the slides' current status
     @Published var slidesState: PhotosSlidesState?
+    
+    /// call these manually, can't be inside struct
+    var slidesCurrentPhotoChanged: (() -> Void)?
+    var slidesToolbarInformationOnChanged: (() -> Void)?
 
     /// the state of the results.
     var resultsState: PhotosResultsState?
@@ -127,7 +131,7 @@ class PhotosViewModel: ObservableObject {
 
     var photosToScan = [Photo]() {
         didSet {
-            totalPhotosCount = photos.filter { $0.metadata.map { !$0.isIgnored } ?? true }.count
+            totalPhotosCount = photos.filter { !$0.isIgnored }.count
             scannedPhotosCount = totalPhotosCount - photosToScan.count
         }
     }

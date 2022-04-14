@@ -9,11 +9,10 @@
 import Photos
 import UIKit
 
-
 struct SlidesPhoto: Hashable {
     var id = UUID()
     var findPhoto: FindPhoto
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
@@ -22,19 +21,13 @@ struct SlidesPhoto: Hashable {
 struct PhotosSlidesState {
     var viewController: PhotosSlidesViewController?
     var slidesPhotos: [SlidesPhoto]
-    var currentPhoto: Photo? {
-        didSet {
-            currentPhotoChanged?()
-        }
-    }
-    var currentPhotoChanged: (() -> Void)?
-    
+    var currentPhoto: Photo?
+
     var isFullScreen = false /// hide the bars
 
     /// for the current image
     var toolbarStarOn = false
     var toolbarInformationOn = false
-    var toolbarInformationOnChanged: (() -> Void)?
 
     /// get from `findPhotos`
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
@@ -174,7 +167,6 @@ struct FindPhoto: Hashable {
         }
     }
 }
-
 
 extension FindPhoto {
     func dateString() -> String {

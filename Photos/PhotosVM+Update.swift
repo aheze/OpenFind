@@ -95,7 +95,7 @@ extension PhotosViewModel {
         }
 
         getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
-        ignoredPhotos = photos.filter { $0.metadata?.isIgnored ?? false }
+        ignoredPhotos = photos.filter { $0.isIgnored }
         photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
     }
 }

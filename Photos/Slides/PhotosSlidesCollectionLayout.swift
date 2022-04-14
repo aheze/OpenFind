@@ -97,8 +97,6 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         return attributes
     }
     
-
-    
     /// called upon finger lift
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
@@ -172,6 +170,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         
         if let slidesPhoto = model.slidesState?.slidesPhotos[safe: closestAttributeIndex] {
             model.slidesState?.currentPhoto = slidesPhoto.findPhoto.photo
+            model.slidesCurrentPhotoChanged?()
         }
         return CGPoint(x: closestAttribute?.frame.origin.x ?? point.x, y: 0)
     }

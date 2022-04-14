@@ -61,4 +61,9 @@ enum PhotosSectionCategorization: Equatable, Hashable {
     }
 }
 
-
+extension Photo {
+    /// if the photo is ignored or not. If metadata is nil, default to `false`.
+    var isIgnored: Bool {
+        metadata.map { $0.isIgnored } ?? false
+    }
+}

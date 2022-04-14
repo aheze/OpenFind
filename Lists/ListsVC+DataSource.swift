@@ -16,8 +16,10 @@ extension ListsViewController {
         snapshot.appendItems(model.displayedLists, toSection: section)
         dataSource.apply(snapshot, animatingDifferences: animate)
 
-        showEmptyContent(model.displayedLists.isEmpty)
-        searchViewModel.enabled = !model.displayedLists.isEmpty
+        if searchViewModel.isEmpty {
+            showEmptyContent(model.displayedLists.isEmpty)
+            searchViewModel.enabled = !model.displayedLists.isEmpty
+        }
         updateViewsEnabled()
     }
     
