@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
         for index in searchViewModel.fields.indices {
             var field = self.searchViewModel.fields[index]
             field.configuration = searchViewModel.configuration
-            self.searchViewModel.updateField(at: index, with: field, notify: true)
+            self.searchViewModel.updateField(at: index, with: field, notify: false)
         }
         
         super.init(coder: coder)
@@ -88,11 +88,13 @@ class SearchViewController: UIViewController {
         
         listen()
         
-        realmModel.$lists.sink { [weak self] lists in
-            guard let self = self else { return }
-            self.listsChanged(newLists: lists)
-        }
-        .store(in: &realmModel.cancellables)
+        realmModel.$lists
+            .dropFirst()
+            .sink { [weak self] lists in
+                guard let self = self else { return }
+                self.listsChanged(newLists: lists)
+            }
+            .store(in: &realmModel.cancellables)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

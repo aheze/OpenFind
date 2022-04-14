@@ -73,8 +73,7 @@ extension PhotosSlidesViewController {
             slidesSearchPromptViewModel.updateBarHeight?()
         } else {
             
-            /// do nothing if not scanned yet
-            guard self.model.slidesState?.slidesPhotos[index].findPhoto.photo.metadata?.dateScanned != nil else { return }
+            /// do nothing if not scanned yet              guard self.model.slidesState?.slidesPhotos[index].findPhoto.photo.metadata?.dateScanned != nil else { return }
 
             let resultsText = self.model.slidesState?.slidesPhotos[index].findPhoto.getResultsText() ?? ""
             var resetText: String?

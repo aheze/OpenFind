@@ -17,4 +17,7 @@ class ListsViewModel: ObservableObject {
     
     var deleteSelected: (() -> Void)?
     var shareSelected: (() -> Void)?
+    
+    /// add a new list from anywhere
+    var addNewList: (() -> Void)?
 }

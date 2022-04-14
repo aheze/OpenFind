@@ -36,7 +36,11 @@ extension ListsViewController {
 
     @objc func addListPressed() {
         
-        /// inside ListsVC+Realm
+        /// inside ListsVC+Add
         addNewList()
+    }
+    
+    func updateViewsEnabled() {
+        selectBarButton?.isEnabled = !model.displayedLists.isEmpty
     }
 }

@@ -67,6 +67,7 @@ class ListsDetailViewModel: ObservableObject {
         self.listDeleted = listDeleted
         
         listCancellable = $list
+            .dropFirst()
             .debounce(for: .seconds(ListsDetailConstants.editDebounceDuration), scheduler: RunLoop.main)
             .sink { [weak self] list in
                 let newList = list.getList()

@@ -25,9 +25,10 @@ extension CameraViewController {
             let scrollViewZoom = self.getScrollViewZoomFrom(percentage: self.zoomViewModel.percentage)
             self.scrollZoomHookViewController.scrollView.zoomScale = scrollViewZoom
         }
-        aspectProgressCancellable = zoomViewModel.$aspectProgress.sink { [weak self] aspectProgress in
-            self?.livePreviewViewController?.changeAspectProgress(to: aspectProgress, animated: true)
-        }
+        aspectProgressCancellable = zoomViewModel.$aspectProgress
+            .sink { [weak self] aspectProgress in
+                self?.livePreviewViewController?.changeAspectProgress(to: aspectProgress, animated: true)
+            }
         
         if let camera = livePreviewViewController?.cameraDevice {
             zoomViewModel.configureZoomFactors(

@@ -60,7 +60,7 @@ extension ListsViewController {
         for index in model.displayedLists.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? ListsContentCell {
                 if model.isSelecting {
-                    cell.contentView.isUserInteractionEnabled = false
+                    cell.view.isUserInteractionEnabled = false
                     cell.view.headerSelectionIconView.alpha = 0
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.headerSelectionIconView.isHidden = false
@@ -68,7 +68,7 @@ extension ListsViewController {
                         cell.view.headerSelectionIconView.alpha = 1
                     }
                 } else {
-                    cell.contentView.isUserInteractionEnabled = true
+                    cell.view.isUserInteractionEnabled = true
                     cell.view.headerSelectionIconView.alpha = 1
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.headerSelectionIconView.isHidden = true

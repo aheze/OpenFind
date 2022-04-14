@@ -7,11 +7,16 @@
 //
 
 class RealmContainer {
-    var lists = List.getSampleLists() {
+    var lists = [List]() {
         didSet {
             listsUpdated?(lists)
         }
     }
+//    var lists = List.getSampleLists() {
+//        didSet {
+//            listsUpdated?(lists)
+//        }
+//    }
 
     var photoMetadatas = [PhotoMetadata]()
 

@@ -28,6 +28,9 @@ class ListsViewController: UIViewController, Searchable {
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, DisplayedList>
     lazy var listsFlowLayout = makeFlowLayout()
     
+    
+    @IBOutlet weak var contentContainer: UIView!
+    
     /// details
     var detailsViewController: ListsDetailViewController?
     
@@ -66,8 +69,8 @@ class ListsViewController: UIViewController, Searchable {
         view.backgroundColor = .secondarySystemBackground
         collectionView.backgroundColor = .clear
         
-        reload()
         setup()
+        reload()
         listen()
     }
     

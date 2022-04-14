@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         let tabController = TabBarController(
             pages: [lists.searchNavigationController],
             model: tabViewModel,
+            realmModel: realmModel,
             cameraViewModel: CameraViewModel(),
             toolbarViewModel: toolbarViewModel
         )

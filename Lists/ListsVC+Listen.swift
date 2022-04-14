@@ -24,6 +24,11 @@ extension ListsViewController {
             self.resetSelectingState()
         }
 
+        model.addNewList = { [weak self] in
+            guard let self = self else { return }
+            self.addNewList()
+        }
+        
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             guard textChanged else { return }

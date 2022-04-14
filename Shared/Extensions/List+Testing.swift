@@ -9,6 +9,20 @@
 import UIKit
 
 extension List {
+    static func getSampleListsShort() -> [List] {
+        let lists = [
+            List(
+                title: "Nature",
+                description: "Words",
+                icon: "leaf.fill",
+                color: 0x1f7000,
+                words: ["Leaf", "Ant", "Stick", "Branch", "Tree", "Ant", "Stick", "Branch", "Tree"],
+                dateCreated: Date()
+            )
+        ]
+
+        return lists
+    }
     static func getSampleLists() -> [List] {
         let lists = [
             List(

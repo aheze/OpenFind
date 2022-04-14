@@ -155,7 +155,7 @@ enum Settings {
                 case .light:
                     return "Light"
                 case .heavy:
-                    return "heavy"
+                    return "Heavy"
                 }
             }
         }
