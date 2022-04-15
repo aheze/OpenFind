@@ -13,7 +13,7 @@ struct SettingsData {
     // MARK: Set this inside the actual app
     static var showScanningOptions: (() -> Void)?
     static var exportAllLists: (() -> Void)?
-    static var deleteAllPhotoMetadata: (() -> Void)?
+    static var deleteAllScannedData: (() -> Void)?
     
     // MARK: Internal callback
     static var resetAllSettings: (() -> Void)?

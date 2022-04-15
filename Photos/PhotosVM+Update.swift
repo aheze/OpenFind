@@ -10,8 +10,8 @@ import UIKit
 
 extension PhotosViewModel {
     /// delete metadata and load
-    func deleteAllMetadata() async {
-        await getRealmModel?().container.deleteAllMetadata()
+    func deleteAllScannedData() async {
+        await getRealmModel?().container.deleteAllScannedData()
         await getRealmModel?().container.loadPhotoMetadatas()
         loadAssets()
 

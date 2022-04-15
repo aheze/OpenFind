@@ -92,7 +92,7 @@ extension PhotosViewModel {
         await MainActor.run {
             self.photos = photos
             self.ignoredPhotos = ignoredPhotos
-            self.photosToScan = photosToScan.reversed() /// newest photos go first
+            self.photosToScan = photosToScan.reversed()
         }
     }
 }

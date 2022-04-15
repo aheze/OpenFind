@@ -54,9 +54,9 @@ extension ViewController {
             guard let self = self else { return }
             self.exportAllLists()
         }
-        SettingsData.deleteAllPhotoMetadata = { [weak self] in
+        SettingsData.deleteAllScannedData = { [weak self] in
             guard let self = self else { return }
-            self.deleteAllPhotoMetadata()
+            self.deleteAllScannedData()
         }
 
         self.settingsController.model.startedToDismiss = { [weak self] in
@@ -72,13 +72,13 @@ extension ViewController {
         self.settingsController.viewController.presentShareSheet(items: urls + [dataSource], applicationActivities: nil)
     }
 
-    func deleteAllPhotoMetadata() {
+    func deleteAllScannedData() {
         let alert = UIAlertController(title: "Delete All Scanned Data?", message: "Are you sure you want to delete all scanned data? This can't be undone.", preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
                 guard let self = self else { return }
                 Task {
-                    await self.photosViewModel.deleteAllMetadata()
+                    await self.photosViewModel.deleteAllScannedData()
                 }
             }
         )

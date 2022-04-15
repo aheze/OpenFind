@@ -30,15 +30,19 @@ extension RealmContainer {
         }
     }
 
-    func deleteAllMetadata() {
+    func deleteAllScannedData() {
         let metadatas = realm.objects(RealmPhotoMetadata.self)
 
         do {
             try realm.write {
-                realm.delete(metadatas)
+                for metadata in metadatas {
+                    metadata.dateScanned = nil
+                    metadata.sentences = RealmSwift.List<RealmSentence>()
+                    metadata.scannedInLanguages = RealmSwift.List<String>()
+                }
             }
         } catch {
-            Debug.log("Error deleting all metadata: \(error)", .error)
+            Debug.log("Error deleting all scanned data: \(error)", .error)
         }
     }
 

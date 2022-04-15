@@ -104,7 +104,7 @@ extension SettingsData {
                                     tintColor: UIColor.systemRed,
                                     rightIconName: "trash"
                                 ) {
-                                    SettingsData.deleteAllPhotoMetadata?()
+                                    SettingsData.deleteAllScannedData?()
                                 }
                             )
                         ],
