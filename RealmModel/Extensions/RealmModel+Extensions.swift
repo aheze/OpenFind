@@ -29,7 +29,7 @@ extension RealmModel {
             }
             return false
         }
-        print("Lang: ->>> \(filteredRecognitionLanguages)")
+
         if filteredRecognitionLanguages.isEmpty {
             return [Settings.Values.RecognitionLanguage.english.rawValue]
         } else {

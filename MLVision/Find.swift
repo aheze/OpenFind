@@ -57,7 +57,6 @@ enum Find {
             }
             request.recognitionLevel = visionOptions.level
             request.recognitionLanguages = visionOptions.recognitionLanguages
-            print("Curren: \(request.recognitionLanguages)")
 
             let imageRequestHandler: VNImageRequestHandler
             switch image {
