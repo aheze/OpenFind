@@ -76,16 +76,10 @@ class ListChipView: UIView {
         return label
     }()
     
+    /// adjust colors
     func setColors() {
-        if color.isLight, traitCollection.userInterfaceStyle == .light {
-            let adjustedTextColor = color.toColor(.black, percentage: 0.6)
-            label.textColor = adjustedTextColor
-        } else if traitCollection.userInterfaceStyle == .dark {
-            let adjustedTextColor = color.toColor(.white, percentage: 0.8)
-            label.textColor = adjustedTextColor
-        } else {
-            label.textColor = color
-        }
+        let textColor = color.getTextColor(backgroundIsDark: traitCollection.userInterfaceStyle == .dark)
+        label.textColor = textColor
     }
     
     private func commonInit() {

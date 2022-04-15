@@ -65,7 +65,9 @@ extension SearchViewController {
                 field.overrides.alpha = model.alpha
                 self.searchViewModel.updateField(at: index, with: field, notify: true)
                 if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
-                    cell.leftView.imageView.tintColor = UIColor.white.toColor(model.selectedColor ?? UIColor(hex: list.color), percentage: model.alpha)
+                    let color = field.overrides.selectedColor ?? UIColor(hex: list.color)
+                    let textColor = color.getTextColor(backgroundIsDark: true)
+                    cell.leftView.imageView.tintColor = UIColor.white.toColor(textColor, percentage: field.overrides.alpha)
                 }
             }
 

@@ -9,6 +9,21 @@
 import SwiftUI
 
 extension UIColor {
+    /// make a color more visible
+    func getTextColor(backgroundIsDark: Bool) -> UIColor {
+        if isLight, !backgroundIsDark {
+            let adjustedTextColor = toColor(.black, percentage: 0.6)
+            return adjustedTextColor
+        } else if !isLight, backgroundIsDark {
+            let adjustedTextColor = toColor(.white, percentage: 0.8)
+            return adjustedTextColor
+        } else {
+            return self
+        }
+    }
+}
+
+extension UIColor {
     var color: Color {
         return Color(self)
     }
@@ -23,9 +38,9 @@ extension Color {
 extension UIColor {
     static var random: UIColor {
         return UIColor(
-            red: .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue: .random(in: 0...1),
+            red: .random(in: 0 ... 1),
+            green: .random(in: 0 ... 1),
+            blue: .random(in: 0 ... 1),
             alpha: 1.0
         )
     }
@@ -51,15 +66,13 @@ extension UIColor {
         var fGreen: CGFloat = 0
         var fBlue: CGFloat = 0
         var fAlpha: CGFloat = 0
-        
-        
+
         if getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
-            
             /// could be negative
             fRed = fRed.clamped(to: 0 ... 1)
             fGreen = fGreen.clamped(to: 0 ... 1)
             fBlue = fBlue.clamped(to: 0 ... 1)
-  
+
             let iRed = UInt(fRed * 255.0)
             let iGreen = UInt(fGreen * 255.0)
             let iBlue = UInt(fBlue * 255.0)
