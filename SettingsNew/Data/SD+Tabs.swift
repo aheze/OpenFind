@@ -158,16 +158,28 @@ extension SettingsData {
                                 configuration: .picker(
                                     title: "Pause Scanning After",
                                     choices: [
-                                        SettingsRow.PickerChoice(title: "Never", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.never.rawValue),
-                                        SettingsRow.PickerChoice(title: "10 Seconds", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "30 Seconds", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "1 Minute", storageValue: Settings.Values.ScanningDurationUntilPauseLevel.sixtySeconds.rawValue)
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningDurationUntilPauseLevel.never.getTitle(),
+                                            storageValue: Settings.Values.ScanningDurationUntilPauseLevel.never.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.getTitle(),
+                                            storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.getTitle(),
+                                            storageValue: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningDurationUntilPauseLevel.sixtySeconds.getTitle(),
+                                            storageValue: Settings.Values.ScanningDurationUntilPauseLevel.sixtySeconds.rawValue
+                                        )
                                     ],
                                     storage: \RealmModel.$cameraScanningDurationUntilPause
                                 )
                             )
                         ],
-                        description: .constant(string: "Pause scanning after a certain amount of time to conserve CPU usage.")
+                        description: .dynamic(identifier: .pauseScanningAfter)
                     )
                 ]
             )

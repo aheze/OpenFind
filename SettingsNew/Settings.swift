@@ -36,6 +36,7 @@ enum Settings {
     enum StringIdentifier {
         case keepWhitespace
         case filterLists
+        case pauseScanningAfter
     }
 
     /// for storage
@@ -182,6 +183,19 @@ enum Settings {
             case tenSeconds = "10"
             case thirtySeconds = "30"
             case sixtySeconds = "60"
+            
+            func getTitle() -> String {
+                switch self {
+                case .never:
+                    return "Never"
+                case .tenSeconds:
+                    return "10 Seconds"
+                case .thirtySeconds:
+                    return "30 Seconds"
+                case .sixtySeconds:
+                    return "1 Minute"
+                }
+            }
         }
 
         enum ScanningFrequencyLevel: String, CaseIterable, Identifiable {

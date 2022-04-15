@@ -19,6 +19,8 @@ extension LivePreviewViewController {
             let hostingController = UIHostingController(rootView: cameraNotFoundView)
             addChildViewController(hostingController, in: view)
             view.bringSubviewToFront(hostingController.view)
+            
+            loaded?()
         }
     }
 

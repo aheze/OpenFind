@@ -30,7 +30,6 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet var safeViewHeightC: NSLayoutConstraint!
     
     /// original, unscaled image size (pretty large)
-//    var imageSize: LivePreviewImageSize?
     var imageSize: CGSize?
     
     /// image scaled down to the view
@@ -76,6 +75,9 @@ class LivePreviewViewController: UIViewController {
 
     /// an actual photo was taken. Send back via another closure.
     var photoCaptured: ((UIImage) -> Void)?
+    
+    /// override loaded (if no camera found, still show)
+    var loaded: (() -> Void)?
     
     /// `true` = became `.aspectFill`
     var hitAspectTarget = false

@@ -23,6 +23,19 @@ extension Settings.StringIdentifier {
             } else {
                 return "Always show all lists in the search bar."
             }
+        case .pauseScanningAfter:
+            if let duration = Settings.Values.ScanningDurationUntilPauseLevel(rawValue: realmModel.cameraScanningDurationUntilPause) {
+                
+                if duration == .never {
+                    return "Never pause the live preview."
+                } else {
+                    let title = duration.getTitle().lowercased()
+                    return "Pause the live preview after \(title) if no text is detected."
+                }
+                
+            }
         }
+        
+        return ""
     }
 }
