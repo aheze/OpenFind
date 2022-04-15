@@ -61,11 +61,15 @@ class RealmModel: ObservableObject {
 
     init() {
         container.listsUpdated = { [weak self] lists in
-            self?.lists = lists
+            DispatchQueue.main.async {
+                self?.lists = lists
+            }
         }
-        
+
         container.photoMetadatasUpdated = { [weak self] photoMetadatas in
-            self?.photoMetadatas = photoMetadatas
+            DispatchQueue.main.async {
+                self?.photoMetadatas = photoMetadatas
+            }
         }
 
         container.loadLists()

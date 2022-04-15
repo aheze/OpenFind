@@ -12,7 +12,7 @@ enum Settings {
     /// for views
     enum ViewIdentifier: String {
         case defaultTab
-        
+
         case highlightsPreview
         case highlightsIcon
         case highlightsColor
@@ -75,6 +75,21 @@ enum Settings {
                 }
             }
 
+            /// check if a language is available
+            func isAvailableFor(accurateMode: Bool, version: Int) -> Bool {
+                guard self != .none else { return false }
+
+                if !accurateMode, requiresAccurateMode() {
+                    return false
+                }
+
+                if version < versionNeeded() {
+                    return false
+                }
+
+                return true
+            }
+
             func versionNeeded() -> Int {
                 switch self {
                 case .none:
@@ -128,7 +143,7 @@ enum Settings {
             case photos
             case camera
             case lists
-            
+
             func getTitle() -> String {
                 switch self {
                 case .photos:
@@ -140,14 +155,14 @@ enum Settings {
                 }
             }
         }
-        
+
         enum HapticFeedbackLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
             case none
             case light
             case heavy
-            
+
             func getTitle() -> String {
                 switch self {
                 case .none:

@@ -17,6 +17,7 @@ extension CameraViewController {
         visionOptions.orientation = await UIWindow.interfaceOrientation?.getVisionOrientation() ?? .right
         visionOptions.level = .fast
         visionOptions.customWords = searchViewModel.customWords
+        visionOptions.recognitionLanguages = [realmModel.findingPrimaryRecognitionLanguage, realmModel.findingSecondaryRecognitionLanguage]
 
         var findOptions = FindOptions()
         findOptions.priority = .cancelIfBusy
@@ -41,6 +42,7 @@ extension CameraViewController {
         visionOptions.orientation = .up
         visionOptions.level = .accurate
         visionOptions.customWords = searchViewModel.customWords
+        visionOptions.recognitionLanguages = [realmModel.findingPrimaryRecognitionLanguage, realmModel.findingSecondaryRecognitionLanguage]
 
         var findOptions = FindOptions()
         findOptions.priority = .waitUntilNotBusy

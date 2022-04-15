@@ -72,9 +72,17 @@ extension PhotosViewModel {
     func scanPhoto(_ photo: Photo, findOptions: FindOptions, inBatch: Bool) {
         Task {
             let image = await getFullImage(from: photo)
+            let realmModel = getRealmModel?()
+            let primaryLanguage = await realmModel?.findingPrimaryRecognitionLanguage ?? ""
+            let secondaryLanguage = await realmModel?.findingSecondaryRecognitionLanguage ?? ""
+            
             if let cgImage = image?.cgImage {
                 var visionOptions = VisionOptions()
                 visionOptions.level = .accurate
+
+                if let realmModel = realmModel {
+                    visionOptions.recognitionLanguages = [primaryLanguage, secondaryLanguage]
+                }
                 let request = await Find.find(in: .cgImage(cgImage), visionOptions: visionOptions, findOptions: findOptions)
                 let sentences = Find.getSentences(from: request)
 

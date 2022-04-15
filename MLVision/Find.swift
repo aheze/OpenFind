@@ -52,8 +52,12 @@ enum Find {
                 continuation.resume(returning: request)
             }
 
-            request.customWords = visionOptions.customWords
+            if let customWords = visionOptions.getCustomWords() {
+                request.customWords = customWords
+            }
             request.recognitionLevel = visionOptions.level
+            request.recognitionLanguages = visionOptions.getRecognitionLanguages()
+            print("Curren: \(request.recognitionLanguages)")
 
             let imageRequestHandler: VNImageRequestHandler
             switch image {

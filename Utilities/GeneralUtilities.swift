@@ -8,6 +8,15 @@
 
 import SwiftUI
 
+enum Utilities {
+    static func deviceVersion() -> Int {
+        if #available(iOS 14, *) {
+            return 14
+        } else {
+            return 13
+        }
+    }
+}
 extension Collection {
     /// Returns the element at the specified index if it is within bounds, otherwise nil.
     subscript(safe index: Index) -> Element? {

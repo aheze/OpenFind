@@ -13,6 +13,36 @@ struct VisionOptions {
     var level = VNRequestTextRecognitionLevel.fast
     var customWords = [String]()
     var orientation = CGImagePropertyOrientation.up
+    var recognitionLanguages = [Settings.Values.RecognitionLanguage.english.rawValue]
+
+    /// return nothing if empty
+    func getCustomWords() -> [String]? {
+        if customWords.isEmpty {
+            return nil
+        } else {
+            return customWords
+        }
+    }
+
+    func getRecognitionLanguages() -> [String] {
+        print("rec nefore: \(recognitionLanguages)")
+        let recognitionLanguages = recognitionLanguages.filter {
+            if let language = Settings.Values.RecognitionLanguage(rawValue: $0) {
+                let available = language.isAvailableFor(
+                    accurateMode: level == .accurate,
+                    version: Utilities.deviceVersion()
+                )
+                return available
+            }
+            return false
+        }
+        print("rec AFTER: \(recognitionLanguages)")
+        if recognitionLanguages.isEmpty {
+            return [Settings.Values.RecognitionLanguage.english.rawValue]
+        } else {
+            return recognitionLanguages
+        }
+    }
 }
 
 struct FindOptions {

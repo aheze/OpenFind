@@ -144,7 +144,7 @@ struct SettingsDynamicPickerPage: View {
         case .primaryRecognitionLanguage, .secondaryRecognitionLanguage:
             if let selectedLanguage = Settings.Values.RecognitionLanguage(rawValue: value) {
                 let versionNeeded = selectedLanguage.versionNeeded()
-                let versionUpdateNeeded = selectedLanguage.versionNeeded() > deviceVersion()
+                let versionUpdateNeeded = selectedLanguage.versionNeeded() > Utilities.deviceVersion()
 
                 if versionUpdateNeeded {
                     return "iOS \(versionNeeded)"
@@ -152,14 +152,6 @@ struct SettingsDynamicPickerPage: View {
             }
         }
         return nil
-    }
-
-    func deviceVersion() -> Int {
-        if #available(iOS 14, *) {
-            return 14
-        } else {
-            return 13
-        }
     }
 
     func getValues() -> [String] {
