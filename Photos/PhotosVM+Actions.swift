@@ -30,8 +30,9 @@ extension PhotosViewModel {
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
-                    sentences: [],
                     dateScanned: nil,
+                    sentences: [],
+                    scannedInLanguages: [],
                     isStarred: shouldStar,
                     isIgnored: false
                 )
@@ -64,8 +65,9 @@ extension PhotosViewModel {
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
-                    sentences: [],
                     dateScanned: nil,
+                    sentences: [],
+                    scannedInLanguages: [],
                     isStarred: false,
                     isIgnored: shouldIgnore
                 )

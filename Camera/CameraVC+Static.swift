@@ -70,9 +70,11 @@ extension CameraViewController {
         if let assetIdentifier = self.model.pausedImage?.assetIdentifier {
             let metadata = PhotoMetadata(
                 assetIdentifier: assetIdentifier,
-                sentences: sentences,
                 dateScanned: currentDate,
-                isStarred: false
+                sentences: sentences,
+                scannedInLanguages: realmModel.getCurrentRecognitionLanguages(accurateMode: true),
+                isStarred: false,
+                isIgnored: false
             )
             DispatchQueue.main.async {
                 self.realmModel.container.updatePhotoMetadata(metadata: metadata)

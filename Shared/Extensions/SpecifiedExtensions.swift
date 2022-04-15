@@ -23,6 +23,14 @@ extension PhotoMetadata {
         }
         return realmSentences
     }
+    
+    func getRealmScannedInLanguages() -> RealmSwift.List<String> {
+        let realmScannedInLanguages = RealmSwift.List<String>()
+        for scannedInLanguage in self.scannedInLanguages {
+            realmScannedInLanguages.append(scannedInLanguage)
+        }
+        return realmScannedInLanguages
+    }
 }
 
 extension Sentence {

@@ -15,4 +15,25 @@ extension RealmModel {
         let thumbnailSize = CGSize(width: length * scale, height: photosMinimumCellLength * scale)
         return thumbnailSize
     }
+
+    func getCurrentRecognitionLanguages(accurateMode: Bool) -> [String] {
+        let recognitionLanguages = [findingPrimaryRecognitionLanguage, findingSecondaryRecognitionLanguage]
+
+        let filteredRecognitionLanguages = recognitionLanguages.filter {
+            if let language = Settings.Values.RecognitionLanguage(rawValue: $0) {
+                let available = language.isAvailableFor(
+                    accurateMode: accurateMode,
+                    version: Utilities.deviceVersion()
+                )
+                return available
+            }
+            return false
+        }
+        print("Lang: ->>> \(filteredRecognitionLanguages)")
+        if filteredRecognitionLanguages.isEmpty {
+            return [Settings.Values.RecognitionLanguage.english.rawValue]
+        } else {
+            return filteredRecognitionLanguages
+        }
+    }
 }

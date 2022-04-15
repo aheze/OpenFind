@@ -56,7 +56,7 @@ enum Find {
                 request.customWords = customWords
             }
             request.recognitionLevel = visionOptions.level
-            request.recognitionLanguages = visionOptions.getRecognitionLanguages()
+            request.recognitionLanguages = visionOptions.recognitionLanguages
             print("Curren: \(request.recognitionLanguages)")
 
             let imageRequestHandler: VNImageRequestHandler

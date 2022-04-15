@@ -20,6 +20,7 @@ struct PausedImage: Identifiable {
     var cgImage: CGImage?
     var dateScanned: Date?
     var sentences = [Sentence]()
+    var scannedInLanguages = [String]()
 
     /// if it's saved to Photos, set this.
     var assetIdentifier: String?

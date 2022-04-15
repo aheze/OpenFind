@@ -79,10 +79,13 @@ extension RealmContainer {
     /// call this inside `updatePhotoMetadata`
     private func addPhotoMetadata(metadata: PhotoMetadata) {
         let realmSentences = metadata.getRealmSentences()
+        let scannedInLanguages = metadata.getRealmScannedInLanguages()
+        
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
-            sentences: realmSentences,
             dateScanned: metadata.dateScanned,
+            sentences: realmSentences,
+            scannedInLanguages: scannedInLanguages,
             isStarred: metadata.isStarred,
             isIgnored: metadata.isIgnored
         )

@@ -10,6 +10,7 @@ import AVFoundation
 import UIKit
 
 extension CameraViewController {
+    
     /// use fast mode
     func findAndAddHighlights(pixelBuffer: CVPixelBuffer) async {
         var visionOptions = VisionOptions()
@@ -17,7 +18,7 @@ extension CameraViewController {
         visionOptions.orientation = await UIWindow.interfaceOrientation?.getVisionOrientation() ?? .right
         visionOptions.level = .fast
         visionOptions.customWords = searchViewModel.customWords
-        visionOptions.recognitionLanguages = [realmModel.findingPrimaryRecognitionLanguage, realmModel.findingSecondaryRecognitionLanguage]
+        visionOptions.recognitionLanguages = realmModel.getCurrentRecognitionLanguages(accurateMode: false)
 
         var findOptions = FindOptions()
         findOptions.priority = .cancelIfBusy
@@ -42,7 +43,7 @@ extension CameraViewController {
         visionOptions.orientation = .up
         visionOptions.level = .accurate
         visionOptions.customWords = searchViewModel.customWords
-        visionOptions.recognitionLanguages = [realmModel.findingPrimaryRecognitionLanguage, realmModel.findingSecondaryRecognitionLanguage]
+        visionOptions.recognitionLanguages = realmModel.getCurrentRecognitionLanguages(accurateMode: true)
 
         var findOptions = FindOptions()
         findOptions.priority = .waitUntilNotBusy

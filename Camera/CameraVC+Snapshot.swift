@@ -54,21 +54,15 @@ extension CameraViewController {
                         /// the photo may have been scanned before the closure was called. if so, save the sentences.
                         metadata = PhotoMetadata(
                             assetIdentifier: assetIdentifier,
-                            sentences: currentPausedImage.sentences,
                             dateScanned: currentPausedImage.dateScanned,
+                            sentences: currentPausedImage.sentences,
+                            scannedInLanguages: currentPausedImage.scannedInLanguages,
                             isStarred: false,
                             isIgnored: false
                         )
-                    } else {
-                        metadata = PhotoMetadata(
-                            assetIdentifier: assetIdentifier,
-                            sentences: currentPausedImage.sentences,
-                            dateScanned: currentPausedImage.dateScanned,
-                            isStarred: false,
-                            isIgnored: false
-                        )
+                        
+                        self.realmModel.container.updatePhotoMetadata(metadata: metadata)
                     }
-                    self.realmModel.container.updatePhotoMetadata(metadata: metadata)
                 }
             }
         }

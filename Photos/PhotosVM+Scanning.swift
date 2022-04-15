@@ -11,20 +11,22 @@ import UIKit
 extension PhotosViewModel {
     /// a photo was just scanned
     /// if `inBatch`, no need for immediate add - check if the user's finger is touching the screen first
-    func photoScanned(photo: Photo, sentences: [Sentence], inBatch: Bool) {
+    @MainActor func photoScanned(photo: Photo, sentences: [Sentence], visionOptions: VisionOptions, inBatch: Bool) {
         var newPhoto = photo
         if let metadata = photo.metadata {
             var newMetadata = metadata
-            newMetadata.sentences = sentences
             newMetadata.dateScanned = Date()
+            newMetadata.sentences = sentences
+            newMetadata.scannedInLanguages = visionOptions.recognitionLanguages
             newPhoto.metadata = newMetadata
             addSentences(of: newPhoto, immediately: !inBatch)
             getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata)
         } else {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
-                sentences: sentences,
                 dateScanned: Date(),
+                sentences: sentences,
+                scannedInLanguages: visionOptions.recognitionLanguages,
                 isStarred: false,
                 isIgnored: false
             )
@@ -73,24 +75,19 @@ extension PhotosViewModel {
         Task {
             let image = await getFullImage(from: photo)
             let realmModel = getRealmModel?()
-            let primaryLanguage = await realmModel?.findingPrimaryRecognitionLanguage ?? ""
-            let secondaryLanguage = await realmModel?.findingSecondaryRecognitionLanguage ?? ""
-            
+            let languages = await realmModel?.getCurrentRecognitionLanguages(accurateMode: true) ?? [Settings.Values.RecognitionLanguage.english.rawValue]
+
             if let cgImage = image?.cgImage {
                 var visionOptions = VisionOptions()
                 visionOptions.level = .accurate
+                visionOptions.recognitionLanguages = languages
 
-                if let realmModel = realmModel {
-                    visionOptions.recognitionLanguages = [primaryLanguage, secondaryLanguage]
-                }
                 let request = await Find.find(in: .cgImage(cgImage), visionOptions: visionOptions, findOptions: findOptions)
                 let sentences = Find.getSentences(from: request)
 
                 /// discard value if not scanning and `inBatch` is true
                 if !inBatch || scanningState == .scanningAllPhotos {
-                    await MainActor.run {
-                        photoScanned(photo: photo, sentences: sentences, inBatch: inBatch)
-                    }
+                    await photoScanned(photo: photo, sentences: sentences, visionOptions: visionOptions, inBatch: inBatch)
                 }
             }
         }

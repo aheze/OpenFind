@@ -11,8 +11,9 @@ import UIKit
 
 class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var assetIdentifier = ""
-    @Persisted var sentences: RealmSwift.List<RealmSentence>
     @Persisted var dateScanned: Date? /// there could be no scan results, but still scanned
+    @Persisted var sentences: RealmSwift.List<RealmSentence> /// scan results
+    @Persisted var scannedInLanguages: RealmSwift.List<String> /// which languages scanned in
     @Persisted var isStarred = false
     @Persisted var isIgnored = false
 
@@ -22,14 +23,16 @@ class RealmPhotoMetadata: Object {
 
     init(
         assetIdentifier: String,
-        sentences: RealmSwift.List<RealmSentence>,
         dateScanned: Date?,
+        sentences: RealmSwift.List<RealmSentence>,
+        scannedInLanguages: RealmSwift.List<String>,
         isStarred: Bool,
         isIgnored: Bool
     ) {
         self.assetIdentifier = assetIdentifier
-        self.sentences = sentences
         self.dateScanned = dateScanned
+        self.sentences = sentences
+        self.scannedInLanguages = scannedInLanguages
         self.isStarred = isStarred
         self.isIgnored = isIgnored
     }
@@ -37,8 +40,9 @@ class RealmPhotoMetadata: Object {
     func getPhotoMetadata() -> PhotoMetadata {
         let metadata = PhotoMetadata(
             assetIdentifier: self.assetIdentifier,
-            sentences: self.sentences.map { $0.getSentence() },
             dateScanned: self.dateScanned,
+            sentences: self.sentences.map { $0.getSentence() },
+            scannedInLanguages: self.scannedInLanguages.map { $0 },
             isStarred: self.isStarred,
             isIgnored: self.isIgnored
         )
