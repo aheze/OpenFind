@@ -52,6 +52,7 @@ extension PhotosViewController {
                 PhotosSlidesItemViewController(
                     coder: coder,
                     model: self.model,
+                    realmModel: self.realmModel,
                     findPhoto: FindPhoto(id: UUID(), photo: photo)
                 )
             }

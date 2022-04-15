@@ -71,22 +71,24 @@ extension SearchViewModel {
 }
 
 extension SearchViewModel {
-    static let defaultFields = [
-        Field(
-            value: .word(
-                .init(
-                    string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
+    func getDefaultFields(realmModel: RealmModel) -> [Field] {
+        return [
+            Field(
+                value: .word(
+                    .init(
+                        string: "",
+                        color: UIColor(hex: realmModel.highlightsColor).getFieldColor(for: 0, realmModel: realmModel).hex
+                    )
+                )
+            ),
+            Field(
+                value: .addNew(
+                    .init(
+                        string: "",
+                        color: UIColor(hex: realmModel.highlightsColor).getFieldColor(for: 1, realmModel: realmModel).hex
+                    )
                 )
             )
-        ),
-        Field(
-            value: .addNew(
-                .init(
-                    string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 1).hex
-                )
-            )
-        )
-    ]
+        ]
+    }
 }

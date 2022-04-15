@@ -65,7 +65,7 @@ extension SearchViewController: UICollectionViewDelegate {
             value: .addNew(
                 .init(
                     string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: searchViewModel.fields.count).hex
+                    color: UIColor(hex: realmModel.highlightsColor).getFieldColor(for: searchViewModel.fields.count, realmModel: self.realmModel).hex
                 )
             )
         )
@@ -79,7 +79,7 @@ extension SearchViewController: UICollectionViewDelegate {
             field.value = .word(
                 .init(
                     string: word.string,
-                    color: Constants.defaultHighlightColor.getFieldColor(for: indexOfLastField).hex
+                    color: UIColor(hex: realmModel.highlightsColor).getFieldColor(for: indexOfLastField, realmModel: self.realmModel).hex
                 )
             )
             searchViewModel.updateField(at: indexOfLastField, with: field, notify: true)

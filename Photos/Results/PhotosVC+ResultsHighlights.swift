@@ -137,7 +137,10 @@ extension PhotosViewController {
 
         let highlightsViewModel = HighlightsViewModel()
         highlightsViewModel.shouldScaleHighlights = false /// highlights are already scaled
-        let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+        let highlightsViewController = HighlightsViewController(
+            highlightsViewModel: highlightsViewModel,
+            realmModel: realmModel
+        )
         highlightsViewController.view.alpha = 0
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

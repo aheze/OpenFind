@@ -47,6 +47,10 @@ extension UIColor {
 }
 
 extension UIColor {
+    convenience init(hex: Int, alpha: CGFloat = 1) {
+        self.init(hex: UInt(hex), alpha: alpha)
+    }
+    
     convenience init(hex: UInt, alpha: CGFloat = 1) {
         self.init(
             red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
@@ -132,7 +136,8 @@ extension UIColor {
 
 /// get gradient color for search bar field
 extension UIColor {
-    func getFieldColor(for index: Int) -> UIColor {
+    func getFieldColor(for index: Int, realmModel: RealmModel) -> UIColor {
+        guard realmModel.highlightsCycleSearchBarColors else { return self }
         let gradation = CGFloat(1) / 15
         let offset = gradation * CGFloat(index)
         return self.offset(by: offset)

@@ -9,9 +9,16 @@
 import UIKit
 
 class PhotosSlidesItemViewController: UIViewController {
+    var model: PhotosViewModel
+    var realmModel: RealmModel
+    var findPhoto: FindPhoto
+    
     var highlightsViewModel = HighlightsViewModel()
     lazy var scrollZoomController = ScrollZoomViewController.make()
-    lazy var highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
+    lazy var highlightsViewController = HighlightsViewController(
+        highlightsViewModel: highlightsViewModel,
+        realmModel: realmModel
+    )
     
     /// constraints are much more reliable than setting the frame of the highlights view controller
     /// these are relative to the drawing view
@@ -20,14 +27,18 @@ class PhotosSlidesItemViewController: UIViewController {
     var highlightsVCWidthC: NSLayoutConstraint!
     var highlightsVCHeightC: NSLayoutConstraint!
  
-    var model: PhotosViewModel
-    var findPhoto: FindPhoto
     var imageFrame = CGRect.zero
     
     @IBOutlet var containerView: UIView!
     
-    init?(coder: NSCoder, model: PhotosViewModel, findPhoto: FindPhoto) {
+    init?(
+        coder: NSCoder,
+        model: PhotosViewModel,
+        realmModel: RealmModel,
+        findPhoto: FindPhoto
+    ) {
         self.model = model
+        self.realmModel = realmModel
         self.findPhoto = findPhoto
         super.init(coder: coder)
     }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HighlightsView: View {
     @ObservedObject var highlightsViewModel: HighlightsViewModel
+    @ObservedObject var realmModel: RealmModel
 
     var body: some View {
         Color.clear.overlay(
@@ -18,6 +19,7 @@ struct HighlightsView: View {
                     ForEach(highlightsViewModel.highlights) { highlight in
                         HighlightView(
                             model: highlightsViewModel,
+                            realmModel: realmModel,
                             highlight: highlight,
                             viewSize: geometry.size
                         )
@@ -33,6 +35,7 @@ struct HighlightsView: View {
 
 struct HighlightView: View {
     @ObservedObject var model: HighlightsViewModel
+    @ObservedObject var realmModel: RealmModel
     let highlight: Highlight
     let viewSize: CGSize
     var body: some View {
@@ -47,10 +50,10 @@ struct HighlightView: View {
 
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(gradient)
-            .opacity(0.2)
+            .opacity(realmModel.highlightsBackgroundOpacity)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(gradient, lineWidth: 1.2)
+                    .stroke(gradient, lineWidth: realmModel.highlightsBorderWidth)
             )
             .opacity(getLingeringOpacity())
             .opacity(highlight.alpha)

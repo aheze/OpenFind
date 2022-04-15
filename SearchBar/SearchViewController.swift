@@ -76,6 +76,8 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchViewModel.updateFields(fields: searchViewModel.getDefaultFields(realmModel: realmModel), notify: false)
+        
         view.translatesAutoresizingMaskIntoConstraints = false /// allow auto sizing
         
         updateLandscapeConstants()
@@ -113,6 +115,7 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController {
+
     func setupCollectionViews() {
         /// actually important, when there's only 1 search bar
         searchCollectionView.alwaysBounceHorizontal = true

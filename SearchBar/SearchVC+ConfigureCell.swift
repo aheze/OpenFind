@@ -46,7 +46,7 @@ extension SearchViewController {
             field.value = .word(
                 .init(
                     string: text,
-                    color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                    color: UIColor(hex: self.realmModel.highlightsColor).getFieldColor(for: index, realmModel: self.realmModel).hex
                 )
             )
             self.searchViewModel.updateField(at: index, with: field, notify: true)
@@ -74,7 +74,7 @@ extension SearchViewController {
                 field.value = .word(
                     .init(
                         string: "",
-                        color: Constants.defaultHighlightColor.getFieldColor(for: index).hex
+                        color: UIColor(hex: self.realmModel.highlightsColor).getFieldColor(for: index, realmModel: self.realmModel).hex
                     )
                 )
                 self.searchViewModel.updateField(at: index, with: field, notify: true)

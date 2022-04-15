@@ -38,7 +38,6 @@ enum Constants {
     /// scale back speed
     static var toolbarIconDeactivateAnimationSpeed = CGFloat(0.3)
     
-    static var defaultHighlightColor = UIColor(hex: 0x00AEEF)
     
     /**
      For toolbars above the keyboard.

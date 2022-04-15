@@ -8,17 +8,16 @@
     
 import SwiftUI
 
-/**
- The View Controller that hosts `PopoverContainerView`. This is automatically managed.
- */
 class HighlightsViewController: UIViewController {
-    /// The popover model to pass down to `PopoverContainerView`.
     var highlightsViewModel: HighlightsViewModel
-    /**
-     Create a new `PopoverContainerViewController`. This is automatically managed.
-     */
-    init(highlightsViewModel: HighlightsViewModel) {
+    var realmModel: RealmModel
+    
+    init(
+        highlightsViewModel: HighlightsViewModel,
+        realmModel: RealmModel
+    ) {
         self.highlightsViewModel = highlightsViewModel
+        self.realmModel = realmModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,7 +34,8 @@ class HighlightsViewController: UIViewController {
         view.backgroundColor = .clear
         
         let highlightsView = HighlightsView(
-            highlightsViewModel: highlightsViewModel
+            highlightsViewModel: highlightsViewModel,
+            realmModel: realmModel
         )
         let hostingController = UIHostingController(rootView: highlightsView)
         hostingController.view.frame = view.bounds
