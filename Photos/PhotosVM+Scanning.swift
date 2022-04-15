@@ -18,6 +18,7 @@ extension PhotosViewModel {
             newMetadata.dateScanned = Date()
             newMetadata.sentences = sentences
             newMetadata.scannedInLanguages = visionOptions.recognitionLanguages
+            print("Update: \(newMetadata.scannedInLanguages)")
             newPhoto.metadata = newMetadata
             addSentences(of: newPhoto, immediately: !inBatch)
             getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata)

@@ -35,21 +35,25 @@ extension UIViewController {
             let starActivity = StarActivity { [weak model] in
                 guard let model = model else { return }
                 model.star(photos: photos)
-                if model.slidesState != nil {
+
+                if model.slidesState == nil {
+                    model.updateAfterStarChange()
+                    model.stopSelecting?()
+                } else {
                     if let photo = model.slidesState?.currentPhoto {
                         model.configureToolbar(for: photo)
                     }
                     model.sortNeededAfterStarChanged = true
-                } else {
-                    model.updateAfterStarChange()
                 }
-                model.stopSelecting?()
             }
 
             let ignoreActivity = IgnoreActivity { [weak model] in
                 guard let model = model else { return }
                 model.ignore(photos: photos)
-                model.stopSelecting?()
+                
+                if model.slidesState == nil {
+                    model.stopSelecting?()
+                }
             }
             presentShareSheet(items: items, applicationActivities: [starActivity, ignoreActivity])
         }

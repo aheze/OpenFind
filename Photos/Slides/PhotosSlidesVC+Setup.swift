@@ -15,6 +15,11 @@ extension PhotosSlidesViewController {
         setupScrollView()
         setupInfo()
         setupNavigationBar()
+        
+        contentView.backgroundColor = .clear
+        scrollView.backgroundColor = .clear
+        collectionViewContainer.backgroundColor = .clear
+        collectionView.backgroundColor = .clear
     }
     
     func setupCollectionView() {

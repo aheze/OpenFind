@@ -12,4 +12,9 @@ import UIKit
 class PhotosSlidesContentCell: UICollectionViewCell {
     var viewController: PhotosSlidesItemViewController?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
+    }
 }

@@ -50,6 +50,7 @@ struct PhotosSlidesInfoView: View {
             if let scannedInLanguages = photo.metadata?.scannedInLanguages, !scannedInLanguages.isEmpty {
                 let languages = scannedInLanguages.compactMap { Settings.Values.RecognitionLanguage(rawValue: $0)?.getTitle() }
                 Text("Scanned in \(languages.sentence).")
+                    .opacity(0.5)
             }
         }
         .foregroundColor(.accent)

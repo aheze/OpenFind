@@ -15,14 +15,22 @@ extension PhotosSlidesViewController {
         model.slidesState?.isFullScreen = isFullScreen
         switchToFullScreen(isFullScreen)
     }
-    
+
     func switchToFullScreen(_ fullScreen: Bool) {
         if fullScreen {
             searchNavigationModel.showNavigationBar?(false)
             tabViewModel.showBars(false, with: .tabAndStatusBar)
+
+            UIView.animate(withDuration: 0.2) {
+                self.view.backgroundColor = .black
+            }
         } else {
             searchNavigationModel.showNavigationBar?(true)
             tabViewModel.showBars(true, with: .tabAndStatusBar)
+
+            UIView.animate(withDuration: 0.2) {
+                self.view.backgroundColor = .systemBackground
+            }
         }
     }
 }
