@@ -13,7 +13,7 @@ enum Finding {
     static func checkIf(realmModel: RealmModel, string: String, matches search: [String]) -> Bool {
         let stringToSearchFrom = string.applyDefaults(realmModel: realmModel)
         return search.contains { text in
-            let stringToSearch = stringToSearchFrom.applyDefaults(realmModel: realmModel)
+            let stringToSearch = text.applyDefaults(realmModel: realmModel)
             return stringToSearchFrom.contains(stringToSearch)
         }
     }

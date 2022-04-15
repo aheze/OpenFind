@@ -10,23 +10,27 @@ import UIKit
 
 extension ListsViewController {
     func addNewList() {
-        let newList = List()
-        realmModel.container.addList(list: newList)
-        reloadDisplayedLists()
-        update()
-        presentDetails(list: newList)
+        DispatchQueue.main.async {
+            let newList = List()
+            self.realmModel.container.addList(list: newList)
+            self.reloadDisplayedLists()
+            self.update()
+            self.presentDetails(list: newList)
+        }
     }
 
     func importList(list: List) {
         let viewController = ListsImportViewController(list: list) { [weak self] in
             guard let self = self else { return }
-            var newList = list
-            newList.id = UUID()
-            self.realmModel.container.addList(list: newList)
-            self.reloadDisplayedLists()
-            self.update()
-            if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
-                self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
+            DispatchQueue.main.async {
+                var newList = list
+                newList.id = UUID()
+                self.realmModel.container.addList(list: newList)
+                self.reloadDisplayedLists()
+                self.update()
+                if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
+                    self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
+                }
             }
         }
         let navigationController = UINavigationController(rootViewController: viewController)

@@ -37,6 +37,7 @@ class IconPickerViewModel {
             iconChanged?(selectedIcon)
         }
     }
+
     var iconChanged: ((String) -> Void)?
     
     var filteredCategories: [Category]
@@ -49,7 +50,6 @@ class IconPickerViewModel {
         self.filteredCategories = icons
         self.cachedSearches = [:]
     }
-    
     
     func filter(search words: [String], completion: @escaping (() -> Void)) {
         DispatchQueue.global(qos: .userInteractive).async {
@@ -89,8 +89,8 @@ class IconPickerViewModel {
         guard !searchedWords.isEmpty else { return icons }
         for category in categories {
             for icon in category.icons {
-                
                 let contains = Finding.checkIf(realmModel: realmModel, string: icon, matches: searchedWords)
+                
                 if contains {
                     if let existingCategoryIndex = filteredCategories
                         .firstIndex(where: { $0.categoryName == category.categoryName })

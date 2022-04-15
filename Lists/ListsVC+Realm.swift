@@ -25,8 +25,10 @@ extension ListsViewController {
         alert.addAction(
             UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
                 guard let self = self else { return }
-                self.deleteLists(lists: self.model.selectedLists)
-                self.resetSelectingState()
+                DispatchQueue.main.async {
+                    self.deleteLists(lists: self.model.selectedLists)
+                    self.resetSelectingState()
+                }
             }
         )
         alert.addAction(

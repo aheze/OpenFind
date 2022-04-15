@@ -61,6 +61,7 @@ extension RealmContainer {
             } catch {
                 Debug.log("Error writing list: \(error)", .error)
             }
+            
             loadLists()
         }
     }
