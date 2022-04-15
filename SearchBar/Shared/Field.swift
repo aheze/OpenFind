@@ -40,19 +40,21 @@ struct Field: Identifiable, Equatable {
     
     /// same as `Value`, but with an extra case: `addNew`
     enum FieldValue: Equatable {
-        static func == (lhs: Field.FieldValue, rhs: Field.FieldValue) -> Bool {
-            switch (lhs, rhs) {
-            case (.word(let lhsWord), .word(let rhsWord)):
-                return lhsWord == rhsWord
-            case (.list(let lhsList), .list(let rhsList)):
-                return lhsList == rhsList
-            default:
-                return false
-            }
-        }
+//        static func == (lhs: Field.FieldValue, rhs: Field.FieldValue) -> Bool {
+//            switch (lhs, rhs) {
+//            case (.word(let lhsWord), .word(let rhsWord)):
+//                return lhsWord == rhsWord
+//            case (.list(let lhsList, originalText: ), .list(let rhsList)):
+//                return lhsList == rhsList
+//            default:
+//                return false
+//            }
+//        }
         
         case word(Word)
-        case list(List)
+        
+        /// `originalText` is the text in the search bar before selecting a list
+        case list(List, originalText: String)
         case addNew(Word) /// `String` for input text during add new -> full cell animation
         
         /// get the text of the value. "Untitled" if it's an untitled list.
@@ -60,7 +62,7 @@ struct Field: Identifiable, Equatable {
             switch self {
             case .word(let word):
                 return word.string
-            case .list(let list):
+            case .list(let list, _):
                 return list.displayedTitle
             case .addNew(let word):
                 return word.string
@@ -71,10 +73,23 @@ struct Field: Identifiable, Equatable {
             switch self {
             case .word(let word):
                 return word.color
-            case .list(let list):
+            case .list(let list, _):
                 return list.color
             case .addNew(let word):
                 return word.color
+            }
+        }
+        
+        /// get original text before selecting a list.
+        /// If change a list when already had a list, carry over the original text from the existing list.
+        func getOriginalText() -> String {
+            switch self {
+            case .word(let word):
+                return word.string
+            case .list(_, originalText: let originalText):
+                return originalText
+            case .addNew:
+                return ""
             }
         }
     }

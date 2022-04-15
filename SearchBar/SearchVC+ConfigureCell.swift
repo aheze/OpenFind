@@ -143,7 +143,7 @@ extension SearchViewController {
                 alpha: field.overrides.alpha
             )
             
-        case .list(let list):
+        case .list(let list, _):
             cell.leftView.imageView.alpha = 1
             cell.leftView.findIconView.alpha = 0
             cell.leftView.imageView.image = UIImage(systemName: list.icon)

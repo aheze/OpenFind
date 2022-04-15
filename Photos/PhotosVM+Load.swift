@@ -67,7 +67,7 @@ extension PhotosViewModel {
                 
                 let photo: Photo
                 let identifier = asset.localIdentifier
-                if let metadata = self.getRealmModel?().container.getPhotoMetadata(from: identifier) {
+                if let metadata = self.getRealmModel?().getPhotoMetadata(from: identifier) {
                     photo = Photo(asset: asset, metadata: metadata)
                     
                     if metadata.isIgnored {

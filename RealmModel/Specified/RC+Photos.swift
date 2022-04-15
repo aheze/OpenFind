@@ -25,7 +25,7 @@ extension RealmContainer {
     }
 
     func applyPhotoMetadatas(_ photoMetadatas: [PhotoMetadata]) {
-        self.photoMetadatas = photoMetadatas
+        self.photoMetadatasUpdated?(photoMetadatas)
     }
 
     func deleteAllMetadata() {
@@ -38,14 +38,6 @@ extension RealmContainer {
         } catch {
             Debug.log("Error deleting all metadata: \(error)", .error)
         }
-    }
-
-    /// get the photo metadata of an photo if it exists
-    func getPhotoMetadata(from identifier: String) -> PhotoMetadata? {
-        if let photoMetadata = photoMetadatas.first(where: { $0.assetIdentifier == identifier }) {
-            return photoMetadata
-        }
-        return nil
     }
 
     /// handles both add or update

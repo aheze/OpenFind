@@ -33,7 +33,7 @@ extension SearchViewModel {
                 existingGradient.colors.append(field.overrides.selectedColor ?? UIColor(hex: word.color))
                 existingGradient.alpha = field.overrides.alpha
                 stringToGradients[string] = existingGradient
-            case .list(let list):
+            case .list(let list, _):
 
                 let strings = list.words
                 guard list.containsWords else { continue }
@@ -59,7 +59,7 @@ extension SearchViewModel {
             switch value {
             case .word(let word):
                 words.insert(word.string)
-            case .list(let list):
+            case .list(let list, _):
                 let contents = Set(list.words)
                 words.formUnion(contents)
             case .addNew:

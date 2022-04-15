@@ -36,6 +36,23 @@ struct KeyboardToolbarView: View {
                 .frame(height: 0.25),
             alignment: .top
         )
+        .onValueChange(of: collectionViewModel.focusedCellIndex) { oldValue, newValue in
+            updateSelectedList()
+        }
+    }
+    
+    func updateSelectedList() {
+        guard let focusedCellIndex = collectionViewModel.focusedCellIndex else { return }
+        guard let field = searchViewModel.fields[safe: focusedCellIndex] else { return }
+//        switch field.value {
+            
+//        case .word(_):
+//            <#code#>
+//        case .list(_):
+//            <#code#>
+//        case .addNew(_):
+//            <#code#>
+//        }
     }
 
     func filteredLists() -> [List] {
@@ -88,5 +105,25 @@ struct ListWidgetView: View {
         } else {
             return .white
         }
+    }
+}
+
+struct KeyboardToolbarViewTester: View {
+    @StateObject var searchViewModel = SearchViewModel(configuration: .camera)
+    @StateObject var realmModel = RealmModel()
+    @StateObject var model = KeyboardToolbarViewModel()
+    @StateObject var collectionViewModel = SearchCollectionViewModel()
+    var body: some View {
+        KeyboardToolbarView(
+            searchViewModel: searchViewModel,
+            realmModel: realmModel,
+            model: model,
+            collectionViewModel: collectionViewModel
+        )
+    }
+}
+struct KeyboardToolbarViewTester_Previews: PreviewProvider {
+    static var previews: some View {
+        KeyboardToolbarViewTester()
     }
 }

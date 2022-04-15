@@ -42,7 +42,7 @@ extension SearchViewController {
                 }
             }
 
-        case .list(let list):
+        case .list(let list, _):
 
             model.header = "LIST"
             model.defaultColor = UIColor(hex: list.color)

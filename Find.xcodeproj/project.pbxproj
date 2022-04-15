@@ -2202,6 +2202,9 @@
 		3CC00EC327A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */; };
 		3CC00EC427A6517700F6CF9C /* ListsVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */; };
 		3CC00EC527A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */; };
+		3CC0D1182808EC91004E7016 /* SettingsDefaultTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA722803C80100B036AD /* SettingsDefaultTabView.swift */; };
+		3CC0D1192808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA9528060A0700B036AD /* SearchVC+Defaults.swift */; };
+		3CC0D11A2808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA9528060A0700B036AD /* SearchVC+Defaults.swift */; };
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
@@ -8322,6 +8325,7 @@
 				3C6C73AF2781947600E039F0 /* SuggestionsView.swift in Sources */,
 				3C2D22C027FC1A6A00D413B7 /* Identifier.swift in Sources */,
 				3CDD944527C05F9700D3EA1A /* Utilities+NavigationBar.swift in Sources */,
+				3CC0D1192808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */,
 				3C5B36F427FEAEDF00801FEE /* SettingsButton.swift in Sources */,
 				3C7B7A61277EEB9C00E1F602 /* CameraVC+Highlights.swift in Sources */,
 				3CE9C21B274DFC4D008C903C /* LivePreviewVC+Zoom.swift in Sources */,
@@ -8349,6 +8353,7 @@
 				3C4D39B327475DC80010FD68 /* FlashIconView.swift in Sources */,
 				3C08EB73279CAC0700971D60 /* TabModel.swift in Sources */,
 				3C3642CC277BC2E70038CB18 /* SearchCollectionView.swift in Sources */,
+				3CC0D1182808EC91004E7016 /* SettingsDefaultTabView.swift in Sources */,
 				3C5B371327FEAEDF00801FEE /* SD+Tabs.swift in Sources */,
 				3C9314AB27B844EC009E5B6E /* ContentPagingFlowLayout.swift in Sources */,
 				3CE9C20D274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
@@ -8602,6 +8607,7 @@
 				3C1A2C2827EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3CF15B1727FF8AEA00D51E9B /* SettingsLinks.swift in Sources */,
 				3CF15B1827FF8AEA00D51E9B /* SD+Feedback.swift in Sources */,
+				3CC0D11A2808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */,
 				3CF15B3627FF8AEA00D51E9B /* SettingsHighlightsIcon.swift in Sources */,
 				3C9314F527B8EA56009E5B6E /* PhotosVC+Delegate.swift in Sources */,
 				3CFD601F278B70970031BC8B /* SearchNavigationController.swift in Sources */,

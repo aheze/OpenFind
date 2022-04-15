@@ -11,13 +11,10 @@ import RealmSwift
 class RealmContainer {
     let realm = try! Realm()
 
-    var lists = [List]() {
-        didSet {
-            listsUpdated?(lists)
-        }
-    }
-
-    var photoMetadatas = [PhotoMetadata]()
+    var getListsSortBy: (() -> Settings.Values.ListsSortByLevel)?
     
     var listsUpdated: (([List]) -> Void)?
+    var photoMetadatasUpdated: (([PhotoMetadata]) -> Void)?
+
+    
 }

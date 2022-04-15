@@ -26,8 +26,17 @@ extension RealmContainer {
             lists.append(list)
         }
 
-        lists = lists.sorted { $0.dateCreated > $1.dateCreated }
-        self.lists = lists
+        let sortBy = getListsSortBy?() ?? .newestFirst
+        switch sortBy {
+        case .newestFirst:
+            lists = lists.sorted { $0.dateCreated > $1.dateCreated }
+        case .oldestFirst:
+            lists = lists.sorted { $0.dateCreated < $1.dateCreated }
+        case .title:
+            lists = lists.sorted { $0.displayedTitle > $1.displayedTitle }
+        }
+        
+        listsUpdated?(lists)
     }
 
     func addList(list: List) {

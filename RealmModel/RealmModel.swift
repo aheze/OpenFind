@@ -14,7 +14,7 @@ class RealmModel: ObservableObject {
 
     @Published private(set) var lists = [List]()
 
-    @Published var photoMetadatas = [PhotoMetadata]()
+    @Published private(set) var photoMetadatas = [PhotoMetadata]()
 
     static let data = RealmModelData.self
 
@@ -63,6 +63,10 @@ class RealmModel: ObservableObject {
         container.listsUpdated = { [weak self] lists in
             self?.lists = lists
         }
+        
+        container.photoMetadatasUpdated = { [weak self] photoMetadatas in
+            self?.photoMetadatas = photoMetadatas
+        }
 
         container.loadLists()
 
@@ -95,6 +99,14 @@ class RealmModel: ObservableObject {
         _cameraScanningDurationUntilPause.configureValueChanged(with: self)
 
         _listsSortBy.configureValueChanged(with: self)
+    }
+
+    /// get the photo metadata of an photo if it exists
+    func getPhotoMetadata(from identifier: String) -> PhotoMetadata? {
+        if let photoMetadata = photoMetadatas.first(where: { $0.assetIdentifier == identifier }) {
+            return photoMetadata
+        }
+        return nil
     }
 }
 

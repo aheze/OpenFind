@@ -14,14 +14,24 @@ extension SearchViewController {
         var deletedListsFieldIndices = [Int]() /// indices of deleted lists in fields
         for index in searchViewModel.fields.indices {
             let currentField = searchViewModel.fields[index]
+            
+            /// update lists if needed
             switch currentField.value {
-            case .list(let list):
+            case .list(let list, let originalText):
                 let updatedList = newLists.first { $0.id == list.id }
                 if let updatedList = updatedList {
-                    let updatedField = Field(configuration: currentField.configuration, value: .list(updatedList), overrides: currentField.overrides)
+                    let updatedField = Field(
+                        configuration: currentField.configuration,
+                        value: .list(updatedList, originalText: originalText),
+                        overrides: currentField.overrides
+                    )
                     fields.append(updatedField)
                 } else {
-                    let emptyField = Field(configuration: currentField.configuration, value: .word(.init()), overrides: currentField.overrides)
+                    let emptyField = Field(
+                        configuration: currentField.configuration,
+                        value: .word(.init()),
+                        overrides: currentField.overrides
+                    )
                     fields.append(emptyField)
                     deletedListsFieldIndices.append(index)
                 }

@@ -10,22 +10,12 @@ import Foundation
 
 extension RealmContainer {
     func loadLists() {
-        listsUpdated?(lists)
-    }
-    
-    func addList(list: List) {
-        self.lists.append(list)
+        listsUpdated?(List.getSampleLists())
     }
 
-    func updateList(list: List) {
-        if let firstIndex = lists.firstIndex(where: { $0.id == list.id }) {
-            lists[firstIndex] = list
-        }
-    }
+    func addList(list: List) {}
 
-    func deleteList(list: List) {
-        if let firstIndex = lists.firstIndex(where: { $0.id == list.id }) {
-            lists.remove(at: firstIndex)
-        }
-    }
+    func updateList(list: List) {}
+
+    func deleteList(list: List) {}
 }

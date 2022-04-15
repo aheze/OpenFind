@@ -10,6 +10,7 @@
 import SwiftUI
 
 class KeyboardToolbarViewModel: ObservableObject {
-
+    @Published var selectedListID: UUID?
+    @Published var displayedLists = [List]()
     var listSelected: ((List) -> Void)?
 }
