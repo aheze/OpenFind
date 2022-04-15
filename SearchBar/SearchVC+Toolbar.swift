@@ -14,12 +14,23 @@ extension SearchViewController {
             guard let self = self else { return }
             if let currentIndex = self.collectionViewModel.focusedCellIndex {
                 guard let currentField = self.searchViewModel.fields[safe: currentIndex] else { return }
-               
-                let field = Field(
-                    configuration: self.searchViewModel.configuration,
-                    value: .list(list, originalText: currentField.value.getOriginalText())
-                )
-                self.searchViewModel.updateField(at: currentIndex, with: field, notify: true)
+                let originalText = currentField.value.getOriginalText()
+
+                /// deselect list
+                if case .list(let existingList, _) = currentField.value, existingList.id == list.id {
+                    let field = Field(
+                        configuration: self.searchViewModel.configuration,
+                        value: .word(.init(string: originalText))
+                    )
+                    self.searchViewModel.updateField(at: currentIndex, with: field, notify: true)
+                } else {
+                    /// select list
+                    let field = Field(
+                        configuration: self.searchViewModel.configuration,
+                        value: .list(list, originalText: originalText)
+                    )
+                    self.searchViewModel.updateField(at: currentIndex, with: field, notify: true)
+                }
 
                 if let cell = self.searchCollectionView.cellForItem(at: currentIndex.indexPath) as? SearchFieldCell {
                     self.configureCell(cell, for: currentIndex)

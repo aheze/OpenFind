@@ -82,6 +82,7 @@ struct Field: Identifiable, Equatable {
         
         /// get original text before selecting a list.
         /// If change a list when already had a list, carry over the original text from the existing list.
+        /// if just a word, return `word.string`
         func getOriginalText() -> String {
             switch self {
             case .word(let word):
