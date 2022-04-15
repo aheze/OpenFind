@@ -13,13 +13,12 @@ struct ResultsIconView: View {
 
     var body: some View {
         Button {
-            /// small scale animation
-            withAnimation(.spring()) { scaleAnimationActive = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
-                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
+            scale(scaleAnimationActive: $scaleAnimationActive)
+
+            if model.loaded {
+                model.resultsOn.toggle()
+                model.resultsPressed?()
             }
-            model.resultsOn.toggle()
-            model.resultsPressed?()
         } label: {
             Text("\(model.displayedResultsCount)")
                 .foregroundColor(model.resultsOn ? .activeIconColor : .white)

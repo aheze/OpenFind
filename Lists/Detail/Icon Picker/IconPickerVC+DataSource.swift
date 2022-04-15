@@ -9,7 +9,6 @@
 import UIKit
 
 extension IconPickerViewController {
-    
     func update(animate: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections(model.filteredCategories)
@@ -18,8 +17,7 @@ extension IconPickerViewController {
         }
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
-    
-    
+
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, icon -> UICollectionViewCell? in
 
@@ -28,7 +26,9 @@ extension IconPickerViewController {
                 for: indexPath
             ) as! IconPickerCell
 
+            var imageExists = false
             if let image = UIImage(systemName: icon) {
+                imageExists = true
                 cell.imageView.image = image
                 cell.imageView.tintColor = .label
             } else {
@@ -44,20 +44,22 @@ extension IconPickerViewController {
 
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
-                let previousIcon = self.model.selectedIcon
-                self.model.selectedIcon = icon
+                if imageExists {
+                    let previousIcon = self.model.selectedIcon
+                    self.model.selectedIcon = icon
 
-                var snapshot = self.dataSource.snapshot()
-                var items = [icon]
-                if snapshot.itemIdentifiers.contains(previousIcon) {
-                    items.append(previousIcon)
+                    var snapshot = self.dataSource.snapshot()
+                    var items = [icon]
+                    if snapshot.itemIdentifiers.contains(previousIcon) {
+                        items.append(previousIcon)
+                    }
+                    if #available(iOS 15.0, *) {
+                        snapshot.reconfigureItems(items)
+                    } else {
+                        snapshot.reloadItems(items)
+                    }
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
-                if #available(iOS 15.0, *) {
-                    snapshot.reconfigureItems(items)
-                } else {
-                    snapshot.reloadItems(items)
-                }
-                self.dataSource.apply(snapshot, animatingDifferences: true)
             }
 
             return cell

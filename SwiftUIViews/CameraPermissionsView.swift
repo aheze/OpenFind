@@ -108,18 +108,20 @@ struct PermissionsActionView: View {
                 let labelAlignment: Alignment = verticalSizeClass != .compact ? .center : .leading
                 let textAlignment: TextAlignment = verticalSizeClass != .compact ? .center : .leading
 
-                VStack(alignment: alignment, spacing: 12) {
-                    Text(title)
-                        .font(UIFont.preferredFont(forTextStyle: .title1).font)
-                        .fontWeight(.medium)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(dark ? UIColor.white.color : UIColor.label.color)
+                VStack(alignment: alignment, spacing: 28) {
+                    VStack(alignment: alignment, spacing: 12) {
+                        Text(title)
+                            .font(UIFont.preferredFont(forTextStyle: .title1).font)
+                            .fontWeight(.medium)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(dark ? UIColor.white.color : UIColor.label.color)
 
-                    Text(description)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity, alignment: labelAlignment)
-                        .multilineTextAlignment(textAlignment)
-                        .foregroundColor(dark ? UIColor.white.withAlphaComponent(0.75).color : UIColor.secondaryLabel.color)
+                        Text(description)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, alignment: labelAlignment)
+                            .multilineTextAlignment(textAlignment)
+                            .foregroundColor(dark ? UIColor.white.withAlphaComponent(0.75).color : UIColor.secondaryLabel.color)
+                    }
 
                     Button(action: action) {
                         let colors = dark

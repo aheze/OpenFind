@@ -18,10 +18,12 @@ struct CameraButton: View {
         Button {
             /// is current camera
             if tabViewModel.tabState == tabType {
-                withAnimation(.spring()) {
-                    cameraViewModel.shutterOn.toggle()
+                if cameraViewModel.loaded {
+                    withAnimation(.spring()) {
+                        cameraViewModel.shutterOn.toggle()
+                    }
+                    cameraViewModel.shutterPressed?()
                 }
-                cameraViewModel.shutterPressed?()
             } else {
                 tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
             }

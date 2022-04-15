@@ -23,7 +23,10 @@ struct SnapshotView: View {
     var body: some View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
-            model.snapshotPressed?()
+
+            if model.loaded {
+                model.snapshotPressed?()
+            }
         } label: {
             Color.clear
                 .overlay(

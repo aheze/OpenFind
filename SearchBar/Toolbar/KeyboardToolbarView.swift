@@ -136,6 +136,7 @@ struct ListWidgetView: View {
             .contentShape(Rectangle())
         }
         .brightness(makeBrighter ? 0 : -0.5)
+        .opacity(makeBrighter ? 1 : 0.75)
     }
 
     func getTextColor() -> UIColor {

@@ -16,7 +16,7 @@ struct ListsEmptyContentView: View {
         PermissionsActionView(
             image: "ListsEmpty",
             title: "No Lists",
-            description: "Use lists to group words together",
+            description: "Use lists to group words together.",
             actionLabel: "Create a List",
             dark: false
         ) {

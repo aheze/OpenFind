@@ -11,6 +11,9 @@ import SwiftUI
 
 class CameraViewModel: ObservableObject {
     
+    /// true if camera loaded (first frame got)
+    @Published var loaded = false
+    
     @Published var toolbarState = ToolbarState.inTabBar
     
     @Published var actualResultsCount = 0

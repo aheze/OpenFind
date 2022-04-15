@@ -25,7 +25,9 @@ extension RealmContainer {
     }
 
     func applyPhotoMetadatas(_ photoMetadatas: [PhotoMetadata]) {
-        self.photoMetadatasUpdated?(photoMetadatas)
+        DispatchQueue.main.async {
+            self.photoMetadatasUpdated?(photoMetadatas)
+        }
     }
 
     func deleteAllMetadata() {
@@ -80,7 +82,7 @@ extension RealmContainer {
     private func addPhotoMetadata(metadata: PhotoMetadata) {
         let realmSentences = metadata.getRealmSentences()
         let scannedInLanguages = metadata.getRealmScannedInLanguages()
-        
+
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
             dateScanned: metadata.dateScanned,

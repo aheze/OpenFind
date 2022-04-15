@@ -72,7 +72,8 @@ extension PhotosViewController {
 
     func showPermissionsView() {
         collectionView.alpha = 0
-
+        showFiltersView(false, animate: false)
+        selectBarButton?.isEnabled = false
         searchViewModel.enabled = false
         slidesSearchViewModel.enabled = false
 

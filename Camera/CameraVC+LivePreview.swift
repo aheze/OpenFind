@@ -41,6 +41,19 @@ extension CameraViewController {
         livePreviewViewController.frameCaptured = { [weak self] pixelBuffer in
             guard let self = self else { return }
             
+            if !self.model.loaded {
+                DispatchQueue.main.async {
+                    self.model.loaded = true
+                
+                    /// slight lag to avoid focusing
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        UIView.animate(withDuration: 0.3) {
+                            self.livePreviewViewController?.view.alpha = 1
+                        }
+                    }
+                }
+            }
+            
             if
                 !self.model.shutterOn,
                 self.model.livePreviewScanning,
@@ -56,6 +69,7 @@ extension CameraViewController {
         
         addChildViewController(livePreviewViewController, in: livePreviewContainerView)
         
+        livePreviewViewController.view.alpha = 0
         livePreviewContainerView.backgroundColor = .clear
         livePreviewViewController.view.backgroundColor = .clear
         return livePreviewViewController

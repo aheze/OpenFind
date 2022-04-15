@@ -149,7 +149,7 @@ extension SearchViewController {
             cell.leftView.imageView.image = UIImage(systemName: list.icon)
             
             let color = field.overrides.selectedColor ?? UIColor(hex: list.color)
-            let textColor = color.getTextColor(backgroundIsDark: true)
+            let textColor = color.getTextColor(backgroundIsDark: searchViewModel.configuration.fieldIsDark)
             cell.leftView.imageView.tintColor = UIColor.white.toColor(textColor, percentage: field.overrides.alpha)
 
         case .addNew:

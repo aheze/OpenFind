@@ -19,6 +19,7 @@ struct SearchConfiguration: Equatable {
     var sidePeekPadding = CGFloat(48)
     
     var fieldCornerRadius = CGFloat(16)
+    var fieldIsDark = true /// used for making color adjustments
     var fieldBackgroundColor = UIColor.black.withAlphaComponent(0.5)
     var fieldActiveBackgroundColor = UIColor.black.withAlphaComponent(0.5)
     var fieldHighlightedBackgroundColor = UIColor(hex: 0x007eef)
@@ -83,6 +84,7 @@ struct SearchConfiguration: Equatable {
             sidePadding: 16,
             sidePeekPadding: 30,
             fieldCornerRadius: 12,
+            fieldIsDark: false,
             fieldBackgroundColor: .systemBackground,
             fieldActiveBackgroundColor: .systemBackground,
             fieldHighlightedBackgroundColor: UIColor(hex: 0x007eef).withAlphaComponent(0.2),

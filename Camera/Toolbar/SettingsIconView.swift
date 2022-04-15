@@ -10,16 +10,14 @@ import SwiftUI
 struct OpenSettingsIconView: View {
     @ObservedObject var model: CameraViewModel
     @State var scaleAnimationActive = false
-    
+
     var body: some View {
         Button {
-            /// small scale animation
-            withAnimation(.spring()) { scaleAnimationActive = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
-                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
+            scale(scaleAnimationActive: $scaleAnimationActive)
+
+            if model.loaded {
+                model.settingsPressed?()
             }
-            
-            model.settingsPressed?()
         } label: {
             Image(systemName: "gearshape.fill")
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)

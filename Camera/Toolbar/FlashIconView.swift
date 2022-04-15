@@ -10,13 +10,16 @@ import SwiftUI
 struct FlashIconView: View {
     @ObservedObject var model: CameraViewModel
     var isEnabled: Bool
-    
+
     @State var scaleAnimationActive = false
 
     var body: some View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
-            toggle()
+
+            if model.loaded {
+                toggle()
+            }
         } label: {
             Image(systemName: "bolt.fill")
                 .frame(width: 40, height: 40)
