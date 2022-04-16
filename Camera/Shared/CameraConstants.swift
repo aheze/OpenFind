@@ -14,7 +14,7 @@ enum CameraConstants {
     static var cameraCoolDownDuration = CGFloat(4)
     
     /// once the history reaches this, remove the first history, and append the new history to the end.
-    static var maximumHistoryCount = 50
+    static var maximumHistoryCount = 20
     
     static var resultsCountUpdateDuration = CGFloat(0.8)
 }

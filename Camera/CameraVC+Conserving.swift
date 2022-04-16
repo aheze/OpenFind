@@ -20,7 +20,7 @@ extension CameraViewController {
         model.motionManager?.accelerometerUpdateInterval = 0.2
 
         /// Wait a bit, because the phone might still be shaking from being put down
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.model.motionManager?.startAccelerometerUpdates(to: .main) { [weak self] data, error in
                 guard let data = data, error == nil else { return }
                 let acceleration = data.acceleration.x + data.acceleration.y

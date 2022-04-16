@@ -182,6 +182,10 @@ extension SettingsData {
                                             storageValue: Settings.Values.ScanningDurationUntilPauseLevel.never.rawValue
                                         ),
                                         SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningDurationUntilPauseLevel.fiveSeconds.getTitle(),
+                                            storageValue: Settings.Values.ScanningDurationUntilPauseLevel.fiveSeconds.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
                                             title: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.getTitle(),
                                             storageValue: Settings.Values.ScanningDurationUntilPauseLevel.tenSeconds.rawValue
                                         ),

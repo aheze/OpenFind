@@ -33,7 +33,7 @@ extension CameraViewController {
             self.highlightsViewModel.update(with: highlights, replace: false)
             self.highlightsAdded()
             self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
-            self.checkEvents()
+            self.checkDormant()
         }
     }
 

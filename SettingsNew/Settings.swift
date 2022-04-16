@@ -180,15 +180,33 @@ enum Settings {
         enum ScanningDurationUntilPauseLevel: String, CaseIterable, Identifiable {
             var id: Self { self }
 
-            case never = "0"
+            case never = ""
+            case fiveSeconds = "5"
             case tenSeconds = "10"
             case thirtySeconds = "30"
             case sixtySeconds = "60"
+            
+            func getDouble() -> Double? {
+                switch self {
+                case .never:
+                    return nil
+                case .fiveSeconds:
+                    return 5
+                case .tenSeconds:
+                    return 10
+                case .thirtySeconds:
+                    return 30
+                case .sixtySeconds:
+                    return 60
+                }
+            }
             
             func getTitle() -> String {
                 switch self {
                 case .never:
                     return "Never"
+                case .fiveSeconds:
+                    return "5 Seconds"
                 case .tenSeconds:
                     return "10 Seconds"
                 case .thirtySeconds:

@@ -31,28 +31,36 @@ extension CameraViewController {
         } else {
             return true
         }
-        
-    }
-    
-    func checkEvents() {
-        if model.history.recentEvents.count >= CameraConstants.maximumHistoryCount {
-            if !model.resultsOn {
-                checkDormant()
-            }
-        }
     }
     
     func checkDormant() {
-        let recentEvents = model.history.recentEvents.suffix(30)
+        guard
+            let duration = Settings.Values.ScanningDurationUntilPauseLevel(rawValue: realmModel.cameraScanningDurationUntilPause),
+            duration != .never,
+            model.history.recentEvents.count >= CameraConstants.maximumHistoryCount,
+            !model.resultsOn
+        else { return }
         
+        let recentEvents = model.history.recentEvents.suffix(30)
         let recentRecognizedStrings = recentEvents.map { $0.sentences }.flatMap { $0 }.map { $0.string } as [String]
         let recentFoundHighlights = recentEvents.map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
         
         if recentFoundHighlights.count == 0, recentRecognizedStrings.count <= 20 {
-            model.history.recentEvents.removeAll()
+            if model.history.dateNoTextRecognized == nil {
+                model.history.dateNoTextRecognized = Date()
+            }
+        } else {
+            model.history.dateNoTextRecognized = nil
+        }
+        
+        if let dateNoTextRecognized = model.history.dateNoTextRecognized {
+            let difference = dateNoTextRecognized.distance(to: Date())
             
-            /// stop scanning for now, until the phone shakes
-            stopLivePreviewScanning()
+            if difference > duration.getDouble() ?? 0 {
+                /// stop scanning for now, until the phone shakes
+                stopLivePreviewScanning()
+                model.history.dateNoTextRecognized = nil
+            }
         }
     }
 }
