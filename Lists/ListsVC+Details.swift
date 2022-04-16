@@ -26,9 +26,18 @@ extension ListsViewController {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let listsDetailViewModel = ListsDetailViewModel(
             list: list,
-            listUpdated: { [weak self] newList in
-                self?.realmModel.container.updateList(list: newList)
-                self?.listUpdated(list: newList)
+            listUpdated: { [weak self] newList, finalUpdate in
+                guard let self = self else { return }
+                self.realmModel.container.updateList(list: newList)
+                self.listUpdated(list: newList)
+                
+                if finalUpdate {
+                    self.reloadDisplayedLists()
+                    self.update()
+                    if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
+                        self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
+                    }
+                }
             },
             listDeleted: { [weak self] listToDelete in
                 self?.realmModel.container.deleteList(list: listToDelete)

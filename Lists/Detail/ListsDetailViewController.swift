@@ -6,8 +6,8 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import SwiftUI
 import Popovers
+import SwiftUI
 
 class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     var model: ListsDetailViewModel
@@ -117,7 +117,7 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -157,7 +157,7 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
         super.willMove(toParent: parent)
         
         /// add the chip views one last time
-        self.model.listUpdated?(model.list.getList())
+        model.listUpdated?(model.list.getList(), true) /// `final` is true, reload the lists back in the collection view
         withAnimation {
             toolbarViewModel.toolbar = nil
         }

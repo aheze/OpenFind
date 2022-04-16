@@ -13,7 +13,6 @@ extension ListsViewController {
         DispatchQueue.main.async {
             let newList = List()
             self.realmModel.container.addList(list: newList)
-            print("addedlist.")
             self.reloadDisplayedLists()
             self.update()
             self.presentDetails(list: newList)

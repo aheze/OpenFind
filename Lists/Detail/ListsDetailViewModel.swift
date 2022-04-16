@@ -13,7 +13,10 @@ import SwiftUI
 class ListsDetailViewModel: ObservableObject {
     var savedList: List
     var realmModel: RealmModel
-    var listUpdated: ((List) -> Void)?
+    
+    /// 1. the list
+    /// 2. final (about to dismiss detail controller) or not final (updating continuously).
+    var listUpdated: ((List, Bool) -> Void)?
     var listDeleted: ((List) -> Void)?
     @Published var list: EditableList
     
@@ -47,7 +50,7 @@ class ListsDetailViewModel: ObservableObject {
     var listCancellable: AnyCancellable?
     init(
         list: List,
-        listUpdated: ((List) -> Void)?,
+        listUpdated: ((List, Bool) -> Void)?,
         listDeleted: ((List) -> Void)?,
         realmModel: RealmModel
     ) {
@@ -71,7 +74,7 @@ class ListsDetailViewModel: ObservableObject {
             .debounce(for: .seconds(ListsDetailConstants.editDebounceDuration), scheduler: RunLoop.main)
             .sink { [weak self] list in
                 let newList = list.getList()
-                self?.listUpdated?(newList)
+                self?.listUpdated?(newList, false) /// false = not final, updating continuously
             }
     }
     
