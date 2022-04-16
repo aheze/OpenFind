@@ -6,13 +6,14 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import Popovers
 import SupportDocs
-import UIKit
+import SwiftUI
 
 extension SettingsViewController {
     func listen() {
         presentationController?.delegate = self
-        
+
         model.showHighlightColorPicker = { [weak self] in
             guard let self = self else { return }
             self.presentColorPicker()
@@ -22,10 +23,10 @@ extension SettingsViewController {
             guard let self = self else { return }
             self.resetAllSettings()
         }
-        
+
         SettingsData.shareLink = { [weak self] in
             guard let self = self else { return }
-            self.presentShareScreen()
+            self.shareLink()
         }
 
         SettingsData.rateTheApp = {
@@ -60,18 +61,52 @@ extension SettingsViewController {
         }
     }
 
-    func presentShareScreen() {
+    func shareLink() {
         guard let url = URL(string: "https://getfind.app/") else { return }
-        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        UIPasteboard.general.url = url
 
-        if let popoverController = activityViewController.popoverPresentationController {
-            popoverController.sourceRect = CGRect(x: 10, y: self.view.bounds.height - 50, width: 20, height: 20)
-            popoverController.sourceView = self.view
+        let tag = UUID().uuidString
+        var attributes = Popover.Attributes()
+        attributes.tag = tag
+        attributes.position = .relative(popoverAnchors: [.top])
+        attributes.sourceFrame = { [weak view] in view?.bounds ?? .zero }
+
+        var insets = Global.safeAreaInsets
+        insets.top += 16
+        attributes.sourceFrameInset = insets
+
+        attributes.presentation.animation = .spring()
+        attributes.presentation.transition = .move(edge: .top)
+        attributes.dismissal.animation = .spring(response: 3, dampingFraction: 0.8, blendDuration: 1)
+        attributes.dismissal.transition = .move(edge: .top)
+
+        let popover = Popover(attributes: attributes) {
+            HStack {
+                Image(systemName: "doc.on.doc")
+                Text("Link Copied!")
+            }
+            .foregroundColor(.blue)
+            .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
+            .background(
+                Capsule()
+                    .fill(UIColor.systemBackground.color)
+                    .shadow(
+                        color: UIColor.label.color.opacity(0.1),
+                        radius: 5,
+                        x: 0,
+                        y: 3
+                    )
+            )
         }
 
-        self.present(activityViewController, animated: true)
+        self.present(popover)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if let popover = self.view.popover(tagged: tag) {
+                popover.dismiss()
+            }
+        }
     }
-    
+
     func resetAllSettings() {
         let alert = UIAlertController(title: "Reset All Settings?", message: "Are you sure you want to reset all settings?", preferredStyle: .actionSheet)
         alert.addAction(
@@ -111,8 +146,7 @@ extension SettingsViewController {
             self.present(colorPicker, animated: true)
         }
     }
-    
-    
+
     func showSupportDocs() {
         let dataSource = URL(string: "https://raw.githubusercontent.com/aheze/FindInfo/DataSource/_data/supportdocs_datasource.json")!
         let options = SupportOptions(
@@ -148,7 +182,7 @@ extension SettingsViewController {
                 error404: URL(string: "https://aheze.github.io/FindInfo/404")!
             )
         )
-        
+
         let viewController = SupportDocsViewController(dataSourceURL: dataSource, options: options)
         self.present(viewController, animated: true)
     }

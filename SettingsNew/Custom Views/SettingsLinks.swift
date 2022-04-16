@@ -36,6 +36,13 @@ struct SettingsQRCodeView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
+                
+                Image("Logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(16)
+                
                 Text("Scan to download Find")
                     .foregroundColor(UIColor.secondaryLabel.color)
                     .font(UIFont.preferredFont(forTextStyle: .title1).font)

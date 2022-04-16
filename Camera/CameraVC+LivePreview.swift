@@ -78,7 +78,7 @@ extension CameraViewController {
         
             /// slight lag to avoid focusing
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.15) {
                     self.livePreviewViewController?.view.alpha = 1
                 }
             }
