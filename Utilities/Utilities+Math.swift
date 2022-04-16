@@ -49,6 +49,7 @@ extension CGFloat {
 
 extension BinaryInteger {
     var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
+    var asRadians: Float { Float(self) * .pi / 180 } /// degrees to radians, for RealityKit
 }
 
 extension FloatingPoint {
