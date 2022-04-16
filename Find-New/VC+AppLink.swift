@@ -32,6 +32,7 @@ extension ViewController {
     /// if view loaded, import list. If not, cache list
     func startImportingList(list: List) {
         if loaded {
+            tabViewModel.statusBarStyle = .default
             tabViewModel.changeTabState(newTab: .lists, animation: .animate)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self.lists.viewController.importList(list: list)

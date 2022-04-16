@@ -33,12 +33,15 @@ extension ListsViewController {
                 }
             }
         }
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         if #available(iOS 15.0, *) {
             if let presentationController = navigationController.presentationController as? UISheetPresentationController {
-                presentationController.detents = [.medium(), .large()]
+                presentationController.detents = [.medium()]
             }
         }
+        
+        self.dismiss(animated: true) /// dismiss currently-visible view controllers, like Settings
         self.present(navigationController, animated: true)
     }
 }
