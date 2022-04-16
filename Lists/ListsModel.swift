@@ -17,7 +17,7 @@ struct DisplayedList: Hashable {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.list)
+        hasher.combine(self.list.id)
     }
 }
 

@@ -10,6 +10,8 @@ import UIKit
 
 extension ListsViewController {
     func listen() {
+        listenToDefaults()
+
         model.deleteSelected = { [weak self] in
             guard let self = self else { return }
             self.deleteSelectedLists()
@@ -35,7 +37,9 @@ extension ListsViewController {
             let search = self.searchViewModel.text
             self.find(text: search)
 
-            if !self.searchViewModel.isEmpty, self.navigationItem.leftBarButtonItem == nil {
+            if self.searchViewModel.isEmpty {
+                self.hideCancelNavigationBar()
+            } else if self.navigationItem.leftBarButtonItem == nil {
                 self.showCancelNavigationBar()
             }
         }

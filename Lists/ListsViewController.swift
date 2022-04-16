@@ -62,6 +62,8 @@ class ListsViewController: UIViewController, Searchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        model.loaded = true
+        
         title = "Lists"
         
         _ = listsFlowLayout

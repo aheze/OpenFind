@@ -36,7 +36,10 @@ extension ListsViewController {
         let list = model.displayedLists[index].list
 
         let (cellSize, chipFrames) = list.getContentViewSize(availableWidth: availableWidth)
-        model.displayedLists[index].frame.chipFrames = chipFrames
+        var displayedList = model.displayedLists[index]
+        displayedList.frame.chipFrames = chipFrames
+        model.updateDisplayedList(at: index, with: displayedList)
+        
         return cellSize
     }
 }

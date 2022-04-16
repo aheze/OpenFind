@@ -2205,6 +2205,8 @@
 		3CC0D1182808EC91004E7016 /* SettingsDefaultTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA722803C80100B036AD /* SettingsDefaultTabView.swift */; };
 		3CC0D1192808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA9528060A0700B036AD /* SearchVC+Defaults.swift */; };
 		3CC0D11A2808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA9528060A0700B036AD /* SearchVC+Defaults.swift */; };
+		3CC0D11E280A874C004E7016 /* ListsVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC0D11D280A874C004E7016 /* ListsVC+Defaults.swift */; };
+		3CC0D11F280A8755004E7016 /* ListsVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC0D11D280A874C004E7016 /* ListsVC+Defaults.swift */; };
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
@@ -4094,6 +4096,7 @@
 		3CBEAC1127549B9600D04B39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsSelectionToolbarView.swift; sourceTree = "<group>"; };
 		3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Selection.swift"; sourceTree = "<group>"; };
+		3CC0D11D280A874C004E7016 /* ListsVC+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Defaults.swift"; sourceTree = "<group>"; };
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
 		3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		3CC230EA25C2105200AD04B6 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
@@ -5186,6 +5189,7 @@
 				3C4D3A65274769370010FD68 /* ListsViewController.swift */,
 				3C9234D927E663280055061A /* ListsVC+Setup.swift */,
 				3C0F23AA27F4EB6700BCBFAE /* ListsVC+Listen.swift */,
+				3CC0D11D280A874C004E7016 /* ListsVC+Defaults.swift */,
 				3CFD5F7B278A486D0031BC8B /* ListsVC+DataSource.swift */,
 				3C0B12CB27F13D9A0013688E /* ListsVC+Delegate.swift */,
 				3CCE2B93279D297200F72351 /* ListsVC+Lifecycle.swift */,
@@ -8954,6 +8958,7 @@
 				3C798ED027F69837007BF68D /* RC+Photos.swift in Sources */,
 				3C4D3A5F2747691A0010FD68 /* ViewController.swift in Sources */,
 				3C93148027B769A0009E5B6E /* ListsDetailVC+Scroll.swift in Sources */,
+				3CC0D11E280A874C004E7016 /* ListsVC+Defaults.swift in Sources */,
 				3CF15B6227FF8AEA00D51E9B /* SettingsData.swift in Sources */,
 				3CCE2B45279D149800F72351 /* ListsDetailVC+Listen.swift in Sources */,
 				3C0F23A227F4B20C00BCBFAE /* ListsImportViewController.swift in Sources */,
@@ -9554,6 +9559,7 @@
 				3C6C73A52781947400E039F0 /* SearchFieldCell.swift in Sources */,
 				3C6C73372781943B00E039F0 /* Model.swift in Sources */,
 				3C6C73452781944B00E039F0 /* TabViewModel.swift in Sources */,
+				3CC0D11F280A8755004E7016 /* ListsVC+Defaults.swift in Sources */,
 				3C1D178727BBF9AC00E82B8B /* PhotosVM+Sort.swift in Sources */,
 				3CAE64F127C6AAE5009E8564 /* PhotosVC+ResultsDataSource.swift in Sources */,
 				3C06260127C69FD20078E66F /* PhotosVC+Results.swift in Sources */,

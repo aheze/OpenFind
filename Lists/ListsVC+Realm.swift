@@ -16,7 +16,34 @@ extension ListsViewController {
     }
 
     func reloadDisplayedLists() {
-        model.displayedLists = realmModel.lists.map { .init(list: $0) }
+        guard let sortBy = Settings.Values.ListsSortByLevel(rawValue: realmModel.listsSortBy) else {
+            let displayedLists: [DisplayedList] = realmModel.lists.map { .init(list: $0) }
+            model.updateDisplayedLists(to: displayedLists)
+            return
+        }
+
+        /// newest first
+        switch sortBy {
+        case .newestFirst:
+            let displayedLists: [DisplayedList] = realmModel.lists
+                .sorted { $0.dateCreated > $1.dateCreated }
+                .map { .init(list: $0) }
+            model.updateDisplayedLists(to: displayedLists)
+        case .oldestFirst:
+            let displayedLists: [DisplayedList] = realmModel.lists
+                .sorted { $0.dateCreated < $1.dateCreated }
+                .map { .init(list: $0) }
+            model.updateDisplayedLists(to: displayedLists)
+        case .title:
+            let displayedLists: [DisplayedList] = realmModel.lists
+                .sorted {
+                    let a = $0.displayedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                    let b = $1.displayedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                    return a < b
+                }
+                .map { .init(list: $0) }
+            model.updateDisplayedLists(to: displayedLists)
+        }
     }
 
     func deleteSelectedLists() {
@@ -52,7 +79,9 @@ extension ListsViewController {
     /// single list updated
     func listUpdated(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
-            model.displayedLists[firstIndex].list = list
+            var displayedList = model.displayedLists[firstIndex]
+            displayedList.list = list
+            model.updateDisplayedList(at: firstIndex, with: displayedList)
             update(at: firstIndex.indexPath, with: model.displayedLists[firstIndex])
         }
     }
@@ -60,7 +89,7 @@ extension ListsViewController {
     /// single list deleted
     func listDeleted(list: List) {
         if let firstIndex = model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
-            model.displayedLists.remove(at: firstIndex)
+            model.removeDisplayedList(at: firstIndex)
             update()
         }
     }

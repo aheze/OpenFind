@@ -12,7 +12,7 @@ extension ListsViewController {
     func find(text: [String]) {
         let displayedLists = realmModel.lists.map { DisplayedList(list: $0) }
         guard !text.isEmpty else {
-            model.displayedLists = displayedLists
+            model.updateDisplayedLists(to: displayedLists)
             update()
             return
         }
@@ -23,7 +23,7 @@ extension ListsViewController {
                 || Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.description, matches: text)
         }
 
-        model.displayedLists = filteredDisplayedLists
+        model.updateDisplayedLists(to: filteredDisplayedLists)
         update()
     }
 }
