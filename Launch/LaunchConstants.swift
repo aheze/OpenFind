@@ -13,6 +13,7 @@ enum LaunchConstants {
     static var textDepth = Float(0.008)
     static var textHeight = CGFloat(0.08)
     
+    static let tileGap = Float(0.008)
     static let tileLength = Float(0.1)
     static let tileDepth = Float(0.02)
     static let tileCornerRadius = Float(0.05)

@@ -16,13 +16,13 @@ extension LaunchViewController {
         sceneView.environment.background = .color(Colors.accentDarkBackground)
         sceneContainer.addSubview(sceneView)
         sceneView.pinEdgesToSuperview()
-        sceneView.debugOptions = [.showPhysics, .showWorldOrigin]
+//        sceneView.debugOptions = [.showPhysics, .showWorldOrigin]
 
         let anchor = AnchorEntity()
         sceneView.scene.addAnchor(anchor)
 
         let basePosition = SIMD3<Float>(x: 0, y: 0, z: 0)
-        let cameraPosition = SIMD3<Float>(x: 0.01, y: 0.3, z: 0.4) /// can't be 0
+        let cameraPosition = SIMD3<Float>(x: 0.0001, y: 0.2, z: 0.1) /// can't be 0
 
         let baseEntity = ModelEntity()
         anchor.addChild(baseEntity)
@@ -39,15 +39,22 @@ extension LaunchViewController {
 
     func addTiles(to baseEntity: ModelEntity) {
         let text = "FIND"
-        let startingOffset = -(Float(text.count) / 2) * LaunchConstants.tileLength + LaunchConstants.tileLength / 2
-        print("start: \(startingOffset)")
+
+        let totalTileLength = Float(text.count) * LaunchConstants.tileLength
+        let totalTileGap = Float(text.count - 1) * LaunchConstants.tileGap
+        let totalLength = totalTileLength + totalTileGap
+
+        /// start to the left
+        let startingOffset = -totalLength / 2 + LaunchConstants.tileLength / 2
+
         for stringIndex in text.indices {
             let character = String(text[stringIndex])
             let index = Float(text.distance(from: text.startIndex, to: stringIndex))
 
             let tile = getTile(character: character)
-            let xOffset = startingOffset + LaunchConstants.tileLength * index
-            print("off: \(xOffset)")
+            let lengthOffset = LaunchConstants.tileLength * index
+            let gapOffset = LaunchConstants.tileGap * index
+            let xOffset = startingOffset + lengthOffset + gapOffset
             tile.position = [xOffset, 0, 0]
             baseEntity.addChild(tile)
         }
@@ -58,10 +65,7 @@ extension LaunchViewController {
     func getCompensation(for mesh: MeshResource) -> SIMD3<Float> {
         let bounds = mesh.bounds
         let boxCenter = bounds.center
-        let boxMin = bounds.min
         var compensation = -boxCenter
-//        - boxCenter
-        print("         ->comp: \(compensation).. from \(boxMin) to \(boxCenter)")
         compensation *= [1, 1, 0]
         return compensation
     }
@@ -76,12 +80,12 @@ extension LaunchViewController {
             cornerRadius: LaunchConstants.tileCornerRadius,
             splitFaces: false
         )
-        
+
         var tileMaterial = PhysicallyBasedMaterial()
         tileMaterial.baseColor = .init(tint: Colors.accent, texture: nil)
         tileMaterial.roughness = PhysicallyBasedMaterial.Roughness(floatLiteral: 0.0)
         tileMaterial.metallic = PhysicallyBasedMaterial.Metallic(floatLiteral: 1.0)
-        
+
         let textMaterial = SimpleMaterial(color: UIColor.white.withAlphaComponent(0.25), roughness: 0, isMetallic: true)
 
         let text = MeshResource.generateText(
