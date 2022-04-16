@@ -29,7 +29,7 @@ extension ViewController {
                     self.photos.viewController.collectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
                 }
             case .lists:
-                
+
                 /// can't check `detailsViewController` because it's not released on dismiss
                 if self.lists.viewController.navigationController.map({ $0.viewControllers.count > 1 }) ?? false {
                     self.lists.viewController.navigationController?.popViewController(animated: true)
@@ -46,6 +46,11 @@ extension ViewController {
             self.present(self.settingsController.viewController, animated: true)
             self.camera.viewController.stopRunning()
         }
+        cameraViewModel.photoAdded = { [weak self] photo in
+            guard let self = self else { return }
+            self.photosViewModel.photosAddedFromCamera.append(photo)
+        }
+
         SettingsData.showScanningOptions = { [weak self] in
             guard let self = self else { return }
             self.settingsController.viewController.present(self.photos.viewController.scanningNavigationViewController, animated: true)

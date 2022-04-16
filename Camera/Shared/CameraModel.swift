@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct CameraHistory {
+    var recentEvents = [Event]()
+    var dateNoTextRecognized: Date?
+    var dateLastScanned: Date?
+}
+
 /// an event in the live preview event history.
 struct Event {
     var date: Date

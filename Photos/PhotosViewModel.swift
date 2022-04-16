@@ -11,7 +11,7 @@ import UIKit
 
 class PhotosViewModel: ObservableObject {
     // MARK: Base collection view
-    
+
     /// show loading indicator
     @Published var loaded = false
     @Published var emptyContentTopPadding = CGFloat(0) /// search bar offset
@@ -52,6 +52,10 @@ class PhotosViewModel: ObservableObject {
     // MARK: Observed external changes
 
     var waitingToAddExternalPhotos = false
+
+    /// photos added from saving in camera
+    var photosAddedFromCamera = [Photo]()
+
     /// reload collection views and find.
     var reloadAfterExternalPhotosChanged: (() -> Void)?
 
@@ -65,7 +69,7 @@ class PhotosViewModel: ObservableObject {
 
     /// the slides' current status
     @Published var slidesState: PhotosSlidesState?
-    
+
     /// call these manually, can't be inside struct
     var slidesCurrentPhotoChanged: (() -> Void)?
     var slidesToolbarInformationOnChanged: (() -> Void)?
@@ -114,6 +118,7 @@ class PhotosViewModel: ObservableObject {
             }
 
             if waitingToAddExternalPhotos {
+                /// also called `addQueuedSentencesToMetadatas`
                 loadExternalPhotos()
             }
 

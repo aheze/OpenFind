@@ -49,7 +49,8 @@ extension CameraViewController {
                 !self.model.shutterOn,
                 self.model.livePreviewScanning,
                 self.tabViewModel.tabState == .camera,
-                self.searchViewModel.stringToGradients.count > 0
+                self.searchViewModel.stringToGradients.count > 0,
+                self.shouldScan()
             {
                 Find.prioritizedAction = .camera
                 Task {

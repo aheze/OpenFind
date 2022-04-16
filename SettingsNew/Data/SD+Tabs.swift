@@ -139,17 +139,36 @@ extension SettingsData {
                                 configuration: .picker(
                                     title: "Scan Every",
                                     choices: [
-                                        SettingsRow.PickerChoice(title: "Continuous", storageValue: Settings.Values.ScanningFrequencyLevel.continuous.rawValue),
-                                        SettingsRow.PickerChoice(title: "0.5 Seconds", storageValue: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue),
-                                        SettingsRow.PickerChoice(title: "1 Second", storageValue: Settings.Values.ScanningFrequencyLevel.oneSecond.rawValue),
-                                        SettingsRow.PickerChoice(title: "2 Seconds", storageValue: Settings.Values.ScanningFrequencyLevel.twoSeconds.rawValue),
-                                        SettingsRow.PickerChoice(title: "3 Seconds", storageValue: Settings.Values.ScanningFrequencyLevel.threeSeconds.rawValue)
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningFrequencyLevel.continuous.getTitle(),
+                                            storageValue: Settings.Values.ScanningFrequencyLevel.continuous.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningFrequencyLevel.tenthSecond.getTitle(),
+                                            storageValue: Settings.Values.ScanningFrequencyLevel.tenthSecond.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningFrequencyLevel.quarterSecond.getTitle(),
+                                            storageValue: Settings.Values.ScanningFrequencyLevel.quarterSecond.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningFrequencyLevel.halfSecond.getTitle(),
+                                            storageValue: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningFrequencyLevel.threeQuartersSecond.getTitle(),
+                                            storageValue: Settings.Values.ScanningFrequencyLevel.threeQuartersSecond.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.ScanningFrequencyLevel.oneSecond.getTitle(),
+                                            storageValue: Settings.Values.ScanningFrequencyLevel.oneSecond.rawValue
+                                        )
                                     ],
                                     storage: \RealmModel.$cameraScanningFrequency
                                 )
                             )
                         ],
-                        description: .constant(string: "Control how often to scan the live preview.")
+                        description: .dynamic(identifier: .scanningFrequency)
                     ),
                     .init(
                         header: "Conserving",

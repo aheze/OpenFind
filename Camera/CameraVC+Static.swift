@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 /**
  When the camera view controller is paused
@@ -57,12 +58,14 @@ extension CameraViewController {
         Find.prioritizedAction = .camera
         let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
         let currentDate = Date()
+        let scannedInLanguages = realmModel.getCurrentRecognitionLanguages(accurateMode: true)
         guard currentUUID == self.model.pausedImage?.id else { return }
 
         await MainActor.run {
             /// set the sentences
             self.model.pausedImage?.sentences = sentences
             self.model.pausedImage?.dateScanned = currentDate
+            self.model.pausedImage?.scannedInLanguages = scannedInLanguages
         }
 
         /// photo was saved to the photo library. Update the sentences
@@ -72,12 +75,17 @@ extension CameraViewController {
                 assetIdentifier: assetIdentifier,
                 dateScanned: currentDate,
                 sentences: sentences,
-                scannedInLanguages: realmModel.getCurrentRecognitionLanguages(accurateMode: true),
+                scannedInLanguages: scannedInLanguages,
                 isStarred: false,
                 isIgnored: false
             )
             DispatchQueue.main.async {
-                self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+                let assets = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: .none)
+                if let asset = assets.firstObject {
+                    let photo = Photo(asset: asset, metadata: metadata)
+                    self.model.photoAdded?(photo)
+                    self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+                }
             }
         }
         Find.prioritizedAction = nil /// paused now, do whatever

@@ -12,9 +12,9 @@ import SwiftUI
 class RealmModel: ObservableObject {
     var container = RealmContainer()
 
-    @Published private(set) var lists = [List]()
+    @Published var lists = [List]()
 
-    @Published private(set) var photoMetadatas = [PhotoMetadata]()
+    @Published var photoMetadatas = [PhotoMetadata]()
 
     static let data = RealmModelData.self
 

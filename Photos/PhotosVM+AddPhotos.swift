@@ -41,10 +41,20 @@ extension PhotosViewModel {
     func loadExternalPhotos() {
         Task {
             waitingToAddExternalPhotos = false
+
+            await MainActor.run {
+                for photo in photosAddedFromCamera {
+                    if let metadata = photo.metadata {
+                        getRealmModel?().photoMetadatas.append(metadata)
+                    }
+                }
+                photosAddedFromCamera.removeAll()
+            }
+
             loadAssets()
             await loadPhotos()
             self.sort()
-            
+
             await MainActor.run {
                 self.reloadAfterExternalPhotosChanged?()
             }

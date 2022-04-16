@@ -55,6 +55,7 @@ extension IgnoredPhotosViewController {
                 guard let photo = self.model.ignoredPhotos.first(where: { $0 == cachedPhoto }) else { return }
                 if let viewController = self.model.getSlidesViewControllerFor?(photo) {
                     viewController.navigationItem.scrollEdgeAppearance = UINavigationBarAppearance()
+                    viewController.view.backgroundColor = .systemBackground
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }
             }

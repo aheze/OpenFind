@@ -36,7 +36,6 @@ extension CameraViewController {
             let creationRequest = PHAssetCreationRequest.forAsset()
             creationRequest.addResource(with: .photo, data: jpegData, options: nil)
             assetIdentifier = creationRequest.placeholderForCreatedAsset?.localIdentifier
-
         } completionHandler: { success, _ in
 
             if
@@ -60,8 +59,13 @@ extension CameraViewController {
                             isStarred: false,
                             isIgnored: false
                         )
-                        
-                        self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+
+                        let assets = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: .none)
+                        if let asset = assets.firstObject {
+                            let photo = Photo(asset: asset, metadata: metadata)
+                            self.model.photoAdded?(photo)
+                            self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+                        }
                     }
                 }
             }

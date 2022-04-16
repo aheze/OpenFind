@@ -36,6 +36,7 @@ enum Settings {
     enum StringIdentifier {
         case keepWhitespace
         case filterLists
+        case scanningFrequency
         case pauseScanningAfter
     }
 
@@ -202,10 +203,45 @@ enum Settings {
             var id: Self { self }
 
             case continuous = "0"
+            case tenthSecond = "0.1"
+            case quarterSecond = "0.25"
             case halfSecond = "0.5"
+            case threeQuartersSecond = "0.75"
             case oneSecond = "1"
-            case twoSeconds = "2"
-            case threeSeconds = "3"
+            
+            func getDouble() -> Double {
+                switch self {
+                case .continuous:
+                    return 0
+                case .tenthSecond:
+                    return 0.1
+                case .quarterSecond:
+                    return 0.25
+                case .halfSecond:
+                    return 0.5
+                case .threeQuartersSecond:
+                    return 0.75
+                case .oneSecond:
+                    return 1
+                }
+            }
+            
+            func getTitle() -> String {
+                switch self {
+                case .continuous:
+                    return "Continuous"
+                case .tenthSecond:
+                    return "0.1 Seconds"
+                case .quarterSecond:
+                    return "0.25 Seconds"
+                case .halfSecond:
+                    return "0.5 Seconds"
+                case .threeQuartersSecond:
+                    return "0.75 Seconds"
+                case .oneSecond:
+                    return "1 Second"
+                }
+            }
         }
 
         enum ListsSortByLevel: String, CaseIterable, Identifiable {

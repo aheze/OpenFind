@@ -10,16 +10,32 @@ import UIKit
 
 extension CameraViewController {
     func createLivePreviewEvent(sentences: [FastSentence], highlights: [Highlight]) {
-        let event = Event(date: Date(), sentences: sentences, highlights: highlights)
+        let now = Date()
+        model.history.dateLastScanned = now
+        let event = Event(date: now, sentences: sentences, highlights: highlights)
 
-        model.recentEvents.append(event)
-        if model.recentEvents.count > CameraConstants.maximumHistoryCount {
-            _ = model.recentEvents.removeFirst()
+        model.history.recentEvents.append(event)
+        if model.history.recentEvents.count > CameraConstants.maximumHistoryCount {
+            _ = model.history.recentEvents.removeFirst()
         }
     }
     
+    func shouldScan() -> Bool {
+        if let dateLastScanned = model.history.dateLastScanned {
+            if let duration = Settings.Values.ScanningFrequencyLevel(rawValue: realmModel.cameraScanningFrequency)?.getDouble() {
+                let difference = dateLastScanned.distance(to: Date())
+                return difference > duration
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
+        
+    }
+    
     func checkEvents() {
-        if model.recentEvents.count >= CameraConstants.maximumHistoryCount {
+        if model.history.recentEvents.count >= CameraConstants.maximumHistoryCount {
             if !model.resultsOn {
                 checkDormant()
             }
@@ -27,13 +43,13 @@ extension CameraViewController {
     }
     
     func checkDormant() {
-        let recentEvents = model.recentEvents.suffix(30)
+        let recentEvents = model.history.recentEvents.suffix(30)
         
         let recentRecognizedStrings = recentEvents.map { $0.sentences }.flatMap { $0 }.map { $0.string } as [String]
         let recentFoundHighlights = recentEvents.map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
         
         if recentFoundHighlights.count == 0, recentRecognizedStrings.count <= 20 {
-            model.recentEvents.removeAll()
+            model.history.recentEvents.removeAll()
             
             /// stop scanning for now, until the phone shakes
             stopLivePreviewScanning()

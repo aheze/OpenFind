@@ -31,6 +31,9 @@ class CameraViewModel: ObservableObject {
     @Published var flash = false
     @Published var cacheOn = false
     
+    /// called after saved to photos, notify `ViewController` which then calls `scheduleUpdate` in `PhotosViewModel`
+    var photoAdded: ((Photo) -> Void)?
+    
     var resultsPressed: (() -> Void)?
     var snapshotPressed: (() -> Void)? /// press the snapshot/camera button
     var flashPressed: (() -> Void)?
@@ -43,7 +46,7 @@ class CameraViewModel: ObservableObject {
     /// keep scanning after tapping the status view
     var resumeScanning: (() -> Void)?
     
-    var recentEvents = [Event]()
+    var history = CameraHistory()
     
     /// set to false if no results for a long time, to conserve battery and other system resources
     var livePreviewScanning = true

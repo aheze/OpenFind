@@ -66,6 +66,7 @@ extension PhotosViewModel {
             if photos[index].metadata != nil {
                 photos[index].metadata?.dateScanned = metadata?.dateScanned
                 photos[index].metadata?.sentences = metadata?.sentences ?? []
+                photos[index].metadata?.scannedInLanguages = metadata?.scannedInLanguages ?? []
             } else {
                 photos[index].metadata = metadata
             }

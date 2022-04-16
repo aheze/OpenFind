@@ -45,7 +45,7 @@ enum RealmModelData {
     // MARK: Camera
     
     static var cameraHapticFeedbackLevel = SavedData(key: "cameraHapticFeedbackLevel", value: Settings.Values.HapticFeedbackLevel.light)
-    static var cameraScanningFrequency = SavedData(key: "cameraScanningFrequency", value: Settings.Values.ScanningFrequencyLevel.halfSecond.rawValue)
+    static var cameraScanningFrequency = SavedData(key: "cameraScanningFrequency", value: Settings.Values.ScanningFrequencyLevel.tenthSecond.rawValue)
     static var cameraScanningDurationUntilPause = SavedData(key: "cameraScanningDurationUntilPause", value: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue)
     
     // MARK: Lists
