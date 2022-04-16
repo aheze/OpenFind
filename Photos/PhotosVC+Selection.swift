@@ -19,6 +19,7 @@ extension PhotosViewController {
     }
 
     func startSelecting() {
+        searchViewModel.dismissKeyboard?()
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
         resultsCollectionView.allowsSelection = true

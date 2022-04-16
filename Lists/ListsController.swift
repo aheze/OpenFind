@@ -72,5 +72,11 @@ class ListsController {
             self.searchNavigationController.updateSearchBarOffset()
             tabViewModel.excludedFrames[.listsSearchBar] = searchNavigationController.searchContainerView.windowFrame()
         }
+        
+        model.updateSearchCollectionView = {
+            searchNavigationController.searchViewController.collectionViewModel.highlightingAddWordField = false
+            searchNavigationController.searchViewController.collectionViewModel.focusedCellIndex = 0
+            searchNavigationController.searchViewController?.reload()
+        }
     }
 }

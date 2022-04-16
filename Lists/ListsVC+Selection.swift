@@ -19,6 +19,7 @@ extension ListsViewController {
     }
     
     func startSelecting() {
+        searchViewModel.dismissKeyboard?()
         selectBarButton.title = "Done"
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
@@ -27,6 +28,7 @@ extension ListsViewController {
     }
 
     func resetSelectingState() {
+        hideCancelNavigationBar()
         model.isSelecting = false
         selectBarButton.title = "Select"
         toolbarViewModel.toolbar = nil

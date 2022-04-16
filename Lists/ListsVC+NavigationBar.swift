@@ -24,18 +24,36 @@ extension ListsViewController {
             action: #selector(addListPressed)
         )
         
-        self.selectBarButton = selectButton
+        selectBarButton = selectButton
         navigationItem.rightBarButtonItems = [addButton, selectButton]
+    }
+    
+    func showCancelNavigationBar() {
+        let cancelButton = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self,
+            action: #selector(cancelPressed)
+        )
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+
+    func hideCancelNavigationBar() {
+        navigationItem.leftBarButtonItem = nil
+    }
+    
+    @objc func cancelPressed() {
+        resetSelectingState()
+        searchViewModel.updateFields(fields: searchViewModel.getDefaultFields(realmModel: realmModel), notify: true)
+        model.updateSearchCollectionView?()
     }
 
     @objc func selectPressed() {
-        
         /// inside ListsVC+Selection
         toggleSelect()
     }
 
     @objc func addListPressed() {
-        
         /// inside ListsVC+Add
         addNewList()
     }

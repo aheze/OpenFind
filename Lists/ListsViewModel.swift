@@ -20,4 +20,7 @@ class ListsViewModel: ObservableObject {
     
     /// add a new list from anywhere
     var addNewList: (() -> Void)?
+    
+    /// reload the collection view to make it empty
+    var updateSearchCollectionView: (() -> Void)?
 }

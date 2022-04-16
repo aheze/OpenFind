@@ -135,7 +135,7 @@ extension PhotosViewController {
         
         model.stopSelecting = { [weak self] in
             guard let self = self else { return }
-            print("'Stop selecting'")
+            
             self.resetSelectingState()
         }
         model.shareSelected = { [weak self] in

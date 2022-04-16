@@ -28,12 +28,16 @@ extension ListsViewController {
             guard let self = self else { return }
             self.addNewList()
         }
-        
+
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             guard textChanged else { return }
             let search = self.searchViewModel.text
             self.find(text: search)
+
+            if !self.searchViewModel.isEmpty, self.navigationItem.leftBarButtonItem == nil {
+                self.showCancelNavigationBar()
+            }
         }
     }
 }
