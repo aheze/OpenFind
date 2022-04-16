@@ -26,6 +26,10 @@ extension SearchViewController {
             to: RealmModelData.findingFilterLists.key,
             selector: #selector(self.findingFilterListsChanged)
         )
+        self.listen(
+            to: RealmModelData.highlightsColor.key,
+            selector: #selector(self.highlightsColorChanged)
+        )
     }
 
     @objc func findingKeepWhitespaceChanged() {}
@@ -35,4 +39,8 @@ extension SearchViewController {
     @objc func findingMatchCaseChanged() {}
     
     @objc func findingFilterListsChanged() {}
+    
+    @objc func highlightsColorChanged() {
+        updateWordColors()
+    }
 }
