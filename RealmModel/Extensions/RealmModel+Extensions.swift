@@ -37,3 +37,12 @@ extension RealmModel {
         }
     }
 }
+
+extension UIColor {
+    func getFieldColor(for index: Int, realmModel: RealmModel) -> UIColor {
+        guard realmModel.highlightsCycleSearchBarColors else { return self }
+        let gradation = CGFloat(1) / 15
+        let offset = gradation * CGFloat(index)
+        return self.offset(by: offset)
+    }
+}

@@ -10,19 +10,6 @@ import Photos
 import UIKit
 
 extension PHAsset {
-    func getDateCreatedCategorization() -> PhotosSectionCategorization? {
-        if
-            let components = creationDate?.get(.year, .month),
-            let year = components.year, let month = components.month
-        {
-            let categorization = PhotosSectionCategorization.date(year: year, month: month)
-            return categorization
-        }
-        return nil
-    }
-}
-
-extension PHAsset {
     var originalFilename: String? {
         var fileName: String?
 

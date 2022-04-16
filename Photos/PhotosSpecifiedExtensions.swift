@@ -32,3 +32,16 @@ extension PhotoMetadata {
         }
     }
 }
+
+extension PHAsset {
+    func getDateCreatedCategorization() -> PhotosSectionCategorization? {
+        if
+            let components = creationDate?.get(.year, .month),
+            let year = components.year, let month = components.month
+        {
+            let categorization = PhotosSectionCategorization.date(year: year, month: month)
+            return categorization
+        }
+        return nil
+    }
+}
