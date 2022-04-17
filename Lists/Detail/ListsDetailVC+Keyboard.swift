@@ -42,7 +42,6 @@ extension ListsDetailViewController {
     }
 
     @objc func keyboardDidHide(_ notification: Notification) {
-        
         let currentOffset = scrollView.contentOffset
         bottomSpacerHeightC.constant = 0
         
@@ -51,8 +50,10 @@ extension ListsDetailViewController {
         
         if let contentOffsetAddition = model.contentOffsetAddition {
             model.contentOffsetAddition = nil
-            let newOffset = CGPoint(x: 0, y: currentOffset.y - contentOffsetAddition)
-            scrollView.setContentOffset(newOffset, animated: true)
+            
+            let targetContentOffset = currentOffset.y - contentOffsetAddition
+            let clampedOffset = max(targetContentOffset, -baseSearchBarOffset)
+            scrollView.setContentOffset(CGPoint(x: 0, y: clampedOffset), animated: true)
         }
         
         wordsKeyboardToolbarViewModel.keyboardShown = false
