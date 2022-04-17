@@ -434,6 +434,7 @@
 		3C257EC8280BF8A9009B6FAE /* LaunchPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EC7280BF8A9009B6FAE /* LaunchPhotosView.swift */; };
 		3C257ECA280BF8AF009B6FAE /* LaunchCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EC9280BF8AF009B6FAE /* LaunchCameraView.swift */; };
 		3C257ECC280BF8B3009B6FAE /* LaunchListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257ECB280BF8B3009B6FAE /* LaunchListsView.swift */; };
+		3C257ECD280C7F29009B6FAE /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
 		3C2994782800DA4400AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
@@ -7682,6 +7683,7 @@
 				3CC0D133280B279D004E7016 /* LaunchScreen.storyboard in Resources */,
 				3CC0D140280B294E004E7016 /* LaunchContent.storyboard in Resources */,
 				3CC0D130280B279D004E7016 /* Assets.xcassets in Resources */,
+				3C257ECD280C7F29009B6FAE /* SharedAssets.xcassets in Resources */,
 				3CC0D12E280B279B004E7016 /* Main.storyboard in Resources */,
 				3CC0D15E280B44D0004E7016 /* SharedColors.xcassets in Resources */,
 			);
