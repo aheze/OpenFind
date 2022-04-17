@@ -22,7 +22,7 @@ extension LaunchViewController {
         sceneView.scene.addAnchor(anchor)
 
         let basePosition = SIMD3<Float>(x: 0, y: 0, z: 0)
-        let cameraPosition = SIMD3<Float>(x: 0.0001, y: 0.2, z: 0.1) /// can't be 0
+        let cameraPosition = SIMD3<Float>(x: 0.0001, y: 0.4, z: 0.1) /// can't be 0
 
         let baseEntity = ModelEntity()
         anchor.addChild(baseEntity)
@@ -38,25 +38,42 @@ extension LaunchViewController {
     }
 
     func addTiles(to baseEntity: ModelEntity) {
-        let text = "FIND"
+        func getStartingOffset(length: Int) -> Float {
+            let totalTileLength = Float(length) * LaunchConstants.tileLength
+            let totalTileGap = Float(length - 1) * LaunchConstants.tileGap
+            let totalLength = totalTileLength + totalTileGap
+            let offset = -totalLength / 2 + LaunchConstants.tileLength / 2
+            return offset
+        }
 
-        let totalTileLength = Float(text.count) * LaunchConstants.tileLength
-        let totalTileGap = Float(text.count - 1) * LaunchConstants.tileGap
-        let totalLength = totalTileLength + totalTileGap
-
-        /// start to the left
-        let startingOffset = -totalLength / 2 + LaunchConstants.tileLength / 2
-
-        for stringIndex in text.indices {
-            let character = String(text[stringIndex])
-            let index = Float(text.distance(from: text.startIndex, to: stringIndex))
-
-            let tile = getTile(character: character)
+        /// get offset along one access
+        func getAdditionalOffset(for index: Float, startingOffset: Float) -> Float {
             let lengthOffset = LaunchConstants.tileLength * index
             let gapOffset = LaunchConstants.tileGap * index
-            let xOffset = startingOffset + lengthOffset + gapOffset
-            tile.position = [xOffset, 0, 0]
-            baseEntity.addChild(tile)
+            let offset = startingOffset + lengthOffset + gapOffset
+            return offset
+        }
+
+        let width = model.textRows.first?.text.count ?? 0
+        let height = model.textRows.count
+
+        /// start to the left
+        let startingXOffset = getStartingOffset(length: width)
+        let startingZOffset = getStartingOffset(length: height)
+
+
+        for rowIndex in model.textRows.indices {
+            let row = model.textRows[rowIndex]
+            for textIndex in row.text.indices {
+                let text = row.text[textIndex]
+
+                let xOffset = getAdditionalOffset(for: Float(textIndex), startingOffset: startingXOffset) /// left to right
+                let zOffset = getAdditionalOffset(for: Float(rowIndex), startingOffset: startingZOffset) /// back to front
+
+                let tile = getTile(character: text.character, color: text.color)
+                tile.position = [xOffset, 0, zOffset]
+                baseEntity.addChild(tile)
+            }
         }
     }
 
@@ -72,7 +89,7 @@ extension LaunchViewController {
 }
 
 extension LaunchViewController {
-    func getTile(character: String) -> ModelEntity {
+    func getTile(character: String, color: UIColor) -> ModelEntity {
         let tile = MeshResource.generateBox(
             width: LaunchConstants.tileLength,
             height: LaunchConstants.tileDepth,
@@ -81,7 +98,7 @@ extension LaunchViewController {
             splitFaces: false
         )
 
-        let tileMaterial = SimpleMaterial(color: Colors.accent, roughness: 0, isMetallic: true)
+        let tileMaterial = SimpleMaterial(color: color, roughness: 0, isMetallic: true)
         let textMaterial = SimpleMaterial(color: UIColor.white.withAlphaComponent(0.25), roughness: 0, isMetallic: true)
 
         let text = MeshResource.generateText(

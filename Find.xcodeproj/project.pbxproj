@@ -3176,6 +3176,9 @@
 		3CF8DA12280BA226008E92E4 /* CameraVC+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA10280BA1E1008E92E4 /* CameraVC+Focus.swift */; };
 		3CF8DA14280BA602008E92E4 /* FocusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */; };
 		3CF8DA15280BA841008E92E4 /* FocusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */; };
+		3CF8DA16280BB1B0008E92E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
+		3CF8DA17280BB1B3008E92E4 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22BC27FC1A6500D413B7 /* Identifier.swift */; };
+		3CF8DA19280BB36C008E92E4 /* LaunchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA18280BB36C008E92E4 /* LaunchModels.swift */; };
 		3CFC91C127E187A2006290CD /* PhotosScanningHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */; };
 		3CFC91C227E187A2006290CD /* PhotosScanningHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */; };
 		3CFC91C427E188C4006290CD /* ResultsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC91C327E188C4006290CD /* ResultsHeaderView.swift */; };
@@ -4285,6 +4288,7 @@
 		3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmModel+Lists.swift"; sourceTree = "<group>"; };
 		3CF8DA10280BA1E1008E92E4 /* CameraVC+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Focus.swift"; sourceTree = "<group>"; };
 		3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusIndicatorView.swift; sourceTree = "<group>"; };
+		3CF8DA18280BB36C008E92E4 /* LaunchModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModels.swift; sourceTree = "<group>"; };
 		3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningHeader.swift; sourceTree = "<group>"; };
 		3CFC91C327E188C4006290CD /* ResultsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsHeaderView.swift; sourceTree = "<group>"; };
 		3CFCE8A127CA9D5F000624D2 /* Utilities+CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+CGPoint.swift"; sourceTree = "<group>"; };
@@ -6153,6 +6157,7 @@
 			children = (
 				3CC0D13F280B294E004E7016 /* LaunchContent.storyboard */,
 				3C153BE6280B6CEC0062751B /* LaunchConstants.swift */,
+				3CF8DA18280BB36C008E92E4 /* LaunchModels.swift */,
 				3CC0D141280B2A0C004E7016 /* LaunchViewModel.swift */,
 				3CC0D139280B27B8004E7016 /* LaunchViewController.swift */,
 				3CC0D15B280B445C004E7016 /* LaunchVC+Setup.swift */,
@@ -10257,6 +10262,7 @@
 				3CC0D160280B6494004E7016 /* LaunchUtilities.swift in Sources */,
 				3CC0D151280B2A40004E7016 /* Utilities+Dates.swift in Sources */,
 				3CC0D145280B2A40004E7016 /* Utilities+UIFont.swift in Sources */,
+				3CF8DA17280BB1B3008E92E4 /* Identifier.swift in Sources */,
 				3CC0D14D280B2A40004E7016 /* Utilities+Accessibility.swift in Sources */,
 				3CC0D14B280B2A40004E7016 /* Utilities+Constraints.swift in Sources */,
 				3C153BE7280B6CEC0062751B /* LaunchConstants.swift in Sources */,
@@ -10264,8 +10270,10 @@
 				3CC0D150280B2A40004E7016 /* Utilities+NavigationBar.swift in Sources */,
 				3CC0D12B280B279B004E7016 /* ViewController.swift in Sources */,
 				3CC0D15C280B445C004E7016 /* LaunchVC+Setup.swift in Sources */,
+				3CF8DA19280BB36C008E92E4 /* LaunchModels.swift in Sources */,
 				3CC0D14A280B2A40004E7016 /* Utilities+UIView.swift in Sources */,
 				3CC0D13C280B28E7004E7016 /* LaunchView.swift in Sources */,
+				3CF8DA16280BB1B0008E92E4 /* Debug.swift in Sources */,
 				3CC0D15D280B447F004E7016 /* Constants.swift in Sources */,
 				3CC0D152280B2A40004E7016 /* Utilities+String.swift in Sources */,
 				3CC0D147280B2A40004E7016 /* Utilities+PHAsset.swift in Sources */,
