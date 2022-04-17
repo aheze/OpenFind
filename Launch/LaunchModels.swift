@@ -29,7 +29,7 @@ struct LaunchText {
         if isPartOfFind {
             return Colors.accent
         } else {
-            return .secondaryLabel
+            return UIColor.clear
         }
     }
 }
@@ -38,5 +38,6 @@ struct LaunchTile {
     var text: LaunchText
     var entity: ModelEntity
     var initialTransform: Transform
+    var midTransform: Transform
     var finalTransform: Transform
 }

@@ -22,14 +22,14 @@ enum LaunchConstants {
 
     static let cameraPositionInitial = SIMD3<Float>(
         x: 0.000001, /// can't be 0
-        y: 0.05, /// height of camera
+        y: 0.054, /// height of camera
         z: 0.04 /// larger = steeper/more sloped tiles
     )
     
     static let cameraPositionFinal = SIMD3<Float>(
-        x: 0.018,
-        y: 0.9, /// height of camera
-        z: 0.2 /// larger = steeper/more sloped tiles
+        x: 0.024,
+        y: 0.96, /// height of camera
+        z: 0.3 /// larger = steeper/more sloped tiles
     )
 }
 

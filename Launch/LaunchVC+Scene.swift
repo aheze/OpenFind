@@ -35,21 +35,39 @@ extension LaunchViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             for tile in self.model.tiles {
                 tile.entity.move(
-                    to: tile.finalTransform,
+                    to: tile.midTransform,
                     relativeTo: nil,
-                    duration: 3,
+                    duration: 8,
                     timingFunction: .easeInOut
                 )
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                let findTiles = self.model.tiles.filter { $0.text.isPartOfFind }
+                for index in findTiles.indices {
+                    let tile = findTiles[index]
+
+                    let percentage = Double(index) / 3
+                    let delay = percentage * 0.9
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        tile.entity.move(
+                            to: tile.finalTransform,
+                            relativeTo: nil,
+                            duration: 0.5,
+                            timingFunction: .easeInOut
+                        )
+                    }
+                }
             }
 
             camera.look(at: .zero, from: LaunchConstants.cameraPositionFinal, relativeTo: baseEntity)
             let transform = camera.transform /// get the final transform
             camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
-            
+
             camera.move(
                 to: transform,
                 relativeTo: nil,
-                duration: 3,
+                duration: 5,
                 timingFunction: .easeInOut
             )
         }
@@ -117,16 +135,36 @@ extension LaunchViewController {
                     y: text.yOffset,
                     z: zOffset + text.additionalZOffset
                 )
-                let finalPosition = SIMD3(
+                let midPosition = SIMD3(
                     x: xOffset,
-                    y: text.yOffset * -0.5,
+                    y: 0,
                     z: zOffset
                 )
+                let finalPosition: SIMD3<Float>
+
+                if text.isPartOfFind {
+                    finalPosition = SIMD3(
+                        x: xOffset,
+                        y: 0.1,
+                        z: zOffset
+                    )
+                } else {
+                    finalPosition = SIMD3(
+                        x: xOffset,
+                        y: text.yOffset * -0.5,
+                        z: zOffset
+                    )
+                }
 
                 let initialTransform = Transform(
                     scale: .one,
                     rotation: simd_quatf(),
                     translation: initialPosition
+                )
+                let midTransform = Transform(
+                    scale: .one,
+                    rotation: simd_quatf(),
+                    translation: midPosition
                 )
                 let finalTransform = Transform(
                     scale: .one,
@@ -141,6 +179,7 @@ extension LaunchViewController {
                     text: text,
                     entity: tileEntity,
                     initialTransform: initialTransform,
+                    midTransform: midTransform,
                     finalTransform: finalTransform
                 )
                 tiles.append(tile)
