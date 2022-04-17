@@ -17,4 +17,6 @@ enum CameraConstants {
     static var maximumHistoryCount = 20
     
     static var resultsCountUpdateDuration = CGFloat(0.8)
+    
+    static var focusIndicatorLength = CGFloat(80)
 }

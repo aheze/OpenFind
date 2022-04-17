@@ -3172,6 +3172,10 @@
 		3CF8DA0D280B9BE9008E92E4 /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */; };
 		3CF8DA0E280B9C4C008E92E4 /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */; };
 		3CF8DA0F280B9C4D008E92E4 /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */; };
+		3CF8DA11280BA1E1008E92E4 /* CameraVC+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA10280BA1E1008E92E4 /* CameraVC+Focus.swift */; };
+		3CF8DA12280BA226008E92E4 /* CameraVC+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA10280BA1E1008E92E4 /* CameraVC+Focus.swift */; };
+		3CF8DA14280BA602008E92E4 /* FocusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */; };
+		3CF8DA15280BA841008E92E4 /* FocusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */; };
 		3CFC91C127E187A2006290CD /* PhotosScanningHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */; };
 		3CFC91C227E187A2006290CD /* PhotosScanningHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */; };
 		3CFC91C427E188C4006290CD /* ResultsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC91C327E188C4006290CD /* ResultsHeaderView.swift */; };
@@ -4279,6 +4283,8 @@
 		3CF76429278CC49500DCA4EA /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		3CF7642B278CE52800DCA4EA /* SearchNC+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+Utilities.swift"; sourceTree = "<group>"; };
 		3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmModel+Lists.swift"; sourceTree = "<group>"; };
+		3CF8DA10280BA1E1008E92E4 /* CameraVC+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Focus.swift"; sourceTree = "<group>"; };
+		3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusIndicatorView.swift; sourceTree = "<group>"; };
 		3CFC91C027E187A2006290CD /* PhotosScanningHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningHeader.swift; sourceTree = "<group>"; };
 		3CFC91C327E188C4006290CD /* ResultsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsHeaderView.swift; sourceTree = "<group>"; };
 		3CFCE8A127CA9D5F000624D2 /* Utilities+CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+CGPoint.swift"; sourceTree = "<group>"; };
@@ -5114,9 +5120,10 @@
 				3C7B7A6C277F9CB200E1F602 /* CameraVC+Static.swift */,
 				3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */,
 				3C9314B427B84F7B009E5B6E /* CameraVC+Snapshot.swift */,
-				3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */,
 				3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */,
+				3CF8DA10280BA1E1008E92E4 /* CameraVC+Focus.swift */,
 				3C7B7A54277EE6D900E1F602 /* CameraVC+Find.swift */,
+				3C8A5249277FC5EF006CF91E /* CameraVC+ScrollZoom.swift */,
 				3C7B7A60277EEB9C00E1F602 /* CameraVC+Highlights.swift */,
 				3C7B7A9D277FB7DA00E1F602 /* CameraVC+Progress.swift */,
 				3C9314E527B864F0009E5B6E /* CameraVC+Blur.swift */,
@@ -6220,6 +6227,7 @@
 				3CCE2AF0279D006300F72351 /* ClearIconView.swift */,
 				3CCE2AEC279D004B00F72351 /* FindIconUIView.swift */,
 				3CCE2AF2279D007000F72351 /* SelectionIconView.swift */,
+				3CF8DA13280BA602008E92E4 /* FocusIndicatorView.swift */,
 			);
 			path = "UIKit Views";
 			sourceTree = "<group>";
@@ -8483,6 +8491,7 @@
 				3CDD944527C05F9700D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3CC0D1192808ECA7004E7016 /* SearchVC+Defaults.swift in Sources */,
 				3C5B36F427FEAEDF00801FEE /* SettingsButton.swift in Sources */,
+				3CF8DA14280BA602008E92E4 /* FocusIndicatorView.swift in Sources */,
 				3C7B7A61277EEB9C00E1F602 /* CameraVC+Highlights.swift in Sources */,
 				3CE9C21B274DFC4D008C903C /* LivePreviewVC+Zoom.swift in Sources */,
 				3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
@@ -8579,6 +8588,7 @@
 				3C989DEE27897AD500C60A54 /* ScrollZoomHookViewController.swift in Sources */,
 				3C5B370227FEAEDF00801FEE /* SettingsViewModel.swift in Sources */,
 				3C93149427B823AE009E5B6E /* SearchVC+Keyboard.swift in Sources */,
+				3CF8DA11280BA1E1008E92E4 /* CameraVC+Focus.swift in Sources */,
 				3C443F1227DD90780050A0AB /* Photo.swift in Sources */,
 				3CAD45AE27FFDC2400B0A0A9 /* PhotosConstants.swift in Sources */,
 				3C0AACB627C8268D009DFC09 /* Utilities+String.swift in Sources */,
@@ -9653,6 +9663,7 @@
 				3C5B369D27FEAEDE00801FEE /* SettingsController.swift in Sources */,
 				3C0B5E7127BACBF600EC881E /* PhotosVC+Setup.swift in Sources */,
 				3C9314ED27B86F45009E5B6E /* PhotosVC+Lifecycle.swift in Sources */,
+				3CF8DA15280BA841008E92E4 /* FocusIndicatorView.swift in Sources */,
 				3C5B36BB27FEAEDE00801FEE /* SD+General.swift in Sources */,
 				3C08EADA279BA85500971D60 /* Utilities+UIView.swift in Sources */,
 				3C0F239A27F4045A00BCBFAE /* List+Import.swift in Sources */,
@@ -9812,6 +9823,7 @@
 				3CB8C31227C31DEC000AA3B9 /* Debug+Log.swift in Sources */,
 				3C17686327AA0F4A0099D1CE /* WordsKeyboardToolbarViewController.swift in Sources */,
 				3C08EAF8279C76DB00971D60 /* ListsController.swift in Sources */,
+				3CF8DA12280BA226008E92E4 /* CameraVC+Focus.swift in Sources */,
 				3CBB319627BD638000F25F6A /* PhotosSlidesVC+Setup.swift in Sources */,
 				3C5B369427FEAEDE00801FEE /* SettingsResultsViewController.swift in Sources */,
 				3C71EF9F27BF5C3200F0C0A0 /* PhotosVC+Transition.swift in Sources */,

@@ -56,6 +56,7 @@ class CameraViewController: UIViewController, PageViewController {
     @IBOutlet var safeView: UIView!
     @IBOutlet var livePreviewContainerView: UIView!
     
+    lazy var focusGestureRecognizer = UILongPressGestureRecognizer()
     var blurOverlayView = CameraBlurOverlayView()
     
     // MARK: Zoom

@@ -37,6 +37,7 @@ extension ListsViewController {
 
             if self.searchViewModel.isEmpty {
                 self.model.isFinding = false
+                print("Empty! Hide cancel")
                 self.hideCancelNavigationBar()
             } else if !self.model.isFinding {
                 self.model.isFinding = true

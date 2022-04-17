@@ -54,6 +54,9 @@ class CameraViewModel: ObservableObject {
     /// detect motion to resume live preview
     var motionManager: CMMotionManager?
     
+    // MARK: Focusing
+    var currentFocusUUID: UUID? /// for keeping track of when to remove
+    
     func resume() {
         withAnimation {
             snapshotState = .inactive

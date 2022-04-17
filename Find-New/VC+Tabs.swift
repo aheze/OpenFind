@@ -24,6 +24,8 @@ extension ViewController {
 
 extension ViewController {
     func willBeginNavigating(from oldTabState: TabState, to newTabState: TabState) {
+        view.endEditing(true)
+        
         switch newTabState {
         case .photos:
             photos.viewController.willBecomeActive()

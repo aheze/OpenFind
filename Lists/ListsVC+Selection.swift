@@ -28,7 +28,6 @@ extension ListsViewController {
     }
 
     func resetSelectingState() {
-        hideCancelNavigationBar()
         model.isSelecting = false
         selectBarButton.title = "Select"
         toolbarViewModel.toolbar = nil

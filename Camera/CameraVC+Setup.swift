@@ -74,5 +74,6 @@ extension CameraViewController {
         livePreviewViewController = createLivePreview()
         setupZoom()
         setupLandscapeToolbar()
+        setupFocusGesture()
     }
 }
