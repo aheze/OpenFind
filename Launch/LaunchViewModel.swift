@@ -13,6 +13,16 @@ class LaunchViewModel: ObservableObject {
     var textRows = [
         LaunchTextRow(
             text: [
+                LaunchText(character: "✭", color: .secondaryLabel),
+                LaunchText(character: "✣", color: .secondaryLabel),
+                LaunchText(character: "✿", color: .secondaryLabel),
+                LaunchText(character: "❂", color: .secondaryLabel),
+                LaunchText(character: "❖", color: .secondaryLabel),
+                LaunchText(character: "◼︎", color: .secondaryLabel)
+            ]
+        ),
+        LaunchTextRow(
+            text: [
                 LaunchText(character: "𝛴", color: .secondaryLabel),
                 LaunchText(character: "𝜽", color: .secondaryLabel),
                 LaunchText(character: "𝛹", color: .secondaryLabel),
@@ -28,8 +38,28 @@ class LaunchViewModel: ObservableObject {
                 LaunchText(character: "I", color: Colors.accent),
                 LaunchText(character: "N", color: Colors.accent),
                 LaunchText(character: "D", color: Colors.accent),
-                LaunchText(character: "❄︎", color: .secondaryLabel)
+                LaunchText(character: "❖", color: .secondaryLabel)
             ]
         ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "∮", color: .secondaryLabel),
+                LaunchText(character: "π", color: .secondaryLabel),
+                LaunchText(character: "⧑", color: .secondaryLabel),
+                LaunchText(character: "∞", color: .secondaryLabel),
+                LaunchText(character: "∴", color: .secondaryLabel),
+                LaunchText(character: "➤", color: .secondaryLabel)
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "♛", color: .secondaryLabel),
+                LaunchText(character: "♣︎", color: .secondaryLabel),
+                LaunchText(character: "♦︎", color: .secondaryLabel),
+                LaunchText(character: "♥︎", color: .secondaryLabel),
+                LaunchText(character: "♠︎", color: .secondaryLabel),
+                LaunchText(character: "♜", color: .secondaryLabel)
+            ]
+        )
     ]
 }
