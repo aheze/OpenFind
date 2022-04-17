@@ -13,6 +13,8 @@ extension LaunchContentViewController {
         view.backgroundColor = .clear
         collectionView.backgroundColor = .clear
         
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast
         collectionView.dataSource = self
         collectionView.delegate = self

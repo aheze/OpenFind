@@ -9,6 +9,8 @@
 import SwiftUI
 
 enum LaunchViewConstants {
+    static var spacing = CGFloat(12)
+    
     static var sidePadding = CGFloat(24)
     static var shadowPadding = CGFloat(54)
 
@@ -19,8 +21,8 @@ enum LaunchViewConstants {
 
     static var footerBottomPadding = CGFloat(16)
     static var footerCornerRadius = CGFloat(20)
-    
-    static var control
+
+    static var controlButtonFont = UIFont.preferredFont(forTextStyle: .title3)
 }
 
 struct LaunchView: View {
@@ -28,7 +30,7 @@ struct LaunchView: View {
     let c = LaunchViewConstants.self
 
     var body: some View {
-        VStack {
+        VStack(spacing: c.spacing) {
             VStack(spacing: c.headerSpacing) {
                 Text("Find")
                     .font(c.headerTitleFont.font)
@@ -45,9 +47,29 @@ struct LaunchView: View {
             )
             .opacity(model.currentPage == .empty ? 1 : 0)
             .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
-            
-            
-            
+
+            if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
+                let previousPage = model.pages[safe: currentIndex - 1]
+                let nextPage = model.pages[safe: currentIndex + 1]
+                
+                HStack {
+                    LaunchControlButtonView(icon: "chevron.backward") {
+                        if let previousPage = previousPage {
+                            model.setCurrentPage(to: previousPage)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    LaunchControlButtonView(icon: "chevron.forward") {
+                        if let nextPage = nextPage {
+                            model.setCurrentPage(to: nextPage)
+                        }
+                    }
+                    .opacity(nextPage != nil ? 1 : 0)
+                }
+                .padding(.horizontal, c.sidePadding)
+            }
 
             LaunchContentView(model: model)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -81,11 +103,22 @@ struct LaunchView: View {
 
 struct LaunchControlButtonView: View {
     var icon: String
+    var action: () -> Void
+
+    let c = LaunchViewConstants.self
+
     var body: some View {
-        Image(systemName: icon)
-            .foregroundColor(.white)
-            .frame(width: <#T##CGFloat?#>, height: <#T##CGFloat?#>, alignment: <#T##Alignment#>)
-            .background()
+        Button(action: action) {
+            Image(systemName: icon)
+                .foregroundColor(.white)
+                .font(c.controlButtonFont.font)
+                .padding(12)
+                .background(
+                    Circle()
+                        .fill(.white.opacity(0.15))
+                )
+        }
+        .buttonStyle(LaunchButtonStyle())
     }
 }
 

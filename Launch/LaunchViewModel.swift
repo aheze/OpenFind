@@ -15,11 +15,19 @@ class LaunchViewModel: ObservableObject {
             currentPageChanged?()
         }
     }
+
     var currentPageChanged: (() -> Void)?
     func setCurrentPage(to page: LaunchPageIdentifier) {
         withAnimation {
             currentPage = page
         }
+    }
+    
+    func getCurrentIndex() -> Int? {
+        if let firstIndex = pages.firstIndex(of: currentPage) {
+            return firstIndex
+        }
+        return nil
     }
     
     var pages = LaunchPageIdentifier.allCases
