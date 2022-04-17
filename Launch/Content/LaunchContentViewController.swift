@@ -1,28 +1,21 @@
 //
-//  LaunchViewController.swift
+//  LaunchContentViewController.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 4/16/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import Combine
-import RealityKit
-import SwiftUI
+import UIKit
 
-class LaunchViewController: UIViewController {
+class LaunchContentViewController: UIViewController {
     var model: LaunchViewModel
+    @IBOutlet var collectionView: UICollectionView!
 
-    @IBOutlet var sceneContainer: UIView!
-    lazy var sceneView = ARView()
-
-    /// for SwiftUI, respects safe area
-    @IBOutlet var contentContainer: UIView!
-
-    static func make(model: LaunchViewModel) -> LaunchViewController {
+    static func make(model: LaunchViewModel) -> LaunchContentViewController {
         let storyboard = UIStoryboard(name: "LaunchContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "LaunchViewController") { coder in
-            LaunchViewController(
+        let viewController = storyboard.instantiateViewController(identifier: "LaunchContentViewController") { coder in
+            LaunchContentViewController(
                 coder: coder,
                 model: model
             )

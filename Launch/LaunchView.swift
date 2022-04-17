@@ -5,18 +5,18 @@
 //  Created by A. Zheng (github.com/aheze) on 4/16/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
+
 import SwiftUI
 
 enum LaunchViewConstants {
     static var sidePadding = CGFloat(24)
     static var shadowPadding = CGFloat(54)
-    
+
     static var headerSpacing = CGFloat(8)
     static var headerTitleFont = UIFont.systemFont(ofSize: 48, weight: .bold)
     static var headerSubtitleFont = UIFont.systemFont(ofSize: 24, weight: .medium)
     static var headerTopPadding = CGFloat(48)
-    
+
     static var footerBottomPadding = CGFloat(16)
     static var footerCornerRadius = CGFloat(20)
 }
@@ -24,14 +24,14 @@ enum LaunchViewConstants {
 struct LaunchView: View {
     @ObservedObject var model: LaunchViewModel
     let c = LaunchViewConstants.self
-    
+
     var body: some View {
         VStack {
             VStack(spacing: c.headerSpacing) {
                 Text("Find")
                     .font(c.headerTitleFont.font)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                 Text("An app to find text in real life.")
                     .font(c.headerSubtitleFont.font)
                     .multilineTextAlignment(.leading)
@@ -41,9 +41,11 @@ struct LaunchView: View {
             .background(
                 LaunchGradientView(transparentBottom: true)
             )
-            
-            Spacer()
-            
+
+            LaunchContentView(model: model)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+
             Button {} label: {
                 Text("Let's Go!")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
@@ -63,6 +65,17 @@ struct LaunchView: View {
         .foregroundColor(.white)
         .opacity(model.showingUI ? 1 : 0)
     }
+}
+
+
+struct LaunchContentView: UIViewControllerRepresentable {
+    @ObservedObject var model: LaunchViewModel
+
+    func makeUIViewController(context: Context) -> LaunchContentViewController {
+        LaunchContentViewController.make(model: model)
+    }
+    
+    func updateUIViewController(_ uiViewController: LaunchContentViewController, context: Context) {}
 }
 
 struct LaunchButtonStyle: ButtonStyle {

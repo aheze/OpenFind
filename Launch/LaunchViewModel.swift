@@ -9,8 +9,9 @@
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
-    
     @Published var showingUI = false
+    
+    var pages = LaunchPageIdentifier.allCases
     
     var on = true /// if false, stop looping animations.
     

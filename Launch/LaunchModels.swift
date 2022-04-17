@@ -48,4 +48,9 @@ struct LaunchTile {
     }
 }
 
-
+enum LaunchPageIdentifier: CaseIterable {
+    case empty /// first page
+    case photos
+    case camera
+    case lists
+}

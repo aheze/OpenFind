@@ -14,7 +14,6 @@ extension LaunchViewController {
         contentContainer.backgroundColor = .clear
         view.backgroundColor = Colors.accentDarkBackground
         
-        listen()
         setupUI()
         setupScene()
     }

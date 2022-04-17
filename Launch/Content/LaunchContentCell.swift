@@ -1,5 +1,5 @@
 //
-//  LaunchVC+Listen.swift
+//  LaunchContentCell.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 4/16/22.
@@ -9,8 +9,6 @@
 
 import UIKit
 
-extension LaunchViewController {
-    func listen() {
-        
-    }
+class LaunchContentCell: UICollectionViewCell {
+    var viewController: LaunchPageViewController?
 }
