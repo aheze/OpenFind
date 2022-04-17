@@ -75,4 +75,9 @@ extension UIFont {
         ])
         return UIFont(descriptor: weightedFontDescriptor, size: 0)
     }
+    
+    static func safeFont(name: String, size: CGFloat) -> UIFont {
+        let font = UIFont(name: name, size: size) ?? .systemFont(ofSize: size)
+        return font
+    }
 }

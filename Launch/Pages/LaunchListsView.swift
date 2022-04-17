@@ -9,21 +9,24 @@
 import SwiftUI
 
 struct LaunchListsView: View {
-    @State var showing = false
-    @State var flash = false
+    @State var showingPainting = false
+    @State var showingList = false
+    @State var highlight = false
+    @State var transform: SettingsProfileTransformState?
 
     var body: some View {
         LaunchPageViewContent(
             title: "Lists",
             description: "Group words together.",
-            footnote: "Need to find U.S. presidents in your textbook? You can do that in a split second. Trying to avoid artificial colors on your grocery run? Now you're all set."
+            footnote: "Need to find U.S. presidents in your textbook? Just use Find. Want to avoid artificial colors on your next grocery run? Now you're all set."
         ) {
             Button {
-                flashAgain()
+                changePortrait()
             } label: {
                 listsPreview
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(UIColor.systemBackground.color)
+                    .background(Color.black)
+                    .overlay(Color.black.opacity(showingPainting ? 0 : 1))
                     .cornerRadius(16)
                     .aspectRatio(1, contentMode: .fit)
             }
@@ -32,12 +35,36 @@ struct LaunchListsView: View {
         .onAppear {
             withAnimation(
                 .spring(
-                    response: 0.6,
-                    dampingFraction: 0.8,
+                    response: 0.8,
+                    dampingFraction: 1,
                     blendDuration: 1
                 )
             ) {
-                showing = true
+                showingPainting = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                withAnimation(
+                    .spring(
+                        response: 0.6,
+                        dampingFraction: 0.8,
+                        blendDuration: 1
+                    )
+                ) {
+                    showingList = true
+                }
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation(
+                    .spring(
+                        response: 0.2,
+                        dampingFraction: 1,
+                        blendDuration: 1
+                    )
+                ) {
+                    highlight = true
+                }
             }
         }
     }
@@ -45,25 +72,48 @@ struct LaunchListsView: View {
     let presidents = ["George", "John", "Thomas"]
     var listsPreview: some View {
         VStack {
-            HStack {
-                Image("Zheng")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 60, height: 60)
-
+            Color.clear.overlay(
                 VStack {
-                    Text("Thomas Jefferson")
-                        .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    PortraitView(length: 90, circular: false, transform: $transform)
 
-                    Text("Thomas Jefferson (April 13, 1743 – July 4, 1826) was an American statesman, diplomat, lawyer, architect, philosopher, and Founding Father who served as the third president of the United States from 1801 to 1809. - Wikipedia")
-                        .font(UIFont.preferredCustomFont(forTextStyle: .title2, weight: .regular).font)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .multilineTextAlignment(.leading)
+                    Group {
+                        Text("Thomas")
+                            .foregroundColor(.white)
+                            + Text(" Jefferson")
+                            .foregroundColor(.black)
+                    }
+                    .font(UIFont.safeFont(name: "TimesNewRomanPSMT", size: 24).font)
+                    .foregroundColor(UIColor.label.color)
+                    .colorMultiply(highlight ? .red : .black)
                 }
-                .foregroundColor(UIColor.label.color)
-                .frame(maxWidth: .infinity)
-            }
+                .padding(36)
+                .background(Color.white)
+                .border(Color.brown, width: 4)
+                .shadow(
+                    color: UIColor.label.color.opacity(0.25),
+                    radius: 8,
+                    x: 0,
+                    y: 1
+                )
+                .background(
+                    RadialGradient(
+                        stops: [
+                            .init(
+                                color: UIColor.white.color,
+                                location: 0.3
+                            ),
+                            .init(
+                                color: UIColor.black.color,
+                                location: 1
+                            )
+                        ],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: 300
+                    )
+                    .padding(-400)
+                )
+            )
 
             VStack(spacing: 0) {
                 HStack {
@@ -95,20 +145,32 @@ struct LaunchListsView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
                 .background(
-                    Color.red
-                        .opacity(0.1)
+                    UIColor.systemBackground.color
+                        .overlay(
+                            Color.red
+                                .opacity(0.1)
+                        )
                         .padding(.bottom, -100)
                 )
             }
-            .offset(x: 0, y: showing ? 0 : 400)
-            .opacity(showing ? 1 : 0)
+            .offset(x: 0, y: showingList ? 0 : 400)
+            .opacity(showingList ? 1 : 0)
         }
     }
 
-    func flashAgain() {
-        flash = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            flash = true
+    func changePortrait() {
+        withAnimation(
+            .spring(
+                response: 0.6,
+                dampingFraction: 0.6,
+                blendDuration: 1
+            )
+        ) {
+            if transform == nil {
+                transform = SettingsProfileTransformState.allCases.randomElement()
+            } else {
+                transform = nil
+            }
         }
     }
 

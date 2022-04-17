@@ -8,13 +8,6 @@
 
 import SwiftUI
 
-enum SettingsProfileTransformState: CaseIterable {
-    case flippedVertically
-    case flippedHorizontally
-    case zoomed
-    case spun
-}
-
 struct Person: Identifiable {
     let id = UUID()
     var name: String
@@ -60,7 +53,7 @@ extension Person {
                 description: "Find is a completely free app — got something you want to add? It could be a translation or a feature or anything, just DM me on Twitter!",
                 urlString: "https://twitter.com/aheze0",
                 showUrl: false
-            ),
+            )
         ]
     }()
 }
@@ -90,20 +83,8 @@ struct SettingsCredits: View {
                         }
                     }
                 } label: {
-                    Image("Zheng")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .scaleEffect(transform == .zoomed ? 2 : 1)
-                        .frame(width: 180, height: 180)
-                        .clipShape(Circle())
-                        .roundedCircleBorder(borderRadius: 6)
-                        .rotation3DEffect(
-                            .degrees(transform == .flippedHorizontally || transform == .flippedVertically ? 180 : 0),
-                            axis: (x: transform == .flippedVertically ? 1 : 0, y: transform == .flippedHorizontally ? 1 : 0, z: 0)
-                        )
-                        .rotationEffect(.degrees(transform == .spun ? 90 : 0))
+                    PortraitView(length: 180, circular: true, transform: $transform)
                 }
-                .buttonStyle(SettingsProfileButtonStyle())
 
                 Text("Find by Andrew Zheng")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
@@ -249,30 +230,6 @@ extension View {
                         ),
                         lineWidth: 3
                     )
-            )
-    }
-
-    func roundedCircleBorder(borderRadius: CGFloat) -> some View {
-        self.clipShape(Circle())
-            .overlay(
-                Circle()
-                    .strokeBorder(
-                        LinearGradient(
-                            colors: [
-                                UIColor.systemBackground.toColor(Colors.accent, percentage: 0.1).color,
-                                UIColor.systemBackground.toColor(Colors.accent, percentage: 0.25).color
-                            ],
-                            startPoint: .bottom,
-                            endPoint: .top
-                        ),
-                        lineWidth: borderRadius
-                    )
-            )
-            .shadow(
-                color: UIColor.label.toColor(Colors.accent, percentage: 0.25).color.opacity(0.25),
-                radius: borderRadius,
-                x: 0,
-                y: borderRadius / 2
             )
     }
 }
