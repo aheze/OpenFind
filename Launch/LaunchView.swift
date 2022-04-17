@@ -10,9 +10,11 @@ import SwiftUI
 
 enum LaunchViewConstants {
     static var sidePadding = CGFloat(24)
-    static var shadowPadding = CGFloat(48)
+    static var shadowPadding = CGFloat(54)
     
-    static var headerFont = Font.system(size: 48, weight: .bold)
+    static var headerSpacing = CGFloat(8)
+    static var headerTitleFont = UIFont.systemFont(ofSize: 48, weight: .bold)
+    static var headerSubtitleFont = UIFont.systemFont(ofSize: 24, weight: .medium)
     static var headerTopPadding = CGFloat(48)
     
     static var footerBottomPadding = CGFloat(16)
@@ -25,19 +27,24 @@ struct LaunchView: View {
     
     var body: some View {
         VStack {
-            Text("Find")
-                .font(c.headerFont)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: c.headerTopPadding, leading: c.sidePadding, bottom: c.shadowPadding, trailing: c.sidePadding))
-                .background(
-                    LaunchGradientView(transparentBottom: true)
-                )
+            VStack(spacing: c.headerSpacing) {
+                Text("Find")
+                    .font(c.headerTitleFont.font)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                Text("An app to find text in real life.")
+                    .font(c.headerSubtitleFont.font)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(EdgeInsets(top: c.headerTopPadding, leading: c.sidePadding, bottom: c.shadowPadding, trailing: c.sidePadding))
+            .background(
+                LaunchGradientView(transparentBottom: true)
+            )
             
             Spacer()
             
-            Button {
-                print("pressed")
-            } label: {
+            Button {} label: {
                 Text("Let's Go!")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
                     .frame(maxWidth: .infinity)
@@ -45,6 +52,7 @@ struct LaunchView: View {
                     .background(.white.opacity(0.1))
                     .cornerRadius(c.footerCornerRadius)
             }
+            .buttonStyle(LaunchButtonStyle())
             .frame(maxWidth: .infinity)
             .padding(EdgeInsets(top: c.shadowPadding, leading: c.sidePadding, bottom: c.footerBottomPadding, trailing: c.sidePadding))
             .background(
@@ -54,6 +62,21 @@ struct LaunchView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .foregroundColor(.white)
         .opacity(model.showingUI ? 1 : 0)
+    }
+}
+
+struct LaunchButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .animation(
+                .spring(
+                    response: 0.2,
+                    dampingFraction: 0.4,
+                    blendDuration: 1
+                ),
+                value: configuration.isPressed
+            )
     }
 }
 
