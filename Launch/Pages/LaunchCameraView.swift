@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct LaunchCameraView: View {
-    @State var flash = false
-    @State var check = false
+    @State var activeColor = Color.blue
+    @State var showing = false
+    @State var highlight = false
 
     var body: some View {
         LaunchPageViewContent(
@@ -19,42 +20,106 @@ struct LaunchCameraView: View {
             footnote: "Got allergies or other dietary restrictions? Just point your phone at the nutrition label and Find will scan it for you."
         ) {
             Button {
-                flashAgain()
+                changeColor()
             } label: {
                 cameraPreview
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(UIColor.systemBackground.color)
+                    .background(
+                        LinearGradient(
+                            colors: [
+                                UIColor(hex: 0x00AEEF).color,
+                                Colors.accent.color
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .cornerRadius(16)
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(1, contentMode: .fit)
             }
             .buttonStyle(LaunchButtonStyle())
         }
         .onAppear {
+            withAnimation(
+                .spring(
+                    response: 0.6,
+                    dampingFraction: 0.9,
+                    blendDuration: 1
+                )
+            ) {
+                showing = true
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 withAnimation(
                     .spring(
-                        response: 0.3,
-                        dampingFraction: 0.4,
+                        response: 0.2,
+                        dampingFraction: 1,
                         blendDuration: 1
                     )
                 ) {
-                    check = true
+                    highlight = true
                 }
             }
         }
     }
 
-    let cellSpacing = CGFloat(2)
+    let cornerRadius = CGFloat(8)
+
     var cameraPreview: some View {
         VStack {
-            
+            VStack(spacing: 6) {
+                Group {
+                    Text("INGREDIENTS:")
+                        .font(UIFont.preferredCustomFont(forTextStyle: .title2, weight: .bold).font)
+
+                    Text("Enriched Corn Meal (Corn Meal, Riboflavin, Folic Acid), ")
+                        .foregroundColor(.black)
+                        + Text("Cheese")
+                        .foregroundColor(.white)
+                        .font(UIFont.preferredMonospacedFont(forTextStyle: .title3, weight: highlight ? .semibold : .regular).font)
+
+                        + Text(", Maltodextrin (Made from Corn), Sea Salt, Natural Flavors.")
+                        .foregroundColor(.black)
+                }
+                .font(.system(.title3, design: .monospaced))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .colorMultiply(highlight ? activeColor : .black)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(24)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                UIColor.white.color,
+                                UIColor.white.toColor(.black, percentage: 0.08).color
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .padding(.bottom, -100) /// extend down a bit
+            )
+            .foregroundColor(.black)
+            .padding(.top, 48)
+            .padding(.horizontal, 36)
+            .offset(x: 0, y: showing ? 0 : 400)
+            .opacity(showing ? 1 : 0)
         }
     }
 
-    func flashAgain() {
-        flash = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            flash = true
+    func changeColor() {
+        withAnimation {
+            activeColor = [
+                Color.red,
+                Color.orange,
+                Color.yellow,
+                Color.green,
+                Color.blue,
+                Color.indigo,
+                Color.purple
+            ].randomElement() ?? .blue
         }
     }
 

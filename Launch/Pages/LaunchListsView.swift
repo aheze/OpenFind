@@ -34,7 +34,7 @@ struct LaunchListsView: View {
                                     .font(UIFont.systemFont(ofSize: 64, weight: .semibold).font)
                                     .foregroundColor(.white)
                                     .padding(24)
-                                    .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(1, contentMode: .fit)
                                     .background(
                                         VisualEffectView(.systemUltraThinMaterialLight)
                                     )

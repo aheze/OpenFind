@@ -18,7 +18,7 @@ struct LaunchPhotosView: View {
         LaunchPageViewContent(
             title: "Photos",
             description: "Search for text in your photos.",
-            footnote: "Comes in handy when you're trying to find memes but you can you for literally anything. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone."
+            footnote: "Comes in handy when you're trying to find memes. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone."
         ) {
             Button {
                 flashAgain()
@@ -27,7 +27,7 @@ struct LaunchPhotosView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(UIColor.systemBackground.color)
                     .cornerRadius(16)
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(1, contentMode: .fit)
             }
             .buttonStyle(LaunchButtonStyle())
         }
@@ -98,6 +98,12 @@ struct LaunchPhotosView: View {
                                                 .stroke(Color.white, lineWidth: lineWidth)
                                                 .padding(-lineWidth / 2)
                                                 .opacity(scanned ? 1 : 0)
+                                                .shadow(
+                                                    color: Color.blue.opacity(0.75),
+                                                    radius: 10,
+                                                    x: 0,
+                                                    y: 2
+                                                )
                                                 .scaleEffect(scanned ? 1 : 0.95)
                                         }
                                     }

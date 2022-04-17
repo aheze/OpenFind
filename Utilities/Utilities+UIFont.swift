@@ -58,4 +58,21 @@ extension UIFont {
         ])
         return UIFont(descriptor: weightedFontDescriptor, size: 0)
     }
+    
+    static func preferredMonospacedFont(forTextStyle textStyle: TextStyle, weight: Weight) -> UIFont {
+        let defaultDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
+        let size = defaultDescriptor.pointSize
+        let fontDescriptor = UIFontDescriptor(fontAttributes: [
+            UIFontDescriptor.AttributeName.size: size,
+            UIFontDescriptor.AttributeName.family: UIFont.monospacedSystemFont(ofSize: size, weight: weight).familyName,
+        ])
+
+        // Add the font weight to the descriptor
+        let weightedFontDescriptor = fontDescriptor.addingAttributes([
+            UIFontDescriptor.AttributeName.traits: [
+                UIFontDescriptor.TraitKey.weight: weight
+            ]
+        ])
+        return UIFont(descriptor: weightedFontDescriptor, size: 0)
+    }
 }
