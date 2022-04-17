@@ -14,7 +14,7 @@ enum Debug {
     static var navigationBarAlwaysTransparent = false
     static var collectionViewScrollDisabled = false
     static var photosTestEmptyLoading = false /// if true, `sleep` instead of calling `loadPhotoMetadatas`
-    static var skipLaunchIntro = true
+    static var skipLaunchIntro = false
 }
 
 extension UIView {
