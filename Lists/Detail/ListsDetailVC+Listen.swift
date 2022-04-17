@@ -12,12 +12,16 @@ extension ListsDetailViewController {
     func listenToButtons() {
         /// change icon
         headerTopLeftView.tapped = { [weak self] in
-            self?.presentIconPicker()
+            guard let self = self else { return }
+            self.view.endEditing(true)
+            self.presentIconPicker()
         }
         
         /// change color
         headerTopRightView.tapped = { [weak self] in
-            self?.presentColorPicker()
+            guard let self = self else { return }
+            self.view.endEditing(true)
+            self.presentColorPicker()
         }
         
         /// edit mode

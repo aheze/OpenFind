@@ -10,6 +10,7 @@ import UIKit
 
 extension ListsDetailViewController {
     func focusCell(at index: Int) {
+        print("Focus at \(index)")
         if model.list.words.indices.contains(index) {
             if let cell = wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell {
                 cell.textField.becomeFirstResponder()
