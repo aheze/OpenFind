@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
@@ -62,4 +61,12 @@ class LaunchViewModel: ObservableObject {
             ]
         )
     ]
+    
+    var width: Int {
+        textRows.first?.text.count ?? 0
+    }
+    
+    var height: Int {
+        textRows.count
+    }
 }

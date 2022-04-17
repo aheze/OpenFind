@@ -18,10 +18,11 @@ struct LaunchText {
     var character: String
     var isPartOfFind = false /// if true, make blue
     
-    enum Position {
-        case ranged(startingOffset: Float, range: Float)
-        case callout(startingOffset: Float, finalOffset: Float) /// for find
-    }
+    /// height, change this later
+    var yOffset = Float(0)
+    
+    var additionalXOffset = Float(0)
+    var additionalZOffset = Float(0)
     
     var color: UIColor {
         if isPartOfFind {

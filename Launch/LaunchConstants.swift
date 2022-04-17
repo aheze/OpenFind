@@ -17,6 +17,8 @@ enum LaunchConstants {
     static let tileLength = Float(0.1)
     static let tileDepth = Float(0.02)
     static let tileCornerRadius = Float(0.05)
+    
+    static let tileGenerationOffsetLimit = Float(0.1)
 
     static let cameraPositionInitial = SIMD3<Float>(
         x: 0.000001, /// can't be 0

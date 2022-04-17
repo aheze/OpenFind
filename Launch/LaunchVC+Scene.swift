@@ -25,6 +25,7 @@ extension LaunchViewController {
         let baseEntity = ModelEntity()
         anchor.addChild(baseEntity)
 
+        adjustPositions()
         addTiles(to: baseEntity)
 
         let camera = PerspectiveCamera()
@@ -35,18 +36,34 @@ extension LaunchViewController {
     }
 
     func adjustPositions() {
+        let modelXCenter = Float(model.width - 1) / 2 /// should be 2.5, which corresponds to a `rowIndex` / `textIndex`
+        let modelZCenter = Float(model.height - 1) / 2
+        let maxValue = modelXCenter * modelZCenter
+        print("maxValue: \(maxValue) ... \(modelXCenter)")
         for rowIndex in model.textRows.indices {
             let row = model.textRows[rowIndex]
             for textIndex in row.text.indices {
-                let text = row.text[textIndex]
+                let x = Float(textIndex) - modelXCenter
+                let z = Float(rowIndex) - modelZCenter
+                let value = abs(x * z)
                 
-//                if text.position
+                let percentageOfMaximum = value / maxValue
+
+                
+                let limit = LaunchConstants.tileGenerationOffsetLimit * percentageOfMaximum
+                let additionalXOffset = 0.1 * (x / modelXCenter)
+                let additionalZOffset = 0.1 * (z / modelZCenter)
+                print("[\(model.textRows[rowIndex].text[textIndex].character)] (\(textIndex), \(rowIndex)) percentageOfMaximum: \(percentageOfMaximum) .. [\(x), \(z)].. \(additionalXOffset)")
+
+                model.textRows[rowIndex].text[textIndex].yOffset = -limit
+                model.textRows[rowIndex].text[textIndex].additionalXOffset = additionalXOffset
+                model.textRows[rowIndex].text[textIndex].additionalZOffset = additionalZOffset
+//                diagonalOffset
             }
         }
     }
-    
+
     func addTiles(to baseEntity: ModelEntity) {
-        
         func getStartingOffset(length: Int) -> Float {
             let totalTileLength = Float(length) * LaunchConstants.tileLength
             let totalTileGap = Float(length - 1) * LaunchConstants.tileGap
@@ -63,12 +80,9 @@ extension LaunchViewController {
             return offset
         }
 
-        let width = model.textRows.first?.text.count ?? 0
-        let height = model.textRows.count
-
         /// start to the left
-        let startingXOffset = getStartingOffset(length: width)
-        let startingZOffset = getStartingOffset(length: height)
+        let startingXOffset = getStartingOffset(length: model.width)
+        let startingZOffset = getStartingOffset(length: model.height)
 
         for rowIndex in model.textRows.indices {
             let row = model.textRows[rowIndex]
@@ -79,7 +93,12 @@ extension LaunchViewController {
                 let zOffset = getAdditionalOffset(for: Float(rowIndex), startingOffset: startingZOffset) /// back to front
 
                 let tile = getTile(character: text.character, color: text.color)
-                tile.position = [xOffset, 0, zOffset]
+                
+                tile.position = [
+                    xOffset + text.additionalXOffset,
+                    text.yOffset,
+                    zOffset + text.additionalZOffset
+                ]
                 baseEntity.addChild(tile)
             }
         }
