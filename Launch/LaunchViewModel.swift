@@ -9,7 +9,29 @@
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
+    
+    var tiles = [LaunchTile]()
     var textRows = [
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "∮"),
+                LaunchText(character: "π"),
+                LaunchText(character: "⧑"),
+                LaunchText(character: "∞"),
+                LaunchText(character: "∴"),
+                LaunchText(character: "➤")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "♛"),
+                LaunchText(character: "♣︎"),
+                LaunchText(character: "♦︎"),
+                LaunchText(character: "♥︎"),
+                LaunchText(character: "♠︎"),
+                LaunchText(character: "♜")
+            ]
+        ),
         LaunchTextRow(
             text: [
                 LaunchText(character: "✭"),
@@ -58,6 +80,26 @@ class LaunchViewModel: ObservableObject {
                 LaunchText(character: "♥︎"),
                 LaunchText(character: "♠︎"),
                 LaunchText(character: "♜")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "✭"),
+                LaunchText(character: "✣"),
+                LaunchText(character: "✿"),
+                LaunchText(character: "❂"),
+                LaunchText(character: "❖"),
+                LaunchText(character: "◼︎")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "𝛴"),
+                LaunchText(character: "𝜽"),
+                LaunchText(character: "𝛹"),
+                LaunchText(character: "𝜔"),
+                LaunchText(character: "𝛼"),
+                LaunchText(character: "𝛺")
             ]
         )
     ]

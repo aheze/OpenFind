@@ -20,8 +20,6 @@ extension LaunchViewController {
         let anchor = AnchorEntity()
         sceneView.scene.addAnchor(anchor)
 
-        let cameraPosition = LaunchConstants.cameraPositionInitial
-
         let baseEntity = ModelEntity()
         anchor.addChild(baseEntity)
 
@@ -32,33 +30,52 @@ extension LaunchViewController {
         let cameraAnchor = AnchorEntity(world: .zero)
         cameraAnchor.addChild(camera)
         sceneView.scene.addAnchor(cameraAnchor)
-        camera.look(at: .zero, from: cameraPosition, relativeTo: baseEntity)
+        camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            for tile in self.model.tiles {
+                tile.entity.move(
+                    to: tile.finalTransform,
+                    relativeTo: nil,
+                    duration: 3,
+                    timingFunction: .easeInOut
+                )
+            }
+
+            camera.look(at: .zero, from: LaunchConstants.cameraPositionFinal, relativeTo: baseEntity)
+            let transform = camera.transform /// get the final transform
+            camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
+            
+            camera.move(
+                to: transform,
+                relativeTo: nil,
+                duration: 3,
+                timingFunction: .easeInOut
+            )
+        }
     }
 
     func adjustPositions() {
         let modelXCenter = Float(model.width - 1) / 2 /// should be 2.5, which corresponds to a `rowIndex` / `textIndex`
         let modelZCenter = Float(model.height - 1) / 2
         let maxValue = modelXCenter * modelZCenter
-        print("maxValue: \(maxValue) ... \(modelXCenter)")
+
         for rowIndex in model.textRows.indices {
             let row = model.textRows[rowIndex]
             for textIndex in row.text.indices {
                 let x = Float(textIndex) - modelXCenter
                 let z = Float(rowIndex) - modelZCenter
                 let value = abs(x * z)
-                
+
                 let percentageOfMaximum = value / maxValue
 
-                
                 let limit = LaunchConstants.tileGenerationOffsetLimit * percentageOfMaximum
                 let additionalXOffset = 0.1 * (x / modelXCenter)
                 let additionalZOffset = 0.1 * (z / modelZCenter)
-                print("[\(model.textRows[rowIndex].text[textIndex].character)] (\(textIndex), \(rowIndex)) percentageOfMaximum: \(percentageOfMaximum) .. [\(x), \(z)].. \(additionalXOffset)")
 
-                model.textRows[rowIndex].text[textIndex].yOffset = -limit
+                model.textRows[rowIndex].text[textIndex].yOffset = limit
                 model.textRows[rowIndex].text[textIndex].additionalXOffset = additionalXOffset
                 model.textRows[rowIndex].text[textIndex].additionalZOffset = additionalZOffset
-//                diagonalOffset
             }
         }
     }
@@ -84,6 +101,7 @@ extension LaunchViewController {
         let startingXOffset = getStartingOffset(length: model.width)
         let startingZOffset = getStartingOffset(length: model.height)
 
+        var tiles = [LaunchTile]()
         for rowIndex in model.textRows.indices {
             let row = model.textRows[rowIndex]
             for textIndex in row.text.indices {
@@ -92,16 +110,44 @@ extension LaunchViewController {
                 let xOffset = getAdditionalOffset(for: Float(textIndex), startingOffset: startingXOffset) /// left to right
                 let zOffset = getAdditionalOffset(for: Float(rowIndex), startingOffset: startingZOffset) /// back to front
 
-                let tile = getTile(character: text.character, color: text.color)
-                
-                tile.position = [
-                    xOffset + text.additionalXOffset,
-                    text.yOffset,
-                    zOffset + text.additionalZOffset
-                ]
-                baseEntity.addChild(tile)
+                let tileEntity = getTileEntity(character: text.character, color: text.color)
+
+                let initialPosition = SIMD3(
+                    x: xOffset + text.additionalXOffset,
+                    y: text.yOffset,
+                    z: zOffset + text.additionalZOffset
+                )
+                let finalPosition = SIMD3(
+                    x: xOffset,
+                    y: text.yOffset * -0.5,
+                    z: zOffset
+                )
+
+                let initialTransform = Transform(
+                    scale: .one,
+                    rotation: simd_quatf(),
+                    translation: initialPosition
+                )
+                let finalTransform = Transform(
+                    scale: .one,
+                    rotation: simd_quatf(),
+                    translation: finalPosition
+                )
+
+                tileEntity.transform = initialTransform
+                baseEntity.addChild(tileEntity)
+
+                let tile = LaunchTile(
+                    text: text,
+                    entity: tileEntity,
+                    initialTransform: initialTransform,
+                    finalTransform: finalTransform
+                )
+                tiles.append(tile)
             }
         }
+
+        model.tiles = tiles
     }
 
     /// Gets half of the width, height and length of the bounding box,
@@ -116,7 +162,7 @@ extension LaunchViewController {
 }
 
 extension LaunchViewController {
-    func getTile(character: String, color: UIColor) -> ModelEntity {
+    func getTileEntity(character: String, color: UIColor) -> ModelEntity {
         let tile = MeshResource.generateBox(
             width: LaunchConstants.tileLength,
             height: LaunchConstants.tileDepth,

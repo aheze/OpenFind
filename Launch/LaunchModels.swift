@@ -6,7 +6,8 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
- import UIKit
+import RealityKit
+import UIKit
 
 /// Row of launch text
 /// X X X X X X
@@ -33,3 +34,9 @@ struct LaunchText {
     }
 }
  
+struct LaunchTile {
+    var text: LaunchText
+    var entity: ModelEntity
+    var initialTransform: Transform
+    var finalTransform: Transform
+}
