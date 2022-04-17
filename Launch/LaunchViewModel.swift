@@ -9,8 +9,10 @@
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
+    var on = true /// if false, stop looping animations.
     
     var tiles = [LaunchTile]()
+    
     var textRows = [
         LaunchTextRow(
             text: [

@@ -32,28 +32,35 @@ extension LaunchViewController {
         sceneView.scene.addAnchor(cameraAnchor)
         camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.animationDelay) {
             for tile in self.model.tiles {
                 tile.entity.move(
                     to: tile.midTransform,
                     relativeTo: nil,
-                    duration: 8,
+                    duration: LaunchConstants.tilesInitialAnimationDuration,
                     timingFunction: .easeInOut
                 )
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            /// one tiles done animating, start flipping them
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesInitialAnimationDuration) {
+                let normalTiles = self.model.tiles.filter { !$0.text.isPartOfFind }
+                self.flipRandomNormalTile(in: normalTiles)
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.findTileAnimationDelay) {
                 let findTiles = self.model.tiles.filter { $0.text.isPartOfFind }
                 for index in findTiles.indices {
                     let tile = findTiles[index]
+                    guard let finalTransform = tile.finalTransform else { continue }
 
                     let percentage = Double(index) / 3
-                    let delay = percentage * 0.9
+                    let delay = percentage * LaunchConstants.findTileAnimationTotalDuration
                     DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                         tile.entity.move(
-                            to: tile.finalTransform,
+                            to: finalTransform,
                             relativeTo: nil,
-                            duration: 0.5,
+                            duration: LaunchConstants.findTileAnimationIndividualDuration,
                             timingFunction: .easeInOut
                         )
                     }
@@ -73,6 +80,56 @@ extension LaunchViewController {
         }
     }
 
+    func flipRandomNormalTile(in tiles: [LaunchTile]) {
+        func flip(tile: LaunchTile, reversed: Bool) {
+            let multiplier = Float(reversed ? -1 : 1)
+            var transform = tile.midTransform
+            transform.rotation = simd_quatf(
+                angle: Float(180.degreesToRadians) * multiplier,
+                axis: [0, 0, 1]
+            )
+            tile.entity.move(
+                to: transform,
+                relativeTo: nil,
+                duration: LaunchConstants.tilesRepeatingAnimationDuration,
+                timingFunction: .easeInOut
+            )
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesRepeatingAnimationDuration) {
+                transform.rotation = simd_quatf(
+                    angle: Float(360.degreesToRadians) * multiplier,
+                    axis: [0, 0, 1]
+                )
+                tile.entity.move(
+                    to: transform,
+                    relativeTo: nil,
+                    duration: LaunchConstants.tilesRepeatingAnimationDuration,
+                    timingFunction: .easeInOut
+                )
+            }
+        }
+
+        if model.on {
+            guard let randomTile = tiles.randomElement() else { return }
+
+            let location = randomTile.location
+            let mirroringLocation = LaunchTile.Location(
+                x: model.width - 1 - location.x,
+                z: model.height - 1 - location.z
+            )
+
+            let mirroringTile = tiles.first { $0.location == mirroringLocation }
+
+            flip(tile: randomTile, reversed: false)
+            if let mirroringTile = mirroringTile {
+                flip(tile: mirroringTile, reversed: true)
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesRepeatingAnimationDelay * 2) {
+                self.flipRandomNormalTile(in: tiles)
+            }
+        }
+    }
+
     func adjustPositions() {
         let modelXCenter = Float(model.width - 1) / 2 /// should be 2.5, which corresponds to a `rowIndex` / `textIndex`
         let modelZCenter = Float(model.height - 1) / 2
@@ -87,9 +144,9 @@ extension LaunchViewController {
 
                 let percentageOfMaximum = value / maxValue
 
-                let limit = LaunchConstants.tileGenerationOffsetLimit * percentageOfMaximum
-                let additionalXOffset = 0.1 * (x / modelXCenter)
-                let additionalZOffset = 0.1 * (z / modelZCenter)
+                let limit = LaunchConstants.tileYOffsetLimit * percentageOfMaximum
+                let additionalXOffset = LaunchConstants.tileDiagonalOffsetLimit * (x / modelXCenter)
+                let additionalZOffset = LaunchConstants.tileDiagonalOffsetLimit * (z / modelZCenter)
 
                 model.textRows[rowIndex].text[textIndex].yOffset = limit
                 model.textRows[rowIndex].text[textIndex].additionalXOffset = additionalXOffset
@@ -140,18 +197,12 @@ extension LaunchViewController {
                     y: 0,
                     z: zOffset
                 )
-                let finalPosition: SIMD3<Float>
+                var finalPosition: SIMD3<Float>?
 
                 if text.isPartOfFind {
                     finalPosition = SIMD3(
                         x: xOffset,
-                        y: 0.1,
-                        z: zOffset
-                    )
-                } else {
-                    finalPosition = SIMD3(
-                        x: xOffset,
-                        y: text.yOffset * -0.5,
+                        y: LaunchConstants.findTileFinalYOffset,
                         z: zOffset
                     )
                 }
@@ -166,11 +217,15 @@ extension LaunchViewController {
                     rotation: simd_quatf(),
                     translation: midPosition
                 )
-                let finalTransform = Transform(
-                    scale: .one,
-                    rotation: simd_quatf(),
-                    translation: finalPosition
-                )
+
+                var finalTransform: Transform?
+                if let finalPosition = finalPosition {
+                    finalTransform = Transform(
+                        scale: .one,
+                        rotation: simd_quatf(),
+                        translation: finalPosition
+                    )
+                }
 
                 tileEntity.transform = initialTransform
                 baseEntity.addChild(tileEntity)
@@ -178,6 +233,7 @@ extension LaunchViewController {
                 let tile = LaunchTile(
                     text: text,
                     entity: tileEntity,
+                    location: .init(x: textIndex, z: rowIndex),
                     initialTransform: initialTransform,
                     midTransform: midTransform,
                     finalTransform: finalTransform

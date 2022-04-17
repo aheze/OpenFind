@@ -37,7 +37,15 @@ struct LaunchText {
 struct LaunchTile {
     var text: LaunchText
     var entity: ModelEntity
+    var location: Location /// populate from index inside `LaunchTextRow`
     var initialTransform: Transform
     var midTransform: Transform
-    var finalTransform: Transform
+    var finalTransform: Transform? /// only for Find tiles
+
+    struct Location: Equatable {
+        var x: Int
+        var z: Int
+    }
 }
+
+
