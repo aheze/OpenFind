@@ -16,5 +16,7 @@ extension LaunchViewController {
         
         setupUI()
         setupScene()
+        
+        listen()
     }
 }

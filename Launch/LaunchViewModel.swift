@@ -6,15 +6,16 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
+import Combine
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
+    
+    /// for storing observers to `currentPage`
+    var cancellables = Set<AnyCancellable>()
+    
     @Published var showingUI = false
-    @Published var currentPage = LaunchPageIdentifier.empty {
-        didSet {
-            currentPageChanged?()
-        }
-    }
+    @Published var currentPage = LaunchPageIdentifier.empty
 
     var currentPageChanged: (() -> Void)?
     func setCurrentPage(to page: LaunchPageIdentifier) {

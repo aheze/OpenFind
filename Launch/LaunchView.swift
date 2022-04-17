@@ -9,7 +9,7 @@
 import SwiftUI
 
 enum LaunchViewConstants {
-    static var spacing = CGFloat(12)
+    static var spacing = CGFloat(16)
     
     static var sidePadding = CGFloat(24)
     static var shadowPadding = CGFloat(54)
