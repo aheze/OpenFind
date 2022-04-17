@@ -134,6 +134,7 @@ struct LaunchListsView: View {
                         Text(name)
                             .font(UIFont.preferredCustomFont(forTextStyle: .headline, weight: .medium).font)
                             .foregroundColor(.red)
+                            .fixedSize(horizontal: true, vertical: false)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 16)

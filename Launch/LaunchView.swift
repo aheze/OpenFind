@@ -151,7 +151,7 @@ struct LaunchButtonStyle: ButtonStyle {
             .animation(
                 .spring(
                     response: 0.2,
-                    dampingFraction: 0.4,
+                    dampingFraction: 0.6,
                     blendDuration: 1
                 ),
                 value: configuration.isPressed

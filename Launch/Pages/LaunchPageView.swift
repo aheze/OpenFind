@@ -59,19 +59,21 @@ struct LaunchPageViewContent<Content: View>: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Group {
-                Text(description)
-                    .foregroundColor(.white)
-                    + Text(" ")
+            Color.clear.overlay(
+                Group {
+                    Text(description)
+                        .foregroundColor(.white)
+                        + Text(" ")
 
-                    + Text(footnote)
-                    .foregroundColor(.white.opacity(0.75))
-            }
-            .font(c.descriptionFont.font)
-            .multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            Spacer()
+                        + Text(footnote)
+                        .foregroundColor(.white.opacity(0.75))
+                }
+                .font(c.descriptionFont.font)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .fixedSize(horizontal: false, vertical: true),
+                alignment: .top
+            )
         }
         .foregroundColor(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
