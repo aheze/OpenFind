@@ -156,8 +156,13 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         
-        /// add the chip views one last time
-        model.listUpdated?(model.list.getList(), true) /// `final` is true, reload the lists back in the collection view
+        print("Moving to \(parent)")
+        
+        if parent == nil {
+            /// add the chip views one last time
+            model.listUpdated?(model.list.getList(), true) /// `final` is true, reload the lists back in the collection view
+        }
+        
         withAnimation {
             toolbarViewModel.toolbar = nil
         }

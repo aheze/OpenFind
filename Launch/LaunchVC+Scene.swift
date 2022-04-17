@@ -81,11 +81,7 @@ extension LaunchViewController {
             splitFaces: false
         )
 
-        var tileMaterial = PhysicallyBasedMaterial()
-        tileMaterial.baseColor = .init(tint: Colors.accent, texture: nil)
-        tileMaterial.roughness = PhysicallyBasedMaterial.Roughness(floatLiteral: 0.0)
-        tileMaterial.metallic = PhysicallyBasedMaterial.Metallic(floatLiteral: 1.0)
-
+        let tileMaterial = SimpleMaterial(color: Colors.accent, roughness: 0, isMetallic: true)
         let textMaterial = SimpleMaterial(color: UIColor.white.withAlphaComponent(0.25), roughness: 0, isMetallic: true)
 
         let text = MeshResource.generateText(

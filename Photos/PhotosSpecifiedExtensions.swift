@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 extension PhotoMetadata {
     static func apply(metadata: PhotoMetadata?, to view: PhotosCellView) {

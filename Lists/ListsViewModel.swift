@@ -9,13 +9,13 @@
 import UIKit
 
 class ListsViewModel: ObservableObject {
-    
     /// if `viewDidLoad` called
     @Published var loaded = false
     
     /// lists shown by the collection view, can be filtered
     @Published private(set) var displayedLists = [DisplayedList]()
     
+    @Published var isFinding = false
     @Published var isSelecting = false
     @Published var selectedLists = [List]()
     

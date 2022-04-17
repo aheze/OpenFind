@@ -10,6 +10,7 @@ import UIKit
 
 extension ListsViewController {
     func update(animate: Bool = true) {
+        print("Updating!!!")
         var snapshot = Snapshot()
         let section = DataSourceSectionTemplate()
         snapshot.appendSections([section])

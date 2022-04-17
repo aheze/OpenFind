@@ -9,6 +9,8 @@
 import UIKit
 
 extension ListsViewController {
+    
+    /// find and load lists into the collection view, calls `updateDisplayedLists`
     func find(text: [String]) {
         let displayedLists = realmModel.lists.map { DisplayedList(list: $0) }
         guard !text.isEmpty else {
@@ -18,7 +20,6 @@ extension ListsViewController {
         }
 
         let filteredDisplayedLists = displayedLists.filter { displayedList in
-
             Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.displayedTitle, matches: text)
                 || Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.description, matches: text)
         }

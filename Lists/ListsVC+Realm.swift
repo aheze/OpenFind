@@ -16,32 +16,11 @@ extension ListsViewController {
     }
 
     func reloadDisplayedLists() {
-        guard let sortBy = Settings.Values.ListsSortByLevel(rawValue: realmModel.listsSortBy) else {
-            let displayedLists: [DisplayedList] = realmModel.lists.map { .init(list: $0) }
-            model.updateDisplayedLists(to: displayedLists)
-            return
-        }
-
-        /// newest first
-        switch sortBy {
-        case .newestFirst:
-            let displayedLists: [DisplayedList] = realmModel.lists
-                .sorted { $0.dateCreated > $1.dateCreated }
-                .map { .init(list: $0) }
-            model.updateDisplayedLists(to: displayedLists)
-        case .oldestFirst:
-            let displayedLists: [DisplayedList] = realmModel.lists
-                .sorted { $0.dateCreated < $1.dateCreated }
-                .map { .init(list: $0) }
-            model.updateDisplayedLists(to: displayedLists)
-        case .title:
-            let displayedLists: [DisplayedList] = realmModel.lists
-                .sorted {
-                    let a = $0.displayedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                    let b = $1.displayedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                    return a < b
-                }
-                .map { .init(list: $0) }
+        if model.isFinding {
+            let search = searchViewModel.text
+            find(text: search)
+        } else {
+            let displayedLists = realmModel.lists.map { DisplayedList(list: $0) }
             model.updateDisplayedLists(to: displayedLists)
         }
     }

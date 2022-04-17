@@ -61,7 +61,8 @@ class RealmModel: ObservableObject {
 
     init() {
         container.listsUpdated = { [weak self] lists in
-            self?.lists = lists
+            guard let self = self else { return }
+            self.loadAndSortLists(lists)
         }
 
         container.photoMetadatasUpdated = { [weak self] photoMetadatas in

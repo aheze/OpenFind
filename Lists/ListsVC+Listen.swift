@@ -34,14 +34,17 @@ extension ListsViewController {
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             guard textChanged else { return }
-            let search = self.searchViewModel.text
-            self.find(text: search)
 
             if self.searchViewModel.isEmpty {
+                self.model.isFinding = false
                 self.hideCancelNavigationBar()
-            } else if self.navigationItem.leftBarButtonItem == nil {
+            } else if !self.model.isFinding {
+                self.model.isFinding = true
                 self.showCancelNavigationBar()
             }
+
+            let search = self.searchViewModel.text
+            self.find(text: search)
         }
     }
 }
