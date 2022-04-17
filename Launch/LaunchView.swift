@@ -9,8 +9,8 @@
 import SwiftUI
 
 enum LaunchViewConstants {
-    static var spacing = CGFloat(16)
-    
+    static var spacing = CGFloat(20)
+
     static var sidePadding = CGFloat(24)
     static var shadowPadding = CGFloat(54)
 
@@ -23,6 +23,9 @@ enum LaunchViewConstants {
     static var footerCornerRadius = CGFloat(20)
 
     static var controlButtonFont = UIFont.preferredFont(forTextStyle: .title3)
+    
+    static var controlCircleSpacing = CGFloat(12)
+    static var controlCircleLength = CGFloat(8)
 }
 
 struct LaunchView: View {
@@ -48,19 +51,30 @@ struct LaunchView: View {
             .opacity(model.currentPage == .empty ? 1 : 0)
             .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
 
+            LaunchContentView(model: model)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
             if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
                 let previousPage = model.pages[safe: currentIndex - 1]
                 let nextPage = model.pages[safe: currentIndex + 1]
-                
+
                 HStack {
                     LaunchControlButtonView(icon: "chevron.backward") {
                         if let previousPage = previousPage {
                             model.setCurrentPage(to: previousPage)
                         }
                     }
-                    
-                    Spacer()
-                    
+
+                    HStack(spacing: c.controlCircleSpacing) {
+                        ForEach(model.pages, id: \.self) { page in
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: c.controlCircleLength, height: c.controlCircleLength)
+                                .opacity(model.currentPage == page ? 1 : 0.5)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+
                     LaunchControlButtonView(icon: "chevron.forward") {
                         if let nextPage = nextPage {
                             model.setCurrentPage(to: nextPage)
@@ -69,10 +83,8 @@ struct LaunchView: View {
                     .opacity(nextPage != nil ? 1 : 0)
                 }
                 .padding(.horizontal, c.sidePadding)
+                .padding(.bottom, 16)
             }
-
-            LaunchContentView(model: model)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Button {
                 withAnimation {

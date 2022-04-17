@@ -428,6 +428,9 @@
 		3C257EBF280BE48E009B6FAE /* LaunchCVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EBE280BE48E009B6FAE /* LaunchCVC+FlowLayout.swift */; };
 		3C257EC1280BE73F009B6FAE /* LaunchCVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EC0280BE73F009B6FAE /* LaunchCVC+Listen.swift */; };
 		3C257EC3280BEB29009B6FAE /* LaunchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EC2280BEB29009B6FAE /* LaunchVC+Listen.swift */; };
+		3C257EC4280BF65B009B6FAE /* PhotosGeneralExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D22F227FD551600D413B7 /* PhotosGeneralExtensions.swift */; };
+		3C257EC5280BF663009B6FAE /* PhotosConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D179127BCAEBA00E82B8B /* PhotosConstants.swift */; };
+		3C257EC6280BF809009B6FAE /* GeneralViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA9A27818CDD000381CE /* GeneralViews.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
 		3C2994782800DA4400AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
@@ -10328,12 +10331,14 @@
 				3CF8DA17280BB1B3008E92E4 /* Identifier.swift in Sources */,
 				3CC0D14D280B2A40004E7016 /* Utilities+Accessibility.swift in Sources */,
 				3C257EBF280BE48E009B6FAE /* LaunchCVC+FlowLayout.swift in Sources */,
+				3C257EC5280BF663009B6FAE /* PhotosConstants.swift in Sources */,
 				3CC0D14B280B2A40004E7016 /* Utilities+Constraints.swift in Sources */,
 				3C153BE7280B6CEC0062751B /* LaunchConstants.swift in Sources */,
 				3CC0D149280B2A40004E7016 /* Utilities+Math.swift in Sources */,
 				3CC0D150280B2A40004E7016 /* Utilities+NavigationBar.swift in Sources */,
 				3CC0D12B280B279B004E7016 /* ViewController.swift in Sources */,
 				3CC0D15C280B445C004E7016 /* LaunchVC+Setup.swift in Sources */,
+				3C257EC6280BF809009B6FAE /* GeneralViews.swift in Sources */,
 				3CF8DA19280BB36C008E92E4 /* LaunchModels.swift in Sources */,
 				3CC0D14A280B2A40004E7016 /* Utilities+UIView.swift in Sources */,
 				3CC0D13C280B28E7004E7016 /* LaunchView.swift in Sources */,
@@ -10341,6 +10346,7 @@
 				3CC0D15D280B447F004E7016 /* Constants.swift in Sources */,
 				3CC0D152280B2A40004E7016 /* Utilities+String.swift in Sources */,
 				3CC0D147280B2A40004E7016 /* Utilities+PHAsset.swift in Sources */,
+				3C257EC4280BF65B009B6FAE /* PhotosGeneralExtensions.swift in Sources */,
 				3CC0D127280B279B004E7016 /* AppDelegate.swift in Sources */,
 				3CC0D146280B2A40004E7016 /* Utilities+CGRect.swift in Sources */,
 				3CC0D143280B2A40004E7016 /* GeneralUtilities.swift in Sources */,

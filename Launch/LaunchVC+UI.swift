@@ -20,11 +20,15 @@ extension LaunchViewController {
         hostingController.view.backgroundColor = .clear
         addChildViewController(hostingController, in: contentContainer)
     }
-    
+
     func prepareUI() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.showUIDelay) {
-            withAnimation(.easeInOut(duration: LaunchConstants.showUIDuration)) {
-                self.model.showingUI = true
+        if Debug.skipLaunchIntro {
+            model.showingUI = true
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.showUIDelay) {
+                withAnimation(.easeInOut(duration: LaunchConstants.showUIDuration)) {
+                    self.model.showingUI = true
+                }
             }
         }
     }

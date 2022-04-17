@@ -15,7 +15,10 @@ extension LaunchViewController {
         view.backgroundColor = Colors.accentDarkBackground
         
         setupUI()
-        setupScene()
+        
+        if !Debug.skipLaunchIntro {
+            setupScene()
+        }
         
         listen()
     }
