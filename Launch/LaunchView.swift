@@ -19,6 +19,8 @@ enum LaunchViewConstants {
 
     static var footerBottomPadding = CGFloat(16)
     static var footerCornerRadius = CGFloat(20)
+    
+    static var control
 }
 
 struct LaunchView: View {
@@ -41,12 +43,20 @@ struct LaunchView: View {
             .background(
                 LaunchGradientView(transparentBottom: true)
             )
+            .opacity(model.currentPage == .empty ? 1 : 0)
+            .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
+            
+            
+            
 
             LaunchContentView(model: model)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
 
-            Button {} label: {
+            Button {
+                withAnimation {
+                    model.setCurrentPage(to: .photos)
+                }
+            } label: {
                 Text("Let's Go!")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
                     .frame(maxWidth: .infinity)
@@ -60,6 +70,8 @@ struct LaunchView: View {
             .background(
                 LaunchGradientView(transparentBottom: false)
             )
+            .opacity(model.currentPage == .empty ? 1 : 0)
+            .frame(height: model.currentPage == .empty ? nil : 0, alignment: .bottom)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .foregroundColor(.white)
@@ -67,6 +79,15 @@ struct LaunchView: View {
     }
 }
 
+struct LaunchControlButtonView: View {
+    var icon: String
+    var body: some View {
+        Image(systemName: icon)
+            .foregroundColor(.white)
+            .frame(width: <#T##CGFloat?#>, height: <#T##CGFloat?#>, alignment: <#T##Alignment#>)
+            .background()
+    }
+}
 
 struct LaunchContentView: UIViewControllerRepresentable {
     @ObservedObject var model: LaunchViewModel
@@ -74,7 +95,7 @@ struct LaunchContentView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> LaunchContentViewController {
         LaunchContentViewController.make(model: model)
     }
-    
+
     func updateUIViewController(_ uiViewController: LaunchContentViewController, context: Context) {}
 }
 

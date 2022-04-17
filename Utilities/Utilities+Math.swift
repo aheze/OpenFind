@@ -65,3 +65,9 @@ extension Int {
         return uInt
     }
 }
+
+extension Int {
+    var indexPath: IndexPath {
+        return IndexPath(item: self, section: 0)
+    }
+}

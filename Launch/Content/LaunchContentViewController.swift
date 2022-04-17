@@ -12,6 +12,8 @@ class LaunchContentViewController: UIViewController {
     var model: LaunchViewModel
     @IBOutlet var collectionView: UICollectionView!
 
+    lazy var flowLayout = makeFlowLayout()
+
     static func make(model: LaunchViewModel) -> LaunchContentViewController {
         let storyboard = UIStoryboard(name: "LaunchContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "LaunchContentViewController") { coder in

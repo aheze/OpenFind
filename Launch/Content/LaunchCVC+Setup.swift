@@ -6,16 +6,19 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension LaunchContentViewController {
     func setup() {
         view.backgroundColor = .clear
         collectionView.backgroundColor = .clear
-        view.addDebugBorders(.green)
         
+        collectionView.decelerationRate = .fast
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        _ = flowLayout
+        
+        listen()
     }
 }

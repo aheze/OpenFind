@@ -10,6 +10,17 @@ import SwiftUI
 
 class LaunchViewModel: ObservableObject {
     @Published var showingUI = false
+    @Published var currentPage = LaunchPageIdentifier.empty {
+        didSet {
+            currentPageChanged?()
+        }
+    }
+    var currentPageChanged: (() -> Void)?
+    func setCurrentPage(to page: LaunchPageIdentifier) {
+        withAnimation {
+            currentPage = page
+        }
+    }
     
     var pages = LaunchPageIdentifier.allCases
     

@@ -12,9 +12,3 @@ extension CGFloat {
         return Int(self)
     }
 }
-
-extension Int {
-    var indexPath: IndexPath {
-        return IndexPath(item: self, section: 0)
-    }
-}
