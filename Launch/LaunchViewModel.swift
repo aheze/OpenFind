@@ -9,6 +9,9 @@
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
+    
+    @Published var showingUI = false
+    
     var on = true /// if false, stop looping animations.
     
     var tiles = [LaunchTile]()

@@ -2031,6 +2031,8 @@
 		3CA63F4C25C8ECA6001C295E /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F4E25C8ECA6001C295E /* TutorialHeader.xib */; };
 		3CA63F5325C926A8001C295E /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F5525C926A8001C295E /* PhotoPermissionView.xib */; };
 		3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F5C25C9274A001C295E /* PhotosMigrationView.xib */; };
+		3CA7EB61280BDB31006ED1D0 /* LaunchVC+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7EB60280BDB30006ED1D0 /* LaunchVC+UI.swift */; };
+		3CA7EB62280BDB33006ED1D0 /* LaunchVC+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7EB60280BDB30006ED1D0 /* LaunchVC+UI.swift */; };
 		3CA9334625BDF2BC00042C2F /* CameraVC+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */; };
 		3CA9334D25BDF37800042C2F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334C25BDF37800042C2F /* CameraView.swift */; };
 		3CA9335125BDF42200042C2F /* CameraVC+CameraControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335025BDF42200042C2F /* CameraVC+CameraControls.swift */; };
@@ -4085,6 +4087,7 @@
 		3CA63F5825C926AA001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PhotoPermissionView.strings"; sourceTree = "<group>"; };
 		3CA63F5B25C9274A001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhotosMigrationView.xib; sourceTree = "<group>"; };
 		3CA63F5F25C9274E001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PhotosMigrationView.strings"; sourceTree = "<group>"; };
+		3CA7EB60280BDB30006ED1D0 /* LaunchVC+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchVC+UI.swift"; sourceTree = "<group>"; };
 		3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Pause.swift"; sourceTree = "<group>"; };
 		3CA9334C25BDF37800042C2F /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		3CA9335025BDF42200042C2F /* CameraVC+CameraControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CameraControls.swift"; sourceTree = "<group>"; };
@@ -6161,6 +6164,7 @@
 				3CC0D141280B2A0C004E7016 /* LaunchViewModel.swift */,
 				3CC0D139280B27B8004E7016 /* LaunchViewController.swift */,
 				3CC0D15B280B445C004E7016 /* LaunchVC+Setup.swift */,
+				3CA7EB60280BDB30006ED1D0 /* LaunchVC+UI.swift */,
 				3CC0D159280B2B3C004E7016 /* LaunchVC+Listen.swift */,
 				3CC0D157280B2B26004E7016 /* LaunchVC+Scene.swift */,
 				3CC0D13B280B28E7004E7016 /* LaunchView.swift */,
@@ -9664,6 +9668,7 @@
 				3C5B36AF27FEAEDE00801FEE /* SettingsMVC+Delegate.swift in Sources */,
 				3C6C735A2781945A00E039F0 /* PhotosController.swift in Sources */,
 				3C6C73A32781947400E039F0 /* SearchViewController.swift in Sources */,
+				3CA7EB62280BDB33006ED1D0 /* LaunchVC+UI.swift in Sources */,
 				3CCE2B52279D235C00F72351 /* ListsDetailVC+DataSource.swift in Sources */,
 				3C5B369D27FEAEDE00801FEE /* SettingsController.swift in Sources */,
 				3C0B5E7127BACBF600EC881E /* PhotosVC+Setup.swift in Sources */,
@@ -10283,6 +10288,7 @@
 				3CC0D158280B2B26004E7016 /* LaunchVC+Scene.swift in Sources */,
 				3CC0D129280B279B004E7016 /* SceneDelegate.swift in Sources */,
 				3CC0D148280B2A40004E7016 /* Utilities+SwiftUI.swift in Sources */,
+				3CA7EB61280BDB31006ED1D0 /* LaunchVC+UI.swift in Sources */,
 				3CC0D163280B64AD004E7016 /* TextEntity.swift in Sources */,
 				3CC0D13A280B27B8004E7016 /* LaunchViewController.swift in Sources */,
 				3CC0D14C280B2A40004E7016 /* Utilities+CGPoint.swift in Sources */,

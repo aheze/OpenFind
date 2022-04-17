@@ -6,18 +6,16 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
-import UIKit
+import SwiftUI
 
 extension LaunchViewController {
     func setup() {
         sceneContainer.backgroundColor = .clear
         contentContainer.backgroundColor = .clear
         view.backgroundColor = Colors.accentDarkBackground
-        print("Done!")
         
         listen()
+        setupUI()
         setupScene()
-        
     }
 }

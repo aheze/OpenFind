@@ -11,31 +11,28 @@
         <!--Launch View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="LaunchViewController" id="Y6W-OH-hqX" customClass="LaunchViewController" customModule="Launch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchViewController" id="Y6W-OH-hqX" customClass="LaunchViewController" customModule="Find_New" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTv-bZ-ysY">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JTv-bZ-ysY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3g-vt-zyh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="I3g-vt-zyh" secondAttribute="bottom" id="3ry-He-CCq"/>
-                            <constraint firstAttribute="trailing" secondItem="JTv-bZ-ysY" secondAttribute="trailing" id="G4U-n2-bKe"/>
-                            <constraint firstItem="JTv-bZ-ysY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="KeZ-BL-YxF"/>
-                            <constraint firstAttribute="bottom" secondItem="JTv-bZ-ysY" secondAttribute="bottom" id="UP2-BV-teF"/>
-                            <constraint firstItem="JTv-bZ-ysY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="aps-rK-iCe"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I3g-vt-zyh" secondAttribute="trailing" id="eUy-FU-z6G"/>
-                            <constraint firstItem="I3g-vt-zyh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="pAS-iL-yp7"/>
-                            <constraint firstItem="I3g-vt-zyh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zzc-y7-Nu7"/>
+                            <constraint firstAttribute="trailing" secondItem="I3g-vt-zyh" secondAttribute="trailing" id="8zo-jo-wOg"/>
+                            <constraint firstAttribute="bottom" secondItem="I3g-vt-zyh" secondAttribute="bottom" id="AM2-uY-ofb"/>
+                            <constraint firstItem="I3g-vt-zyh" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="F48-rM-0V9"/>
+                            <constraint firstItem="I3g-vt-zyh" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="lbg-7V-kEj"/>
                         </constraints>
                     </view>
                     <connections>

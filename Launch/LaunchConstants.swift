@@ -9,8 +9,11 @@
 import UIKit
 
 enum LaunchConstants {
-    static var textDepth = Float(0.008)
-    static var textHeight = CGFloat(0.08)
+    static let showUIDelay = CGFloat(5)
+    static let showUIDuration = CGFloat(1.2)
+    
+    static let textDepth = Float(0.008)
+    static let textHeight = CGFloat(0.08)
     
     static let tileGap = Float(0.01)
     static let tileLength = Float(0.1)
