@@ -16,12 +16,19 @@ struct LaunchTextRow {
 
 struct LaunchText {
     var character: String
-    var color: UIColor
-    var position: Position?
+    var isPartOfFind = false /// if true, make blue
     
     enum Position {
         case ranged(startingOffset: Float, range: Float)
         case callout(startingOffset: Float, finalOffset: Float) /// for find
+    }
+    
+    var color: UIColor {
+        if isPartOfFind {
+            return Colors.accent
+        } else {
+            return .secondaryLabel
+        }
     }
 }
  

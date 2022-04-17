@@ -16,13 +16,11 @@ extension LaunchViewController {
         sceneView.environment.background = .color(Colors.accentDarkBackground)
         sceneContainer.addSubview(sceneView)
         sceneView.pinEdgesToSuperview()
-//        sceneView.debugOptions = [.showPhysics, .showWorldOrigin]
 
         let anchor = AnchorEntity()
         sceneView.scene.addAnchor(anchor)
 
-        let basePosition = SIMD3<Float>(x: 0, y: 0, z: 0)
-        let cameraPosition = SIMD3<Float>(x: 0.0001, y: 0.4, z: 0.1) /// can't be 0
+        let cameraPosition = LaunchConstants.cameraPositionInitial
 
         let baseEntity = ModelEntity()
         anchor.addChild(baseEntity)
@@ -33,11 +31,22 @@ extension LaunchViewController {
         let cameraAnchor = AnchorEntity(world: .zero)
         cameraAnchor.addChild(camera)
         sceneView.scene.addAnchor(cameraAnchor)
-        camera.position = cameraPosition
-        camera.look(at: basePosition, from: cameraPosition, relativeTo: baseEntity)
+        camera.look(at: .zero, from: cameraPosition, relativeTo: baseEntity)
     }
 
+    func adjustPositions() {
+        for rowIndex in model.textRows.indices {
+            let row = model.textRows[rowIndex]
+            for textIndex in row.text.indices {
+                let text = row.text[textIndex]
+                
+//                if text.position
+            }
+        }
+    }
+    
     func addTiles(to baseEntity: ModelEntity) {
+        
         func getStartingOffset(length: Int) -> Float {
             let totalTileLength = Float(length) * LaunchConstants.tileLength
             let totalTileGap = Float(length - 1) * LaunchConstants.tileGap
@@ -60,7 +69,6 @@ extension LaunchViewController {
         /// start to the left
         let startingXOffset = getStartingOffset(length: width)
         let startingZOffset = getStartingOffset(length: height)
-
 
         for rowIndex in model.textRows.indices {
             let row = model.textRows[rowIndex]
