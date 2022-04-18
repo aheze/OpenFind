@@ -20,6 +20,8 @@ enum LaunchConstants {
     static let tileDepth = Float(0.02)
     static let tileCornerRadius = Float(0.05)
     
+    static let tileFont = CTFontCreateWithName("SFUI-Semibold" as CFString, LaunchConstants.textHeight, nil)
+    
     static let cameraPositionInitial = SIMD3<Float>(
         x: 0.000001, /// can't be 0
         y: 0.054, /// height of camera

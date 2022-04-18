@@ -10,7 +10,6 @@ import Combine
 import SwiftUI
 
 class LaunchViewModel: ObservableObject {
-    
     /// for storing observers to `currentPage`
     var cancellables = Set<AnyCancellable>()
     
@@ -64,7 +63,7 @@ class LaunchViewModel: ObservableObject {
                 LaunchText(character: "✣"),
                 LaunchText(character: "✿"),
                 LaunchText(character: "❂"),
-                LaunchText(character: "❖"),
+                LaunchText(character: "✿"),
                 LaunchText(character: "◼︎")
             ]
         ),
@@ -114,7 +113,7 @@ class LaunchViewModel: ObservableObject {
                 LaunchText(character: "✣"),
                 LaunchText(character: "✿"),
                 LaunchText(character: "❂"),
-                LaunchText(character: "❖"),
+                LaunchText(character: "✿"),
                 LaunchText(character: "◼︎")
             ]
         ),
