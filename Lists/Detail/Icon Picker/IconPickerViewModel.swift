@@ -29,7 +29,8 @@ class IconPickerViewModel {
         shapes,
         arrows,
         indices,
-        math
+        math,
+        miscellaneous
     ]
     
     var selectedIcon: String {

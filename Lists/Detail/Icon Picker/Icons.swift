@@ -672,6 +672,8 @@ let objectsAndTools = Category(
         "shippingbox.fill",
         "paintpalette",
         "paintpalette.fill",
+        "cup.and.saucer",
+        "cup.and.saucer.fill",
         "takeoutbag.and.cup.and.straw",
         "takeoutbag.and.cup.and.straw.fill",
         "fork.knife",
@@ -2612,5 +2614,18 @@ let math = Category(
         "number.square",
         "number.square.fill",
         "x.squareroot"
+    ]
+)
+
+let miscellaneous = Category(
+    categoryName: "Miscellaneous",
+    icons: [
+        "checkmark",
+        "checkmark.circle",
+        "checkmark.circle.fill",
+        "checkmark.diamond",
+        "checkmark.diamond.fill",
+        "checkmark.square",
+        "checkmark.square.fill"
     ]
 )
