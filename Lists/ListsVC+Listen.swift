@@ -10,6 +10,7 @@ import UIKit
 
 extension ListsViewController {
     func listen() {
+        listenToListsChange()
         listenToDefaults()
 
         model.deleteSelected = { [weak self] in

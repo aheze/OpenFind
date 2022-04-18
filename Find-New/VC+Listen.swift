@@ -10,6 +10,8 @@ import UIKit
 
 extension ViewController {
     func listen() {
+        listenToDefaults()
+        
         ViewControllerCallback.getListDetailController = { [weak self] list in
             guard let self = self else { return nil }
             let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false, addDismissButton: true)

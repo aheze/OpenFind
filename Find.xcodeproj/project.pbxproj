@@ -463,6 +463,7 @@
 		3C257EEB280DAC01009B6FAE /* LaunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EB1280BE213009B6FAE /* LaunchPageViewController.swift */; };
 		3C257EEC280DAC01009B6FAE /* LaunchCVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EC0280BE73F009B6FAE /* LaunchCVC+Listen.swift */; };
 		3C257EED280DAC01009B6FAE /* LaunchVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EC2280BEB29009B6FAE /* LaunchVC+Listen.swift */; };
+		3C257F09280E2BE6009B6FAE /* VC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257F08280E2BE5009B6FAE /* VC+Defaults.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
 		3C2994782800DA4400AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
@@ -3669,6 +3670,7 @@
 		3C257ECE280C89C8009B6FAE /* PortraitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitView.swift; sourceTree = "<group>"; };
 		3C257ED9280D21F4009B6FAE /* LaunchFinalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchFinalView.swift; sourceTree = "<group>"; };
 		3C257EDB280D290F009B6FAE /* LaunchVC+Enter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchVC+Enter.swift"; sourceTree = "<group>"; };
+		3C257F08280E2BE5009B6FAE /* VC+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Defaults.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
 		3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Landscape.swift"; sourceTree = "<group>"; };
@@ -5838,6 +5840,7 @@
 				3C6C7327278193F600E039F0 /* ViewController.swift */,
 				3C93149B27B84457009E5B6E /* VC+Setup.swift */,
 				3C5B377927FEB06000801FEE /* VC+Listen.swift */,
+				3C257F08280E2BE5009B6FAE /* VC+Defaults.swift */,
 				3CE3D4F627DD315700521735 /* VC+Tabs.swift */,
 				3CB4C32127A772030093155E /* VC+Frames.swift */,
 				3C0F239727F3FA5A00BCBFAE /* VC+AppLink.swift */,
@@ -9684,6 +9687,7 @@
 				3C443FAC27DFB5740050A0AB /* PhotosSlidesVC+Highlights.swift in Sources */,
 				3CAD45E028000D3A00B0A0A9 /* CameraStatusView.swift in Sources */,
 				3C6C73C02781947E00E039F0 /* VisionFindingUtilities.swift in Sources */,
+				3C257F09280E2BE6009B6FAE /* VC+Defaults.swift in Sources */,
 				3CCE2B4F279D235400F72351 /* ListsDetailViewModel.swift in Sources */,
 				3C1A2C1127E8E8EF00B3D065 /* IgnoredPhotosVC+FlowLayout.swift in Sources */,
 				3C21EE2B27A461930005E183 /* RC+Lists.swift in Sources */,

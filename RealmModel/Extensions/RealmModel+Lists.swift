@@ -9,7 +9,15 @@
 import UIKit
 
 extension RealmModel {
-    
+    func setupLists() {
+        container.listsUpdated = { [weak self] lists in
+            guard let self = self else { return }
+            self.loadAndSortLists(lists)
+        }
+
+        container.loadLists()
+    }
+
     /// load and sort lists for direct use in `Lists`
     func loadAndSortLists(_ lists: [List]) {
         guard let sortBy = Settings.Values.ListsSortByLevel(rawValue: listsSortBy) else {

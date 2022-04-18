@@ -14,11 +14,11 @@ extension ListsDetailViewController {
         let colorPickerIconController = ColorPickerIconController(model: headerTopRightColorPickerModel)
         addChildViewController(colorPickerIconController, in: headerTopRightView)
         
-        setupViews()
-        applyConstants()
+        self.setupViews()
+        self.applyConstants()
         setupNavigationBar()
         
-        loadListContents(animate: false)
+        self.loadListContents(animate: false)
         updateTableViewHeightConstraint(animated: false)
         
         scrollView.alwaysBounceVertical = true
@@ -43,10 +43,10 @@ extension ListsDetailViewController {
         
         headerTopCenterTextField.autocapitalizationType = .words
         headerBottomTextField.autocapitalizationType = .sentences
+        headerTopCenterTextField.autocorrectionType = .yes
     }
     
     func loadListContents(animate: Bool = true) {
-        
         headerTopLeftImageView.image = UIImage(systemName: model.list.icon)
         
         let color = UIColor(hex: model.list.color)
@@ -110,7 +110,6 @@ extension ListsDetailViewController {
             
         headerTopLeftImageView.tintColor = textColor
         
-        
         /// animate only when lightness changed
         var shouldAnimate = false
         let isLight = color.isLight
@@ -126,7 +125,6 @@ extension ListsDetailViewController {
             self.headerBottomView.backgroundColor = backgroundColor
         }
 
-        
         withAnimation(shouldAnimate ? .easeOut(duration: 0.3) : nil) {
             headerTopRightColorPickerModel.tintColor = textColor
         }

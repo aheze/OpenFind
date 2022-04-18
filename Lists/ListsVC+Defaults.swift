@@ -9,16 +9,5 @@
 import UIKit
 
 extension ListsViewController {
-    func listenToDefaults() {
-        self.listen(
-            to: RealmModelData.listsSortBy.key,
-            selector: #selector(self.listsSortByChanged)
-        )
-    }
-
-    @objc func listsSortByChanged() {
-        if model.loaded {
-            reload()
-        }
-    }
+    func listenToDefaults() {}
 }

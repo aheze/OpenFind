@@ -6,9 +6,22 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 extension ListsViewController {
+    func listenToListsChange() {
+        realmModel.$lists
+            .dropFirst()
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                DispatchQueue.main.async { /// get `didSet`
+                    self.reload()
+                }
+            }
+            .store(in: &realmModel.cancellables)
+    }
+
     /// call this in `Find-New`'s `viewDidLoad`, after loading realm
     func reload() {
         reloadDisplayedLists()

@@ -19,10 +19,10 @@ class RealmModel: ObservableObject {
     static let data = RealmModelData.self
 
     var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Storage
+
     @Saved("launchedBefore") var launchedBefore = false
-    
 
     // MARK: - Defaults
 
@@ -64,17 +64,11 @@ class RealmModel: ObservableObject {
     @Saved(data.listsSortBy.key) var listsSortBy = data.listsSortBy.value
 
     init() {
-        container.listsUpdated = { [weak self] lists in
-            guard let self = self else { return }
-            self.loadAndSortLists(lists)
-        }
-
         container.photoMetadatasUpdated = { [weak self] photoMetadatas in
             self?.photoMetadatas = photoMetadatas
         }
 
-        container.loadLists()
-
+        setupLists()
         listenToDefaults()
     }
 
