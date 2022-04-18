@@ -91,7 +91,7 @@ struct LaunchView: View {
                     model.setCurrentPage(to: .photos)
                 }
             } label: {
-                Text("Let's Go!")
+                Text("Get Started")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
                     .frame(maxWidth: .infinity)
                     .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))

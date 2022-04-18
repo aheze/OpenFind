@@ -268,11 +268,13 @@ extension LaunchViewController {
 
         let tileMaterial = SimpleMaterial(color: color, roughness: 0, isMetallic: true)
         let textMaterial = SimpleMaterial(color: UIColor.white.withAlphaComponent(0.25), roughness: 0, isMetallic: true)
+        let font = UIFont.systemFont(ofSize: LaunchConstants.textHeight, weight: .semibold)
+            
 
         let text = MeshResource.generateText(
             character,
             extrusionDepth: LaunchConstants.textDepth,
-            font: .systemFont(ofSize: LaunchConstants.textHeight, weight: .semibold),
+            font: font,
             containerFrame: .zero,
             alignment: .center,
             lineBreakMode: .byWordWrapping

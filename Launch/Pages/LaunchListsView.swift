@@ -71,7 +71,7 @@ struct LaunchListsView: View {
 
     let presidents = ["George", "John", "Thomas"]
     var listsPreview: some View {
-        VStack {
+        VStack(spacing: 0) {
             Color.clear.overlay(
                 VStack {
                     PortraitView(length: 90, circular: false, transform: $transform)

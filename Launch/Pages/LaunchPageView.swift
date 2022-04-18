@@ -64,14 +64,13 @@ struct LaunchPageViewContent<Content: View>: View {
                     Text(description)
                         .foregroundColor(.white)
                         + Text(" ")
-
                         + Text(footnote)
                         .foregroundColor(.white.opacity(0.75))
                 }
                 .font(c.descriptionFont.font)
                 .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .fixedSize(horizontal: false, vertical: true),
+                .frame(maxWidth: .infinity, alignment: .leading),
+
                 alignment: .top
             )
         }
