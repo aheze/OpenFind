@@ -53,4 +53,5 @@ enum LaunchPageIdentifier: CaseIterable {
     case photos
     case camera
     case lists
+    case final
 }

@@ -16,6 +16,8 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
     /// get data
     var getPages: (() -> [LaunchPageIdentifier])?
     
+    var getCollectionViewWidth: (() -> CGFloat)?
+    
     var currentIndexChanged: (() -> Void)?
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
@@ -45,7 +47,7 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
      
-        let width = collectionView.bounds.width
+        let width = getCollectionViewWidth?() ?? collectionView.bounds.width
         let height = collectionView.bounds.height
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
@@ -87,7 +89,10 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
     
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        print("getting..")
+        prepare()
         let attributes = layoutAttributes[safe: currentIndex]
+        print("offset: \(attributes?.frame.origin.x)")
         return CGPoint(x: attributes?.frame.origin.x ?? proposedContentOffset.x, y: 0)
     }
     
@@ -97,7 +102,7 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
         var pickedAttributes = [UICollectionViewLayoutAttributes?]()
         
         /// prevent scrolling from **photos -> lists** or **lists -> photos**
-        let maxDistance = collectionView?.bounds.width ?? 500
+        let maxDistance = getCollectionViewWidth?() ?? collectionView?.bounds.width ?? 500
 
         switch velocity {
         case _ where velocity < 0:

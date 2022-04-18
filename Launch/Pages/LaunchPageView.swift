@@ -36,6 +36,8 @@ struct LaunchPageView: View {
                 LaunchCameraView()
             case .lists:
                 LaunchListsView()
+            case .final:
+                EmptyView()
             }
         }
     }

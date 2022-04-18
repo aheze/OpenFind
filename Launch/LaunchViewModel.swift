@@ -63,7 +63,7 @@ class LaunchViewModel: ObservableObject {
                 LaunchText(character: "✣"),
                 LaunchText(character: "✿"),
                 LaunchText(character: "❂"),
-                LaunchText(character: "✿"),
+                LaunchText(character: "❃"),
                 LaunchText(character: "◼︎")
             ]
         ),
@@ -113,7 +113,7 @@ class LaunchViewModel: ObservableObject {
                 LaunchText(character: "✣"),
                 LaunchText(character: "✿"),
                 LaunchText(character: "❂"),
-                LaunchText(character: "✿"),
+                LaunchText(character: "❃"),
                 LaunchText(character: "◼︎")
             ]
         ),

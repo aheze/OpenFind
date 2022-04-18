@@ -443,6 +443,7 @@
 		3C257ED4280C89D1009B6FAE /* PortraitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257ECE280C89C8009B6FAE /* PortraitView.swift */; };
 		3C257ED5280C89D2009B6FAE /* PortraitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257ECE280C89C8009B6FAE /* PortraitView.swift */; };
 		3C257ED7280C8A41009B6FAE /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */; };
+		3C257ED8280CEB39009B6FAE /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D77BB27A5B140005371F3 /* Global.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
 		3C2994782800DA4400AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
@@ -10373,6 +10374,7 @@
 				3CF8DA16280BB1B0008E92E4 /* Debug.swift in Sources */,
 				3CC0D15D280B447F004E7016 /* Constants.swift in Sources */,
 				3CC0D152280B2A40004E7016 /* Utilities+String.swift in Sources */,
+				3C257ED8280CEB39009B6FAE /* Global.swift in Sources */,
 				3CC0D147280B2A40004E7016 /* Utilities+PHAsset.swift in Sources */,
 				3C257EC4280BF65B009B6FAE /* PhotosGeneralExtensions.swift in Sources */,
 				3CC0D127280B279B004E7016 /* AppDelegate.swift in Sources */,
