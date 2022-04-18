@@ -40,7 +40,7 @@ struct LaunchFinalView: View {
                     .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
                     .frame(maxWidth: .infinity)
                     .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
-                    .background(.white.opacity(0.1))
+                    .background(Color.white.opacity(0.1))
                     .cornerRadius(c.footerCornerRadius)
             }
         }

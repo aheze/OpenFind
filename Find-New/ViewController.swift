@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var listToLoad: List?
 
     /// lazy load everything
+    lazy var launchViewModel = LaunchViewModel()
     lazy var tabViewModel = TabViewModel()
     lazy var realmModel = RealmModel()
     lazy var photosViewModel = PhotosViewModel()
@@ -39,10 +40,22 @@ class ViewController: UIViewController {
         realmModel: realmModel
     )
 
+    lazy var launchViewController = LaunchViewController.make(model: launchViewModel) { [weak self] in
+        guard let self = self else { return }
+        self.onboardingEntering()
+    } done: { [weak self] in
+        guard let self = self else { return }
+        self.onboardingDone()
+    }
+
     /// loading this in `viewDidLoad` will cascade and load everything else
     lazy var tabController: TabBarController = {
         let tabController = TabBarController(
-            pages: [photos.searchNavigationController, camera.viewController, lists.searchNavigationController],
+            pages: [
+                photos.searchNavigationController,
+                camera.viewController,
+                lists.searchNavigationController
+            ],
             model: tabViewModel,
             realmModel: realmModel,
             cameraViewModel: cameraViewModel,
@@ -73,6 +86,42 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        loadApp()
+
+        if realmModel.launchedBefore {
+            startApp()
+        } else {
+            loadOnboarding()
+        }
+    }
+
+    // MARK: - Onboarding
+
+    func loadOnboarding() {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+
+        _ = launchViewController
+        addChildViewController(launchViewController, in: view)
+        view.bringSubviewToFront(launchViewController.view)
+    }
+
+    func onboardingEntering() {
+        self.view.transform = .init(scaleX: 1.4, y: 1.4)
+        UIView.animate(duration: 0.6, dampingFraction: 0.7) {
+            self.view.transform = .identity
+        }
+    }
+
+    func onboardingDone() {
+        AppDelegate.AppUtility.lockOrientation(.all)
+        removeChildViewController(launchViewController)
+        startApp()
+    }
+
+    // MARK: - Start App
+
+    func loadApp() {
         loaded = true
 
         /// start the app up
@@ -81,6 +130,9 @@ class ViewController: UIViewController {
         setup()
         listen()
         updateExcludedFrames()
+    }
+
+    func startApp() {
         importListIfNeeded()
     }
 

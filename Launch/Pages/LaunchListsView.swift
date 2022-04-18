@@ -88,7 +88,7 @@ struct LaunchListsView: View {
                 }
                 .padding(36)
                 .background(Color.white)
-                .border(Color.brown, width: 4)
+                .border(UIColor.systemBrown.color, width: 4)
                 .shadow(
                     color: UIColor.label.color.opacity(0.25),
                     radius: 8,

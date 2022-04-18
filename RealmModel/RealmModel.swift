@@ -19,6 +19,10 @@ class RealmModel: ObservableObject {
     static let data = RealmModelData.self
 
     var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Storage
+    @Saved("launchedBefore") var launchedBefore = false
+    
 
     // MARK: - Defaults
 

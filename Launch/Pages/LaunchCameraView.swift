@@ -81,7 +81,7 @@ struct LaunchCameraView: View {
                         + Text(", Maltodextrin (Made from Corn), Sea Salt, Natural Flavors.")
                         .foregroundColor(.black)
                 }
-                .font(.system(.title3, design: .monospaced))
+                .font(UIFont.preferredMonospacedFont(forTextStyle: .title3, weight: .regular).font)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .colorMultiply(highlight ? activeColor : .black)
@@ -116,9 +116,7 @@ struct LaunchCameraView: View {
                 Color.orange,
                 Color.green,
                 Color.blue,
-                Color.indigo,
-                Color.purple,
-                Color.teal
+                Color.purple
             ].randomElement() ?? .blue
         }
     }
