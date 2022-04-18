@@ -89,7 +89,7 @@ class ViewController: UIViewController {
 
         loadApp()
 
-        if realmModel.launchedBefore {
+        if realmModel.launchedBefore || Debug.overrideLaunch {
             startApp()
         } else {
             loadOnboarding()

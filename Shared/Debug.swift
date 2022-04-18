@@ -15,6 +15,7 @@ enum Debug {
     static var collectionViewScrollDisabled = false
     static var photosTestEmptyLoading = false /// if true, `sleep` instead of calling `loadPhotoMetadatas`
     static var skipLaunchIntro = false
+    static var overrideLaunch = true /// override launch screen, go directly to main content
 }
 
 extension UIView {

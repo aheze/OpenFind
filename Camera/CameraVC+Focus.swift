@@ -15,7 +15,7 @@ extension CameraViewController {
         focusGestureRecognizer.minimumPressDuration = 0
         focusGestureRecognizer.addTarget(self, action: #selector(focusTapped))
         focusGestureRecognizer.delegate = self
-        view.addGestureRecognizer(focusGestureRecognizer)
+        safeView.addGestureRecognizer(focusGestureRecognizer)
     }
 
     @objc func focusTapped(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -28,7 +28,7 @@ extension CameraViewController {
         let location = gestureRecognizer.location(in: livePreviewViewController.livePreviewView)
         focus(at: location)
         
-        let visibleLocation = gestureRecognizer.location(in: view)
+        let visibleLocation = gestureRecognizer.location(in: safeView)
         addFocusIndicator(at: visibleLocation)
     }
     
@@ -64,7 +64,7 @@ extension CameraViewController {
             width: CameraConstants.focusIndicatorLength,
             height: CameraConstants.focusIndicatorLength
         )
-        view.addSubview(indicatorView)
+        safeView.addSubview(indicatorView)
 
         indicatorView.alpha = 0
         indicatorView.transform = .init(scaleX: 1.1, y: 1.1)
