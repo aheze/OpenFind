@@ -28,7 +28,7 @@ struct LaunchCameraView: View {
                         LinearGradient(
                             colors: [
                                 UIColor(hex: 0x00AEEF).color,
-                                Colors.accent.color
+                                Colors.accent.toColor(.black, percentage: 0.5).color
                             ],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
@@ -114,11 +114,11 @@ struct LaunchCameraView: View {
             activeColor = [
                 Color.red,
                 Color.orange,
-                Color.yellow,
                 Color.green,
                 Color.blue,
                 Color.indigo,
-                Color.purple
+                Color.purple,
+                Color.teal
             ].randomElement() ?? .blue
         }
     }

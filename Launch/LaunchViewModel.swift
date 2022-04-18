@@ -15,6 +15,9 @@ class LaunchViewModel: ObservableObject {
     
     @Published var showingUI = false
     @Published var currentPage = LaunchPageIdentifier.empty
+    
+    /// dismiss launch screen and present main app
+    var enter: (() -> Void)?
 
     var currentPageChanged: (() -> Void)?
     func setCurrentPage(to page: LaunchPageIdentifier) {

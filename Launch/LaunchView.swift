@@ -53,6 +53,32 @@ struct LaunchView: View {
 
             LaunchContentView(model: model)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background( /// for the final page
+                    LinearGradient(
+                        stops: [
+                            .init(
+                                color: Colors.accentDarkBackground.color.opacity(0),
+                                location: 0
+                            ),
+                            .init(
+                                color: Colors.accentDarkBackground.color,
+                                location: 0.3
+                            ),
+                            .init(
+                                color: Colors.accentDarkBackground.color,
+                                location: 0.7
+                            ),
+                            .init(
+                                color: Colors.accentDarkBackground.color.opacity(0),
+                                location: 1
+                            )
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .padding(.vertical, 80)
+                    .opacity(model.currentPage == .final ? 1 : 0)
+                )
 
             if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
                 let previousPage = model.pages[safe: currentIndex - 1]

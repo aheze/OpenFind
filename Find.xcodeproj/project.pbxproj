@@ -444,6 +444,7 @@
 		3C257ED5280C89D2009B6FAE /* PortraitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257ECE280C89C8009B6FAE /* PortraitView.swift */; };
 		3C257ED7280C8A41009B6FAE /* RealmModel+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DA0C280B9BE9008E92E4 /* RealmModel+Lists.swift */; };
 		3C257ED8280CEB39009B6FAE /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D77BB27A5B140005371F3 /* Global.swift */; };
+		3C257EDA280D21F4009B6FAE /* LaunchFinalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257ED9280D21F4009B6FAE /* LaunchFinalView.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
 		3C2994782800DA4400AE1AEC /* CameraVC+Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */; };
@@ -3650,6 +3651,7 @@
 		3C257EC9280BF8AF009B6FAE /* LaunchCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCameraView.swift; sourceTree = "<group>"; };
 		3C257ECB280BF8B3009B6FAE /* LaunchListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListsView.swift; sourceTree = "<group>"; };
 		3C257ECE280C89C8009B6FAE /* PortraitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitView.swift; sourceTree = "<group>"; };
+		3C257ED9280D21F4009B6FAE /* LaunchFinalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchFinalView.swift; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
 		3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Landscape.swift"; sourceTree = "<group>"; };
@@ -4952,6 +4954,7 @@
 				3C257EC7280BF8A9009B6FAE /* LaunchPhotosView.swift */,
 				3C257EC9280BF8AF009B6FAE /* LaunchCameraView.swift */,
 				3C257ECB280BF8B3009B6FAE /* LaunchListsView.swift */,
+				3C257ED9280D21F4009B6FAE /* LaunchFinalView.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -10356,6 +10359,7 @@
 				3C257EB0280BE1FB009B6FAE /* LaunchContentCell.swift in Sources */,
 				3CC0D145280B2A40004E7016 /* Utilities+UIFont.swift in Sources */,
 				3CF8DA17280BB1B3008E92E4 /* Identifier.swift in Sources */,
+				3C257EDA280D21F4009B6FAE /* LaunchFinalView.swift in Sources */,
 				3CC0D14D280B2A40004E7016 /* Utilities+Accessibility.swift in Sources */,
 				3C257ED0280C89CE009B6FAE /* PortraitView.swift in Sources */,
 				3C257EBF280BE48E009B6FAE /* LaunchCVC+FlowLayout.swift in Sources */,

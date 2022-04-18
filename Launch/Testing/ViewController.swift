@@ -12,6 +12,10 @@ class ViewController: UIViewController {
     lazy var model = LaunchViewModel()
     lazy var launchViewController = LaunchViewController.make(model: model)
 
+    override var childForStatusBarStyle: UIViewController? {
+        return launchViewController
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)

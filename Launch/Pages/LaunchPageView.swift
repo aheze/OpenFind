@@ -37,7 +37,7 @@ struct LaunchPageView: View {
             case .lists:
                 LaunchListsView()
             case .final:
-                EmptyView()
+                LaunchFinalView(model: model)
             }
         }
     }
