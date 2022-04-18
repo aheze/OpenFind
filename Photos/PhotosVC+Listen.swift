@@ -88,19 +88,22 @@ extension PhotosViewController {
             guard let self = self else { return }
             
             if textChanged {
-                self.findAndUpdateResultsState(context: .findingAfterTextChange)
-                self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
+                Task {
+                    await self.findAndUpdateResultsState(context: .findingAfterTextChange)
+                    
+                    self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
                 
-                let resultsStateExisted = self.model.resultsState != nil
-                if resultsStateExisted {
-                    self.updateResults()
-                } else {
-                    self.updateResults(animate: false)
-                }
+                    let resultsStateExisted = self.model.resultsState != nil
+                    if resultsStateExisted {
+                        self.updateResults()
+                    } else {
+                        self.updateResults(animate: false)
+                    }
                 
-                if self.model.isSelecting {
-                    self.resetSelectingState()
-                    self.updateCollectionViewSelectionState()
+                    if self.model.isSelecting {
+                        self.resetSelectingState()
+                        self.updateCollectionViewSelectionState()
+                    }
                 }
             } else {
                 /// replace all highlights

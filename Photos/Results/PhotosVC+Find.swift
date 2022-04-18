@@ -20,28 +20,29 @@ enum FindContext {
 }
 
 extension PhotosViewController {
-    
     /// call `findAndUpdateResultsState` and reload the collection views
     func findAndUpdateDisplayedPhotos(context: FindContext) {
-        if model.resultsState != nil {
-            self.findAndUpdateResultsState(context: context) /// find again (handles star/unstar)
-        }
+        Task {
+            if model.resultsState != nil {
+                await self.findAndUpdateResultsState(context: context) /// find again (handles star/unstar)
+            }
 
-        switch sliderViewModel.selectedFilter ?? .all {
-        case .starred:
-            model.displayedSections = model.starredSections
-        case .screenshots:
-            model.displayedSections = model.screenshotsSections
-        case .all:
-            model.displayedSections = model.allSections
-        }
+            switch sliderViewModel.selectedFilter ?? .all {
+            case .starred:
+                model.displayedSections = model.starredSections
+            case .screenshots:
+                model.displayedSections = model.screenshotsSections
+            case .all:
+                model.displayedSections = model.allSections
+            }
 
-        update()
-        updateResults()
+            update()
+            updateResults()
+        }
     }
     
     /// find in all photos and populate `resultsState`
-    func findAndUpdateResultsState(context: FindContext) {
+    func findAndUpdateResultsState(context: FindContext) async {
         if !model.photosToScan.isEmpty, model.scanningState == .dormant {
             switch context {
             case .findingAfterNewPhotosAdded:

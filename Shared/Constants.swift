@@ -11,7 +11,7 @@ import SwiftUI
 enum Colors {
     /// Main accent color (blue)
     static var accent = UIColor(named: "Accent")!
-    static var accentDarkBackground = UIColor(hex: 0x005099) /// `0x007EEF` but darker
+    static var accentDarkBackground = UIColor(hex: 0x0052a9)
     static var activeIconColor = UIColor(hex: 0x8AF9FF)
 }
 

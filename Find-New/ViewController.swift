@@ -107,9 +107,9 @@ class ViewController: UIViewController {
     }
 
     func onboardingEntering() {
-        self.view.transform = .init(scaleX: 1.4, y: 1.4)
-        UIView.animate(duration: 0.6, dampingFraction: 0.7) {
-            self.view.transform = .identity
+        self.tabController.viewController.view.transform = .init(scaleX: 1.4, y: 1.4)
+        UIView.animate(duration: 0.6, dampingFraction: 1) {
+            self.tabController.viewController.view.transform = .identity
         }
     }
 
