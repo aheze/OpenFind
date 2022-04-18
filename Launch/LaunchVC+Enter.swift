@@ -35,6 +35,18 @@ extension LaunchViewController {
                 duration: LaunchConstants.enterAfterDuration,
                 timingFunction: .easeIn
             )
+            
+            /// make launch view transparent when the camera is right next to the tiles
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterAfterDuration * 0.77) {
+                UIView.animate(withDuration: 0.15) {
+                    self.view.backgroundColor = .clear
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterAfterDuration + 0.1) {
+                /// remove view
+                self.done()
+            }
         }
         
         withAnimation(

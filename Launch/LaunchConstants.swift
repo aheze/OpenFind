@@ -42,7 +42,7 @@ enum LaunchConstants {
     
     static let cameraPositionBeforeEnter = SIMD3<Float>(
         x: 0.000001,
-        y: 1.1,
+        y: 0.8,
         z: 0
     )
     

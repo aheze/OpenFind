@@ -10,7 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy var model = LaunchViewModel()
-    lazy var launchViewController = LaunchViewController.make(model: model)
+    lazy var launchViewController = LaunchViewController.make(model: model) { [weak self] in
+        guard let self = self else { return }
+        self.removeLaunchViewController()
+    }
+
+    func removeLaunchViewController() {
+        removeChildViewController(launchViewController)
+    }
 
     override var childForStatusBarStyle: UIViewController? {
         return launchViewController
@@ -19,6 +26,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+
+        view.backgroundColor = .green
 
         _ = launchViewController
         addChildViewController(launchViewController, in: view)

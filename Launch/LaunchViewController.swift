@@ -21,26 +21,30 @@ class LaunchViewController: UIViewController {
     /// for SwiftUI, respects safe area
     @IBOutlet var contentContainer: UIView!
 
-    static func make(model: LaunchViewModel) -> LaunchViewController {
+    var done: () -> Void
+
+    static func make(model: LaunchViewModel, done: @escaping () -> Void) -> LaunchViewController {
         let storyboard = UIStoryboard(name: "LaunchContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "LaunchViewController") { coder in
             LaunchViewController(
                 coder: coder,
-                model: model
+                model: model,
+                done: done
             )
         }
         return viewController
     }
 
-    init?(coder: NSCoder, model: LaunchViewModel) {
+    init?(coder: NSCoder, model: LaunchViewModel, done: @escaping () -> Void) {
         self.model = model
+        self.done = done
         super.init(coder: coder)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
