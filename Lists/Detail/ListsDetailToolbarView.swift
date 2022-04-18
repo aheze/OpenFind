@@ -17,6 +17,7 @@ struct ListsDetailToolbarView: View {
                 let words = model.selectedWords.map { $0.string }
                 let string = words.joined(separator: "•")
                 let pasteboard = UIPasteboard.general
+
                 pasteboard.string = string
             }
             .disabled(model.selectedWords.count == 0)

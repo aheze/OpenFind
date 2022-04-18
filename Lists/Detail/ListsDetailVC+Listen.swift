@@ -56,26 +56,7 @@ extension ListsDetailViewController {
             
             for index in self.model.list.words.indices {
                 guard let cell = self.wordsTableView.cellForRow(at: index.indexPath) as? ListsDetailWordCell else { continue }
-                
-                if self.model.isEditing {
-                    cell.stackViewLeftC.constant = 0
-                    cell.stackViewRightC.constant = 0
-                    UIView.animate(withDuration: ListsDetailConstants.editAnimationDuration) {
-                        cell.leftView.isHidden = false
-                        cell.rightView.isHidden = false
-                        cell.stackView.layoutIfNeeded()
-                    }
-                } else {
-                    cell.stackViewLeftC.constant = ListsDetailConstants.listRowContentEdgeInsets.left
-                    cell.stackViewRightC.constant = ListsDetailConstants.listRowContentEdgeInsets.right
-                    UIView.animate(withDuration: ListsDetailConstants.editAnimationDuration) {
-                        cell.leftView.isHidden = true
-                        cell.rightView.isHidden = true
-                        cell.stackView.layoutIfNeeded()
-                    } completion: { _ in
-                        cell.leftSelectionIconView.setState(.empty)
-                    }
-                }
+                self.configureCellSelection(cell, animate: true)
             }
         }
         

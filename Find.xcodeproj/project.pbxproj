@@ -4663,8 +4663,8 @@
 			children = (
 				3CCE2B42279D0C6900F72351 /* ListsDetailViewModel.swift */,
 				3C08EAEE279BAAD400971D60 /* ListsDetailViewController.swift */,
-				3CCE2B44279D149800F72351 /* ListsDetailVC+Listen.swift */,
 				3C08EB79279CBFDF00971D60 /* ListsDetailVC+Setup.swift */,
+				3CCE2B44279D149800F72351 /* ListsDetailVC+Listen.swift */,
 				3CCE2B40279D093600F72351 /* ListsDetailVC+DataSource.swift */,
 				3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */,
 				3CCE2B9F279DD0C600F72351 /* ListsDetailVC+Rearrange.swift */,

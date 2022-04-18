@@ -66,6 +66,7 @@ extension ListsDetailViewController: UITableViewDataSource {
                 self.model.selectedWords = self.model.selectedWords.filter { $0.id != word.id }
                 cell.leftSelectionIconView.setState(.empty)
             } else {
+                let word = self.model.list.words[indexPath.item]
                 self.model.selectedWords.append(word)
                 cell.leftSelectionIconView.setState(.selected)
             }
@@ -108,20 +109,41 @@ extension ListsDetailViewController: UITableViewDataSource {
             return true
         }
 
-        /// configure which parts of the cell are visible
+        configureCellSelection(cell, animate: false)
+
+        return cell
+    }
+
+    /// configure which parts of the cell are visible
+    func configureCellSelection(_ cell: ListsDetailWordCell, animate: Bool) {
         if model.isEditing {
             cell.stackViewLeftC.constant = 0
             cell.stackViewRightC.constant = 0
-            cell.leftView.isHidden = false
-            cell.rightView.isHidden = false
+            cell.textField.isEnabled = false
         } else {
             cell.stackViewLeftC.constant = ListsDetailConstants.listRowContentEdgeInsets.left
             cell.stackViewRightC.constant = ListsDetailConstants.listRowContentEdgeInsets.right
-            cell.leftView.isHidden = true
-            cell.rightView.isHidden = true
+            cell.textField.isEnabled = true
         }
 
-        return cell
+        UIView.animate(withDuration: ListsDetailConstants.editAnimationDuration) {
+            if self.model.isEditing {
+                cell.leftView.isHidden = false
+                cell.rightView.isHidden = false
+            } else {
+                cell.leftView.isHidden = true
+                cell.rightView.isHidden = true
+            }
+
+            if animate {
+                cell.stackView.layoutIfNeeded()
+            }
+        } completion: { _ in
+            /// make empty after hiding
+            if !self.model.isEditing {
+                cell.leftSelectionIconView.setState(.empty)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
