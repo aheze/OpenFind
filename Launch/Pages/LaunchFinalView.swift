@@ -66,5 +66,6 @@ struct LaunchFinalView: View {
             y: 3
         )
         .padding(c.sidePadding)
+        .offset(x: 0, y: model.showingUI ? 0 : 600)
     }
 }

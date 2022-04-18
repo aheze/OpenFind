@@ -34,13 +34,29 @@ enum LaunchConstants {
         z: 0.3 /// larger = steeper/more sloped tiles
     )
     
+    /// straight above looks like this:
+//    camera.transform.rotation = simd_quatf(
+//        angle: 90.asRadians,
+//        axis: [-1, 0, 0]
+//    )
+    
+    static let cameraPositionBeforeEnter = SIMD3<Float>(
+        x: 0.000001,
+        y: 1.1,
+        z: 0
+    )
+    
+    static let cameraPositionAfterEnter = SIMD3<Float>(
+        x: 0,
+        y: 0.03,
+        z: 0
+    )
+    
     static let tileYOffsetLimit = Float(0.1)
     static let tileDiagonalOffsetLimit = Float(0.2)
     
     static let findTileFinalYOffset = Float(0.08)
     
-    /// time to start all animations
-    static let animationDelay = CGFloat(0.6)
     static let tilesInitialAnimationDuration = CGFloat(9)
     static let tilesFinalAnimationDuration = CGFloat(4)
  
@@ -53,4 +69,7 @@ enum LaunchConstants {
     static let findTileAnimationDelay = CGFloat(5.5)
     static let findTileAnimationIndividualDuration = CGFloat(0.5)
     static let findTileAnimationTotalDuration = CGFloat(1) /// time to start all 4 tiles
+
+    static let enterBeforeDuration = CGFloat(1.2)
+    static let enterAfterDuration = CGFloat(1.4)
 }

@@ -13,7 +13,7 @@ import UIKit
 extension LaunchViewController {
     func setupScene() {
         sceneView.cameraMode = .nonAR
-        sceneView.environment.background = .color(Colors.accentDarkBackground)
+        sceneView.environment.background = .color(.clear)
         sceneContainer.addSubview(sceneView)
         sceneView.pinEdgesToSuperview()
 
@@ -21,63 +21,67 @@ extension LaunchViewController {
         sceneView.scene.addAnchor(anchor)
 
         let baseEntity = ModelEntity()
+        self.baseEntity = baseEntity
         anchor.addChild(baseEntity)
 
-        adjustPositions()
-        addTiles(to: baseEntity)
+        self.adjustPositions()
+        self.addTiles(to: baseEntity)
 
         let camera = PerspectiveCamera()
+        self.camera = camera
         let cameraAnchor = AnchorEntity(world: .zero)
         cameraAnchor.addChild(camera)
         sceneView.scene.addAnchor(cameraAnchor)
         camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.animationDelay) {
-            for tile in self.model.tiles {
-                tile.entity.move(
-                    to: tile.midTransform,
-                    relativeTo: nil,
-                    duration: LaunchConstants.tilesInitialAnimationDuration,
-                    timingFunction: .easeInOut
-                )
-            }
+        self.animateScene()
+    }
 
-            /// one tiles done animating, start flipping them
-            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesInitialAnimationDuration) {
-                let normalTiles = self.model.tiles.filter { !$0.text.isPartOfFind }
-                self.flipRandomNormalTile(in: normalTiles)
-            }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.findTileAnimationDelay) {
-                let findTiles = self.model.tiles.filter { $0.text.isPartOfFind }
-                for index in findTiles.indices {
-                    let tile = findTiles[index]
-                    guard let finalTransform = tile.finalTransform else { continue }
-
-                    let percentage = Double(index) / 3
-                    let delay = percentage * LaunchConstants.findTileAnimationTotalDuration
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                        tile.entity.move(
-                            to: finalTransform,
-                            relativeTo: nil,
-                            duration: LaunchConstants.findTileAnimationIndividualDuration,
-                            timingFunction: .easeInOut
-                        )
-                    }
-                }
-            }
-
-            camera.look(at: .zero, from: LaunchConstants.cameraPositionFinal, relativeTo: baseEntity)
-            let transform = camera.transform /// get the final transform
-            camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
-
-            camera.move(
-                to: transform,
+    func animateScene() {
+        for tile in self.model.tiles {
+            tile.entity.move(
+                to: tile.midTransform,
                 relativeTo: nil,
-                duration: 5,
+                duration: LaunchConstants.tilesInitialAnimationDuration,
                 timingFunction: .easeInOut
             )
         }
+
+        /// one tiles done animating, start flipping them
+        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesInitialAnimationDuration) {
+            let normalTiles = self.model.tiles.filter { !$0.text.isPartOfFind }
+            self.flipRandomNormalTile(in: normalTiles)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.findTileAnimationDelay) {
+            let findTiles = self.model.tiles.filter { $0.text.isPartOfFind }
+            for index in findTiles.indices {
+                let tile = findTiles[index]
+                guard let finalTransform = tile.finalTransform else { continue }
+
+                let percentage = Double(index) / 3
+                let delay = percentage * LaunchConstants.findTileAnimationTotalDuration
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    tile.entity.move(
+                        to: finalTransform,
+                        relativeTo: nil,
+                        duration: LaunchConstants.findTileAnimationIndividualDuration,
+                        timingFunction: .easeInOut
+                    )
+                }
+            }
+        }
+
+        self.camera.look(at: .zero, from: LaunchConstants.cameraPositionFinal, relativeTo: self.baseEntity)
+        let transform = self.camera.transform /// get the final transform
+        self.camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: self.baseEntity)
+
+        self.camera.move(
+            to: transform,
+            relativeTo: nil,
+            duration: 5,
+            timingFunction: .easeInOut
+        )
     }
 
     func flipRandomNormalTile(in tiles: [LaunchTile]) {
@@ -286,7 +290,7 @@ extension LaunchViewController {
             axis: [1, 0, 0] /* About X axis */
         )
 
-        let compensation = getCompensation(for: text)
+        let compensation = self.getCompensation(for: text)
 
         textEntity.transform.rotation = rotation
         textEntity.position.x = compensation.x
