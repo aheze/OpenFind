@@ -73,6 +73,8 @@ class RealmModel: ObservableObject {
     }
 
     func listenToDefaults() {
+        _launchedBefore.configureValueChanged(with: self)
+        
         _defaultTab.configureValueChanged(with: self)
         _swipeToNavigate.configureValueChanged(with: self)
 
