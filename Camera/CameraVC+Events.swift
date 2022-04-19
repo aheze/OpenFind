@@ -42,15 +42,11 @@ extension CameraViewController {
                 let latestEvent = model.history.recentEvents.last,
                 !latestEvent.highlights.isEmpty
             {
-                print("Recelty got! \(model.history.recentEvents.count)")
                 var recentEventsWithoutLast = model.history.recentEvents
                 _ = recentEventsWithoutLast.removeLast()
                 let recentFoundHighlights = recentEventsWithoutLast.suffix(5).map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
                 
-                print("recent: \(recentFoundHighlights)")
-                if recentFoundHighlights.count <= 5 {
-                    print("Play now!")
-                    
+                if recentFoundHighlights.count <= 2 {
                     if let style = hapticFeedbackLevel.getFeedbackStyle() {
                         let generator = UIImpactFeedbackGenerator(style: style)
                         generator.impactOccurred()

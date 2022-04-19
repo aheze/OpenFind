@@ -20,13 +20,13 @@ extension PhotosViewController {
         model.reloadAfterStarChanged = { [weak self] in
             guard let self = self else { return }
             
-            self.findAndUpdateDisplayedPhotos(context: .justFindFromExistingDoNotScan)
+            self.find(context: .justFindFromExistingDoNotScan)
         }
         
         model.reloadAfterExternalPhotosChanged = { [weak self] in
             guard let self = self else { return }
             
-            self.findAndUpdateDisplayedPhotos(context: .findingAfterNewPhotosAdded)
+            self.find(context: .findingAfterNewPhotosAdded)
         }
         
         /// underlying arrays have already been updated, reload the UI.
@@ -62,7 +62,9 @@ extension PhotosViewController {
         /// called when finding from slides or new results came live when scanning results
         model.photosWithQueuedSentencesAdded = { [weak self] photos in
             guard let self = self else { return }
-            self.findAfterQueuedSentencesUpdate(in: photos)
+            Task.detached {
+                await self.findAfterQueuedSentencesUpdate(in: photos)
+            }
         }
         model.scanningIconTapped = { [weak self] in
             guard let self = self else { return }
@@ -88,23 +90,9 @@ extension PhotosViewController {
             guard let self = self else { return }
             
             if textChanged {
-                Task {
-                    await self.findAndUpdateResultsState(context: .findingAfterTextChange)
-                    
-                    self.resultsHeaderViewModel.text = self.model.resultsState?.getResultsText() ?? ""
+                let resultsStateExisted = self.model.resultsState != nil
+                self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
                 
-                    let resultsStateExisted = self.model.resultsState != nil
-                    if resultsStateExisted {
-                        self.updateResults()
-                    } else {
-                        self.updateResults(animate: false)
-                    }
-                
-                    if self.model.isSelecting {
-                        self.resetSelectingState()
-                        self.updateCollectionViewSelectionState()
-                    }
-                }
             } else {
                 /// replace all highlights
                 self.updateResultsHighlightColors()

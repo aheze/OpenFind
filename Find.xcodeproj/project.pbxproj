@@ -5317,6 +5317,7 @@
 				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
 				3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */,
 				3C1D178827BCA4A300E82B8B /* PhotosVC+Listen.swift */,
+				3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */,
 				3C9234A327E454370055061A /* PhotosVC+Update.swift */,
 				3CAD45E82800984000B0A0A9 /* PhotosVC+Observe.swift */,
 				3C1D178E27BCACAC00E82B8B /* PhotosVC+PHAssetCaching.swift */,
@@ -6177,7 +6178,6 @@
 		3CAE64E927C6AA5F009E8564 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */,
 				3C0625FF27C69FB60078E66F /* PhotosVC+Results.swift */,
 				3C17B8E927C9C4D000B55E97 /* PhotosVC+ResultsHighlights.swift */,
 				3CAE64ED27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift */,

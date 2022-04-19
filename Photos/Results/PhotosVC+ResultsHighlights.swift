@@ -23,7 +23,7 @@ extension PhotosViewController {
             else { continue }
             
             let previousLines = Array(findPhoto.descriptionLines.prefix(index))
-            let previousDescription = getCellDescription(from: previousLines)
+            let previousDescription = Finding.getCellDescription(from: previousLines)
             var previousDescriptionCount = previousDescription.count
             
             /// Needed to account for newLines - otherwise every line after the first will have highlights shifted 1 to the left

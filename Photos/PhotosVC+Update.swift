@@ -14,7 +14,7 @@ import UIKit
 
 extension PhotosViewController {
     /// find after a new photo was scanned
-    func findAfterQueuedSentencesUpdate(in photos: [Photo]) {
+    func findAfterQueuedSentencesUpdate(in photos: [Photo]) async {
         /// **Scenario 1:** searching inside a single photo in slides
         if let slidesState = model.slidesState {
             if self.searchNavigationProgressViewModel.percentageShowing {
@@ -36,25 +36,25 @@ extension PhotosViewController {
             /// **Scenario 2:** searching inside results screen while scanning
         } else if model.resultsState != nil {
             let displayedFindPhotos: [FindPhoto]
-            let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = self.findAndGetFindPhotos(from: photos)
-            
-            switch sliderViewModel.selectedFilter ?? .all {
-            case .starred:
-                displayedFindPhotos = starredFindPhotos
-            case .screenshots:
-                displayedFindPhotos = screenshotsFindPhotos
-            case .all:
-                displayedFindPhotos = allFindPhotos
-            }
-            
-            model.resultsState?.displayedFindPhotos.insert(contentsOf: displayedFindPhotos, at: 0)
-            model.resultsState?.starredFindPhotos.insert(contentsOf: starredFindPhotos, at: 0)
-            model.resultsState?.screenshotsFindPhotos.insert(contentsOf: screenshotsFindPhotos, at: 0)
-            model.resultsState?.allFindPhotos.insert(contentsOf: allFindPhotos, at: 0)
-            
-            /// only add live results when results state isn't nil
-            /// updates can't occur when slides are shown, so no need to update `slidesState`
-            self.updateResults()
+//            let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = await self.findAndGetFindPhotos(realmModel: realmModel, from: photos)
+//
+//            switch sliderViewModel.selectedFilter ?? .all {
+//            case .starred:
+//                displayedFindPhotos = starredFindPhotos
+//            case .screenshots:
+//                displayedFindPhotos = screenshotsFindPhotos
+//            case .all:
+//                displayedFindPhotos = allFindPhotos
+//            }
+//
+//            model.resultsState?.displayedFindPhotos.insert(contentsOf: displayedFindPhotos, at: 0)
+//            model.resultsState?.starredFindPhotos.insert(contentsOf: starredFindPhotos, at: 0)
+//            model.resultsState?.screenshotsFindPhotos.insert(contentsOf: screenshotsFindPhotos, at: 0)
+//            model.resultsState?.allFindPhotos.insert(contentsOf: allFindPhotos, at: 0)
+//
+//            /// only add live results when results state isn't nil
+//            /// updates can't occur when slides are shown, so no need to update `slidesState`
+//            self.updateResults()
         }
     }
 }
