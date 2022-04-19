@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var listToLoad: List?
 
     var realmModel = RealmModel()
-    
+
     /// lazy load everything
     lazy var launchViewModel = LaunchViewModel()
     lazy var tabViewModel = TabViewModel()
@@ -87,18 +87,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("loading!!!")
-        print("view loaded.: \(realmModel)")
-//        loadMigratedData()
-        
+
         if !RealmContainer.migratedPhotoMetadatas.isEmpty || !RealmContainer.migratedLists.isEmpty {
-            print("loading!!")
             loadMigratedData(
                 migratedPhotoMetadatas: RealmContainer.migratedPhotoMetadatas,
                 migratedLists: RealmContainer.migratedLists
             )
         }
-        
+
         loadApp()
 
         if realmModel.launchedBefore || Debug.overrideLaunch {
@@ -107,21 +103,15 @@ class ViewController: UIViewController {
             loadOnboarding()
         }
     }
-    
+
     // MARK: - Migration
+
     func loadMigratedData(migratedPhotoMetadatas: [PhotoMetadata], migratedLists: [List]) {
-        print("migrate calleda!!")
-//        _ = realmModel
-        
-        print("realmModel made!! \(realmModel)")
-        
         for metadata in migratedPhotoMetadatas {
-            print("adding!! \(metadata.assetIdentifier).. \(metadata.isStarred)")
             realmModel.container.updatePhotoMetadata(metadata: metadata)
         }
-        
+
         for list in migratedLists {
-            print("adding!! \(list.title)")
             realmModel.container.addList(list: list)
         }
     }
@@ -137,7 +127,7 @@ class ViewController: UIViewController {
     }
 
     func onboardingEntering() {
-        self.tabController.viewController.view.transform = .init(scaleX: 1.4, y: 1.4)
+        tabController.viewController.view.transform = .init(scaleX: 1.4, y: 1.4)
         UIView.animate(duration: 0.6, dampingFraction: 1) {
             self.tabController.viewController.view.transform = .identity
         }

@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        print("override!")
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
@@ -44,12 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
 
-                print("migrating")
                 /// Find v1.2
                 if oldSchemaVersion == 16 {
                     var photoMetadatas = [PhotoMetadata]()
                     migration.enumerateObjects(ofType: "HistoryModel") { oldObject, _ in
-                        print("old: \(oldObject).. \(oldObject?["isHearted"])")
+
                         guard let oldObject = oldObject else { return }
 
                         var photoMetadata = PhotoMetadata()
@@ -84,7 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let iconColorName = oldObject["iconColorName"] as? String {
                             let color = UIColor(hexString: iconColorName)
                             if let hex = color.getHex() {
-                                print("hex: \(hex)")
                                 list.color = hex
                             }
                         }
@@ -94,12 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         lists.append(list)
                     }
 
-                    print("Done.")
                     if let viewController = UIApplication.shared.windows.first?.rootViewController as? ViewController {
-                        print("Setting!!! \(photoMetadatas) amd \(lists)")
                         viewController.loadMigratedData(migratedPhotoMetadatas: photoMetadatas, migratedLists: lists)
-                    } else {
-                        print("NO vc.")
+                    } else { /// if no view controller, cache data.
                         RealmContainer.migratedPhotoMetadatas = photoMetadatas
                         RealmContainer.migratedLists = lists
                     }
@@ -113,10 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
-
-//        if let viewController = UIApplication.shared.windows.first?.rootViewController as? ViewController {
-//            viewController.loadMigratedData(migratedPhotoMetadatas: [], migratedLists: [])
-//        }
 
         return true
     }

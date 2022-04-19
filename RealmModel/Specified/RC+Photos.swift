@@ -53,9 +53,8 @@ extension RealmContainer {
             Debug.log("No metadata.")
             return
         }
-        
+
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
-            print("extists!")
             let realmSentences = metadata.getRealmSentences()
             do {
                 try realm.write {
@@ -68,7 +67,6 @@ extension RealmContainer {
                 Debug.log("Error updating photo metadata: \(error)", .error)
             }
         } else {
-            print("add instead.")
             addPhotoMetadata(metadata: metadata)
         }
     }
@@ -87,12 +85,10 @@ extension RealmContainer {
 
     /// call this inside `updatePhotoMetadata`
     private func addPhotoMetadata(metadata: PhotoMetadata) {
-        print("adding. \(metadata)")
         let realmSentences = metadata.getRealmSentences()
-        print("realmSentences. \(realmSentences)")
+
         let scannedInLanguages = metadata.getRealmScannedInLanguages()
-        print("scannedInLanguages. \(scannedInLanguages)")
-        
+
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
             dateScanned: metadata.dateScanned,
@@ -101,12 +97,10 @@ extension RealmContainer {
             isStarred: metadata.isStarred,
             isIgnored: metadata.isIgnored
         )
-        print("created.")
 
         do {
             try realm.write {
                 realm.add(realmMetadata)
-                print("added.")
             }
         } catch {
             Debug.log("Error adding photo metadata: \(error)", .error)
