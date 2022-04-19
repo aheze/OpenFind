@@ -65,7 +65,7 @@ extension PhotosViewController {
         UIView.animate(duration: 0.3, dampingFraction: 0.8) {
             self.collectionView.alpha = 1
         }
-        print("finished loading.")
+
         showFiltersView(true, animate: true) /// already has an animation
 
         model.displayedSections = model.allSections

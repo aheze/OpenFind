@@ -52,6 +52,7 @@ extension SettingsViewController {
             guard let self = self else { return }
             self.showSupportDocs()
         }
+
         SettingsData.joinTheDiscord = {
             if let url = URL(string: "https://discord.com/invite/UJpHv8jmN5") {
                 UIApplication.shared.open(url)
@@ -145,7 +146,7 @@ extension SettingsViewController {
         }
     }
 
-    func showSupportDocs() {
+    func getSupportDocs() -> UIViewController {
         let dataSource = URL(string: "https://raw.githubusercontent.com/aheze/FindInfo/DataSource/_data/supportdocs_datasource.json")!
         let options = SupportOptions(
             categories: [
@@ -182,6 +183,11 @@ extension SettingsViewController {
         )
 
         let viewController = SupportDocsViewController(dataSourceURL: dataSource, options: options)
+        return viewController
+    }
+
+    func showSupportDocs() {
+        let viewController = self.getSupportDocs()
         self.present(viewController, animated: true)
     }
 }
@@ -193,4 +199,3 @@ extension SettingsViewController: UIColorPickerViewControllerDelegate {
         realmModel.objectWillChange.send()
     }
 }
-

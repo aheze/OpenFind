@@ -12,6 +12,11 @@ extension ViewController {
     func listen() {
         listenToDefaults()
 
+        SettingsData.getHelpCenter = { [weak self] in
+            guard let self = self else { return nil }
+            return self.settingsController.viewController.getSupportDocs()
+        }
+
         ViewControllerCallback.getListDetailController = { [weak self] list in
             guard let self = self else { return nil }
             let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false, addDismissButton: true)

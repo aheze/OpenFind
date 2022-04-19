@@ -49,6 +49,7 @@ extension PhotosViewController {
     }
     
     @MainActor func apply(allFindPhotos: [FindPhoto], starredFindPhotos: [FindPhoto], screenshotsFindPhotos: [FindPhoto], context: FindContext) {
+        guard !searchViewModel.isEmpty else { return }
         let displayedFindPhotos: [FindPhoto]
         
         switch self.sliderViewModel.selectedFilter ?? .all {

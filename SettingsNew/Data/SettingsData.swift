@@ -24,6 +24,8 @@ struct SettingsData {
     static var helpCenter: (() -> Void)?
     static var joinTheDiscord: (() -> Void)?
     
+    static var getHelpCenter: (() -> UIViewController?)?
+    
     /// sharing
     static var shareLink: (() -> Void)?
     

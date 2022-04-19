@@ -51,6 +51,8 @@ extension SearchViewController {
             )
             self.searchViewModel.updateField(at: index, with: field, notify: true)
             self.configureAppearances(valuesCount: self.searchViewModel.values.count)
+            
+            self.checkExtras(text: text)
         }
         
         cell.leftViewTapped = { [weak self] in

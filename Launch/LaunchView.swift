@@ -23,7 +23,7 @@ enum LaunchViewConstants {
     static var footerCornerRadius = CGFloat(20)
 
     static var controlButtonFont = UIFont.preferredFont(forTextStyle: .title3)
-    
+
     static var controlCircleSpacing = CGFloat(12)
     static var controlCircleLength = CGFloat(8)
 }
@@ -93,10 +93,12 @@ struct LaunchView: View {
 
                     HStack(spacing: c.controlCircleSpacing) {
                         ForEach(model.pages, id: \.self) { page in
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: c.controlCircleLength, height: c.controlCircleLength)
-                                .opacity(model.currentPage == page ? 1 : 0.5)
+                            if page != .empty {
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: c.controlCircleLength, height: c.controlCircleLength)
+                                    .opacity(model.currentPage == page ? 1 : 0.5)
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity)
