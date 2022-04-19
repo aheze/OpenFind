@@ -134,6 +134,7 @@ class ViewController: UIViewController {
     }
 
     func onboardingDone() {
+        realmModel.launchedBefore = true
         AppDelegate.AppUtility.lockOrientation(.all)
         removeChildViewController(launchViewController)
         startApp()
