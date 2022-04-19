@@ -117,7 +117,7 @@ struct PermissionsActionView: View {
                             .foregroundColor(dark ? UIColor.white.color : UIColor.label.color)
 
                         Text(description)
-                            .fixedSize(horizontal: false, vertical: true)
+                            .minimumScaleFactor(0.4) /// allow resizing
                             .frame(maxWidth: .infinity, alignment: labelAlignment)
                             .multilineTextAlignment(textAlignment)
                             .foregroundColor(dark ? UIColor.white.withAlphaComponent(0.75).color : UIColor.secondaryLabel.color)
@@ -150,6 +150,7 @@ struct PermissionsActionView: View {
                 }
                 .padding(.horizontal, verticalSizeClass != .compact ? 36 : 0)
             }
+            .padding(.vertical, 100)
         )
         .edgesIgnoringSafeArea(.all)
         .padding(.horizontal, verticalSizeClass != .compact ? 0 : 64)

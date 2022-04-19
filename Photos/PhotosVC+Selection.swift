@@ -36,7 +36,10 @@ extension PhotosViewController {
     }
 
     /// reset the state after finding from selected photos or pressing done
+    /// also called in `willBecomeInactive`, so check `model.loaded`
     func resetSelectingState() {
+        guard model.loaded else { return }
+        
         model.updateAllowed = true
         model.isSelecting = false
         collectionView.allowsSelection = false

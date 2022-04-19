@@ -71,6 +71,7 @@ struct LaunchPageViewContent<Content: View>: View {
                 }
                 .font(c.descriptionFont.font)
                 .multilineTextAlignment(.leading)
+                .minimumScaleFactor(0.4) /// allow resizing
                 .frame(maxWidth: .infinity, alignment: .leading),
 
                 alignment: .top
