@@ -89,10 +89,8 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
     
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        print("getting..")
         prepare()
         let attributes = layoutAttributes[safe: currentIndex]
-        print("offset: \(attributes?.frame.origin.x)")
         return CGPoint(x: attributes?.frame.origin.x ?? proposedContentOffset.x, y: 0)
     }
     
@@ -101,9 +99,6 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
 
         var pickedAttributes = [UICollectionViewLayoutAttributes?]()
         
-        /// prevent scrolling from **photos -> lists** or **lists -> photos**
-        let maxDistance = getCollectionViewWidth?() ?? collectionView?.bounds.width ?? 500
-
         switch velocity {
         case _ where velocity < 0:
             pickedAttributes = layoutAttributes.map { layoutAttribute in
@@ -129,15 +124,6 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
                     closestAttribute = layoutAttribute
                     closestDistance = distance /// for keeping track later
                 }
-            }
-        }
-        
-        let currentOffset = collectionView?.contentOffset.x ?? 0
-        if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
-            let distance = abs(closestAttributeUnwrapped.frame.origin.x - currentOffset)
-            if distance > maxDistance {
-                closestAttributeIndex = 1 /// camera
-                closestAttribute = layoutAttributes[closestAttributeIndex]
             }
         }
         
