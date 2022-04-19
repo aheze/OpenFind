@@ -15,6 +15,7 @@ class CameraViewController: UIViewController, PageViewController {
     
     /// external models
     var tabViewModel: TabViewModel
+    var photosPermissionsViewModel: PhotosPermissionsViewModel
     var realmModel: RealmModel
     
     lazy var permissionsViewModel = CameraPermissionsViewModel()
@@ -73,10 +74,12 @@ class CameraViewController: UIViewController, PageViewController {
         coder: NSCoder,
         model: CameraViewModel,
         tabViewModel: TabViewModel,
+        photosPermissionsViewModel: PhotosPermissionsViewModel,
         realmModel: RealmModel
     ) {
         self.model = model
         self.tabViewModel = tabViewModel
+        self.photosPermissionsViewModel = photosPermissionsViewModel
         self.realmModel = realmModel
         super.init(coder: coder)
     }

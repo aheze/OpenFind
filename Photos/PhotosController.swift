@@ -11,6 +11,7 @@ class PhotosController {
     var model: PhotosViewModel
     var realmModel: RealmModel
     var tabViewModel: TabViewModel
+    var photosPermissionsViewModel: PhotosPermissionsViewModel
     var toolbarViewModel: ToolbarViewModel
     
     var searchNavigationModel: SearchNavigationModel
@@ -27,12 +28,14 @@ class PhotosController {
         model: PhotosViewModel,
         realmModel: RealmModel,
         tabViewModel: TabViewModel,
+        photosPermissionsViewModel: PhotosPermissionsViewModel,
         toolbarViewModel: ToolbarViewModel
     ) {
         self.model = model
         self.realmModel = realmModel
-        self.toolbarViewModel = toolbarViewModel
         self.tabViewModel = tabViewModel
+        self.photosPermissionsViewModel = photosPermissionsViewModel
+        self.toolbarViewModel = toolbarViewModel
         
         let searchNavigationModel = SearchNavigationModel()
         let searchViewModel = SearchViewModel(configuration: .photos)
@@ -54,6 +57,7 @@ class PhotosController {
                 model: model,
                 realmModel: realmModel,
                 tabViewModel: tabViewModel,
+                photosPermissionsViewModel: photosPermissionsViewModel,
                 toolbarViewModel: toolbarViewModel,
                 searchNavigationModel: searchNavigationModel,
                 searchViewModel: searchViewModel,

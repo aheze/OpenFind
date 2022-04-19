@@ -6,6 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import Combine
 import Photos
 import SwiftUI
 
@@ -35,7 +36,7 @@ extension PhotosViewController {
     }
 
     func checkPermissions() {
-        switch permissionsViewModel.currentStatus {
+        switch photosPermissionsViewModel.currentStatus {
         case .notDetermined:
             showPermissionsView()
         case .restricted:
@@ -64,7 +65,7 @@ extension PhotosViewController {
         UIView.animate(duration: 0.3, dampingFraction: 0.8) {
             self.collectionView.alpha = 1
         }
-        self.showFiltersView(true, animate: true) /// already has an animation
+        showFiltersView(true, animate: true) /// already has an animation
 
         model.displayedSections = model.allSections
         update(animate: false)
@@ -77,21 +78,26 @@ extension PhotosViewController {
         searchViewModel.enabled = false
         slidesSearchViewModel.enabled = false
 
-        let permissionsView = PhotosPermissionsView(model: permissionsViewModel)
+        let permissionsView = PhotosPermissionsView(model: photosPermissionsViewModel)
         let hostingController = UIHostingController(rootView: permissionsView)
         hostingController.view.backgroundColor = .clear
         addChildViewController(hostingController, in: view)
         view.bringSubviewToFront(hostingController.view)
-        permissionsViewModel.permissionsGranted = { [weak self] in
-            guard let self = self else { return }
-            self.load()
+        photosPermissionsViewModel.$currentStatus
+            .dropFirst()
+            .sink { [weak self] status in
+                if status.isGranted() {
+                    guard let self = self else { return }
+                    self.load()
 
-            UIView.animate(withDuration: 0.5) { [weak hostingController] in
-                hostingController?.view.alpha = 0
-            } completion: { [weak hostingController] _ in
-                hostingController?.view.removeFromSuperview()
+                    UIView.animate(withDuration: 0.5) { [weak hostingController] in
+                        hostingController?.view.alpha = 0
+                    } completion: { [weak hostingController] _ in
+                        hostingController?.view.removeFromSuperview()
+                    }
+                }
             }
-        }
+            .store(in: &realmModel.cancellables)
     }
 }
 

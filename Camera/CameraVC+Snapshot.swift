@@ -26,6 +26,55 @@ extension CameraViewController {
     }
 
     func saveImage(_ image: PausedImage) {
+        photosPermissionsViewModel.$currentStatus
+            .dropFirst()
+            .sink { [weak self] status in
+                guard let self = self else { return }
+                if status.isGranted() {
+                    self.saveImageAfterPermissionsGranted(image: image)
+                } else {
+                    self.model.setSnapshotState(to: .inactive)
+                }
+            }
+            .store(in: &realmModel.cancellables)
+
+        if photosPermissionsViewModel.currentStatus.isGranted() {
+            print("granted!")
+            saveImageAfterPermissionsGranted(image: image)
+        } else if photosPermissionsViewModel.currentStatus == .notDetermined {
+            let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(title: "Continue", style: .default) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.photosPermissionsViewModel.requestAuthorization()
+                }
+            )
+            alert.addAction(
+                UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.model.setSnapshotState(to: .inactive)
+                }
+            )
+            present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(title: "Go To Settings", style: .default) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.photosPermissionsViewModel.goToSettings()
+                }
+            )
+            alert.addAction(
+                UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.model.setSnapshotState(to: .inactive)
+                }
+            )
+            present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func saveImageAfterPermissionsGranted(image: PausedImage) {
         guard let cgImage = image.cgImage else { return }
         let uiImage = UIImage(cgImage: cgImage)
         guard let jpegData = uiImage.jpegData(compressionQuality: 1) else { return }

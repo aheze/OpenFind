@@ -9,10 +9,23 @@
 import Photos
 import SwiftUI
 
+extension PHAuthorizationStatus {
+    func isGranted() -> Bool {
+        if #available(iOS 14, *) {
+            if self == .authorized || self == .limited {
+                return true
+            }
+        } else {
+            if self == .authorized {
+                return true
+            }
+        }
+        return false
+    }
+}
+
 class PhotosPermissionsViewModel: ObservableObject {
     @Published var currentStatus: PHAuthorizationStatus
-
-    var permissionsGranted: (() -> Void)?
 
     init() {
         currentStatus = PhotosPermissionsViewModel.checkAuthorizationStatus()
@@ -27,18 +40,12 @@ class PhotosPermissionsViewModel: ObservableObject {
         if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 DispatchQueue.main.async {
-                    if status == .authorized || status == .limited {
-                        self.permissionsGranted?()
-                    }
                     setStatus(to: status)
                 }
             }
         } else {
             PHPhotoLibrary.requestAuthorization { status in
                 DispatchQueue.main.async {
-                    if status == .authorized {
-                        self.permissionsGranted?()
-                    }
                     setStatus(to: status)
                 }
             }

@@ -14,6 +14,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var model: PhotosViewModel
     var realmModel: RealmModel
     var tabViewModel: TabViewModel
+    var photosPermissionsViewModel: PhotosPermissionsViewModel
     var toolbarViewModel: ToolbarViewModel
     var searchNavigationModel: SearchNavigationModel
     var searchViewModel: SearchViewModel
@@ -22,7 +23,6 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var slidesSearchPromptViewModel: SearchPromptViewModel
     
     /// internal models
-    var permissionsViewModel = PhotosPermissionsViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
     var sliderViewModel = SliderViewModel()
     lazy var headerContentModel = HeaderContentModel()
@@ -76,6 +76,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         model: PhotosViewModel,
         realmModel: RealmModel,
         tabViewModel: TabViewModel,
+        photosPermissionsViewModel: PhotosPermissionsViewModel,
         toolbarViewModel: ToolbarViewModel,
         searchNavigationModel: SearchNavigationModel,
         searchViewModel: SearchViewModel,
@@ -86,6 +87,7 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
         self.model = model
         self.realmModel = realmModel
         self.tabViewModel = tabViewModel
+        self.photosPermissionsViewModel = photosPermissionsViewModel
         self.toolbarViewModel = toolbarViewModel
         self.searchNavigationModel = searchNavigationModel
         self.searchViewModel = searchViewModel

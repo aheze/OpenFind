@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 
     /// lazy load everything
     lazy var launchViewModel = LaunchViewModel()
+    lazy var photosPermissionsViewModel = PhotosPermissionsViewModel()
     lazy var tabViewModel = TabViewModel()
     lazy var photosViewModel = PhotosViewModel()
     lazy var cameraViewModel = CameraViewModel()
@@ -27,11 +28,13 @@ class ViewController: UIViewController {
         model: photosViewModel,
         realmModel: realmModel,
         tabViewModel: tabViewModel,
+        photosPermissionsViewModel: photosPermissionsViewModel,
         toolbarViewModel: toolbarViewModel
     )
     lazy var camera = CameraController(
         model: cameraViewModel,
         tabViewModel: tabViewModel,
+        photosPermissionsViewModel: photosPermissionsViewModel,
         realmModel: realmModel
     )
     lazy var lists = ListsController(
