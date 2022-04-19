@@ -11,7 +11,7 @@ import UIKit
 extension ViewController {
     func listen() {
         listenToDefaults()
-        
+
         ViewControllerCallback.getListDetailController = { [weak self] list in
             guard let self = self else { return nil }
             let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false, addDismissButton: true)
@@ -25,10 +25,13 @@ extension ViewController {
             case .photos:
                 if self.photosViewModel.resultsState != nil {
                     let topOffset = self.photos.viewController.view.safeAreaInsets.top + self.photos.viewController.searchViewModel.getTotalHeight()
-                    self.photos.viewController.resultsCollectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
+                    let leftContentOffset = self.photos.viewController.resultsCollectionView.adjustedContentInset.left
+                    self.photos.viewController.resultsCollectionView.setContentOffset(CGPoint(x: -leftContentOffset, y: -topOffset), animated: true)
                 } else {
                     let topOffset = self.photos.viewController.view.safeAreaInsets.top + self.photos.viewController.searchViewModel.getTotalHeight()
-                    self.photos.viewController.collectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
+                    let leftContentOffset = self.photos.viewController.collectionView.adjustedContentInset.left
+
+                    self.photos.viewController.collectionView.setContentOffset(CGPoint(x: -leftContentOffset, y: -topOffset), animated: true)
                 }
             case .lists:
 
@@ -37,7 +40,8 @@ extension ViewController {
                     self.lists.viewController.navigationController?.popViewController(animated: true)
                 } else {
                     let topOffset = self.lists.viewController.view.safeAreaInsets.top + self.lists.viewController.searchViewModel.getTotalHeight()
-                    self.lists.viewController.collectionView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: true)
+                    let leftContentOffset = self.lists.viewController.collectionView.adjustedContentInset.left
+                    self.lists.viewController.collectionView.setContentOffset(CGPoint(x: -leftContentOffset, y: -topOffset), animated: true)
                 }
             default: break
             }
