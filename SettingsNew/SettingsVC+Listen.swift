@@ -12,8 +12,6 @@ import SwiftUI
 
 extension SettingsViewController {
     func listen() {
-        presentationController?.delegate = self
-
         model.showHighlightColorPicker = { [weak self] in
             guard let self = self else { return }
             self.presentColorPicker()
@@ -196,9 +194,3 @@ extension SettingsViewController: UIColorPickerViewControllerDelegate {
     }
 }
 
-extension SettingsViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        mainViewController.searchViewModel.dismissKeyboard?()
-        model.startedToDismiss?()
-    }
-}

@@ -49,6 +49,7 @@ extension ViewController {
 
         cameraViewModel.settingsPressed = { [weak self] in
             guard let self = self else { return }
+            self.settingsController.viewController.presentationController?.delegate = self
             self.present(self.settingsController.viewController, animated: true)
             self.camera.viewController.stopRunning()
         }
@@ -72,6 +73,7 @@ extension ViewController {
 
         self.settingsController.model.startedToDismiss = { [weak self] in
             guard let self = self else { return }
+
             self.camera.viewController.willBecomeActive()
         }
     }
@@ -97,5 +99,13 @@ extension ViewController {
             UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         )
         self.settingsController.viewController.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: UIAdaptivePresentationControllerDelegate {
+    /// for settings
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        settingsController.mainViewController.searchViewModel.dismissKeyboard?()
+        camera.viewController.willBecomeActive()
     }
 }
