@@ -89,19 +89,18 @@ extension PhotosViewController {
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             
-            if textChanged {
-                let resultsStateExisted = self.model.resultsState != nil
-                self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
-                
-            } else {
-                /// replace all highlights
-                self.updateResultsHighlightColors()
-            }
-            
             if self.searchViewModel.isEmpty {
                 self.showResults(false)
             } else {
                 self.showResults(true)
+                if textChanged {
+                    let resultsStateExisted = self.model.resultsState != nil
+                    self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
+                    
+                } else {
+                    /// replace all highlights
+                    self.updateResultsHighlightColors()
+                }
             }
         }
         

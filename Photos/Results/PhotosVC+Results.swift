@@ -37,6 +37,7 @@ extension PhotosViewController {
             updateNavigationBlur(with: collectionView)
             hideCancelNavigationBar()
             showScanningButton(true)
+
             updateCounts(
                 allCount: nil,
                 starredCount: nil,
