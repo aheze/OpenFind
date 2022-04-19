@@ -13,7 +13,7 @@ extension PhotosViewController {
         let viewController = createSlidesViewController()
 
         let slidesPhotos: [SlidesPhoto] = model.displayedSections.flatMap { $0.photos }.map { photo in
-            return SlidesPhoto(
+            SlidesPhoto(
                 findPhoto: FindPhoto(
                     id: UUID(),
                     photo: photo
@@ -39,7 +39,7 @@ extension PhotosViewController {
         guard let resultsState = model.resultsState else { return }
 
         let slidesPhotos: [SlidesPhoto] = resultsState.displayedFindPhotos.map { findPhoto in
-            return SlidesPhoto(findPhoto: findPhoto)
+            SlidesPhoto(findPhoto: findPhoto)
         }
 
         model.resultsState = resultsState

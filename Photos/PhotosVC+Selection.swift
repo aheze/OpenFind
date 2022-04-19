@@ -19,6 +19,7 @@ extension PhotosViewController {
     }
 
     func startSelecting() {
+        model.updateAllowed = false
         searchViewModel.dismissKeyboard?()
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
@@ -36,6 +37,7 @@ extension PhotosViewController {
 
     /// reset the state after finding from selected photos or pressing done
     func resetSelectingState() {
+        model.updateAllowed = true
         model.isSelecting = false
         collectionView.allowsSelection = false
         collectionView.allowsMultipleSelection = false

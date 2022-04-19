@@ -116,6 +116,7 @@ extension PhotosViewController {
         collectionView.contentInset.top = searchViewModel.getTotalHeight()
         collectionView.contentInset.bottom = PhotosConstants.bottomPadding + SliderConstants.height /// padding for the slider
         collectionView.verticalScrollIndicatorInsets.top = searchViewModel.getTotalHeight() + SearchNavigationConstants.scrollIndicatorTopPadding
+        collectionView.verticalScrollIndicatorInsets.bottom = PhotosConstants.bottomPadding + SliderConstants.height /// padding for the slider
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.collectionViewLayout = layout
     }

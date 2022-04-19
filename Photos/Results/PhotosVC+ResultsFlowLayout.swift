@@ -13,7 +13,7 @@ extension PhotosViewController {
         let flowLayout = ListsCollectionFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.getSections = { [weak self] in
-
+            
             guard
                 let self = self,
                 let resultsState = self.model.resultsState

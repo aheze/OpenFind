@@ -39,7 +39,6 @@ extension CameraViewController {
             .store(in: &realmModel.cancellables)
 
         if photosPermissionsViewModel.currentStatus.isGranted() {
-            print("granted!")
             saveImageAfterPermissionsGranted(image: image)
         } else if photosPermissionsViewModel.currentStatus == .notDetermined {
             let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)

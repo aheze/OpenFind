@@ -35,26 +35,15 @@ extension PhotosViewController {
             
             /// **Scenario 2:** searching inside results screen while scanning
         } else if model.resultsState != nil {
-            let displayedFindPhotos: [FindPhoto]
-//            let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = await self.findAndGetFindPhotos(realmModel: realmModel, from: photos)
-//
-//            switch sliderViewModel.selectedFilter ?? .all {
-//            case .starred:
-//                displayedFindPhotos = starredFindPhotos
-//            case .screenshots:
-//                displayedFindPhotos = screenshotsFindPhotos
-//            case .all:
-//                displayedFindPhotos = allFindPhotos
-//            }
-//
-//            model.resultsState?.displayedFindPhotos.insert(contentsOf: displayedFindPhotos, at: 0)
-//            model.resultsState?.starredFindPhotos.insert(contentsOf: starredFindPhotos, at: 0)
-//            model.resultsState?.screenshotsFindPhotos.insert(contentsOf: screenshotsFindPhotos, at: 0)
-//            model.resultsState?.allFindPhotos.insert(contentsOf: allFindPhotos, at: 0)
-//
-//            /// only add live results when results state isn't nil
-//            /// updates can't occur when slides are shown, so no need to update `slidesState`
-//            self.updateResults()
+            let realmModel = self.realmModel
+            let photos = self.model.photos
+            let stringToGradients = self.searchViewModel.stringToGradients
+            
+            Task.detached {
+                let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = await Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
+                
+                await self.apply(allFindPhotos: allFindPhotos, starredFindPhotos: starredFindPhotos, screenshotsFindPhotos: screenshotsFindPhotos, context: .justFindFromExistingDoNotScan)
+            }
         }
     }
 }
