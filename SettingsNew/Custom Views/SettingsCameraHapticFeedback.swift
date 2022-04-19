@@ -13,7 +13,6 @@ struct SettingsCameraHapticFeedback: View {
     @ObservedObject var realmModel: RealmModel
 
     var body: some View {
-        
         HStack {
             ForEach(Settings.Values.HapticFeedbackLevel.allCases) { level in
                 SettingsCameraHapticFeedbackButton(model: model, realmModel: realmModel, level: level)
@@ -29,15 +28,20 @@ struct SettingsCameraHapticFeedback: View {
 struct SettingsCameraHapticFeedbackButton: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
-    
+
     let level: Settings.Values.HapticFeedbackLevel
     let cornerRadius = CGFloat(10)
     let lineWidth = CGFloat(4)
 
     var body: some View {
         Button {
-            withAnimation {
-                realmModel.cameraHapticFeedbackLevel = level
+            if let style = level.getFeedbackStyle() {
+                let generator = UIImpactFeedbackGenerator(style: style)
+                generator.impactOccurred()
+            }
+
+            withAnimation(.easeInOut(duration: 0.2)) {
+                realmModel.cameraHapticFeedbackLevel = level.rawValue
             }
         } label: {
             UIColor.label.color.opacity(getBackgroundOpacity())
@@ -49,9 +53,13 @@ struct SettingsCameraHapticFeedbackButton: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(Color.accent, lineWidth: lineWidth)
-                        .opacity(realmModel.cameraHapticFeedbackLevel == level ? 1 : 0)
+                        .opacity(getCurrentLevel() == level ? 1 : 0)
                 )
         }
+    }
+
+    func getCurrentLevel() -> Settings.Values.HapticFeedbackLevel {
+        return Settings.Values.HapticFeedbackLevel(rawValue: realmModel.cameraHapticFeedbackLevel) ?? .none
     }
 
     func getBackgroundOpacity() -> Double {

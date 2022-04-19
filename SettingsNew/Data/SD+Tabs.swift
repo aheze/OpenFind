@@ -130,7 +130,7 @@ extension SettingsData {
                                 )
                             )
                         ],
-                        description: .constant(string: "Vibrate when results are found in the live preview.")
+                        description: .constant(string: "Generate haptic feedback when new results are found in the live preview.")
                     ),
                     .init(
                         header: "Frequency",

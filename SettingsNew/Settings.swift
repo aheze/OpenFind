@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Settings {
     /// for views
@@ -175,6 +175,17 @@ enum Settings {
                     return "Heavy"
                 }
             }
+
+            func getFeedbackStyle() -> UIImpactFeedbackGenerator.FeedbackStyle? {
+                switch self {
+                case .none:
+                    return nil
+                case .light:
+                    return .light
+                case .heavy:
+                    return .medium
+                }
+            }
         }
 
         enum ScanningDurationUntilPauseLevel: String, CaseIterable, Identifiable {
@@ -185,7 +196,7 @@ enum Settings {
             case tenSeconds = "10"
             case thirtySeconds = "30"
             case sixtySeconds = "60"
-            
+
             func getDouble() -> Double? {
                 switch self {
                 case .never:
@@ -200,7 +211,7 @@ enum Settings {
                     return 60
                 }
             }
-            
+
             func getTitle() -> String {
                 switch self {
                 case .never:
@@ -226,7 +237,7 @@ enum Settings {
             case halfSecond = "0.5"
             case threeQuartersSecond = "0.75"
             case oneSecond = "1"
-            
+
             func getDouble() -> Double {
                 switch self {
                 case .continuous:
@@ -243,7 +254,7 @@ enum Settings {
                     return 1
                 }
             }
-            
+
             func getTitle() -> String {
                 switch self {
                 case .continuous:

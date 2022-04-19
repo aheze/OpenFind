@@ -33,7 +33,34 @@ extension CameraViewController {
         }
     }
     
-    func checkDormant() {
+    /// check if should go dormant
+    func checkEvents() {
+        // MARK: check haptic feedback
+
+        if let hapticFeedbackLevel = Settings.Values.HapticFeedbackLevel(rawValue: realmModel.cameraHapticFeedbackLevel) {
+            if
+                let latestEvent = model.history.recentEvents.last,
+                !latestEvent.highlights.isEmpty
+            {
+                print("Recelty got! \(model.history.recentEvents.count)")
+                var recentEventsWithoutLast = model.history.recentEvents
+                _ = recentEventsWithoutLast.removeLast()
+                let recentFoundHighlights = recentEventsWithoutLast.suffix(5).map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
+                
+                print("recent: \(recentFoundHighlights)")
+                if recentFoundHighlights.count <= 5 {
+                    print("Play now!")
+                    
+                    if let style = hapticFeedbackLevel.getFeedbackStyle() {
+                        let generator = UIImpactFeedbackGenerator(style: style)
+                        generator.impactOccurred()
+                    }
+                }
+            }
+        }
+        
+        // MARK: check dormant
+
         guard
             let duration = Settings.Values.ScanningDurationUntilPauseLevel(rawValue: realmModel.cameraScanningDurationUntilPause),
             duration != .never,
