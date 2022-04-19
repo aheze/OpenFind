@@ -16,5 +16,6 @@ class RealmContainer {
     var listsUpdated: (([List]) -> Void)?
     var photoMetadatasUpdated: (([PhotoMetadata]) -> Void)?
 
-    
+    static var migratedPhotoMetadatas = [PhotoMetadata]()
+    static var migratedLists = [List]()
 }

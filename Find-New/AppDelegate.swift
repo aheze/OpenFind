@@ -6,6 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import RealmSwift
 import UIKit
 
 @main
@@ -32,6 +33,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        print("override!")
+        let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 17,
+
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+
+                print("migrating")
+                /// Find v1.2
+                if oldSchemaVersion == 16 {
+                    var photoMetadatas = [PhotoMetadata]()
+                    migration.enumerateObjects(ofType: "HistoryModel") { oldObject, _ in
+                        print("old: \(oldObject).. \(oldObject?["isHearted"])")
+                        guard let oldObject = oldObject else { return }
+
+                        var photoMetadata = PhotoMetadata()
+
+                        if let assetIdentifier = oldObject["assetIdentifier"] as? String {
+                            photoMetadata.assetIdentifier = assetIdentifier
+                        }
+
+                        if let isHearted = oldObject["isHearted"] as? Bool, isHearted {
+                            photoMetadata.isStarred = isHearted
+                        }
+                        photoMetadatas.append(photoMetadata)
+                    }
+
+                    var lists = [List]()
+                    migration.enumerateObjects(ofType: "FindList") { oldObject, _ in
+                        guard let oldObject = oldObject else { return }
+
+                        var list = List()
+                        if let name = oldObject["name"] as? String {
+                            list.title = name
+                        }
+
+                        if let descriptionOfList = oldObject["descriptionOfList"] as? String {
+                            list.description = descriptionOfList
+                        }
+
+                        if let iconImageName = oldObject["iconImageName"] as? String {
+                            list.icon = iconImageName
+                        }
+
+                        if let iconColorName = oldObject["iconColorName"] as? String {
+                            let color = UIColor(hexString: iconColorName)
+                            if let hex = color.getHex() {
+                                print("hex: \(hex)")
+                                list.color = hex
+                            }
+                        }
+                        if let contents = oldObject["contents"] as? RealmSwift.List<String> {
+                            list.words = contents.map { $0 }
+                        }
+                        lists.append(list)
+                    }
+
+                    print("Done.")
+                    if let viewController = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+                        print("Setting!!! \(photoMetadatas) amd \(lists)")
+                        viewController.loadMigratedData(migratedPhotoMetadatas: photoMetadatas, migratedLists: lists)
+                    } else {
+                        print("NO vc.")
+                        RealmContainer.migratedPhotoMetadatas = photoMetadatas
+                        RealmContainer.migratedLists = lists
+                    }
+
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+            }
+        )
+
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+
+//        if let viewController = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+//            viewController.loadMigratedData(migratedPhotoMetadatas: [], migratedLists: [])
+//        }
+
         return true
     }
 

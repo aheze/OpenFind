@@ -5902,10 +5902,10 @@
 		3C798EAF27F68F2E007BF68D /* Specified */ = {
 			isa = PBXGroup;
 			children = (
+				3C21ED9627A3CECC0005E183 /* RealmModels.swift */,
 				3C798EBB27F68F74007BF68D /* RealmContainer.swift */,
 				3C21EDC927A45DD80005E183 /* RC+Lists.swift */,
 				3C21EDCF27A4616D0005E183 /* RC+Photos.swift */,
-				3C21ED9627A3CECC0005E183 /* RealmModels.swift */,
 			);
 			path = Specified;
 			sourceTree = "<group>";

@@ -64,6 +64,7 @@ class RealmModel: ObservableObject {
     @Saved(data.listsSortBy.key) var listsSortBy = data.listsSortBy.value
 
     init() {
+        print("making realmmodel.")
         container.photoMetadatasUpdated = { [weak self] photoMetadatas in
             self?.photoMetadatas = photoMetadatas
         }

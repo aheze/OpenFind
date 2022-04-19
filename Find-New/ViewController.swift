@@ -12,10 +12,11 @@ class ViewController: UIViewController {
     var loaded = false
     var listToLoad: List?
 
+    var realmModel = RealmModel()
+    
     /// lazy load everything
     lazy var launchViewModel = LaunchViewModel()
     lazy var tabViewModel = TabViewModel()
-    lazy var realmModel = RealmModel()
     lazy var photosViewModel = PhotosViewModel()
     lazy var cameraViewModel = CameraViewModel()
     lazy var listsViewModel = ListsViewModel()
@@ -86,13 +87,42 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("loading!!!")
+        print("view loaded.: \(realmModel)")
+//        loadMigratedData()
+        
+        if !RealmContainer.migratedPhotoMetadatas.isEmpty || !RealmContainer.migratedLists.isEmpty {
+            print("loading!!")
+            loadMigratedData(
+                migratedPhotoMetadatas: RealmContainer.migratedPhotoMetadatas,
+                migratedLists: RealmContainer.migratedLists
+            )
+        }
+        
         loadApp()
 
         if realmModel.launchedBefore || Debug.overrideLaunch {
             startApp()
         } else {
             loadOnboarding()
+        }
+    }
+    
+    // MARK: - Migration
+    func loadMigratedData(migratedPhotoMetadatas: [PhotoMetadata], migratedLists: [List]) {
+        print("migrate calleda!!")
+//        _ = realmModel
+        
+        print("realmModel made!! \(realmModel)")
+        
+        for metadata in migratedPhotoMetadatas {
+            print("adding!! \(metadata.assetIdentifier).. \(metadata.isStarred)")
+            realmModel.container.updatePhotoMetadata(metadata: metadata)
+        }
+        
+        for list in migratedLists {
+            print("adding!! \(list.title)")
+            realmModel.container.addList(list: list)
         }
     }
 
