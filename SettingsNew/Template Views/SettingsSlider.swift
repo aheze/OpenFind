@@ -47,6 +47,7 @@ struct SettingsSlider: View {
                 }
             }
         }
+        .accessibilityElement(children: .combine)
         .padding(SettingsConstants.rowVerticalInsetsFromSlider)
         .padding(SettingsConstants.rowHorizontalInsets)
     }

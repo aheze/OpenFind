@@ -32,6 +32,7 @@ struct SettingsHighlightsPreview: View {
                 )
             Text(" text in real life?")
         }
+        .accessibilityElement(children: .combine)
         .font(UIFont.preferredFont(forTextStyle: .title3).font)
         .fixedSize(horizontal: true, vertical: false)
         .padding(.vertical, highlightSidePadding)

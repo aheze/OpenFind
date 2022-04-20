@@ -32,6 +32,7 @@ struct SettingsDeepLink: View {
                             Text(getDestinationTitle())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(SettingsConstants.rowVerticalInsetsFromText)
 
                             let titles = getPathTitles()
 
@@ -61,12 +62,15 @@ struct SettingsDeepLink: View {
                             case .modal:
                                 Image(systemName: "arrow.up.forward")
                                     .foregroundColor(UIColor.secondaryLabel.color)
+                                    .accessibilityElement()
+                                    .accessibilityLabel("Opens external app")
                             }
                         }
                     }
                 }
-                .padding(SettingsConstants.rowVerticalInsetsFromText)
+
                 .padding(SettingsConstants.rowHorizontalInsets)
+                .accessibilityElement(children: .combine)
             }
         }
         .disabled(!model.touchesEnabled) /// stop buttons from sticking down even after scroll

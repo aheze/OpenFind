@@ -46,7 +46,7 @@ extension ListsDetailViewController {
         headerTopCenterTextField.autocorrectionType = .yes
         
         headerTopLeftView.accessibilityLabel = "Icons"
-        headerTopRightView.accessibilityLabel = "Color"
+        headerTopRightView.accessibilityLabel = "Colors"
         headerTopLeftView.accessibilityHint = "Pick an icon"
         headerTopRightView.accessibilityHint = "Pick a color"
         

@@ -33,6 +33,7 @@ extension PhotosSlidesViewController {
                 if currentIndex < slidesState.slidesPhotos.count - 1 {
                     let nextIndex = currentIndex + 1
                     self.model.slidesState?.currentPhoto = slidesState.slidesPhotos[safe: nextIndex]?.findPhoto.photo
+                    self.model.slidesCurrentPhotoChanged?()
                     self.collectionView.scrollToItem(at: nextIndex.indexPath, at: .centeredHorizontally, animated: true)
                 }
             }
@@ -47,6 +48,7 @@ extension PhotosSlidesViewController {
                 if currentIndex > 0 {
                     let previousIndex = currentIndex - 1
                     self.model.slidesState?.currentPhoto = slidesState.slidesPhotos[safe: previousIndex]?.findPhoto.photo
+                    self.model.slidesCurrentPhotoChanged?()
                     self.collectionView.scrollToItem(at: previousIndex.indexPath, at: .centeredHorizontally, animated: true)
                 }
             }

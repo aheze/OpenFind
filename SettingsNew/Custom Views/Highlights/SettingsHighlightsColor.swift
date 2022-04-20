@@ -48,6 +48,7 @@ struct SettingsHighlightsColor: View {
                     .frame(width: 30, height: 30)
             }
         }
+        .accessibilityElement(children: .combine)
         .padding(SettingsConstants.rowHorizontalInsets)
     }
 }

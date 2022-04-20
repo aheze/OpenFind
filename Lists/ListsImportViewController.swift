@@ -64,7 +64,7 @@ class ListsImportViewController: UIViewController {
 
     func getSizes() {
         let availableWidth = view.bounds.width - (ListsCollectionConstants.sidePadding * 2)
-        let (size, chipFrames) = list.getContentViewSize(availableWidth: availableWidth)
+        let (size, chipFrames, _) = list.getDisplayData(availableWidth: availableWidth)
         self.size = size
         self.chipFrames = chipFrames
     }

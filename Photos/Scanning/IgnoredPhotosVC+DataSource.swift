@@ -45,6 +45,11 @@ extension IgnoredPhotosViewController {
 
             PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
 
+            let description = photo.getVoiceoverDescription()
+            cell.buttonView.accessibilityElementsHidden = true
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = description
+                  
             /// selection
             cell.buttonView.isUserInteractionEnabled = !self.model.ignoredPhotosIsSelecting
             let selected = self.model.ignoredPhotosIsSelecting && self.model.ignoredPhotosSelectedPhotos.contains(photo)

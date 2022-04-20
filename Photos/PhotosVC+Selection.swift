@@ -88,20 +88,7 @@ extension PhotosViewController {
         cell.buttonView.isUserInteractionEnabled = !model.isSelecting
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-
-        let description = photo.getVoiceoverDescription()
-        if model.isSelecting {
-            cell.buttonView.accessibilityElementsHidden = true
-            cell.isAccessibilityElement = true
-            cell.accessibilityLabel = description
-            cell.accessibilityTraits = selected ? .selected : .none
-        } else {
-            cell.buttonView.accessibilityElementsHidden = false
-            cell.isAccessibilityElement = false
-            cell.accessibilityLabel = nil
-            cell.buttonView.accessibilityLabel = description
-            cell.buttonView.accessibilityTraits = selected ? .selected : .none
-        }
+        cell.accessibilityTraits = selected ? .image : .none
     }
 
     func updateCollectionViewSelectionState() {

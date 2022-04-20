@@ -59,6 +59,11 @@ extension PhotosViewController {
 
             PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
 
+            let description = photo.getVoiceoverDescription()
+            cell.buttonView.accessibilityElementsHidden = true
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = description
+
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
 

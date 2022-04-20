@@ -5892,8 +5892,8 @@
 		3C798E0B27F615BF007BF68D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3C443F4227DD90C00050A0AB /* GeneralExtensions.swift */,
 				3C7223C527C4506C0085EBF1 /* SpecifiedExtensions.swift */,
+				3C443F4227DD90C00050A0AB /* GeneralExtensions.swift */,
 				3CDAF25827F2335700467B31 /* List+Share.swift */,
 				3C0F239927F4045A00BCBFAE /* List+Import.swift */,
 				3C0F23A427F4B4A600BCBFAE /* List+Display.swift */,

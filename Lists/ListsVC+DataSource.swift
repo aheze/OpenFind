@@ -49,6 +49,10 @@ extension ListsViewController {
             let list = displayedList.list
             
             let selected = self.model.selectedLists.contains(where: { $0.id == list.id })
+            
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = displayedList.getVoiceoverDescription()
+            
             cell.view.configureSelection(selected: selected, modelSelecting: self.model.isSelecting)
             cell.view.configureData(list: list)
             

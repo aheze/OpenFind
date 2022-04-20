@@ -25,5 +25,6 @@ struct SettingsToggle: View {
                 .labelsHidden()
         }
         .padding(SettingsConstants.rowHorizontalInsets)
+        .accessibilityElement(children: .combine)
     }
 }

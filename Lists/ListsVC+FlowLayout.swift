@@ -35,11 +35,12 @@ extension ListsViewController {
     func writeCellFrameAndReturnSize(index: Int, availableWidth: CGFloat) -> CGSize {
         let list = model.displayedLists[index].list
 
-        let (cellSize, chipFrames) = list.getContentViewSize(availableWidth: availableWidth)
+        let (cellSize, chipFrames, wordsLeft) = list.getDisplayData(availableWidth: availableWidth)
         var displayedList = model.displayedLists[index]
         displayedList.frame.chipFrames = chipFrames
+        displayedList.wordsLeft = wordsLeft
         model.updateDisplayedList(at: index, with: displayedList)
-        
+
         return cellSize
     }
 }

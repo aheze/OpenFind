@@ -9,8 +9,8 @@
 import UIKit
 
 extension List {
-    /// get size and chip frames for a list
-    func getContentViewSize(availableWidth: CGFloat) -> (CGSize, [ListFrame.ChipFrame]) {
+    /// get size, chip frames, and words left for a list
+    func getDisplayData(availableWidth: CGFloat) -> (size: CGSize, chips: [ListFrame.ChipFrame], wordsLeft: Int?) {
         let c = ListsCellConstants.self
         
         let headerHeight = c.headerTitleFont.lineHeight
@@ -20,6 +20,8 @@ extension List {
         let contentWidth = availableWidth
             - c.contentEdgeInsets.left
             - c.contentEdgeInsets.right
+        
+        var wordsLeft: Int?
         
         /// relative to content
         var offset = CGSize.zero
@@ -54,6 +56,7 @@ extension List {
                     chipType: .wordsLeft
                 )
                 chipFrames.append(wordsLeftChipFrame)
+                wordsLeft = wordsLeftAfterCurrent
                 return true
             }
             return false
@@ -129,6 +132,6 @@ extension List {
         
         let height = headerHeight + containerHeight
         let cellSize = CGSize(width: availableWidth, height: height)
-        return (cellSize, chipFrames)
+        return (cellSize, chipFrames, wordsLeft)
     }
 }

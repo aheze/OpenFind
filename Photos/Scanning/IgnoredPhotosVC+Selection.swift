@@ -77,5 +77,11 @@ extension IgnoredPhotosViewController {
     func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
+        
+        if selected {
+            cell.accessibilityTraits = .selected
+        } else {
+            cell.accessibilityTraits = .none
+        }
     }
 }
