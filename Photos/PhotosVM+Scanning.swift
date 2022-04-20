@@ -30,6 +30,7 @@ extension PhotosViewModel {
                 isStarred: false,
                 isIgnored: false
             )
+
             newPhoto.metadata = metadata
             getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
             addSentences(of: newPhoto, immediately: !inBatch)

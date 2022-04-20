@@ -25,8 +25,11 @@ extension RealmContainer {
     }
 
     func applyPhotoMetadatas(_ photoMetadatas: [PhotoMetadata]) {
-        DispatchQueue.main.async {
-            self.photoMetadatasUpdated?(photoMetadatas)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let model = self.getModel?() {
+                model.photoMetadatas = photoMetadatas
+            }
         }
     }
 
@@ -40,6 +43,9 @@ extension RealmContainer {
                     metadata.sentences = RealmSwift.List<RealmSentence>()
                     metadata.scannedInLanguages = RealmSwift.List<String>()
                 }
+            }
+            if let model = self.getModel?() {
+                model.photoMetadatas.removeAll()
             }
         } catch {
             Debug.log("Error deleting all scanned data: \(error)", .error)
@@ -63,6 +69,12 @@ extension RealmContainer {
                     realmMetadata.isStarred = metadata.isStarred
                     realmMetadata.isIgnored = metadata.isIgnored
                 }
+
+                if let model = getModel?() {
+                    if let firstIndex = model.photoMetadatas.firstIndex(where: { $0.assetIdentifier == metadata.assetIdentifier }) {
+                        model.photoMetadatas[firstIndex] = metadata
+                    }
+                }
             } catch {
                 Debug.log("Error updating photo metadata: \(error)", .error)
             }
@@ -76,6 +88,10 @@ extension RealmContainer {
             do {
                 try realm.write {
                     realm.delete(realmMetadata)
+                }
+
+                if let model = getModel?() {
+                    model.photoMetadatas = model.photoMetadatas.filter { $0.assetIdentifier != metadata.assetIdentifier }
                 }
             } catch {
                 Debug.log("Error deleting metadata: \(error)", .error)
@@ -102,6 +118,8 @@ extension RealmContainer {
             try realm.write {
                 realm.add(realmMetadata)
             }
+
+            getModel?()?.photoMetadatas.append(metadata)
         } catch {
             Debug.log("Error adding photo metadata: \(error)", .error)
         }

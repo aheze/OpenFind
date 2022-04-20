@@ -17,6 +17,6 @@ extension ViewController {
     }
 
     @objc func listsSortByChanged() {
-        realmModel.loadAndSortLists(realmModel.lists)
+        realmModel.container.loadLists()
     }
 }

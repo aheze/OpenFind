@@ -26,17 +26,25 @@ extension RealmContainer {
             lists.append(list)
         }
 
-        let sortBy = getListsSortBy?() ?? .newestFirst
+        guard
+            let model = getModel?(),
+            let sortBy = Settings.Values.ListsSortByLevel(rawValue: model.listsSortBy)
+        else { return }
+
         switch sortBy {
         case .newestFirst:
             lists = lists.sorted { $0.dateCreated > $1.dateCreated }
         case .oldestFirst:
             lists = lists.sorted { $0.dateCreated < $1.dateCreated }
         case .title:
-            lists = lists.sorted { $0.displayedTitle > $1.displayedTitle }
+            lists = lists.sorted {
+                let a = $0.displayedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                let b = $1.displayedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                return a < b
+            }
         }
-        
-        listsUpdated?(lists)
+
+        model.lists = lists
     }
 
     func addList(list: List) {
@@ -61,7 +69,7 @@ extension RealmContainer {
             } catch {
                 Debug.log("Error writing list: \(error)", .error)
             }
-            
+
             loadLists()
         }
     }

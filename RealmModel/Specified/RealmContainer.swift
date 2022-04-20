@@ -11,10 +11,7 @@ import RealmSwift
 class RealmContainer {
     let realm = try! Realm()
 
-    var getListsSortBy: (() -> Settings.Values.ListsSortByLevel)?
-    
-    var listsUpdated: (([List]) -> Void)?
-    var photoMetadatasUpdated: (([PhotoMetadata]) -> Void)?
+    var getModel: (() -> RealmModel?)? /// get from outside container
 
     static var migratedPhotoMetadatas = [PhotoMetadata]()
     static var migratedLists = [List]()

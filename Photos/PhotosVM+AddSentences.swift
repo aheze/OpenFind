@@ -72,7 +72,6 @@ extension PhotosViewModel {
             }
         }
 
-        print("Applying metadata. \(getIndex(for: photo, in: \.photos)).. \(getIndexPath(for: photo, in: \.displayedSections))")
         /// update main array
         if let index = getIndex(for: photo, in: \.photos) {
             /// if `index` is not nil, just modify the changed properties - prevent overriding other properties that might have changed while the queue was waiting

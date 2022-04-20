@@ -64,17 +64,17 @@ class RealmModel: ObservableObject {
     @Saved(data.listsSortBy.key) var listsSortBy = data.listsSortBy.value
 
     init() {
-        container.photoMetadatasUpdated = { [weak self] photoMetadatas in
-            self?.photoMetadatas = photoMetadatas
+        container.getModel = { [weak self] in
+
+            self
         }
 
-        setupLists()
         listenToDefaults()
     }
 
     func listenToDefaults() {
         _launchedBefore.configureValueChanged(with: self)
-        
+
         _defaultTab.configureValueChanged(with: self)
         _swipeToNavigate.configureValueChanged(with: self)
 
