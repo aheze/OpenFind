@@ -55,6 +55,7 @@ class ListsDetailWordCell: UITableViewCell {
         
         applyConstants()
         textField.delegate = self
+        textField.autocapitalizationType = .sentences
     }
     
     func applyConstants() {

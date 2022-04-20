@@ -15,7 +15,7 @@ struct ListsDetailToolbarView: View {
         HStack {
             ToolbarIconButton(iconName: "doc.on.doc") {
                 let words = model.selectedWords.map { $0.string }
-                let string = words.joined(separator: "•")
+                let string = words.joined(separator: ", ")
                 let pasteboard = UIPasteboard.general
 
                 pasteboard.string = string

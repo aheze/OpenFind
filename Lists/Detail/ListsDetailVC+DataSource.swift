@@ -75,8 +75,9 @@ extension ListsDetailViewController: UITableViewDataSource {
             guard let self = self else { return true }
 
             let newWords = replacementString
-                .components(separatedBy: "•")
-                .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+                .components(separatedBy: ",")
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                .filter { !$0.isEmpty }
 
             /// a new bullet-separated string was pasted
             if newWords.count > 1 {

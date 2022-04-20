@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        realmModel.container.loadLists()
         tabViewModel.tabState = .lists
         addChildViewController(lists.searchNavigationController, in: view)
     }

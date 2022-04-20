@@ -65,7 +65,6 @@ class RealmModel: ObservableObject {
 
     init() {
         container.getModel = { [weak self] in
-
             self
         }
 
