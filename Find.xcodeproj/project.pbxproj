@@ -720,8 +720,11 @@
 		3C436241280FB0AB002DD153 /* TabBarVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EBB280BE463009B6FAE /* TabBarVC+FlowLayout.swift */; };
 		3C436244280FB0C9002DD153 /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E6927BABE1D00EC881E /* PhotosModel.swift */; };
 		3C436245280FCACA002DD153 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
-		3C436248280FD6BB002DD153 /* PhotosSlidesCollectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C436246280FD6B8002DD153 /* PhotosSlidesCollectionContainer.swift */; };
-		3C436249280FD6BC002DD153 /* PhotosSlidesCollectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C436246280FD6B8002DD153 /* PhotosSlidesCollectionContainer.swift */; };
+		3C436248280FD6BB002DD153 /* PhotosSlidesVoiceOverToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C436246280FD6B8002DD153 /* PhotosSlidesVoiceOverToolbar.swift */; };
+		3C436249280FD6BC002DD153 /* PhotosSlidesVoiceOverToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C436246280FD6B8002DD153 /* PhotosSlidesVoiceOverToolbar.swift */; };
+		3C43624B28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */; };
+		3C43624C28108DF4002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */; };
+		3C43624D28108DF6002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */; };
 		3C443E9227DD88F80050A0AB /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C443E9327DD88F80050A0AB /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
@@ -3773,7 +3776,8 @@
 		3C42C44525C32B15004DC6E9 /* CameraVC+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Lists.swift"; sourceTree = "<group>"; };
 		3C42C44C25C33D6B004DC6E9 /* FindBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FindBar+Lists.swift"; sourceTree = "<group>"; };
 		3C436232280F30AD002DD153 /* SearchVC+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Extras.swift"; sourceTree = "<group>"; };
-		3C436246280FD6B8002DD153 /* PhotosSlidesCollectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesCollectionContainer.swift; sourceTree = "<group>"; };
+		3C436246280FD6B8002DD153 /* PhotosSlidesVoiceOverToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesVoiceOverToolbar.swift; sourceTree = "<group>"; };
+		3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosSlidesVC+VoiceOver.swift"; sourceTree = "<group>"; };
 		3C443EF527DD8F610050A0AB /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		3C443F0327DD90390050A0AB /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		3C443F0527DD90490050A0AB /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -6240,9 +6244,10 @@
 				3CE3D4DA27DCFA2100521735 /* PhotosSlidesVC+FullScreen.swift */,
 				3C71EFAB27BFFBBB00F0C0A0 /* PhotosSlidesVC+Gestures.swift */,
 				3C71EF9A27BF4DD900F0C0A0 /* PhotosSlidesVC+Transition.swift */,
+				3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */,
 				3CBB319127BD611F00F25F6A /* PhotosSlidesCollectionLayout.swift */,
 				3CBB319D27BD68EC00F25F6A /* PhotosSlidesContentCell.swift */,
-				3C436246280FD6B8002DD153 /* PhotosSlidesCollectionContainer.swift */,
+				3C436246280FD6B8002DD153 /* PhotosSlidesVoiceOverToolbar.swift */,
 			);
 			path = Slides;
 			sourceTree = "<group>";
@@ -8830,6 +8835,7 @@
 				3C257ED4280C89D1009B6FAE /* PortraitView.swift in Sources */,
 				3C1A2C1F27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift in Sources */,
 				3CCE2B49279D21C900F72351 /* PhotosVC+Selection.swift in Sources */,
+				3C43624D28108DF6002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */,
 				3CAD45EB2800985200B0A0A9 /* PhotosVC+Observe.swift in Sources */,
 				3CE3D4E227DCFBB700521735 /* SearchNavigationModel.swift in Sources */,
 				3CB8C32927C34CDF000AA3B9 /* PhotosVM+Scanning.swift in Sources */,
@@ -8897,7 +8903,7 @@
 				3C436244280FB0C9002DD153 /* PhotosModel.swift in Sources */,
 				3C443EA127DD88FE0050A0AB /* SearchTextField.swift in Sources */,
 				3C71EFAA27BFFB2900F0C0A0 /* PhotosTransitionDismissAnimator.swift in Sources */,
-				3C436249280FD6BC002DD153 /* PhotosSlidesCollectionContainer.swift in Sources */,
+				3C436249280FD6BC002DD153 /* PhotosSlidesVoiceOverToolbar.swift in Sources */,
 				3C443FA227DEBA4D0050A0AB /* SearchPromptView.swift in Sources */,
 				3C71EFA327BF5D4500F0C0A0 /* PhotosTransitionPushAnimator.swift in Sources */,
 				3C798ECD27F69837007BF68D /* RC+Lists.swift in Sources */,
@@ -9448,6 +9454,7 @@
 				3CF15B9727FF8AEE00D51E9B /* SettingsLicenses.swift in Sources */,
 				3C6C74352781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CF15B7A27FF8AEE00D51E9B /* SettingsModels.swift in Sources */,
+				3C43624B28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */,
 				3C443F7727DDD74A0050A0AB /* Sentence+Find.swift in Sources */,
 				3CF15B8727FF8AEE00D51E9B /* SettingsCameraHapticFeedback.swift in Sources */,
 				3CCE2B11279D008B00F72351 /* SelectionIconView.swift in Sources */,
@@ -9853,7 +9860,7 @@
 				3C6C73A52781947400E039F0 /* SearchFieldCell.swift in Sources */,
 				3C6C73372781943B00E039F0 /* Model.swift in Sources */,
 				3C6C73452781944B00E039F0 /* TabViewModel.swift in Sources */,
-				3C436248280FD6BB002DD153 /* PhotosSlidesCollectionContainer.swift in Sources */,
+				3C436248280FD6BB002DD153 /* PhotosSlidesVoiceOverToolbar.swift in Sources */,
 				3CC0D11F280A8755004E7016 /* ListsVC+Defaults.swift in Sources */,
 				3C1D178727BBF9AC00E82B8B /* PhotosVM+Sort.swift in Sources */,
 				3CAE64F127C6AAE5009E8564 /* PhotosVC+ResultsDataSource.swift in Sources */,
@@ -9972,6 +9979,7 @@
 				3CF76443278D19AD00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
 				3CBB319B27BD643500F25F6A /* PhotosSlidesVC+Delegate.swift in Sources */,
 				3CF7642D278D187200DCA4EA /* SearchNC+Utilities.swift in Sources */,
+				3C43624C28108DF4002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */,
 				3C257EE6280DAC01009B6FAE /* LaunchContentCell.swift in Sources */,
 				3C443F7127DDD7490050A0AB /* Sentence+Find.swift in Sources */,
 				3C5B369227FEAEDE00801FEE /* SettingsPageViewController.swift in Sources */,

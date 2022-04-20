@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-import UIKit
+import SwiftUI
 
 extension PhotosSlidesViewController {
     func setup() {
@@ -21,51 +21,7 @@ extension PhotosSlidesViewController {
         collectionViewContainer.backgroundColor = .clear
         collectionView.backgroundColor = .clear
         
-        collectionViewContainer.accessibilityTraits = .none
-        collectionViewContainer.isAccessibilityElement = true
-        collectionViewContainer.model = model
-        collectionViewContainer.increment = { [weak self] in
-            guard let self = self else { return }
-            
-            if
-                let slidesState = self.model.slidesState,
-                let currentIndex = slidesState.getCurrentIndex()
-            {
-                if currentIndex < slidesState.slidesPhotos.count - 1 {
-                    let nextIndex = currentIndex + 1
-                    self.model.slidesState?.currentPhoto = slidesState.slidesPhotos[safe: nextIndex]?.findPhoto.photo
-                    self.model.slidesCurrentPhotoChanged?()
-                    self.collectionView.scrollToItem(at: nextIndex.indexPath, at: .centeredHorizontally, animated: true)
-                    if
-                        let cell = self.collectionView.cellForItem(at: nextIndex.indexPath) as? PhotosSlidesContentCell,
-                        let viewController = cell.viewController
-                    {
-                        viewController.containerView.alpha = 1
-                    }
-                }
-            }
-        }
-        collectionViewContainer.decrement = { [weak self] in
-            guard let self = self else { return }
-            
-            if
-                let slidesState = self.model.slidesState,
-                let currentIndex = slidesState.getCurrentIndex()
-            {
-                if currentIndex > 0 {
-                    let previousIndex = currentIndex - 1
-                    self.model.slidesState?.currentPhoto = slidesState.slidesPhotos[safe: previousIndex]?.findPhoto.photo
-                    self.model.slidesCurrentPhotoChanged?()
-                    self.collectionView.scrollToItem(at: previousIndex.indexPath, at: .centeredHorizontally, animated: true)
-                    if
-                        let cell = self.collectionView.cellForItem(at: previousIndex.indexPath) as? PhotosSlidesContentCell,
-                        let viewController = cell.viewController
-                    {
-                        viewController.containerView.alpha = 1
-                    }
-                }
-            }
-        }
+        setupVoiceOverToolbar()
     }
     
     func setupCollectionView() {

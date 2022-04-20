@@ -73,6 +73,7 @@ class PhotosViewModel: ObservableObject {
     /// call these manually, can't be inside struct
     var slidesCurrentPhotoChanged: (() -> Void)?
     var slidesToolbarInformationOnChanged: (() -> Void)?
+    var slidesUpdateFullScreenStateTo: ((Bool) -> Void)?
 
     /// the state of the results.
     var resultsState: PhotosResultsState?

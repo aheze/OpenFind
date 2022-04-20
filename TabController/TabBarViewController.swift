@@ -133,8 +133,10 @@ class TabBarViewController: UIViewController {
     }
 
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat, safeAreaInsets: UIEdgeInsets) {
+        let additionalInset = bottomHeight - safeAreaInsets.bottom
+        
         for page in pages {
-            page.additionalSafeAreaInsets.bottom = bottomHeight - safeAreaInsets.bottom
+            page.additionalSafeAreaInsets.bottom = additionalInset
         }
     }
     

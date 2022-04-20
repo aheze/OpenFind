@@ -44,7 +44,9 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
 
-    @IBOutlet var collectionViewContainer: PhotosSlidesCollectionContainer!
+    @IBOutlet weak var collectionViewToolbarContainer: UIView!
+    @IBOutlet weak var collectionViewToolbarHeightC: NSLayoutConstraint!
+    @IBOutlet var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
 

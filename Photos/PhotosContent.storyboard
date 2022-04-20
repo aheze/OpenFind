@@ -245,7 +245,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qD1-tb-8vt">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf" customClass="PhotosSlidesCollectionContainer" customModule="FindPhotos" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VDv-5V-ksK">
@@ -268,14 +268,24 @@
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYX-K1-p3X">
+                                                        <rect key="frame" x="0.0" y="500" width="414" height="100"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="9L4-Qe-sh0"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="600" id="3xd-XB-bot"/>
                                                     <constraint firstItem="VDv-5V-ksK" firstAttribute="top" secondItem="Hrf-dC-vKf" secondAttribute="top" id="Aoo-S9-QYi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yYX-K1-p3X" secondAttribute="trailing" id="V3v-dU-Uhb"/>
+                                                    <constraint firstItem="yYX-K1-p3X" firstAttribute="leading" secondItem="Hrf-dC-vKf" secondAttribute="leading" id="f2N-Vz-vnD"/>
                                                     <constraint firstAttribute="bottom" secondItem="VDv-5V-ksK" secondAttribute="bottom" id="lKo-0s-SEG"/>
                                                     <constraint firstItem="VDv-5V-ksK" firstAttribute="leading" secondItem="Hrf-dC-vKf" secondAttribute="leading" id="qmi-fd-f3n"/>
                                                     <constraint firstAttribute="trailing" secondItem="VDv-5V-ksK" secondAttribute="trailing" id="rvV-eq-NIX"/>
+                                                    <constraint firstAttribute="bottom" secondItem="yYX-K1-p3X" secondAttribute="bottom" id="uSt-gA-SWP"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaS-Fz-cut">
@@ -318,8 +328,10 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="VDv-5V-ksK" id="5hV-NE-Ntn"/>
-                        <outlet property="collectionViewContainer" destination="Hrf-dC-vKf" id="gGR-lm-oCk"/>
+                        <outlet property="collectionViewContainer" destination="Hrf-dC-vKf" id="aIK-bA-4Wb"/>
                         <outlet property="collectionViewContainerHeightC" destination="3xd-XB-bot" id="nb9-fS-3TK"/>
+                        <outlet property="collectionViewToolbarContainer" destination="yYX-K1-p3X" id="JTd-YD-oP5"/>
+                        <outlet property="collectionViewToolbarHeightC" destination="9L4-Qe-sh0" id="1ty-4A-1aQ"/>
                         <outlet property="contentView" destination="qD1-tb-8vt" id="jGq-fg-Y03"/>
                         <outlet property="infoViewContainer" destination="BaS-Fz-cut" id="3RD-wI-Uvj"/>
                         <outlet property="infoViewContainerHeightC" destination="r3Q-6x-J8n" id="9SP-1B-JWl"/>

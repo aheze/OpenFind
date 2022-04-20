@@ -4,42 +4,7 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>Search Bar</string>
-		<key>predicate</key>
-		<dict>
-			<key>predicates</key>
-			<array>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>General Frameworks</string>
-						<string>SearchBar.xcodeproj</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Framework Testing</string>
-						<string>SearchBarTesting.xcodeproj</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-			</array>
-			<key>rule</key>
-			<string>any</string>
-		</dict>
-		<key>source</key>
-		<dict>
-			<key>file-source</key>
-			<string>workspace</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Camera</string>
+		<string>Find New</string>
 		<key>predicate</key>
 		<dict>
 			<key>predicates</key>
@@ -48,59 +13,16 @@
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
-						<string>Camera</string>
+						<string>Assets</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>
 				</dict>
-			</array>
-			<key>rule</key>
-			<string>any</string>
-		</dict>
-		<key>source</key>
-		<dict>
-			<key>file-source</key>
-			<string>workspace</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>TabController</string>
-		<key>predicate</key>
-		<dict>
-			<key>predicates</key>
-			<array>
 				<dict>
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
-						<string>TabController</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-			</array>
-			<key>rule</key>
-			<string>any</string>
-		</dict>
-		<key>source</key>
-		<dict>
-			<key>file-source</key>
-			<string>workspace</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Frameworks</string>
-		<key>predicate</key>
-		<dict>
-			<key>predicates</key>
-			<array>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>ARVision</string>
+						<string>Find-New</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>
@@ -118,6 +40,15 @@
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
+						<string>RealmModel</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
 						<string>TabController</string>
 					</array>
 					<key>rule</key>
@@ -127,7 +58,52 @@
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
+						<string>ScrollZoom</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>SwiftUIViews</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>SearchBar</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>SearchNavigation</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
 						<string>Photos</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>Highlights</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>
@@ -146,104 +122,6 @@
 					<array>
 						<string>Find.xcodeproj</string>
 						<string>Lists</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Settings</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>SearchBar</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Utilities</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-			</array>
-			<key>rule</key>
-			<string>any</string>
-		</dict>
-		<key>source</key>
-		<dict>
-			<key>file-source</key>
-			<string>workspace</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Find Unified</string>
-		<key>predicate</key>
-		<dict>
-			<key>predicates</key>
-			<array>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Shared</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>TabController</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Photos</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Camera</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>SearchBar</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Highlights</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>
@@ -270,24 +148,6 @@
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
-						<string>Lists</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
-						<string>Settings</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Find.xcodeproj</string>
 						<string>Popover</string>
 					</array>
 					<key>rule</key>
@@ -297,33 +157,25 @@
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
-						<string>Utilities</string>
+						<string>SettingsNew</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>
 				</dict>
-			</array>
-			<key>rule</key>
-			<string>any</string>
-		</dict>
-		<key>source</key>
-		<dict>
-			<key>file-source</key>
-			<string>workspace</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Old Find</string>
-		<key>predicate</key>
-		<dict>
-			<key>predicates</key>
-			<array>
 				<dict>
 					<key>path-components</key>
 					<array>
 						<string>Find.xcodeproj</string>
-						<string>Find</string>
+						<string>Launch</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>Utilities</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>
