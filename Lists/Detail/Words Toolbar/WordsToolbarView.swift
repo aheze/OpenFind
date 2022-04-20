@@ -26,7 +26,7 @@ struct WordsToolbarView: View {
 
             Text("\(model.selectedWordIndex + 1) / \(model.totalWordsCount)")
                 .font(.body.bold())
-                .accessibility("\(model.selectedWordIndex + 1) out of \(model.totalWordsCount)")
+                .accessibilityLabel("\(model.selectedWordIndex + 1) out of \(model.totalWordsCount)")
 
             Button {
                 model.goToIndex?(model.selectedWordIndex + 1)
@@ -47,7 +47,7 @@ struct WordsToolbarView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .contentShape(Rectangle())
             }
-            .accessibility("Add word below")
+            .accessibilityLabel("Add word below")
             .frame(width: 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -719,6 +719,7 @@
 		3C436240280FB0AB002DD153 /* TabBarVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EBB280BE463009B6FAE /* TabBarVC+FlowLayout.swift */; };
 		3C436241280FB0AB002DD153 /* TabBarVC+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EBB280BE463009B6FAE /* TabBarVC+FlowLayout.swift */; };
 		3C436244280FB0C9002DD153 /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E6927BABE1D00EC881E /* PhotosModel.swift */; };
+		3C436245280FCACA002DD153 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
 		3C443E9227DD88F80050A0AB /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C443E9327DD88F80050A0AB /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
@@ -9714,6 +9715,7 @@
 				3C6C73BB2781947E00E039F0 /* VisionUtilities.swift in Sources */,
 				3CDD944027C05F4A00D3EA1A /* PhotosScanningView.swift in Sources */,
 				3C5B36B627FEAEDE00801FEE /* SD+About.swift in Sources */,
+				3C436245280FCACA002DD153 /* Utilities+Accessibility.swift in Sources */,
 				3C21ED5E27A3A8A90005E183 /* KeyboardToolbarView.swift in Sources */,
 				3C7223B927C442670085EBF1 /* CameraVC+Events.swift in Sources */,
 				3C5B369927FEAEDE00801FEE /* SettingsCameraHapticFeedback.swift in Sources */,
