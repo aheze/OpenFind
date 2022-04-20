@@ -24,6 +24,10 @@ extension ListsViewController {
             action: #selector(addListPressed)
         )
         
+        selectButton.accessibilityLabel = "Select"
+        selectButton.accessibilityHint = "Select lists"
+        addButton.accessibilityLabel = "Create"
+        addButton.accessibilityHint = "Create a new list"
         selectBarButton = selectButton
         navigationItem.rightBarButtonItems = [addButton, selectButton]
     }
@@ -35,6 +39,7 @@ extension ListsViewController {
             target: self,
             action: #selector(cancelPressed)
         )
+        cancelButton.accessibilityHint = "Cancel searching"
         navigationItem.leftBarButtonItem = cancelButton
     }
 

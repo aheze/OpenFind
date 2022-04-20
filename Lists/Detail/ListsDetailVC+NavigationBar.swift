@@ -11,11 +11,11 @@ import UIKit
 
 extension ListsDetailViewController {
     func setupNavigationBar() {
-        if #available(iOS 14.0, *) {
-            setupTopMenu()
-        } else {
+//        if #available(iOS 14.0, *) {
+//            setupTopMenu()
+//        } else {
             setupPopoversTopMenu()
-        }
+//        }
         setupDismissButton()
     }
     
@@ -57,6 +57,7 @@ extension ListsDetailViewController {
                 deleteAction
             ])
         )
+        optionsButton.accessibilityLabel = "Options"
         
         if model.addDismissButton {
             navigationItem.leftBarButtonItem = optionsButton
@@ -72,6 +73,7 @@ extension ListsDetailViewController {
             optionsButton.addTarget(self, action: #selector(popoversBarButtonTapped), for: .touchUpInside)
             return optionsButton
         }()
+        optionsButton.accessibilityLabel = "Options"
         popoversOptionsButton = optionsButton
         
         let optionsButtonItem = UIBarButtonItem(customView: optionsButton)

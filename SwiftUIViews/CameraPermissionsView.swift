@@ -103,6 +103,7 @@ struct PermissionsActionView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 160, height: 160)
+                    .accessibility(hidden: true)
 
                 let alignment: HorizontalAlignment = verticalSizeClass != .compact ? .center : .leading
                 let labelAlignment: Alignment = verticalSizeClass != .compact ? .center : .leading

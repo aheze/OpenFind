@@ -42,6 +42,8 @@ extension IconPickerViewController {
                 cell.buttonView.backgroundColor = .clear
             }
 
+            cell.buttonView.accessibilityLabel = icon
+            cell.buttonView.accessibilityHint = "Tap to set list icon"
             cell.tapped = { [weak self] in
                 guard let self = self else { return }
                 if imageExists {

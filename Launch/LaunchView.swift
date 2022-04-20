@@ -172,21 +172,6 @@ struct LaunchContentView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: LaunchContentViewController, context: Context) {}
 }
 
-struct LaunchButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .animation(
-                .spring(
-                    response: 0.2,
-                    dampingFraction: 0.6,
-                    blendDuration: 1
-                ),
-                value: configuration.isPressed
-            )
-    }
-}
-
 struct LaunchGradientView: View {
     var transparentBottom: Bool
     var body: some View {

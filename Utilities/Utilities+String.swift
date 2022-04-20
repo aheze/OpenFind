@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 extension String {
     func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
@@ -40,5 +40,11 @@ extension BidirectionalCollection where Element: StringProtocol {
         count <= 2 ?
             joined(separator: " and ") :
             dropLast().joined(separator: ", ") + ", and " + last!
+    }
+}
+
+extension String {
+    var text: Text {
+        return Text(self)
     }
 }

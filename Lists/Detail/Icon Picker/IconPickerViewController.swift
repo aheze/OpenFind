@@ -60,6 +60,8 @@ class IconPickerViewController: UIViewController, Searchable {
             target: self,
             action: #selector(jumpToIcon)
         )
+        jumpButton.accessibilityLabel = "Jump"
+        jumpButton.accessibilityHint = "Scroll to selected icon"
         navigationItem.leftBarButtonItem = jumpButton
         
         update(animate: false)

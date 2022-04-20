@@ -10,7 +10,6 @@ import UIKit
 
 extension SearchNavigationController {
     func setupSearchBar() {
-        
         // MARK: Setup container view
         
         view.addSubview(searchContainerViewContainer)

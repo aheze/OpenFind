@@ -87,8 +87,6 @@ class SearchNavigationController: UIViewController, PageViewController {
         self.realmModel = realmModel
         self.tabType = tabType
         super.init(coder: coder)
-        
-        
     }
     
     @available(*, unavailable)
@@ -110,6 +108,9 @@ class SearchNavigationController: UIViewController, PageViewController {
         setupProgress()
         listen()
         
+        /// read search bar first
+        view.accessibilityElements = [searchContainerViewContainer, navigation.view as Any]
+        
         /// refresh the blur after coming back from app switcher
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
@@ -129,7 +130,6 @@ class SearchNavigationController: UIViewController, PageViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            
             /// update the blur after changing to dark mode
             DispatchQueue.main.async {
                 self.setupBlur()

@@ -59,6 +59,8 @@ class SearchFieldCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        triggerButton.accessibilityElementsHidden = true
+        
         /// Needed for some reason sometimes
         triggerButton.setTitle("", for: .normal)
         

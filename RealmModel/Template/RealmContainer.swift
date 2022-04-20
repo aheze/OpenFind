@@ -8,7 +8,8 @@
 
 class RealmContainer {
     var getListsSortBy: (() -> Settings.Values.ListsSortByLevel)?
-    
+
+    var getModel: (() -> RealmModel?)?
     var listsUpdated: (([List]) -> Void)?
     var photoMetadatasUpdated: (([PhotoMetadata]) -> Void)?
 }

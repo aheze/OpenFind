@@ -44,6 +44,17 @@ extension ListsDetailViewController {
         headerTopCenterTextField.autocapitalizationType = .words
         headerBottomTextField.autocapitalizationType = .sentences
         headerTopCenterTextField.autocorrectionType = .yes
+        
+        headerTopLeftView.accessibilityLabel = "Icons"
+        headerTopRightView.accessibilityLabel = "Color"
+        headerTopLeftView.accessibilityHint = "Pick an icon"
+        headerTopRightView.accessibilityHint = "Pick a color"
+        
+        
+        wordsTopLeftView.accessibilityLabel = "Edit"
+        wordsTopCenterView.isAccessibilityElement = true
+        wordsTopCenterView.accessibilityLabel = "Words"
+        wordsTopRightView.accessibilityLabel = "Add"
     }
     
     func loadListContents(animate: Bool = true) {
