@@ -12,6 +12,17 @@ enum PhotosScanningIconState {
     case scanning
     case paused
     case done
+
+    func getDescription() -> String {
+        switch self {
+        case .scanning:
+            return "Currently scanning"
+        case .paused:
+            return "Currently paused"
+        case .done:
+            return "Done scanning"
+        }
+    }
 }
 
 struct PhotosScanningIcon: View {
@@ -77,6 +88,7 @@ struct PhotosScanningProgressView: View {
                 .font(Font(iconFont as CTFont))
                 .foregroundColor(.accent)
             )
+            .accessibilityLabel(state.getDescription())
     }
 
     func getTrimPercentage() -> CGFloat {
@@ -155,6 +167,7 @@ struct PhotosScanningGradientProgressView: View {
                 .foregroundColor(.accent)
                 .animation(.spring(), value: state)
             )
+            .accessibilityLabel(state.getDescription())
     }
 
     func getTrimPercentage() -> CGFloat {

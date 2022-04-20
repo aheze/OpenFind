@@ -25,6 +25,7 @@ struct PhotosSelectionToolbarView: View {
             ToolbarIconButton(iconName: "trash") {
                 deleteSelected()
             }
+            .accessibilityLabel("Delete")
             .disabled(model.selectedPhotos.count == 0)
         }
     }

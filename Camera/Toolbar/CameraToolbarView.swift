@@ -16,10 +16,11 @@ struct CameraToolbarView: View {
             HStack {
                 ResultsIconView(model: model)
                     .frameTag(CameraStatusConstants.sourceViewIdentifier)
-                
+
                 Spacer()
                 SnapshotView(model: model, isEnabled: $model.shutterOn)
             }
+            .accessibilityElement(children: .contain)
             .frame(maxWidth: .infinity)
 
             Color.clear
@@ -29,6 +30,7 @@ struct CameraToolbarView: View {
                 Spacer()
                 OpenSettingsIconView(model: model)
             }
+            .accessibilityElement(children: .contain)
             .frame(maxWidth: .infinity)
         }
     }

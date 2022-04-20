@@ -14,48 +14,51 @@ struct TabBarView: View {
     @ObservedObject var cameraViewModel: CameraViewModel
     
     var body: some View {
-        Color.clear.overlay(
-            HStack(alignment: .bottom, spacing: 0) {
-                PhotosButton(tabViewModel: tabViewModel, attributes: tabViewModel.photosIconAttributes)
-                CameraButton(tabViewModel: tabViewModel, cameraViewModel: cameraViewModel, attributes: tabViewModel.cameraIconAttributes)
-                ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
-            }
-            .padding(.bottom, tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)
-            .opacity(toolbarViewModel.toolbar == nil ? 1 : 0)
-            .accessibility(hidden: toolbarViewModel.toolbar != nil)
-                
-            /// toolbar for other view controllers
-            .overlay(
-                VStack {
-                    if let toolbar = toolbarViewModel.toolbar {
-                        toolbar
-                    }
-                }
-                .frame(maxHeight: .infinity)
-                .padding(.bottom, tabViewModel.tabBarAttributes.toolbarBottomPadding)
-                .padding(.horizontal, 16)
-            )
-                
-            /// toolbar icons for camera
-            .overlay(
-                CameraToolbarView(model: cameraViewModel)
-                    .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
-                    .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
-                    .accessibility(hidden: tabViewModel.tabState != .camera)
-            )
-            .frame(height: tabViewModel.tabBarAttributes.backgroundHeight, alignment: .bottom)
-            .padding(.horizontal, 16)
-                
-            /// right after this point is the area of visual tab bar background (what the user sees)
+        Color.clear
+            .accessibilityElement()
+            .accessibilityLabel("Toolbar")
             .background(
-                BackgroundView(tabViewModel: tabViewModel)
-                    .edgesIgnoringSafeArea(.all)
-            ),
-            alignment: .bottom
-        )
-        .edgesIgnoringSafeArea(.bottom)
-        .opacity(getOpacity()) /// hide the tab bar when the keyboard shows
-        .offset(x: 0, y: tabViewModel.barsShown ? 0 : 200)
+                HStack(alignment: .bottom, spacing: 0) {
+                    PhotosButton(tabViewModel: tabViewModel, attributes: tabViewModel.photosIconAttributes)
+                    CameraButton(tabViewModel: tabViewModel, cameraViewModel: cameraViewModel, attributes: tabViewModel.cameraIconAttributes)
+                    ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
+                }
+                .padding(.bottom, tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)
+                .opacity(toolbarViewModel.toolbar == nil ? 1 : 0)
+                .accessibility(hidden: toolbarViewModel.toolbar != nil)
+                
+                /// toolbar for other view controllers
+                .overlay(
+                    VStack {
+                        if let toolbar = toolbarViewModel.toolbar {
+                            toolbar
+                        }
+                    }
+                    .frame(maxHeight: .infinity)
+                    .padding(.bottom, tabViewModel.tabBarAttributes.toolbarBottomPadding)
+                    .padding(.horizontal, 16)
+                )
+                
+                /// toolbar icons for camera
+                .overlay(
+                    CameraToolbarView(model: cameraViewModel)
+                        .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
+                        .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
+                        .accessibility(hidden: tabViewModel.tabState != .camera)
+                )
+                .frame(height: tabViewModel.tabBarAttributes.backgroundHeight, alignment: .bottom)
+                .padding(.horizontal, 16)
+                
+                /// right after this point is the area of visual tab bar background (what the user sees)
+                .background(
+                    BackgroundView(tabViewModel: tabViewModel)
+                        .edgesIgnoringSafeArea(.all)
+                ),
+                alignment: .bottom
+            )
+            .edgesIgnoringSafeArea(.bottom)
+            .opacity(getOpacity()) /// hide the tab bar when the keyboard shows
+            .offset(x: 0, y: tabViewModel.barsShown ? 0 : 200)
     }
     
     func getOpacity() -> Double {

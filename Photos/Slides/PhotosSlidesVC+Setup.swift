@@ -20,6 +20,8 @@ extension PhotosSlidesViewController {
         scrollView.backgroundColor = .clear
         collectionViewContainer.backgroundColor = .clear
         collectionView.backgroundColor = .clear
+        
+        collectionView.isAccessibilityElement = true
     }
     
     func setupCollectionView() {

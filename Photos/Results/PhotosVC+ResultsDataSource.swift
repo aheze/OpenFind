@@ -72,6 +72,10 @@ extension PhotosViewController {
             PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
 
             self.loadHighlights(for: cell, findPhoto: findPhoto)
+            
+            /// selection
+            let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
+            self.configureResultsCellSelection(cell: cell, photo: findPhoto.photo, selected: selected)
 
             cell.tapped = { [weak self] in
                 guard let self = self else { return }

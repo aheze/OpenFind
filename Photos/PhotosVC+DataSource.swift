@@ -66,26 +66,9 @@ extension PhotosViewController {
             }
 
             /// selection
-            cell.buttonView.isUserInteractionEnabled = !self.model.isSelecting
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
-            self.configureCellSelection(cell: cell, selected: selected)
+            self.configureCellSelection(cell: cell, photo: photo, selected: selected)
 
-            
-            if self.model.isSelecting {
-                cell.accessibilityLabel = photo.getVoiceoverDescription()
-                cell.buttonView.accessibilityElementsHidden = true
-                if selected {
-                    cell.accessibilityTraits = [.image, .selected]
-                } else {
-                    cell.accessibilityTraits = .image
-                }
-            } else {
-                cell.accessibilityLabel = nil
-                cell.buttonView.accessibilityTraits = .image
-                cell.buttonView.accessibilityLabel = photo.getVoiceoverDescription()
-                cell.buttonView.accessibilityElementsHidden = false
-            }
-            
             return cell
         }
 
@@ -100,9 +83,4 @@ extension PhotosViewController {
         }
         return dataSource
     }
-}
-
-func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
-    cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
-    cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
 }

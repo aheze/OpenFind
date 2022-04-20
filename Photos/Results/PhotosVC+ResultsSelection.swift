@@ -16,7 +16,7 @@ extension PhotosViewController {
             model.selectedPhotos.append(photo)
 
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                configureResultsCellSelection(cell: cell, selected: true)
+                configureResultsCellSelection(cell: cell, photo: photo, selected: true)
             }
         }
     }
@@ -28,14 +28,26 @@ extension PhotosViewController {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
 
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                configureResultsCellSelection(cell: cell, selected: false)
+                configureResultsCellSelection(cell: cell, photo: photo, selected: false)
             }
         }
     }
 
-    func configureResultsCellSelection(cell: PhotosResultsCell, selected: Bool) {
+    func configureResultsCellSelection(cell: PhotosResultsCell, photo: Photo, selected: Bool) {
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
+        cell.buttonView.isUserInteractionEnabled = !model.isSelecting
+        cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
+        cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
+
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = photo.getVoiceoverDescription()
+//        cell.buttonView.accessibilityElementsHidden = true
+        if selected {
+            cell.accessibilityTraits = [.image, .selected]
+        } else {
+            cell.accessibilityTraits = .image
+        }
     }
 
     func updateResultsCollectionViewSelectionState() {

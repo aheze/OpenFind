@@ -39,9 +39,10 @@ struct PhotosScanningViewHeader: View {
                         .blueBackground()
 
                         VStack(alignment: .leading) {
-                            Text(model.getRemainingTime() ?? "All Photos Scanned")
+                            Text(getRemainingTime())
                                 .foregroundColor(.accent.opacity(0.75))
                                 .font(.headline.weight(.medium))
+                                .accessibilityLabel(getRemainingTime(addTilde: false))
 
                             HStack {
                                 Text("\(model.scannedPhotosCount)")
@@ -54,6 +55,7 @@ struct PhotosScanningViewHeader: View {
                                     .foregroundColor(.accent.opacity(0.75))
                             }
                             .font(.largeTitle.weight(.semibold))
+                            .accessibilityLabel("\(model.scannedPhotosCount) out of \(model.totalPhotosCount)")
 
                             let image = getImage()
                             let title = getTitle()
@@ -110,6 +112,17 @@ struct PhotosScanningViewHeader: View {
         }
     }
 
+    func getRemainingTime(addTilde: Bool = true) -> String {
+        if let remainingTime = model.getRemainingTime() {
+            if addTilde {
+                return "~\(remainingTime)"
+            } else {
+                return remainingTime
+            }
+        } else {
+            return "All Photos Scanned"
+        }
+    }
     func getImage() -> String {
         var image = model.scanningState == .scanningAllPhotos ? "pause.fill" : "play.fill"
         if model.scannedPhotosCount == model.totalPhotosCount {

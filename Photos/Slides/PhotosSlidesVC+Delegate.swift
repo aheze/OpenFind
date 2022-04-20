@@ -45,6 +45,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 /// detect stopped at a new photo
 extension PhotosSlidesViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         if scrollView == self.scrollView {
             infoScrollViewDidScroll()
         }

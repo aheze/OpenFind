@@ -39,7 +39,7 @@ extension PhotosViewController {
     /// also called in `willBecomeInactive`, so check `model.loaded`
     func resetSelectingState() {
         guard model.loaded else { return }
-        
+
         model.updateAllowed = true
         model.isSelecting = false
         collectionView.allowsSelection = false
@@ -64,7 +64,7 @@ extension PhotosViewController {
             model.selectedPhotos.append(photo)
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                configureCellSelection(cell: cell, selected: true)
+                configureCellSelection(cell: cell, photo: photo, selected: true)
             }
         }
     }
@@ -75,14 +75,32 @@ extension PhotosViewController {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                configureCellSelection(cell: cell, selected: false)
+                configureCellSelection(cell: cell, photo: photo, selected: false)
             }
         }
     }
 
-    func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
+    func configureCellSelection(cell: PhotosCollectionCell, photo: Photo, selected: Bool) {
+        cell.buttonView.isUserInteractionEnabled = !model.isSelecting
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
+
+        if model.isSelecting {
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = photo.getVoiceoverDescription()
+            cell.buttonView.accessibilityElementsHidden = true
+            if selected {
+                cell.accessibilityTraits = [.image, .selected]
+            } else {
+                cell.accessibilityTraits = .image
+            }
+        } else {
+            cell.isAccessibilityElement = false
+            cell.accessibilityLabel = nil
+            cell.buttonView.accessibilityTraits = .image
+            cell.buttonView.accessibilityLabel = photo.getVoiceoverDescription()
+            cell.buttonView.accessibilityElementsHidden = false
+        }
     }
 
     func updateCollectionViewSelectionState() {

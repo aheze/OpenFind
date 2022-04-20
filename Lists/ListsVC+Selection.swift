@@ -21,6 +21,8 @@ extension ListsViewController {
     func startSelecting() {
         searchViewModel.dismissKeyboard?()
         selectBarButton.title = "Done"
+        selectBarButton.accessibilityLabel = "Done"
+        selectBarButton.accessibilityHint = "Stop selecting lists"
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
         toolbarViewModel.toolbar = AnyView(toolbarView)
@@ -30,6 +32,8 @@ extension ListsViewController {
     func resetSelectingState() {
         model.isSelecting = false
         selectBarButton.title = "Select"
+        selectBarButton.accessibilityLabel = "Select"
+        selectBarButton.accessibilityHint = "Select lists"
         toolbarViewModel.toolbar = nil
         model.selectedLists = []
         updateCollectionViewSelectionState()
