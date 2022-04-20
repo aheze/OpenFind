@@ -46,7 +46,7 @@ extension PhotosViewController {
             cell.representedAssetIdentifier = photo.asset.localIdentifier
             self.model.imageManager.requestImage(
                 for: photo.asset,
-                   targetSize: self.realmModel.thumbnailSize,
+                targetSize: self.realmModel.thumbnailSize,
                 contentMode: .aspectFill,
                 options: nil
             ) { thumbnail, _ in
@@ -70,6 +70,22 @@ extension PhotosViewController {
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
             self.configureCellSelection(cell: cell, selected: selected)
 
+            
+            if self.model.isSelecting {
+                cell.accessibilityLabel = photo.getVoiceoverDescription()
+                cell.buttonView.accessibilityElementsHidden = true
+                if selected {
+                    cell.accessibilityTraits = [.image, .selected]
+                } else {
+                    cell.accessibilityTraits = .image
+                }
+            } else {
+                cell.accessibilityLabel = nil
+                cell.buttonView.accessibilityTraits = .image
+                cell.buttonView.accessibilityLabel = photo.getVoiceoverDescription()
+                cell.buttonView.accessibilityElementsHidden = false
+            }
+            
             return cell
         }
 

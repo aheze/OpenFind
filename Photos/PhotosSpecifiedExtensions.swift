@@ -34,6 +34,20 @@ extension PhotoMetadata {
     }
 }
 
+extension Photo {
+    func getVoiceoverDescription() -> String {
+        
+        let dateString = asset.creationDate?.convertDateToReadableString() ?? ""
+        let starred = metadata?.isStarred ?? false
+        
+        if starred {
+            return "\(dateString), starred."
+        } else {
+            return dateString
+        }
+    }
+}
+
 extension PHAsset {
     func getDateCreatedCategorization() -> PhotosSectionCategorization? {
         if

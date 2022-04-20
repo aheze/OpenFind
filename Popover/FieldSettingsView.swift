@@ -246,7 +246,7 @@ struct PaletteButton: View {
                 )
         }
         .accessibilityElement(children: .ignore)
-        .accessibility(getDescription())
+        .accessibilityLabel(getDescription())
     }
     
     func getDescription() -> String {

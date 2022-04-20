@@ -156,12 +156,12 @@ class TabBarViewController: UIViewController {
             return /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
         }
         
-        let otherIndices = self.pages.indices.filter { $0 != index }
-        print("pother: \(otherIndices)")
+        let otherIndices = pages.indices.filter { $0 != index }
+        
         for otherIndex in otherIndices {
             pages[otherIndex].view.accessibilityElementsHidden = true
         }
-        pages[index].view.accessibilityElementsHidden = false
+        pages[safe: index]?.view.accessibilityElementsHidden = false
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)

@@ -10,7 +10,11 @@ import SwiftUI
 
 extension View {
     /// accessibility label
-    func accessibility(_ string: String) -> some View {
+    func accessibilityLabel(_ string: String) -> some View {
+        accessibility(label: Text(string))
+    }
+    
+    func accessibilityHint(_ string: String) -> some View {
         accessibility(hint: Text(string))
     }
 }

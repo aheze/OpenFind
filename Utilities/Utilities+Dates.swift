@@ -100,7 +100,7 @@ extension Date {
         } else {
             /// displays the date as "January 1, 2020"
             /// the ' ' marks indicate a character that you add (in our case, a comma)
-            dateFormatter.dateFormat = "MMMM d',' yyyy"
+            dateFormatter.dateFormat = "MMMM d"
             return dateFormatter.string(from: self)
         }
     }

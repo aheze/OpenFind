@@ -16,39 +16,49 @@ struct PhotosSlidesToolbarView: View {
             ToolbarIconButton(iconName: "square.and.arrow.up") {
                 sharePhoto()
             }
+            .accessibilityLabel("Share")
+            .accessibilityHint("Share this photo")
         
             Spacer()
         
-            ToolbarIconButton(iconName: starIcon()) {
+            let starDescription = getStarDescription()
+            ToolbarIconButton(iconName: starDescription.icon) {
                 toggleStar()
             }
+            .accessibilityLabel(starDescription.label)
+            .accessibilityHint(starDescription.hint)
         
             Spacer()
         
-            ToolbarIconButton(iconName: infoIcon()) {
+            let infoDescription = getInfoDescription()
+            ToolbarIconButton(iconName: infoDescription.icon) {
                 toggleToolbar()
             }
+            .accessibilityLabel(infoDescription.label)
+            .accessibilityHint(infoDescription.hint)
         
             Spacer()
         
             ToolbarIconButton(iconName: "trash") {
                 deletePhoto()
             }
+            .accessibilityLabel("Delete")
         }
     }
     
-    func starIcon() -> String {
+    /// 1. icon, 2. voiceover label, 3. voiceover hint
+    func getStarDescription() -> (icon: String, label: String, hint: String) {
         if let slidesState = model.slidesState, slidesState.toolbarStarOn {
-            return "star.fill"
+            return ("star.fill", "Starred", "Tap to unstar")
         }
-        return "star"
+        return ("star", "Star", "Tap to star")
     }
     
-    func infoIcon() -> String {
+    func getInfoDescription() -> (icon: String, label: String, hint: String) {
         if let slidesState = model.slidesState, slidesState.toolbarInformationOn {
-            return "info.circle.fill"
+            return ("info.circle.fill", "Info On", "Tap to hide information about this photo")
         }
-        return "info.circle"
+        return ("info.circle", "Info", "Tap to show information about this photo")
     }
 
     func toggleStar() {

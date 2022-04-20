@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         model: PhotosViewModel(),
         realmModel: realmModel,
         tabViewModel: tabViewModel,
+        photosPermissionsViewModel: PhotosPermissionsViewModel(),
         toolbarViewModel: toolbarViewModel
     )
 

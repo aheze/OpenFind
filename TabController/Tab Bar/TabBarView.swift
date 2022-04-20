@@ -22,6 +22,7 @@ struct TabBarView: View {
             }
             .padding(.bottom, tabViewModel.tabBarAttributes.iconsBottomPaddingForOverflow)
             .opacity(toolbarViewModel.toolbar == nil ? 1 : 0)
+            .accessibility(hidden: toolbarViewModel.toolbar != nil)
                 
             /// toolbar for other view controllers
             .overlay(
@@ -40,6 +41,7 @@ struct TabBarView: View {
                 CameraToolbarView(model: cameraViewModel)
                     .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
                     .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
+                    .accessibility(hidden: tabViewModel.tabState != .camera)
             )
             .frame(height: tabViewModel.tabBarAttributes.backgroundHeight, alignment: .bottom)
             .padding(.horizontal, 16)

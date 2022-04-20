@@ -11,7 +11,7 @@ import UIKit
 extension RealmContainer {
     func loadPhotoMetadatas() {}
 
-    func deleteAllMetadata() {}
+    func deleteAllScannedData() {}
 
     func updatePhotoMetadata(metadata: PhotoMetadata?) {}
 
