@@ -69,6 +69,8 @@ extension PhotosSlidesViewController {
 
         model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto
 
+        /// hide views when pushing
+
         if model.animatingSlides {
             photoSlidesViewController.containerView.alpha = 0
         } else {

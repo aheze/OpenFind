@@ -44,7 +44,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
 
-    @IBOutlet var collectionViewContainer: UIView!
+    @IBOutlet var collectionViewContainer: PhotosSlidesCollectionContainer!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
 
@@ -122,11 +122,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         withAnimation {
             toolbarViewModel.toolbar = AnyView(toolbarView)
         }
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = collectionView.windowFrame()
+        tabViewModel.excludedFrames[.photosSlidesItemCollectionView] = view.bounds
     }
 
     override func viewWillDisappear(_ animated: Bool) {

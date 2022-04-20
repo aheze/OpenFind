@@ -59,7 +59,6 @@ class TabBarViewController: UIViewController {
         contentCollectionView.decelerationRate = .fast
         contentCollectionView.showsHorizontalScrollIndicator = false
         contentCollectionView.contentInsetAdjustmentBehavior = .never
-        print("scroll: \(contentCollectionView.isScrollEnabled)")
         
         contentCollectionView.delegate = self
         contentCollectionView.dataSource = self

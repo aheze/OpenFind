@@ -21,6 +21,11 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             let viewController = cell.viewController
         else { return }
 
+        if model.animatingSlides {
+            viewController.containerView.alpha = 0
+        } else {
+            viewController.containerView.alpha = 1
+        }
         viewController.highlightsViewModel.highlights.removeAll()
         if !slidesSearchViewModel.stringToGradients.isEmpty {
             /// if keys are same, show the highlights.
@@ -45,7 +50,6 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 /// detect stopped at a new photo
 extension PhotosSlidesViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if scrollView == self.scrollView {
             infoScrollViewDidScroll()
         }

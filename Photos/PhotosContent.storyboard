@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -245,7 +245,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qD1-tb-8vt">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-dC-vKf" customClass="PhotosSlidesCollectionContainer" customModule="FindPhotos" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VDv-5V-ksK">
@@ -318,7 +318,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="VDv-5V-ksK" id="5hV-NE-Ntn"/>
-                        <outlet property="collectionViewContainer" destination="Hrf-dC-vKf" id="qXn-mh-zrp"/>
+                        <outlet property="collectionViewContainer" destination="Hrf-dC-vKf" id="gGR-lm-oCk"/>
                         <outlet property="collectionViewContainerHeightC" destination="3xd-XB-bot" id="nb9-fS-3TK"/>
                         <outlet property="contentView" destination="qD1-tb-8vt" id="jGq-fg-Y03"/>
                         <outlet property="infoViewContainer" destination="BaS-Fz-cut" id="3RD-wI-Uvj"/>
