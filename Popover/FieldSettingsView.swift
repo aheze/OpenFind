@@ -91,6 +91,14 @@ struct FieldSettingsView: View {
         .cornerRadius(16)
     }
     
+    func getDefaultColorDescription() -> String {
+        if model.selectedColor == nil {
+            return "Default color \(model.defaultColor.readableDescription), selected."
+        } else {
+            return "Default color \(model.defaultColor.readableDescription)"
+        }
+    }
+    
     func header(string: String, showEditListButton: Bool = false) -> some View {
         HStack {
             Text(string)
@@ -151,6 +159,7 @@ struct FieldSettingsView: View {
         .clipped()
         .opacity(model.words.isEmpty ? 0 : 1)
         .frame(height: heightOfWordsStack(), alignment: .top)
+        .accessibility(hidden: model.words.isEmpty)
     }
     
     func defaultButtonForegroundColor() -> UIColor {
@@ -235,6 +244,16 @@ struct PaletteButton: View {
                         .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                         .opacity(color == selectedColor ? 1 : 0)
                 )
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibility(getDescription())
+    }
+    
+    func getDescription() -> String {
+        if color == selectedColor {
+            return "Color \(color.readableDescription), selected."
+        } else {
+            return "Color \(color.readableDescription)"
         }
     }
 }

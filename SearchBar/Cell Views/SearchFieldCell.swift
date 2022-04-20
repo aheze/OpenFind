@@ -112,6 +112,8 @@ class SearchFieldCell: UICollectionViewCell {
         textField.keyboardAppearance = configuration.keyboardAppearance
         leftViewRightC.constant = 0
         rightViewLeftC.constant = 0
+        
+        leftView.buttonView.accessibilityLabel = "Search Bar Options"
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

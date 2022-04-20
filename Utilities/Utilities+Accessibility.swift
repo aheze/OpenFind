@@ -6,8 +6,24 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
+import SwiftUI
 
-import UIKit
+extension View {
+    /// accessibility label
+    func accessibility(_ string: String) -> some View {
+        accessibility(hint: Text(string))
+    }
+}
+
+extension UIColor {
+    var readableDescription: String {
+        if #available(iOS 14.0, *) {
+            return self.accessibilityName
+        } else {
+            return "#\(self.hexString)"
+        }
+    }
+}
 
 struct AccessibilityText {
     var text = ""

@@ -57,6 +57,9 @@ extension SearchViewController {
         
         cell.leftViewTapped = { [weak self] in
             guard let self = self else { return }
+            if UIAccessibility.isVoiceOverRunning {
+                cell.endEditing(true)
+            }
             
             /// update the index
             let index = self.searchViewModel.fields.firstIndex { $0.id == field.id } ?? 0
@@ -126,11 +129,18 @@ extension SearchViewController {
         if text.isEmpty {
             if valuesCount >= 2 {
                 cell.rightView.clearIconView.setState(.delete, animated: true)
+                cell.rightView.buttonView.accessibilityElementsHidden = false
+                cell.rightView.buttonView.accessibilityLabel = "Remove search bar"
+                cell.rightView.buttonView.accessibilityHint = "Remove this search bar"
             } else {
                 cell.rightView.clearIconView.setState(.hidden, animated: true)
+                cell.rightView.buttonView.accessibilityElementsHidden = true
             }
         } else {
             cell.rightView.clearIconView.setState(.clear, animated: true)
+            cell.rightView.buttonView.accessibilityElementsHidden = false
+            cell.rightView.buttonView.accessibilityLabel = "Clear"
+            cell.rightView.buttonView.accessibilityHint = "Clear entered text"
         }
     }
     

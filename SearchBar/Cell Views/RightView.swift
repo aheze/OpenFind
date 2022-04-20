@@ -11,8 +11,7 @@ class RightView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet var buttonView: ButtonView!
     
-    
-    @IBOutlet weak var clearIconView: ClearIconView!
+    @IBOutlet var clearIconView: ClearIconView!
     @IBOutlet var iconViewWidthC: NSLayoutConstraint!
     @IBOutlet var iconViewHeightC: NSLayoutConstraint!
     @IBOutlet var iconViewCenterXC: NSLayoutConstraint!

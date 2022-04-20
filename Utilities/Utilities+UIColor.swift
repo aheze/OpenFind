@@ -64,6 +64,10 @@ extension UIColor {
         return getHex() ?? 0x00AEEF
     }
 
+    var hexString: String {
+        return String(hex, radix: 16, uppercase: true)
+    }
+
     /// from https://stackoverflow.com/a/28645384/14351818
     func getHex() -> UInt? {
         var fRed: CGFloat = 0

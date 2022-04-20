@@ -1472,7 +1472,6 @@
 		3C6C74392781955D00E039F0 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
 		3C6C743A2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
 		3C6C743B2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
-		3C6C743C2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
 		3C6C743F2781958E00E039F0 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
 		3C6C7441278195E200E039F0 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C6C7440278195E200E039F0 /* Popovers */; };
 		3C6C7445278221E600E039F0 /* HighlightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */; };
@@ -10016,7 +10015,6 @@
 				3CFD6031278B71E20031BC8B /* SearchNC+SearchBar.swift in Sources */,
 				3C6EAA6C2803B16A00B036AD /* IgnoredPhotosVC+Listen.swift in Sources */,
 				3C0F23AC27F4EB6D00BCBFAE /* ListsVC+Listen.swift in Sources */,
-				3C6C743C2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
 				3CB8C32A27C34CF5000AA3B9 /* PhotosVM+Scanning.swift in Sources */,
 				3C5B36A727FEAEDE00801FEE /* SettingsController+Listen.swift in Sources */,
 				3C6C73352781943600E039F0 /* Constants.swift in Sources */,
