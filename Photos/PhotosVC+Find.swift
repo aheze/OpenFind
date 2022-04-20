@@ -74,7 +74,9 @@ extension PhotosViewController {
             updateResults() /// always update results anyway, for example when coming back from star
         }
         
-        resultsHeaderViewModel.text = model.resultsState?.getResultsText() ?? ""
+        let results = model.resultsState?.getResultsText() ?? ""
+        resultsHeaderViewModel.text = results
+        UIAccessibility.post(notification: .announcement, argument: results)
         
         if model.isSelecting {
             resetSelectingState()

@@ -16,6 +16,8 @@ extension PhotosViewController {
             target: self,
             action: #selector(selectPressed)
         )
+        selectButton.accessibilityLabel = "Select"
+        selectButton.accessibilityHint = "Select photo"
         selectBarButton = selectButton
 
         let scanningButton = UIBarButtonItem.customButton(customView: scanningIconController.view, length: 34)
@@ -31,6 +33,8 @@ extension PhotosViewController {
             target: self,
             action: #selector(cancelPressed)
         )
+        cancelButton.accessibilityLabel = "Cancel"
+        cancelButton.accessibilityHint = "Cancel searching"
         navigationItem.leftBarButtonItem = cancelButton
     }
 

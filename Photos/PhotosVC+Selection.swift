@@ -26,6 +26,8 @@ extension PhotosViewController {
         resultsCollectionView.allowsSelection = true
         resultsCollectionView.allowsMultipleSelection = true
         selectBarButton?.title = "Done"
+        selectBarButton?.accessibilityLabel = "Done"
+        selectBarButton?.accessibilityHint = "Stop selecting photos"
         toolbarViewModel.toolbar = AnyView(selectionToolbar)
         showFiltersView(false, animate: true)
         if model.resultsState != nil {
@@ -47,6 +49,8 @@ extension PhotosViewController {
         resultsCollectionView.allowsSelection = false
         resultsCollectionView.allowsMultipleSelection = false
         selectBarButton?.title = "Select"
+        selectBarButton?.accessibilityLabel = "Select"
+        selectBarButton?.accessibilityHint = "Select photos"
         toolbarViewModel.toolbar = nil
         showFiltersView(true, animate: true)
         model.selectedPhotos = []
@@ -85,21 +89,18 @@ extension PhotosViewController {
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
 
+        let description = photo.getVoiceoverDescription()
         if model.isSelecting {
-            cell.isAccessibilityElement = true
-            cell.accessibilityLabel = photo.getVoiceoverDescription()
             cell.buttonView.accessibilityElementsHidden = true
-            if selected {
-                cell.accessibilityTraits = [.image, .selected]
-            } else {
-                cell.accessibilityTraits = .image
-            }
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = description
+            cell.accessibilityTraits = selected ? .selected : .none
         } else {
+            cell.buttonView.accessibilityElementsHidden = false
             cell.isAccessibilityElement = false
             cell.accessibilityLabel = nil
-            cell.buttonView.accessibilityTraits = .image
-            cell.buttonView.accessibilityLabel = photo.getVoiceoverDescription()
-            cell.buttonView.accessibilityElementsHidden = false
+            cell.buttonView.accessibilityLabel = description
+            cell.buttonView.accessibilityTraits = selected ? .selected : .none
         }
     }
 

@@ -73,9 +73,12 @@ extension PhotosViewController {
 
             self.loadHighlights(for: cell, findPhoto: findPhoto)
             
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = findPhoto.getVoiceoverDescription()
+            
             /// selection
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
-            self.configureResultsCellSelection(cell: cell, photo: findPhoto.photo, selected: selected)
+            self.configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: selected)
 
             cell.tapped = { [weak self] in
                 guard let self = self else { return }

@@ -36,7 +36,6 @@ extension PhotoMetadata {
 
 extension Photo {
     func getVoiceoverDescription() -> String {
-        
         let dateString = asset.creationDate?.convertDateToReadableString() ?? ""
         let starred = metadata?.isStarred ?? false
         
@@ -45,6 +44,24 @@ extension Photo {
         } else {
             return dateString
         }
+    }
+}
+
+extension FindPhoto {
+    func getVoiceoverDescription() -> String {
+        let photoDescription = photo.getVoiceoverDescription()
+        var resultsText = ""
+        
+        if let highlightsSet = highlightsSet {
+            if highlightsSet.highlights.count == 1 {
+                resultsText = " \(highlightsSet.highlights.count) result. \(descriptionText)"
+            } else {
+                resultsText = " \(highlightsSet.highlights.count) results. \(descriptionText)"
+            }
+        }
+        
+        let string = photoDescription + resultsText
+        return string
     }
 }
 

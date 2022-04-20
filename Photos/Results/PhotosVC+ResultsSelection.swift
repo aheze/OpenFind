@@ -10,43 +10,41 @@ import UIKit
 
 extension PhotosViewController {
     func photoResultsSelected(at indexPath: IndexPath) {
-        guard let resultsState = model.resultsState, let photo = resultsState.displayedFindPhotos[safe: indexPath.item]?.photo else { return }
+        guard let resultsState = model.resultsState, let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item] else { return }
 
-        if !model.selectedPhotos.contains(photo) {
-            model.selectedPhotos.append(photo)
+        if !model.selectedPhotos.contains(findPhoto.photo) {
+            model.selectedPhotos.append(findPhoto.photo)
 
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                configureResultsCellSelection(cell: cell, photo: photo, selected: true)
+                configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: true)
             }
         }
     }
 
     func photoResultsDeselected(at indexPath: IndexPath) {
-        guard let resultsState = model.resultsState, let photo = resultsState.displayedFindPhotos[safe: indexPath.item]?.photo else { return }
+        guard let resultsState = model.resultsState, let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item] else { return }
 
-        if model.selectedPhotos.contains(photo) {
-            model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
+        if model.selectedPhotos.contains(findPhoto.photo) {
+            model.selectedPhotos = model.selectedPhotos.filter { $0 != findPhoto.photo }
 
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                configureResultsCellSelection(cell: cell, photo: photo, selected: false)
+                configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: false)
             }
         }
     }
 
-    func configureResultsCellSelection(cell: PhotosResultsCell, photo: Photo, selected: Bool) {
+    func configureResultsCellSelection(cell: PhotosResultsCell, findPhoto: FindPhoto, selected: Bool) {
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
         cell.buttonView.isUserInteractionEnabled = !model.isSelecting
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
 
-        cell.isAccessibilityElement = true
-        cell.accessibilityLabel = photo.getVoiceoverDescription()
-//        cell.buttonView.accessibilityElementsHidden = true
+        
         if selected {
-            cell.accessibilityTraits = [.image, .selected]
+            cell.accessibilityTraits = .selected
         } else {
-            cell.accessibilityTraits = .image
+            cell.accessibilityTraits = .none
         }
     }
 
