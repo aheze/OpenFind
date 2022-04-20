@@ -21,11 +21,6 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             let viewController = cell.viewController
         else { return }
 
-        if model.animatingSlides {
-            viewController.containerView.alpha = 0
-        } else {
-            viewController.containerView.alpha = 1
-        }
         viewController.highlightsViewModel.highlights.removeAll()
         if !slidesSearchViewModel.stringToGradients.isEmpty {
             /// if keys are same, show the highlights.

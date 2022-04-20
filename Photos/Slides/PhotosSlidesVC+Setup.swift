@@ -21,6 +21,7 @@ extension PhotosSlidesViewController {
         collectionViewContainer.backgroundColor = .clear
         collectionView.backgroundColor = .clear
         
+        collectionViewContainer.accessibilityTraits = .none
         collectionViewContainer.isAccessibilityElement = true
         collectionViewContainer.model = model
         collectionViewContainer.increment = { [weak self] in
@@ -35,6 +36,12 @@ extension PhotosSlidesViewController {
                     self.model.slidesState?.currentPhoto = slidesState.slidesPhotos[safe: nextIndex]?.findPhoto.photo
                     self.model.slidesCurrentPhotoChanged?()
                     self.collectionView.scrollToItem(at: nextIndex.indexPath, at: .centeredHorizontally, animated: true)
+                    if
+                        let cell = self.collectionView.cellForItem(at: nextIndex.indexPath) as? PhotosSlidesContentCell,
+                        let viewController = cell.viewController
+                    {
+                        viewController.containerView.alpha = 1
+                    }
                 }
             }
         }
@@ -50,6 +57,12 @@ extension PhotosSlidesViewController {
                     self.model.slidesState?.currentPhoto = slidesState.slidesPhotos[safe: previousIndex]?.findPhoto.photo
                     self.model.slidesCurrentPhotoChanged?()
                     self.collectionView.scrollToItem(at: previousIndex.indexPath, at: .centeredHorizontally, animated: true)
+                    if
+                        let cell = self.collectionView.cellForItem(at: previousIndex.indexPath) as? PhotosSlidesContentCell,
+                        let viewController = cell.viewController
+                    {
+                        viewController.containerView.alpha = 1
+                    }
                 }
             }
         }

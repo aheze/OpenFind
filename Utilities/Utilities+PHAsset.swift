@@ -27,4 +27,18 @@ extension PHAsset {
 
         return fileName
     }
+
+    var timeCreatedString: String? {
+        guard let creationDate = creationDate else { return nil }
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "d MMM y"
+
+        timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        timeFormatter.dateFormat = "h:mm a"
+        timeFormatter.amSymbol = "AM"
+        timeFormatter.pmSymbol = "PM"
+
+        let timeAsString = timeFormatter.string(from: creationDate)
+        return timeAsString
+    }
 }

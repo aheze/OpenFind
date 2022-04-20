@@ -158,8 +158,10 @@ class TabBarViewController: UIViewController {
         let otherIndices = pages.indices.filter { $0 != index }
         
         for otherIndex in otherIndices {
+            pages[otherIndex].view.isAccessibilityElement = true
             pages[otherIndex].view.accessibilityElementsHidden = true
         }
+        pages[safe: index]?.view.isAccessibilityElement = false
         pages[safe: index]?.view.accessibilityElementsHidden = false
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {

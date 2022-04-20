@@ -37,12 +37,15 @@ extension PhotoMetadata {
 extension Photo {
     func getVoiceoverDescription() -> String {
         let dateString = asset.creationDate?.convertDateToReadableString() ?? ""
+        let timeString = asset.timeCreatedString ?? ""
+        let creationString = "\(dateString) at \(timeString)"
+        
         let starred = metadata?.isStarred ?? false
         
         if starred {
-            return "\(dateString), starred."
+            return "\(creationString), starred."
         } else {
-            return dateString
+            return creationString
         }
     }
 }

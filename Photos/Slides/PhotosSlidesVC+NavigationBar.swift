@@ -50,16 +50,7 @@ extension PhotosSlidesViewController {
     func updateNavigationBarTitle(for photo: Photo) {
         if let dateCreated = photo.asset.creationDate {
             let dateAsString = dateCreated.convertDateToReadableString()
-            
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "d MMM y"
-
-            timeFormatter.locale = Locale(identifier: "en_US_POSIX")
-            timeFormatter.dateFormat = "h:mm a"
-            timeFormatter.amSymbol = "AM"
-            timeFormatter.pmSymbol = "PM"
-            
-            let timeAsString = timeFormatter.string(from: dateCreated)
+            let timeAsString = photo.asset.timeCreatedString ?? ""
             
             titleLabel.text = dateAsString
             subtitleLabel.text = timeAsString

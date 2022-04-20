@@ -11,11 +11,11 @@ import UIKit
 
 extension ListsDetailViewController {
     func setupNavigationBar() {
-//        if #available(iOS 14.0, *) {
-//            setupTopMenu()
-//        } else {
+        if #available(iOS 14.0, *) {
+            setupTopMenu()
+        } else {
             setupPopoversTopMenu()
-//        }
+        }
         setupDismissButton()
     }
     

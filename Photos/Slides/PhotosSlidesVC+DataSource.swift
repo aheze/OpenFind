@@ -68,6 +68,8 @@ extension PhotosSlidesViewController {
         }
 
         model.slidesState?.slidesPhotos[indexPath.item] = slidesPhoto
+        photoSlidesViewController.scrollZoomController.imageView.accessibilityTraits = .none
+        photoSlidesViewController.scrollZoomController.drawingView.accessibilityTraits = .none
 
         /// hide views when pushing
 
