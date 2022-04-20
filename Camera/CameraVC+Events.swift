@@ -44,7 +44,7 @@ extension CameraViewController {
             {
                 var recentEventsWithoutLast = model.history.recentEvents
                 _ = recentEventsWithoutLast.removeLast()
-                let recentFoundHighlights = recentEventsWithoutLast.suffix(5).map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
+                let recentFoundHighlights = recentEventsWithoutLast.suffix(10).map { $0.highlights }.flatMap { $0 }.map { $0.string } as [String]
                 
                 if recentFoundHighlights.count <= 2 {
                     if let style = hapticFeedbackLevel.getFeedbackStyle() {

@@ -17,6 +17,7 @@ enum Utilities {
         }
     }
 }
+
 extension Collection {
     /// Returns the element at the specified index if it is within bounds, otherwise nil.
     subscript(safe index: Index) -> Element? {
@@ -83,10 +84,15 @@ class TimeElapsed {
     }
 }
 
-
 extension Task where Success == Never, Failure == Never {
     static func sleep(seconds: Double) async throws {
         let duration = UInt64(seconds * 1_000_000_000)
         try await Task.sleep(nanoseconds: duration)
+    }
+}
+
+extension UIApplication {
+    static var rootViewController: UIViewController? {
+        UIApplication.shared.windows.first?.rootViewController
     }
 }

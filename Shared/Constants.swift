@@ -13,6 +13,10 @@ enum Colors {
     static var accent = UIColor(named: "Accent")!
     static var accentDarkBackground = UIColor(hex: 0x0052a9)
     static var activeIconColor = UIColor(hex: 0x8AF9FF)
+    
+    /// doesn't change according to dark mode or not
+    static var accentLighter = UIColor(hex: 0x00AEEF)
+    static var accentDarker = UIColor(hex: 0x00A4FF)
 }
 
 extension Color {

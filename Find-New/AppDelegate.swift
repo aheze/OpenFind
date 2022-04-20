@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         lists.append(list)
                     }
 
-                    if let viewController = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+                    if let viewController = UIApplication.rootViewController as? ViewController {
                         viewController.loadMigratedData(migratedPhotoMetadatas: photoMetadatas, migratedLists: lists)
                     } else { /// if no view controller, cache data.
                         RealmContainer.migratedPhotoMetadatas = photoMetadatas
