@@ -26,7 +26,11 @@ extension PhotosViewController {
         model.reloadAfterExternalPhotosChanged = { [weak self] in
             guard let self = self else { return }
             
-            self.find(context: .findingAfterNewPhotosAdded)
+            if self.model.resultsState != nil {
+                self.find(context: .findingAfterNewPhotosAdded)
+            } else {
+                self.updateDisplayedPhotos()
+            }
         }
         
         /// underlying arrays have already been updated, reload the UI.

@@ -75,7 +75,7 @@ extension SearchViewController {
             break
         }
 
-        let configuration = self.searchViewModel.configuration
+        let configuration = searchViewModel.configuration
         var popover = Popover { FieldSettingsView(model: model, configuration: configuration) }
         popover.attributes.rubberBandingMode = .none
         popover.attributes.sourceFrame = { cell.windowFrame() }
@@ -86,3 +86,5 @@ extension SearchViewController {
         return popover
     }
 }
+
+

@@ -49,6 +49,8 @@ extension PhotosViewController {
     }
     
     @MainActor func apply(allFindPhotos: [FindPhoto], starredFindPhotos: [FindPhoto], screenshotsFindPhotos: [FindPhoto], context: FindContext) {
+        print("resultsState? \(model.resultsState != nil)")
+        
         guard !searchViewModel.isEmpty else { return }
         let displayedFindPhotos: [FindPhoto]
         

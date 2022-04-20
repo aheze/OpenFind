@@ -19,8 +19,8 @@ extension PhotosViewModel {
             newMetadata.sentences = sentences
             newMetadata.scannedInLanguages = visionOptions.recognitionLanguages
             newPhoto.metadata = newMetadata
-            addSentences(of: newPhoto, immediately: !inBatch)
             getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata)
+            addSentences(of: newPhoto, immediately: !inBatch)
         } else {
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
@@ -31,8 +31,8 @@ extension PhotosViewModel {
                 isIgnored: false
             )
             newPhoto.metadata = metadata
-            addSentences(of: newPhoto, immediately: !inBatch)
             getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
+            addSentences(of: newPhoto, immediately: !inBatch)
         }
 
         photosToScan = photosToScan.filter { $0 != photo }

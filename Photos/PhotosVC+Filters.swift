@@ -54,10 +54,11 @@ extension PhotosViewController {
     /// If `model.resultsState != nil`, will find again
     func sliderChanged(filter: SliderViewModel.Filter) {
         /// find again (handles star/unstar)
-        sliderChanged()
+        updateDisplayedPhotos()
     }
 
-    func sliderChanged() {
+    /// call this after slider change *or* adding new photos
+    func updateDisplayedPhotos() {
         switch sliderViewModel.selectedFilter ?? .all {
         case .starred:
             model.displayedSections = model.starredSections

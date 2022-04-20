@@ -12,6 +12,7 @@ extension TabBarViewController: UICollectionViewDelegate {
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
         if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             let middle = contentCollectionView.bounds.width
@@ -48,6 +49,9 @@ extension TabBarViewController: UICollectionViewDelegate {
                 model.willBeginNavigating?(model.tabState, newTab)
             }
             model.changeTabState(newTab: newTab)
+        } else if UIAccessibility.isVoiceOverRunning {
+            UIAccessibility.post(notification: .layoutChanged, argument: view)
+            updateTabContent(model.tabState, animated: false)
         }
     }
     
@@ -78,6 +82,7 @@ extension TabBarViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pageViewController = pages[indexPath.item]
+        pageViewController.accessibilityViewIsModal = true
         
         addChildViewController(pageViewController, in: cell.contentView)
     }

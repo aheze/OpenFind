@@ -59,7 +59,7 @@ class TabBarViewController: UIViewController {
         contentCollectionView.decelerationRate = .fast
         contentCollectionView.showsHorizontalScrollIndicator = false
         contentCollectionView.contentInsetAdjustmentBehavior = .never
-        contentCollectionView.isScrollEnabled = !Debug.collectionViewScrollDisabled
+        print("scroll: \(contentCollectionView.isScrollEnabled)")
         
         contentCollectionView.delegate = self
         contentCollectionView.dataSource = self
@@ -67,9 +67,10 @@ class TabBarViewController: UIViewController {
         if let view = view as? TabControllerView {
             view.model = model
             view.tappedExcludedView = { [weak self] in
-                self?.contentCollectionView.isScrollEnabled = false
+                guard let self = self else { return }
+                self.contentCollectionView.isScrollEnabled = false
                 DispatchQueue.main.async {
-                    self?.contentCollectionView.isScrollEnabled = true
+                    self.contentCollectionView.isScrollEnabled = self.getScrollViewEnabled()
                 }
             }
         }
@@ -154,6 +155,13 @@ class TabBarViewController: UIViewController {
         default:
             return /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
         }
+        
+        let otherIndices = self.pages.indices.filter { $0 != index }
+        print("pother: \(otherIndices)")
+        for otherIndex in otherIndices {
+            pages[otherIndex].view.accessibilityElementsHidden = true
+        }
+        pages[index].view.accessibilityElementsHidden = false
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)

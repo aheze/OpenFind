@@ -88,6 +88,7 @@ extension PhotosViewModel {
     
     func loadPhotos() async {
         let (photos, ignoredPhotos, photosToScan) = await getPhotos()
+        print("Count: \(photosToScan.count)")
         
         await MainActor.run {
             self.photos = photos

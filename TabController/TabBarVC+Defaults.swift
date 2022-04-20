@@ -14,6 +14,16 @@ extension TabBarViewController {
     }
 
     @objc func swipeToNavigateChanged() {
-        self.contentCollectionView.isScrollEnabled = self.realmModel.swipeToNavigate
+        self.contentCollectionView.isScrollEnabled = self.getScrollViewEnabled()
+    }
+
+    func getScrollViewEnabled() -> Bool {
+        if Debug.collectionViewScrollDisabled {
+            return false
+        }
+        if self.realmModel.swipeToNavigate, !UIAccessibility.isVoiceOverRunning {
+            return true
+        }
+        return false
     }
 }
