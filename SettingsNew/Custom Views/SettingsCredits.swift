@@ -85,11 +85,12 @@ struct SettingsCredits: View {
                 } label: {
                     PortraitView(length: 180, circular: true, transform: $transform)
                 }
+                .buttonStyle(SettingsProfileButtonStyle())
 
                 Text("Find by Andrew Zheng")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
 
-                Text("Thanks for checking out Find, I really appreciate it :)")
+                Text("Thanks for checking out Find, I really appreciate it :) I'm the person who coded this app. If you have any questions, comments, or whatever just DM me on Twitter!")
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
@@ -110,7 +111,7 @@ struct SettingsCredits: View {
                 .padding(.horizontal, 32)
 
             VStack(spacing: SettingsConstants.sectionSpacing) {
-                Text("Find was only made possible by these people — thank you!")
+                Text("These people helped Find become what it is today. Thank you!")
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
@@ -148,6 +149,7 @@ struct SettingsCredits: View {
                         }
                     }
                 }
+                .buttonStyle(EasingScaleButtonStyle())
             }
         }
     }
@@ -268,6 +270,21 @@ struct SettingsProfileButtonStyle: ButtonStyle {
                 .spring(
                     response: 0.3,
                     dampingFraction: 0.4,
+                    blendDuration: 1
+                ),
+                value: configuration.isPressed
+            )
+    }
+}
+
+struct EasingScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .animation(
+                .spring(
+                    response: 0.3,
+                    dampingFraction: 0.7,
                     blendDuration: 1
                 ),
                 value: configuration.isPressed
