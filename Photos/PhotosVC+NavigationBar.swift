@@ -65,6 +65,7 @@ extension PhotosViewController {
         hideCancelNavigationBar()
         searchViewModel.updateFields(fields: searchViewModel.getDefaultFields(realmModel: realmModel), notify: true)
         model.updateSearchCollectionView?()
+        resetSelectingState()
     }
 
     @objc func selectPressed() {
