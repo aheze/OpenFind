@@ -15,6 +15,7 @@ import UIKit
 
 extension CameraViewController {
     func resume() {
+        focusGestureRecognizer.isEnabled = true
         livePreviewViewController?.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
         removeScrollZoomImage()
@@ -23,6 +24,7 @@ extension CameraViewController {
     }
 
     func pause() {
+        focusGestureRecognizer.isEnabled = false
         guard let livePreviewViewController = livePreviewViewController else { return }
         Task {
             let pausedImage = PausedImage()
@@ -36,7 +38,7 @@ extension CameraViewController {
             }
 
             let image = await livePreviewViewController.takePhoto()
-            
+
             guard currentUUID == self.model.pausedImage?.id else { return }
             self.setScrollZoomImage(image: image)
 
@@ -48,7 +50,7 @@ extension CameraViewController {
                 }
 
                 await scan(currentUUID: currentUUID, cgImage: cgImage)
-                
+
                 guard currentUUID == self.model.pausedImage?.id else { return }
                 self.endAutoProgress()
                 self.hideLivePreview()
