@@ -90,7 +90,7 @@ struct SettingsCredits: View {
                 Text("Find by Andrew Zheng")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
 
-                Text("Thanks for checking out Find, I really appreciate it :) I'm the person who coded this app. If you have any questions, comments, or whatever just DM me on Twitter!")
+                Text("Thanks for checking out Find, I really appreciate it :) I'm the person who coded this app. If you have any questions, comments, or whatever just message me using one of the links below!")
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
@@ -149,7 +149,6 @@ struct SettingsCredits: View {
                         }
                     }
                 }
-                .buttonStyle(EasingScaleButtonStyle())
             }
         }
     }
@@ -213,6 +212,7 @@ struct PersonView: View {
                     )
             )
         }
+        .buttonStyle(EasingScaleButtonStyle())
     }
 }
 
@@ -280,11 +280,11 @@ struct SettingsProfileButtonStyle: ButtonStyle {
 struct EasingScaleButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
             .animation(
                 .spring(
-                    response: 0.3,
-                    dampingFraction: 0.7,
+                    response: 0.2,
+                    dampingFraction: 0.6,
                     blendDuration: 1
                 ),
                 value: configuration.isPressed
