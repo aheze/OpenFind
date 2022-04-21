@@ -48,6 +48,11 @@ class LaunchViewController: UIViewController {
         return .lightContent
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        sceneContainer.layoutIfNeeded()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

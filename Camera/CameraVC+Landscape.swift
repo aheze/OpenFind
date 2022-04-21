@@ -18,12 +18,17 @@ extension CameraViewController {
         addChildViewController(hostingController, in: landscapeToolbarContainer)
         
         updateLandscapeToolbar()
-        let landscapeTabBarHeight = TabBarAttributes.darkBackgroundLandscape.backgroundHeight
-        
-        let cellHeight = landscapeTabBarHeight
-            - searchViewModel.configuration.barTopPaddingLandscape
-            - searchViewModel.configuration.barBottomPaddingLandscape
-        searchViewModel.configuration.cellHeightLandscape = cellHeight
+
+        if traitCollection.verticalSizeClass == .regular, traitCollection.horizontalSizeClass == .regular {
+            /// iPad
+        } else {
+            let landscapeTabBarHeight = TabBarAttributes.darkBackgroundLandscape.backgroundHeight
+            
+            let cellHeight = landscapeTabBarHeight
+                - searchViewModel.configuration.barTopPaddingLandscape
+                - searchViewModel.configuration.barBottomPaddingLandscape
+            searchViewModel.configuration.cellHeightLandscape = cellHeight
+        }
     }
     
     func updateLandscapeToolbar() {

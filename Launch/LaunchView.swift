@@ -44,10 +44,6 @@ struct LaunchView: View {
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(EdgeInsets(top: c.headerTopPadding, leading: c.sidePadding, bottom: c.shadowPadding, trailing: c.sidePadding))
-            .background(
-                LaunchGradientView(transparentBottom: true)
-            )
             .opacity(model.currentPage == .empty ? 1 : 0)
             .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
 
@@ -80,39 +76,7 @@ struct LaunchView: View {
                     .opacity(model.currentPage == .final ? 1 : 0)
                 )
 
-            if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
-                let previousPage = model.pages[safe: currentIndex - 1]
-                let nextPage = model.pages[safe: currentIndex + 1]
-
-                HStack {
-                    LaunchControlButtonView(icon: "chevron.backward") {
-                        if let previousPage = previousPage {
-                            model.setCurrentPage(to: previousPage)
-                        }
-                    }
-
-                    HStack(spacing: c.controlCircleSpacing) {
-                        ForEach(model.pages, id: \.self) { page in
-                            if page != .empty {
-                                Circle()
-                                    .fill(Color.white)
-                                    .frame(width: c.controlCircleLength, height: c.controlCircleLength)
-                                    .opacity(model.currentPage == page ? 1 : 0.5)
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-
-                    LaunchControlButtonView(icon: "chevron.forward") {
-                        if let nextPage = nextPage {
-                            model.setCurrentPage(to: nextPage)
-                        }
-                    }
-                    .opacity(nextPage != nil ? 1 : 0)
-                }
-                .padding(.horizontal, c.sidePadding)
-                .padding(.bottom, 16)
-            }
+            PagingButtonsView(model: model)
 
             Button {
                 withAnimation {
@@ -128,16 +92,53 @@ struct LaunchView: View {
             }
             .buttonStyle(LaunchButtonStyle())
             .frame(maxWidth: .infinity)
-            .padding(EdgeInsets(top: c.shadowPadding, leading: c.sidePadding, bottom: c.footerBottomPadding, trailing: c.sidePadding))
-            .background(
-                LaunchGradientView(transparentBottom: false)
-            )
             .opacity(model.currentPage == .empty ? 1 : 0)
             .frame(height: model.currentPage == .empty ? nil : 0, alignment: .bottom)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: 560, maxHeight: 900)
         .foregroundColor(.white)
         .opacity(model.showingUI ? 1 : 0)
+    }
+}
+
+struct PagingButtonsView: View {
+    @ObservedObject var model: LaunchViewModel
+    let c = LaunchViewConstants.self
+    
+    var body: some View {
+        if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
+            let previousPage = model.pages[safe: currentIndex - 1]
+            let nextPage = model.pages[safe: currentIndex + 1]
+
+            HStack {
+                LaunchControlButtonView(icon: "chevron.backward") {
+                    if let previousPage = previousPage {
+                        model.setCurrentPage(to: previousPage)
+                    }
+                }
+
+                HStack(spacing: c.controlCircleSpacing) {
+                    ForEach(model.pages, id: \.self) { page in
+                        if page != .empty {
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: c.controlCircleLength, height: c.controlCircleLength)
+                                .opacity(model.currentPage == page ? 1 : 0.5)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity)
+
+                LaunchControlButtonView(icon: "chevron.forward") {
+                    if let nextPage = nextPage {
+                        model.setCurrentPage(to: nextPage)
+                    }
+                }
+                .opacity(nextPage != nil ? 1 : 0)
+            }
+            .padding(.horizontal, c.sidePadding)
+            .padding(.bottom, 16)
+        }
     }
 }
 

@@ -16,8 +16,6 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
     /// get data
     var getPages: (() -> [LaunchPageIdentifier])?
     
-    var getCollectionViewWidth: (() -> CGFloat)?
-    
     var currentIndexChanged: (() -> Void)?
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
@@ -47,7 +45,7 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
      
-        let width = getCollectionViewWidth?() ?? collectionView.bounds.width
+        let width = collectionView.bounds.width
         let height = collectionView.bounds.height
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()

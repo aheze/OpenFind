@@ -16,10 +16,7 @@ extension LaunchContentViewController {
             guard let self = self else { return [] }
             return self.model.pages
         }
-        flowLayout.getCollectionViewWidth = {
-            let width = UIScreen.main.bounds.width - Global.safeAreaInsets.left - Global.safeAreaInsets.right
-            return width
-        }
+
         flowLayout.currentIndexChanged = { [weak self] in
             guard let self = self else { return }
 

@@ -44,6 +44,8 @@ class LaunchPageViewController: UIViewController {
         addChild(hostingController)
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
+        
+        hostingController.view.addDebugBorders(.red)
     }
 }
 

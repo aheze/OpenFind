@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JTv-bZ-ysY">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTv-bZ-ysY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3g-vt-zyh">
@@ -31,9 +30,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="I3g-vt-zyh" secondAttribute="trailing" id="8zo-jo-wOg"/>
+                            <constraint firstItem="JTv-bZ-ysY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9wv-BA-59F"/>
                             <constraint firstAttribute="bottom" secondItem="I3g-vt-zyh" secondAttribute="bottom" id="AM2-uY-ofb"/>
                             <constraint firstItem="I3g-vt-zyh" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="F48-rM-0V9"/>
+                            <constraint firstAttribute="trailing" secondItem="JTv-bZ-ysY" secondAttribute="trailing" id="FJc-Ck-8qU"/>
+                            <constraint firstItem="JTv-bZ-ysY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="KwO-3T-5aB"/>
                             <constraint firstItem="I3g-vt-zyh" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="lbg-7V-kEj"/>
+                            <constraint firstAttribute="bottom" secondItem="JTv-bZ-ysY" secondAttribute="bottom" id="sX9-dG-Thg"/>
                         </constraints>
                     </view>
                     <connections>
