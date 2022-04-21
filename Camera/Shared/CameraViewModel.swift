@@ -61,6 +61,7 @@ class CameraViewModel: ObservableObject {
         withAnimation {
             snapshotState = .inactive
         }
+        
         pausedImage = nil
     }
     

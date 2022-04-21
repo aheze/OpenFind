@@ -6,8 +6,8 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 /**
  When the camera view controller is paused
@@ -26,6 +26,7 @@ extension CameraViewController {
         guard let livePreviewViewController = livePreviewViewController else { return }
         Task {
             let pausedImage = PausedImage()
+            let currentUUID = pausedImage.id
 
             await MainActor.run {
                 model.pausedImage = pausedImage
@@ -34,8 +35,8 @@ extension CameraViewController {
                 hideZoomView()
             }
 
-            let currentUUID = pausedImage.id
             let image = await livePreviewViewController.takePhoto()
+            
             guard currentUUID == self.model.pausedImage?.id else { return }
             self.setScrollZoomImage(image: image)
 
@@ -47,6 +48,8 @@ extension CameraViewController {
                 }
 
                 await scan(currentUUID: currentUUID, cgImage: cgImage)
+                
+                guard currentUUID == self.model.pausedImage?.id else { return }
                 self.endAutoProgress()
                 self.hideLivePreview()
             }

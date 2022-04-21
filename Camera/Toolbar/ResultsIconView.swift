@@ -34,11 +34,10 @@ struct ResultsIconView: View {
         .accessibilityLabel(voiceOverLabel)
         .accessibilityHint("Double-tap for more information")
         .onValueChange(of: model.displayedResultsCount) { _, _ in
-            print("Changed!")
             UIAccessibility.post(notification: .announcement, argument: voiceOverLabel)
         }
     }
-    
+
     func getLabel() -> String {
         if model.displayedResultsCount == 1 {
             return "\(model.displayedResultsCount) result"
