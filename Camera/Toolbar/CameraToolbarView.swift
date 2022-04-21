@@ -33,5 +33,6 @@ struct CameraToolbarView: View {
             .accessibilityElement(children: .contain)
             .frame(maxWidth: .infinity)
         }
+        .accessibilityElement(children: .contain)
     }
 }

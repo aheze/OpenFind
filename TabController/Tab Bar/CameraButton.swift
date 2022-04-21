@@ -49,6 +49,41 @@ struct CameraButton: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(CameraButtonStyle(isShutter: tabViewModel.tabState == tabType))
+        .accessibilityLabel(getVoiceOverLabel())
+        .accessibilityValue(getVoiceOverValue())
+        .accessibilityHint(getVoiceOverHint())
+    }
+    
+    func getVoiceOverLabel() -> String {
+        if tabViewModel.tabState == tabType {
+            return "Shutter"
+        } else {
+            return "Camera"
+        }
+    }
+    func getVoiceOverValue() -> String {
+        if tabViewModel.tabState == tabType {
+            if cameraViewModel.shutterOn {
+                return "Paused"
+            } else {
+                return ""
+            }
+        } else {
+            return ""
+        }
+    }
+
+    
+    func getVoiceOverHint() -> String {
+        if tabViewModel.tabState == tabType {
+            if cameraViewModel.shutterOn {
+                return "Double-tap to resume the shutter"
+            } else {
+                return "Double-tap to pause the shutter and take a photo"
+            }
+        } else {
+            return "Navigate to the camera and change this button into a shutter"
+        }
     }
 }
 

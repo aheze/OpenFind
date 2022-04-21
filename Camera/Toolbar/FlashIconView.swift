@@ -29,9 +29,27 @@ struct FlashIconView: View {
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
                 .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
+        .accessibilityLabel(getVoiceOverLabel())
+        .accessibilityHint(getVoiceOverHint())
         .disabled(!isEnabled)
     }
 
+    func getVoiceOverLabel() -> String {
+        if model.flash {
+            return "Flashlight, on."
+        } else {
+            return "Flashlight, off."
+        }
+    }
+    
+    func getVoiceOverHint() -> String {
+        if model.flash {
+            return "Double-tap to turn off"
+        } else {
+            return "Double-tap to turn on"
+        }
+    }
+    
     func toggle() {
         withAnimation {
             model.flash.toggle()

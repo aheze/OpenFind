@@ -49,6 +49,8 @@ struct ZoomFactorView: View {
                 isActive: isActive
             )
         }
+        .accessibilityElement()
+        .accessibilityLabel("\(zoomFactor.zoomLabelRange.lowerBound.string) zoom")
         .disabled(isActive || !zoomViewModel.allowingButtonPresses) /// only press-able when not already pressed
         .scaleEffect(
             zoomViewModel.isExpanded && !isActive ? zoomFactor.activationProgress : 1

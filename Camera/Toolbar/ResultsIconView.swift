@@ -12,6 +12,7 @@ struct ResultsIconView: View {
     @State var scaleAnimationActive = false
 
     var body: some View {
+        let voiceOverLabel = getLabel()
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
 
@@ -29,6 +30,20 @@ struct ResultsIconView: View {
                 .frame(width: 40, height: 40)
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
                 .cameraToolbarIconBackground(toolbarState: model.toolbarState)
+        }
+        .accessibilityLabel(voiceOverLabel)
+        .accessibilityHint("Double-tap for more information")
+        .onValueChange(of: model.displayedResultsCount) { _, _ in
+            print("Changed!")
+            UIAccessibility.post(notification: .announcement, argument: voiceOverLabel)
+        }
+    }
+    
+    func getLabel() -> String {
+        if model.displayedResultsCount == 1 {
+            return "\(model.displayedResultsCount) result"
+        } else {
+            return "\(model.displayedResultsCount) results"
         }
     }
 }

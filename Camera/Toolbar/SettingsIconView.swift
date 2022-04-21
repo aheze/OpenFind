@@ -26,5 +26,6 @@ struct OpenSettingsIconView: View {
                 .font(.system(size: 19))
                 .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
+        .accessibilityLabel("Settings")
     }
 }

@@ -10,7 +10,6 @@ import CoreMotion
 import SwiftUI
 
 class CameraViewModel: ObservableObject {
-    
     /// true if camera loaded (first frame got)
     @Published var loaded = false
     
@@ -55,6 +54,7 @@ class CameraViewModel: ObservableObject {
     var motionManager: CMMotionManager?
     
     // MARK: Focusing
+
     var currentFocusUUID: UUID? /// for keeping track of when to remove
     
     func resume() {

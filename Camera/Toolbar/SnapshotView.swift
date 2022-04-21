@@ -58,7 +58,17 @@ struct SnapshotView: View {
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
                 .cameraToolbarIconBackground(toolbarState: model.toolbarState)
         }
+        .accessibilityLabel("Save to photos.")
+        .accessibilityHint("Save photo to the photo library.")
         .disabled(!isEnabled)
+    }
+    
+    func getVoiceOverHint() -> String {
+        if model.shutterOn {
+            return "Save captured photo to the photo library. Double-tap the shutter to pause and take photo."
+        } else {
+            return "Save captured photo to the photo library"
+        }
     }
 
     var isSaving: Bool {

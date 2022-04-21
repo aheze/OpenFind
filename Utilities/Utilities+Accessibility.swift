@@ -14,6 +14,10 @@ extension View {
         accessibility(label: Text(string))
     }
     
+    func accessibilityValue(_ string: String) -> some View {
+        accessibility(value: Text(string))
+    }
+    
     func accessibilityHint(_ string: String) -> some View {
         accessibility(hint: Text(string))
     }
