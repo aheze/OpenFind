@@ -93,6 +93,7 @@ class ViewController: UIViewController {
 
         realmModel.started()
         if !realmModel.launchedBefore {
+            print("Not alucnehd before")
             realmModel.addSampleLists()
         }
 

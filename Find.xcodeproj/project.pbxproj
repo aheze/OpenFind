@@ -2339,6 +2339,7 @@
 		3CC5951B27A0EA24001D07DC /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC5951927A0EA24001D07DC /* IconPickerViewController.swift */; };
 		3CC5951C27A0EA24001D07DC /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC5951927A0EA24001D07DC /* IconPickerViewController.swift */; };
 		3CC5951F27A0EA24001D07DC /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC5951927A0EA24001D07DC /* IconPickerViewController.swift */; };
+		3CCA2BFC281223000019044D /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */; };
 		3CCA9B3425BCD493003BD0E3 /* PhotoSlidesVC+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA9B3325BCD493003BD0E3 /* PhotoSlidesVC+Info.swift */; };
 		3CCA9B3F25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA9B3E25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift */; };
 		3CCB840925B0E362000631BA /* PhotosVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */; };
@@ -10408,6 +10409,7 @@
 				3C257EAD280BE03F009B6FAE /* LaunchCVC+Setup.swift in Sources */,
 				3C257EBA280BE39A009B6FAE /* LaunchContentFlowLayout.swift in Sources */,
 				3C257EB0280BE1FB009B6FAE /* LaunchContentCell.swift in Sources */,
+				3CCA2BFC281223000019044D /* SwiftUIExtensions.swift in Sources */,
 				3CC0D145280B2A40004E7016 /* Utilities+UIFont.swift in Sources */,
 				3CF8DA17280BB1B3008E92E4 /* Identifier.swift in Sources */,
 				3C257EDA280D21F4009B6FAE /* LaunchFinalView.swift in Sources */,

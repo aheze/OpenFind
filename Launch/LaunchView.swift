@@ -32,79 +32,128 @@ struct LaunchView: View {
     @ObservedObject var model: LaunchViewModel
     let c = LaunchViewConstants.self
 
+    @State var topTextHeight = CGFloat(0)
+    @State var bottomTextHeight = CGFloat(0)
+
     var body: some View {
-        VStack(spacing: c.spacing) {
-            VStack(spacing: c.headerSpacing) {
-                Text("Find")
-                    .font(c.headerTitleFont.font)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+        VStack {
+            Colors.accentDarkBackground.color
+                .edgesIgnoringSafeArea(.all)
+        }
+        .mask(
+            VStack(spacing: 0) {
+                Color.black
+                    .frame(height: topTextHeight)
 
-                Text("An app to find text in real life.")
-                    .font(c.headerSubtitleFont.font)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .opacity(model.currentPage == .empty ? 1 : 0)
-            .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
-
-            LaunchContentView(model: model)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background( /// for the final page
-                    LinearGradient(
-                        stops: [
-                            .init(
-                                color: Colors.accentDarkBackground.color.opacity(0),
-                                location: 0
-                            ),
-                            .init(
-                                color: Colors.accentDarkBackground.color,
-                                location: 0.3
-                            ),
-                            .init(
-                                color: Colors.accentDarkBackground.color,
-                                location: 0.7
-                            ),
-                            .init(
-                                color: Colors.accentDarkBackground.color.opacity(0),
-                                location: 1
-                            )
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                    .padding(.vertical, 80)
-                    .opacity(model.currentPage == .final ? 1 : 0)
+                LinearGradient(
+                    stops: [
+                        .init(
+                            color: Colors.accentDarkBackground.color,
+                            location: 0
+                        ),
+                        .init(
+                            color: Colors.accentDarkBackground.color.opacity(0),
+                            location: 0.1
+                        ),
+                        .init(
+                            color: Colors.accentDarkBackground.color.opacity(0),
+                            location: 0.8
+                        ),
+                        .init(
+                            color: Colors.accentDarkBackground.color,
+                            location: 1
+                        )
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
                 )
 
-            PagingButtonsView(model: model)
-
-            Button {
-                withAnimation {
-                    model.setCurrentPage(to: .photos)
-                }
-            } label: {
-                Text("Get Started")
-                    .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
-                    .frame(maxWidth: .infinity)
-                    .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(c.footerCornerRadius)
+                Color.black
+                    .frame(height: bottomTextHeight)
             }
-            .buttonStyle(LaunchButtonStyle())
-            .frame(maxWidth: .infinity)
-            .opacity(model.currentPage == .empty ? 1 : 0)
-            .frame(height: model.currentPage == .empty ? nil : 0, alignment: .bottom)
-        }
-        .frame(maxWidth: 560, maxHeight: 900)
-        .foregroundColor(.white)
-        .opacity(model.showingUI ? 1 : 0)
+                .edgesIgnoringSafeArea(.all)
+        )
+        .overlay(
+            VStack(spacing: c.spacing) {
+                VStack(spacing: c.headerSpacing) {
+                    Text("Find")
+                        .font(c.headerTitleFont.font)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Text("An app to find text in real life.")
+                        .font(c.headerSubtitleFont.font)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .opacity(model.currentPage == .empty ? 1 : 0)
+                .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
+                .readSize {
+                    topTextHeight = $0.height
+                }
+
+                LaunchContentView(model: model)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background( /// for the final page
+                        LinearGradient(
+                            stops: [
+                                .init(
+                                    color: Colors.accentDarkBackground.color.opacity(0),
+                                    location: 0
+                                ),
+                                .init(
+                                    color: Colors.accentDarkBackground.color,
+                                    location: 0.3
+                                ),
+                                .init(
+                                    color: Colors.accentDarkBackground.color,
+                                    location: 0.7
+                                ),
+                                .init(
+                                    color: Colors.accentDarkBackground.color.opacity(0),
+                                    location: 1
+                                )
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .padding(.vertical, 80)
+                        .opacity(model.currentPage == .final ? 1 : 0)
+                    )
+
+                PagingButtonsView(model: model)
+
+                Button {
+                    withAnimation {
+                        model.setCurrentPage(to: .photos)
+                    }
+                } label: {
+                    Text("Get Started")
+                        .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
+                        .frame(maxWidth: .infinity)
+                        .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(c.footerCornerRadius)
+                }
+                .buttonStyle(LaunchButtonStyle())
+                .frame(maxWidth: .infinity)
+                .opacity(model.currentPage == .empty ? 1 : 0)
+                .frame(height: model.currentPage == .empty ? nil : 0, alignment: .bottom)
+                .readSize {
+                    print("Bot: \($0.height)")
+                    bottomTextHeight = $0.height
+                }
+            }
+            .frame(maxWidth: 560, maxHeight: 900)
+            .foregroundColor(.white)
+            .opacity(model.showingUI ? 1 : 0)
+        )
     }
 }
 
 struct PagingButtonsView: View {
     @ObservedObject var model: LaunchViewModel
     let c = LaunchViewConstants.self
-    
+
     var body: some View {
         if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
             let previousPage = model.pages[safe: currentIndex - 1]
@@ -173,23 +222,38 @@ struct LaunchContentView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: LaunchContentViewController, context: Context) {}
 }
 
-struct LaunchGradientView: View {
-    var transparentBottom: Bool
-    var body: some View {
-        LinearGradient(
-            stops: [
-                .init(
-                    color: Colors.accentDarkBackground.color,
-                    location: 0.8
-                ),
-                .init(
-                    color: Colors.accentDarkBackground.color.opacity(0),
-                    location: 1
+// struct LaunchGradientView: View {
+//    var transparentBottom: Bool
+//    var body: some View {
+//        LinearGradient(
+//            stops: [
+//                .init(
+//                    color: Colors.accentDarkBackground.color,
+//                    location: 0.8
+//                ),
+//                .init(
+//                    color: Colors.accentDarkBackground.color.opacity(0),
+//                    location: 1
+//                )
+//            ],
+//            startPoint: transparentBottom ? .top : .bottom,
+//            endPoint: transparentBottom ? .bottom : .top
+//        )
+//        .edgesIgnoringSafeArea(.all)
+//    }
+// }
+
+public extension View {
+    @inlinable
+    func reverseMask<Mask: View>(
+        @ViewBuilder _ mask: () -> Mask
+    ) -> some View {
+        self.mask(
+            Rectangle()
+                .overlay(
+                    mask()
+                        .blendMode(.destinationOut)
                 )
-            ],
-            startPoint: transparentBottom ? .top : .bottom,
-            endPoint: transparentBottom ? .bottom : .top
         )
-        .edgesIgnoringSafeArea(.all)
     }
 }
