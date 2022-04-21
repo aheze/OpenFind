@@ -6,7 +6,6 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-
 import UIKit
 
 extension SearchNavigationController {
@@ -16,6 +15,9 @@ extension SearchNavigationController {
     
     func didBecomeActive() {
         model.onDidBecomeActive?()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            UIAccessibility.post(notification: .screenChanged, argument: self.searchContainerView)
+        }
     }
     
     func willBecomeInactive() {
@@ -27,7 +29,5 @@ extension SearchNavigationController {
     }
     
     /// don't use this because search navigation controller doesn't need to be a tab
-    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-//        model.onBoundsChange?(size, safeAreaInsets)
-    }
+    func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {}
 }

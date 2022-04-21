@@ -11,6 +11,28 @@ import SwiftUI
 
 extension LaunchViewController {
     func enter() {
+        animateSceneForEnter()
+     
+        withAnimation(
+            .spring(
+                response: 0.8,
+                dampingFraction: 0.6,
+                blendDuration: 1
+            )
+        ) {
+            model.showingUI = false
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.contentContainer.alpha = 0
+        }
+    }
+    
+    /// also calls `entering` and `done`
+    func animateSceneForEnter() {
+        guard let camera = camera else { return }
+        guard let baseEntity = baseEntity else { return }
+        
         camera.look(at: .zero, from: LaunchConstants.cameraPositionBeforeEnter, relativeTo: baseEntity)
         let transform = camera.transform /// get the final transform
         let lookDownRotation = transform.rotation
@@ -24,12 +46,12 @@ extension LaunchViewController {
         )
         
         DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterBeforeDuration + 0.1) {
-            self.camera.look(at: .zero, from: LaunchConstants.cameraPositionAfterEnter, relativeTo: self.baseEntity)
-            var transform = self.camera.transform /// get the final transform
+            camera.look(at: .zero, from: LaunchConstants.cameraPositionAfterEnter, relativeTo: baseEntity)
+            var transform = camera.transform /// get the final transform
             transform.rotation = lookDownRotation
-            self.camera.look(at: .zero, from: LaunchConstants.cameraPositionBeforeEnter, relativeTo: self.baseEntity)
+            camera.look(at: .zero, from: LaunchConstants.cameraPositionBeforeEnter, relativeTo: baseEntity)
             
-            self.camera.move(
+            camera.move(
                 to: transform,
                 relativeTo: nil,
                 duration: LaunchConstants.enterAfterDuration,
@@ -48,20 +70,6 @@ extension LaunchViewController {
                 /// remove view
                 self.done()
             }
-        }
-        
-        withAnimation(
-            .spring(
-                response: 0.8,
-                dampingFraction: 0.6,
-                blendDuration: 1
-            )
-        ) {
-            model.showingUI = false
-        }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.contentContainer.alpha = 0
         }
     }
 }

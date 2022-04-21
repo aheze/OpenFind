@@ -16,6 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Find-Large" translatesAutoresizingMaskIntoConstraints="NO" id="zJv-pg-avC">
+                                <rect key="frame" x="127" y="368" width="160" height="160"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="8RT-Oq-w3N"/>
+                                    <constraint firstAttribute="height" constant="160" id="Bzy-F9-yQ2"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIO-Uj-HK1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -86,6 +94,7 @@
                             <constraint firstAttribute="trailing" secondItem="vbV-LF-KmV" secondAttribute="trailing" id="Iwp-9G-BTr"/>
                             <constraint firstAttribute="trailing" secondItem="n3B-Mf-bwU" secondAttribute="trailing" id="JYM-qs-4QN"/>
                             <constraint firstItem="bIO-Uj-HK1" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Jfk-Ft-Zbu"/>
+                            <constraint firstItem="zJv-pg-avC" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Nyo-Nu-aIO"/>
                             <constraint firstItem="hlJ-qC-1i7" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="RFP-eq-dgj"/>
                             <constraint firstItem="kxc-BX-aU0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SqY-rn-u7C"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="kxc-BX-aU0" secondAttribute="bottom" id="WnS-or-Qdh"/>
@@ -95,6 +104,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kxc-BX-aU0" secondAttribute="trailing" id="dTl-50-0WU"/>
                             <constraint firstItem="YnY-qI-LKB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="feC-ha-U3n"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="YnY-qI-LKB" secondAttribute="trailing" constant="16" id="nj7-KA-ZyO"/>
+                            <constraint firstItem="zJv-pg-avC" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="z9z-8D-1ZP"/>
                         </constraints>
                     </view>
                     <connections>
@@ -225,6 +235,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Find-Large" width="100" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -38,6 +38,9 @@ extension LaunchViewController {
     }
 
     func animateScene() {
+        guard let camera = self.camera else { return }
+        guard let baseEntity = self.baseEntity else { return }
+        
         for tile in self.model.tiles {
             tile.entity.move(
                 to: tile.midTransform,
@@ -72,11 +75,11 @@ extension LaunchViewController {
             }
         }
 
-        self.camera.look(at: .zero, from: LaunchConstants.cameraPositionFinal, relativeTo: self.baseEntity)
-        let transform = self.camera.transform /// get the final transform
-        self.camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: self.baseEntity)
+        camera.look(at: .zero, from: LaunchConstants.cameraPositionFinal, relativeTo: baseEntity)
+        let transform = camera.transform /// get the final transform
+        camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
 
-        self.camera.move(
+        camera.move(
             to: transform,
             relativeTo: nil,
             duration: 5,

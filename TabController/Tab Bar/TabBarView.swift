@@ -16,7 +16,7 @@ struct TabBarView: View {
     var body: some View {
         Color.clear
             .accessibilityElement()
-            .accessibilityLabel("Toolbar")
+            .accessibilityLabel(toolbarViewModel.toolbar == nil ? "Tab bar" : "Toolbar")
             .background(
                 HStack(alignment: .bottom, spacing: 0) {
                     PhotosButton(tabViewModel: tabViewModel, attributes: tabViewModel.photosIconAttributes)

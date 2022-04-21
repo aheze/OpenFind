@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         realmModel.started()
-        
+
         if !RealmContainer.migratedPhotoMetadatas.isEmpty || !RealmContainer.migratedLists.isEmpty {
             loadMigratedData(
                 migratedPhotoMetadatas: RealmContainer.migratedPhotoMetadatas,
@@ -105,7 +105,11 @@ class ViewController: UIViewController {
         if realmModel.launchedBefore || Debug.overrideLaunch {
             startApp()
         } else {
-            loadOnboarding()
+            if UIAccessibility.isVoiceOverRunning {
+                realmModel.entered()
+            } else {
+                loadOnboarding()
+            }
         }
     }
 

@@ -160,11 +160,14 @@ class TabBarViewController: UIViewController {
         let otherIndices = pages.indices.filter { $0 != index }
         
         for otherIndex in otherIndices {
-            pages[otherIndex].view.isAccessibilityElement = true
-            pages[otherIndex].view.accessibilityElementsHidden = true
+            let otherView = pages[otherIndex].view
+            
+            otherView?.accessibilityElementsHidden = true
+            otherView?.accessibilityViewIsModal = false
         }
-        pages[safe: index]?.view.isAccessibilityElement = false
-        pages[safe: index]?.view.accessibilityElementsHidden = false
+        let activeView = pages[safe: index]?.view
+        activeView?.accessibilityViewIsModal = true
+        activeView?.accessibilityElementsHidden = false
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
@@ -180,3 +183,9 @@ class TabBarViewController: UIViewController {
         }
     }
 }
+
+// extension UIView {
+//    func enableVoiceOver(_ enable: Bool) {
+//        self.isAccessibilityElement = false
+//    }
+// }

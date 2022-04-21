@@ -50,7 +50,7 @@ struct ZoomFactorView: View {
             )
         }
         .accessibilityElement()
-        .accessibilityLabel("\(zoomFactor.zoomLabelRange.lowerBound.string) zoom")
+        .accessibilityLabel(getVoiceOverLabel(isActive: isActive))
         .disabled(isActive || !zoomViewModel.allowingButtonPresses) /// only press-able when not already pressed
         .scaleEffect(
             zoomViewModel.isExpanded && !isActive ? zoomFactor.activationProgress : 1
@@ -76,7 +76,16 @@ struct ZoomFactorView: View {
             .scaleEffect(0.7)
             .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0) /// show when passed preset and dragging left, increasing zoom value
             .disabled(!zoomViewModel.allowingButtonPresses)
+            .accessibility(hidden: true)
         )
+    }
+    
+    func getVoiceOverLabel(isActive: Bool) -> String {
+        if isActive {
+            return "\(zoomFactor.zoomLabelRange.lowerBound.string) zoom, active."
+        } else {
+            return "\(zoomFactor.zoomLabelRange.lowerBound.string) zoom"
+        }
     }
     
     func activate() {

@@ -17,7 +17,11 @@ extension CameraViewController {
         }
     }
     
-    func didBecomeActive() {}
+    func didBecomeActive() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIAccessibility.post(notification: .screenChanged, argument: self.searchContainerView)
+        }
+    }
     
     func willBecomeInactive() {}
     

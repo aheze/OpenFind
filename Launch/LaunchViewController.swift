@@ -15,8 +15,8 @@ class LaunchViewController: UIViewController {
 
     @IBOutlet var sceneContainer: UIView!
     lazy var sceneView = ARView()
-    var baseEntity: ModelEntity!
-    var camera: PerspectiveCamera!
+    var baseEntity: ModelEntity?
+    var camera: PerspectiveCamera?
 
     /// for SwiftUI, respects safe area
     @IBOutlet var contentContainer: UIView!

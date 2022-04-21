@@ -44,8 +44,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
 
-    @IBOutlet weak var collectionViewToolbarContainer: UIView!
-    @IBOutlet weak var collectionViewToolbarHeightC: NSLayoutConstraint!
+    @IBOutlet var collectionViewToolbarContainer: UIView!
+    @IBOutlet var collectionViewToolbarHeightC: NSLayoutConstraint!
     @IBOutlet var collectionViewContainer: UIView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
@@ -95,6 +95,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        accessibilityViewIsModal = true
 
         title = "Photo"
         navigationItem.largeTitleDisplayMode = .never
