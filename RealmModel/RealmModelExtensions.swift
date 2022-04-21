@@ -23,11 +23,17 @@ extension RealmModel {
         if !enteredVersions.contains(version) {
             enteredVersions.append(version)
         }
-        
+
         if !launchedBefore {
-            isFirstLaunch = true /// set to true for importing lists
             launchedBefore = true
         }
+    }
+
+    func addSampleLists() {
+        for list in List.defaultLists {
+            container.addList(list: list)
+        }
+        addedListsBefore = true
     }
 }
 

@@ -15,9 +15,6 @@ extension SearchNavigationController {
     
     func didBecomeActive() {
         model.onDidBecomeActive?()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            UIAccessibility.post(notification: .screenChanged, argument: self.searchContainerView)
-        }
     }
     
     func willBecomeInactive() {

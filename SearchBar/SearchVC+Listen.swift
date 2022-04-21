@@ -28,7 +28,18 @@ extension SearchViewController {
         searchViewModel.enabledChanged = { [weak self] in
             guard let self = self else { return }
             let enabled = self.searchViewModel.enabled
+            
             self.view.isUserInteractionEnabled = enabled
+            
+            for index in self.searchViewModel.fields.indices {
+                if let cell = self.searchCollectionView.cellForItem(at: index.indexPath) as? SearchFieldCell {
+                    if enabled {
+                        cell.textField.accessibilityHint = self.searchViewModel.configuration.voiceOverDescription
+                    } else {
+                        cell.textField.accessibilityHint = "\(self.searchViewModel.configuration.voiceOverDescription). Permissions are needed."
+                    }
+                }
+            }
         }
     }
 

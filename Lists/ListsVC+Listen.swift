@@ -41,6 +41,7 @@ extension ListsViewController {
                 self.hideCancelNavigationBar()
             } else if !self.model.isFinding {
                 self.model.isFinding = true
+                self.resetSelectingState()
                 self.showCancelNavigationBar()
             }
 

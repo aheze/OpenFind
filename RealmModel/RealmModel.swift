@@ -22,9 +22,8 @@ class RealmModel: ObservableObject {
 
     // MARK: - Storage
 
-    var isFirstLaunch = false
     @Saved("launchedBefore") var launchedBefore = false
-    
+
     /// if `false` and also launched before `false`, add lists (first launch in v1.2.0)
     /// if `false` and launched before `true`, ask.
     /// If denied or lists added, set this to true anyway.

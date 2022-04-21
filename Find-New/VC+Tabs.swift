@@ -28,17 +28,17 @@ extension ViewController {
         
         switch newTabState {
         case .photos:
-            photos.viewController.willBecomeActive()
+            photos.searchNavigationController.willBecomeActive()
             camera.viewController.willBecomeInactive()
             lists.searchNavigationController.willBecomeInactive()
 
         case .camera:
-            photos.viewController.willBecomeInactive()
+            photos.searchNavigationController.willBecomeInactive()
             camera.viewController.willBecomeActive()
             lists.searchNavigationController.willBecomeInactive()
 
         case .lists:
-            photos.viewController.willBecomeInactive()
+            photos.searchNavigationController.willBecomeInactive()
             camera.viewController.willBecomeInactive()
             lists.searchNavigationController.willBecomeActive()
         default: break
@@ -48,19 +48,19 @@ extension ViewController {
     func didFinishNavigating(from oldTabState: TabState, to newTabState: TabState) {
         switch newTabState {
         case .photos:
-            photos.viewController.didBecomeActive()
+            photos.searchNavigationController.didBecomeActive()
             camera.viewController.didBecomeInactive()
             lists.searchNavigationController.didBecomeInactive()
 
             tabViewModel.statusBarStyle = .default
         case .camera:
-            photos.viewController.didBecomeInactive()
+            photos.searchNavigationController.didBecomeInactive()
             camera.viewController.didBecomeActive()
             lists.searchNavigationController.didBecomeInactive()
 
             tabViewModel.statusBarStyle = .lightContent
         case .lists:
-            photos.viewController.didBecomeInactive()
+            photos.searchNavigationController.didBecomeInactive()
             camera.viewController.didBecomeInactive()
             lists.searchNavigationController.didBecomeActive()
 

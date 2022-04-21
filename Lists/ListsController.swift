@@ -57,7 +57,16 @@ class ListsController {
         
         /// set the details search view model
         searchNavigationModel.onWillBecomeActive = { viewController.willBecomeActive() }
-        searchNavigationModel.onDidBecomeActive = { viewController.didBecomeActive() }
+        searchNavigationModel.onDidBecomeActive = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                if searchViewModel.enabled {
+                    UIAccessibility.post(notification: .screenChanged, argument: searchNavigationController.searchContainerView)
+                } else {
+                    UIAccessibility.post(notification: .screenChanged, argument: viewController.view)
+                }
+            }
+            viewController.didBecomeActive()
+        }
         searchNavigationModel.onWillBecomeInactive = { viewController.willBecomeInactive() }
         searchNavigationModel.onDidBecomeInactive = { viewController.didBecomeInactive() }
         searchNavigationModel.onBoundsChange = { size, safeAreaInsets in

@@ -90,8 +90,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("View load.")
         realmModel.started()
+        if !realmModel.launchedBefore {
+            print("first launch!")
+            realmModel.addSampleLists()
+        }
 
         if !RealmContainer.migratedPhotoMetadatas.isEmpty || !RealmContainer.migratedLists.isEmpty {
             loadMigratedData(

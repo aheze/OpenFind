@@ -26,6 +26,7 @@ class CameraViewController: UIViewController, PageViewController {
     var highlightsViewModel = HighlightsViewModel()
     var messagesViewModel = CameraMessagesViewModel()
     
+    @IBOutlet weak var logoImageView: UIImageView!
     // MARK: - Sub view controllers
 
     var livePreviewViewController: LivePreviewViewController?

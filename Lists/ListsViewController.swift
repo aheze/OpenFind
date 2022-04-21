@@ -28,8 +28,7 @@ class ListsViewController: UIViewController, Searchable {
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, DisplayedList>
     lazy var listsFlowLayout = makeFlowLayout()
     
-    
-    @IBOutlet weak var contentContainer: UIView!
+    @IBOutlet var contentContainer: UIView!
     
     /// details
     var detailsViewController: ListsDetailViewController?

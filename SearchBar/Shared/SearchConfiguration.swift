@@ -8,6 +8,8 @@
 import UIKit
 
 struct SearchConfiguration: Equatable {
+    var voiceOverDescription = "Enter text to find using the camera"
+    
     var cellHeight = CGFloat(60)
     var cellHeightLandscape = CGFloat(60) /// smaller cell height for camera. modify this later
     var cellSpacing = CGFloat(8)
@@ -78,6 +80,7 @@ struct SearchConfiguration: Equatable {
     
     static var lists: Self = {
         var configuration = SearchConfiguration(
+            voiceOverDescription: "Enter text to find lists",
             cellHeight: 44,
             cellHeightLandscape: 44,
             cellSpacing: 8,
@@ -125,6 +128,7 @@ struct SearchConfiguration: Equatable {
 
     static var photos: Self = {
         var configuration = SearchConfiguration.lists
+        configuration.voiceOverDescription = "Enter text to find photos"
         configuration.fieldBackgroundColor = .secondarySystemBackground
         configuration.fieldActiveBackgroundColor = .systemBackground
         configuration.addTextPlaceholder = "Find Photos"
@@ -133,12 +137,14 @@ struct SearchConfiguration: Equatable {
     
     static var photosSlides: Self = {
         var configuration = SearchConfiguration.photos
+        configuration.voiceOverDescription = "Enter text to find in this photo"
         configuration.addTextPlaceholder = "Find in Photo"
         return configuration
     }()
     
     static var icons: Self = {
         var configuration = SearchConfiguration.photos
+        configuration.voiceOverDescription = "Enter text to find icons"
         configuration.fieldActiveBackgroundColor = .secondarySystemBackground
         configuration.addTextPlaceholder = "Find Icons"
         return configuration
@@ -146,6 +152,7 @@ struct SearchConfiguration: Equatable {
     
     static var settings: Self = {
         var configuration = SearchConfiguration.lists
+        configuration.voiceOverDescription = "Enter text to find settings"
         configuration.addTextPlaceholder = "Find Settings"
         configuration.sidePadding = 20
         configuration.sidePeekPadding = 36

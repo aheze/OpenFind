@@ -17,26 +17,23 @@ extension ListsViewController {
     func didBecomeActive() {
         detailsViewController?.didBecomeActive()
         
-        if realmModel.isFirstLaunch {
-            addSampleLists()
-        } else {
-            if !realmModel.addedListsBefore {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-                    let alert = UIAlertController(title: "Sample Lists Available!", message: "Find v2.0 comes with new sample lists. Would you like to add them?", preferredStyle: .alert)
-                    alert.addAction(
-                        UIAlertAction(title: "Add Sample Lists", style: .default) { [weak self] _ in
-                            guard let self = self else { return }
-                            self.addSampleLists()
-                        }
-                    )
-                    alert.addAction(
-                        UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
-                            guard let self = self else { return }
-                            self.realmModel.addedListsBefore = true
-                        }
-                    )
-                    self.present(alert, animated: true, completion: nil)
-                }
+        /// add lists if already launched
+        if realmModel.launchedBefore, !realmModel.addedListsBefore {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let alert = UIAlertController(title: "Sample Lists Available!", message: "Find v2.0 comes with new sample lists. Would you like to add them?", preferredStyle: .alert)
+                alert.addAction(
+                    UIAlertAction(title: "Add Sample Lists", style: .default) { [weak self] _ in
+                        guard let self = self else { return }
+                        self.realmModel.addSampleLists()
+                    }
+                )
+                alert.addAction(
+                    UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+                        guard let self = self else { return }
+                        self.realmModel.addedListsBefore = true
+                    }
+                )
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

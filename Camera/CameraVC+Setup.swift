@@ -44,6 +44,7 @@ extension CameraViewController {
     }
 
     func showPermissionsView() {
+        logoImageView.alpha = 0
         livePreviewContainerView.alpha = 0
         zoomContainerView.alpha = 0
         searchViewModel.enabled = false
@@ -62,10 +63,14 @@ extension CameraViewController {
                 hostingController?.view.alpha = 0
                 self.livePreviewContainerView.alpha = 1
                 self.zoomContainerView.alpha = 1
-
+                self.logoImageView.alpha = 1
             } completion: { [weak hostingController] _ in
                 hostingController?.view.removeFromSuperview()
             }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIAccessibility.post(notification: .layoutChanged, argument: permissionsView)
         }
     }
 

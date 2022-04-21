@@ -112,6 +112,7 @@
                         <outlet property="landscapeToolbarContainer" destination="YnY-qI-LKB" id="MlT-mq-2ub"/>
                         <outlet property="landscapeToolbarWidthC" destination="Zo4-jL-rmE" id="Obi-Jf-vyA"/>
                         <outlet property="livePreviewContainerView" destination="bIO-Uj-HK1" id="Jvd-MQ-Lw8"/>
+                        <outlet property="logoImageView" destination="zJv-pg-avC" id="UZS-fI-eE2"/>
                         <outlet property="progressContainerView" destination="vbV-LF-KmV" id="mwe-5f-Eut"/>
                         <outlet property="safeView" destination="kxc-BX-aU0" id="gD2-wc-k0h"/>
                         <outlet property="scrollZoomContainerView" destination="8OQ-wQ-RqJ" id="YL3-jt-60T"/>

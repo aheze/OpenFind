@@ -19,6 +19,12 @@ extension SearchViewController {
     func configureCell(_ cell: SearchFieldCell, for index: Int) {
         cell.model = searchViewModel
         
+        if searchViewModel.enabled {
+            cell.textField.accessibilityHint = searchViewModel.configuration.voiceOverDescription
+        } else {
+            cell.textField.accessibilityHint = "\(searchViewModel.configuration.voiceOverDescription). Permissions are needed."
+        }
+        
         /// load the configuration
         cell.setConfiguration()
         
