@@ -726,6 +726,7 @@
 		3C43624C28108DF4002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */; };
 		3C43624D28108DF6002DD153 /* PhotosSlidesVC+VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */; };
 		3C43624F2810B231002DD153 /* ListsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624E2810B231002DD153 /* ListsDefaults.swift */; };
+		3C4362502810E986002DD153 /* ListsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624E2810B231002DD153 /* ListsDefaults.swift */; };
 		3C443E9227DD88F80050A0AB /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA89278182F1000381CE /* SuggestionsView.swift */; };
 		3C443E9327DD88F80050A0AB /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
@@ -10009,6 +10010,7 @@
 				3C7223D227C475310085EBF1 /* ExtendedCurveConnector.swift in Sources */,
 				3C29948228015C9D00AE1AEC /* CameraVC+Setup.swift in Sources */,
 				3C5B36BC27FEAEDE00801FEE /* SettingsSlider.swift in Sources */,
+				3C4362502810E986002DD153 /* ListsDefaults.swift in Sources */,
 				3C7223CD27C4537A0085EBF1 /* CameraVC+Toolbar.swift in Sources */,
 				3C08EAF2279C76BD00971D60 /* ListsViewModel.swift in Sources */,
 				3C1A2C2727EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */,

@@ -13,10 +13,45 @@ import WebKit
 extension SearchViewController {
     static let extrasPopoverTag = "Extras"
     func checkExtras(text: String) {
-        if text.roughlyEquals("/resetlaunch") {
-            realmModel.launchedBefore = false
-            showPopover(configuration: .checkmark(message: "Launch Reset"), autoDismiss: true)
+        // MARK: - Commands
+
+        if text.roughlyEquals("/resetAddedListsBefore") {
+            realmModel.addedListsBefore = false
+            showPopover(configuration: .message(icon: "checkmark", text: "Reset Added Lists Before"), autoDismiss: true)
         }
+
+        if text.roughlyEquals("/resetLaunchedBefore") {
+            realmModel.launchedBefore = false
+            showPopover(configuration: .message(icon: "checkmark", text: "Reset Launched Before"), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/resetStartedVersions") {
+            realmModel.startedVersions = []
+            showPopover(configuration: .message(icon: "checkmark", text: "Reset Started Versions"), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/resetEnteredVersions") {
+            realmModel.enteredVersions = []
+            showPopover(configuration: .message(icon: "checkmark", text: "Reset Entered Versions"), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/showAddedListsBefore") {
+            showPopover(configuration: .message(icon: "info.circle", text: "Added Lists Before? \(realmModel.addedListsBefore)"), autoDismiss: true)
+        }
+        
+        if text.roughlyEquals("/showLaunchedBefore") {
+            showPopover(configuration: .message(icon: "info.circle", text: "Launched Before? \(realmModel.launchedBefore)"), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/showStartedVersions") {
+            showPopover(configuration: .message(icon: "info.circle", text: "Started Versions? \(realmModel.startedVersions)"), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/showEnteredVersions") {
+            showPopover(configuration: .message(icon: "info.circle", text: "Entered Versions: \(realmModel.enteredVersions)"), autoDismiss: true)
+        }
+
+        // MARK: - Extras
 
         if text.roughlyEquals("/about") {
             showPopover(configuration: .about, autoDismiss: false)
@@ -89,7 +124,7 @@ extension SearchViewController {
 
 struct ExtrasView: View {
     enum Configuration {
-        case checkmark(message: String)
+        case message(icon: String, text: String)
         case about
         case url(url: URL)
         case image(systemName: String)
@@ -101,11 +136,12 @@ struct ExtrasView: View {
     @State var transform: SettingsProfileTransformState?
     var body: some View {
         switch configuration {
-        case .checkmark(message: let message):
+        case .message(icon: let icon, text: let text):
             VStack(spacing: 20) {
-                Image(systemName: "checkmark")
+                Image(systemName: icon)
                     .font(UIFont.systemFont(ofSize: 52, weight: .semibold).font)
-                Text(message)
+
+                Text(text)
                     .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
             }
             .padding(36)
@@ -172,8 +208,8 @@ struct ExtrasView: View {
 
 private extension String {
     func roughlyEquals(_ otherText: String) -> Bool {
-        let a = trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let b = otherText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let a = filter { !$0.isWhitespace }.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let b = otherText.filter { !$0.isWhitespace }.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         return a == b
     }
 }

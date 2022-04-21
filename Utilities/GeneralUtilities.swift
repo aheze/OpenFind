@@ -16,6 +16,10 @@ enum Utilities {
             return 13
         }
     }
+
+    static func getVersionString() -> String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
 }
 
 extension Collection {

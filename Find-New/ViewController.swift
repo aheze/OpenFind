@@ -91,6 +91,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        realmModel.started()
+        
         if !RealmContainer.migratedPhotoMetadatas.isEmpty || !RealmContainer.migratedLists.isEmpty {
             loadMigratedData(
                 migratedPhotoMetadatas: RealmContainer.migratedPhotoMetadatas,
@@ -137,7 +139,7 @@ class ViewController: UIViewController {
     }
 
     func onboardingDone() {
-        realmModel.launchedBefore = true
+        realmModel.entered()
         AppDelegate.AppUtility.lockOrientation(.all)
         removeChildViewController(launchViewController)
         startApp()

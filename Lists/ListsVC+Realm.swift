@@ -64,6 +64,13 @@ extension ListsViewController {
         reloadDisplayedLists()
         update()
     }
+    
+    func addSampleLists() {
+        for list in List.defaultLists {
+            realmModel.container.addList(list: list)
+        }
+        realmModel.addedListsBefore = true
+    }
 }
 
 /// these are called after realm has updated

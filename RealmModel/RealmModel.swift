@@ -22,7 +22,26 @@ class RealmModel: ObservableObject {
 
     // MARK: - Storage
 
+    var isFirstLaunch = false
     @Saved("launchedBefore") var launchedBefore = false
+    
+    /// if `false` and also launched before `false`, add lists (first launch in v1.2.0)
+    /// if `false` and launched before `true`, ask.
+    /// If denied or lists added, set this to true anyway.
+    @Saved("addedListsBefore") var addedListsBefore = false
+    var startedVersions = [String]() { /// versions launched in
+        didSet {
+            let defaults = UserDefaults.standard
+            defaults.set(startedVersions, forKey: "startedVersions")
+        }
+    }
+
+    var enteredVersions = [String]() { /// versions launched in and also accepted/entered after "Get Started"
+        didSet {
+            let defaults = UserDefaults.standard
+            defaults.set(enteredVersions, forKey: "enteredVersions")
+        }
+    }
 
     // MARK: - Defaults
 
@@ -64,6 +83,10 @@ class RealmModel: ObservableObject {
     @Saved(data.listsSortBy.key) var listsSortBy = data.listsSortBy.value
 
     init() {
+        let defaults = UserDefaults.standard
+        startedVersions = defaults.stringArray(forKey: "startedVersions") ?? [String]()
+        enteredVersions = defaults.stringArray(forKey: "enteredVersions") ?? [String]()
+
         container.getModel = { [weak self] in
             self
         }
@@ -73,6 +96,7 @@ class RealmModel: ObservableObject {
 
     func listenToDefaults() {
         _launchedBefore.configureValueChanged(with: self)
+        _addedListsBefore.configureValueChanged(with: self)
 
         _defaultTab.configureValueChanged(with: self)
         _swipeToNavigate.configureValueChanged(with: self)

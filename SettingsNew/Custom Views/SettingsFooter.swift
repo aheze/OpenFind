@@ -14,7 +14,7 @@ struct SettingsFooter: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Text(verbatim: "Version \(getVersionString())")
+            Text(verbatim: "Version \(Utilities.getVersionString())")
             Text(verbatim: " • ")
             Button {
                 if let url = URL(string: "https://getfind.app/whatsnew/") {
@@ -28,7 +28,4 @@ struct SettingsFooter: View {
         .foregroundColor(UIColor.secondaryLabel.color)
     }
 
-    func getVersionString() -> String {
-        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-    }
 }

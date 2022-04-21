@@ -9,6 +9,33 @@
 import UIKit
 
 extension RealmModel {
+    /// called on startup
+    func started() {
+        let version = Utilities.getVersionString()
+        print("started! +\(version)+")
+        if !startedVersions.contains(version) {
+            print("start no ocntains")
+            startedVersions.append(version)
+        }
+    }
+
+    /// called in onboarding
+    func entered() {
+        let version = Utilities.getVersionString()
+        print("enteredVersions! +\(version)+")
+        if !enteredVersions.contains(version) {
+            print("enteredVersions no ocntains")
+            enteredVersions.append(version)
+        }
+        
+        if !launchedBefore {
+            isFirstLaunch = true /// set to true for importing lists
+            launchedBefore = true
+        }
+    }
+}
+
+extension RealmModel {
     var thumbnailSize: CGSize {
         let scale = UIScreen.main.scale
         let length = photosMinimumCellLength * 3 / 2 /// slightly clearer
