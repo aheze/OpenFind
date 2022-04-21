@@ -44,6 +44,7 @@ struct PhotosSlidesToolbarView: View {
             }
             .accessibilityLabel("Delete")
         }
+        .accessibility(hidden: model.slidesState?.isFullScreen ?? false)
     }
     
     /// 1. icon, 2. voiceover label, 3. voiceover hint

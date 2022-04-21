@@ -45,18 +45,14 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 /// detect stopped at a new photo
 extension PhotosSlidesViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == self.collectionView {
+        if scrollView == collectionView {
             if UIAccessibility.isVoiceOverRunning {
-                print("might need to reset!")
                 if let currentIndex = model.slidesState?.getCurrentIndex() {
                     let offset = flowLayout.layoutAttributes[currentIndex].fullOrigin
-                    print("Needed porigin \(offset) vs \(scrollView.contentOffset.x)")
-                    
+
                     if offset != scrollView.contentOffset.x {
                         collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: false)
                     }
-                    
-                    
                 }
             }
         }

@@ -4773,6 +4773,7 @@
 		3C1A2C1C27E94A4E00B3D065 /* Slides Views */ = {
 			isa = PBXGroup;
 			children = (
+				3C436246280FD6B8002DD153 /* PhotosSlidesVoiceOverToolbar.swift */,
 				3CDD942727C0583600D3EA1A /* PhotosSlidesToolbarView.swift */,
 				3C1A2C2027E94D8E00B3D065 /* PhotosSlidesVC+FlowLayout.swift */,
 				3C1A2C2327EA89A500B3D065 /* PhotosSlidesVC+ScrollView.swift */,
@@ -6250,7 +6251,6 @@
 				3C43624A28108D51002DD153 /* PhotosSlidesVC+VoiceOver.swift */,
 				3CBB319127BD611F00F25F6A /* PhotosSlidesCollectionLayout.swift */,
 				3CBB319D27BD68EC00F25F6A /* PhotosSlidesContentCell.swift */,
-				3C436246280FD6B8002DD153 /* PhotosSlidesVoiceOverToolbar.swift */,
 			);
 			path = Slides;
 			sourceTree = "<group>";

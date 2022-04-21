@@ -26,6 +26,8 @@ extension ListsViewController {
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
         toolbarViewModel.toolbar = AnyView(toolbarView)
+        collectionView.allowsSelection = true
+        collectionView.allowsMultipleSelection = true
         updateCollectionViewSelectionState()
     }
 
@@ -36,6 +38,8 @@ extension ListsViewController {
         selectBarButton.accessibilityHint = "Select lists"
         toolbarViewModel.toolbar = nil
         model.selectedLists = []
+        collectionView.allowsSelection = false
+        collectionView.allowsMultipleSelection = false
         updateCollectionViewSelectionState()
     }
 

@@ -17,14 +17,14 @@ struct PhotosSlidesVoiceOverToolbar: View {
     var body: some View {
         let index = getCurrentIndex()
         let total = getPhotosCount()
-        let label = getLabel(currentIndex: index, total: total)
         let isFullScreen = getIsFullScreen()
+        let label = getLabel(currentIndex: index, total: total, isFullScreen: isFullScreen)
 
         Color.clear.overlay(
             VStack {
                 Text("\(index + 1) / \(total)")
                     .foregroundColor(UIColor.label.color)
-                
+
                     + Text(isFullScreen ? " (Show Controls)" : " (Hide Controls)")
                     .foregroundColor(UIColor.secondaryLabel.color)
             }
@@ -33,7 +33,6 @@ struct PhotosSlidesVoiceOverToolbar: View {
             .padding(.bottom, tabViewModel.tabBarAttributes.backgroundHeight)
             .accessibilityLabel(label)
             .accessibilityAction {
-                print("trigger")
                 model.slidesUpdateFullScreenStateTo?(!isFullScreen)
             }
             .accessibilityAdjustableAction { direction in
@@ -69,11 +68,12 @@ struct PhotosSlidesVoiceOverToolbar: View {
         return slidesState.slidesPhotos.count
     }
 
-    func getLabel(currentIndex: Int, total: Int) -> String {
+    func getLabel(currentIndex: Int, total: Int, isFullScreen: Bool) -> String {
+        let fullScreenText = isFullScreen ? "exit" : "enter"
         if total == 1 {
-            return "\(currentIndex + 1) out of \(total) photo"
+            return "\(currentIndex + 1) out of \(total) photo. Double-tap to \(fullScreenText) full screen."
         } else {
-            return "\(currentIndex + 1) out of \(total) photos"
+            return "\(currentIndex + 1) out of \(total) photos. Double-tap to \(fullScreenText) full screen mode"
         }
     }
 

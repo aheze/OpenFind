@@ -18,18 +18,29 @@ class SearchPromptViewModel: ObservableObject {
     @Published private(set) var show = false
     @Published private(set) var resultsText = ""
     @Published private(set) var resetText: String?
+
+    @Published private(set) var voiceOverString = ""
     var updateBarHeight: (() -> Void)?
     var resetPressed: (() -> Void)?
 
     func update(show: Bool, resultsText: String? = nil, resetText: String? = nil) {
+        var voiceOverString = ""
         withAnimation {
             self.show = show
             self.resetText = resetText
         }
 
+        if let resetText = resetText {
+            voiceOverString.append(resetText)
+        }
+
         if let resultsText = resultsText {
             self.resultsText = resultsText
+            voiceOverString.append(". \(resultsText)")
         }
+
+        UIAccessibility.post(notification: .announcement, argument: voiceOverString)
+        self.voiceOverString = voiceOverString
     }
 
     func totalText() -> String {
@@ -75,6 +86,8 @@ struct SearchPromptView: View {
 
                 Spacer()
             }
+            .accessibilityElement()
+            .accessibilityLabel(model.voiceOverString)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(SearchPromptConstants.padding),
             alignment: .top

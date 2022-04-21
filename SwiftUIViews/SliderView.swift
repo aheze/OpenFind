@@ -40,6 +40,17 @@ class SliderViewModel: ObservableObject {
                 return "All"
             }
         }
+        
+        func getVoiceOverHint() -> String {
+            switch self {
+            case .starred:
+                return "Display starred photos only"
+            case .screenshots:
+                return "Display screenshots only"
+            case .all:
+                return "Display all photos"
+            }
+        }
     }
 
     /// A UI selection (wraps a filter)
@@ -111,6 +122,9 @@ struct SliderView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(SliderConstants.selectionEdgeInsets)
+                .accessibilityElement()
+                .accessibilityLabel(selection.filter.getString())
+                .accessibilityHint(selection.filter.getVoiceOverHint())
                 .scaleEffect(getScale(for: selection.filter))
                 .foregroundColor(.white)
                 .opacity(getAlpha(for: selection.filter))

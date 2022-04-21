@@ -113,7 +113,7 @@ class SearchFieldCell: UICollectionViewCell {
         leftViewRightC.constant = 0
         rightViewLeftC.constant = 0
         
-        leftView.buttonView.accessibilityLabel = "Search Bar Options"
+        leftView.buttonView.accessibilityElementsHidden = true
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

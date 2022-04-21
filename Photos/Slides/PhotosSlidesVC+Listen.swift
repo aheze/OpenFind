@@ -94,7 +94,7 @@ extension PhotosSlidesViewController {
         
         model.slidesUpdateFullScreenStateTo = { [weak self] photo in
             guard let self = self else { return }
-            self.switchToFullScreen(photo)
+            self.toggleFullScreen()
         }
     }
 }

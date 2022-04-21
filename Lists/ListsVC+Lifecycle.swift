@@ -15,7 +15,6 @@ extension ListsViewController {
     }
     
     func didBecomeActive() {
-        print("Activate!!!")
         detailsViewController?.didBecomeActive()
         
         if realmModel.isFirstLaunch {

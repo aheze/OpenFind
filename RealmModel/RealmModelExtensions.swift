@@ -12,9 +12,7 @@ extension RealmModel {
     /// called on startup
     func started() {
         let version = Utilities.getVersionString()
-        print("started! +\(version)+")
         if !startedVersions.contains(version) {
-            print("start no ocntains")
             startedVersions.append(version)
         }
     }
@@ -22,9 +20,7 @@ extension RealmModel {
     /// called in onboarding
     func entered() {
         let version = Utilities.getVersionString()
-        print("enteredVersions! +\(version)+")
         if !enteredVersions.contains(version) {
-            print("enteredVersions no ocntains")
             enteredVersions.append(version)
         }
         
