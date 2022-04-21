@@ -30,7 +30,7 @@ enum RealmModelData {
     
     // MARK: Highlights
     
-    static var highlightsColor = SavedData(key: "highlightsColor", value: Int(0x00aeef))
+    static var highlightsColor = SavedData(key: "highlightsColor", value: Int(0x009AEF))
     static var highlightsCycleSearchBarColors = SavedData(key: "highlightsCycleSearchBarColors", value: true)
     static var highlightsBorderWidth = SavedData(key: "highlightsBorderWidth", value: Double(1.2))
     static var highlightsBackgroundOpacity = SavedData(key: "highlightsBackgroundOpacity", value: Double(0.3))
