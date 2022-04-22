@@ -9,6 +9,8 @@ import SwiftUI
 
 class ToolbarViewModel: ObservableObject {
     @Published var toolbar: AnyView? = nil
+    
+    var didDismiss: (() -> Void)?
 }
 
 struct ToolbarIconButton: View {

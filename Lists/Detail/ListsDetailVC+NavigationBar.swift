@@ -125,6 +125,7 @@ extension ListsDetailViewController {
     @objc func optionsPressed() {}
     
     @objc func dismissSelf() {
+        model.listUpdated?(model.list.getList(), true) /// `final` is true, reload the lists back in the collection view
         dismiss(animated: true)
     }
     

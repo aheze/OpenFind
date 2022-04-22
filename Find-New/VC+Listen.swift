@@ -19,7 +19,13 @@ extension ViewController {
 
         ViewControllerCallback.getListDetailController = { [weak self] list in
             guard let self = self else { return nil }
-            let viewController = self.lists.viewController.getDetailViewController(list: list, focusFirstWord: false, addDismissButton: true)
+            let toolbarViewModel = ToolbarViewModel()
+            let viewController = self.lists.viewController.getDetailViewController(
+                toolbarViewModel: toolbarViewModel,
+                list: list,
+                focusFirstWord: false,
+                addDismissButton: true
+            )
             return viewController
         }
         tabViewModel.tappedTabAgain = { [weak self] tab in

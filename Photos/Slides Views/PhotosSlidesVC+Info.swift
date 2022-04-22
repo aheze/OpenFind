@@ -24,7 +24,9 @@ extension PhotosSlidesViewController {
     func showInfo(_ show: Bool) {
         var offset: CGFloat?
         if show {
-            if traitCollection.verticalSizeClass == .compact {
+            
+            /// landscape iPhone or iPad
+            if traitCollection.horizontalSizeClass == .regular {
                 var attributes = Popover.Attributes()
                 attributes.tag = "Popover"
                 attributes.position = .relative(popoverAnchors: [.topRight])

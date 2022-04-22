@@ -12,17 +12,38 @@ extension ListsViewController {
     func presentDetails(list: List, focusFirstWord: Bool = false) {
         /// keep it up to date. replacing!
         
-        let viewController = self.getDetailViewController(list: list, focusFirstWord: focusFirstWord, addDismissButton: false)
-        self.detailsViewController = viewController
-        navigationController?.pushViewController(viewController, animated: true)
-        
-        viewController.updateSearchBarOffset = { [weak self] in
-            guard let self = self else { return }
-            self.updateNavigationBar?()
+        /// iPad
+        if traitCollection.horizontalSizeClass == .regular, traitCollection.verticalSizeClass == .regular {
+            let toolbarViewModel = ToolbarViewModel()
+            let viewController = self.getDetailViewController(toolbarViewModel: toolbarViewModel, list: list, focusFirstWord: focusFirstWord, addDismissButton: true)
+            self.detailsViewController = viewController
+            
+            let navigationController = UINavigationController(rootViewController: viewController)
+            let toolbarController = ToolbarController.make(model: toolbarViewModel, rootViewController: navigationController)
+            self.present(toolbarController, animated: true)
+            
+            toolbarViewModel.didDismiss = { [weak self] in
+                guard let self = self else { return }
+                print("did dismiss received!")
+                self.reloadDisplayedLists()
+                self.update()
+                if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
+                    self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
+                }
+            }
+        } else {
+            let viewController = self.getDetailViewController(toolbarViewModel: toolbarViewModel, list: list, focusFirstWord: focusFirstWord, addDismissButton: false)
+            self.detailsViewController = viewController
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            viewController.updateSearchBarOffset = { [weak self] in
+                guard let self = self else { return }
+                self.updateNavigationBar?()
+            }
         }
     }
     
-    func getDetailViewController(list: List, focusFirstWord: Bool, addDismissButton: Bool) -> ListsDetailViewController {
+    func getDetailViewController(toolbarViewModel: ToolbarViewModel, list: List, focusFirstWord: Bool, addDismissButton: Bool) -> ListsDetailViewController {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)
         let listsDetailViewModel = ListsDetailViewModel(
             list: list,
@@ -49,12 +70,11 @@ extension ListsViewController {
         listsDetailViewModel.focusFirstWord = focusFirstWord
         listsDetailViewModel.addDismissButton = addDismissButton
         let viewController: ListsDetailViewController = storyboard.instantiateViewController(identifier: "ListsDetailViewController") { coder in
-            
             ListsDetailViewController(
                 coder: coder,
                 model: listsDetailViewModel,
                 tabViewModel: self.tabViewModel,
-                toolbarViewModel: self.toolbarViewModel,
+                toolbarViewModel: toolbarViewModel,
                 realmModel: self.realmModel
             )
         }
