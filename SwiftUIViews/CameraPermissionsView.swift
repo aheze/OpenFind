@@ -94,9 +94,11 @@ struct PermissionsActionView: View {
     let dark: Bool
     let action: () -> Void
 
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     var body: some View {
+        let descriptionFont = getDescriptionFont()
         Color.clear.overlay(
             AdaptiveStack(vertical: verticalSizeClass != .compact, spacing: 32) {
                 Image(image)
@@ -118,6 +120,7 @@ struct PermissionsActionView: View {
                             .foregroundColor(dark ? UIColor.white.color : UIColor.label.color)
 
                         Text(description)
+                            .font(descriptionFont.font)
                             .minimumScaleFactor(0.4) /// allow resizing
                             .frame(maxWidth: .infinity, alignment: labelAlignment)
                             .multilineTextAlignment(textAlignment)
@@ -136,7 +139,7 @@ struct PermissionsActionView: View {
                             ]
 
                         Text(actionLabel)
-                            .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold).font)
+                            .font(descriptionFont.font)
                             .foregroundColor(.white)
                             .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
                             .background(
@@ -152,9 +155,25 @@ struct PermissionsActionView: View {
                 .padding(.horizontal, verticalSizeClass != .compact ? 36 : 0)
             }
             .padding(.vertical, 100)
+            .frame(maxWidth: getMaxWidth())
         )
         .edgesIgnoringSafeArea(.all)
         .padding(.horizontal, verticalSizeClass != .compact ? 0 : 64)
+    }
+    
+    /// for iPad
+    func getMaxWidth() -> CGFloat? {
+        if verticalSizeClass == .regular && horizontalSizeClass == .regular {
+            return 500
+        }
+        return nil
+    }
+    
+    func getDescriptionFont() -> UIFont {
+        if verticalSizeClass == .regular && horizontalSizeClass == .regular {
+            return UIFont.preferredCustomFont(forTextStyle: .title2, weight: .medium)
+        }
+        return UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium)
     }
 }
 

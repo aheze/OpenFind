@@ -90,12 +90,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Viewdidload")
 
         realmModel.started()
-        if !realmModel.launchedBefore {
-            print("Not alucnehd before")
-            realmModel.addSampleLists()
-        }
 
         if !RealmContainer.migratedPhotoMetadatas.isEmpty || !RealmContainer.migratedLists.isEmpty {
             loadMigratedData(
@@ -147,6 +144,11 @@ class ViewController: UIViewController {
     }
 
     func onboardingDone() {
+        if !realmModel.launchedBefore {
+            print("Not launchedBefore")
+            realmModel.addSampleLists()
+        }
+
         realmModel.entered()
         AppDelegate.AppUtility.lockOrientation(.all)
         removeChildViewController(launchViewController)

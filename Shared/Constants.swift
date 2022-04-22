@@ -11,7 +11,7 @@ import SwiftUI
 enum Colors {
     /// Main accent color (blue)
     static var accent = UIColor(named: "Accent")!
-    static var accentDarkBackground = UIColor(hex: 0x0052a9)
+    static var accentDarkBackground = UIColor(hex: 0x0052A9)
     static var activeIconColor = UIColor(hex: 0x8AF9FF)
     
     /// doesn't change according to dark mode or not
@@ -27,7 +27,6 @@ extension Color {
 }
 
 enum Constants {
-    
     static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)
@@ -41,7 +40,6 @@ enum Constants {
     
     /// scale back speed
     static var toolbarIconDeactivateAnimationSpeed = CGFloat(0.3)
-    
     
     /**
      For toolbars above the keyboard.
@@ -74,29 +72,47 @@ enum ConstantVars {
     static var tabBarTotalHeightExpandedLandscape = CGFloat(0)
     static var toolbarBottomPaddingLandscape = CGFloat(0)
     
+    /// iPad with rounded corners also needs bottom padding
+    static func getIsPad(window: UIWindow) -> Bool {
+        if window.traitCollection.horizontalSizeClass == .regular, window.traitCollection.verticalSizeClass == .regular {
+            return true
+        } else {
+            return false
+        }
+    }
+
     static func configure(window: UIWindow?) {
         let safeAreaInsets = window?.safeAreaInsets ?? .zero
         let orientation = UIWindow.currentInterfaceOrientation ?? .portrait
         
+        print("land? \(orientation.isLandscape)")
         let bottomSafeAreaInset: CGFloat /// bottom inset for the physical device
         let deviceHasNotch: Bool
-        if orientation.isLandscape {
-            deviceHasNotch = safeAreaInsets.left > 0 || safeAreaInsets.right > 0
-        } else {
-            deviceHasNotch = safeAreaInsets.bottom > 0
-        }
         
-        switch orientation {
-        case .portrait:
+        /// if iPad, bottom has padding in any orientation
+        if let window = window, getIsPad(window: window) {
+            deviceHasNotch = safeAreaInsets.bottom > 0
             bottomSafeAreaInset = safeAreaInsets.bottom
-        case .portraitUpsideDown:
-            bottomSafeAreaInset = safeAreaInsets.bottom
-        case .landscapeLeft: /// home button left
-            bottomSafeAreaInset = safeAreaInsets.left
-        case .landscapeRight: /// home button right
-            bottomSafeAreaInset = safeAreaInsets.right
-        default:
-            bottomSafeAreaInset = 0
+        } else {
+            if orientation.isLandscape {
+                /// for phones, check left and right
+                deviceHasNotch = safeAreaInsets.left > 0 || safeAreaInsets.right > 0
+            } else {
+                deviceHasNotch = safeAreaInsets.bottom > 0
+            }
+            
+            switch orientation {
+            case .portrait:
+                bottomSafeAreaInset = safeAreaInsets.bottom
+            case .portraitUpsideDown:
+                bottomSafeAreaInset = safeAreaInsets.bottom
+            case .landscapeLeft: /// home button left
+                bottomSafeAreaInset = safeAreaInsets.left
+            case .landscapeRight: /// home button right
+                bottomSafeAreaInset = safeAreaInsets.right
+            default:
+                bottomSafeAreaInset = 0
+            }
         }
         
         if deviceHasNotch {
