@@ -54,9 +54,16 @@ extension SearchViewController {
                 if let existingPopover = self.view.popover(tagged: PopoverIdentifier.fieldSettingsIdentifier) {
                     existingPopover.dismiss()
                 }
-                guard let viewController = ViewControllerCallback.getListDetailController?(list) else { return }
+                let toolbarViewModel = ToolbarViewModel()
+                guard let viewController = ViewControllerCallback.getListDetailController?(toolbarViewModel, list) else { return }
+
                 let navigationController = UINavigationController(rootViewController: viewController)
-                self.present(navigationController, animated: true)
+                let toolbarController = ToolbarController.make(model: toolbarViewModel, rootViewController: navigationController)
+                self.present(toolbarController, animated: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.view.endEditing(true)
+                }
             }
             model.changed = { [weak self] in
                 guard let self = self else { return }
@@ -86,5 +93,3 @@ extension SearchViewController {
         return popover
     }
 }
-
-

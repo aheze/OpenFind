@@ -17,9 +17,8 @@ extension ViewController {
             return self.settingsController.viewController.getSupportDocs()
         }
 
-        ViewControllerCallback.getListDetailController = { [weak self] list in
+        ViewControllerCallback.getListDetailController = { [weak self] toolbarViewModel, list in
             guard let self = self else { return nil }
-            let toolbarViewModel = ToolbarViewModel()
             let viewController = self.lists.viewController.getDetailViewController(
                 toolbarViewModel: toolbarViewModel,
                 list: list,
@@ -28,6 +27,7 @@ extension ViewController {
             )
             return viewController
         }
+        
         tabViewModel.tappedTabAgain = { [weak self] tab in
             guard let self = self else { return }
 

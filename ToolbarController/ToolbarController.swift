@@ -57,9 +57,9 @@ class ToolbarController: UIViewController {
             guard let self = self else { return }
             UIView.animate(withDuration: 0.3) {
                 if toolbar != nil {
-                    self.toolbarContainerView.alpha = 1
+                    self.toolbarContainerViewContainer.alpha = 1
                 } else {
-                    self.toolbarContainerView.alpha = 0
+                    self.toolbarContainerViewContainer.alpha = 0
                 }
             }
         }

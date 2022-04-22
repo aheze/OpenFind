@@ -9,7 +9,6 @@
 import UIKit
 
 extension ListsViewController {
-    
     /// find and load lists into the collection view, calls `updateDisplayedLists`
     func find(text: [String]) {
         let displayedLists = realmModel.lists.map { DisplayedList(list: $0) }

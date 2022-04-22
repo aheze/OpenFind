@@ -9,5 +9,5 @@
 import UIKit
 
 enum ViewControllerCallback {
-    static var getListDetailController: ((List) -> UIViewController?)?
+    static var getListDetailController: ((ToolbarViewModel, List) -> UIViewController?)?
 }

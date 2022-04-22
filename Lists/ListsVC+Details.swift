@@ -24,7 +24,6 @@ extension ListsViewController {
             
             toolbarViewModel.didDismiss = { [weak self] in
                 guard let self = self else { return }
-                print("did dismiss received!")
                 self.reloadDisplayedLists()
                 self.update()
                 if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
