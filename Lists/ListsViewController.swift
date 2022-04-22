@@ -71,6 +71,7 @@ class ListsViewController: UIViewController, Searchable {
         collectionView.backgroundColor = .clear
         
         setup()
+        realmModel.container.loadLists()
         reload()
         listen()
     }

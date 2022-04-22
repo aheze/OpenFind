@@ -22,7 +22,6 @@ extension ListsViewController {
             .store(in: &realmModel.cancellables)
     }
 
-    /// call this in `Find-New`'s `viewDidLoad`, after loading realm
     func reload() {
         reloadDisplayedLists()
         update(animate: false)

@@ -18,6 +18,7 @@ extension ListsViewController {
         )
         viewController.view.backgroundColor = .clear
         contentContainer.backgroundColor = .clear
+        contentContainer.alpha = 0
         addChildViewController(viewController, in: contentContainer)
     }
 

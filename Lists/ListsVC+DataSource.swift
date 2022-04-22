@@ -20,6 +20,7 @@ extension ListsViewController {
             showEmptyContent(model.displayedLists.isEmpty)
             searchViewModel.enabled = !model.displayedLists.isEmpty
         }
+        
         updateViewsEnabled()
     }
     
