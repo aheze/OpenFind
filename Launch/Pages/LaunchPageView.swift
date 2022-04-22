@@ -11,6 +11,7 @@ import SwiftUI
 enum LaunchPageViewConstants {
     static var titleFont = UIFont.preferredCustomFont(forTextStyle: .largeTitle, weight: .semibold)
     static var descriptionFont = UIFont.preferredCustomFont(forTextStyle: .title2, weight: .medium)
+    static var descriptionFontLarge = UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium)
 
     static var spacing = CGFloat(16)
     static var edgePadding = CGFloat(24) /// screen edge
@@ -49,6 +50,8 @@ struct LaunchPageViewContent<Content: View>: View {
     var footnote: String
     @ViewBuilder let content: Content
 
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     let c = LaunchPageViewConstants.self
 
     var body: some View {
@@ -69,7 +72,7 @@ struct LaunchPageViewContent<Content: View>: View {
                         + Text(footnote)
                         .foregroundColor(.white.opacity(0.75))
                 }
-                .font(c.descriptionFont.font)
+                .font(getDescriptionFont().font)
                 .multilineTextAlignment(.leading)
                 .minimumScaleFactor(0.4) /// allow resizing
                 .frame(maxWidth: .infinity, alignment: .leading),
@@ -84,5 +87,13 @@ struct LaunchPageViewContent<Content: View>: View {
         .cornerRadius(c.cornerRadius)
         .padding(.horizontal, c.edgePadding)
         .padding(.vertical, 0.5) /// view gets clipped a bit, add a bit of padding
+    }
+
+    func getDescriptionFont() -> UIFont {
+        if horizontalSizeClass == .regular && verticalSizeClass == .regular {
+            return c.descriptionFontLarge
+        } else {
+            return c.descriptionFont
+        }
     }
 }

@@ -12,14 +12,13 @@ enum LaunchViewConstants {
     static var spacing = CGFloat(20)
 
     static var sidePadding = CGFloat(24)
-    static var shadowPadding = CGFloat(54)
 
     static var headerSpacing = CGFloat(8)
     static var headerTitleFont = UIFont.systemFont(ofSize: 48, weight: .bold)
     static var headerSubtitleFont = UIFont.systemFont(ofSize: 24, weight: .medium)
-    static var headerTopPadding = CGFloat(48)
+    static var headerInsets = EdgeInsets(top: 48, leading: sidePadding, bottom: 16, trailing: sidePadding)
 
-    static var footerBottomPadding = CGFloat(16)
+    static var footerInsets = EdgeInsets(top: 16, leading: sidePadding, bottom: 16, trailing: sidePadding)
     static var footerCornerRadius = CGFloat(20)
 
     static var controlButtonFont = UIFont.preferredFont(forTextStyle: .title3)
@@ -34,8 +33,14 @@ struct LaunchView: View {
 
     @State var topTextHeight = CGFloat(0)
     @State var bottomTextHeight = CGFloat(0)
+    @State var contentHeight = CGFloat(0)
+    @State var deviceHeight = CGFloat(0)
 
     var body: some View {
+        
+        /// gap above and below the content, on iPad
+        let verticalGap = (deviceHeight - contentHeight) / 2
+
         VStack {
             Colors.accentDarkBackground.color
                 .edgesIgnoringSafeArea(.all)
@@ -43,7 +48,7 @@ struct LaunchView: View {
         .mask(
             VStack(spacing: 0) {
                 Color.black
-                    .frame(height: topTextHeight)
+                    .frame(height: topTextHeight + verticalGap)
 
                 LinearGradient(
                     stops: [
@@ -69,9 +74,9 @@ struct LaunchView: View {
                 )
 
                 Color.black
-                    .frame(height: bottomTextHeight)
+                    .frame(height: bottomTextHeight + verticalGap)
             }
-                .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
         )
         .overlay(
             VStack(spacing: c.spacing) {
@@ -86,6 +91,7 @@ struct LaunchView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .opacity(model.currentPage == .empty ? 1 : 0)
+                .padding(c.headerInsets)
                 .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
                 .readSize {
                     topTextHeight = $0.height
@@ -137,16 +143,25 @@ struct LaunchView: View {
                 .buttonStyle(LaunchButtonStyle())
                 .frame(maxWidth: .infinity)
                 .opacity(model.currentPage == .empty ? 1 : 0)
+                .padding(c.footerInsets)
                 .frame(height: model.currentPage == .empty ? nil : 0, alignment: .bottom)
                 .readSize {
-                    print("Bot: \($0.height)")
                     bottomTextHeight = $0.height
                 }
             }
             .frame(maxWidth: 560, maxHeight: 900)
             .foregroundColor(.white)
             .opacity(model.showingUI ? 1 : 0)
+            .readSize {
+                contentHeight = $0.height
+                print("readSizeCont: \(contentHeight). \(deviceHeight)")
+            }
         )
+        .readSize {
+            deviceHeight = $0.height
+
+            print("Cont: \(contentHeight). \(deviceHeight)")
+        }
     }
 }
 
@@ -186,7 +201,6 @@ struct PagingButtonsView: View {
                 .opacity(nextPage != nil ? 1 : 0)
             }
             .padding(.horizontal, c.sidePadding)
-            .padding(.bottom, 16)
         }
     }
 }
@@ -221,27 +235,6 @@ struct LaunchContentView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: LaunchContentViewController, context: Context) {}
 }
-
-// struct LaunchGradientView: View {
-//    var transparentBottom: Bool
-//    var body: some View {
-//        LinearGradient(
-//            stops: [
-//                .init(
-//                    color: Colors.accentDarkBackground.color,
-//                    location: 0.8
-//                ),
-//                .init(
-//                    color: Colors.accentDarkBackground.color.opacity(0),
-//                    location: 1
-//                )
-//            ],
-//            startPoint: transparentBottom ? .top : .bottom,
-//            endPoint: transparentBottom ? .bottom : .top
-//        )
-//        .edgesIgnoringSafeArea(.all)
-//    }
-// }
 
 public extension View {
     @inlinable
