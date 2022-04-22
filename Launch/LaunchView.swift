@@ -37,7 +37,6 @@ struct LaunchView: View {
     @State var deviceHeight = CGFloat(0)
 
     var body: some View {
-        
         /// gap above and below the content, on iPad
         let verticalGap = (deviceHeight - contentHeight) / 2
 
@@ -80,21 +79,23 @@ struct LaunchView: View {
         )
         .overlay(
             VStack(spacing: c.spacing) {
-                VStack(spacing: c.headerSpacing) {
-                    Text("Find")
-                        .font(c.headerTitleFont.font)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                if model.currentPage == .empty {
+                    VStack(spacing: c.headerSpacing) {
+                        Text("Find")
+                            .font(c.headerTitleFont.font)
+                            .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Text("An app to find text in real life.")
-                        .font(c.headerSubtitleFont.font)
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .opacity(model.currentPage == .empty ? 1 : 0)
-                .padding(c.headerInsets)
-                .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
-                .readSize {
-                    topTextHeight = $0.height
+                        Text("An app to find text in real life.")
+                            .font(c.headerSubtitleFont.font)
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .opacity(model.currentPage == .empty ? 1 : 0)
+                    .padding(c.headerInsets)
+
+                    .readSize {
+                        topTextHeight = $0.height
+                    }
                 }
 
                 LaunchContentView(model: model)
@@ -128,25 +129,26 @@ struct LaunchView: View {
 
                 PagingButtonsView(model: model)
 
-                Button {
-                    withAnimation {
-                        model.setCurrentPage(to: .photos)
+                if model.currentPage == .empty {
+                    Button {
+                        withAnimation {
+                            model.setCurrentPage(to: .photos)
+                        }
+                    } label: {
+                        Text("Get Started")
+                            .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
+                            .frame(maxWidth: .infinity)
+                            .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(c.footerCornerRadius)
                     }
-                } label: {
-                    Text("Get Started")
-                        .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
-                        .frame(maxWidth: .infinity)
-                        .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(c.footerCornerRadius)
-                }
-                .buttonStyle(LaunchButtonStyle())
-                .frame(maxWidth: .infinity)
-                .opacity(model.currentPage == .empty ? 1 : 0)
-                .padding(c.footerInsets)
-                .frame(height: model.currentPage == .empty ? nil : 0, alignment: .bottom)
-                .readSize {
-                    bottomTextHeight = $0.height
+                    .buttonStyle(LaunchButtonStyle())
+                    .frame(maxWidth: .infinity)
+                    .opacity(model.currentPage == .empty ? 1 : 0)
+                    .padding(c.footerInsets)
+                    .readSize {
+                        bottomTextHeight = $0.height
+                    }
                 }
             }
             .frame(maxWidth: 560, maxHeight: 900)
