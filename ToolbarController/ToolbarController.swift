@@ -80,7 +80,6 @@ class ToolbarController: UIViewController {
 
 extension ToolbarController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("presentationControllerDidDismiss dismiss!")
         model.didDismiss?()
     }
 }

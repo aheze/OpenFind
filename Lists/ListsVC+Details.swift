@@ -20,16 +20,11 @@ extension ListsViewController {
             
             let navigationController = UINavigationController(rootViewController: viewController)
             let toolbarController = ToolbarController.make(model: toolbarViewModel, rootViewController: navigationController)
+            toolbarViewModel.didDismiss = {
+                viewController.dismissSelf()
+            }
             self.present(toolbarController, animated: true)
             
-            toolbarViewModel.didDismiss = { [weak self] in
-                guard let self = self else { return }
-                self.reloadDisplayedLists()
-                self.update()
-                if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == list.id }) {
-                    self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
-                }
-            }
         } else {
             let viewController = self.getDetailViewController(toolbarViewModel: toolbarViewModel, list: list, focusFirstWord: focusFirstWord, addDismissButton: false)
             self.detailsViewController = viewController
