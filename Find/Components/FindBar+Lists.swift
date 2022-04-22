@@ -27,11 +27,11 @@ extension FindBar {
                 editableList.orderIdentifier = index
                 
                 var contents = [String]()
-                for singleCont in reallist.words {
+                for singleCont in realList.contents {
                     contents.append(singleCont)
                 }
                 
-                editablelist.words = contents
+                editableList.contents = contents
                 
                 for selectedList in selectedLists {
                     if selectedList.dateCreated == realList.dateCreated {

@@ -203,35 +203,35 @@ extension Date {
     func convertDateToReadableString() -> String {
         let todayLoc = NSLocalizedString("todayLoc", comment: "extensionDate def=Today")
         let yesterdayLoc = NSLocalizedString("yesterdayLoc", comment: "extensionDate def=Yesterday")
-        
+
         /// Initializing a Date object will always return the current date (including time)
         let todaysDate = Date()
-        
+
         guard let yesterday = todaysDate.subtract(days: 1) else { return "2020" }
-        
+
         guard let oneWeekAgo = todaysDate.subtract(days: 7) else { return "2020" }
         guard let yestYesterday = yesterday.subtract(days: 1) else { return "2020" }
-        
+
         /// This will be any date from one week ago to the day before yesterday
-        let recently = oneWeekAgo...yestYesterday
-        
+        let recently = oneWeekAgo ... yestYesterday
+
         /// convert the date into a string, if the date is before yesterday
         let dateFormatter = DateFormatter()
-        
+
         /// If self (the date that you're comparing) is today
         if hasSame(.day, as: todaysDate) {
             return todayLoc
-            
+
             /// if self is yesterday
         } else if hasSame(.day, as: yesterday) {
             return yesterdayLoc
-            
+
             /// if self is in between one week ago and the day before yesterday
         } else if recently.contains(self) {
             /// "EEEE" will display something like "Wednesday" (the weekday)
             dateFormatter.dateFormat = "EEEE"
             return dateFormatter.string(from: self)
-            
+
             /// self is before one week ago
         } else {
             /// displays the date as "January 1, 2020"
@@ -240,23 +240,23 @@ extension Date {
             return dateFormatter.string(from: self)
         }
     }
-    
+
     /// Thanks to Vasily Bodnarchuk: https://stackoverflow.com/a/40654331
     func compare(with date: Date, only component: Calendar.Component) -> Int {
         let days1 = Calendar.current.component(component, from: self)
         let days2 = Calendar.current.component(component, from: date)
         return days1 - days2
     }
-    
+
     func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
         return compare(with: date, only: component) == 0
     }
-    
+
     func add(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
         let comp = DateComponents(year: years, month: months, day: days, hour: hours, minute: minutes, second: seconds)
         return Calendar.current.date(byAdding: comp, to: self)
     }
-    
+
     func subtract(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
         return add(years: -years, months: -months, days: -days, hours: -hours, minutes: -minutes, seconds: -seconds)
     }
@@ -320,7 +320,7 @@ class GradientBorderView: CustomActionsView {
         didSet {
             let inset = lineWidth / 2
             shapeLayer?.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
-            
+
             layer.cornerRadius = cornerRadius
         }
     }
@@ -334,16 +334,16 @@ class GradientBorderView: CustomActionsView {
     var lineWidth = CGFloat(3) {
         didSet {
             shapeLayer?.lineWidth = lineWidth
-            
+
             let inset = lineWidth / 2
             gradientLayer.frame = bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
         }
     }
-    
+
     var shapeLayer: CAShapeLayer?
     lazy var gradientLayer: CAGradientLayer = {
         let inset = lineWidth / 2
-        
+
         let l = CAGradientLayer()
         l.frame = self.bounds
         l.colors = [#colorLiteral(red: 0.117850464, green: 0.6410203502, blue: 0.9803485577, alpha: 1).cgColor, #colorLiteral(red: 0.2087231564, green: 0.6273328993, blue: 0.8017540564, alpha: 1).cgColor]
@@ -351,20 +351,20 @@ class GradientBorderView: CustomActionsView {
         l.endPoint = CGPoint(x: 0.5, y: 1)
         l.cornerRadius = cornerRadius
         layer.addSublayer(l)
-        
+
         let shape = CAShapeLayer()
         shape.lineWidth = lineWidth
         shape.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
         shape.strokeColor = UIColor.black.cgColor
         shape.fillColor = UIColor.clear.cgColor
         l.mask = shape
-        
+
         self.shapeLayer = shape
-        
+
         shape.masksToBounds = false
         l.masksToBounds = false
         layer.masksToBounds = false
-        
+
         layer.cornerRadius = cornerRadius
         return l
     }()
@@ -429,3 +429,185 @@ extension CALayer {
     }
 }
 
+struct AccessibilityText {
+    var text = ""
+    var isRaised = false
+    var customPitch: Double? = nil
+    var customPronunciation: String? = nil
+}
+
+extension UIAccessibility {
+    static func postAnnouncement(_ texts: [AccessibilityText], delay: Double = 0.5) {
+        let string = makeAttributedText(texts)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            UIAccessibility.post(notification: .announcement, argument: string)
+        }
+    }
+
+    static func makeAttributedText(_ texts: [AccessibilityText]) -> NSMutableAttributedString {
+        let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
+        let string = NSMutableAttributedString()
+
+        for text in texts {
+            if let customPitch = text.customPitch {
+                let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: customPitch]
+                let customRaisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
+                string.append(customRaisedString)
+            } else if let customPronunciation = text.customPronunciation {
+                let pronunciation = [NSAttributedString.Key.accessibilitySpeechIPANotation: NSString(string: customPronunciation)]
+                let customPronunciationString = NSMutableAttributedString(string: text.text, attributes: pronunciation)
+                string.append(customPronunciationString)
+            } else if text.isRaised {
+                let raisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
+                string.append(raisedString)
+            } else {
+                let normalString = NSAttributedString(string: text.text)
+                string.append(normalString)
+            }
+        }
+
+        return string
+    }
+}
+
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}
+
+extension UIViewController {
+    func addChild(_ childViewController: UIViewController, in inView: UIView) {
+        /// Add Child View Controller
+        addChild(childViewController)
+
+        /// Add Child View as Subview
+        inView.insertSubview(childViewController.view, at: 0)
+
+        /// Configure Child View
+        childViewController.view.frame = inView.bounds
+        childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        /// Notify Child View Controller
+        childViewController.didMove(toParent: self)
+    }
+
+    func removeChild(_ childViewController: UIViewController) {
+        /// Notify Child View Controller
+        childViewController.willMove(toParent: nil)
+
+        /// Remove Child View From Superview
+        childViewController.view.removeFromSuperview()
+
+        /// Notify Child View Controller
+        childViewController.removeFromParent()
+    }
+}
+
+extension UIView {
+    func centerInParent() {
+        guard let superview = superview else { return }
+        center = CGPoint(
+            x: superview.bounds.width / 2,
+            y: superview.bounds.height / 2
+        )
+    }
+}
+
+extension View {
+    func configureBar() -> some View {
+        return modifier(BarModifier())
+    }
+}
+
+/**
+ ViewModifier that applies SupportOptions' `NavigationBar` and `SearchBar` configurations.
+ */
+struct BarModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay( /// Workaround to apply the `ViewControllerResolver`
+                ViewControllerResolver { viewController in
+
+                    /**
+                     Now set the Navigation Bar's configuration
+                     */
+                    let navBarAppearance = UINavigationBarAppearance()
+                    navBarAppearance.configureWithOpaqueBackground()
+                    navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                    navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+                    navBarAppearance.backgroundColor = UIColor(named: "DarkBackground")
+
+                    viewController.navigationController?.navigationBar.standardAppearance = navBarAppearance
+
+                    viewController.navigationController?.navigationBar.barTintColor = UIColor(named: "DarkBackground")
+                    viewController.navigationController?.navigationBar.tintColor = UIColor.white
+
+                    if let navController = viewController.navigationController {
+                        navController.navigationBar.layer.masksToBounds = false
+                        navController.navigationBar.layer.shadowColor = UIColor(named: "DarkBackground")?.cgColor
+                        navController.navigationBar.layer.shadowOpacity = 0.8
+                        navController.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+                        navController.navigationBar.layer.shadowRadius = 6
+                    }
+                }
+                .frame(width: 0, height: 0)
+            )
+    }
+}
+
+/**
+ Access the parent view controller of the SwiftUI View.
+ */
+internal final class ViewControllerResolver: UIViewControllerRepresentable {
+    /// Closure to call when `didMove`
+    let onResolve: (UIViewController) -> Void
+
+    init(onResolve: @escaping (UIViewController) -> Void) {
+        self.onResolve = onResolve
+    }
+
+    func makeUIViewController(context: Context) -> ParentResolverViewController {
+        ParentResolverViewController(onResolve: onResolve)
+    }
+
+    func updateUIViewController(_ uiViewController: ParentResolverViewController, context: Context) {}
+}
+
+internal class ParentResolverViewController: UIViewController {
+    let onResolve: (UIViewController) -> Void
+
+    init(onResolve: @escaping (UIViewController) -> Void) {
+        self.onResolve = onResolve
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("Use init(onResolve:) to instantiate ParentResolverViewController.")
+    }
+
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+
+        if let parent = parent {
+            onResolve(parent)
+        }
+    }
+}

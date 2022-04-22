@@ -83,3 +83,12 @@ extension PhotoSlidesViewController: UIGestureRecognizerDelegate {
         return false
     }
 }
+
+extension UIWindow {
+    static var currentInterfaceOrientation: UIInterfaceOrientation? {
+        return UIApplication.shared.windows
+            .first?
+            .windowScene?
+            .interfaceOrientation
+    }
+}

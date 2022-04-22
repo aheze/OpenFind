@@ -8,6 +8,8 @@
 	<string>Find</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -19,7 +21,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>5132</string>
+	<string>5137</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -27,11 +31,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This permission is required to save photos to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>By allowing access to your photos, you&apos;ll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.</string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConfigurationIntent</string>

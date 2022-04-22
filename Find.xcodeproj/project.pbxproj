@@ -524,6 +524,28 @@
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
+		3C2D19D028130924005575F5 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19B428130924005575F5 /* Bridge.swift */; };
+		3C2D19D228130924005575F5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19B628130924005575F5 /* SettingsView.swift */; };
+		3C2D19D328130924005575F5 /* SettingsWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19B828130924005575F5 /* SettingsWidgets.swift */; };
+		3C2D19D428130924005575F5 /* DefaultColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19BA28130924005575F5 /* DefaultColorView.swift */; };
+		3C2D19D528130924005575F5 /* LanguagesSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19BB28130924005575F5 /* LanguagesSummaryView.swift */; };
+		3C2D19D628130924005575F5 /* TextDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19BD28130924005575F5 /* TextDetectionView.swift */; };
+		3C2D19D728130924005575F5 /* HapticFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19BE28130924005575F5 /* HapticFeedbackView.swift */; };
+		3C2D19D828130924005575F5 /* ShutterStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19BF28130924005575F5 /* ShutterStyleView.swift */; };
+		3C2D19D928130924005575F5 /* SettingsViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C028130924005575F5 /* SettingsViewModifiers.swift */; };
+		3C2D19DA28130924005575F5 /* SwipeToNavigateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C228130924005575F5 /* SwipeToNavigateView.swift */; };
+		3C2D19DB28130924005575F5 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C328130924005575F5 /* ShareView.swift */; };
+		3C2D19DC28130924005575F5 /* ResetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C428130924005575F5 /* ResetSettingsView.swift */; };
+		3C2D19DD28130924005575F5 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C528130924005575F5 /* CreditsView.swift */; };
+		3C2D19DE28130924005575F5 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C728130924005575F5 /* PeopleView.swift */; };
+		3C2D19DF28130924005575F5 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C828130924005575F5 /* ContactView.swift */; };
+		3C2D19E028130924005575F5 /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19C928130924005575F5 /* LanguagesView.swift */; };
+		3C2D19E128130924005575F5 /* ExternalLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19CB28130924005575F5 /* ExternalLinks.swift */; };
+		3C2D19E228130924005575F5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19CC28130924005575F5 /* HelpView.swift */; };
+		3C2D19E328130924005575F5 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19CD28130924005575F5 /* FeedbackView.swift */; };
+		3C2D19E428130924005575F5 /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19CE28130924005575F5 /* SettingsComponents.swift */; };
+		3C2D19E528130924005575F5 /* SingleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D19CF28130924005575F5 /* SingleWebView.swift */; };
+		3C2D19E628130C81005575F5 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD4224A6B37500D5F844 /* ListToolBar.xib */; };
 		3C2D228B27FAD2F900D413B7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C2D228D27FAD35F00D413B7 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D228C27FAD35F00D413B7 /* SettingsModels.swift */; };
 		3C2D228F27FB5B6200D413B7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D228E27FB5B6200D413B7 /* SettingsData.swift */; };
@@ -2120,7 +2142,6 @@
 		3CAE64F327C6AE2A009E8564 /* PhotosVC+Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */; };
 		3CAE64F427C6AE34009E8564 /* PhotosVC+Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */; };
 		3CB0022C2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
-		3CB0022D2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3CB0022E2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3CB0022F2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
@@ -2342,10 +2363,8 @@
 		3CCCCAB327818CEC000381CE /* GeneralViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA9A27818CDD000381CE /* GeneralViews.swift */; };
 		3CCCCAB427818CEC000381CE /* FindIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA9827818CAF000381CE /* FindIconView.swift */; };
 		3CCCCAB527818CEC000381CE /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
-		3CCE2AED279D004B00F72351 /* FindIconUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEC279D004B00F72351 /* FindIconUIView.swift */; };
 		3CCE2AEF279D004F00F72351 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEE279D004F00F72351 /* ButtonView.swift */; };
 		3CCE2AF1279D006300F72351 /* ClearIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF0279D006300F72351 /* ClearIconView.swift */; };
-		3CCE2AF3279D007000F72351 /* SelectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF2279D007000F72351 /* SelectionIconView.swift */; };
 		3CCE2AF5279D008800F72351 /* SelectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF2279D007000F72351 /* SelectionIconView.swift */; };
 		3CCE2AF6279D008800F72351 /* ClearIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF0279D006300F72351 /* ClearIconView.swift */; };
 		3CCE2AF7279D008800F72351 /* FindIconUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEC279D004B00F72351 /* FindIconUIView.swift */; };
@@ -2401,7 +2420,6 @@
 		3CCE2B2A279D008D00F72351 /* ClearIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF0279D006300F72351 /* ClearIconView.swift */; };
 		3CCE2B2B279D008D00F72351 /* FindIconUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEC279D004B00F72351 /* FindIconUIView.swift */; };
 		3CCE2B2C279D008D00F72351 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AEE279D004F00F72351 /* ButtonView.swift */; };
-		3CCE2B2D279D008D00F72351 /* UIKitViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A18275AA16C0064F2C6 /* UIKitViews.swift */; };
 		3CCE2B41279D093600F72351 /* ListsDetailVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B40279D093600F72351 /* ListsDetailVC+DataSource.swift */; };
 		3CCE2B43279D0C6900F72351 /* ListsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B42279D0C6900F72351 /* ListsDetailViewModel.swift */; };
 		3CCE2B45279D149800F72351 /* ListsDetailVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2B44279D149800F72351 /* ListsDetailVC+Listen.swift */; };
@@ -2472,7 +2490,6 @@
 		3CD706FC27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */; };
 		3CD706FE27A3925200B446D7 /* ListsDetailVC+IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */; };
 		3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */; };
-		3CDAF25927F2335700467B31 /* List+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAF25827F2335700467B31 /* List+Share.swift */; };
 		3CDAF25A27F2336300467B31 /* List+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAF25827F2335700467B31 /* List+Share.swift */; };
 		3CDAF25B27F2336300467B31 /* List+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAF25827F2335700467B31 /* List+Share.swift */; };
 		3CDAF25C27F2336300467B31 /* List+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAF25827F2335700467B31 /* List+Share.swift */; };
@@ -3346,8 +3363,6 @@
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */; };
 		495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD3824A6B2E500D5F844 /* FindBar.xib */; };
-		495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD4224A6B37500D5F844 /* ListToolBar.xib */; };
-		495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */; };
 		495F38F22432B7B700A17D93 /* Licenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F12432B7B700A17D93 /* Licenses.swift */; };
 		495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F72432C8FB00A17D93 /* CarteViewController.swift */; };
 		495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F82432C8FC00A17D93 /* CarteItem.swift */; };
@@ -3368,7 +3383,6 @@
 		4999AC982353A80A00AB06A7 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC972353A80A00AB06A7 /* CameraViewController.swift */; };
 		4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC992353A80A00AB06A7 /* Main.storyboard */; };
 		4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9C2353A81100AB06A7 /* Assets.xcassets */; };
-		4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */; };
 		49A8EFAC237A5EFE00328D47 /* SetupStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAB237A5EFE00328D47 /* SetupStats.swift */; };
 		49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAD237A5F2800328D47 /* SetupSearchBar.swift */; };
 		49B7A32D2390823C0070209F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B7A32C2390823C0070209F /* Colors.xcassets */; };
@@ -3652,6 +3666,28 @@
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
+		3C2D19B428130924005575F5 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
+		3C2D19B628130924005575F5 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3C2D19B728130924005575F5 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		3C2D19B828130924005575F5 /* SettingsWidgets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWidgets.swift; sourceTree = "<group>"; };
+		3C2D19BA28130924005575F5 /* DefaultColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultColorView.swift; sourceTree = "<group>"; };
+		3C2D19BB28130924005575F5 /* LanguagesSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesSummaryView.swift; sourceTree = "<group>"; };
+		3C2D19BD28130924005575F5 /* TextDetectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDetectionView.swift; sourceTree = "<group>"; };
+		3C2D19BE28130924005575F5 /* HapticFeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedbackView.swift; sourceTree = "<group>"; };
+		3C2D19BF28130924005575F5 /* ShutterStyleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterStyleView.swift; sourceTree = "<group>"; };
+		3C2D19C028130924005575F5 /* SettingsViewModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModifiers.swift; sourceTree = "<group>"; };
+		3C2D19C228130924005575F5 /* SwipeToNavigateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToNavigateView.swift; sourceTree = "<group>"; };
+		3C2D19C328130924005575F5 /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		3C2D19C428130924005575F5 /* ResetSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetSettingsView.swift; sourceTree = "<group>"; };
+		3C2D19C528130924005575F5 /* CreditsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		3C2D19C728130924005575F5 /* PeopleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
+		3C2D19C828130924005575F5 /* ContactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
+		3C2D19C928130924005575F5 /* LanguagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
+		3C2D19CB28130924005575F5 /* ExternalLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinks.swift; sourceTree = "<group>"; };
+		3C2D19CC28130924005575F5 /* HelpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		3C2D19CD28130924005575F5 /* FeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		3C2D19CE28130924005575F5 /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
+		3C2D19CF28130924005575F5 /* SingleWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleWebView.swift; sourceTree = "<group>"; };
 		3C2D228C27FAD35F00D413B7 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		3C2D228E27FB5B6200D413B7 /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		3C2D229027FBA54100D413B7 /* SettingsPage+Generate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsPage+Generate.swift"; sourceTree = "<group>"; };
@@ -4356,7 +4392,6 @@
 		495DAD3A24A6B2E900D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FindBar.strings"; sourceTree = "<group>"; };
 		495DAD4124A6B37500D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ListToolBar.xib; sourceTree = "<group>"; };
 		495DAD4424A6B37900D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ListToolBar.strings"; sourceTree = "<group>"; };
-		495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewConfiguration.swift; sourceTree = "<group>"; };
 		495F38F12432B7B700A17D93 /* Licenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licenses.swift; sourceTree = "<group>"; };
 		495F38F72432C8FB00A17D93 /* CarteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteViewController.swift; sourceTree = "<group>"; };
 		495F38F82432C8FC00A17D93 /* CarteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteItem.swift; sourceTree = "<group>"; };
@@ -4930,6 +4965,76 @@
 				3C257EAF280BE1FB009B6FAE /* LaunchContentCell.swift */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		3C2D19B328130924005575F5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D19B428130924005575F5 /* Bridge.swift */,
+				3C2D19B628130924005575F5 /* SettingsView.swift */,
+				3C2D19B728130924005575F5 /* Settings.h */,
+				3C2D19B828130924005575F5 /* SettingsWidgets.swift */,
+				3C2D19B928130924005575F5 /* General */,
+				3C2D19BC28130924005575F5 /* Camera */,
+				3C2D19C028130924005575F5 /* SettingsViewModifiers.swift */,
+				3C2D19C128130924005575F5 /* Other */,
+				3C2D19C628130924005575F5 /* Subviews */,
+				3C2D19CA28130924005575F5 /* Support */,
+				3C2D19CE28130924005575F5 /* SettingsComponents.swift */,
+				3C2D19CF28130924005575F5 /* SingleWebView.swift */,
+			);
+			name = Settings;
+			path = "../../../../../Downloads/Find-b9cffaf31ebc8d4161ebf2eec5486f1d8b48bb3b/Settings/Settings";
+			sourceTree = "<group>";
+		};
+		3C2D19B928130924005575F5 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D19BA28130924005575F5 /* DefaultColorView.swift */,
+				3C2D19BB28130924005575F5 /* LanguagesSummaryView.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		3C2D19BC28130924005575F5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D19BD28130924005575F5 /* TextDetectionView.swift */,
+				3C2D19BE28130924005575F5 /* HapticFeedbackView.swift */,
+				3C2D19BF28130924005575F5 /* ShutterStyleView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		3C2D19C128130924005575F5 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D19C228130924005575F5 /* SwipeToNavigateView.swift */,
+				3C2D19C328130924005575F5 /* ShareView.swift */,
+				3C2D19C428130924005575F5 /* ResetSettingsView.swift */,
+				3C2D19C528130924005575F5 /* CreditsView.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		3C2D19C628130924005575F5 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D19C728130924005575F5 /* PeopleView.swift */,
+				3C2D19C828130924005575F5 /* ContactView.swift */,
+				3C2D19C928130924005575F5 /* LanguagesView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		3C2D19CA28130924005575F5 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				3C2D19CB28130924005575F5 /* ExternalLinks.swift */,
+				3C2D19CC28130924005575F5 /* HelpView.swift */,
+				3C2D19CD28130924005575F5 /* FeedbackView.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		3C2D22A727FBD99800D413B7 /* Template Views */ = {
@@ -6425,7 +6530,6 @@
 				4952F0C1240B1DD00068564F /* SearchCell.swift */,
 				495F38FD243302D500A17D93 /* StatsViewController.swift */,
 				49563500243591650001E8C6 /* RateTheApp.swift */,
-				495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -6716,6 +6820,7 @@
 				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
 				496937382353C219009CA41A /* Tab Bar Controllers */,
 				3C16EA81259BED7F00D73755 /* Other View Controllers */,
+				3C2D19B328130924005575F5 /* Settings */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				3CAA1D37266C7684008F1F16 /* Assets and Info */,
 				49E9D89424996E1A0006757C /* Localizable.strings */,
@@ -7273,8 +7378,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4999AC8F2353A80A00AB06A7 /* Find */,
-				3C643F1826057806001E6FA1 /* FindClip */,
 				3C6C7320278193F600E039F0 /* Find-New */,
 				3C4D3948274759240010FD68 /* TabController */,
 				3C4D396927475B890010FD68 /* Camera */,
@@ -7293,6 +7396,8 @@
 				3CE40B7A27F5281F00CADCBF /* SettingsNew */,
 				3CC0D123280B279B004E7016 /* Launch */,
 				3CCA2C0028122F3C0019044D /* ToolbarController */,
+				4999AC8F2353A80A00AB06A7 /* Find */,
+				3C643F1826057806001E6FA1 /* FindClip */,
 			);
 		};
 /* End PBXProject section */
@@ -7640,6 +7745,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2D19E628130C81005575F5 /* ListToolBar.xib in Resources */,
 				3CA63F5325C926A8001C295E /* PhotoPermissionView.xib in Resources */,
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */,
@@ -7658,12 +7764,10 @@
 				3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */,
 				3CE306DC259AC46400F1B2E2 /* ListsIcon.xib in Resources */,
 				3C4DE700259AD3FF0037D104 /* CacheButton.xib in Resources */,
-				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */,
 				3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */,
-				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
 				3CA63F4C25C8ECA6001C295E /* TutorialHeader.xib in Resources */,
@@ -10762,6 +10866,7 @@
 				3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */,
 				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,
 				3C69187026125F6B00510C08 /* HighlightColor.swift in Sources */,
+				3C2D19D328130924005575F5 /* SettingsWidgets.swift in Sources */,
 				3C1AB1A6261004B7009B47C0 /* Sound.swift in Sources */,
 				3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */,
 				3C64723A261386100089DAC6 /* CameraVC+Transcripts.swift in Sources */,
@@ -10776,13 +10881,14 @@
 				3CABD25025C11870009921EE /* ViewController+Tips.swift in Sources */,
 				3C4DE6FE259AD3FF0037D104 /* CacheButton.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetupStats.swift in Sources */,
-				3CDAF25927F2335700467B31 /* List+Share.swift in Sources */,
+				3C2D19DF28130924005575F5 /* ContactView.swift in Sources */,
 				3CF0421225C251C600E29FA6 /* PhotosVC+Tips.swift in Sources */,
 				3C22D3D02702D578001E8474 /* PagingView.swift in Sources */,
 				3CAC4DCA25BF5E1600CC7948 /* CameraVC+HandleCache.swift in Sources */,
 				3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */,
 				3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */,
 				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
+				3C2D19D628130924005575F5 /* TextDetectionView.swift in Sources */,
 				3CAC4DA525BF52CE00CC7948 /* LTEasing.swift in Sources */,
 				3C22D3D72702D578001E8474 /* PagingSizeCache.swift in Sources */,
 				3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */,
@@ -10790,12 +10896,15 @@
 				49301BF52402493A00B4780B /* HistoryModel.swift in Sources */,
 				3C22D4062702D578001E8474 /* PagingTransition.swift in Sources */,
 				3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */,
+				3C2D19E428130924005575F5 /* SettingsComponents.swift in Sources */,
 				3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */,
 				3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */,
 				3C8D58A225B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift in Sources */,
 				3CA9334D25BDF37800042C2F /* CameraView.swift in Sources */,
+				3C2D19D928130924005575F5 /* SettingsViewModifiers.swift in Sources */,
 				3C22D3ED2702D578001E8474 /* PagingDirection.swift in Sources */,
 				3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */,
+				3C2D19DC28130924005575F5 /* ResetSettingsView.swift in Sources */,
 				3C22D3EC2702D578001E8474 /* PagingIndicatorOptions.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */,
@@ -10804,7 +10913,6 @@
 				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,
 				3C22D4052702D578001E8474 /* AnyPagingItem.swift in Sources */,
 				3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */,
-				3CB0022D2762FA5A00B6A349 /* FieldSettingsView.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				3C22D3EA2702D578001E8474 /* PagingContentInteraction.swift in Sources */,
@@ -10815,7 +10923,6 @@
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
 				3C8CFC5C25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift in Sources */,
 				3CAC4DD025BF611100CC7948 /* CameraVC+Draw.swift in Sources */,
-				3CCE2AED279D004B00F72351 /* FindIconUIView.swift in Sources */,
 				3C22D3E82702D578001E8474 /* PagingMenuPosition.swift in Sources */,
 				3CCF61FB266EFE1F00109C2F /* EmptyListView.swift in Sources */,
 				3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */,
@@ -10827,10 +10934,10 @@
 				3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */,
 				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
 				3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */,
+				3C2D19DB28130924005575F5 /* ShareView.swift in Sources */,
 				3C22D3F92702D578001E8474 /* PagingViewControllerSizeDelegate.swift in Sources */,
 				3CAC4DB625BF52CF00CC7948 /* MorphingText.swift in Sources */,
 				3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */,
-				3CCE2B2D279D008D00F72351 /* UIKitViews.swift in Sources */,
 				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,
 				3CF0421525C2532B00E29FA6 /* VC+StarTip.swift in Sources */,
 				3C22D3F22702D578001E8474 /* PagingViewControllerInfiniteDataSource.swift in Sources */,
@@ -10845,12 +10952,12 @@
 				3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */,
 				3C42C44D25C33D6B004DC6E9 /* FindBar+Lists.swift in Sources */,
 				3C4DE6FF259AD3FF0037D104 /* SaveToPhotosButton.swift in Sources */,
-				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */,
 				3C570E7A260CF02600F5AA4D /* TabBar+Accessibility.swift in Sources */,
 				3C1317F325B3817300FCEB79 /* PhotoFindVC+TableView.swift in Sources */,
 				3C3DF5FF25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift in Sources */,
+				3C2D19D028130924005575F5 /* Bridge.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
 				3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */,
 				3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */,
@@ -10865,12 +10972,12 @@
 				3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */,
 				3C22D4012702D578001E8474 /* PagingIndicatorMetric.swift in Sources */,
 				3C22D3F82702D578001E8474 /* PageViewManagerDataSource.swift in Sources */,
-				3CCE2AF3279D007000F72351 /* SelectionIconView.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */,
 				3C56C5A625A95D120006A667 /* PhotoSlidesVC+PagingSource.swift in Sources */,
 				3C22D3FE2702D578001E8474 /* PagingLayout.swift in Sources */,
 				3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */,
+				3C2D19E028130924005575F5 /* LanguagesView.swift in Sources */,
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
 				3C6472442613C7C90089DAC6 /* SlideVC+Accessibility.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
@@ -10891,16 +10998,21 @@
 				3C1FE21C25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift in Sources */,
 				492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */,
 				3C22D3F62702D578001E8474 /* CollectionView.swift in Sources */,
+				3C2D19E228130924005575F5 /* HelpView.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* Utilities.swift in Sources */,
 				3C570E82260CF26600F5AA4D /* SegmentedSlider+Accessibility.swift in Sources */,
 				3C22D3D52702D578001E8474 /* PagingStaticDataSource.swift in Sources */,
 				3CE306D9259AC46400F1B2E2 /* ListsIcon.swift in Sources */,
+				3C2D19DE28130924005575F5 /* PeopleView.swift in Sources */,
+				3C2D19D428130924005575F5 /* DefaultColorView.swift in Sources */,
 				3C3B6C7A25D32FE90082B86C /* PhotoSlidesVC+CacheHandler.swift in Sources */,
+				3C2D19D828130924005575F5 /* ShutterStyleView.swift in Sources */,
 				495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
 				3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */,
 				495F38F22432B7B700A17D93 /* Licenses.swift in Sources */,
 				3C22D3DF2702D578001E8474 /* UIColor+interpolation.swift in Sources */,
+				3C2D19D228130924005575F5 /* SettingsView.swift in Sources */,
 				3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */,
 				3CECF4C125A9072300C16A16 /* PhotosVC+PresentSlides.swift in Sources */,
 				3C570E7E260CF24400F5AA4D /* PhotosVC+Accessibility.swift in Sources */,
@@ -10908,6 +11020,7 @@
 				3CCA9B3425BCD493003BD0E3 /* PhotoSlidesVC+Info.swift in Sources */,
 				3C22D3E62702D578001E8474 /* InvalidationState.swift in Sources */,
 				3C22D3D92702D578001E8474 /* PagingBorderView.swift in Sources */,
+				3C2D19DD28130924005575F5 /* CreditsView.swift in Sources */,
 				4953F3C92417344900690E53 /* ListToolBar.swift in Sources */,
 				3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */,
 				3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */,
@@ -10917,6 +11030,8 @@
 				3CAC4DA925BF52CF00CC7948 /* LTMorphingLabel.swift in Sources */,
 				4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */,
 				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
+				3C2D19D728130924005575F5 /* HapticFeedbackView.swift in Sources */,
+				3C2D19E528130924005575F5 /* SingleWebView.swift in Sources */,
 				3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */,
 				3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */,
 				3C1AB195260FD518009B47C0 /* PhotoSlidesVC+Accessibility.swift in Sources */,
@@ -10956,20 +11071,24 @@
 				498332DA243279EF00AD083E /* SingleHelp.swift in Sources */,
 				4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */,
 				3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */,
+				3C2D19DA28130924005575F5 /* SwipeToNavigateView.swift in Sources */,
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
 				3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */,
 				3C1FE21225BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift in Sources */,
 				3CAC4DAF25BF52CF00CC7948 /* LTMorphingLabel+Fall.swift in Sources */,
+				3C2D19D528130924005575F5 /* LanguagesSummaryView.swift in Sources */,
 				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
 				3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */,
 				3C22D4072702D578001E8474 /* PagingNavigationOrientation.swift in Sources */,
 				3C3DF5F625B52A6E00DD7A10 /* PhotoFindVC+PresentSlides.swift in Sources */,
 				3C22D3CF2702D578001E8474 /* PagingIndicatorView.swift in Sources */,
+				3C2D19E328130924005575F5 /* FeedbackView.swift in Sources */,
 				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
 				3C9D5F5525F31F77002E93F5 /* CameraFocusView.swift in Sources */,
 				3CFF312F25AA79D400D3C56D /* TabBar+Photos.swift in Sources */,
 				3C5B156725A7ED7A00BB8988 /* ViewController+CameraShutoff.swift in Sources */,
+				3C2D19E128130924005575F5 /* ExternalLinks.swift in Sources */,
 				3C22D4002702D578001E8474 /* PagingDistance.swift in Sources */,
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,
 				3C22D3F32702D578001E8474 /* Tween.swift in Sources */,
@@ -11920,7 +12039,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppOld.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -11944,7 +12063,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppOld.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -12664,7 +12783,7 @@
 				);
 				MARKETING_VERSION = 1.2.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppOld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -12689,7 +12808,7 @@
 				);
 				MARKETING_VERSION = 1.2.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppOld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

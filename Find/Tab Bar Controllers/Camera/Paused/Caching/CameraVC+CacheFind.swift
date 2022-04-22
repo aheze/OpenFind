@@ -23,7 +23,7 @@ extension CameraViewController {
             
             var customFindArray = [String]()
             for list in self.selectedLists {
-                for cont in list.words {
+                for cont in list.contents {
                     customFindArray.append(cont)
                     customFindArray.append(cont.lowercased())
                     customFindArray.append(cont.uppercased())

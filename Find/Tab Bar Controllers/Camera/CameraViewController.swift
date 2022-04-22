@@ -19,7 +19,6 @@ protocol ToggleCreateCircle: class {
 }
 
 class CameraViewController: UIViewController {
-    let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
     let updateImportantShouldPresentWhatsNew = true
     var shouldPresentWhatsNew = false
     
@@ -252,13 +251,7 @@ class CameraViewController: UIViewController {
     @IBOutlet var whatsNewView: UIView!
     @IBOutlet var whatsNewButton: UIButton!
     @IBOutlet var whatsNewHeightC: NSLayoutConstraint!
-    @IBAction func whatsNewPressed(_ sender: Any) {
-        if shouldPresentWhatsNew {
-            dismissWhatsNew(completion: {
-                self.displayWhatsNew()
-            })
-        }
-    }
+    @IBAction func whatsNewPressed(_ sender: Any) {}
     
     var temporaryPreventGestures: ((Bool) -> Void)?
     @IBOutlet var newSearchTextField: TextField!
@@ -551,31 +544,6 @@ class CameraViewController: UIViewController {
         whatsNewView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         whatsNewButton.alpha = 0
-        
-        let version = WhatsNew.Version(
-            major: 1,
-            minor: 2,
-            patch: 0
-        )
-        
-        if !keyValueVersionStore.has(version: version) {
-            keyValueVersionStore.set(version: version)
-            
-            /// not presented yet
-            if updateImportantShouldPresentWhatsNew {
-                shouldPresentWhatsNew = true
-                whatsNewHeightC.constant = 28
-                UIView.animate(withDuration: 1.5, animations: {
-                    self.whatsNewView.alpha = 1
-                    self.whatsNewButton.alpha = 1
-                    self.whatsNewView.layoutIfNeeded()
-                }) { _ in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                        UIAccessibility.post(notification: .layoutChanged, argument: self.warningView)
-                    }
-                }
-            }
-        }
         
         if let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             UserDefaults.standard.set(currentVersion, forKey: "CurrentAppVersion")
