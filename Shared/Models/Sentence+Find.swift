@@ -36,6 +36,7 @@ extension Array where Element == Sentence {
             let rangeResults = sentence.ranges(of: search, realmModel: realmModel)
             for rangeResult in rangeResults {
                 let gradient = stringToGradients[rangeResult.string] ?? Gradient()
+                
                 for range in rangeResult.ranges {
                     let highlight = Highlight(
                         string: rangeResult.string,

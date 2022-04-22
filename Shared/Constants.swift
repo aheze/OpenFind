@@ -85,7 +85,6 @@ enum ConstantVars {
         let safeAreaInsets = window?.safeAreaInsets ?? .zero
         let orientation = UIWindow.currentInterfaceOrientation ?? .portrait
         
-        print("land? \(orientation.isLandscape)")
         let bottomSafeAreaInset: CGFloat /// bottom inset for the physical device
         let deviceHasNotch: Bool
         

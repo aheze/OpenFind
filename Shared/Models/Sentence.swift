@@ -39,7 +39,7 @@ struct Sentence {
     var confidence: Double
 
     /// average angle of the sentence. Positive = up, negative = down from the right of the x axis
-    var angle: CGFloat
+    var angle: CGFloat?
 
     /// a frame that surrounds all the letters
     var boundingFrame: CGRect
@@ -65,16 +65,20 @@ struct Sentence {
 }
 
 extension Sentence {
-    static func getAngle(components: [Component]) -> CGFloat {
+    ///  `nil` if only 1 component
+    static func getAngle(components: [Component]) -> CGFloat? {
+        guard components.count > 1 else { return nil }
+
         guard
             let firstComponent = components.min(by: { $0.range.lowerBound < $1.range.lowerBound }),
             let lastComponent = components.min(by: { $0.range.upperBound > $1.range.upperBound })
-        else { return 0 }
+        else { return nil }
 
         /// differences are the distance from the unit circle origin (`firstRangeToFrame`) to the outside point (`lastRangeToFrame`)
-        let yDifference = firstComponent.frame.midY - lastComponent.frame.midY
+        let yDifference = lastComponent.frame.midY - firstComponent.frame.midY
         let xDifference = lastComponent.frame.midX - firstComponent.frame.midX
         let angle = atan2(yDifference, xDifference)
+
         return angle
     }
 
@@ -88,9 +92,13 @@ extension Sentence {
         return frame
     }
 
-    static func getSentenceFrame(angle: CGFloat, boundingFrame: CGRect) -> CGRect {
-        /// should be bigger
-        return insetFrameFromRotation(angle: angle, frame: boundingFrame)
+    static func getSentenceFrame(angle: CGFloat?, boundingFrame: CGRect) -> CGRect {
+        if let angle = angle {
+            /// should be bigger
+            return insetFrameFromRotation(angle: angle, frame: boundingFrame)
+        } else {
+            return boundingFrame
+        }
     }
 
     /// adjust the frame after an angle rotation
@@ -112,8 +120,6 @@ extension Sentence {
     }
 }
 
-
-
 extension Sentence {
     /// get the component/word range that contains a character index
     /// also adjusts the frame to fit the angle of rotation
@@ -121,7 +127,9 @@ extension Sentence {
         guard var component = components.first(where: { component in component.range.contains(index) || component.range.upperBound == index }) else {
             return nil
         }
-        component.frame = Sentence.insetFrameFromRotation(angle: angle, frame: component.frame)
+        if let angle = angle {
+            component.frame = Sentence.insetFrameFromRotation(angle: angle, frame: component.frame)
+        }
         return component
     }
 
@@ -131,20 +139,32 @@ extension Sentence {
         return String(string[start ..< end])
     }
 
-    /// position of the entire sentence
-    func position() -> Highlight.Position {
-        let position = Highlight.Position(
-            originalPoint: .zero,
-            pivotPoint: .zero,
-            center: sentenceFrame.center,
-            size: sentenceFrame.size,
-            angle: angle
-        )
-        return position
+    /// if true, text is probably sideways
+    func getFrameIsVertical() -> Bool {
+        let aspectRatio = sentenceFrame.size.height / sentenceFrame.size.width
+        return aspectRatio > 1.8
     }
 
     /// get the position of a highlight
     func position(for targetRange: Range<Int>) -> Highlight.Position {
+        /// single vertical word
+        if let angle = angle {
+            /// if angle is too rotated, just show the entire sentence
+            if getFrameIsVertical() || (abs(angle) > 45.degreesToRadians) {
+                let length = min(sentenceFrame.size.height, sentenceFrame.size.width)
+                let position = Highlight.Position(
+                    originalPoint: sentenceFrame.center,
+                    pivotPoint: sentenceFrame.center,
+                    center: sentenceFrame.center,
+                    size: CGSize(width: length, height: length),
+                    angle: 0
+                )
+                return position
+            }
+        }
+
+        let angle = angle ?? 0
+
         let highlightFrame = frame(for: targetRange)
 
         let distanceFromCenter = CGPointDistance(from: highlightFrame.center, to: sentenceFrame.center)

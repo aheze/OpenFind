@@ -154,13 +154,10 @@ struct LaunchView: View {
             .opacity(model.showingUI ? 1 : 0)
             .readSize {
                 contentHeight = $0.height
-                print("readSizeCont: \(contentHeight). \(deviceHeight)")
             }
         )
         .readSize {
             deviceHeight = $0.height
-
-            print("Cont: \(contentHeight). \(deviceHeight)")
         }
     }
 }

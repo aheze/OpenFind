@@ -144,7 +144,6 @@ class ViewController: UIViewController {
 
     func onboardingDone() {
         if !realmModel.launchedBefore {
-            print("Not launchedBefore")
             realmModel.addSampleLists()
         }
 
