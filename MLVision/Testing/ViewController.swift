@@ -89,7 +89,6 @@ class ViewController: UIViewController {
         let highlightsViewController = HighlightsViewController(highlightsViewModel: highlightsViewModel)
         addChildViewController(highlightsViewController, in: highlightsView)
         highlightsView.backgroundColor = .clear
-        imageView.addDebugBorders(.green)
         view.bringSubviewToFront(highlightsView)
     }
 }

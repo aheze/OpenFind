@@ -91,6 +91,7 @@ class SearchFieldCell: UICollectionViewCell {
         textField.font = configuration.fieldFont
         textField.textColor = configuration.fieldFontColor
         textField.tintColor = configuration.fieldTintColor
+        textField.returnKeyType = .search
         
         textField.attributedPlaceholder = NSAttributedString(
             string: configuration.addTextPlaceholder,

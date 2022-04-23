@@ -9,10 +9,10 @@
 import UIKit
 
 extension LivePreviewViewController {
-    func updateViewportSize(safeViewFrame: CGRect) async {
+    func updateViewportSize(safeViewFrame: CGRect) {
         guard var imageSize = imageSize else { return }
             
-        if await UIWindow.interfaceOrientation?.isLandscape ?? false {
+        if UIWindow.currentInterfaceOrientation?.isLandscape ?? false {
             imageSize = CGSize(width: imageSize.height, height: imageSize.width)
         }
 
@@ -31,14 +31,14 @@ extension LivePreviewViewController {
         
         /// only care about the fill rect - fills the safe area, with extruding gap on left and right
         var imageFillSafeRect = imageFillSafeCenteredRect
-//        imageFillSafeRect.origin.x = safeViewFrame.origin.x
+        imageFillSafeRect.origin.x = safeViewFrame.origin.x
         
         
-//        if traitCollection.horizontalSizeClass == .compact {
-//            imageFillSafeRect.origin.y = safeViewFrame.origin.y
-//        } else {
-//            imageFillSafeRect.origin.y = 0
-//        }
+        if traitCollection.horizontalSizeClass == .compact {
+            imageFillSafeRect.origin.y = safeViewFrame.origin.y
+        } else {
+            imageFillSafeRect.origin.y = 0
+        }
         
         
         imageFitViewSize = imageFitViewCenteredRect.size
@@ -47,6 +47,7 @@ extension LivePreviewViewController {
         /// Avoid a slide animation
         UIView.performWithoutAnimation {
             previewFitView.bounds = CGRect(x: 0, y: 0, width: imageFillSafeRect.width, height: imageFillSafeRect.height)
+            print("Set center: \(previewFitView.bounds)")
             previewFitView.center = CGPoint(x: imageFillSafeRect.midX, y: imageFillSafeRect.midY)
         }
 

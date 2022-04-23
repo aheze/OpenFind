@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     lazy var camera = CameraController(
         model: cameraViewModel,
         tabViewModel: tabViewModel,
+        photosPermissionsViewModel: PhotosPermissionsViewModel(),
         realmModel: realmModel
     )
 

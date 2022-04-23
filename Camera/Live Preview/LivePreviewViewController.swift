@@ -52,7 +52,7 @@ class LivePreviewViewController: UIViewController {
     
     /// update the frames of the camera
     var changeContentContainerViewFrame: ((CGRect) -> Void)? /// called inside `changeAspectProgress`
-    var changeSimulatedSafeViewFrame: ((CGRect) -> Void)?
+    var changeSimulatedSafeViewFrame: ((CGRect) -> Void)? /// called inside `changeAspectProgress`
     
     /// directly in view hierarchy
     @IBOutlet var testingView: UIView!
@@ -105,27 +105,27 @@ class LivePreviewViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        let orientation = UIWindow.currentInterfaceOrientation
+            
+        if let connection = livePreviewView.videoPreviewLayer.connection {
+            switch orientation ?? .portrait {
+            case .portrait: connection.videoOrientation = .portrait
+            case .landscapeRight: connection.videoOrientation = .landscapeRight
+            case .landscapeLeft: connection.videoOrientation = .landscapeLeft
+            case .portraitUpsideDown: connection.videoOrientation = .portraitUpsideDown
+            default: connection.videoOrientation = .portrait
+            }
+        }
+            
+        /// updates `previewFitView`. Must come before settings frame of `livePreviewView.videoPreviewLayer`
+        needSafeViewUpdate?()
+            
         /// need to disable animations, otherwise there is a weird moving
         CATransaction.begin()
         CATransaction.setValue(true, forKey: kCATransactionDisableActions)
+            
         livePreviewView.videoPreviewLayer.frame = previewFitView.bounds
         CATransaction.commit()
-
-        Task {
-            let orientation = await UIWindow.interfaceOrientation
-            
-            if let connection = livePreviewView.videoPreviewLayer.connection {
-                switch orientation ?? .portrait {
-                case .portrait: connection.videoOrientation = .portrait
-                case .landscapeRight: connection.videoOrientation = .landscapeRight
-                case .landscapeLeft: connection.videoOrientation = .landscapeLeft
-                case .portraitUpsideDown: connection.videoOrientation = .portraitUpsideDown
-                default: connection.videoOrientation = .portrait
-                }
-            }
-            
-            needSafeViewUpdate?()
-        }
     }
 
     func setup() {

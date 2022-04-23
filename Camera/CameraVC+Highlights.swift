@@ -16,6 +16,7 @@ extension CameraViewController {
             highlightsViewModel: highlightsViewModel,
             realmModel: realmModel
         )
+        
         scrollZoomViewController.addChildViewController(highlightsViewController, in: scrollZoomViewController.drawingView)
     }
   

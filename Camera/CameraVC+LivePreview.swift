@@ -19,17 +19,14 @@ extension CameraViewController {
         livePreviewViewController.needSafeViewUpdate = { [weak self] in
             guard let self = self else { return }
             
-//            print("safe view update now! \(self.safeView.frame)")
-            Task {
-                await livePreviewViewController.updateViewportSize(safeViewFrame: self.safeView.frame)
-                livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
-                livePreviewViewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress, animated: false)
-            }
+            livePreviewViewController.updateViewportSize(safeViewFrame: self.safeView.frame)
+            livePreviewViewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
+            livePreviewViewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress, animated: false)
         }
         
         livePreviewViewController.changeContentContainerViewFrame = { [weak self] frame in
             guard let self = self else { return }
-            print("frame: \(frame.rounded(toPlaces: 3))")
+
             frame.setAsConstraints(
                 left: self.contentContainerLeftC,
                 top: self.contentContainerTopC,

@@ -1,5 +1,5 @@
 //
-//  CameraVC+Toolbar.swift
+//  CameraVC+Status.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/21/22.

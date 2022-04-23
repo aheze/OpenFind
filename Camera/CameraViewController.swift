@@ -56,10 +56,7 @@ class CameraViewController: UIViewController, PageViewController {
     @IBOutlet var simulatedSafeViewTopC: NSLayoutConstraint!
     @IBOutlet var simulatedSafeViewWidthC: NSLayoutConstraint!
     @IBOutlet var simulatedSafeViewHeightC: NSLayoutConstraint!
-    
-    /// saved for background thread access
-    var contentContainerViewSize = CGSize.zero
-    
+
     /// Inside the drawing view
     @IBOutlet var scrollZoomContainerView: UIView!
     @IBOutlet var scrollZoomHookContainerView: UIView!
@@ -107,16 +104,6 @@ class CameraViewController: UIViewController, PageViewController {
         _ = searchViewController
         setup()
         listen()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard let livePreviewViewController = livePreviewViewController else { return }
-        Task {
-            await livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
-            livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
-            contentContainerViewSize = contentContainerView.bounds.size
-        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

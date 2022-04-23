@@ -16,10 +16,9 @@ struct ResultsIconView: View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
 
-            if model.loaded {
-                model.resultsOn.toggle()
-                model.resultsPressed?()
-            }
+            model.resultsOn.toggle()
+            model.resultsPressed?()
+
         } label: {
             Text("\(model.displayedResultsCount)")
                 .foregroundColor(model.resultsOn ? .activeIconColor : .white)

@@ -15,9 +15,8 @@ struct OpenSettingsIconView: View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
 
-            if model.loaded {
-                model.settingsPressed?()
-            }
+            model.settingsPressed?()
+
         } label: {
             Image(systemName: "gearshape.fill")
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)

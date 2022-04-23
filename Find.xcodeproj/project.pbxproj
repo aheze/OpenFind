@@ -1404,6 +1404,7 @@
 		3C6E9F4B28146B0900FAD6A9 /* ListsVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F492814667F00FAD6A9 /* ListsVC+Keyboard.swift */; };
 		3C6E9F4D28146B1900FAD6A9 /* PhotosVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F4C28146B1900FAD6A9 /* PhotosVC+Defaults.swift */; };
 		3C6E9F4E28146B1900FAD6A9 /* PhotosVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F4C28146B1900FAD6A9 /* PhotosVC+Defaults.swift */; };
+		3C6E9F4F2814A87D00FAD6A9 /* ListsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624E2810B231002DD153 /* ListsDefaults.swift */; };
 		3C6EAA6B2803ACD200B036AD /* IgnoredPhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA682803ACBB00B036AD /* IgnoredPhotosVC+Listen.swift */; };
 		3C6EAA6C2803B16A00B036AD /* IgnoredPhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA682803ACBB00B036AD /* IgnoredPhotosVC+Listen.swift */; };
 		3C6EAA6F2803B76D00B036AD /* PhotosVM+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA6D2803B75D00B036AD /* PhotosVM+Actions.swift */; };
@@ -1445,8 +1446,8 @@
 		3C7223C227C450140085EBF1 /* SelectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCE2AF2279D007000F72351 /* SelectionIconView.swift */; };
 		3C7223C427C4505E0085EBF1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA8B2781859C000381CE /* Model.swift */; };
 		3C7223C927C450700085EBF1 /* SpecifiedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223C527C4506C0085EBF1 /* SpecifiedExtensions.swift */; };
-		3C7223CC27C453760085EBF1 /* CameraVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223CB27C453760085EBF1 /* CameraVC+Toolbar.swift */; };
-		3C7223CD27C4537A0085EBF1 /* CameraVC+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223CB27C453760085EBF1 /* CameraVC+Toolbar.swift */; };
+		3C7223CC27C453760085EBF1 /* CameraVC+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223CB27C453760085EBF1 /* CameraVC+Status.swift */; };
+		3C7223CD27C4537A0085EBF1 /* CameraVC+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223CB27C453760085EBF1 /* CameraVC+Status.swift */; };
 		3C7223CE27C453A70085EBF1 /* CameraMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223C027C44EB30085EBF1 /* CameraMessageView.swift */; };
 		3C7223CF27C453A80085EBF1 /* CameraMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223C027C44EB30085EBF1 /* CameraMessageView.swift */; };
 		3C7223D127C4752D0085EBF1 /* ExtendedCurveConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7223D027C4752D0085EBF1 /* ExtendedCurveConnector.swift */; };
@@ -3909,7 +3910,7 @@
 		3C7223BD27C44C070085EBF1 /* CameraVC+Conserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Conserving.swift"; sourceTree = "<group>"; };
 		3C7223C027C44EB30085EBF1 /* CameraMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMessageView.swift; sourceTree = "<group>"; };
 		3C7223C527C4506C0085EBF1 /* SpecifiedExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecifiedExtensions.swift; sourceTree = "<group>"; };
-		3C7223CB27C453760085EBF1 /* CameraVC+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Toolbar.swift"; sourceTree = "<group>"; };
+		3C7223CB27C453760085EBF1 /* CameraVC+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Status.swift"; sourceTree = "<group>"; };
 		3C7223D027C4752D0085EBF1 /* ExtendedCurveConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedCurveConnector.swift; sourceTree = "<group>"; };
 		3C798DE827F612B9007BF68D /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		3C798EAD27F68EE3007BF68D /* RealmContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmContainer.swift; sourceTree = "<group>"; };
@@ -5133,7 +5134,7 @@
 				3C364304277BC58E0038CB18 /* CameraVC+LivePreview.swift */,
 				3C7223B727C442640085EBF1 /* CameraVC+Events.swift */,
 				3C7223BD27C44C070085EBF1 /* CameraVC+Conserving.swift */,
-				3C7223CB27C453760085EBF1 /* CameraVC+Toolbar.swift */,
+				3C7223CB27C453760085EBF1 /* CameraVC+Status.swift */,
 				3C2994772800DA4400AE1AEC /* CameraVC+Landscape.swift */,
 				3C7B7A6C277F9CB200E1F602 /* CameraVC+Static.swift */,
 				3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */,
@@ -8320,7 +8321,7 @@
 				3C11996A27499A5E00D6AFE3 /* ZoomConstants.swift in Sources */,
 				3C5B36FE27FEAEDF00801FEE /* SettingsDynamicPicker.swift in Sources */,
 				3C5B371127FEAEDF00801FEE /* SD+FindingAndHighlights.swift in Sources */,
-				3C7223CC27C453760085EBF1 /* CameraVC+Toolbar.swift in Sources */,
+				3C7223CC27C453760085EBF1 /* CameraVC+Status.swift in Sources */,
 				3C5B370D27FEAEDF00801FEE /* SettingsMVC+Setup.swift in Sources */,
 				3C5B371527FEAEDF00801FEE /* SettingsViewController.swift in Sources */,
 				3C7B7A49277EB19500E1F602 /* Utilities+CGRect.swift in Sources */,
@@ -8460,6 +8461,7 @@
 				3C9314A127B844EC009E5B6E /* TabBarController.swift in Sources */,
 				3C9314B527B84F7B009E5B6E /* CameraVC+Snapshot.swift in Sources */,
 				3CCCCA9F27818CE8000381CE /* FindIconView.swift in Sources */,
+				3C6E9F4F2814A87D00FAD6A9 /* ListsDefaults.swift in Sources */,
 				3C798EE527F6A2EB007BF68D /* List+Testing.swift in Sources */,
 				3CBB31AA27BDB99000F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
 				3C7223BE27C44C070085EBF1 /* CameraVC+Conserving.swift in Sources */,
@@ -9710,7 +9712,7 @@
 				3C29948228015C9D00AE1AEC /* CameraVC+Setup.swift in Sources */,
 				3C5B36BC27FEAEDE00801FEE /* SettingsSlider.swift in Sources */,
 				3C4362502810E986002DD153 /* ListsDefaults.swift in Sources */,
-				3C7223CD27C4537A0085EBF1 /* CameraVC+Toolbar.swift in Sources */,
+				3C7223CD27C4537A0085EBF1 /* CameraVC+Status.swift in Sources */,
 				3C08EAF2279C76BD00971D60 /* ListsViewModel.swift in Sources */,
 				3C1A2C2727EAB79D00B3D065 /* Utilities+PHAsset.swift in Sources */,
 				3C7A440527EE464800DFF76F /* PhotosVM+Get.swift in Sources */,

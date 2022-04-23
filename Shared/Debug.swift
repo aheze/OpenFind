@@ -10,9 +10,9 @@ import UIKit
 
 enum Debug {
     /// Everything should be false on release
-    static var tabBarAlwaysTransparent = true
-    static var navigationBarAlwaysTransparent = true
-    static var disableCameraSwipingBlur = true
+    static var tabBarAlwaysTransparent = false
+    static var navigationBarAlwaysTransparent = false
+    static var disableCameraSwipingBlur = false
     static var collectionViewScrollDisabled = false
     static var photosTestEmptyLoading = false /// if true, `sleep` instead of calling `loadPhotoMetadatas`
     static var skipLaunchIntro = false
@@ -22,7 +22,7 @@ enum Debug {
 extension UIView {
     /// add a border to a view
     func addDebugBorders(_ color: UIColor, width: CGFloat = 0.75) {
-        backgroundColor = color.withAlphaComponent(0.3)
+        backgroundColor = color.withAlphaComponent(0.2)
         layer.borderColor = color.cgColor
         layer.borderWidth = width
     }
