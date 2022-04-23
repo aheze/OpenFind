@@ -42,23 +42,6 @@ extension CGRect {
     }
 }
 
-extension UIInterfaceOrientation {
-    func getVisionOrientation() -> CGImagePropertyOrientation {
-        switch self {
-        case .portrait:
-            return .right
-        case .landscapeRight: /// home button right
-            return .up
-        case .landscapeLeft: /// home button left
-            return .down
-        case .portraitUpsideDown:
-            return .left
-        default:
-            return .right
-        }
-    }
-}
-
 extension CVPixelBuffer {
     /// Returns a Core Graphics image from the pixel buffer's current contents.
     func toCGImage() -> CGImage? {

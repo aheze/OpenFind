@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.lockOrientation(orientation)
             UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
         }
+        
+        static func setOrientation(_ rotateOrientation: UIInterfaceOrientation) {
+            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        }
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

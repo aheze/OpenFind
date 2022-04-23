@@ -27,6 +27,7 @@ struct PausedImage: Identifiable {
     var dateScanned: Date?
     var sentences = [Sentence]()
     var scannedInLanguages = [String]()
+    var orientationTakenIn: UIInterfaceOrientation? /// lock to this
 
     /// if it's saved to Photos, set this.
     var assetIdentifier: String?

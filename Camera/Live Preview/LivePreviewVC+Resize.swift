@@ -47,7 +47,6 @@ extension LivePreviewViewController {
         /// Avoid a slide animation
         UIView.performWithoutAnimation {
             previewFitView.bounds = CGRect(x: 0, y: 0, width: imageFillSafeRect.width, height: imageFillSafeRect.height)
-            print("Set center: \(previewFitView.bounds)")
             previewFitView.center = CGPoint(x: imageFillSafeRect.midX, y: imageFillSafeRect.midY)
         }
 

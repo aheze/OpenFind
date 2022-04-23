@@ -15,6 +15,8 @@ import UIKit
 
 extension CameraViewController {
     func resume() {
+        AppDelegate.AppUtility.lockOrientation(.all)
+        model.pausedImage = nil
         focusGestureRecognizer.isEnabled = true
         livePreviewViewController?.livePreviewView.videoPreviewLayer.connection?.isEnabled = true
         endAutoProgress()
@@ -26,8 +28,12 @@ extension CameraViewController {
     func pause() {
         focusGestureRecognizer.isEnabled = false
         guard let livePreviewViewController = livePreviewViewController else { return }
+
         Task {
-            let pausedImage = PausedImage()
+            let currentOrientation = UIWindow.currentInterfaceOrientation
+            AppDelegate.AppUtility.lockOrientation(currentOrientation?.getMask() ?? .all)
+            let pausedImage = PausedImage(orientationTakenIn: currentOrientation)
+
             let currentUUID = pausedImage.id
 
             await MainActor.run {

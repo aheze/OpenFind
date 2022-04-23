@@ -18,12 +18,18 @@ extension CameraViewController {
     }
     
     func didBecomeActive() {
+        if let orientation = model.pausedImage?.orientationTakenIn, let mask = orientation.getMask() {
+            AppDelegate.AppUtility.lockOrientation(mask, andRotateTo: orientation)
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             UIAccessibility.post(notification: .screenChanged, argument: self.searchContainerView)
         }
     }
     
-    func willBecomeInactive() {}
+    func willBecomeInactive() {
+        AppDelegate.AppUtility.lockOrientation(.all)
+    }
     
     func didBecomeInactive() {
         Find.prioritizedAction = nil
