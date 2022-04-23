@@ -48,7 +48,7 @@ class SettingsShareAppViewController: UIViewController {
 struct SettingsShareAppView: View {
     @State var present = false
     @State var presentingUUID = UUID()
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Image("Logo")
@@ -68,9 +68,15 @@ struct SettingsShareAppView: View {
             Button {
                 present = true
             } label: {
-                Text("getfind.app")
-                    .foregroundColor(UIColor.secondaryLabel.color)
-                    .font(UIFont.preferredFont(forTextStyle: .title1).font)
+                VStack(spacing: 6) {
+                    Text("getfind.app")
+                        .foregroundColor(UIColor.secondaryLabel.color)
+                        .font(UIFont.preferredFont(forTextStyle: .title1).font)
+                    
+                    Text("(Tap to copy)")
+                        .foregroundColor(UIColor.secondaryLabel.color)
+                        .font(UIFont.preferredFont(forTextStyle: .caption1).font)
+                }
             }
 
             Spacer()
@@ -95,7 +101,7 @@ struct SettingsShareAppView: View {
                 $0.dismissal.dragDismissalProximity = 0.1
             }
         ) {
-            NotificationViewPopover(icon: "doc.on.doc", text: "Link copied!", color: Colors.accent)
+            NotificationViewPopover(icon: "doc.on.doc", text: "Link copied!", url: "https://getfind.app", color: Colors.accent)
                 .onAppear {
                     presentingUUID = UUID()
                     let currentID = presentingUUID
@@ -167,12 +173,23 @@ struct NotificationImage: View {
 struct NotificationViewPopover: View {
     let icon: String
     let text: String
+    let url: String
     let color: UIColor
     var body: some View {
         HStack {
             NotificationImage(icon, color: color)
             Text(text)
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Button {
+                if let url = URL(string: url) {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                Image(systemName: "arrow.up.right")
+                    .font(UIFont.preferredFont(forTextStyle: .title3).font)
+                    .foregroundColor(.accent)
+            }
         }
         .frame(maxWidth: 600)
         .padding()
