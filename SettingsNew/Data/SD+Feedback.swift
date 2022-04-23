@@ -42,26 +42,6 @@ extension SettingsData {
                     ) {
                         suggestNewFeatures?()
                     }
-                ),
-                .init(
-                    configuration: .link(
-                        title: "Help Center",
-                        leftIcon: .template(iconName: "questionmark.circle.fill", backgroundColor: UIColor(hex: 0x44AB00)),
-                        indicatorStyle: .modal,
-                        destination: nil
-                    ) {
-                        helpCenter?()
-                    }
-                ),
-                .init(
-                    configuration: .link(
-                        title: "Join the Discord",
-                        leftIcon: .image(imageName: "DiscordIcon", inset: 6, backgroundColor: UIColor(hex: 0x5865F2)),
-                        indicatorStyle: .modal,
-                        destination: nil
-                    ) {
-                        joinTheDiscord?()
-                    }
                 )
             ]
         )

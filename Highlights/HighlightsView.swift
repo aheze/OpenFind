@@ -29,6 +29,7 @@ struct HighlightsView: View {
             }
         )
         .edgesIgnoringSafeArea(.all)
+        .border(.red)
         .opacity(highlightsViewModel.upToDate ? 1 : 0.5)
     }
 }

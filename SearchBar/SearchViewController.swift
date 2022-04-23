@@ -84,7 +84,7 @@ class SearchViewController: UIViewController {
         searchBarTopC.constant = 0
         searchBarBottomC.constant = 0
         searchBarView.backgroundColor = .clear
-        backgroundView.isHidden = !searchViewModel.configuration.showBackground
+        backgroundView.isHidden = !searchViewModel.configuration.showBackground || Debug.navigationBarAlwaysTransparent
         setupCollectionViews()
         searchCollectionView.contentInsetAdjustmentBehavior = .never
         

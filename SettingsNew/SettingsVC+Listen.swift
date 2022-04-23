@@ -58,6 +58,17 @@ extension SettingsViewController {
                 UIApplication.shared.open(url)
             }
         }
+        
+        SettingsData.joinTheReddit = {
+            if let url = URL(string: "https://www.reddit.com/r/findapp") {
+                UIApplication.shared.open(url)
+            }
+        }
+        
+        SettingsData.shareApp = { [weak self] in
+            guard let self = self else { return }
+            self.showShareApp()
+        }
     }
 
     func shareLink() {
@@ -189,6 +200,12 @@ extension SettingsViewController {
     func showSupportDocs() {
         let viewController = self.getSupportDocs()
         self.present(viewController, animated: true)
+    }
+    
+    func showShareApp() {
+        let viewController = SettingsShareAppViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        self.present(navigationController, animated: true)
     }
 }
 

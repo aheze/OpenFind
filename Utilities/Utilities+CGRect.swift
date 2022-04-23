@@ -26,3 +26,15 @@ extension CGRect {
         return rect
     }
 }
+
+extension CGRect {
+    /// round for printing
+    func rounded(toPlaces: Int = 3) -> CGRect {
+        return CGRect(
+            x: origin.x.rounded(toPlaces: toPlaces),
+            y: origin.y.rounded(toPlaces: toPlaces),
+            width: width.rounded(toPlaces: toPlaces),
+            height: height.rounded(toPlaces: toPlaces)
+        )
+    }
+}

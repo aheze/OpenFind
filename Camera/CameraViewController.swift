@@ -26,7 +26,8 @@ class CameraViewController: UIViewController, PageViewController {
     var highlightsViewModel = HighlightsViewModel()
     var messagesViewModel = CameraMessagesViewModel()
     
-    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet var logoImageView: UIImageView!
+
     // MARK: - Sub view controllers
 
     var livePreviewViewController: LivePreviewViewController?
@@ -44,8 +45,18 @@ class CameraViewController: UIViewController, PageViewController {
     // MARK: Camera content
 
     /// should match the frame of the image, includes highlights
+    /// Includes
     @IBOutlet var contentContainerView: UIView!
-
+    @IBOutlet var contentContainerLeftC: NSLayoutConstraint!
+    @IBOutlet var contentContainerTopC: NSLayoutConstraint!
+    @IBOutlet var contentContainerWidthC: NSLayoutConstraint!
+    @IBOutlet var contentContainerHeightC: NSLayoutConstraint!
+    
+    @IBOutlet var simulatedSafeViewLeftC: NSLayoutConstraint!
+    @IBOutlet var simulatedSafeViewTopC: NSLayoutConstraint!
+    @IBOutlet var simulatedSafeViewWidthC: NSLayoutConstraint!
+    @IBOutlet var simulatedSafeViewHeightC: NSLayoutConstraint!
+    
     /// saved for background thread access
     var contentContainerViewSize = CGSize.zero
     

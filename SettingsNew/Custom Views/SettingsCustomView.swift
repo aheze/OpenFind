@@ -32,8 +32,6 @@ struct SettingsCustomView: View {
                 SettingsCredits(model: model, realmModel: realmModel)
             case .licenses:
                 SettingsLicenses(model: model, realmModel: realmModel)
-            case .links:
-                SettingsLinks(model: model, realmModel: realmModel)
             case .footer:
                 SettingsFooter(model: model, realmModel: realmModel)
             }

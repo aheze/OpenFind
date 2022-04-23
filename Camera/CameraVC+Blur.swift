@@ -25,6 +25,7 @@ extension CameraViewController {
     }
 
     func updateBlurProgress(to progress: CGFloat) {
+        guard !Debug.disableCameraSwipingBlur else { return }
         blurOverlayView.animator?.fractionComplete = progress
         switch tabViewModel.tabState {
         case .photos, .cameraToPhotos:

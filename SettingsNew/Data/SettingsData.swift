@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct SettingsData {
-    
     // MARK: Set this inside the actual app
+
     static var showScanningOptions: (() -> Void)?
     static var exportAllLists: (() -> Void)?
     static var deleteAllScannedData: (() -> Void)?
     
     // MARK: Internal callback
+
     static var resetAllSettings: (() -> Void)?
     /// feedback
     static var rateTheApp: (() -> Void)?
@@ -23,6 +24,8 @@ struct SettingsData {
     static var suggestNewFeatures: (() -> Void)?
     static var helpCenter: (() -> Void)?
     static var joinTheDiscord: (() -> Void)?
+    static var joinTheReddit: (() -> Void)?
+    static var shareApp: (() -> Void)?
     
     static var getHelpCenter: (() -> UIViewController?)?
     
@@ -40,21 +43,21 @@ struct SettingsData {
         [
             /// general section
             generalSection,
-
+            
             /// finding and highlights (second section)
             findingAndHighlightsSection,
-
+            
             /// photos, camera, lists
             tabsSection,
             
-            /// rate, report, suggest, help, Discord
+            /// rate, report, suggest
             feedbackSection,
+            
+            /// help, Discord, Reddit, share
+            linksSection,
             
             /// credits, licenses
             aboutSection,
-            
-            /// share app
-            linksSection,
             
             /// what's new
             footerSection
