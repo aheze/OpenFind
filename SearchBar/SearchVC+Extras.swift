@@ -38,7 +38,7 @@ extension SearchViewController {
         if text.roughlyEquals("/showAddedListsBefore") {
             showPopover(configuration: .message(icon: "info.circle", text: "Added Lists Before? \(realmModel.addedListsBefore)"), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/showLaunchedBefore") {
             showPopover(configuration: .message(icon: "info.circle", text: "Launched Before? \(realmModel.launchedBefore)"), autoDismiss: true)
         }
@@ -87,6 +87,18 @@ extension SearchViewController {
             }
         }
 
+        if text.roughlyEquals("/tre") {
+            if let url = URL(string: "https://www.youtube.com/channel/UCNtulabnRs8kwfIFFKy9hQQ?app=desktop") {
+                showPopover(configuration: .link(url: url, icon: "tv.fill", text: "Tre's channel"), autoDismiss: false)
+            }
+        }
+
+        if text.roughlyEquals("/etsy") {
+            if let url = URL(string: "https://www.etsy.com/shop/StuffingStuff") {
+                showPopover(configuration: .link(url: url, icon: "scissors", text: "Buy crochet stuff!"), autoDismiss: false)
+            }
+        }
+
         if text.roughlyEquals("/apple") {
             showPopover(configuration: .image(systemName: "applelogo"), autoDismiss: true)
         }
@@ -100,6 +112,8 @@ extension SearchViewController {
 
         var insets = Global.safeAreaInsets
         insets.top += 160
+        insets.left += 32
+        insets.right += 32
         attributes.sourceFrameInset = insets
 
         let searchConfiguration = searchViewModel.configuration
@@ -127,6 +141,7 @@ struct ExtrasView: View {
         case message(icon: String, text: String)
         case about
         case url(url: URL)
+        case link(url: URL, icon: String, text: String) /// show a popup first, then open in safari
         case image(systemName: String)
     }
 
@@ -193,7 +208,29 @@ struct ExtrasView: View {
                 .frame(maxWidth: 350)
                 .cornerRadius(10)
                 .shadow(color: UIColor.systemBackground.color.opacity(0.25), radius: 4, x: 0, y: 2)
+        case .link(url: let url, icon: let icon, text: let text):
+            VStack(spacing: 16) {
+                Image(systemName: icon)
+                    .font(UIFont.systemFont(ofSize: 84, weight: .semibold).font)
 
+                Text(text)
+                    .frame(maxWidth: .infinity)
+
+                Button {
+                    UIApplication.shared.open(url)
+                } label: {
+                    Text("Open URL")
+                        .foregroundColor(.white)
+                        .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
+                        .background(Color.accent)
+                        .cornerRadius(16)
+                }
+            }
+            .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
+            .foregroundColor(searchConfiguration.fieldIsDark ? UIColor.white.color : UIColor.secondaryLabel.color)
+            .padding(36)
+            .background(VisualEffectView(searchConfiguration.popoverBackgroundBlurStyle))
+            .cornerRadius(20)
         case .image(systemName: let systemName):
             Image(systemName: systemName)
                 .font(UIFont.systemFont(ofSize: 84, weight: .semibold).font)
