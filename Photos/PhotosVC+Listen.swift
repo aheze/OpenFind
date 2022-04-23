@@ -10,6 +10,9 @@ import SwiftUI
 
 extension PhotosViewController {
     func listen() {
+        listenToDefaults()
+        listenToKeyboard()
+        
         /// only called at first
         model.reload = { [weak self] in
             guard let self = self else { return }

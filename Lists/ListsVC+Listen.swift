@@ -12,6 +12,7 @@ extension ListsViewController {
     func listen() {
         listenToListsChange()
         listenToDefaults()
+        listenToKeyboard()
 
         model.deleteSelected = { [weak self] in
             guard let self = self else { return }
