@@ -139,3 +139,13 @@ class SelectionIconView: UIView {
         case selected
     }
 }
+
+extension UIView {
+    func centerInParent() {
+        guard let superview = superview else { return }
+        center = CGPoint(
+            x: superview.bounds.width / 2,
+            y: superview.bounds.height / 2
+        )
+    }
+}

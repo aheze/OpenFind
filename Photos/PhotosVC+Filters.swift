@@ -78,7 +78,7 @@ extension PhotosViewController {
         }
 
         if model.resultsState != nil {
-            updateResults()
+            updateResults() /// make sure to call `update` later, when results dismissed
         } else {
             update()
         }

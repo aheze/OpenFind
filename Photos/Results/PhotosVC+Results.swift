@@ -43,6 +43,8 @@ extension PhotosViewController {
                 starredCount: nil,
                 screenshotsCount: nil
             )
+            
+            update() /// update in case filters changed
             contentContainer.isHidden = false
         }
         updateViewsEnabled()
