@@ -12,16 +12,16 @@ class ViewController: UIViewController {
     let cameraViewModel = CameraViewModel()
     let model = ListsViewModel()
     var toolbarViewModel = ToolbarViewModel()
-    
+
     lazy var photos: PhotosController = PhotosBridge.makeController()
 
     lazy var camera: CameraController = CameraBridge.makeController(
         cameraViewModel: cameraViewModel,
-        model:model
+        model: model
     )
 
     lazy var lists: ListsController = ListsBridge.makeController(model: model)
-    
+
     lazy var tabController: TabBarController = {
         toolbarViewModel = ToolbarViewModel()
 
@@ -30,20 +30,17 @@ class ViewController: UIViewController {
             cameraViewModel: cameraViewModel,
             toolbarViewModel: toolbarViewModel
         )
-        
+
         tabController.delegate = self
-        
+
         self.addChildViewController(tabController.viewController, in: self.view)
 
-        let searchBar = camera.viewController.searchViewController.searchBarView ?? UIView()
-        let searchBarBounds = searchBar.convert(searchBar.bounds, to: nil)
-        tabController.viewController.excludedFrames = [searchBarBounds]
         return tabController
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         _ = tabController
     }
 }
@@ -56,7 +53,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         if searchContainerFrame.contains(location) {
             return false
         }
-        
+
         return true
     }
 }
@@ -79,7 +76,7 @@ extension ViewController {
         default: break
         }
     }
-    
+
     func didFinishNavigatingTo(tab: TabState) {
         switch tab {
         case .photos:

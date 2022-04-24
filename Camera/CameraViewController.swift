@@ -106,6 +106,14 @@ class CameraViewController: UIViewController, PageViewController {
         listen()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let searchBar = searchViewController.searchBarView ?? UIView()
+        let searchBarBounds = searchBar.convert(searchBar.bounds, to: nil)
+        tabViewModel.excludedFrames[.cameraSearchBar] = searchBarBounds
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         

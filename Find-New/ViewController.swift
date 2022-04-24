@@ -67,7 +67,6 @@ class ViewController: UIViewController {
         )
 
         self.addChildViewController(tabController.viewController, in: self.view)
-        updateExcludedFrames()
         return tabController
     }()
 
@@ -163,18 +162,10 @@ class ViewController: UIViewController {
 
         setup()
         listen()
-        updateExcludedFrames()
     }
 
     func startApp() {
         importListIfNeeded()
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate { _ in
-            self.updateExcludedFrames()
-        }
     }
 }
 

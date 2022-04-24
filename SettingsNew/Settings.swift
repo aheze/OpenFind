@@ -50,8 +50,8 @@ enum Settings {
             case german = "de-DE"
             case spanish = "es-ES"
             case portuguese = "pt-BR"
-            case chineseSimplified = "zh-Hans"
-            case chineseTraditional = "zh-Hant"
+//            case chineseSimplified = "zh-Hans"
+//            case chineseTraditional = "zh-Hant"
 
             func getTitle() -> String {
                 switch self {
@@ -69,10 +69,10 @@ enum Settings {
                     return "Spanish"
                 case .portuguese:
                     return "Portuguese"
-                case .chineseSimplified:
-                    return "Chinese (Simplified)"
-                case .chineseTraditional:
-                    return "Chinese (Traditional)"
+//                case .chineseSimplified:
+//                    return "Chinese (Simplified)"
+//                case .chineseTraditional:
+//                    return "Chinese (Traditional)"
                 }
             }
 
@@ -107,10 +107,10 @@ enum Settings {
                     return 14
                 case .portuguese:
                     return 14
-                case .chineseSimplified:
-                    return 14
-                case .chineseTraditional:
-                    return 14
+//                case .chineseSimplified:
+//                    return 14
+//                case .chineseTraditional:
+//                    return 14
                 }
             }
 
@@ -130,10 +130,10 @@ enum Settings {
                     return false
                 case .portuguese:
                     return false
-                case .chineseSimplified:
-                    return true
-                case .chineseTraditional:
-                    return true
+//                case .chineseSimplified:
+//                    return true
+//                case .chineseTraditional:
+//                    return true
                 }
             }
         }
