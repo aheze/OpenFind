@@ -75,7 +75,9 @@ extension PhotosViewController {
 
             cell.isAccessibilityElement = true
             cell.accessibilityLabel = findPhoto.getVoiceoverDescription()
-
+            cell.baseView.alpha = 1
+            cell.transform = .identity
+            
             /// selection
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
             self.configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: selected)

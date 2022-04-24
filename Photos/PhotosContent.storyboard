@@ -159,7 +159,7 @@
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-xJ-UFv">
                                                                         <rect key="frame" x="0.0" y="0.0" width="171" height="367.5"/>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lPc-81-AcF">
                                                                         <rect key="frame" x="0.0" y="0.0" width="171" height="367.5"/>
@@ -170,7 +170,7 @@
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="pEK-xJ-UFv" secondAttribute="bottom" id="Adb-PX-24v"/>
                                                                     <constraint firstItem="lPc-81-AcF" firstAttribute="leading" secondItem="zka-9d-UMr" secondAttribute="leading" id="OhC-zD-Z7e"/>
@@ -196,6 +196,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="4hh-A7-7ZC" secondAttribute="trailing" id="4mU-bU-fAG"/>
                                     <constraint firstAttribute="bottom" secondItem="4hh-A7-7ZC" secondAttribute="bottom" id="HIy-Fk-0cz"/>
@@ -203,8 +204,10 @@
                                     <constraint firstItem="4hh-A7-7ZC" firstAttribute="top" secondItem="kKw-aS-TWR" secondAttribute="top" id="gHW-rb-e7L"/>
                                 </constraints>
                             </collectionViewCellContentView>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <size key="customSize" width="271" height="388"/>
                             <connections>
+                                <outlet property="baseView" destination="4hh-A7-7ZC" id="OuD-SI-9QA"/>
                                 <outlet property="descriptionContainerView" destination="zka-9d-UMr" id="goU-4i-mql"/>
                                 <outlet property="descriptionHighlightsContainerView" destination="pEK-xJ-UFv" id="oxG-8g-xNY"/>
                                 <outlet property="descriptionTextView" destination="lPc-81-AcF" id="qqw-zf-XDM"/>

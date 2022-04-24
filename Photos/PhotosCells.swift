@@ -122,6 +122,8 @@ class PhotosResultsCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        baseView.backgroundColor = .systemBackground
 
         stackView.isUserInteractionEnabled = false
         resultsLabel.clipsToBounds = true

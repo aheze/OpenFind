@@ -63,6 +63,29 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
+    
+    /// **for results only**
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if model.resultsState != nil  {
+            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
+                UIView.animate(withDuration: 0.2) {
+                    cell.baseView.alpha = 0.75
+                    cell.transform = .init(scaleX: 0.97, y: 0.97)
+                }
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if model.resultsState != nil  {
+            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
+                UIView.animate(withDuration: 0.2) {
+                    cell.baseView.alpha = 1
+                    cell.transform = .identity
+                }
+            }
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         guard model.resultsState == nil else { return nil }
