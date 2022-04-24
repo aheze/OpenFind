@@ -117,6 +117,8 @@ CoreSimulator 783.5 - Device: iPhone 13 Pro Max (F1EC12A7-4B5F-4462-AC9C-ED54E50
 AttributeGraph precondition failure: attribute failed to set an initial value: 2106424, ForEachChild<Array<Highlight>, UUID, HighlightView>.
 ```
 
+4/23/22 - might be fixed by checking that tab is photos first
+
 `itemIdentifier` is unreliable and sometimes gives huge numbers (`9223372036854775807`)
 ```swift
 guard let existingPhoto = dataSource.itemIdentifier(for: indexPath) else { return }

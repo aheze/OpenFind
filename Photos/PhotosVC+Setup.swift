@@ -70,6 +70,11 @@ extension PhotosViewController {
 
         model.displayedSections = model.allSections
         update(animate: false)
+        
+        /// user entered text before photos were loaded, so find now
+        if !searchViewModel.isEmpty {
+            find(context: .findingAfterTextChange(firstTimeShowingResults: true))
+        }
     }
 
     func showPermissionsView() {
