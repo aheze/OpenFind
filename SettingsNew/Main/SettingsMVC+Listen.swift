@@ -10,6 +10,8 @@ import UIKit
 
 extension SettingsMainViewController {
     func listen() {
+        listenToKeyboard()
+        
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
 

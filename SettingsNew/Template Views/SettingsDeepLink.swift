@@ -32,7 +32,6 @@ struct SettingsDeepLink: View {
                             Text(getDestinationTitle())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(SettingsConstants.rowVerticalInsetsFromText)
 
                             let titles = getPathTitles()
 
@@ -53,6 +52,7 @@ struct SettingsDeepLink: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
+                        .padding(SettingsConstants.rowVerticalInsetsFromText)
 
                         if let indicatorStyle = indicatorStyle {
                             switch indicatorStyle {
@@ -68,7 +68,6 @@ struct SettingsDeepLink: View {
                         }
                     }
                 }
-
                 .padding(SettingsConstants.rowHorizontalInsets)
                 .accessibilityElement(children: .combine)
             }

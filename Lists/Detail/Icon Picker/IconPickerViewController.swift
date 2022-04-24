@@ -65,6 +65,8 @@ class IconPickerViewController: UIViewController, Searchable {
         navigationItem.leftBarButtonItem = jumpButton
         
         update(animate: false)
+        
+        listenToKeyboard()
     }
     
     @objc func dismissSelf() {
