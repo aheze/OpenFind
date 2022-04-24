@@ -103,10 +103,12 @@ extension PhotosViewController: UICollectionViewDelegate {
             if photo.isStarred {
                 star = UIAction(title: "Unstar", image: UIImage(systemName: "star")) { [weak self] action in
                     self?.model.star(photos: [photo])
+                    self?.model.updateAfterStarChange()
                 }
             } else {
                 star = UIAction(title: "Star", image: UIImage(systemName: "star.fill")) { [weak self] action in
                     self?.model.star(photos: [photo])
+                    self?.model.updateAfterStarChange()
                 }
             }
 

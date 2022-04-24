@@ -19,6 +19,8 @@ extension PhotosViewModel {
     }
 
     /// toggle star for a single photo. If multiple photos and one photo is unstarred, star all.
+    /// **must** also call `self?.model.updateAfterStarChange()` after this function to reload collection views.
+    /// Unless - in slides, in which case set `sortNeededAfterStarChanged = true`.
     func star(photos: [Photo]) {
         let photosStarred: [Bool] = photos.map {
             let starred = $0.metadata.map { $0.isStarred } ?? false
