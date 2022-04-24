@@ -1,5 +1,5 @@
 //
-//  PhotosSharing.swift
+//  PhotosVM+Share
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 3/26/22.
@@ -50,7 +50,7 @@ extension UIViewController {
             let ignoreActivity = IgnoreActivity { [weak model] in
                 guard let model = model else { return }
                 model.ignore(photos: photos)
-                
+
                 if model.slidesState == nil {
                     model.stopSelecting?()
                 }

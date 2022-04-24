@@ -14,9 +14,9 @@ struct PhotosSelectionToolbarView: View {
     var body: some View {
         HStack {
             ToolbarIconButton(iconName: "square.and.arrow.up") {
-                model.shareSelected?()
+                shareSelected()
             }
-                .disabled(model.selectedPhotos.count == 0)
+            .disabled(model.selectedPhotos.count == 0)
 
             Text(selectedText())
                 .font(.system(.headline))
@@ -36,6 +36,11 @@ struct PhotosSelectionToolbarView: View {
         } else {
             return "\(model.selectedPhotos.count) Photos Selected"
         }
+    }
+
+    func shareSelected() {
+        model.share(photos: model.selectedPhotos)
+        model.stopSelecting?()
     }
 
     func deleteSelected() {

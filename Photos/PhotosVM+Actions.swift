@@ -7,12 +7,17 @@
 //
 
 import SwiftUI
+import Photos
 
 /**
  Star / Ignore
  */
 
 extension PhotosViewModel {
+    func share(photos: [Photo]) {
+        UIApplication.rootViewController?.share(photos: photos, model: self)
+    }
+
     /// toggle star for a single photo. If multiple photos and one photo is unstarred, star all.
     func star(photos: [Photo]) {
         let photosStarred: [Bool] = photos.map {
@@ -43,7 +48,6 @@ extension PhotosViewModel {
     }
 
     func ignore(photos: [Photo]) {
-        
         /// see which of the passed-in photos are ignored
         let photosIgnored: [Bool] = photos.map {
             let ignored = $0.isIgnored
@@ -75,6 +79,34 @@ extension PhotosViewModel {
                 withAnimation {
                     updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                 }
+            }
+        }
+    }
+
+    func delete(photos: [Photo]) {
+        let assetIdentifiers = photos.map { $0.asset.localIdentifier }
+        let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
+        PHPhotoLibrary.shared().performChanges {
+            PHAssetChangeRequest.deleteAssets(assets)
+        } completionHandler: { [weak self] success, _ in
+            guard success else { return }
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                for photo in photos {
+                    if let metadata = photo.metadata {
+                        self.getRealmModel?().container.deletePhotoMetadata(metadata: metadata)
+                    }
+                }
+                self.refreshCollectionViews(afterDeleting: photos)
+                self.reloadCollectionViewsAfterDeletion?()
+
+                /// refresh slides model and reload slides collection view
+                if let photo = photos.first {
+                    self.deletePhotoInSlides?(photo)
+                }
+                self.ignoredPhotos = photos.filter { $0.isIgnored }
+                self.photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
             }
         }
     }

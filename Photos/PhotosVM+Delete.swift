@@ -10,34 +10,6 @@ import Photos
 import UIKit
 
 extension PhotosViewModel {
-    func delete(photos: [Photo]) {
-        let assetIdentifiers = photos.map { $0.asset.localIdentifier }
-        let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
-        PHPhotoLibrary.shared().performChanges {
-            PHAssetChangeRequest.deleteAssets(assets)
-        } completionHandler: { [weak self] success, _ in
-            guard success else { return }
-            guard let self = self else { return }
-
-            DispatchQueue.main.async {
-                for photo in photos {
-                    if let metadata = photo.metadata {
-                        self.getRealmModel?().container.deletePhotoMetadata(metadata: metadata)
-                    }
-                }
-                self.refreshCollectionViews(afterDeleting: photos)
-                self.reloadCollectionViewsAfterDeletion?()
-
-                /// refresh slides model and reload slides collection view
-                if let photo = photos.first {
-                    self.deletePhotoInSlides?(photo)
-                }
-                self.ignoredPhotos = photos.filter { $0.isIgnored }
-                self.photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
-            }
-        }
-    }
-
     /// refresh collection view and results collection view models, not slides
     func refreshCollectionViews(afterDeleting photos: [Photo]) {
         self.photos = self.photos.filter { !photos.contains($0) }

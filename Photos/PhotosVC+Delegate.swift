@@ -63,10 +63,10 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
-    
+
     /// **for results only**
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if model.resultsState != nil  {
+        if model.resultsState != nil {
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
                 UIView.animate(withDuration: 0.2) {
                     cell.baseView.alpha = 0.75
@@ -75,9 +75,9 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if model.resultsState != nil  {
+        if model.resultsState != nil {
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
                 UIView.animate(withDuration: 0.2) {
                     cell.baseView.alpha = 1
@@ -94,34 +94,35 @@ extension PhotosViewController: UICollectionViewDelegate {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
 
             // Create an action for sharing
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
                 print("Sharing \(photo)")
+                self?.model.share(photos: [photo])
             }
 
             let star: UIAction
             if photo.isStarred {
-                star = UIAction(title: "Unstar", image: UIImage(systemName: "star")) { action in
-                    print("Unstar \(photo)")
+                star = UIAction(title: "Unstar", image: UIImage(systemName: "star")) { [weak self] action in
+                    self?.model.star(photos: [photo])
                 }
             } else {
-                star = UIAction(title: "Star", image: UIImage(systemName: "star.fill")) { action in
-                    print("Star \(photo)")
+                star = UIAction(title: "Star", image: UIImage(systemName: "star.fill")) { [weak self] action in
+                    self?.model.star(photos: [photo])
                 }
             }
 
             let ignore: UIAction
             if photo.isIgnored {
-                ignore = UIAction(title: "Unigore", image: UIImage(systemName: "nosign")) { action in
-                    print("unignore \(photo)")
+                ignore = UIAction(title: "Unignore", image: UIImage(systemName: "nosign")) { [weak self] action in
+                    self?.model.ignore(photos: [photo])
                 }
             } else {
-                ignore = UIAction(title: "Ignore", image: UIImage(systemName: "nosign")) { action in
-                    print("ignore \(photo)")
+                ignore = UIAction(title: "Ignore", image: UIImage(systemName: "nosign")) { [weak self] action in
+                    self?.model.ignore(photos: [photo])
                 }
             }
 
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
-                print("Sharing \(photo)")
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
+                self?.model.delete(photos: [photo])
             }
 
             // Create other actions...
