@@ -10,7 +10,7 @@ import UIKit
 
 extension List {
     static var defaultLists: [List] {
-        [
+        var lists: [List] = [
             .init(
                 title: "Beef",
                 description: "Meat from cows",
@@ -186,5 +186,14 @@ extension List {
                 dateCreated: Date()
             )
         ]
+        
+        let startingDate = Date()
+        for index in lists.indices {
+            let offset = Double(index) /// add 1 second into the future
+            let date = startingDate.addingTimeInterval(offset)
+            lists[index].dateCreated = date
+        }
+        
+        return lists
     }
 }
