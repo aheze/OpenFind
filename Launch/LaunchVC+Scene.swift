@@ -12,6 +12,8 @@ import UIKit
 
 extension LaunchViewController {
     func setupScene() {
+        _ = sceneView
+
         sceneView.cameraMode = .nonAR
         sceneView.environment.background = .color(.clear)
         sceneContainer.addSubview(sceneView)
@@ -35,12 +37,20 @@ extension LaunchViewController {
         camera.look(at: .zero, from: LaunchConstants.cameraPositionInitial, relativeTo: baseEntity)
 
         self.animateScene()
+
+        UIView.animate(withDuration: 0.5) {
+            self.sceneContainer.alpha = 1
+            self.imageView.alpha = 0
+            self.activityIndicator.alpha = 0
+        }
+
+        showUI()
     }
 
     func animateScene() {
         guard let camera = self.camera else { return }
         guard let baseEntity = self.baseEntity else { return }
-        
+
         for tile in self.model.tiles {
             tile.entity.move(
                 to: tile.midTransform,

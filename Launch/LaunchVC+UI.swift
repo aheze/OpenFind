@@ -9,11 +9,6 @@
 import SwiftUI
 
 extension LaunchViewController {
-    func setupUI() {
-        setupView()
-        prepareUI()
-    }
-
     func setupView() {
         let contentView = LaunchView(model: model)
         let hostingController = UIHostingController(rootView: contentView)
@@ -21,7 +16,7 @@ extension LaunchViewController {
         addChildViewController(hostingController, in: contentContainer)
     }
 
-    func prepareUI() {
+    func showUI() {
         if Debug.skipLaunchIntro {
             model.showingUI = true
         } else {

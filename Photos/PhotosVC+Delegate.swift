@@ -95,7 +95,6 @@ extension PhotosViewController: UICollectionViewDelegate {
 
             // Create an action for sharing
             let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
-                print("Sharing \(photo)")
                 self?.model.share(photos: [photo])
             }
 

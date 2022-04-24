@@ -10,14 +10,30 @@ import SwiftUI
 
 extension LaunchViewController {
     func setup() {
+        activityIndicator.alpha = 0
+        sceneContainer.alpha = 0
         sceneContainer.backgroundColor = .clear
         contentContainer.backgroundColor = .clear
         view.backgroundColor = Colors.accentDarkBackground
         
-        setupUI()
+        activityIndicatorTopC.constant = 50
+        activityIndicator.color = .white
+        activityIndicator.startAnimating()
         
-        if !Debug.skipLaunchIntro {
-            setupScene()
+        /// SwiftUI overlay
+        setupView()
+        
+        UIView.animate(withDuration: 0.3) {
+            self.activityIndicator.alpha = 1
+        }
+        
+        if Debug.skipLaunchIntro {
+            showUI()
+        } else {
+            /// need a bit of delay to ensure activity indicator showing
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.31) {
+                self.setupScene()
+            }
         }
         
         listen()

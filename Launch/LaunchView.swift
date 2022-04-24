@@ -46,8 +46,10 @@ struct LaunchView: View {
         }
         .mask(
             VStack(spacing: 0) {
-                Color.black
-                    .frame(height: topTextHeight + verticalGap)
+                if model.currentPage != .final {
+                    Color.black
+                        .frame(height: topTextHeight + verticalGap)
+                }
 
                 LinearGradient(
                     stops: [
@@ -79,24 +81,24 @@ struct LaunchView: View {
         )
         .overlay(
             VStack(spacing: c.spacing) {
-                if model.currentPage == .empty {
-                    VStack(spacing: c.headerSpacing) {
-                        Text("Find")
-                            .font(c.headerTitleFont.font)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                VStack(spacing: c.headerSpacing) {
+                    Text("Find")
+                        .font(c.headerTitleFont.font)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                        Text("An app to find text in real life.")
-                            .font(c.headerSubtitleFont.font)
-                            .multilineTextAlignment(.leading)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .opacity(model.currentPage == .empty ? 1 : 0)
-                    .padding(c.headerInsets)
-
-                    .readSize {
+                    Text("An app to find text in real life.")
+                        .font(c.headerSubtitleFont.font)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .opacity(model.currentPage == .empty ? 1 : 0)
+                .padding(c.headerInsets)
+                .readSize {
+                    if model.currentPage == .empty {
                         topTextHeight = $0.height
                     }
                 }
+                .frame(height: model.currentPage == .empty ? nil : 0, alignment: .top)
 
                 LaunchContentView(model: model)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

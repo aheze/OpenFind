@@ -17,6 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Find-Large" translatesAutoresizingMaskIntoConstraints="NO" id="gEs-8y-r66">
+                                <rect key="frame" x="127" y="368" width="160" height="160"/>
+                                <color key="tintColor" white="1" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="VBa-0e-ljX"/>
+                                    <constraint firstAttribute="height" constant="160" id="taG-6V-enZ"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="McM-Oe-6to">
+                                <rect key="frame" x="197" y="578" width="20" height="20"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTv-bZ-ysY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -29,18 +40,25 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="gEs-8y-r66" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6m6-UV-iMb"/>
                             <constraint firstAttribute="trailing" secondItem="I3g-vt-zyh" secondAttribute="trailing" id="8zo-jo-wOg"/>
                             <constraint firstItem="JTv-bZ-ysY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9wv-BA-59F"/>
                             <constraint firstAttribute="bottom" secondItem="I3g-vt-zyh" secondAttribute="bottom" id="AM2-uY-ofb"/>
                             <constraint firstItem="I3g-vt-zyh" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="F48-rM-0V9"/>
                             <constraint firstAttribute="trailing" secondItem="JTv-bZ-ysY" secondAttribute="trailing" id="FJc-Ck-8qU"/>
                             <constraint firstItem="JTv-bZ-ysY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="KwO-3T-5aB"/>
+                            <constraint firstItem="McM-Oe-6to" firstAttribute="top" secondItem="gEs-8y-r66" secondAttribute="bottom" constant="50" id="iwr-e7-8m8"/>
                             <constraint firstItem="I3g-vt-zyh" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="lbg-7V-kEj"/>
+                            <constraint firstItem="McM-Oe-6to" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="n9B-AG-mv2"/>
                             <constraint firstAttribute="bottom" secondItem="JTv-bZ-ysY" secondAttribute="bottom" id="sX9-dG-Thg"/>
+                            <constraint firstItem="gEs-8y-r66" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="zuf-nE-O45"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="McM-Oe-6to" id="Zpt-fg-eyT"/>
+                        <outlet property="activityIndicatorTopC" destination="iwr-e7-8m8" id="rG1-Kx-4GC"/>
                         <outlet property="contentContainer" destination="I3g-vt-zyh" id="FEe-7K-GG0"/>
+                        <outlet property="imageView" destination="gEs-8y-r66" id="R5u-jc-CCg"/>
                         <outlet property="sceneContainer" destination="JTv-bZ-ysY" id="dvZ-Wv-Jv6"/>
                     </connections>
                 </viewController>
@@ -96,6 +114,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Find-Large" width="100" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

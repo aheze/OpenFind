@@ -13,6 +13,11 @@ import SwiftUI
 class LaunchViewController: UIViewController {
     var model: LaunchViewModel
 
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicatorTopC: NSLayoutConstraint!
+    
     @IBOutlet var sceneContainer: UIView!
     lazy var sceneView = ARView()
     var baseEntity: ModelEntity?

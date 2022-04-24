@@ -9,7 +9,7 @@
 import UIKit
 
 enum LaunchConstants {
-    static let showUIDelay = CGFloat(5)
+    static let showUIDelay = CGFloat(1) /// wait a bit after fade image
     static let showUIDuration = CGFloat(1.2)
     
     static let textDepth = Float(0.008)
