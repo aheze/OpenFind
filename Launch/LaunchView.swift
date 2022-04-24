@@ -46,10 +46,9 @@ struct LaunchView: View {
         }
         .mask(
             VStack(spacing: 0) {
-                if model.currentPage != .final {
-                    Color.black
-                        .frame(height: topTextHeight + verticalGap)
-                }
+                /// show full background when on final page
+                Color.black
+                    .frame(height: model.currentPage == .final ? 0 : topTextHeight + verticalGap)
 
                 LinearGradient(
                     stops: [

@@ -112,9 +112,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             let slidesPhoto = slidesState.slidesPhotos[safe: currentIndex]
         {
             if let highlights = slidesPhoto.findPhoto.highlightsSet?.highlights, highlights.count > 3 {
-                realmModel.incrementExperience(by: 3)
+                realmModel.incrementExperience(by: 6)
             }
-            
             
             model.configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
