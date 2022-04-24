@@ -20,17 +20,32 @@ struct ResultsHeaderView: View {
     @ObservedObject var resultsHeaderViewModel: ResultsHeaderViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Group {
-                Text(resultsHeaderViewModel.text)
-                    + Text(" ")
-                    + Text(resultsHeaderViewModel.description ?? "")
-                    .foregroundColor(UIColor.secondaryLabel.color)
-            }
-            .fixedSize(horizontal: false, vertical: true)
+        Button {
+            model.scanningIconTapped?()
+        } label: {
+            VStack(alignment: .leading, spacing: 12) {
+                Group {
+                    Text(resultsHeaderViewModel.text)
+                        .foregroundColor(Colors.accent.color)
+                        + Text(" ")
+                        + Text(resultsHeaderViewModel.description ?? "")
+                        .foregroundColor(Colors.accent.color.opacity(0.5))
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
 
-            PhotosScanningHeader(model: model)
+                PhotosScanningHeader(model: model)
+                    .padding(16)
+                    .background(Color.accent.opacity(0.1))
+                    .cornerRadius(14)
+            }
+            .padding(16)
+            .blueBackground()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .buttonStyle(EasingScaleButtonStyle())
+        .padding(.bottom, ListsCollectionConstants.cellSpacing)
     }
 }
+
+

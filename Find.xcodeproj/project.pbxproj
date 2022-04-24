@@ -211,7 +211,6 @@
 		3C1AB1A6261004B7009B47C0 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB1A5261004B7009B47C0 /* Sound.swift */; };
 		3C1D178627BBF9A200E82B8B /* PhotosVM+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */; };
 		3C1D178727BBF9AC00E82B8B /* PhotosVM+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */; };
-		3C1D178927BCA4A300E82B8B /* PhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178827BCA4A300E82B8B /* PhotosVC+Listen.swift */; };
 		3C1D178A27BCA4A600E82B8B /* PhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178827BCA4A300E82B8B /* PhotosVC+Listen.swift */; };
 		3C1D178C27BCA50C00E82B8B /* PhotosCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178B27BCA50C00E82B8B /* PhotosCells.swift */; };
 		3C1D178D27BCA51800E82B8B /* PhotosCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178B27BCA50C00E82B8B /* PhotosCells.swift */; };
@@ -1409,6 +1408,10 @@
 		3C6E9F532814EEC200FAD6A9 /* IconPickerVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F522814EEC200FAD6A9 /* IconPickerVC+Keyboard.swift */; };
 		3C6E9F542814EEE400FAD6A9 /* IconPickerVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F522814EEC200FAD6A9 /* IconPickerVC+Keyboard.swift */; };
 		3C6E9F552814EEFD00FAD6A9 /* SettingsMVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F502814EEA100FAD6A9 /* SettingsMVC+Keyboard.swift */; };
+		3C6E9F5628150A4600FAD6A9 /* ListsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624E2810B231002DD153 /* ListsDefaults.swift */; };
+		3C6E9F5728150A4A00FAD6A9 /* PhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D178827BCA4A300E82B8B /* PhotosVC+Listen.swift */; };
+		3C6E9F5828150A4D00FAD6A9 /* PhotosVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F46281464F100FAD6A9 /* PhotosVC+Keyboard.swift */; };
+		3C6E9F5928150A6400FAD6A9 /* SettingsMVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E9F502814EEA100FAD6A9 /* SettingsMVC+Keyboard.swift */; };
 		3C6EAA6B2803ACD200B036AD /* IgnoredPhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA682803ACBB00B036AD /* IgnoredPhotosVC+Listen.swift */; };
 		3C6EAA6C2803B16A00B036AD /* IgnoredPhotosVC+Listen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA682803ACBB00B036AD /* IgnoredPhotosVC+Listen.swift */; };
 		3C6EAA6F2803B76D00B036AD /* PhotosVM+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA6D2803B75D00B036AD /* PhotosVM+Actions.swift */; };
@@ -8572,6 +8575,7 @@
 				3C443F5E27DDA7850050A0AB /* SwiftUIExtensions.swift in Sources */,
 				3CF15B3A27FF8AEA00D51E9B /* SD+FindingAndHighlights.swift in Sources */,
 				3CF7643A278D19AC00DCA4EA /* SearchNC+Transitioning.swift in Sources */,
+				3C6E9F5728150A4A00FAD6A9 /* PhotosVC+Listen.swift in Sources */,
 				3C7A441527EFB6F600DFF76F /* PhotosSlidesVC+Deletion.swift in Sources */,
 				3C443E9427DD88F80050A0AB /* SearchUtilities.swift in Sources */,
 				3C06260027C69FB60078E66F /* PhotosVC+Results.swift in Sources */,
@@ -8612,6 +8616,7 @@
 				3CF15B3B27FF8AEA00D51E9B /* SettingsViewModel.swift in Sources */,
 				3C443EBD27DD8ABC0050A0AB /* TabBarController.swift in Sources */,
 				3CCA2C1B28122F9C0019044D /* ToolbarViewModel.swift in Sources */,
+				3C6E9F5828150A4D00FAD6A9 /* PhotosVC+Keyboard.swift in Sources */,
 				3C443E9C27DD88F80050A0AB /* SearchVC+Toolbar.swift in Sources */,
 				3CE3D4E827DD0BE100521735 /* SearchNC+Listen.swift in Sources */,
 				3C443EAD27DD89830050A0AB /* HighlightsViewController.swift in Sources */,
@@ -8707,7 +8712,7 @@
 				3C798F0427F6A5CF007BF68D /* CameraConstants.swift in Sources */,
 				3C443ED127DD8ADA0050A0AB /* CameraViewModel.swift in Sources */,
 				3C606674274ECCBB000A5BDE /* Debug.swift in Sources */,
-				3C1D178927BCA4A300E82B8B /* PhotosVC+Listen.swift in Sources */,
+				3C6E9F5628150A4600FAD6A9 /* ListsDefaults.swift in Sources */,
 				3C17B8EA27C9C4D000B55E97 /* PhotosVC+ResultsHighlights.swift in Sources */,
 				3CAE64EE27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift in Sources */,
 				3C9CA8AC27EFFA3400D087F2 /* PhotosSpecifiedExtensions.swift in Sources */,
@@ -8852,6 +8857,7 @@
 				3CCA2C3F281232120019044D /* ToolbarView.swift in Sources */,
 				3CAE64EB27C6AA73009E8564 /* PhotosVC+ResultsFlowLayout.swift in Sources */,
 				3C08EAE6279BA85E00971D60 /* Utilities+UIView.swift in Sources */,
+				3C6E9F5928150A6400FAD6A9 /* SettingsMVC+Keyboard.swift in Sources */,
 				3C443EB427DD898F0050A0AB /* Find+Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

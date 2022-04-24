@@ -62,8 +62,6 @@ class PhotosCollectionHeader: UICollectionReusableView {
 class PhotosCollectionCell: UICollectionViewCell {
     var representedAssetIdentifier: String?
     lazy var view = PhotosCellView()
-    lazy var buttonView = ButtonView()
-    var tapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,14 +70,8 @@ class PhotosCollectionCell: UICollectionViewCell {
     }
     
     func commonInit() {
-        addSubview(buttonView)
-        buttonView.pinEdgesToSuperview()
-        buttonView.addSubview(view)
+        addSubview(view)
         view.pinEdgesToSuperview()
-        
-        buttonView.tapped = { [weak self] in
-            self?.tapped?()
-        }
     }
     
     @available(*, unavailable)
@@ -96,7 +88,7 @@ class PhotosResultsCell: UICollectionViewCell {
     var tapped: (() -> Void)?
     var appeared: (() -> Void)?
     var disappeared: (() -> Void)?
-    @IBOutlet var buttonView: ButtonView!
+    @IBOutlet var baseView: UIView! /// inside ContentView. Used to be a button, then I switched to just selection
     
     /// `imageView` on left, `rightStackView` on right
     @IBOutlet var stackView: UIStackView!
@@ -140,10 +132,6 @@ class PhotosResultsCell: UICollectionViewCell {
         
         leftContainerView.addSubview(view)
         view.pinEdgesToSuperview()
-        
-        buttonView.tapped = { [weak self] in
-            self?.tapped?()
-        }
         
         descriptionTextView.isEditable = false
         

@@ -36,11 +36,10 @@ extension PhotosViewController {
     func configureResultsCellSelection(cell: PhotosResultsCell, findPhoto: FindPhoto, selected: Bool) {
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-        cell.buttonView.isUserInteractionEnabled = !model.isSelecting
+
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
 
-        
         if selected {
             cell.accessibilityTraits = .selected
         } else {
@@ -54,13 +53,11 @@ extension PhotosViewController {
             let indexPath = index.indexPath
             if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
                 if model.isSelecting {
-                    cell.buttonView.isUserInteractionEnabled = false
                     cell.view.selectOverlayIconView.setState(.hidden)
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.selectOverlayView.alpha = 1
                     }
                 } else {
-                    cell.buttonView.isUserInteractionEnabled = true
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.selectOverlayView.backgroundColor = .clear
                         cell.view.selectOverlayView.alpha = 0

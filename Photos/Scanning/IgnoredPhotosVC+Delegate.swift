@@ -21,6 +21,14 @@ extension IgnoredPhotosViewController: UICollectionViewDelegate {
         if model.ignoredPhotosIsSelecting {
             photoSelected(at: indexPath)
         } else {
+            if let photo = self.model.ignoredPhotos[safe: indexPath.item] {
+                if let viewController = self.model.getSlidesViewControllerFor?(photo) {
+                    viewController.navigationItem.scrollEdgeAppearance = UINavigationBarAppearance()
+                    viewController.view.backgroundColor = .systemBackground
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+
             collectionView.deselectItem(at: indexPath, animated: false)
         }
     }

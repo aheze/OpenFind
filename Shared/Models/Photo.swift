@@ -14,18 +14,23 @@ struct Photo: Hashable {
     var metadata: PhotoMetadata?
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.asset)
+        hasher.combine(asset)
     }
 
     static func == (lhs: Photo, rhs: Photo) -> Bool {
         lhs.asset == rhs.asset
     }
-    
-    func isStarred() -> Bool  {
+
+    /// if the photo is ignored or not. If metadata is nil, default to `false`.
+    var isIgnored: Bool {
+        metadata.map { $0.isIgnored } ?? false
+    }
+
+    var isStarred: Bool {
         metadata.map { $0.isStarred } ?? false
     }
-    
-    func isScreenshot() -> Bool {
+
+    var isScreenshot: Bool {
         asset.mediaSubtypes.contains(.photoScreenshot)
     }
 }
@@ -38,4 +43,3 @@ struct PhotoMetadata {
     var isStarred = false
     var isIgnored = false
 }
-

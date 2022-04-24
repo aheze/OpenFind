@@ -109,10 +109,10 @@ extension Finding {
             
                 allFindPhotos.append(findPhoto)
                 
-                if findPhoto.photo.isStarred() {
+                if findPhoto.photo.isStarred {
                     starredFindPhotos.append(findPhoto)
                 }
-                if findPhoto.photo.isScreenshot() {
+                if findPhoto.photo.isScreenshot {
                     screenshotsFindPhotos.append(findPhoto)
                 }
             }

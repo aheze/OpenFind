@@ -35,7 +35,6 @@ extension IgnoredPhotosViewController {
         collectionView.pinEdgesToSuperview()
 
         collectionView.delegate = self
-        collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
         collectionView.delaysContentTouches = true
         collectionView.showsHorizontalScrollIndicator = false

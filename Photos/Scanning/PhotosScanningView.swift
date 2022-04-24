@@ -123,6 +123,7 @@ struct PhotosScanningViewHeader: View {
             return "All Photos Scanned"
         }
     }
+
     func getImage() -> String {
         var image = model.scanningState == .scanningAllPhotos ? "pause.fill" : "play.fill"
         if model.scannedPhotosCount == model.totalPhotosCount {
@@ -160,6 +161,7 @@ struct PhotosScanningButton: View {
             .background(Color.accent.opacity(0.15))
             .cornerRadius(10)
         }
+        .buttonStyle(EasingScaleButtonStyle())
     }
 }
 
@@ -202,9 +204,10 @@ struct PhotoScanningLink: View {
                     .foregroundColor(UIColor.secondaryLabel.color)
                 }
                 .padding(SettingsConstants.rowHorizontalInsets)
-                .background(UIColor.systemBackground.color)
-                .cornerRadius(SettingsConstants.sectionCornerRadius)
             }
+            .buttonStyle(SettingsButtonStyle())
+            .background(UIColor.systemBackground.color)
+            .cornerRadius(SettingsConstants.sectionCornerRadius)
         }
     }
 }

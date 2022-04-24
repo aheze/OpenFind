@@ -121,7 +121,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="271" height="388"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hh-A7-7ZC" customClass="ButtonView" customModule="FindPhotos" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hh-A7-7ZC">
                                         <rect key="frame" x="0.0" y="0.0" width="271" height="388"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cP1-N9-FIj">
@@ -205,7 +205,6 @@
                             </collectionViewCellContentView>
                             <size key="customSize" width="271" height="388"/>
                             <connections>
-                                <outlet property="buttonView" destination="4hh-A7-7ZC" id="C49-2p-ool"/>
                                 <outlet property="descriptionContainerView" destination="zka-9d-UMr" id="goU-4i-mql"/>
                                 <outlet property="descriptionHighlightsContainerView" destination="pEK-xJ-UFv" id="oxG-8g-xNY"/>
                                 <outlet property="descriptionTextView" destination="lPc-81-AcF" id="qqw-zf-XDM"/>

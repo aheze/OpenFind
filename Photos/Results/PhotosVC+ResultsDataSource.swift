@@ -72,20 +72,13 @@ extension PhotosViewController {
             PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
 
             self.loadHighlights(for: cell, findPhoto: findPhoto)
-            
+
             cell.isAccessibilityElement = true
             cell.accessibilityLabel = findPhoto.getVoiceoverDescription()
-            
+
             /// selection
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
             self.configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: selected)
-
-            cell.tapped = { [weak self] in
-                guard let self = self else { return }
-                /// get the current up-to-date FindPhoto first.
-                guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return }
-                self.presentSlides(startingAtFindPhoto: findPhoto)
-            }
 
             return cell
         }

@@ -6,7 +6,7 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-import UIKit
+import SwiftUI
 
 extension CameraViewController {
     func createLivePreview() -> LivePreviewViewController {
@@ -84,7 +84,9 @@ extension CameraViewController {
     
     func loadUI() {
         DispatchQueue.main.async {
-            self.model.loaded = true
+            withAnimation {
+                self.model.loaded = true
+            }
         
             /// slight lag to avoid focusing
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {

@@ -36,7 +36,7 @@ extension IgnoredPhotosViewController {
             }
         }
     }
-    
+
     func getSelectButtonTitle() -> String {
         if model.ignoredPhotosIsSelecting {
             return "Done"
@@ -54,13 +54,11 @@ extension IgnoredPhotosViewController {
         for index in model.ignoredPhotos.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCollectionCell {
                 if model.ignoredPhotosIsSelecting {
-                    cell.buttonView.isUserInteractionEnabled = false
                     cell.view.selectOverlayIconView.setState(.hidden)
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.selectOverlayView.alpha = 1
                     }
                 } else {
-                    cell.buttonView.isUserInteractionEnabled = true
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.selectOverlayView.backgroundColor = .clear
                         cell.view.selectOverlayView.alpha = 0
@@ -77,7 +75,7 @@ extension IgnoredPhotosViewController {
     func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-        
+
         if selected {
             cell.accessibilityTraits = .selected
         } else {

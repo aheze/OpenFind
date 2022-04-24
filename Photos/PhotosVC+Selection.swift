@@ -21,9 +21,7 @@ extension PhotosViewController {
     func startSelecting() {
         model.updateAllowed = false
         searchViewModel.dismissKeyboard?()
-        collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
-        resultsCollectionView.allowsSelection = true
         resultsCollectionView.allowsMultipleSelection = true
         selectBarButton?.title = "Done"
         selectBarButton?.accessibilityLabel = "Done"
@@ -44,9 +42,7 @@ extension PhotosViewController {
 
         model.updateAllowed = true
         model.isSelecting = false
-        collectionView.allowsSelection = false
         collectionView.allowsMultipleSelection = false
-        resultsCollectionView.allowsSelection = false
         resultsCollectionView.allowsMultipleSelection = false
         selectBarButton?.title = "Select"
         selectBarButton?.accessibilityLabel = "Select"
@@ -85,7 +81,6 @@ extension PhotosViewController {
     }
 
     func configureCellSelection(cell: PhotosCollectionCell, photo: Photo, selected: Bool) {
-        cell.buttonView.isUserInteractionEnabled = !model.isSelecting
         cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
         cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
         cell.accessibilityTraits = selected ? .image : .none
@@ -98,13 +93,11 @@ extension PhotosViewController {
                 let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
                 if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
                     if model.isSelecting {
-                        cell.buttonView.isUserInteractionEnabled = false
                         cell.view.selectOverlayIconView.setState(.hidden)
                         UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                             cell.view.selectOverlayView.alpha = 1
                         }
                     } else {
-                        cell.buttonView.isUserInteractionEnabled = true
                         UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                             cell.view.selectOverlayView.backgroundColor = .clear
                             cell.view.selectOverlayView.alpha = 0

@@ -46,24 +46,12 @@ extension IgnoredPhotosViewController {
             PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
 
             let description = photo.getVoiceoverDescription()
-            cell.buttonView.accessibilityElementsHidden = true
             cell.isAccessibilityElement = true
             cell.accessibilityLabel = description
-                  
-            /// selection
-            cell.buttonView.isUserInteractionEnabled = !self.model.ignoredPhotosIsSelecting
+
+            /// selectiong
             let selected = self.model.ignoredPhotosIsSelecting && self.model.ignoredPhotosSelectedPhotos.contains(photo)
             self.configureCellSelection(cell: cell, selected: selected)
-            
-            cell.tapped = { [weak self] in
-                guard let self = self else { return }
-                guard let photo = self.model.ignoredPhotos.first(where: { $0 == cachedPhoto }) else { return }
-                if let viewController = self.model.getSlidesViewControllerFor?(photo) {
-                    viewController.navigationItem.scrollEdgeAppearance = UINavigationBarAppearance()
-                    viewController.view.backgroundColor = .systemBackground
-                    self.navigationController?.pushViewController(viewController, animated: true)
-                }
-            }
 
             return cell
         }

@@ -25,7 +25,7 @@ extension PhotosViewModel {
                 allSections.append(newSection)
             }
 
-            if photo.isStarred() {
+            if photo.isStarred {
                 let existingSectionIndex = starredSections.firstIndex { $0.categorization == dateCreatedCategorization }
                 if let existingSectionIndex = existingSectionIndex {
                     starredSections[existingSectionIndex].photos.append(photo)
@@ -35,7 +35,7 @@ extension PhotosViewModel {
                 }
             }
 
-            if photo.isScreenshot() {
+            if photo.isScreenshot {
                 let existingSectionIndex = screenshotsSections.firstIndex { $0.categorization == dateCreatedCategorization }
                 if let existingSectionIndex = existingSectionIndex {
                     screenshotsSections[existingSectionIndex].photos.append(photo)
