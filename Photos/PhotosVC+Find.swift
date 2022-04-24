@@ -78,6 +78,10 @@ extension PhotosViewController {
         resultsHeaderViewModel.text = results
         UIAccessibility.post(notification: .announcement, argument: results)
         
+        if displayedFindPhotos.count >= 1 {
+            realmModel.incrementExperience(by: 2)
+        }
+        
         if model.isSelecting {
             resetSelectingState()
             updateCollectionViewSelectionState()

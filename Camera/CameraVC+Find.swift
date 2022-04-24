@@ -55,6 +55,10 @@ extension CameraViewController {
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: replace)
             self.highlightsAdded()
+            
+            if highlights.count >= 2 {
+                self.realmModel.incrementExperience(by: 3)
+            }
         }
         return sentences
     }

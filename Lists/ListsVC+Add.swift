@@ -16,6 +16,7 @@ extension ListsViewController {
             self.reloadDisplayedLists()
             self.update()
             self.presentDetails(list: newList)
+            self.realmModel.incrementExperience(by: 5)
         }
     }
 
@@ -31,6 +32,7 @@ extension ListsViewController {
                 if let index = self.model.displayedLists.firstIndex(where: { $0.list.id == newList.id }) {
                     self.collectionView.scrollToItem(at: index.indexPath, at: .centeredVertically, animated: true)
                 }
+                self.realmModel.incrementExperience(by: 4)
             }
         }
         

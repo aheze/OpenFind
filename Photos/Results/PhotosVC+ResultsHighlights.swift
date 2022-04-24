@@ -107,6 +107,8 @@ extension PhotosViewController {
     /// This only updates the results collection view.
     /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
     func updateResultsHighlightColors() {
+        
+        guard tabViewModel.tabState == .photos else { return }
         updateResultsHighlightColors(in: \PhotosResultsState.displayedFindPhotos) { [weak self] index in
             guard let self = self else { return }
             /// update visible highlights
@@ -114,6 +116,7 @@ extension PhotosViewController {
                 let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
                 let findPhoto = self.model.resultsState?.displayedFindPhotos[index]
             {
+                
                 cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: findPhoto)
             }
         }

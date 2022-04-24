@@ -120,6 +120,7 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        realmModel.incrementExperience(by: 1)
         
         title = "List"
         navigationItem.largeTitleDisplayMode = .never

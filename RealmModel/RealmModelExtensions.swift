@@ -35,6 +35,12 @@ extension RealmModel {
         }
         addedListsBefore = true
     }
+    
+    func incrementExperience(by additionalExperience: Int) {
+        for _ in 0..<additionalExperience {
+            experiencePoints += 1
+        }
+    }
 }
 
 extension RealmModel {

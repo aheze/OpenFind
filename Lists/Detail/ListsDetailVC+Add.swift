@@ -30,6 +30,8 @@ extension ListsDetailViewController {
 
         wordsTableView.insertRows(at: newWordsIndices, with: .automatic)
         updateWordsKeyboardToolbar()
+
+        realmModel.incrementExperience(by: 4)
     }
 }
 

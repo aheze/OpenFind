@@ -27,11 +27,10 @@ extension CameraViewController {
         }
     }
     
-    func willBecomeInactive() {
-        AppDelegate.AppUtility.lockOrientation(.all)
-    }
+    func willBecomeInactive() {}
     
     func didBecomeInactive() {
+        AppDelegate.AppUtility.lockOrientation(.all)
         Find.prioritizedAction = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + CameraConstants.cameraCoolDownDuration) {
             if self.tabViewModel.tabState != .camera {

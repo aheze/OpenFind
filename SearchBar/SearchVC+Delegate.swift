@@ -50,6 +50,7 @@ extension SearchViewController: UICollectionViewDelegate {
                     completion()
                     DispatchQueue.main.async {
                         animationCompletion()
+                        self.realmModel.incrementExperience(by: 4)
                     }
                 }
             }

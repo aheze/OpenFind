@@ -55,6 +55,7 @@ extension PhotosSlidesViewController {
                         stringToGradients: self.slidesSearchViewModel.stringToGradients,
                         highlights: newHighlights
                     )
+
                     self.getViewController(for: slidesPhoto.findPhoto.photo)?.highlightsViewModel.highlights = newHighlights
                     self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = newHighlightsSet
                 }
@@ -91,7 +92,7 @@ extension PhotosSlidesViewController {
             guard let self = self else { return }
             self.share(photos: [photo], model: self.model)
         }
-        
+
         model.slidesUpdateFullScreenStateTo = { [weak self] photo in
             guard let self = self else { return }
             self.toggleFullScreen()

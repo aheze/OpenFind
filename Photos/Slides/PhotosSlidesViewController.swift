@@ -111,6 +111,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             let currentIndex = slidesState.getCurrentIndex(),
             let slidesPhoto = slidesState.slidesPhotos[safe: currentIndex]
         {
+            if let highlights = slidesPhoto.findPhoto.highlightsSet?.highlights, highlights.count > 3 {
+                realmModel.incrementExperience(by: 3)
+            }
+            
+            
             model.configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)

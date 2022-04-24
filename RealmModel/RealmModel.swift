@@ -41,6 +41,9 @@ class RealmModel: ObservableObject {
             defaults.set(enteredVersions, forKey: "enteredVersions")
         }
     }
+    
+    /// once this reaches 100, then 200, then 1000, ask for a review
+    @Saved(data.experiencePoints.key) var experiencePoints = data.experiencePoints.value
 
     // MARK: - Defaults
 
@@ -96,6 +99,7 @@ class RealmModel: ObservableObject {
     func listenToDefaults() {
         _launchedBefore.configureValueChanged(with: self)
         _addedListsBefore.configureValueChanged(with: self)
+        _experiencePoints.configureValueChanged(with: self)
 
         _defaultTab.configureValueChanged(with: self)
         _swipeToNavigate.configureValueChanged(with: self)
@@ -136,6 +140,8 @@ class RealmModel: ObservableObject {
 extension RealmModel {
     func resetAllSettings() {
         let data = RealmModelData.self
+        
+        /** don't reset `experiencePoints` */
 
         swipeToNavigate = data.swipeToNavigate.value
         findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value

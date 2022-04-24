@@ -34,6 +34,11 @@ extension SearchViewController {
             realmModel.enteredVersions = []
             showPopover(configuration: .message(icon: "checkmark", text: "Reset Entered Versions"), autoDismiss: true)
         }
+        
+        if text.roughlyEquals("/resetPoints") {
+            realmModel.experiencePoints = 0
+            showPopover(configuration: .message(icon: "checkmark", text: "Reset Experience Points"), autoDismiss: true)
+        }
 
         if text.roughlyEquals("/showAddedListsBefore") {
             showPopover(configuration: .message(icon: "info.circle", text: "Added Lists Before? \(realmModel.addedListsBefore)"), autoDismiss: true)
@@ -50,6 +55,12 @@ extension SearchViewController {
         if text.roughlyEquals("/showEnteredVersions") {
             showPopover(configuration: .message(icon: "info.circle", text: "Entered Versions: \(realmModel.enteredVersions)"), autoDismiss: true)
         }
+        
+        if text.roughlyEquals("/showPoints") {
+            showPopover(configuration: .message(icon: "info.circle", text: "Experience Points: \(realmModel.experiencePoints)"), autoDismiss: true)
+        }
+        
+        
 
         // MARK: - Extras
 

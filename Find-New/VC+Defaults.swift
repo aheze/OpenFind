@@ -6,17 +6,26 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import StoreKit
 import UIKit
 
 extension ViewController {
     func listenToDefaults() {
         self.listen(
-            to: RealmModelData.listsSortBy.key,
-            selector: #selector(self.listsSortByChanged)
+            to: RealmModelData.experiencePoints.key,
+            selector: #selector(self.experiencePointsChanged)
         )
     }
 
-    @objc func listsSortByChanged() {
-        realmModel.container.loadLists()
+    @objc func experiencePointsChanged() {
+        switch realmModel.experiencePoints {
+        case 100, 200, 1000:
+            self.requestRate()
+        default: break
+        }
+    }
+
+    func requestRate() {
+        SKStoreReviewController.requestReview()
     }
 }
