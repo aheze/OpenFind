@@ -200,6 +200,7 @@ struct PagingButtonsView: View {
                 .opacity(nextPage != nil ? 1 : 0)
             }
             .padding(.horizontal, c.sidePadding)
+            .padding(.bottom, 16)
         }
     }
 }

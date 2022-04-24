@@ -16,8 +16,10 @@ struct ResultsIconView: View {
         Button {
             scale(scaleAnimationActive: $scaleAnimationActive)
 
-            model.resultsOn.toggle()
-            model.resultsPressed?()
+            if model.loaded {
+                model.resultsOn.toggle()
+                model.resultsPressed?()
+            }
 
         } label: {
             Text("\(model.displayedResultsCount)")
@@ -35,6 +37,7 @@ struct ResultsIconView: View {
         .onValueChange(of: model.displayedResultsCount) { _, _ in
             UIAccessibility.post(notification: .announcement, argument: voiceOverLabel)
         }
+        .opacity(model.loaded ? 1 : 0.5)
     }
 
     func getLabel() -> String {

@@ -32,6 +32,7 @@ struct FlashIconView: View {
         .accessibilityLabel(getVoiceOverLabel())
         .accessibilityHint(getVoiceOverHint())
         .disabled(!isEnabled)
+        .opacity(model.loaded ? 1 : 0.5)
     }
 
     func getVoiceOverLabel() -> String {

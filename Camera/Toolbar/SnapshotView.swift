@@ -61,6 +61,7 @@ struct SnapshotView: View {
         .accessibilityLabel("Save to photos.")
         .accessibilityHint("Save photo to the photo library.")
         .disabled(!isEnabled)
+        .opacity(model.loaded ? 1 : 0.5)
     }
     
     func getVoiceOverHint() -> String {
