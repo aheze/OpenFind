@@ -11,7 +11,7 @@ import SwiftUI
 
 extension LaunchViewController {
     func enter() {
-        animateSceneForEnter()
+        self.animateSceneForEnter()
      
         withAnimation(
             .spring(
@@ -60,16 +60,26 @@ extension LaunchViewController {
             
             /// make launch view transparent when the camera is right next to the tiles
             DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterAfterDuration * 0.77) {
-                self.entering()
+                self.entering?()
                 UIView.animate(withDuration: 0.15) {
                     self.view.backgroundColor = .clear
                 }
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterAfterDuration + 0.1) {
+                self.removeARView()
                 /// remove view
-                self.done()
+                self.done?()
             }
         }
+    }
+    
+    func removeARView() {
+        self.sceneView?.session.pause()
+        self.sceneView?.session.delegate = nil
+        self.sceneView?.scene.anchors.removeAll()
+        self.sceneView?.removeFromSuperview()
+        self.sceneView?.window?.resignKey()
+        self.sceneView = nil
     }
 }

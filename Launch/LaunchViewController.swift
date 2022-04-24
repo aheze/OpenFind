@@ -13,23 +13,22 @@ import SwiftUI
 class LaunchViewController: UIViewController {
     var model: LaunchViewModel
 
-    
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var activityIndicatorTopC: NSLayoutConstraint!
-    
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var activityIndicatorTopC: NSLayoutConstraint!
+
     @IBOutlet var sceneContainer: UIView!
-    lazy var sceneView = ARView()
+    lazy var sceneView: ARView? = ARView()
     var baseEntity: ModelEntity?
     var camera: PerspectiveCamera?
 
     /// for SwiftUI, respects safe area
     @IBOutlet var contentContainer: UIView!
 
-    var entering: () -> Void /// called when just about to show
-    var done: () -> Void
+    var entering: (() -> Void)? /// called when just about to show
+    var done: (() -> Void)?
 
-    static func make(model: LaunchViewModel, entering: @escaping () -> Void, done: @escaping () -> Void) -> LaunchViewController {
+    static func make(model: LaunchViewModel, entering: (() -> Void)?, done: (() -> Void)?) -> LaunchViewController {
         let storyboard = UIStoryboard(name: "LaunchContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "LaunchViewController") { coder in
             LaunchViewController(
@@ -42,7 +41,7 @@ class LaunchViewController: UIViewController {
         return viewController
     }
 
-    init?(coder: NSCoder, model: LaunchViewModel, entering: @escaping () -> Void, done: @escaping () -> Void) {
+    init?(coder: NSCoder, model: LaunchViewModel, entering: (() -> Void)?, done: (() -> Void)?) {
         self.model = model
         self.entering = entering
         self.done = done
@@ -55,9 +54,10 @@ class LaunchViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         sceneContainer.layoutIfNeeded()
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

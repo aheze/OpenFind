@@ -14,6 +14,7 @@ extension LaunchViewController {
     func setupScene() {
         _ = sceneView
 
+        guard let sceneView = sceneView else { return }
         sceneView.cameraMode = .nonAR
         sceneView.environment.background = .color(.clear)
         sceneContainer.addSubview(sceneView)

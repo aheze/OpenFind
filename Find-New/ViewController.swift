@@ -44,13 +44,7 @@ class ViewController: UIViewController {
         realmModel: realmModel
     )
 
-    lazy var launchViewController = LaunchViewController.make(model: launchViewModel) { [weak self] in
-        guard let self = self else { return }
-        self.onboardingEntering()
-    } done: { [weak self] in
-        guard let self = self else { return }
-        self.onboardingDone()
-    }
+    var launchViewController: LaunchViewController?
 
     /// loading this in `viewDidLoad` will cascade and load everything else
     lazy var tabController: TabBarController = {
@@ -129,7 +123,15 @@ class ViewController: UIViewController {
     func loadOnboarding() {
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
 
-        _ = launchViewController
+        self.launchViewController = LaunchViewController.make(model: launchViewModel) { [weak self] in
+            guard let self = self else { return }
+            self.onboardingEntering()
+        } done: { [weak self] in
+            guard let self = self else { return }
+            self.onboardingDone()
+        }
+        
+        guard let launchViewController = launchViewController else { return }
         addChildViewController(launchViewController, in: view)
         view.bringSubviewToFront(launchViewController.view)
     }
@@ -142,6 +144,7 @@ class ViewController: UIViewController {
     }
 
     func onboardingDone() {
+        guard let launchViewController = launchViewController else { return }
         if !realmModel.launchedBefore {
             realmModel.addSampleLists()
         }
@@ -149,6 +152,7 @@ class ViewController: UIViewController {
         realmModel.entered()
         AppDelegate.AppUtility.lockOrientation(.all)
         removeChildViewController(launchViewController)
+        self.launchViewController = nil
         startApp()
     }
 
