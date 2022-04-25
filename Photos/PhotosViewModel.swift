@@ -219,7 +219,7 @@ class PhotosViewModel: ObservableObject {
             case .downloadingFromCloud:
                 return "Scanning may be slightly slower depending on your internet speed."
             case .photosFailedToScanBecauseInCloud:
-                return "Some of your photos are stored in iCloud. To scan them, connect to the internet and download them to your device."
+                return "This could happen if you're using iCloud photos. To scan these photos, connect to the internet and download them to your device."
             }
         }
         

@@ -118,8 +118,6 @@ extension PhotosViewModel {
                     await photoScanned(photo: photo, sentences: sentences, visionOptions: visionOptions, inBatch: inBatch)
                 }
             } else {
-                print("skip!!!")
-
                 await photoFailedToScan(photo: photo, inBatch: inBatch)
             }
         }

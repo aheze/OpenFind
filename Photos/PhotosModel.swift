@@ -115,7 +115,6 @@ struct PhotosResultsState {
 struct FindPhoto: Hashable {
     var id: UUID
     var photo: Photo
-    var fullImage: UIImage?
 
     /// results (an array of highlights)
     var highlightsSet: HighlightsSet?

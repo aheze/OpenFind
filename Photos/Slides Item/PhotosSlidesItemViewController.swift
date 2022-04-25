@@ -86,7 +86,6 @@ class PhotosSlidesItemViewController: UIViewController {
         scrollZoomController.imageView.image = nil
         model.getFullImage(from: findPhoto.photo.asset) { [weak self] image in
             guard let self = self else { return }
-            self.findPhoto.fullImage = image
             self.scrollZoomController.imageView.image = image
         }
     }

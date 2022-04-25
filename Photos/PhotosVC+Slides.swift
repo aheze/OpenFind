@@ -81,10 +81,6 @@ extension PhotosViewController {
 
             /// update the transition with the new image.
             self.model.imageUpdatedWhenPresentingSlides?(fullImage)
-
-            if let index = self.model.slidesState?.getFindPhotoIndex(findPhoto: findPhoto) {
-                self.model.slidesState?.slidesPhotos[index].findPhoto.fullImage = fullImage
-            }
         }
 
         /// update the search view model

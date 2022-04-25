@@ -94,20 +94,31 @@ struct PhotosScanningProgressView: View {
             )
             .overlay(
                 VStack {
-                    switch model.scanningIconState {
-                    case .scanning:
-                        EmptyView()
-                    case .done:
-                        Image(systemName: "checkmark")
-                            .transition(
-                                .asymmetric(
-                                    insertion: .move(edge: .bottom),
-                                    removal: .move(edge: .top)
+                    if model.notes.isEmpty {
+                        switch model.scanningIconState {
+                        case .scanning:
+                            EmptyView()
+                        case .done:
+                            Image(systemName: "checkmark")
+                                .transition(
+                                    .asymmetric(
+                                        insertion: .move(edge: .bottom),
+                                        removal: .move(edge: .top)
+                                    )
+                                    .combined(with: .opacity)
                                 )
-                                .combined(with: .opacity)
-                            )
-                    case .paused:
-                        Image(systemName: "pause.fill")
+                        case .paused:
+                            Image(systemName: "pause.fill")
+                                .transition(
+                                    .asymmetric(
+                                        insertion: .move(edge: .bottom),
+                                        removal: .move(edge: .top)
+                                    )
+                                    .combined(with: .opacity)
+                                )
+                        }
+                    } else {
+                        Image(systemName: "exclamationmark")
                             .transition(
                                 .asymmetric(
                                     insertion: .move(edge: .bottom),
