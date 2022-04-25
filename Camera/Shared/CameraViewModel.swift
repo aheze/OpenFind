@@ -15,10 +15,10 @@ class CameraViewModel: ObservableObject {
     
     @Published var toolbarState = ToolbarState.inTabBar
     
-    @Published var actualResultsCount = 0
+    @Published var actualResultsCount = ResultsCount.noTextEntered
     
     /// this will be slightly delayed/debounced
-    @Published var displayedResultsCount = 0
+    @Published var displayedResultsCount = ResultsCount.noTextEntered
     
     @Published var snapshotState = SnapshotState.inactive
  

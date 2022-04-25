@@ -131,7 +131,7 @@ class ViewController: UIViewController {
     @IBAction func purpleButtonPressed(_ sender: Any) {
         let model = CameraViewModel()
         var popover = Popover(attributes: .init()) {
-            CameraStatusView(model: model)
+            CameraStatusView(model: model, searchViewModel: SearchViewModel())
         }
         
         popover.attributes.sourceFrame = { [weak purpleButton] in purpleButton.windowFrame() }

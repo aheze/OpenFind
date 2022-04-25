@@ -40,6 +40,7 @@ struct CameraStatus {
 
 struct CameraStatusView: View {
     @ObservedObject var model: CameraViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
 
     var body: some View {
         let status = getStatus()
@@ -61,6 +62,7 @@ struct CameraStatusView: View {
                         + Text(status.secondaryDescription ?? "")
                         .foregroundColor(.white.opacity(0.5))
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(CameraStatusConstants.descriptionFont.font)
                 .padding(CameraStatusConstants.descriptionInsets)
             }
@@ -94,8 +96,17 @@ struct CameraStatusView: View {
 
     func getStatus() -> CameraStatus {
         var status = CameraStatus()
+
         if model.shutterOn {
             status.title = "\(model.displayedResultsCount) Results"
+
+            if case .number(let count) = model.displayedResultsCount {
+                if count == 1 {
+                    status.title = "\(count) Result"
+                } else {
+                    status.title = "\(count) Results"
+                }
+            }
 
             if let pausedImage = model.pausedImage {
                 if pausedImage.dateScanned != nil {
@@ -108,8 +119,17 @@ struct CameraStatusView: View {
                 }
             }
         } else {
-            if model.livePreviewScanning {
-                status.title = "\(model.displayedResultsCount) Results"
+            if searchViewModel.isEmpty {
+                status.title = "Start Finding!"
+                status.description = "Enter text in the search bar."
+                status.secondaryDescription = "When Find detects results, this popup will update with more information."
+            } else if model.livePreviewScanning, case .number(let count) = model.displayedResultsCount {
+                if count == 1 {
+                    status.title = "\(count) Result"
+                } else {
+                    status.title = "\(count) Results"
+                }
+
                 status.description = "Find is currently in Live Preview mode."
                 status.secondaryDescription = "Tap the shutter to pause and scan."
             } else {

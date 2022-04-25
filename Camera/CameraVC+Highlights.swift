@@ -43,6 +43,6 @@ extension CameraViewController {
     
     /// call this whenever update `highlightsViewModel.highlights`, except when just the colors changed
     func highlightsAdded() {
-        model.actualResultsCount = highlightsViewModel.highlights.count
+        model.actualResultsCount = .number(highlightsViewModel.highlights.count)
     }
 }

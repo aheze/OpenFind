@@ -13,7 +13,7 @@ extension CameraViewController {
     func presentStatusView() {
         var popover = Popover(attributes: .init()) { [weak self] in
             if let self = self {
-                CameraStatusView(model: self.model)
+                CameraStatusView(model: self.model, searchViewModel: self.searchViewModel)
             }
         }
 

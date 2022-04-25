@@ -24,7 +24,6 @@ class CameraViewController: UIViewController, PageViewController {
     
     var searchViewModel = SearchViewModel(configuration: .camera)
     var highlightsViewModel = HighlightsViewModel()
-    var messagesViewModel = CameraMessagesViewModel()
     
     @IBOutlet var logoImageView: UIImageView!
 

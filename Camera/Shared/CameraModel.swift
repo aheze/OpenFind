@@ -40,6 +40,12 @@ enum SnapshotState {
     case saved
 }
 
+enum ResultsCount: Equatable {
+    case noTextEntered
+    case number(Int)
+    case paused
+}
+
 
 enum ToolbarState {
     case inTabBar
