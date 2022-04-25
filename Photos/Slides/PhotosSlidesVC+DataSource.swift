@@ -45,6 +45,7 @@ extension PhotosSlidesViewController {
             viewController.findPhoto = slidesPhoto.findPhoto
             viewController.loadViewIfNeeded()
             viewController.reloadImage()
+
             photoSlidesViewController = viewController
         } else {
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)

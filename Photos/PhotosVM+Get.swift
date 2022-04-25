@@ -68,4 +68,18 @@ extension PhotosViewModel {
             completion?(thumbnail)
         }
     }
+    
+    /// closure-based for returning multiple times
+    func getFullImage(from asset: PHAsset, completion: @escaping ((UIImage?) -> Void)) {
+        let options = PHImageRequestOptions()
+        options.isNetworkAccessAllowed = true
+        imageManager.requestImage(
+            for: asset,
+            targetSize: .zero,
+            contentMode: .aspectFit,
+            options: options
+        ) { image, _ in
+            completion(image)
+        }
+    }
 }
