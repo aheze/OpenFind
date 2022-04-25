@@ -24,6 +24,12 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
         if let containerView = getCurrentItemContainerView() {
             containerView.alpha = 1
         }
+        if let toolbarContainer = getCurrentItemToolbarContainer() {
+            toolbarContainer.alpha = 0
+            UIView.animate(withDuration: 0.4) {
+                toolbarContainer.alpha = 1
+            }
+        }
     }
     
     func referenceImage(type: PhotoTransitionAnimatorType) -> UIImage? {
@@ -59,7 +65,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     
     func getCurrentItemViewController() -> PhotosSlidesItemViewController? {
         if let photo = model.slidesState?.currentPhoto, let viewController = self.getViewController(for: photo) {
-            return viewController   
+            return viewController
         }
         return nil
     }
@@ -79,6 +85,16 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
             let imageView = viewController.scrollZoomController.imageView
         {
             return imageView
+        }
+        return nil
+    }
+    
+    func getCurrentItemToolbarContainer() -> UIView? {
+        if
+            let viewController = getCurrentItemViewController(),
+            let toolbarContainer = viewController.toolbarContainer
+        {
+            return toolbarContainer
         }
         return nil
     }

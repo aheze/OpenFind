@@ -354,7 +354,30 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnc-h5-EGj">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zre-cQ-6zR">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6w-mM-Mfw">
+                                        <rect key="frame" x="298" y="746" width="100" height="100"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="CEi-3Y-054"/>
+                                            <constraint firstAttribute="height" constant="100" id="Kkz-Ps-tM4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="JoA-3v-TLd"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="JoA-3v-TLd" firstAttribute="bottom" secondItem="r6w-mM-Mfw" secondAttribute="bottom" constant="16" id="C4O-IO-faX"/>
+                                    <constraint firstItem="JoA-3v-TLd" firstAttribute="trailing" secondItem="r6w-mM-Mfw" secondAttribute="trailing" constant="16" id="HyZ-4E-aEu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zre-cQ-6zR" secondAttribute="trailing" id="JT4-In-wmd"/>
+                                    <constraint firstItem="Zre-cQ-6zR" firstAttribute="leading" secondItem="nnc-h5-EGj" secondAttribute="leading" id="Zze-vE-pQW"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zre-cQ-6zR" secondAttribute="bottom" id="dOI-Vh-2vQ"/>
+                                    <constraint firstItem="Zre-cQ-6zR" firstAttribute="top" secondItem="nnc-h5-EGj" secondAttribute="top" id="vzY-Rh-hIh"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="stP-0T-jgx"/>
@@ -367,7 +390,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="containerView" destination="nnc-h5-EGj" id="Fdb-ke-33o"/>
+                        <outlet property="containerView" destination="nnc-h5-EGj" id="LWU-D3-inU"/>
+                        <outlet property="contentView" destination="Zre-cQ-6zR" id="uOC-WN-3HT"/>
+                        <outlet property="toolbarContainer" destination="r6w-mM-Mfw" id="lcu-DE-eaF"/>
+                        <outlet property="toolbarContainerHeightC" destination="Kkz-Ps-tM4" id="dy2-bj-IJJ"/>
+                        <outlet property="toolbarContainerWidthC" destination="CEi-3Y-054" id="x3k-cF-dx1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hA-vz-uvn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

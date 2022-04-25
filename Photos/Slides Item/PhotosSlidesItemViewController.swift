@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-import UIKit
+import SwiftUI
 
 class PhotosSlidesItemViewController: UIViewController {
     var model: PhotosViewModel
@@ -30,6 +30,10 @@ class PhotosSlidesItemViewController: UIViewController {
     var imageFrame = CGRect.zero
     
     @IBOutlet var containerView: UIView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet var toolbarContainer: UIView!
+    @IBOutlet var toolbarContainerWidthC: NSLayoutConstraint!
+    @IBOutlet var toolbarContainerHeightC: NSLayoutConstraint!
     
     init?(
         coder: NSCoder,
@@ -53,8 +57,9 @@ class PhotosSlidesItemViewController: UIViewController {
         
         _ = scrollZoomController
         _ = highlightsViewController
-        addChildViewController(scrollZoomController, in: containerView)
+        addChildViewController(scrollZoomController, in: contentView)
         addHighlightsViewController()
+        addToolbar()
         reloadImage()
         
         view.backgroundColor = .clear
@@ -112,6 +117,18 @@ class PhotosSlidesItemViewController: UIViewController {
 }
 
 extension PhotosSlidesItemViewController {
+    func addToolbar() {
+        let contentView = PhotosSlidesItemToolbarView(model: model) { [weak self] size in
+            guard let self = self else { return }
+            self.toolbarContainerWidthC.constant = size.width
+            self.toolbarContainerHeightC.constant = size.height
+        }
+        let hostingController = UIHostingController(rootView: contentView)
+        addChildViewController(hostingController, in: toolbarContainer)
+        toolbarContainer.backgroundColor = .clear
+        hostingController.view.backgroundColor = .clear
+    }
+
     func addHighlightsViewController() {
         /// Add Child View Controller
         scrollZoomController.addChild(highlightsViewController)

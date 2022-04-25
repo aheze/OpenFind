@@ -2391,6 +2391,10 @@
 		3CD7063A27A3842200B446D7 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7060F27A11E6D00B446D7 /* Icons.swift */; };
 		3CD706FC27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */; };
 		3CD706FE27A3925200B446D7 /* ListsDetailVC+IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */; };
+		3CD947E1281765E30080FA8D /* PhotosTextOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD947E0281765E30080FA8D /* PhotosTextOverlayView.swift */; };
+		3CD947E2281765E30080FA8D /* PhotosTextOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD947E0281765E30080FA8D /* PhotosTextOverlayView.swift */; };
+		3CD947E4281769170080FA8D /* PhotosSlidesItemToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD947E3281769170080FA8D /* PhotosSlidesItemToolbarView.swift */; };
+		3CD947E5281769170080FA8D /* PhotosSlidesItemToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD947E3281769170080FA8D /* PhotosSlidesItemToolbarView.swift */; };
 		3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */; };
 		3CDAF25A27F2336300467B31 /* List+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAF25827F2335700467B31 /* List+Share.swift */; };
 		3CDAF25B27F2336300467B31 /* List+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAF25827F2335700467B31 /* List+Share.swift */; };
@@ -4143,6 +4147,8 @@
 		3CD7061127A1BCC800B446D7 /* IconPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerController.swift; sourceTree = "<group>"; };
 		3CD706FB27A3921600B446D7 /* ListsDetailVC+ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+ColorPicker.swift"; sourceTree = "<group>"; };
 		3CD706FD27A3925200B446D7 /* ListsDetailVC+IconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+IconPicker.swift"; sourceTree = "<group>"; };
+		3CD947E0281765E30080FA8D /* PhotosTextOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTextOverlayView.swift; sourceTree = "<group>"; };
+		3CD947E3281769170080FA8D /* PhotosSlidesItemToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesItemToolbarView.swift; sourceTree = "<group>"; };
 		3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFindViewController.swift; sourceTree = "<group>"; };
 		3CDAF25827F2335700467B31 /* List+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Share.swift"; sourceTree = "<group>"; };
 		3CDD942727C0583600D3EA1A /* PhotosSlidesToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesToolbarView.swift; sourceTree = "<group>"; };
@@ -4601,6 +4607,7 @@
 				3C1A2C1D27E94A6C00B3D065 /* PhotosSlidesVC+Info.swift */,
 				3C1A2C1927E9010C00B3D065 /* PhotosSlidesInfoView.swift */,
 				3C1A2C1627E9010500B3D065 /* PhotosSlidesInfoViewController.swift */,
+				3CD947E0281765E30080FA8D /* PhotosTextOverlayView.swift */,
 			);
 			path = "Slides Views";
 			sourceTree = "<group>";
@@ -5201,43 +5208,10 @@
 				3C4D39E9274766580010FD68 /* PhotosContent.storyboard */,
 				3C1D179127BCAEBA00E82B8B /* PhotosConstants.swift */,
 				3C0B5E6927BABE1D00EC881E /* PhotosModel.swift */,
-				3C9314E827B86E84009E5B6E /* PhotosViewModel.swift */,
-				3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */,
-				3CAD45EC28009A2700B0A0A9 /* PhotosVM+AddPhotos.swift */,
-				3C7A440427EE464800DFF76F /* PhotosVM+Get.swift */,
-				3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */,
-				3CB8C32827C34CDF000AA3B9 /* PhotosVM+Scanning.swift */,
-				3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */,
-				3C9234A027E2EB1B0055061A /* PhotosVM+AddSentences.swift */,
-				3C6EAA6D2803B75D00B036AD /* PhotosVM+Actions.swift */,
-				3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */,
-				3C0B12C727F025110013688E /* PhotosVM+Share.swift */,
-				3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */,
 				3C4D39EC274766580010FD68 /* PhotosController.swift */,
-				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
-				3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */,
-				3C1D178827BCA4A300E82B8B /* PhotosVC+Listen.swift */,
-				3C6E9F4C28146B1900FAD6A9 /* PhotosVC+Defaults.swift */,
-				3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */,
-				3C9234A327E454370055061A /* PhotosVC+Update.swift */,
-				3CAD45E82800984000B0A0A9 /* PhotosVC+Observe.swift */,
-				3C1D178E27BCACAC00E82B8B /* PhotosVC+PHAssetCaching.swift */,
-				3C9314F227B8EA50009E5B6E /* PhotosVC+DataSource.swift */,
-				3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */,
-				3C6E9F46281464F100FAD6A9 /* PhotosVC+Keyboard.swift */,
-				3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */,
-				3C9314EB27B86F2B009E5B6E /* PhotosVC+Lifecycle.swift */,
-				3C17B8E627C9ACB700B55E97 /* PhotosVC+NavigationBar.swift */,
-				3CCE2B48279D21C900F72351 /* PhotosVC+Selection.swift */,
-				3CBB318727BD51FF00F25F6A /* PhotosVC+Slides.swift */,
-				3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */,
-				3C7A440D27EF746F00DFF76F /* PhotosVC+EmptyContent.swift */,
-				3C71EF9D27BF5C2E00F0C0A0 /* PhotosVC+Transition.swift */,
-				3C0B5E6627BABCEA00EC881E /* PhotosCollectionFlowLayout.swift */,
-				3C1D178B27BCA50C00E82B8B /* PhotosCells.swift */,
-				3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */,
-				3C875E0B27EB690700EC35ED /* PhotosSelectionToolbarView.swift */,
-				3C7A440A27EF734900DFF76F /* PhotosEmptyContentView.swift */,
+				3CD947DD2817659A0080FA8D /* View Model */,
+				3CD947DE281765A40080FA8D /* View Controller */,
+				3CD947DF281765B50080FA8D /* Views */,
 				3CAE64E927C6AA5F009E8564 /* Results */,
 				3CDD943A27C05DA600D3EA1A /* Scanning */,
 				3CBB318A27BD522A00F25F6A /* Slides */,
@@ -6067,6 +6041,7 @@
 			isa = PBXGroup;
 			children = (
 				3CBB31A127BD6E9200F25F6A /* PhotosSlidesItemViewController.swift */,
+				3CD947E3281769170080FA8D /* PhotosSlidesItemToolbarView.swift */,
 			);
 			path = "Slides Item";
 			sourceTree = "<group>";
@@ -6184,6 +6159,63 @@
 				3C08EB77279CBD8100971D60 /* ColorPickerIcon.swift */,
 			);
 			path = "Color Picker";
+			sourceTree = "<group>";
+		};
+		3CD947DD2817659A0080FA8D /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				3C9314E827B86E84009E5B6E /* PhotosViewModel.swift */,
+				3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */,
+				3CAD45EC28009A2700B0A0A9 /* PhotosVM+AddPhotos.swift */,
+				3C7A440427EE464800DFF76F /* PhotosVM+Get.swift */,
+				3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */,
+				3CB8C32827C34CDF000AA3B9 /* PhotosVM+Scanning.swift */,
+				3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */,
+				3C9234A027E2EB1B0055061A /* PhotosVM+AddSentences.swift */,
+				3C6EAA6D2803B75D00B036AD /* PhotosVM+Actions.swift */,
+				3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */,
+				3C0B12C727F025110013688E /* PhotosVM+Share.swift */,
+				3C443F8027DDDA5A0050A0AB /* PhotosVM+Update.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		3CD947DE281765A40080FA8D /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C4D39ED274766580010FD68 /* PhotosViewController.swift */,
+				3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */,
+				3C1D178827BCA4A300E82B8B /* PhotosVC+Listen.swift */,
+				3C6E9F4C28146B1900FAD6A9 /* PhotosVC+Defaults.swift */,
+				3CAE64F227C6AE2A009E8564 /* PhotosVC+Find.swift */,
+				3C9234A327E454370055061A /* PhotosVC+Update.swift */,
+				3CAD45E82800984000B0A0A9 /* PhotosVC+Observe.swift */,
+				3C1D178E27BCACAC00E82B8B /* PhotosVC+PHAssetCaching.swift */,
+				3C9314F227B8EA50009E5B6E /* PhotosVC+DataSource.swift */,
+				3C9314F427B8EA56009E5B6E /* PhotosVC+Delegate.swift */,
+				3C6E9F46281464F100FAD6A9 /* PhotosVC+Keyboard.swift */,
+				3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */,
+				3C9314EB27B86F2B009E5B6E /* PhotosVC+Lifecycle.swift */,
+				3C17B8E627C9ACB700B55E97 /* PhotosVC+NavigationBar.swift */,
+				3CCE2B48279D21C900F72351 /* PhotosVC+Selection.swift */,
+				3CBB318727BD51FF00F25F6A /* PhotosVC+Slides.swift */,
+				3C443F6827DDB2CE0050A0AB /* PhotosVC+Filters.swift */,
+				3C7A440D27EF746F00DFF76F /* PhotosVC+EmptyContent.swift */,
+				3C71EF9D27BF5C2E00F0C0A0 /* PhotosVC+Transition.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		3CD947DF281765B50080FA8D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C0B5E6627BABCEA00EC881E /* PhotosCollectionFlowLayout.swift */,
+				3C1D178B27BCA50C00E82B8B /* PhotosCells.swift */,
+				3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */,
+				3C875E0B27EB690700EC35ED /* PhotosSelectionToolbarView.swift */,
+				3C7A440A27EF734900DFF76F /* PhotosEmptyContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3CDA84F325B250AF00726F91 /* Finding */ = {
@@ -8764,6 +8796,7 @@
 				3C7A440927EECEA100DFF76F /* PhotosVC+ResultsHeader.swift in Sources */,
 				3CFD602C278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C0B5E7027BAC9B700EC881E /* PhotosVC+Setup.swift in Sources */,
+				3CD947E2281765E30080FA8D /* PhotosTextOverlayView.swift in Sources */,
 				3CBB318D27BD526200F25F6A /* ScrollZoomHookViewController.swift in Sources */,
 				3CFC91C527E188C4006290CD /* ResultsHeaderView.swift in Sources */,
 				3CFCE8A527CA9D5F000624D2 /* Utilities+CGPoint.swift in Sources */,
@@ -8798,6 +8831,7 @@
 				3C443F1427DD90790050A0AB /* Word.swift in Sources */,
 				3C9234A527E454370055061A /* PhotosVC+Update.swift in Sources */,
 				3CF15B2F27FF8AEA00D51E9B /* SettingsViewController.swift in Sources */,
+				3CD947E5281769170080FA8D /* PhotosSlidesItemToolbarView.swift in Sources */,
 				3CF15B1527FF8AEA00D51E9B /* SettingsController+Listen.swift in Sources */,
 				3C9234AB27E5734E0055061A /* SearchVM+Get.swift in Sources */,
 				3CF15B2227FF8AEA00D51E9B /* SettingsFooter.swift in Sources */,
@@ -9539,6 +9573,7 @@
 				3C6C73452781944B00E039F0 /* TabViewModel.swift in Sources */,
 				3C436248280FD6BB002DD153 /* PhotosSlidesVoiceOverToolbar.swift in Sources */,
 				3CC0D11F280A8755004E7016 /* ListsVC+Defaults.swift in Sources */,
+				3CD947E4281769170080FA8D /* PhotosSlidesItemToolbarView.swift in Sources */,
 				3C1D178727BBF9AC00E82B8B /* PhotosVM+Sort.swift in Sources */,
 				3CAE64F127C6AAE5009E8564 /* PhotosVC+ResultsDataSource.swift in Sources */,
 				3C06260127C69FD20078E66F /* PhotosVC+Results.swift in Sources */,
@@ -9564,6 +9599,7 @@
 				3C6C736D2781946200E039F0 /* CameraVC+Static.swift in Sources */,
 				3C443F4E27DD90E90050A0AB /* GeneralExtensions.swift in Sources */,
 				3C5B36BA27FEAEDE00801FEE /* SettingsLink.swift in Sources */,
+				3CD947E1281765E30080FA8D /* PhotosTextOverlayView.swift in Sources */,
 				3C5B36A927FEAEDE00801FEE /* SD+Misc.swift in Sources */,
 				3C6C7421278194A100E039F0 /* TipView.swift in Sources */,
 				3C798EBD27F68F7A007BF68D /* RealmContainer.swift in Sources */,
