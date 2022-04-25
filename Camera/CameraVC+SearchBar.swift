@@ -20,15 +20,20 @@ extension CameraViewController {
             if textChanged {
                 self.highlightsViewModel.setUpToDate(false)
                 
-                /// animate the highlight frames instead if paused
-                if
-                    self.model.shutterOn,
-                    let sentences = self.model.pausedImage?.sentences
-                {
-                    let highlights = sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients, realmModel: self.realmModel)
-                    DispatchQueue.main.async {
-                        self.highlightsViewModel.update(with: highlights, replace: true)
-                        self.highlightsAdded()
+                if self.searchViewModel.isEmpty {
+                    self.highlightsViewModel.highlights = []
+                    self.highlightsAdded()
+                } else {
+                    /// animate the highlight frames instead if paused
+                    if
+                        self.model.shutterOn,
+                        let sentences = self.model.pausedImage?.sentences
+                    {
+                        let highlights = sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients, realmModel: self.realmModel)
+                        DispatchQueue.main.async {
+                            self.highlightsViewModel.update(with: highlights, replace: true)
+                            self.highlightsAdded()
+                        }
                     }
                 }
             } else {

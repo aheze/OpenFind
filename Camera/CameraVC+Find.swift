@@ -30,6 +30,7 @@ extension CameraViewController {
         let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients, realmModel: realmModel)
 
         DispatchQueue.main.async {
+            guard !self.searchViewModel.isEmpty else { return }
             self.highlightsViewModel.update(with: highlights, replace: false)
             self.highlightsAdded()
             self.createLivePreviewEvent(sentences: sentences, highlights: highlights)
