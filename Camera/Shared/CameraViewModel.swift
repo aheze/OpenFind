@@ -18,7 +18,7 @@ class CameraViewModel: ObservableObject {
     @Published var actualResultsCount = ResultsCount.noTextEntered
     
     /// this will be slightly delayed/debounced
-    @Published var displayedResultsCount = ResultsCount.noTextEntered
+    @Published private(set) var displayedResultsCount = ResultsCount.noTextEntered
     
     @Published var snapshotState = SnapshotState.inactive
  

@@ -14,10 +14,10 @@ struct PhotosScanningHeader: View {
         HStack(spacing: 12) {
             PhotosScanningProgressView(
                 model: model,
-                lineWidth: 3,
+                lineWidth: 4,
                 iconFont: .preferredCustomFont(forTextStyle: .body, weight: PhotosConstants.scanningCheckmarkWeight)
             )
-            .frame(width: 32, height: 32)
+            .frame(width: 26, height: 26)
 
             let time = model.getRemainingTime()
 
