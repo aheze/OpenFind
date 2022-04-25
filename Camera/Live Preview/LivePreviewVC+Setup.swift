@@ -19,7 +19,7 @@ extension LivePreviewViewController {
             let hostingController = UIHostingController(rootView: cameraNotFoundView)
             addChildViewController(hostingController, in: view)
             view.bringSubviewToFront(hostingController.view)
-            
+
             loaded?()
         }
     }
@@ -54,9 +54,8 @@ extension LivePreviewViewController {
         if session.canAddOutput(photoDataOutput) {
             session.addOutput(photoDataOutput)
         }
-        
-        print("first: \(session.connections.first)''")
-        session.connections.first?.preferredVideoStabilizationMode = .cinematicExtended
+
+//        session.connections.first?.preferredVideoStabilizationMode = .cinematicExtended
 
         DispatchQueue.main.async {
             self.addSession()

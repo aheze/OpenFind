@@ -18,6 +18,10 @@ extension CameraViewController {
             guard let self = self else { return }
             
             if textChanged {
+                if self.searchViewModel.isEmpty {
+                    self.model.displayedResultsCount = .noTextEntered
+                }
+                
                 self.highlightsViewModel.setUpToDate(false)
                 
                 /// animate the highlight frames instead if paused

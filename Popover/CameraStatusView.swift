@@ -97,6 +97,13 @@ struct CameraStatusView: View {
     func getStatus() -> CameraStatus {
         var status = CameraStatus()
 
+        guard !searchViewModel.isEmpty else {
+            status.title = "Start Finding!"
+            status.description = "Enter text in the search bar."
+            status.secondaryDescription = "When Find detects results, this popup will update with more information."
+            return status
+        }
+
         if model.shutterOn {
             status.title = "\(model.displayedResultsCount) Results"
 
@@ -119,11 +126,7 @@ struct CameraStatusView: View {
                 }
             }
         } else {
-            if searchViewModel.isEmpty {
-                status.title = "Start Finding!"
-                status.description = "Enter text in the search bar."
-                status.secondaryDescription = "When Find detects results, this popup will update with more information."
-            } else if model.livePreviewScanning, case .number(let count) = model.displayedResultsCount {
+            if model.livePreviewScanning, case .number(let count) = model.displayedResultsCount {
                 if count == 1 {
                     status.title = "\(count) Result"
                 } else {
