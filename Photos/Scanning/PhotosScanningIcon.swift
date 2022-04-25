@@ -33,11 +33,9 @@ struct PhotosScanningIcon: View {
             model.scanningIconTapped?()
         } label: {
             PhotosScanningProgressView(
-                scannedPhotosCount: model.scannedPhotosCount,
-                totalPhotosCount: model.totalPhotosCount,
+                model: model,
                 lineWidth: 2.5,
-                iconFont: .systemFont(ofSize: 9, weight: PhotosConstants.scanningCheckmarkWeight),
-                state: model.scanningIconState
+                iconFont: .systemFont(ofSize: 9, weight: PhotosConstants.scanningCheckmarkWeight)
             )
             .padding(4)
             .padding(.leading, 8)
@@ -49,59 +47,11 @@ struct PhotosScanningIcon: View {
 }
 
 struct PhotosScanningProgressView: View {
-    var scannedPhotosCount: Int
-    var totalPhotosCount: Int
+    @ObservedObject var model: PhotosViewModel
     var lineWidth: CGFloat
     var iconFont: UIFont
-    var state: PhotosScanningIconState
+    var showGradient = false
 
-    var body: some View {
-        Circle()
-            .trim(from: 0, to: getTrimPercentage())
-            .stroke(
-                Color.accent,
-                style: StrokeStyle(
-                    lineWidth: lineWidth,
-                    lineCap: .round
-                )
-            )
-            .animation(.spring(), value: scannedPhotosCount)
-            .background(
-                Circle()
-                    .stroke(
-                        Color.accent.opacity(0.25),
-                        style: StrokeStyle(
-                            lineWidth: lineWidth,
-                            lineCap: .round
-                        )
-                    )
-            )
-            .rotationEffect(.degrees(-90))
-            .overlay(
-                VStack {
-                    if state == .done {
-                        Image(systemName: "checkmark")
-                    } else if state == .paused {
-                        Image(systemName: "pause.fill")
-                    }
-                }
-                .font(Font(iconFont as CTFont))
-                .foregroundColor(.accent)
-            )
-            .accessibilityLabel(state.getDescription())
-    }
-
-    func getTrimPercentage() -> CGFloat {
-        return CGFloat(scannedPhotosCount) / CGFloat(totalPhotosCount)
-    }
-}
-
-struct PhotosScanningGradientProgressView: View {
-    var scannedPhotosCount: Int
-    var totalPhotosCount: Int
-    var lineWidth: CGFloat
-    var iconFont: UIFont
-    var state: PhotosScanningIconState
     @State var color = Colors.accent
 
     var body: some View {
@@ -114,7 +64,7 @@ struct PhotosScanningGradientProgressView: View {
                     lineCap: .round
                 )
             )
-            .animation(.spring(), value: scannedPhotosCount)
+            .animation(.spring(), value: model.scannedPhotosCount)
             .background(
                 Circle()
                     .stroke(
@@ -140,10 +90,14 @@ struct PhotosScanningGradientProgressView: View {
                     )
                     .padding(lineWidth / 2)
                     .opacity(0.5)
+                    .opacity(showGradient ? 1 : 0)
             )
             .overlay(
                 VStack {
-                    if state == .done {
+                    switch model.scanningIconState {
+                    case .scanning:
+                        EmptyView()
+                    case .done:
                         Image(systemName: "checkmark")
                             .transition(
                                 .asymmetric(
@@ -152,7 +106,7 @@ struct PhotosScanningGradientProgressView: View {
                                 )
                                 .combined(with: .opacity)
                             )
-                    } else if state == .paused {
+                    case .paused:
                         Image(systemName: "pause.fill")
                             .transition(
                                 .asymmetric(
@@ -165,12 +119,12 @@ struct PhotosScanningGradientProgressView: View {
                 }
                 .font(Font(iconFont as CTFont))
                 .foregroundColor(.accent)
-                .animation(.spring(), value: state)
+                .animation(.spring(), value: model.scanningIconState)
             )
-            .accessibilityLabel(state.getDescription())
+            .accessibilityLabel(model.scanningIconState.getDescription())
     }
 
     func getTrimPercentage() -> CGFloat {
-        return CGFloat(scannedPhotosCount) / CGFloat(totalPhotosCount)
+        return CGFloat(model.scannedPhotosCount) / CGFloat(model.totalPhotosCount)
     }
 }

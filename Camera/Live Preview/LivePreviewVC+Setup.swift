@@ -54,6 +54,9 @@ extension LivePreviewViewController {
         if session.canAddOutput(photoDataOutput) {
             session.addOutput(photoDataOutput)
         }
+        
+        print("first: \(session.connections.first)''")
+        session.connections.first?.preferredVideoStabilizationMode = .cinematicExtended
 
         DispatchQueue.main.async {
             self.addSession()

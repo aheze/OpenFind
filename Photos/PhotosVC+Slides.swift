@@ -77,7 +77,7 @@ extension PhotosViewController {
 
     func presentSlides(startingAt findPhoto: FindPhoto, with slidesState: PhotosSlidesState) {
         Task {
-            let fullImage = await model.getFullImage(from: findPhoto.photo)
+            let fullImage = await model.getFullImage(from: findPhoto.photo.asset)
 
             /// update the transition with the new image.
             self.model.imageUpdatedWhenPresentingSlides?(fullImage)

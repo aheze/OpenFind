@@ -193,7 +193,7 @@ struct SettingsDynamicPickerPage: View {
     func getDescription() -> String? {
         switch identifier {
         case .primaryRecognitionLanguage:
-            return "Due to its complexity, Chinese does not work in the Camera live preview."
+            return nil /// or warn about Chinese being supported in only paused mode
         case .secondaryRecognitionLanguage:
             return nil
         }

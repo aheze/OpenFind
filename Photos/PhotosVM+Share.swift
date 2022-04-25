@@ -113,14 +113,7 @@ class PhotosSharingDataSource: NSObject, UIActivityItemSource {
         super.init()
 
         if let firstAsset = assets.first {
-            let options = PHImageRequestOptions()
-            model.imageManager.requestImage(
-                for: firstAsset,
-                targetSize: CGSize(width: 200, height: 200),
-                contentMode: .aspectFill,
-                options: options
-            ) { [weak self] image, _ in
-
+            model.getSmallImage(from: firstAsset, targetSize: CGSize(width: 200, height: 200)) { [weak self] image in
                 self?.previewImage = image
             }
         }

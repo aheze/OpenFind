@@ -26,12 +26,11 @@ struct PhotosScanningViewHeader: View {
                 /// Header
                 Container(description: "Find works completely offline, so your photos and other data never leave your phone.") {
                     HStack(spacing: 16) {
-                        PhotosScanningGradientProgressView(
-                            scannedPhotosCount: model.scannedPhotosCount,
-                            totalPhotosCount: model.totalPhotosCount,
+                        PhotosScanningProgressView(
+                            model: model,
                             lineWidth: 10,
                             iconFont: .systemFont(ofSize: 42, weight: PhotosConstants.scanningCheckmarkWeight),
-                            state: model.scanningIconState
+                            showGradient: true
                         )
                         .frame(width: 90, height: 90)
                         .padding(20)
@@ -72,6 +71,39 @@ struct PhotosScanningViewHeader: View {
                         }
                     }
                     .fixedSize(horizontal: false, vertical: true)
+                    .padding(16)
+                    .blueBackground()
+                }
+
+                ForEach(model.notes) { note in
+                    let title = note.getTitle()
+                    let description = note.getDescription()
+                    let icon = note.getIcon()
+
+                    VStack {
+                        VStack(spacing: 6) {
+                            HStack {
+                                Text(title)
+                                    .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .semibold).font)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                                Image(systemName: icon)
+                                    .font(UIFont.preferredFont(forTextStyle: .title3).font)
+                            }
+
+                            Text(description)
+                                .foregroundColor(.accent.opacity(0.75))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+
+                        if note == .photosFailedToScanBecauseInCloud {
+                            PhotosScanningButton(image: nil, title: "Try Again") {
+                                model.removeNote(note)
+                                model.loadAndStartScanning()
+                            }
+                        }
+                    }
+                    .foregroundColor(.accent)
                     .padding(16)
                     .blueBackground()
                 }

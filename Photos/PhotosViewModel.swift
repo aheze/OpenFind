@@ -142,6 +142,9 @@ class PhotosViewModel: ObservableObject {
         }
     }
 
+    /// is iCloud photos
+    @Published var notes = [PhotosNote]()
+
     var scanningIconState: PhotosScanningIconState {
         if photosToScan.isEmpty {
             return .done
@@ -193,5 +196,40 @@ class PhotosViewModel: ObservableObject {
     enum ScanningState {
         case dormant
         case scanningAllPhotos
+    }
+
+    /// errors, warning, notes
+    enum PhotosNote: Identifiable {
+        var id: Self { self }
+
+        case downloadingFromCloud
+        case photosFailedToScanBecauseInCloud
+
+        func getTitle() -> String {
+            switch self {
+            case .downloadingFromCloud:
+                return "Downloading photos from iCloud."
+            case .photosFailedToScanBecauseInCloud:
+                return "Failed to scan some photos."
+            }
+        }
+        
+        func getDescription() -> String {
+            switch self {
+            case .downloadingFromCloud:
+                return "Scanning may be slightly slower depending on your internet speed."
+            case .photosFailedToScanBecauseInCloud:
+                return "Some of your photos are stored in iCloud. To scan them, connect to the internet and download them to your device."
+            }
+        }
+        
+        func getIcon() -> String {
+            switch self {
+            case .downloadingFromCloud:
+                return "icloud"
+            case .photosFailedToScanBecauseInCloud:
+                return "exclamationmark.icloud"
+            }
+        }
     }
 }

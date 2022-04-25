@@ -6,6 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import Photos
 import UIKit
 
 extension IgnoredPhotosViewController {
@@ -30,16 +31,13 @@ extension IgnoredPhotosViewController {
 
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = photo.asset.localIdentifier
-            self.model.imageManager.requestImage(
-                for: photo.asset,
-                targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero,
-                contentMode: .aspectFill,
-                options: nil
-            ) { thumbnail, _ in
-                // UIKit may have recycled this cell by the handler's activation time.
-                // Set the cell's thumbnail image only if it's still showing the same asset.
+
+            self.model.getSmallImage(
+                from: photo.asset,
+                targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero
+            ) { image in
                 if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                    cell.view.imageView.image = thumbnail
+                    cell.view.imageView.image = image
                 }
             }
 

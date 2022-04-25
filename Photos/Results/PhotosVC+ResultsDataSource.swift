@@ -56,16 +56,13 @@ extension PhotosViewController {
 
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
-            self.model.imageManager.requestImage(
-                for: findPhoto.photo.asset,
-                targetSize: self.realmModel.thumbnailSize,
-                contentMode: .aspectFill,
-                options: nil
-            ) { thumbnail, _ in
-                // UIKit may have recycled this cell by the handler's activation time.
-                // Set the cell's thumbnail image only if it's still showing the same asset.
+
+            self.model.getSmallImage(
+                from: findPhoto.photo.asset,
+                targetSize: self.realmModel.thumbnailSize
+            ) { image in
                 if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
-                    cell.view.imageView.image = thumbnail
+                    cell.view.imageView.image = image
                 }
             }
 
@@ -77,7 +74,7 @@ extension PhotosViewController {
             cell.accessibilityLabel = findPhoto.getVoiceoverDescription()
             cell.baseView.alpha = 1
             cell.transform = .identity
-            
+
             /// selection
             let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
             self.configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: selected)

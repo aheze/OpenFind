@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 extension PhotosViewModel {
     /// a photo was just scanned
@@ -40,6 +40,21 @@ extension PhotosViewModel {
         resumeScanning()
     }
 
+    @MainActor func photoFailedToScan(photo: Photo, inBatch: Bool) {
+        addSentences(of: photo, immediately: !inBatch)
+
+        /// if in slides, show alert
+        if !inBatch {
+            Debug.show("Failed to scan photo", message: "Because this photo is stored in iCloud, you must download it to your device first.")
+        }
+
+        /// skip
+        photosToScan = photosToScan.filter { $0 != photo }
+
+        addNote(.photosFailedToScanBecauseInCloud)
+        resumeScanning()
+    }
+
     func startScanning() {
         scanningState = .scanningAllPhotos
         if let lastPhoto = photosToScan.last {
@@ -52,6 +67,9 @@ extension PhotosViewModel {
 
     /// call this after a photo was just scanned
     func resumeScanning() {
+        if photosToScan.isEmpty {
+            self.removeNote(.downloadingFromCloud)
+        }
         if
             shouldResumeScanning(),
             let lastPhoto = photosToScan.last
@@ -70,11 +88,20 @@ extension PhotosViewModel {
         scanningState = .dormant
     }
 
+    /// load photos and start scanning
+    /// call this after "Try Again" when photos are in iCloud and failed to scan
+    func loadAndStartScanning() {
+        Task {
+            await self.loadPhotos()
+            startScanning()
+        }
+    }
+
     /// scan a photo
     /// `inBatch`: scanning all photos. If true, check `scanningState == .scanningAllPhotos`.
     func scanPhoto(_ photo: Photo, findOptions: FindOptions, inBatch: Bool) {
         Task {
-            let image = await getFullImage(from: photo)
+            let image = await getFullImage(from: photo.asset)
             let realmModel = getRealmModel?()
             let languages = await realmModel?.getCurrentRecognitionLanguages(accurateMode: true) ?? [Settings.Values.RecognitionLanguage.english.rawValue]
 
@@ -90,6 +117,10 @@ extension PhotosViewModel {
                 if !inBatch || scanningState == .scanningAllPhotos {
                     await photoScanned(photo: photo, sentences: sentences, visionOptions: visionOptions, inBatch: inBatch)
                 }
+            } else {
+                print("skip!!!")
+
+                await photoFailedToScan(photo: photo, inBatch: inBatch)
             }
         }
     }

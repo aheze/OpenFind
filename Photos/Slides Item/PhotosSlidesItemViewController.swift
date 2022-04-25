@@ -82,11 +82,18 @@ class PhotosSlidesItemViewController: UIViewController {
 
     func reloadImage() {
         imageFrame = getImageFrame()
-        model.getFullImage(from: findPhoto.photo) { [weak self] image in
+        
+        showImage(image: nil)
+        Task.detached { [weak self] in
             guard let self = self else { return }
-            self.findPhoto.fullImage = image
-            self.scrollZoomController.imageView.image = image
+            let image = await self.model.getFullImage(from: self.findPhoto.photo.asset)
+            await self.showImage(image: image)
         }
+    }
+    
+    @MainActor func showImage(image: UIImage?) {
+        findPhoto.fullImage = image
+        scrollZoomController.imageView.image = image
     }
     
     func getImageFrame() -> CGRect {

@@ -31,6 +31,8 @@ extension UIView {
 extension Debug {
     static func show(_ title: String, message: String? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+        let defaultAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(defaultAction)
+        UIApplication.topmostViewController?.present(alertController, animated: true, completion: nil)
     }
 }

@@ -1170,6 +1170,8 @@
 		3C5B379227FF603600801FEE /* CameraVC+Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */; };
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
 		3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5F1FA427121BB200143BDD /* WhatsNewKit */; };
+		3C60162A2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */; };
+		3C60162B2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */; };
 		3C606671274ECCBA000A5BDE /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
 		3C606673274ECCBB000A5BDE /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
 		3C606674274ECCBB000A5BDE /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
@@ -3800,6 +3802,7 @@
 		3C5B377E27FF575100801FEE /* Utilities+UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIWindow.swift"; sourceTree = "<group>"; };
 		3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Flash.swift"; sourceTree = "<group>"; };
 		3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Accessibility.swift"; sourceTree = "<group>"; };
+		3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Notes.swift"; sourceTree = "<group>"; };
 		3C643F1926057806001E6FA1 /* FindClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C643F1B26057806001E6FA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C643F1D26057806001E6FA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -5226,6 +5229,7 @@
 				3C7A440427EE464800DFF76F /* PhotosVM+Get.swift */,
 				3C1D178527BBF9A200E82B8B /* PhotosVM+Sort.swift */,
 				3CB8C32827C34CDF000AA3B9 /* PhotosVM+Scanning.swift */,
+				3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */,
 				3C9234A027E2EB1B0055061A /* PhotosVM+AddSentences.swift */,
 				3C6EAA6D2803B75D00B036AD /* PhotosVM+Actions.swift */,
 				3C7A441027EF791800DFF76F /* PhotosVM+Delete.swift */,
@@ -8660,6 +8664,7 @@
 				3CCE2B1F279D008C00F72351 /* FindIconUIView.swift in Sources */,
 				3C443EAA27DD89830050A0AB /* Highlight.swift in Sources */,
 				3C71EFAC27BFFBBB00F0C0A0 /* PhotosSlidesVC+Gestures.swift in Sources */,
+				3C60162B2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */,
 				3CAE64F327C6AE2A009E8564 /* PhotosVC+Find.swift in Sources */,
 				3C443F7427DDD74A0050A0AB /* Sentence+Find.swift in Sources */,
 				3CB8C30D27C2D0D8000AA3B9 /* Find+Queue.swift in Sources */,
@@ -9385,6 +9390,7 @@
 				3C875E0F27EB7F9900EC35ED /* IgnoredPhotosVC+Selection.swift in Sources */,
 				3C6C7429278194A500E039F0 /* Utilities+Constraints.swift in Sources */,
 				3CE3D4D627DC486E00521735 /* Sentence.swift in Sources */,
+				3C60162A2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */,
 				3C0B5E6D27BAC05900EC881E /* PhotosPermissionsView.swift in Sources */,
 				3CC594F8279F3322001D07DC /* ColorPickerView.swift in Sources */,
 				3C6C7427278194A500E039F0 /* GeneralUtilities.swift in Sources */,

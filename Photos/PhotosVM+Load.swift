@@ -28,6 +28,7 @@ extension PhotosViewModel {
         }
     }
     
+    
     /// Main queue for `@Published`
     @MainActor func reloadAfterLoad() {
         withAnimation {
