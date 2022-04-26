@@ -13,28 +13,11 @@ struct Highlight: Identifiable, Hashable {
     var string = ""
     var colors = [UIColor]()
     var alpha = CGFloat(1)
-    var position = Position()
+    var position = ScannedPosition()
     
     /// State
     var state = State.added
-    
-    struct Position: Equatable {
-        /// the center that it's originally located
-        var originalPoint = CGPoint.zero
-        
-        /// where to rotate around
-        var pivotPoint = CGPoint.zero
-        
-        /// midpoint of the highlight, to the screen. Use this in SwiftUI
-        var center = CGPoint.zero
-        
-        /// dimensions
-        var size = CGSize.zero
-            
-        /// how much to rotate by
-        var angle = CGFloat(0)
-    }
-    
+
     enum State: Equatable {
         case reused
         case added
@@ -54,6 +37,33 @@ struct Highlight: Identifiable, Hashable {
         }
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+struct ScannedPosition: Equatable {
+    /// the center that it's originally located
+    var originalPoint = CGPoint.zero
+    
+    /// where to rotate around
+    var pivotPoint = CGPoint.zero
+    
+    /// midpoint of the highlight, to the screen. Use this in SwiftUI
+    var center = CGPoint.zero
+    
+    /// dimensions
+    var size = CGSize.zero
+        
+    /// how much to rotate by
+    var angle = CGFloat(0)
+}
+
+struct Overlay: Identifiable, Hashable {
+    let id = UUID()
+    var string = ""
+    var position = ScannedPosition()
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

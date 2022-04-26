@@ -13,6 +13,8 @@ class PhotosSlidesItemViewController: UIViewController {
     var realmModel: RealmModel
     var findPhoto: FindPhoto
     
+    var textOverlayViewModel = PhotosTextOverlayViewModel()
+    
     var highlightsViewModel = HighlightsViewModel()
     lazy var scrollZoomController = ScrollZoomViewController.make()
     lazy var highlightsViewController = HighlightsViewController(
@@ -86,6 +88,7 @@ class PhotosSlidesItemViewController: UIViewController {
     }
 
     func reloadImage() {
+        textOverlayViewModel.on = false
         imageFrame = getImageFrame()
         
         scrollZoomController.imageView.image = nil
@@ -118,7 +121,7 @@ class PhotosSlidesItemViewController: UIViewController {
 
 extension PhotosSlidesItemViewController {
     func addToolbar() {
-        let contentView = PhotosSlidesItemToolbarView(model: model) { [weak self] size in
+        let contentView = PhotosSlidesItemToolbarView(model: model, textOverlayViewModel: textOverlayViewModel) { [weak self] size in
             guard let self = self else { return }
             self.toolbarContainerWidthC.constant = size.width
             self.toolbarContainerHeightC.constant = size.height
@@ -127,6 +130,29 @@ extension PhotosSlidesItemViewController {
         addChildViewController(hostingController, in: toolbarContainer)
         toolbarContainer.backgroundColor = .clear
         hostingController.view.backgroundColor = .clear
+        
+        textOverlayViewModel.$on
+            .dropFirst()
+            .sink { [weak self] on in
+                guard let self = self else { return }
+                
+                if on {
+                    guard let sentences = self.findPhoto.photo.metadata?.sentences else { return }
+                    let overlays: [Overlay] = sentences.map { sentence in
+                        let upperBound = sentence.components.last?.range.upperBound ?? 1
+                        let highlight = Overlay(
+                            string: sentence.string,
+                            position: sentence.position(for: 0 ..< upperBound)
+                        )
+                        return highlight
+                    }
+                    self.highlightsViewModel.overlays = overlays
+                }
+                withAnimation {
+                    self.highlightsViewModel.showOverlays = on
+                }
+            }
+            .store(in: &realmModel.cancellables)
     }
 
     func addHighlightsViewController() {

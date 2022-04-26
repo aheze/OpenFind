@@ -11,6 +11,10 @@ import SwiftUI
 class HighlightsViewModel: ObservableObject {
     @Published var highlights = [Highlight]()
     
+    @Published var overlays = [Overlay]()
+    
+    @Published var showOverlays = false
+    
     /// If not up to date, fade out a bit.
     @Published var upToDate = true
     

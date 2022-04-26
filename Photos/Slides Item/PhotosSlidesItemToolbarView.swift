@@ -10,9 +10,11 @@ import SwiftUI
 
 struct PhotosSlidesItemToolbarView: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var textOverlayViewModel: PhotosTextOverlayViewModel
+    
     var sizeChanged: ((CGSize) -> Void)?
     var body: some View {
-        PhotosTextOverlayView(model: model)
+        PhotosTextOverlayView(model: model, textOverlayViewModel: textOverlayViewModel)
             .sizeReader {
                 sizeChanged?($0)
             }

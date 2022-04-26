@@ -146,13 +146,13 @@ extension Sentence {
     }
 
     /// get the position of a highlight
-    func position(for targetRange: Range<Int>) -> Highlight.Position {
+    func position(for targetRange: Range<Int>) -> ScannedPosition {
         /// single vertical word
         if let angle = angle {
             /// if angle is too rotated, just show the entire sentence
             if getFrameIsVertical() || (abs(angle) > 45.degreesToRadians) {
                 let length = min(sentenceFrame.size.height, sentenceFrame.size.width)
-                let position = Highlight.Position(
+                let position = ScannedPosition(
                     originalPoint: sentenceFrame.center,
                     pivotPoint: sentenceFrame.center,
                     center: sentenceFrame.center,
@@ -191,7 +191,7 @@ extension Sentence {
             )
         }
 
-        let position = Highlight.Position(
+        let position = ScannedPosition(
             originalPoint: highlightFrame.center,
             pivotPoint: sentenceFrame.center,
             center: highlightCenter,

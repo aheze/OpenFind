@@ -16,6 +16,23 @@ struct HighlightsView: View {
         Color.clear.overlay(
             GeometryReader { geometry in
                 ZStack {
+                    if highlightsViewModel.showOverlays {
+                        Color.black
+                            .opacity(0.25)
+                            .reverseMask {
+                                ZStack {
+                                    ForEach(highlightsViewModel.overlays) { overlay in
+                                        OverlayView(
+                                            model: highlightsViewModel,
+                                            realmModel: realmModel,
+                                            overlay: overlay,
+                                            viewSize: geometry.size
+                                        )
+                                    }
+                                }
+                            }
+                    }
+
                     ForEach(highlightsViewModel.highlights) { highlight in
                         HighlightView(
                             model: highlightsViewModel,
@@ -30,6 +47,59 @@ struct HighlightsView: View {
         )
         .edgesIgnoringSafeArea(.all)
         .opacity(highlightsViewModel.upToDate ? 1 : 0.5)
+    }
+}
+
+struct OverlayView: View {
+    @ObservedObject var model: HighlightsViewModel
+    @ObservedObject var realmModel: RealmModel
+    let overlay: Overlay
+    let viewSize: CGSize
+    let color = Color.blue
+
+    var body: some View {
+        let cornerRadius = getCornerRadius()
+        let frame = getFrame()
+
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .fill(color)
+            .frame(
+                width: frame.width,
+                height: frame.height
+            )
+            .rotationEffect(.radians(-overlay.position.angle))
+            .position(
+                x: frame.minX,
+                y: frame.minY
+            )
+    }
+
+    func getFrame() -> CGRect {
+        if model.shouldScaleHighlights {
+            return CGRect(
+                x: overlay.position.center.x * viewSize.width,
+                y: overlay.position.center.y * viewSize.height,
+                width: overlay.position.size.width * viewSize.width,
+                height: overlay.position.size.height * viewSize.height
+            )
+        } else {
+            return CGRect(
+                x: overlay.position.center.x,
+                y: overlay.position.center.y,
+                width: overlay.position.size.width,
+                height: overlay.position.size.height
+            )
+        }
+    }
+
+    func getCornerRadius() -> CGFloat {
+        /// use shortest side for calculating
+        let length = min(overlay.position.size.width, overlay.position.size.height)
+        if model.shouldScaleHighlights {
+            return (length * 300) / 4
+        } else {
+            return length / 3
+        }
     }
 }
 

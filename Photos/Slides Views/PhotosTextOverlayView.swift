@@ -8,14 +8,22 @@
 
 import SwiftUI
 
+class PhotosTextOverlayViewModel: ObservableObject {
+    @Published var on = false
+}
+
 struct PhotosTextOverlayView: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var textOverlayViewModel: PhotosTextOverlayViewModel
 
     var body: some View {
         let imageName = getImageName()
 
         Button {
             print("Show text!")
+            withAnimation {
+                textOverlayViewModel.on.toggle()
+            }
         } label: {
             Image(systemName: imageName)
                 .foregroundColor(.white)
@@ -23,7 +31,7 @@ struct PhotosTextOverlayView: View {
                 .background(
                     Circle()
                         .fill(
-                            Color.accent
+                            textOverlayViewModel.on ? Color.accent : Color.gray
                         )
                 )
         }

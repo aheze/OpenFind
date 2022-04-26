@@ -46,3 +46,18 @@ extension InsettableShape {
             .background(fill(fillStyle))
     }
 }
+
+public extension View {
+    @inlinable
+    func reverseMask<Mask: View>(
+        @ViewBuilder _ mask: () -> Mask
+    ) -> some View {
+        self.mask(
+            Rectangle()
+                .overlay(
+                    mask()
+                        .blendMode(.destinationOut)
+                )
+        )
+    }
+}
