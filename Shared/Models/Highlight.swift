@@ -44,7 +44,7 @@ struct Highlight: Identifiable, Hashable {
 
 struct ScannedPosition: Equatable {
     /// the center that it's originally located
-    var originalPoint = CGPoint.zero
+//    var originalPoint = CGPoint.zero
     
     /// where to rotate around
     var pivotPoint = CGPoint.zero

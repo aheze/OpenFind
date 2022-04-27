@@ -109,6 +109,12 @@ extension SearchViewController {
                 showPopover(configuration: .link(url: url, icon: "scissors", text: "Buy crochet stuff!"), autoDismiss: false)
             }
         }
+        
+//        if text.roughlyEquals("/coco") {
+//            if let url = URL(string: "https://www.youtube.com/c/cocomelonarmy") {
+//                showPopover(configuration: .link(url: url, icon: "tv.fill", text: "Sub to cocomelon"), autoDismiss: false)
+//            }
+//        }
 
         if text.roughlyEquals("/apple") {
             showPopover(configuration: .image(systemName: "applelogo"), autoDismiss: true)

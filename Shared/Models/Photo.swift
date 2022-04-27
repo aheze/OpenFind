@@ -37,9 +37,13 @@ struct Photo: Hashable {
 
 struct PhotoMetadata {
     var assetIdentifier = ""
+    var isStarred = false
+    var isIgnored = false
+    var text: PhotoMetadataText?
+}
+
+struct PhotoMetadataText {
     var dateScanned: Date?
     var sentences = [Sentence]()
     var scannedInLanguages = [String]()
-    var isStarred = false
-    var isIgnored = false
 }
