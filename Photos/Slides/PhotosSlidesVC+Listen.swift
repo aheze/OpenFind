@@ -90,7 +90,15 @@ extension PhotosSlidesViewController {
 
         model.sharePhotoInSlides = { [weak self] photo in
             guard let self = self else { return }
-            self.share(photos: [photo], model: self.model)
+            
+            let sourceRect = CGRect(
+                x: 0,
+                y: self.view.bounds.height - self.tabViewModel.tabBarAttributes.backgroundHeight,
+                width: 50,
+                height: 50
+            )
+            
+            self.share(photos: [photo], model: self.model, sourceRect: sourceRect)
         }
 
         model.slidesUpdateFullScreenStateTo = { [weak self] photo in

@@ -15,7 +15,7 @@ import Photos
 
 extension PhotosViewModel {
     func share(photos: [Photo]) {
-        UIApplication.rootViewController?.share(photos: photos, model: self)
+        self.sharePhotos?(photos)
     }
 
     /// toggle star for a single photo. If multiple photos and one photo is unstarred, star all.

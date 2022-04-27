@@ -5,15 +5,15 @@
 //  Created by A. Zheng (github.com/aheze) on 12/30/21.
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
-    
 
+import Popovers
 import UIKit
 
 extension CGRect {
     var center: CGPoint {
         CGPoint(x: self.midX, y: self.midY)
     }
-    
+
     func scaleTo(_ size: CGSize) -> CGRect {
         var rect = CGRect(
             x: self.origin.x * size.width,
@@ -22,8 +22,20 @@ extension CGRect {
             height: self.height * size.height
         )
         rect = rect.insetBy(dx: -3, dy: -3)
-        
+
         return rect
+    }
+}
+
+extension CGRect {
+    init(center: CGPoint, length: CGFloat) {
+        let origin = CGPoint(
+            x: center.x - length / 2,
+            y: center.y - length / 2
+        )
+
+        let size = CGSize(width: length, height: length)
+        self.init(origin: origin, size: size)
     }
 }
 

@@ -93,7 +93,19 @@ extension ViewController {
         let displayedLists = lists.model.displayedLists.map { $0.list }
         let urls = displayedLists.compactMap { $0.getURL() }
         let dataSource = ListsSharingDataSource(lists: displayedLists)
-        self.settingsController.viewController.presentShareSheet(items: urls + [dataSource], applicationActivities: nil)
+        
+        let sourceRect = CGRect(
+            x: view.bounds.width / 2,
+            y: 50,
+            width: 1,
+            height: 1
+        )
+        
+        self.settingsController.viewController.presentShareSheet(
+            items: urls + [dataSource],
+            applicationActivities: nil,
+            sourceRect: sourceRect
+        )
     }
 
     func deleteAllScannedData() {

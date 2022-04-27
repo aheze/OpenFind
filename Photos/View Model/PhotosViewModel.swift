@@ -181,6 +181,7 @@ class PhotosViewModel: ObservableObject {
 
     // MARK: Share
 
+    var sharePhotos: (([Photo]) -> Void)? /// multiple photos in main screen
     var sharePhotoInSlides: ((Photo) -> Void)? /// single photo
 
     // MARK: Deletion

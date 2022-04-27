@@ -24,7 +24,19 @@ extension ListsViewController {
             let lists = self.model.selectedLists
             let urls = lists.compactMap { $0.getURL() }
             let dataSource = ListsSharingDataSource(lists: lists)
-            self.presentShareSheet(items: urls + [dataSource], applicationActivities: nil)
+
+            let sourceRect = CGRect(
+                x: 0,
+                y: self.view.bounds.height - self.tabViewModel.tabBarAttributes.backgroundHeight,
+                width: 50,
+                height: 50
+            )
+
+            self.presentShareSheet(
+                items: urls + [dataSource],
+                applicationActivities: nil,
+                sourceRect: sourceRect
+            )
             self.resetSelectingState()
         }
 

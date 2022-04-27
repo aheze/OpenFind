@@ -11,7 +11,9 @@ import Photos
 import UIKit
 
 extension UIViewController {
-    func share(photos: [Photo], model: PhotosViewModel) {
+    
+    /// export photos into a usable format, add other share sheet actions
+    func share(photos: [Photo], model: PhotosViewModel, sourceRect: CGRect) {
         let assets = photos.map { $0.asset }
 
         Task {
@@ -55,7 +57,12 @@ extension UIViewController {
                     model.stopSelecting?()
                 }
             }
-            presentShareSheet(items: items, applicationActivities: [starActivity, ignoreActivity])
+
+            presentShareSheet(
+                items: items,
+                applicationActivities: [starActivity, ignoreActivity],
+                sourceRect: sourceRect
+            )
         }
     }
 }

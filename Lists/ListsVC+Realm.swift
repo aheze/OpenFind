@@ -52,6 +52,17 @@ extension ListsViewController {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         )
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = view
+            popoverPresentationController.sourceRect = CGRect(
+                x: view.bounds.width - 50,
+                y: view.bounds.height - tabViewModel.tabBarAttributes.backgroundHeight,
+                width: 50,
+                height: 50
+            )
+        }
+
         present(alert, animated: true, completion: nil)
     }
 

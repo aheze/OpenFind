@@ -24,7 +24,18 @@ extension ListsDetailViewController {
         let list = model.list.getList()
         if let url = list.getURL() {
             let dataSource = ListsSharingDataSource(lists: [list])
-            presentShareSheet(items: [url, dataSource], applicationActivities: nil)
+            let sourceRect = CGRect(
+                x: view.bounds.width / 2,
+                y: 50,
+                width: 1,
+                height: 1
+            )
+            
+            presentShareSheet(
+                items: [url, dataSource],
+                applicationActivities: nil,
+                sourceRect: sourceRect
+            )
         }
     }
     

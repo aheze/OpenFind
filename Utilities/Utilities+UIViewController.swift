@@ -75,11 +75,13 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func presentShareSheet(items: [Any], applicationActivities: [UIActivity]?) {
+    func presentShareSheet(items: [Any], applicationActivities: [UIActivity]?, sourceRect: CGRect) {
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: applicationActivities)
+        
         if let popoverController = activityViewController.popoverPresentationController {
-            popoverController.sourceRect = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
+            popoverController.sourceRect = sourceRect
             popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = [.up, .down]
         }
 
         self.present(activityViewController, animated: true)
