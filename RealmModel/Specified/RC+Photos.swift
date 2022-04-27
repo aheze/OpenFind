@@ -20,15 +20,14 @@ extension RealmContainer {
         let photoMetadatas = realmPhotoMetadatas.map {
             $0.getPhotoMetadata()
         }
-        let array = Array(photoMetadatas)
-        applyPhotoMetadatas(array)
-    }
 
-    func applyPhotoMetadatas(_ photoMetadatas: [PhotoMetadata]) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+        DispatchQueue.main.async {
             if let model = self.getModel?() {
-                model.photoMetadatas = photoMetadatas
+                let assetIdentifierToPhotoMetadata = photoMetadatas.reduce(into: [String: PhotoMetadata]()) {
+                    $0[$1.assetIdentifier] = $1
+                }
+
+                model.assetIdentifierToPhotoMetadata = assetIdentifierToPhotoMetadata
             }
         }
     }
@@ -45,7 +44,7 @@ extension RealmContainer {
                 }
             }
             if let model = getModel?() {
-                model.photoMetadatas.removeAll()
+                model.assetIdentifierToPhotoMetadata.removeAll()
             }
         } catch {
             Debug.log("Error deleting all scanned data: \(error)", .error)
@@ -71,8 +70,8 @@ extension RealmContainer {
                 }
 
                 if let model = getModel?() {
-                    if let firstIndex = model.photoMetadatas.firstIndex(where: { $0.assetIdentifier == metadata.assetIdentifier }) {
-                        model.photoMetadatas[firstIndex] = metadata
+                    if model.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] != nil {
+                        model.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] = metadata
                     }
                 }
             } catch {
@@ -91,7 +90,8 @@ extension RealmContainer {
                 }
 
                 if let model = getModel?() {
-                    model.photoMetadatas = model.photoMetadatas.filter { $0.assetIdentifier != metadata.assetIdentifier }
+                    model.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] = nil
+                    
                 }
             } catch {
                 Debug.log("Error deleting metadata: \(error)", .error)
@@ -116,7 +116,7 @@ extension RealmContainer {
                 realm.add(realmMetadata)
             }
 
-            getModel?()?.photoMetadatas.append(metadata)
+            getModel?()?.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] = metadata
         } catch {
             Debug.log("Error adding photo metadata: \(error)", .error)
         }

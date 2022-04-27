@@ -14,7 +14,7 @@ class RealmModel: ObservableObject {
 
     @Published var lists = [List]()
 
-    @Published var photoMetadatas = [PhotoMetadata]()
+    @Published var assetIdentifierToPhotoMetadata = [String: PhotoMetadata]()
 
     static let data = RealmModelData.self
 
@@ -41,7 +41,7 @@ class RealmModel: ObservableObject {
             defaults.set(enteredVersions, forKey: "enteredVersions")
         }
     }
-    
+
     /// once this reaches 100, then 200, then 1000, ask for a review
     @Saved(data.experiencePoints.key) var experiencePoints = data.experiencePoints.value
 
@@ -130,17 +130,15 @@ class RealmModel: ObservableObject {
 
     /// get the photo metadata of an photo if it exists
     func getPhotoMetadata(from identifier: String) -> PhotoMetadata? {
-        if let photoMetadata = photoMetadatas.first(where: { $0.assetIdentifier == identifier }) {
-            return photoMetadata
-        }
-        return nil
+        let photoMetadata = assetIdentifierToPhotoMetadata[identifier]
+        return photoMetadata
     }
 }
 
 extension RealmModel {
     func resetAllSettings() {
         let data = RealmModelData.self
-        
+
         /** don't reset `experiencePoints` */
 
         swipeToNavigate = data.swipeToNavigate.value
