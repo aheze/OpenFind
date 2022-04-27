@@ -112,11 +112,10 @@ extension CameraViewController {
                         /// the photo may have been scanned before the closure was called. if so, save the sentences.
                         metadata = PhotoMetadata(
                             assetIdentifier: assetIdentifier,
-                            dateScanned: currentPausedImage.dateScanned,
-                            sentences: currentPausedImage.sentences,
-                            scannedInLanguages: currentPausedImage.scannedInLanguages,
                             isStarred: false,
-                            isIgnored: false
+                            isIgnored: false,
+                            dateScanned: currentPausedImage.dateScanned,
+                            text: currentPausedImage.text
                         )
 
                         let assets = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: .none)

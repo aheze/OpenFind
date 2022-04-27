@@ -40,36 +40,46 @@ struct Sentence {
     var topRight: CGPoint
     var bottomRight: CGPoint
     var bottomLeft: CGPoint
-    
-    func getPosition(for range: Range<Int>) -> ScannedPosition {
-        let width = CGPointDistance(from: topLeft, to: topRight)
-        let height = CGPointDistance(from: topLeft, to: bottomLeft)
-        let size = CGSize(width: width, height: height)
-        let center = CGPoint(
-            x: topRight.x - bott,
-            y: <#T##CGFloat#>
-        )
-        
-        let characterLength = width / CGFloat(string.count)
-        let characterXOffset = gridWidth * CGFloat(range.lowerBound)
 
-        let frame = CGRect(
-            x: component.frame.origin.x + characterXOffset,
-            y: component.frame.origin.y,
-            width: characterLength,
-            height: component.frame.height
+    func getPosition(for range: Range<Int>) -> ScannedPosition {
+        /// width, height, and center for the entire sentence
+        let sentenceWidth = CGPointDistance(from: topLeft, to: topRight)
+        let sentenceHeight = CGPointDistance(from: topLeft, to: bottomLeft)
+        let sentenceCenter = CGPoint(
+            x: (topRight.x - bottomLeft.x) / 2,
+            y: (topRight.y - bottomLeft.y) / 2
         )
-        
-        
+        let sentenceFrame = CGRect(
+            x: sentenceCenter.x - sentenceWidth / 2,
+            y: sentenceCenter.y - sentenceHeight / 2,
+            width: sentenceWidth,
+            height: sentenceHeight
+        )
+
+        let characterLength = sentenceWidth / CGFloat(string.count)
+
+        let highlightXOffset = characterLength * CGFloat(range.lowerBound)
+        let highlightWidth = characterLength * CGFloat(range.count)
+
+        /// frame of highlight
+        let highlightFrame = CGRect(
+            x: sentenceFrame.origin.x + highlightXOffset,
+            y: 0,
+            width: highlightWidth,
+            height: sentenceHeight
+        )
+
         let yDifference = topRight.y - topLeft.y
         let xDifference = topRight.x - topLeft.x
         let angle = atan2(yDifference, xDifference)
-        
+
         let position = ScannedPosition(
-            pivotPoint: <#T##CGPoint#>,
-            center: <#T##CGPoint#>,
-            size: size,
+            pivotPoint: sentenceCenter,
+            center: highlightFrame.center,
+            size: highlightFrame.size,
             angle: angle
         )
+
+        return position
     }
 }

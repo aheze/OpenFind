@@ -11,9 +11,10 @@ import UIKit
 
 class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var assetIdentifier = ""
-    @Persisted var text: RealmPhotoMetadataText?
     @Persisted var isStarred = false
     @Persisted var isIgnored = false
+    @Persisted var dateScanned: Date?
+    @Persisted var text: RealmPhotoMetadataText?
 
     override init() {
         super.init()
@@ -21,41 +22,40 @@ class RealmPhotoMetadata: Object {
 
     init(
         assetIdentifier: String,
-        text: RealmPhotoMetadataText,
         isStarred: Bool,
-        isIgnored: Bool
+        isIgnored: Bool,
+        dateScanned: Date?,
+        text: RealmPhotoMetadataText?
     ) {
         self.assetIdentifier = assetIdentifier
         self.text = text
         self.isStarred = isStarred
         self.isIgnored = isIgnored
+        self.dateScanned = dateScanned
     }
 
     func getPhotoMetadata() -> PhotoMetadata {
         let metadata = PhotoMetadata(
             assetIdentifier: self.assetIdentifier,
-            text: self.text?.getPhotoMetadataText() ?? PhotoMetadataText(),
             isStarred: self.isStarred,
-            isIgnored: self.isIgnored
+            isIgnored: self.isIgnored,
+            dateScanned: self.dateScanned,
+            text: self.text?.getPhotoMetadataText() ?? PhotoMetadataText()
         )
         return metadata
     }
 }
 
-var dateScanned: Date?
-var sentences = [Sentence]()
-var scannedInLanguages = [String]()
-
 class RealmPhotoMetadataText: Object {
-    @Persisted var dateScanned: Date?
     @Persisted var sentences: RealmSwift.List<RealmSentence>
     @Persisted var scannedInLanguages: RealmSwift.List<String> /// which languages scanned in
-
+    @Persisted var scannedInVersion: String?
+    
     func getPhotoMetadataText() -> PhotoMetadataText {
         let metadataText = PhotoMetadataText(
-            dateScanned: dateScanned,
             sentences: sentences.map { $0.getSentence() },
-            scannedInLanguages: self.scannedInLanguages.map { $0 }
+            scannedInLanguages: self.scannedInLanguages.map { $0 },
+            scannedInVersion: scannedInVersion
         )
         return metadataText
     }

@@ -27,9 +27,9 @@ extension CameraViewController {
                     /// animate the highlight frames instead if paused
                     if
                         self.model.shutterOn,
-                        let sentences = self.model.pausedImage?.sentences
+                        let text = self.model.pausedImage?.text
                     {
-                        let highlights = sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients, realmModel: self.realmModel)
+                        let highlights = text.sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients, realmModel: self.realmModel)
                         DispatchQueue.main.async {
                             self.highlightsViewModel.update(with: highlights, replace: true)
                             self.highlightsAdded()

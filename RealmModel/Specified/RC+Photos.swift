@@ -40,11 +40,11 @@ extension RealmContainer {
             try realm.write {
                 for metadata in metadatas {
                     metadata.dateScanned = nil
-                    metadata.sentences = RealmSwift.List<RealmSentence>()
-                    metadata.scannedInLanguages = RealmSwift.List<String>()
+                    metadata.text?.sentences = RealmSwift.List<RealmSentence>()
+                    metadata.text?.scannedInLanguages = RealmSwift.List<String>()
                 }
             }
-            if let model = self.getModel?() {
+            if let model = getModel?() {
                 model.photoMetadatas.removeAll()
             }
         } catch {
@@ -61,13 +61,13 @@ extension RealmContainer {
         }
 
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
-            let realmSentences = metadata.getRealmSentences()
+            let text = metadata.text?.getRealmText()
             do {
                 try realm.write {
-                    realmMetadata.dateScanned = metadata.dateScanned
-                    realmMetadata.sentences = realmSentences
                     realmMetadata.isStarred = metadata.isStarred
                     realmMetadata.isIgnored = metadata.isIgnored
+                    realmMetadata.dateScanned = metadata.dateScanned
+                    realmMetadata.text = text
                 }
 
                 if let model = getModel?() {
@@ -101,17 +101,14 @@ extension RealmContainer {
 
     /// call this inside `updatePhotoMetadata`
     private func addPhotoMetadata(metadata: PhotoMetadata) {
-        let realmSentences = metadata.getRealmSentences()
-
-        let scannedInLanguages = metadata.getRealmScannedInLanguages()
+        let text = metadata.text?.getRealmText()
 
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
-            dateScanned: metadata.dateScanned,
-            sentences: realmSentences,
-            scannedInLanguages: scannedInLanguages,
             isStarred: metadata.isStarred,
-            isIgnored: metadata.isIgnored
+            isIgnored: metadata.isIgnored,
+            dateScanned: metadata.dateScanned,
+            text: text
         )
 
         do {

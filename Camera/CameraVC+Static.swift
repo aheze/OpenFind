@@ -32,7 +32,10 @@ extension CameraViewController {
         Task {
             let currentOrientation = UIWindow.currentInterfaceOrientation
             AppDelegate.AppUtility.lockOrientation(currentOrientation?.getMask() ?? .all)
-            let pausedImage = PausedImage(orientationTakenIn: currentOrientation)
+            let pausedImage = PausedImage(
+                text: PhotoMetadataText(),
+                orientationTakenIn: currentOrientation
+            )
 
             let currentUUID = pausedImage.id
 
@@ -68,15 +71,24 @@ extension CameraViewController {
     func scan(currentUUID: UUID, cgImage: CGImage) async {
         Find.prioritizedAction = .camera
         let sentences = await self.findAndAddHighlights(image: cgImage, wait: true)
-        let currentDate = Date()
         let scannedInLanguages = realmModel.getCurrentRecognitionLanguages(accurateMode: true)
+        let scannedInVersion = Utilities.getVersionString()
+        
+        let text = PhotoMetadataText(
+            sentences: sentences,
+            scannedInLanguages: scannedInLanguages,
+            scannedInVersion: scannedInVersion
+        )
+
         guard currentUUID == self.model.pausedImage?.id else { return }
+
+        let currentDate = Date()
 
         await MainActor.run {
             /// set the sentences
-            self.model.pausedImage?.sentences = sentences
             self.model.pausedImage?.dateScanned = currentDate
-            self.model.pausedImage?.scannedInLanguages = scannedInLanguages
+            self.model.pausedImage?.text.sentences = sentences
+            self.model.pausedImage?.text.scannedInLanguages = scannedInLanguages
         }
 
         /// photo was saved to the photo library. Update the sentences
@@ -85,10 +97,7 @@ extension CameraViewController {
             let metadata = PhotoMetadata(
                 assetIdentifier: assetIdentifier,
                 dateScanned: currentDate,
-                sentences: sentences,
-                scannedInLanguages: scannedInLanguages,
-                isStarred: false,
-                isIgnored: false
+                text: text
             )
             DispatchQueue.main.async {
                 let assets = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: .none)

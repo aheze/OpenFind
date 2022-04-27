@@ -13,8 +13,15 @@ import UIKit
  Might contain some dependencies, like `RealmSwift`
  */
 
+extension PhotoMetadataText {
+    func getRealmText() -> RealmPhotoMetadataText {
+        let text = RealmPhotoMetadataText()
+        text.sentences = self.getRealmSentences()
+        text.scannedInLanguages = self.getRealmScannedInLanguages()
+        text.scannedInVersion = scannedInVersion
+        return text
+    }
 
-extension PhotoMetadata {
     func getRealmSentences() -> RealmSwift.List<RealmSentence> {
         let realmSentences = RealmSwift.List<RealmSentence>()
         for sentence in self.sentences {
@@ -23,7 +30,7 @@ extension PhotoMetadata {
         }
         return realmSentences
     }
-    
+
     func getRealmScannedInLanguages() -> RealmSwift.List<String> {
         let realmScannedInLanguages = RealmSwift.List<String>()
         for scannedInLanguage in self.scannedInLanguages {
@@ -35,27 +42,23 @@ extension PhotoMetadata {
 
 extension Sentence {
     func getRealmSentence() -> RealmSentence {
-        let realmComponents = RealmSwift.List<RealmSentenceComponent>()
-        for component in components {
-            let realmRange = RealmIntRange(lowerBound: component.range.lowerBound, upperBound: component.range.upperBound)
-            let realmRect = RealmRect(
-                x: component.frame.origin.x,
-                y: component.frame.origin.y,
-                width: component.frame.width,
-                height: component.frame.height
-            )
-
-            let realmComponent = RealmSentenceComponent()
-            realmComponent.range = realmRange
-            realmComponent.frame = realmRect
-            realmComponents.append(realmComponent)
-        }
-
         let realmSentence = RealmSentence()
         realmSentence.string = string
-        realmSentence.components = realmComponents
         realmSentence.confidence = confidence
+        realmSentence.topLeft = self.topLeft.getRealmPoint()
+        realmSentence.topRight = self.topRight.getRealmPoint()
+        realmSentence.bottomRight = self.bottomRight.getRealmPoint()
+        realmSentence.bottomLeft = self.bottomLeft.getRealmPoint()
         return realmSentence
+    }
+}
+
+extension CGPoint {
+    func getRealmPoint() -> RealmPoint {
+        let point = RealmPoint()
+        point.x = x
+        point.y = y
+        return point
     }
 }
 
@@ -66,4 +69,3 @@ extension List {
         return words
     }
 }
-

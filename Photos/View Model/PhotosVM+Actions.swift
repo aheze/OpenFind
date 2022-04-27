@@ -37,11 +37,9 @@ extension PhotosViewModel {
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
-                    dateScanned: nil,
-                    sentences: [],
-                    scannedInLanguages: [],
                     isStarred: shouldStar,
-                    isIgnored: false
+                    isIgnored: false,
+                    text: PhotoMetadataText()
                 )
                 newPhoto.metadata = metadata
                 updatePhotoMetadata(photo: newPhoto, reloadCell: true)
@@ -63,19 +61,16 @@ extension PhotosViewModel {
             /// metadata exists, delete sentences
             if newPhoto.metadata != nil {
                 newPhoto.metadata?.isIgnored = shouldIgnore
-                newPhoto.metadata?.dateScanned = nil /// delete saved sentences anyway
-                newPhoto.metadata?.sentences = []
+                newPhoto.metadata?.text?.delete()
                 withAnimation {
                     updatePhotoMetadata(photo: newPhoto, reloadCell: true)
                 }
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
-                    dateScanned: nil,
-                    sentences: [],
-                    scannedInLanguages: [],
                     isStarred: false,
-                    isIgnored: shouldIgnore
+                    isIgnored: shouldIgnore,
+                    text: PhotoMetadataText()
                 )
                 newPhoto.metadata = metadata
                 withAnimation {

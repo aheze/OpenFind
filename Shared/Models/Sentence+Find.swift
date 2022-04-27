@@ -42,7 +42,7 @@ extension Array where Element == Sentence {
                         string: rangeResult.string,
                         colors: gradient.colors,
                         alpha: gradient.alpha,
-                        position: sentence.position(for: range)
+                        position: sentence.getPosition(for: range)
                     )
                     highlights.append(highlight)
                 }
@@ -71,7 +71,6 @@ extension Array where Element == FastSentence {
                         colors: gradient.colors,
                         alpha: gradient.alpha,
                         position: .init(
-                            originalPoint: .zero,
                             pivotPoint: .zero,
                             center: word.frame.center,
                             size: word.frame.size,

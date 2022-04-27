@@ -25,8 +25,7 @@ struct PausedImage: Identifiable {
     let id = UUID()
     var cgImage: CGImage?
     var dateScanned: Date?
-    var sentences = [Sentence]()
-    var scannedInLanguages = [String]()
+    var text: PhotoMetadataText
     var orientationTakenIn: UIInterfaceOrientation? /// lock to this
 
     /// if it's saved to Photos, set this.

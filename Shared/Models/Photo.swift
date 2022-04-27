@@ -39,11 +39,21 @@ struct PhotoMetadata {
     var assetIdentifier = ""
     var isStarred = false
     var isIgnored = false
+    var dateScanned: Date?
+
+    /// if this is nil, it hasn't been loaded.
+    /// This should not be nil when loaded, even if not scanned. (`dateScanned` determines scanned or not scanned.)
     var text: PhotoMetadataText?
 }
 
 struct PhotoMetadataText {
-    var dateScanned: Date?
     var sentences = [Sentence]()
     var scannedInLanguages = [String]()
+    var scannedInVersion: String?
+
+    mutating func delete() {
+        sentences.removeAll()
+        scannedInLanguages.removeAll()
+        scannedInVersion = nil
+    }
 }

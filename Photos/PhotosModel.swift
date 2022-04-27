@@ -202,11 +202,26 @@ struct PhotosSection: Hashable {
     }
 }
 
+extension Array where Element == Photo {
+    /// apply metadata to a single photo inside an array of photos
+    /// only modify the changed properties `dateScanned` and `sentences`
+    mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
+        if self[index].metadata != nil {
+            self[index].metadata?.dateScanned = metadata?.dateScanned
+            self[index].metadata?.text?.sentences = metadata?.text?.sentences ?? []
+            self[index].metadata?.text?.scannedInLanguages = metadata?.text?.scannedInLanguages ?? []
+        } else {
+            self[index].metadata = metadata
+        }
+    }
+}
+
 extension Array where Element == FindPhoto {
     mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
         if self[index].photo.metadata != nil {
             self[index].photo.metadata?.dateScanned = metadata?.dateScanned
-            self[index].photo.metadata?.sentences = metadata?.sentences ?? []
+            self[index].photo.metadata?.text?.sentences = metadata?.text?.sentences ?? []
+            self[index].photo.metadata?.text?.scannedInLanguages = metadata?.text?.scannedInLanguages ?? []
         } else {
             self[index].photo.metadata = metadata
         }
@@ -217,7 +232,8 @@ extension Array where Element == SlidesPhoto {
     mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
         if self[index].findPhoto.photo.metadata != nil {
             self[index].findPhoto.photo.metadata?.dateScanned = metadata?.dateScanned
-            self[index].findPhoto.photo.metadata?.sentences = metadata?.sentences ?? []
+            self[index].findPhoto.photo.metadata?.text?.sentences = metadata?.text?.sentences ?? []
+            self[index].findPhoto.photo.metadata?.text?.scannedInLanguages = metadata?.text?.scannedInLanguages ?? []
         } else {
             self[index].findPhoto.photo.metadata = metadata
         }

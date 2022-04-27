@@ -17,6 +17,7 @@ enum Utilities {
         }
     }
 
+    /// version of the app, for example `2.0.3`
     static func getVersionString() -> String {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     }

@@ -16,19 +16,24 @@ extension PhotosViewModel {
         if let metadata = photo.metadata {
             var newMetadata = metadata
             newMetadata.dateScanned = Date()
-            newMetadata.sentences = sentences
-            newMetadata.scannedInLanguages = visionOptions.recognitionLanguages
+            newMetadata.text?.sentences = sentences
+            newMetadata.text?.scannedInLanguages = visionOptions.recognitionLanguages
             newPhoto.metadata = newMetadata
             getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata)
             addSentences(of: newPhoto, immediately: !inBatch)
         } else {
-            let metadata = PhotoMetadata(
-                assetIdentifier: photo.asset.localIdentifier,
-                dateScanned: Date(),
+            let text = PhotoMetadataText(
                 sentences: sentences,
                 scannedInLanguages: visionOptions.recognitionLanguages,
+                scannedInVersion: Utilities.getVersionString()
+            )
+            
+            let metadata = PhotoMetadata(
+                assetIdentifier: photo.asset.localIdentifier,
                 isStarred: false,
-                isIgnored: false
+                isIgnored: false,
+                dateScanned: Date(),
+                text: text
             )
 
             newPhoto.metadata = metadata

@@ -88,11 +88,13 @@ extension Finding {
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
         
+        
+        // TODO!!!
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let (highlights, lines) = Finding.getHighlightsAndDescription(
                 realmModel: realmModel,
-                from: metadata.sentences,
+                from: metadata.text?.sentences ?? [],
                 with: stringToGradients
             )
             if highlights.count >= 1 {
@@ -141,7 +143,7 @@ extension Finding {
                         string: rangeResult.string,
                         colors: gradient.colors,
                         alpha: gradient.alpha,
-                        position: sentence.position(for: range)
+                        position: sentence.getPosition(for: range)
                     )
 
                     highlights.append(highlight)
