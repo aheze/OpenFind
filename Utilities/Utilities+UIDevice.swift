@@ -8,7 +8,19 @@
 
 import UIKit
 
-extension UIDevice {
+public extension UIDevice {
+    
+    /// new enough for finding
+    static let isNewEnoughForOnboarding: Bool = {
+        let name = modelName
+        switch name {
+        case "iPhone 6s", "iPhone 6 Plus", "iPhone 7", "iPhone 7 Plus":
+            return false
+        default:
+            return true
+        }
+    }()
+    
     static let modelName: String = {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -18,8 +30,8 @@ extension UIDevice {
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
 
-        func mapToDevice(identifier: String) -> String { // swiftlint:disable:this cyclomatic_complexity
-#if os(iOS)
+        func mapToDevice(identifier: String) -> String {
+            #if os(iOS)
             switch identifier {
             case "iPod5,1": return "iPod touch (5th generation)"
             case "iPod7,1": return "iPod touch (6th generation)"
@@ -33,7 +45,6 @@ extension UIDevice {
             case "iPhone7,1": return "iPhone 6 Plus"
             case "iPhone8,1": return "iPhone 6s"
             case "iPhone8,2": return "iPhone 6s Plus"
-            case "iPhone8,4": return "iPhone SE"
             case "iPhone9,1", "iPhone9,3": return "iPhone 7"
             case "iPhone9,2", "iPhone9,4": return "iPhone 7 Plus"
             case "iPhone10,1", "iPhone10,4": return "iPhone 8"
@@ -45,7 +56,6 @@ extension UIDevice {
             case "iPhone12,1": return "iPhone 11"
             case "iPhone12,3": return "iPhone 11 Pro"
             case "iPhone12,5": return "iPhone 11 Pro Max"
-            case "iPhone12,8": return "iPhone SE (2nd generation)"
             case "iPhone13,1": return "iPhone 12 mini"
             case "iPhone13,2": return "iPhone 12"
             case "iPhone13,3": return "iPhone 12 Pro"
@@ -54,6 +64,9 @@ extension UIDevice {
             case "iPhone14,5": return "iPhone 13"
             case "iPhone14,2": return "iPhone 13 Pro"
             case "iPhone14,3": return "iPhone 13 Pro Max"
+            case "iPhone8,4": return "iPhone SE"
+            case "iPhone12,8": return "iPhone SE (2nd generation)"
+            case "iPhone14,6": return "iPhone SE (3rd generation)"
             case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return "iPad 2"
             case "iPad3,1", "iPad3,2", "iPad3,3": return "iPad (3rd generation)"
             case "iPad3,4", "iPad3,5", "iPad3,6": return "iPad (4th generation)"
@@ -66,6 +79,7 @@ extension UIDevice {
             case "iPad5,3", "iPad5,4": return "iPad Air 2"
             case "iPad11,3", "iPad11,4": return "iPad Air (3rd generation)"
             case "iPad13,1", "iPad13,2": return "iPad Air (4th generation)"
+            case "iPad13,16", "iPad13,17": return "iPad Air (5th generation)"
             case "iPad2,5", "iPad2,6", "iPad2,7": return "iPad mini"
             case "iPad4,4", "iPad4,5", "iPad4,6": return "iPad mini 2"
             case "iPad4,7", "iPad4,8", "iPad4,9": return "iPad mini 3"
@@ -89,14 +103,14 @@ extension UIDevice {
             case "i386", "x86_64", "arm64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
             default: return identifier
             }
-#elseif os(tvOS)
+            #elseif os(tvOS)
             switch identifier {
             case "AppleTV5,3": return "Apple TV 4"
             case "AppleTV6,2": return "Apple TV 4K"
             case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
             default: return identifier
             }
-#endif
+            #endif
         }
 
         return mapToDevice(identifier: identifier)

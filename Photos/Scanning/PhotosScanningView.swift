@@ -53,6 +53,8 @@ struct PhotosScanningViewHeader: View {
                                     Text("\(model.totalPhotosCount)")
                                     .foregroundColor(.accent.opacity(0.75))
                             }
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.3)
                             .font(.largeTitle.weight(.semibold))
                             .accessibilityLabel("\(model.scannedPhotosCount) out of \(model.totalPhotosCount)")
 

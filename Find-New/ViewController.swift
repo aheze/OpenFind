@@ -109,12 +109,14 @@ class ViewController: UIViewController {
     // MARK: - Migration
 
     func loadMigratedData(migratedPhotoMetadatas: [PhotoMetadata], migratedLists: [List]) {
-        for metadata in migratedPhotoMetadatas {
-            realmModel.container.updatePhotoMetadata(metadata: metadata)
-        }
+        DispatchQueue.main.async {
+            for metadata in migratedPhotoMetadatas {
+                self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+            }
 
-        for list in migratedLists {
-            realmModel.container.addList(list: list)
+            for list in migratedLists {
+                self.realmModel.container.addList(list: list)
+            }
         }
     }
 
@@ -130,7 +132,7 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             self.onboardingDone()
         }
-        
+
         guard let launchViewController = launchViewController else { return }
         addChildViewController(launchViewController, in: view)
         view.bringSubviewToFront(launchViewController.view)
@@ -145,7 +147,7 @@ class ViewController: UIViewController {
 
     func onboardingDone() {
         guard let launchViewController = launchViewController else { return }
-        if !realmModel.launchedBefore {
+        if !realmModel.launchedBefore && !realmModel.addedListsBefore {
             realmModel.addSampleLists()
         }
 

@@ -15,7 +15,7 @@ struct PhotosScanningHeader: View {
             PhotosScanningProgressView(
                 model: model,
                 lineWidth: 4,
-                iconFont: .preferredCustomFont(forTextStyle: .body, weight: PhotosConstants.scanningCheckmarkWeight)
+                iconFont: .systemFont(ofSize: 15, weight: .semibold)
             )
             .frame(width: 26, height: 26)
 
@@ -32,6 +32,8 @@ struct PhotosScanningHeader: View {
                         Text("\(model.totalPhotosCount)")
                         .foregroundColor(.accent.opacity(0.75))
                 }
+                .lineLimit(1)
+                .minimumScaleFactor(0.3)
                 .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .semibold).font)
 
                 Spacer()
