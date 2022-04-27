@@ -601,8 +601,6 @@
 		3C3232F0261164A900A33192 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
 		3C3232F426118B4000A33192 /* ListBuilderVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */; };
 		3C35A97A278979700003D7A0 /* ScrollZoomHookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35A979278979700003D7A0 /* ScrollZoomHookViewController.swift */; };
-		3C3642AE277BBED10038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C3642AD277BBED10038CB18 /* Popovers */; };
-		3C3642BB277BC1340038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C3642BA277BC1340038CB18 /* Popovers */; };
 		3C3642BD277BC20B0038CB18 /* CameraVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3642BC277BC20B0038CB18 /* CameraVC+SearchBar.swift */; };
 		3C3642BE277BC2E70038CB18 /* SearchVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchVC+Delegate.swift */; };
 		3C3642BF277BC2E70038CB18 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
@@ -654,10 +652,7 @@
 		3C364301277BC2E90038CB18 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
 		3C364303277BC4D00038CB18 /* CameraVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364302277BC4D00038CB18 /* CameraVC+Zoom.swift */; };
 		3C364305277BC58E0038CB18 /* CameraVC+LivePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364304277BC58E0038CB18 /* CameraVC+LivePreview.swift */; };
-		3C36430D277BDF430038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C36430C277BDF430038CB18 /* Popovers */; };
-		3C364346277C0CDD0038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C364345277C0CDD0038CB18 /* Popovers */; };
 		3C36434C277C0F970038CB18 /* SupportDocs in Frameworks */ = {isa = PBXBuildFile; productRef = 3C36434B277C0F970038CB18 /* SupportDocs */; };
-		3C36434E277C1B980038CB18 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C36434D277C1B980038CB18 /* Popovers */; };
 		3C364350277C22480038CB18 /* TabControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C36434F277C22480038CB18 /* TabControllerView.swift */; };
 		3C364352277C407F0038CB18 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
 		3C364353277C52EE0038CB18 /* SearchVC+Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364351277C407F0038CB18 /* SearchVC+Popovers.swift */; };
@@ -781,7 +776,6 @@
 		3C443EEF27DD8C150050A0AB /* PhotosPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E6C27BAC05900EC881E /* PhotosPermissionsView.swift */; };
 		3C443EF027DD8C160050A0AB /* CameraNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93151F27B990B2009E5B6E /* CameraNotFoundView.swift */; };
 		3C443EF127DD8C160050A0AB /* PhotosPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B5E6C27BAC05900EC881E /* PhotosPermissionsView.swift */; };
-		3C443EF327DD8C5B0050A0AB /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C443EF227DD8C5B0050A0AB /* Popovers */; };
 		3C443EF427DD8D3A0050A0AB /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
 		3C443EF627DD8F610050A0AB /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443EF527DD8F610050A0AB /* SliderView.swift */; };
 		3C443EF727DD8F630050A0AB /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C443EF527DD8F610050A0AB /* SliderView.swift */; };
@@ -1169,7 +1163,6 @@
 		3C5B379127FF5F1900801FEE /* CameraVC+Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */; };
 		3C5B379227FF603600801FEE /* CameraVC+Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B379027FF5F1900801FEE /* CameraVC+Flash.swift */; };
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
-		3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5F1FA427121BB200143BDD /* WhatsNewKit */; };
 		3C60162A2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */; };
 		3C60162B2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */; };
 		3C606671274ECCBA000A5BDE /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
@@ -1366,7 +1359,6 @@
 		3C6C743A2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
 		3C6C743B2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C742E2781955C00E039F0 /* Utilities+Accessibility.swift */; };
 		3C6C743F2781958E00E039F0 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
-		3C6C7441278195E200E039F0 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C6C7440278195E200E039F0 /* Popovers */; };
 		3C6C7445278221E600E039F0 /* HighlightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A51277EB1F200E1F602 /* HighlightsConstants.swift */; };
 		3C6C7446278221E600E039F0 /* HighlightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A1B277E93F900E1F602 /* HighlightsView.swift */; };
 		3C6C7447278221E600E039F0 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A68277F94D400E1F602 /* Highlight.swift */; };
@@ -1670,7 +1662,6 @@
 		3C798FB427F782EF007BF68D /* TabTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C08EB74279CAC2C00971D60 /* TabTransitioning.swift */; };
 		3C798FC727F78307007BF68D /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3C798FC927F78307007BF68D /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADA7275C12BA0030F0D2 /* TipView.swift */; };
-		3C798FCC27F78481007BF68D /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C798FCB27F78481007BF68D /* Popovers */; };
 		3C798FD027F784EE007BF68D /* SettingsMVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C798FCF27F784EE007BF68D /* SettingsMVC+Setup.swift */; };
 		3C798FD227F7850D007BF68D /* SettingsMVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C798FD127F7850D007BF68D /* SettingsMVC+Delegate.swift */; };
 		3C7A43EC27EBE90000DFF76F /* PhotosCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A43EB27EBE90000DFF76F /* PhotosCellView.swift */; };
@@ -1822,6 +1813,7 @@
 		3C7E1094279E59DE00ABC016 /* ListsDetailVC+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E1092279DDF5D00ABC016 /* ListsDetailVC+Add.swift */; };
 		3C7E1095279E59DE00ABC016 /* ListsDetailVC+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E1092279DDF5D00ABC016 /* ListsDetailVC+Add.swift */; };
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
+		3C817F892819117700417835 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C817F882819117700417835 /* Popovers */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
 		3C875DEA27EAC28B00EC35ED /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9234D027E660100055061A /* Section.swift */; };
@@ -3140,7 +3132,6 @@
 		3CFCE8C027CACC6B000624D2 /* Rotation.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFCE8B127CACC6B000624D2 /* Rotation.xcassets */; };
 		3CFD5F74278A374B0031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
 		3CFD5F78278A37D00031BC8B /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F73278A374B0031BC8B /* TabModel.swift */; };
-		3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3CFD5F79278A37F00031BC8B /* Popovers */; };
 		3CFD5F7C278A486D0031BC8B /* ListsVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7B278A486D0031BC8B /* ListsVC+DataSource.swift */; };
 		3CFD5F7E278A4A130031BC8B /* ListsContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7D278A4A130031BC8B /* ListsContentCell.swift */; };
 		3CFD5F80278A4BF70031BC8B /* ListsCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD5F7F278A4BF70031BC8B /* ListsCollectionFlowLayout.swift */; };
@@ -3188,7 +3179,6 @@
 		3CFD600D278B6FAA0031BC8B /* UIKitViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A18275AA16C0064F2C6 /* UIKitViews.swift */; };
 		3CFD600E278B6FAA0031BC8B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
 		3CFD600F278B6FAA0031BC8B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCCA8B2781859C000381CE /* Model.swift */; };
-		3CFD6011278B6FBD0031BC8B /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3CFD6010278B6FBD0031BC8B /* Popovers */; };
 		3CFD6012278B6FCE0031BC8B /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3CFD6013278B6FCE0031BC8B /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADA7275C12BA0030F0D2 /* TipView.swift */; };
 		3CFD6014278B705C0031BC8B /* ProgressLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B7A85277FA53200E1F602 /* ProgressLineView.swift */; };
@@ -4337,7 +4327,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C364346277C0CDD0038CB18 /* Popovers in Frameworks */,
 				3CAD45D927FFEB5A00B0A0A9 /* SupportDocs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4362,7 +4351,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C36430D277BDF430038CB18 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4370,7 +4358,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C3642BB277BC1340038CB18 /* Popovers in Frameworks */,
 				3CAD45BA27FFE12500B0A0A9 /* SupportDocs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4380,7 +4367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CF15D4427FF8B0A00D51E9B /* SupportDocs in Frameworks */,
-				3C443EF327DD8C5B0050A0AB /* Popovers in Frameworks */,
 				3C443FC827DFD1550050A0AB /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4389,7 +4375,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CFD5F7A278A37F00031BC8B /* Popovers in Frameworks */,
 				3CAD45AD27FFDC0000B0A0A9 /* SupportDocs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4398,7 +4383,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C36434E277C1B980038CB18 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4415,8 +4399,8 @@
 			files = (
 				3C5B377827FEAF6100801FEE /* SupportDocs in Frameworks */,
 				3C21EDC627A45C130005E183 /* RealmSwift in Frameworks */,
+				3C817F892819117700417835 /* Popovers in Frameworks */,
 				3C21EDC427A45C130005E183 /* Realm in Frameworks */,
-				3C6C7441278195E200E039F0 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4461,7 +4445,6 @@
 			files = (
 				3CADD80227FE4B7A009BBBDA /* SupportDocs in Frameworks */,
 				3C2D229827FBBA0200D413B7 /* SwiftPrettyPrint in Frameworks */,
-				3C798FCC27F78481007BF68D /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4469,7 +4452,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CFD6011278B6FBD0031BC8B /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4479,8 +4461,6 @@
 			files = (
 				3C21ED9127A3CD910005E183 /* RealmSwift in Frameworks */,
 				3C21ED8F27A3CD910005E183 /* Realm in Frameworks */,
-				3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */,
-				3C3642AE277BBED10038CB18 /* Popovers in Frameworks */,
 				3C4D3B7B274779EE0010FD68 /* Introspect in Frameworks */,
 				3C36434C277C0F970038CB18 /* SupportDocs in Frameworks */,
 				9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */,
@@ -6786,7 +6766,6 @@
 			);
 			name = Popover;
 			packageProductDependencies = (
-				3C364345277C0CDD0038CB18 /* Popovers */,
 				3CAD45D827FFEB5A00B0A0A9 /* SupportDocs */,
 			);
 			productName = Popover;
@@ -6847,7 +6826,6 @@
 			);
 			name = TabController;
 			packageProductDependencies = (
-				3C36430C277BDF430038CB18 /* Popovers */,
 			);
 			productName = TabController;
 			productReference = 3C4D3949274759240010FD68 /* TabController.app */;
@@ -6867,7 +6845,6 @@
 			);
 			name = Camera;
 			packageProductDependencies = (
-				3C3642BA277BC1340038CB18 /* Popovers */,
 				3CAD45B927FFE12500B0A0A9 /* SupportDocs */,
 			);
 			productName = Camera;
@@ -6888,7 +6865,6 @@
 			);
 			name = FindPhotos;
 			packageProductDependencies = (
-				3C443EF227DD8C5B0050A0AB /* Popovers */,
 				3C443FC727DFD1550050A0AB /* Introspect */,
 				3CF15D4327FF8B0A00D51E9B /* SupportDocs */,
 			);
@@ -6910,7 +6886,6 @@
 			);
 			name = Lists;
 			packageProductDependencies = (
-				3CFD5F79278A37F00031BC8B /* Popovers */,
 				3CAD45AC27FFDC0000B0A0A9 /* SupportDocs */,
 			);
 			productName = Lists;
@@ -6931,7 +6906,6 @@
 			);
 			name = SearchBar;
 			packageProductDependencies = (
-				3C36434D277C1B980038CB18 /* Popovers */,
 			);
 			productName = SearchBar;
 			productReference = 3C4D3B30274776E90010FD68 /* SearchBar.app */;
@@ -6968,10 +6942,10 @@
 			);
 			name = "Find-New";
 			packageProductDependencies = (
-				3C6C7440278195E200E039F0 /* Popovers */,
 				3C21EDC327A45C130005E183 /* Realm */,
 				3C21EDC527A45C130005E183 /* RealmSwift */,
 				3C5B377727FEAF6100801FEE /* SupportDocs */,
+				3C817F882819117700417835 /* Popovers */,
 			);
 			productName = "Find-New";
 			productReference = 3C6C7321278193F600E039F0 /* Find-New.app */;
@@ -7076,7 +7050,6 @@
 			);
 			name = SettingsNew;
 			packageProductDependencies = (
-				3C798FCB27F78481007BF68D /* Popovers */,
 				3C2D229727FBBA0200D413B7 /* SwiftPrettyPrint */,
 				3CADD80127FE4B7A009BBBDA /* SupportDocs */,
 			);
@@ -7098,7 +7071,6 @@
 			);
 			name = SearchNavigation;
 			packageProductDependencies = (
-				3CFD6010278B6FBD0031BC8B /* Popovers */,
 			);
 			productName = SearchNavigation;
 			productReference = 3CFD5FD3278B6F2B0031BC8B /* SearchNavigation.app */;
@@ -7126,9 +7098,7 @@
 			);
 			name = Find;
 			packageProductDependencies = (
-				3C5F1FA427121BB200143BDD /* WhatsNewKit */,
 				3C4D3B7A274779EE0010FD68 /* Introspect */,
-				3C3642AD277BBED10038CB18 /* Popovers */,
 				3C36434B277C0F970038CB18 /* SupportDocs */,
 				3C21ED8E27A3CD910005E183 /* Realm */,
 				3C21ED9027A3CD910005E183 /* RealmSwift */,
@@ -7216,12 +7186,11 @@
 			);
 			mainGroup = 4999AC872353A80A00AB06A7;
 			packageReferences = (
-				3C5F1FA327121BB200143BDD /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */,
 				3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */,
 				3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				3C2D229627FBBA0200D413B7 /* XCRemoteSwiftPackageReference "SwiftPrettyPrint" */,
+				3C504E052819108B00AD302A /* XCRemoteSwiftPackageReference "Popovers" */,
 			);
 			productRefGroup = 4999AC912353A80A00AB06A7 /* Products */;
 			projectDirPath = "";
@@ -11731,7 +11700,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5136;
+				CURRENT_PROJECT_VERSION = 5137;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-New/Info.plist";
@@ -11749,7 +11718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -11767,7 +11736,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5136;
+				CURRENT_PROJECT_VERSION = 5137;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-New/Info.plist";
@@ -11785,7 +11754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -12594,14 +12563,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aheze/Popovers";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aheze/SupportDocs";
@@ -12618,11 +12579,11 @@
 				kind = branch;
 			};
 		};
-		3C5F1FA327121BB200143BDD /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
+		3C504E052819108B00AD302A /* XCRemoteSwiftPackageReference "Popovers" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit";
+			repositoryURL = "https://github.com/aheze/Popovers";
 			requirement = {
-				branch = master;
+				branch = main;
 				kind = branch;
 			};
 		};
@@ -12664,40 +12625,10 @@
 			package = 3C2D229627FBBA0200D413B7 /* XCRemoteSwiftPackageReference "SwiftPrettyPrint" */;
 			productName = SwiftPrettyPrint;
 		};
-		3C3642AD277BBED10038CB18 /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
-		3C3642BA277BC1340038CB18 /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
-		3C36430C277BDF430038CB18 /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
-		3C364345277C0CDD0038CB18 /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
 		3C36434B277C0F970038CB18 /* SupportDocs */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
 			productName = SupportDocs;
-		};
-		3C36434D277C1B980038CB18 /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
-		3C443EF227DD8C5B0050A0AB /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
 		};
 		3C443FC727DFD1550050A0AB /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -12714,19 +12645,9 @@
 			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
 			productName = SupportDocs;
 		};
-		3C5F1FA427121BB200143BDD /* WhatsNewKit */ = {
+		3C817F882819117700417835 /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C5F1FA327121BB200143BDD /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
-			productName = WhatsNewKit;
-		};
-		3C6C7440278195E200E039F0 /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
-		3C798FCB27F78481007BF68D /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
+			package = 3C504E052819108B00AD302A /* XCRemoteSwiftPackageReference "Popovers" */;
 			productName = Popovers;
 		};
 		3CAD45AC27FFDC0000B0A0A9 /* SupportDocs */ = {
@@ -12753,16 +12674,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
 			productName = SupportDocs;
-		};
-		3CFD5F79278A37F00031BC8B /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
-		};
-		3CFD6010278B6FBD0031BC8B /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C3642AC277BBED10038CB18 /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

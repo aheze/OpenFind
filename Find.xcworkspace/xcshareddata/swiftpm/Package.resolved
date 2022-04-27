@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/aheze/Popovers",
       "state" : {
-        "revision" : "a845bdf8bf04e6e165f475d462d630974c0c1cce",
-        "version" : "1.3.1"
+        "branch" : "main",
+        "revision" : "a845bdf8bf04e6e165f475d462d630974c0c1cce"
       }
     },
     {
@@ -97,15 +97,6 @@
       "state" : {
         "branch" : "master",
         "revision" : "7ef0df639079491ee1aaf6b83b6fd4d08df80393"
-      }
-    },
-    {
-      "identity" : "whatsnewkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SvenTiigi/WhatsNewKit",
-      "state" : {
-        "branch" : "master",
-        "revision" : "8d40ce0de25a4bfe7996bef46c429c1e56a8962b"
       }
     }
   ],

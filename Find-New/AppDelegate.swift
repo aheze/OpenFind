@@ -38,13 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-//        print("Starting!!")
-//        var items = [String]()
-//        for i in 0 ..< 12_000_000 { /// this usually takes a couple seconds
-//            items.append("\(i)")
-//        }
-//        print("it: \(items.count)")
-
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).

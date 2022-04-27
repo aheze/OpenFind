@@ -61,7 +61,9 @@ class PhotosSlidesItemViewController: UIViewController {
         _ = highlightsViewController
         addChildViewController(scrollZoomController, in: contentView)
         addHighlightsViewController()
-        addToolbar()
+        
+        toolbarContainer.isHidden = true
+//        addToolbar()
         reloadImage()
         
         view.backgroundColor = .clear
