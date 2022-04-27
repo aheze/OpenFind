@@ -34,7 +34,7 @@ extension SearchViewController {
             realmModel.enteredVersions = []
             showPopover(configuration: .message(icon: "checkmark", text: "Reset Entered Versions"), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/resetPoints") {
             realmModel.experiencePoints = 0
             showPopover(configuration: .message(icon: "checkmark", text: "Reset Experience Points"), autoDismiss: true)
@@ -55,12 +55,10 @@ extension SearchViewController {
         if text.roughlyEquals("/showEnteredVersions") {
             showPopover(configuration: .message(icon: "info.circle", text: "Entered Versions: \(realmModel.enteredVersions)"), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/showPoints") {
             showPopover(configuration: .message(icon: "info.circle", text: "Experience Points: \(realmModel.experiencePoints)"), autoDismiss: true)
         }
-        
-        
 
         // MARK: - Extras
 
@@ -113,11 +111,23 @@ extension SearchViewController {
         if text.roughlyEquals("/apple") {
             showPopover(configuration: .image(systemName: "applelogo"), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/coco") {
             if let url = URL(string: "https://www.youtube.com/c/cocomelonarmy") {
                 showPopover(configuration: .link(url: url, icon: "tv.fill", text: "Sub to cocomelon"), autoDismiss: false)
             }
+        }
+
+        if text.roughlyEquals("/strawberry") {
+            showPopover(configuration: .strawberry, autoDismiss: false)
+        }
+
+        if text.roughlyEquals("/gradient") {
+            showPopover(configuration: .gradient, autoDismiss: false)
+        }
+
+        if text.roughlyEquals("/code") {
+            showPopover(configuration: .code, autoDismiss: false)
         }
     }
 
@@ -160,6 +170,9 @@ struct ExtrasView: View {
         case url(url: URL)
         case link(url: URL, icon: String, text: String) /// show a popup first, then open in safari
         case image(systemName: String)
+        case strawberry
+        case gradient
+        case code
     }
 
     var searchConfiguration: SearchConfiguration
@@ -256,6 +269,20 @@ struct ExtrasView: View {
                 .aspectRatio(1, contentMode: .fill)
                 .background(VisualEffectView(searchConfiguration.popoverBackgroundBlurStyle))
                 .cornerRadius(20)
+        case .strawberry:
+            getStrawberryView()
+        case .gradient:
+            GradientView()
+        case .code:
+            CodeView()
+        }
+    }
+
+    func getStrawberryView() -> AnyView {
+        if #available(iOS 15.0, *) {
+            return AnyView(StrawberryView())
+        } else {
+            return AnyView(EmptyView())
         }
     }
 }
@@ -282,5 +309,49 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ view: WKWebView, context: UIViewRepresentableContext<WebView>) {
         let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
         view.load(request)
+    }
+}
+
+@available(iOS 15.0, *)
+struct StrawberryView: View {
+    var body: some View {
+        Button {
+            print("Strawberry")
+        } label: {
+            AsyncImage(url: URL(string: "https://thumbs.dreamstime.com/b/fresh-strawberry-white-background-40742985.jpg"))
+        }
+    }
+}
+
+struct GradientView: View {
+    var body: some View {
+        VStack {
+            ForEach(0 ..< 10, id: \.self) { b in
+                Color(
+                    UIColor(red: 1, green: 0, blue: CGFloat(b) / 10, alpha: 1)
+                )
+            }
+        }
+    }
+}
+
+struct CodeView: View {
+    @State var color = Color.blue
+    var body: some View {
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+
+            Text("Hello Coding Club!")
+                .foregroundColor(color)
+
+            Button {
+                color = .green
+            } label: {
+                Text("Hehehaha")
+            }
+        }
+        .background(UIColor.systemBackground.color)
     }
 }
