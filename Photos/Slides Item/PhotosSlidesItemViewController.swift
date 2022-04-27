@@ -80,7 +80,11 @@ class PhotosSlidesItemViewController: UIViewController {
         )
         
         /// automatically animated
-        if model.slidesState?.toolbarInformationOn ?? false {
+        if
+            let toolbarInformationOn = model.slidesState?.toolbarInformationOn,
+            toolbarInformationOn,
+            traitCollection.horizontalSizeClass == .compact
+        {
             setAspectRatio(scaleToFill: true)
         } else {
             setAspectRatio(scaleToFill: false)
