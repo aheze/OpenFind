@@ -30,9 +30,21 @@ extension UIView {
 
 extension Debug {
     static func show(_ title: String, message: String? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Ok", style: .default)
-        alertController.addAction(defaultAction)
-        UIApplication.topmostViewController?.present(alertController, animated: true, completion: nil)
+        alert.addAction(defaultAction)
+        
+        guard let viewController = UIApplication.topmostViewController else { return }
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = viewController.view
+            popoverPresentationController.sourceRect = CGRect(
+                x: viewController.view.bounds.width / 2,
+                y: 50,
+                width: 1,
+                height: 1
+            )
+        }
+        
+        viewController.present(alert, animated: true, completion: nil)
     }
 }

@@ -54,6 +54,12 @@ extension CameraViewController {
                     self.model.setSnapshotState(to: .inactive)
                 }
             )
+            
+            if let popoverPresentationController = alert.popoverPresentationController {
+                popoverPresentationController.sourceView = self.landscapeToolbarContainer
+                popoverPresentationController.sourceRect = self.landscapeToolbarContainer.bounds
+                popoverPresentationController.permittedArrowDirections = .right
+            }
             present(alert, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)
@@ -69,6 +75,11 @@ extension CameraViewController {
                     self.model.setSnapshotState(to: .inactive)
                 }
             )
+            if let popoverPresentationController = alert.popoverPresentationController {
+                popoverPresentationController.sourceView = self.landscapeToolbarContainer
+                popoverPresentationController.sourceRect = self.landscapeToolbarContainer.bounds
+                popoverPresentationController.permittedArrowDirections = .right
+            }
             present(alert, animated: true, completion: nil)
         }
     }

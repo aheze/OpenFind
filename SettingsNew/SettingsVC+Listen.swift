@@ -22,6 +22,31 @@ extension SettingsViewController {
             self.resetAllSettings()
         }
 
+        SettingsData.deleteAllScannedData = { [weak self] in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: "Delete All Scanned Data?", message: "Are you sure you want to delete all scanned data? This can't be undone.", preferredStyle: .actionSheet)
+            alert.addAction(
+                UIAlertAction(title: "Delete", style: .destructive) { _ in
+                    ViewControllerCallback.deleteAllScannedData?()
+                }
+            )
+            alert.addAction(
+                UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+            )
+
+            if let popoverPresentationController = alert.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect = CGRect(
+                    x: self.view.bounds.width / 2,
+                    y: 50,
+                    width: 1,
+                    height: 1
+                )
+            }
+
+            self.present(alert, animated: true, completion: nil)
+        }
+
         SettingsData.shareLink = { [weak self] in
             guard let self = self else { return }
             self.shareLink()
@@ -58,13 +83,13 @@ extension SettingsViewController {
                 UIApplication.shared.open(url)
             }
         }
-        
+
         SettingsData.joinTheReddit = {
             if let url = URL(string: "https://www.reddit.com/r/findapp") {
                 UIApplication.shared.open(url)
             }
         }
-        
+
         SettingsData.shareApp = { [weak self] in
             guard let self = self else { return }
             self.showShareApp()
@@ -201,7 +226,7 @@ extension SettingsViewController {
         let viewController = self.getSupportDocs()
         self.present(viewController, animated: true)
     }
-    
+
     func showShareApp() {
         let viewController = SettingsShareAppViewController()
         let navigationController = UINavigationController(rootViewController: viewController)

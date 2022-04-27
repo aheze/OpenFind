@@ -28,6 +28,11 @@ extension ViewController {
             return viewController
         }
         
+        ViewControllerCallback.deleteAllScannedData = { [weak self] in
+            guard let self = self else { return }
+            self.deleteAllScannedData()
+        }
+
         tabViewModel.tappedTabAgain = { [weak self] tab in
             guard let self = self else { return }
 
@@ -77,10 +82,6 @@ extension ViewController {
             guard let self = self else { return }
             self.exportAllLists()
         }
-        SettingsData.deleteAllScannedData = { [weak self] in
-            guard let self = self else { return }
-            self.deleteAllScannedData()
-        }
 
         self.settingsController.model.startedToDismiss = { [weak self] in
             guard let self = self else { return }
@@ -93,14 +94,14 @@ extension ViewController {
         let displayedLists = lists.model.displayedLists.map { $0.list }
         let urls = displayedLists.compactMap { $0.getURL() }
         let dataSource = ListsSharingDataSource(lists: displayedLists)
-        
+
         let sourceRect = CGRect(
             x: view.bounds.width / 2,
             y: 50,
             width: 1,
             height: 1
         )
-        
+
         self.settingsController.viewController.presentShareSheet(
             items: urls + [dataSource],
             applicationActivities: nil,
@@ -109,19 +110,9 @@ extension ViewController {
     }
 
     func deleteAllScannedData() {
-        let alert = UIAlertController(title: "Delete All Scanned Data?", message: "Are you sure you want to delete all scanned data? This can't be undone.", preferredStyle: .actionSheet)
-        alert.addAction(
-            UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
-                guard let self = self else { return }
-                Task {
-                    await self.photosViewModel.deleteAllScannedData()
-                }
-            }
-        )
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-        )
-        self.settingsController.viewController.present(alert, animated: true, completion: nil)
+        Task {
+            await self.photosViewModel.deleteAllScannedData()
+        }
     }
 }
 

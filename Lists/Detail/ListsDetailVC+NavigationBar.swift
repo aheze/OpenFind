@@ -19,30 +19,6 @@ extension ListsDetailViewController {
         setupDismissButton()
     }
     
-    /// sharing logic inside `ListsSharingDataSource`
-    func share() {
-        let list = model.list.getList()
-        if let url = list.getURL() {
-            let dataSource = ListsSharingDataSource(lists: [list])
-            let sourceRect = CGRect(
-                x: view.bounds.width / 2,
-                y: 50,
-                width: 1,
-                height: 1
-            )
-            
-            presentShareSheet(
-                items: [url, dataSource],
-                applicationActivities: nil,
-                sourceRect: sourceRect
-            )
-        }
-    }
-    
-    func delete() {
-        deleteList()
-    }
-    
     @available(iOS 14.0, *)
     func setupTopMenu() {
         let shareAction = UIAction(
@@ -140,7 +116,27 @@ extension ListsDetailViewController {
         dismiss(animated: true)
     }
     
-    func deleteList() {
+    /// sharing logic inside `ListsSharingDataSource`
+    func share() {
+        let list = model.list.getList()
+        if let url = list.getURL() {
+            let dataSource = ListsSharingDataSource(lists: [list])
+            let sourceRect = CGRect(
+                x: view.bounds.width / 2,
+                y: 50,
+                width: 1,
+                height: 1
+            )
+            
+            presentShareSheet(
+                items: [url, dataSource],
+                applicationActivities: nil,
+                sourceRect: sourceRect
+            )
+        }
+    }
+    
+    func delete() {
         let listName = model.list.title.isEmpty ? "This List" : #""\#(model.list.title)""#
         let alert = UIAlertController(title: "Delete \(listName)?", message: "Are you sure you want to delete this list? This can't be undone.", preferredStyle: .actionSheet)
         alert.addAction(
@@ -158,6 +154,19 @@ extension ListsDetailViewController {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         )
+        
+        if let popoverPresentationController = alert.popoverPresentationController {
+            let sourceRect = CGRect(
+                x: view.bounds.width / 2,
+                y: 50,
+                width: 1,
+                height: 1
+            )
+            
+            popoverPresentationController.sourceView = view
+            popoverPresentationController.sourceRect = sourceRect
+        }
+        
         present(alert, animated: true, completion: nil)
     }
 }

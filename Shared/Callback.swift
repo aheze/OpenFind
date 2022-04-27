@@ -10,4 +10,7 @@ import UIKit
 
 enum ViewControllerCallback {
     static var getListDetailController: ((ToolbarViewModel, List) -> UIViewController?)?
+    
+    /// confirmed already, delete now
+    static var deleteAllScannedData: (() -> Void)?
 }
