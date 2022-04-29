@@ -20,7 +20,6 @@ struct PhotosTextOverlayView: View {
         let imageName = getImageName()
 
         Button {
-            print("Show text!")
             withAnimation {
                 textOverlayViewModel.on.toggle()
             }

@@ -18,6 +18,7 @@ extension PhotosSlidesViewController {
 
     func switchToFullScreen(_ fullScreen: Bool) {
         if fullScreen {
+            searchViewModel.dismissKeyboard?()
             searchNavigationModel.showNavigationBar?(false)
             tabViewModel.showBars(false, with: .tabAndStatusBar)
 

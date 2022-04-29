@@ -88,7 +88,6 @@ extension Finding {
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
         
-        // TODO!!!
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let text = realmModel.container.getText(from: metadata.assetIdentifier)
@@ -96,7 +95,7 @@ extension Finding {
                 realmModel: realmModel,
                 from: text?.sentences ?? [],
                 with: stringToGradients,
-                imageSize: nil
+                imageSize: photo.asset.getSize()
             )
             if highlights.count >= 1 {
                 let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: stringToGradients, highlights: highlights)

@@ -11704,7 +11704,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5137;
+				CURRENT_PROJECT_VERSION = 5138;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-New/Info.plist";
@@ -11722,7 +11722,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -11740,7 +11740,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5137;
+				CURRENT_PROJECT_VERSION = 5138;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-New/Info.plist";
@@ -11758,7 +11758,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

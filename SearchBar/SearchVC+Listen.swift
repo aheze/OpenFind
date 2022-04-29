@@ -17,7 +17,9 @@ extension SearchViewController {
         
         searchViewModel.dismissKeyboard = { [weak self] in
             guard let self = self else { return }
-            self.view.endEditing(true)
+
+            /// calling superview actually forces end editing
+            self.view.superview?.endEditing(true)
         }
         
         searchViewModel.getShouldKeepWhitespace = { [weak self] in

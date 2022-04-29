@@ -114,7 +114,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             if let highlights = slidesPhoto.findPhoto.highlightsSet?.highlights, highlights.count > 3 {
                 realmModel.incrementExperience(by: 6)
             }
-            
+
             model.configureToolbar(for: slidesPhoto.findPhoto.photo)
             collectionView.layoutIfNeeded()
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
@@ -137,6 +137,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         if let popover = view.popover(tagged: "Popover") {
             popover.dismiss()
         }
+
+        searchViewModel.dismissKeyboard?()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
