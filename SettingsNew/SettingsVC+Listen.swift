@@ -27,7 +27,7 @@ extension SettingsViewController {
             let alert = UIAlertController(title: "Delete All Scanned Data?", message: "Are you sure you want to delete all scanned data? This can't be undone.", preferredStyle: .actionSheet)
             alert.addAction(
                 UIAlertAction(title: "Delete", style: .destructive) { _ in
-                    ViewControllerCallback.deleteAllScannedData?()
+                    ViewControllerCallback.deleteAllScannedData?(false)
                 }
             )
             alert.addAction(

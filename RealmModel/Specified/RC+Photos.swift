@@ -14,24 +14,17 @@ extension RealmContainer {
     func loadPhotoMetadatas() {
         let realm = try! Realm()
 
-        print("fetching..")
         /// convert realm lists to normal lists
         let realmPhotoMetadatas = realm.objects(RealmPhotoMetadata.self)
-
-        print("fetched! \(realmPhotoMetadatas.count)")
 
         /// this line is very fast actually
         let photoMetadatas = realmPhotoMetadatas.map {
             $0.getPhotoMetadata()
         }
 
-        print("Getting.")
-
         let assetIdentifierToPhotoMetadata = photoMetadatas.reduce(into: [String: PhotoMetadata]()) {
             $0[$1.assetIdentifier] = $1
         }
-
-        print("Made.")
 
         DispatchQueue.main.async {
             self.applyMetadatas(assetIdentifierToPhotoMetadata: assetIdentifierToPhotoMetadata)
@@ -44,18 +37,33 @@ extension RealmContainer {
         }
     }
 
-    func deleteAllScannedData() {
+    func deleteAllPhotos() {
         let realm = try! Realm()
         let metadatas = realm.objects(RealmPhotoMetadata.self)
 
         do {
             try realm.write {
                 realm.delete(metadatas)
-//                for metadata in metadatas {
-//                    metadata.dateScanned = nil
-//                    metadata.text?.sentences = RealmSwift.List<RealmSentence>()
-//                    metadata.text?.scannedInLanguages = RealmSwift.List<String>()
-//                }
+            }
+            if let model = getModel?() {
+                model.assetIdentifierToPhotoMetadata.removeAll()
+            }
+        } catch {
+            Debug.log("Error deleting all photos: \(error)", .error)
+        }
+    }
+
+    func deleteAllScannedData() {
+        let realm = try! Realm()
+        let metadatas = realm.objects(RealmPhotoMetadata.self)
+
+        do {
+            try realm.write {
+                for metadata in metadatas {
+                    metadata.dateScanned = nil
+                    metadata.text?.sentences = RealmSwift.List<RealmSentence>()
+                    metadata.text?.scannedInLanguages = RealmSwift.List<String>()
+                }
             }
             if let model = getModel?() {
                 model.assetIdentifierToPhotoMetadata.removeAll()
@@ -73,7 +81,7 @@ extension RealmContainer {
             Debug.log("No metadata.")
             return
         }
-        
+
         let realm = try! Realm()
 
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
@@ -112,7 +120,7 @@ extension RealmContainer {
             dateScanned: metadata.dateScanned,
             text: text
         )
-        
+
         let realm = try! Realm()
 
         do {
@@ -127,7 +135,6 @@ extension RealmContainer {
     }
 
     func getText(from identifier: String) -> PhotoMetadataText? {
-        
         let realm = try! Realm()
         if
             let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: identifier),
@@ -141,7 +148,6 @@ extension RealmContainer {
 
     /// delete metadata and text
     func deletePhotoMetadata(metadata: PhotoMetadata) {
-        
         let realm = try! Realm()
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
             do {

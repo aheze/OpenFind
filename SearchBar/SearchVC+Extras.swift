@@ -71,8 +71,8 @@ extension SearchViewController {
                 "longsdklfj sdfkjsdlf dsf"
             ]
 
-            for i in 0..<10_000 {
-                print("i: \(i)")
+            for i in 0..<1_000 {
+                Debug.log("Populating: \(i)")
                 let string = strings.randomElement()!
                 let sentences = (0..<250).map { _ in
                     Sentence(
@@ -103,8 +103,13 @@ extension SearchViewController {
         }
 
         if text.roughlyEquals("/debugDeleteAllMetadatas") {
-            ViewControllerCallback.deleteAllScannedData?()
-            showPopover(configuration: .message(icon: "info.circle", text: "Deleted."), autoDismiss: true)
+            ViewControllerCallback.deleteAllScannedData?(false)
+            showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Scanned Data."), autoDismiss: true)
+        }
+        
+        if text.roughlyEquals("/debugDeleteAllPhotos") {
+            ViewControllerCallback.deleteAllScannedData?(true)
+            showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Photo Metadata."), autoDismiss: true)
         }
 
         // MARK: - Extras

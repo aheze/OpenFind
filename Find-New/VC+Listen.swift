@@ -27,10 +27,10 @@ extension ViewController {
             )
             return viewController
         }
-        
-        ViewControllerCallback.deleteAllScannedData = { [weak self] in
+
+        ViewControllerCallback.deleteAllScannedData = { [weak self] allPhotos in
             guard let self = self else { return }
-            self.deleteAllScannedData()
+            self.deleteAllScannedData(allPhotos: allPhotos)
         }
 
         tabViewModel.tappedTabAgain = { [weak self] tab in
@@ -109,9 +109,9 @@ extension ViewController {
         )
     }
 
-    func deleteAllScannedData() {
+    func deleteAllScannedData(allPhotos: Bool) {
         Task {
-            await self.photosViewModel.deleteAllScannedData()
+            await self.photosViewModel.deleteAllScannedData(allPhotos: allPhotos)
         }
     }
 }

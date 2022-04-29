@@ -95,14 +95,6 @@ struct Sentence {
             angle: scaledAngle
         )
 
-//        let position = ScannedPosition(
-//            center: sentenceCenter,
-//            size: CGSize(width: sentenceWidth, height: sentenceHeight),
-//            angle: angle
-//        )
-
-        print("String: \(string)------ \(range) -> \(scaledAngle.radiansToDegrees) .. normL: \(normalizedAngle.radiansToDegrees)")
-
         return position
     }
 }

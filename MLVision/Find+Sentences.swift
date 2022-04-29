@@ -49,8 +49,7 @@ extension Find {
                     bottomRight: CGPoint(x: rectangleObservation.bottomRight.x, y: 1 - rectangleObservation.bottomRight.y),
                     bottomLeft: CGPoint(x: rectangleObservation.bottomLeft.x, y: 1 - rectangleObservation.bottomLeft.y)
                 )
-                
-                print("Sentence: \(sentence)")
+
                 sentences.append(sentence)
             } catch {
                 Debug.log("Error: \(error)")

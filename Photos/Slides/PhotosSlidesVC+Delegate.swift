@@ -30,7 +30,7 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
             {
                 viewController.highlightsViewModel.highlights = highlightsSet.highlights
                 viewController.highlightsViewModel.shouldScaleHighlights = true
-                print("set; \(highlightsSet.highlights)")
+
             } else {
                 /// else, find again.
                 startFinding(for: slidesPhoto, viewController: viewController, animate: false)
