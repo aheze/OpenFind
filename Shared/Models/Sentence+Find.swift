@@ -71,7 +71,6 @@ extension Array where Element == FastSentence {
                         colors: gradient.colors,
                         alpha: gradient.alpha,
                         position: .init(
-                            pivotPoint: .zero,
                             center: word.frame.center,
                             size: word.frame.size,
                             angle: .zero

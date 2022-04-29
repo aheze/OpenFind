@@ -45,9 +45,10 @@ struct Sentence {
         /// width, height, and center for the entire sentence
         let sentenceWidth = CGPointDistance(from: topLeft, to: topRight)
         let sentenceHeight = CGPointDistance(from: topLeft, to: bottomLeft)
+
         let sentenceCenter = CGPoint(
-            x: (topRight.x - bottomLeft.x) / 2,
-            y: (topRight.y - bottomLeft.y) / 2
+            x: (topRight.x + bottomLeft.x) / 2,
+            y: (topRight.y + bottomLeft.y) / 2
         )
         let sentenceFrame = CGRect(
             x: sentenceCenter.x - sentenceWidth / 2,
@@ -55,8 +56,6 @@ struct Sentence {
             width: sentenceWidth,
             height: sentenceHeight
         )
-        
-        
 
         let characterLength = sentenceWidth / CGFloat(string.count)
 
@@ -66,10 +65,7 @@ struct Sentence {
         let yDifference = topRight.y - topLeft.y
         let xDifference = topRight.x - topLeft.x
         let angle = atan2(yDifference, xDifference)
-        
-        
-        
-        
+
         /// frame of highlight, relative to sentence
         let highlightFrame = CGRect(
             x: sentenceFrame.origin.x + highlightXOffset,
@@ -78,31 +74,20 @@ struct Sentence {
             height: sentenceHeight
         )
 
-        let highlightDistanceToSentenceCenter = highlightFrame.midX - sentenceWidth / 2
+        let highlightCenterRelativeToSentenceCenter = highlightXOffset + highlightWidth / 2
+        let highlightDistanceToSentenceCenter = highlightCenterRelativeToSentenceCenter - (sentenceWidth / 2)
         let highlightRotationalXOffset = highlightDistanceToSentenceCenter * cos(angle)
         let highlightRotationalYOffset = highlightDistanceToSentenceCenter * sin(angle)
         let highlightCenter = CGPoint(
             x: sentenceCenter.x + highlightRotationalXOffset,
             y: sentenceCenter.y + highlightRotationalYOffset
         )
-        
-        print("Width: \(sentenceWidth) -> \(highlightWidth).. \(highlightCenter)")
-        print("Dist from center: \(highlightDistanceToSentenceCenter).. X: \(highlightRotationalXOffset)")
-        
-        
 
         let position = ScannedPosition(
-            pivotPoint: sentenceCenter,
             center: highlightCenter,
             size: highlightFrame.size,
             angle: angle
         )
-//        let position = ScannedPosition(
-//            pivotPoint: sentenceCenter,
-//            center: highlightFrame.center,
-//            size: highlightFrame.size,
-//            angle: angle
-//        )
 
         return position
     }

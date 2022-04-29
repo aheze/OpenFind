@@ -51,7 +51,6 @@ extension PhotosViewController {
                     colors: lineHighlight.colors,
                     alpha: lineHighlight.alpha,
                     position: .init(
-                        pivotPoint: .zero,
                         center: frame.center,
                         size: frame.size,
                         angle: .zero

@@ -43,12 +43,6 @@ struct Highlight: Identifiable, Hashable {
 }
 
 struct ScannedPosition: Equatable {
-    /// the center that it's originally located
-//    var originalPoint = CGPoint.zero
-    
-    /// where to rotate around. This should be the sentence's center
-    var pivotPoint = CGPoint.zero
-    
     /// midpoint of the highlight, to the screen. Use this in SwiftUI
     var center = CGPoint.zero
     

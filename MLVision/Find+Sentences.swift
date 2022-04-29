@@ -44,11 +44,13 @@ extension Find {
                 let sentence = Sentence(
                     string: string,
                     confidence: confidence,
-                    topLeft: rectangleObservation.topLeft,
-                    topRight: rectangleObservation.topRight,
-                    bottomRight: rectangleObservation.bottomRight,
-                    bottomLeft: rectangleObservation.bottomLeft
+                    topLeft: CGPoint(x: rectangleObservation.topLeft.x, y: 1 - rectangleObservation.topLeft.y),
+                    topRight: CGPoint(x: rectangleObservation.topRight.x, y: 1 - rectangleObservation.topRight.y),
+                    bottomRight: CGPoint(x: rectangleObservation.bottomRight.x, y: 1 - rectangleObservation.bottomRight.y),
+                    bottomLeft: CGPoint(x: rectangleObservation.bottomLeft.x, y: 1 - rectangleObservation.bottomLeft.y)
                 )
+                
+                print("Sentence: \(sentence)")
                 sentences.append(sentence)
             } catch {
                 Debug.log("Error: \(error)")
