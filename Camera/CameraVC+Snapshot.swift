@@ -18,7 +18,7 @@ extension CameraViewController {
                 image.cgImage != nil
             {
                 model.setSnapshotState(to: .startedSaving)
-                saveImage(image)
+                self.saveImage(image)
             } else {
                 model.setSnapshotState(to: .noImageYet)
             }
@@ -39,7 +39,7 @@ extension CameraViewController {
             .store(in: &realmModel.cancellables)
 
         if photosPermissionsViewModel.currentStatus.isGranted() {
-            saveImageAfterPermissionsGranted(image: image)
+            self.saveImageAfterPermissionsGranted(image: image)
         } else if photosPermissionsViewModel.currentStatus == .notDetermined {
             let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)
             alert.addAction(
@@ -54,7 +54,7 @@ extension CameraViewController {
                     self.model.setSnapshotState(to: .inactive)
                 }
             )
-            
+
             if let popoverPresentationController = alert.popoverPresentationController {
                 popoverPresentationController.sourceView = self.landscapeToolbarContainer
                 popoverPresentationController.sourceRect = self.landscapeToolbarContainer.bounds
@@ -114,15 +114,14 @@ extension CameraViewController {
                             assetIdentifier: assetIdentifier,
                             isStarred: false,
                             isIgnored: false,
-                            dateScanned: currentPausedImage.dateScanned,
-                            text: currentPausedImage.text
+                            dateScanned: currentPausedImage.dateScanned
                         )
 
                         let assets = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: .none)
                         if let asset = assets.firstObject {
                             let photo = Photo(asset: asset, metadata: metadata)
                             self.model.photoAdded?(photo)
-                            self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+                            self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: currentPausedImage.text)
                             self.realmModel.incrementExperience(by: 3)
                         }
                     }

@@ -33,16 +33,15 @@ extension PhotosViewModel {
             var newPhoto = photo
             if newPhoto.metadata != nil {
                 newPhoto.metadata?.isStarred = shouldStar
-                updatePhotoMetadata(photo: newPhoto, reloadCell: true)
+                updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
                     isStarred: shouldStar,
-                    isIgnored: false,
-                    text: PhotoMetadataText()
+                    isIgnored: false
                 )
                 newPhoto.metadata = metadata
-                updatePhotoMetadata(photo: newPhoto, reloadCell: true)
+                updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
             }
         }
     }
@@ -61,20 +60,19 @@ extension PhotosViewModel {
             /// metadata exists, delete sentences
             if newPhoto.metadata != nil {
                 newPhoto.metadata?.isIgnored = shouldIgnore
-                newPhoto.metadata?.text?.delete()
                 withAnimation {
-                    updatePhotoMetadata(photo: newPhoto, reloadCell: true)
+                    /// create a empty `PhotoMetadataText` to clear it
+                    updatePhotoMetadata(photo: newPhoto, withText: PhotoMetadataText(), reloadCell: true)
                 }
             } else {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
                     isStarred: false,
-                    isIgnored: shouldIgnore,
-                    text: PhotoMetadataText()
+                    isIgnored: shouldIgnore
                 )
                 newPhoto.metadata = metadata
                 withAnimation {
-                    updatePhotoMetadata(photo: newPhoto, reloadCell: true)
+                    updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
                 }
             }
         }

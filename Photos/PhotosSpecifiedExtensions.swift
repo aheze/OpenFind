@@ -83,18 +83,18 @@ extension PHAsset {
 
 extension Finding {
     /// get FindPhotos from specified photos
-    static func findAndGetFindPhotos(realmModel: RealmModel, from photos: [Photo], stringToGradients: [String: Gradient]) async -> ([FindPhoto], [FindPhoto], [FindPhoto]) {
+    static func findAndGetFindPhotos(realmModel: RealmModel, from photos: [Photo], stringToGradients: [String: Gradient]) -> ([FindPhoto], [FindPhoto], [FindPhoto]) {
         var allFindPhotos = [FindPhoto]()
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
         
-        
         // TODO!!!
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
+            let text = realmModel.container.getText(from: metadata.assetIdentifier)
             let (highlights, lines) = Finding.getHighlightsAndDescription(
                 realmModel: realmModel,
-                from: metadata.text?.sentences ?? [],
+                from: text?.sentences ?? [],
                 with: stringToGradients
             )
             if highlights.count >= 1 {

@@ -96,15 +96,14 @@ extension CameraViewController {
         if let assetIdentifier = self.model.pausedImage?.assetIdentifier {
             let metadata = PhotoMetadata(
                 assetIdentifier: assetIdentifier,
-                dateScanned: currentDate,
-                text: text
+                dateScanned: currentDate
             )
             DispatchQueue.main.async {
                 let assets = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: .none)
                 if let asset = assets.firstObject {
                     let photo = Photo(asset: asset, metadata: metadata)
                     self.model.photoAdded?(photo)
-                    self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+                    self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil)
                 }
             }
         }

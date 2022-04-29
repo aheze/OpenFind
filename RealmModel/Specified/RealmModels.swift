@@ -39,8 +39,7 @@ class RealmPhotoMetadata: Object {
             assetIdentifier: self.assetIdentifier,
             isStarred: self.isStarred,
             isIgnored: self.isIgnored,
-            dateScanned: self.dateScanned,
-            text: self.text?.getPhotoMetadataText() ?? PhotoMetadataText()
+            dateScanned: self.dateScanned
         )
         return metadata
     }

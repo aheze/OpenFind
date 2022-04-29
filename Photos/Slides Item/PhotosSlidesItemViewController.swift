@@ -143,7 +143,7 @@ extension PhotosSlidesItemViewController {
                 guard let self = self else { return }
                 
                 if on {
-                    guard let sentences = self.findPhoto.photo.metadata?.text?.sentences else { return }
+//                    guard let sentences = self.findPhoto.photo.metadata?.text?.sentences else { return }
 //                    let overlays: [Overlay] = sentences.map { sentence in
 //                        let upperBound = sentence.components.last?.range.upperBound ?? 1
 //                        let highlight = Overlay(

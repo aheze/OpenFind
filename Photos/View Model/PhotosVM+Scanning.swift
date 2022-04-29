@@ -13,31 +13,30 @@ extension PhotosViewModel {
     /// if `inBatch`, no need for immediate add - check if the user's finger is touching the screen first
     @MainActor func photoScanned(photo: Photo, sentences: [Sentence], visionOptions: VisionOptions, inBatch: Bool) {
         var newPhoto = photo
+
+        let text = PhotoMetadataText(
+            sentences: sentences,
+            scannedInLanguages: visionOptions.recognitionLanguages,
+            scannedInVersion: Utilities.getVersionString()
+        )
+
         if let metadata = photo.metadata {
             var newMetadata = metadata
             newMetadata.dateScanned = Date()
-            newMetadata.text?.sentences = sentences
-            newMetadata.text?.scannedInLanguages = visionOptions.recognitionLanguages
             newPhoto.metadata = newMetadata
-            getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata)
+
+            getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata, text: text)
             addSentences(of: newPhoto, immediately: !inBatch)
         } else {
-            let text = PhotoMetadataText(
-                sentences: sentences,
-                scannedInLanguages: visionOptions.recognitionLanguages,
-                scannedInVersion: Utilities.getVersionString()
-            )
-            
             let metadata = PhotoMetadata(
                 assetIdentifier: photo.asset.localIdentifier,
                 isStarred: false,
                 isIgnored: false,
-                dateScanned: Date(),
-                text: text
+                dateScanned: Date()
             )
 
             newPhoto.metadata = metadata
-            getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
+            getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text)
             addSentences(of: newPhoto, immediately: !inBatch)
         }
 
@@ -73,7 +72,7 @@ extension PhotosViewModel {
     /// call this after a photo was just scanned
     func resumeScanning() {
         if photosToScan.isEmpty {
-            self.removeNote(.downloadingFromCloud)
+            removeNote(.downloadingFromCloud)
         }
         if
             shouldResumeScanning(),

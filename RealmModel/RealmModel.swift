@@ -133,6 +133,8 @@ class RealmModel: ObservableObject {
         let photoMetadata = assetIdentifierToPhotoMetadata[identifier]
         return photoMetadata
     }
+    
+    
 }
 
 extension RealmModel {

@@ -140,12 +140,14 @@ struct HighlightView: View {
 
     func getFrame() -> CGRect {
         if model.shouldScaleHighlights {
-            return CGRect(
+            let frame = CGRect(
                 x: highlight.position.center.x * viewSize.width,
                 y: highlight.position.center.y * viewSize.height,
                 width: highlight.position.size.width * viewSize.width,
                 height: highlight.position.size.height * viewSize.height
             )
+            print("Frame: \(frame)... \(viewSize) -> \(highlight.position)")
+            return frame
         } else {
             return CGRect(
                 x: highlight.position.center.x,

@@ -47,11 +47,11 @@ struct PhotosSlidesInfoView: View {
             }
             .fixedSize(horizontal: false, vertical: true)
 
-            if let scannedInLanguages = photo.metadata?.text?.scannedInLanguages, !scannedInLanguages.isEmpty {
-                let languages = scannedInLanguages.compactMap { Settings.Values.RecognitionLanguage(rawValue: $0)?.getTitle() }
-                Text("Scanned in \(languages.sentence).")
-                    .foregroundColor(UIColor.secondaryLabel.color)
-            }
+//            if let scannedInLanguages = photo.metadata?.text?.scannedInLanguages, !scannedInLanguages.isEmpty {
+//                let languages = scannedInLanguages.compactMap { Settings.Values.RecognitionLanguage(rawValue: $0)?.getTitle() }
+//                Text("Scanned in \(languages.sentence).")
+//                    .foregroundColor(UIColor.secondaryLabel.color)
+//            }
         }
         .foregroundColor(.accent)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

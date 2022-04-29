@@ -34,7 +34,7 @@ extension SearchViewController {
             realmModel.enteredVersions = []
             showPopover(configuration: .message(icon: "checkmark", text: "Reset Entered Versions"), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/resetPoints") {
             realmModel.experiencePoints = 0
             showPopover(configuration: .message(icon: "checkmark", text: "Reset Experience Points"), autoDismiss: true)
@@ -55,12 +55,57 @@ extension SearchViewController {
         if text.roughlyEquals("/showEnteredVersions") {
             showPopover(configuration: .message(icon: "info.circle", text: "Entered Versions: \(realmModel.enteredVersions)"), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/showPoints") {
             showPopover(configuration: .message(icon: "info.circle", text: "Experience Points: \(realmModel.experiencePoints)"), autoDismiss: true)
         }
-        
-        
+
+        if text.roughlyEquals("/debugPopulateWithLotsOfPhotos") {
+            let strings = [
+                "Some string",
+                "as diuoiasu oisud oaisdu aosd",
+                "ieufn oisufoisdufiodsuf oidsfusidfu sd",
+                "alksdj asdjlajdlkasjdlkasjd lksajdlkajsdlka jdkljsldkjalksdj alksjdklasd",
+                "asdjh saodjklasdkla string",
+                "Some adskj",
+                "longsdklfj sdfkjsdlf dsf"
+            ]
+
+            for i in 0..<10_000 {
+                print("i: \(i)")
+                let string = strings.randomElement()!
+                let sentences = (0..<250).map { _ in
+                    Sentence(
+                        string: string,
+                        confidence: 1,
+                        topLeft: CGPoint(x: 0.9998, y: 0.933),
+                        topRight: CGPoint(x: 0.9998, y: 0.933),
+                        bottomRight: CGPoint(x: 0.9998, y: 0.933),
+                        bottomLeft: CGPoint(x: 0.9998, y: 0.93343)
+                    )
+                }
+                let photoMetadata = PhotoMetadata(
+                    assetIdentifier: UUID().uuidString,
+                    isStarred: Bool.random(),
+                    isIgnored: false,
+                    dateScanned: Date()
+                )
+                
+                let text = PhotoMetadataText(
+                    sentences: sentences,
+                    scannedInLanguages: [Settings.Values.RecognitionLanguage.english.rawValue],
+                    scannedInVersion: "2.0.3"
+                )
+                
+                realmModel.container.updatePhotoMetadata(metadata: photoMetadata, text: text)
+            }
+            showPopover(configuration: .message(icon: "info.circle", text: "Populated."), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/debugDeleteAllMetadatas") {
+            ViewControllerCallback.deleteAllScannedData?()
+            showPopover(configuration: .message(icon: "info.circle", text: "Deleted."), autoDismiss: true)
+        }
 
         // MARK: - Extras
 
@@ -109,7 +154,7 @@ extension SearchViewController {
                 showPopover(configuration: .link(url: url, icon: "scissors", text: "Buy crochet stuff!"), autoDismiss: false)
             }
         }
-        
+
 //        if text.roughlyEquals("/coco") {
 //            if let url = URL(string: "https://www.youtube.com/c/cocomelonarmy") {
 //                showPopover(configuration: .link(url: url, icon: "tv.fill", text: "Sub to cocomelon"), autoDismiss: false)

@@ -31,10 +31,11 @@ extension PhotosSlidesViewController {
     func findFromMetadata(in slidesPhoto: SlidesPhoto, viewController: PhotosSlidesItemViewController, animate: Bool) {
         guard let metadata = slidesPhoto.findPhoto.photo.metadata else { return }
         guard !slidesSearchViewModel.isEmpty else { return }
-        let highlights = metadata.text?.sentences.getHighlights(
+        guard let text = realmModel.container.getText(from: metadata.assetIdentifier) else { return }
+        let highlights = text.sentences.getHighlights(
             stringToGradients: self.slidesSearchViewModel.stringToGradients,
             realmModel: realmModel
-        ) ?? []
+        )
 
         let highlightSet = FindPhoto.HighlightsSet(
             stringToGradients: self.slidesSearchViewModel.stringToGradients,

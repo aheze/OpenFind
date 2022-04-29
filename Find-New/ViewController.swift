@@ -111,7 +111,7 @@ class ViewController: UIViewController {
     func loadMigratedData(migratedPhotoMetadatas: [PhotoMetadata], migratedLists: [List]) {
         DispatchQueue.main.async {
             for metadata in migratedPhotoMetadatas {
-                self.realmModel.container.updatePhotoMetadata(metadata: metadata)
+                self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil)
             }
 
             for list in migratedLists {

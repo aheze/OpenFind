@@ -9,7 +9,7 @@
 import RealmSwift
 
 class RealmContainer {
-    let realm = try! Realm()
+//    let realm = try! Realm()
 
     var getModel: (() -> RealmModel?)? /// get from outside container
 

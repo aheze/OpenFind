@@ -55,13 +55,22 @@ struct Sentence {
             width: sentenceWidth,
             height: sentenceHeight
         )
+        
+        
 
         let characterLength = sentenceWidth / CGFloat(string.count)
 
         let highlightXOffset = characterLength * CGFloat(range.lowerBound)
         let highlightWidth = characterLength * CGFloat(range.count)
 
-        /// frame of highlight
+        let yDifference = topRight.y - topLeft.y
+        let xDifference = topRight.x - topLeft.x
+        let angle = atan2(yDifference, xDifference)
+        
+        
+        
+        
+        /// frame of highlight, relative to sentence
         let highlightFrame = CGRect(
             x: sentenceFrame.origin.x + highlightXOffset,
             y: 0,
@@ -69,16 +78,31 @@ struct Sentence {
             height: sentenceHeight
         )
 
-        let yDifference = topRight.y - topLeft.y
-        let xDifference = topRight.x - topLeft.x
-        let angle = atan2(yDifference, xDifference)
+        let highlightDistanceToSentenceCenter = highlightFrame.midX - sentenceWidth / 2
+        let highlightRotationalXOffset = highlightDistanceToSentenceCenter * cos(angle)
+        let highlightRotationalYOffset = highlightDistanceToSentenceCenter * sin(angle)
+        let highlightCenter = CGPoint(
+            x: sentenceCenter.x + highlightRotationalXOffset,
+            y: sentenceCenter.y + highlightRotationalYOffset
+        )
+        
+        print("Width: \(sentenceWidth) -> \(highlightWidth).. \(highlightCenter)")
+        print("Dist from center: \(highlightDistanceToSentenceCenter).. X: \(highlightRotationalXOffset)")
+        
+        
 
         let position = ScannedPosition(
             pivotPoint: sentenceCenter,
-            center: highlightFrame.center,
+            center: highlightCenter,
             size: highlightFrame.size,
             angle: angle
         )
+//        let position = ScannedPosition(
+//            pivotPoint: sentenceCenter,
+//            center: highlightFrame.center,
+//            size: highlightFrame.size,
+//            angle: angle
+//        )
 
         return position
     }

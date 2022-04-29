@@ -43,7 +43,7 @@ struct PhotoMetadata {
 
     /// if this is nil, it hasn't been loaded.
     /// This should not be nil when loaded, even if not scanned. (`dateScanned` determines scanned or not scanned.)
-    var text: PhotoMetadataText?
+//    var text: PhotoMetadataText?
 }
 
 struct PhotoMetadataText {
