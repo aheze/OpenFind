@@ -41,53 +41,67 @@ struct Sentence {
     var bottomRight: CGPoint
     var bottomLeft: CGPoint
 
-    func getPosition(for range: Range<Int>) -> ScannedPosition {
+    /// pass in `imageSize` to calculate angle
+    func getPosition(for range: Range<Int>, imageSize: CGSize?) -> ScannedPosition {
         /// width, height, and center for the entire sentence
         let sentenceWidth = CGPointDistance(from: topLeft, to: topRight)
         let sentenceHeight = CGPointDistance(from: topLeft, to: bottomLeft)
 
-        let sentenceCenter = CGPoint(
-            x: (topRight.x + bottomLeft.x) / 2,
-            y: (topRight.y + bottomLeft.y) / 2
-        )
-        let sentenceFrame = CGRect(
-            x: sentenceCenter.x - sentenceWidth / 2,
-            y: sentenceCenter.y - sentenceHeight / 2,
-            width: sentenceWidth,
-            height: sentenceHeight
-        )
-
         let characterLength = sentenceWidth / CGFloat(string.count)
-
         let highlightXOffset = characterLength * CGFloat(range.lowerBound)
         let highlightWidth = characterLength * CGFloat(range.count)
 
         let yDifference = topRight.y - topLeft.y
         let xDifference = topRight.x - topLeft.x
-        let angle = atan2(yDifference, xDifference)
+        let normalizedAngle = atan2(yDifference, xDifference)
 
-        /// frame of highlight, relative to sentence
-        let highlightFrame = CGRect(
-            x: sentenceFrame.origin.x + highlightXOffset,
-            y: 0,
-            width: highlightWidth,
-            height: sentenceHeight
+        var scaledAngle = CGFloat(0)
+        if let imageSize = imageSize {
+            let topRightScaled = CGPoint(
+                x: topRight.x * imageSize.width,
+                y: topRight.y * imageSize.height
+            )
+            let topLeftScaled = CGPoint(
+                x: topLeft.x * imageSize.width,
+                y: topLeft.y * imageSize.height
+            )
+            let yDifference = topRightScaled.y - topLeftScaled.y
+            let xDifference = topRightScaled.x - topLeftScaled.x
+            scaledAngle = atan2(yDifference, xDifference)
+        }
+
+        let sentenceWidthCenter = sentenceWidth / 2
+        let highlightCenterRelativeToSentenceCenter = highlightXOffset + highlightWidth / 2
+
+        let highlightDistanceToSentenceCenter = highlightCenterRelativeToSentenceCenter - sentenceWidthCenter
+        let highlightRotationalXOffset = highlightDistanceToSentenceCenter * cos(normalizedAngle)
+        let highlightRotationalYOffset = highlightDistanceToSentenceCenter * sin(normalizedAngle)
+
+        let sentenceCenter = CGPoint(
+            x: (topRight.x + bottomLeft.x) / 2,
+            y: (topRight.y + bottomLeft.y) / 2
         )
 
-        let highlightCenterRelativeToSentenceCenter = highlightXOffset + highlightWidth / 2
-        let highlightDistanceToSentenceCenter = highlightCenterRelativeToSentenceCenter - (sentenceWidth / 2)
-        let highlightRotationalXOffset = highlightDistanceToSentenceCenter * cos(angle)
-        let highlightRotationalYOffset = highlightDistanceToSentenceCenter * sin(angle)
         let highlightCenter = CGPoint(
             x: sentenceCenter.x + highlightRotationalXOffset,
             y: sentenceCenter.y + highlightRotationalYOffset
         )
 
+        let highlightSize = CGSize(width: highlightWidth, height: sentenceHeight)
+
         let position = ScannedPosition(
             center: highlightCenter,
-            size: highlightFrame.size,
-            angle: angle
+            size: highlightSize,
+            angle: scaledAngle
         )
+
+//        let position = ScannedPosition(
+//            center: sentenceCenter,
+//            size: CGSize(width: sentenceWidth, height: sentenceHeight),
+//            angle: angle
+//        )
+
+        print("String: \(string)------ \(range) -> \(scaledAngle.radiansToDegrees) .. normL: \(normalizedAngle.radiansToDegrees)")
 
         return position
     }

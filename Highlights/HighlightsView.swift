@@ -67,7 +67,7 @@ struct OverlayView: View {
                 width: frame.width,
                 height: frame.height
             )
-            .rotationEffect(.radians(-overlay.position.angle))
+            .rotationEffect(.radians(overlay.position.angle))
             .position(
                 x: frame.minX,
                 y: frame.minY
@@ -131,7 +131,7 @@ struct HighlightView: View {
                 width: frame.width,
                 height: frame.height
             )
-            .rotationEffect(.radians(-highlight.position.angle))
+            .rotationEffect(.radians(highlight.position.angle))
             .position(
                 x: frame.minX,
                 y: frame.minY
@@ -140,14 +140,12 @@ struct HighlightView: View {
 
     func getFrame() -> CGRect {
         if model.shouldScaleHighlights {
-            let frame = CGRect(
+            return CGRect(
                 x: highlight.position.center.x * viewSize.width,
                 y: highlight.position.center.y * viewSize.height,
                 width: highlight.position.size.width * viewSize.width,
                 height: highlight.position.size.height * viewSize.height
             )
-            print("Frame: \(frame)... \(viewSize) -> \(highlight.position)")
-            return frame
         } else {
             return CGRect(
                 x: highlight.position.center.x,

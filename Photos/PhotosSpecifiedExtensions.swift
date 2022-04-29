@@ -95,7 +95,8 @@ extension Finding {
             let (highlights, lines) = Finding.getHighlightsAndDescription(
                 realmModel: realmModel,
                 from: text?.sentences ?? [],
-                with: stringToGradients
+                with: stringToGradients,
+                imageSize: nil
             )
             if highlights.count >= 1 {
                 let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: stringToGradients, highlights: highlights)
@@ -126,7 +127,8 @@ extension Finding {
     static func getHighlightsAndDescription(
         realmModel: RealmModel,
         from sentences: [Sentence],
-        with stringToGradients: [String: Gradient]
+        with stringToGradients: [String: Gradient],
+        imageSize: CGSize?
     ) -> ([Highlight], [FindPhoto.Line]) {
         var highlights = [Highlight]()
         var lines = [FindPhoto.Line]()
@@ -143,7 +145,10 @@ extension Finding {
                         string: rangeResult.string,
                         colors: gradient.colors,
                         alpha: gradient.alpha,
-                        position: sentence.getPosition(for: range)
+                        position: sentence.getPosition(
+                            for: range,
+                            imageSize: imageSize
+                        )
                     )
 
                     highlights.append(highlight)

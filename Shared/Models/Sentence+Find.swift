@@ -29,7 +29,7 @@ extension Sentence {
 
 extension Array where Element == Sentence {
     /// scanned
-    func getHighlights(stringToGradients: [String: Gradient], realmModel: RealmModel) -> [Highlight] {
+    func getHighlights(stringToGradients: [String: Gradient], realmModel: RealmModel, imageSize: CGSize) -> [Highlight] {
         var highlights = [Highlight]()
         for sentence in self {
             let search = Swift.Array(stringToGradients.keys)
@@ -42,7 +42,7 @@ extension Array where Element == Sentence {
                         string: rangeResult.string,
                         colors: gradient.colors,
                         alpha: gradient.alpha,
-                        position: sentence.getPosition(for: range)
+                        position: sentence.getPosition(for: range, imageSize: imageSize)
                     )
                     highlights.append(highlight)
                 }
