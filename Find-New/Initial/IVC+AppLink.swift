@@ -8,7 +8,7 @@
     
 import UIKit
 
-extension ViewController {
+extension InitialViewController {
     func handleIncomingURL(_ incomingURL: URL) {
         let string = incomingURL.absoluteString
         
@@ -31,28 +31,26 @@ extension ViewController {
     
     /// if view loaded, import list. If not, cache list
     func startImportingList(list: List) {
-        if loaded {
-            tabViewModel.statusBarStyle = .default
-            tabViewModel.changeTabState(newTab: .lists, animation: .animate)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.lists.viewController.importList(list: list)
-            }
+        if properties.viewControllerLoaded {
+            guard let viewController = viewController else { return }
+            viewController.tabViewModel.statusBarStyle = .default
+            importList(list: list)
         } else {
-            listToLoad = list
+            properties.listToLoad = list
         }
     }
     
     /// load list after view loaded
     func importListIfNeeded() {
-        if let listToLoad = listToLoad {
+        if let listToLoad = properties.listToLoad {
             importList(list: listToLoad)
         }
     }
     
     func importList(list: List) {
-        tabViewModel.changeTabState(newTab: .lists, animation: .animate)
+        viewController?.tabViewModel.changeTabState(newTab: .lists, animation: .animate)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            self.lists.viewController.importList(list: list)
+            self.viewController?.lists.viewController.importList(list: list)
         }
     }
 }
