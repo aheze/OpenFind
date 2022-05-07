@@ -29,7 +29,7 @@ struct KeyboardToolbarView: View {
                         selected: selectedList?.id == list.id,
                         makeBrighter: makeBrighter
                     )
-                    .transition(.scale)
+                    .transition(.scale(scale: 0.9).combined(with: .opacity))
                 }
             }
             .animation(.default, value: searchViewModel.fields)

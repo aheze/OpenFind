@@ -125,13 +125,10 @@ class TabBarViewController: UIViewController {
     func updateTraitCollection(to collection: UITraitCollection) {
         switch collection.orientation {
         case .phoneLandscape:
-            print("land")
             TabState.isLandscape = true
         case .phonePortrait:
-            print("phonte!")
             TabState.isLandscape = false
         case .pad:
-            print("ipad!")
             TabState.isLandscape = true
         }
         

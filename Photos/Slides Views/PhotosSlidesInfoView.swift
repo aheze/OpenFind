@@ -34,7 +34,7 @@ struct PhotosSlidesInfoView: View {
                     ) {
                         scanNow()
                     }
-                    .transition(.scale)
+                    .transition(.scale(scale: 0.5).combined(with: .opacity))
                 }
 
                 PhotosScanningInfoButton(

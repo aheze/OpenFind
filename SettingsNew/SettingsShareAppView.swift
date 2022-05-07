@@ -47,7 +47,7 @@ class SettingsShareAppViewController: UIViewController {
 
 struct SettingsShareAppView: View {
     @State var present = false
-    @State var presentingUUID = UUID()
+    @State var presentingUUID: UUID?
 
     var body: some View {
         VStack(spacing: 20) {
@@ -72,7 +72,7 @@ struct SettingsShareAppView: View {
                     Text("getfind.app")
                         .foregroundColor(UIColor.secondaryLabel.color)
                         .font(UIFont.preferredFont(forTextStyle: .title1).font)
-                    
+
                     Text("(Tap to copy)")
                         .foregroundColor(UIColor.secondaryLabel.color)
                         .font(UIFont.preferredFont(forTextStyle: .caption1).font)
@@ -101,7 +101,7 @@ struct SettingsShareAppView: View {
                 $0.dismissal.dragDismissalProximity = 0.1
             }
         ) {
-            NotificationViewPopover(icon: "doc.on.doc", text: "Link copied!", url: "https://getfind.app", color: Colors.accent)
+            NotificationViewPopover(icon: "doc.on.doc", text: "Link copied!", color: Colors.accent, url: "https://getfind.app")
                 .onAppear {
                     presentingUUID = UUID()
                     let currentID = presentingUUID
@@ -154,8 +154,8 @@ struct NotificationImage: View {
     var body: some View {
         Image(systemName: imageName)
             .foregroundColor(.white)
-            .font(.system(size: 19, weight: .medium))
-            .frame(width: 36, height: 36)
+            .font(.system(size: 17, weight: .medium))
+            .frame(width: 38, height: 38)
             .background(
                 LinearGradient(
                     colors: [
@@ -173,22 +173,26 @@ struct NotificationImage: View {
 struct NotificationViewPopover: View {
     let icon: String
     let text: String
-    let url: String
     let color: UIColor
+    var url: String?
+
     var body: some View {
         HStack {
             NotificationImage(icon, color: color)
+            
             Text(text)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Button {
-                if let url = URL(string: url) {
-                    UIApplication.shared.open(url)
+
+            if let urlString = url {
+                Button {
+                    if let url = URL(string: urlString) {
+                        UIApplication.shared.open(url)
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.right")
+                        .font(UIFont.preferredFont(forTextStyle: .title3).font)
+                        .foregroundColor(.accent)
                 }
-            } label: {
-                Image(systemName: "arrow.up.right")
-                    .font(UIFont.preferredFont(forTextStyle: .title3).font)
-                    .foregroundColor(.accent)
             }
         }
         .frame(maxWidth: 600)
