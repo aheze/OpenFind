@@ -52,6 +52,7 @@ class IgnoredPhotosViewController: UIViewController {
          Instantiate the base `view`.
          */
         view = UIView()
+        view.backgroundColor = .systemBackground
         
         setup()
         listen()

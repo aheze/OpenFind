@@ -123,11 +123,18 @@ class TabBarViewController: UIViewController {
     }
     
     func updateTraitCollection(to collection: UITraitCollection) {
-        if collection.horizontalSizeClass == .regular {
+        switch collection.orientation {
+        case .phoneLandscape:
+            print("land")
             TabState.isLandscape = true
-        } else {
+        case .phonePortrait:
+            print("phonte!")
             TabState.isLandscape = false
+        case .pad:
+            print("ipad!")
+            TabState.isLandscape = true
         }
+        
         model.changeTabState(newTab: model.tabState, animation: .animate)
         updateTabBarHeight(model.tabState)
     }

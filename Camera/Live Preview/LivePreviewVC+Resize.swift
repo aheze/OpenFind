@@ -33,13 +33,14 @@ extension LivePreviewViewController {
         var imageFillSafeRect = imageFillSafeCenteredRect
         imageFillSafeRect.origin.x = safeViewFrame.origin.x
         
-        
-        if traitCollection.horizontalSizeClass == .compact {
+        switch traitCollection.orientation {
+        case .phoneLandscape:
+            imageFillSafeRect.origin.y = 0
+        case .phonePortrait:
             imageFillSafeRect.origin.y = safeViewFrame.origin.y
-        } else {
+        case .pad:
             imageFillSafeRect.origin.y = 0
         }
-        
         
         imageFitViewSize = imageFitViewCenteredRect.size
         self.imageFillSafeRect = imageFillSafeRect

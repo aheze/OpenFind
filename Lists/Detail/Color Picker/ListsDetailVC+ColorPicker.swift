@@ -19,10 +19,12 @@ extension ListsDetailViewController {
                 }
             }
 
-            self.present(colorPicker, animated: true)
             colorPicker.selectedColor = UIColor(hex: model.list.color)
             colorPicker.supportsAlpha = false
             colorPicker.delegate = self
+
+            print("[resngint!!!!")
+            self.present(colorPicker, animated: true)
         } else {
             self.headerTopRightColorPickerModel.selectedColorChanged = { [weak self] in
                 guard let self = self else { return }
@@ -37,9 +39,21 @@ extension ListsDetailViewController {
 }
 
 extension ListsDetailViewController: UIColorPickerViewControllerDelegate {
-    @available(iOS 14.0, *)
+    
+    /// This is called in iOS 15
+    @available(iOS 15.0, *)
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
         model.list.color = color.hex
         loadListContents()
+    }
+
+    /// This is called in iOS 14
+    @available(iOS 14.0, *)
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        if #available(iOS 15.0, *) { } else {
+            let color = viewController.selectedColor
+            model.list.color = color.hex
+            loadListContents()
+        }
     }
 }

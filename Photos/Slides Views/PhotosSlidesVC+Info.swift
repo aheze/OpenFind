@@ -24,23 +24,21 @@ extension PhotosSlidesViewController {
     func showInfo(_ show: Bool) {
         var offset: CGFloat?
         if show {
-            
             /// landscape iPhone or iPad
-            if traitCollection.horizontalSizeClass == .regular {
+            if traitCollection.verticalSizeClass == .compact {
                 var attributes = Popover.Attributes()
                 attributes.tag = "Popover"
                 attributes.position = .relative(popoverAnchors: [.topRight])
                 attributes.dismissal.mode = .none
-                attributes.sourceFrameInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+
+                let navigationBarHeight = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets) + slidesSearchViewModel.getTotalHeight()
+                let tabBarHeight = tabViewModel.tabBarAttributes.backgroundHeight
+
+                attributes.sourceFrameInset = UIEdgeInsets(top: navigationBarHeight + 16, left: 16, bottom: tabBarHeight + 16, right: 16)
+                attributes.screenEdgePadding = UIEdgeInsets(top: navigationBarHeight + 16, left: 16, bottom: tabBarHeight + 16, right: 16)
                 attributes.sourceFrame = { [weak self] in
                     guard let self = self else { return .zero }
-                    var rect = self.view.bounds
-                    let navigationBarHeight = self.getCompactBarSafeAreaHeight(with: Global.safeAreaInsets) + self.slidesSearchViewModel.getTotalHeight()
-                    rect.origin.x -= Global.safeAreaInsets.right
-                    rect.origin.y += navigationBarHeight
-                    rect.size.height -= navigationBarHeight
-                    rect.size.height -= Global.safeAreaInsets.bottom
-                    return rect
+                    return self.view.bounds
                 }
                 let popover = Popover(attributes: attributes) { [weak self] in
                     if let self = self {
@@ -48,7 +46,8 @@ extension PhotosSlidesViewController {
                             PhotosSlidesInfoView(model: self.model)
                         }
                         .background(UIColor.systemBackground.color)
-                        .frame(width: 300, height: 250)
+                        .frame(width: 300)
+                        .frame(maxHeight: 300)
                         .cornerRadius(16)
                         .popoverShadow()
                     }

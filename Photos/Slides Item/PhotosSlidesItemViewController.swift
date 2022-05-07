@@ -85,7 +85,7 @@ class PhotosSlidesItemViewController: UIViewController {
         if
             let toolbarInformationOn = model.slidesState?.toolbarInformationOn,
             toolbarInformationOn,
-            traitCollection.horizontalSizeClass == .compact
+            traitCollection.verticalSizeClass == .regular
         {
             setAspectRatio(scaleToFill: true)
         } else {

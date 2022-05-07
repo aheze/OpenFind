@@ -38,3 +38,25 @@ extension UIView {
         }
     }
 }
+
+
+extension UITraitCollection {
+    enum Orientation {
+        case phoneLandscape
+        case phonePortrait
+        case pad
+    }
+    
+    var orientation: Orientation {
+        if self.verticalSizeClass == .compact {
+            return .phoneLandscape
+        } else {
+            /// iPhone vertical
+            if self.horizontalSizeClass == .compact {
+                return .phonePortrait
+            } else { /// iPad
+                return .pad
+            }
+        }
+    }
+}

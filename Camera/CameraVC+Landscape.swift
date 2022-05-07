@@ -19,32 +19,31 @@ extension CameraViewController {
         
         updateLandscapeToolbar()
 
-        if traitCollection.verticalSizeClass == .regular, traitCollection.horizontalSizeClass == .regular {
-            /// iPad
-        } else {
+        switch traitCollection.orientation {
+        case .phoneLandscape, .phonePortrait:
             let landscapeTabBarHeight = TabBarAttributes.darkBackgroundLandscape.backgroundHeight
             
             let cellHeight = landscapeTabBarHeight
                 - searchViewModel.configuration.barTopPaddingLandscape
                 - searchViewModel.configuration.barBottomPaddingLandscape
-            searchViewModel.configuration.cellHeightLandscape = cellHeight
+            
+            let height = max(cellHeight, CameraConstants.minimumLandscapeSearchBarHeight)
+            searchViewModel.configuration.cellHeightLandscape = height
+        default: break
         }
     }
     
     func updateLandscapeToolbar() {
-        /// iPhone horizontal
-        if traitCollection.verticalSizeClass == .compact {
+        switch traitCollection.orientation {
+        case .phoneLandscape:
             landscapeToolbarContainer.alpha = 1
             model.toolbarState = .sideCompact
-        } else {
-            /// iPhone vertical
-            if traitCollection.horizontalSizeClass == .compact {
-                landscapeToolbarContainer.alpha = 0
-                model.toolbarState = .inTabBar
-            } else { /// iPad
-                landscapeToolbarContainer.alpha = 1
-                model.toolbarState = .sideExpanded
-            }
+        case .phonePortrait:
+            landscapeToolbarContainer.alpha = 0
+            model.toolbarState = .inTabBar
+        case .pad:
+            landscapeToolbarContainer.alpha = 1
+            model.toolbarState = .sideExpanded
         }
     }
 }

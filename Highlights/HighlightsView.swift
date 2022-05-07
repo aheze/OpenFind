@@ -158,7 +158,7 @@ struct HighlightView: View {
 
     func getLingeringOpacity() -> CGFloat {
         if case .lingering = highlight.state {
-            return 0.1
+            return 0.2
         } else {
             return 1
         }
