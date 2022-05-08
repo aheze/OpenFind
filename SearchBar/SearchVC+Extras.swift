@@ -12,6 +12,7 @@ import WebKit
 
 extension SearchViewController {
     static let extrasPopoverTag = "Extras"
+
     func checkExtras(text: String) {
         // MARK: - Commands
 
@@ -90,13 +91,13 @@ extension SearchViewController {
                     isIgnored: false,
                     dateScanned: Date()
                 )
-                
+
                 let text = PhotoMetadataText(
                     sentences: sentences,
                     scannedInLanguages: [Settings.Values.RecognitionLanguage.english.rawValue],
                     scannedInVersion: "2.0.3"
                 )
-                
+
                 realmModel.container.updatePhotoMetadata(metadata: photoMetadata, text: text)
             }
             showPopover(configuration: .message(icon: "info.circle", text: "Populated."), autoDismiss: true)
@@ -106,7 +107,7 @@ extension SearchViewController {
             ViewControllerCallback.deleteAllScannedData?(false)
             showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Scanned Data."), autoDismiss: true)
         }
-        
+
         if text.roughlyEquals("/debugDeleteAllPhotos") {
             ViewControllerCallback.deleteAllScannedData?(true)
             showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Photo Metadata."), autoDismiss: true)

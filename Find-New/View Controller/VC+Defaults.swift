@@ -19,7 +19,7 @@ extension ViewController {
 
     @objc func experiencePointsChanged() {
         switch realmModel.experiencePoints {
-        case 100, 200, 1000:
+        case 50, 100, 200:
             self.requestRate()
         default: break
         }
