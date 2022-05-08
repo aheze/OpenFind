@@ -138,14 +138,21 @@ struct HighlightView: View {
             )
     }
 
+    
+    /// origin is used as center.
     func getFrame() -> CGRect {
         if model.shouldScaleHighlights {
-            return CGRect(
+            let padding = HighlightsConstants.padding
+            var frame = CGRect(
                 x: highlight.position.center.x * viewSize.width,
                 y: highlight.position.center.y * viewSize.height,
                 width: highlight.position.size.width * viewSize.width,
                 height: highlight.position.size.height * viewSize.height
             )
+
+            frame.size.width += padding.left + padding.right
+            frame.size.height += padding.top + padding.bottom
+            return frame
         } else {
             return CGRect(
                 x: highlight.position.center.x,
