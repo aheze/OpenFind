@@ -22,11 +22,13 @@ extension InitialViewController {
             // a schema version lower than the one set above
             migrationBlock: { [weak self] migration, oldSchemaVersion in
 
+                print("performinc mfiration!!!")
                 if oldSchemaVersion == 17 {
                     var photoMetadatas = [PhotoMetadata]()
                     
-                    migration.enumerateObjects(ofType: "PhotoMetadata") { oldObject, newObject in
+                    migration.enumerateObjects(ofType: "RealmPhotoMetadata") { oldObject, newObject in
 
+                        print("phto..")
                         guard let oldObject = oldObject else { return }
                         
                         let text = RealmPhotoMetadataText()

@@ -63,7 +63,6 @@ class PhotosSlidesItemViewController: UIViewController {
         addHighlightsViewController()
         
         toolbarContainer.isHidden = true
-//        addToolbar()
         reloadImage()
         
         view.backgroundColor = .clear
@@ -74,6 +73,7 @@ class PhotosSlidesItemViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         imageFrame = getImageFrame()
+        
         imageFrame.setAsConstraints(
             left: highlightsVCLeftC,
             top: highlightsVCTopC,

@@ -42,7 +42,7 @@ class TabBarController: NSObject {
             )
         }
         
-        print("make")
+        
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
         
