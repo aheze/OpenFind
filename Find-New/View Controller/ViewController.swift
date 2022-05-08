@@ -70,6 +70,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        _ = tabController
         setup()
         listen()
     }

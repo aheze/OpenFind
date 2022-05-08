@@ -100,6 +100,7 @@ enum ConstantVars {
                 deviceHasNotch = safeAreaInsets.bottom > 0
             }
             
+            /// this isn't very precise, since `safeAreaInsets.bottom` in portrait is **not** `safeAreaInsets.right` in landscape.
             switch orientation {
             case .portrait:
                 bottomSafeAreaInset = safeAreaInsets.bottom

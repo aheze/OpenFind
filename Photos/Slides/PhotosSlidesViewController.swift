@@ -122,6 +122,8 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
                 slidesSearchPromptViewModel.update(show: true, resultsText: slidesPhoto.findPhoto.getResultsText(), resetText: nil)
             }
         }
+
+        collectionView.addDebugBorders(.red, width: 10)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -152,9 +154,16 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
         }
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        resetInfoToHidden()
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        self.resetInfoToHidden()
+        self.collectionViewContainerHeightC.constant = size.height
+        
+        coordinator.animate { _ in
+            self.scrollView.layoutIfNeeded()
+        }
     }
 
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {

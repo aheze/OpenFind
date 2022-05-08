@@ -121,6 +121,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// called after rotation
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         let attributes = layoutAttributes[safe: currentIndex]
+        print("att: \(attributes?.fullOrigin)")
         return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
     }
     

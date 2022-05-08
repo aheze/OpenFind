@@ -55,6 +55,8 @@ class TabBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("loading")
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
         contentCollectionView.showsHorizontalScrollIndicator = false

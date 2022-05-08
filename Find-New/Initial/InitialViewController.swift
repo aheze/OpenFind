@@ -76,6 +76,7 @@ class InitialViewController: UIViewController {
         }
         self.viewController = viewController
         addChildViewController(viewController, in: view)
+        print("added!")
     }
 
     /// once the app is started, perform any additional steps
