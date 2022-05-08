@@ -33,7 +33,6 @@ struct PhotosScanningHeader: View {
                         .foregroundColor(.accent.opacity(0.75))
                 }
                 .lineLimit(1)
-                .minimumScaleFactor(0.3)
                 .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .semibold).font)
 
                 Spacer()

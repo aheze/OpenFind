@@ -11,8 +11,6 @@ import UIKit
 struct InitialProperties {
     var viewControllerLoaded = false
     var listToLoad: List?
-    var migratedPhotoMetadatas = [PhotoMetadata]()
-    var migratedLists = [List]()
 }
 
 class InitialViewController: UIViewController {
@@ -76,7 +74,6 @@ class InitialViewController: UIViewController {
         }
         self.viewController = viewController
         addChildViewController(viewController, in: view)
-        print("added!")
     }
 
     /// once the app is started, perform any additional steps
