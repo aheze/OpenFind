@@ -49,12 +49,12 @@ class RealmPhotoMetadataText: Object {
     @Persisted var sentences: RealmSwift.List<RealmSentence>
     @Persisted var scannedInLanguages: RealmSwift.List<String> /// which languages scanned in
     @Persisted var scannedInVersion: String?
-    
+
     func getPhotoMetadataText() -> PhotoMetadataText {
         let metadataText = PhotoMetadataText(
             sentences: sentences.map { $0.getSentence() },
             scannedInLanguages: self.scannedInLanguages.map { $0 },
-            scannedInVersion: scannedInVersion
+            scannedInVersion: self.scannedInVersion
         )
         return metadataText
     }
@@ -88,6 +88,15 @@ class RealmSentence: Object {
 class RealmPoint: Object {
     @Persisted var x: Double
     @Persisted var y: Double
+
+    override init() {
+        super.init()
+    }
+
+    init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+    }
 
     func getCGPoint() -> CGPoint {
         let point = CGPoint(x: x, y: y)
