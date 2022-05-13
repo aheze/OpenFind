@@ -102,7 +102,11 @@ extension PhotosViewController {
                 self.showResults(true)
                 if textChanged {
                     let resultsStateExisted = self.model.resultsState != nil
-                    self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
+                    
+                    Debouncer.debounce(delay: .seconds(0.4)) {
+                        self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
+                    }
+                    
                 } else {
                     /// replace all highlights
                     self.updateResultsHighlightColors()
