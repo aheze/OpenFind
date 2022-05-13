@@ -88,15 +88,33 @@ extension Finding {
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
         
+        print("Starting: \(stringToGradients.keys)")
+        let timer = TimeElapsed()
+        
+//        var text: PhotoMetadataText?
+//        if let metadata = photos.first?.metadata {
+//            text = realmModel.container.getText(from: metadata.assetIdentifier)
+//        }
+//
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
+//            print("Looping.")
             let text = realmModel.container.getText(from: metadata.assetIdentifier)
+//            let text: PhotoMetadataText? = PhotoMetadataText()
+            
             let (highlights, lines) = Finding.getHighlightsAndDescription(
                 realmModel: realmModel,
-                from: text?.sentences ?? [],
+                from: [],
                 with: stringToGradients,
                 imageSize: photo.asset.getSize()
             )
+//            let (highlights, lines) = Finding.getHighlightsAndDescription(
+//                realmModel: realmModel,
+//                from: text?.sentences ?? [],
+//                with: stringToGradients,
+//                imageSize: photo.asset.getSize()
+//            )
+            
             if highlights.count >= 1 {
                 let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: stringToGradients, highlights: highlights)
                 let description = Finding.getCellDescription(from: lines)
@@ -120,6 +138,8 @@ extension Finding {
             }
         }
         
+        print("     Ending: \(stringToGradients.keys). \(timer.stop())")
+
         return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos)
     }
     

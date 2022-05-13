@@ -22,6 +22,7 @@ class PhotosViewModel: ObservableObject {
     var assets: PHFetchResult<PHAsset>? /// could become inaccurate after deletion.
     var photos = [Photo]()
     var displayedSections = [PhotosSection]() /// this is fed into the collection view
+    var photoIdentifierToText = [String: PhotoMetadataText]()
 
     @Published var photosEditable = false /// select button enabled
 
@@ -214,7 +215,7 @@ class PhotosViewModel: ObservableObject {
                 return "Failed to scan some photos."
             }
         }
-        
+
         func getDescription() -> String {
             switch self {
             case .downloadingFromCloud:
@@ -223,7 +224,7 @@ class PhotosViewModel: ObservableObject {
                 return "This could happen if you're using iCloud photos. To scan these photos, connect to the internet and download them to your device."
             }
         }
-        
+
         func getIcon() -> String {
             switch self {
             case .downloadingFromCloud:

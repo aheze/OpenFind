@@ -138,7 +138,6 @@ extension PhotosViewController {
         model.sharePhotos = { [weak self] photos in
             guard let self = self else { return }
             
-            
             let sourceRect = CGRect(
                 x: self.view.bounds.width / 2,
                 y: 50,

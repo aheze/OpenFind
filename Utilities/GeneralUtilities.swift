@@ -80,6 +80,14 @@ class TimeElapsed {
         return "[No Time]"
     }
 
+    
+    /// stop and print
+    func print() {
+        let string = stop()
+        Swift.print(string)
+    }
+
+    
     func getDuration() -> CFAbsoluteTime? {
         if let endTime = endTime {
             return endTime - startTime
