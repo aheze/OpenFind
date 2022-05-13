@@ -31,12 +31,12 @@ extension Array where Element == Sentence {
     /// scanned
     func getHighlights(stringToGradients: [String: Gradient], realmModel: RealmModel, imageSize: CGSize) -> [Highlight] {
         var highlights = [Highlight]()
+        let search = Swift.Array(stringToGradients.keys)
         for sentence in self {
-            let search = Swift.Array(stringToGradients.keys)
             let rangeResults = sentence.ranges(of: search, realmModel: realmModel)
             for rangeResult in rangeResults {
                 let gradient = stringToGradients[rangeResult.string] ?? Gradient()
-                
+
                 for range in rangeResult.ranges {
                     let highlight = Highlight(
                         string: rangeResult.string,
@@ -50,6 +50,18 @@ extension Array where Element == Sentence {
         }
         return highlights
     }
+
+    /// just check if a the sentences matches the search. A tiny bit faster than `getLineHighlights`.
+//    func checkContainsSearch(stringToGradients: [String: Gradient], realmModel: RealmModel) -> Bool {
+//        let search = Swift.Array(stringToGradients.keys)
+//        for sentence in self {
+//            let rangeResults = sentence.ranges(of: search, realmModel: realmModel)
+//            if !rangeResults.isEmpty {
+//                return true
+//            }
+//        }
+//        return false
+//    }
 }
 
 extension Array where Element == FastSentence {
