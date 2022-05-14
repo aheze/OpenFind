@@ -42,13 +42,26 @@ extension PhotosViewController {
         let stringToGradients = self.searchViewModel.stringToGradients
         
         Task.detached {
-            let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
+            let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos, resultsCount) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
             
-            await self.apply(allFindPhotos: allFindPhotos, starredFindPhotos: starredFindPhotos, screenshotsFindPhotos: screenshotsFindPhotos, context: context)
+            await self.apply(
+                allFindPhotos: allFindPhotos,
+                starredFindPhotos: starredFindPhotos,
+                screenshotsFindPhotos: screenshotsFindPhotos,
+                resultsCount: resultsCount,
+                context: context
+            )
         }
     }
     
-    @MainActor func apply(allFindPhotos: [FindPhoto], starredFindPhotos: [FindPhoto], screenshotsFindPhotos: [FindPhoto], context: FindContext) {
+    /// apply the resultsState
+    @MainActor func apply(
+        allFindPhotos: [FindPhoto],
+        starredFindPhotos: [FindPhoto],
+        screenshotsFindPhotos: [FindPhoto],
+        resultsCount: Int,
+        context: FindContext
+    ) {
         guard !searchViewModel.isEmpty else { return }
         let displayedFindPhotos: [FindPhoto]
         
@@ -65,7 +78,8 @@ extension PhotosViewController {
             displayedFindPhotos: displayedFindPhotos,
             allFindPhotos: allFindPhotos,
             starredFindPhotos: starredFindPhotos,
-            screenshotsFindPhotos: screenshotsFindPhotos
+            screenshotsFindPhotos: screenshotsFindPhotos,
+            resultsCount: resultsCount
         )
         
         if case .findingAfterTextChange(firstTimeShowingResults: let firstTimeShowingResults) = context {

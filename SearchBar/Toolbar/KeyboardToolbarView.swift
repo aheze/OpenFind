@@ -16,36 +16,54 @@ struct KeyboardToolbarView: View {
 
     var body: some View {
         let displayedLists = getDisplayedLists()
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(displayedLists) { list in
-                    let (selectedList, _) = getSelectedListAndOriginalText()
 
-                    /// make brighter if showing all lists
-                    let makeBrighter = getMakeBrighter(list: list, selectedList: selectedList)
-                    ListWidgetView(
-                        model: model,
-                        list: list,
-                        selected: selectedList?.id == list.id,
-                        makeBrighter: makeBrighter
-                    )
-                    .transition(.scale(scale: 0.9).combined(with: .opacity))
+        Color.clear
+            .overlay(
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(displayedLists) { list in
+                            let (selectedList, _) = getSelectedListAndOriginalText()
+
+                            /// make brighter if showing all lists
+                            let makeBrighter = getMakeBrighter(list: list, selectedList: selectedList)
+                            ListWidgetView(
+                                model: model,
+                                list: list,
+                                selected: selectedList?.id == list.id,
+                                makeBrighter: makeBrighter
+                            )
+                            .transition(.scale(scale: 0.9).combined(with: .opacity))
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
+                .background(
+                    VisualEffectView(.systemChromeMaterial)
+                        .edgesIgnoringSafeArea(.all)
+                )
+                .overlay(
+                    Color.clear
+                        .overlay(
+                            Rectangle()
+                                .strokeBorder(UIColor.secondaryLabel.color, lineWidth: 0.25)
+                                .padding(-0.25)
+                        )
+                        .mask(
+                            Rectangle()
+                                .padding(.top, -0.25) /// only show border on top
+                        )
+                        .frame(height: 200),
+
+                    alignment: .top
+                )
+                .offset(x: 0, y: displayedLists.isEmpty ? SearchConstants.toolbarHeight : 0)
+                .animation(.spring(), value: searchViewModel.fields),
+                alignment: .bottom
+            )
+            .onValueChange(of: displayedLists) { oldValue, newValue in
+                model.showing = !newValue.isEmpty
             }
-            .animation(.default, value: searchViewModel.fields)
-            .padding(.horizontal, 16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .background(
-            VisualEffectView(.systemChromeMaterial)
-                .edgesIgnoringSafeArea(.all)
-        )
-        .overlay(
-            Rectangle()
-                .fill(Color(UIColor.secondaryLabel))
-                .frame(height: 0.25),
-            alignment: .top
-        )
     }
 
     func getMakeBrighter(list: List, selectedList: List?) -> Bool {

@@ -82,14 +82,12 @@ extension PHAsset {
 }
 
 extension Finding {
-    /// get FindPhotos from specified photos
-    static func findAndGetFindPhotos(realmModel: RealmModel, from photos: [Photo], stringToGradients: [String: Gradient]) -> ([FindPhoto], [FindPhoto], [FindPhoto]) {
+    /// get `FindPhoto`s from specified photos, also return count
+    static func findAndGetFindPhotos(realmModel: RealmModel, from photos: [Photo], stringToGradients: [String: Gradient]) -> ([FindPhoto], [FindPhoto], [FindPhoto], Int) {
         var allFindPhotos = [FindPhoto]()
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
-
-        print("Starting: \(stringToGradients.keys)")
-        let timer = TimeElapsed()
+        var count = 0
 
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
@@ -102,6 +100,7 @@ extension Finding {
                 with: stringToGradients,
                 imageSize: photo.asset.getSize()
             )
+            count += lines.count
 
             if lines.count >= 1 {
                 let description = Finding.getCellDescription(from: lines)
@@ -124,9 +123,7 @@ extension Finding {
             }
         }
 
-        print("     Ending: \(stringToGradients.keys). \(timer.stop())")
-
-        return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos)
+        return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos, count)
     }
 
     static func getLineHighlights(

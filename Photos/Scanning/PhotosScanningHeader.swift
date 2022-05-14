@@ -32,10 +32,8 @@ struct PhotosScanningHeader: View {
                         Text("\(model.totalPhotosCount)")
                         .foregroundColor(.accent.opacity(0.75))
                 }
-                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .semibold).font)
-
-                Spacer()
 
                 if let time = time {
                     if model.scanningState == .dormant {

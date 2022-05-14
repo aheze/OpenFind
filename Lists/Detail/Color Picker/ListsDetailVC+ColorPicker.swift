@@ -23,7 +23,6 @@ extension ListsDetailViewController {
             colorPicker.supportsAlpha = false
             colorPicker.delegate = self
 
-            print("[resngint!!!!")
             self.present(colorPicker, animated: true)
         } else {
             self.headerTopRightColorPickerModel.selectedColorChanged = { [weak self] in
@@ -39,7 +38,6 @@ extension ListsDetailViewController {
 }
 
 extension ListsDetailViewController: UIColorPickerViewControllerDelegate {
-    
     /// This is called in iOS 15
     @available(iOS 15.0, *)
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {

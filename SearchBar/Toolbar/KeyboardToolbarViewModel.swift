@@ -10,4 +10,5 @@ import SwiftUI
 
 class KeyboardToolbarViewModel: ObservableObject {
     var listSelected: ((List) -> Void)?
+    @Published var showing = true /// if false, stop hit testing
 }

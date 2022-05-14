@@ -70,6 +70,8 @@ struct PhotosResultsState {
     var starredFindPhotos: [FindPhoto]
     var screenshotsFindPhotos: [FindPhoto]
 
+    var resultsCount: Int
+
     /// get from `findPhotos`
     func getFindPhotoIndex(for photo: Photo, in keyPath: KeyPath<PhotosResultsState, [FindPhoto]>) -> Int? {
         let findPhotos = self[keyPath: keyPath]
@@ -80,15 +82,13 @@ struct PhotosResultsState {
     }
 
     func getResultsText() -> String {
-        let highlights = displayedFindPhotos.compactMap { $0.highlightsSet?.highlights }.flatMap { $0 }
-
-        switch highlights.count {
+        switch resultsCount {
         case 0:
             return "No results."
         case 1:
             return "1 result in \(displayedFindPhotos.count) photos."
         default:
-            return "\(highlights.count) results in \(displayedFindPhotos.count) photos."
+            return "\(resultsCount) results in \(displayedFindPhotos.count) photos."
         }
     }
 
