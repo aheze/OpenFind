@@ -66,6 +66,7 @@ class RealmModel: ObservableObject {
     @Saved(data.highlightsCycleSearchBarColors.key) var highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
     @Saved(data.highlightsBorderWidth.key) var highlightsBorderWidth = data.highlightsBorderWidth.value
     @Saved(data.highlightsBackgroundOpacity.key) var highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
+    @Saved(data.highlightsPaddingPercentage.key) var highlightsPaddingPercentage = data.highlightsPaddingPercentage.value
 
     // MARK: Photos
 
@@ -115,6 +116,7 @@ class RealmModel: ObservableObject {
         _highlightsCycleSearchBarColors.configureValueChanged(with: self)
         _highlightsBorderWidth.configureValueChanged(with: self)
         _highlightsBackgroundOpacity.configureValueChanged(with: self)
+        _highlightsPaddingPercentage.configureValueChanged(with: self)
 
         _photosScanOnLaunch.configureValueChanged(with: self)
         _photosScanOnAddition.configureValueChanged(with: self)
@@ -133,8 +135,6 @@ class RealmModel: ObservableObject {
         let photoMetadata = assetIdentifierToPhotoMetadata[identifier]
         return photoMetadata
     }
-    
-    
 }
 
 extension RealmModel {
@@ -143,6 +143,7 @@ extension RealmModel {
 
         /** don't reset `experiencePoints` */
 
+        defaultTab = data.defaultTab.value
         swipeToNavigate = data.swipeToNavigate.value
         findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value
         findingSecondaryRecognitionLanguage = data.findingSecondaryRecognitionLanguage.value
@@ -154,6 +155,7 @@ extension RealmModel {
         highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
         highlightsBorderWidth = data.highlightsBorderWidth.value
         highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
+        highlightsPaddingPercentage = data.highlightsPaddingPercentage.value
         photosScanOnLaunch = data.photosScanOnLaunch.value
         photosScanOnAddition = data.photosScanOnAddition.value
         photosScanOnFind = data.photosScanOnFind.value

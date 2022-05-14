@@ -12,7 +12,8 @@ struct SettingsHighlightsPreview: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
 
-    let highlightSidePadding = CGFloat(4.5)
+    @State var highlightSize = CGSize.zero
+    let highlightSidePadding = CGFloat(3.5)
 
     var body: some View {
         let color = UIColor(hex: UInt(realmModel.highlightsColor))
@@ -20,6 +21,9 @@ struct SettingsHighlightsPreview: View {
         HStack(spacing: 0) {
             Text("What if you could ")
             Text("find")
+                .sizeReader {
+                    highlightSize = $0
+                }
                 .overlay(
                     color.color
                         .opacity(realmModel.highlightsBackgroundOpacity)
@@ -28,7 +32,7 @@ struct SettingsHighlightsPreview: View {
                             RoundedRectangle(cornerRadius: SettingsConstants.iconCornerRadius)
                                 .strokeBorder(color.color, lineWidth: realmModel.highlightsBorderWidth)
                         )
-                        .padding(-highlightSidePadding)
+                        .padding(-realmModel.getHighlightPadding(size: highlightSize) * 0.7) /// preview a bit smaller
                 )
             Text(" text in real life?")
         }
@@ -47,6 +51,7 @@ struct SettingsHighlightsPreview: View {
                 startPoint: .leading,
                 endPoint: .trailing
             )
+            .padding(.vertical, -50) /// allow vertical overflow of the padding
         )
     }
 }

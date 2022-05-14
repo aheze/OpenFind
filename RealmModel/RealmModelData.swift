@@ -39,6 +39,7 @@ enum RealmModelData {
     static var highlightsCycleSearchBarColors = SavedData(key: "highlightsCycleSearchBarColors", value: true)
     static var highlightsBorderWidth = SavedData(key: "highlightsBorderWidth", value: Double(1.2))
     static var highlightsBackgroundOpacity = SavedData(key: "highlightsBackgroundOpacity", value: Double(0.3))
+    static var highlightsPaddingPercentage = SavedData(key: "highlightsPaddingPercentage", value: Double(0.1))
     
     // MARK: Photos
 

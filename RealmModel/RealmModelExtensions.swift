@@ -71,6 +71,12 @@ extension RealmModel {
             return filteredRecognitionLanguages
         }
     }
+    
+    func getHighlightPadding(size: CGSize) -> CGFloat {
+        let length = min(size.width, size.height)
+        let padding = highlightsPaddingPercentage * length
+        return padding
+    }
 }
 
 extension UIColor {

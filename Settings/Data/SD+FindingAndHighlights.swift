@@ -138,6 +138,23 @@ extension SettingsData {
                                 )
                             )
                         ]
+                    ),
+                    .init(
+                        header: "Padding",
+                        rows: [
+                            .init(
+                                configuration: .slider(
+                                    title: "Padding",
+                                    numberOfSteps: nil,
+                                    minValue: 0,
+                                    maxValue: 0.25,
+                                    minSymbol: .system(name: "minus.rectangle", weight: .regular),
+                                    maxSymbol: .system(name: "plus.rectangle", weight: .regular),
+                                    saveAsInt: false,
+                                    storage: \.$highlightsPaddingPercentage
+                                )
+                            )
+                        ]
                     )
                 ]
             )
