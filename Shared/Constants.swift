@@ -27,6 +27,8 @@ extension Color {
 }
 
 enum Constants {
+    static var versionsWithSlantedTextSupport = ["2.0.4", "2.0.5"]
+    
     static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)

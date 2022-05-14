@@ -11,7 +11,7 @@ import SwiftUI
 
 extension PhotosSlidesViewController {
     func setupInfo() {
-        let viewController = PhotosSlidesInfoViewController(model: model)
+        let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel)
         addChildViewController(viewController, in: infoViewContainer)
         infoViewContainer.clipsToBounds = true
     }
@@ -43,7 +43,7 @@ extension PhotosSlidesViewController {
                 let popover = Popover(attributes: attributes) { [weak self] in
                     if let self = self {
                         ScrollView {
-                            PhotosSlidesInfoView(model: self.model)
+                            PhotosSlidesInfoView(model: self.model, realmModel: self.realmModel)
                         }
                         .background(UIColor.systemBackground.color)
                         .frame(width: 300)

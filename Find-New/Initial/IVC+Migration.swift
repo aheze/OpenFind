@@ -30,13 +30,11 @@ extension InitialViewController {
                     print("Migrating: \(oldSchemaVersion)")
                     migration.enumerateObjects(ofType: "RealmPhotoMetadata") { oldObject, newObject in
 
-                        print("Old: \(oldObject)")
                         guard let oldObject = oldObject else { return }
 
                         let text = RealmPhotoMetadataText()
                         text.scannedInVersion = nil
 
-                        print("Getting: \(oldObject["scannedInLanguages"] )")
                         if let scannedInLanguages = oldObject["scannedInLanguages"] as? RealmSwift.List<String> {
                             text.scannedInLanguages = scannedInLanguages
                         }

@@ -11,6 +11,8 @@ import SwiftUI
 
 struct PhotosSlidesInfoView: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var realmModel: RealmModel
+
     var body: some View {
         let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
 
@@ -46,6 +48,19 @@ struct PhotosSlidesInfoView: View {
                 }
             }
             .fixedSize(horizontal: false, vertical: true)
+
+            Group {
+                if let text = realmModel.container.getText(from: photo.asset.localIdentifier) {
+                    if !Constants.versionsWithSlantedTextSupport.contains(text.scannedInVersion ?? "") {
+                        Button {
+                            scanNow()
+                        } label: {
+                            Text("Rescan to support slanted text")
+                        }
+                    }
+                }
+            }
+            .foregroundColor(UIColor.secondaryLabel.color)
         }
         .foregroundColor(.accent)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
