@@ -115,7 +115,11 @@ extension PhotosViewController {
                     let numberOfPhotos = self.model.scannedPhotosCount
                     let estimatedTime = CGFloat(numberOfPhotos) / 500 /// 1222 photos 0 -> 2.444 seconds
                     
-                    self.progressViewModel.start(progress: .auto(estimatedTime: estimatedTime))
+                    /// start progress bar immediately
+                    Debouncer.debounce(queue: .main, delay: .seconds(0.4)) {
+                        self.progressViewModel.start(progress: .auto(estimatedTime: estimatedTime))
+                    }
+                    
                     Debouncer.debounce(delay: .seconds(0.4), shouldRunImmediately: false) {
                         self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
                     }
