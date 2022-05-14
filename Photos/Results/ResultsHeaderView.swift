@@ -18,6 +18,7 @@ class ResultsHeaderViewModel: ObservableObject {
 struct ResultsHeaderView: View {
     @ObservedObject var model: PhotosViewModel
     @ObservedObject var resultsHeaderViewModel: ResultsHeaderViewModel
+    @ObservedObject var progressViewModel: ProgressViewModel
 
     var body: some View {
         Button {
@@ -41,6 +42,10 @@ struct ResultsHeaderView: View {
                     .cornerRadius(14)
             }
             .padding(16)
+            .background(
+                ProgressLineView(model: progressViewModel)
+                    .opacity(0.1)
+            )
             .blueBackground()
         }
         .buttonStyle(EasingScaleButtonStyle())

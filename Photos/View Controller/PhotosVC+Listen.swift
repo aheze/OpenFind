@@ -103,7 +103,11 @@ extension PhotosViewController {
                 if textChanged {
                     let resultsStateExisted = self.model.resultsState != nil
                     
-                    Debouncer.debounce(delay: .seconds(0.4)) {
+                    let numberOfPhotos = self.model.scannedPhotosCount
+                    let estimatedTime = CGFloat(numberOfPhotos) / 500 /// 1222 photos 0 -> 2.444 seconds
+                    
+                    self.progressViewModel.start(progress: .auto(estimatedTime: estimatedTime))
+                    Debouncer.debounce(delay: .seconds(0.4), shouldRunImmediately: false) {
                         self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
                     }
                     

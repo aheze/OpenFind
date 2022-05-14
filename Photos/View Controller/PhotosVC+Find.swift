@@ -51,6 +51,10 @@ extension PhotosViewController {
                 resultsCount: resultsCount,
                 context: context
             )
+            
+            await MainActor.run {
+                self.progressViewModel.finishAutoProgress(shouldShimmer: false)
+            }
         }
     }
     
