@@ -1,17 +1,13 @@
 //
-//  SpecifiedExtensions.swift
+//  RealmModelSpecifiedExtensions.swift
 //  Find
 //
-//  Created by A. Zheng (github.com/aheze) on 2/21/22.
+//  Created by A. Zheng (github.com/aheze) on 5/13/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
 import RealmSwift
 import UIKit
-
-/**
- Might contain some dependencies, like `RealmSwift`
- */
 
 extension PhotoMetadataText {
     func getRealmText() -> RealmPhotoMetadataText {

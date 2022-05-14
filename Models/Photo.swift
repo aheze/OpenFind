@@ -53,3 +53,26 @@ struct PhotoMetadataText {
         scannedInVersion = nil
     }
 }
+
+enum PhotosSectionCategorization: Equatable, Hashable {
+    case date(year: Int, month: Int)
+
+    func getTitle() -> String {
+        switch self {
+        case .date(let year, let month):
+            let dateComponents = DateComponents(year: year, month: month)
+            if let date = Calendar.current.date(from: dateComponents) {
+                let formatter = DateFormatter()
+                if date.isInThisYear {
+                    formatter.dateFormat = "MMMM"
+                } else {
+                    formatter.dateFormat = "MMMM yyyy" /// add year if before
+                }
+                let string = formatter.string(from: date)
+                return string
+            }
+        }
+
+        return ""
+    }
+}

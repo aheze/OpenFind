@@ -22,7 +22,12 @@ struct Gradient: Hashable {
     var alpha = CGFloat(1)
 }
 
+// MARK: Finding
 
+struct RangeResult: Hashable {
+    var string: String
+    var ranges: [Range<Int>]
+}
 
 struct DataSourceSectionTemplate: Hashable {
     var id = 0
@@ -35,4 +40,3 @@ struct DataSourceSectionTemplate: Hashable {
         lhs.id == rhs.id
     }
 }
-

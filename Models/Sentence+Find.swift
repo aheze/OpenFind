@@ -50,18 +50,6 @@ extension Array where Element == Sentence {
         }
         return highlights
     }
-
-    /// just check if a the sentences matches the search. A tiny bit faster than `getLineHighlights`.
-//    func checkContainsSearch(stringToGradients: [String: Gradient], realmModel: RealmModel) -> Bool {
-//        let search = Swift.Array(stringToGradients.keys)
-//        for sentence in self {
-//            let rangeResults = sentence.ranges(of: search, realmModel: realmModel)
-//            if !rangeResults.isEmpty {
-//                return true
-//            }
-//        }
-//        return false
-//    }
 }
 
 extension Array where Element == FastSentence {
