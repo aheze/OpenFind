@@ -82,11 +82,6 @@
 		<key>Settings.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>27</integer>
-		</dict>
-		<key>SettingsNew.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
 		<key>SwiftUIViews.xcscheme_^#shared#^_</key>
@@ -123,6 +118,11 @@
 			<true/>
 		</dict>
 		<key>3C6C7320278193F600E039F0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3CE40B7A27F5281F00CADCBF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

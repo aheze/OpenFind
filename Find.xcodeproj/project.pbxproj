@@ -1154,6 +1154,11 @@
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
 		3C5ED383282F61870077DD9B /* RealmModelSpecifiedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5ED382282F61870077DD9B /* RealmModelSpecifiedExtensions.swift */; };
 		3C5ED384282F62030077DD9B /* RealmModelSpecifiedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5ED382282F61870077DD9B /* RealmModelSpecifiedExtensions.swift */; };
+		3C5ED385282F62BC0077DD9B /* ListsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43624E2810B231002DD153 /* ListsDefaults.swift */; };
+		3C5ED386282F62C30077DD9B /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3794274756470010FD68 /* ToolbarViewModel.swift */; };
+		3C5ED388282F63440077DD9B /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA2C1628122F5F0019044D /* ToolbarController.swift */; };
+		3C5ED389282F63680077DD9B /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA2C25281231340019044D /* ToolbarView.swift */; };
+		3C5ED38B282F63780077DD9B /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5ED38A282F63780077DD9B /* Popovers */; };
 		3C60162A2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */; };
 		3C60162B2816486500B07BD7 /* PhotosVM+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6016292816486500B07BD7 /* PhotosVM+Notes.swift */; };
 		3C606671274ECCBA000A5BDE /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
@@ -4152,7 +4157,7 @@
 		3CE3D4F827DD33CF00521735 /* TabBarVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Listen.swift"; sourceTree = "<group>"; };
 		3CE3D4FB27DD5AF800521735 /* VisionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionModels.swift; sourceTree = "<group>"; };
 		3CE3D50127DD5B2500521735 /* Find+Sentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Find+Sentences.swift"; sourceTree = "<group>"; };
-		3CE40B7B27F5281F00CADCBF /* SettingsNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CE40B7B27F5281F00CADCBF /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE40B7D27F5281F00CADCBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CE40B7F27F5281F00CADCBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3CE40B8127F5281F00CADCBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -4422,6 +4427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5ED38B282F63780077DD9B /* Popovers in Frameworks */,
 				3CADD80227FE4B7A009BBBDA /* SupportDocs in Frameworks */,
 				3C2D229827FBBA0200D413B7 /* SwiftPrettyPrint in Frameworks */,
 			);
@@ -6281,7 +6287,7 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		3CE40B7C27F5281F00CADCBF /* SettingsNew */ = {
+		3CE40B7C27F5281F00CADCBF /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				3CE40B9827F611F800CADCBF /* SettingsContent.storyboard */,
@@ -6304,7 +6310,7 @@
 				3C2D22CF27FCD4A200D413B7 /* Custom Views */,
 				3CE40B8F27F5284A00CADCBF /* Testing */,
 			);
-			path = SettingsNew;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		3CE40B8F27F5284A00CADCBF /* Testing */ = {
@@ -6645,7 +6651,7 @@
 				3C4D3A48274768FE0010FD68 /* Lists */,
 				3C2DBBDF277E739200911A74 /* MLVision */,
 				3C1D19F3275A9F390064F2C6 /* Popover */,
-				3CE40B7C27F5281F00CADCBF /* SettingsNew */,
+				3CE40B7C27F5281F00CADCBF /* Settings */,
 				3CC0D125280B279B004E7016 /* Launch */,
 				3C4D39A427475D5F0010FD68 /* Utilities */,
 				4999AC922353A80A00AB06A7 /* Find */,
@@ -6674,7 +6680,7 @@
 				3C6C7321278193F600E039F0 /* Find-New.app */,
 				3CFD5FD3278B6F2B0031BC8B /* SearchNavigation.app */,
 				3C21ED7627A3C4AB0005E183 /* RealmModel.app */,
-				3CE40B7B27F5281F00CADCBF /* SettingsNew.app */,
+				3CE40B7B27F5281F00CADCBF /* Settings.app */,
 				3CC0D124280B279B004E7016 /* Launch.app */,
 				3CCA2C0128122F3C0019044D /* ToolbarController.app */,
 			);
@@ -7033,9 +7039,9 @@
 			productReference = 3CCA2C0128122F3C0019044D /* ToolbarController.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3CE40B7A27F5281F00CADCBF /* SettingsNew */ = {
+		3CE40B7A27F5281F00CADCBF /* Settings */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3CE40B8E27F5282100CADCBF /* Build configuration list for PBXNativeTarget "SettingsNew" */;
+			buildConfigurationList = 3CE40B8E27F5282100CADCBF /* Build configuration list for PBXNativeTarget "Settings" */;
 			buildPhases = (
 				3CE40B7727F5281F00CADCBF /* Sources */,
 				3CE40B7827F5281F00CADCBF /* Frameworks */,
@@ -7045,13 +7051,14 @@
 			);
 			dependencies = (
 			);
-			name = SettingsNew;
+			name = Settings;
 			packageProductDependencies = (
 				3C2D229727FBBA0200D413B7 /* SwiftPrettyPrint */,
 				3CADD80127FE4B7A009BBBDA /* SupportDocs */,
+				3C5ED38A282F63780077DD9B /* Popovers */,
 			);
 			productName = SettingsNew;
-			productReference = 3CE40B7B27F5281F00CADCBF /* SettingsNew.app */;
+			productReference = 3CE40B7B27F5281F00CADCBF /* Settings.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3CFD5FD2278B6F2B0031BC8B /* SearchNavigation */ = {
@@ -7206,7 +7213,7 @@
 				3C7B7AA2277FBBC000E1F602 /* ScrollZoom */,
 				3CFD5FD2278B6F2B0031BC8B /* SearchNavigation */,
 				3C21ED7527A3C4AB0005E183 /* RealmModel */,
-				3CE40B7A27F5281F00CADCBF /* SettingsNew */,
+				3CE40B7A27F5281F00CADCBF /* Settings */,
 				3CC0D123280B279B004E7016 /* Launch */,
 				3CCA2C0028122F3C0019044D /* ToolbarController */,
 				4999AC8F2353A80A00AB06A7 /* Find */,
@@ -10209,6 +10216,7 @@
 				3C2D22D527FCE34F00D413B7 /* SettingsHighlightsIcon.swift in Sources */,
 				3C798F9727F782B0007BF68D /* ClearIconView.swift in Sources */,
 				3C798F5727F7829F007BF68D /* SearchVC+Delegate.swift in Sources */,
+				3C5ED389282F63680077DD9B /* ToolbarView.swift in Sources */,
 				3C153BEE280B98540062751B /* SearchVC+Defaults.swift in Sources */,
 				3C798F4F27F78284007BF68D /* SearchPromptView.swift in Sources */,
 				3C798DF627F61582007BF68D /* Utilities+PHAsset.swift in Sources */,
@@ -10278,10 +10286,13 @@
 				3C7C8DE22802BACB001DEE72 /* Finding.swift in Sources */,
 				3C798DEC27F61582007BF68D /* Utilities+Constraints.swift in Sources */,
 				3C798DF827F61582007BF68D /* Utilities+Math.swift in Sources */,
+				3C5ED385282F62BC0077DD9B /* ListsDefaults.swift in Sources */,
 				3C798F6E27F7829F007BF68D /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C2D22E527FD407C00D413B7 /* SD+Tabs.swift in Sources */,
+				3C5ED386282F62C30077DD9B /* ToolbarViewModel.swift in Sources */,
 				3C2D22E327FD407700D413B7 /* SD+FindingAndHighlights.swift in Sources */,
 				3C2D229E27FBD46400D413B7 /* SettingsResultsViewController.swift in Sources */,
+				3C5ED388282F63440077DD9B /* ToolbarController.swift in Sources */,
 				3C798F6127F7829F007BF68D /* SearchVM+Extensions.swift in Sources */,
 				3C798DF927F61582007BF68D /* Utilities+UIFont.swift in Sources */,
 				3C798F4C27F78284007BF68D /* SearchNC+Prompt.swift in Sources */,
@@ -12058,7 +12069,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SettingsNew/Testing/Info.plist;
+				INFOPLIST_FILE = Settings/Testing/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -12070,7 +12081,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SettingsNew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -12089,7 +12100,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SettingsNew/Testing/Info.plist;
+				INFOPLIST_FILE = Settings/Testing/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -12101,7 +12112,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SettingsNew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -12482,7 +12493,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3CE40B8E27F5282100CADCBF /* Build configuration list for PBXNativeTarget "SettingsNew" */ = {
+		3CE40B8E27F5282100CADCBF /* Build configuration list for PBXNativeTarget "Settings" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3CE40B8C27F5282100CADCBF /* Debug */,
@@ -12618,6 +12629,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C36433F277C0B5E0038CB18 /* XCRemoteSwiftPackageReference "SupportDocs" */;
 			productName = SupportDocs;
+		};
+		3C5ED38A282F63780077DD9B /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C504E052819108B00AD302A /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
 		};
 		3C817F882819117700417835 /* Popovers */ = {
 			isa = XCSwiftPackageProductDependency;
