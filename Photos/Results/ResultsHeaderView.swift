@@ -9,7 +9,7 @@
 import SwiftUI
 
 class ResultsHeaderViewModel: ObservableObject {
-    @Published var text = "10 Results."
+    @Published var text = "Finding..."
     @Published var description: String? = defaultDescription
 
     static let defaultDescription = "More results will appear as Find scans more photos."

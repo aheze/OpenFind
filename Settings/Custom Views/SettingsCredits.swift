@@ -13,7 +13,7 @@ struct Person: Identifiable {
     var name: String
     var picture: ProfilePicture
     var description: String
-    var urlString: String
+    var urlString: String?
     var showUrl = true
 
     enum ProfilePicture {
@@ -22,7 +22,7 @@ struct Person: Identifiable {
     }
 
     func getUrlSummary() -> String {
-        var urlString = self.urlString
+        guard var urlString = urlString else { return "" }
         urlString = urlString.replacingOccurrences(of: "https://", with: "", options: .anchored)
         urlString = urlString.replacingOccurrences(of: "http://", with: "", options: .anchored)
 
@@ -31,7 +31,6 @@ struct Person: Identifiable {
         return urlString
     }
 }
-
 extension Person {
     static var people: [Person] = {
         [
@@ -46,6 +45,16 @@ extension Person {
                 picture: .image(imageName: "WinKProfile"),
                 description: "Made the app promo music",
                 urlString: "https://soundcloud.com/winksounds"
+            ),
+            .init(
+                name: "Eleni",
+                picture: .symbol(iconName: "person.fill", foregroundColor: .white, backgroundColor: .systemPink),
+                description: "Made the strawberry image - try typing /strawberry in a search bar"
+            ),
+            .init(
+                name: "Leo",
+                picture: .symbol(iconName: "person.fill", foregroundColor: .white, backgroundColor: .systemGreen),
+                description: "Made the gradient image - try typing /gradient in a search bar"
             ),
             .init(
                 name: "Want to help?",
@@ -154,11 +163,12 @@ struct SettingsCredits: View {
     }
 }
 
+
 struct PersonView: View {
     let person: Person
     var body: some View {
         Button {
-            if let url = URL(string: person.urlString) {
+            if let urlString = person.urlString, let url = URL(string: urlString) {
                 UIApplication.shared.open(url)
             }
         } label: {
@@ -211,6 +221,7 @@ struct PersonView: View {
                         lineWidth: 0.25
                     )
             )
+            .contentShape(Rectangle())
         }
         .buttonStyle(EasingScaleButtonStyle())
     }

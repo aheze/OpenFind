@@ -58,7 +58,14 @@ struct KeyboardToolbarView: View {
                     alignment: .top
                 )
                 .offset(x: 0, y: displayedLists.isEmpty ? SearchConstants.toolbarHeight : 0)
-                .animation(.spring(), value: searchViewModel.fields),
+                .animation(
+                    .spring(
+                        response: 0.3,
+                        dampingFraction: 1,
+                        blendDuration: 1
+                    ),
+                    value: searchViewModel.fields
+                ),
                 alignment: .bottom
             )
             .onValueChange(of: displayedLists) { oldValue, newValue in
