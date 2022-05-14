@@ -89,6 +89,7 @@ extension CameraViewController {
             self.model.pausedImage?.dateScanned = currentDate
             self.model.pausedImage?.text.sentences = sentences
             self.model.pausedImage?.text.scannedInLanguages = scannedInLanguages
+            self.model.pausedImage?.text.scannedInVersion = scannedInVersion
         }
 
         /// photo was saved to the photo library. Update the sentences
@@ -103,7 +104,7 @@ extension CameraViewController {
                 if let asset = assets.firstObject {
                     let photo = Photo(asset: asset, metadata: metadata)
                     self.model.photoAdded?(photo)
-                    self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil)
+                    self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: text)
                 }
             }
         }
