@@ -70,7 +70,9 @@ struct PhotosResultsState {
     var starredFindPhotos: [FindPhoto]
     var screenshotsFindPhotos: [FindPhoto]
 
-    var resultsCount: Int
+    var allResultsCount: Int
+    var starredResultsCount: Int
+    var screenshotsResultsCount: Int
 
     /// get from `findPhotos`
     func getFindPhotoIndex(for photo: Photo, in keyPath: KeyPath<PhotosResultsState, [FindPhoto]>) -> Int? {
@@ -81,7 +83,20 @@ struct PhotosResultsState {
         return nil
     }
 
-    func getResultsText() -> String {
+    func getResultsCount(for filter: SliderViewModel.Filter) -> Int {
+        switch filter {
+        case .starred:
+            return starredResultsCount
+        case .screenshots:
+            return screenshotsResultsCount
+        case .all:
+            return allResultsCount
+        }
+    }
+
+    func getResultsText(for filter: SliderViewModel.Filter) -> String {
+        let resultsCount = getResultsCount(for: filter)
+
         switch resultsCount {
         case 0:
             return "No results."
@@ -120,6 +135,7 @@ struct FindPhoto: Hashable {
     var highlightsSet: HighlightsSet?
     var descriptionText = ""
     var descriptionLines = [Line]()
+    var numberOfResults = 0
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -178,11 +194,10 @@ extension FindPhoto {
 
     func resultsString() -> String {
         let string: String
-        let count = highlightsSet?.highlights.count ?? 0
-        if count == 1 {
-            string = "\(count) Result"
+        if numberOfResults == 1 {
+            string = "\(numberOfResults) Result"
         } else {
-            string = "\(count) Results"
+            string = "\(numberOfResults) Results"
         }
         return string
     }

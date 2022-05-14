@@ -82,25 +82,34 @@ extension PHAsset {
 }
 
 extension Finding {
-    /// get `FindPhoto`s from specified photos, also return count
-    static func findAndGetFindPhotos(realmModel: RealmModel, from photos: [Photo], stringToGradients: [String: Gradient]) -> ([FindPhoto], [FindPhoto], [FindPhoto], Int) {
+    /// get `FindPhoto`s from specified photos, also return number of photos count
+    static func findAndGetFindPhotos(
+        realmModel: RealmModel,
+        from photos: [Photo],
+        stringToGradients: [String: Gradient]
+    ) -> (
+        [FindPhoto], [FindPhoto], [FindPhoto],
+        Int, Int, Int
+    ) {
         var allFindPhotos = [FindPhoto]()
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
-        var count = 0
+
+        var allResultsCount = 0
+        var starredResultsCount = 0
+        var screenshotsResultsCount = 0
 
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let text = realmModel.container.getText(from: metadata.assetIdentifier)
             guard let sentences = text?.sentences else { continue }
 
-            let lines = Finding.getLineHighlights(
+            let (lines, highlightsCount) = Finding.getLineHighlights(
                 realmModel: realmModel,
                 from: sentences,
                 with: stringToGradients,
                 imageSize: photo.asset.getSize()
             )
-            count += lines.count
 
             if lines.count >= 1 {
                 let description = Finding.getCellDescription(from: lines)
@@ -109,30 +118,39 @@ extension Finding {
                     id: UUID(),
                     photo: photo,
                     descriptionText: description,
-                    descriptionLines: lines
+                    descriptionLines: lines,
+                    numberOfResults: highlightsCount
                 )
 
                 allFindPhotos.append(findPhoto)
 
                 if findPhoto.photo.isStarred {
                     starredFindPhotos.append(findPhoto)
+                    starredResultsCount += highlightsCount
                 }
                 if findPhoto.photo.isScreenshot {
                     screenshotsFindPhotos.append(findPhoto)
+                    screenshotsResultsCount += highlightsCount
                 }
+                allResultsCount += highlightsCount
             }
         }
 
-        return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos, count)
+        return (
+            allFindPhotos, starredFindPhotos, screenshotsFindPhotos,
+            allResultsCount, starredResultsCount, screenshotsResultsCount
+        )
     }
 
+    /// return lines and also number of highlights
     static func getLineHighlights(
         realmModel: RealmModel,
         from sentences: [Sentence],
         with stringToGradients: [String: Gradient],
         imageSize: CGSize?
-    ) -> [FindPhoto.Line] {
+    ) -> ([FindPhoto.Line], Int) {
         var lines = [FindPhoto.Line]()
+        var highlightsCount = 0
 
         for sentence in sentences {
             /// the highlights in this sentence.
@@ -142,6 +160,7 @@ extension Finding {
             for rangeResult in rangeResults {
                 let gradient = stringToGradients[rangeResult.string] ?? Gradient()
                 for range in rangeResult.ranges {
+                    highlightsCount += 1
                     let lineHighlight = FindPhoto.Line.LineHighlight(
                         string: rangeResult.string,
                         rangeInSentence: range,
@@ -158,7 +177,7 @@ extension Finding {
             }
         }
 
-        return lines
+        return (lines, highlightsCount)
     }
 
     /// get the text to show in the cell's text view

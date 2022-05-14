@@ -45,6 +45,8 @@ struct ResultsHeaderView: View {
             .background(
                 ProgressLineView(model: progressViewModel)
                     .opacity(0.1)
+                    .padding(-20)
+                    .blur(radius: 4)
             )
             .blueBackground()
         }
