@@ -96,7 +96,7 @@ struct SettingsCredits: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(UIColor.secondaryLabel.color)
             }
-            .padding(.horizontal, 32)
+            .padding(.horizontal, 28)
 
             HStack(spacing: 16) {
                 SettingsProfileLink(imageName: "TwitterIcon", inset: 3, urlString: "https://twitter.com/aheze0")
@@ -111,12 +111,12 @@ struct SettingsCredits: View {
                 .padding(.horizontal, 32)
 
             VStack(spacing: SettingsConstants.sectionSpacing) {
-                Text("These people helped Find become what it is today. Thank you!")
+                Text("Thanks to")
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
                     .foregroundColor(UIColor.secondaryLabel.color)
-                    .padding(.horizontal, 32)
+                    .padding(.horizontal, 28)
 
                 ForEach(Person.people) { person in
                     PersonView(person: person)
@@ -139,7 +139,7 @@ struct SettingsCredits: View {
                                 .frame(maxWidth: .infinity)
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(UIColor.secondaryLabel.color)
-                                .padding(.horizontal, 32)
+                                .padding(.horizontal, 28)
                                 .transition(
                                     .asymmetric(
                                         insertion: .identity,
