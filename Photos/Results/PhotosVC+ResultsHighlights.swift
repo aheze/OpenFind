@@ -63,22 +63,25 @@ extension PhotosViewController {
         return cellHighlights
     }
     
+    /// `loop` gets called in each `FindPhoto`
     func updateResultsHighlightColors(in keyPath: WritableKeyPath<PhotosResultsState, [FindPhoto]>, loop: ((Int) -> Void)? = nil) {
         guard let findPhotos = model.resultsState?[keyPath: keyPath] else { return }
         for findPhotoIndex in findPhotos.indices {
-            guard let highlightsSet = findPhotos[findPhotoIndex].highlightsSet else { return }
             
-            let newHighlights: [Highlight] = highlightsSet.highlights.map { highlight in
-                if let gradient = self.searchViewModel.stringToGradients[highlight.string] {
-                    var newHighlight = highlight
-                    newHighlight.colors = gradient.colors
-                    newHighlight.alpha = gradient.alpha
-                    return newHighlight
+            /// if photo has highlights, also update them.
+            if let highlightsSet = findPhotos[findPhotoIndex].highlightsSet {
+                let newHighlights: [Highlight] = highlightsSet.highlights.map { highlight in
+                    if let gradient = self.searchViewModel.stringToGradients[highlight.string] {
+                        var newHighlight = highlight
+                        newHighlight.colors = gradient.colors
+                        newHighlight.alpha = gradient.alpha
+                        return newHighlight
+                    }
+                    return highlight
                 }
-                return highlight
+                let newHighlightsSet = FindPhoto.HighlightsSet(stringToGradients: searchViewModel.stringToGradients, highlights: newHighlights)
+                model.resultsState?[keyPath: keyPath][findPhotoIndex].highlightsSet = newHighlightsSet
             }
-            let newHighlightsSet = FindPhoto.HighlightsSet(stringToGradients: searchViewModel.stringToGradients, highlights: newHighlights)
-            model.resultsState?[keyPath: keyPath][findPhotoIndex].highlightsSet = newHighlightsSet
             
             /// update the line highlight colors
             for (lineIndex, descriptionLine) in findPhotos[findPhotoIndex].descriptionLines.enumerated() {
@@ -105,7 +108,6 @@ extension PhotosViewController {
     /// This only updates the results collection view.
     /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
     func updateResultsHighlightColors() {
-        
         guard tabViewModel.tabState == .photos else { return }
         updateResultsHighlightColors(in: \PhotosResultsState.displayedFindPhotos) { [weak self] index in
             guard let self = self else { return }
@@ -114,7 +116,6 @@ extension PhotosViewController {
                 let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
                 let findPhoto = self.model.resultsState?.displayedFindPhotos[index]
             {
-                
                 cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: findPhoto)
             }
         }
