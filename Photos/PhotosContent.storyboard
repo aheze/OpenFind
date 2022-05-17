@@ -357,7 +357,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zre-cQ-6zR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6w-mM-Mfw">
                                         <rect key="frame" x="298" y="746" width="100" height="100"/>
@@ -369,7 +369,7 @@
                                     </view>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="JoA-3v-TLd"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="JoA-3v-TLd" firstAttribute="bottom" secondItem="r6w-mM-Mfw" secondAttribute="bottom" constant="16" id="C4O-IO-faX"/>
                                     <constraint firstItem="JoA-3v-TLd" firstAttribute="trailing" secondItem="r6w-mM-Mfw" secondAttribute="trailing" constant="16" id="HyZ-4E-aEu"/>
