@@ -102,23 +102,25 @@ struct SliderView: View {
 
                 HStack {
                     if let count = selection.count {
+                        let text = count > 9 ? "9+" : "\(count)"
                         let (foregroundColor, backgroundColor) = getCountColor(for: selection.filter)
-                        Text("\(count)")
+                        
+                        Text(text)
                             .foregroundColor(foregroundColor.color)
                             .font(Font(SliderConstants.countFont as CTFont))
                             .padding(SliderConstants.countPadding)
-                            .fixedSize(horizontal: true, vertical: false)
                             .background(
                                 Capsule()
                                     .fill(backgroundColor.color)
                             )
-                            .transition(.scale)
+                            .fixedSize(horizontal: true, vertical: true)
+                            .transition(.scale(scale: 0.5).combined(with: .opacity))
                     }
 
                     Text(selection.filter.getString())
                         .font(Font(SliderConstants.font as CTFont))
                         .colorMultiply(getForegroundColor(for: selection.filter).color)
-                        .fixedSize(horizontal: true, vertical: false)
+                        .fixedSize(horizontal: true, vertical: true)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(SliderConstants.selectionEdgeInsets)

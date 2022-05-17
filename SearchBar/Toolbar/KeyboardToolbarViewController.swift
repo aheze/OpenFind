@@ -56,6 +56,15 @@ class KeyboardToolbarViewController: UIViewController {
         hostingController.didMove(toParent: self)
         
         _ = reloadFrame()
+        
+        /// disable hit testing when no lists displayed
+        model.$showing
+            .dropFirst()
+            .sink { [weak self] showing in
+                guard let self = self else { return }
+                self.view.isUserInteractionEnabled = showing
+            }
+            .store(in: &realmModel.cancellables)
     }
     
     /// return true if frame was reloaded
@@ -63,9 +72,9 @@ class KeyboardToolbarViewController: UIViewController {
         let currentHeight = view.frame.height
         let newHeight: CGFloat
         if collectionViewModel.keyboardShown {
-            newHeight = 60
+            newHeight = SearchConstants.toolbarHeight
         } else {
-            newHeight = 60 + Global.safeAreaInsets.bottom
+            newHeight = SearchConstants.toolbarHeight + Global.safeAreaInsets.bottom
         }
         
         let heightChanged = currentHeight != newHeight

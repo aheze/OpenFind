@@ -70,6 +70,10 @@ struct PhotosResultsState {
     var starredFindPhotos: [FindPhoto]
     var screenshotsFindPhotos: [FindPhoto]
 
+    var allResultsCount: Int
+    var starredResultsCount: Int
+    var screenshotsResultsCount: Int
+
     /// get from `findPhotos`
     func getFindPhotoIndex(for photo: Photo, in keyPath: KeyPath<PhotosResultsState, [FindPhoto]>) -> Int? {
         let findPhotos = self[keyPath: keyPath]
@@ -79,16 +83,27 @@ struct PhotosResultsState {
         return nil
     }
 
-    func getResultsText() -> String {
-        let highlights = displayedFindPhotos.compactMap { $0.highlightsSet?.highlights }.flatMap { $0 }
+    func getResultsCount(for filter: SliderViewModel.Filter) -> Int {
+        switch filter {
+        case .starred:
+            return starredResultsCount
+        case .screenshots:
+            return screenshotsResultsCount
+        case .all:
+            return allResultsCount
+        }
+    }
 
-        switch highlights.count {
+    func getResultsText(for filter: SliderViewModel.Filter) -> String {
+        let resultsCount = getResultsCount(for: filter)
+
+        switch resultsCount {
         case 0:
             return "No results."
         case 1:
             return "1 result in \(displayedFindPhotos.count) photos."
         default:
-            return "\(highlights.count) results in \(displayedFindPhotos.count) photos."
+            return "\(resultsCount) results in \(displayedFindPhotos.count) photos."
         }
     }
 
@@ -120,6 +135,7 @@ struct FindPhoto: Hashable {
     var highlightsSet: HighlightsSet?
     var descriptionText = ""
     var descriptionLines = [Line]()
+    var numberOfResults = 0
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -178,11 +194,10 @@ extension FindPhoto {
 
     func resultsString() -> String {
         let string: String
-        let count = highlightsSet?.highlights.count ?? 0
-        if count == 1 {
-            string = "\(count) Result"
+        if numberOfResults == 1 {
+            string = "\(numberOfResults) Result"
         } else {
-            string = "\(count) Results"
+            string = "\(numberOfResults) Results"
         }
         return string
     }
@@ -202,11 +217,22 @@ struct PhotosSection: Hashable {
     }
 }
 
+extension Array where Element == Photo {
+    /// apply metadata to a single photo inside an array of photos
+    /// only modify the changed properties `dateScanned` and `sentences`
+    mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
+        if self[index].metadata != nil {
+            self[index].metadata?.dateScanned = metadata?.dateScanned
+        } else {
+            self[index].metadata = metadata
+        }
+    }
+}
+
 extension Array where Element == FindPhoto {
     mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
         if self[index].photo.metadata != nil {
             self[index].photo.metadata?.dateScanned = metadata?.dateScanned
-            self[index].photo.metadata?.sentences = metadata?.sentences ?? []
         } else {
             self[index].photo.metadata = metadata
         }
@@ -217,7 +243,6 @@ extension Array where Element == SlidesPhoto {
     mutating func applyMetadata(at index: Int, with metadata: PhotoMetadata?) {
         if self[index].findPhoto.photo.metadata != nil {
             self[index].findPhoto.photo.metadata?.dateScanned = metadata?.dateScanned
-            self[index].findPhoto.photo.metadata?.sentences = metadata?.sentences ?? []
         } else {
             self[index].findPhoto.photo.metadata = metadata
         }

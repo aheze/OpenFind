@@ -55,6 +55,7 @@ class TabBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
         contentCollectionView.showsHorizontalScrollIndicator = false
@@ -123,11 +124,15 @@ class TabBarViewController: UIViewController {
     }
     
     func updateTraitCollection(to collection: UITraitCollection) {
-        if collection.horizontalSizeClass == .regular {
+        switch collection.orientation {
+        case .phoneLandscape:
             TabState.isLandscape = true
-        } else {
+        case .phonePortrait:
             TabState.isLandscape = false
+        case .pad:
+            TabState.isLandscape = true
         }
+        
         model.changeTabState(newTab: model.tabState, animation: .animate)
         updateTabBarHeight(model.tabState)
     }

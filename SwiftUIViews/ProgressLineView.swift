@@ -10,8 +10,6 @@ import SwiftUI
 
 class ProgressViewModel: ObservableObject {
     @Published var progress = Progress.determinate(progress: 0)
-    @Published var foregroundColor: UIColor = .init(hex: 0x00aeef)
-    @Published var backgroundColor: UIColor = .init(hex: 0x00aeef).withAlphaComponent(0.2)
     
     /// the actual percentage used by the view
     @Published var percentage = CGFloat(0)
@@ -25,11 +23,24 @@ class ProgressViewModel: ObservableObject {
     @Published var finalShimmerPercentage = CGFloat(0)
     @Published var finalShimmerShowing = false
     
+    var startTime: Date?
+    
+    /// configuration
+    var foregroundColor: UIColor = .init(hex: 0x00aeef)
+    var backgroundColor: UIColor = .init(hex: 0x00aeef).withAlphaComponent(0.2)
+    
     static var shimmerWidth = CGFloat(200)
     static var shimmerAnimationInterval = CGFloat(4.5)
     static var shimmerAnimationTime = CGFloat(1.5)
     static var maximumTimerDuration = CGFloat(5) /// stop the timer after this
-    var startTime: Date?
+    
+    init(
+        foregroundColor: UIColor = .init(hex: 0x00aeef),
+        backgroundColor: UIColor = .init(hex: 0x00aeef).withAlphaComponent(0.2)
+    ) {
+        self.foregroundColor = foregroundColor
+        self.backgroundColor = backgroundColor
+    }
     
     enum Progress {
         case determinate(progress: CGFloat)
@@ -53,9 +64,8 @@ class ProgressViewModel: ObservableObject {
             
             /// make the animation slightly longer
             let delayedInterval = interval * 2.5
-            percentage = 0
             
-            withAnimation(.easeOut(duration: delayedInterval)) {
+            withAnimation(.spring()) {
                 self.percentage = 0.2
             }
             
@@ -95,11 +105,15 @@ class ProgressViewModel: ObservableObject {
         }
     }
     
-    func finishAutoProgress() {
+    func finishAutoProgress(shouldShimmer: Bool = true) {
         withAnimation(.easeIn(duration: 0.5)) {
             percentage = 1
         }
-        shimmer(isFinal: true)
+        
+        if shouldShimmer {
+            shimmer(isFinal: true)
+        }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             withAnimation {
                 self.percentageShowing = false

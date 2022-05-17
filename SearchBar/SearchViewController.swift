@@ -105,17 +105,20 @@ class SearchViewController: UIViewController {
     }
 
     func updateLandscapeConstants() {
-        if traitCollection.horizontalSizeClass == .regular {
+        switch traitCollection.orientation {
+        case .phoneLandscape:
             searchViewModel.isLandscape = true
-        } else {
+        case .phonePortrait:
+            searchViewModel.isLandscape = false
+        case .pad:
             searchViewModel.isLandscape = false
         }
+        
         searchBarHeightC.constant = searchViewModel.getTotalHeight()
     }
 }
 
 extension SearchViewController {
-
     func setupCollectionViews() {
         /// actually important, when there's only 1 search bar
         searchCollectionView.alwaysBounceHorizontal = true

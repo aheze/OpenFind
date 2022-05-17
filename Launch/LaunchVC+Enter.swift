@@ -11,8 +11,6 @@ import SwiftUI
 
 extension LaunchViewController {
     func enter() {
-        self.animateSceneForEnter()
-     
         withAnimation(
             .spring(
                 response: 0.8,
@@ -25,6 +23,10 @@ extension LaunchViewController {
         
         UIView.animate(withDuration: 0.3) {
             self.contentContainer.alpha = 0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.animateSceneForEnter()
         }
     }
     

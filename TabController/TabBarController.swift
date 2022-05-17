@@ -41,6 +41,8 @@ class TabBarController: NSObject {
                 realmModel: realmModel
             )
         }
+        
+        
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
         

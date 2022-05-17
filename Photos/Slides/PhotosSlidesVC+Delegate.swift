@@ -29,6 +29,8 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
                 highlightsSet.stringToGradients == self.slidesSearchViewModel.stringToGradients
             {
                 viewController.highlightsViewModel.highlights = highlightsSet.highlights
+                viewController.highlightsViewModel.shouldScaleHighlights = true
+
             } else {
                 /// else, find again.
                 startFinding(for: slidesPhoto, viewController: viewController, animate: false)

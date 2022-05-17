@@ -33,5 +33,6 @@ extension PhotosSlidesViewController {
         collectionView.keyboardDismissMode = .interactive
         collectionView.decelerationRate = .fast
         collectionView.collectionViewLayout = flowLayout
+        collectionView.alwaysBounceHorizontal = true /// allow bouncing even when only 1 photo
     }
 }

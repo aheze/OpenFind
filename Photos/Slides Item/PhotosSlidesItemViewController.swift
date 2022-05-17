@@ -63,7 +63,6 @@ class PhotosSlidesItemViewController: UIViewController {
         addHighlightsViewController()
         
         toolbarContainer.isHidden = true
-//        addToolbar()
         reloadImage()
         
         view.backgroundColor = .clear
@@ -74,6 +73,7 @@ class PhotosSlidesItemViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         imageFrame = getImageFrame()
+        
         imageFrame.setAsConstraints(
             left: highlightsVCLeftC,
             top: highlightsVCTopC,
@@ -85,7 +85,7 @@ class PhotosSlidesItemViewController: UIViewController {
         if
             let toolbarInformationOn = model.slidesState?.toolbarInformationOn,
             toolbarInformationOn,
-            traitCollection.horizontalSizeClass == .compact
+            traitCollection.verticalSizeClass == .regular
         {
             setAspectRatio(scaleToFill: true)
         } else {
@@ -143,16 +143,16 @@ extension PhotosSlidesItemViewController {
                 guard let self = self else { return }
                 
                 if on {
-                    guard let sentences = self.findPhoto.photo.metadata?.sentences else { return }
-                    let overlays: [Overlay] = sentences.map { sentence in
-                        let upperBound = sentence.components.last?.range.upperBound ?? 1
-                        let highlight = Overlay(
-                            string: sentence.string,
-                            position: sentence.position(for: 0 ..< upperBound)
-                        )
-                        return highlight
-                    }
-                    self.highlightsViewModel.overlays = overlays
+//                    guard let sentences = self.findPhoto.photo.metadata?.text?.sentences else { return }
+//                    let overlays: [Overlay] = sentences.map { sentence in
+//                        let upperBound = sentence.components.last?.range.upperBound ?? 1
+//                        let highlight = Overlay(
+//                            string: sentence.string,
+//                            position: sentence.position(for: 0 ..< upperBound)
+//                        )
+//                        return highlight
+//                    }
+//                    self.highlightsViewModel.overlays = overlays
                 }
                 withAnimation {
                     self.highlightsViewModel.showOverlays = on

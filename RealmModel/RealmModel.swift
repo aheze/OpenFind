@@ -14,7 +14,7 @@ class RealmModel: ObservableObject {
 
     @Published var lists = [List]()
 
-    @Published var photoMetadatas = [PhotoMetadata]()
+    @Published var assetIdentifierToPhotoMetadata = [String: PhotoMetadata]()
 
     static let data = RealmModelData.self
 
@@ -41,7 +41,7 @@ class RealmModel: ObservableObject {
             defaults.set(enteredVersions, forKey: "enteredVersions")
         }
     }
-    
+
     /// once this reaches 100, then 200, then 1000, ask for a review
     @Saved(data.experiencePoints.key) var experiencePoints = data.experiencePoints.value
 
@@ -66,6 +66,7 @@ class RealmModel: ObservableObject {
     @Saved(data.highlightsCycleSearchBarColors.key) var highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
     @Saved(data.highlightsBorderWidth.key) var highlightsBorderWidth = data.highlightsBorderWidth.value
     @Saved(data.highlightsBackgroundOpacity.key) var highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
+    @Saved(data.highlightsPaddingPercentage.key) var highlightsPaddingPercentage = data.highlightsPaddingPercentage.value
 
     // MARK: Photos
 
@@ -115,6 +116,7 @@ class RealmModel: ObservableObject {
         _highlightsCycleSearchBarColors.configureValueChanged(with: self)
         _highlightsBorderWidth.configureValueChanged(with: self)
         _highlightsBackgroundOpacity.configureValueChanged(with: self)
+        _highlightsPaddingPercentage.configureValueChanged(with: self)
 
         _photosScanOnLaunch.configureValueChanged(with: self)
         _photosScanOnAddition.configureValueChanged(with: self)
@@ -130,19 +132,18 @@ class RealmModel: ObservableObject {
 
     /// get the photo metadata of an photo if it exists
     func getPhotoMetadata(from identifier: String) -> PhotoMetadata? {
-        if let photoMetadata = photoMetadatas.first(where: { $0.assetIdentifier == identifier }) {
-            return photoMetadata
-        }
-        return nil
+        let photoMetadata = assetIdentifierToPhotoMetadata[identifier]
+        return photoMetadata
     }
 }
 
 extension RealmModel {
     func resetAllSettings() {
         let data = RealmModelData.self
-        
+
         /** don't reset `experiencePoints` */
 
+        defaultTab = data.defaultTab.value
         swipeToNavigate = data.swipeToNavigate.value
         findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value
         findingSecondaryRecognitionLanguage = data.findingSecondaryRecognitionLanguage.value
@@ -154,6 +155,7 @@ extension RealmModel {
         highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
         highlightsBorderWidth = data.highlightsBorderWidth.value
         highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
+        highlightsPaddingPercentage = data.highlightsPaddingPercentage.value
         photosScanOnLaunch = data.photosScanOnLaunch.value
         photosScanOnAddition = data.photosScanOnAddition.value
         photosScanOnFind = data.photosScanOnFind.value

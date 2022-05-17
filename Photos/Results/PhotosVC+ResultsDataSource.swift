@@ -18,7 +18,7 @@ extension PhotosViewController {
         resultsSnapshot.appendItems(resultsState.displayedFindPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
 
-        resultsHeaderViewModel.text = model.resultsState?.getResultsText() ?? ""
+        resultsHeaderViewModel.text = model.resultsState?.getResultsText(for: sliderViewModel.selectedFilter ?? .all) ?? ""
         if model.scannedPhotosCount == model.totalPhotosCount {
             resultsHeaderViewModel.description = nil
         } else {

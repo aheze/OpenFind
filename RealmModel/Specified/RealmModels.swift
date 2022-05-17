@@ -11,11 +11,10 @@ import UIKit
 
 class RealmPhotoMetadata: Object {
     @Persisted(primaryKey: true) var assetIdentifier = ""
-    @Persisted var dateScanned: Date? /// there could be no scan results, but still scanned
-    @Persisted var sentences: RealmSwift.List<RealmSentence> /// scan results
-    @Persisted var scannedInLanguages: RealmSwift.List<String> /// which languages scanned in
     @Persisted var isStarred = false
     @Persisted var isIgnored = false
+    @Persisted var dateScanned: Date?
+    @Persisted var text: RealmPhotoMetadataText?
 
     override init() {
         super.init()
@@ -23,107 +22,85 @@ class RealmPhotoMetadata: Object {
 
     init(
         assetIdentifier: String,
-        dateScanned: Date?,
-        sentences: RealmSwift.List<RealmSentence>,
-        scannedInLanguages: RealmSwift.List<String>,
         isStarred: Bool,
-        isIgnored: Bool
+        isIgnored: Bool,
+        dateScanned: Date?,
+        text: RealmPhotoMetadataText?
     ) {
         self.assetIdentifier = assetIdentifier
-        self.dateScanned = dateScanned
-        self.sentences = sentences
-        self.scannedInLanguages = scannedInLanguages
+        self.text = text
         self.isStarred = isStarred
         self.isIgnored = isIgnored
+        self.dateScanned = dateScanned
     }
 
     func getPhotoMetadata() -> PhotoMetadata {
         let metadata = PhotoMetadata(
             assetIdentifier: self.assetIdentifier,
-            dateScanned: self.dateScanned,
-            sentences: self.sentences.map { $0.getSentence() },
-            scannedInLanguages: self.scannedInLanguages.map { $0 },
             isStarred: self.isStarred,
-            isIgnored: self.isIgnored
+            isIgnored: self.isIgnored,
+            dateScanned: self.dateScanned
         )
         return metadata
     }
 }
 
+class RealmPhotoMetadataText: Object {
+    @Persisted var sentences: RealmSwift.List<RealmSentence>
+    @Persisted var scannedInLanguages: RealmSwift.List<String> /// which languages scanned in
+    @Persisted var scannedInVersion: String?
+
+    func getPhotoMetadataText() -> PhotoMetadataText {
+        let metadataText = PhotoMetadataText(
+            sentences: sentences.map { $0.getSentence() },
+            scannedInLanguages: self.scannedInLanguages.map { $0 },
+            scannedInVersion: self.scannedInVersion
+        )
+        return metadataText
+    }
+}
+
 class RealmSentence: Object {
     @Persisted var string: String?
-    @Persisted var components: RealmSwift.List<RealmSentenceComponent>
+
     @Persisted var confidence: Double?
 
+    /// normalized points from `0` to `1`
+    @Persisted var topLeft: RealmPoint?
+    @Persisted var topRight: RealmPoint?
+    @Persisted var bottomRight: RealmPoint?
+    @Persisted var bottomLeft: RealmPoint?
+
     func getSentence() -> Sentence {
-        let components = self.components.map {
-            Sentence.Component(
-                range: $0.range?.getRange() ?? 0 ..< 1,
-                frame: $0.frame?.getRect() ?? .zero
-            )
-        }
-
-        return Sentence(
-            string: self.string ?? "",
-            components: Array(components),
-            confidence: self.confidence ?? 0
+        let sentence = Sentence(
+            string: string ?? "",
+            confidence: confidence ?? 0,
+            topLeft: self.topLeft?.getCGPoint() ?? .zero,
+            topRight: self.topRight?.getCGPoint() ?? .zero,
+            bottomRight: self.bottomRight?.getCGPoint() ?? .zero,
+            bottomLeft: self.bottomLeft?.getCGPoint() ?? .zero
         )
+
+        return sentence
     }
 }
 
-class RealmSentenceComponent: Object {
-    @Persisted var range: RealmIntRange?
-    @Persisted var frame: RealmRect?
-}
-
-class RealmIntRange: Object {
-    @Persisted var lowerBound = 0
-    @Persisted var upperBound = 0
+class RealmPoint: Object {
+    @Persisted var x: Double
+    @Persisted var y: Double
 
     override init() {
         super.init()
     }
 
-    init(lowerBound: Int, upperBound: Int) {
-        self.lowerBound = lowerBound
-        self.upperBound = upperBound
-    }
-
-    func getRange() -> Range<Int> {
-        return self.lowerBound ..< self.upperBound
-    }
-}
-
-class RealmRect: Object {
-    @Persisted var x = Double(0)
-    @Persisted var y = Double(0)
-    @Persisted var width = Double(0)
-    @Persisted var height = Double(0)
-
-    override init() {
-        super.init()
-    }
-
-    init(
-        x: Double,
-        y: Double,
-        width: Double,
-        height: Double
-    ) {
+    init(x: Double, y: Double) {
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
     }
 
-    func getRect() -> CGRect {
-        let rect = CGRect(
-            x: x,
-            y: y,
-            width: width,
-            height: height
-        )
-        return rect
+    func getCGPoint() -> CGPoint {
+        let point = CGPoint(x: x, y: y)
+        return point
     }
 }
 

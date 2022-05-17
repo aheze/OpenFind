@@ -23,10 +23,16 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var slidesSearchPromptViewModel: SearchPromptViewModel
     
     /// internal models
-    var resultsHeaderViewModel = ResultsHeaderViewModel()
+    
     var sliderViewModel = SliderViewModel()
+    var resultsHeaderViewModel = ResultsHeaderViewModel()
+    var progressViewModel = ProgressViewModel(foregroundColor: Colors.accent, backgroundColor: .clear)
     lazy var headerContentModel = HeaderContentModel()
-    lazy var resultsHeaderView = ResultsHeaderView(model: model, resultsHeaderViewModel: resultsHeaderViewModel)
+    lazy var resultsHeaderView = ResultsHeaderView(
+        model: model,
+        resultsHeaderViewModel: resultsHeaderViewModel,
+        progressViewModel: progressViewModel
+    )
     var resultsHeaderHeightC: NSLayoutConstraint?
     
     /// Searchable

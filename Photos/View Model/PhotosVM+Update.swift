@@ -10,8 +10,13 @@ import UIKit
 
 extension PhotosViewModel {
     /// delete metadata and load
-    func deleteAllScannedData() async {
-        await getRealmModel?().container.deleteAllScannedData()
+    func deleteAllScannedData(allPhotos: Bool) async {
+        if allPhotos {
+            await getRealmModel?().container.deleteAllPhotos()
+        } else {
+            await getRealmModel?().container.deleteAllScannedData()
+        }
+        
         await getRealmModel?().container.loadPhotoMetadatas()
         loadAssets()
 
@@ -23,10 +28,11 @@ extension PhotosViewModel {
         }
     }
 
-    /// `photo.metadata` should be the new metadata
     /// Update realm and reload cell if needed
+    /// `photo.metadata` should be the new metadata
+    /// if `withText`, also update the text. Pass in an empty `PhotoMetadataText` to clear,
     /// This does not add append/remove photos from starred. To update that, use `sort`.
-    func updatePhotoMetadata(photo: Photo, reloadCell: Bool) {
+    func updatePhotoMetadata(photo: Photo, withText text: PhotoMetadataText?, reloadCell: Bool) {
         /// for reloading at a specific index path
         /// 1. Index path inside `collectionView`
         /// 2. Index inside `resultsCollectionView`
@@ -94,7 +100,7 @@ extension PhotosViewModel {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }
 
-        getRealmModel?().container.updatePhotoMetadata(metadata: metadata)
+        getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text)
         ignoredPhotos = photos.filter { $0.isIgnored }
         photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
     }

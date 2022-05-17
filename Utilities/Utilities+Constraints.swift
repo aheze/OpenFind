@@ -10,10 +10,10 @@ import UIKit
 
 extension CGRect {
     func setAsConstraints(left: NSLayoutConstraint, top: NSLayoutConstraint, width: NSLayoutConstraint, height: NSLayoutConstraint) {
-        left.constant = origin.x
-        top.constant = origin.y
-        width.constant = size.width
-        height.constant = size.height
+        left.constant = origin.x.isFinite ? origin.x : 0
+        top.constant = origin.y.isFinite ? origin.y : 0
+        width.constant = size.width.isFinite ? size.width : 0
+        height.constant = size.height.isFinite ? size.height : 0
     }
 }
 
@@ -28,7 +28,7 @@ extension UIView {
             self.leftAnchor.constraint(equalTo: superview.leftAnchor, constant: padding.left)
         ])
     }
-    
+
     func pinEdgesToSuperviewAndReturnTopConstraint() -> NSLayoutConstraint? {
         guard let superview = superview else { return nil }
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ extension UIView {
             self.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
             self.leftAnchor.constraint(equalTo: superview.leftAnchor)
         ])
-        
+
         return topConstraint
     }
 }

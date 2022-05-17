@@ -52,7 +52,11 @@ extension CameraViewController {
 
         let request = await Find.find(in: .cgImage(image), visionOptions: visionOptions, findOptions: findOptions)
         let sentences = Find.getSentences(from: request)
-        let highlights = sentences.getHighlights(stringToGradients: searchViewModel.stringToGradients, realmModel: realmModel)
+        let highlights = sentences.getHighlights(
+            stringToGradients: searchViewModel.stringToGradients,
+            realmModel: realmModel,
+            imageSize: CGSize(width: image.width, height: image.height)
+        )
         DispatchQueue.main.async {
             self.highlightsViewModel.update(with: highlights, replace: replace)
             self.highlightsAdded()

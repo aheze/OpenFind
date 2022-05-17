@@ -11,6 +11,8 @@ import RealmSwift
 extension RealmContainer {
     func loadLists() {
         var lists = [List]()
+        
+        let realm = try! Realm()
         /// convert realm lists to normal lists
         let realmLists = realm.objects(RealmList.self)
         for realmList in realmLists {
@@ -59,6 +61,8 @@ extension RealmContainer {
             color: Int(list.color),
             dateCreated: list.dateCreated
         )
+        
+        let realm = try! Realm()
 
         /// make sure hasn't added yet
         if realm.object(ofType: RealmList.self, forPrimaryKey: list.id) == nil {
@@ -75,6 +79,9 @@ extension RealmContainer {
     }
 
     func updateList(list: List) {
+        
+        let realm = try! Realm()
+        
         if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
             let words = list.getRealmWords()
             do {
@@ -95,6 +102,9 @@ extension RealmContainer {
     }
 
     func deleteList(list: List) {
+        
+        let realm = try! Realm()
+        1
         if let realmList = realm.object(ofType: RealmList.self, forPrimaryKey: list.id) {
             do {
                 try realm.write {

@@ -10,8 +10,11 @@ import SwiftUI
 
 class PhotosSlidesInfoViewController: UIViewController {
     var model: PhotosViewModel
-    init(model: PhotosViewModel) {
+    var realmModel: RealmModel
+    
+    init(model: PhotosViewModel, realmModel: RealmModel) {
         self.model = model
+        self.realmModel = realmModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,7 +30,7 @@ class PhotosSlidesInfoViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .systemBackground
 
-        let contentView = PhotosSlidesInfoView(model: model)
+        let contentView = PhotosSlidesInfoView(model: model, realmModel: realmModel)
         let hostingController = UIHostingController(rootView: contentView)
         hostingController.view.frame = view.bounds
         hostingController.view.backgroundColor = .clear

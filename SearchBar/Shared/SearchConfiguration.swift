@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum SearchConstants {
+    static var toolbarHeight = CGFloat(60) /// height of lists toolbar
+}
+
 struct SearchConfiguration: Equatable {
     var voiceOverDescription = "Enter text to find using the camera"
     

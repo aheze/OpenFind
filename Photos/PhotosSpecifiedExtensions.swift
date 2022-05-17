@@ -39,9 +39,9 @@ extension Photo {
         let dateString = asset.creationDate?.convertDateToReadableString() ?? ""
         let timeString = asset.timeCreatedString ?? ""
         let creationString = "\(dateString) at \(timeString)"
-        
+
         let starred = metadata?.isStarred ?? false
-        
+
         if starred {
             return "\(creationString), starred."
         } else {
@@ -54,7 +54,7 @@ extension FindPhoto {
     func getVoiceoverDescription() -> String {
         let photoDescription = photo.getVoiceoverDescription()
         var resultsText = ""
-        
+
         if let highlightsSet = highlightsSet {
             if highlightsSet.highlights.count == 1 {
                 resultsText = " \(highlightsSet.highlights.count) result. \(descriptionText)"
@@ -62,7 +62,7 @@ extension FindPhoto {
                 resultsText = " \(highlightsSet.highlights.count) results. \(descriptionText)"
             }
         }
-        
+
         let string = photoDescription + resultsText
         return string
     }
@@ -82,70 +82,85 @@ extension PHAsset {
 }
 
 extension Finding {
-    /// get FindPhotos from specified photos
-    static func findAndGetFindPhotos(realmModel: RealmModel, from photos: [Photo], stringToGradients: [String: Gradient]) async -> ([FindPhoto], [FindPhoto], [FindPhoto]) {
+    /// get `FindPhoto`s from specified photos, also return number of photos count
+    static func findAndGetFindPhotos(
+        realmModel: RealmModel,
+        from photos: [Photo],
+        stringToGradients: [String: Gradient]
+    ) -> (
+        [FindPhoto], [FindPhoto], [FindPhoto],
+        Int, Int, Int
+    ) {
         var allFindPhotos = [FindPhoto]()
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
-        
+
+        var allResultsCount = 0
+        var starredResultsCount = 0
+        var screenshotsResultsCount = 0
+
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
-            let (highlights, lines) = Finding.getHighlightsAndDescription(
+            let text = realmModel.container.getText(from: metadata.assetIdentifier)
+            guard let sentences = text?.sentences else { continue }
+
+            let (lines, highlightsCount) = Finding.getLineHighlights(
                 realmModel: realmModel,
-                from: metadata.sentences,
-                with: stringToGradients
+                from: sentences,
+                with: stringToGradients,
+                imageSize: photo.asset.getSize()
             )
-            if highlights.count >= 1 {
-                let highlightsSet = FindPhoto.HighlightsSet(stringToGradients: stringToGradients, highlights: highlights)
+
+            if lines.count >= 1 {
                 let description = Finding.getCellDescription(from: lines)
-                
+
                 let findPhoto = FindPhoto(
                     id: UUID(),
                     photo: photo,
-                    highlightsSet: highlightsSet,
                     descriptionText: description,
-                    descriptionLines: lines
+                    descriptionLines: lines,
+                    numberOfResults: highlightsCount
                 )
-            
+
                 allFindPhotos.append(findPhoto)
-                
+
                 if findPhoto.photo.isStarred {
                     starredFindPhotos.append(findPhoto)
+                    starredResultsCount += highlightsCount
                 }
                 if findPhoto.photo.isScreenshot {
                     screenshotsFindPhotos.append(findPhoto)
+                    screenshotsResultsCount += highlightsCount
                 }
+                allResultsCount += highlightsCount
             }
         }
-        
-        return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos)
+
+        return (
+            allFindPhotos, starredFindPhotos, screenshotsFindPhotos,
+            allResultsCount, starredResultsCount, screenshotsResultsCount
+        )
     }
-    
-    static func getHighlightsAndDescription(
+
+    /// return lines and also number of highlights
+    static func getLineHighlights(
         realmModel: RealmModel,
         from sentences: [Sentence],
-        with stringToGradients: [String: Gradient]
-    ) -> ([Highlight], [FindPhoto.Line]) {
-        var highlights = [Highlight]()
+        with stringToGradients: [String: Gradient],
+        imageSize: CGSize?
+    ) -> ([FindPhoto.Line], Int) {
         var lines = [FindPhoto.Line]()
-        
+        var highlightsCount = 0
+
         for sentence in sentences {
             /// the highlights in this sentence.
             var lineHighlights = [FindPhoto.Line.LineHighlight]()
-            
+
             let rangeResults = sentence.ranges(of: Array(stringToGradients.keys), realmModel: realmModel)
             for rangeResult in rangeResults {
                 let gradient = stringToGradients[rangeResult.string] ?? Gradient()
                 for range in rangeResult.ranges {
-                    let highlight = Highlight(
-                        string: rangeResult.string,
-                        colors: gradient.colors,
-                        alpha: gradient.alpha,
-                        position: sentence.position(for: range)
-                    )
-
-                    highlights.append(highlight)
-                        
+                    highlightsCount += 1
                     let lineHighlight = FindPhoto.Line.LineHighlight(
                         string: rangeResult.string,
                         rangeInSentence: range,
@@ -155,16 +170,16 @@ extension Finding {
                     lineHighlights.append(lineHighlight)
                 }
             }
-            
+
             if lineHighlights.count > 0 {
                 let line = FindPhoto.Line(string: sentence.string, lineHighlights: lineHighlights)
                 lines.append(line)
             }
         }
-        
-        return (highlights, lines)
+
+        return (lines, highlightsCount)
     }
-    
+
     /// get the text to show in the cell's text view
     static func getCellDescription(from descriptionLines: [FindPhoto.Line]) -> String {
         let topLines = descriptionLines.prefix(3)

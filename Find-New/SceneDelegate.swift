@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     /// handle a deeplinked URL
     func handleIncomingURL(_ url: URL) {
-        if let viewController = window?.rootViewController as? ViewController {
+        if let viewController = window?.rootViewController as? InitialViewController {
             viewController.handleIncomingURL(url)
         }
     }
@@ -48,7 +48,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         if
-
             /// Universal Links
             let userActivity = connectionOptions.userActivities.first,
             userActivity.activityType == NSUserActivityTypeBrowsingWeb,

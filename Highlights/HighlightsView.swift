@@ -16,22 +16,22 @@ struct HighlightsView: View {
         Color.clear.overlay(
             GeometryReader { geometry in
                 ZStack {
-                    if highlightsViewModel.showOverlays {
-                        Color.black
-                            .opacity(0.25)
-                            .reverseMask {
-                                ZStack {
-                                    ForEach(highlightsViewModel.overlays) { overlay in
-                                        OverlayView(
-                                            model: highlightsViewModel,
-                                            realmModel: realmModel,
-                                            overlay: overlay,
-                                            viewSize: geometry.size
-                                        )
-                                    }
-                                }
-                            }
-                    }
+//                    if highlightsViewModel.showOverlays {
+//                        Color.black
+//                            .opacity(0.25)
+//                            .reverseMask {
+//                                ZStack {
+//                                    ForEach(highlightsViewModel.overlays) { overlay in
+//                                        OverlayView(
+//                                            model: highlightsViewModel,
+//                                            realmModel: realmModel,
+//                                            overlay: overlay,
+//                                            viewSize: geometry.size
+//                                        )
+//                                    }
+//                                }
+//                            }
+//                    }
 
                     ForEach(highlightsViewModel.highlights) { highlight in
                         HighlightView(
@@ -50,58 +50,58 @@ struct HighlightsView: View {
     }
 }
 
-struct OverlayView: View {
-    @ObservedObject var model: HighlightsViewModel
-    @ObservedObject var realmModel: RealmModel
-    let overlay: Overlay
-    let viewSize: CGSize
-    let color = Color.blue
-
-    var body: some View {
-        let cornerRadius = getCornerRadius()
-        let frame = getFrame()
-
-        RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(color)
-            .frame(
-                width: frame.width,
-                height: frame.height
-            )
-            .rotationEffect(.radians(-overlay.position.angle))
-            .position(
-                x: frame.minX,
-                y: frame.minY
-            )
-    }
-
-    func getFrame() -> CGRect {
-        if model.shouldScaleHighlights {
-            return CGRect(
-                x: overlay.position.center.x * viewSize.width,
-                y: overlay.position.center.y * viewSize.height,
-                width: overlay.position.size.width * viewSize.width,
-                height: overlay.position.size.height * viewSize.height
-            )
-        } else {
-            return CGRect(
-                x: overlay.position.center.x,
-                y: overlay.position.center.y,
-                width: overlay.position.size.width,
-                height: overlay.position.size.height
-            )
-        }
-    }
-
-    func getCornerRadius() -> CGFloat {
-        /// use shortest side for calculating
-        let length = min(overlay.position.size.width, overlay.position.size.height)
-        if model.shouldScaleHighlights {
-            return (length * 300) / 4
-        } else {
-            return length / 3
-        }
-    }
-}
+// struct OverlayView: View {
+//    @ObservedObject var model: HighlightsViewModel
+//    @ObservedObject var realmModel: RealmModel
+//    let overlay: Overlay
+//    let viewSize: CGSize
+//    let color = Color.blue
+//
+//    var body: some View {
+//        let cornerRadius = getCornerRadius()
+//        let frame = getFrame()
+//
+//        RoundedRectangle(cornerRadius: cornerRadius)
+//            .fill(color)
+//            .frame(
+//                width: frame.width,
+//                height: frame.height
+//            )
+//            .rotationEffect(.radians(overlay.position.angle))
+//            .position(
+//                x: frame.minX,
+//                y: frame.minY
+//            )
+//    }
+//
+//    func getFrame() -> CGRect {
+//        if model.shouldScaleHighlights {
+//            return CGRect(
+//                x: overlay.position.center.x * viewSize.width,
+//                y: overlay.position.center.y * viewSize.height,
+//                width: overlay.position.size.width * viewSize.width,
+//                height: overlay.position.size.height * viewSize.height
+//            )
+//        } else {
+//            return CGRect(
+//                x: overlay.position.center.x,
+//                y: overlay.position.center.y,
+//                width: overlay.position.size.width,
+//                height: overlay.position.size.height
+//            )
+//        }
+//    }
+//
+//    func getCornerRadius() -> CGFloat {
+//        /// use shortest side for calculating
+//        let length = min(overlay.position.size.width, overlay.position.size.height)
+//        if model.shouldScaleHighlights {
+//            return (length * 300) / 4
+//        } else {
+//            return length / 3
+//        }
+//    }
+// }
 
 struct HighlightView: View {
     @ObservedObject var model: HighlightsViewModel
@@ -131,34 +131,41 @@ struct HighlightView: View {
                 width: frame.width,
                 height: frame.height
             )
-            .rotationEffect(.radians(-highlight.position.angle))
+            .rotationEffect(.radians(highlight.position.angle))
             .position(
                 x: frame.minX,
                 y: frame.minY
             )
     }
 
+    /// origin is used as center.
     func getFrame() -> CGRect {
+        var frame = CGRect.zero
         if model.shouldScaleHighlights {
-            return CGRect(
+            frame = CGRect(
                 x: highlight.position.center.x * viewSize.width,
                 y: highlight.position.center.y * viewSize.height,
                 width: highlight.position.size.width * viewSize.width,
                 height: highlight.position.size.height * viewSize.height
             )
         } else {
-            return CGRect(
+            frame = CGRect(
                 x: highlight.position.center.x,
                 y: highlight.position.center.y,
                 width: highlight.position.size.width,
                 height: highlight.position.size.height
             )
         }
+
+        let padding = realmModel.getHighlightPadding(size: frame.size)
+        frame.size.width += padding * 1.25 /// a bit bigger for width
+        frame.size.height += padding
+        return frame
     }
 
     func getLingeringOpacity() -> CGFloat {
         if case .lingering = highlight.state {
-            return 0.1
+            return 0.2
         } else {
             return 1
         }

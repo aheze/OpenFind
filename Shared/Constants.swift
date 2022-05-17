@@ -27,6 +27,8 @@ extension Color {
 }
 
 enum Constants {
+    static var versionsWithSlantedTextSupport = ["2.0.4", "2.0.5"]
+    
     static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)
@@ -100,6 +102,7 @@ enum ConstantVars {
                 deviceHasNotch = safeAreaInsets.bottom > 0
             }
             
+            /// this isn't very precise, since `safeAreaInsets.bottom` in portrait is **not** `safeAreaInsets.right` in landscape.
             switch orientation {
             case .portrait:
                 bottomSafeAreaInset = safeAreaInsets.bottom

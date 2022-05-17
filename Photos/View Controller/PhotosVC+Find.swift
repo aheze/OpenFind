@@ -42,13 +42,37 @@ extension PhotosViewController {
         let stringToGradients = self.searchViewModel.stringToGradients
         
         Task.detached {
-            let (allFindPhotos, starredFindPhotos, screenshotsFindPhotos) = await Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
+            let (
+                allFindPhotos, starredFindPhotos, screenshotsFindPhotos,
+                allResultsCount, starredResultsCount, screenshotsResultsCount
+            ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
             
-            await self.apply(allFindPhotos: allFindPhotos, starredFindPhotos: starredFindPhotos, screenshotsFindPhotos: screenshotsFindPhotos, context: context)
+            await self.apply(
+                allFindPhotos: allFindPhotos,
+                starredFindPhotos: starredFindPhotos,
+                screenshotsFindPhotos: screenshotsFindPhotos,
+                allResultsCount: allResultsCount,
+                starredResultsCount: starredResultsCount,
+                screenshotsResultsCount: screenshotsResultsCount,
+                context: context
+            )
+            
+            await MainActor.run {
+                self.progressViewModel.finishAutoProgress(shouldShimmer: false)
+            }
         }
     }
     
-    @MainActor func apply(allFindPhotos: [FindPhoto], starredFindPhotos: [FindPhoto], screenshotsFindPhotos: [FindPhoto], context: FindContext) {
+    /// apply the resultsState
+    @MainActor func apply(
+        allFindPhotos: [FindPhoto],
+        starredFindPhotos: [FindPhoto],
+        screenshotsFindPhotos: [FindPhoto],
+        allResultsCount: Int,
+        starredResultsCount: Int,
+        screenshotsResultsCount: Int,
+        context: FindContext
+    ) {
         guard !searchViewModel.isEmpty else { return }
         let displayedFindPhotos: [FindPhoto]
         
@@ -65,7 +89,10 @@ extension PhotosViewController {
             displayedFindPhotos: displayedFindPhotos,
             allFindPhotos: allFindPhotos,
             starredFindPhotos: starredFindPhotos,
-            screenshotsFindPhotos: screenshotsFindPhotos
+            screenshotsFindPhotos: screenshotsFindPhotos,
+            allResultsCount: allResultsCount,
+            starredResultsCount: starredResultsCount,
+            screenshotsResultsCount: screenshotsResultsCount
         )
         
         if case .findingAfterTextChange(firstTimeShowingResults: let firstTimeShowingResults) = context {
@@ -74,7 +101,7 @@ extension PhotosViewController {
             updateResults() /// always update results anyway, for example when coming back from star
         }
         
-        let results = model.resultsState?.getResultsText() ?? ""
+        let results = model.resultsState?.getResultsText(for: sliderViewModel.selectedFilter ?? .all) ?? ""
         resultsHeaderViewModel.text = results
         UIAccessibility.post(notification: .announcement, argument: results)
         

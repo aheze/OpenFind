@@ -13,6 +13,15 @@ extension PhotosViewController {
         listenToDefaults()
         listenToKeyboard()
         
+        /// disable pressing results when searching
+        progressViewModel.$percentageShowing
+            .dropFirst()
+            .sink { [weak self] showing in
+                guard let self = self else { return }
+                self.resultsCollectionView.allowsSelection = !showing
+            }
+            .store(in: &realmModel.cancellables)
+        
         /// only called at first
         model.reload = { [weak self] in
             guard let self = self else { return }
@@ -102,7 +111,19 @@ extension PhotosViewController {
                 self.showResults(true)
                 if textChanged {
                     let resultsStateExisted = self.model.resultsState != nil
-                    self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
+                    
+                    let numberOfPhotos = self.model.scannedPhotosCount
+                    let estimatedTime = CGFloat(numberOfPhotos) / 500 /// 1222 photos 0 -> 2.444 seconds
+                    
+                    /// start progress bar immediately
+                    Debouncer.debounce(queue: .main, delay: .seconds(0.4)) {
+                        self.progressViewModel.start(progress: .auto(estimatedTime: estimatedTime))
+                    }
+                    
+                    Debouncer.debounce(delay: .seconds(0.4), shouldRunImmediately: false) {
+                        self.find(context: .findingAfterTextChange(firstTimeShowingResults: !resultsStateExisted))
+                    }
+                    
                 } else {
                     /// replace all highlights
                     self.updateResultsHighlightColors()
@@ -137,7 +158,6 @@ extension PhotosViewController {
         
         model.sharePhotos = { [weak self] photos in
             guard let self = self else { return }
-            
             
             let sourceRect = CGRect(
                 x: self.view.bounds.width / 2,

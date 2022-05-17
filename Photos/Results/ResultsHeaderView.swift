@@ -9,7 +9,7 @@
 import SwiftUI
 
 class ResultsHeaderViewModel: ObservableObject {
-    @Published var text = "10 Results."
+    @Published var text = "Finding..."
     @Published var description: String? = defaultDescription
 
     static let defaultDescription = "More results will appear as Find scans more photos."
@@ -18,6 +18,7 @@ class ResultsHeaderViewModel: ObservableObject {
 struct ResultsHeaderView: View {
     @ObservedObject var model: PhotosViewModel
     @ObservedObject var resultsHeaderViewModel: ResultsHeaderViewModel
+    @ObservedObject var progressViewModel: ProgressViewModel
 
     var body: some View {
         Button {
@@ -41,6 +42,12 @@ struct ResultsHeaderView: View {
                     .cornerRadius(14)
             }
             .padding(16)
+            .background(
+                ProgressLineView(model: progressViewModel)
+                    .opacity(0.1)
+                    .padding(-20)
+                    .blur(radius: 4)
+            )
             .blueBackground()
         }
         .buttonStyle(EasingScaleButtonStyle())

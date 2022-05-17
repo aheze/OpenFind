@@ -13,6 +13,7 @@ extension RealmContainer {
     /// this function takes a while to run, add `await`
     func loadPhotoMetadatas() {
         let realm = try! Realm()
+
         /// convert realm lists to normal lists
         let realmPhotoMetadatas = realm.objects(RealmPhotoMetadata.self)
 
@@ -20,32 +21,52 @@ extension RealmContainer {
         let photoMetadatas = realmPhotoMetadatas.map {
             $0.getPhotoMetadata()
         }
-        let array = Array(photoMetadatas)
-        applyPhotoMetadatas(array)
+
+        let assetIdentifierToPhotoMetadata = photoMetadatas.reduce(into: [String: PhotoMetadata]()) {
+            $0[$1.assetIdentifier] = $1
+        }
+
+        DispatchQueue.main.async {
+            self.applyMetadatas(assetIdentifierToPhotoMetadata: assetIdentifierToPhotoMetadata)
+        }
     }
 
-    func applyPhotoMetadatas(_ photoMetadatas: [PhotoMetadata]) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if let model = self.getModel?() {
-                model.photoMetadatas = photoMetadatas
+    @MainActor func applyMetadatas(assetIdentifierToPhotoMetadata: [String: PhotoMetadata]) {
+        if let model = getModel?() {
+            model.assetIdentifierToPhotoMetadata = assetIdentifierToPhotoMetadata
+        }
+    }
+
+    func deleteAllPhotos() {
+        let realm = try! Realm()
+        let metadatas = realm.objects(RealmPhotoMetadata.self)
+
+        do {
+            try realm.write {
+                realm.delete(metadatas)
             }
+            if let model = getModel?() {
+                model.assetIdentifierToPhotoMetadata.removeAll()
+            }
+        } catch {
+            Debug.log("Error deleting all photos: \(error)", .error)
         }
     }
 
     func deleteAllScannedData() {
+        let realm = try! Realm()
         let metadatas = realm.objects(RealmPhotoMetadata.self)
 
         do {
             try realm.write {
                 for metadata in metadatas {
                     metadata.dateScanned = nil
-                    metadata.sentences = RealmSwift.List<RealmSentence>()
-                    metadata.scannedInLanguages = RealmSwift.List<String>()
+                    metadata.text?.sentences = RealmSwift.List<RealmSentence>()
+                    metadata.text?.scannedInLanguages = RealmSwift.List<String>()
                 }
             }
-            if let model = self.getModel?() {
-                model.photoMetadatas.removeAll()
+            if let model = getModel?() {
+                model.assetIdentifierToPhotoMetadata.removeAll()
             }
         } catch {
             Debug.log("Error deleting all scanned data: \(error)", .error)
@@ -53,37 +74,81 @@ extension RealmContainer {
     }
 
     /// handles both add or update
+    /// if `text` is not nil, also update the text
     /// Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata`
-    func updatePhotoMetadata(metadata: PhotoMetadata?) {
+    func updatePhotoMetadata(metadata: PhotoMetadata?, text: PhotoMetadataText?) {
         guard let metadata = metadata else {
             Debug.log("No metadata.")
             return
         }
 
+        let realm = try! Realm()
+
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
-            let realmSentences = metadata.getRealmSentences()
             do {
                 try realm.write {
-                    realmMetadata.dateScanned = metadata.dateScanned
-                    realmMetadata.sentences = realmSentences
                     realmMetadata.isStarred = metadata.isStarred
                     realmMetadata.isIgnored = metadata.isIgnored
+                    realmMetadata.dateScanned = metadata.dateScanned
+
+                    if let text = text {
+                        realmMetadata.text = text.getRealmText()
+                    }
                 }
 
                 if let model = getModel?() {
-                    if let firstIndex = model.photoMetadatas.firstIndex(where: { $0.assetIdentifier == metadata.assetIdentifier }) {
-                        model.photoMetadatas[firstIndex] = metadata
+                    if model.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] != nil {
+                        model.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] = metadata
                     }
                 }
             } catch {
                 Debug.log("Error updating photo metadata: \(error)", .error)
             }
         } else {
-            addPhotoMetadata(metadata: metadata)
+            addPhotoMetadata(metadata: metadata, text: text)
         }
     }
 
+    /// call this inside `updatePhotoMetadata`
+    private func addPhotoMetadata(metadata: PhotoMetadata, text: PhotoMetadataText?) {
+        let text = text?.getRealmText()
+
+        let realmMetadata = RealmPhotoMetadata(
+            assetIdentifier: metadata.assetIdentifier,
+            isStarred: metadata.isStarred,
+            isIgnored: metadata.isIgnored,
+            dateScanned: metadata.dateScanned,
+            text: text
+        )
+
+        let realm = try! Realm()
+
+        do {
+            try realm.write {
+                realm.add(realmMetadata)
+            }
+
+            getModel?()?.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] = metadata
+        } catch {
+            Debug.log("Error adding photo metadata: \(error)", .error)
+        }
+    }
+
+    func getText(from identifier: String) -> PhotoMetadataText? {
+        let realm = try! Realm()
+        if
+            let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: identifier),
+
+            let text = realmMetadata.text?.getPhotoMetadataText()
+        {
+            return text
+        }
+        return nil
+    }
+
+    /// delete metadata and text
     func deletePhotoMetadata(metadata: PhotoMetadata) {
+        let realm = try! Realm()
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
             do {
                 try realm.write {
@@ -91,37 +156,11 @@ extension RealmContainer {
                 }
 
                 if let model = getModel?() {
-                    model.photoMetadatas = model.photoMetadatas.filter { $0.assetIdentifier != metadata.assetIdentifier }
+                    model.assetIdentifierToPhotoMetadata[metadata.assetIdentifier] = nil
                 }
             } catch {
                 Debug.log("Error deleting metadata: \(error)", .error)
             }
-        }
-    }
-
-    /// call this inside `updatePhotoMetadata`
-    private func addPhotoMetadata(metadata: PhotoMetadata) {
-        let realmSentences = metadata.getRealmSentences()
-
-        let scannedInLanguages = metadata.getRealmScannedInLanguages()
-
-        let realmMetadata = RealmPhotoMetadata(
-            assetIdentifier: metadata.assetIdentifier,
-            dateScanned: metadata.dateScanned,
-            sentences: realmSentences,
-            scannedInLanguages: scannedInLanguages,
-            isStarred: metadata.isStarred,
-            isIgnored: metadata.isIgnored
-        )
-
-        do {
-            try realm.write {
-                realm.add(realmMetadata)
-            }
-
-            getModel?()?.photoMetadatas.append(metadata)
-        } catch {
-            Debug.log("Error adding photo metadata: \(error)", .error)
         }
     }
 }

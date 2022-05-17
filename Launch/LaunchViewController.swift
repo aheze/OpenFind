@@ -25,26 +25,23 @@ class LaunchViewController: UIViewController {
     /// for SwiftUI, respects safe area
     @IBOutlet var contentContainer: UIView!
 
+    var aboutToEnter: (() -> Void)?
     var entering: (() -> Void)? /// called when just about to show
     var done: (() -> Void)?
 
-    static func make(model: LaunchViewModel, entering: (() -> Void)?, done: (() -> Void)?) -> LaunchViewController {
+    static func make(model: LaunchViewModel) -> LaunchViewController {
         let storyboard = UIStoryboard(name: "LaunchContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "LaunchViewController") { coder in
             LaunchViewController(
                 coder: coder,
-                model: model,
-                entering: entering,
-                done: done
+                model: model
             )
         }
         return viewController
     }
 
-    init?(coder: NSCoder, model: LaunchViewModel, entering: (() -> Void)?, done: (() -> Void)?) {
+    init?(coder: NSCoder, model: LaunchViewModel) {
         self.model = model
-        self.entering = entering
-        self.done = done
         super.init(coder: coder)
     }
 

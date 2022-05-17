@@ -25,11 +25,17 @@ extension CameraViewController {
                     self.highlightsAdded()
                 } else {
                     /// animate the highlight frames instead if paused
+                    /// Use `.accurate` sentences instead of `FastSentence`
                     if
                         self.model.shutterOn,
-                        let sentences = self.model.pausedImage?.sentences
+                        let image = self.model.pausedImage,
+                        let cgImage = image.cgImage
                     {
-                        let highlights = sentences.getHighlights(stringToGradients: self.searchViewModel.stringToGradients, realmModel: self.realmModel)
+                        let highlights = image.text.sentences.getHighlights(
+                            stringToGradients: self.searchViewModel.stringToGradients,
+                            realmModel: self.realmModel,
+                            imageSize: CGSize(width: cgImage.width, height: cgImage.height)
+                        )
                         DispatchQueue.main.async {
                             self.highlightsViewModel.update(with: highlights, replace: true)
                             self.highlightsAdded()

@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 4/19/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-
 import Popovers
 import SwiftUI
 import WebKit
@@ -59,6 +58,17 @@ extension SearchViewController {
         if text.roughlyEquals("/showPoints") {
             showPopover(configuration: .message(icon: "info.circle", text: "Experience Points: \(realmModel.experiencePoints)"), autoDismiss: true)
         }
+
+        if text.roughlyEquals("/debugDeleteAllMetadatas") {
+            ViewControllerCallback.deleteAllScannedData?(false)
+            showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Scanned Data."), autoDismiss: true)
+        }
+
+        if text.roughlyEquals("/debugDeleteAllPhotos") {
+            ViewControllerCallback.deleteAllScannedData?(true)
+            showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Photo Metadata."), autoDismiss: true)
+        }
+
 
         // MARK: - Extras
 

@@ -19,9 +19,11 @@ extension LaunchViewController {
                 self.updateUI(for: page)
             }
             .store(in: &model.cancellables)
-        
+
         model.enter = { [weak self] in
             guard let self = self else { return }
+            self.aboutToEnter?()
+
             self.enter()
         }
     }

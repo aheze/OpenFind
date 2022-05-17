@@ -19,4 +19,6 @@ enum CameraConstants {
     static var resultsCountUpdateDuration = CGFloat(0.8)
     
     static var focusIndicatorLength = CGFloat(80)
+    
+    static var minimumLandscapeSearchBarHeight = CGFloat(48)
 }

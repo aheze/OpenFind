@@ -33,7 +33,7 @@ extension Debug {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(defaultAction)
-        
+
         guard let viewController = UIApplication.topmostViewController else { return }
         if let popoverPresentationController = alert.popoverPresentationController {
             popoverPresentationController.sourceView = viewController.view
@@ -44,7 +44,23 @@ extension Debug {
                 height: 1
             )
         }
-        
+
         viewController.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension Debug {
+    enum Level: String {
+        case error = "Error"
+        case warning = "Warning"
+        case log = "Log"
+    }
+
+    static func log(_ item: Any, _ level: Level? = .log) {
+        if let level = level {
+            Swift.print("[\(level)] - \(item)")
+        } else {
+            Swift.print(item)
+        }
     }
 }

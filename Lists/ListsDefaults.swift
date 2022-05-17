@@ -42,12 +42,12 @@ extension List {
                     "Nut",
                     "Peanut",
                     "Macadamia",
-                    "Almonds",
+                    "Almond",
                     "Cashew",
                     "Chestnut",
                     "Walnut",
                     "Hazelnut",
-                    "Pecans",
+                    "Pecan",
                     "Pistachio"
                 ],
                 dateCreated: Date()
@@ -162,7 +162,7 @@ extension List {
                 color: 0x3A7921,
                 words: [
                     "Pork",
-                    "Rib",
+                    "Gelatin",
                     "Shrimp",
                     "Lobster",
                     "Crab",
@@ -181,7 +181,7 @@ extension List {
                 color: 0x009A00,
                 words: [
                     "Pork",
-                    "Rib"
+                    "Gelatin"
                 ],
                 dateCreated: Date()
             )
