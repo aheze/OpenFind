@@ -96,7 +96,7 @@ extension ViewController {
         let dataSource = ListsSharingDataSource(lists: displayedLists)
 
         let sourceRect = CGRect(
-            x: view.bounds.width / 2,
+            x: self.settingsController.viewController.view.bounds.width / 2,
             y: 50,
             width: 1,
             height: 1

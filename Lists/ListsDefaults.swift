@@ -42,12 +42,12 @@ extension List {
                     "Nut",
                     "Peanut",
                     "Macadamia",
-                    "Almonds",
+                    "Almond",
                     "Cashew",
                     "Chestnut",
                     "Walnut",
                     "Hazelnut",
-                    "Pecans",
+                    "Pecan",
                     "Pistachio"
                 ],
                 dateCreated: Date()

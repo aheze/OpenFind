@@ -153,6 +153,19 @@ extension SettingsViewController {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         )
+        
+        if let popoverPresentationController = alert.popoverPresentationController {
+            let sourceRect = CGRect(
+                x: view.bounds.width / 2,
+                y: 50,
+                width: 1,
+                height: 1
+            )
+            
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect = sourceRect
+            popoverPresentationController.permittedArrowDirections = .up
+        }
         self.present(alert, animated: true, completion: nil)
     }
 
