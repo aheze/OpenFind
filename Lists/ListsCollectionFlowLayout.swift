@@ -10,7 +10,6 @@ import UIKit
 
 /// columned layout, used by both Lists and Photos
 class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
-    
     /// attributes for the headers / supplementary views
     var sectionAttributes = [UICollectionViewLayoutAttributes]()
     
@@ -43,7 +42,6 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     }
     
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
-    var columnWidth = CGFloat(0) /// width of each column. Needed for bounds change calculations
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
     func getAvailableWidth(bounds: CGFloat, insets: UIEdgeInsets) -> CGFloat {
@@ -80,7 +78,6 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         let (numberOfColumns, columnWidth) = getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
-        self.columnWidth = columnWidth
         
         var columnOffsets = [CGSize]()
         for columnIndex in 0 ..< numberOfColumns {

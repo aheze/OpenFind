@@ -66,15 +66,13 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     typealias ResultsSnapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, FindPhoto>
     
     /// for SwiftUI views
-    @IBOutlet weak var contentContainer: UIView!
-    
+    @IBOutlet var contentContainer: UIView!
     
     // MARK: Filtering
 
     @IBOutlet var sliderContainerView: UIView!
     @IBOutlet var sliderContainerViewHeightC: NSLayoutConstraint!
     @IBOutlet var sliderContainerViewBottomC: NSLayoutConstraint!
-    
     
     var loadedPhotos = false
     init?(

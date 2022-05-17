@@ -84,7 +84,7 @@ extension PhotosViewController {
         case .all:
             displayedFindPhotos = allFindPhotos
         }
-    
+        
         model.resultsState = PhotosResultsState(
             displayedFindPhotos: displayedFindPhotos,
             allFindPhotos: allFindPhotos,
@@ -94,6 +94,8 @@ extension PhotosViewController {
             starredResultsCount: starredResultsCount,
             screenshotsResultsCount: screenshotsResultsCount
         )
+        
+        updateDisplayedCellSizes() ///
         
         if case .findingAfterTextChange(firstTimeShowingResults: let firstTimeShowingResults) = context {
             updateResults(animate: !firstTimeShowingResults)

@@ -28,7 +28,6 @@ extension PhotosViewModel {
         }
     }
     
-    
     /// Main queue for `@Published`
     @MainActor func reloadAfterLoad() {
         withAnimation {
@@ -48,11 +47,13 @@ extension PhotosViewModel {
     }
     
     func getPhotos() async -> ([Photo], [Photo], [Photo]) {
-        await withCheckedContinuation { continuation in
+        let photos = await withCheckedContinuation { continuation in
             getPhotos { photos, ignoredPhotos, photosToScan in
                 continuation.resume(returning: (photos, ignoredPhotos, photosToScan))
             }
         }
+        
+        return photos
     }
 
     /// 1. all photos, 2. ignored photos, 3. photos to scan
@@ -68,17 +69,28 @@ extension PhotosViewModel {
                 
                 let photo: Photo
                 let identifier = asset.localIdentifier
-                if let metadata = self.getRealmModel?().getPhotoMetadata(from: identifier) {
+                
+                if Debug.photosLoadManyImages {
+                    let metadata = PhotoMetadata(
+                        assetIdentifier: identifier,
+                        isStarred: false,
+                        isIgnored: false,
+                        dateScanned: Date()
+                    )
                     photo = Photo(asset: asset, metadata: metadata)
+                } else {
+                    if let metadata = self.getRealmModel?().getPhotoMetadata(from: identifier) {
+                        photo = Photo(asset: asset, metadata: metadata)
                     
-                    if metadata.isIgnored {
-                        ignoredPhotos.append(photo)
-                    } else if metadata.dateScanned == nil {
+                        if metadata.isIgnored {
+                            ignoredPhotos.append(photo)
+                        } else if metadata.dateScanned == nil {
+                            photosToScan.append(photo)
+                        }
+                    } else {
+                        photo = Photo(asset: asset)
                         photosToScan.append(photo)
                     }
-                } else {
-                    photo = Photo(asset: asset)
-                    photosToScan.append(photo)
                 }
                 
                 photos.append(photo)

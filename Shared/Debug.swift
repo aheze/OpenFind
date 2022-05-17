@@ -17,6 +17,7 @@ enum Debug {
     static var photosTestEmptyLoading = false /// if true, `sleep` instead of calling `loadPhotoMetadatas`
     static var skipLaunchIntro = false
     static var overrideLaunch = false /// override launch screen, go directly to main content
+    static var photosLoadManyImages = true
 }
 
 extension UIView {

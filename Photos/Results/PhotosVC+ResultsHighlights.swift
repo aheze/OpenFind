@@ -67,7 +67,6 @@ extension PhotosViewController {
     func updateResultsHighlightColors(in keyPath: WritableKeyPath<PhotosResultsState, [FindPhoto]>, loop: ((Int) -> Void)? = nil) {
         guard let findPhotos = model.resultsState?[keyPath: keyPath] else { return }
         for findPhotoIndex in findPhotos.indices {
-            
             /// if photo has highlights, also update them.
             if let highlightsSet = findPhotos[findPhotoIndex].highlightsSet {
                 let newHighlights: [Highlight] = highlightsSet.highlights.map { highlight in

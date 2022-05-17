@@ -9,15 +9,12 @@
 import SwiftUI
 
 extension PhotosViewController {
-    func willBecomeActive() {
-        
-    }
+    func willBecomeActive() {}
     
     func didBecomeActive() {}
     
     func willBecomeInactive() {
         withAnimation {
-            
             /// make sure that views are loaded inside here
             resetSelectingState()
         }
@@ -26,8 +23,10 @@ extension PhotosViewController {
     func didBecomeInactive() {}
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
-        self.baseSearchBarOffset = self.getCompactBarSafeAreaHeight(with: safeAreaInsets)
-        self.updateNavigationBar?()
+        baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
+        updateNavigationBar?()
+        
+        updateDisplayedCellSizes()
         
         if let slidesState = model.slidesState {
             slidesState.viewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)

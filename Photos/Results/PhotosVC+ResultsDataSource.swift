@@ -48,6 +48,7 @@ extension PhotosViewController {
             ) as! PhotosResultsCell
 
             /// get the current up-to-date FindPhoto first.
+
             guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
 
             cell.titleLabel.text = findPhoto.dateString()

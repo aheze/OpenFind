@@ -40,16 +40,25 @@ extension PhotosViewController {
         
         flowLayout.getSizeForIndexWithWidth = { [weak self] photosIndex, availableWidth in
             guard let self = self else { return .zero }
-            return self.getCellSize(photosIndex: photosIndex, availableWidth: availableWidth)
+            return self.model.resultsState?.displayedCellSizes[safe: photosIndex] ?? .zero
         }
         
         resultsCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }
     
-    func getCellSize(photosIndex: Int, availableWidth: CGFloat) -> CGSize {
-        guard let resultsState = model.resultsState else { return .zero }
-        let photo = resultsState.displayedFindPhotos[photosIndex]
+    /// calculate and update the sizes of results cells
+    func updateDisplayedCellSizes() {
+        let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+        
+        guard let displayedFindPhotos = model.resultsState?.displayedFindPhotos else { return }
+        let sizes = displayedFindPhotos.map { findPhoto in
+            getCellSize(findPhoto: findPhoto, availableWidth: columnWidth)
+        }
+        model.resultsState?.displayedCellSizes = sizes
+    }
+    
+    func getCellSize(findPhoto: FindPhoto, availableWidth: CGFloat) -> CGSize {
         let c = PhotosResultsCellConstants.self
 
         let rightTopStackViewHeight = c.resultsFont.lineHeight
@@ -60,7 +69,7 @@ extension PhotosViewController {
         
         let contentWidth = availableWidth - (c.cellPadding * 2)
         let descriptionWidth = contentWidth - c.leftContainerWidth - c.cellSpacing
-        let descriptionHeight = photo.descriptionText.height(withConstrainedWidth: descriptionWidth, font: c.descriptionFont)
+        let descriptionHeight = findPhoto.descriptionText.height(withConstrainedWidth: descriptionWidth, font: c.descriptionFont)
         
         let contentHeight = rightTopStackViewHeight + rightStackViewSpacing + descriptionHeight
         let height = contentHeight + c.cellPadding * 2

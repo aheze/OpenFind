@@ -157,6 +157,7 @@
 		3C153BEC280B74C70062751B /* LaunchConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C153BE6280B6CEC0062751B /* LaunchConstants.swift */; };
 		3C153BED280B74CB0062751B /* LaunchContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC0D13F280B294E004E7016 /* LaunchContent.storyboard */; };
 		3C153BEE280B98540062751B /* SearchVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EAA9528060A0700B036AD /* SearchVC+Defaults.swift */; };
+		3C165A8328334E7F0030FE3F /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 3C165A8228334E7F0030FE3F /* Popovers */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
 		3C17685D27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */; };
 		3C17685E27AA0F4A0099D1CE /* WordsToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17685A27AA0F4A0099D1CE /* WordsToolbarView.swift */; };
@@ -4350,6 +4351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C165A8328334E7F0030FE3F /* Popovers in Frameworks */,
 				3CF15D4427FF8B0A00D51E9B /* SupportDocs in Frameworks */,
 				3C443FC827DFD1550050A0AB /* Introspect in Frameworks */,
 			);
@@ -5166,11 +5168,11 @@
 		3C4D39D52747661E0010FD68 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				3C0B5E6927BABE1D00EC881E /* PhotosModel.swift */,
 				3C2D22F227FD551600D413B7 /* PhotosGeneralExtensions.swift */,
 				3C9CA8AA27EFFA3400D087F2 /* PhotosSpecifiedExtensions.swift */,
 				3C4D39E9274766580010FD68 /* PhotosContent.storyboard */,
 				3C1D179127BCAEBA00E82B8B /* PhotosConstants.swift */,
-				3C0B5E6927BABE1D00EC881E /* PhotosModel.swift */,
 				3C4D39EC274766580010FD68 /* PhotosController.swift */,
 				3CD947DD2817659A0080FA8D /* View Model */,
 				3CD947DE281765A40080FA8D /* View Controller */,
@@ -6870,6 +6872,7 @@
 			packageProductDependencies = (
 				3C443FC727DFD1550050A0AB /* Introspect */,
 				3CF15D4327FF8B0A00D51E9B /* SupportDocs */,
+				3C165A8228334E7F0030FE3F /* Popovers */,
 			);
 			productName = Photos;
 			productReference = 3C4D39D42747661E0010FD68 /* FindPhotos.app */;
@@ -11440,6 +11443,7 @@
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Photos/Testing/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -11472,6 +11476,7 @@
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Photos/Testing/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -12575,6 +12580,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C165A8228334E7F0030FE3F /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C504E052819108B00AD302A /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
+		};
 		3C21ED8E27A3CD910005E183 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C21ED8D27A3CD910005E183 /* XCRemoteSwiftPackageReference "realm-swift" */;
