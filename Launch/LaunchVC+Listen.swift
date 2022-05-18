@@ -22,9 +22,11 @@ extension LaunchViewController {
 
         model.enter = { [weak self] in
             guard let self = self else { return }
-            self.aboutToEnter?()
-
-            self.enter()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.aboutToEnter?()
+                self.enter()
+            }
         }
     }
 

@@ -15,6 +15,7 @@ class LaunchViewModel: ObservableObject {
     
     @Published var showingUI = false
     @Published var currentPage = LaunchPageIdentifier.empty
+    @Published var controlsEnabled = true /// set to false after enter first
     
     /// dismiss launch screen and present main app
     var enter: (() -> Void)?

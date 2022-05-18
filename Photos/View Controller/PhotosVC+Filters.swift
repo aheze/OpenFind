@@ -54,7 +54,7 @@ extension PhotosViewController {
     /// If `model.resultsState != nil`, will find again
     func sliderChanged(filter: SliderViewModel.Filter) {
         /// find again (handles star/unstar)
-        updateDisplayedPhotos()
+        self.updateDisplayedPhotos()
     }
 
     /// call this after slider change *or* adding new photos
@@ -77,13 +77,13 @@ extension PhotosViewController {
             }
         }
 
-        updateResultsCellSizes { [weak self] in
-            guard let self = self else { return }
-            if self.model.resultsState != nil {
+        if self.model.resultsState != nil {
+            updateResultsCellSizes { [weak self] in
+                guard let self = self else { return }
                 self.updateResults() /// make sure to call `update` later, when results dismissed
-            } else {
-                self.update()
             }
+        } else {
+            self.update()
         }
     }
 

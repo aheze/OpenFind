@@ -50,6 +50,7 @@ extension PhotosViewController {
     }
 
     /// call after bounds or filter change
+    /// Only works when `resultsState` isn't nil
     /// If add completion, must call `updateResults()` later.
     /// If completion is `nil`, `invalidateLayout` will be called.
     func updateResultsCellSizes(completion: (() -> Void)? = nil) {

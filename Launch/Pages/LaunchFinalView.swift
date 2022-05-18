@@ -34,6 +34,7 @@ struct LaunchFinalView: View {
                 .multilineTextAlignment(.center)
             
             Button {
+                model.controlsEnabled = false
                 model.enter?()
             } label: {
                 Text("Start Finding")
@@ -43,6 +44,7 @@ struct LaunchFinalView: View {
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(c.footerCornerRadius)
             }
+            .disabled(!model.controlsEnabled)
         }
         .foregroundColor(.white)
         .padding(.top, 32)
