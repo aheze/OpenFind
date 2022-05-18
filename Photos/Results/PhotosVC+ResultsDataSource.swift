@@ -39,6 +39,38 @@ extension PhotosViewController {
         }
     }
 
+    func willDisplayResultsCell(cell: UICollectionViewCell, indexPath: IndexPath) {
+        if
+            let resultsState = model.resultsState,
+            let cell = cell as? PhotosResultsCell,
+            let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item]
+        {
+            configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
+        }
+    }
+
+    /// call after bounds or filter change
+    /// If add completion, must call `updateResults()` later.
+    /// If completion is `nil`, `invalidateLayout` will be called.
+    func updateResultsCellSizes(completion: (() -> Void)? = nil) {
+        if let displayedFindPhotos = model.resultsState?.displayedFindPhotos {
+            let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                let sizes = self.getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
+
+                DispatchQueue.main.async {
+                    self.model.resultsState?.displayedCellSizes = sizes
+                    if let completion = completion {
+                        completion()
+                    } else {
+                        self.resultsFlowLayout.invalidateLayout()
+                    }
+                }
+            }
+        }
+    }
+
     func makeResultsDataSource() -> ResultsDataSource {
         let dataSource = ResultsDataSource(collectionView: resultsCollectionView) { collectionView, indexPath, cachedFindPhoto -> UICollectionViewCell? in
 
@@ -68,7 +100,6 @@ extension PhotosViewController {
             PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
 
             cell.isAccessibilityElement = true
-            cell.accessibilityLabel = findPhoto.getVoiceoverDescription()
             cell.baseView.alpha = 1
             cell.transform = .identity
 

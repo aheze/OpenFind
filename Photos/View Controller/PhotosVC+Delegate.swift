@@ -25,13 +25,8 @@ extension PhotosViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if
-            let resultsState = model.resultsState,
-            let cell = cell as? PhotosResultsCell,
-            let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item]
-        {
-            configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
-        }
+        /// handle logic in `PhotosVC+ResultsDataSource`
+        willDisplayResultsCell(cell: cell, indexPath: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {

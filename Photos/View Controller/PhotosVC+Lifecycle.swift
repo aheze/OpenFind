@@ -25,19 +25,7 @@ extension PhotosViewController {
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)
         updateNavigationBar?()
-        
-        if let displayedFindPhotos = model.resultsState?.displayedFindPhotos {
-            let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                let sizes = self.getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
-                
-                DispatchQueue.main.async {
-                    self.model.resultsState?.displayedCellSizes = sizes
-                    self.resultsFlowLayout.invalidateLayout()
-                }
-            }
-        }
+        updateResultsCellSizes()
         
         if let slidesState = model.slidesState {
             slidesState.viewController?.boundsChanged(to: size, safeAreaInsets: safeAreaInsets)

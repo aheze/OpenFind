@@ -77,10 +77,13 @@ extension PhotosViewController {
             }
         }
 
-        if model.resultsState != nil {
-            updateResults() /// make sure to call `update` later, when results dismissed
-        } else {
-            update()
+        updateResultsCellSizes { [weak self] in
+            guard let self = self else { return }
+            if self.model.resultsState != nil {
+                self.updateResults() /// make sure to call `update` later, when results dismissed
+            } else {
+                self.update()
+            }
         }
     }
 
