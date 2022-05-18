@@ -74,6 +74,7 @@ class RealmModel: ObservableObject {
     @Saved(data.photosScanOnAddition.key) var photosScanOnAddition = data.photosScanOnAddition.value
     @Saved(data.photosScanOnFind.key) var photosScanOnFind = data.photosScanOnFind.value
     @Saved(data.photosMinimumCellLength.key) var photosMinimumCellLength = data.photosMinimumCellLength.value
+    @Saved(data.photosResultsCellLayout.key) var photosResultsCellLayout = data.photosResultsCellLayout.value
 
     // MARK: Camera
 
@@ -122,6 +123,7 @@ class RealmModel: ObservableObject {
         _photosScanOnAddition.configureValueChanged(with: self)
         _photosScanOnFind.configureValueChanged(with: self)
         _photosMinimumCellLength.configureValueChanged(with: self)
+        _photosResultsCellLayout.configureValueChanged(with: self)
 
         _cameraHapticFeedbackLevel.configureValueChanged(with: self)
         _cameraScanningFrequency.configureValueChanged(with: self)

@@ -18,7 +18,7 @@ extension PhotosViewController {
         resultsSnapshot.appendItems(resultsState.displayedFindPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
 
-        resultsHeaderViewModel.text = model.resultsState?.getResultsText(for: sliderViewModel.selectedFilter ?? .all) ?? ""
+        resultsHeaderViewModel.text = model.resultsState?.getResultsText() ?? ""
         if model.scannedPhotosCount == model.totalPhotosCount {
             resultsHeaderViewModel.description = nil
         } else {
@@ -52,8 +52,25 @@ extension PhotosViewController {
             guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
 
             cell.titleLabel.text = findPhoto.dateString()
-            cell.resultsLabel.text = findPhoto.resultsString()
-            cell.descriptionTextView.text = findPhoto.descriptionText
+
+            var description: FindPhoto.Description
+            if let existingDescription = findPhoto.description {
+                description = existingDescription
+            } else {
+                let (lines, highlightsCount) = Finding.getLineHighlights(
+                    realmModel: self.realmModel,
+                    from: self.realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
+                    with: self.searchViewModel.stringToGradients,
+                    imageSize: findPhoto.photo.asset.getSize()
+                )
+                print("Count: \(highlightsCount)")
+                let text = Finding.getCellDescription(from: lines)
+                description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
+            }
+
+            cell.resultsLabel.text = description.resultsString()
+            cell.descriptionTextView.text = description.text
+            self.loadHighlights(for: cell, lines: description.lines)
 
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
@@ -68,8 +85,6 @@ extension PhotosViewController {
             }
 
             PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
-
-            self.loadHighlights(for: cell, findPhoto: findPhoto)
 
             cell.isAccessibilityElement = true
             cell.accessibilityLabel = findPhoto.getVoiceoverDescription()

@@ -42,10 +42,7 @@ struct PhotosResultsState {
     var starredFindPhotos: [FindPhoto]
     var screenshotsFindPhotos: [FindPhoto]
 
-    var allResultsCount: Int
-    var starredResultsCount: Int
-    var screenshotsResultsCount: Int
-    
+    /// recalculated after bounds change
     var displayedCellSizes = [CGSize]()
 }
 
@@ -56,9 +53,7 @@ struct FindPhoto: Hashable {
 
     /// results (an array of highlights)
     var highlightsSet: HighlightsSet?
-    var descriptionText = ""
-    var descriptionLines = [Line]()
-    var numberOfResults = 0
+    var description: Description?
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(photo.asset)
@@ -66,6 +61,12 @@ struct FindPhoto: Hashable {
 
     static func == (lhs: FindPhoto, rhs: FindPhoto) -> Bool {
         lhs.photo.asset == rhs.photo.asset
+    }
+
+    struct Description {
+        var numberOfResults: Int
+        var text: String
+        var lines: [Line]
     }
 }
 

@@ -28,6 +28,17 @@ extension Sentence {
 }
 
 extension Array where Element == Sentence {
+    
+    /// check if a sentence contains the search
+    func checkIf(realmModel: RealmModel, matches searches: [String]) -> Bool {
+        for sentence in self {
+            if Finding.checkIf(realmModel: realmModel, stringToSearchFrom: sentence.string, matches: searches) {
+                return true
+            }
+        }
+        return false
+    }
+
     /// scanned
     func getHighlights(stringToGradients: [String: Gradient], realmModel: RealmModel, imageSize: CGSize) -> [Highlight] {
         var highlights = [Highlight]()

@@ -54,7 +54,7 @@ extension SettingsMainViewController {
     
     func checkIf(row: SettingsRow, contains text: [String]) -> Bool {
         if let title = row.configuration.getTitle() {
-            return Finding.checkIf(realmModel: realmModel, string: title, matches: text)
+            return Finding.checkIf(realmModel: realmModel, stringToSearchFrom: title, matches: text)
         }
         return false
     }

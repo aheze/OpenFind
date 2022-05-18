@@ -48,33 +48,14 @@ extension PhotosViewController {
     }
     
     /// calculate and update the sizes of results cells
-    func updateDisplayedCellSizes() {
-        let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
-        
-        guard let displayedFindPhotos = model.resultsState?.displayedFindPhotos else { return }
-        let sizes = displayedFindPhotos.map { findPhoto in
-            getCellSize(findPhoto: findPhoto, availableWidth: columnWidth)
+    func getDisplayedCellSizes(from displayedFindPhotos: [FindPhoto], columnWidth: CGFloat) -> [CGSize] {
+        var height = CGFloat(100)
+        if let photosResultsCellLayout = Settings.Values.PhotosResultsCellLayout(rawValue: realmModel.photosResultsCellLayout) {
+            height = photosResultsCellLayout.getCellHeight()
         }
-        model.resultsState?.displayedCellSizes = sizes
-    }
-    
-    func getCellSize(findPhoto: FindPhoto, availableWidth: CGFloat) -> CGSize {
-        let c = PhotosResultsCellConstants.self
-
-        let rightTopStackViewHeight = c.resultsFont.lineHeight
-            + c.resultsLabelEdgeInsets.top
-            + c.resultsLabelEdgeInsets.bottom
         
-        let rightStackViewSpacing = c.cellSpacing
+        let sizes = Array(repeating: CGSize(width: columnWidth, height: height), count: displayedFindPhotos.count)
         
-        let contentWidth = availableWidth - (c.cellPadding * 2)
-        let descriptionWidth = contentWidth - c.leftContainerWidth - c.cellSpacing
-        let descriptionHeight = findPhoto.descriptionText.height(withConstrainedWidth: descriptionWidth, font: c.descriptionFont)
-        
-        let contentHeight = rightTopStackViewHeight + rightStackViewSpacing + descriptionHeight
-        let height = contentHeight + c.cellPadding * 2
-        
-        let cellSize = CGSize(width: availableWidth, height: height)
-        return cellSize
+        return sizes
     }
 }

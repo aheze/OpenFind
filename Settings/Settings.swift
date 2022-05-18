@@ -50,8 +50,6 @@ enum Settings {
             case german = "de-DE"
             case spanish = "es-ES"
             case portuguese = "pt-BR"
-//            case chineseSimplified = "zh-Hans"
-//            case chineseTraditional = "zh-Hant"
 
             func getTitle() -> String {
                 switch self {
@@ -69,10 +67,6 @@ enum Settings {
                     return "Spanish"
                 case .portuguese:
                     return "Portuguese"
-//                case .chineseSimplified:
-//                    return "Chinese (Simplified)"
-//                case .chineseTraditional:
-//                    return "Chinese (Traditional)"
                 }
             }
 
@@ -107,10 +101,6 @@ enum Settings {
                     return 14
                 case .portuguese:
                     return 14
-//                case .chineseSimplified:
-//                    return 14
-//                case .chineseTraditional:
-//                    return 14
                 }
             }
 
@@ -183,6 +173,36 @@ enum Settings {
                     return .light
                 case .heavy:
                     return .medium
+                }
+            }
+        }
+
+        enum PhotosResultsCellLayout: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case small
+            case medium
+            case large
+
+            func getTitle() -> String {
+                switch self {
+                case .small:
+                    return "Small"
+                case .medium:
+                    return "Medium"
+                case .large:
+                    return "Large"
+                }
+            }
+            
+            func getCellHeight() -> CGFloat {
+                switch self {
+                case .small:
+                    return 60
+                case .medium:
+                    return 120
+                case .large:
+                    return 300
                 }
             }
         }

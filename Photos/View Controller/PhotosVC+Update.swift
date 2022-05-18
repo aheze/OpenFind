@@ -40,18 +40,16 @@ extension PhotosViewController {
             let stringToGradients = self.searchViewModel.stringToGradients
             
             Task.detached {
+                
+                // TODO: Optimize
                 let (
-                    allFindPhotos, starredFindPhotos, screenshotsFindPhotos,
-                    allResultsCount, starredResultsCount, screenshotsResultsCount
+                    allFindPhotos, starredFindPhotos, screenshotsFindPhotos
                 ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
                 
                 await self.apply(
                     allFindPhotos: allFindPhotos,
                     starredFindPhotos: starredFindPhotos,
                     screenshotsFindPhotos: screenshotsFindPhotos,
-                    allResultsCount: allResultsCount,
-                    starredResultsCount: starredResultsCount,
-                    screenshotsResultsCount: screenshotsResultsCount,
                     context: .justFindFromExistingDoNotScan
                 )
             }

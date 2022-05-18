@@ -43,17 +43,13 @@ extension PhotosViewController {
         
         Task.detached {
             let (
-                allFindPhotos, starredFindPhotos, screenshotsFindPhotos,
-                allResultsCount, starredResultsCount, screenshotsResultsCount
+                allFindPhotos, starredFindPhotos, screenshotsFindPhotos
             ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
             
             await self.apply(
                 allFindPhotos: allFindPhotos,
                 starredFindPhotos: starredFindPhotos,
                 screenshotsFindPhotos: screenshotsFindPhotos,
-                allResultsCount: allResultsCount,
-                starredResultsCount: starredResultsCount,
-                screenshotsResultsCount: screenshotsResultsCount,
                 context: context
             )
             
@@ -68,9 +64,6 @@ extension PhotosViewController {
         allFindPhotos: [FindPhoto],
         starredFindPhotos: [FindPhoto],
         screenshotsFindPhotos: [FindPhoto],
-        allResultsCount: Int,
-        starredResultsCount: Int,
-        screenshotsResultsCount: Int,
         context: FindContext
     ) {
         guard !searchViewModel.isEmpty else { return }
@@ -85,17 +78,16 @@ extension PhotosViewController {
             displayedFindPhotos = allFindPhotos
         }
         
+        let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+        let sizes = getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
+        
         model.resultsState = PhotosResultsState(
             displayedFindPhotos: displayedFindPhotos,
             allFindPhotos: allFindPhotos,
             starredFindPhotos: starredFindPhotos,
             screenshotsFindPhotos: screenshotsFindPhotos,
-            allResultsCount: allResultsCount,
-            starredResultsCount: starredResultsCount,
-            screenshotsResultsCount: screenshotsResultsCount
+            displayedCellSizes: sizes
         )
-        
-        updateDisplayedCellSizes() ///
         
         if case .findingAfterTextChange(firstTimeShowingResults: let firstTimeShowingResults) = context {
             updateResults(animate: !firstTimeShowingResults)
@@ -103,7 +95,7 @@ extension PhotosViewController {
             updateResults() /// always update results anyway, for example when coming back from star
         }
         
-        let results = model.resultsState?.getResultsText(for: sliderViewModel.selectedFilter ?? .all) ?? ""
+        let results = model.resultsState?.getResultsText() ?? ""
         resultsHeaderViewModel.text = results
         UIAccessibility.post(notification: .announcement, argument: results)
         

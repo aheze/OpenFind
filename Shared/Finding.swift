@@ -10,18 +10,30 @@ import UIKit
 
 enum Finding {
     /// check if a string matches the search (the string contains at least one of the searches)
-    static func checkIf(realmModel: RealmModel, string: String, matches search: [String]) -> Bool {
-        let stringToSearchFrom = string.applyDefaults(realmModel: realmModel)
-        return search.contains { text in
-            let stringToSearch = text.applyDefaults(realmModel: realmModel)
-            return stringToSearchFrom.contains(stringToSearch)
+    static func checkIf(realmModel: RealmModel, stringToSearchFrom: String, matches searches: [String]) -> Bool {
+        return searches.contains { search in
+            checkIf(realmModel: realmModel, stringToSearchFrom: stringToSearchFrom, contains: search)
         }
     }
 
-    static func checkIf(realmModel: RealmModel, string: String, contains text: String) -> Bool {
-        let stringToSearchFrom = string.applyDefaults(realmModel: realmModel)
-        let stringToSearch = text.applyDefaults(realmModel: realmModel)
-        return stringToSearchFrom.contains(stringToSearch)
+    static func checkIf(realmModel: RealmModel, stringToSearchFrom: String, contains search: String) -> Bool {
+        if realmModel.findingMatchCase {
+            if realmModel.findingMatchAccents {
+                return stringToSearchFrom.contains(search)
+            } else { /// match case, accents don't matter
+                return stringToSearchFrom
+                    .folding(options: .diacriticInsensitive, locale: .current)
+                    .contains(
+                        search.folding(options: .diacriticInsensitive, locale: .current)
+                    )
+            }
+        } else {
+            if realmModel.findingMatchAccents { /// match accents but not case
+                return stringToSearchFrom.localizedCaseInsensitiveContains(search)
+            } else { /// don't match anything
+                return stringToSearchFrom.localizedStandardContains(search)
+            }
+        }
     }
 }
 

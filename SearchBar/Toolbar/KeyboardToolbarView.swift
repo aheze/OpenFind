@@ -94,7 +94,10 @@ struct KeyboardToolbarView: View {
         let (_, originalText) = getSelectedListAndOriginalText()
 
         if realmModel.findingFilterLists, !originalText.isEmpty {
-            return realmModel.lists.filter { Finding.checkIf(realmModel: realmModel, string: $0.displayedTitle, contains: originalText) }
+            return realmModel.lists.filter {
+                Finding.checkIf(realmModel: realmModel, stringToSearchFrom: $0.displayedTitle, contains: originalText)
+                
+            }
         } else {
             return realmModel.lists
         }

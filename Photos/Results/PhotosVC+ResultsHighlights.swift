@@ -10,11 +10,11 @@ import UIKit
 
 extension PhotosViewController {
     /// call this inside the cell provider. Frames of returned highlights are already scaled.
-    func getHighlights(for cell: PhotosResultsCell, with findPhoto: FindPhoto) -> [Highlight] {
+    func getHighlights(for cell: PhotosResultsCell, with lines: [FindPhoto.Line]) -> [Highlight] {
         /// the highlights to be shown. Create these from `lineHighlights`
         var cellHighlights = [Highlight]()
-        for index in findPhoto.descriptionLines.indices {
-            let line = findPhoto.descriptionLines[index]
+        for index in lines.indices {
+            let line = lines[index]
             
             /// `lineHighlights` - highlights in the cell without a frame - only represented by their ranges
             guard
@@ -22,7 +22,7 @@ extension PhotosViewController {
                 let textView = cell.descriptionTextView
             else { continue }
             
-            let previousLines = Array(findPhoto.descriptionLines.prefix(index))
+            let previousLines = Array(lines.prefix(index))
             let previousDescription = Finding.getCellDescription(from: previousLines)
             var previousDescriptionCount = previousDescription.count
             
@@ -83,20 +83,22 @@ extension PhotosViewController {
             }
             
             /// update the line highlight colors
-            for (lineIndex, descriptionLine) in findPhotos[findPhotoIndex].descriptionLines.enumerated() {
-                guard let lineHighlights = descriptionLine.lineHighlights else { continue }
+            if let description = findPhotos[findPhotoIndex].description {
+                for (index, line) in description.lines.enumerated() {
+                    guard let lineHighlights = line.lineHighlights else { continue }
                     
-                let newLineHighlights: [FindPhoto.Line.LineHighlight] = lineHighlights.map { highlight in
-                    if let gradient = self.searchViewModel.stringToGradients[highlight.string] {
-                        var newHighlight = highlight
-                        newHighlight.colors = gradient.colors
-                        newHighlight.alpha = gradient.alpha
-                        return newHighlight
+                    let newLineHighlights: [FindPhoto.Line.LineHighlight] = lineHighlights.map { highlight in
+                        if let gradient = self.searchViewModel.stringToGradients[highlight.string] {
+                            var newHighlight = highlight
+                            newHighlight.colors = gradient.colors
+                            newHighlight.alpha = gradient.alpha
+                            return newHighlight
+                        }
+                        return highlight
                     }
-                    return highlight
-                }
                 
-                model.resultsState?[keyPath: keyPath][findPhotoIndex].descriptionLines[lineIndex].lineHighlights = newLineHighlights
+                    model.resultsState?[keyPath: keyPath][findPhotoIndex].description?.lines[index].lineHighlights = newLineHighlights
+                }
             }
             
             loop?(findPhotoIndex)
@@ -113,9 +115,10 @@ extension PhotosViewController {
             /// update visible highlights
             if
                 let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
-                let findPhoto = self.model.resultsState?.displayedFindPhotos[index]
+                let findPhoto = self.model.resultsState?.displayedFindPhotos[index],
+                let lines = findPhoto.description?.lines
             {
-                cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: findPhoto)
+                cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: lines)
             }
         }
         updateResultsHighlightColors(in: \PhotosResultsState.allFindPhotos)
@@ -125,9 +128,7 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
-    func loadHighlights(for cell: PhotosResultsCell, findPhoto: FindPhoto) {
-        guard cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier else { return }
-
+    func loadHighlights(for cell: PhotosResultsCell, lines: [FindPhoto.Line]) {
         /// clear existing highlights
         if let highlightsViewController = cell.highlightsViewController {
             removeChildViewController(highlightsViewController)
@@ -152,7 +153,7 @@ extension PhotosViewController {
                 cell.highlightsViewController?.view.alpha = 1
             }
 
-            cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: findPhoto)
+            cell.highlightsViewController?.highlightsViewModel.highlights = self.getHighlights(for: cell, with: lines)
         }
     }
 }
