@@ -26,11 +26,15 @@ extension PhotosViewController {
             switch context {
             case .findingAfterNewPhotosAdded:
                 if realmModel.photosScanOnAddition {
-                    model.startScanning()
+                    DispatchQueue.main.async {
+                        self.model.startScanning()
+                    }
                 }
             case .findingAfterTextChange:
                 if realmModel.photosScanOnFind {
-                    model.startScanning()
+                    DispatchQueue.main.async {
+                        self.model.startScanning()
+                    }
                 }
             case .justFindFromExistingDoNotScan:
                 break

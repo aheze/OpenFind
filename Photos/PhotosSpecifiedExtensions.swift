@@ -229,13 +229,12 @@ extension Finding {
         var starredFindPhotos = [FindPhoto]()
         var screenshotsFindPhotos = [FindPhoto]()
 
-        let timer = TimeElapsed()
-
         for photo in photos {
             guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
             let text = realmModel.container.getText(from: metadata.assetIdentifier)
             guard let sentences = text?.sentences else { continue }
 
+            /// very fast!
             let contains = sentences.checkIf(realmModel: realmModel, matches: Array(stringToGradients.keys))
 
             if contains {
@@ -254,8 +253,6 @@ extension Finding {
                 }
             }
         }
-
-        timer.print()
 
         return (allFindPhotos, starredFindPhotos, screenshotsFindPhotos)
     }

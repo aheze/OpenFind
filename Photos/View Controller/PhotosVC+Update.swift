@@ -34,10 +34,13 @@ extension PhotosViewController {
             }
             
             /// **Scenario 2:** searching inside results screen while scanning
-        } else if model.resultsState != nil {
+        } else if let resultsState = model.resultsState {
             let realmModel = self.realmModel
-            let photos = self.model.photos
             let stringToGradients = self.searchViewModel.stringToGradients
+            
+            let existingAllFindPhotos = resultsState.allFindPhotos
+            let existingStarredFindPhotos = resultsState.starredFindPhotos
+            let existingScreenshotsFindPhotos = resultsState.screenshotsFindPhotos
             
             Task.detached {
                 
@@ -47,9 +50,9 @@ extension PhotosViewController {
                 ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
                 
                 await self.apply(
-                    allFindPhotos: allFindPhotos,
-                    starredFindPhotos: starredFindPhotos,
-                    screenshotsFindPhotos: screenshotsFindPhotos,
+                    allFindPhotos: existingAllFindPhotos + allFindPhotos,
+                    starredFindPhotos: existingStarredFindPhotos + starredFindPhotos,
+                    screenshotsFindPhotos: existingScreenshotsFindPhotos + screenshotsFindPhotos,
                     context: .justFindFromExistingDoNotScan
                 )
             }
