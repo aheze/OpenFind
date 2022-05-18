@@ -134,10 +134,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        if let popover = view.popover(tagged: "Popover") {
-            popover.dismiss()
-        }
-
+        resetInfoToHidden()
         searchViewModel.dismissKeyboard?()
     }
 

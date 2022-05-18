@@ -50,11 +50,18 @@ extension PhotosViewController {
                 ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
                 
                 await self.apply(
-                    allFindPhotos: existingAllFindPhotos + allFindPhotos,
-                    starredFindPhotos: existingStarredFindPhotos + starredFindPhotos,
-                    screenshotsFindPhotos: existingScreenshotsFindPhotos + screenshotsFindPhotos,
+                    allFindPhotos: (allFindPhotos + existingAllFindPhotos).uniqued(),
+                    starredFindPhotos: (starredFindPhotos + existingStarredFindPhotos).uniqued(),
+                    screenshotsFindPhotos: (screenshotsFindPhotos + existingScreenshotsFindPhotos).uniqued(),
                     context: .justFindFromExistingDoNotScan
                 )
+                
+//                await self.apply(
+//                    allFindPhotos: (existingAllFindPhotos + allFindPhotos).uniqued(),
+//                    starredFindPhotos: (existingStarredFindPhotos + starredFindPhotos).uniqued(),
+//                    screenshotsFindPhotos: (existingScreenshotsFindPhotos + screenshotsFindPhotos).uniqued(),
+//                    context: .justFindFromExistingDoNotScan
+//                )
             }
         }
     }

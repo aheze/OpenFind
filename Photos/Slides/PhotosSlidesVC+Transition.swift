@@ -41,7 +41,7 @@ extension PhotosSlidesViewController: PhotoTransitionAnimatorDelegate {
     
     func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect? {
         let frame = getCurrentPhotoFrame() ?? .zero
-        if model.slidesState?.toolbarInformationOn ?? false {
+        if model.slidesState?.toolbarInformationOn ?? false, traitCollection.horizontalSizeClass != .regular {
             return frame
         } else {
             let currentPhoto = model.slidesState?.getCurrentSlidesPhoto()?.findPhoto.photo
