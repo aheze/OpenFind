@@ -90,7 +90,7 @@ class IconPickerViewModel {
         guard !searchedWords.isEmpty else { return icons }
         for category in categories {
             for icon in category.icons {
-                let contains = Finding.checkIf(realmModel: realmModel, string: icon, matches: searchedWords)
+                let contains = Finding.checkIf(realmModel: realmModel, stringToSearchFrom: icon, matches: searchedWords)
                 
                 if contains {
                     if let existingCategoryIndex = filteredCategories

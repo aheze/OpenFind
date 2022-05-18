@@ -53,24 +53,7 @@ extension PhotosViewController {
 
             cell.titleLabel.text = findPhoto.dateString()
 
-            var description: FindPhoto.Description
-            if let existingDescription = findPhoto.description {
-                description = existingDescription
-            } else {
-                let (lines, highlightsCount) = Finding.getLineHighlights(
-                    realmModel: self.realmModel,
-                    from: self.realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
-                    with: self.searchViewModel.stringToGradients,
-                    imageSize: findPhoto.photo.asset.getSize()
-                )
-                print("Count: \(highlightsCount)")
-                let text = Finding.getCellDescription(from: lines)
-                description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
-            }
-
-            cell.resultsLabel.text = description.resultsString()
-            cell.descriptionTextView.text = description.text
-            self.loadHighlights(for: cell, lines: description.lines)
+            self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
 
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier

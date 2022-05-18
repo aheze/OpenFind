@@ -95,6 +95,15 @@ extension PhotosViewController {
             updateResults() /// always update results anyway, for example when coming back from star
         }
         
+        for index in displayedFindPhotos.indices {
+            if
+                let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
+                let findPhoto = displayedFindPhotos[safe: index]
+            {
+                self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
+            }
+        }
+        
         let results = model.resultsState?.getResultsText() ?? ""
         resultsHeaderViewModel.text = results
         UIAccessibility.post(notification: .announcement, argument: results)

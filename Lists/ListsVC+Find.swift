@@ -19,8 +19,8 @@ extension ListsViewController {
         }
 
         let filteredDisplayedLists = displayedLists.filter { displayedList in
-            Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.displayedTitle, matches: text)
-                || Finding.checkIf(realmModel: self.realmModel, string: displayedList.list.description, matches: text)
+            Finding.checkIf(realmModel: self.realmModel, stringToSearchFrom: displayedList.list.displayedTitle, matches: text)
+                || Finding.checkIf(realmModel: self.realmModel, stringToSearchFrom: displayedList.list.description, matches: text)
         }
 
         model.updateDisplayedLists(to: filteredDisplayedLists)

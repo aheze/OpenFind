@@ -20,7 +20,7 @@ enum SliderConstants {
 
     static let outerPadding = CGFloat(5)
     static let bottomPadding = CGFloat(12)
-    
+
     static let maxWidth = CGFloat(500)
 }
 
@@ -40,7 +40,7 @@ class SliderViewModel: ObservableObject {
                 return "All"
             }
         }
-        
+
         func getVoiceOverHint() -> String {
             switch self {
             case .starred:
@@ -97,14 +97,14 @@ struct SliderView: View {
     @ObservedObject var model: SliderViewModel
     var body: some View {
         HStack(spacing: SliderConstants.spacing) {
-            ForEach(model.selections.indices) { index in
+            ForEach(model.selections.indices, id: \.self) { index in
                 let selection = model.selections[index]
 
                 HStack {
                     if let count = selection.count {
                         let text = count > 9 ? "9+" : "\(count)"
                         let (foregroundColor, backgroundColor) = getCountColor(for: selection.filter)
-                        
+
                         Text(text)
                             .foregroundColor(foregroundColor.color)
                             .font(Font(SliderConstants.countFont as CTFont))

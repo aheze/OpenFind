@@ -128,6 +128,28 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
+    /// populate the cell with actual finding data 
+    func configureResultsCellDescription(cell: PhotosResultsCell, findPhoto: FindPhoto) {
+        var description: FindPhoto.Description
+        if let existingDescription = findPhoto.description {
+            description = existingDescription
+        } else {
+            let (lines, highlightsCount) = Finding.getLineHighlights(
+                realmModel: realmModel,
+                from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
+                with: searchViewModel.stringToGradients,
+                imageSize: findPhoto.photo.asset.getSize()
+            )
+            let text = Finding.getCellDescription(from: lines)
+            description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
+        }
+
+        cell.resultsLabel.text = description.resultsString()
+        cell.descriptionTextView.text = description.text
+        loadHighlights(for: cell, lines: description.lines)
+    }
+    
+    /// add the highlights for a results cell
     func loadHighlights(for cell: PhotosResultsCell, lines: [FindPhoto.Line]) {
         /// clear existing highlights
         if let highlightsViewController = cell.highlightsViewController {
