@@ -6,7 +6,7 @@
 //  Copyright © 2021 A. Zheng. All rights reserved.
 //
     
-import UIKit
+import SwiftUI
 
 extension CameraViewController {
     func createSearchBar() -> SearchViewController {
@@ -21,8 +21,10 @@ extension CameraViewController {
                 self.highlightsViewModel.setUpToDate(false)
                 
                 if self.searchViewModel.isEmpty {
-                    self.highlightsViewModel.highlights = []
-                    self.highlightsAdded()
+                    withAnimation {
+                        self.highlightsViewModel.highlights = []
+                        self.highlightsAdded()
+                    }
                 } else {
                     /// animate the highlight frames instead if paused
                     /// Use `.accurate` sentences instead of `FastSentence`

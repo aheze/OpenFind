@@ -54,7 +54,7 @@ extension PhotosViewModel {
         }
 
         let shouldIgnore = photosIgnored.contains(false)
-        print("Ig? \(shouldIgnore)")
+
         for photo in photos {
             var newPhoto = photo
             /// metadata exists, delete sentences

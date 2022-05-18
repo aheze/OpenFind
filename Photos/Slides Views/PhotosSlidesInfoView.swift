@@ -51,7 +51,11 @@ struct PhotosSlidesInfoView: View {
 
             Group {
                 if let text = realmModel.container.getText(from: photo.asset.localIdentifier) {
-                    if !Constants.versionsWithSlantedTextSupport.contains(text.scannedInVersion ?? "") {
+                    if
+                        photo.metadata?.dateScanned != nil,
+                        !photo.isIgnored,
+                        !Constants.versionsWithSlantedTextSupport.contains(text.scannedInVersion ?? "")
+                    {
                         Button {
                             scanNow()
                         } label: {

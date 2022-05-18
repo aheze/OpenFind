@@ -92,7 +92,6 @@ extension RealmContainer {
                     realmMetadata.dateScanned = metadata.dateScanned
 
                     if let text = text {
-                        print("WRiting text. \(text)")
                         realmMetadata.text = text.getRealmText()
                     }
                 }
