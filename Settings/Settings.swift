@@ -38,6 +38,7 @@ enum Settings {
         case filterLists
         case scanningFrequency
         case pauseScanningAfter
+        case photosResultsInsertNewMode
     }
 
     /// for storage
@@ -121,10 +122,6 @@ enum Settings {
                     return false
                 case .portuguese:
                     return false
-//                case .chineseSimplified:
-//                    return true
-//                case .chineseTraditional:
-//                    return true
                 }
             }
         }
@@ -195,7 +192,7 @@ enum Settings {
                     return "Large"
                 }
             }
-            
+
             func getCellHeight() -> CGFloat {
                 switch self {
                 case .small:
@@ -204,6 +201,22 @@ enum Settings {
                     return 120
                 case .large:
                     return 300
+                }
+            }
+        }
+
+        enum PhotosResultsInsertNewMode: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case top /// new results get inserted at top
+            case bottom /// inserted at bottom
+
+            func getTitle() -> String {
+                switch self {
+                case .top:
+                    return "Top"
+                case .bottom:
+                    return "Bottom"
                 }
             }
         }

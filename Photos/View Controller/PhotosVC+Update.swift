@@ -42,26 +42,32 @@ extension PhotosViewController {
             let existingStarredFindPhotos = resultsState.starredFindPhotos
             let existingScreenshotsFindPhotos = resultsState.screenshotsFindPhotos
             
+            let photosResultsInsertNewMode = Settings.Values.PhotosResultsInsertNewMode(rawValue: realmModel.photosResultsInsertNewMode)
+            
             Task.detached {
-                
                 // TODO: Optimize
                 let (
                     allFindPhotos, starredFindPhotos, screenshotsFindPhotos
                 ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
                 
-                await self.apply(
-                    allFindPhotos: (allFindPhotos + existingAllFindPhotos).uniqued(),
-                    starredFindPhotos: (starredFindPhotos + existingStarredFindPhotos).uniqued(),
-                    screenshotsFindPhotos: (screenshotsFindPhotos + existingScreenshotsFindPhotos).uniqued(),
-                    context: .justFindFromExistingDoNotScan
-                )
-                
-//                await self.apply(
-//                    allFindPhotos: (existingAllFindPhotos + allFindPhotos).uniqued(),
-//                    starredFindPhotos: (existingStarredFindPhotos + starredFindPhotos).uniqued(),
-//                    screenshotsFindPhotos: (existingScreenshotsFindPhotos + screenshotsFindPhotos).uniqued(),
-//                    context: .justFindFromExistingDoNotScan
-//                )
+                if
+                    let photosResultsInsertNewMode = photosResultsInsertNewMode,
+                    photosResultsInsertNewMode == .top
+                {
+                    await self.apply(
+                        allFindPhotos: (allFindPhotos + existingAllFindPhotos).uniqued(),
+                        starredFindPhotos: (starredFindPhotos + existingStarredFindPhotos).uniqued(),
+                        screenshotsFindPhotos: (screenshotsFindPhotos + existingScreenshotsFindPhotos).uniqued(),
+                        context: .justFindFromExistingDoNotScan
+                    )
+                } else {
+                    await self.apply(
+                        allFindPhotos: (existingAllFindPhotos + allFindPhotos).uniqued(),
+                        starredFindPhotos: (existingStarredFindPhotos + starredFindPhotos).uniqued(),
+                        screenshotsFindPhotos: (existingScreenshotsFindPhotos + screenshotsFindPhotos).uniqued(),
+                        context: .justFindFromExistingDoNotScan
+                    )
+                }
             }
         }
     }

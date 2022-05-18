@@ -48,6 +48,8 @@ enum RealmModelData {
     static var photosScanOnFind = SavedData(key: "photosScanOnFind", value: true)
     static var photosMinimumCellLength = SavedData(key: "photosMinimumCellLength", value: CGFloat(80))
     static var photosResultsCellLayout = SavedData(key: "photosResultsCellLayout", value: Settings.Values.PhotosResultsCellLayout.medium.rawValue)
+    static var photosResultsInsertNewMode = SavedData(key: "photosResultsInsertNewMode", value: Settings.Values.PhotosResultsInsertNewMode.top.rawValue)
+    
 
     // MARK: Camera
     

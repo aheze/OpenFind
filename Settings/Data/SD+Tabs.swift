@@ -74,6 +74,28 @@ extension SettingsData {
                         description: .constant(string: "Configure the size of the grid in the Photos tab.")
                     ),
                     .init(
+                        header: "Results",
+                        rows: [
+                            .init(
+                                configuration: .picker(
+                                    title: "Insert New Results",
+                                    choices: [
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.PhotosResultsInsertNewMode.top.getTitle(),
+                                            storageValue: Settings.Values.PhotosResultsInsertNewMode.top.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.PhotosResultsInsertNewMode.bottom.getTitle(),
+                                            storageValue: Settings.Values.PhotosResultsInsertNewMode.bottom.rawValue
+                                        )
+                                    ],
+                                    storage: \RealmModel.$photosResultsInsertNewMode
+                                )
+                            )
+                        ],
+                        description: .dynamic(identifier: .photosResultsInsertNewMode)
+                    ),
+                    .init(
                         rows: [
                             .init(
                                 configuration: .link(

@@ -60,6 +60,15 @@ extension Settings.StringIdentifier {
                     return "Pause the live preview after \(title) if no text is detected."
                 }
             }
+        case .photosResultsInsertNewMode:
+            if let photosResultsInsertNewMode = Settings.Values.PhotosResultsInsertNewMode(rawValue: realmModel.photosResultsInsertNewMode) {
+                switch photosResultsInsertNewMode {
+                case .top:
+                    return "Insert new results at the top of the list."
+                case .bottom:
+                    return "Insert new results at the bottom of the list"
+                }
+            }
         }
 
         return ""
