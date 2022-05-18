@@ -11,6 +11,25 @@ import SwiftUI
 extension Settings.StringIdentifier {
     func getString(realmModel: RealmModel) -> String {
         switch self {
+        case .findingMatch:
+
+            if realmModel.findingMatchCase {
+                if realmModel.findingMatchAccents {
+                    /// match both case and accents.
+                    return "Case-and-accent sensitive search."
+                } else {
+                    /// match case, accents don't matter. Could be taxing on the CPU
+                    return "Case-sensitive search. Tip: to optimize finding, also enable Match Accents."
+                }
+            } else {
+                if realmModel.findingMatchAccents {
+                    /// match accents but not case
+                    return "Accent-sensitive search."
+                } else {
+                    /// don't match anything
+                    return "Capitalization and accents won't matter."
+                }
+            }
         case .keepWhitespace:
             if realmModel.findingKeepWhitespace {
                 return "Keep leading and trailing whitespace in entered text in the search bar. Also affects words inside lists."
@@ -42,7 +61,7 @@ extension Settings.StringIdentifier {
                 }
             }
         }
-        
+
         return ""
     }
 }

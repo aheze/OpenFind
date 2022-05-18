@@ -12,8 +12,7 @@ class IgnoredPhotosViewController: UIViewController {
     /// external models
     var model: PhotosViewModel
     var realmModel: RealmModel
-    
-    
+    var ignoredPhotosViewModel = IgnoredPhotosViewModel()
     
     typealias DataSource = UICollectionViewDiffableDataSource<DataSourceSectionTemplate, Photo>
     typealias Snapshot = NSDiffableDataSourceSnapshot<DataSourceSectionTemplate, Photo>
@@ -24,7 +23,7 @@ class IgnoredPhotosViewController: UIViewController {
     
     var selectBarButton: UIBarButtonItem!
     lazy var toolbarContainer = UIView()
-    lazy var toolbarView = IgnoredPhotosToolbarView(model: model)
+    lazy var toolbarView = IgnoredPhotosToolbarView(model: model, ignoredPhotosViewModel: ignoredPhotosViewModel)
     
     lazy var headerContentModel = HeaderContentModel()
     lazy var ignoredPhotosHeaderView = IgnoredPhotosHeaderView(model: model)
@@ -56,24 +55,25 @@ class IgnoredPhotosViewController: UIViewController {
         
         setup()
         listen()
-        model.ignoredPhotosChanged = { [weak self] in
+        ignoredPhotosViewModel.ignoredPhotosChanged = { [weak self] in
             guard let self = self else { return }
+            
             self.updateViewsEnabled()
             self.update(animate: true)
-            self.model.ignoredPhotosIsSelecting = false
+            self.ignoredPhotosViewModel.ignoredPhotosIsSelecting = false
             self.updateCollectionViewSelectionState()
         }
     }
     
     func updateViewsEnabled() {
-        model.ignoredPhotosEditable = !model.ignoredPhotos.isEmpty
-        selectBarButton.isEnabled = model.ignoredPhotosEditable
+        ignoredPhotosViewModel.ignoredPhotosEditable = !model.ignoredPhotos.isEmpty
+        selectBarButton.isEnabled = ignoredPhotosViewModel.ignoredPhotosEditable
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         update()
-        self.updateViewsEnabled()
+        updateViewsEnabled()
     }
     
     @objc func dismissSelf() {

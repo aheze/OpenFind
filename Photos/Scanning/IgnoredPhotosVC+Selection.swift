@@ -10,15 +10,15 @@ import UIKit
 
 extension IgnoredPhotosViewController {
     func toggleSelect() {
-        model.ignoredPhotosIsSelecting.toggle()
+        ignoredPhotosViewModel.ignoredPhotosIsSelecting.toggle()
         updateCollectionViewSelectionState()
     }
 
     func photoSelected(at indexPath: IndexPath) {
         guard let photo = model.ignoredPhotos[safe: indexPath.item] else { return }
 
-        if !model.ignoredPhotosSelectedPhotos.contains(photo) {
-            model.ignoredPhotosSelectedPhotos.append(photo)
+        if !ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo) {
+            ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.append(photo)
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
                 configureCellSelection(cell: cell, selected: true)
@@ -28,8 +28,8 @@ extension IgnoredPhotosViewController {
 
     func photoDeselected(at indexPath: IndexPath) {
         guard let photo = model.ignoredPhotos[safe: indexPath.item] else { return }
-        if model.ignoredPhotosSelectedPhotos.contains(photo) {
-            model.ignoredPhotosSelectedPhotos = model.ignoredPhotosSelectedPhotos.filter { $0 != photo }
+        if ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo) {
+            ignoredPhotosViewModel.ignoredPhotosSelectedPhotos = ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.filter { $0 != photo }
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
                 configureCellSelection(cell: cell, selected: false)
@@ -38,7 +38,7 @@ extension IgnoredPhotosViewController {
     }
 
     func getSelectButtonTitle() -> String {
-        if model.ignoredPhotosIsSelecting {
+        if ignoredPhotosViewModel.ignoredPhotosIsSelecting {
             return "Done"
         } else {
             return "Select"
@@ -47,13 +47,13 @@ extension IgnoredPhotosViewController {
 
     func updateCollectionViewSelectionState() {
         selectBarButton.title = getSelectButtonTitle()
-        if !model.ignoredPhotosIsSelecting {
-            model.ignoredPhotosSelectedPhotos = []
+        if !ignoredPhotosViewModel.ignoredPhotosIsSelecting {
+            ignoredPhotosViewModel.ignoredPhotosSelectedPhotos = []
         }
 
         for index in model.ignoredPhotos.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCollectionCell {
-                if model.ignoredPhotosIsSelecting {
+                if ignoredPhotosViewModel.ignoredPhotosIsSelecting {
                     cell.view.selectOverlayIconView.setState(.hidden)
                     UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
                         cell.view.selectOverlayView.alpha = 1
@@ -66,7 +66,7 @@ extension IgnoredPhotosViewController {
                 }
             }
 
-            if !model.ignoredPhotosIsSelecting {
+            if !ignoredPhotosViewModel.ignoredPhotosIsSelecting {
                 collectionView.deselectItem(at: index.indexPath, animated: false)
             }
         }

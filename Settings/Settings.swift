@@ -33,6 +33,7 @@ enum Settings {
     }
 
     enum StringIdentifier {
+        case findingMatch
         case keepWhitespace
         case filterLists
         case scanningFrequency

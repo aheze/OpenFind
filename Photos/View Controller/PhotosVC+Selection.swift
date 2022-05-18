@@ -50,7 +50,7 @@ extension PhotosViewController {
         toolbarViewModel.toolbar = nil
         showFiltersView(true, animate: true)
         model.selectedPhotos = []
-        model.ignoredPhotosSelectedPhotos = []
+
         if model.resultsState != nil {
             updateResultsCollectionViewSelectionState()
         } else {

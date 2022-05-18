@@ -65,7 +65,8 @@ extension SettingsData {
                         rows: [
                             .init(configuration: .toggle(title: "Match Accents", storage: \.$findingMatchAccents)),
                             .init(configuration: .toggle(title: "Match Case", storage: \.$findingMatchCase))
-                        ]
+                        ],
+                        description: .dynamic(identifier: .findingMatch)
                     ),
                     .init(
                         rows: [

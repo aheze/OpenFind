@@ -47,8 +47,8 @@ extension IgnoredPhotosViewController {
             cell.isAccessibilityElement = true
             cell.accessibilityLabel = description
 
-            /// selectiong
-            let selected = self.model.ignoredPhotosIsSelecting && self.model.ignoredPhotosSelectedPhotos.contains(photo)
+            /// selection
+            let selected = self.ignoredPhotosViewModel.ignoredPhotosIsSelecting && self.ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo)
             self.configureCellSelection(cell: cell, selected: selected)
 
             return cell

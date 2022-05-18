@@ -10,7 +10,7 @@ import UIKit
 
 extension IgnoredPhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
-        if model.ignoredPhotosIsSelecting {
+        if ignoredPhotosViewModel.ignoredPhotosIsSelecting {
             return true
         } else {
             return false
@@ -18,7 +18,7 @@ extension IgnoredPhotosViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if model.ignoredPhotosIsSelecting {
+        if ignoredPhotosViewModel.ignoredPhotosIsSelecting {
             photoSelected(at: indexPath)
         } else {
             if let photo = self.model.ignoredPhotos[safe: indexPath.item] {
@@ -34,7 +34,7 @@ extension IgnoredPhotosViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if model.ignoredPhotosIsSelecting {
+        if ignoredPhotosViewModel.ignoredPhotosIsSelecting {
             photoDeselected(at: indexPath)
         }
     }

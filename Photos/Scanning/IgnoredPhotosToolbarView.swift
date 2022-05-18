@@ -15,6 +15,7 @@ enum UnignoreAction {
 
 struct IgnoredPhotosToolbarView: View {
     @ObservedObject var model: PhotosViewModel
+    @ObservedObject var ignoredPhotosViewModel: IgnoredPhotosViewModel
     @State var showingWarning = false
     
     var body: some View {
@@ -29,9 +30,9 @@ struct IgnoredPhotosToolbarView: View {
                 for photo in selectedPhotos {
                     var newPhoto = photo
                     newPhoto.metadata?.isIgnored = false
-                    model.updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: false)
+                    model.updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
                 }
-                model.ignoredPhotosChanged?()
+                ignoredPhotosViewModel.ignoredPhotosChanged?()
             }
 
         } label: {
@@ -52,7 +53,7 @@ struct IgnoredPhotosToolbarView: View {
                         .edgesIgnoringSafeArea(.all)
                 )
         }
-        .disabled(!model.ignoredPhotosEditable)
+        .disabled(!ignoredPhotosViewModel.ignoredPhotosEditable)
         .actionSheet(isPresented: $showingWarning) {
             ActionSheet(
                 title: Text("All photos will be unignored."),
@@ -61,9 +62,9 @@ struct IgnoredPhotosToolbarView: View {
                         for photo in model.ignoredPhotos {
                             var newPhoto = photo
                             newPhoto.metadata?.isIgnored = false
-                            model.updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: false)
+                            model.updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
                         }
-                        model.ignoredPhotosChanged?()
+                        ignoredPhotosViewModel.ignoredPhotosChanged?()
                     },
                     .cancel()
                 ]
@@ -72,22 +73,22 @@ struct IgnoredPhotosToolbarView: View {
     }
 
     func getUnignoreAction() -> UnignoreAction {
-        switch model.ignoredPhotosSelectedPhotos.count {
+        switch ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.count {
         case 0:
             return .unignoreAll
         default:
-            return .unignoreSelected(model.ignoredPhotosSelectedPhotos)
+            return .unignoreSelected(ignoredPhotosViewModel.ignoredPhotosSelectedPhotos)
         }
     }
 
     func getText() -> String {
-        switch model.ignoredPhotosSelectedPhotos.count {
+        switch ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.count {
         case 0:
             return "Unignore All Photos"
         case 1:
-            return "Unignore \(model.ignoredPhotosSelectedPhotos.count) Photo"
+            return "Unignore \(ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.count) Photo"
         default:
-            return "Unignore \(model.ignoredPhotosSelectedPhotos.count) Photos"
+            return "Unignore \(ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.count) Photos"
         }
     }
 }

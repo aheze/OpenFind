@@ -19,8 +19,10 @@ enum Finding {
     static func checkIf(realmModel: RealmModel, stringToSearchFrom: String, contains search: String) -> Bool {
         if realmModel.findingMatchCase {
             if realmModel.findingMatchAccents {
+                /// match both case and accents.
                 return stringToSearchFrom.contains(search)
-            } else { /// match case, accents don't matter
+            } else {
+                /// match case, accents don't matter. Could be taxing on the CPU
                 return stringToSearchFrom
                     .folding(options: .diacriticInsensitive, locale: .current)
                     .contains(
@@ -28,9 +30,11 @@ enum Finding {
                     )
             }
         } else {
-            if realmModel.findingMatchAccents { /// match accents but not case
+            if realmModel.findingMatchAccents {
+                /// match accents but not case
                 return stringToSearchFrom.localizedCaseInsensitiveContains(search)
-            } else { /// don't match anything
+            } else {
+                /// don't match anything
                 return stringToSearchFrom.localizedStandardContains(search)
             }
         }

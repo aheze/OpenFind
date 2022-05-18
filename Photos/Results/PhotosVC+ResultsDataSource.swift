@@ -53,8 +53,6 @@ extension PhotosViewController {
 
             cell.titleLabel.text = findPhoto.dateString()
 
-            self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
-
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
 

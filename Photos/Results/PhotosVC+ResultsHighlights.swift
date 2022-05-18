@@ -128,7 +128,7 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
-    /// populate the cell with actual finding data 
+    /// populate the cell with actual finding data
     func configureResultsCellDescription(cell: PhotosResultsCell, findPhoto: FindPhoto) {
         var description: FindPhoto.Description
         if let existingDescription = findPhoto.description {

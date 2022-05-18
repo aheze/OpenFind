@@ -70,13 +70,15 @@ struct SettingsShareAppView: View {
             } label: {
                 VStack(spacing: 6) {
                     Text("getfind.app")
-                        .foregroundColor(UIColor.secondaryLabel.color)
                         .font(UIFont.preferredFont(forTextStyle: .title1).font)
 
                     Text("(Tap to copy)")
-                        .foregroundColor(UIColor.secondaryLabel.color)
+                        .opacity(0.75)
                         .font(UIFont.preferredFont(forTextStyle: .caption1).font)
                 }
+                .foregroundColor(.accent)
+                .padding(EdgeInsets(top: 16, leading: 24, bottom:1612, trailing: 24))
+                .blueBackground()
             }
 
             Spacer()

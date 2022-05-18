@@ -171,11 +171,6 @@ class PhotosViewModel: ObservableObject {
     // MARK: Ignored Photos
 
     var ignoredPhotos = [Photo]()
-    var ignoredPhotosChanged: (() -> Void)?
-    @Published var ignoredPhotosIsSelecting = false
-    @Published var ignoredPhotosSelectedPhotos = [Photo]()
-    @Published var ignoredPhotosEditable = false /// select button enabled
-    var ignoredPhotosFinishedUpdating: (() -> Void)? /// some photos were unignored from the scanning modal, update collection view and selection state
 
     /// focus a photo after tapping it in the ignored photos collection view
     var getSlidesViewControllerFor: ((Photo) -> PhotosSlidesItemViewController?)?

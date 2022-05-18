@@ -102,6 +102,7 @@ extension PhotosViewController {
             /// don't notify yet
             self.searchViewModel.updateFields(fields: newFields, notify: false)
         }
+        
         searchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
             
@@ -113,10 +114,10 @@ extension PhotosViewController {
                     let resultsStateExisted = self.model.resultsState != nil
                     
                     let numberOfPhotos = self.model.scannedPhotosCount
-                    let estimatedTime = CGFloat(numberOfPhotos) / 500 /// 1222 photos 0 -> 2.444 seconds
+                    let estimatedTime = CGFloat(numberOfPhotos) / 1500
                     
                     /// start progress bar immediately
-                    Debouncer.debounce(queue: .main, delay: .seconds(0.4)) {
+                    Debouncer.debounce(queue: .main, delay: .seconds(0.3)) {
                         self.progressViewModel.start(progress: .auto(estimatedTime: estimatedTime))
                     }
                     
