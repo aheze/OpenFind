@@ -9,6 +9,8 @@
 import SwiftUI
 
 extension PhotosViewController {
+    
+    /// make the results header
     func setupResultsHeader() {
         if let resultsHeaderHeightC = setupHeaderView(
             view: resultsHeaderView,

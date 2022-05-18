@@ -23,6 +23,7 @@ struct HeaderContent<Content: View>: View {
                 headerContentModel.size = $0
                 headerContentModel.sizeChanged?()
             }
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

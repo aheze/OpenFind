@@ -92,6 +92,7 @@ struct SettingsPageView: View {
         }
         .padding(SettingsConstants.edgeInsets)
         .padding(.top, page.addTopPadding ? SettingsConstants.additionalTopInset : 0)
+        .padding(.bottom, 16)
         .readSize {
             self.sizeChanged?($0)
         }
