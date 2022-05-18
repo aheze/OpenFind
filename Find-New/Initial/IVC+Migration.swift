@@ -144,6 +144,7 @@ extension InitialViewController {
                     // And will update the schema on disk automatically
                 }
 
+                /// for v1
                 if !migratedPhotoMetadatas.isEmpty || !migratedLists.isEmpty {
                     DispatchQueue.main.async {
                         for metadata in migratedPhotoMetadatas {

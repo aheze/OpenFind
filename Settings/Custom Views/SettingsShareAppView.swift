@@ -77,7 +77,7 @@ struct SettingsShareAppView: View {
                         .font(UIFont.preferredFont(forTextStyle: .caption1).font)
                 }
                 .foregroundColor(.accent)
-                .padding(EdgeInsets(top: 16, leading: 24, bottom:1612, trailing: 24))
+                .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
                 .blueBackground()
             }
 

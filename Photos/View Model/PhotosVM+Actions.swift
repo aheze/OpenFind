@@ -6,8 +6,8 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-import SwiftUI
 import Photos
+import SwiftUI
 
 /**
  Star / Ignore
@@ -54,12 +54,13 @@ extension PhotosViewModel {
         }
 
         let shouldIgnore = photosIgnored.contains(false)
-
+        print("Ig? \(shouldIgnore)")
         for photo in photos {
             var newPhoto = photo
             /// metadata exists, delete sentences
             if newPhoto.metadata != nil {
                 newPhoto.metadata?.isIgnored = shouldIgnore
+                newPhoto.metadata?.dateScanned = nil
                 withAnimation {
                     /// create a empty `PhotoMetadataText` to clear it
                     updatePhotoMetadata(photo: newPhoto, withText: PhotoMetadataText(), reloadCell: true)
@@ -68,7 +69,8 @@ extension PhotosViewModel {
                 let metadata = PhotoMetadata(
                     assetIdentifier: photo.asset.localIdentifier,
                     isStarred: false,
-                    isIgnored: shouldIgnore
+                    isIgnored: shouldIgnore,
+                    dateScanned: nil
                 )
                 newPhoto.metadata = metadata
                 withAnimation {

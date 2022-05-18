@@ -51,6 +51,7 @@ class RealmPhotoMetadataText: Object {
     @Persisted var scannedInVersion: String?
 
     func getPhotoMetadataText() -> PhotoMetadataText {
+        print("get. \(sentences.first)")
         let metadataText = PhotoMetadataText(
             sentences: sentences.map { $0.getSentence() },
             scannedInLanguages: self.scannedInLanguages.map { $0 },

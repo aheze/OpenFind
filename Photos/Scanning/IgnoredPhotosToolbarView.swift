@@ -30,6 +30,7 @@ struct IgnoredPhotosToolbarView: View {
                 for photo in selectedPhotos {
                     var newPhoto = photo
                     newPhoto.metadata?.isIgnored = false
+                    newPhoto.metadata?.dateScanned = nil
                     model.updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
                 }
                 ignoredPhotosViewModel.ignoredPhotosChanged?()
@@ -62,6 +63,7 @@ struct IgnoredPhotosToolbarView: View {
                         for photo in model.ignoredPhotos {
                             var newPhoto = photo
                             newPhoto.metadata?.isIgnored = false
+                            newPhoto.metadata?.dateScanned = nil
                             model.updatePhotoMetadata(photo: newPhoto, withText: nil, reloadCell: true)
                         }
                         ignoredPhotosViewModel.ignoredPhotosChanged?()

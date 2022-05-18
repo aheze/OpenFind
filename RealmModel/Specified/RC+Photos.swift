@@ -92,6 +92,7 @@ extension RealmContainer {
                     realmMetadata.dateScanned = metadata.dateScanned
 
                     if let text = text {
+                        print("WRiting text. \(text)")
                         realmMetadata.text = text.getRealmText()
                     }
                 }
@@ -138,11 +139,11 @@ extension RealmContainer {
         let realm = try! Realm()
         if
             let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: identifier),
-
             let text = realmMetadata.text?.getPhotoMetadataText()
         {
             return text
         }
+
         return nil
     }
 

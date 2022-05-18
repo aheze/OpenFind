@@ -16,13 +16,13 @@ extension PhotosViewModel {
         } else {
             await getRealmModel?().container.deleteAllScannedData()
         }
-        
+
         await getRealmModel?().container.loadPhotoMetadatas()
         loadAssets()
 
         await loadPhotos()
         sort()
-        
+
         await MainActor.run {
             reload?()
         }
@@ -101,6 +101,7 @@ extension PhotosViewModel {
         }
 
         getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text)
+
         ignoredPhotos = photos.filter { $0.isIgnored }
         photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }
     }
