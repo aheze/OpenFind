@@ -11,7 +11,11 @@ import SwiftUI
 extension PhotosViewController {
     func willBecomeActive() {}
     
-    func didBecomeActive() {}
+    func didBecomeActive() {
+        if model.slidesState == nil {
+            model.updateAllowed = true
+        }
+    }
     
     func willBecomeInactive() {
         withAnimation {
@@ -20,7 +24,9 @@ extension PhotosViewController {
         }
     }
     
-    func didBecomeInactive() {}
+    func didBecomeInactive() {
+        model.updateAllowed = false
+    }
     
     func boundsChanged(to size: CGSize, safeAreaInsets: UIEdgeInsets) {
         baseSearchBarOffset = getCompactBarSafeAreaHeight(with: safeAreaInsets)

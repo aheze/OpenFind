@@ -38,7 +38,7 @@ class InitialViewController: UIViewController {
             return nil
         }
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

@@ -47,6 +47,7 @@ extension PhotosViewController {
                 guard frame.size.width > 0, frame.size.height > 0 else { continue }
                 
                 let cellHighlight = Highlight(
+                    id: UUID(),
                     string: lineHighlight.string,
                     colors: lineHighlight.colors,
                     alpha: lineHighlight.alpha,
@@ -68,7 +69,7 @@ extension PhotosViewController {
     /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
     func updateResultsHighlightColors() {
         guard tabViewModel.tabState == .photos else { return }
-        
+
         if let resultsState = model.resultsState {
             for index in resultsState.displayedFindPhotos.indices {
                 if
@@ -106,10 +107,11 @@ extension PhotosViewController {
                 with: searchViewModel.stringToGradients,
                 imageSize: findPhoto.photo.asset.getSize()
             )
+            
             let text = Finding.getCellDescription(from: lines)
             description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
         }
-
+        
         cell.resultsLabel.text = description.resultsString()
         cell.descriptionTextView.text = description.text
         

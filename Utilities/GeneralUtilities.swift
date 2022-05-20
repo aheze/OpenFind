@@ -81,7 +81,7 @@ class TimeElapsed {
     }
 
     /// stop and print
-    func print() {
+    func end() {
         let string = stop()
         Swift.print(string)
     }
@@ -132,11 +132,11 @@ public enum Debouncer {
     ///
     ///     for i in 0...100000 {
     ///         Debouncer.debounce {
-    ///             print("your work : \(i)")
+    ///             prin("your work : \(i)")
     ///         }
     ///     }
     ///
-    ///     print("done!")
+    ///     prin("done!")
     ///
     ///     1. if shouldRunImmediately is true,
     ///     => "your work : 0"

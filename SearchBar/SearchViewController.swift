@@ -90,13 +90,6 @@ class SearchViewController: UIViewController {
         
         listen()
         
-        realmModel.$lists
-            .dropFirst()
-            .sink { [weak self] lists in
-                guard let self = self else { return }
-                self.listsChanged(newLists: lists)
-            }
-            .store(in: &realmModel.cancellables)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

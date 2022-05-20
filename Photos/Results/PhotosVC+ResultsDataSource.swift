@@ -97,6 +97,10 @@ extension PhotosViewController {
                     cell.view.imageView.image = image
                 }
             }
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
+//            }
 
             PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
 

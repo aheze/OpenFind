@@ -29,6 +29,7 @@ struct CameraNotFoundView: View {
 
                 Button {
                     tabViewModel.changeTabState(newTab: .photos, animation: .animate)
+                    tabViewModel.statusBarStyle = .default
                 } label: {
                     Text("Find From Photos")
                         .fontWeight(.medium)

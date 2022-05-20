@@ -9,7 +9,7 @@
 import UIKit
 
 struct Highlight: Identifiable, Hashable {
-    let id = UUID()
+    var id: UUID
     var string = ""
     var colors = [UIColor]()
     var alpha = CGFloat(1)

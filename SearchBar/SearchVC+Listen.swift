@@ -15,6 +15,14 @@ extension SearchViewController {
         listenToToolbar()
         listenToKeyboard()
         
+        realmModel.$lists
+            .dropFirst()
+            .sink { [weak self] lists in
+                guard let self = self else { return }
+                self.listsChanged(newLists: lists)
+            }
+            .store(in: &realmModel.cancellables)
+        
         searchViewModel.dismissKeyboard = { [weak self] in
             guard let self = self else { return }
 

@@ -50,6 +50,7 @@ extension Array where Element == Sentence {
 
                 for range in rangeResult.ranges {
                     let highlight = Highlight(
+                        id: UUID(),
                         string: rangeResult.string,
                         colors: gradient.colors,
                         alpha: gradient.alpha,
@@ -78,6 +79,7 @@ extension Array where Element == FastSentence {
                     let word = sentence.getWord(word: string, at: index)
 
                     let highlight = Highlight(
+                        id: UUID(),
                         string: word.string,
                         colors: gradient.colors,
                         alpha: gradient.alpha,

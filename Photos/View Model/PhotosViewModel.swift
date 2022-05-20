@@ -115,6 +115,7 @@ class PhotosViewModel: ObservableObject {
     var updateAllowed = true {
         didSet {
             guard updateAllowed else { return }
+
             if updateState == .waitingForPermission {
                 addQueuedSentencesToMetadatas()
             }

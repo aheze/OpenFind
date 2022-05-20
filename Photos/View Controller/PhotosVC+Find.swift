@@ -50,6 +50,7 @@ extension PhotosViewController {
                 allFindPhotos, starredFindPhotos, screenshotsFindPhotos
             ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
             
+            /// could be a problem
             await self.apply(
                 allFindPhotos: allFindPhotos,
                 starredFindPhotos: starredFindPhotos,
@@ -70,7 +71,9 @@ extension PhotosViewController {
         screenshotsFindPhotos: [FindPhoto],
         context: FindContext
     ) {
+        
         guard !searchViewModel.isEmpty else { return }
+        
         let displayedFindPhotos: [FindPhoto]
         
         switch self.sliderViewModel.selectedFilter ?? .all {
@@ -83,6 +86,7 @@ extension PhotosViewController {
         }
         
         let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+
         let sizes = getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
         
         model.resultsState = PhotosResultsState(
@@ -97,15 +101,6 @@ extension PhotosViewController {
             updateResults(animate: !firstTimeShowingResults)
         } else {
             updateResults() /// always update results anyway, for example when coming back from star
-        }
-        
-        for index in displayedFindPhotos.indices {
-            if
-                let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
-                let findPhoto = displayedFindPhotos[safe: index]
-            {
-                self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
-            }
         }
         
         let results = model.resultsState?.getResultsText() ?? ""

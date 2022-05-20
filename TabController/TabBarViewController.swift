@@ -53,6 +53,45 @@ class TabBarViewController: UIViewController {
         return model.statusBarStyle
     }
     
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(
+                title: "Photos",
+                action: #selector(showPhotos),
+                input: "1",
+                modifierFlags: .command
+            ),
+            UIKeyCommand(
+                title: "Camera",
+                action: #selector(showCamera),
+                input: "2",
+                modifierFlags: .command
+            ),
+            UIKeyCommand(
+                title: "Lists",
+                action: #selector(showLists),
+                input: "3",
+                modifierFlags: .command
+            )
+        ]
+    }
+
+    @objc func showPhotos() {
+        model.changeTabState(newTab: .photos, animation: .fractionalProgress)
+        model.statusBarStyle = .default
+    }
+    
+    @objc func showCamera() {
+        model.changeTabState(newTab: .camera, animation: .fractionalProgress)
+        model.statusBarStyle = .lightContent
+    }
+    
+    @objc func showLists() {
+        model.changeTabState(newTab: .lists, animation: .fractionalProgress)
+        model.statusBarStyle = .default
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
