@@ -1,6 +1,0 @@
-framework module SDWebImagePhotosPlugin {
-  umbrella header "SDWebImagePhotosPlugin.h"
-
-  export *
-  module * { export * }
-}

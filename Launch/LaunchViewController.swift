@@ -25,8 +25,8 @@ class LaunchViewController: UIViewController {
     /// for SwiftUI, respects safe area
     @IBOutlet var contentContainer: UIView!
 
-    var aboutToEnter: (() -> Void)?
-    var entering: (() -> Void)? /// called when just about to show
+    var aboutToEnter: (() -> Void)? /// called when enter pressed, about to start
+    var entering: (() -> Void)? /// called when just about to show the main content
     var done: (() -> Void)?
 
     static func make(model: LaunchViewModel) -> LaunchViewController {

@@ -10,10 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy var model = LaunchViewModel()
-    lazy var launchViewController = LaunchViewController.make(model: model) { [weak self] in
-        guard let self = self else { return }
-        self.removeLaunchViewController()
-    }
+    lazy var launchViewController = LaunchViewController.make(model: model)
 
     func removeLaunchViewController() {
         removeChildViewController(launchViewController)
@@ -31,5 +28,21 @@ class ViewController: UIViewController {
 
         _ = launchViewController
         addChildViewController(launchViewController, in: view)
+
+        launchViewController.aboutToEnter = { [weak self] in
+            guard let self = self else { return }
+            print("about to enter")
+        }
+
+        launchViewController.entering = { [weak self] in
+            guard let self = self else { return }
+            print("entering")
+        }
+
+        launchViewController.done = { [weak self] in
+            guard let self = self else { return }
+            self.removeLaunchViewController()
+            print("remove vc")
+        }
     }
 }

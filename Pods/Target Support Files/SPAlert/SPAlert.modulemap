@@ -1,6 +1,0 @@
-framework module SPAlert {
-  umbrella header "SPAlert-umbrella.h"
-
-  export *
-  module * { export * }
-}
