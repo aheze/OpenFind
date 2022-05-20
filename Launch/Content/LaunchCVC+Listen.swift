@@ -13,10 +13,8 @@ extension LaunchContentViewController {
         model.$currentPage
             .dropFirst()
             .sink { [weak self] page in
-
                 guard let self = self else { return }
-                guard let index = self.model.pages.firstIndex(of: page) else { return }
-                self.collectionView.scrollToItem(at: index.indexPath, at: .centeredHorizontally, animated: true)
+                self.collectionView.scrollToItem(at: page.rawValue.indexPath, at: .centeredHorizontally, animated: true)
             }
             .store(in: &model.cancellables)
     }

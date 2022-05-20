@@ -48,10 +48,10 @@ struct LaunchTile {
     }
 }
 
-enum LaunchPageIdentifier: CaseIterable {
-    case empty /// first page
-    case photos
-    case camera
-    case lists
-    case final
+enum LaunchPage: Int, CaseIterable {
+    case empty = 0 /// first page
+    case photos = 1
+    case camera = 2
+    case lists = 3
+    case final = 4
 }

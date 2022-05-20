@@ -9,5 +9,9 @@
 
 import SwiftUI
 
-
+struct LaunchSplashView: View {
+    var body: some View {
+        Text("hi")
+    }
+}
 

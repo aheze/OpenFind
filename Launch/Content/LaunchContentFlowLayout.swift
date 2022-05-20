@@ -14,7 +14,7 @@ class LaunchContentFlowLayout: UICollectionViewFlowLayout {
     }
     
     /// get data
-    var getPages: (() -> [LaunchPageIdentifier])?
+    var getPages: (() -> [LaunchPage])?
     
     var currentIndexChanged: (() -> Void)?
     

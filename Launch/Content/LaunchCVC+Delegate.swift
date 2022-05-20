@@ -11,7 +11,7 @@ import UIKit
 extension LaunchContentViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? LaunchContentCell else { return }
-        let identifier = model.pages[indexPath.item]
+        let identifier = LaunchPage.allCases[indexPath.item]
 
         if let viewController = cell.viewController {
             viewController.pageViewModel.identifier = identifier

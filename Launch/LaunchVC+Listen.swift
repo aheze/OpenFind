@@ -28,7 +28,7 @@ extension LaunchViewController {
         }
     }
 
-    func updateUI(for page: LaunchPageIdentifier) {
+    func updateUI(for page: LaunchPage) {
         UIView.animate(withDuration: 0.3) {
             if page == .empty || page == .final {
                 self.sceneContainer.alpha = 1

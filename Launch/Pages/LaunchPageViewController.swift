@@ -14,7 +14,7 @@ class LaunchPageViewController: UIViewController {
     
     init(
         model: LaunchViewModel,
-        identifier: LaunchPageIdentifier
+        identifier: LaunchPage
     ) {
         self.model = model
         let pageViewModel = LaunchPageViewModel(identifier: identifier)

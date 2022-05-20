@@ -72,4 +72,97 @@ enum LaunchConstants {
 
     static let enterBeforeDuration = CGFloat(1.2)
     static let enterAfterDuration = CGFloat(1.4)
+    
+    static let textRows = [
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "∮"),
+                LaunchText(character: "π"),
+                LaunchText(character: "⧑"),
+                LaunchText(character: "∞"),
+                LaunchText(character: "∴"),
+                LaunchText(character: "➤")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "♛"),
+                LaunchText(character: "♣︎"),
+                LaunchText(character: "♦︎"),
+                LaunchText(character: "♥︎"),
+                LaunchText(character: "♠︎"),
+                LaunchText(character: "♜")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "✭"),
+                LaunchText(character: "✣"),
+                LaunchText(character: "✿"),
+                LaunchText(character: "❂"),
+                LaunchText(character: "❃"),
+                LaunchText(character: "◼︎")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "𝛴"),
+                LaunchText(character: "𝜽"),
+                LaunchText(character: "𝛹"),
+                LaunchText(character: "𝜔"),
+                LaunchText(character: "𝛼"),
+                LaunchText(character: "𝛺")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "❖"),
+                LaunchText(character: "F", isPartOfFind: true),
+                LaunchText(character: "I", isPartOfFind: true),
+                LaunchText(character: "N", isPartOfFind: true),
+                LaunchText(character: "D", isPartOfFind: true),
+                LaunchText(character: "❖")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "∮"),
+                LaunchText(character: "π"),
+                LaunchText(character: "⧑"),
+                LaunchText(character: "∞"),
+                LaunchText(character: "∴"),
+                LaunchText(character: "➤")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "♛"),
+                LaunchText(character: "♣︎"),
+                LaunchText(character: "♦︎"),
+                LaunchText(character: "♥︎"),
+                LaunchText(character: "♠︎"),
+                LaunchText(character: "♜")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "✭"),
+                LaunchText(character: "✣"),
+                LaunchText(character: "✿"),
+                LaunchText(character: "❂"),
+                LaunchText(character: "❃"),
+                LaunchText(character: "◼︎")
+            ]
+        ),
+        LaunchTextRow(
+            text: [
+                LaunchText(character: "𝛴"),
+                LaunchText(character: "𝜽"),
+                LaunchText(character: "𝛹"),
+                LaunchText(character: "𝜔"),
+                LaunchText(character: "𝛼"),
+                LaunchText(character: "𝛺")
+            ]
+        )
+    ]
 }

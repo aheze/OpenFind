@@ -10,9 +10,9 @@
 import SwiftUI
 
 class LaunchPageViewModel: ObservableObject {
-    @Published var identifier: LaunchPageIdentifier
+    @Published var identifier: LaunchPage
     
-    init(identifier: LaunchPageIdentifier) {
+    init(identifier: LaunchPage) {
         self.identifier = identifier
     }
 }

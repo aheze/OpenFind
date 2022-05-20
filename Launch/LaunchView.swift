@@ -133,7 +133,7 @@ struct LaunchView: View {
                 if model.currentPage == .empty {
                     Button {
                         withAnimation {
-                            model.setCurrentPage(to: .photos)
+                            model.currentPage = .photos
                         }
                     } label: {
                         Text("Get Started")
@@ -170,19 +170,20 @@ struct PagingButtonsView: View {
     let c = LaunchViewConstants.self
 
     var body: some View {
-        if model.currentPage != .empty, let currentIndex = model.getCurrentIndex() {
-            let previousPage = model.pages[safe: currentIndex - 1]
-            let nextPage = model.pages[safe: currentIndex + 1]
+        if model.currentPage != .empty {
+            let currentIndex = model.currentPage.rawValue
+            let previousPage = LaunchPage.allCases[safe: currentIndex - 1]
+            let nextPage = LaunchPage.allCases[safe: currentIndex + 1]
 
             HStack {
                 LaunchControlButtonView(icon: "chevron.backward") {
                     if let previousPage = previousPage {
-                        model.setCurrentPage(to: previousPage)
+                        model.currentPage = previousPage
                     }
                 }
 
                 HStack(spacing: c.controlCircleSpacing) {
-                    ForEach(model.pages, id: \.self) { page in
+                    ForEach(LaunchPage.allCases, id: \.self) { page in
                         if page != .empty {
                             Circle()
                                 .fill(Color.white)
@@ -195,7 +196,7 @@ struct PagingButtonsView: View {
 
                 LaunchControlButtonView(icon: "chevron.forward") {
                     if let nextPage = nextPage {
-                        model.setCurrentPage(to: nextPage)
+                        model.currentPage = nextPage
                     }
                 }
                 .opacity(nextPage != nil ? 1 : 0)
