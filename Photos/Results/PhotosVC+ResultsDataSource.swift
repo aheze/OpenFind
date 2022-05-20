@@ -48,13 +48,12 @@ extension PhotosViewController {
             configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
         }
     }
-    
+
     func endDisplayResultsCell(cell: UICollectionViewCell, indexPath: IndexPath) {
         if
             model.resultsState != nil,
             let cell = cell as? PhotosResultsCell
         {
-            print("End rest!!!")
             removeHighlights(for: cell)
         }
     }
@@ -107,10 +106,6 @@ extension PhotosViewController {
                     cell.view.imageView.image = image
                 }
             }
-            
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
-//            }
 
             PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
 

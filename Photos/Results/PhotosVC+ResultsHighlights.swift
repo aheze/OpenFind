@@ -156,7 +156,6 @@ extension PhotosViewController {
         if let existingHighlightsViewController = cell.highlightsViewController {
             removeChildViewController(existingHighlightsViewController)
             cell.highlightsViewController = nil
-            print("Removed!!!")
         }
     }
 }

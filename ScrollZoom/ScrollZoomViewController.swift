@@ -17,7 +17,7 @@ class ScrollZoomViewController: UIViewController {
 
     /// normal zoom scale, nothing to do with camera zoom
     static var minimumZoomScale = CGFloat(1)
-    static var maximumZoomScale = CGFloat(3.5)
+    static var maximumZoomScale = CGFloat(4.5)
 
     static func make() -> ScrollZoomViewController {
         let storyboard = UIStoryboard(name: "ScrollZoomContent", bundle: nil)

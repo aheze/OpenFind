@@ -50,7 +50,6 @@ extension PhotosViewController {
                 allFindPhotos, starredFindPhotos, screenshotsFindPhotos
             ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
             
-            /// could be a problem
             await self.apply(
                 allFindPhotos: allFindPhotos,
                 starredFindPhotos: starredFindPhotos,
@@ -71,7 +70,6 @@ extension PhotosViewController {
         screenshotsFindPhotos: [FindPhoto],
         context: FindContext
     ) {
-        
         guard !searchViewModel.isEmpty else { return }
         
         let displayedFindPhotos: [FindPhoto]
@@ -86,7 +84,7 @@ extension PhotosViewController {
         }
         
         let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
-
+        
         let sizes = getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
         
         model.resultsState = PhotosResultsState(
@@ -103,6 +101,17 @@ extension PhotosViewController {
             updateResults() /// always update results anyway, for example when coming back from star
         }
         
+        DispatchQueue.main.async {
+            for index in displayedFindPhotos.indices {
+                if
+                    let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
+                    let findPhoto = displayedFindPhotos[safe: index]
+                {
+                    self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
+                }
+            }
+        }
+
         let results = model.resultsState?.getResultsText() ?? ""
         resultsHeaderViewModel.text = results
         UIAccessibility.post(notification: .announcement, argument: results)
