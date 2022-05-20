@@ -62,12 +62,14 @@ extension LaunchViewController {
         }
 
         /// one tiles done animating, start flipping them
-        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesInitialAnimationDuration) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesInitialAnimationDuration) { [weak self] in
+            guard let self = self else { return }
             let normalTiles = self.model.tiles.filter { !$0.text.isPartOfFind }
             self.flipRandomNormalTile(in: normalTiles)
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.findTileAnimationDelay) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.findTileAnimationDelay) { [weak self] in
+            guard let self = self else { return }
             let findTiles = self.model.tiles.filter { $0.text.isPartOfFind }
             for index in findTiles.indices {
                 let tile = findTiles[index]
@@ -126,25 +128,24 @@ extension LaunchViewController {
             }
         }
 
-        if model.on {
-            guard let randomTile = tiles.randomElement() else { return }
+        guard let randomTile = tiles.randomElement() else { return }
 
-            let location = randomTile.location
-            let mirroringLocation = LaunchTile.Location(
-                x: model.width - 1 - location.x,
-                z: model.height - 1 - location.z
-            )
+        let location = randomTile.location
+        let mirroringLocation = LaunchTile.Location(
+            x: model.width - 1 - location.x,
+            z: model.height - 1 - location.z
+        )
 
-            let mirroringTile = tiles.first { $0.location == mirroringLocation }
+        let mirroringTile = tiles.first { $0.location == mirroringLocation }
 
-            flip(tile: randomTile, reversed: false)
-            if let mirroringTile = mirroringTile {
-                flip(tile: mirroringTile, reversed: true)
-            }
+        flip(tile: randomTile, reversed: false)
+        if let mirroringTile = mirroringTile {
+            flip(tile: mirroringTile, reversed: true)
+        }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesRepeatingAnimationDelay * 2) {
-                self.flipRandomNormalTile(in: tiles)
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesRepeatingAnimationDelay * 2) { [weak self] in
+            guard let self = self else { return }
+            self.flipRandomNormalTile(in: tiles)
         }
     }
 

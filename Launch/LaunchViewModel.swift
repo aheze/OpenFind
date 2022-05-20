@@ -20,8 +20,6 @@ class LaunchViewModel: ObservableObject {
     /// dismiss launch screen and present main app
     var enter: (() -> Void)?
 
-    var on = true /// if false, stop looping animations.
-    
     var tiles = [LaunchTile]()
     var textRows = LaunchConstants.textRows
     

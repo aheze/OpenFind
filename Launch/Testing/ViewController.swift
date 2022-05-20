@@ -10,10 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy var model = LaunchViewModel()
-    lazy var launchViewController = LaunchViewController.make(model: model)
+    var launchViewController: LaunchViewController?
 
     func removeLaunchViewController() {
-        removeChildViewController(launchViewController)
+        if let launchViewController = launchViewController {
+            removeChildViewController(launchViewController)
+            self.launchViewController = nil
+        }
     }
 
     override var childForStatusBarStyle: UIViewController? {
@@ -26,7 +29,9 @@ class ViewController: UIViewController {
 
         view.backgroundColor = .green
 
-        _ = launchViewController
+        let launchViewController = LaunchViewController.make(model: model)
+        self.launchViewController = launchViewController
+
         addChildViewController(launchViewController, in: view)
 
         launchViewController.aboutToEnter = { [weak self] in
