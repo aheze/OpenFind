@@ -28,6 +28,10 @@ extension PhotosViewController: UICollectionViewDelegate {
         /// handle logic in `PhotosVC+ResultsDataSource`
         willDisplayResultsCell(cell: cell, indexPath: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        endDisplayResultsCell(cell: cell, indexPath: indexPath)
+    }
 
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
         if model.isSelecting {

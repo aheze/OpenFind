@@ -151,4 +151,12 @@ extension PhotosViewController {
             highlightsViewController.highlightsViewModel.highlights = self.getHighlights(for: cell, with: lines)
         }
     }
+    
+    func removeHighlights(for cell: PhotosResultsCell) {
+        if let existingHighlightsViewController = cell.highlightsViewController {
+            removeChildViewController(existingHighlightsViewController)
+            cell.highlightsViewController = nil
+            print("Removed!!!")
+        }
+    }
 }

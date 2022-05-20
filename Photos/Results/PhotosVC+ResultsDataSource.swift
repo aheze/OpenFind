@@ -48,6 +48,16 @@ extension PhotosViewController {
             configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
         }
     }
+    
+    func endDisplayResultsCell(cell: UICollectionViewCell, indexPath: IndexPath) {
+        if
+            model.resultsState != nil,
+            let cell = cell as? PhotosResultsCell
+        {
+            print("End rest!!!")
+            removeHighlights(for: cell)
+        }
+    }
 
     /// call after bounds or filter change
     /// Only works when `resultsState` isn't nil

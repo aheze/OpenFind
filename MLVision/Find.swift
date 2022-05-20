@@ -49,9 +49,7 @@ enum Find {
     internal static func run(in image: FindImage, visionOptions: VisionOptions, findOptions: FindOptions) async -> VNRequest {
         return await withCheckedContinuation { continuation in
             let request = VNRecognizeTextRequest { request, _ in
-                print("Done! Resuming")
                 continuation.resume(returning: request)
-                print("Finished continu")
             }
 
             if let customWords = visionOptions.getCustomWords() {
