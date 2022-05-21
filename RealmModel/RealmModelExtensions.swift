@@ -12,7 +12,7 @@ extension RealmModel {
     /// called on startup
     func started() {
         let version = Utilities.getVersionString()
-        print("started: \(startedVersions). Current: \(version)")
+
         if !startedVersions.contains(version) {
             startedVersions.append(version)
         }
@@ -36,9 +36,9 @@ extension RealmModel {
         }
         addedListsBefore = true
     }
-    
+
     func incrementExperience(by additionalExperience: Int) {
-        for _ in 0..<additionalExperience {
+        for _ in 0 ..< additionalExperience {
             experiencePoints += 1
         }
     }
@@ -72,7 +72,7 @@ extension RealmModel {
             return filteredRecognitionLanguages
         }
     }
-    
+
     func getHighlightPadding(size: CGSize) -> CGFloat {
         let length = min(size.width, size.height)
         let padding = highlightsPaddingPercentage * length
