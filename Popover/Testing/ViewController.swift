@@ -19,7 +19,7 @@ class ViewController: UIViewController {
             value: .word(
                 .init(
                     string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 0).hex
+                    color: UIColor(hex: 0x00aeef).hex
                 )
             )
         ),
@@ -32,14 +32,15 @@ class ViewController: UIViewController {
                     color: 0x00AEEF,
                     words: ["Word", "Branch", "Water", "Dirt"],
                     dateCreated: Date()
-                )
+                ),
+                originalText: ""
             )
         ),
         Field(
             value: .addNew(
                 .init(
                     string: "",
-                    color: Constants.defaultHighlightColor.getFieldColor(for: 2).hex
+                    color: UIColor(hex: 0x00aeef).hex
                 )
             )
         )
@@ -129,31 +130,31 @@ class ViewController: UIViewController {
     
     @IBOutlet var purpleButton: UIButton!
     @IBAction func purpleButtonPressed(_ sender: Any) {
-        let model = CameraViewModel()
-        var popover = Popover(attributes: .init()) {
-            CameraStatusView(model: model, searchViewModel: SearchViewModel())
-        }
-        
-        popover.attributes.sourceFrame = { [weak purpleButton] in purpleButton.windowFrame() }
-        popover.attributes.rubberBandingMode = .none
-        popover.attributes.presentation.animation = .spring()
-        popover.attributes.presentation.transition = .opacity
-        popover.attributes.dismissal.animation = .spring()
-        popover.attributes.dismissal.transition = .opacity
-        popover.attributes.dismissal.excludedFrames = {
-            [
-                self.purpleButton.windowFrame(),
-                self.listButton.windowFrame(),
-                self.listLabel.windowFrame()
-            ]
-        }
-        popover.attributes.tag = "Status Popover"
-        
-        if let oldPopover = self.popover(tagged: "Status Popover") {
-            replace(oldPopover, with: popover)
-        } else {
-            present(popover)
-        }
+//        let model = CameraViewModel()
+//        var popover = Popover(attributes: .init()) {
+//            CameraStatusView(model: model, searchViewModel: SearchViewModel())
+//        }
+//        
+//        popover.attributes.sourceFrame = { [weak purpleButton] in purpleButton.windowFrame() }
+//        popover.attributes.rubberBandingMode = .none
+//        popover.attributes.presentation.animation = .spring()
+//        popover.attributes.presentation.transition = .opacity
+//        popover.attributes.dismissal.animation = .spring()
+//        popover.attributes.dismissal.transition = .opacity
+//        popover.attributes.dismissal.excludedFrames = {
+//            [
+//                self.purpleButton.windowFrame(),
+//                self.listButton.windowFrame(),
+//                self.listLabel.windowFrame()
+//            ]
+//        }
+//        popover.attributes.tag = "Status Popover"
+//        
+//        if let oldPopover = self.popover(tagged: "Status Popover") {
+//            replace(oldPopover, with: popover)
+//        } else {
+//            present(popover)
+//        }
     }
     
     override func viewDidLoad() {
