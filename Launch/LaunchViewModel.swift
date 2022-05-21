@@ -19,12 +19,25 @@ class LaunchViewModel: ObservableObject {
     @Published var sceneType: SceneType?
     
     /// dismiss launch screen and present main app
-    var enter: (() -> Void)?
-
+    @Published var entered = false
+    
     /// for RealityKit
     var tiles = [LaunchTile]()
     
     @Published var textRows = LaunchConstants.textRows
+    
+    lazy var locationsOfNormalText: [LaunchSceneModel.Location] = {
+        var locationsOfNormalText = [LaunchSceneModel.Location]()
+        for (rowIndex, row) in textRows.enumerated() {
+            for (columnIndex, text) in row.text.enumerated() {
+                if text.isPartOfFindIndex == nil {
+                    let location = LaunchSceneModel.Location(row: rowIndex, column: columnIndex)
+                    locationsOfNormalText.append(location)
+                }
+            }
+        }
+        return locationsOfNormalText
+    }()
     
     var width: Int {
         textRows.first?.text.count ?? 0

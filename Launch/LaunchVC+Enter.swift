@@ -26,7 +26,11 @@ extension LaunchViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.animateSceneForEnter()
+            switch self.model.sceneType {
+            case .realityKit:
+                self.animateSceneForEnter()
+            default: break
+            }
         }
     }
     
@@ -62,16 +66,11 @@ extension LaunchViewController {
             
             /// make launch view transparent when the camera is right next to the tiles
             DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterAfterDuration * 0.77) {
-                self.entering?()
-                UIView.animate(withDuration: 0.15) {
-                    self.view.backgroundColor = .clear
-                }
+                self.hideBackground()
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.enterAfterDuration + 0.1) {
-                self.removeARView()
-                /// remove view
-                self.done?()
+                self.finish()
             }
         }
     }
@@ -83,5 +82,18 @@ extension LaunchViewController {
         self.sceneView?.removeFromSuperview()
         self.sceneView?.window?.resignKey()
         self.sceneView = nil
+    }
+    
+    func hideBackground() {
+        entering?()
+        UIView.animate(withDuration: 0.15) {
+            self.view.backgroundColor = .clear
+        }
+    }
+
+    func finish() {
+        /// remove view
+        removeARView()
+        done?()
     }
 }

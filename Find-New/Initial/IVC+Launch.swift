@@ -16,11 +16,6 @@ extension InitialViewController {
 
         let launchViewController = LaunchViewController.make(model: launchViewModel)
 
-        launchViewController.aboutToEnter = { [weak self] in
-            guard let self = self else { return }
-            self.loadApp()
-        }
-
         launchViewController.entering = { [weak self] in
             guard let self = self else { return }
             self.onboardingEntering()
@@ -53,6 +48,5 @@ extension InitialViewController {
         AppDelegate.AppUtility.lockOrientation(.all)
         removeChildViewController(launchViewController)
         self.launchViewController = nil
-        startApp()
     }
 }

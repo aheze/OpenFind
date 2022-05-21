@@ -46,12 +46,12 @@ class InitialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        /// must be first
         configureRealm()
+        loadApp()
+        startApp()
 
-        if realmModel.launchedBefore || Debug.overrideLaunch {
-            loadApp()
-            startApp()
-        } else {
+        if !realmModel.launchedBefore || Debug.alwaysShowOnboarding {
             if UIAccessibility.isVoiceOverRunning {
                 realmModel.entered()
             } else {

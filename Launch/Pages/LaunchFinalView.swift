@@ -35,7 +35,7 @@ struct LaunchFinalView: View {
             
             Button {
                 model.controlsEnabled = false
-                model.enter?()
+                model.entered = true
             } label: {
                 Text("Start Finding")
                     .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
@@ -53,7 +53,7 @@ struct LaunchFinalView: View {
         .background(
             LinearGradient(
                 colors: [
-                    UIColor(hex: 0x00AEEF).toColor(.black, percentage: 0.25).color,
+                    UIColor(hex: 0x007EEF).toColor(.black, percentage: 0.25).color,
                     Colors.accent.toColor(.black, percentage: 0.5).color
                 ],
                 startPoint: .topLeading,

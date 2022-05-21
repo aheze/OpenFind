@@ -20,12 +20,16 @@ extension LaunchViewController {
             }
             .store(in: &model.cancellables)
 
-        model.enter = { [weak self] in
-            guard let self = self else { return }
+        model.$entered
+            .dropFirst()
+            .sink { [weak self] entering in
+                guard let self = self else { return }
 
-            self.aboutToEnter?()
-            self.enter()
-        }
+                if entering {
+                    self.enter()
+                }
+            }
+            .store(in: &model.cancellables)
     }
 
     func updateUI(for page: LaunchPage) {
@@ -39,7 +43,7 @@ extension LaunchViewController {
 
         UIView.animate(duration: 1.9, dampingFraction: 0.6) {
             if page == .final {
-                self.sceneContainer.transform = .init(scaleX: 1.4, y: 1.4)
+                self.sceneContainer.transform = .init(scaleX: 1.28, y: 1.28)
             } else {
                 self.sceneContainer.transform = .identity
             }

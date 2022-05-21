@@ -34,20 +34,13 @@ class ViewController: UIViewController {
 
         addChildViewController(launchViewController, in: view)
 
-        launchViewController.aboutToEnter = { [weak self] in
-            guard let self = self else { return }
-            print("about to enter")
-        }
-
         launchViewController.entering = { [weak self] in
             guard let self = self else { return }
-            print("entering")
         }
 
         launchViewController.done = { [weak self] in
             guard let self = self else { return }
             self.removeLaunchViewController()
-            print("remove vc")
         }
     }
 }

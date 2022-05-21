@@ -67,5 +67,13 @@ extension LaunchViewController {
         }
         
         showUI()
+        
+        launchSceneModel.entering = { [weak self] in
+            self?.hideBackground()
+        }
+        
+        launchSceneModel.done = { [weak self] in
+            self?.finish()
+        }
     }
 }

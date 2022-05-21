@@ -2111,6 +2111,7 @@
 		3CBB31AC27BDB99200F25F6A /* SearchNC+ViewTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB31A527BDB98800F25F6A /* SearchNC+ViewTransitioning.swift */; };
 		3CBC55C12837EF8C00C22847 /* LaunchSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC55C02837EF8C00C22847 /* LaunchSceneView.swift */; };
 		3CBC55C22837FBDD00C22847 /* LaunchSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC55C02837EF8C00C22847 /* LaunchSceneView.swift */; };
+		3CBC55C428387DBF00C22847 /* LaunchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC55C328387DBF00C22847 /* LaunchUtilities.swift */; };
 		3CBEAC0F2754867400D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
 		3CC00EBF27A6501300F6CF9C /* ListsSelectionToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */; };
 		3CC00EC127A6507500F6CF9C /* ListsVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */; };
@@ -4054,6 +4055,7 @@
 		3CBB31A127BD6E9200F25F6A /* PhotosSlidesItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSlidesItemViewController.swift; sourceTree = "<group>"; };
 		3CBB31A527BDB98800F25F6A /* SearchNC+ViewTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchNC+ViewTransitioning.swift"; sourceTree = "<group>"; };
 		3CBC55C02837EF8C00C22847 /* LaunchSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneView.swift; sourceTree = "<group>"; };
+		3CBC55C328387DBF00C22847 /* LaunchUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUtilities.swift; sourceTree = "<group>"; };
 		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
 		3CC00EBE27A6501300F6CF9C /* ListsSelectionToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsSelectionToolbarView.swift; sourceTree = "<group>"; };
 		3CC00EC027A6507500F6CF9C /* ListsVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Selection.swift"; sourceTree = "<group>"; };
@@ -6016,6 +6018,7 @@
 				3C257EDB280D290F009B6FAE /* LaunchVC+Enter.swift */,
 				3CC0D13B280B28E7004E7016 /* LaunchView.swift */,
 				3CBC55C02837EF8C00C22847 /* LaunchSceneView.swift */,
+				3CBC55C328387DBF00C22847 /* LaunchUtilities.swift */,
 				3C257EB8280BE2BD009B6FAE /* Content */,
 				3C257EB7280BE2B7009B6FAE /* Pages */,
 				3CC0D138280B27A8004E7016 /* Testing */,
@@ -10059,6 +10062,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CC0D154280B2A40004E7016 /* Utilities+UIWindow.swift in Sources */,
+				3CBC55C428387DBF00C22847 /* LaunchUtilities.swift in Sources */,
 				3CCA2C2F281231CF0019044D /* Saved.swift in Sources */,
 				3CC0D151280B2A40004E7016 /* Utilities+Dates.swift in Sources */,
 				3C257EAD280BE03F009B6FAE /* LaunchCVC+Setup.swift in Sources */,

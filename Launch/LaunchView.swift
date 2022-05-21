@@ -18,7 +18,7 @@ enum LaunchViewConstants {
     static var headerSubtitleFont = UIFont.systemFont(ofSize: 24, weight: .medium)
     static var headerInsets = EdgeInsets(top: 48, leading: sidePadding, bottom: 16, trailing: sidePadding)
 
-    static var footerInsets = EdgeInsets(top: 16, leading: sidePadding, bottom: 16, trailing: sidePadding)
+    static var footerInsets = EdgeInsets(top: 16, leading: sidePadding, bottom: 10, trailing: sidePadding)
     static var footerCornerRadius = CGFloat(20)
 
     static var controlButtonFont = UIFont.preferredFont(forTextStyle: .title3)
@@ -78,6 +78,7 @@ struct LaunchView: View {
             }
             .edgesIgnoringSafeArea(.all)
         )
+
         .overlay(
             VStack(spacing: c.spacing) {
                 VStack(spacing: c.headerSpacing) {
@@ -131,20 +132,32 @@ struct LaunchView: View {
                 PagingButtonsView(model: model)
 
                 if model.currentPage == .empty {
-                    Button {
-                        withAnimation {
-                            model.currentPage = .photos
+                    VStack(spacing: 12) {
+                        Button {
+                            withAnimation {
+                                model.currentPage = .photos
+                            }
+                        } label: {
+                            Text("Get Started")
+                                .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
+                                .frame(maxWidth: .infinity)
+                                .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
+                                .background(Color.white.opacity(0.1))
+                                .cornerRadius(c.footerCornerRadius)
                         }
-                    } label: {
-                        Text("Get Started")
-                            .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
-                            .frame(maxWidth: .infinity)
-                            .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
-                            .background(Color.white.opacity(0.1))
-                            .cornerRadius(c.footerCornerRadius)
+                        .buttonStyle(LaunchButtonStyle())
+                        .frame(maxWidth: .infinity)
+
+                        Button {
+                            withAnimation {
+                                model.currentPage = .final
+                            }
+                        } label: {
+                            Text("Skip")
+                                .font(UIFont.preferredCustomFont(forTextStyle: .body, weight: .medium).font)
+                                .opacity(0.2)
+                        }
                     }
-                    .buttonStyle(LaunchButtonStyle())
-                    .frame(maxWidth: .infinity)
                     .opacity(model.currentPage == .empty ? 1 : 0)
                     .padding(c.footerInsets)
                     .readSize {
@@ -178,7 +191,9 @@ struct PagingButtonsView: View {
             HStack {
                 LaunchControlButtonView(icon: "chevron.backward") {
                     if let previousPage = previousPage {
-                        model.currentPage = previousPage
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            model.currentPage = previousPage
+                        }
                     }
                 }
 
@@ -196,7 +211,9 @@ struct PagingButtonsView: View {
 
                 LaunchControlButtonView(icon: "chevron.forward") {
                     if let nextPage = nextPage {
-                        model.currentPage = nextPage
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            model.currentPage = nextPage
+                        }
                     }
                 }
                 .opacity(nextPage != nil ? 1 : 0)
@@ -237,4 +254,3 @@ struct LaunchContentView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: LaunchContentViewController, context: Context) {}
 }
-

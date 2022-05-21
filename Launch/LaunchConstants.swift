@@ -60,7 +60,7 @@ enum LaunchConstants {
     static let tilesInitialAnimationDuration = CGFloat(9)
     static let tilesFinalAnimationDuration = CGFloat(4)
  
-    static let tilesRepeatingAnimationDelay = CGFloat(1.2)
+    static let tilesRepeatingAnimationDelay = CGFloat(1.4)
     
     /// time to flip half way.
     /// tiles are flipped 360 degrees, so this is multiplied by 2.
