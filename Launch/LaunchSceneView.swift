@@ -243,30 +243,21 @@ struct LaunchSceneTextView: View {
         let textOpacity = getTextOpacity()
         let borderOpacity = getBorderOpacity()
         
-        Button {
-            withAnimation(.easeIn(duration: LaunchSceneConstants.tileFlipDuration)) {
-                let angle = CGFloat(180) * 1
-                
-                model.textRows[location.row].text[location.column].angle = angle
-            }
-            
-        } label: {
-            Color.white.opacity(0.03)
-                .frame(width: 70, height: 70)
-                .overlay(
-                    Text(text.character)
-                        .font(.system(size: 54, weight: .bold))
-                        .foregroundColor(.white)
-                        .opacity(textOpacity)
-                )
-                .cornerRadius(cornerRadius)
-                .overlay(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .strokeBorder(Color.white, lineWidth: 2)
-                        .opacity(borderOpacity)
-                )
-                .rotation3DEffect(.degrees(text.angle), axis: (0, 1, 0), perspective: 0.4)
-        }
+        Color.white.opacity(0.03)
+            .frame(width: 70, height: 70)
+            .overlay(
+                Text(text.character)
+                    .font(.system(size: 54, weight: .bold))
+                    .foregroundColor(.white)
+                    .opacity(textOpacity)
+            )
+            .cornerRadius(cornerRadius)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(Color.white, lineWidth: 2)
+                    .opacity(borderOpacity)
+            )
+            .rotation3DEffect(.degrees(text.angle), axis: (0, 1, 0), perspective: 0.4)
     }
     
     func getTextOpacity() -> CGFloat {
