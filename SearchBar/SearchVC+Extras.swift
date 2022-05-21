@@ -69,7 +69,6 @@ extension SearchViewController {
             showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Photo Metadata."), autoDismiss: true)
         }
 
-
         // MARK: - Extras
 
         if text.roughlyEquals("/about") {
@@ -139,6 +138,51 @@ extension SearchViewController {
         if text.roughlyEquals("/code") {
             showPopover(configuration: .code, autoDismiss: false)
         }
+
+        if text.roughlyEquals("/launch") {
+            showPopover(
+                configuration: .button(
+                    title: "Show Launch Screen",
+                    description: "View the launch screen again!",
+                    buttonTitle: "Launch",
+                    action: { [weak self] in
+                        guard let self = self else { return }
+                        self.presentLaunchViewController(type: .swiftUI)
+                    }
+                ),
+                autoDismiss: false
+            )
+        }
+        
+        if text.roughlyEquals("/legacyLaunch") {
+            showPopover(
+                configuration: .button(
+                    title: "Show Launch Screen Animation",
+                    description: "This is the legacy launch screen from version 2.0.5. Disclaimer: app performance could get worse, view at your own risk!",
+                    buttonTitle: "Launch",
+                    action: { [weak self] in
+                        guard let self = self else { return }
+                        self.presentLaunchViewController(type: .realityKit)
+                    }
+                ),
+                autoDismiss: false
+            )
+        }
+    }
+
+    func presentLaunchViewController(type: LaunchViewModel.SceneType) {
+        let model = LaunchViewModel()
+        model.sceneType = type
+
+        let launchViewController = LaunchViewController.make(model: model)
+        launchViewController.modalPresentationStyle = .overFullScreen
+        present(launchViewController, animated: true)
+
+        launchViewController.done = { [weak launchViewController] in
+            if let launchViewController = launchViewController {
+                launchViewController.dismiss(animated: false)
+            }
+        }
     }
 
     func showPopover(configuration: ExtrasView.Configuration, autoDismiss: Bool) {
@@ -153,9 +197,17 @@ extension SearchViewController {
         insets.right += 32
         attributes.sourceFrameInset = insets
 
+        func dismiss() {
+            if let existingPopover = view.popover(tagged: SearchViewController.extrasPopoverTag) {
+                self.dismiss(existingPopover)
+            }
+        }
+
         let searchConfiguration = searchViewModel.configuration
         let popover = Popover(attributes: attributes) {
-            ExtrasView(searchConfiguration: searchConfiguration, configuration: configuration)
+            ExtrasView(searchConfiguration: searchConfiguration, configuration: configuration) {
+                dismiss()
+            }
         }
         if let existingPopover = view.popover(tagged: SearchViewController.extrasPopoverTag) {
             replace(existingPopover, with: popover)
@@ -165,9 +217,7 @@ extension SearchViewController {
 
         if autoDismiss {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                if let existingPopover = self.view.popover(tagged: SearchViewController.extrasPopoverTag) {
-                    self.dismiss(existingPopover)
-                }
+                dismiss()
             }
         }
     }
@@ -183,10 +233,12 @@ struct ExtrasView: View {
         case strawberry
         case gradient
         case code
+        case button(title: String, description: String, buttonTitle: String, action: (() -> Void)?)
     }
 
     var searchConfiguration: SearchConfiguration
     var configuration: Configuration
+    var dismiss: (() -> Void)?
 
     @State var transform: SettingsProfileTransformState?
     var body: some View {
@@ -285,6 +337,35 @@ struct ExtrasView: View {
             GradientView()
         case .code:
             CodeView()
+        case .button(title: let title, description: let description, buttonTitle: let buttonTitle, action: let action):
+            VStack(spacing: 16) {
+                Image(systemName: "info.circle")
+                    .font(UIFont.systemFont(ofSize: 84, weight: .semibold).font)
+
+                Text(title)
+                    .frame(maxWidth: .infinity)
+
+                Text(description)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .opacity(0.75)
+
+                Button {
+                    dismiss?()
+                    action?()
+                } label: {
+                    Text(buttonTitle)
+                        .foregroundColor(.white)
+                        .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
+                        .background(Color.accent)
+                        .cornerRadius(16)
+                }
+            }
+            .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
+            .foregroundColor(searchConfiguration.fieldIsDark ? UIColor.white.color : UIColor.secondaryLabel.color)
+            .padding(36)
+            .background(VisualEffectView(searchConfiguration.popoverBackgroundBlurStyle))
+            .cornerRadius(20)
         }
     }
 

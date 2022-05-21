@@ -26,9 +26,10 @@ class LaunchViewController: UIViewController {
     @IBOutlet var contentContainer: UIView!
 
     // MARK: - Listen to these values
+
     var entering: (() -> Void)? /// called when just about to show the main content
     var done: (() -> Void)?
-    
+
     static func make(model: LaunchViewModel) -> LaunchViewController {
         let storyboard = UIStoryboard(name: "LaunchContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "LaunchViewController") { coder in

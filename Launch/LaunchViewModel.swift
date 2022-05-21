@@ -16,7 +16,7 @@ class LaunchViewModel: ObservableObject {
     @Published var showingUI = false
     @Published var currentPage = LaunchPage.empty
     @Published var controlsEnabled = true /// set to false after enter first
-    @Published var sceneType: SceneType?
+    @Published var sceneType = SceneType.swiftUI
     
     /// dismiss launch screen and present main app
     @Published var entered = false

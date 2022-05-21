@@ -19,7 +19,7 @@ extension LaunchViewController {
         
         listen()
         
-        model.sceneType = .swiftUI
+        print("Set uyp!!!")
         
         /// SwiftUI overlay
         setupView()
@@ -29,8 +29,6 @@ extension LaunchViewController {
             setupRealityKit()
         case .swiftUI:
             setupSwiftUI()
-        case .none:
-            setupSwiftUI() /// fallback
         }
     }
     
