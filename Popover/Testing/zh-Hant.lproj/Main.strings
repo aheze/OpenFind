@@ -1,0 +1,33 @@
+
+/* Class = "UIButton"; configuration.title = "Tip"; ObjectID = "9cV-aS-XBJ"; */
+"9cV-aS-XBJ.configuration.title" = "Tip";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "9cV-aS-XBJ"; */
+"9cV-aS-XBJ.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "List"; ObjectID = "LJn-R9-ade"; */
+"LJn-R9-ade.configuration.title" = "List";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "LJn-R9-ade"; */
+"LJn-R9-ade.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "List"; ObjectID = "WJn-gW-YrJ"; */
+"WJn-gW-YrJ.text" = "List";
+
+/* Class = "UIButton"; configuration.title = "Word"; ObjectID = "alj-An-ZWr"; */
+"alj-An-ZWr.configuration.title" = "Word";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "alj-An-ZWr"; */
+"alj-An-ZWr.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Purple Button"; ObjectID = "gew-an-EDb"; */
+"gew-an-EDb.normalTitle" = "Purple Button";
+
+/* Class = "UILabel"; text = "Word"; ObjectID = "kI3-Fj-dir"; */
+"kI3-Fj-dir.text" = "Word";
+
+/* Class = "UIButton"; configuration.title = "Hold to Swipe"; ObjectID = "zC2-rM-Fnl"; */
+"zC2-rM-Fnl.configuration.title" = "Hold to Swipe";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "zC2-rM-Fnl"; */
+"zC2-rM-Fnl.normalTitle" = "Button";

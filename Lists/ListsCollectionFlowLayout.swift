@@ -56,7 +56,7 @@ class ListsCollectionFlowLayout: UICollectionViewFlowLayout {
     func getColumns(bounds: CGFloat, insets: UIEdgeInsets) -> (Int, CGFloat) {
         let availableWidth = getAvailableWidth(bounds: bounds, insets: insets)
         
-        let numberOfColumns = Int(availableWidth / ListsCollectionConstants.minCellWidth)
+        let numberOfColumns = max(1, Int(availableWidth / ListsCollectionConstants.minCellWidth))
         
         /// space between columns
         let columnSpacing = CGFloat(numberOfColumns - 1) * ListsCollectionConstants.cellSpacing

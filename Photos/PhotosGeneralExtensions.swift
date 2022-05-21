@@ -16,7 +16,7 @@ extension CGFloat {
         let minCellWidth = self
         guard minCellWidth.isNormal else { return (0, 0) }
 
-        let numberOfColumns = Int(availableWidth / minCellWidth)
+        let numberOfColumns = Swift.max(1, Int(availableWidth / minCellWidth))
 
         /// space between columns
         let columnSpacing = CGFloat(numberOfColumns - 1) * PhotosConstants.cellSpacing
