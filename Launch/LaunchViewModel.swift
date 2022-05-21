@@ -16,12 +16,15 @@ class LaunchViewModel: ObservableObject {
     @Published var showingUI = false
     @Published var currentPage = LaunchPage.empty
     @Published var controlsEnabled = true /// set to false after enter first
+    @Published var sceneType: SceneType?
     
     /// dismiss launch screen and present main app
     var enter: (() -> Void)?
 
+    /// for RealityKit
     var tiles = [LaunchTile]()
-    var textRows = LaunchConstants.textRows
+    
+    @Published var textRows = LaunchConstants.textRows
     
     var width: Int {
         textRows.first?.text.count ?? 0
@@ -29,5 +32,10 @@ class LaunchViewModel: ObservableObject {
     
     var height: Int {
         textRows.count
+    }
+    
+    enum SceneType {
+        case realityKit
+        case swiftUI
     }
 }

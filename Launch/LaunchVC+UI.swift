@@ -18,10 +18,12 @@ extension LaunchViewController {
 
     func showUI() {
         if Debug.skipLaunchIntro {
-            model.showingUI = true
+            withAnimation(.easeOut(duration: 1)) {
+                model.showingUI = true
+            }
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.showUIDelay) {
-                withAnimation(.easeInOut(duration: LaunchConstants.showUIDuration)) {
+                withAnimation(.linear(duration: LaunchConstants.showUIDuration)) {
                     self.model.showingUI = true
                 }
             }

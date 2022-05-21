@@ -117,10 +117,10 @@ enum LaunchConstants {
         LaunchTextRow(
             text: [
                 LaunchText(character: "❖"),
-                LaunchText(character: "F", isPartOfFind: true),
-                LaunchText(character: "I", isPartOfFind: true),
-                LaunchText(character: "N", isPartOfFind: true),
-                LaunchText(character: "D", isPartOfFind: true),
+                LaunchText(character: "F", isPartOfFindIndex: 0),
+                LaunchText(character: "I", isPartOfFindIndex: 1),
+                LaunchText(character: "N", isPartOfFindIndex: 2),
+                LaunchText(character: "D", isPartOfFindIndex: 3),
                 LaunchText(character: "❖")
             ]
         ),

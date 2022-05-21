@@ -11,7 +11,7 @@ import SceneKit
 import UIKit
 
 extension LaunchViewController {
-    func setupScene() {
+    func setupRealityKitScene() {
         _ = sceneView
 
         guard let sceneView = sceneView else { return }
@@ -64,13 +64,13 @@ extension LaunchViewController {
         /// one tiles done animating, start flipping them
         DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.tilesInitialAnimationDuration) { [weak self] in
             guard let self = self else { return }
-            let normalTiles = self.model.tiles.filter { !$0.text.isPartOfFind }
+            let normalTiles = self.model.tiles.filter { $0.text.isPartOfFindIndex == nil }
             self.flipRandomNormalTile(in: normalTiles)
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + LaunchConstants.findTileAnimationDelay) { [weak self] in
             guard let self = self else { return }
-            let findTiles = self.model.tiles.filter { $0.text.isPartOfFind }
+            let findTiles = self.model.tiles.filter { $0.text.isPartOfFindIndex != nil }
             for index in findTiles.indices {
                 let tile = findTiles[index]
                 guard let finalTransform = tile.finalTransform else { continue }
@@ -218,7 +218,7 @@ extension LaunchViewController {
                 )
                 var finalPosition: SIMD3<Float>?
 
-                if text.isPartOfFind {
+                if text.isPartOfFindIndex != nil {
                     finalPosition = SIMD3(
                         x: xOffset,
                         y: LaunchConstants.findTileFinalYOffset,

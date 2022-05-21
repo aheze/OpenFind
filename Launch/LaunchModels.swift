@@ -11,14 +11,17 @@ import UIKit
 
 /// Row of launch text
 /// X X X X X X
-struct LaunchTextRow {
+struct LaunchTextRow: Identifiable {
+    let id = UUID()
     var text = [LaunchText]()
 }
 
-struct LaunchText {
+struct LaunchText: Identifiable {
+    let id = UUID()
     var character: String
-    var isPartOfFind = false /// if true, make blue
+    var isPartOfFindIndex: Int? /// if not nil, make blue
     
+    // MARK: - RealityKit
     /// height, change this later
     var yOffset = Float(0)
     
@@ -26,12 +29,15 @@ struct LaunchText {
     var additionalZOffset = Float(0)
     
     var color: UIColor {
-        if isPartOfFind {
+        if isPartOfFindIndex != nil {
             return Colors.accent
         } else {
             return UIColor.clear
         }
     }
+    
+    // MARK: - SwiftUI
+    var angle = CGFloat(0)
 }
  
 struct LaunchTile {
