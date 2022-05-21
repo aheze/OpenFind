@@ -46,74 +46,86 @@ class SettingsShareAppViewController: UIViewController {
 }
 
 struct SettingsShareAppView: View {
-    @State var present = false
-    @State var presentingUUID: UUID?
+    @State var copied = false
 
     var body: some View {
         VStack(spacing: 20) {
-            Image("Logo")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
-                .cornerRadius(16)
+            HStack(spacing: 14) {
+                Image("Logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 64, height: 64)
+                    .cornerRadius(16)
 
-            Text("Scan to download Find")
-                .foregroundColor(UIColor.secondaryLabel.color)
-                .font(UIFont.preferredFont(forTextStyle: .title1).font)
+                VStack(alignment: .leading) {
+                    Text("Find")
+                        .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .semibold).font)
 
-            Image("AppQRCode")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+                    Text("An app to find text in real life.")
+                        .font(UIFont.preferredCustomFont(forTextStyle: .title3, weight: .medium).font)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.white)
+            }
+            .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
+            .background(
+                LinearGradient(
+                    colors: [
+                        Colors.accent.color,
+                        Colors.accent.toColor(.black, percentage: 0.2).color
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .cornerRadius(16)
 
             Button {
-                present = true
-            } label: {
-                VStack(spacing: 6) {
-                    Text("getfind.app")
-                        .font(UIFont.preferredFont(forTextStyle: .title1).font)
-
-                    Text("(Tap to copy)")
-                        .opacity(0.75)
-                        .font(UIFont.preferredFont(forTextStyle: .caption1).font)
+                UIPasteboard.general.url = URL(string: "https://getfind.app")
+                withAnimation {
+                    copied = true
                 }
+
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
+
+            } label: {
+                HStack {
+                    HStack(spacing: 10) {
+                        Image(systemName: "doc.on.doc")
+
+                        Text("Copy Link")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    if copied {
+                        Image(systemName: "checkmark")
+                            .transition(.scale)
+                    }
+                }
+                .font(UIFont.preferredCustomFont(forTextStyle: .title2, weight: .medium).font)
                 .foregroundColor(.accent)
-                .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
+                .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
                 .blueBackground()
             }
 
+            VStack(spacing: 0) {
+                Image("AppQRCode")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(UIColor.label.color)
+
+                Text("Scan to download Find")
+                    .foregroundColor(.accent)
+                    .font(UIFont.preferredFont(forTextStyle: .title3).font)
+            }
+            .padding(EdgeInsets(top: 16, leading: 20, bottom: 24, trailing: 20))
+            .blueBackground()
+
             Spacer()
         }
-        .foregroundColor(UIColor.label.color)
-        .padding(.horizontal, 32)
-        .padding(.top, 48)
-        .popover(
-            present: $present,
-            attributes: {
-                $0.sourceFrameInset = UIEdgeInsets(16)
-                $0.position = .relative(
-                    popoverAnchors: [
-                        .top,
-                    ]
-                )
-                $0.presentation.animation = .spring()
-                $0.presentation.transition = .move(edge: .top)
-                $0.dismissal.animation = .spring(response: 3, dampingFraction: 0.8, blendDuration: 1)
-                $0.dismissal.transition = .move(edge: .top)
-                $0.dismissal.mode = [.dragUp]
-                $0.dismissal.dragDismissalProximity = 0.1
-            }
-        ) {
-            NotificationViewPopover(icon: "doc.on.doc", text: "Link copied!", color: Colors.accent, url: "https://getfind.app")
-                .onAppear {
-                    presentingUUID = UUID()
-                    let currentID = presentingUUID
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        if currentID == presentingUUID {
-                            present = false
-                        }
-                    }
-                }
-        }
+        .padding(.horizontal, 24)
+        .padding(.top, 4)
     }
 }
 
@@ -181,7 +193,7 @@ struct NotificationViewPopover: View {
     var body: some View {
         HStack {
             NotificationImage(icon, color: color)
-            
+
             Text(text)
                 .frame(maxWidth: .infinity, alignment: .leading)
 

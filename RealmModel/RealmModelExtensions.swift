@@ -12,6 +12,7 @@ extension RealmModel {
     /// called on startup
     func started() {
         let version = Utilities.getVersionString()
+        print("started: \(startedVersions). Current: \(version)")
         if !startedVersions.contains(version) {
             startedVersions.append(version)
         }

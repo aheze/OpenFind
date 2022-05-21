@@ -13,6 +13,10 @@ struct SavedData<Value> {
     var value: Value
 }
 
+enum TipIdentifier: String {
+    case photosGallerySearch
+}
+
 enum RealmModelData {
     // MARK: Storage
     static var experiencePoints = SavedData(key: "experiencePoints", value: 0)

@@ -88,7 +88,7 @@ struct LaunchSceneView: View {
                     launchSceneModel.sceneState = .entered
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.08) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.18) {
                     launchSceneModel.entering?()
                     
                     withAnimation(.easeIn(duration: 0.4)) {

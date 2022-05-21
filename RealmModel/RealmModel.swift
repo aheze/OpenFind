@@ -23,24 +23,15 @@ class RealmModel: ObservableObject {
     // MARK: - Storage
 
     @Saved("launchedBefore") var launchedBefore = false
+    @Saved("startedVersions") var startedVersions = [String]()
+    @Saved("enteredVersions") var enteredVersions = [String]()
 
     /// if `false` and also launched before `false`, add lists (first launch in v1.2.0)
     /// if `false` and launched before `true`, ask.
     /// If denied or lists added, set this to true anyway.
     @Saved("addedListsBefore") var addedListsBefore = false
-    var startedVersions = [String]() { /// versions launched in
-        didSet {
-            let defaults = UserDefaults.standard
-            defaults.set(startedVersions, forKey: "startedVersions")
-        }
-    }
 
-    var enteredVersions = [String]() { /// versions launched in and also accepted/entered after "Get Started"
-        didSet {
-            let defaults = UserDefaults.standard
-            defaults.set(enteredVersions, forKey: "enteredVersions")
-        }
-    }
+    
 
     /// once this reaches 100, then 200, then 1000, ask for a review
     @Saved(data.experiencePoints.key) var experiencePoints = data.experiencePoints.value
@@ -88,10 +79,6 @@ class RealmModel: ObservableObject {
     @Saved(data.listsSortBy.key) var listsSortBy = data.listsSortBy.value
 
     init() {
-        let defaults = UserDefaults.standard
-        startedVersions = defaults.stringArray(forKey: "startedVersions") ?? [String]()
-        enteredVersions = defaults.stringArray(forKey: "enteredVersions") ?? [String]()
-
         container.getModel = { [weak self] in
             self
         }
@@ -101,6 +88,9 @@ class RealmModel: ObservableObject {
 
     func listenToDefaults() {
         _launchedBefore.configureValueChanged(with: self)
+        _startedVersions.configureValueChanged(with: self)
+        _enteredVersions.configureValueChanged(with: self)
+
         _addedListsBefore.configureValueChanged(with: self)
         _experiencePoints.configureValueChanged(with: self)
 

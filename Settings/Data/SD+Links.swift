@@ -45,6 +45,16 @@ extension SettingsData {
                 ),
                 .init(
                     configuration: .link(
+                        title: "Help Translate Find",
+                        leftIcon: .template(iconName: "textformat", backgroundColor: UIColor(hex: 0x93AE00)),
+                        indicatorStyle: .modal,
+                        destination: nil
+                    ) {
+                        translateFind?()
+                    }
+                ),
+                .init(
+                    configuration: .link(
                         title: "Share App",
                         leftIcon: .template(iconName: "square.and.arrow.up", backgroundColor: UIColor(hex: 0x007EFF)),
                         indicatorStyle: .none,

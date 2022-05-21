@@ -89,6 +89,13 @@ extension SettingsViewController {
                 UIApplication.shared.open(url)
             }
         }
+        
+        SettingsData.translateFind = {
+            if let url = URL(string: "https://getfind.app/translate") {
+                UIApplication.shared.open(url)
+            }
+        }
+        
 
         SettingsData.shareApp = { [weak self] in
             guard let self = self else { return }

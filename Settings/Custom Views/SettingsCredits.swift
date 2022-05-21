@@ -288,6 +288,7 @@ struct SettingsProfileButtonStyle: ButtonStyle {
     }
 }
 
+/// scale and fade slightly
 struct EasingScaleButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
