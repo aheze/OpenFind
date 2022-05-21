@@ -18,7 +18,7 @@ struct LaunchListsView: View {
         LaunchPageViewContent(
             title: "Lists",
             description: "Group words together.",
-            footnote: "Need to find U.S. presidents in your textbook? Save your eyesight, let Find do its thing. Want to avoid artificial colors on your next grocery run? Leave it to the app."
+            footnote: "Need to find U.S. presidents in your textbook? Leave it to the app. Want to avoid artificial colors on your next grocery run? Save your eyesight."
         ) {
             Button {
                 changePortrait()
