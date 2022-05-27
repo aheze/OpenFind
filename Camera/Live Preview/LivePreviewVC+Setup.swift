@@ -55,6 +55,8 @@ extension LivePreviewViewController {
             session.addOutput(photoDataOutput)
         }
 
+        print("con: \(livePreviewView.videoPreviewLayer.connection)")
+//        livePreviewView.videoPreviewLayer.connection?.preferredVideoStabilizationMode = .cinematicExtended
 //        session.connections.first?.preferredVideoStabilizationMode = .cinematicExtended
 
         DispatchQueue.main.async {

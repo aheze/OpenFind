@@ -236,6 +236,40 @@ extension SettingsData {
                             )
                         ],
                         description: .dynamic(identifier: .pauseScanningAfter)
+                    ),
+                    .init(
+                        header: "Video Stabilization",
+                        rows: [
+                            .init(
+                                configuration: .picker(
+                                    title: "Stabilization",
+                                    choices: [
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.StabilizationMode.off.getTitle(),
+                                            storageValue: Settings.Values.StabilizationMode.off.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.StabilizationMode.standard.getTitle(),
+                                            storageValue: Settings.Values.StabilizationMode.standard.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.StabilizationMode.cinematic.getTitle(),
+                                            storageValue: Settings.Values.StabilizationMode.cinematic.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.StabilizationMode.cinematicExtended.getTitle(),
+                                            storageValue: Settings.Values.StabilizationMode.cinematicExtended.rawValue
+                                        ),
+                                        SettingsRow.PickerChoice(
+                                            title: Settings.Values.StabilizationMode.auto.getTitle(),
+                                            storageValue: Settings.Values.StabilizationMode.auto.rawValue
+                                        )
+                                    ],
+                                    storage: \RealmModel.$cameraStabilizationMode
+                                )
+                            )
+                        ],
+                        description: .dynamic(identifier: .cameraStabilizationMode)
                     )
                 ]
             )

@@ -31,8 +31,6 @@ class RealmModel: ObservableObject {
     /// If denied or lists added, set this to true anyway.
     @Saved("addedListsBefore") var addedListsBefore = false
 
-    
-
     /// once this reaches 100, then 200, then 1000, ask for a review
     @Saved(data.experiencePoints.key) var experiencePoints = data.experiencePoints.value
 
@@ -74,6 +72,7 @@ class RealmModel: ObservableObject {
     @Saved(data.cameraHapticFeedbackLevel.key) var cameraHapticFeedbackLevel = data.cameraHapticFeedbackLevel.value
     @Saved(data.cameraScanningFrequency.key) var cameraScanningFrequency = data.cameraScanningFrequency.value
     @Saved(data.cameraScanningDurationUntilPause.key) var cameraScanningDurationUntilPause = data.cameraScanningDurationUntilPause.value
+    @Saved(data.cameraStabilizationMode.key) var cameraStabilizationMode = data.cameraStabilizationMode.value
 
     // MARK: Lists
 
@@ -122,6 +121,7 @@ class RealmModel: ObservableObject {
         _cameraHapticFeedbackLevel.configureValueChanged(with: self)
         _cameraScanningFrequency.configureValueChanged(with: self)
         _cameraScanningDurationUntilPause.configureValueChanged(with: self)
+        _cameraStabilizationMode.configureValueChanged(with: self)
 
         _listsSortBy.configureValueChanged(with: self)
     }

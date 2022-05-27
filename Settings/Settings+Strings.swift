@@ -60,6 +60,21 @@ extension Settings.StringIdentifier {
                     return "Pause the live preview after \(title) if no text is detected."
                 }
             }
+        case .cameraStabilizationMode:
+            if let mode = Settings.Values.StabilizationMode(rawValue: realmModel.cameraStabilizationMode) {
+                switch mode {
+                case .off:
+                    return "No video stabilization."
+                case .standard:
+                    return "Standard video stabilization — produces steadier frames, but narrows the FOV and could be slightly slower."
+                case .cinematic:
+                    return "Cinematic video stabilization — produces steadier frames, but narrows the FOV and will be slightly slower."
+                case .cinematicExtended:
+                    return "IT'S MORBIN' TIME!"
+                case .auto:
+                    return "Auto video stabilization based on device capabilities."
+                }
+            }
         case .photosResultsInsertNewMode:
             if let photosResultsInsertNewMode = Settings.Values.PhotosResultsInsertNewMode(rawValue: realmModel.photosResultsInsertNewMode) {
                 switch photosResultsInsertNewMode {

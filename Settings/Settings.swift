@@ -6,6 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 enum Settings {
@@ -37,6 +38,7 @@ enum Settings {
         case keepWhitespace
         case filterLists
         case scanningFrequency
+        case cameraStabilizationMode
         case pauseScanningAfter
         case photosResultsInsertNewMode
     }
@@ -302,6 +304,46 @@ enum Settings {
                     return "0.75 Seconds"
                 case .oneSecond:
                     return "1 Second"
+                }
+            }
+        }
+
+        enum StabilizationMode: String, CaseIterable, Identifiable {
+            var id: Self { self }
+
+            case off
+            case standard
+            case cinematic
+            case cinematicExtended
+            case auto
+
+            func getAVCaptureVideoStabilizationMode() -> AVCaptureVideoStabilizationMode {
+                switch self {
+                case .off:
+                    return .off
+                case .standard:
+                    return .standard
+                case .cinematic:
+                    return .cinematic
+                case .cinematicExtended:
+                    return .cinematicExtended
+                case .auto:
+                    return .auto
+                }
+            }
+
+            func getTitle() -> String {
+                switch self {
+                case .off:
+                    return "Off"
+                case .standard:
+                    return "Standard"
+                case .cinematic:
+                    return "Cinematic"
+                case .cinematicExtended:
+                    return "Cinematic Extended"
+                case .auto:
+                    return "Auto"
                 }
             }
         }
