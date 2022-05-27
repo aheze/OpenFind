@@ -241,7 +241,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rK7-Wx-OtW">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rK7-Wx-OtW" customClass="ManualScrollView" customModule="FindPhotos" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qD1-tb-8vt">
@@ -337,7 +337,7 @@
                         <outlet property="contentView" destination="qD1-tb-8vt" id="jGq-fg-Y03"/>
                         <outlet property="infoViewContainer" destination="BaS-Fz-cut" id="3RD-wI-Uvj"/>
                         <outlet property="infoViewContainerHeightC" destination="r3Q-6x-J8n" id="9SP-1B-JWl"/>
-                        <outlet property="scrollView" destination="rK7-Wx-OtW" id="Te2-2I-IJb"/>
+                        <outlet property="scrollView" destination="rK7-Wx-OtW" id="sEW-x6-Zuj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keI-tt-KQh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

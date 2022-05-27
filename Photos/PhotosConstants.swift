@@ -42,6 +42,8 @@ enum PhotosCellConstants {
 
 enum PhotosSlidesConstants {
     static var infoHeightPercentageOfScreen = CGFloat(0.4)
+    
+    static var notesHeight = CGFloat(150)
 }
 
 enum PhotosResultsCellConstants {

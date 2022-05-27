@@ -27,7 +27,7 @@ class ListsDetailViewController: UIViewController, Searchable, NavigationNamed {
     var popoversOptionsButton: UIButton?
     var popoversMenu: Templates.UIKitMenu? /// if under iOS 14, this will contain the popovers menu.
     
-    @IBOutlet var scrollView: ListsDetailScrollView!
+    @IBOutlet var scrollView: ManualScrollView!
     @IBOutlet var contentView: UIView!
     
     /// has padding on the sides

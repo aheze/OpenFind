@@ -15,7 +15,8 @@ class EditableTextViewModel: ObservableObject {
     @Published var isEditing = false
     var endEditing: (() -> Void)?
 
-    var keyboardShown: ((CGFloat?) -> Void)?
+    @Published var keyboardHeight: CGFloat?
+//    var keyboardShown: ((CGFloat?) -> Void)?
 }
 
 struct EditableTextView: UIViewRepresentable {
@@ -28,7 +29,7 @@ struct EditableTextView: UIViewRepresentable {
         view.delegate = context.coordinator
         view.font = UIFont.preferredFont(forTextStyle: .body)
 
-        listenToKeyboard()
+        context.coordinator.listenToKeyboard()
 
         model.getFrameForRange = { [weak view] start, end in
             if let frame = view?.getFrame(start: start, end: end) {
@@ -52,6 +53,7 @@ struct EditableTextView: UIViewRepresentable {
 
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: EditableTextView
+        var currentKeyboardHeight: CGFloat?
 
         init(_ parent: EditableTextView) {
             self.parent = parent
@@ -82,7 +84,7 @@ extension EditableTextView.Coordinator {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardDidHide),
-            name: UIResponder.keyboardDidHideNotification,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -92,11 +94,16 @@ extension EditableTextView.Coordinator {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
 
-            parent.model.keyboardShown?(keyboardHeight)
+            /// only modify and call the `sink` on `parent.model.keyboardHeight` if the height changed - prevent over-scrolling
+            if currentKeyboardHeight.map({ $0 != keyboardHeight }) ?? true {
+                parent.model.keyboardHeight = keyboardHeight
+            }
+            currentKeyboardHeight = keyboardHeight
         }
     }
 
     @objc func keyboardDidHide(_ notification: Notification) {
-        parent.model.keyboardShown?(nil)
+        parent.model.keyboardHeight = nil
+        currentKeyboardHeight = nil
     }
 }

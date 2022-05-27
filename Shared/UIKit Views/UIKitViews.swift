@@ -8,11 +8,16 @@
 
 import UIKit
 
+/// prevent auto scrolling
+class ManualScrollView: UIScrollView {
+    override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {}
+}
+
 class PaddedLabel: UILabel {
     var textInsets = UIEdgeInsets.zero {
         didSet { invalidateIntrinsicContentSize() }
     }
-    
+
     override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         let insetRect = bounds.inset(by: textInsets)
         let textRect = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
@@ -24,14 +29,13 @@ class PaddedLabel: UILabel {
         )
         return textRect.inset(by: invertedInsets)
     }
-    
+
     override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: textInsets))
     }
 }
 
 class PaddedTextField: UITextField, UITextDropDelegate {
-
     var padding = UIEdgeInsets.zero {
         didSet { invalidateIntrinsicContentSize() }
     }
@@ -47,12 +51,12 @@ class PaddedTextField: UITextField, UITextDropDelegate {
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         textDropDelegate = self
     }
-    
+
     func textDroppableView(_ textDroppableView: UIView & UITextDroppable, proposalForDrop drop: UITextDropRequest) -> UITextDropProposal {
         return UITextDropProposal(operation: .cancel)
     }

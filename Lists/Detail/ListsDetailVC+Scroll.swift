@@ -54,7 +54,3 @@ extension ListsDetailViewController {
         }
     }
 }
-
-class ListsDetailScrollView: UIScrollView {
-    override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {}
-}

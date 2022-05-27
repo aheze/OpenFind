@@ -24,7 +24,6 @@ struct PhotosSlidesInfoView: View {
             return note
         } set: { newValue in
             let note = PhotoMetadataNote(string: newValue)
-            print("update!!")
             realmModel.container.updatePhotoMetadata(metadata: photo.metadata, text: nil, note: note)
         }
 
@@ -47,7 +46,6 @@ struct PhotosSlidesInfoView: View {
                 Text(verbatim: "\(photo.asset.originalFilename ?? "Photo")")
 
                 EditableTextView(model: textModel, text: noteBinding)
-                    .frame(height: 140)
                     .padding(12)
                     .frame(maxWidth: .infinity)
                     .overlay(
@@ -67,6 +65,7 @@ struct PhotosSlidesInfoView: View {
                         alignment: .topTrailing
                     )
                     .blueBackground()
+                    .frame(height: PhotosSlidesConstants.notesHeight)
 
                 Text(verbatim: "\(getDateString(from: photo))")
                     .padding(12)

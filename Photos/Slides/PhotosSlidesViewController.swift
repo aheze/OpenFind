@@ -41,7 +41,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     lazy var toolbarView = PhotosSlidesToolbarView(model: model)
 
     /// includes collection view and info view
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var scrollView: ManualScrollView!
     @IBOutlet var contentView: UIView!
 
     @IBOutlet var collectionViewToolbarContainer: UIView!
@@ -51,6 +51,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
 
     // MARK: Info
+
     @IBOutlet var infoViewContainer: UIView!
     @IBOutlet var infoViewContainerHeightC: NSLayoutConstraint!
     lazy var infoNoteHighlightViewModel = HighlightsViewModel()

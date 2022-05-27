@@ -26,6 +26,23 @@ extension PhotosSlidesViewController {
             let infoHeight = self.getInfoHeight() /// max height
             self.infoViewContainerHeightC.constant = max(infoHeight, size.height + self.tabViewModel.tabBarAttributes.backgroundHeight)
         }
+
+        infoNoteTextViewModel.$keyboardHeight
+            .dropFirst()
+            .sink { [weak self] height in
+                guard let self = self else { return }
+                let bottomPadding = height ?? 0
+
+                UIView.animate(withDuration: 0.5) {
+                    if height != nil {
+                        self.scrollView.contentOffset.y += PhotosSlidesConstants.notesHeight
+                    }
+
+                    self.scrollView.contentInset.bottom = bottomPadding
+                    self.scrollView.verticalScrollIndicatorInsets.bottom = bottomPadding
+                }
+            }
+            .store(in: &realmModel.cancellables)
     }
 
     func getInfoHeight() -> CGFloat {
