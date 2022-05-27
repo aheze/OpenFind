@@ -42,21 +42,7 @@ struct KeyboardToolbarView: View {
                     VisualEffectView(.systemChromeMaterial)
                         .edgesIgnoringSafeArea(.all)
                 )
-                .overlay(
-                    Color.clear
-                        .overlay(
-                            Rectangle()
-                                .strokeBorder(UIColor.secondaryLabel.color, lineWidth: 0.25)
-                                .padding(-0.25)
-                        )
-                        .mask(
-                            Rectangle()
-                                .padding(.top, -0.25) /// only show border on top
-                        )
-                        .frame(height: 200),
-
-                    alignment: .top
-                )
+                .addTopBorder()
                 .offset(x: 0, y: displayedLists.isEmpty ? SearchConstants.toolbarHeight : 0)
                 .animation(
                     .spring(

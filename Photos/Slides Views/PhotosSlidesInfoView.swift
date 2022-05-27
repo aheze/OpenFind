@@ -17,62 +17,76 @@ struct PhotosSlidesInfoView: View {
     var body: some View {
         let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
 
-        VStack(alignment: .leading) {
-            Text(verbatim: "\(photo.asset.originalFilename ?? "Photo")")
-
-            Text(verbatim: "\(getDateString(from: photo))")
-                .padding(12)
-                .frame(maxWidth: .infinity)
-                .blueBackground()
-
-            HStack {
-                let ignored = photo.isIgnored
-
-                if !ignored {
-                    let (isScanned, scanTitle) = getScanState(from: photo)
-                    PhotosScanningInfoButton(
-                        title: scanTitle,
-                        description: isScanned ? "Tap to Rescan" : nil,
-                        isOn: isScanned
-                    ) {
-                        scanNow()
-                    }
-                    .transition(.scale(scale: 0.5).combined(with: .opacity))
-                }
-
-                PhotosScanningInfoButton(
-                    title: ignored ? "Ignored" : "Ignore",
-                    description: ignored ? "Tap to Unignore" : nil,
-                    isOn: ignored
-                ) {
-                    ignore(photo: photo)
-                }
+        VStack(spacing: 0) {
+            if infoModel.showHandle {
+                Rectangle()
+                    .fill(UIColor.secondaryLabel.color)
+                    .frame(height: 0.4)
+                    .opacity(0.75)
+                
+                Capsule()
+                    .fill(UIColor.secondaryLabel.color)
+                    .frame(width: 36, height: 5)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
             }
-            .fixedSize(horizontal: false, vertical: true)
 
-            Group {
-                if let text = realmModel.container.getText(from: photo.asset.localIdentifier) {
-                    if
-                        photo.metadata?.dateScanned != nil,
-                        !photo.isIgnored,
-                        !Constants.versionsWithSlantedTextSupport.contains(text.scannedInVersion ?? "")
-                    {
-                        Button {
+            VStack(alignment: .leading) {
+                Text(verbatim: "\(photo.asset.originalFilename ?? "Photo")")
+
+                Text(verbatim: "\(getDateString(from: photo))")
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .blueBackground()
+
+                HStack {
+                    let ignored = photo.isIgnored
+
+                    if !ignored {
+                        let (isScanned, scanTitle) = getScanState(from: photo)
+                        PhotosScanningInfoButton(
+                            title: scanTitle,
+                            description: isScanned ? "Tap to Rescan" : nil,
+                            isOn: isScanned
+                        ) {
                             scanNow()
-                        } label: {
-                            Text("Rescan to support slanted text")
+                        }
+                        .transition(.scale(scale: 0.5).combined(with: .opacity))
+                    }
+
+                    PhotosScanningInfoButton(
+                        title: ignored ? "Ignored" : "Ignore",
+                        description: ignored ? "Tap to Unignore" : nil,
+                        isOn: ignored
+                    ) {
+                        ignore(photo: photo)
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
+
+                Group {
+                    if let text = realmModel.container.getText(from: photo.asset.localIdentifier) {
+                        if
+                            photo.metadata?.dateScanned != nil,
+                            !photo.isIgnored,
+                            !Constants.versionsWithSlantedTextSupport.contains(text.scannedInVersion ?? "")
+                        {
+                            Button {
+                                scanNow()
+                            } label: {
+                                Text("Rescan to support slanted text")
+                            }
                         }
                     }
                 }
+                .foregroundColor(UIColor.secondaryLabel.color)
             }
-            .foregroundColor(UIColor.secondaryLabel.color)
+            .foregroundColor(.accent)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .padding(16)
         }
-        .foregroundColor(.accent)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding(16)
         .edgesIgnoringSafeArea(.all)
         .sizeReader { size in
-
             infoModel.sizeChanged?(size)
         }
     }

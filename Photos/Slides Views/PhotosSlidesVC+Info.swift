@@ -12,6 +12,7 @@ import SwiftUI
 extension PhotosSlidesViewController {
     func setupInfo() {
         let infoModel = PhotoSlidesInfoViewModel()
+        infoModel.showHandle = true
         let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel, infoModel: infoModel)
         addChildViewController(viewController, in: infoViewContainer)
         infoViewContainer.clipsToBounds = true

@@ -26,6 +26,26 @@ public extension View {
     }
 }
 
+extension View {
+    func addTopBorder() -> some View {
+        overlay(
+            Color.clear
+                .overlay(
+                    Rectangle()
+                        .strokeBorder(UIColor.secondaryLabel.color, lineWidth: 0.25)
+                        .padding(-0.25)
+                )
+                .mask(
+                    Rectangle()
+                        .padding(.top, -0.25) /// only show border on top
+                )
+                .frame(height: 200),
+
+            alignment: .top
+        )
+    }
+}
+
 struct ContentFrameReaderPreferenceKey: PreferenceKey {
     static var defaultValue: CGRect { return CGRect() }
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) { value = nextValue() }
