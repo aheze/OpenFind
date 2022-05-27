@@ -72,4 +72,7 @@ enum PhotosResultsCellConstants {
 
     /// width of the image view
     static var leftContainerWidth = CGFloat(100)
+    
+    static var noteHeight = CGFloat(100)
+    static var rightSpacing = CGFloat(12)
 }

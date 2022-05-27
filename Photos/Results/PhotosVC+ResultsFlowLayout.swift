@@ -54,7 +54,15 @@ extension PhotosViewController {
             height = photosResultsCellLayout.getCellHeight()
         }
         
-        let sizes = Array(repeating: CGSize(width: columnWidth, height: height), count: displayedFindPhotos.count)
+        var sizes = Array(repeating: CGSize(width: columnWidth, height: height), count: displayedFindPhotos.count)
+        for index in displayedFindPhotos.indices {
+            let photo = displayedFindPhotos[index].photo
+            if realmModel.container.getNote(from: photo.asset.localIdentifier) != nil {
+                var height = sizes[index].height
+                height += PhotosResultsCellConstants.noteHeight + PhotosResultsCellConstants.rightSpacing
+                sizes[index].height = height
+            }
+        }
         
         return sizes
     }

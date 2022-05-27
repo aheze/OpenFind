@@ -85,9 +85,6 @@ class PhotosResultsCell: UICollectionViewCell {
     var highlightsViewController: HighlightsViewController?
     var representedAssetIdentifier: String?
     
-    var tapped: (() -> Void)?
-    var appeared: (() -> Void)?
-    var disappeared: (() -> Void)?
     @IBOutlet var baseView: UIView! /// inside ContentView. Used to be a button, then I switched to just selection
     
     /// `imageView` on left, `rightStackView` on right
@@ -115,6 +112,10 @@ class PhotosResultsCell: UICollectionViewCell {
     @IBOutlet var descriptionHighlightsContainerView: UIView!
     @IBOutlet var descriptionTextView: UITextView!
     
+    @IBOutlet var descriptionNotesContainerView: UIView!
+    @IBOutlet var descriptionNotesTextView: UITextView!
+    @IBOutlet var descriptionNotesHeightC: NSLayoutConstraint!
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         resultsLabel.layer.cornerRadius = resultsLabel.bounds.height / 2
@@ -131,11 +132,17 @@ class PhotosResultsCell: UICollectionViewCell {
         descriptionTextView.contentInset = .zero
         descriptionTextView.textContainerInset = .zero
         descriptionTextView.backgroundColor = .clear
+        descriptionTextView.isEditable = false
+        
+        descriptionNotesTextView.contentInset = .zero
+        descriptionNotesTextView.textContainerInset = .init(top: 8, left: 6, bottom: 8, right: 6)
+        descriptionNotesTextView.backgroundColor = .secondarySystemBackground
+        descriptionNotesTextView.isEditable = false
+        descriptionNotesContainerView.clipsToBounds = true
+        descriptionNotesContainerView.layer.cornerRadius = 16
         
         leftContainerView.addSubview(view)
         view.pinEdgesToSuperview()
-        
-        descriptionTextView.isEditable = false
         
         let c = PhotosResultsCellConstants.self
         resultsLabel.backgroundColor = c.resultsLabelBackgroundColor
@@ -158,15 +165,14 @@ class PhotosResultsCell: UICollectionViewCell {
         titleLabel.font = c.titleFont
         resultsLabel.font = c.resultsFont
         descriptionTextView.font = c.descriptionFont
+        descriptionNotesTextView.font = c.descriptionFont
         
         titleLabel.textColor = c.titleTextColor
         resultsLabel.textColor = c.resultsLabelTextColor
         descriptionTextView.textColor = c.descriptionTextColor
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
+        descriptionNotesTextView.textColor = .secondaryLabel
         
-        disappeared?()
+        rightStackView.spacing = c.rightSpacing
+        descriptionNotesHeightC.constant = 0
     }
 }

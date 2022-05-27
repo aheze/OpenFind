@@ -154,16 +154,43 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zka-9d-UMr">
-                                                                <rect key="frame" x="0.0" y="20.5" width="171" height="367.5"/>
+                                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="zka-9d-UMr">
+                                                                <rect key="frame" x="0.0" y="20.5" width="171" height="317.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-xJ-UFv">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="367.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="317.5"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lPc-81-AcF">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="367.5"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lPc-81-AcF">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="317.5"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat.</mutableString>
+                                                                        <color key="textColor" systemColor="labelColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    </textView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="lPc-81-AcF" secondAttribute="bottom" id="Ign-bU-38O"/>
+                                                                    <constraint firstItem="lPc-81-AcF" firstAttribute="leading" secondItem="zka-9d-UMr" secondAttribute="leading" id="OhC-zD-Z7e"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="pEK-xJ-UFv" secondAttribute="bottom" id="ZPe-kE-eFe"/>
+                                                                    <constraint firstItem="pEK-xJ-UFv" firstAttribute="leading" secondItem="zka-9d-UMr" secondAttribute="leading" id="eg0-CG-1d7"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="lPc-81-AcF" secondAttribute="trailing" id="fAM-UE-JHd"/>
+                                                                    <constraint firstItem="pEK-xJ-UFv" firstAttribute="top" secondItem="zka-9d-UMr" secondAttribute="top" id="uaH-wE-U77"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pEK-xJ-UFv" secondAttribute="trailing" id="vsg-6z-kbO"/>
+                                                                    <constraint firstItem="lPc-81-AcF" firstAttribute="top" secondItem="zka-9d-UMr" secondAttribute="top" id="xZc-5U-Vqy"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EpC-32-i3k">
+                                                                <rect key="frame" x="0.0" y="338" width="171" height="50"/>
+                                                                <subviews>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pnm-bu-IUX">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="171" height="50"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="50" id="jyJ-jH-f4N"/>
+                                                                        </constraints>
                                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu </string>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -172,14 +199,10 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="bottom" secondItem="pEK-xJ-UFv" secondAttribute="bottom" id="Adb-PX-24v"/>
-                                                                    <constraint firstItem="lPc-81-AcF" firstAttribute="leading" secondItem="zka-9d-UMr" secondAttribute="leading" id="OhC-zD-Z7e"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="lPc-81-AcF" secondAttribute="bottom" id="WEy-O4-yHZ"/>
-                                                                    <constraint firstItem="pEK-xJ-UFv" firstAttribute="leading" secondItem="zka-9d-UMr" secondAttribute="leading" id="eg0-CG-1d7"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="lPc-81-AcF" secondAttribute="trailing" id="fAM-UE-JHd"/>
-                                                                    <constraint firstItem="pEK-xJ-UFv" firstAttribute="top" secondItem="zka-9d-UMr" secondAttribute="top" id="uaH-wE-U77"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="pEK-xJ-UFv" secondAttribute="trailing" id="vsg-6z-kbO"/>
-                                                                    <constraint firstItem="lPc-81-AcF" firstAttribute="top" secondItem="zka-9d-UMr" secondAttribute="top" id="xZc-5U-Vqy"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pnm-bu-IUX" secondAttribute="trailing" id="Akw-bi-mDu"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="pnm-bu-IUX" secondAttribute="bottom" id="Tja-oG-Ht6"/>
+                                                                    <constraint firstItem="pnm-bu-IUX" firstAttribute="leading" secondItem="EpC-32-i3k" secondAttribute="leading" id="TuJ-N4-nJf"/>
+                                                                    <constraint firstItem="pnm-bu-IUX" firstAttribute="top" secondItem="EpC-32-i3k" secondAttribute="top" id="lJt-LS-VlU"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -210,6 +233,9 @@
                                 <outlet property="baseView" destination="4hh-A7-7ZC" id="OuD-SI-9QA"/>
                                 <outlet property="descriptionContainerView" destination="zka-9d-UMr" id="goU-4i-mql"/>
                                 <outlet property="descriptionHighlightsContainerView" destination="pEK-xJ-UFv" id="oxG-8g-xNY"/>
+                                <outlet property="descriptionNotesContainerView" destination="EpC-32-i3k" id="yiI-XN-IU4"/>
+                                <outlet property="descriptionNotesHeightC" destination="jyJ-jH-f4N" id="sKo-B9-613"/>
+                                <outlet property="descriptionNotesTextView" destination="pnm-bu-IUX" id="4jU-NK-OjX"/>
                                 <outlet property="descriptionTextView" destination="lPc-81-AcF" id="qqw-zf-XDM"/>
                                 <outlet property="leftContainerView" destination="oXg-jy-yw4" id="GWh-jT-GTd"/>
                                 <outlet property="leftContainerViewWidthC" destination="sz8-2z-I8i" id="VO5-xe-zkp"/>

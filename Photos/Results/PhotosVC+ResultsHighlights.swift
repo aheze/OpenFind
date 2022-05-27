@@ -107,6 +107,15 @@ extension PhotosViewController {
 extension PhotosViewController {
     /// populate the cell with actual finding data
     func configureResultsCellDescription(cell: PhotosResultsCell, findPhoto: FindPhoto) {
+        if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier) {
+            cell.descriptionNotesContainerView.isHidden = false
+            cell.descriptionNotesHeightC.constant = PhotosResultsCellConstants.noteHeight
+            cell.descriptionNotesTextView.text = note.string
+        } else {
+            cell.descriptionNotesContainerView.isHidden = true
+            cell.descriptionNotesHeightC.constant = 0
+        }
+        
         var description: FindPhoto.Description
         if let existingDescription = findPhoto.description {
             description = existingDescription
