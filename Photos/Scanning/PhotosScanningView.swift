@@ -98,7 +98,7 @@ struct PhotosScanningViewHeader: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
 
-                        if note == .photosFailedToScanBecauseInCloud {
+                        if case .photosFailedToScan(_) = note {
                             PhotosScanningButton(image: nil, title: "Try Again") {
                                 model.removeNote(note)
                                 model.loadAndStartScanning()
@@ -154,6 +154,14 @@ struct PhotosScanningViewHeader: View {
                     .padding(SettingsConstants.rowHorizontalInsets)
                     .background(UIColor.systemBackground.color)
                     .cornerRadius(SettingsConstants.sectionCornerRadius)
+                }
+                
+                Button {
+                    model.loadAndStartScanning()
+                } label: {
+                    Text("Stuck Scanning? Tap To Refresh")
+                        .font(UIFont.preferredCustomFont(forTextStyle: .caption1, weight: .thin).font)
+                        .foregroundColor(UIColor.secondaryLabel.color)
                 }
 
                 Spacer()

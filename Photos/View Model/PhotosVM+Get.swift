@@ -44,6 +44,10 @@ extension PhotosViewModel {
             options.progressHandler = { [weak self] progress, error, _, _ in
                 guard let self = self else { return }
                 self.addNote(.downloadingFromCloud)
+
+                if let error = error {
+                    self.addNote(.photosFailedToScan(error: error.localizedDescription))
+                }
             }
             imageManager.requestImage(
                 for: asset,
@@ -51,6 +55,13 @@ extension PhotosViewModel {
                 contentMode: .aspectFit,
                 options: options
             ) { image, info in
+                if let error = info?[PHImageErrorKey] as? Error {
+                    self.addNote(.photosFailedToScan(error: error.localizedDescription))
+                }
+
+                if let image = image, image.size == .zero {
+                    self.addNote(.photosFailedToScan(error: "Some photos weren't downloaded completely."))
+                }
                 continuation.resume(returning: image)
             }
         }
@@ -83,5 +94,3 @@ extension PhotosViewModel {
         }
     }
 }
-
-

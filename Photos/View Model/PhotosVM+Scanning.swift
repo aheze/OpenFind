@@ -55,17 +55,18 @@ extension PhotosViewModel {
         /// skip
         photosToScan = photosToScan.filter { $0 != photo }
 
-        addNote(.photosFailedToScanBecauseInCloud)
         resumeScanning()
     }
 
     func startScanning() {
-        scanningState = .scanningAllPhotos
-        if let lastPhoto = photosToScan.last {
-            var findOptions = FindOptions()
-            findOptions.priority = .waitUntilNotBusy
-            findOptions.action = .photosScanning
-            scanPhoto(lastPhoto, findOptions: findOptions, inBatch: true)
+        DispatchQueue.main.async {
+            self.scanningState = .scanningAllPhotos
+            if let lastPhoto = self.photosToScan.last {
+                var findOptions = FindOptions()
+                findOptions.priority = .waitUntilNotBusy
+                findOptions.action = .photosScanning
+                self.scanPhoto(lastPhoto, findOptions: findOptions, inBatch: true)
+            }
         }
     }
 

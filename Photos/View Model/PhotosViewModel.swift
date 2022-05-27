@@ -197,17 +197,32 @@ class PhotosViewModel: ObservableObject {
     }
 
     /// errors, warning, notes
-    enum PhotosNote: Identifiable {
-        var id: Self { self }
+    enum PhotosNote: Identifiable, Equatable {
+        var id: String {
+            switch self {
+            case .downloadingFromCloud:
+                return "downloadingFromCloud"
+            case .photosFailedToScan(error: let error):
+                return error
+            }
+        }
+        
+        static func == (lhs: PhotosNote, rhs: PhotosNote) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
 
         case downloadingFromCloud
-        case photosFailedToScanBecauseInCloud
+        case photosFailedToScan(error: String)
 
         func getTitle() -> String {
             switch self {
             case .downloadingFromCloud:
                 return "Downloading photos from iCloud."
-            case .photosFailedToScanBecauseInCloud:
+            case .photosFailedToScan:
                 return "Failed to scan some photos."
             }
         }
@@ -215,9 +230,9 @@ class PhotosViewModel: ObservableObject {
         func getDescription() -> String {
             switch self {
             case .downloadingFromCloud:
-                return "Scanning may be slightly slower depending on your internet speed."
-            case .photosFailedToScanBecauseInCloud:
-                return "This could happen if you're using iCloud photos. To scan these photos, connect to the internet and download them to your device."
+                return "Find fetches photos through Apple's built in APIs — all network connections are handled by Apple and not exposed to the app. Scanning may be slightly slower depending on your internet speed. "
+            case .photosFailedToScan(error: let error):
+                return "Error: [\(error)]. This could happen if you're using iCloud photos. To scan these photos, connect to the internet and download them to your device."
             }
         }
 
@@ -225,7 +240,7 @@ class PhotosViewModel: ObservableObject {
             switch self {
             case .downloadingFromCloud:
                 return "icloud"
-            case .photosFailedToScanBecauseInCloud:
+            case .photosFailedToScan:
                 return "exclamationmark.icloud"
             }
         }
