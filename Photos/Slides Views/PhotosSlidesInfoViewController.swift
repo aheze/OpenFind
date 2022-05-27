@@ -8,13 +8,19 @@
 
 import SwiftUI
 
+class PhotoSlidesInfoViewModel: ObservableObject {
+    var sizeChanged: ((CGSize) -> Void)?
+}
+
 class PhotosSlidesInfoViewController: UIViewController {
     var model: PhotosViewModel
     var realmModel: RealmModel
-    
-    init(model: PhotosViewModel, realmModel: RealmModel) {
+    var infoModel: PhotoSlidesInfoViewModel
+
+    init(model: PhotosViewModel, realmModel: RealmModel, infoModel: PhotoSlidesInfoViewModel) {
         self.model = model
         self.realmModel = realmModel
+        self.infoModel = infoModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,7 +36,7 @@ class PhotosSlidesInfoViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .systemBackground
 
-        let contentView = PhotosSlidesInfoView(model: model, realmModel: realmModel)
+        let contentView = PhotosSlidesInfoView(model: model, realmModel: realmModel, infoModel: infoModel)
         let hostingController = UIHostingController(rootView: contentView)
         hostingController.view.frame = view.bounds
         hostingController.view.backgroundColor = .clear

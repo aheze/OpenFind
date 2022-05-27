@@ -12,6 +12,7 @@ import SwiftUI
 struct PhotosSlidesInfoView: View {
     @ObservedObject var model: PhotosViewModel
     @ObservedObject var realmModel: RealmModel
+    @ObservedObject var infoModel: PhotoSlidesInfoViewModel
 
     var body: some View {
         let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
@@ -70,6 +71,10 @@ struct PhotosSlidesInfoView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(16)
         .edgesIgnoringSafeArea(.all)
+        .sizeReader { size in
+
+            infoModel.sizeChanged?(size)
+        }
     }
 
     func scanNow() {

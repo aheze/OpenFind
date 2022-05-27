@@ -19,8 +19,6 @@ extension LaunchViewController {
         
         listen()
         
-        print("Set uyp!!!")
-        
         /// SwiftUI overlay
         setupView()
         

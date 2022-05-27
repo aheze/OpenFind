@@ -16,7 +16,6 @@ extension PhotosSlidesViewController {
 
         /// don't use `scrollView.bounds.height`, it will be less
         collectionViewContainerHeightC.constant = view.bounds.height
-        infoViewContainerHeightC.constant = 0
     }
 }
 
@@ -34,18 +33,17 @@ extension PhotosSlidesViewController {
         guard scrollView == self.scrollView else { return }
         let currentOffset = scrollView.contentOffset.y /// make positive for now
         let threshold = getInfoHeight() / 4 * 3
+
         if currentOffset < threshold {
             targetContentOffset.pointee.y = 0
             model.slidesState?.toolbarInformationOn = false
-        } else {
-            targetContentOffset.pointee.y = getInfoHeight()
         }
     }
 
     /// reset to hidden after `scrollViewWillEndDragging`
     func infoScrollViewDidEndDecelerating() {
         if let slidesState = model.slidesState, !slidesState.toolbarInformationOn {
-            resetInfoToHidden()
+            resetInfoToHidden(scrollIfNeeded: false)
         }
     }
 }

@@ -28,6 +28,7 @@ extension PhotosSlidesViewController {
                 slidesState.toolbarInformationOn
             {
                 let offset = self.scrollView.contentOffset.y
+
                 let infoHeight = self.getInfoHeight()
                 let extraHeight = infoHeight - offset
 

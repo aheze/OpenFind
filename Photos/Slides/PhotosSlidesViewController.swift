@@ -134,7 +134,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        resetInfoToHidden()
+        resetInfoToHidden(scrollIfNeeded: true)
         searchViewModel.dismissKeyboard?()
     }
 
@@ -152,7 +152,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        resetInfoToHidden()
+        resetInfoToHidden(scrollIfNeeded: true)
         collectionViewContainerHeightC.constant = size.height
 
         coordinator.animate { _ in

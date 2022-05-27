@@ -11,9 +11,20 @@ import SwiftUI
 
 extension PhotosSlidesViewController {
     func setupInfo() {
-        let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel)
+        let infoModel = PhotoSlidesInfoViewModel()
+        let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel, infoModel: infoModel)
         addChildViewController(viewController, in: infoViewContainer)
         infoViewContainer.clipsToBounds = true
+
+        scrollView.isScrollEnabled = false
+        scrollView.alwaysBounceVertical = true
+
+        infoModel.sizeChanged = { [weak self] size in
+            guard let self = self else { return }
+            let infoHeight = self.getInfoHeight() /// max height
+//            self.infoViewContainerHeightC.constant = max(infoHeight, size.height)
+            self.infoViewContainerHeightC.constant = 500
+        }
     }
 
     func getInfoHeight() -> CGFloat {
@@ -43,7 +54,7 @@ extension PhotosSlidesViewController {
                 let popover = Popover(attributes: attributes) { [weak self] in
                     if let self = self {
                         ScrollView {
-                            PhotosSlidesInfoView(model: self.model, realmModel: self.realmModel)
+                            PhotosSlidesInfoView(model: self.model, realmModel: self.realmModel, infoModel: PhotoSlidesInfoViewModel())
                         }
                         .background(UIColor.systemBackground.color)
                         .frame(width: 300)
@@ -54,16 +65,18 @@ extension PhotosSlidesViewController {
                 }
                 present(popover)
             } else {
-                infoViewContainerHeightC.constant = getInfoHeight()
                 dismissPanGesture.isEnabled = false
-                scrollView.alwaysBounceVertical = true
+                scrollView.isScrollEnabled = true
                 offset = getInfoHeight()
             }
         } else {
-            resetInfoToHidden()
             offset = 0
+            resetInfoToHidden(scrollIfNeeded: false)
+            collectionViewContainerHeightC.constant = view.bounds.height
         }
 
+        /// first make sure image resizes
+        flowLayout.invalidateLayout()
         UIView.animate(duration: 0.6, dampingFraction: 1) {
             self.scrollView.contentOffset = CGPoint(x: 0, y: offset ?? 0)
 
@@ -74,13 +87,25 @@ extension PhotosSlidesViewController {
     }
 
     /// set constraints to 0
-    func resetInfoToHidden() {
+    func resetInfoToHidden(scrollIfNeeded: Bool) {
         model.slidesState?.toolbarInformationOn = false
-        infoViewContainerHeightC.constant = 0
         dismissPanGesture.isEnabled = true
-        scrollView.alwaysBounceVertical = false
+        scrollView.isScrollEnabled = false
         if let popover = view.popover(tagged: "Popover") {
             popover.dismiss()
+        }
+
+        if scrollIfNeeded {
+            collectionViewContainerHeightC.constant = view.bounds.height
+
+            flowLayout.invalidateLayout()
+            UIView.animate(duration: 0.6, dampingFraction: 1) {
+                self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+
+                /// don't also call `self.flowLayout.invalidateLayout()`, otherwise there will be a glitch
+                /// `currentViewController.setAspectRatio(scaleToFill: show)` also seems to be automatically animated
+                self.scrollView.layoutIfNeeded()
+            }
         }
     }
 }
