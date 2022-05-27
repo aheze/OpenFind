@@ -22,6 +22,7 @@ enum FindContext {
 extension PhotosViewController {
     /// find in all photos, populate `resultsState`, reload collection view
     func find(context: FindContext) {
+        print("Find/\(context)")
         if !model.photosToScan.isEmpty, model.scanningState == .dormant {
             switch context {
             case .findingAfterNewPhotosAdded:
@@ -50,6 +51,7 @@ extension PhotosViewController {
                 allFindPhotos, starredFindPhotos, screenshotsFindPhotos
             ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
             
+            print("Finding and getting.")
             await self.apply(
                 allFindPhotos: allFindPhotos,
                 starredFindPhotos: starredFindPhotos,
