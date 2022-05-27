@@ -122,7 +122,12 @@ extension PhotosViewController {
         model.resultsState?.update(findPhoto: newFindPhoto)
         cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
         
-        loadHighlights(for: cell, lines: description.lines)
+        if realmModel.photosRenderResultsHighlights {
+            loadHighlights(for: cell, lines: description.lines)
+        } else if let highlightsViewController = cell.highlightsViewController {
+            removeChildViewController(highlightsViewController)
+            cell.highlightsViewController = nil
+        }
     }
     
     /// add the highlights for a results cell

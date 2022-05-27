@@ -98,6 +98,17 @@ extension SettingsData {
                     .init(
                         rows: [
                             .init(
+                                configuration: .toggle(
+                                    title: "Render Highlights",
+                                    storage: \RealmModel.$photosRenderResultsHighlights
+                                )
+                            )
+                        ],
+                        description: .constant(string: "Render highlights in the results text excerpt. May have a performance impact on some devices.")
+                    ),
+                    .init(
+                        rows: [
+                            .init(
                                 configuration: .link(
                                     title: "Advanced",
                                     leftIcon: nil,

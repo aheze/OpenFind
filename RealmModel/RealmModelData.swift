@@ -19,6 +19,7 @@ enum TipIdentifier: String {
 
 enum RealmModelData {
     // MARK: Storage
+
     static var experiencePoints = SavedData(key: "experiencePoints", value: 0)
     
     // MARK: General
@@ -53,8 +54,8 @@ enum RealmModelData {
     static var photosMinimumCellLength = SavedData(key: "photosMinimumCellLength", value: CGFloat(80))
     static var photosResultsCellLayout = SavedData(key: "photosResultsCellLayout", value: Settings.Values.PhotosResultsCellLayout.medium.rawValue)
     static var photosResultsInsertNewMode = SavedData(key: "photosResultsInsertNewMode", value: Settings.Values.PhotosResultsInsertNewMode.top.rawValue)
+    static var photosRenderResultsHighlights = SavedData(key: "photosRenderResultsHighlights", value: true) /// load highlights in results
     
-
     // MARK: Camera
     
     static var cameraHapticFeedbackLevel = SavedData(key: "cameraHapticFeedbackLevel", value: Settings.Values.HapticFeedbackLevel.light.rawValue)
