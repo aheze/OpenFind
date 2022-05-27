@@ -15,6 +15,7 @@ class RealmPhotoMetadata: Object {
     @Persisted var isIgnored = false
     @Persisted var dateScanned: Date?
     @Persisted var text: RealmPhotoMetadataText?
+    @Persisted var note: RealmPhotoMetadataNote?
 
     override init() {
         super.init()
@@ -25,13 +26,15 @@ class RealmPhotoMetadata: Object {
         isStarred: Bool,
         isIgnored: Bool,
         dateScanned: Date?,
-        text: RealmPhotoMetadataText?
+        text: RealmPhotoMetadataText?,
+        note: RealmPhotoMetadataNote?
     ) {
         self.assetIdentifier = assetIdentifier
-        self.text = text
         self.isStarred = isStarred
         self.isIgnored = isIgnored
         self.dateScanned = dateScanned
+        self.text = text
+        self.note = note
     }
 
     func getPhotoMetadata() -> PhotoMetadata {
@@ -51,12 +54,23 @@ class RealmPhotoMetadataText: Object {
     @Persisted var scannedInVersion: String?
 
     func getPhotoMetadataText() -> PhotoMetadataText {
-        let metadataText = PhotoMetadataText(
+        let text = PhotoMetadataText(
             sentences: sentences.map { $0.getSentence() },
             scannedInLanguages: self.scannedInLanguages.map { $0 },
             scannedInVersion: self.scannedInVersion
         )
-        return metadataText
+        return text
+    }
+}
+
+class RealmPhotoMetadataNote: Object {
+    @Persisted var string: String
+
+    func getPhotoMetadataNote() -> PhotoMetadataNote {
+        let note = PhotoMetadataNote(
+            string: string
+        )
+        return note
     }
 }
 

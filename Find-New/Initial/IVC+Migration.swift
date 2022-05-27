@@ -148,7 +148,7 @@ extension InitialViewController {
                 if !migratedPhotoMetadatas.isEmpty || !migratedLists.isEmpty {
                     DispatchQueue.main.async {
                         for metadata in migratedPhotoMetadatas {
-                            self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil)
+                            self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil, note: nil)
                         }
 
                         for list in migratedLists {

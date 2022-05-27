@@ -76,7 +76,7 @@ extension RealmContainer {
     /// handles both add or update
     /// if `text` is not nil, also update the text
     /// Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata`
-    func updatePhotoMetadata(metadata: PhotoMetadata?, text: PhotoMetadataText?) {
+    func updatePhotoMetadata(metadata: PhotoMetadata?, text: PhotoMetadataText?, note: PhotoMetadataNote?) {
         guard let metadata = metadata else {
             Debug.log("No metadata.")
             return
@@ -94,6 +94,10 @@ extension RealmContainer {
                     if let text = text {
                         realmMetadata.text = text.getRealmText()
                     }
+                    
+                    if let note = note {
+                        realmMetadata.note = note.getRealmNote()
+                    }
                 }
 
                 if let model = getModel?() {
@@ -105,20 +109,26 @@ extension RealmContainer {
                 Debug.log("Error updating photo metadata: \(error)", .error)
             }
         } else {
-            addPhotoMetadata(metadata: metadata, text: text)
+            addPhotoMetadata(metadata: metadata, text: text, note: note)
         }
     }
 
     /// call this inside `updatePhotoMetadata`
-    private func addPhotoMetadata(metadata: PhotoMetadata, text: PhotoMetadataText?) {
+    private func addPhotoMetadata(
+        metadata: PhotoMetadata,
+        text: PhotoMetadataText?,
+        note: PhotoMetadataNote?
+    ) {
         let text = text?.getRealmText()
+        let note = note?.getRealmNote()
 
         let realmMetadata = RealmPhotoMetadata(
             assetIdentifier: metadata.assetIdentifier,
             isStarred: metadata.isStarred,
             isIgnored: metadata.isIgnored,
             dateScanned: metadata.dateScanned,
-            text: text
+            text: text,
+            note: note
         )
 
         let realm = try! Realm()
@@ -141,6 +151,18 @@ extension RealmContainer {
             let text = realmMetadata.text?.getPhotoMetadataText()
         {
             return text
+        }
+
+        return nil
+    }
+    
+    func getNote(from identifier: String) -> PhotoMetadataNote? {
+        let realm = try! Realm()
+        if
+            let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: identifier),
+            let note = realmMetadata.note?.getPhotoMetadataNote()
+        {
+            return note
         }
 
         return nil

@@ -100,7 +100,7 @@ extension PhotosViewModel {
             reloadAt?(collectionViewIndexPath, resultsCollectionViewIndex, metadata)
         }
 
-        getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text)
+        getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text, note: nil)
 
         ignoredPhotos = photos.filter { $0.isIgnored }
         photosToScan = photos.filter { $0.metadata.map { !$0.isIgnored && $0.dateScanned == nil } ?? true }

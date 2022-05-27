@@ -47,7 +47,7 @@ extension PhotosViewModel {
             await MainActor.run {
                 for photo in photosAddedFromCamera {
                     if let metadata = photo.metadata {
-                        getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: nil)
+                        getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: nil, note: nil)
                     }
                 }
             }

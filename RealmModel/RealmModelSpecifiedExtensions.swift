@@ -36,6 +36,14 @@ extension PhotoMetadataText {
     }
 }
 
+extension PhotoMetadataNote {
+    func getRealmNote() -> RealmPhotoMetadataNote {
+        let note = RealmPhotoMetadataNote()
+        note.string = string
+        return note
+    }
+}
+
 extension Sentence {
     func getRealmSentence() -> RealmSentence {
         let realmSentence = RealmSentence()

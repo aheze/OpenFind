@@ -121,7 +121,11 @@ extension CameraViewController {
                         if let asset = assets.firstObject {
                             let photo = Photo(asset: asset, metadata: metadata)
                             self.model.photoAdded?(photo)
-                            self.realmModel.container.updatePhotoMetadata(metadata: metadata, text: currentPausedImage.text)
+                            self.realmModel.container.updatePhotoMetadata(
+                                metadata: metadata,
+                                text: currentPausedImage.text,
+                                note: nil
+                            )
                             self.realmModel.incrementExperience(by: 3)
                         }
                     }

@@ -25,7 +25,7 @@ extension PhotosViewModel {
             newMetadata.dateScanned = Date()
             newPhoto.metadata = newMetadata
 
-            getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata, text: text)
+            getRealmModel?().container.updatePhotoMetadata(metadata: newMetadata, text: text, note: nil)
             addSentences(of: newPhoto, immediately: !inBatch)
         } else {
             let metadata = PhotoMetadata(
@@ -36,7 +36,7 @@ extension PhotosViewModel {
             )
 
             newPhoto.metadata = metadata
-            getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text)
+            getRealmModel?().container.updatePhotoMetadata(metadata: metadata, text: text, note: nil)
             addSentences(of: newPhoto, immediately: !inBatch)
         }
 

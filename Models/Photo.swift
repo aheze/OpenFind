@@ -42,16 +42,14 @@ struct PhotoMetadata {
     var dateScanned: Date?
 }
 
+struct PhotoMetadataNote {
+    var string = ""
+}
+
 struct PhotoMetadataText {
     var sentences = [Sentence]()
     var scannedInLanguages = [String]()
     var scannedInVersion: String?
-
-    mutating func delete() {
-        sentences.removeAll()
-        scannedInLanguages.removeAll()
-        scannedInVersion = nil
-    }
 }
 
 enum PhotosSectionCategorization: Equatable, Hashable {
