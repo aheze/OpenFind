@@ -140,6 +140,22 @@ struct PhotosScanningViewHeader: View {
                     storage: \.$photosScanOnAddition
                 )
 
+                Container(description: "Coming soon!") {
+                    HStack(spacing: SettingsConstants.rowIconTitleSpacing) {
+                        Text("Background Scanning")
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(SettingsConstants.rowVerticalInsetsFromText)
+
+                        Toggle("", isOn: .constant(false))
+                            .labelsHidden()
+                            .disabled(true)
+                    }
+                    .padding(SettingsConstants.rowHorizontalInsets)
+                    .background(UIColor.systemBackground.color)
+                    .cornerRadius(SettingsConstants.sectionCornerRadius)
+                }
+
                 Spacer()
             }
             .padding(SettingsConstants.edgeInsets)

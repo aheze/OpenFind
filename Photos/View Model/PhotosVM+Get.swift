@@ -68,7 +68,7 @@ extension PhotosViewModel {
             completion?(thumbnail)
         }
     }
-    
+
     /// closure-based for returning multiple times
     func getFullImage(from asset: PHAsset, completion: @escaping ((UIImage?) -> Void)) {
         let options = PHImageRequestOptions()
@@ -83,3 +83,5 @@ extension PhotosViewModel {
         }
     }
 }
+
+
