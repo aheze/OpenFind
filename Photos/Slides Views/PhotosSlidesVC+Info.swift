@@ -114,6 +114,7 @@ extension PhotosSlidesViewController {
         model.slidesState?.toolbarInformationOn = false
         dismissPanGesture.isEnabled = true
         scrollView.isScrollEnabled = false
+        infoNoteTextViewModel.endEditing?()
         if let popover = view.popover(tagged: "Popover") {
             popover.dismiss()
         }

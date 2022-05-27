@@ -99,6 +99,7 @@ struct PhotosSlidesInfoView: View {
 
                 Group {
                     if let text = realmModel.container.getText(from: photo.asset.localIdentifier) {
+                        let _ = print("Scanned: \(text.scannedInVersion)")
                         if
                             photo.metadata?.dateScanned != nil,
                             !photo.isIgnored,
