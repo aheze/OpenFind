@@ -63,6 +63,7 @@ extension PhotosSlidesViewController {
                 let navigationBarHeight = getCompactBarSafeAreaHeight(with: Global.safeAreaInsets) + slidesSearchViewModel.getTotalHeight()
                 let tabBarHeight = tabViewModel.tabBarAttributes.backgroundHeight
 
+                attributes.rubberBandingMode = .none
                 attributes.sourceFrameInset = UIEdgeInsets(top: navigationBarHeight + 16, left: 16, bottom: tabBarHeight + 16, right: 16)
                 attributes.screenEdgePadding = UIEdgeInsets(top: navigationBarHeight + 16, left: 16, bottom: tabBarHeight + 16, right: 16)
                 attributes.sourceFrame = { [weak self] in
