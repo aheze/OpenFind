@@ -13,18 +13,18 @@ extension PhotosSlidesViewController {
     func setupInfo() {
         let infoModel = PhotoSlidesInfoViewModel()
         infoModel.showHandle = true
-        let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel, infoModel: infoModel)
+        let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel, infoModel: infoModel, textModel: infoNoteTextViewModel)
         addChildViewController(viewController, in: infoViewContainer)
         infoViewContainer.clipsToBounds = true
 
         scrollView.isScrollEnabled = false
         scrollView.alwaysBounceVertical = true
+        scrollView.keyboardDismissMode = .onDrag
 
         infoModel.sizeChanged = { [weak self] size in
             guard let self = self else { return }
             let infoHeight = self.getInfoHeight() /// max height
-//            self.infoViewContainerHeightC.constant = max(infoHeight, size.height)
-            self.infoViewContainerHeightC.constant = 500
+            self.infoViewContainerHeightC.constant = max(infoHeight, size.height + self.tabViewModel.tabBarAttributes.backgroundHeight)
         }
     }
 
@@ -55,7 +55,12 @@ extension PhotosSlidesViewController {
                 let popover = Popover(attributes: attributes) { [weak self] in
                     if let self = self {
                         ScrollView {
-                            PhotosSlidesInfoView(model: self.model, realmModel: self.realmModel, infoModel: PhotoSlidesInfoViewModel())
+                            PhotosSlidesInfoView(
+                                model: self.model,
+                                realmModel: self.realmModel,
+                                infoModel: PhotoSlidesInfoViewModel(),
+                                textModel: self.infoNoteTextViewModel
+                            )
                         }
                         .background(UIColor.systemBackground.color)
                         .frame(width: 300)

@@ -2396,6 +2396,9 @@
 		3CDDAEF227A8398C007F9652 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3CDDAEF327A839E9007F9652 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
 		3CDDAEF427A839E9007F9652 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDAEF127A8398C007F9652 /* SearchTextField.swift */; };
+		3CDEC6AA2841715F009CF036 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEC6A92841715F009CF036 /* EditableTextView.swift */; };
+		3CDEC6AB28417197009CF036 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEC6A92841715F009CF036 /* EditableTextView.swift */; };
+		3CDEC6AC28417197009CF036 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDEC6A92841715F009CF036 /* EditableTextView.swift */; };
 		3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306CE259AC46400F1B2E2 /* TabBar.swift */; };
 		3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */; };
 		3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */; };
@@ -4049,6 +4052,7 @@
 		3CDD945327C0654100D3EA1A /* PhotosScanningConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScanningConstants.swift; sourceTree = "<group>"; };
 		3CDD945627C0685500D3EA1A /* Saved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saved.swift; sourceTree = "<group>"; };
 		3CDDAEF127A8398C007F9652 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		3CDEC6A92841715F009CF036 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
 		3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosIcon.swift; sourceTree = "<group>"; };
@@ -5645,6 +5649,7 @@
 				3C257ECE280C89C8009B6FAE /* PortraitView.swift */,
 				3C1CC42E2839511200A96850 /* PopoverTipView.swift */,
 				3C443F5927DDA7730050A0AB /* SwiftUIExtensions.swift */,
+				3CDEC6A92841715F009CF036 /* EditableTextView.swift */,
 				3C7B7A7D277FA50B00E1F602 /* Assets.xcassets */,
 				3CCCCAB627818CF1000381CE /* Testing */,
 			);
@@ -8445,6 +8450,7 @@
 				3C443ED127DD8ADA0050A0AB /* CameraViewModel.swift in Sources */,
 				3C606674274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C6E9F5628150A4600FAD6A9 /* ListsDefaults.swift in Sources */,
+				3CDEC6AC28417197009CF036 /* EditableTextView.swift in Sources */,
 				3C17B8EA27C9C4D000B55E97 /* PhotosVC+ResultsHighlights.swift in Sources */,
 				3CAE64EE27C6AA96009E8564 /* PhotosVC+ResultsDataSource.swift in Sources */,
 				3C9CA8AC27EFFA3400D087F2 /* PhotosSpecifiedExtensions.swift in Sources */,
@@ -9352,6 +9358,7 @@
 				3C1D179027BCACBC00E82B8B /* PhotosVC+PHAssetCaching.swift in Sources */,
 				3C6C7326278193F600E039F0 /* SceneDelegate.swift in Sources */,
 				3C6C7423278194A500E039F0 /* Utilities+Dates.swift in Sources */,
+				3CDEC6AB28417197009CF036 /* EditableTextView.swift in Sources */,
 				3C5B36A127FEAEDE00801FEE /* SettingsResultsView.swift in Sources */,
 				3C257EE4280DAC01009B6FAE /* LaunchListsView.swift in Sources */,
 				3C1D178A27BCA4A600E82B8B /* PhotosVC+Listen.swift in Sources */,
@@ -9720,6 +9727,7 @@
 				3C443F0427DD90390050A0AB /* List.swift in Sources */,
 				3CF15C3527FF8AF100D51E9B /* SettingsDynamicPicker.swift in Sources */,
 				3CF15C5727FF8AF100D51E9B /* SettingsMVC+Results.swift in Sources */,
+				3CDEC6AA2841715F009CF036 /* EditableTextView.swift in Sources */,
 				3CF15C3E27FF8AF100D51E9B /* SD+Tabs.swift in Sources */,
 				3CF15C3627FF8AF100D51E9B /* SettingsModels.swift in Sources */,
 				3CF15C4F27FF8AF100D51E9B /* SettingsLink.swift in Sources */,

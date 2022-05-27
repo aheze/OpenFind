@@ -13,9 +13,20 @@ struct PhotosSlidesInfoView: View {
     @ObservedObject var model: PhotosViewModel
     @ObservedObject var realmModel: RealmModel
     @ObservedObject var infoModel: PhotoSlidesInfoViewModel
+    @ObservedObject var textModel: EditableTextViewModel
 
     var body: some View {
         let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
+
+        let noteBinding: Binding<String> = Binding {
+            let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
+            let note = realmModel.container.getNote(from: photo.asset.localIdentifier)?.string ?? ""
+            return note
+        } set: { newValue in
+            let note = PhotoMetadataNote(string: newValue)
+            print("update!!")
+            realmModel.container.updatePhotoMetadata(metadata: photo.metadata, text: nil, note: note)
+        }
 
         VStack(spacing: 0) {
             if infoModel.showHandle {
@@ -23,16 +34,39 @@ struct PhotosSlidesInfoView: View {
                     .fill(UIColor.secondaryLabel.color)
                     .frame(height: 0.4)
                     .opacity(0.75)
-                
+
                 Capsule()
                     .fill(UIColor.secondaryLabel.color)
                     .frame(width: 36, height: 5)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
+                    .padding(.top, 10)
+                    .padding(.bottom, 4)
             }
 
             VStack(alignment: .leading) {
                 Text(verbatim: "\(photo.asset.originalFilename ?? "Photo")")
+
+                EditableTextView(model: textModel, text: noteBinding)
+                    .frame(height: 140)
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .overlay(
+                        VStack {
+                            if textModel.isEditing {
+                                Button {
+                                    textModel.endEditing?()
+                                } label: {
+                                    Image(systemName: "checkmark")
+                                }
+                                .transition(.scale)
+                            }
+                        }
+                        .animation(.default, value: textModel.isEditing)
+                        .padding(14),
+
+                        alignment: .topTrailing
+                    )
+                    .blueBackground()
 
                 Text(verbatim: "\(getDateString(from: photo))")
                     .padding(12)

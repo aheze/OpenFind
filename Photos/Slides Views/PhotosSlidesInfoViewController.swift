@@ -9,7 +9,7 @@
 import SwiftUI
 
 class PhotoSlidesInfoViewModel: ObservableObject {
-    var showHandle = false /// for scroll
+    @Published var showHandle = false /// for scroll
     var sizeChanged: ((CGSize) -> Void)?
 }
 
@@ -17,11 +17,18 @@ class PhotosSlidesInfoViewController: UIViewController {
     var model: PhotosViewModel
     var realmModel: RealmModel
     var infoModel: PhotoSlidesInfoViewModel
+    var textModel: EditableTextViewModel
 
-    init(model: PhotosViewModel, realmModel: RealmModel, infoModel: PhotoSlidesInfoViewModel) {
+    init(
+        model: PhotosViewModel,
+        realmModel: RealmModel,
+        infoModel: PhotoSlidesInfoViewModel,
+        textModel: EditableTextViewModel
+    ) {
         self.model = model
         self.realmModel = realmModel
         self.infoModel = infoModel
+        self.textModel = textModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -37,7 +44,7 @@ class PhotosSlidesInfoViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .systemBackground
 
-        let contentView = PhotosSlidesInfoView(model: model, realmModel: realmModel, infoModel: infoModel)
+        let contentView = PhotosSlidesInfoView(model: model, realmModel: realmModel, infoModel: infoModel, textModel: textModel)
         let hostingController = UIHostingController(rootView: contentView)
         hostingController.view.frame = view.bounds
         hostingController.view.backgroundColor = .clear

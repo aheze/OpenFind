@@ -8,6 +8,20 @@
     
 import UIKit
 
+extension UITextView {
+    func getFrame(start startOffset: Int, end endOffset: Int) -> CGRect? {
+        if
+            let start = position(from: beginningOfDocument, offset: startOffset),
+            let end = position(from: beginningOfDocument, offset: endOffset),
+            let textRange = textRange(from: start, to: end)
+        {
+            let frame = firstRect(for: textRange)
+            return frame
+        }
+        return nil
+    }
+}
+
 extension PhotosViewController {
     /// call this inside the cell provider. Frames of returned highlights are already scaled.
     func getLineHighlights(for cell: PhotosResultsCell, with lines: [FindPhoto.Line]) -> [Highlight] {
@@ -37,13 +51,7 @@ extension PhotosViewController {
                 let startOffset = lineHighlight.rangeInSentence.startIndex + previousDescriptionCount
                 let endOffset = lineHighlight.rangeInSentence.endIndex + previousDescriptionCount
                 
-                guard
-                    let start = textView.position(from: textView.beginningOfDocument, offset: startOffset),
-                    let end = textView.position(from: textView.beginningOfDocument, offset: endOffset),
-                    let textRange = textView.textRange(from: start, to: end)
-                else { continue }
-                
-                let frame = textView.firstRect(for: textRange)
+                guard let frame = textView.getFrame(start: startOffset, end: endOffset) else { continue }
                 
                 /// make sure the rectangle actually is valid
                 guard frame.size.width > 0, frame.size.height > 0 else { continue }
@@ -65,7 +73,7 @@ extension PhotosViewController {
         
         return cellHighlights
     }
-
+    
     /// replace the `resultsState`'s current highlight colors. Don't call `update()`, since applying snapshots is laggy.
     /// This only updates the results collection view.
     /// This also resets each `FindPhoto`'s `HighlightsSet` to a single highlight set with the new colors.
