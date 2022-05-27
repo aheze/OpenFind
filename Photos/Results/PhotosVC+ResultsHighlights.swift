@@ -10,10 +10,12 @@ import UIKit
 
 extension PhotosViewController {
     /// call this inside the cell provider. Frames of returned highlights are already scaled.
-    func getHighlights(for cell: PhotosResultsCell, with lines: [FindPhoto.Line]) -> [Highlight] {
+    func getLineHighlights(for cell: PhotosResultsCell, with lines: [FindPhoto.Line]) -> [Highlight] {
         /// the highlights to be shown. Create these from `lineHighlights`
         var cellHighlights = [Highlight]()
-        for index in lines.indices {
+        
+        /// don't loop too many times
+        for index in lines.indices where index < 3 {
             let line = lines[index]
             
             /// `lineHighlights` - highlights in the cell without a frame - only represented by their ranges
@@ -142,14 +144,8 @@ extension PhotosViewController {
             highlightsViewController = newHighlightsViewController
         }
         
-        highlightsViewController.view.alpha = 0
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            UIView.animate(withDuration: 0.1) {
-                cell.highlightsViewController?.view.alpha = 1
-            }
-            highlightsViewController.highlightsViewModel.highlights = self.getHighlights(for: cell, with: lines)
-        }
+        let highlights = getLineHighlights(for: cell, with: lines)
+        highlightsViewController.highlightsViewModel.highlights = highlights
     }
     
     func removeHighlights(for cell: PhotosResultsCell) {
