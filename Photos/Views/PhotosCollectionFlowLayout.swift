@@ -120,6 +120,7 @@ class PhotosCollectionFlowLayout: UICollectionViewFlowLayout {
 
     override func prepare() { /// configure the cells' frames
         super.prepare()
+        
         guard let collectionView = collectionView else { return }
         var photosAttributes = PhotosAttributes.attributes([])
         

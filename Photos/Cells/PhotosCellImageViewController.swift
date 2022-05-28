@@ -7,8 +7,12 @@
 //
     
 import SwiftUI
+import Photos
 
 class PhotosCell: UICollectionViewCell {
+    /// when fetching an image, this will be populated
+    var fetchingID: PHImageRequestID?
+    
     var representedAssetIdentifier: String?
     var viewController: PhotosCellImageViewController?
 }

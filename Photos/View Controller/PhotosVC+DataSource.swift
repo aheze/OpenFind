@@ -34,7 +34,6 @@ extension PhotosViewController {
     func configureCell(cell: PhotosCell, indexPath: IndexPath) {
         guard let photo = model.getPhoto(from: indexPath) else { return }
 
-        cell.contentView.addDebugBorders(.red)
         let viewController: PhotosCellImageViewController
         if let existingViewController = cell.viewController {
             viewController = existingViewController
@@ -43,17 +42,9 @@ extension PhotosViewController {
             addChildViewController(viewController, in: cell.contentView)
             cell.viewController = viewController
         }
-
+//
         cell.representedAssetIdentifier = photo.asset.localIdentifier
         viewController.model.image = nil
-        model.getImage(
-            from: photo.asset,
-            targetSize: self.realmModel.thumbnailSize
-        ) { image in
-            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                viewController.model.image = image
-            }
-        }
 
         let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
         viewController.model.selected = selected
@@ -61,6 +52,24 @@ extension PhotosViewController {
         let description = photo.getVoiceoverDescription()
         cell.isAccessibilityElement = true
         cell.accessibilityLabel = description
+
+        let id = self.model.getImage(
+            from: photo.asset,
+            targetSize: self.realmModel.thumbnailSize
+        ) { image in
+            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+                viewController.model.image = image
+            }
+        }
+        cell.fetchingID = id
+    }
+
+    func teardownCell(cell: PhotosCell, indexPath: IndexPath) {
+        if let id = cell.fetchingID {
+            cell.fetchingID = nil
+
+            model.imageManager.cancelImageRequest(id)
+        }
     }
 
     func makeDataSource() -> DataSource {
@@ -70,6 +79,16 @@ extension PhotosViewController {
                 withReuseIdentifier: "PhotosCell",
                 for: indexPath
             ) as! PhotosCell
+
+//            let id = self.model.getImage(
+//                from: cachedPhoto.asset,
+//                targetSize: self.realmModel.thumbnailSize
+//            ) { image in
+//                //            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                //                viewController.model.image = image
+//                //            }
+//            }
+//            cell.fetchingID = id
 
             return cell
         }

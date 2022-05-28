@@ -72,10 +72,13 @@ extension PhotosViewModel {
         }
     }
 
-    func getImage(from asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode = .aspectFill, completion: ((UIImage?) -> Void)?) {
+    func getImage(from asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode = .aspectFill, completion: ((UIImage?) -> Void)?) -> PHImageRequestID {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        imageManager.requestImage(
+        options.isSynchronous = false
+        options.resizeMode = .fast
+        options.deliveryMode = .fastFormat
+        return imageManager.requestImage(
             for: asset,
             targetSize: targetSize,
             contentMode: .aspectFill,

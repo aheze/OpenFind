@@ -23,6 +23,8 @@ extension PhotosViewController {
         
         // The window you prepare ahead of time is larger than the height of the visible rect.
         let visibleRect = CGRect(origin: collectionView!.contentOffset, size: collectionView!.bounds.size)
+        
+        
         let preheatRect = visibleRect.insetBy(dx: 0, dy: -0.9 * visibleRect.height)
         
         // Update only if the visible area is significantly different from the last preheated area.

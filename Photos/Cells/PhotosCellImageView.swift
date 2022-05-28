@@ -16,11 +16,11 @@ struct PhotosCellImageViewState {
 
 struct PhotosCellImageView: View {
     @ObservedObject var model: PhotosCellImageViewModel
-//    let state = getState()
+
 //    let state = PhotosCellImageViewState()
-    
+
     var body: some View {
-        
+//        let state = getState()
 
         Color.clear
             .overlay(
@@ -44,17 +44,19 @@ struct PhotosCellImageView: View {
 //                    if state.showingShade {
 //                        LinearGradient(
 //                            stops: [
-//                                .init(color: .clear, location: 0.6),
+//                                .init(color: .clear, location: 0.4),
 //                                .init(color: .black, location: 1)
 //                            ],
-//                            startPoint: .topLeading,
-//                            endPoint: .bottomTrailing
+//                            startPoint: .topTrailing,
+//                            endPoint: .bottomLeading
 //                        )
 //                    }
 //
 //                    if state.showingStar {
 //                        Image(systemName: "star.fill")
-//                            .foregroundColor(.yellow)
+//                            .font(UIFont.preferredFont(forTextStyle: .body).font)
+//                            .foregroundColor(.white)
+//                            .padding(6)
 //                    }
 //                }
 //            )
@@ -71,6 +73,7 @@ struct PhotosCellImageView: View {
                     }
                 }
             )
+            .opacity(model.show ? 1 : 0)
     }
 
     func getState() -> PhotosCellImageViewState {
