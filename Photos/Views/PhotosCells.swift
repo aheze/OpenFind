@@ -59,26 +59,26 @@ class PhotosCollectionHeader: UICollectionReusableView {
 }
 
 /// the main photos cell
-class PhotosCollectionCell: UICollectionViewCell {
-    var representedAssetIdentifier: String?
-    lazy var view = PhotosCellView()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        commonInit()
-    }
-    
-    func commonInit() {
-        addSubview(view)
-        view.pinEdgesToSuperview()
-    }
-    
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+//class PhotosCollectionCell: UICollectionViewCell {
+//    var representedAssetIdentifier: String?
+//    lazy var view = PhotosCellView()
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//
+//        commonInit()
+//    }
+//
+//    func commonInit() {
+//        addSubview(view)
+//        view.pinEdgesToSuperview()
+//    }
+//
+//    @available(*, unavailable)
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}
 
 /// the results photos cell
 class PhotosResultsCell: UICollectionViewCell {

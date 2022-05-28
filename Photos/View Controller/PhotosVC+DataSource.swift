@@ -24,8 +24,8 @@ extension PhotosViewController {
 
     /// reload the collection view at an index path.
     func update(at indexPath: IndexPath, with metadata: PhotoMetadata) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-            PhotoMetadata.apply(metadata: metadata, to: cell.view)
+        if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+            cell.viewController?.model.photo?.metadata = metadata
         }
     }
 
@@ -50,7 +50,6 @@ extension PhotosViewController {
             from: photo.asset,
             targetSize: self.realmModel.thumbnailSize
         ) { image in
-
             if cell.representedAssetIdentifier == photo.asset.localIdentifier {
                 viewController.model.image = image
             }

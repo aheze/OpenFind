@@ -24,8 +24,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     cell.view.imageView.alpha = 0
                 }
             } else {
-                if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                    cell.alpha = 0
+                if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
+                    cell.viewController?.model.showImage(false)
                 }
             }
         case .pop:
@@ -62,8 +62,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 for sectionIndex in model.displayedSections.indices {
                     for photoIndex in model.displayedSections[sectionIndex].photos.indices {
                         let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
-                        if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                            cell.alpha = 1
+                        if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                            cell.viewController?.model.showImage(true)
                         }
                     }
                 }
@@ -72,9 +72,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             
                 let hideCell = { [weak self] in
                     guard let self = self else { return }
-                    if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                        cell.alpha = 0
-                        cell.view.overlayView.alpha = 0
+                    if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
+                        cell.viewController?.model.showImage(false)
+                        cell.viewController?.model.showOverlay(false, animate: false)
                         
                         if let header = self.getCurrentHeader(for: photoIndexPath) {
                             header.alpha = 0
@@ -113,13 +113,12 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                         }
                     }
                 } else {
-                    if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                        cell.alpha = 1
-                    
+                    if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
+                        cell.viewController?.model.showImage(true)
+                        
                         /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
-                        UIView.animate(withDuration: 0.3) {
-                            cell.view.overlayView.alpha = 1
-                        }
+                        cell.viewController?.model.showOverlay(true, animate: true)
+                        
                     }
                     if let header = getCurrentHeader(for: photoIndexPath) {
                         UIView.animate(withDuration: 0.3) {
@@ -147,9 +146,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         } else {
             if
                 let indexPath = model.getIndexPath(for: currentPhoto, in: \.displayedSections),
-                let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell
+                let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell
             {
-                return cell.view.imageView.image
+                return cell.viewController?.model.image
             }
         }
         
@@ -164,8 +163,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 return frame
             }
         } else {
-            if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCollectionCell {
-                let frame = cell.view.imageView.windowFrame()
+            if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
+                let frame = cell.contentView.windowFrame()
                 return frame
             }
         }

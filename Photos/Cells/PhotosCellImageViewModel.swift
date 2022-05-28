@@ -16,7 +16,18 @@ class PhotosCellImageViewModel: ObservableObject {
 
     @Published var showOverlay = true /// star, ignore, etc
 
+    @Published var showSelectionOverlay = false
     @Published var selected = false
+}
 
+extension PhotosCellImageViewModel {
+    func showImage(_ show: Bool) {
+        self.show = show
+    }
 
+    func showOverlay(_ show: Bool, animate: Bool) {
+        withAnimation(.easeOut(duration: animate ? 0.4 : 0)) {
+            self.showOverlay = show
+        }
+    }
 }

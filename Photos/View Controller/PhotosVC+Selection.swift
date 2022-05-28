@@ -62,8 +62,8 @@ extension PhotosViewController {
         if !model.selectedPhotos.contains(photo) {
             model.selectedPhotos.append(photo)
 
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                configureCellSelection(cell: cell, photo: photo, selected: true)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                cell.viewController?.model.selected = true
             }
         }
     }
@@ -73,16 +73,10 @@ extension PhotosViewController {
         if model.selectedPhotos.contains(photo) {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
 
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                configureCellSelection(cell: cell, photo: photo, selected: false)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                cell.viewController?.model.selected = false
             }
         }
-    }
-
-    func configureCellSelection(cell: PhotosCollectionCell, photo: Photo, selected: Bool) {
-        cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
-        cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-        cell.accessibilityTraits = selected ? .image : .none
     }
 
     func updateCollectionViewSelectionState() {
@@ -90,18 +84,8 @@ extension PhotosViewController {
             let section = model.displayedSections[sectionIndex]
             for photoIndex in section.photos.indices {
                 let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
-                if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                    if model.isSelecting {
-                        cell.view.selectOverlayIconView.setState(.hidden)
-                        UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                            cell.view.selectOverlayView.alpha = 1
-                        }
-                    } else {
-                        UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                            cell.view.selectOverlayView.backgroundColor = .clear
-                            cell.view.selectOverlayView.alpha = 0
-                        }
-                    }
+                if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                    cell.viewController?.model.showSelectionOverlay = model.isSelecting
                 }
 
                 if !model.isSelecting {

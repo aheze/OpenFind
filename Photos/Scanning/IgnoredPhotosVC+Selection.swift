@@ -20,8 +20,8 @@ extension IgnoredPhotosViewController {
         if !ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo) {
             ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.append(photo)
 
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                configureCellSelection(cell: cell, selected: true)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                cell.viewController?.model.selected = true
             }
         }
     }
@@ -31,8 +31,8 @@ extension IgnoredPhotosViewController {
         if ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo) {
             ignoredPhotosViewModel.ignoredPhotosSelectedPhotos = ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.filter { $0 != photo }
 
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionCell {
-                configureCellSelection(cell: cell, selected: false)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                cell.viewController?.model.selected = false
             }
         }
     }
@@ -52,34 +52,13 @@ extension IgnoredPhotosViewController {
         }
 
         for index in model.ignoredPhotos.indices {
-            if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCollectionCell {
-                if ignoredPhotosViewModel.ignoredPhotosIsSelecting {
-                    cell.view.selectOverlayIconView.setState(.hidden)
-                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                        cell.view.selectOverlayView.alpha = 1
-                    }
-                } else {
-                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                        cell.view.selectOverlayView.backgroundColor = .clear
-                        cell.view.selectOverlayView.alpha = 0
-                    }
-                }
+            if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCell {
+                cell.viewController?.model.showSelectionOverlay = ignoredPhotosViewModel.ignoredPhotosIsSelecting
             }
 
             if !ignoredPhotosViewModel.ignoredPhotosIsSelecting {
                 collectionView.deselectItem(at: index.indexPath, animated: false)
             }
-        }
-    }
-
-    func configureCellSelection(cell: PhotosCollectionCell, selected: Bool) {
-        cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
-        cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-
-        if selected {
-            cell.accessibilityTraits = .selected
-        } else {
-            cell.accessibilityTraits = .none
         }
     }
 }

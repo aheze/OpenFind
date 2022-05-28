@@ -24,32 +24,32 @@ extension IgnoredPhotosViewController {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "PhotosCollectionCell",
                 for: indexPath
-            ) as! PhotosCollectionCell
+            ) as! PhotosCell
 
             /// get the current up-to-date photo first.
-            guard let photo = self.model.ignoredPhotos.first(where: { $0 == cachedPhoto }) else { return cell }
-
-            // Request an image for the asset from the PHCachingImageManager.
-            cell.representedAssetIdentifier = photo.asset.localIdentifier
-
-            self.model.getImage(
-                from: photo.asset,
-                targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero
-            ) { image in
-                if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                    cell.view.imageView.image = image
-                }
-            }
-
-            PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
-
-            let description = photo.getVoiceoverDescription()
-            cell.isAccessibilityElement = true
-            cell.accessibilityLabel = description
-
-            /// selection
-            let selected = self.ignoredPhotosViewModel.ignoredPhotosIsSelecting && self.ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo)
-            self.configureCellSelection(cell: cell, selected: selected)
+//            guard let photo = self.model.ignoredPhotos.first(where: { $0 == cachedPhoto }) else { return cell }
+//
+//            // Request an image for the asset from the PHCachingImageManager.
+//            cell.representedAssetIdentifier = photo.asset.localIdentifier
+//
+//            self.model.getImage(
+//                from: photo.asset,
+//                targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero
+//            ) { image in
+//                if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                    cell.view.imageView.image = image
+//                }
+//            }
+//
+//            PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
+//
+//            let description = photo.getVoiceoverDescription()
+//            cell.isAccessibilityElement = true
+//            cell.accessibilityLabel = description
+//
+//            /// selection
+//            let selected = self.ignoredPhotosViewModel.ignoredPhotosIsSelecting && self.ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo)
+//            self.configureCellSelection(cell: cell, selected: selected)
 
             return cell
         }
