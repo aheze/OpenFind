@@ -72,12 +72,21 @@ extension PhotosViewModel {
         }
     }
 
-    func getImage(from asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode = .aspectFill, completion: ((UIImage?) -> Void)?) -> PHImageRequestID {
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        options.isSynchronous = false
-        options.resizeMode = .fast
-        options.deliveryMode = .fastFormat
+    func getImage(
+        from asset: PHAsset,
+        targetSize: CGSize,
+        contentMode: PHImageContentMode = .aspectFill,
+        options defaultOptions: PHImageRequestOptions? = nil,
+        completion: ((UIImage?) -> Void)?
+    ) -> PHImageRequestID {
+        let options: PHImageRequestOptions = defaultOptions ?? {
+            let options = PHImageRequestOptions()
+            options.isNetworkAccessAllowed = true
+            options.resizeMode = .fast
+            options.deliveryMode = .fastFormat
+            return options
+        }()
+
         return imageManager.requestImage(
             for: asset,
             targetSize: targetSize,
@@ -90,6 +99,14 @@ extension PhotosViewModel {
 
     /// closure-based for returning multiple times
     func getFullImage(from asset: PHAsset, completion: @escaping ((UIImage?) -> Void)) {
-        getImage(from: asset, targetSize: .zero, completion: completion)
+        let options = PHImageRequestOptions()
+        options.isNetworkAccessAllowed = true
+        
+        _ = getImage(
+            from: asset,
+            targetSize: .zero,
+            options: options,
+            completion: completion
+        )
     }
 }

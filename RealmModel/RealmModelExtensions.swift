@@ -47,8 +47,8 @@ extension RealmModel {
 extension RealmModel {
     var thumbnailSize: CGSize {
         let scale = UIScreen.main.scale
-        let length = photosMinimumCellLength * 3 / 2 /// slightly clearer
-        let thumbnailSize = CGSize(width: length * scale, height: length * scale)
+        let length = (photosMinimumCellLength * scale) * 3 / 2 /// slightly clearer
+        let thumbnailSize = CGSize(width: length, height: length)
         return thumbnailSize
     }
 

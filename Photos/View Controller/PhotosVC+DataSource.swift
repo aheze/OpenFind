@@ -80,16 +80,6 @@ extension PhotosViewController {
                 for: indexPath
             ) as! PhotosCell
 
-//            let id = self.model.getImage(
-//                from: cachedPhoto.asset,
-//                targetSize: self.realmModel.thumbnailSize
-//            ) { image in
-//                //            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                //                viewController.model.image = image
-//                //            }
-//            }
-//            cell.fetchingID = id
-
             return cell
         }
 
