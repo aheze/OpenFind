@@ -44,46 +44,42 @@ extension PhotosViewController {
 //            addChildViewController(viewController, in: cell.contentView)
             cell.viewController = viewController
         }
-//
-//
-//
-//        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
-//        viewController.model.selected = selected
-//
-//        let description = photo.getVoiceoverDescription()
-//        cell.isAccessibilityElement = true
-//        cell.accessibilityLabel = description
-//
+
+        
+        viewController.model.photo = photo
+        
+        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+        viewController.model.selected = selected
+
+        let description = photo.getVoiceoverDescription()
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = description
+
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
-        
 
         viewController.model.image = nil
         cell.representedAssetIdentifier = photo.asset.localIdentifier
-        cell.fetchingID = PHImageManager.default().requestImage(
-            for: photo.asset,
-            targetSize: .init(width: 2, height: 2),
-            contentMode: .aspectFill,
-            options: options
-        ) { image, _ in
-            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                viewController.model.image = image
-            }
-        }
+//        cell.fetchingID = PHImageManager.default().requestImage(
+//            for: photo.asset,
+//            targetSize: .init(width: 2, height: 2),
+//            contentMode: .aspectFill,
+//            options: options
+//        ) { image, _ in
+//            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                viewController.model.image = image
+//            }
+//        }
 
-        ////
-
-//
-//        viewController.model.image = nil
-//        let id = self.model.getImage(
+        viewController.model.image = UIImage(named: "Logo")!
+//        cell.fetchingID = self.model.getImage(
 //            from: photo.asset,
 //            targetSize: self.realmModel.thumbnailSize
 //        ) { image in
-//                    if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                        viewController.model.image = image
-//                    }
+//            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                viewController.model.image = image
+//            }
 //        }
-//        cell.fetchingID = id
     }
 
     func teardownCell(cell: PhotosCell, indexPath: IndexPath) {

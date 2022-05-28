@@ -20,7 +20,7 @@ struct PhotosCellImageView: View {
 //    let state = PhotosCellImageViewState()
 
     var body: some View {
-//        let state = getState()
+        let state = getState()
 
         Color.clear
             .overlay(
@@ -36,40 +36,47 @@ struct PhotosCellImageView: View {
                     }
                 }
             )
-//            .overlay(
-//                Color.blue.opacity(state.showingBlueOverlay ? 1 : 0)
-//            )
-//            .overlay(
-//                ZStack(alignment: .bottomLeading) {
-//                    if state.showingShade {
-//                        LinearGradient(
-//                            stops: [
-//                                .init(color: .clear, location: 0.4),
-//                                .init(color: .black, location: 1)
-//                            ],
-//                            startPoint: .topTrailing,
-//                            endPoint: .bottomLeading
-//                        )
-//                    }
-//
-//                    if state.showingStar {
-//                        Image(systemName: "star.fill")
-//                            .font(UIFont.preferredFont(forTextStyle: .body).font)
-//                            .foregroundColor(.white)
-//                            .padding(6)
-//                    }
-//                }
-//            )
             .overlay(
-                VStack {
-                    if model.selected {
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 12, height: 12)
-                            .overlay(
-                                Circle()
-                                    .stroke(.white, lineWidth: 2)
-                            )
+                Colors.accent.toColor(.black, percentage: 0.5).color
+                    .opacity(state.showingBlueOverlay ? 0.75 : 0)
+            )
+            .overlay(
+                ZStack(alignment: .bottomLeading) {
+                    if state.showingShade {
+                        LinearGradient(
+                            stops: [
+                                .init(color: .clear, location: 0.4),
+                                .init(color: .black, location: 1)
+                            ],
+                            startPoint: .topTrailing,
+                            endPoint: .bottomLeading
+                        )
+                    }
+
+                    if state.showingStar {
+                        Image(systemName: "star.fill")
+                            .font(UIFont.preferredFont(forTextStyle: .body).font)
+                            .foregroundColor(.white)
+                            .padding(6)
+                    }
+                }
+                .opacity(model.showOverlay ? 1 : 0)
+            )
+            .overlay(
+                ZStack {
+                    Color.white
+                        .opacity(model.showSelectionOverlay ? 0.1 : 0)
+
+                    VStack {
+                        if model.selected {
+                            Circle()
+                                .fill(.blue)
+                                .frame(width: 12, height: 12)
+                                .overlay(
+                                    Circle()
+                                        .stroke(.white, lineWidth: 2)
+                                )
+                        }
                     }
                 }
             )
