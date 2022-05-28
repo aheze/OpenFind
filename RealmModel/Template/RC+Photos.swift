@@ -14,7 +14,7 @@ extension RealmContainer {
     func deleteAllPhotos() {}
     func deleteAllScannedData() {}
 
-    func updatePhotoMetadata(metadata: PhotoMetadata?, text: PhotoMetadataText?) {}
+    func updatePhotoMetadata(metadata: PhotoMetadata?, text: PhotoMetadataText?, note: PhotoMetadataNote?) {}
 
     func deletePhotoMetadata(metadata: PhotoMetadata) {}
 
@@ -46,5 +46,9 @@ extension RealmContainer {
         )
 
         return metadataText
+    }
+
+    func getNote(from identifier: String) -> PhotoMetadataNote? {
+        return nil
     }
 }

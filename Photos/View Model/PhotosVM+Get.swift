@@ -82,8 +82,9 @@ extension PhotosViewModel {
         let options: PHImageRequestOptions = defaultOptions ?? {
             let options = PHImageRequestOptions()
             options.isNetworkAccessAllowed = true
-            options.resizeMode = .fast
-            options.deliveryMode = .fastFormat
+            
+//            options.resizeMode = .fast
+//            options.deliveryMode = .fastFormat
             return options
         }()
 

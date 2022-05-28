@@ -73,6 +73,7 @@ struct PhotosCellImageView: View {
                     }
                 }
             )
+            .edgesIgnoringSafeArea(.all)
             .opacity(model.show ? 1 : 0)
     }
 

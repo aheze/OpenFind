@@ -335,6 +335,9 @@
 		3C1FE21625BB423E004DC9EF /* SlideFindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21525BB423E004DC9EF /* SlideFindBar.swift */; };
 		3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */; };
 		3C1FE21C25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */; };
+		3C20CDAC2842AE16000B79DB /* PhotosCellImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ADECC2841B0FA0099948D /* PhotosCellImageView.swift */; };
+		3C20CDAD2842AE3B000B79DB /* PhotosCellImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ADED02841B3220099948D /* PhotosCellImageViewController.swift */; };
+		3C20CDAE2842AE48000B79DB /* PhotosCellImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ADECE2841B1380099948D /* PhotosCellImageViewModel.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C21ED5927A3A7EF0005E183 /* KeyboardToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5827A3A7EF0005E183 /* KeyboardToolbarView.swift */; };
 		3C21ED5B27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21ED5A27A3A7FF0005E183 /* KeyboardToolbarViewModel.swift */; };
@@ -8552,6 +8555,7 @@
 				3CFD6020278B70970031BC8B /* SearchNavigationConstants.swift in Sources */,
 				3CE3D4C527DA807700521735 /* SearchConfiguration.swift in Sources */,
 				3C443ED327DD8BD00050A0AB /* SettingsIconView.swift in Sources */,
+				3C20CDAE2842AE48000B79DB /* PhotosCellImageViewModel.swift in Sources */,
 				3C7A440927EECEA100DFF76F /* PhotosVC+ResultsHeader.swift in Sources */,
 				3CFD602C278B71E10031BC8B /* SearchNC+NavigationBar.swift in Sources */,
 				3C0B5E7027BAC9B700EC881E /* PhotosVC+Setup.swift in Sources */,
@@ -8562,6 +8566,7 @@
 				3CFCE8A527CA9D5F000624D2 /* Utilities+CGPoint.swift in Sources */,
 				3CF15B2D27FF8AEA00D51E9B /* SettingsSlider.swift in Sources */,
 				3C443EA227DD88FE0050A0AB /* SearchFieldCell.swift in Sources */,
+				3C20CDAC2842AE16000B79DB /* PhotosCellImageView.swift in Sources */,
 				3CF15B1B27FF8AEA00D51E9B /* SettingsDynamicPicker.swift in Sources */,
 				3CBB318F27BD526200F25F6A /* ScrollZoomViewController.swift in Sources */,
 				3CF15B3327FF8AEA00D51E9B /* SettingsData.swift in Sources */,
@@ -8604,6 +8609,7 @@
 				3CF15B2227FF8AEA00D51E9B /* SettingsFooter.swift in Sources */,
 				3CBB31A227BD6E9200F25F6A /* PhotosSlidesItemViewController.swift in Sources */,
 				3C7A440F27EF747000DFF76F /* PhotosVC+EmptyContent.swift in Sources */,
+				3C20CDAD2842AE3B000B79DB /* PhotosCellImageViewController.swift in Sources */,
 				3CF15B2E27FF8AEA00D51E9B /* SettingsCustomView.swift in Sources */,
 				3C443E9B27DD88F80050A0AB /* SearchCollectionView.swift in Sources */,
 				3C1D1A41275AA25E0064F2C6 /* Utilities+Constraints.swift in Sources */,

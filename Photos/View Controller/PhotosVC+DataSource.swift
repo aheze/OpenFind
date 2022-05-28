@@ -39,29 +39,51 @@ extension PhotosViewController {
             viewController = existingViewController
         } else {
             viewController = PhotosCellImageViewController()
-            addChildViewController(viewController, in: cell.contentView)
+            cell.contentView.addSubview(viewController.view)
+            viewController.view.pinEdgesToSuperview()
+//            addChildViewController(viewController, in: cell.contentView)
             cell.viewController = viewController
         }
 //
-        cell.representedAssetIdentifier = photo.asset.localIdentifier
+//
+//
+//        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+//        viewController.model.selected = selected
+//
+//        let description = photo.getVoiceoverDescription()
+//        cell.isAccessibilityElement = true
+//        cell.accessibilityLabel = description
+//
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        
+
         viewController.model.image = nil
-
-        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
-        viewController.model.selected = selected
-
-        let description = photo.getVoiceoverDescription()
-        cell.isAccessibilityElement = true
-        cell.accessibilityLabel = description
-
-        let id = self.model.getImage(
-            from: photo.asset,
-            targetSize: self.realmModel.thumbnailSize
-        ) { image in
+        cell.representedAssetIdentifier = photo.asset.localIdentifier
+        cell.fetchingID = PHImageManager.default().requestImage(
+            for: photo.asset,
+            targetSize: .init(width: 2, height: 2),
+            contentMode: .aspectFill,
+            options: options
+        ) { image, _ in
             if cell.representedAssetIdentifier == photo.asset.localIdentifier {
                 viewController.model.image = image
             }
         }
-        cell.fetchingID = id
+
+        ////
+
+//
+//        viewController.model.image = nil
+//        let id = self.model.getImage(
+//            from: photo.asset,
+//            targetSize: self.realmModel.thumbnailSize
+//        ) { image in
+//                    if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                        viewController.model.image = image
+//                    }
+//        }
+//        cell.fetchingID = id
     }
 
     func teardownCell(cell: PhotosCell, indexPath: IndexPath) {
