@@ -30,6 +30,11 @@ extension PhotosViewModel {
         return nil
     }
 
+    func getPhoto(from indexPath: IndexPath) -> Photo? {
+        let photo = displayedSections[safe: indexPath.section]?.photos[safe: indexPath.row]
+        return photo
+    }
+
     /// get from `sections`
     func getPhoto(from metadata: PhotoMetadata) -> Photo? {
         let photo = photos.first { $0.asset.localIdentifier == metadata.assetIdentifier }
@@ -67,30 +72,21 @@ extension PhotosViewModel {
         }
     }
 
-    func getSmallImage(from asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode = .aspectFill, completion: ((UIImage?) -> Void)?) {
+    func getImage(from asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode = .aspectFill, completion: ((UIImage?) -> Void)?) {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        self.imageManager.requestImage(
+        imageManager.requestImage(
             for: asset,
             targetSize: targetSize,
             contentMode: .aspectFill,
             options: options
-        ) { thumbnail, _ in
-            completion?(thumbnail)
+        ) { image, _ in
+            completion?(image)
         }
     }
 
     /// closure-based for returning multiple times
     func getFullImage(from asset: PHAsset, completion: @escaping ((UIImage?) -> Void)) {
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        imageManager.requestImage(
-            for: asset,
-            targetSize: .zero,
-            contentMode: .aspectFit,
-            options: options
-        ) { image, _ in
-            completion(image)
-        }
+        getImage(from: asset, targetSize: .zero, completion: completion)
     }
 }

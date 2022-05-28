@@ -32,7 +32,7 @@ extension IgnoredPhotosViewController {
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = photo.asset.localIdentifier
 
-            self.model.getSmallImage(
+            self.model.getImage(
                 from: photo.asset,
                 targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero
             ) { image in

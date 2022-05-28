@@ -16,7 +16,7 @@ import SwiftUI
  */
 extension PhotosViewController {
     func setup() {
-        collectionView.register(PhotosCollectionCell.self, forCellWithReuseIdentifier: "PhotosCollectionCell")
+        collectionView.register(PhotosCell.self, forCellWithReuseIdentifier: "PhotosCell")
         setupCollectionView(collectionView, with: flowLayout)
         setupCollectionView(resultsCollectionView, with: resultsFlowLayout)
         showResults(false)

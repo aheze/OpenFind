@@ -98,7 +98,7 @@ extension PhotosViewController {
             // Request an image for the asset from the PHCachingImageManager.
             cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
 
-            self.model.getSmallImage(
+            self.model.getImage(
                 from: findPhoto.photo.asset,
                 targetSize: self.realmModel.thumbnailSize
             ) { image in
