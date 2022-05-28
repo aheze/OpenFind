@@ -79,11 +79,14 @@ extension PhotosViewModel {
         options defaultOptions: PHImageRequestOptions? = nil,
         completion: ((UIImage?) -> Void)?
     ) -> PHImageRequestID {
-        let options: PHImageRequestOptions = defaultOptions ?? {
-            let options = PHImageRequestOptions()
-            options.isNetworkAccessAllowed = true
-            return options
-        }()
+//        let options: PHImageRequestOptions = defaultOptions ?? {
+//            let options = PHImageRequestOptions()
+////            options.isNetworkAccessAllowed = true
+//            return options
+//        }()
+        
+        let options = PHImageRequestOptions()
+        options.isNetworkAccessAllowed = true
 
         return imageManager.requestImage(
             for: asset,

@@ -55,23 +55,39 @@ extension PhotosViewController {
         cell.isAccessibilityElement = true
         cell.accessibilityLabel = description
 
-        let options = PHImageRequestOptions()
-        options.deliveryMode = .highQualityFormat
+//        let options = PHImageRequestOptions()
+//        options.isNetworkAccessAllowed = false
 
         viewController.model.image = nil
         cell.representedAssetIdentifier = photo.asset.localIdentifier
 //        cell.fetchingID = PHImageManager.default().requestImage(
 //            for: photo.asset,
-//            targetSize: .init(width: 2, height: 2),
+//            targetSize: self.realmModel.thumbnailSize,
 //            contentMode: .aspectFill,
 //            options: options
+////            options: nil
 //        ) { image, _ in
 //            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
 //                viewController.model.image = image
 //            }
 //        }
 
-        viewController.model.image = UIImage(named: "Logo")!
+//        let options = PHImageRequestOptions()
+//        options.isNetworkAccessAllowed = true
+
+        self.model.getImage(
+            from: photo.asset,
+            targetSize: self.realmModel.thumbnailSize
+        ) { image in
+            // UIKit may have recycled this cell by the handler's activation time.
+            // Set the cell's thumbnail image only if it's still showing the same asset.
+            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                cell.view.imageView.image = image
+            }
+        }
+        
+        
+//        viewController.model.image = UIImage(named: "Logo")!
 //        cell.fetchingID = self.model.getImage(
 //            from: photo.asset,
 //            targetSize: self.realmModel.thumbnailSize
