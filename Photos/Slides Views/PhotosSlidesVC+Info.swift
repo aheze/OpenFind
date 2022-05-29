@@ -19,7 +19,7 @@ extension PhotosSlidesViewController {
 
         scrollView.isScrollEnabled = false
         scrollView.alwaysBounceVertical = true
-        scrollView.keyboardDismissMode = .onDrag
+        scrollView.keyboardDismissMode = .interactive
 
         infoModel.sizeChanged = { [weak self] size in
             guard let self = self else { return }
@@ -31,6 +31,7 @@ extension PhotosSlidesViewController {
             .dropFirst()
             .sink { [weak self] height in
                 guard let self = self else { return }
+                guard self.model.slidesState?.toolbarInformationOn ?? false else { return }
                 let bottomPadding = height ?? 0
 
                 UIView.animate(withDuration: 0.5) {

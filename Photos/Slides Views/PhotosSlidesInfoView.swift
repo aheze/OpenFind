@@ -46,6 +46,20 @@ struct PhotosSlidesInfoView: View {
                 Text(verbatim: "\(photo.asset.originalFilename ?? "Photo")")
 
                 EditableTextView(model: textModel, text: noteBinding)
+                    .overlay(
+                        VStack {
+                            if noteBinding.wrappedValue.isEmpty {
+                                Text("Add a searchable note")
+                                    .font(UIFont.preferredFont(forTextStyle: .body).font)
+                                    .foregroundColor(.accent)
+                                    .opacity(0.5)
+                                    .padding(.vertical, 2)
+                                    .padding(.leading, 6)
+                            }
+                        }
+                        .allowsHitTesting(false),
+                        alignment: .topLeading
+                    )
                     .padding(12)
                     .frame(maxWidth: .infinity)
                     .overlay(
@@ -55,12 +69,13 @@ struct PhotosSlidesInfoView: View {
                                     textModel.endEditing?()
                                 } label: {
                                     Image(systemName: "checkmark")
+                                        .padding(14)
+                                        .contentShape(Rectangle())
                                 }
                                 .transition(.scale)
                             }
                         }
-                        .animation(.default, value: textModel.isEditing)
-                        .padding(14),
+                        .animation(.default, value: textModel.isEditing),
 
                         alignment: .topTrailing
                     )

@@ -13,6 +13,7 @@ struct FindIconView: View {
     var alpha = CGFloat(1)
 
     var body: some View {
+        
         GeometryReader { geometry in
             let spacing = geometry.size.height * FindIconUIView.spacingPercent
             let availableHeightForHighlights = geometry.size.height - (2 * spacing)

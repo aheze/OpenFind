@@ -16,18 +16,23 @@ class EditableTextViewModel: ObservableObject {
     var endEditing: (() -> Void)?
 
     @Published var keyboardHeight: CGFloat?
-//    var keyboardShown: ((CGFloat?) -> Void)?
 }
 
 struct EditableTextView: UIViewRepresentable {
     @ObservedObject var model: EditableTextViewModel
     @Binding var text: String
+    @State var view: UITextView?
 
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
         view.backgroundColor = .clear
         view.delegate = context.coordinator
         view.font = UIFont.preferredFont(forTextStyle: .body)
+        view.textContainerInset = .zero
+
+        DispatchQueue.main.async {
+            self.view = view
+        }
 
         context.coordinator.listenToKeyboard()
 
@@ -94,6 +99,8 @@ extension EditableTextView.Coordinator {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
 
+            guard parent.view?.isFirstResponder ?? false else { return }
+
             /// only modify and call the `sink` on `parent.model.keyboardHeight` if the height changed - prevent over-scrolling
             if currentKeyboardHeight.map({ $0 != keyboardHeight }) ?? true {
                 parent.model.keyboardHeight = keyboardHeight
@@ -103,6 +110,7 @@ extension EditableTextView.Coordinator {
     }
 
     @objc func keyboardDidHide(_ notification: Notification) {
+        guard parent.view?.isFirstResponder ?? false else { return }
         parent.model.keyboardHeight = nil
         currentKeyboardHeight = nil
     }
