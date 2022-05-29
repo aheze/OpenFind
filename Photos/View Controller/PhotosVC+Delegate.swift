@@ -40,7 +40,9 @@ extension PhotosViewController: UICollectionViewDelegate {
             teardownCell(cell: cell, indexPath: indexPath)
         }
 
-        endDisplayResultsCell(cell: cell, indexPath: indexPath)
+        if let cell = cell as? PhotosCellResults {
+            teardownCellResults(cell: cell, indexPath: indexPath)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {

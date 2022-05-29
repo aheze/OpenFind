@@ -8,17 +8,45 @@
     
 import UIKit
 
-extension UITextView {
-    func getFrame(start startOffset: Int, end endOffset: Int) -> CGRect? {
-        if
-            let start = position(from: beginningOfDocument, offset: startOffset),
-            let end = position(from: beginningOfDocument, offset: endOffset),
-            let textRange = textRange(from: start, to: end)
-        {
-            let frame = firstRect(for: textRange)
-            return frame
+extension PhotosViewController {
+    /// populate the cell with actual finding data and highlights
+    func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
+        guard let viewController = cell.viewController else { return }
+        
+        if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier) {
+            viewController.resultsModel.note = note.string
+        } else {
+            viewController.resultsModel.note = nil
         }
-        return nil
+        
+        var description: FindPhoto.Description
+        if let existingDescription = findPhoto.description {
+            description = existingDescription
+        } else {
+            let (lines, highlightsCount) = Finding.getLineHighlights(
+                realmModel: realmModel,
+                from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
+                with: searchViewModel.stringToGradients,
+                imageSize: findPhoto.photo.asset.getSize()
+            )
+            
+            let text = Finding.getCellDescription(from: lines)
+            description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                let highlights = self.getLineHighlights(for: cell, with: lines)
+                viewController.highlightsViewModel.update(with: highlights, replace: true)
+            }
+        }
+        
+        viewController.resultsModel.resultsText = description.resultsString()
+        viewController.resultsModel.text = description.text
+        
+        var newFindPhoto = findPhoto
+        newFindPhoto.description = description
+        model.resultsState?.update(findPhoto: newFindPhoto)
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
     }
 }
 
@@ -83,12 +111,11 @@ extension PhotosViewController {
         if let resultsState = model.resultsState {
             for index in resultsState.displayedFindPhotos.indices {
                 if
-                    let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
-                    let viewController = cell.highlightsViewController
+                    let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
+                    let highlightsViewModel = cell.viewController?.highlightsViewModel
                 {
-                    let currentHighlights = viewController.highlightsViewModel.highlights
                     var newHighlights = [Highlight]()
-                    for highlight in currentHighlights {
+                    for highlight in highlightsViewModel.highlights {
                         if let gradient = searchViewModel.stringToGradients[highlight.string] {
                             var newHighlight = highlight
                             newHighlight.colors = gradient.colors
@@ -97,56 +124,24 @@ extension PhotosViewController {
                         }
                     }
                     
-                    cell.highlightsViewController?.highlightsViewModel.highlights = newHighlights
+                    highlightsViewModel.highlights = newHighlights
                 }
             }
         }
     }
 }
 
-extension PhotosViewController {
-    /// populate the cell with actual finding data
-    func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
-        let viewController = getAndLoadCellResultsViewController(cell: cell)
-        
-        if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier) {
-            viewController.resultsModel.note = note.string
-        } else {
-            viewController.resultsModel.note = nil
+extension UITextView {
+    /// get the frame of a range
+    func getFrame(start startOffset: Int, end endOffset: Int) -> CGRect? {
+        if
+            let start = position(from: beginningOfDocument, offset: startOffset),
+            let end = position(from: beginningOfDocument, offset: endOffset),
+            let textRange = textRange(from: start, to: end)
+        {
+            let frame = firstRect(for: textRange)
+            return frame
         }
-        
-        var description: FindPhoto.Description
-        if let existingDescription = findPhoto.description {
-            description = existingDescription
-        } else {
-            let (lines, highlightsCount) = Finding.getLineHighlights(
-                realmModel: realmModel,
-                from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
-                with: searchViewModel.stringToGradients,
-                imageSize: findPhoto.photo.asset.getSize()
-            )
-            
-            let text = Finding.getCellDescription(from: lines)
-            description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
-            
-            let highlights = getLineHighlights(for: cell, with: lines)
-            viewController.highlightsViewModel.highlights = highlights
-        }
-        
-        viewController.resultsModel.resultsText = description.resultsString()
-        viewController.resultsModel.text = description.text
-        
-        var newFindPhoto = findPhoto
-        newFindPhoto.description = description
-        model.resultsState?.update(findPhoto: newFindPhoto)
-        cell.isAccessibilityElement = true
-        cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
-    }
-    
-    func removeHighlights(for cell: PhotosResultsCell) {
-        if let existingHighlightsViewController = cell.highlightsViewController {
-            removeChildViewController(existingHighlightsViewController)
-            cell.highlightsViewController = nil
-        }
+        return nil
     }
 }

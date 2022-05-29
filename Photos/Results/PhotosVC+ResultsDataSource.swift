@@ -40,21 +40,21 @@ extension PhotosViewController {
     }
 
     /// returns the view controller, loading it if necessary
-    func getAndLoadCellResultsViewController(cell: PhotosCellResults) -> PhotosCellResultsImageViewController {
+    func getAndLoadCellResultsViewController(cell: PhotosCellResults, findPhoto: FindPhoto) -> PhotosCellResultsImageViewController {
         let viewController: PhotosCellResultsImageViewController
         if let existingViewController = cell.viewController {
-            viewController = self.reloadCellResults(cell: cell, existingViewController: existingViewController)
+            viewController = self.reloadCellResults(cell: cell, existingViewController: existingViewController, findPhoto: findPhoto)
         } else {
             viewController = PhotosCellResultsImageViewController(realmModel: realmModel)
             addChildViewController(viewController, in: cell.contentView)
             cell.viewController = viewController
-            viewController.view.addDebugBorders(.random)
         }
         return viewController
     }
 
+    /// also update the description highlights
     @discardableResult
-    func reloadCellResults(cell: PhotosCellResults, existingViewController: PhotosCellResultsImageViewController) -> PhotosCellResultsImageViewController {
+    func reloadCellResults(cell: PhotosCellResults, existingViewController: PhotosCellResultsImageViewController, findPhoto: FindPhoto) -> PhotosCellResultsImageViewController {
         let newViewController = PhotosCellResultsImageViewController(
             model: existingViewController.model,
             resultsModel: existingViewController.resultsModel,
@@ -66,6 +66,8 @@ extension PhotosViewController {
         self.removeChildViewController(existingViewController)
         self.addChildViewController(newViewController, in: cell.contentView)
         cell.viewController = newViewController
+
+        configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
         return newViewController
     }
 
@@ -75,8 +77,9 @@ extension PhotosViewController {
             let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item]
         else { return }
 
-        let viewController = self.getAndLoadCellResultsViewController(cell: cell)
+        let viewController = self.getAndLoadCellResultsViewController(cell: cell, findPhoto: findPhoto)
 
+        viewController.highlightsViewModel.highlights.removeAll()
         viewController.resultsModel.findPhoto = findPhoto
         viewController.model.photo = findPhoto.photo
 
@@ -100,14 +103,7 @@ extension PhotosViewController {
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
     }
 
-    func endDisplayResultsCell(cell: UICollectionViewCell, indexPath: IndexPath) {
-        if
-            model.resultsState != nil,
-            let cell = cell as? PhotosResultsCell
-        {
-            removeHighlights(for: cell)
-        }
-    }
+    func teardownCellResults(cell: PhotosCellResults, indexPath: IndexPath) {}
 
     /// call after bounds or filter change
     /// Only works when `resultsState` isn't nil
