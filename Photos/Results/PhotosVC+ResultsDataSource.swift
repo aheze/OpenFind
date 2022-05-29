@@ -39,14 +39,44 @@ extension PhotosViewController {
         }
     }
 
-    func willDisplayResultsCell(cell: UICollectionViewCell, indexPath: IndexPath) {
-        if
+    func configureCellResults(cell: PhotosCellResults, indexPath: IndexPath) {
+        guard
             let resultsState = model.resultsState,
-            let cell = cell as? PhotosResultsCell,
             let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item]
-        {
-            configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
+        else { return }
+
+        let viewController: PhotosCellResultsImageViewController
+        if let existingViewController = cell.viewController {
+            viewController = existingViewController
+        } else {
+            viewController = PhotosCellResultsImageViewController(realmModel: realmModel)
+            addChildViewController(viewController, in: cell.contentView)
+//            cell.contentView.addSubview(viewController.view)
+//            viewController.view.pinEdgesToSuperview()
+            cell.viewController = viewController
         }
+
+        viewController.resultsModel.findPhoto = findPhoto
+        viewController.model.photo = findPhoto.photo
+
+        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
+        viewController.model.selected = selected
+
+        viewController.model.image = nil
+        cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
+
+        cell.fetchingID = self.model.getImage(
+            from: findPhoto.photo.asset,
+            targetSize: self.realmModel.thumbnailSize
+        ) { [weak viewController] image in
+            // UIKit may have recycled this cell by the handler's activation time.
+            // Set the cell's thumbnail image only if it's still showing the same asset.
+            if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
+                viewController?.model.image = image
+            }
+        }
+        
+        configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
     }
 
     func endDisplayResultsCell(cell: UICollectionViewCell, indexPath: IndexPath) {
@@ -85,37 +115,37 @@ extension PhotosViewController {
         let dataSource = ResultsDataSource(collectionView: resultsCollectionView) { collectionView, indexPath, cachedFindPhoto -> UICollectionViewCell? in
 
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "PhotosResultsCell",
+                withReuseIdentifier: "PhotosCellResults",
                 for: indexPath
-            ) as! PhotosResultsCell
+            ) as! PhotosCellResults
 
             /// get the current up-to-date FindPhoto first.
 
-            guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
-
-            cell.titleLabel.text = findPhoto.dateString()
-
-            // Request an image for the asset from the PHCachingImageManager.
-            cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
-
-            self.model.getImage(
-                from: findPhoto.photo.asset,
-                targetSize: self.realmModel.thumbnailSize
-            ) { image in
-                if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
-                    cell.view.imageView.image = image
-                }
-            }
-
-            PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
-
-            cell.isAccessibilityElement = true
-            cell.baseView.alpha = 1
-            cell.transform = .identity
-
-            /// selection
-            let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
-            self.configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: selected)
+//            guard let findPhoto = self.model.resultsState?.displayedFindPhotos.first(where: { $0.photo == cachedFindPhoto.photo }) else { return cell }
+//
+//            cell.titleLabel.text = findPhoto.dateString()
+//
+//            // Request an image for the asset from the PHCachingImageManager.
+//            cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
+//
+//            self.model.getImage(
+//                from: findPhoto.photo.asset,
+//                targetSize: self.realmModel.thumbnailSize
+//            ) { image in
+//                if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
+//                    cell.view.imageView.image = image
+//                }
+//            }
+//
+//            PhotoMetadata.apply(metadata: findPhoto.photo.metadata, to: cell.view)
+//
+//            cell.isAccessibilityElement = true
+//            cell.baseView.alpha = 1
+//            cell.transform = .identity
+//
+//            /// selection
+//            let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
+//            self.configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: selected)
 
             return cell
         }

@@ -101,13 +101,14 @@ extension PhotosViewController {
             updateResults() /// always update results anyway, for example when coming back from star
         }
         
+        /// update highlights if photo was same, but search changed
         DispatchQueue.main.async {
             for index in displayedFindPhotos.indices {
                 if
-                    let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell,
+                    let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
                     let findPhoto = displayedFindPhotos[safe: index]
                 {
-                    self.configureResultsCellDescription(cell: cell, findPhoto: findPhoto)
+                    self.configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
                 }
             }
         }

@@ -106,14 +106,11 @@ extension PhotosViewController {
 
 extension PhotosViewController {
     /// populate the cell with actual finding data
-    func configureResultsCellDescription(cell: PhotosResultsCell, findPhoto: FindPhoto) {
+    func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
         if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier) {
-            cell.descriptionNotesContainerView.isHidden = false
-            cell.descriptionNotesHeightC.constant = PhotosResultsCellConstants.noteHeight
-            cell.descriptionNotesTextView.text = note.string
+            cell.viewController?.resultsModel.note = note.string
         } else {
-            cell.descriptionNotesContainerView.isHidden = true
-            cell.descriptionNotesHeightC.constant = 0
+            cell.viewController?.resultsModel.note = nil
         }
         
         var description: FindPhoto.Description
@@ -131,20 +128,21 @@ extension PhotosViewController {
             description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
         }
         
-        cell.resultsLabel.text = description.resultsString()
-        cell.descriptionTextView.text = description.text
+        cell.viewController?.resultsModel.resultsText = description.resultsString()
+        cell.viewController?.resultsModel.text = description.text
         
         var newFindPhoto = findPhoto
         newFindPhoto.description = description
         model.resultsState?.update(findPhoto: newFindPhoto)
+        cell.isAccessibilityElement = true
         cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
         
-        if realmModel.photosRenderResultsHighlights {
-            loadHighlights(for: cell, lines: description.lines)
-        } else if let highlightsViewController = cell.highlightsViewController {
-            removeChildViewController(highlightsViewController)
-            cell.highlightsViewController = nil
-        }
+//        if realmModel.photosRenderResultsHighlights {
+//            loadHighlights(for: cell, lines: description.lines)
+//        } else if let highlightsViewController = cell.highlightsViewController {
+//            removeChildViewController(highlightsViewController)
+//            cell.highlightsViewController = nil
+//        }
     }
     
     /// add the highlights for a results cell

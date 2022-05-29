@@ -55,7 +55,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var infoViewContainer: UIView!
     @IBOutlet var infoViewContainerHeightC: NSLayoutConstraint!
     lazy var infoNoteHighlightViewModel = HighlightsViewModel()
-    lazy var infoNoteTextViewModel = EditableTextViewModel()
+    lazy var infoNoteTextViewModel = EditableTextViewModel(configuration: .infoSlides)
 
     lazy var flowLayout = makeFlowLayout()
     lazy var dataSource: DataSource? = makeDataSource()

@@ -1,26 +1,31 @@
 //
-//  PhotosCellImageViewController.swift
+//  PhotosCellResultsImageViewController.swift
 //  Find
 //
-//  Created by A. Zheng (github.com/aheze) on 5/27/22.
+//  Created by A. Zheng (github.com/aheze) on 5/28/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
     
-import SwiftUI
 import Photos
+import SwiftUI
 
-class PhotosCell: UICollectionViewCell {
+class PhotosCellResults: UICollectionViewCell {
     /// when fetching an image, this will be populated
     var fetchingID: PHImageRequestID?
     
     var representedAssetIdentifier: String?
-    var viewController: PhotosCellImageViewController?
+    var viewController: PhotosCellResultsImageViewController?
 }
 
-class PhotosCellImageViewController: UIViewController {
+class PhotosCellResultsImageViewController: UIViewController {
     var model = PhotosCellImageViewModel()
+    var resultsModel = PhotosCellResultsImageViewModel()
+    var textModel = EditableTextViewModel(configuration: .cellResults)
+    var highlightsViewModel = HighlightsViewModel()
+    var realmModel: RealmModel
     
-    init() {
+    init(realmModel: RealmModel) {
+        self.realmModel = realmModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,7 +41,14 @@ class PhotosCellImageViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .clear
         
-        let contentView = PhotosCellImageView(model: model)
+        let contentView = PhotosCellResultsImageView(
+            model: model,
+            resultsModel: resultsModel,
+            textModel: textModel,
+            highlightsViewModel: highlightsViewModel,
+            realmModel: realmModel
+        )
+        
         let hostingController = UIHostingController(rootView: contentView)
         hostingController.view.frame = view.bounds
         hostingController.view.backgroundColor = .clear

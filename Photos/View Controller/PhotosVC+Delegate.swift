@@ -30,7 +30,9 @@ extension PhotosViewController: UICollectionViewDelegate {
         }
 
         /// handle logic in `PhotosVC+ResultsDataSource`
-        willDisplayResultsCell(cell: cell, indexPath: indexPath)
+        if let cell = cell as? PhotosCellResults {
+            configureCellResults(cell: cell, indexPath: indexPath)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

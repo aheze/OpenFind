@@ -9,6 +9,8 @@
 import SwiftUI
 
 class EditableTextViewModel: ObservableObject {
+    var configuration: Configuration
+
     /// start, end
     var getFrameForRange: ((Int, Int) -> CGRect?)?
 
@@ -16,6 +18,28 @@ class EditableTextViewModel: ObservableObject {
     var endEditing: (() -> Void)?
 
     @Published var keyboardHeight: CGFloat?
+
+    init(configuration: Configuration) {
+        self.configuration = configuration
+    }
+
+    struct Configuration {
+        var scrollable = false
+        var editable = true
+
+        static let infoSlides: Self = {
+            var configuration = Configuration()
+            configuration.scrollable = true
+            return configuration
+        }()
+        
+        static let cellResults: Self = {
+            var configuration = Configuration()
+            configuration.scrollable = false
+            configuration.editable = false
+            return configuration
+        }()
+    }
 }
 
 struct EditableTextView: UIViewRepresentable {
@@ -29,6 +53,8 @@ struct EditableTextView: UIViewRepresentable {
         view.delegate = context.coordinator
         view.font = UIFont.preferredFont(forTextStyle: .body)
         view.textContainerInset = .zero
+        view.isScrollEnabled = model.configuration.scrollable
+        view.isEditable = model.configuration.editable
 
         DispatchQueue.main.async {
             self.view = view
@@ -50,6 +76,10 @@ struct EditableTextView: UIViewRepresentable {
 
     func updateUIView(_ view: UITextView, context: Context) {
         view.text = text
+        view.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        view.setContentHuggingPriority(.defaultLow, for: .vertical)
+        view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
 
     func makeCoordinator() -> Coordinator {
