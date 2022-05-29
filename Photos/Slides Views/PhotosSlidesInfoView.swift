@@ -24,7 +24,13 @@ struct PhotosSlidesInfoView: View {
             return note
         } set: { newValue in
             let note = PhotoMetadataNote(string: newValue)
-            realmModel.container.updatePhotoMetadata(metadata: photo.metadata, text: nil, note: note)
+            let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
+            if let metadata = photo.metadata {
+                realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil, note: note)
+            } else {
+                let metadata = PhotoMetadata(assetIdentifier: photo.asset.localIdentifier)
+                realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil, note: note)
+            }
         }
 
         VStack(spacing: 0) {

@@ -44,6 +44,7 @@ extension PhotosSlidesViewController {
 
             viewController.findPhoto = slidesPhoto.findPhoto
             viewController.loadViewIfNeeded()
+            viewController.scrollZoomController.imageView.image = nil
             viewController.reloadImage()
 
             photoSlidesViewController = viewController

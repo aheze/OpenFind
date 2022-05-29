@@ -76,11 +76,11 @@ extension RealmContainer {
     /// handles both add or update
     /// if `text` is not nil, also update the text
     /// Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata`
-    func updatePhotoMetadata(metadata: PhotoMetadata?, text: PhotoMetadataText?, note: PhotoMetadataNote?) {
-        guard let metadata = metadata else {
-            Debug.log("No metadata.")
-            return
-        }
+    func updatePhotoMetadata(metadata: PhotoMetadata, text: PhotoMetadataText?, note: PhotoMetadataNote?) {
+//        guard let metadata = metadata else {
+//            Debug.log("No metadata.")
+//            return
+//        }
 
         let realm = try! Realm()
 
