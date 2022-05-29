@@ -31,6 +31,7 @@ struct PhotosSlidesInfoView: View {
                 let metadata = PhotoMetadata(assetIdentifier: photo.asset.localIdentifier)
                 realmModel.container.updatePhotoMetadata(metadata: metadata, text: nil, note: note)
             }
+            infoModel.noteChanged?()
         }
 
         VStack(spacing: 0) {

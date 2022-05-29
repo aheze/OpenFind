@@ -102,19 +102,7 @@ extension PhotosViewController {
         }
         
         /// update highlights if photo was same, but search changed
-        DispatchQueue.main.async {
-            for index in displayedFindPhotos.indices {
-                if
-                    let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
-                    let existingViewController = cell.viewController,
-                    let findPhoto = self.model.resultsState?.displayedFindPhotos[safe: index]
-                {
-                    print("Refreshing \(index).")
-              
-                    self.reloadCellResults(cell: cell, existingViewController: existingViewController, findPhoto: findPhoto)
-                }
-            }
-        }
+        reloadVisibleCellResults()
 
         let results = model.resultsState?.getResultsText() ?? ""
         resultsHeaderViewModel.text = results

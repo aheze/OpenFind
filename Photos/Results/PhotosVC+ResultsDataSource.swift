@@ -51,6 +51,19 @@ extension PhotosViewController {
         }
         return viewController
     }
+    
+    func reloadVisibleCellResults() {
+        guard let displayedFindPhotos = model.resultsState?.displayedFindPhotos else { return }
+        for index in displayedFindPhotos.indices {
+            if
+                let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
+                let existingViewController = cell.viewController,
+                let findPhoto = self.model.resultsState?.displayedFindPhotos[safe: index]
+            {
+                self.reloadCellResults(cell: cell, existingViewController: existingViewController, findPhoto: findPhoto)
+            }
+        }
+    }
 
     /// also update the description highlights
     @discardableResult

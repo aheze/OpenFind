@@ -62,6 +62,9 @@ class PhotosViewModel: ObservableObject {
 
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
+    
+    /// reload displayed results photos after info changed
+    var updateDisplayedResults: (() -> Void)?
 
     // MARK: Slides / Results
 

@@ -61,6 +61,16 @@ extension PhotosViewController {
             }
         }
         
+        model.updateDisplayedResults = { [weak self] in
+            guard let self = self else { return }
+            if self.model.resultsState != nil {
+                self.updateResultsCellSizes {
+                    self.updateResults() /// make sure to call `update` later, when results dismissed
+                    self.reloadVisibleCellResults()
+                }
+            }
+        }
+        
         model.getSlidesViewControllerFor = { [weak self] photo in
             guard let self = self else { return nil }
             let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)

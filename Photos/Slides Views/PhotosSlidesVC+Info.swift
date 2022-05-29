@@ -27,6 +27,14 @@ extension PhotosSlidesViewController {
             self.infoViewContainerHeightC.constant = max(infoHeight, size.height + self.tabViewModel.tabBarAttributes.backgroundHeight)
         }
 
+        infoModel.noteChanged = { [weak self] in
+            guard let self = self else { return }
+
+            Debouncer.debounce(queue: .main) {
+                self.model.updateDisplayedResults?()
+            }
+        }
+
         infoNoteTextViewModel.$keyboardHeight
             .dropFirst()
             .sink { [weak self] height in
