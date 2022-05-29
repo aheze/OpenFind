@@ -1,5 +1,5 @@
 //
-//  PhotosVC+Update.swift
+//  PhotosVC+UpdateForNewPhotos.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 3/17/22.
@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- Update for finding
+ Update after new photos were added
  */
 
 extension PhotosViewController {

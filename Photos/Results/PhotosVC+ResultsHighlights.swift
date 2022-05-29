@@ -24,7 +24,7 @@ extension UITextView {
 
 extension PhotosViewController {
     /// call this inside the cell provider. Frames of returned highlights are already scaled.
-    func getLineHighlights(for cell: PhotosResultsCell, with lines: [FindPhoto.Line]) -> [Highlight] {
+    func getLineHighlights(for cell: PhotosCellResults, with lines: [FindPhoto.Line]) -> [Highlight] {
         /// the highlights to be shown. Create these from `lineHighlights`
         var cellHighlights = [Highlight]()
         
@@ -35,7 +35,7 @@ extension PhotosViewController {
             /// `lineHighlights` - highlights in the cell without a frame - only represented by their ranges
             guard
                 let lineHighlights = line.lineHighlights,
-                let textView = cell.descriptionTextView
+                let getFrameForRange = cell.viewController?.textModel.getFrameForRange
             else { continue }
             
             let previousLines = Array(lines.prefix(index))
@@ -51,7 +51,7 @@ extension PhotosViewController {
                 let startOffset = lineHighlight.rangeInSentence.startIndex + previousDescriptionCount
                 let endOffset = lineHighlight.rangeInSentence.endIndex + previousDescriptionCount
                 
-                guard let frame = textView.getFrame(start: startOffset, end: endOffset) else { continue }
+                guard let frame = getFrameForRange(startOffset, endOffset) else { continue }
                 
                 /// make sure the rectangle actually is valid
                 guard frame.size.width > 0, frame.size.height > 0 else { continue }
@@ -107,10 +107,12 @@ extension PhotosViewController {
 extension PhotosViewController {
     /// populate the cell with actual finding data
     func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
+        let viewController = getAndLoadCellResultsViewController(cell: cell)
+        
         if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier) {
-            cell.viewController?.resultsModel.note = note.string
+            viewController.resultsModel.note = note.string
         } else {
-            cell.viewController?.resultsModel.note = nil
+            viewController.resultsModel.note = nil
         }
         
         var description: FindPhoto.Description
@@ -126,46 +128,19 @@ extension PhotosViewController {
             
             let text = Finding.getCellDescription(from: lines)
             description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
+            
+            let highlights = getLineHighlights(for: cell, with: lines)
+            viewController.highlightsViewModel.highlights = highlights
         }
         
-        cell.viewController?.resultsModel.resultsText = description.resultsString()
-        cell.viewController?.resultsModel.text = description.text
+        viewController.resultsModel.resultsText = description.resultsString()
+        viewController.resultsModel.text = description.text
         
         var newFindPhoto = findPhoto
         newFindPhoto.description = description
         model.resultsState?.update(findPhoto: newFindPhoto)
         cell.isAccessibilityElement = true
         cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
-        
-//        if realmModel.photosRenderResultsHighlights {
-//            loadHighlights(for: cell, lines: description.lines)
-//        } else if let highlightsViewController = cell.highlightsViewController {
-//            removeChildViewController(highlightsViewController)
-//            cell.highlightsViewController = nil
-//        }
-    }
-    
-    /// add the highlights for a results cell
-    func loadHighlights(for cell: PhotosResultsCell, lines: [FindPhoto.Line]) {
-        /// clear existing highlights
-        
-        var highlightsViewController: HighlightsViewController
-        if let existingHighlightsViewController = cell.highlightsViewController {
-            highlightsViewController = existingHighlightsViewController
-        } else {
-            let highlightsViewModel = HighlightsViewModel()
-            highlightsViewModel.shouldScaleHighlights = false /// highlights are already scaled
-            let newHighlightsViewController = HighlightsViewController(
-                highlightsViewModel: highlightsViewModel,
-                realmModel: realmModel
-            )
-            addChildViewController(newHighlightsViewController, in: cell.descriptionHighlightsContainerView)
-            cell.highlightsViewController = newHighlightsViewController
-            highlightsViewController = newHighlightsViewController
-        }
-        
-        let highlights = getLineHighlights(for: cell, with: lines)
-        highlightsViewController.highlightsViewModel.highlights = highlights
     }
     
     func removeHighlights(for cell: PhotosResultsCell) {

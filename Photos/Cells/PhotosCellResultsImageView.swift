@@ -36,22 +36,23 @@ struct PhotosCellResultsImageView: View {
                     Text(resultsModel.resultsText)
                         .font(UIFont.preferredFont(forTextStyle: .subheadline).font)
                         .foregroundColor(UIColor.secondaryLabel.color)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
                         .background(
                             Capsule()
                                 .fill(UIColor.secondarySystemBackground.color)
+                                .padding(.horizontal, -12)
+                                .padding(.vertical, -8)
                         )
+                        .padding(.trailing, 12)
                 }
                 
                 EditableTextView(model: textModel, text: .constant(resultsModel.text))
+                    .background(
+                        HighlightsView(highlightsViewModel: highlightsViewModel, realmModel: realmModel)
+                    )
                     .allowsHitTesting(false)
                 
                 if let note = resultsModel.note {
                     EditableTextView(model: textModel, text: .constant(note))
-                        .overlay(
-                            HighlightsView(highlightsViewModel: highlightsViewModel, realmModel: realmModel)
-                        )
                         .allowsHitTesting(false)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(6)
@@ -64,8 +65,8 @@ struct PhotosCellResultsImageView: View {
                                     UIColor.label.color
                                         .cornerRadius(6, corners: .bottomLeft)
                                         .opacity(0.1)
-                                )
-                            ,
+                                ),
+                            
                             alignment: .topTrailing
                         )
                         .background(UIColor.secondarySystemBackground.color)
@@ -74,7 +75,7 @@ struct PhotosCellResultsImageView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .padding(16)
+        .padding(12)
         .background(UIColor.systemBackground.color)
         .cornerRadius(16)
         .edgesIgnoringSafeArea(.all)

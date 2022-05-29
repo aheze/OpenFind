@@ -32,7 +32,7 @@ class EditableTextViewModel: ObservableObject {
             configuration.scrollable = true
             return configuration
         }()
-        
+
         static let cellResults: Self = {
             var configuration = Configuration()
             configuration.scrollable = false
@@ -76,6 +76,7 @@ struct EditableTextView: UIViewRepresentable {
 
     func updateUIView(_ view: UITextView, context: Context) {
         view.text = text
+
         view.setContentHuggingPriority(.defaultLow, for: .horizontal)
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)

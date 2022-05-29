@@ -28,6 +28,7 @@ extension PhotosViewController {
             showCancelNavigationBar()
             showScanningButton(false)
             contentContainer.isHidden = true
+
         } else {
             model.resultsState = nil
             if collectionView.window == nil {

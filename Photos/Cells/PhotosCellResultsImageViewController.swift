@@ -18,14 +18,26 @@ class PhotosCellResults: UICollectionViewCell {
 }
 
 class PhotosCellResultsImageViewController: UIViewController {
-    var model = PhotosCellImageViewModel()
-    var resultsModel = PhotosCellResultsImageViewModel()
-    var textModel = EditableTextViewModel(configuration: .cellResults)
-    var highlightsViewModel = HighlightsViewModel()
-    var realmModel: RealmModel
+    let model: PhotosCellImageViewModel
+    let resultsModel: PhotosCellResultsImageViewModel
+    let textModel: EditableTextViewModel
+    let highlightsViewModel: HighlightsViewModel
+    let realmModel: RealmModel
     
-    init(realmModel: RealmModel) {
+    init(
+        model: PhotosCellImageViewModel? = nil,
+        resultsModel: PhotosCellResultsImageViewModel? = nil,
+        textModel: EditableTextViewModel? = nil,
+        highlightsViewModel: HighlightsViewModel? = nil,
+        realmModel: RealmModel
+    ) {
+        self.model = model ?? .init()
+        self.resultsModel = resultsModel ?? .init()
+        self.textModel = textModel ?? .init(configuration: .cellResults)
+        self.highlightsViewModel = highlightsViewModel ?? .init()
         self.realmModel = realmModel
+        
+        self.highlightsViewModel.shouldScaleHighlights = false /// highlights are already scaled
         super.init(nibName: nil, bundle: nil)
     }
     

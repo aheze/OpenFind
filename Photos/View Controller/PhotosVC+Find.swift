@@ -106,9 +106,11 @@ extension PhotosViewController {
             for index in displayedFindPhotos.indices {
                 if
                     let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
-                    let findPhoto = displayedFindPhotos[safe: index]
+                    let existingViewController = cell.viewController
                 {
-                    self.configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
+                    print("Refreshing \(index).")
+              
+                    self.reloadCellResults(cell: cell, existingViewController: existingViewController)
                 }
             }
         }
