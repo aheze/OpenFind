@@ -45,9 +45,8 @@ extension PhotosViewController {
             cell.viewController = viewController
         }
 
-        
         viewController.model.photo = photo
-        
+
         let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
         viewController.model.selected = selected
 
@@ -55,47 +54,20 @@ extension PhotosViewController {
         cell.isAccessibilityElement = true
         cell.accessibilityLabel = description
 
-//        let options = PHImageRequestOptions()
-//        options.isNetworkAccessAllowed = false
 
         viewController.model.image = nil
         cell.representedAssetIdentifier = photo.asset.localIdentifier
-//        cell.fetchingID = PHImageManager.default().requestImage(
-//            for: photo.asset,
-//            targetSize: self.realmModel.thumbnailSize,
-//            contentMode: .aspectFill,
-//            options: options
-////            options: nil
-//        ) { image, _ in
-//            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                viewController.model.image = image
-//            }
-//        }
 
-//        let options = PHImageRequestOptions()
-//        options.isNetworkAccessAllowed = true
-
-        self.model.getImage(
+        cell.fetchingID = self.model.getImage(
             from: photo.asset,
             targetSize: self.realmModel.thumbnailSize
-        ) { image in
+        ) { [weak viewController] image in
             // UIKit may have recycled this cell by the handler's activation time.
             // Set the cell's thumbnail image only if it's still showing the same asset.
             if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                cell.view.imageView.image = image
+                viewController?.model.image = image
             }
         }
-        
-        
-//        viewController.model.image = UIImage(named: "Logo")!
-//        cell.fetchingID = self.model.getImage(
-//            from: photo.asset,
-//            targetSize: self.realmModel.thumbnailSize
-//        ) { image in
-//            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                viewController.model.image = image
-//            }
-//        }
     }
 
     func teardownCell(cell: PhotosCell, indexPath: IndexPath) {

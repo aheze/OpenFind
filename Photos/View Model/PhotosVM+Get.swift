@@ -79,14 +79,11 @@ extension PhotosViewModel {
         options defaultOptions: PHImageRequestOptions? = nil,
         completion: ((UIImage?) -> Void)?
     ) -> PHImageRequestID {
-//        let options: PHImageRequestOptions = defaultOptions ?? {
-//            let options = PHImageRequestOptions()
-////            options.isNetworkAccessAllowed = true
-//            return options
-//        }()
-        
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
+        let options: PHImageRequestOptions = defaultOptions ?? {
+            let options = PHImageRequestOptions()
+            options.isNetworkAccessAllowed = true
+            return options
+        }()
 
         return imageManager.requestImage(
             for: asset,
@@ -102,7 +99,7 @@ extension PhotosViewModel {
     func getFullImage(from asset: PHAsset, completion: @escaping ((UIImage?) -> Void)) {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        
+
         _ = getImage(
             from: asset,
             targetSize: .zero,

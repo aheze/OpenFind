@@ -17,8 +17,6 @@ struct PhotosCellImageViewState {
 struct PhotosCellImageView: View {
     @ObservedObject var model: PhotosCellImageViewModel
 
-//    let state = PhotosCellImageViewState()
-
     var body: some View {
         let state = getState()
 
@@ -45,7 +43,7 @@ struct PhotosCellImageView: View {
                     if state.showingShade {
                         LinearGradient(
                             stops: [
-                                .init(color: .clear, location: 0.4),
+                                .init(color: .clear, location: 0.3),
                                 .init(color: .black, location: 1)
                             ],
                             startPoint: .topTrailing,
@@ -63,7 +61,7 @@ struct PhotosCellImageView: View {
                 .opacity(model.showOverlay ? 1 : 0)
             )
             .overlay(
-                ZStack {
+                ZStack(alignment: .bottomTrailing) {
                     Color.white
                         .opacity(model.showSelectionOverlay ? 0.1 : 0)
 
@@ -71,13 +69,19 @@ struct PhotosCellImageView: View {
                         if model.selected {
                             Circle()
                                 .fill(.blue)
-                                .frame(width: 12, height: 12)
+                                .frame(width: 20, height: 20)
                                 .overlay(
                                     Circle()
-                                        .stroke(.white, lineWidth: 2)
+                                        .stroke(.white, lineWidth: 1.6)
+                                )
+                                .overlay(
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 11, weight: .medium))
                                 )
                         }
                     }
+                    .padding(6)
                 }
             )
             .edgesIgnoringSafeArea(.all)

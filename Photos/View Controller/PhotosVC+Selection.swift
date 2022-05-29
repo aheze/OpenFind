@@ -86,6 +86,7 @@ extension PhotosViewController {
                 let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
                 if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
                     cell.viewController?.model.showSelectionOverlay = model.isSelecting
+                    cell.viewController?.model.selected = false
                 }
 
                 if !model.isSelecting {

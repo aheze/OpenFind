@@ -14,7 +14,7 @@ extension PhotosViewController: UICollectionViewDelegate {
         updateNavigationBlur(with: scrollView)
 
         /// For photos caching
-//        updateCachedAssets()
+        updateCachedAssets()
     }
 
     /// update the blur with a scroll view's content offset
