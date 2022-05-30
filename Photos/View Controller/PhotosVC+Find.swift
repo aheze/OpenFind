@@ -5,14 +5,14 @@
 //  Created by A. Zheng (github.com/aheze) on 2/23/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
+
 import UIKit
 
 /// control how to find
 enum FindContext {
     case findingAfterNewPhotosAdded
     case findingAfterTextChange(firstTimeShowingResults: Bool)
-    
+
     /// no need to scan again if:
     ///     - photo starred/unstarred
     ///     - photo added via live results
@@ -40,14 +40,13 @@ extension PhotosViewController {
                 break
             }
         }
-        
+
         let realmModel = self.realmModel
         let photos = self.model.photos
         let stringToGradients = self.searchViewModel.stringToGradients
-        
+
         print("\n\n\n+++ Start!!!!!\n")
         Task.detached {
-            let timer = TimeElapsed()
             let (
                 allFindPhotosNotes, starredFindPhotosNotes, screenshotsFindPhotosNotes
             ) = Finding.findAndGetFindPhotos(
@@ -56,17 +55,14 @@ extension PhotosViewController {
                 stringToGradients: stringToGradients,
                 scope: .note
             )
-            timer.end()
-            print("Applying all find photos.")
-            
-            await self.apply(
+
+            await self.startApplyingResults(
                 allFindPhotos: allFindPhotosNotes,
                 starredFindPhotos: starredFindPhotosNotes,
                 screenshotsFindPhotos: screenshotsFindPhotosNotes,
                 context: context
             )
-            
-            let timer2 = TimeElapsed()
+
             let (
                 allFindPhotosText, starredFindPhotosText, screenshotsFindPhotosText
             ) = Finding.findAndGetFindPhotos(
@@ -75,35 +71,57 @@ extension PhotosViewController {
                 stringToGradients: stringToGradients,
                 scope: .text
             )
-            timer2.end()
 
-            print("Applying all find photos another time.")
-            await self.apply(
-                allFindPhotos: FindPhoto.merge(findPhotos: allFindPhotosNotes, otherFindPhotos: allFindPhotosText),
-                starredFindPhotos: FindPhoto.merge(findPhotos: starredFindPhotosNotes, otherFindPhotos: starredFindPhotosText),
-                screenshotsFindPhotos: FindPhoto.merge(findPhotos: screenshotsFindPhotosNotes, otherFindPhotos: screenshotsFindPhotosText),
+            try await Task.sleep(seconds: 0.7)
+            await self.startApplyingResults(
+                allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText),
+                starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText),
+                screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotosNotes + screenshotsFindPhotosText),
                 context: context
             )
-            
+
             await MainActor.run {
                 self.progressViewModel.finishAutoProgress(shouldShimmer: false)
             }
         }
     }
-    
+
     func searchNotesThenText() async {}
-    
-    /// apply the resultsState
-    @MainActor func apply(
+
+    /// queue if needed
+    @MainActor func startApplyingResults(
+        allFindPhotos: [FindPhoto],
+        starredFindPhotos: [FindPhoto],
+        screenshotsFindPhotos: [FindPhoto],
+        context: FindContext
+    ) {
+        if model.updateAllowed {
+            self.applyResults(
+                allFindPhotos: allFindPhotos,
+                starredFindPhotos: starredFindPhotos,
+                screenshotsFindPhotos: screenshotsFindPhotos,
+                context: context
+            )
+        } else {
+            model.queuedAllResults = allFindPhotos
+            model.queuedStarredResults = starredFindPhotos
+            model.queuedScreenshotsResults = screenshotsFindPhotos
+            model.queuedResultsContext = context
+            model.waitingToAddResults = true
+        }
+    }
+
+    /// apply results to the results collection view
+    @MainActor func applyResults(
         allFindPhotos: [FindPhoto],
         starredFindPhotos: [FindPhoto],
         screenshotsFindPhotos: [FindPhoto],
         context: FindContext
     ) {
         guard !searchViewModel.isEmpty else { return }
-        
+
         let displayedFindPhotos: [FindPhoto]
-        
+
         switch self.sliderViewModel.selectedFilter ?? .all {
         case .starred:
             displayedFindPhotos = starredFindPhotos
@@ -112,12 +130,11 @@ extension PhotosViewController {
         case .all:
             displayedFindPhotos = allFindPhotos
         }
-        
+
         let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
-        
-        print("         Get displayed sizes. \(displayedFindPhotos.map { $0.fastDescription })")
+
         let sizes = getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
-        
+
         model.resultsState = PhotosResultsState(
             displayedFindPhotos: displayedFindPhotos,
             allFindPhotos: allFindPhotos,
@@ -125,20 +142,20 @@ extension PhotosViewController {
             screenshotsFindPhotos: screenshotsFindPhotos,
             displayedCellSizes: sizes
         )
-        
+
         if case .findingAfterTextChange(firstTimeShowingResults: let firstTimeShowingResults) = context {
             updateResults(animate: !firstTimeShowingResults)
         } else {
             updateResults() /// always update results anyway, for example when coming back from star
         }
-        
+
         /// update highlights if photo was same, but search changed
         reloadVisibleCellResults()
 
         let results = model.resultsState?.getResultsText() ?? ""
         resultsHeaderViewModel.text = results
         UIAccessibility.post(notification: .announcement, argument: results)
-        
+
         if model.isSelecting {
             resetSelectingState()
             updateCollectionViewSelectionState()

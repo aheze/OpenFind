@@ -51,7 +51,7 @@ extension PhotosViewController {
         }
         return viewController
     }
-    
+
     func reloadVisibleCellResults() {
         guard let displayedFindPhotos = model.resultsState?.displayedFindPhotos else { return }
         for index in displayedFindPhotos.indices {
@@ -76,10 +76,16 @@ extension PhotosViewController {
             realmModel: existingViewController.realmModel
         )
 
-        self.removeChildViewController(existingViewController)
         self.addChildViewController(newViewController, in: cell.contentView)
         cell.viewController = newViewController
+        newViewController.view.alpha = 0
 
+        UIView.animate(withDuration: 0.3) {
+            existingViewController.view.alpha = 0
+            newViewController.view.alpha = 1
+        } completion: { _ in
+            self.removeChildViewController(existingViewController)
+        }
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
         return newViewController
     }

@@ -62,7 +62,7 @@ class PhotosViewModel: ObservableObject {
 
     /// reload the collection view to make it empty
     var updateSearchCollectionView: (() -> Void)?
-    
+
     /// reload displayed results photos after info changed
     var updateDisplayedResults: (() -> Void)?
 
@@ -81,6 +81,15 @@ class PhotosViewModel: ObservableObject {
 
     /// the state of the results.
     var resultsState: PhotosResultsState?
+
+    // MARK: - Add results after update allowed
+
+    var waitingToAddResults = false
+    var queuedAllResults = [FindPhoto]()
+    var queuedStarredResults = [FindPhoto]()
+    var queuedScreenshotsResults = [FindPhoto]()
+    var queuedResultsContext: FindContext?
+    var addQueuedResults: (([FindPhoto], [FindPhoto], [FindPhoto], FindContext?) -> Void)?
 
     /// the date when the last results update occurred.
     var lastResultsUpdateTime: Date?
@@ -123,7 +132,18 @@ class PhotosViewModel: ObservableObject {
                 addQueuedSentencesToMetadatas()
             }
 
+            if waitingToAddResults {
+                waitingToAddResults = false
+                addQueuedResults?(queuedAllResults, queuedStarredResults, queuedScreenshotsResults, queuedResultsContext)
+                queuedAllResults.removeAll()
+                queuedStarredResults.removeAll()
+                queuedScreenshotsResults.removeAll()
+                queuedResultsContext = nil
+            }
+
             if waitingToAddExternalPhotos {
+                waitingToAddExternalPhotos = false
+                
                 /// also called `addQueuedSentencesToMetadatas`
                 loadExternalPhotos()
             }
@@ -193,7 +213,9 @@ class PhotosViewModel: ObservableObject {
 
     /// don't update `slidesState` until this closure is called.
     var deletePhotoInSlides: ((Photo) -> Void)?
+}
 
+extension PhotosViewModel {
     enum ScanningState {
         case dormant
         case scanningAllPhotos
@@ -209,11 +231,11 @@ class PhotosViewModel: ObservableObject {
                 return error
             }
         }
-        
+
         static func == (lhs: PhotosNote, rhs: PhotosNote) -> Bool {
             lhs.id == rhs.id
         }
-        
+
         func hash(into hasher: inout Hasher) {
             hasher.combine(id)
         }

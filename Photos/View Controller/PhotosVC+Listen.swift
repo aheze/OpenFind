@@ -92,6 +92,20 @@ extension PhotosViewController {
                 await self.findAfterQueuedSentencesUpdate(in: photos)
             }
         }
+        
+        model.addQueuedResults = { [weak self] allFindPhotos, starredFindPhotos, screenshotsFindPhotos, queuedResultsContext in
+            guard let self = self else { return }
+            
+            Task.detached {
+                await self.applyResults(
+                    allFindPhotos: allFindPhotos,
+                    starredFindPhotos: starredFindPhotos,
+                    screenshotsFindPhotos: screenshotsFindPhotos,
+                    context: queuedResultsContext ?? .justFindFromExistingDoNotScan
+                )
+            }
+        }
+        
         model.scanningIconTapped = { [weak self] in
             guard let self = self else { return }
             self.searchViewModel.dismissKeyboard?()

@@ -41,7 +41,6 @@ extension PhotosViewModel {
     func loadExternalPhotos() {
         let photosAddedFromCamera = self.photosAddedFromCamera
         self.photosAddedFromCamera.removeAll()
-        waitingToAddExternalPhotos = false
 
         Task {
             await MainActor.run {

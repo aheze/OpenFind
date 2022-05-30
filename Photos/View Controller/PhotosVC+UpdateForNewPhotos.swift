@@ -59,14 +59,14 @@ extension PhotosViewController {
                     let photosResultsInsertNewMode = photosResultsInsertNewMode,
                     photosResultsInsertNewMode == .top
                 {
-                    await self.apply(
-                        allFindPhotos: (allFindPhotos + existingAllFindPhotos).uniqued(),
-                        starredFindPhotos: (starredFindPhotos + existingStarredFindPhotos).uniqued(),
-                        screenshotsFindPhotos: (screenshotsFindPhotos + existingScreenshotsFindPhotos).uniqued(),
+                    await self.startApplyingResults(
+                        allFindPhotos: FindPhoto.merge(allFindPhotos + existingAllFindPhotos),
+                        starredFindPhotos: FindPhoto.merge(starredFindPhotos + existingStarredFindPhotos),
+                        screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotos + existingScreenshotsFindPhotos),
                         context: .justFindFromExistingDoNotScan
                     )
                 } else {
-                    await self.apply(
+                    await self.startApplyingResults(
                         allFindPhotos: (existingAllFindPhotos + allFindPhotos).uniqued(),
                         starredFindPhotos: (existingStarredFindPhotos + starredFindPhotos).uniqued(),
                         screenshotsFindPhotos: (existingScreenshotsFindPhotos + screenshotsFindPhotos).uniqued(),

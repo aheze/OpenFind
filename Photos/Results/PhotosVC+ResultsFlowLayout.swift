@@ -49,9 +49,6 @@ extension PhotosViewController {
     
     /// calculate and update the sizes of results cells
     func getDisplayedCellSizes(from displayedFindPhotos: [FindPhoto], columnWidth: CGFloat) -> [CGSize] {
-        print("         GetING displayed sizes. \(displayedFindPhotos.map { $0.fastDescription })")
-        
-        
         var textHeight = CGFloat(0)
         if let photosResultsCellLayout = Settings.Values.PhotosResultsCellLayout(rawValue: realmModel.photosResultsCellLayout) {
             textHeight += photosResultsCellLayout.getCellHeight()
@@ -62,7 +59,7 @@ extension PhotosViewController {
             let findPhoto = displayedFindPhotos[index]
             
             guard let fastDescription = findPhoto.fastDescription else { continue }
-            print("Getting size... \(index) -> fastDescription \(fastDescription)")
+            
             var height = CGFloat(40)
             
             if fastDescription.containsResultsInText {
