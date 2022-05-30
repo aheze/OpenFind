@@ -8,14 +8,19 @@
 
 import Photos
 import UIKit
+import SwiftPrettyPrint
 
 extension FindPhoto {
     /// merge `FindPhoto`s and also merge the `FastDescription`
     static func merge(findPhotos: [FindPhoto], otherFindPhotos: [FindPhoto]) -> [FindPhoto] {
-        print("-------- merging \(findPhotos.count) with \(otherFindPhotos.count)")
+        Pretty.prettyPrint("-------- merging \(findPhotos.count) with \(otherFindPhotos.count)")
+        Pretty.prettyPrint(findPhotos.map { ($0.photo.asset.localIdentifier, $0.fastDescription) })
+        Pretty.prettyPrint(otherFindPhotos.map { ($0.photo.asset.localIdentifier, $0.fastDescription) })
+        
+//        return findPhotos + otherFindPhotos
         var new = findPhotos
         for otherFindPhoto in otherFindPhotos {
-            if let firstIndex = new.firstIndex(of: otherFindPhoto) {
+            if let firstIndex = new.firstIndex(where: { $0.photo.asset.localIdentifier == otherFindPhoto.photo.asset.localIdentifier }) {
                 if
                     let existingFastDescription = new[firstIndex].fastDescription,
                     let otherFastDescription = otherFindPhoto.fastDescription
@@ -28,11 +33,17 @@ extension FindPhoto {
                     )
 
                     new[firstIndex].fastDescription = newFastDescription
+                    print("Merging into \(newFastDescription)")
+                } else {
+                    print("Uh")
                 }
             } else {
                 new.append(otherFindPhoto)
+                print("Appending \(otherFindPhoto.fastDescription)")
             }
         }
+        
+        Pretty.prettyPrint(new.map { ($0.photo.asset.localIdentifier, $0.fastDescription) })
         return new
     }
 }

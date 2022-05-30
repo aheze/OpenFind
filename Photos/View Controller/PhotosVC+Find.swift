@@ -45,6 +45,7 @@ extension PhotosViewController {
         let photos = self.model.photos
         let stringToGradients = self.searchViewModel.stringToGradients
         
+        print("\n\n\n+++ Start!!!!!\n")
         Task.detached {
             let timer = TimeElapsed()
             let (
@@ -56,6 +57,7 @@ extension PhotosViewController {
                 scope: .note
             )
             timer.end()
+            print("Applying all find photos.")
             
             await self.apply(
                 allFindPhotos: allFindPhotosNotes,
@@ -75,6 +77,7 @@ extension PhotosViewController {
             )
             timer2.end()
 
+            print("Applying all find photos another time.")
             await self.apply(
                 allFindPhotos: FindPhoto.merge(findPhotos: allFindPhotosNotes, otherFindPhotos: allFindPhotosText),
                 starredFindPhotos: FindPhoto.merge(findPhotos: starredFindPhotosNotes, otherFindPhotos: starredFindPhotosText),
@@ -112,6 +115,7 @@ extension PhotosViewController {
         
         let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
         
+        print("         Get displayed sizes. \(displayedFindPhotos.map { $0.fastDescription })")
         let sizes = getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)
         
         model.resultsState = PhotosResultsState(

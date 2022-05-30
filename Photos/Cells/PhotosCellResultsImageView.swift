@@ -34,13 +34,13 @@ struct PhotosCellResultsImageView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Text(resultsModel.resultsText)
-                        .font(UIFont.preferredFont(forTextStyle: .subheadline).font)
+                        .font(UIFont.preferredFont(forTextStyle: .footnote).font)
                         .foregroundColor(UIColor.secondaryLabel.color)
                         .background(
                             Capsule()
                                 .fill(UIColor.secondarySystemBackground.color)
                                 .padding(.horizontal, -12)
-                                .padding(.vertical, -8)
+                                .padding(.vertical, -6)
                         )
                         .padding(.trailing, 12)
                 }
