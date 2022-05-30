@@ -46,14 +46,39 @@ extension PhotosViewController {
         let stringToGradients = self.searchViewModel.stringToGradients
         
         Task.detached {
+            let timer = TimeElapsed()
             let (
-                allFindPhotos, starredFindPhotos, screenshotsFindPhotos
-            ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
+                allFindPhotosNotes, starredFindPhotosNotes, screenshotsFindPhotosNotes
+            ) = Finding.findAndGetFindPhotos(
+                realmModel: realmModel,
+                from: photos,
+                stringToGradients: stringToGradients,
+                scope: .note
+            )
+            timer.end()
             
             await self.apply(
-                allFindPhotos: allFindPhotos,
-                starredFindPhotos: starredFindPhotos,
-                screenshotsFindPhotos: screenshotsFindPhotos,
+                allFindPhotos: allFindPhotosNotes,
+                starredFindPhotos: starredFindPhotosNotes,
+                screenshotsFindPhotos: screenshotsFindPhotosNotes,
+                context: context
+            )
+            
+            let timer2 = TimeElapsed()
+            let (
+                allFindPhotosText, starredFindPhotosText, screenshotsFindPhotosText
+            ) = Finding.findAndGetFindPhotos(
+                realmModel: realmModel,
+                from: photos,
+                stringToGradients: stringToGradients,
+                scope: .text
+            )
+            timer2.end()
+
+            await self.apply(
+                allFindPhotos: (allFindPhotosNotes + allFindPhotosText).uniqued(),
+                starredFindPhotos: (starredFindPhotosNotes + starredFindPhotosText).uniqued(),
+                screenshotsFindPhotos: (screenshotsFindPhotosNotes + screenshotsFindPhotosText).uniqued(),
                 context: context
             )
             
@@ -62,6 +87,8 @@ extension PhotosViewController {
             }
         }
     }
+    
+    func searchNotesThenText() async {}
     
     /// apply the resultsState
     @MainActor func apply(

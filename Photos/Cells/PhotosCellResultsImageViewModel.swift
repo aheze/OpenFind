@@ -13,5 +13,7 @@ class PhotosCellResultsImageViewModel: ObservableObject {
     @Published var findPhoto: FindPhoto?
     @Published var resultsText = ""
     @Published var text = ""
+    @Published var resultsFoundInText = false
     @Published var note: String?
+    @Published var resultsFoundInNote = false
 }

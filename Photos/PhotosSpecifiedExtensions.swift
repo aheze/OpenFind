@@ -131,6 +131,10 @@ extension FindPhoto {
 }
 
 extension FindPhoto.Description {
+    var numberOfResults: Int {
+        return numberOfResultsInNote + numberOfResultsInText
+    }
+    
     func resultsString() -> String {
         let string: String
 
@@ -221,7 +225,8 @@ extension Finding {
     static func findAndGetFindPhotos(
         realmModel: RealmModel,
         from photos: [Photo],
-        stringToGradients: [String: Gradient]
+        stringToGradients: [String: Gradient],
+        scope: PhotosSearchScope
     ) -> (
         [FindPhoto], [FindPhoto], [FindPhoto]
     ) {
@@ -230,18 +235,27 @@ extension Finding {
         var screenshotsFindPhotos = [FindPhoto]()
 
         for photo in photos {
-            guard let metadata = photo.metadata, !metadata.isIgnored else { continue }
-            let text = realmModel.container.getText(from: metadata.assetIdentifier)
-            guard let sentences = text?.sentences else { continue }
+            let contains: Bool
 
-            /// very fast!
-            let contains = sentences.checkIf(realmModel: realmModel, matches: Array(stringToGradients.keys))
+            guard let metadata = photo.metadata else { continue }
+            let search = Array(stringToGradients.keys)
+            
+            switch scope {
+            case .text:
+                
+                guard !metadata.isIgnored else { continue }
+                let text = realmModel.container.getText(from: metadata.assetIdentifier)
+                guard let sentences = text?.sentences else { continue }
+
+                /// very fast!
+                contains = sentences.checkIf(realmModel: realmModel, matches: search)
+            case .note:
+                guard let note = realmModel.container.getNote(from: metadata.assetIdentifier) else { continue }
+                contains = Finding.checkIf(realmModel: realmModel, stringToSearchFrom: note.string, matches: search)
+            }
 
             if contains {
-                let findPhoto = FindPhoto(
-                    id: UUID(),
-                    photo: photo
-                )
+                let findPhoto = FindPhoto(photo: photo)
 
                 allFindPhotos.append(findPhoto)
 

@@ -48,7 +48,12 @@ extension PhotosViewController {
                 // TODO: Optimize
                 let (
                     allFindPhotos, starredFindPhotos, screenshotsFindPhotos
-                ) = Finding.findAndGetFindPhotos(realmModel: realmModel, from: photos, stringToGradients: stringToGradients)
+                ) = Finding.findAndGetFindPhotos(
+                    realmModel: realmModel,
+                    from: photos,
+                    stringToGradients: stringToGradients,
+                    scope: .text
+                )
                 
                 if
                     let photosResultsInsertNewMode = photosResultsInsertNewMode,

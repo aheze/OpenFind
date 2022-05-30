@@ -39,6 +39,18 @@ enum Finding {
             }
         }
     }
+
+    static func getNumberOfMatches(realmModel: RealmModel, stringToSearchFrom: String, matches searches: [String]) -> Int {
+        let stringToSearchFrom = stringToSearchFrom.applyDefaults(realmModel: realmModel)
+
+        var count = 0
+        for search in searches {
+            let stringToSearch = search.applyDefaults(realmModel: realmModel)
+            let indices = stringToSearchFrom.indicesOf(string: stringToSearch)
+            count += indices.count
+        }
+        return count
+    }
 }
 
 extension String {

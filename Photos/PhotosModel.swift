@@ -30,6 +30,12 @@ struct PhotosSlidesState {
     var toolbarInformationOn = false
 }
 
+/// what part of the image to search in
+enum PhotosSearchScope {
+    case text
+    case note
+}
+
 enum PhotosSentencesUpdateState {
     case scheduled
     case waitingForPermission
@@ -48,7 +54,6 @@ struct PhotosResultsState {
 
 /// a photo that contains results to display (in the form of highlights)
 struct FindPhoto: Hashable {
-    var id: UUID
     var photo: Photo
 
     /// results (an array of highlights)
@@ -64,9 +69,11 @@ struct FindPhoto: Hashable {
     }
 
     struct Description {
-        var numberOfResults: Int
         var text: String
         var lines: [Line]
+        var numberOfResultsInText: Int
+        var note: String?
+        var numberOfResultsInNote: Int
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  PhotosVC+ResultsHighlights.swift
+//  PhotosVC+ResultsDescription.swift
 //  Find
 //
 //  Created by A. Zheng (github.com/aheze) on 2/25/22.
@@ -13,25 +13,35 @@ extension PhotosViewController {
     func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
         guard let viewController = cell.viewController else { return }
         
-        if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier) {
-            viewController.resultsModel.note = note.string
-        } else {
-            viewController.resultsModel.note = nil
-        }
-        
         var description: FindPhoto.Description
         if let existingDescription = findPhoto.description {
             description = existingDescription
         } else {
+            let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier)?.string
+            let numberOfResultsInNote = note.map {
+                Finding.getNumberOfMatches(
+                    realmModel: realmModel,
+                    stringToSearchFrom: $0,
+                    matches: Array(searchViewModel.stringToGradients.keys)
+                )
+            } ?? 0
+            print("\(note) -> Num in note: \(numberOfResultsInNote)")
+            
             let (lines, highlightsCount) = Finding.getLineHighlights(
                 realmModel: realmModel,
                 from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
                 with: searchViewModel.stringToGradients,
                 imageSize: findPhoto.photo.asset.getSize()
             )
-            
             let text = Finding.getCellDescription(from: lines)
-            description = .init(numberOfResults: highlightsCount, text: text, lines: lines)
+            
+            description = .init(
+                text: text,
+                lines: lines,
+                numberOfResultsInText: highlightsCount,
+                note: note,
+                numberOfResultsInNote: numberOfResultsInNote
+            )
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 let highlights = self.getLineHighlights(for: cell, with: lines)
@@ -41,6 +51,9 @@ extension PhotosViewController {
         
         viewController.resultsModel.resultsText = description.resultsString()
         viewController.resultsModel.text = description.text
+        viewController.resultsModel.resultsFoundInText = description.numberOfResultsInText > 0
+        viewController.resultsModel.note = description.note
+        viewController.resultsModel.resultsFoundInNote = description.numberOfResultsInNote > 0
         
         var newFindPhoto = findPhoto
         newFindPhoto.description = description

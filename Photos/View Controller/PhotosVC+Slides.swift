@@ -15,7 +15,6 @@ extension PhotosViewController {
         let slidesPhotos: [SlidesPhoto] = model.displayedSections.flatMap { $0.photos }.map { photo in
             SlidesPhoto(
                 findPhoto: FindPhoto(
-                    id: UUID(),
                     photo: photo
                 )
             )
