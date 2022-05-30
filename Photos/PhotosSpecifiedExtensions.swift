@@ -9,6 +9,34 @@
 import Photos
 import UIKit
 
+extension FindPhoto {
+    /// merge `FindPhoto`s and also merge the `FastDescription`
+    static func merge(findPhotos: [FindPhoto], otherFindPhotos: [FindPhoto]) -> [FindPhoto] {
+        print("-------- merging \(findPhotos.count) with \(otherFindPhotos.count)")
+        var new = findPhotos
+        for otherFindPhoto in otherFindPhotos {
+            if let firstIndex = new.firstIndex(of: otherFindPhoto) {
+                if
+                    let existingFastDescription = new[firstIndex].fastDescription,
+                    let otherFastDescription = otherFindPhoto.fastDescription
+                {
+                    let newFastDescription = FindPhoto.FastDescription(
+                        containsResultsInText: existingFastDescription.containsResultsInText || otherFastDescription.containsResultsInText,
+                        containsResultsInNote: existingFastDescription.containsResultsInNote || otherFastDescription.containsResultsInNote,
+                        containsText: existingFastDescription.containsText || otherFastDescription.containsText,
+                        containsNote: existingFastDescription.containsNote || otherFastDescription.containsNote
+                    )
+
+                    new[firstIndex].fastDescription = newFastDescription
+                }
+            } else {
+                new.append(otherFindPhoto)
+            }
+        }
+        return new
+    }
+}
+
 extension PhotosSlidesState {
     /// get from `findPhotos`
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
@@ -134,7 +162,7 @@ extension FindPhoto.Description {
     var numberOfResults: Int {
         return numberOfResultsInNote + numberOfResultsInText
     }
-    
+
     func resultsString() -> String {
         let string: String
 
@@ -236,26 +264,39 @@ extension Finding {
 
         for photo in photos {
             let contains: Bool
+            var fastDescription = FindPhoto.FastDescription()
 
+            print("Looping photo.")
+            
             guard let metadata = photo.metadata else { continue }
             let search = Array(stringToGradients.keys)
-            
+
             switch scope {
             case .text:
-                
+
                 guard !metadata.isIgnored else { continue }
                 let text = realmModel.container.getText(from: metadata.assetIdentifier)
                 guard let sentences = text?.sentences else { continue }
 
                 /// very fast!
                 contains = sentences.checkIf(realmModel: realmModel, matches: search)
+                fastDescription.containsNote = realmModel.container.getNote(from: metadata.assetIdentifier) != nil
+                fastDescription.containsText = true
+                fastDescription.containsResultsInText = contains
             case .note:
                 guard let note = realmModel.container.getNote(from: metadata.assetIdentifier) else { continue }
                 contains = Finding.checkIf(realmModel: realmModel, stringToSearchFrom: note.string, matches: search)
+                fastDescription.containsNote = true
+                fastDescription.containsResultsInNote = contains
             }
 
+            print("Scope: \(scope). Desc: \(fastDescription)")
+
             if contains {
-                let findPhoto = FindPhoto(photo: photo)
+                let findPhoto = FindPhoto(
+                    photo: photo,
+                    fastDescription: fastDescription
+                )
 
                 allFindPhotos.append(findPhoto)
 

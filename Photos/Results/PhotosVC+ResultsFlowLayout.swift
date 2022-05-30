@@ -49,19 +49,31 @@ extension PhotosViewController {
     
     /// calculate and update the sizes of results cells
     func getDisplayedCellSizes(from displayedFindPhotos: [FindPhoto], columnWidth: CGFloat) -> [CGSize] {
-        var height = CGFloat(100)
+        var textHeight = CGFloat(100)
         if let photosResultsCellLayout = Settings.Values.PhotosResultsCellLayout(rawValue: realmModel.photosResultsCellLayout) {
-            height = photosResultsCellLayout.getCellHeight()
+            textHeight = photosResultsCellLayout.getCellHeight()
         }
         
-        var sizes = Array(repeating: CGSize(width: columnWidth, height: height), count: displayedFindPhotos.count)
+        var sizes = [CGSize]()
         for index in displayedFindPhotos.indices {
-            let photo = displayedFindPhotos[index].photo
-            if let note = realmModel.container.getNote(from: photo.asset.localIdentifier), !note.string.isEmpty {
-                var height = sizes[index].height
-                height += PhotosResultsCellConstants.noteHeight + PhotosResultsCellConstants.rightSpacing
-                sizes[index].height = height
+            let findPhoto = displayedFindPhotos[index]
+            
+            guard let fastDescription = findPhoto.fastDescription else { continue }
+            print("\(index) -> fastDescription \(fastDescription)")
+            var height = CGFloat(0)
+            
+            if fastDescription.containsResultsInText {
+                height += textHeight
+                
+                if fastDescription.containsNote {
+                    height += PhotosResultsCellConstants.noteHeight + PhotosResultsCellConstants.rightSpacing
+                }
+            } else if fastDescription.containsNote {
+                height += PhotosResultsCellConstants.noteHeight
             }
+            
+            let size = CGSize(width: columnWidth, height: height)
+            sizes.append(size)
         }
         
         return sizes

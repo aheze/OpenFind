@@ -76,9 +76,9 @@ extension PhotosViewController {
             timer2.end()
 
             await self.apply(
-                allFindPhotos: (allFindPhotosNotes + allFindPhotosText).uniqued(),
-                starredFindPhotos: (starredFindPhotosNotes + starredFindPhotosText).uniqued(),
-                screenshotsFindPhotos: (screenshotsFindPhotosNotes + screenshotsFindPhotosText).uniqued(),
+                allFindPhotos: FindPhoto.merge(findPhotos: allFindPhotosNotes, otherFindPhotos: allFindPhotosText),
+                starredFindPhotos: FindPhoto.merge(findPhotos: starredFindPhotosNotes, otherFindPhotos: starredFindPhotosText),
+                screenshotsFindPhotos: FindPhoto.merge(findPhotos: screenshotsFindPhotosNotes, otherFindPhotos: screenshotsFindPhotosText),
                 context: context
             )
             

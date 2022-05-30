@@ -45,41 +45,43 @@ struct PhotosCellResultsImageView: View {
                         .padding(.trailing, 12)
                 }
                 
-                if resultsModel.resultsFoundInText {
-                    EditableTextView(model: textModel, text: .constant(resultsModel.text))
-                        .background(
-                            HighlightsView(highlightsViewModel: highlightsViewModel, realmModel: realmModel)
-                        )
-                        .allowsHitTesting(false)
-                }
+                VStack(spacing: PhotosResultsCellConstants.rightSpacing) {
+                    if resultsModel.resultsFoundInText {
+                        EditableTextView(model: textModel, text: .constant(resultsModel.text))
+                            .background(
+                                HighlightsView(highlightsViewModel: highlightsViewModel, realmModel: realmModel)
+                            )
+                            .allowsHitTesting(false)
+                    }
                 
-                if let note = resultsModel.note {
-                    EditableTextView(model: textModel, text: .constant(note))
-                        .allowsHitTesting(false)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(6)
-                        .overlay(
-                            Text("NOTE")
-                                .foregroundColor(resultsModel.resultsFoundInNote ? .accent : UIColor.secondaryLabel.color)
-                                .font(UIFont.preferredCustomFont(forTextStyle: .caption1, weight: .bold).font)
-                                .padding(7)
-                                .background(
-                                    VStack {
-                                        if resultsModel.resultsFoundInNote {
-                                            Color.accent
-                                                .opacity(0.1)
-                                        } else {
-                                            UIColor.label.color
-                                                .opacity(0.1)
+                    if let note = resultsModel.note {
+                        EditableTextView(model: textModel, text: .constant(note))
+                            .allowsHitTesting(false)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(6)
+                            .overlay(
+                                Text("NOTE")
+                                    .foregroundColor(resultsModel.resultsFoundInNote ? .accent : UIColor.secondaryLabel.color)
+                                    .font(UIFont.preferredCustomFont(forTextStyle: .caption1, weight: .bold).font)
+                                    .padding(7)
+                                    .background(
+                                        VStack {
+                                            if resultsModel.resultsFoundInNote {
+                                                Color.accent
+                                                    .opacity(0.1)
+                                            } else {
+                                                UIColor.label.color
+                                                    .opacity(0.1)
+                                            }
                                         }
-                                    }
-                                    .cornerRadius(6, corners: .bottomLeft)
-                                ),
-                            
-                            alignment: .topTrailing
-                        )
-                        .background(UIColor.secondarySystemBackground.color)
-                        .cornerRadius(10)
+                                        .cornerRadius(6, corners: .bottomLeft)
+                                    ),
+                                
+                                alignment: .topTrailing
+                            )
+                            .background(UIColor.secondarySystemBackground.color)
+                            .cornerRadius(10)
+                    }
                 }
             }
         }
