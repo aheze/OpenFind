@@ -58,11 +58,11 @@ struct FindPhoto: Hashable {
 
     /// results (an array of highlights)
     var highlightsSet: HighlightsSet?
-    
+
     /// for calculating cell sizes
     /// set this in `find()`
     var fastDescription: FastDescription?
-    
+
     var description: Description? /// contains everything to be displayed
 
     func hash(into hasher: inout Hasher) {
@@ -72,11 +72,11 @@ struct FindPhoto: Hashable {
     static func == (lhs: FindPhoto, rhs: FindPhoto) -> Bool {
         lhs.photo.asset == rhs.photo.asset
     }
-    
+
     struct FastDescription {
         var containsResultsInText = false
         var containsResultsInNote = false
-        
+
         /// just for showing
         var containsText = false
         var containsNote = false

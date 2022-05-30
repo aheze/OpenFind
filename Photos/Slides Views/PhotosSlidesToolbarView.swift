@@ -34,6 +34,32 @@ struct PhotosSlidesToolbarView: View {
             ToolbarIconButton(iconName: infoDescription.icon) {
                 toggleToolbar()
             }
+            .overlay(
+                Color.clear
+                    .frame(width: 1, height: 1)
+                    .overlay(
+                        VStack {
+                            if
+                                let slidesState = model.slidesState,
+                                let slidesPhoto = slidesState.getCurrentSlidesPhoto(),
+                                let numberOfResultsInNote = slidesPhoto.findPhoto.description?.numberOfResultsInNote
+                            {
+                                let _ = print("yep, numberOfResultsInNote")
+                                Text("\(numberOfResultsInNote)")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 4)
+                                    .padding(.vertical, 1.5)
+                                    .background(
+                                        Capsule()
+                                            .fill(Color.accent)
+                                    )
+                            }
+                        }
+                            .fixedSize(horizontal: true, vertical: true)
+                    ),
+                alignment: .topTrailing
+            )
             .accessibilityLabel(infoDescription.label)
             .accessibilityHint(infoDescription.hint)
         

@@ -16,6 +16,23 @@ struct PhotosSlidesInfoView: View {
     @ObservedObject var textModel: EditableTextViewModel
 
     var body: some View {
+        Group {
+            if infoModel.reportSize {
+                Color.clear.overlay(
+                    content
+                        .sizeReader { size in
+                            infoModel.sizeChanged?(size)
+                        },
+                    alignment: .top
+                )
+            } else {
+                content
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+
+    var content: some View {
         let photo = model.slidesState?.currentPhoto ?? Photo(asset: PHAsset())
 
         let noteBinding: Binding<String> = Binding {
@@ -34,7 +51,7 @@ struct PhotosSlidesInfoView: View {
             infoModel.noteChanged?()
         }
 
-        VStack(spacing: 0) {
+        return VStack(spacing: 0) {
             if infoModel.showHandle {
                 Rectangle()
                     .fill(UIColor.secondaryLabel.color)
@@ -140,10 +157,7 @@ struct PhotosSlidesInfoView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(16)
         }
-        .edgesIgnoringSafeArea(.all)
-        .sizeReader { size in
-            infoModel.sizeChanged?(size)
-        }
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     func scanNow() {

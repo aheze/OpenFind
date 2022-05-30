@@ -69,7 +69,7 @@ struct EditableTextView: UIViewRepresentable {
             return nil
         }
         model.endEditing = { [weak view] in
-            view?.resignFirstResponder()
+            view?.endEditing(true)
         }
         return view
     }

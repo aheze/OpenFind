@@ -10,6 +10,8 @@ import SwiftUI
 
 class PhotoSlidesInfoViewModel: ObservableObject {
     @Published var showHandle = false /// for scroll
+    
+    var reportSize = false
     var sizeChanged: ((CGSize) -> Void)?
     var noteChanged: (() -> Void)?
 }

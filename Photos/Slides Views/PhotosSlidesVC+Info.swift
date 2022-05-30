@@ -13,6 +13,7 @@ extension PhotosSlidesViewController {
     func setupInfo() {
         let infoModel = PhotoSlidesInfoViewModel()
         infoModel.showHandle = true
+        infoModel.reportSize = true
         let viewController = PhotosSlidesInfoViewController(model: model, realmModel: realmModel, infoModel: infoModel, textModel: infoNoteTextViewModel)
         addChildViewController(viewController, in: infoViewContainer)
         infoViewContainer.clipsToBounds = true
@@ -23,8 +24,10 @@ extension PhotosSlidesViewController {
 
         infoModel.sizeChanged = { [weak self] size in
             guard let self = self else { return }
+            
+            print("size: \(size)")
             let infoHeight = self.getInfoHeight() /// max height
-            self.infoViewContainerHeightC.constant = max(infoHeight, size.height + self.tabViewModel.tabBarAttributes.backgroundHeight)
+            self.infoViewContainerHeightC.constant = max(infoHeight, size.height + self.tabViewModel.tabBarAttributes.backgroundHeight + 40)
         }
 
         infoModel.noteChanged = { [weak self] in
@@ -85,7 +88,7 @@ extension PhotosSlidesViewController {
                             PhotosSlidesInfoView(
                                 model: self.model,
                                 realmModel: self.realmModel,
-                                infoModel: PhotoSlidesInfoViewModel(),
+                                infoModel: PhotoSlidesInfoViewModel(), /// default configuration
                                 textModel: self.infoNoteTextViewModel
                             )
                         }
