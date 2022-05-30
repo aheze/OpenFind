@@ -59,6 +59,7 @@ extension PhotosViewController {
         
         var newFindPhoto = findPhoto
         newFindPhoto.description = description
+        
         model.resultsState?.update(findPhoto: newFindPhoto)
         cell.isAccessibilityElement = true
         cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()

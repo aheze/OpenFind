@@ -38,6 +38,7 @@ extension FindPhoto {
     }
 }
 
+/// to update a slides photo, just get the index, then update. No need to modify `currentPhoto`, since it's just a `Photo`.
 extension PhotosSlidesState {
     /// get from `findPhotos`
     func getFindPhotoIndex(findPhoto: FindPhoto) -> Int? {
@@ -91,19 +92,19 @@ extension PhotosResultsState {
 
     mutating func update(findPhoto: FindPhoto) {
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.displayedFindPhotos) {
-            displayedFindPhotos[index].photo = findPhoto.photo
+            displayedFindPhotos[index] = findPhoto
         }
 
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.allFindPhotos) {
-            allFindPhotos[index].photo = findPhoto.photo
+            allFindPhotos[index] = findPhoto
         }
 
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.starredFindPhotos) {
-            starredFindPhotos[index].photo = findPhoto.photo
+            starredFindPhotos[index] = findPhoto
         }
 
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.screenshotsFindPhotos) {
-            screenshotsFindPhotos[index].photo = findPhoto.photo
+            screenshotsFindPhotos[index] = findPhoto
         }
     }
 }

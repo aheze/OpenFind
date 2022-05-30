@@ -24,8 +24,7 @@ extension PhotosSlidesViewController {
 
         infoModel.sizeChanged = { [weak self] size in
             guard let self = self else { return }
-            
-            print("size: \(size)")
+
             let infoHeight = self.getInfoHeight() /// max height
             self.infoViewContainerHeightC.constant = max(infoHeight, size.height + self.tabViewModel.tabBarAttributes.backgroundHeight + 40)
         }

@@ -12,7 +12,7 @@
 		<key>Camera.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Find-New.xcscheme_^#shared#^_</key>
 		<dict>
@@ -27,7 +27,7 @@
 		<key>FindClip.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>12</integer>
 		</dict>
 		<key>GettingStarted (Playground) 1.xcscheme</key>
 		<dict>
@@ -74,22 +74,22 @@
 		<key>Highlights.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>8</integer>
 		</dict>
 		<key>Launch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>18</integer>
 		</dict>
 		<key>Lists.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>7</integer>
 		</dict>
 		<key>MLVision.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>11</integer>
 		</dict>
 		<key>Photos.xcscheme_^#shared#^_</key>
 		<dict>
@@ -99,27 +99,27 @@
 		<key>Popover.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>16</integer>
 		</dict>
 		<key>RealmModel.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>ScrollZoom.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>15</integer>
 		</dict>
 		<key>SearchBar.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>13</integer>
 		</dict>
 		<key>SearchNavigation.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Settings.xcscheme_^#shared#^_</key>
 		<dict>
@@ -129,7 +129,7 @@
 		<key>SwiftUIViews.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>17</integer>
 		</dict>
 		<key>TabController.xcscheme_^#shared#^_</key>
 		<dict>
@@ -139,7 +139,7 @@
 		<key>ToolbarController.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>14</integer>
 		</dict>
 	</dict>
 </dict>

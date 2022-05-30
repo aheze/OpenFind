@@ -83,11 +83,17 @@ struct FindPhoto: Hashable {
     }
 
     struct Description {
-        var text: String
-        var lines: [Line]
-        var numberOfResultsInText: Int
+        var text = ""
+        var lines = [Line]()
+        var numberOfResultsInText = 0
         var note: String?
-        var numberOfResultsInNote: Int
+        var numberOfResultsInNote = 0
+    }
+
+    mutating func createDescriptionIfNeeded() {
+        if description == nil {
+            description = .init()
+        }
     }
 }
 

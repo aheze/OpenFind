@@ -25,6 +25,24 @@ extension PhotosSlidesViewController {
                 self.scanPhoto(slidesPhoto: slidesPhoto)
             }
         }
+
+        if let note = realmModel.container.getNote(from: slidesPhoto.findPhoto.photo.asset.localIdentifier) {
+            let search = Array(slidesSearchViewModel.stringToGradients.keys)
+            let numberOfResultsInNote = Finding.getNumberOfMatches(
+                realmModel: realmModel,
+                stringToSearchFrom: note.string,
+                matches: search
+            )
+
+            var findPhoto = slidesPhoto.findPhoto
+
+            findPhoto.createDescriptionIfNeeded()
+            findPhoto.description?.numberOfResultsInNote = numberOfResultsInNote
+
+            if let index = model.slidesState?.getFindPhotoIndex(findPhoto: findPhoto) {
+                model.slidesState?.slidesPhotos[index].findPhoto = findPhoto
+            }
+        }
     }
 
     /// find and show results, if there is text in the slides search view model
@@ -52,6 +70,8 @@ extension PhotosSlidesViewController {
         }
 
         if let slidesState = model.slidesState, let index = slidesState.getSlidesPhotoIndex(photo: slidesPhoto.findPhoto.photo) {
+            self.model.slidesState?.slidesPhotos[index].findPhoto.createDescriptionIfNeeded()
+            self.model.slidesState?.slidesPhotos[index].findPhoto.description?.numberOfResultsInText = highlights.count
             self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
         }
 

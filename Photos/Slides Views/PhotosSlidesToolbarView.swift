@@ -42,12 +42,13 @@ struct PhotosSlidesToolbarView: View {
                             if
                                 let slidesState = model.slidesState,
                                 let slidesPhoto = slidesState.getCurrentSlidesPhoto(),
-                                let numberOfResultsInNote = slidesPhoto.findPhoto.description?.numberOfResultsInNote
+                                let numberOfResultsInNote = slidesPhoto.findPhoto.description?.numberOfResultsInNote,
+                                numberOfResultsInNote > 0
                             {
-                                let _ = print("yep, numberOfResultsInNote")
                                 Text("\(numberOfResultsInNote)")
                                     .font(.caption)
                                     .foregroundColor(.white)
+                                    .frame(minWidth: 12)
                                     .padding(.horizontal, 4)
                                     .padding(.vertical, 1.5)
                                     .background(
@@ -56,7 +57,7 @@ struct PhotosSlidesToolbarView: View {
                                     )
                             }
                         }
-                            .fixedSize(horizontal: true, vertical: true)
+                        .fixedSize(horizontal: true, vertical: true)
                     ),
                 alignment: .topTrailing
             )
