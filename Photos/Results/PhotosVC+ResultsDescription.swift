@@ -95,7 +95,7 @@ extension PhotosViewController {
                 let endOffset = lineHighlight.rangeInSentence.endIndex + previousDescriptionCount
                 
                 guard let frame = getFrameForRange(startOffset, endOffset) else { continue }
-                
+
                 /// make sure the rectangle actually is valid
                 guard frame.size.width > 0, frame.size.height > 0 else { continue }
                 

@@ -81,7 +81,7 @@ extension PhotosViewController {
                 scope: .text
             )
 
-            try await Task.sleep(seconds: 0.9)
+            try await Task.sleep(seconds: 0.4)
             await self.startApplyingResults(
                 allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText),
                 starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText),
