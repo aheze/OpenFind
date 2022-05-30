@@ -17,37 +17,36 @@ extension PhotosViewController {
         if let existingDescription = findPhoto.description {
             description = existingDescription
         } else {
-            var noteString: String?
+            description = .init()
+            
             if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier), !note.string.isEmpty {
-                noteString = note.string
+                description.note = note.string
+                
+                if findPhoto.fastDescription?.containsResultsInNote ?? false {
+                    let numberOfResultsInNote = Finding.getNumberOfMatches(
+                        realmModel: realmModel,
+                        stringToSearchFrom: note.string,
+                        matches: Array(searchViewModel.stringToGradients.keys)
+                    )
+                    description.numberOfResultsInNote = numberOfResultsInNote
+                }
             }
-            let numberOfResultsInNote = noteString.map {
-                Finding.getNumberOfMatches(
+            
+            if findPhoto.fastDescription?.containsResultsInText ?? false {
+                let (lines, highlightsCount) = Finding.getLineHighlights(
                     realmModel: realmModel,
-                    stringToSearchFrom: $0,
-                    matches: Array(searchViewModel.stringToGradients.keys)
+                    from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
+                    with: searchViewModel.stringToGradients,
+                    imageSize: findPhoto.photo.asset.getSize()
                 )
-            } ?? 0
-            
-            let (lines, highlightsCount) = Finding.getLineHighlights(
-                realmModel: realmModel,
-                from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
-                with: searchViewModel.stringToGradients,
-                imageSize: findPhoto.photo.asset.getSize()
-            )
-            let text = Finding.getCellDescription(from: lines)
-            
-            description = .init(
-                text: text,
-                lines: lines,
-                numberOfResultsInText: highlightsCount,
-                note: noteString,
-                numberOfResultsInNote: numberOfResultsInNote
-            )
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                let highlights = self.getLineHighlights(for: cell, with: lines)
-                viewController.highlightsViewModel.update(with: highlights, replace: true)
+                description.lines = lines
+                description.text = Finding.getCellDescription(from: lines)
+                description.numberOfResultsInText = highlightsCount
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    let highlights = self.getLineHighlights(for: cell, with: lines)
+                    viewController.highlightsViewModel.update(with: highlights, replace: true)
+                }
             }
         }
         

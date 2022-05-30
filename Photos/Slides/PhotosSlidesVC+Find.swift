@@ -49,6 +49,8 @@ extension PhotosSlidesViewController {
         } else {
             /// if is ignored, don't scan
             if !photoIgnored {
+                print("NO metadata, not ignored. need to scan: \(slidesPhoto.findPhoto.dateString())")
+
                 self.scanPhoto(slidesPhoto: slidesPhoto)
             }
         }

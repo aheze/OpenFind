@@ -124,10 +124,7 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
             collectionView.scrollToItem(at: currentIndex.indexPath, at: .centeredHorizontally, animated: true)
 
             if slidesPhoto.findPhoto.description?.numberOfResults ?? 0 > 0 {
-                slidesSearchPromptViewModel.update(
-                    show: true,
-                    resultsString: slidesPhoto.findPhoto.getResultsString()
-                )
+                updatePromptForCurrentPhoto()
             }
         }
     }

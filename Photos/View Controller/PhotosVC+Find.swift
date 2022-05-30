@@ -68,7 +68,7 @@ extension PhotosViewController {
             let initialAllFindPhotos = (existingAllFindPhotos + allFindPhotosNotes).uniqued()
             let initialStarredFindPhotos = (existingStarredFindPhotos + starredFindPhotosNotes).uniqued()
             let initialScreenshotsFindPhotos = (existingScreenshotsFindPhotos + screenshotsFindPhotosNotes).uniqued()
-            
+
             await self.startApplyingResults(
                 allFindPhotos: initialAllFindPhotos,
                 starredFindPhotos: initialStarredFindPhotos,
@@ -85,7 +85,8 @@ extension PhotosViewController {
                 scope: .text
             )
 
-            try await Task.sleep(seconds: 0.4)
+            try await Task.sleep(seconds: 1.2)
+
             await self.startApplyingResults(
                 allFindPhotos: FindPhoto.merge(initialAllFindPhotos + allFindPhotosText),
                 starredFindPhotos: FindPhoto.merge(initialStarredFindPhotos + starredFindPhotosText),

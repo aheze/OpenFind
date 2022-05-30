@@ -74,32 +74,36 @@ struct PhotosCellResultsImageView: View {
                     }
                 
                     if let note = resultsModel.note {
-                        HStack(alignment: .top) {
-                            EditableTextView(model: textModel, text: .constant(note))
-                                .allowsHitTesting(false)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .padding(6)
+                        Color.clear
+                            .overlay(
+                                HStack(alignment: .top) {
+                                    EditableTextView(model: textModel, text: .constant(note))
+                                        .allowsHitTesting(false)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .padding(6)
                                 
-                            Text("NOTE")
-                                .foregroundColor(resultsModel.resultsFoundInNote ? .accent : UIColor.secondaryLabel.color)
-                                .font(UIFont.preferredCustomFont(forTextStyle: .caption1, weight: .bold).font)
-                                .padding(7)
-                                .background(
-                                    VStack {
-                                        if resultsModel.resultsFoundInNote {
-                                            Color.accent
-                                                .opacity(0.1)
-                                        } else {
-                                            UIColor.label.color
-                                                .opacity(0.1)
-                                        }
-                                    }
-                                    .cornerRadius(6, corners: .bottomLeft)
-                                )
-                        }
-                        .background(UIColor.secondarySystemBackground.color)
-                        .cornerRadius(10)
-                        .frame(height: PhotosResultsCellConstants.noteHeight)
+                                    Text("NOTE")
+                                        .foregroundColor(resultsModel.resultsFoundInNote ? .accent : UIColor.secondaryLabel.color)
+                                        .font(UIFont.preferredCustomFont(forTextStyle: .caption1, weight: .bold).font)
+                                        .padding(7)
+                                        .background(
+                                            VStack {
+                                                if resultsModel.resultsFoundInNote {
+                                                    Color.accent
+                                                        .opacity(0.1)
+                                                } else {
+                                                    UIColor.label.color
+                                                        .opacity(0.1)
+                                                }
+                                            }
+                                            .cornerRadius(6, corners: .bottomLeft)
+                                        )
+                                }
+                                .background(UIColor.secondarySystemBackground.color)
+                                .cornerRadius(10)
+                                .frame(maxHeight: PhotosResultsCellConstants.noteHeight),
+                                alignment: .bottom
+                            )
                     }
                 }
             }
