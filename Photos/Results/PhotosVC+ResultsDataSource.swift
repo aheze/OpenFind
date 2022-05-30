@@ -78,14 +78,14 @@ extension PhotosViewController {
 
         self.addChildViewController(newViewController, in: cell.contentView)
         cell.viewController = newViewController
-        newViewController.view.alpha = 0
+//        newViewController.view.alpha = 0
 
-        UIView.animate(withDuration: 0.3) {
-            existingViewController.view.alpha = 0
-            newViewController.view.alpha = 1
-        } completion: { _ in
-            self.removeChildViewController(existingViewController)
-        }
+//        UIView.animate(withDuration: 0.3) {
+//            existingViewController.view.alpha = 0
+//            newViewController.view.alpha = 1
+//        } completion: { _ in
+        self.removeChildViewController(existingViewController)
+//        }
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
         return newViewController
     }

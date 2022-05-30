@@ -45,7 +45,6 @@ extension PhotosViewController {
         let photos = self.model.photos
         let stringToGradients = self.searchViewModel.stringToGradients
 
-        print("\n\n\n+++ Start!!!!!\n")
         Task.detached {
             let (
                 allFindPhotosNotes, starredFindPhotosNotes, screenshotsFindPhotosNotes
@@ -56,10 +55,20 @@ extension PhotosViewController {
                 scope: .note
             )
 
+            var existingAllFindPhotos = [FindPhoto]()
+            var existingStarredFindPhotos = [FindPhoto]()
+            var existingScreenshotsFindPhotos = [FindPhoto]()
+
+            if let resultsState = await self.model.resultsState {
+                existingAllFindPhotos = resultsState.allFindPhotos
+                existingStarredFindPhotos = resultsState.starredFindPhotos
+                existingScreenshotsFindPhotos = resultsState.screenshotsFindPhotos
+            }
+
             await self.startApplyingResults(
-                allFindPhotos: allFindPhotosNotes,
-                starredFindPhotos: starredFindPhotosNotes,
-                screenshotsFindPhotos: screenshotsFindPhotosNotes,
+                allFindPhotos: (allFindPhotosNotes + existingAllFindPhotos).uniqued(),
+                starredFindPhotos: (starredFindPhotosNotes + existingStarredFindPhotos).uniqued(),
+                screenshotsFindPhotos: (screenshotsFindPhotosNotes + existingScreenshotsFindPhotos).uniqued(),
                 context: context
             )
 
@@ -72,7 +81,7 @@ extension PhotosViewController {
                 scope: .text
             )
 
-            try await Task.sleep(seconds: 0.7)
+            try await Task.sleep(seconds: 0.9)
             await self.startApplyingResults(
                 allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText),
                 starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText),
@@ -85,8 +94,6 @@ extension PhotosViewController {
             }
         }
     }
-
-    func searchNotesThenText() async {}
 
     /// queue if needed
     @MainActor func startApplyingResults(
@@ -103,9 +110,9 @@ extension PhotosViewController {
                 context: context
             )
         } else {
-            model.queuedAllResults = allFindPhotos
-            model.queuedStarredResults = starredFindPhotos
-            model.queuedScreenshotsResults = screenshotsFindPhotos
+            model.queuedAllResults += allFindPhotos
+            model.queuedStarredResults += starredFindPhotos
+            model.queuedScreenshotsResults += screenshotsFindPhotos
             model.queuedResultsContext = context
             model.waitingToAddResults = true
         }

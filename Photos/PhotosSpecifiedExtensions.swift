@@ -7,7 +7,6 @@
 //
 
 import Photos
-import SwiftPrettyPrint
 import UIKit
 
 extension FindPhoto {
@@ -37,32 +36,6 @@ extension FindPhoto {
 
         return new
     }
-    
-    
-    //    static func merge(findPhotos: [FindPhoto], otherFindPhotos: [FindPhoto]) -> [FindPhoto] {
-//        var new = findPhotos
-//        for otherFindPhoto in otherFindPhotos {
-//            if let firstIndex = new.firstIndex(where: { $0.photo.asset.localIdentifier == otherFindPhoto.photo.asset.localIdentifier }) {
-//                if
-//                    let existingFastDescription = new[firstIndex].fastDescription,
-//                    let otherFastDescription = otherFindPhoto.fastDescription
-//                {
-//                    let newFastDescription = FindPhoto.FastDescription(
-//                        containsResultsInText: existingFastDescription.containsResultsInText || otherFastDescription.containsResultsInText,
-//                        containsResultsInNote: existingFastDescription.containsResultsInNote || otherFastDescription.containsResultsInNote,
-//                        containsText: existingFastDescription.containsText || otherFastDescription.containsText,
-//                        containsNote: existingFastDescription.containsNote || otherFastDescription.containsNote
-//                    )
-//
-//                    new[firstIndex].fastDescription = newFastDescription
-//                }
-//            } else {
-//                new.append(otherFindPhoto)
-//            }
-//        }
-//
-//        return new
-//    }
 }
 
 extension PhotosSlidesState {
@@ -294,8 +267,6 @@ extension Finding {
             let contains: Bool
             var fastDescription = FindPhoto.FastDescription()
 
-            print("Looping photo.")
-
             guard let metadata = photo.metadata else { continue }
             let search = Array(stringToGradients.keys)
 
@@ -317,8 +288,6 @@ extension Finding {
                 fastDescription.containsNote = true
                 fastDescription.containsResultsInNote = contains
             }
-
-            print("Scope: \(scope). Desc: \(fastDescription)")
 
             if contains {
                 let findPhoto = FindPhoto(

@@ -14,13 +14,13 @@ extension PhotosViewController {
         listenToKeyboard()
         
         /// disable pressing results when searching
-        progressViewModel.$percentageShowing
-            .dropFirst()
-            .sink { [weak self] showing in
-                guard let self = self else { return }
-                self.resultsCollectionView.allowsSelection = !showing
-            }
-            .store(in: &realmModel.cancellables)
+//        progressViewModel.$percentageShowing
+//            .dropFirst()
+//            .sink { [weak self] showing in
+//                guard let self = self else { return }
+//                self.resultsCollectionView.allowsSelection = !showing
+//            }
+//            .store(in: &realmModel.cancellables)
         
         /// only called at first
         model.reload = { [weak self] in

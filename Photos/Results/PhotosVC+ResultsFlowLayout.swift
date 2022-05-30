@@ -60,7 +60,7 @@ extension PhotosViewController {
             
             guard let fastDescription = findPhoto.fastDescription else { continue }
             
-            var height = CGFloat(40)
+            var height = CGFloat(50)
             
             if fastDescription.containsResultsInText {
                 height += textHeight
