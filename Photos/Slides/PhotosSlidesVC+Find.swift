@@ -12,13 +12,21 @@ extension PhotosSlidesViewController {
     /// start finding for a photo.
     /// If metadata does not exist, start scanning.
     /// Once done, `model.photosWithQueuedSentencesAdded` in `PhotosVC+Listen` will be called.
-    func startFinding(for slidesPhoto: SlidesPhoto, viewController: PhotosSlidesItemViewController, animate: Bool) {
+    func startFinding(
+        for slidesPhoto: SlidesPhoto,
+        viewController: PhotosSlidesItemViewController,
+        animate: Bool,
+        showPromptIfResultsFoundInstantly: Bool /// if finding from metadata, show prompt
+    ) {
         let photoIgnored = slidesPhoto.findPhoto.photo.isIgnored
         if
             let metadata = slidesPhoto.findPhoto.photo.metadata,
             metadata.dateScanned != nil || photoIgnored /// find from metadata even if ignored (show prompt)
         {
             self.findFromMetadata(in: slidesPhoto, viewController: viewController, animate: animate)
+            if showPromptIfResultsFoundInstantly {
+                self.updatePromptForCurrentPhoto()
+            }
         } else {
             /// if is ignored, don't scan
             if !photoIgnored {
@@ -26,15 +34,16 @@ extension PhotosSlidesViewController {
             }
         }
 
-        if let note = realmModel.container.getNote(from: slidesPhoto.findPhoto.photo.asset.localIdentifier) {
+        if
+            let note = realmModel.container.getNote(from: slidesPhoto.findPhoto.photo.asset.localIdentifier),
+            var findPhoto = model.slidesState?.getUpToDateSlidesPhoto(for: slidesPhoto.findPhoto.photo)?.findPhoto
+        {
             let search = Array(slidesSearchViewModel.stringToGradients.keys)
             let numberOfResultsInNote = Finding.getNumberOfMatches(
                 realmModel: realmModel,
                 stringToSearchFrom: note.string,
                 matches: search
             )
-
-            var findPhoto = slidesPhoto.findPhoto
 
             findPhoto.createDescriptionIfNeeded()
             findPhoto.description?.numberOfResultsInNote = numberOfResultsInNote
@@ -74,8 +83,6 @@ extension PhotosSlidesViewController {
             self.model.slidesState?.slidesPhotos[index].findPhoto.description?.numberOfResultsInText = highlights.count
             self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
         }
-
-        self.updatePrompt(for: slidesPhoto.findPhoto.photo)
     }
 
     func scanPhoto(slidesPhoto: SlidesPhoto) {
@@ -100,6 +107,7 @@ extension PhotosSlidesViewController {
             slidesSearchPromptViewModel.updateBarHeight?()
         } else {
             let resultsText = slidesPhoto.findPhoto.getResultsText()
+
             var resetText: String?
             if model.resultsState != nil, searchViewModel.text != slidesSearchViewModel.text {
                 let summary = searchViewModel.getSummaryString()
@@ -108,6 +116,13 @@ extension PhotosSlidesViewController {
 
             slidesSearchPromptViewModel.update(show: true, resultsText: resultsText, resetText: resetText)
             slidesSearchPromptViewModel.updateBarHeight?()
+        }
+    }
+
+    /// update prompt for the current photo
+    func updatePromptForCurrentPhoto() {
+        if let currentPhoto = model.slidesState?.currentPhoto {
+            self.updatePrompt(for: currentPhoto)
         }
     }
 }

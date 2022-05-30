@@ -34,7 +34,12 @@ extension PhotosSlidesViewController {
                     /// if showing, that means Find is currently scanning, so don't scan a second time.
                 } else if !self.searchNavigationProgressViewModel.percentageShowing {
                     if let viewController = self.getViewController(for: slidesPhoto.findPhoto.photo) {
-                        self.startFinding(for: slidesPhoto, viewController: viewController, animate: true)
+                        self.startFinding(
+                            for: slidesPhoto,
+                            viewController: viewController,
+                            animate: true,
+                            showPromptIfResultsFoundInstantly: true
+                        )
                     }
                 }
             } else {
@@ -90,14 +95,14 @@ extension PhotosSlidesViewController {
 
         model.sharePhotoInSlides = { [weak self] photo in
             guard let self = self else { return }
-            
+
             let sourceRect = CGRect(
                 x: 0,
                 y: self.view.bounds.height - self.tabViewModel.tabBarAttributes.backgroundHeight,
                 width: 50,
                 height: 50
             )
-            
+
             self.share(photos: [photo], model: self.model, sourceRect: sourceRect)
         }
 

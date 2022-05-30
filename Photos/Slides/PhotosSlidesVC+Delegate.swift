@@ -33,7 +33,12 @@ extension PhotosSlidesViewController: UICollectionViewDelegate {
 
             } else {
                 /// else, find again.
-                startFinding(for: slidesPhoto, viewController: viewController, animate: false)
+                startFinding(
+                    for: slidesPhoto,
+                    viewController: viewController,
+                    animate: false,
+                    showPromptIfResultsFoundInstantly: false
+                )
             }
         }
 

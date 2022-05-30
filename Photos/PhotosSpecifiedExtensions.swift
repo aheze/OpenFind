@@ -63,6 +63,14 @@ extension PhotosSlidesState {
         return nil
     }
 
+    /// structs may have changed, fetch from the array again
+    func getUpToDateSlidesPhoto(for photo: Photo) -> SlidesPhoto? {
+        if let index = getSlidesPhotoIndex(photo: photo) {
+            return slidesPhotos[safe: index]
+        }
+        return nil
+    }
+
     func getCurrentIndex() -> Int? {
         let index = slidesPhotos.firstIndex { $0.findPhoto.photo == currentPhoto }
         return index
@@ -136,18 +144,13 @@ extension FindPhoto {
     }
 
     func getResultsText() -> String {
-        if let highlightsSet = highlightsSet {
-            let highlights = highlightsSet.highlights
-            switch highlights.count {
-            case 0:
-                return "No Results"
-            case 1:
-                return "1 Result"
-            default:
-                return "\(highlights.count) Results"
-            }
-        } else {
+        switch description?.numberOfResults ?? 0 {
+        case 0:
             return "No Results"
+        case 1:
+            return "1 Result"
+        default:
+            return "\(description?.numberOfResults ?? 0) Results"
         }
     }
 

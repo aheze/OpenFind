@@ -26,7 +26,12 @@ extension PhotosViewController {
                     let slidesPhoto = slidesState.slidesPhotos[safe: index]
                 {
                     if let viewController = slidesState.viewController?.getViewController(for: slidesPhoto.findPhoto.photo) {
+                        
+                        /// after scanning done, find
                         slidesState.viewController?.findFromMetadata(in: slidesPhoto, viewController: viewController, animate: false)
+                        
+                        /// then display the prompt
+                        slidesState.viewController?.updatePromptForCurrentPhoto()
                     }
                 }
                     

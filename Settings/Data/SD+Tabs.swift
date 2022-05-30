@@ -60,7 +60,7 @@ extension SettingsData {
                     .init(
                         rows: [
                             .init(
-                                configuration: .button(title: "Scanning Options", tintColor: nil, rightIconName: "arrow.up.forward") {
+                                configuration: .button(title: "Scanning Options", tintColor: nil, rightIconName: nil) {
                                     showScanningOptions?()
                                 }
                             )

@@ -5,7 +5,6 @@
 //  Created by A. Zheng (github.com/aheze) on 4/23/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-    
 
 import UIKit
 
@@ -13,16 +12,6 @@ extension SettingsData {
     static var linksSection: SettingsSection = {
         .init(
             rows: [
-                .init(
-                    configuration: .link(
-                        title: "Help Center",
-                        leftIcon: .template(iconName: "questionmark.circle.fill", backgroundColor: UIColor(hex: 0x44AB00)),
-                        indicatorStyle: .modal,
-                        destination: nil
-                    ) {
-                        helpCenter?()
-                    }
-                ),
                 .init(
                     configuration: .link(
                         title: "Join the Discord",
@@ -51,6 +40,16 @@ extension SettingsData {
                         destination: nil
                     ) {
                         translateFind?()
+                    }
+                ),
+                .init(
+                    configuration: .link(
+                        title: "Help Center",
+                        leftIcon: .template(iconName: "questionmark.circle.fill", backgroundColor: UIColor(hex: 0x44AB00)),
+                        indicatorStyle: .none,
+                        destination: nil
+                    ) {
+                        helpCenter?()
                     }
                 ),
                 .init(
