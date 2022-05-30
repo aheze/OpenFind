@@ -81,6 +81,7 @@ struct PhotosCellResultsImageView: View {
                             )
                             .background(UIColor.secondarySystemBackground.color)
                             .cornerRadius(10)
+                            .frame(height: PhotosResultsCellConstants.noteHeight)
                     }
                 }
             }

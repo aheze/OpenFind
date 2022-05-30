@@ -7,17 +7,12 @@
 //
 
 import Photos
-import UIKit
 import SwiftPrettyPrint
+import UIKit
 
 extension FindPhoto {
     /// merge `FindPhoto`s and also merge the `FastDescription`
     static func merge(findPhotos: [FindPhoto], otherFindPhotos: [FindPhoto]) -> [FindPhoto] {
-        Pretty.prettyPrint("-------- merging \(findPhotos.count) with \(otherFindPhotos.count)")
-        Pretty.prettyPrint(findPhotos.map { ($0.photo.asset.localIdentifier, $0.fastDescription) })
-        Pretty.prettyPrint(otherFindPhotos.map { ($0.photo.asset.localIdentifier, $0.fastDescription) })
-        
-//        return findPhotos + otherFindPhotos
         var new = findPhotos
         for otherFindPhoto in otherFindPhotos {
             if let firstIndex = new.firstIndex(where: { $0.photo.asset.localIdentifier == otherFindPhoto.photo.asset.localIdentifier }) {
@@ -33,17 +28,12 @@ extension FindPhoto {
                     )
 
                     new[firstIndex].fastDescription = newFastDescription
-                    print("Merging into \(newFastDescription)")
-                } else {
-                    print("Uh")
                 }
             } else {
                 new.append(otherFindPhoto)
-                print("Appending \(otherFindPhoto.fastDescription)")
             }
         }
-        
-        Pretty.prettyPrint(new.map { ($0.photo.asset.localIdentifier, $0.fastDescription) })
+
         return new
     }
 }
@@ -278,7 +268,7 @@ extension Finding {
             var fastDescription = FindPhoto.FastDescription()
 
             print("Looping photo.")
-            
+
             guard let metadata = photo.metadata else { continue }
             let search = Array(stringToGradients.keys)
 
@@ -291,11 +281,11 @@ extension Finding {
 
                 /// very fast!
                 contains = sentences.checkIf(realmModel: realmModel, matches: search)
-                fastDescription.containsNote = realmModel.container.getNote(from: metadata.assetIdentifier) != nil
+                fastDescription.containsNote = realmModel.container.checkNoteExists(assetIdentifier: metadata.assetIdentifier)
                 fastDescription.containsText = true
                 fastDescription.containsResultsInText = contains
             case .note:
-                guard let note = realmModel.container.getNote(from: metadata.assetIdentifier) else { continue }
+                guard let note = realmModel.container.getNote(from: metadata.assetIdentifier), !note.string.isEmpty else { continue }
                 contains = Finding.checkIf(realmModel: realmModel, stringToSearchFrom: note.string, matches: search)
                 fastDescription.containsNote = true
                 fastDescription.containsResultsInNote = contains

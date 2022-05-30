@@ -200,7 +200,7 @@ enum Settings {
                 case .small:
                     return 60
                 case .medium:
-                    return 120
+                    return 90
                 case .large:
                     return 300
                 }

@@ -17,15 +17,17 @@ extension PhotosViewController {
         if let existingDescription = findPhoto.description {
             description = existingDescription
         } else {
-            let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier)?.string
-            let numberOfResultsInNote = note.map {
+            var noteString: String?
+            if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier), !note.string.isEmpty {
+                noteString = note.string
+            }
+            let numberOfResultsInNote = noteString.map {
                 Finding.getNumberOfMatches(
                     realmModel: realmModel,
                     stringToSearchFrom: $0,
                     matches: Array(searchViewModel.stringToGradients.keys)
                 )
             } ?? 0
-            print("\(note) -> Num in note: \(numberOfResultsInNote)")
             
             let (lines, highlightsCount) = Finding.getLineHighlights(
                 realmModel: realmModel,
@@ -39,7 +41,7 @@ extension PhotosViewController {
                 text: text,
                 lines: lines,
                 numberOfResultsInText: highlightsCount,
-                note: note,
+                note: noteString,
                 numberOfResultsInNote: numberOfResultsInNote
             )
             
