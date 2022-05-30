@@ -68,6 +68,7 @@ struct PhotosCellResultsImageView: View {
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
+                                .padding(.vertical, -20) /// allow overflow masking
                             )
                             .allowsHitTesting(false)
                     }

@@ -65,10 +65,14 @@ extension PhotosViewController {
                 existingScreenshotsFindPhotos = resultsState.screenshotsFindPhotos
             }
 
+            let initialAllFindPhotos = (existingAllFindPhotos + allFindPhotosNotes).uniqued()
+            let initialStarredFindPhotos = (existingStarredFindPhotos + starredFindPhotosNotes).uniqued()
+            let initialScreenshotsFindPhotos = (existingScreenshotsFindPhotos + screenshotsFindPhotosNotes).uniqued()
+            
             await self.startApplyingResults(
-                allFindPhotos: (allFindPhotosNotes + existingAllFindPhotos).uniqued(),
-                starredFindPhotos: (starredFindPhotosNotes + existingStarredFindPhotos).uniqued(),
-                screenshotsFindPhotos: (screenshotsFindPhotosNotes + existingScreenshotsFindPhotos).uniqued(),
+                allFindPhotos: initialAllFindPhotos,
+                starredFindPhotos: initialStarredFindPhotos,
+                screenshotsFindPhotos: initialScreenshotsFindPhotos,
                 context: context
             )
 
@@ -83,9 +87,9 @@ extension PhotosViewController {
 
             try await Task.sleep(seconds: 0.4)
             await self.startApplyingResults(
-                allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText),
-                starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText),
-                screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotosNotes + screenshotsFindPhotosText),
+                allFindPhotos: FindPhoto.merge(initialAllFindPhotos + allFindPhotosText),
+                starredFindPhotos: FindPhoto.merge(initialStarredFindPhotos + starredFindPhotosText),
+                screenshotsFindPhotos: FindPhoto.merge(initialScreenshotsFindPhotos + screenshotsFindPhotosText),
                 context: context
             )
 
