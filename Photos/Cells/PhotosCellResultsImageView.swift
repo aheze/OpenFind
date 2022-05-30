@@ -26,6 +26,9 @@ struct PhotosCellResultsImageView: View {
             PhotosCellImageView(model: model)
                 .frame(width: 100)
                 .cornerRadius(12)
+                .sizeReader { size in
+                    resultsModel.imageSize = size
+                }
             
             VStack(spacing: 10) {
                 HStack {

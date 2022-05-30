@@ -20,8 +20,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             
             if model.resultsState != nil {
                 self.model.updateAllowed = false
-                if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                    cell.view.imageView.alpha = 0
+                if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
+                    cell.viewController?.model.showImage(false)
                 }
             } else {
                 if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
@@ -36,17 +36,17 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             
             if let resultsState = model.resultsState {
                 for index in resultsState.displayedFindPhotos.indices {
-                    if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
-                        cell.view.imageView.alpha = 1
+                    if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults {
+                        cell.viewController?.model.showImage(true)
                     }
                 }
                 
                 guard let photoIndexPath = getCurrentPhotoIndexPath() else { return }
             
                 let hideCell = { [weak self] in
-                    if let cell = self?.resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                        cell.view.imageView.alpha = 0
-                        cell.view.overlayView.alpha = 0
+                    if let cell = self?.resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
+                        cell.viewController?.model.showImage(false)
+                        cell.viewController?.model.showOverlay(false, animate: false)
                     }
                 }
             
@@ -105,12 +105,11 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             /// make sure completed first
             if completed {
                 if model.resultsState != nil {
-                    if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                        cell.view.imageView.alpha = 1
-                    
-                        UIView.animate(withDuration: 0.3) {
-                            cell.view.overlayView.alpha = 1
-                        }
+                    if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
+                        cell.viewController?.model.showImage(true)
+                        
+                        /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
+                        cell.viewController?.model.showOverlay(true, animate: true)
                     }
                 } else {
                     if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
@@ -139,9 +138,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         if let resultsState = model.resultsState {
             if
                 let index = resultsState.getFindPhotoIndex(for: currentPhoto, in: \.displayedFindPhotos),
-                let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell
+                let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults
             {
-                return cell.view.imageView.image
+                return cell.viewController?.model.image
             }
         } else {
             if
@@ -158,8 +157,9 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
     func imageFrame(type: PhotoTransitionAnimatorType) -> CGRect? {
         guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
         if model.resultsState != nil {
-            if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosResultsCell {
-                let frame = cell.view.imageView.windowFrame()
+            if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
+                let imageFrame = cell.viewController?.resultsModel.getImageFrame?() ?? .zero
+                let frame = cell.contentView.convert(imageFrame, to: nil)
                 return frame
             }
         } else {
