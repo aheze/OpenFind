@@ -10,6 +10,12 @@ import UIKit
 
 extension PhotosSlidesViewController {
     func listen() {
+        slidesSearchPromptViewModel.showNote = { [weak self] in
+            guard let self = self else { return }
+            self.model.slidesState?.toolbarInformationOn = true
+            self.showInfo(true)
+        }
+
         slidesSearchViewModel.fieldsChanged = { [weak self] textChanged in
             guard let self = self else { return }
 

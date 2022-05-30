@@ -143,14 +143,14 @@ extension FindPhoto {
         }
     }
 
-    func getResultsText() -> String {
+    func getResultsString() -> String {
         switch description?.numberOfResults ?? 0 {
         case 0:
-            return "No Results"
+            return "No results"
         case 1:
-            return "1 Result"
+            return "1 result"
         default:
-            return "\(description?.numberOfResults ?? 0) Results"
+            return "\(description?.numberOfResults ?? 0) results"
         }
     }
 
@@ -172,9 +172,9 @@ extension FindPhoto.Description {
         let string: String
 
         if numberOfResults == 1 {
-            string = "\(numberOfResults) Result"
+            string = "\(numberOfResults) result"
         } else {
-            string = "\(numberOfResults) Results"
+            string = "\(numberOfResults) results"
         }
 
         return string

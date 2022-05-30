@@ -18,22 +18,7 @@ extension PhotosSlidesViewController {
         animate: Bool,
         showPromptIfResultsFoundInstantly: Bool /// if finding from metadata, show prompt
     ) {
-        let photoIgnored = slidesPhoto.findPhoto.photo.isIgnored
-        if
-            let metadata = slidesPhoto.findPhoto.photo.metadata,
-            metadata.dateScanned != nil || photoIgnored /// find from metadata even if ignored (show prompt)
-        {
-            self.findFromMetadata(in: slidesPhoto, viewController: viewController, animate: animate)
-            if showPromptIfResultsFoundInstantly {
-                self.updatePromptForCurrentPhoto()
-            }
-        } else {
-            /// if is ignored, don't scan
-            if !photoIgnored {
-                self.scanPhoto(slidesPhoto: slidesPhoto)
-            }
-        }
-
+        var resultsFoundInstantly = false
         if
             let note = realmModel.container.getNote(from: slidesPhoto.findPhoto.photo.asset.localIdentifier),
             var findPhoto = model.slidesState?.getUpToDateSlidesPhoto(for: slidesPhoto.findPhoto.photo)?.findPhoto
@@ -51,6 +36,25 @@ extension PhotosSlidesViewController {
             if let index = model.slidesState?.getFindPhotoIndex(findPhoto: findPhoto) {
                 model.slidesState?.slidesPhotos[index].findPhoto = findPhoto
             }
+            resultsFoundInstantly = true
+        }
+
+        let photoIgnored = slidesPhoto.findPhoto.photo.isIgnored
+        if
+            let metadata = slidesPhoto.findPhoto.photo.metadata,
+            metadata.dateScanned != nil || photoIgnored /// find from metadata even if ignored (show prompt)
+        {
+            self.findFromMetadata(in: slidesPhoto, viewController: viewController, animate: animate)
+            resultsFoundInstantly = true
+        } else {
+            /// if is ignored, don't scan
+            if !photoIgnored {
+                self.scanPhoto(slidesPhoto: slidesPhoto)
+            }
+        }
+
+        if resultsFoundInstantly, showPromptIfResultsFoundInstantly {
+            self.updatePromptForCurrentPhoto()
         }
     }
 
@@ -102,19 +106,33 @@ extension PhotosSlidesViewController {
             let slidesPhoto = model.slidesState?.slidesPhotos[safe: slidesPhotoIndex]
         else { return }
 
+        let numberOfResultsInText = slidesPhoto.findPhoto.description?.numberOfResultsInText
+        let numberOfResultsInNote = slidesPhoto.findPhoto.description?.numberOfResultsInNote
+
         if slidesPhoto.findPhoto.photo.isIgnored {
-            slidesSearchPromptViewModel.update(show: true, resultsText: "Photo is ignored")
+            slidesSearchPromptViewModel.update(
+                show: true,
+                resultsString: "Photo is ignored",
+                numberOfResultsInText: numberOfResultsInText,
+                numberOfResultsInNote: numberOfResultsInNote
+            )
             slidesSearchPromptViewModel.updateBarHeight?()
         } else {
-            let resultsText = slidesPhoto.findPhoto.getResultsText()
+            let resultsString = slidesPhoto.findPhoto.getResultsString()
 
-            var resetText: String?
+            var resetString: String?
             if model.resultsState != nil, searchViewModel.text != slidesSearchViewModel.text {
                 let summary = searchViewModel.getSummaryString()
-                resetText = summary
+                resetString = summary
             }
 
-            slidesSearchPromptViewModel.update(show: true, resultsText: resultsText, resetText: resetText)
+            slidesSearchPromptViewModel.update(
+                show: true,
+                resultsString: resultsString,
+                numberOfResultsInText: numberOfResultsInText,
+                numberOfResultsInNote: numberOfResultsInNote,
+                resetString: resetString
+            )
             slidesSearchPromptViewModel.updateBarHeight?()
         }
     }

@@ -16,27 +16,40 @@ enum SearchPromptConstants {
 class SearchPromptViewModel: ObservableObject {
     /// don't set directly, instead use `show()`
     @Published private(set) var show = false
-    @Published private(set) var resultsText = ""
-    @Published private(set) var resetText: String?
+    @Published private(set) var resultsString = ""
+    @Published private(set) var numberOfResultsInText: Int?
+    @Published private(set) var numberOfResultsInNote: Int?
+
+    @Published private(set) var resetString: String?
 
     @Published private(set) var voiceOverString = ""
+
     var updateBarHeight: (() -> Void)?
+    var showNote: (() -> Void)?
     var resetPressed: (() -> Void)?
 
-    func update(show: Bool, resultsText: String? = nil, resetText: String? = nil) {
+    func update(
+        show: Bool,
+        resultsString: String? = nil,
+        numberOfResultsInText: Int? = nil,
+        numberOfResultsInNote: Int? = nil,
+        resetString: String? = nil
+    ) {
         var voiceOverString = ""
-        withAnimation {
+        withAnimation(.easeOut(duration: 0.3)) {
             self.show = show
-            self.resetText = resetText
+            self.numberOfResultsInText = numberOfResultsInText
+            self.numberOfResultsInNote = numberOfResultsInNote
+            self.resetString = resetString
         }
 
-        if let resetText = resetText {
-            voiceOverString.append(resetText)
+        if let resultsString = resultsString {
+            self.resultsString = resultsString
+            voiceOverString.append(resultsString)
         }
 
-        if let resultsText = resultsText {
-            self.resultsText = resultsText
-            voiceOverString.append(". \(resultsText)")
+        if let resetString = resetString {
+            voiceOverString.append(". Tap to reset to \(resetString)")
         }
 
         UIAccessibility.post(notification: .announcement, argument: voiceOverString)
@@ -44,9 +57,9 @@ class SearchPromptViewModel: ObservableObject {
     }
 
     func totalText() -> String {
-        var text = resultsText
-        if let resetText = resetText {
-            text += resetText
+        var text = resultsString
+        if let resetString = resetString {
+            text += resetString
         }
         return text
     }
@@ -67,10 +80,29 @@ struct SearchPromptView: View {
     var body: some View {
         Color.clear.overlay(
             HStack {
-                Text(model.resultsText)
+                Text(model.resultsString)
                     .font(Font(SearchPromptConstants.font as CTFont))
 
-                if let resetText = model.resetText {
+                if let numberOfResultsInNote = model.numberOfResultsInNote, numberOfResultsInNote > 0 {
+                    Circle()
+                        .fill(UIColor.secondaryLabel.color)
+                        .frame(width: 2, height: 2)
+
+                    Button {
+                        model.showNote?()
+                    } label: {
+                        VStack {
+                            if let numberOfResultsInText = model.numberOfResultsInText, numberOfResultsInText > 0 {
+                                Text("(\(numberOfResultsInText) in text, \(numberOfResultsInNote) in note)")
+                            } else {
+                                Text("(\(numberOfResultsInNote) in note)")
+                            }
+                        }
+                        .foregroundColor(UIColor.secondaryLabel.color)
+                    }
+                }
+
+                if let resetString = model.resetString {
                     Circle()
                         .fill(UIColor.secondaryLabel.color)
                         .frame(width: 2, height: 2)
@@ -78,7 +110,7 @@ struct SearchPromptView: View {
                     Button {
                         model.resetPressed?()
                     } label: {
-                        Text("Reset to \(resetText)")
+                        Text("Reset to \(resetString)")
                             .font(Font(SearchPromptConstants.font as CTFont))
                             .foregroundColor(.accent)
                     }
