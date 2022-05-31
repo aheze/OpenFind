@@ -65,9 +65,9 @@ extension PhotosViewController {
                 existingScreenshotsFindPhotos = resultsState.screenshotsFindPhotos
             }
 
-            let initialAllFindPhotos = (existingAllFindPhotos + allFindPhotosNotes).uniqued()
-            let initialStarredFindPhotos = (existingStarredFindPhotos + starredFindPhotosNotes).uniqued()
-            let initialScreenshotsFindPhotos = (existingScreenshotsFindPhotos + screenshotsFindPhotosNotes).uniqued()
+            let initialAllFindPhotos = FindPhoto.merge(existingAllFindPhotos + allFindPhotosNotes, options: .combineFastDescriptionsNoteOnly).filterHasResults()
+            let initialStarredFindPhotos = FindPhoto.merge(existingStarredFindPhotos + starredFindPhotosNotes, options: .combineFastDescriptionsNoteOnly).filterHasResults()
+            let initialScreenshotsFindPhotos = FindPhoto.merge(existingScreenshotsFindPhotos + screenshotsFindPhotosNotes, options: .combineFastDescriptionsNoteOnly).filterHasResults()
 
             await self.startApplyingResults(
                 allFindPhotos: initialAllFindPhotos,
@@ -88,9 +88,9 @@ extension PhotosViewController {
             try await Task.sleep(seconds: 1.2)
 
             await self.startApplyingResults(
-                allFindPhotos: FindPhoto.merge(initialAllFindPhotos + allFindPhotosText),
-                starredFindPhotos: FindPhoto.merge(initialStarredFindPhotos + starredFindPhotosText),
-                screenshotsFindPhotos: FindPhoto.merge(initialScreenshotsFindPhotos + screenshotsFindPhotosText),
+                allFindPhotos: FindPhoto.merge(initialAllFindPhotos + allFindPhotosText).filterHasResults(),
+                starredFindPhotos: FindPhoto.merge(initialStarredFindPhotos + starredFindPhotosText).filterHasResults(),
+                screenshotsFindPhotos: FindPhoto.merge(initialScreenshotsFindPhotos + screenshotsFindPhotosText).filterHasResults(),
                 context: context
             )
 

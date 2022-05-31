@@ -60,14 +60,15 @@ extension PhotosViewController {
                     scope: .text
                 )
                 
+                /// just use `uniqued` instead of `FindPhoto.merge` - results should only be in text, so no need to check overlap between notes/text
                 if
                     let photosResultsInsertNewMode = photosResultsInsertNewMode,
                     photosResultsInsertNewMode == .top
                 {
                     await self.startApplyingResults(
-                        allFindPhotos: FindPhoto.merge(allFindPhotos + existingAllFindPhotos),
-                        starredFindPhotos: FindPhoto.merge(starredFindPhotos + existingStarredFindPhotos),
-                        screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotos + existingScreenshotsFindPhotos),
+                        allFindPhotos: (allFindPhotos + existingAllFindPhotos).uniqued(),
+                        starredFindPhotos: (starredFindPhotos + existingStarredFindPhotos).uniqued(),
+                        screenshotsFindPhotos: (screenshotsFindPhotos + existingScreenshotsFindPhotos).uniqued(),
                         context: .justFindFromExistingDoNotScan
                     )
                 } else {

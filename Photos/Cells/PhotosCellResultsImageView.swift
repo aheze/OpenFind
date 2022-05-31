@@ -22,7 +22,7 @@ struct PhotosCellResultsImageView: View {
     var body: some View {
         let state = getState()
         
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 12) {
             PhotosCellImageView(model: model)
                 .frame(width: 100)
                 .cornerRadius(10)
@@ -62,13 +62,14 @@ struct PhotosCellResultsImageView: View {
                             .mask(
                                 LinearGradient(
                                     stops: [
-                                        .init(color: .white, location: 0.9),
-                                        .init(color: .clear, location: 1)
+                                        .init(color: .white, location: 0.86),
+                                        .init(color: .clear, location: 0.93)
                                     ],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
                                 .padding(.vertical, -20) /// allow overflow masking
+                                .padding(.horizontal, -20)
                             )
                             .allowsHitTesting(false)
                     }
@@ -80,7 +81,7 @@ struct PhotosCellResultsImageView: View {
                                     EditableTextView(model: textModel, text: .constant(note))
                                         .allowsHitTesting(false)
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .padding(6)
+                                        .padding(10)
                                 
                                     Text("NOTE")
                                         .foregroundColor(resultsModel.resultsFoundInNote ? .accent : UIColor.secondaryLabel.color)

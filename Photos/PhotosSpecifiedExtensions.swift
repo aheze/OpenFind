@@ -10,9 +10,14 @@ import Photos
 import UIKit
 
 extension FindPhoto {
+    enum MergeOptions {
+        case combineFastDescriptions
+        case combineFastDescriptionsNoteOnly
+    }
+
     /// merge `FindPhoto`s and also merge the `FastDescription`
 
-    static func merge(_ findPhotos: [FindPhoto]) -> [FindPhoto] {
+    static func merge(_ findPhotos: [FindPhoto], options: MergeOptions = .combineFastDescriptions) -> [FindPhoto] {
         var new = [FindPhoto]()
         for findPhoto in findPhotos {
             if let firstIndex = new.firstIndex(where: { $0.photo.asset.localIdentifier == findPhoto.photo.asset.localIdentifier }) {
@@ -20,12 +25,23 @@ extension FindPhoto {
                     let existingFastDescription = new[firstIndex].fastDescription,
                     let otherFastDescription = findPhoto.fastDescription
                 {
-                    let newFastDescription = FindPhoto.FastDescription(
-                        containsResultsInText: existingFastDescription.containsResultsInText || otherFastDescription.containsResultsInText,
-                        containsResultsInNote: existingFastDescription.containsResultsInNote || otherFastDescription.containsResultsInNote,
-                        containsText: existingFastDescription.containsText || otherFastDescription.containsText,
-                        containsNote: existingFastDescription.containsNote || otherFastDescription.containsNote
-                    )
+                    let newFastDescription: FindPhoto.FastDescription
+                    switch options {
+                    case .combineFastDescriptions:
+                        newFastDescription = FindPhoto.FastDescription(
+                            containsResultsInText: existingFastDescription.containsResultsInText || otherFastDescription.containsResultsInText,
+                            containsResultsInNote: existingFastDescription.containsResultsInNote || otherFastDescription.containsResultsInNote,
+                            containsText: existingFastDescription.containsText || otherFastDescription.containsText,
+                            containsNote: existingFastDescription.containsNote || otherFastDescription.containsNote
+                        )
+                    case .combineFastDescriptionsNoteOnly:
+                        newFastDescription = FindPhoto.FastDescription(
+                            containsResultsInText: false,
+                            containsResultsInNote: existingFastDescription.containsResultsInNote || otherFastDescription.containsResultsInNote,
+                            containsText: false,
+                            containsNote: existingFastDescription.containsNote || otherFastDescription.containsNote
+                        )
+                    }
 
                     new[firstIndex].fastDescription = newFastDescription
                 }
@@ -35,6 +51,18 @@ extension FindPhoto {
         }
 
         return new
+    }
+}
+
+extension Array where Element == FindPhoto {
+    /// check `FastDescription`
+    func filterHasResults() -> [FindPhoto] {
+        filter { findPhoto in
+            if let fastDescription = findPhoto.fastDescription {
+                return fastDescription.containsResultsInText || fastDescription.containsResultsInNote
+            }
+            return false
+        }
     }
 }
 

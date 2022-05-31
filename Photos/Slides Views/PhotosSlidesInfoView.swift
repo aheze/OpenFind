@@ -77,8 +77,6 @@ struct PhotosSlidesInfoView: View {
                                     .font(UIFont.preferredFont(forTextStyle: .body).font)
                                     .foregroundColor(.accent)
                                     .opacity(0.5)
-                                    .padding(.vertical, 2)
-                                    .padding(.leading, 6)
                             }
                         }
                         .allowsHitTesting(false),

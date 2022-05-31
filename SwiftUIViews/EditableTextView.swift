@@ -53,6 +53,7 @@ struct EditableTextView: UIViewRepresentable {
         view.delegate = context.coordinator
         view.font = UIFont.preferredFont(forTextStyle: .body)
         view.textContainerInset = .zero
+        view.textContainer.lineFragmentPadding = 0
         view.isScrollEnabled = model.configuration.scrollable
         view.isEditable = model.configuration.editable
 
