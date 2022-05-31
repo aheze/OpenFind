@@ -88,11 +88,8 @@ class PhotosViewModel: ObservableObject {
     // MARK: - Add results after update allowed
 
     var waitingToAddResults = false
-    var queuedAllResults = [FindPhoto]()
-    var queuedStarredResults = [FindPhoto]()
-    var queuedScreenshotsResults = [FindPhoto]()
-    var queuedResultsContext: FindContext?
-    var addQueuedResults: (([FindPhoto], [FindPhoto], [FindPhoto], FindContext?) -> Void)?
+    var queuedResults = QueuedResults()
+    var addQueuedResults: ((QueuedResults) -> Void)?
 
     /// the date when the last results update occurred.
     var lastResultsUpdateTime: Date?
@@ -137,11 +134,8 @@ class PhotosViewModel: ObservableObject {
 
             if waitingToAddResults {
                 waitingToAddResults = false
-                addQueuedResults?(queuedAllResults, queuedStarredResults, queuedScreenshotsResults, queuedResultsContext)
-                queuedAllResults.removeAll()
-                queuedStarredResults.removeAll()
-                queuedScreenshotsResults.removeAll()
-                queuedResultsContext = nil
+                addQueuedResults?(queuedResults)
+                queuedResults = .init()
             }
 
             if waitingToAddExternalPhotos {

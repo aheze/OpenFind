@@ -56,7 +56,6 @@ extension PhotosViewController {
         model.updateDisplayedResults = { [weak self] in
             guard let self = self else { return }
             if self.model.resultsState != nil {
-                
                 self.updateResultsCellSizes {
                     self.updateResults() /// make sure to call `update` later, when results dismissed
                     self.reloadVisibleCellResults()
@@ -86,15 +85,16 @@ extension PhotosViewController {
             }
         }
         
-        model.addQueuedResults = { [weak self] allFindPhotos, starredFindPhotos, screenshotsFindPhotos, queuedResultsContext in
+        model.addQueuedResults = { [weak self] queuedResults in
             guard let self = self else { return }
             
             Task.detached {
                 await self.applyResults(
-                    allFindPhotos: allFindPhotos,
-                    starredFindPhotos: starredFindPhotos,
-                    screenshotsFindPhotos: screenshotsFindPhotos,
-                    context: queuedResultsContext ?? .justFindFromExistingDoNotScan
+                    allFindPhotos: queuedResults.allFindPhotos,
+                    starredFindPhotos: queuedResults.starredFindPhotos,
+                    screenshotsFindPhotos: queuedResults.screenshotsFindPhotos,
+                    findingInNotes: false,
+                    context: queuedResults.context ?? .justFindFromExistingDoNotScan
                 )
             }
         }
@@ -131,7 +131,8 @@ extension PhotosViewController {
                     let resultsStateExisted = self.model.resultsState != nil
                     
                     let numberOfPhotos = self.model.scannedPhotosCount
-                    let estimatedTime = CGFloat(numberOfPhotos) / 1500
+                    let calculatedTime = CGFloat(numberOfPhotos) / 1500
+                    let estimatedTime = max(calculatedTime, 1)
                     
                     /// start progress bar immediately
                     Debouncer.debounce(queue: .main, delay: .seconds(0.3)) {

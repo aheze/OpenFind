@@ -9,8 +9,21 @@
 import Photos
 import UIKit
 
+struct ResultsUpdateOptions: OptionSet {
+    let rawValue: Int
+
+    /// Dismiss the popover when the user taps outside.
+    static let postAnnouncement = Self(rawValue: 1 << 0) // 1
+
+    /// Dismiss the popover when the user drags it down.
+    static let findingInNotes = Self(rawValue: 1 << 1) // 2
+
+    /// Don't automatically dismiss the popover.
+    static let none = Self([])
+}
+
 extension PhotosViewController {
-    func updateResults(animate: Bool = true) {
+    func updateResults(animate: Bool = true, options: ResultsUpdateOptions = .none) {
         guard let resultsState = model.resultsState else { return }
         var resultsSnapshot = ResultsSnapshot()
         let section = DataSourceSectionTemplate()
@@ -18,18 +31,53 @@ extension PhotosViewController {
         resultsSnapshot.appendItems(resultsState.displayedFindPhotos, toSection: section)
         resultsDataSource.apply(resultsSnapshot, animatingDifferences: animate)
 
-        resultsHeaderViewModel.text = model.resultsState?.getResultsText() ?? ""
+        let findingInNotes = options.contains(.findingInNotes)
+        let message = self.getMessage(
+            findingInNotes: findingInNotes,
+            selectedFilter: sliderViewModel.selectedFilter ?? .all
+        )
+
+        resultsHeaderViewModel.text = message
+
+        if options.contains(.postAnnouncement) {
+            UIAccessibility.post(notification: .announcement, argument: message)
+        }
+
         if model.scannedPhotosCount == model.totalPhotosCount {
             resultsHeaderViewModel.description = nil
         } else {
             resultsHeaderViewModel.description = ResultsHeaderViewModel.defaultDescription
         }
+
         updateCounts(
             allCount: resultsState.allFindPhotos.count,
             starredCount: resultsState.starredFindPhotos.count,
             screenshotsCount: resultsState.screenshotsFindPhotos.count
         )
         updateViewsEnabled()
+    }
+
+    func getMessage(findingInNotes: Bool, selectedFilter: SliderViewModel.Filter) -> String {
+        let count = model.resultsState?.displayedFindPhotos.count ?? 0
+        if findingInNotes {
+            switch selectedFilter {
+            case .starred:
+                return count == 1 ? "Found notes in 1 starred photo." : "Found notes in \(count) starred photos."
+            case .screenshots:
+                return count == 1 ? "Found notes in 1 screenshots." : "Found notes in \(count) screenshots."
+            case .all:
+                return count == 1 ? "Found notes in 1 photo." : "Found notes in \(count) photos."
+            }
+        } else {
+            switch selectedFilter {
+            case .starred:
+                return count == 1 ? "1 starred photo." : "\(count) starred photos."
+            case .screenshots:
+                return count == 1 ? "1 screenshot." : "\(count) screenshots."
+            case .all:
+                return count == 1 ? "1 photo." : "\(count) photos."
+            }
+        }
     }
 
     /// reload the collection view at an index path.

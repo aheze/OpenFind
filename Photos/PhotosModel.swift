@@ -18,6 +18,14 @@ struct SlidesPhoto: Hashable {
     }
 }
 
+struct QueuedResults {
+    var allFindPhotos = [FindPhoto]()
+    var starredFindPhotos = [FindPhoto]()
+    var screenshotsFindPhotos = [FindPhoto]()
+    var findingInNotes = false
+    var context: FindContext?
+}
+
 struct PhotosSlidesState {
     var viewController: PhotosSlidesViewController?
     var slidesPhotos: [SlidesPhoto]

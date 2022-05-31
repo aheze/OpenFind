@@ -108,17 +108,6 @@ extension PhotosResultsState {
         return nil
     }
 
-    func getResultsText() -> String {
-        switch displayedFindPhotos.count {
-        case 0:
-            return "No results."
-        case 1:
-            return "\(displayedFindPhotos.count) photo."
-        default:
-            return "\(displayedFindPhotos.count) photos."
-        }
-    }
-
     mutating func update(findPhoto: FindPhoto) {
         if let index = getFindPhotoIndex(for: findPhoto.photo, in: \.displayedFindPhotos) {
             displayedFindPhotos[index] = findPhoto

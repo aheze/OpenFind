@@ -67,6 +67,7 @@ extension PhotosViewController {
                     allFindPhotos: allFindPhotosNotes,
                     starredFindPhotos: starredFindPhotosNotes,
                     screenshotsFindPhotos: screenshotsFindPhotosNotes,
+                    findingInNotes: true,
                     context: context
                 )
             }
@@ -80,21 +81,19 @@ extension PhotosViewController {
                 scope: .text
             )
 
-            print("delay: \(await realmModel.photosResultsFindTextDelay)")
-
             if findNotesFirst {
                 try await Task.sleep(seconds: realmModel.photosResultsFindTextDelay)
             }
-            
+
             try Task.checkCancellation()
 
             await self.startApplyingResults(
                 allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText).filterHasResults(),
                 starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText).filterHasResults(),
                 screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotosNotes + screenshotsFindPhotosText).filterHasResults(),
+                findingInNotes: false,
                 context: context
             )
-            print("Applied reults/")
 
             await MainActor.run {
                 self.progressViewModel.finishAutoProgress(shouldShimmer: false)
@@ -107,6 +106,7 @@ extension PhotosViewController {
         allFindPhotos: [FindPhoto],
         starredFindPhotos: [FindPhoto],
         screenshotsFindPhotos: [FindPhoto],
+        findingInNotes: Bool = false,
         context: FindContext
     ) {
         if model.updateAllowed {
@@ -114,13 +114,15 @@ extension PhotosViewController {
                 allFindPhotos: allFindPhotos,
                 starredFindPhotos: starredFindPhotos,
                 screenshotsFindPhotos: screenshotsFindPhotos,
+                findingInNotes: findingInNotes,
                 context: context
             )
         } else {
-            model.queuedAllResults += allFindPhotos
-            model.queuedStarredResults += starredFindPhotos
-            model.queuedScreenshotsResults += screenshotsFindPhotos
-            model.queuedResultsContext = context
+            model.queuedResults.allFindPhotos += allFindPhotos
+            model.queuedResults.starredFindPhotos += starredFindPhotos
+            model.queuedResults.screenshotsFindPhotos += screenshotsFindPhotos
+            model.queuedResults.findingInNotes = findingInNotes
+            model.queuedResults.context = context
             model.waitingToAddResults = true
         }
     }
@@ -130,6 +132,7 @@ extension PhotosViewController {
         allFindPhotos: [FindPhoto],
         starredFindPhotos: [FindPhoto],
         screenshotsFindPhotos: [FindPhoto],
+        findingInNotes: Bool,
         context: FindContext
     ) {
         guard !searchViewModel.isEmpty else { return }
@@ -157,18 +160,15 @@ extension PhotosViewController {
             displayedCellSizes: sizes
         )
 
+        let options: ResultsUpdateOptions = [.postAnnouncement, findingInNotes ? .findingInNotes : .none]
         if case .findingAfterTextChange(firstTimeShowingResults: let firstTimeShowingResults) = context {
-            updateResults(animate: !firstTimeShowingResults)
+            updateResults(animate: !firstTimeShowingResults, options: options)
         } else {
-            updateResults() /// always update results anyway, for example when coming back from star
+            updateResults(options: options) /// always update results anyway, for example when coming back from star
         }
 
         /// update highlights if photo was same, but search changed
         reloadVisibleCellResults()
-
-        let results = model.resultsState?.getResultsText() ?? ""
-        resultsHeaderViewModel.text = results
-        UIAccessibility.post(notification: .announcement, argument: results)
 
         if model.isSelecting {
             resetSelectingState()
