@@ -21,7 +21,7 @@ extension IgnoredPhotosViewController {
             ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.append(photo)
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
-                cell.viewController?.model.selected = true
+                cell.model.selected = true
                 cell.accessibilityTraits = .selected
             }
         }
@@ -33,7 +33,7 @@ extension IgnoredPhotosViewController {
             ignoredPhotosViewModel.ignoredPhotosSelectedPhotos = ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.filter { $0 != photo }
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
-                cell.viewController?.model.selected = false
+                cell.model.selected = false
                 cell.accessibilityTraits = .none
             }
         }
@@ -55,8 +55,8 @@ extension IgnoredPhotosViewController {
 
         for index in model.ignoredPhotos.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCell {
-                cell.viewController?.model.showSelectionOverlay = ignoredPhotosViewModel.ignoredPhotosIsSelecting
-                cell.viewController?.model.selected = false
+                cell.model.showSelectionOverlay = ignoredPhotosViewModel.ignoredPhotosIsSelecting
+                cell.model.selected = false
             }
 
             if !ignoredPhotosViewModel.ignoredPhotosIsSelecting {

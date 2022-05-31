@@ -13,59 +13,64 @@ extension PhotosViewController {
     func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
         guard let viewController = cell.viewController else { return }
         
-        var description: FindPhoto.Description
-        if let existingDescription = findPhoto.description {
-            description = existingDescription
-        } else {
-            description = .init()
+        viewController.resultsModel.text = ""
+        DispatchQueue.global(qos: .userInitiated).async {
+            var description: FindPhoto.Description
+            if let existingDescription = findPhoto.description {
+                description = existingDescription
+            } else {
+                description = .init()
             
-            if let note = realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier), !note.string.isEmpty {
-                description.note = note.string
-                
-                if findPhoto.fastDescription?.containsResultsInNote ?? false {
-                    let numberOfResultsInNote = Finding.getNumberOfMatches(
-                        realmModel: realmModel,
-                        stringToSearchFrom: note.string,
-                        matches: Array(searchViewModel.stringToGradients.keys)
-                    )
-                    description.numberOfResultsInNote = numberOfResultsInNote
+                if let note = self.realmModel.container.getNote(from: findPhoto.photo.asset.localIdentifier), !note.string.isEmpty {
+                    description.note = note.string
+
+                    if findPhoto.fastDescription?.containsResultsInNote ?? false {
+                        let numberOfResultsInNote = Finding.getNumberOfMatches(
+                            realmModel: self.realmModel,
+                            stringToSearchFrom: note.string,
+                            matches: Array(self.searchViewModel.stringToGradients.keys)
+                        )
+                        description.numberOfResultsInNote = numberOfResultsInNote
+                    }
                 }
-            }
             
-            if findPhoto.fastDescription?.containsResultsInText ?? false {
-                let (lines, highlightsCount) = Finding.getLineHighlights(
-                    realmModel: realmModel,
-                    from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? .init(),
-                    with: searchViewModel.stringToGradients,
-                    imageSize: findPhoto.photo.asset.getSize()
-                )
-                description.lines = lines
-                description.text = Finding.getCellDescription(from: lines)
-                description.numberOfResultsInText = highlightsCount
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    if self.realmModel.photosRenderResultsHighlights {
-                        let highlights = self.getLineHighlights(for: cell, with: lines)
-                        viewController.highlightsViewModel.update(with: highlights, replace: true)
-                    } else {
-                        viewController.highlightsViewModel.highlights = []
+                if findPhoto.fastDescription?.containsResultsInText ?? false {
+                    let (lines, highlightsCount) = Finding.getLineHighlights(
+                        realmModel: self.realmModel,
+                        from: self.realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? .init(),
+                        with: self.searchViewModel.stringToGradients,
+                        imageSize: findPhoto.photo.asset.getSize()
+                    )
+                    description.lines = lines
+                    description.text = Finding.getCellDescription(from: lines)
+                    description.numberOfResultsInText = highlightsCount
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        if self.realmModel.photosRenderResultsHighlights {
+                            let highlights = self.getLineHighlights(for: cell, with: lines)
+                            viewController.highlightsViewModel.update(with: highlights, replace: true)
+                        } else {
+                            viewController.highlightsViewModel.highlights = []
+                        }
                     }
                 }
             }
+        
+            DispatchQueue.main.async {
+                viewController.resultsModel.resultsText = description.resultsString()
+                viewController.resultsModel.text = description.text
+                viewController.resultsModel.resultsFoundInText = description.numberOfResultsInText > 0
+                viewController.resultsModel.note = description.note
+                viewController.resultsModel.resultsFoundInNote = description.numberOfResultsInNote > 0
+            
+                var newFindPhoto = findPhoto
+                newFindPhoto.description = description
+            
+                self.model.resultsState?.update(findPhoto: newFindPhoto)
+                cell.isAccessibilityElement = true
+                cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
+            }
         }
-        
-        viewController.resultsModel.resultsText = description.resultsString()
-        viewController.resultsModel.text = description.text
-        viewController.resultsModel.resultsFoundInText = description.numberOfResultsInText > 0
-        viewController.resultsModel.note = description.note
-        viewController.resultsModel.resultsFoundInNote = description.numberOfResultsInNote > 0
-        
-        var newFindPhoto = findPhoto
-        newFindPhoto.description = description
-        
-        model.resultsState?.update(findPhoto: newFindPhoto)
-        cell.isAccessibilityElement = true
-        cell.accessibilityLabel = newFindPhoto.getVoiceoverDescription()
     }
 }
 

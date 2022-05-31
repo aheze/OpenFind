@@ -25,7 +25,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 }
             } else {
                 if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
-                    cell.viewController?.model.showImage(false)
+                    cell.model.showImage(false)
                 }
             }
         case .pop:
@@ -63,7 +63,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     for photoIndex in model.displayedSections[sectionIndex].photos.indices {
                         let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
                         if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
-                            cell.viewController?.model.showImage(true)
+                            cell.model.showImage(true)
                         }
                     }
                 }
@@ -73,8 +73,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 let hideCell = { [weak self] in
                     guard let self = self else { return }
                     if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
-                        cell.viewController?.model.showImage(false)
-                        cell.viewController?.model.showOverlay(false, animate: false)
+                        cell.model.showImage(false)
+                        cell.model.showOverlay(false, animate: false)
                         
                         if let header = self.getCurrentHeader(for: photoIndexPath) {
                             header.alpha = 0
@@ -113,11 +113,10 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                     }
                 } else {
                     if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
-                        cell.viewController?.model.showImage(true)
+                        cell.model.showImage(true)
                         
                         /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
-                        cell.viewController?.model.showOverlay(true, animate: true)
-                        
+                        cell.model.showOverlay(true, animate: true)
                     }
                     if let header = getCurrentHeader(for: photoIndexPath) {
                         UIView.animate(withDuration: 0.3) {
@@ -147,7 +146,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 let indexPath = model.getIndexPath(for: currentPhoto, in: \.displayedSections),
                 let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell
             {
-                return cell.viewController?.model.image
+                return cell.model.image
             }
         }
         

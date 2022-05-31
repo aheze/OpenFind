@@ -64,7 +64,7 @@ extension PhotosViewController {
             model.selectedPhotos.append(photo)
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
-                cell.viewController?.model.selected = true
+                cell.model.selected = true
                 cell.accessibilityTraits = .selected
             }
         }
@@ -76,7 +76,7 @@ extension PhotosViewController {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != photo }
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
-                cell.viewController?.model.selected = false
+                cell.model.selected = false
                 cell.accessibilityTraits = .none
             }
         }
@@ -88,8 +88,8 @@ extension PhotosViewController {
             for photoIndex in section.photos.indices {
                 let indexPath = IndexPath(item: photoIndex, section: sectionIndex)
                 if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
-                    cell.viewController?.model.showSelectionOverlay = model.isSelecting
-                    cell.viewController?.model.selected = false
+                    cell.model.showSelectionOverlay = model.isSelecting
+                    cell.model.selected = false
                 }
 
                 if !model.isSelecting {

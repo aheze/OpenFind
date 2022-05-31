@@ -76,7 +76,6 @@ extension PhotosViewController {
                         context: .justFindFromExistingDoNotScan
                     )
                 }
-            }
-        }
+            }              }
     }
 }

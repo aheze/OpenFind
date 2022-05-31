@@ -95,7 +95,9 @@ extension PhotosViewController {
             viewController = self.reloadCellResults(cell: cell, existingViewController: existingViewController, findPhoto: findPhoto)
         } else {
             viewController = PhotosCellResultsImageViewController(realmModel: realmModel)
-            addChildViewController(viewController, in: cell.contentView)
+            cell.contentView.addSubview(viewController.view)
+            viewController.view.pinEdgesToSuperview()
+//            addChildViewController(viewController, in: cell.contentView)
             cell.viewController = viewController
         }
         return viewController
@@ -153,16 +155,16 @@ extension PhotosViewController {
         viewController.model.image = nil
         cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
 
-        cell.fetchingID = self.model.getImage(
-            from: findPhoto.photo.asset,
-            targetSize: CGSize(width: 300, height: 300)
-        ) { [weak viewController] image in
-            // UIKit may have recycled this cell by the handler's activation time.
-            // Set the cell's thumbnail image only if it's still showing the same asset.
-            if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
-                viewController?.model.image = image
-            }
-        }
+//        cell.fetchingID = self.model.getImage(
+//            from: findPhoto.photo.asset,
+//            targetSize: CGSize(width: 300, height: 300)
+//        ) { [weak viewController] image in
+//            // UIKit may have recycled this cell by the handler's activation time.
+//            // Set the cell's thumbnail image only if it's still showing the same asset.
+//            if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
+//                viewController?.model.image = image
+//            }
+//        }
 
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
     }

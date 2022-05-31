@@ -7,7 +7,7 @@
 //
 
 import Photos
-import UIKit
+import SwiftUI
 
 extension IgnoredPhotosViewController {
     func update(animate: Bool = true) {
@@ -21,39 +21,36 @@ extension IgnoredPhotosViewController {
     func configureCell(cell: PhotosCell, indexPath: IndexPath) {
         guard let photo = model.getPhoto(from: indexPath) else { return }
 
-        let viewController: PhotosCellImageViewController
-        if let existingViewController = cell.viewController {
-            viewController = existingViewController
-        } else {
-            viewController = PhotosCellImageViewController()
-            cell.contentView.addSubview(viewController.view)
-            viewController.view.pinEdgesToSuperview()
-
-            cell.viewController = viewController
+        if cell.view == nil {
+            let contentView = PhotosCellImageView(model: cell.model)
+            let hostingController = UIHostingController(rootView: contentView)
+            cell.contentView.addSubview(hostingController.view)
+            hostingController.view.pinEdgesToSuperview()
+            cell.view = hostingController.view
         }
 
-        viewController.model.photo = photo
-
-        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
-        viewController.model.selected = selected
-
-        let description = photo.getVoiceoverDescription()
-        cell.isAccessibilityElement = true
-        cell.accessibilityLabel = description
-
-        viewController.model.image = nil
-        cell.representedAssetIdentifier = photo.asset.localIdentifier
-
-        cell.fetchingID = self.model.getImage(
-            from: photo.asset,
-            targetSize: self.realmModel.thumbnailSize
-        ) { [weak viewController] image in
-            // UIKit may have recycled this cell by the handler's activation time.
-            // Set the cell's thumbnail image only if it's still showing the same asset.
-            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-                viewController?.model.image = image
-            }
-        }
+//        cell.model.photo = photo
+//
+//        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+//        cell.model.selected = selected
+//
+//        let description = photo.getVoiceoverDescription()
+//        cell.isAccessibilityElement = true
+//        cell.accessibilityLabel = description
+//
+//        cell.model.image = nil
+//        cell.representedAssetIdentifier = photo.asset.localIdentifier
+//
+//        cell.fetchingID = self.model.getImage(
+//            from: photo.asset,
+//            targetSize: self.realmModel.thumbnailSize
+//        ) { [weak viewController] image in
+//            // UIKit may have recycled this cell by the handler's activation time.
+//            // Set the cell's thumbnail image only if it's still showing the same asset.
+//            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+//                viewController?.model.image = image
+//            }
+//        }
     }
 
     func teardownCell(cell: PhotosCell, indexPath: IndexPath) {
