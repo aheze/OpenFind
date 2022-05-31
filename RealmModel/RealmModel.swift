@@ -145,24 +145,34 @@ extension RealmModel {
 
         defaultTab = data.defaultTab.value
         swipeToNavigate = data.swipeToNavigate.value
+
         findingPrimaryRecognitionLanguage = data.findingPrimaryRecognitionLanguage.value
         findingSecondaryRecognitionLanguage = data.findingSecondaryRecognitionLanguage.value
         findingKeepWhitespace = data.findingKeepWhitespace.value
         findingMatchAccents = data.findingMatchAccents.value
         findingMatchCase = data.findingMatchCase.value
         findingFilterLists = data.findingFilterLists.value
+
         highlightsColor = data.highlightsColor.value
         highlightsCycleSearchBarColors = data.highlightsCycleSearchBarColors.value
         highlightsBorderWidth = data.highlightsBorderWidth.value
         highlightsBackgroundOpacity = data.highlightsBackgroundOpacity.value
         highlightsPaddingPercentage = data.highlightsPaddingPercentage.value
+
         photosScanOnLaunch = data.photosScanOnLaunch.value
         photosScanOnAddition = data.photosScanOnAddition.value
         photosScanOnFind = data.photosScanOnFind.value
         photosMinimumCellLength = data.photosMinimumCellLength.value
+        photosResultsCellLayout = data.photosResultsCellLayout.value
+        photosResultsInsertNewMode = data.photosResultsInsertNewMode.value
+        photosRenderResultsHighlights = data.photosRenderResultsHighlights.value
+        photosResultsFindNotesFirst = data.photosResultsFindNotesFirst.value
+        photosResultsFindTextDelay = data.photosResultsFindTextDelay.value
+
         cameraHapticFeedbackLevel = data.cameraHapticFeedbackLevel.value
         cameraScanningFrequency = data.cameraScanningFrequency.value
         cameraScanningDurationUntilPause = data.cameraScanningDurationUntilPause.value
+        cameraStabilizationMode = data.cameraStabilizationMode.value
     }
 }
 
