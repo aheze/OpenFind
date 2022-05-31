@@ -13,4 +13,6 @@ enum ViewControllerCallback {
     
     /// confirmed already, delete now
     static var deleteAllScannedData: ((Bool) -> Void)?
+    
+    static var deleteAllNotes: (() -> Void)?
 }

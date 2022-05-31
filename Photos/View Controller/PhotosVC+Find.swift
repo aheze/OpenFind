@@ -63,13 +63,16 @@ extension PhotosViewController {
                     scope: .note
                 )
 
-                await self.startApplyingResults(
-                    allFindPhotos: allFindPhotosNotes,
-                    starredFindPhotos: starredFindPhotosNotes,
-                    screenshotsFindPhotos: screenshotsFindPhotosNotes,
-                    findingInNotes: true,
-                    context: context
-                )
+                /// only show notes if some were found
+                if !allFindPhotosNotes.isEmpty {
+                    await self.startApplyingResults(
+                        allFindPhotos: allFindPhotosNotes,
+                        starredFindPhotos: starredFindPhotosNotes,
+                        screenshotsFindPhotos: screenshotsFindPhotosNotes,
+                        findingInNotes: true,
+                        context: context
+                    )
+                }
             }
 
             let (
@@ -81,7 +84,7 @@ extension PhotosViewController {
                 scope: .text
             )
 
-            if findNotesFirst {
+            if !allFindPhotosNotes.isEmpty, findNotesFirst {
                 try await Task.sleep(seconds: realmModel.photosResultsFindTextDelay)
             }
 

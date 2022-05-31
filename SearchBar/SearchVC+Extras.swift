@@ -69,6 +69,11 @@ extension SearchViewController {
             showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Photo Metadata."), autoDismiss: true)
         }
 
+        if text.roughlyEquals("/debugDeleteAllNotes") {
+            ViewControllerCallback.deleteAllNotes?()
+            showPopover(configuration: .message(icon: "info.circle", text: "Deleted All Photo Notes."), autoDismiss: true)
+        }
+
         // MARK: - Extras
 
         if text.roughlyEquals("/about") {
@@ -153,7 +158,7 @@ extension SearchViewController {
                 autoDismiss: false
             )
         }
-        
+
         if text.roughlyEquals("/legacyLaunch") {
             showPopover(
                 configuration: .button(

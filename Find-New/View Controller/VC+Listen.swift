@@ -33,6 +33,13 @@ extension ViewController {
             self.deleteAllScannedData(allPhotos: allPhotos)
         }
 
+        ViewControllerCallback.deleteAllNotes = { [weak self] in
+            guard let self = self else { return }
+            for identifier in Array(self.realmModel.assetIdentifierToPhotoMetadata.keys) {
+                self.realmModel.container.deleteNote(assetIdentifier: identifier)
+            }
+        }
+
         tabViewModel.tappedTabAgain = { [weak self] tab in
             guard let self = self else { return }
 

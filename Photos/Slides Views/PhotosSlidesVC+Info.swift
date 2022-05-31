@@ -64,12 +64,14 @@ extension PhotosSlidesViewController {
     func showInfo(_ show: Bool) {
         var offset: CGFloat?
         var percentage = CGFloat(0)
-        
+
         if show {
             /// landscape iPhone or iPad
             if traitCollection.horizontalSizeClass == .regular {
+                guard popover(tagged: "Info Popover") == nil else { return }
+
                 var attributes = Popover.Attributes()
-                attributes.tag = "Popover"
+                attributes.tag = "Info Popover"
                 attributes.position = .relative(popoverAnchors: [.topRight])
                 attributes.dismissal.mode = .none
 
@@ -83,14 +85,25 @@ extension PhotosSlidesViewController {
                     guard let self = self else { return .zero }
                     return self.view.bounds
                 }
+
+                let infoModel = PhotoSlidesInfoViewModel()
+                infoModel.noteChanged = { [weak self] in
+                    guard let self = self else { return }
+
+                    Debouncer.debounce(queue: .main) {
+                        self.model.updateDisplayedResults?()
+                    }
+                }
+                let infoNoteTextViewModel = EditableTextViewModel(configuration: .infoSlides)
+
                 let popover = Popover(attributes: attributes) { [weak self] in
                     if let self = self {
                         ScrollView {
                             PhotosSlidesInfoView(
                                 model: self.model,
                                 realmModel: self.realmModel,
-                                infoModel: PhotoSlidesInfoViewModel(), /// default configuration
-                                textModel: self.infoNoteTextViewModel
+                                infoModel: infoModel, /// default configuration
+                                textModel: infoNoteTextViewModel
                             )
                         }
                         .background(UIColor.systemBackground.color)
@@ -122,10 +135,8 @@ extension PhotosSlidesViewController {
             /// don't also call `self.flowLayout.invalidateLayout()`, otherwise there will be a glitch
             /// `currentViewController.setAspectRatio(scaleToFill: show)` also seems to be automatically animated
             self.scrollView.layoutIfNeeded()
-            
-            
+
             self.getCurrentItemViewController()?.setAspectRatioToFill(percentage: percentage)
-            
         }
     }
 
@@ -135,7 +146,7 @@ extension PhotosSlidesViewController {
         dismissPanGesture.isEnabled = true
         scrollView.isScrollEnabled = false
         infoNoteTextViewModel.endEditing?()
-        if let popover = view.popover(tagged: "Popover") {
+        if let popover = view.popover(tagged: "Info Popover") {
             popover.dismiss()
         }
 

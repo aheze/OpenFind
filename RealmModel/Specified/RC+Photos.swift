@@ -77,11 +77,6 @@ extension RealmContainer {
     /// if `text` is not nil, also update the text
     /// Make sure to transfer any properties from `PhotoMetadata` to `RealmPhotoMetadata`
     func updatePhotoMetadata(metadata: PhotoMetadata, text: PhotoMetadataText?, note: PhotoMetadataNote?) {
-//        guard let metadata = metadata else {
-//            Debug.log("No metadata.")
-//            return
-//        }
-
         let realm = try! Realm()
 
         if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: metadata.assetIdentifier) {
@@ -94,7 +89,7 @@ extension RealmContainer {
                     if let text = text {
                         realmMetadata.text = text.getRealmText()
                     }
-                    
+
                     if let note = note {
                         realmMetadata.note = note.getRealmNote()
                     }
@@ -155,7 +150,7 @@ extension RealmContainer {
 
         return nil
     }
-    
+
     func getNote(from identifier: String) -> PhotoMetadataNote? {
         let realm = try! Realm()
         if
@@ -174,7 +169,7 @@ extension RealmContainer {
         }
         return false
     }
-    
+
     /// delete metadata and text
     func deletePhotoMetadata(metadata: PhotoMetadata) {
         let realm = try! Realm()
@@ -189,6 +184,20 @@ extension RealmContainer {
                 }
             } catch {
                 Debug.log("Error deleting metadata: \(error)", .error)
+            }
+        }
+    }
+
+    func deleteNote(assetIdentifier: String) {
+        let realm = try! Realm()
+
+        if let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: assetIdentifier) {
+            do {
+                try realm.write {
+                    realmMetadata.note = nil
+                }
+            } catch {
+                Debug.log("Error delete note: \(error)", .error)
             }
         }
     }
