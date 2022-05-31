@@ -41,6 +41,7 @@ enum Settings {
         case cameraStabilizationMode
         case pauseScanningAfter
         case photosResultsInsertNewMode
+        case photosResultsFinding
     }
 
     /// for storage

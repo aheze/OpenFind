@@ -66,6 +66,8 @@ class RealmModel: ObservableObject {
     @Saved(data.photosResultsCellLayout.key) var photosResultsCellLayout = data.photosResultsCellLayout.value
     @Saved(data.photosResultsInsertNewMode.key) var photosResultsInsertNewMode = data.photosResultsInsertNewMode.value
     @Saved(data.photosRenderResultsHighlights.key) var photosRenderResultsHighlights = data.photosRenderResultsHighlights.value
+    @Saved(data.photosResultsFindNotesFirst.key) var photosResultsFindNotesFirst = data.photosResultsFindNotesFirst.value
+    @Saved(data.photosResultsFindTextDelay.key) var photosResultsFindTextDelay = data.photosResultsFindTextDelay.value
 
     // MARK: Camera
 
@@ -117,6 +119,8 @@ class RealmModel: ObservableObject {
         _photosResultsCellLayout.configureValueChanged(with: self)
         _photosResultsInsertNewMode.configureValueChanged(with: self)
         _photosRenderResultsHighlights.configureValueChanged(with: self)
+        _photosResultsFindNotesFirst.configureValueChanged(with: self)
+        _photosResultsFindTextDelay.configureValueChanged(with: self)
 
         _cameraHapticFeedbackLevel.configureValueChanged(with: self)
         _cameraScanningFrequency.configureValueChanged(with: self)

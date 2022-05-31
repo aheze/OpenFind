@@ -51,10 +51,12 @@ enum RealmModelData {
     static var photosScanOnLaunch = SavedData(key: "photosScanOnLaunch", value: false)
     static var photosScanOnAddition = SavedData(key: "photosScanOnAddition", value: true)
     static var photosScanOnFind = SavedData(key: "photosScanOnFind", value: true)
-    static var photosMinimumCellLength = SavedData(key: "photosMinimumCellLength", value: CGFloat(80))
+    static var photosMinimumCellLength = SavedData(key: "photosMinimumCellLength", value: Double(80))
     static var photosResultsCellLayout = SavedData(key: "photosResultsCellLayout", value: Settings.Values.PhotosResultsCellLayout.medium.rawValue)
     static var photosResultsInsertNewMode = SavedData(key: "photosResultsInsertNewMode", value: Settings.Values.PhotosResultsInsertNewMode.top.rawValue)
     static var photosRenderResultsHighlights = SavedData(key: "photosRenderResultsHighlights", value: true) /// load highlights in results
+    static var photosResultsFindNotesFirst = SavedData(key: "photosResultsFindNotesFirst", value: true)
+    static var photosResultsFindTextDelay = SavedData(key: "photosResultsFindTextDelay", value: Double(0.3))
     
     // MARK: Camera
     

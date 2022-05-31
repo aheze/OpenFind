@@ -107,6 +107,31 @@ extension SettingsData {
                         description: .constant(string: "Render highlights in the results text excerpt. May have a performance impact on some devices.")
                     ),
                     .init(
+                        header: "Photo Notes",
+                        rows: [
+                            .init(
+                                configuration: .toggle(
+                                    title: "Find Notes First",
+                                    storage: \RealmModel.$photosResultsFindNotesFirst
+                                )
+                            ),
+                            .init(
+                                configuration: .slider(
+                                    title: "Find Text Delay",
+                                    numberOfSteps: nil,
+                                    minValue: 0,
+                                    maxValue: 1,
+                                    minSymbol: .text(string: "0s"),
+                                    maxSymbol: .text(string: "1s"),
+                                    saveAsInt: false,
+                                    storage: \RealmModel.$photosResultsFindTextDelay
+                                ),
+                                visible: \RealmModel.photosResultsFindNotesFirst
+                            ),
+                        ],
+                        description: .dynamic(identifier: .photosResultsFinding)
+                    ),
+                    .init(
                         rows: [
                             .init(
                                 configuration: .link(

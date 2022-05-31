@@ -51,6 +51,8 @@ struct SettingsSection: Identifiable {
 struct SettingsRow: Identifiable {
     let id = UUID()
     var configuration: Configuration
+    var visible: KeyPath<RealmModel, Bool>?
+    
     enum Configuration {
         case link(
             title: String,
