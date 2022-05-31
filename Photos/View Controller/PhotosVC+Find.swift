@@ -49,7 +49,6 @@ extension PhotosViewController {
         let displayNotesFirst = realmModel.photosResultsDisplayNotesAtTop
 
         model.currentFindingTask = Task.detached {
-            let timer = TimeElapsed()
             var (
                 allFindPhotos, starredFindPhotos, screenshotsFindPhotos
             ) = Finding.findAndGetFindPhotos(
@@ -57,7 +56,6 @@ extension PhotosViewController {
                 from: photos,
                 stringToGradients: stringToGradients
             )
-            timer.end()
 
             if displayNotesFirst {
                 allFindPhotos.sortedNoteResultsFirst()

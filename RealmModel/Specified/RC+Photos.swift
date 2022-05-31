@@ -151,11 +151,11 @@ extension RealmContainer {
         return nil
     }
 
-    func getNote(from identifier: String) -> PhotoMetadataNote? {
+    func getNote(from identifier: String) -> RealmPhotoMetadataNote? {
         let realm = try! Realm()
         if
             let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: identifier),
-            let note = realmMetadata.note?.getPhotoMetadataNote()
+            let note = realmMetadata.note
         {
             return note
         }
