@@ -64,6 +64,7 @@ extension PhotosViewController {
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
                 cell.viewController?.model.selected = true
+                cell.accessibilityTraits = .selected
             }
         }
     }
@@ -75,6 +76,7 @@ extension PhotosViewController {
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
                 cell.viewController?.model.selected = false
+                cell.accessibilityTraits = .none
             }
         }
     }

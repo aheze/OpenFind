@@ -10,6 +10,8 @@ import UIKit
 
 extension PhotosSlidesViewController {
     func setupScrollView() {
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.decelerationRate = .fast

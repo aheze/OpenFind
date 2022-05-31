@@ -82,8 +82,8 @@ extension PhotosViewController {
 
     /// reload the collection view at an index path.
     func updateResults(at index: Int, with metadata: PhotoMetadata) {
-        if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosResultsCell {
-            PhotoMetadata.apply(metadata: metadata, to: cell.view)
+        if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults {
+            cell.viewController?.model.photo?.metadata = metadata
         }
     }
 
@@ -127,14 +127,9 @@ extension PhotosViewController {
 
         self.addChildViewController(newViewController, in: cell.contentView)
         cell.viewController = newViewController
-//        newViewController.view.alpha = 0
 
-//        UIView.animate(withDuration: 0.3) {
-//            existingViewController.view.alpha = 0
-//            newViewController.view.alpha = 1
-//        } completion: { _ in
         self.removeChildViewController(existingViewController)
-//        }
+
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
         return newViewController
     }
@@ -185,7 +180,7 @@ extension PhotosViewController {
     /// If completion is `nil`, `invalidateLayout` will be called.
     func updateResultsCellSizes(completion: (() -> Void)? = nil) {
         if let displayedFindPhotos = model.resultsState?.displayedFindPhotos {
-            let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: collectionView.bounds.width, insets: collectionView.safeAreaInsets)
+            let (_, columnWidth) = resultsFlowLayout.getColumns(bounds: resultsCollectionView.bounds.width, insets: resultsCollectionView.safeAreaInsets)
 
             DispatchQueue.global(qos: .userInitiated).async {
                 let sizes = self.getDisplayedCellSizes(from: displayedFindPhotos, columnWidth: columnWidth)

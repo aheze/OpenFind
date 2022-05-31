@@ -19,8 +19,8 @@ extension PhotosViewController {
             if resultsCollectionView.window == nil {
                 collectionViewContainer.addSubview(resultsCollectionView)
                 resultsCollectionView.pinEdgesToSuperview()
-
                 setupResultsHeader()
+                model.updateAllowed = true
             }
 
             collectionView.removeFromSuperview()
@@ -31,11 +31,11 @@ extension PhotosViewController {
 
         } else {
             model.resultsState = nil
-            
+
             /// reset collection view
             let resultsSnapshot = ResultsSnapshot()
             resultsDataSource.apply(resultsSnapshot, animatingDifferences: true)
-            
+
             /// add normal collection view again
             if collectionView.window == nil {
                 collectionViewContainer.addSubview(collectionView)

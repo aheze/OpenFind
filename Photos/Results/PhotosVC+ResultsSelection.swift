@@ -15,8 +15,9 @@ extension PhotosViewController {
         if !model.selectedPhotos.contains(findPhoto.photo) {
             model.selectedPhotos.append(findPhoto.photo)
 
-            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: true)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCellResults {
+                cell.viewController?.model.selected = true
+                cell.accessibilityTraits = .selected
             }
         }
     }
@@ -27,23 +28,10 @@ extension PhotosViewController {
         if model.selectedPhotos.contains(findPhoto.photo) {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != findPhoto.photo }
 
-            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                configureResultsCellSelection(cell: cell, findPhoto: findPhoto, selected: false)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+                cell.viewController?.model.selected = false
+                cell.accessibilityTraits = .none
             }
-        }
-    }
-
-    func configureResultsCellSelection(cell: PhotosResultsCell, findPhoto: FindPhoto, selected: Bool) {
-        cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
-        cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-
-        cell.view.selectOverlayIconView.setState(selected ? .selected : .hidden)
-        cell.view.selectOverlayView.backgroundColor = selected ? PhotosCellConstants.selectedBackgroundColor : .clear
-
-        if selected {
-            cell.accessibilityTraits = .selected
-        } else {
-            cell.accessibilityTraits = .none
         }
     }
 
@@ -51,18 +39,9 @@ extension PhotosViewController {
         guard let resultsState = model.resultsState else { return }
         for index in resultsState.displayedFindPhotos.indices {
             let indexPath = index.indexPath
-            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosResultsCell {
-                if model.isSelecting {
-                    cell.view.selectOverlayIconView.setState(.hidden)
-                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                        cell.view.selectOverlayView.alpha = 1
-                    }
-                } else {
-                    UIView.animate(withDuration: ListsCellConstants.editAnimationDuration) {
-                        cell.view.selectOverlayView.backgroundColor = .clear
-                        cell.view.selectOverlayView.alpha = 0
-                    }
-                }
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCellResults {
+                cell.viewController?.model.showSelectionOverlay = model.isSelecting
+                cell.viewController?.model.selected = false
             }
 
             if !model.isSelecting {

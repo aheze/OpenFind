@@ -191,31 +191,6 @@ extension FindPhoto.Description {
     }
 }
 
-extension PhotoMetadata {
-    static func apply(metadata: PhotoMetadata?, to view: PhotosCellView) {
-        if let metadata = metadata {
-            if metadata.isIgnored {
-                view.shadeView.alpha = 1
-            } else {
-                view.shadeView.alpha = 0
-            }
-            if metadata.isStarred {
-                view.overlayGradientImageView.alpha = 1
-                view.overlayStarImageView.alpha = 1
-            } else {
-                view.overlayGradientImageView.alpha = 0
-                view.overlayStarImageView.alpha = 0
-            }
-
-            /// make set to reset if metadata doesn't exist - cells get reused
-        } else {
-            view.shadeView.alpha = 0
-            view.overlayGradientImageView.alpha = 0
-            view.overlayStarImageView.alpha = 0
-        }
-    }
-}
-
 extension Photo {
     func getVoiceoverDescription() -> String {
         let dateString = asset.creationDate?.convertDateToReadableString() ?? ""
