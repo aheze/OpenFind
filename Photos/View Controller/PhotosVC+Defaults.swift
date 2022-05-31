@@ -15,8 +15,10 @@ extension PhotosViewController {
             selector: #selector(self.photosMinimumCellLengthChanged)
         )
     }
-    
+
     @objc func photosMinimumCellLengthChanged() {
-        flowLayout.invalidateLayout()
+        Debouncer.debounce(queue: .main, delay: .seconds(1)) {
+            self.flowLayout.invalidateLayout()
+        }
     }
 }

@@ -1068,7 +1068,6 @@
 		3C4DC4F1284339AA00656D4E /* PhotosCellResultsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DC4EF284339AA00656D4E /* PhotosCellResultsImageViewModel.swift */; };
 		3C4DC4F3284339B100656D4E /* PhotosCellResultsImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DC4F2284339B100656D4E /* PhotosCellResultsImageViewController.swift */; };
 		3C4DC4F4284339B100656D4E /* PhotosCellResultsImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DC4F2284339B100656D4E /* PhotosCellResultsImageViewController.swift */; };
-		3C4DC4F628445DAE00656D4E /* SwiftPrettyPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4DC4F528445DAE00656D4E /* SwiftPrettyPrint */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -4311,7 +4310,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C4DC4F628445DAE00656D4E /* SwiftPrettyPrint in Frameworks */,
 				3C5B377827FEAF6100801FEE /* SupportDocs in Frameworks */,
 				3C21EDC627A45C130005E183 /* RealmSwift in Frameworks */,
 				3C817F892819117700417835 /* Popovers in Frameworks */,
@@ -6881,7 +6879,6 @@
 				3C21EDC527A45C130005E183 /* RealmSwift */,
 				3C5B377727FEAF6100801FEE /* SupportDocs */,
 				3C817F882819117700417835 /* Popovers */,
-				3C4DC4F528445DAE00656D4E /* SwiftPrettyPrint */,
 			);
 			productName = "Find-New";
 			productReference = 3C6C7321278193F600E039F0 /* Find-New.app */;
@@ -12489,11 +12486,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		3C4DC4F528445DAE00656D4E /* SwiftPrettyPrint */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C2D229627FBBA0200D413B7 /* XCRemoteSwiftPackageReference "SwiftPrettyPrint" */;
-			productName = SwiftPrettyPrint;
 		};
 		3C5B377727FEAF6100801FEE /* SupportDocs */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -43,11 +43,15 @@ extension PhotosSlidesViewController {
         let infoHeight = getInfoHeight()
 
         let distanceToDetent = infoHeight - currentOffset
-        if distanceToDetent < 100 {
-            targetContentOffset.pointee.y = infoHeight
-        } else {
-            targetContentOffset.pointee.y = 0
-            model.slidesState?.toolbarInformationOn = false
+
+        /// ignore if finger drag up - don't set `targetContentOffset` in that case
+        if distanceToDetent > 0 {
+            if distanceToDetent < 120, velocity.y >= 0 {
+                targetContentOffset.pointee.y = infoHeight
+            } else {
+                targetContentOffset.pointee.y = 0
+                model.slidesState?.toolbarInformationOn = false
+            }
         }
     }
 
