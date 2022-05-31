@@ -16,11 +16,9 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
     }
     
     /// top inset for info - make the image smaller when info is shown
+    /// return the scroll view's content offset
     var getTopInset: (() -> CGFloat)?
-    
-    /// add height back when info scrolling back down
-    var getTopExtraHeight: (() -> CGFloat)?
-    
+
     var layoutAttributes = [PageLayoutAttributes]()
 
     /// actual content offset used by `prepare`
@@ -38,9 +36,8 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         else { return }
         
         let topInset = getTopInset?() ?? 0
-        let topExtraHeight = getTopExtraHeight?() ?? 0
         let width = collectionView.bounds.width
-        let height = collectionView.bounds.height - topInset + topExtraHeight
+        let height = collectionView.bounds.height - topInset
         
         var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
@@ -48,7 +45,7 @@ class PhotosSlidesCollectionLayout: UICollectionViewFlowLayout {
         for index in slidesState.slidesPhotos.indices {
             let attributes = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
             
-            let rect = CGRect(x: currentOrigin, y: topInset - topExtraHeight, width: width, height: height)
+            let rect = CGRect(x: currentOrigin, y: topInset, width: width, height: height)
             attributes.fullOrigin = currentOrigin
             attributes.frame = rect
             layoutAttributes.append(attributes)

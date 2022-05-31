@@ -62,6 +62,7 @@ extension PhotosSlidesViewController {
                 }
             }
         }
+
         if scrollView == self.scrollView {
             infoScrollViewDidScroll()
         }

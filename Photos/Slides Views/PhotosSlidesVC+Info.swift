@@ -63,6 +63,8 @@ extension PhotosSlidesViewController {
 
     func showInfo(_ show: Bool) {
         var offset: CGFloat?
+        var percentage = CGFloat(1)
+        
         if show {
             /// landscape iPhone or iPad
             if traitCollection.horizontalSizeClass == .regular {
@@ -106,6 +108,7 @@ extension PhotosSlidesViewController {
             }
         } else {
             offset = 0
+            percentage = 0
             resetInfoToHidden(scrollIfNeeded: false)
             collectionViewContainerHeightC.constant = view.bounds.height
         }
@@ -118,6 +121,8 @@ extension PhotosSlidesViewController {
             /// don't also call `self.flowLayout.invalidateLayout()`, otherwise there will be a glitch
             /// `currentViewController.setAspectRatio(scaleToFill: show)` also seems to be automatically animated
             self.scrollView.layoutIfNeeded()
+            self.getCurrentItemViewController()?.setAspectRatioToFill(percentage: percentage)
+            
         }
     }
 

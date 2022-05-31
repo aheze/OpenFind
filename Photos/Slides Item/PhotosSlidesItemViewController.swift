@@ -12,6 +12,7 @@ class PhotosSlidesItemViewController: UIViewController {
     var model: PhotosViewModel
     var realmModel: RealmModel
     var findPhoto: FindPhoto
+    var getImageBoundsSize: (() -> CGSize)?
     
     var textOverlayViewModel = PhotosTextOverlayViewModel()
     
@@ -80,17 +81,6 @@ class PhotosSlidesItemViewController: UIViewController {
             width: highlightsVCWidthC,
             height: highlightsVCHeightC
         )
-        
-        /// automatically animated
-        if
-            let toolbarInformationOn = model.slidesState?.toolbarInformationOn,
-            toolbarInformationOn,
-            traitCollection.horizontalSizeClass != .regular
-        {
-            setAspectRatio(scaleToFill: true)
-        } else {
-            setAspectRatio(scaleToFill: false)
-        }
     }
 
     func reloadImage() {
@@ -100,6 +90,16 @@ class PhotosSlidesItemViewController: UIViewController {
         model.getFullImage(from: findPhoto.photo.asset) { [weak self] image in
             guard let self = self else { return }
             self.scrollZoomController.imageView.image = image
+        }
+        
+        if
+            let toolbarInformationOn = model.slidesState?.toolbarInformationOn,
+            toolbarInformationOn,
+            traitCollection.horizontalSizeClass != .regular
+        {
+            setAspectRatioToFill(percentage: 1)
+        } else {
+            setAspectRatioToFill(percentage: 0)
         }
     }
     
@@ -111,16 +111,15 @@ class PhotosSlidesItemViewController: UIViewController {
         return frame
     }
     
-    func setAspectRatio(scaleToFill: Bool) {
+    func setAspectRatioToFill(percentage: CGFloat) {
         let asset = findPhoto.photo.asset
         let imageSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
-        if scaleToFill {
-            let scale = CGSize.scaleFor(imageSize: imageSize, scaledTo: view.bounds.size)
-            
-            scrollZoomController.baseView.transform = CGAffineTransform(scaleX: scale, y: scale)
-        } else {
-            scrollZoomController.baseView.transform = .identity
-        }
+        
+        let imageBoundsSize = getImageBoundsSize?() ?? .zero
+        let scaleNeeded = CGSize.scaleFor(imageSize: imageSize, scaledTo: imageBoundsSize)
+        let transform = 1 + (scaleNeeded - 1) * percentage
+        
+        scrollZoomController.baseView.transform = CGAffineTransform(scaleX: transform, y: transform)
     }
 }
 

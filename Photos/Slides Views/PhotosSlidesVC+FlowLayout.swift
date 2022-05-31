@@ -12,29 +12,9 @@ extension PhotosSlidesViewController {
     func makeFlowLayout() -> PhotosSlidesCollectionLayout {
         let flowLayout = PhotosSlidesCollectionLayout(model: model)
         flowLayout.getTopInset = { [weak self] in
-            if
-                let self = self,
-                let slidesState = self.model.slidesState,
-                slidesState.toolbarInformationOn
-            {
-                return self.getInfoHeight()
-            }
-            return 0
-        }
-        flowLayout.getTopExtraHeight = { [weak self] in
-            if
-                let self = self,
-                let slidesState = self.model.slidesState,
-                slidesState.toolbarInformationOn
-            {
-                let offset = self.scrollView.contentOffset.y
+            guard let self = self else { return .zero }
 
-                let infoHeight = self.getInfoHeight()
-                let extraHeight = infoHeight - offset
-
-                return extraHeight
-            }
-            return 0
+            return self.scrollView.contentOffset.y
         }
 
         return flowLayout

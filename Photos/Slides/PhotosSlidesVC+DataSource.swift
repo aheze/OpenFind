@@ -59,6 +59,14 @@ extension PhotosSlidesViewController {
                 )
             }
 
+            /// get the accurate bounds size
+            viewController.getImageBoundsSize = { [weak self] in
+                guard let self = self else { return .zero }
+                let size = self.flowLayout.layoutAttributes[safe: 0]?.size
+
+                return size ?? .zero
+            }
+
             photoSlidesViewController = viewController
             addChildViewController(viewController, in: cell.contentView)
             cell.contentView.bringSubviewToFront(viewController.view)
