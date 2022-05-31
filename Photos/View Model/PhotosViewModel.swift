@@ -66,7 +66,7 @@ class PhotosViewModel: ObservableObject {
     /// reload displayed results photos after info changed
     var updateDisplayedResults: (() -> Void)?
 
-    // MARK: Slides / Results
+    // MARK: Slides
 
     /// for use inside the slides' `willDisplay` cell - hide the container view if animating.
     var animatingSlides = false
@@ -78,6 +78,9 @@ class PhotosViewModel: ObservableObject {
     var slidesCurrentPhotoChanged: (() -> Void)?
     var slidesToolbarInformationOnChanged: (() -> Void)?
     var slidesUpdateFullScreenStateTo: ((Bool) -> Void)?
+
+    // MARK: - Finding / Results
+    var currentFindingTask: Task<(), Error>?
 
     /// the state of the results.
     var resultsState: PhotosResultsState?

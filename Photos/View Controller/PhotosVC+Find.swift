@@ -22,6 +22,8 @@ enum FindContext {
 extension PhotosViewController {
     /// find in all photos, populate `resultsState`, reload collection view
     func find(context: FindContext) {
+        model.currentFindingTask?.cancel()
+
         if !model.photosToScan.isEmpty, model.scanningState == .dormant {
             switch context {
             case .findingAfterNewPhotosAdded:
@@ -45,7 +47,7 @@ extension PhotosViewController {
         let photos = self.model.photos
         let stringToGradients = self.searchViewModel.stringToGradients
 
-        Task.detached {
+        model.currentFindingTask = Task.detached {
             let (
                 allFindPhotosNotes, starredFindPhotosNotes, screenshotsFindPhotosNotes
             ) = Finding.findAndGetFindPhotos(
@@ -55,26 +57,13 @@ extension PhotosViewController {
                 scope: .note
             )
 
-            var existingAllFindPhotos = [FindPhoto]()
-            var existingStarredFindPhotos = [FindPhoto]()
-            var existingScreenshotsFindPhotos = [FindPhoto]()
-
-            if let resultsState = await self.model.resultsState {
-                existingAllFindPhotos = resultsState.allFindPhotos
-                existingStarredFindPhotos = resultsState.starredFindPhotos
-                existingScreenshotsFindPhotos = resultsState.screenshotsFindPhotos
-            }
-
-            let initialAllFindPhotos = FindPhoto.merge(existingAllFindPhotos + allFindPhotosNotes, options: .combineFastDescriptionsNoteOnly).filterHasResults()
-            let initialStarredFindPhotos = FindPhoto.merge(existingStarredFindPhotos + starredFindPhotosNotes, options: .combineFastDescriptionsNoteOnly).filterHasResults()
-            let initialScreenshotsFindPhotos = FindPhoto.merge(existingScreenshotsFindPhotos + screenshotsFindPhotosNotes, options: .combineFastDescriptionsNoteOnly).filterHasResults()
-
             await self.startApplyingResults(
-                allFindPhotos: initialAllFindPhotos,
-                starredFindPhotos: initialStarredFindPhotos,
-                screenshotsFindPhotos: initialScreenshotsFindPhotos,
+                allFindPhotos: allFindPhotosNotes,
+                starredFindPhotos: starredFindPhotosNotes,
+                screenshotsFindPhotos: screenshotsFindPhotosNotes,
                 context: context
             )
+            print("Applied notes/")
 
             let (
                 allFindPhotosText, starredFindPhotosText, screenshotsFindPhotosText
@@ -86,13 +75,15 @@ extension PhotosViewController {
             )
 
             try await Task.sleep(seconds: 1.2)
+            try Task.checkCancellation()
 
             await self.startApplyingResults(
-                allFindPhotos: FindPhoto.merge(initialAllFindPhotos + allFindPhotosText).filterHasResults(),
-                starredFindPhotos: FindPhoto.merge(initialStarredFindPhotos + starredFindPhotosText).filterHasResults(),
-                screenshotsFindPhotos: FindPhoto.merge(initialScreenshotsFindPhotos + screenshotsFindPhotosText).filterHasResults(),
+                allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText).filterHasResults(),
+                starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText).filterHasResults(),
+                screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotosNotes + screenshotsFindPhotosText).filterHasResults(),
                 context: context
             )
+            print("Applied reults/")
 
             await MainActor.run {
                 self.progressViewModel.finishAutoProgress(shouldShimmer: false)

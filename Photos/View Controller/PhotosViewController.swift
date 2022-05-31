@@ -23,7 +23,6 @@ class PhotosViewController: UIViewController, PageViewController, Searchable {
     var slidesSearchPromptViewModel: SearchPromptViewModel
     
     /// internal models
-    
     var sliderViewModel = SliderViewModel()
     var resultsHeaderViewModel = ResultsHeaderViewModel()
     var progressViewModel = ProgressViewModel(foregroundColor: Colors.accent, backgroundColor: .clear)
