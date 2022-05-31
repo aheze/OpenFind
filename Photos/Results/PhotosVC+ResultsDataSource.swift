@@ -93,32 +93,13 @@ extension PhotosViewController {
         for index in displayedFindPhotos.indices {
             if
                 let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
-                let existingView = cell.containerView,
+                cell.containerView != nil,
                 var findPhoto = self.model.resultsState?.displayedFindPhotos[safe: index]
             {
                 findPhoto.description = nil
-                self.reloadCellResults(cell: cell, existingView: existingView, findPhoto: findPhoto)
+                configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
             }
         }
-    }
-
-    /// also update the description highlights
-    func reloadCellResults(cell: PhotosCellResults, existingView: UIView, findPhoto: FindPhoto) {
-//        existingView.removeFromSuperview()
-//        let contentView = PhotosCellResultsImageView(
-//            model: cell.model,
-//            resultsModel: cell.resultsModel,
-//            textModel: cell.textModel,
-//            highlightsViewModel: cell.highlightsViewModel,
-//            realmModel: self.realmModel
-//        )
-//        let hostingController = UIHostingController(rootView: contentView)
-//        hostingController.view.backgroundColor = .clear
-//        cell.contentView.addSubview(hostingController.view)
-//        hostingController.view.pinEdgesToSuperview()
-//        cell.containerView = hostingController.view
-
-        configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
     }
 
     func configureCellResults(cell: PhotosCellResults, indexPath: IndexPath) {

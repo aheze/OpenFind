@@ -77,6 +77,10 @@ extension SearchViewController {
         // MARK: - Extras
 
         if text.roughlyEquals("/set") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.view.endEditing(true)
+            }
+
             ViewControllerCallback.presentSettings?()
         }
 
