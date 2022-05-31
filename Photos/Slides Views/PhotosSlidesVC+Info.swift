@@ -63,7 +63,7 @@ extension PhotosSlidesViewController {
 
     func showInfo(_ show: Bool) {
         var offset: CGFloat?
-        var percentage = CGFloat(1)
+        var percentage = CGFloat(0)
         
         if show {
             /// landscape iPhone or iPad
@@ -105,6 +105,7 @@ extension PhotosSlidesViewController {
                 dismissPanGesture.isEnabled = false
                 scrollView.isScrollEnabled = true
                 offset = getInfoHeight()
+                percentage = 1
             }
         } else {
             offset = 0
@@ -121,6 +122,8 @@ extension PhotosSlidesViewController {
             /// don't also call `self.flowLayout.invalidateLayout()`, otherwise there will be a glitch
             /// `currentViewController.setAspectRatio(scaleToFill: show)` also seems to be automatically animated
             self.scrollView.layoutIfNeeded()
+            
+            
             self.getCurrentItemViewController()?.setAspectRatioToFill(percentage: percentage)
             
         }

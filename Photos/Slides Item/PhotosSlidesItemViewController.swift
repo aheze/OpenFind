@@ -117,7 +117,10 @@ class PhotosSlidesItemViewController: UIViewController {
         
         let imageBoundsSize = getImageBoundsSize?() ?? .zero
         let scaleNeeded = CGSize.scaleFor(imageSize: imageSize, scaledTo: imageBoundsSize)
-        let transform = 1 + (scaleNeeded - 1) * percentage
+        let identity = CGFloat(1)
+        let scaleRange = scaleNeeded - identity + 0.2
+        
+        let transform = identity + (scaleRange * percentage)
         
         scrollZoomController.baseView.transform = CGAffineTransform(scaleX: transform, y: transform)
     }

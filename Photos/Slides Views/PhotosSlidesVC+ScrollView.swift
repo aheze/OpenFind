@@ -25,7 +25,9 @@ extension PhotosSlidesViewController {
         /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
         if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             flowLayout.invalidateLayout()
+        }
 
+        if traitCollection.horizontalSizeClass != .regular {
             let infoHeight = getInfoHeight()
             let percentage = 1 - ((infoHeight - scrollView.contentOffset.y) / infoHeight)
             getCurrentItemViewController()?.setAspectRatioToFill(percentage: percentage)
