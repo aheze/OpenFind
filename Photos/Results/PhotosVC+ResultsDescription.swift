@@ -44,8 +44,12 @@ extension PhotosViewController {
                 description.numberOfResultsInText = highlightsCount
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    let highlights = self.getLineHighlights(for: cell, with: lines)
-                    viewController.highlightsViewModel.update(with: highlights, replace: true)
+                    if self.realmModel.photosRenderResultsHighlights {
+                        let highlights = self.getLineHighlights(for: cell, with: lines)
+                        viewController.highlightsViewModel.update(with: highlights, replace: true)
+                    } else {
+                        viewController.highlightsViewModel.highlights = []
+                    }
                 }
             }
         }

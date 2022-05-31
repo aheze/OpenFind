@@ -46,24 +46,30 @@ extension PhotosViewController {
         let realmModel = self.realmModel
         let photos = self.model.photos
         let stringToGradients = self.searchViewModel.stringToGradients
+        let findNotesFirst = realmModel.photosResultsFindNotesFirst
 
         model.currentFindingTask = Task.detached {
-            let (
-                allFindPhotosNotes, starredFindPhotosNotes, screenshotsFindPhotosNotes
-            ) = Finding.findAndGetFindPhotos(
-                realmModel: realmModel,
-                from: photos,
-                stringToGradients: stringToGradients,
-                scope: .note
-            )
+            var allFindPhotosNotes = [FindPhoto]()
+            var starredFindPhotosNotes = [FindPhoto]()
+            var screenshotsFindPhotosNotes = [FindPhoto]()
 
-            await self.startApplyingResults(
-                allFindPhotos: allFindPhotosNotes,
-                starredFindPhotos: starredFindPhotosNotes,
-                screenshotsFindPhotos: screenshotsFindPhotosNotes,
-                context: context
-            )
-            print("Applied notes/")
+            if findNotesFirst {
+                (
+                    allFindPhotosNotes, starredFindPhotosNotes, screenshotsFindPhotosNotes
+                ) = Finding.findAndGetFindPhotos(
+                    realmModel: realmModel,
+                    from: photos,
+                    stringToGradients: stringToGradients,
+                    scope: .note
+                )
+
+                await self.startApplyingResults(
+                    allFindPhotos: allFindPhotosNotes,
+                    starredFindPhotos: starredFindPhotosNotes,
+                    screenshotsFindPhotos: screenshotsFindPhotosNotes,
+                    context: context
+                )
+            }
 
             let (
                 allFindPhotosText, starredFindPhotosText, screenshotsFindPhotosText
@@ -74,7 +80,12 @@ extension PhotosViewController {
                 scope: .text
             )
 
-            try await Task.sleep(seconds: 1.2)
+            print("delay: \(await realmModel.photosResultsFindTextDelay)")
+
+            if findNotesFirst {
+                try await Task.sleep(seconds: realmModel.photosResultsFindTextDelay)
+            }
+            
             try Task.checkCancellation()
 
             await self.startApplyingResults(

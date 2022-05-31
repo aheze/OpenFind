@@ -120,9 +120,9 @@ extension SettingsData {
                                     title: "Find Text Delay",
                                     numberOfSteps: nil,
                                     minValue: 0,
-                                    maxValue: 1,
+                                    maxValue: 2,
                                     minSymbol: .text(string: "0s"),
-                                    maxSymbol: .text(string: "1s"),
+                                    maxSymbol: .text(string: "2s"),
                                     saveAsInt: false,
                                     storage: \RealmModel.$photosResultsFindTextDelay
                                 ),

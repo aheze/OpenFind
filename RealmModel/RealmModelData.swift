@@ -56,7 +56,7 @@ enum RealmModelData {
     static var photosResultsInsertNewMode = SavedData(key: "photosResultsInsertNewMode", value: Settings.Values.PhotosResultsInsertNewMode.top.rawValue)
     static var photosRenderResultsHighlights = SavedData(key: "photosRenderResultsHighlights", value: true) /// load highlights in results
     static var photosResultsFindNotesFirst = SavedData(key: "photosResultsFindNotesFirst", value: true)
-    static var photosResultsFindTextDelay = SavedData(key: "photosResultsFindTextDelay", value: Double(0.3))
+    static var photosResultsFindTextDelay = SavedData(key: "photosResultsFindTextDelay", value: Double(0.8))
     
     // MARK: Camera
     
@@ -64,8 +64,6 @@ enum RealmModelData {
     static var cameraScanningFrequency = SavedData(key: "cameraScanningFrequency", value: Settings.Values.ScanningFrequencyLevel.tenthSecond.rawValue)
     static var cameraScanningDurationUntilPause = SavedData(key: "cameraScanningDurationUntilPause", value: Settings.Values.ScanningDurationUntilPauseLevel.thirtySeconds.rawValue)
     static var cameraStabilizationMode = SavedData(key: "cameraStabilizationMode", value: Settings.Values.StabilizationMode.off.rawValue)
-    
-    
     
     // MARK: Lists
 

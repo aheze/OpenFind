@@ -289,29 +289,39 @@ extension Finding {
         var screenshotsFindPhotos = [FindPhoto]()
 
         for photo in photos {
-            let contains: Bool
+            var contains = false
             var fastDescription = FindPhoto.FastDescription()
 
             guard let metadata = photo.metadata else { continue }
             let search = Array(stringToGradients.keys)
 
-            switch scope {
-            case .text:
-
-                guard !metadata.isIgnored else { continue }
+            if
+                scope == .text,
+                !metadata.isIgnored
+            {
                 let text = realmModel.container.getText(from: metadata.assetIdentifier)
-                guard let sentences = text?.sentences else { continue }
+                if let sentences = text?.sentences {
+                    /// very fast!
+                    let containsResultsInText = sentences.checkIf(realmModel: realmModel, matches: search)
+                    fastDescription.containsNote = realmModel.container.checkNoteExists(assetIdentifier: metadata.assetIdentifier)
+                    fastDescription.containsText = true
+                    fastDescription.containsResultsInText = containsResultsInText
 
-                /// very fast!
-                contains = sentences.checkIf(realmModel: realmModel, matches: search)
-                fastDescription.containsNote = realmModel.container.checkNoteExists(assetIdentifier: metadata.assetIdentifier)
-                fastDescription.containsText = true
-                fastDescription.containsResultsInText = contains
-            case .note:
-                guard let note = realmModel.container.getNote(from: metadata.assetIdentifier), !note.string.isEmpty else { continue }
-                contains = Finding.checkIf(realmModel: realmModel, stringToSearchFrom: note.string, matches: search)
+                    if !contains {
+                        contains = containsResultsInText
+                    }
+                }
+            }
+
+            if let note = realmModel.container.getNote(from: metadata.assetIdentifier), !note.string.isEmpty {
+                let containsResultsInNote = Finding.checkIf(realmModel: realmModel, stringToSearchFrom: note.string, matches: search)
                 fastDescription.containsNote = true
-                fastDescription.containsResultsInNote = contains
+                fastDescription.containsResultsInNote = containsResultsInNote
+
+                /// set contains if haven't set before
+                if !contains {
+                    contains = containsResultsInNote
+                }
             }
 
             if contains {
