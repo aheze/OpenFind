@@ -25,6 +25,7 @@ extension PhotosSlidesViewController {
             /// metadata already exists, directly find
             if textChanged {
                 if self.slidesSearchViewModel.isEmpty {
+                    
                     self.slidesSearchPromptViewModel.update(show: false)
                     self.slidesSearchPromptViewModel.updateBarHeight?()
 
@@ -33,8 +34,13 @@ extension PhotosSlidesViewController {
                             stringToGradients: [:],
                             highlights: []
                         )
-                        self.getViewController(for: slidesPhoto.findPhoto.photo)?.highlightsViewModel.update(with: [], replace: true)
+                        
+                        if let viewController = self.getViewController(for: slidesPhoto.findPhoto.photo) {
+                            viewController.highlightsViewModel.update(with: [], replace: true)
+                        }
+                        
                         self.model.slidesState?.slidesPhotos[index].findPhoto.highlightsSet = highlightSet
+                        self.model.slidesState?.slidesPhotos[index].findPhoto.description = nil
                     }
 
                     /// if showing, that means Find is currently scanning, so don't scan a second time.

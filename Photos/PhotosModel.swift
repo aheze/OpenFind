@@ -83,7 +83,7 @@ struct FindPhoto: Hashable {
     }
 
     struct Description {
-        var text = ""
+        var text = "" /// excerpted text
         var lines = [Line]()
         var numberOfResultsInText = 0
         var note: String?

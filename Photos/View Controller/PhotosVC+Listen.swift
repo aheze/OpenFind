@@ -13,15 +13,6 @@ extension PhotosViewController {
         listenToDefaults()
         listenToKeyboard()
         
-        /// disable pressing results when searching
-//        progressViewModel.$percentageShowing
-//            .dropFirst()
-//            .sink { [weak self] showing in
-//                guard let self = self else { return }
-//                self.resultsCollectionView.allowsSelection = !showing
-//            }
-//            .store(in: &realmModel.cancellables)
-        
         /// only called at first
         model.reload = { [weak self] in
             guard let self = self else { return }
@@ -61,9 +52,11 @@ extension PhotosViewController {
             }
         }
         
+        /// update results after note changed
         model.updateDisplayedResults = { [weak self] in
             guard let self = self else { return }
             if self.model.resultsState != nil {
+                
                 self.updateResultsCellSizes {
                     self.updateResults() /// make sure to call `update` later, when results dismissed
                     self.reloadVisibleCellResults()

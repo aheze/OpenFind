@@ -81,7 +81,6 @@ struct SearchPromptView: View {
         Color.clear.overlay(
             HStack {
                 Text(model.resultsString)
-                    .font(Font(SearchPromptConstants.font as CTFont))
 
                 if let numberOfResultsInNote = model.numberOfResultsInNote, numberOfResultsInNote > 0 {
                     Circle()
@@ -91,7 +90,7 @@ struct SearchPromptView: View {
                     Button {
                         model.showNote?()
                     } label: {
-                        VStack {
+                        Group {
                             if let numberOfResultsInText = model.numberOfResultsInText, numberOfResultsInText > 0 {
                                 Text("(\(numberOfResultsInText) in text, \(numberOfResultsInNote) in note)")
                             } else {
@@ -111,13 +110,13 @@ struct SearchPromptView: View {
                         model.resetPressed?()
                     } label: {
                         Text("Reset to \(resetString)")
-                            .font(Font(SearchPromptConstants.font as CTFont))
                             .foregroundColor(.accent)
                     }
                 }
 
                 Spacer()
             }
+            .font(Font(SearchPromptConstants.font as CTFont))
             .accessibilityElement()
             .accessibilityLabel(model.voiceOverString)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
