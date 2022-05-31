@@ -171,7 +171,13 @@ extension PhotosViewController {
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
     }
 
-    func teardownCellResults(cell: PhotosCellResults, indexPath: IndexPath) {}
+    func teardownCellResults(cell: PhotosCellResults, indexPath: IndexPath) {
+        if let id = cell.fetchingID {
+            cell.fetchingID = nil
+
+            model.imageManager.cancelImageRequest(id)
+        }
+    }
 
     /// call after bounds or filter change
     /// Only works when `resultsState` isn't nil
