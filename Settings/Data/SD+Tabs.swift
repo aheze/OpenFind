@@ -111,25 +111,12 @@ extension SettingsData {
                         rows: [
                             .init(
                                 configuration: .toggle(
-                                    title: "Find Notes First",
-                                    storage: \RealmModel.$photosResultsFindNotesFirst
+                                    title: "Display Notes First",
+                                    storage: \RealmModel.$photosResultsDisplayNotesAtTop
                                 )
-                            ),
-                            .init(
-                                configuration: .slider(
-                                    title: "Find Text Delay",
-                                    numberOfSteps: nil,
-                                    minValue: 0,
-                                    maxValue: 2,
-                                    minSymbol: .text(string: "0s"),
-                                    maxSymbol: .text(string: "2s"),
-                                    saveAsInt: false,
-                                    storage: \RealmModel.$photosResultsFindTextDelay
-                                ),
-                                visible: \RealmModel.photosResultsFindNotesFirst
-                            ),
+                            )
                         ],
-                        description: .dynamic(identifier: .photosResultsFinding)
+                        description: .constant(string: "Display notes above normal text results.")
                     ),
                     .init(
                         rows: [

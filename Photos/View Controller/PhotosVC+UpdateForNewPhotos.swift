@@ -56,8 +56,7 @@ extension PhotosViewController {
                 ) = Finding.findAndGetFindPhotos(
                     realmModel: realmModel,
                     from: photos,
-                    stringToGradients: stringToGradients,
-                    scope: .text
+                    stringToGradients: stringToGradients
                 )
                 
                 /// just use `uniqued` instead of `FindPhoto.merge` - results should only be in text, so no need to check overlap between notes/text

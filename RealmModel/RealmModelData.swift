@@ -55,8 +55,7 @@ enum RealmModelData {
     static var photosResultsCellLayout = SavedData(key: "photosResultsCellLayout", value: Settings.Values.PhotosResultsCellLayout.medium.rawValue)
     static var photosResultsInsertNewMode = SavedData(key: "photosResultsInsertNewMode", value: Settings.Values.PhotosResultsInsertNewMode.top.rawValue)
     static var photosRenderResultsHighlights = SavedData(key: "photosRenderResultsHighlights", value: false) /// load highlights in results
-    static var photosResultsFindNotesFirst = SavedData(key: "photosResultsFindNotesFirst", value: true)
-    static var photosResultsFindTextDelay = SavedData(key: "photosResultsFindTextDelay", value: Double(0.8))
+    static var photosResultsDisplayNotesAtTop = SavedData(key: "photosResultsDisplayNotesAtTop", value: true)
     
     // MARK: Camera
     

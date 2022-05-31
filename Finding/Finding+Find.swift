@@ -14,8 +14,7 @@ extension Finding {
     static func findAndGetFindPhotos(
         realmModel: RealmModel,
         from photos: [Photo],
-        stringToGradients: [String: Gradient],
-        scope: PhotosSearchScope
+        stringToGradients: [String: Gradient]
     ) -> (
         [FindPhoto], [FindPhoto], [FindPhoto]
     ) {
@@ -30,11 +29,7 @@ extension Finding {
             guard let metadata = photo.metadata else { continue }
             let search = Array(stringToGradients.keys)
 
-            
-            if
-                scope == .text,
-                !metadata.isIgnored
-            {
+            if !metadata.isIgnored {
                 let text = realmModel.container.getText(from: metadata.assetIdentifier)
                 if let sentences = text?.sentences {
                     /// very fast!

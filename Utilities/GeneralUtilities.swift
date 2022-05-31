@@ -66,11 +66,14 @@ extension Comparable {
 }
 
 class TimeElapsed {
-    let startTime: CFAbsoluteTime
-    var endTime: CFAbsoluteTime?
+    private let startTime: CFAbsoluteTime
 
-    init() {
+    var endTime: CFAbsoluteTime?
+    var message: String?
+
+    init(_ message: String? = nil) {
         startTime = CFAbsoluteTimeGetCurrent()
+        self.message = message
     }
 
     func stop() -> String {
@@ -83,8 +86,12 @@ class TimeElapsed {
 
     /// stop and print
     func end() {
-        let string = stop()
-        Swift.print(string)
+        let timeElapsed = stop()
+        if let message = message {
+            Swift.print("[\(message)] \(timeElapsed)")
+        } else {
+            Swift.print(timeElapsed)
+        }
     }
 
     func getDuration() -> CFAbsoluteTime? {

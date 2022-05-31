@@ -84,15 +84,6 @@ extension Settings.StringIdentifier {
                     return "Insert new results at the bottom of the list"
                 }
             }
-        case .photosResultsFinding:
-            if realmModel.photosResultsFindNotesFirst {
-                let seconds = realmModel.photosResultsFindTextDelay.rounded(toPlaces: 1)
-                let secondsString = seconds == 1 ? "1 second" : "\(seconds) seconds"
-                return "Find notes first, then wait \(secondsString) to find text. Enable this option if you have a lot of notes."
-            } else {
-                return "Find notes and text at the same time."
-            }
-            
         }
 
         return ""

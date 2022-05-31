@@ -26,6 +26,17 @@ extension CGFloat {
     }
 }
 
+extension Array where Element == FindPhoto {
+    mutating func sortedNoteResultsFirst() {
+        self = self.sorted { a, b in
+            if let fastDescription = a.fastDescription, fastDescription.containsResultsInNote {
+                return true
+            }
+            return false
+        }
+    }
+}
+
 extension PHAsset {
     /// get the image's size
     func getSize() -> CGSize {
