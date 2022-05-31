@@ -65,7 +65,7 @@ extension PhotosSlidesViewController {
 
         guard let text = realmModel.container.getText(from: metadata.assetIdentifier) else { return }
 
-        let highlights = text.sentences.getHighlights(
+        let highlights = text.sentences.getSentences().getHighlights(
             stringToGradients: self.slidesSearchViewModel.stringToGradients,
             realmModel: realmModel,
             imageSize: slidesPhoto.findPhoto.photo.asset.getSize()

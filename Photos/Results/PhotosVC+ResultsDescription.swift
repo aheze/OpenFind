@@ -35,7 +35,7 @@ extension PhotosViewController {
             if findPhoto.fastDescription?.containsResultsInText ?? false {
                 let (lines, highlightsCount) = Finding.getLineHighlights(
                     realmModel: realmModel,
-                    from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? [],
+                    from: realmModel.container.getText(from: findPhoto.photo.asset.localIdentifier)?.sentences ?? .init(),
                     with: searchViewModel.stringToGradients,
                     imageSize: findPhoto.photo.asset.getSize()
                 )

@@ -75,6 +75,7 @@ extension PhotosViewController {
                 }
             }
 
+            let timer = TimeElapsed()
             let (
                 allFindPhotosText, starredFindPhotosText, screenshotsFindPhotosText
             ) = Finding.findAndGetFindPhotos(
@@ -83,6 +84,7 @@ extension PhotosViewController {
                 stringToGradients: stringToGradients,
                 scope: .text
             )
+            timer.end()
 
             if !allFindPhotosNotes.isEmpty, findNotesFirst {
                 try await Task.sleep(seconds: realmModel.photosResultsFindTextDelay)

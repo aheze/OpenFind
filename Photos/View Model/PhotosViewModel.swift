@@ -22,7 +22,6 @@ class PhotosViewModel: ObservableObject {
     var assets: PHFetchResult<PHAsset>? /// could become inaccurate after deletion.
     var photos = [Photo]()
     var displayedSections = [PhotosSection]() /// this is fed into the collection view
-    var photoIdentifierToText = [String: PhotoMetadataText]()
 
     @Published var photosEditable = false /// select button enabled
 
@@ -80,7 +79,8 @@ class PhotosViewModel: ObservableObject {
     var slidesUpdateFullScreenStateTo: ((Bool) -> Void)?
 
     // MARK: - Finding / Results
-    var currentFindingTask: Task<(), Error>?
+
+    var currentFindingTask: Task<Void, Error>?
 
     /// the state of the results.
     var resultsState: PhotosResultsState?
@@ -140,7 +140,7 @@ class PhotosViewModel: ObservableObject {
 
             if waitingToAddExternalPhotos {
                 waitingToAddExternalPhotos = false
-                
+
                 /// also called `addQueuedSentencesToMetadatas`
                 loadExternalPhotos()
             }

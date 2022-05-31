@@ -40,3 +40,7 @@ struct DataSourceSectionTemplate: Hashable {
         lhs.id == rhs.id
     }
 }
+
+//class RealmArray<Element> {
+//    
+//}

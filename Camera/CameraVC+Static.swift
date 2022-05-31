@@ -87,9 +87,7 @@ extension CameraViewController {
         await MainActor.run {
             /// set the sentences
             self.model.pausedImage?.dateScanned = currentDate
-            self.model.pausedImage?.text.sentences = sentences
-            self.model.pausedImage?.text.scannedInLanguages = scannedInLanguages
-            self.model.pausedImage?.text.scannedInVersion = scannedInVersion
+            self.model.pausedImage?.text = text
         }
 
         /// photo was saved to the photo library. Update the sentences

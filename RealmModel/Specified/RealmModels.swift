@@ -53,13 +53,18 @@ class RealmPhotoMetadataText: Object {
     @Persisted var scannedInLanguages: RealmSwift.List<String> /// which languages scanned in
     @Persisted var scannedInVersion: String?
 
-    func getPhotoMetadataText() -> PhotoMetadataText {
-        let text = PhotoMetadataText(
-            sentences: sentences.map { $0.getSentence() },
-            scannedInLanguages: self.scannedInLanguages.map { $0 },
-            scannedInVersion: self.scannedInVersion
-        )
-        return text
+    override init() {
+        super.init()
+    }
+
+    init(
+        sentences: RealmSwift.List<RealmSentence>,
+        scannedInLanguages: RealmSwift.List<String>,
+        scannedInVersion: String?
+    ) {
+        self.sentences = sentences
+        self.scannedInLanguages = scannedInLanguages
+        self.scannedInVersion = scannedInVersion
     }
 }
 

@@ -30,7 +30,7 @@ struct PausedImage: Identifiable {
 
     /// if it's saved to Photos, set this.
     var assetIdentifier: String?
-}
+}  
 
 enum SnapshotState {
     case inactive
@@ -44,7 +44,6 @@ enum ResultsCount: Equatable {
     case number(Int)
     case paused
 }
-
 
 enum ToolbarState {
     case inTabBar
