@@ -33,36 +33,36 @@ extension PhotosViewController {
         guard let photo = model.getPhoto(from: indexPath) else { return }
 
         DispatchQueue.main.async {
-            if cell.view == nil {
+            cell.model.image = nil
+
+            if cell.containerView == nil {
                 let contentView = PhotosCellImageView(model: cell.model)
                 let hostingController = UIHostingController(rootView: contentView)
                 cell.contentView.addSubview(hostingController.view)
                 hostingController.view.pinEdgesToSuperview()
-                cell.view = hostingController.view
+                cell.containerView = hostingController.view
             }
-        }
 
-//
-        cell.model.photo = photo
-//
-        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
-        cell.model.selected = selected
+            cell.model.photo = photo
 
-        let description = photo.getVoiceoverDescription()
-        cell.isAccessibilityElement = true
-        cell.accessibilityLabel = description
+            let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+            cell.model.selected = selected
 
-        cell.model.image = nil
-        cell.representedAssetIdentifier = photo.asset.localIdentifier
+            let description = photo.getVoiceoverDescription()
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = description
 
-        cell.fetchingID = self.model.getImage(
-            from: photo.asset,
-            targetSize: self.realmModel.thumbnailSize
-        ) { [weak cell] image in
-            // UIKit may have recycled this cell by the handler's activation time.
-            // Set the cell's thumbnail image only if it's still showing the same asset.
-            if cell?.representedAssetIdentifier == photo.asset.localIdentifier {
-                cell?.model.image = image
+            cell.representedAssetIdentifier = photo.asset.localIdentifier
+
+            cell.fetchingID = self.model.getImage(
+                from: photo.asset,
+                targetSize: self.realmModel.thumbnailSize
+            ) { [weak cell] image in
+                // UIKit may have recycled this cell by the handler's activation time.
+                // Set the cell's thumbnail image only if it's still showing the same asset.
+                if cell?.representedAssetIdentifier == photo.asset.localIdentifier {
+                    cell?.model.image = image
+                }
             }
         }
     }
@@ -73,6 +73,7 @@ extension PhotosViewController {
 
             model.imageManager.cancelImageRequest(id)
         }
+        cell.model.image = nil
     }
 
     func makeDataSource() -> DataSource {

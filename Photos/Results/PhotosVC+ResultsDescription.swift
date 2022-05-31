@@ -11,9 +11,9 @@ import UIKit
 extension PhotosViewController {
     /// populate the cell with actual finding data and highlights
     func configureCellResultsDescription(cell: PhotosCellResults, findPhoto: FindPhoto) {
-        guard let viewController = cell.viewController else { return }
+        guard let containerView = cell.containerView else { return }
         
-        viewController.resultsModel.text = ""
+        cell.resultsModel.text = ""
         DispatchQueue.global(qos: .userInitiated).async {
             var description: FindPhoto.Description
             if let existingDescription = findPhoto.description {
@@ -48,20 +48,20 @@ extension PhotosViewController {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         if self.realmModel.photosRenderResultsHighlights {
                             let highlights = self.getLineHighlights(for: cell, with: lines)
-                            viewController.highlightsViewModel.update(with: highlights, replace: true)
+                            cell.highlightsViewModel.update(with: highlights, replace: true)
                         } else {
-                            viewController.highlightsViewModel.highlights = []
+                            cell.highlightsViewModel.highlights = []
                         }
                     }
                 }
             }
         
             DispatchQueue.main.async {
-                viewController.resultsModel.resultsText = description.resultsString()
-                viewController.resultsModel.text = description.text
-                viewController.resultsModel.resultsFoundInText = description.numberOfResultsInText > 0
-                viewController.resultsModel.note = description.note
-                viewController.resultsModel.resultsFoundInNote = description.numberOfResultsInNote > 0
+                cell.resultsModel.resultsText = description.resultsString()
+                cell.resultsModel.text = description.text
+                cell.resultsModel.resultsFoundInText = description.numberOfResultsInText > 0
+                cell.resultsModel.note = description.note
+                cell.resultsModel.resultsFoundInNote = description.numberOfResultsInNote > 0
             
                 var newFindPhoto = findPhoto
                 newFindPhoto.description = description
@@ -87,7 +87,7 @@ extension PhotosViewController {
             /// `lineHighlights` - highlights in the cell without a frame - only represented by their ranges
             guard
                 let lineHighlights = line.lineHighlights,
-                let getFrameForRange = cell.viewController?.textModel.getFrameForRange
+                let getFrameForRange = cell.textModel.getFrameForRange
             else { continue }
             
             let previousLines = Array(lines.prefix(index))
@@ -136,8 +136,9 @@ extension PhotosViewController {
             for index in resultsState.displayedFindPhotos.indices {
                 if
                     let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
-                    let highlightsViewModel = cell.viewController?.highlightsViewModel
+                    cell.containerView != nil
                 {
+                    let highlightsViewModel = cell.highlightsViewModel
                     var newHighlights = [Highlight]()
                     for highlight in highlightsViewModel.highlights {
                         if let gradient = searchViewModel.stringToGradients[highlight.string] {

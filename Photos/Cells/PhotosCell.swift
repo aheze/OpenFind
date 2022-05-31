@@ -12,8 +12,8 @@ import SwiftUI
 class PhotosCell: UICollectionViewCell {
     /// when fetching an image, this will be populated
     var fetchingID: PHImageRequestID?
-
     var representedAssetIdentifier: String?
+    var containerView: UIView?
+    
     var model = PhotosCellImageViewModel()
-    var view: UIView?
 }

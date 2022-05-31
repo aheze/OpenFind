@@ -25,7 +25,6 @@ extension PhotosViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.addDebugBorders(.green)
         if let cell = cell as? PhotosCell {
             configureCell(cell: cell, indexPath: indexPath)
         }

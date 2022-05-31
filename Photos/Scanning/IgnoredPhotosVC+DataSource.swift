@@ -21,36 +21,36 @@ extension IgnoredPhotosViewController {
     func configureCell(cell: PhotosCell, indexPath: IndexPath) {
         guard let photo = model.getPhoto(from: indexPath) else { return }
 
-        if cell.view == nil {
+        if cell.containerView == nil {
             let contentView = PhotosCellImageView(model: cell.model)
             let hostingController = UIHostingController(rootView: contentView)
             cell.contentView.addSubview(hostingController.view)
             hostingController.view.pinEdgesToSuperview()
-            cell.view = hostingController.view
+            cell.containerView = hostingController.view
         }
 
-//        cell.model.photo = photo
-//
-//        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
-//        cell.model.selected = selected
-//
-//        let description = photo.getVoiceoverDescription()
-//        cell.isAccessibilityElement = true
-//        cell.accessibilityLabel = description
-//
-//        cell.model.image = nil
-//        cell.representedAssetIdentifier = photo.asset.localIdentifier
-//
-//        cell.fetchingID = self.model.getImage(
-//            from: photo.asset,
-//            targetSize: self.realmModel.thumbnailSize
-//        ) { [weak viewController] image in
-//            // UIKit may have recycled this cell by the handler's activation time.
-//            // Set the cell's thumbnail image only if it's still showing the same asset.
-//            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                viewController?.model.image = image
-//            }
-//        }
+        cell.model.photo = photo
+
+        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+        cell.model.selected = selected
+
+        let description = photo.getVoiceoverDescription()
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = description
+
+        cell.model.image = nil
+        cell.representedAssetIdentifier = photo.asset.localIdentifier
+
+        cell.fetchingID = self.model.getImage(
+            from: photo.asset,
+            targetSize: self.realmModel.thumbnailSize
+        ) { [weak cell] image in
+            // UIKit may have recycled this cell by the handler's activation time.
+            // Set the cell's thumbnail image only if it's still showing the same asset.
+            if cell?.representedAssetIdentifier == photo.asset.localIdentifier {
+                cell?.model.image = image
+            }
+        }
     }
 
     func teardownCell(cell: PhotosCell, indexPath: IndexPath) {

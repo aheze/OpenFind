@@ -7,7 +7,7 @@
 //
 
 import Photos
-import UIKit
+import SwiftUI
 
 struct ResultsUpdateOptions: OptionSet {
     let rawValue: Int
@@ -84,23 +84,8 @@ extension PhotosViewController {
     /// reload the collection view at an index path.
     func updateResults(at index: Int, with metadata: PhotoMetadata) {
         if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults {
-            cell.viewController?.model.photo?.metadata = metadata
+            cell.model.photo?.metadata = metadata
         }
-    }
-
-    /// returns the view controller, loading it if necessary
-    func getAndLoadCellResultsViewController(cell: PhotosCellResults, findPhoto: FindPhoto) -> PhotosCellResultsImageViewController {
-        let viewController: PhotosCellResultsImageViewController
-        if let existingViewController = cell.viewController {
-            viewController = self.reloadCellResults(cell: cell, existingViewController: existingViewController, findPhoto: findPhoto)
-        } else {
-            viewController = PhotosCellResultsImageViewController(realmModel: realmModel)
-            cell.contentView.addSubview(viewController.view)
-            viewController.view.pinEdgesToSuperview()
-//            addChildViewController(viewController, in: cell.contentView)
-            cell.viewController = viewController
-        }
-        return viewController
     }
 
     func reloadVisibleCellResults() {
@@ -108,33 +93,32 @@ extension PhotosViewController {
         for index in displayedFindPhotos.indices {
             if
                 let cell = self.resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults,
-                let existingViewController = cell.viewController,
+                let existingView = cell.containerView,
                 var findPhoto = self.model.resultsState?.displayedFindPhotos[safe: index]
             {
                 findPhoto.description = nil
-                self.reloadCellResults(cell: cell, existingViewController: existingViewController, findPhoto: findPhoto)
+                self.reloadCellResults(cell: cell, existingView: existingView, findPhoto: findPhoto)
             }
         }
     }
 
     /// also update the description highlights
-    @discardableResult
-    func reloadCellResults(cell: PhotosCellResults, existingViewController: PhotosCellResultsImageViewController, findPhoto: FindPhoto) -> PhotosCellResultsImageViewController {
-        let newViewController = PhotosCellResultsImageViewController(
-            model: existingViewController.model,
-            resultsModel: existingViewController.resultsModel,
-            textModel: existingViewController.textModel,
-            highlightsViewModel: existingViewController.highlightsViewModel,
-            realmModel: existingViewController.realmModel
-        )
-
-        self.addChildViewController(newViewController, in: cell.contentView)
-        cell.viewController = newViewController
-
-        self.removeChildViewController(existingViewController)
+    func reloadCellResults(cell: PhotosCellResults, existingView: UIView, findPhoto: FindPhoto) {
+//        existingView.removeFromSuperview()
+//        let contentView = PhotosCellResultsImageView(
+//            model: cell.model,
+//            resultsModel: cell.resultsModel,
+//            textModel: cell.textModel,
+//            highlightsViewModel: cell.highlightsViewModel,
+//            realmModel: self.realmModel
+//        )
+//        let hostingController = UIHostingController(rootView: contentView)
+//        hostingController.view.backgroundColor = .clear
+//        cell.contentView.addSubview(hostingController.view)
+//        hostingController.view.pinEdgesToSuperview()
+//        cell.containerView = hostingController.view
 
         configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
-        return newViewController
     }
 
     func configureCellResults(cell: PhotosCellResults, indexPath: IndexPath) {
@@ -143,30 +127,47 @@ extension PhotosViewController {
             let findPhoto = resultsState.displayedFindPhotos[safe: indexPath.item]
         else { return }
 
-        let viewController = self.getAndLoadCellResultsViewController(cell: cell, findPhoto: findPhoto)
+        DispatchQueue.main.async {
+            cell.model.image = nil
 
-        viewController.highlightsViewModel.highlights.removeAll()
-        viewController.resultsModel.findPhoto = findPhoto
-        viewController.model.photo = findPhoto.photo
+            if cell.containerView == nil {
+                cell.realmModel = self.realmModel
+                let contentView = PhotosCellResultsImageView(
+                    model: cell.model,
+                    resultsModel: cell.resultsModel,
+                    textModel: cell.textModel,
+                    highlightsViewModel: cell.highlightsViewModel,
+                    realmModel: self.realmModel
+                )
+                let hostingController = UIHostingController(rootView: contentView)
+                hostingController.view.backgroundColor = .clear
+                cell.contentView.addSubview(hostingController.view)
+                hostingController.view.pinEdgesToSuperview()
+                cell.containerView = hostingController.view
+            }
 
-        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
-        viewController.model.selected = selected
+            cell.highlightsViewModel.highlights.removeAll()
+            cell.resultsModel.findPhoto = findPhoto
+            cell.model.photo = findPhoto.photo
 
-        viewController.model.image = nil
-        cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
+            let selected = self.model.isSelecting && self.model.selectedPhotos.contains(findPhoto.photo)
+            cell.model.selected = selected
 
-//        cell.fetchingID = self.model.getImage(
-//            from: findPhoto.photo.asset,
-//            targetSize: CGSize(width: 300, height: 300)
-//        ) { [weak viewController] image in
-//            // UIKit may have recycled this cell by the handler's activation time.
-//            // Set the cell's thumbnail image only if it's still showing the same asset.
-//            if cell.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
-//                viewController?.model.image = image
-//            }
-//        }
+            cell.representedAssetIdentifier = findPhoto.photo.asset.localIdentifier
 
-        configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
+            cell.fetchingID = self.model.getImage(
+                from: findPhoto.photo.asset,
+                targetSize: CGSize(width: 300, height: 300)
+            ) { [weak cell] image in
+                // UIKit may have recycled this cell by the handler's activation time.
+                // Set the cell's thumbnail image only if it's still showing the same asset.
+                if cell?.representedAssetIdentifier == findPhoto.photo.asset.localIdentifier {
+                    cell?.model.image = image
+                }
+            }
+
+            self.configureCellResultsDescription(cell: cell, findPhoto: findPhoto)
+        }
     }
 
     func teardownCellResults(cell: PhotosCellResults, indexPath: IndexPath) {

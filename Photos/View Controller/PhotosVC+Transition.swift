@@ -21,7 +21,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             if model.resultsState != nil {
                 self.model.updateAllowed = false
                 if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
-                    cell.viewController?.model.showImage(false)
+                    cell.model.showImage(false)
                 }
             } else {
                 if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
@@ -37,7 +37,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             if let resultsState = model.resultsState {
                 for index in resultsState.displayedFindPhotos.indices {
                     if let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults {
-                        cell.viewController?.model.showImage(true)
+                        cell.model.showImage(true)
                     }
                 }
                 
@@ -45,8 +45,8 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             
                 let hideCell = { [weak self] in
                     if let cell = self?.resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
-                        cell.viewController?.model.showImage(false)
-                        cell.viewController?.model.showOverlay(false, animate: false)
+                        cell.model.showImage(false)
+                        cell.model.showOverlay(false, animate: false)
                     }
                 }
             
@@ -106,10 +106,10 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
             if completed {
                 if model.resultsState != nil {
                     if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
-                        cell.viewController?.model.showImage(true)
+                        cell.model.showImage(true)
                         
                         /// show the shadow overlay again (doesn't matter if actually starred or not, that is determined by the subviews)
-                        cell.viewController?.model.showOverlay(true, animate: true)
+                        cell.model.showOverlay(true, animate: true)
                     }
                 } else {
                     if let cell = collectionView.cellForItem(at: photoIndexPath) as? PhotosCell {
@@ -139,7 +139,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
                 let index = resultsState.getFindPhotoIndex(for: currentPhoto, in: \.displayedFindPhotos),
                 let cell = resultsCollectionView.cellForItem(at: index.indexPath) as? PhotosCellResults
             {
-                return cell.viewController?.model.image
+                return cell.model.image
             }
         } else {
             if
@@ -157,7 +157,7 @@ extension PhotosViewController: PhotoTransitionAnimatorDelegate {
         guard let photoIndexPath = getCurrentPhotoIndexPath() else { return nil }
         if model.resultsState != nil {
             if let cell = resultsCollectionView.cellForItem(at: photoIndexPath) as? PhotosCellResults {
-                let imageFrame = cell.viewController?.resultsModel.getImageFrame?() ?? .zero
+                let imageFrame = cell.resultsModel.getImageFrame?() ?? .zero
                 let frame = cell.contentView.convert(imageFrame, to: nil)
                 return frame
             }
