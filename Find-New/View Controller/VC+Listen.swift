@@ -39,6 +39,12 @@ extension ViewController {
                 self.realmModel.container.deleteNote(assetIdentifier: identifier)
             }
         }
+        ViewControllerCallback.presentSettings = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.presentSettings()
+            }
+        }
 
         tabViewModel.tappedTabAgain = { [weak self] tab in
             guard let self = self else { return }
@@ -72,9 +78,7 @@ extension ViewController {
 
         cameraViewModel.settingsPressed = { [weak self] in
             guard let self = self else { return }
-            self.settingsController.viewController.presentationController?.delegate = self
-            self.present(self.settingsController.viewController, animated: true)
-            self.camera.viewController.stopRunning()
+            self.presentSettings()
         }
         cameraViewModel.photoAdded = { [weak self] photo in
             guard let self = self else { return }
@@ -95,6 +99,12 @@ extension ViewController {
 
             self.camera.viewController.willBecomeActive()
         }
+    }
+
+    func presentSettings() {
+        settingsController.viewController.presentationController?.delegate = self
+        self.present(settingsController.viewController, animated: true)
+        camera.viewController.stopRunning()
     }
 
     func exportAllLists() {

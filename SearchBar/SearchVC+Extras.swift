@@ -76,6 +76,10 @@ extension SearchViewController {
 
         // MARK: - Extras
 
+        if text.roughlyEquals("/set") {
+            ViewControllerCallback.presentSettings?()
+        }
+
         if text.roughlyEquals("/about") {
             showPopover(configuration: .about, autoDismiss: false)
         }
