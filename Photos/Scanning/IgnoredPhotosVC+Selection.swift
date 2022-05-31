@@ -56,6 +56,7 @@ extension IgnoredPhotosViewController {
         for index in model.ignoredPhotos.indices {
             if let cell = collectionView.cellForItem(at: index.indexPath) as? PhotosCell {
                 cell.viewController?.model.showSelectionOverlay = ignoredPhotosViewModel.ignoredPhotosIsSelecting
+                cell.viewController?.model.selected = false
             }
 
             if !ignoredPhotosViewModel.ignoredPhotosIsSelecting {

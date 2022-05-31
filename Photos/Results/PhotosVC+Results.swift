@@ -20,12 +20,14 @@ extension PhotosViewController {
                 collectionViewContainer.addSubview(resultsCollectionView)
                 resultsCollectionView.pinEdgesToSuperview()
                 setupResultsHeader()
-                
+
                 /// reset
                 resultsHeaderViewModel.text = "Finding..."
                 model.queuedResults = .init()
                 model.waitingToAddResults = false
                 model.updateAllowed = true
+                model.photosEditable = false
+                selectBarButton?.isEnabled = false
             }
 
             collectionView.removeFromSuperview()
@@ -60,6 +62,5 @@ extension PhotosViewController {
             update() /// update in case filters changed
             contentContainer.isHidden = false
         }
-        updateViewsEnabled()
     }
 }

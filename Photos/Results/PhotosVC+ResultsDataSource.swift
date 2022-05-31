@@ -54,6 +54,7 @@ extension PhotosViewController {
             starredCount: resultsState.starredFindPhotos.count,
             screenshotsCount: resultsState.screenshotsFindPhotos.count
         )
+
         updateViewsEnabled()
     }
 

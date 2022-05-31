@@ -21,7 +21,7 @@ extension IgnoredPhotosViewController {
     }
 
     func setupCollectionView() {
-        collectionView.register(PhotosCell.self, forCellWithReuseIdentifier: "PhotosCollectionCell")
+        collectionView.register(PhotosCell.self, forCellWithReuseIdentifier: "PhotosCell")
 
         view.addSubview(collectionContainer)
         collectionContainer.translatesAutoresizingMaskIntoConstraints = false

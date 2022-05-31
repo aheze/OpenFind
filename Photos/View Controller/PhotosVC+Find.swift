@@ -138,7 +138,6 @@ extension PhotosViewController {
         findingInNotes: Bool,
         context: FindContext
     ) {
-        let timer = TimeElapsed()
         let allFindPhotos = allFindPhotos.uniqued()
         let starredFindPhotos = starredFindPhotos.uniqued()
         let screenshotsFindPhotos = screenshotsFindPhotos.uniqued()
@@ -177,10 +176,5 @@ extension PhotosViewController {
 
         /// update highlights if photo was same, but search changed
         reloadVisibleCellResults()
-
-        if model.isSelecting {
-            resetSelectingState()
-            updateCollectionViewSelectionState()
-        }
     }
 }

@@ -115,7 +115,8 @@ class PhotosSlidesItemViewController: UIViewController {
         let asset = findPhoto.photo.asset
         let imageSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
         
-        let imageBoundsSize = getImageBoundsSize?() ?? .zero
+        let imageBoundsSize = getImageBoundsSize?() ?? view.bounds.size
+        
         let scaleNeeded = CGSize.scaleFor(imageSize: imageSize, scaledTo: imageBoundsSize)
         let identity = CGFloat(1)
         let scaleRange = scaleNeeded - identity + 0.2

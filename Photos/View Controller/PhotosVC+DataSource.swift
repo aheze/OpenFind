@@ -29,8 +29,6 @@ extension PhotosViewController {
         }
     }
 
-    func sortCollectionView() {}
-
     func configureCell(cell: PhotosCell, indexPath: IndexPath) {
         guard let photo = model.getPhoto(from: indexPath) else { return }
 
@@ -41,7 +39,7 @@ extension PhotosViewController {
             viewController = PhotosCellImageViewController()
             cell.contentView.addSubview(viewController.view)
             viewController.view.pinEdgesToSuperview()
-//            addChildViewController(viewController, in: cell.contentView)
+
             cell.viewController = viewController
         }
 
@@ -53,7 +51,6 @@ extension PhotosViewController {
         let description = photo.getVoiceoverDescription()
         cell.isAccessibilityElement = true
         cell.accessibilityLabel = description
-
 
         viewController.model.image = nil
         cell.representedAssetIdentifier = photo.asset.localIdentifier

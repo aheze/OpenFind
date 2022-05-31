@@ -40,6 +40,7 @@ extension PhotosViewController {
     func resetSelectingState() {
         guard model.loaded else { return }
 
+        model.updateAllowed = true
         model.isSelecting = false
         collectionView.allowsMultipleSelection = false
         resultsCollectionView.allowsMultipleSelection = false

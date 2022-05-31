@@ -18,38 +18,59 @@ extension IgnoredPhotosViewController {
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
 
+    func configureCell(cell: PhotosCell, indexPath: IndexPath) {
+        guard let photo = model.getPhoto(from: indexPath) else { return }
+
+        let viewController: PhotosCellImageViewController
+        if let existingViewController = cell.viewController {
+            viewController = existingViewController
+        } else {
+            viewController = PhotosCellImageViewController()
+            cell.contentView.addSubview(viewController.view)
+            viewController.view.pinEdgesToSuperview()
+
+            cell.viewController = viewController
+        }
+
+        viewController.model.photo = photo
+
+        let selected = self.model.isSelecting && self.model.selectedPhotos.contains(photo)
+        viewController.model.selected = selected
+
+        let description = photo.getVoiceoverDescription()
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = description
+
+        viewController.model.image = nil
+        cell.representedAssetIdentifier = photo.asset.localIdentifier
+
+        cell.fetchingID = self.model.getImage(
+            from: photo.asset,
+            targetSize: self.realmModel.thumbnailSize
+        ) { [weak viewController] image in
+            // UIKit may have recycled this cell by the handler's activation time.
+            // Set the cell's thumbnail image only if it's still showing the same asset.
+            if cell.representedAssetIdentifier == photo.asset.localIdentifier {
+                viewController?.model.image = image
+            }
+        }
+    }
+
+    func teardownCell(cell: PhotosCell, indexPath: IndexPath) {
+        if let id = cell.fetchingID {
+            cell.fetchingID = nil
+
+            model.imageManager.cancelImageRequest(id)
+        }
+    }
+
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, cachedPhoto -> UICollectionViewCell? in
 
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "PhotosCollectionCell",
+                withReuseIdentifier: "PhotosCell",
                 for: indexPath
             ) as! PhotosCell
-
-            /// get the current up-to-date photo first.
-//            guard let photo = self.model.ignoredPhotos.first(where: { $0 == cachedPhoto }) else { return cell }
-//
-//            // Request an image for the asset from the PHCachingImageManager.
-//            cell.representedAssetIdentifier = photo.asset.localIdentifier
-//
-//            self.model.getImage(
-//                from: photo.asset,
-//                targetSize: self.model.getRealmModel?().thumbnailSize ?? .zero
-//            ) { image in
-//                if cell.representedAssetIdentifier == photo.asset.localIdentifier {
-//                    cell.view.imageView.image = image
-//                }
-//            }
-//
-//            PhotoMetadata.apply(metadata: photo.metadata, to: cell.view)
-//
-//            let description = photo.getVoiceoverDescription()
-//            cell.isAccessibilityElement = true
-//            cell.accessibilityLabel = description
-//
-//            /// selection
-//            let selected = self.ignoredPhotosViewModel.ignoredPhotosIsSelecting && self.ignoredPhotosViewModel.ignoredPhotosSelectedPhotos.contains(photo)
-//            self.configureCellSelection(cell: cell, selected: selected)
 
             return cell
         }
