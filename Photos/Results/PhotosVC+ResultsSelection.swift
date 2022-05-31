@@ -15,7 +15,7 @@ extension PhotosViewController {
         if !model.selectedPhotos.contains(findPhoto.photo) {
             model.selectedPhotos.append(findPhoto.photo)
 
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCellResults {
+            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosCellResults {
                 cell.viewController?.model.selected = true
                 cell.accessibilityTraits = .selected
             }
@@ -28,7 +28,7 @@ extension PhotosViewController {
         if model.selectedPhotos.contains(findPhoto.photo) {
             model.selectedPhotos = model.selectedPhotos.filter { $0 != findPhoto.photo }
 
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCell {
+            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosCellResults {
                 cell.viewController?.model.selected = false
                 cell.accessibilityTraits = .none
             }
@@ -39,7 +39,7 @@ extension PhotosViewController {
         guard let resultsState = model.resultsState else { return }
         for index in resultsState.displayedFindPhotos.indices {
             let indexPath = index.indexPath
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotosCellResults {
+            if let cell = resultsCollectionView.cellForItem(at: indexPath) as? PhotosCellResults {
                 cell.viewController?.model.showSelectionOverlay = model.isSelecting
                 cell.viewController?.model.selected = false
             }

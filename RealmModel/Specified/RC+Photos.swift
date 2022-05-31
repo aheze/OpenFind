@@ -163,13 +163,6 @@ extension RealmContainer {
         return nil
     }
 
-    func checkNoteExists(assetIdentifier: String) -> Bool {
-        if let note = getNote(from: assetIdentifier), !note.string.isEmpty {
-            return true
-        }
-        return false
-    }
-
     /// delete metadata and text
     func deletePhotoMetadata(metadata: PhotoMetadata) {
         let realm = try! Realm()

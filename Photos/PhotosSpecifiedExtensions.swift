@@ -9,35 +9,6 @@
 import Photos
 import UIKit
 
-extension FindPhoto {
-    /// merge `FindPhoto`s and also merge the `FastDescription`
-
-    static func merge(_ findPhotos: [FindPhoto]) -> [FindPhoto] {
-        var new = [FindPhoto]()
-        for findPhoto in findPhotos {
-            if let firstIndex = new.firstIndex(where: { $0.photo.asset.localIdentifier == findPhoto.photo.asset.localIdentifier }) {
-                if
-                    let existingFastDescription = new[firstIndex].fastDescription,
-                    let otherFastDescription = findPhoto.fastDescription
-                {
-                    let newFastDescription = FindPhoto.FastDescription(
-                        containsResultsInText: existingFastDescription.containsResultsInText || otherFastDescription.containsResultsInText,
-                        containsResultsInNote: existingFastDescription.containsResultsInNote || otherFastDescription.containsResultsInNote,
-                        containsText: existingFastDescription.containsText || otherFastDescription.containsText,
-                        containsNote: existingFastDescription.containsNote || otherFastDescription.containsNote
-                    )
-
-                    new[firstIndex].fastDescription = newFastDescription
-                }
-            } else {
-                new.append(findPhoto)
-            }
-        }
-
-        return new
-    }
-}
-
 extension Array where Element == FindPhoto {
     /// check `FastDescription`
     func filterHasResults() -> [FindPhoto] {
@@ -267,7 +238,6 @@ extension Finding {
                 if let sentences = text?.sentences {
                     /// very fast!
                     let containsResultsInText = sentences.checkIf(realmModel: realmModel, matches: search)
-                    fastDescription.containsNote = realmModel.container.checkNoteExists(assetIdentifier: metadata.assetIdentifier)
                     fastDescription.containsText = true
                     fastDescription.containsResultsInText = containsResultsInText
 

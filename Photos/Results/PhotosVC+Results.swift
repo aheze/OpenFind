@@ -20,6 +20,11 @@ extension PhotosViewController {
                 collectionViewContainer.addSubview(resultsCollectionView)
                 resultsCollectionView.pinEdgesToSuperview()
                 setupResultsHeader()
+                
+                /// reset
+                resultsHeaderViewModel.text = "Finding..."
+                model.queuedResults = .init()
+                model.waitingToAddResults = false
                 model.updateAllowed = true
             }
 

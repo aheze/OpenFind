@@ -91,9 +91,9 @@ extension PhotosViewController {
             try Task.checkCancellation()
 
             await self.startApplyingResults(
-                allFindPhotos: FindPhoto.merge(allFindPhotosNotes + allFindPhotosText).filterHasResults(),
-                starredFindPhotos: FindPhoto.merge(starredFindPhotosNotes + starredFindPhotosText).filterHasResults(),
-                screenshotsFindPhotos: FindPhoto.merge(screenshotsFindPhotosNotes + screenshotsFindPhotosText).filterHasResults(),
+                allFindPhotos: (allFindPhotosNotes + allFindPhotosText).uniqued(),
+                starredFindPhotos: (starredFindPhotosNotes + starredFindPhotosText).uniqued(),
+                screenshotsFindPhotos: (screenshotsFindPhotosNotes + screenshotsFindPhotosText).uniqued(),
                 findingInNotes: false,
                 context: context
             )
@@ -138,6 +138,11 @@ extension PhotosViewController {
         findingInNotes: Bool,
         context: FindContext
     ) {
+        let timer = TimeElapsed()
+        let allFindPhotos = allFindPhotos.uniqued()
+        let starredFindPhotos = starredFindPhotos.uniqued()
+        let screenshotsFindPhotos = screenshotsFindPhotos.uniqued()
+
         guard !searchViewModel.isEmpty else { return }
 
         let displayedFindPhotos: [FindPhoto]
