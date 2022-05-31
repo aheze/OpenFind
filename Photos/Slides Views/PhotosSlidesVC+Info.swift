@@ -107,8 +107,8 @@ extension PhotosSlidesViewController {
                             )
                         }
                         .background(UIColor.systemBackground.color)
-                        .frame(width: 300)
-                        .frame(maxHeight: 300)
+                        .frame(width: 340)
+                        .frame(maxHeight: 400)
                         .cornerRadius(16)
                         .popoverShadow()
                     }

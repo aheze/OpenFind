@@ -37,28 +37,28 @@ struct PhotosCellImageView: View {
             .overlay(
                 Colors.accent.toColor(.black, percentage: 0.5).color
                     .opacity(state.showingBlueOverlay ? 0.75 : 0)
-            )
-            .overlay(
-                ZStack(alignment: .bottomLeading) {
-                    if state.showingShade {
-                        LinearGradient(
-                            stops: [
-                                .init(color: .clear, location: 0.3),
-                                .init(color: .black, location: 1)
-                            ],
-                            startPoint: .topTrailing,
-                            endPoint: .bottomLeading
-                        )
-                    }
+                    .overlay(
+                        ZStack(alignment: .bottomLeading) {
+                            if state.showingShade {
+                                LinearGradient(
+                                    stops: [
+                                        .init(color: .clear, location: 0.3),
+                                        .init(color: .black, location: 1)
+                                    ],
+                                    startPoint: .topTrailing,
+                                    endPoint: .bottomLeading
+                                )
+                            }
 
-                    if state.showingStar {
-                        Image(systemName: "star.fill")
-                            .font(UIFont.preferredFont(forTextStyle: .body).font)
-                            .foregroundColor(.white)
-                            .padding(6)
-                    }
-                }
-                .opacity(model.showOverlay ? 1 : 0)
+                            if state.showingStar {
+                                Image(systemName: "star.fill")
+                                    .font(UIFont.preferredFont(forTextStyle: .body).font)
+                                    .foregroundColor(.white)
+                                    .padding(6)
+                            }
+                        }
+                    )
+                    .opacity(model.showOverlay ? 1 : 0) /// `showOverlay` controls the entire overlay's visibility
             )
             .overlay(
                 ZStack(alignment: .bottomTrailing) {

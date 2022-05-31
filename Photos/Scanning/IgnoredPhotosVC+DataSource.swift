@@ -24,6 +24,7 @@ extension IgnoredPhotosViewController {
         if cell.containerView == nil {
             let contentView = PhotosCellImageView(model: cell.model)
             let hostingController = UIHostingController(rootView: contentView)
+            hostingController.view.backgroundColor = .clear
             cell.contentView.addSubview(hostingController.view)
             hostingController.view.pinEdgesToSuperview()
             cell.containerView = hostingController.view
