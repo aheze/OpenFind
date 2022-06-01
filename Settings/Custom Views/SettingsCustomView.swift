@@ -12,7 +12,7 @@ struct SettingsCustomView: View {
     @ObservedObject var model: SettingsViewModel
     @ObservedObject var realmModel: RealmModel
     let identifier: Settings.ViewIdentifier
-    
+
     var body: some View {
         VStack {
             switch identifier {
@@ -28,6 +28,8 @@ struct SettingsCustomView: View {
                 SettingsPhotoGridSize(model: model, realmModel: realmModel)
             case .cameraHapticFeedbackLevel:
                 SettingsCameraHapticFeedback(model: model, realmModel: realmModel)
+            case .widgets:
+                SettingsWidgetsView(model: model, realmModel: realmModel)
             case .credits:
                 SettingsCredits(model: model, realmModel: realmModel)
             case .licenses:

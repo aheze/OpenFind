@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>FindWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
 		<key>GettingStarted (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>

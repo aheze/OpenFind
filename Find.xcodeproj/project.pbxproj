@@ -2310,6 +2310,28 @@
 		3CD3A103280270AC007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
 		3CD3A104280270AC007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
 		3CD3A105280270AD007A2593 /* TabBarVC+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */; };
+		3CD565722847277300E348A1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495D9CC524A16AAB009C507C /* WidgetKit.framework */; };
+		3CD565732847277300E348A1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495D9CC724A16AAB009C507C /* SwiftUI.framework */; };
+		3CD565762847277300E348A1 /* FindWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD565752847277300E348A1 /* FindWidget.swift */; };
+		3CD565792847277500E348A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CD565782847277500E348A1 /* Assets.xcassets */; };
+		3CD5657B2847277500E348A1 /* FindWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3CD565772847277300E348A1 /* FindWidget.intentdefinition */; };
+		3CD5657C2847277500E348A1 /* FindWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3CD565772847277300E348A1 /* FindWidget.intentdefinition */; };
+		3CD5657F2847277500E348A1 /* FindWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3CD565712847277300E348A1 /* FindWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3CD5658528472DD800E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565862847304200E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565872847304700E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565882847304700E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565892847304700E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD5658A2847304800E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD5658B2847304800E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD5658C2847304900E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD5658D2847304900E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD5658E2847304A00E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD5658F2847304A00E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565902847304A00E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565912847304B00E348A1 /* SD+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5658428472DD800E348A1 /* SD+More.swift */; };
+		3CD565932847307500E348A1 /* SettingsWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD565922847307500E348A1 /* SettingsWidgetsView.swift */; };
+		3CD565942847311900E348A1 /* SettingsWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD565922847307500E348A1 /* SettingsWidgetsView.swift */; };
 		3CD6227927C5D79100DF9AE8 /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
 		3CD6227A27C5D79900DF9AE8 /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
 		3CD6227B27C5D79A00DF9AE8 /* SearchVC+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */; };
@@ -3195,6 +3217,13 @@
 			remoteGlobalIDString = 3C643F1826057806001E6FA1;
 			remoteInfo = FindClip;
 		};
+		3CD5657D2847277500E348A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4999AC882353A80A00AB06A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CD565702847277300E348A1;
+			remoteInfo = FindWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -3227,6 +3256,17 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD565802847277500E348A1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3CD5657F2847277500E348A1 /* FindWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		495D9CD524A16AB2009C507C /* Embed App Extensions */ = {
@@ -4059,6 +4099,13 @@
 		3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Tips.swift"; sourceTree = "<group>"; };
 		3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ShutterPosition.swift"; sourceTree = "<group>"; };
 		3CD3A10028027095007A2593 /* TabBarVC+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarVC+Defaults.swift"; sourceTree = "<group>"; };
+		3CD565712847277300E348A1 /* FindWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FindWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CD565752847277300E348A1 /* FindWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWidget.swift; sourceTree = "<group>"; };
+		3CD565772847277300E348A1 /* FindWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = FindWidget.intentdefinition; sourceTree = "<group>"; };
+		3CD565782847277500E348A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3CD5657A2847277500E348A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CD5658428472DD800E348A1 /* SD+More.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SD+More.swift"; sourceTree = "<group>"; };
+		3CD565922847307500E348A1 /* SettingsWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWidgetsView.swift; sourceTree = "<group>"; };
 		3CD6227827C5D79100DF9AE8 /* SearchVC+Reload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Reload.swift"; sourceTree = "<group>"; };
 		3CD6227E27C5E62C00DF9AE8 /* SearchCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewModel.swift; sourceTree = "<group>"; };
 		3CD7060B27A0F62300B446D7 /* IconPickerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerConstants.swift; sourceTree = "<group>"; };
@@ -4359,6 +4406,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD5656E2847277300E348A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD565732847277300E348A1 /* SwiftUI.framework in Frameworks */,
+				3CD565722847277300E348A1 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4831,6 +4887,7 @@
 				3C2D22D627FCE35900D413B7 /* Highlights */,
 				3C2D22F027FD528200D413B7 /* SettingsPhotoGridSize.swift */,
 				3C2D22D027FCD4CA00D413B7 /* SettingsCameraHapticFeedback.swift */,
+				3CD565922847307500E348A1 /* SettingsWidgetsView.swift */,
 				3C2D22FA27FD7B0400D413B7 /* SettingsShareAppView.swift */,
 				3C2D22F627FD7AE200D413B7 /* SettingsCredits.swift */,
 				3C2D22F827FD7AFF00D413B7 /* SettingsLicenses.swift */,
@@ -4856,6 +4913,7 @@
 				3C2D22E027FD406700D413B7 /* SD+General.swift */,
 				3C2D22E227FD407700D413B7 /* SD+FindingAndHighlights.swift */,
 				3C2D22E427FD407C00D413B7 /* SD+Tabs.swift */,
+				3CD5658428472DD800E348A1 /* SD+More.swift */,
 				3C2D22E627FD408600D413B7 /* SD+Feedback.swift */,
 				3C6E9F342814609100FAD6A9 /* SD+Links.swift */,
 				3C2D22E827FD408E00D413B7 /* SD+About.swift */,
@@ -6086,6 +6144,17 @@
 			path = "View Controller";
 			sourceTree = "<group>";
 		};
+		3CD565742847277300E348A1 /* FindWidget */ = {
+			isa = PBXGroup;
+			children = (
+				3CD565752847277300E348A1 /* FindWidget.swift */,
+				3CD565772847277300E348A1 /* FindWidget.intentdefinition */,
+				3CD565782847277500E348A1 /* Assets.xcassets */,
+				3CD5657A2847277500E348A1 /* Info.plist */,
+			);
+			path = FindWidget;
+			sourceTree = "<group>";
+		};
 		3CD706FA27A3920200B446D7 /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -6619,6 +6688,7 @@
 				3CE40B7C27F5281F00CADCBF /* Settings */,
 				3CC0D125280B279B004E7016 /* Launch */,
 				3C4D39A427475D5F0010FD68 /* Utilities */,
+				3CD565742847277300E348A1 /* FindWidget */,
 				4999AC922353A80A00AB06A7 /* Find */,
 				3C643F1A26057806001E6FA1 /* FindClip */,
 				4999AC912353A80A00AB06A7 /* Products */,
@@ -6647,6 +6717,7 @@
 				3CE40B7B27F5281F00CADCBF /* Settings.app */,
 				3CC0D124280B279B004E7016 /* Launch.app */,
 				3CCA2C0128122F3C0019044D /* ToolbarController.app */,
+				3CD565712847277300E348A1 /* FindWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -6887,10 +6958,12 @@
 				3C6C731E278193F600E039F0 /* Frameworks */,
 				3C6C731F278193F600E039F0 /* Resources */,
 				3C6C5A292846859F0059F99F /* Embed Frameworks */,
+				3CD565802847277500E348A1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3CD5657E2847277500E348A1 /* PBXTargetDependency */,
 			);
 			name = "Find-New";
 			packageProductDependencies = (
@@ -6987,6 +7060,23 @@
 			productName = ToolbarController;
 			productReference = 3CCA2C0128122F3C0019044D /* ToolbarController.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3CD565702847277300E348A1 /* FindWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CD565832847277500E348A1 /* Build configuration list for PBXNativeTarget "FindWidgetExtension" */;
+			buildPhases = (
+				3CD5656D2847277300E348A1 /* Sources */,
+				3CD5656E2847277300E348A1 /* Frameworks */,
+				3CD5656F2847277300E348A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FindWidgetExtension;
+			productName = FindWidgetExtension;
+			productReference = 3CD565712847277300E348A1 /* FindWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		3CE40B7A27F5281F00CADCBF /* Settings */ = {
 			isa = PBXNativeTarget;
@@ -7115,6 +7205,9 @@
 					3CCA2C0028122F3C0019044D = {
 						CreatedOnToolsVersion = 13.3;
 					};
+					3CD565702847277300E348A1 = {
+						CreatedOnToolsVersion = 13.3;
+					};
 					3CE40B7A27F5281F00CADCBF = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -7165,6 +7258,7 @@
 				3CCA2C0028122F3C0019044D /* ToolbarController */,
 				4999AC8F2353A80A00AB06A7 /* Find */,
 				3C643F1826057806001E6FA1 /* FindClip */,
+				3CD565702847277300E348A1 /* FindWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -7443,6 +7537,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3CD5656F2847277300E348A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD565792847277500E348A1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CE40B7927F5281F00CADCBF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -7680,6 +7782,7 @@
 				3C21ED9927A45A2F0005E183 /* Constants.swift in Sources */,
 				3CBB31A427BD946000F25F6A /* Debug.swift in Sources */,
 				3C798EC427F69832007BF68D /* RC+Lists.swift in Sources */,
+				3CD565912847304B00E348A1 /* SD+More.swift in Sources */,
 				3CF15D1327FF8AF600D51E9B /* SettingsMVC+Results.swift in Sources */,
 				3CF15CE627FF8AF600D51E9B /* SettingsController.swift in Sources */,
 				3CF15CEF27FF8AF600D51E9B /* SettingsHighlightsColor.swift in Sources */,
@@ -7802,6 +7905,7 @@
 				3CCCCAAD27818CEA000381CE /* FindIconView.swift in Sources */,
 				3CF15BDF27FF8AF000D51E9B /* SettingsSectionRows.swift in Sources */,
 				3C443EEB27DD8C140050A0AB /* PhotosPermissionsView.swift in Sources */,
+				3CD5658C2847304900E348A1 /* SD+More.swift in Sources */,
 				3C2DBBE1277E739200911A74 /* AppDelegate.swift in Sources */,
 				3CF15BF327FF8AF000D51E9B /* SettingsPhotoGridSize.swift in Sources */,
 				3C2994C52802344700AE1AEC /* RealmModelExtensions.swift in Sources */,
@@ -7850,6 +7954,7 @@
 				3C364350277C22480038CB18 /* TabControllerView.swift in Sources */,
 				3CF15D4227FF8AFE00D51E9B /* SettingsMVC+Results.swift in Sources */,
 				3CF15D3827FF8AFE00D51E9B /* SettingsData.swift in Sources */,
+				3CD565872847304700E348A1 /* SD+More.swift in Sources */,
 				3C3642DE277BC2E70038CB18 /* SearchFieldCell.swift in Sources */,
 				3CC00EC327A6517700F6CF9C /* ListsSelectionToolbarView.swift in Sources */,
 				3CCE2B59279D235D00F72351 /* ListsDetailVC+Setup.swift in Sources */,
@@ -8241,6 +8346,7 @@
 				3C6E9F4F2814A87D00FAD6A9 /* ListsDefaults.swift in Sources */,
 				3C798EE527F6A2EB007BF68D /* List+Testing.swift in Sources */,
 				3CBB31AA27BDB99000F25F6A /* SearchNC+ViewTransitioning.swift in Sources */,
+				3CD565882847304700E348A1 /* SD+More.swift in Sources */,
 				3C7223BE27C44C070085EBF1 /* CameraVC+Conserving.swift in Sources */,
 				3C5B36FC27FEAEDF00801FEE /* SettingsPageView.swift in Sources */,
 				3C3642CD277BC2E70038CB18 /* SearchFieldCell.swift in Sources */,
@@ -8577,6 +8683,7 @@
 				3C1D178F27BCACAC00E82B8B /* PhotosVC+PHAssetCaching.swift in Sources */,
 				3C4D3A7B2747696F0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3CFD602B278B71E10031BC8B /* SearchNC+SearchBar.swift in Sources */,
+				3CD565892847304700E348A1 /* SD+More.swift in Sources */,
 				3C4DC4F1284339AA00656D4E /* PhotosCellResultsImageViewModel.swift in Sources */,
 				3C6EAA6B2803ACD200B036AD /* IgnoredPhotosVC+Listen.swift in Sources */,
 				3CFD6020278B70970031BC8B /* SearchNavigationConstants.swift in Sources */,
@@ -8743,6 +8850,7 @@
 				3C0F23A827F4BBC100BCBFAE /* ListsVC+Add.swift in Sources */,
 				3C2994AE280227AA00AE1AEC /* RealmModelData.swift in Sources */,
 				3CF15B5227FF8AEA00D51E9B /* SettingsSectionRows.swift in Sources */,
+				3CD5658A2847304800E348A1 /* SD+More.swift in Sources */,
 				3CCE2B19279D008B00F72351 /* SelectionIconView.swift in Sources */,
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C3642FC277BC2E90038CB18 /* SearchViewController.swift in Sources */,
@@ -8975,6 +9083,7 @@
 				3C4D3B9727477ABD0010FD68 /* SearchVC+DataSource.swift in Sources */,
 				3C1CC4102839506F00A96850 /* LaunchContentViewController.swift in Sources */,
 				3C2DBBC4277D5D7900911A74 /* SearchVC+ConfigureCell.swift in Sources */,
+				3CD5658B2847304800E348A1 /* SD+More.swift in Sources */,
 				3C1CC41D2839506F00A96850 /* LaunchFinalView.swift in Sources */,
 				3CCCCAA727818CE9000381CE /* FindIconView.swift in Sources */,
 				3CF15B9727FF8AEE00D51E9B /* SettingsLicenses.swift in Sources */,
@@ -9195,6 +9304,7 @@
 				3C817F8B28198E6E00417835 /* InitialViewController.swift in Sources */,
 				3C6C73A42781947400E039F0 /* SearchVC+ConfigureCell.swift in Sources */,
 				3C2C2CDD27E23D0D00CA92EA /* SearchNC+Progress.swift in Sources */,
+				3CD5657C2847277500E348A1 /* FindWidget.intentdefinition in Sources */,
 				3C93147E27B76129009E5B6E /* ListsDetailVC+Delegate.swift in Sources */,
 				3CAE64F427C6AE34009E8564 /* PhotosVC+Find.swift in Sources */,
 				3CDAF25A27F2336300467B31 /* List+Share.swift in Sources */,
@@ -9209,6 +9319,7 @@
 				3C5B36BD27FEAEDE00801FEE /* SettingsPicker.swift in Sources */,
 				3C257EEC280DAC01009B6FAE /* LaunchCVC+Listen.swift in Sources */,
 				3C443FA627DFA6330050A0AB /* SearchNC+Prompt.swift in Sources */,
+				3CD565942847311900E348A1 /* SettingsWidgetsView.swift in Sources */,
 				3C6C5A2C284686F50059F99F /* Finding+Find.swift in Sources */,
 				3C21ED6C27A3A9320005E183 /* KeyboardToolbarViewController.swift in Sources */,
 				3CFD601C278B70950031BC8B /* SearchNavigationConstants.swift in Sources */,
@@ -9476,6 +9587,7 @@
 				3CDD944327C05F9600D3EA1A /* Utilities+NavigationBar.swift in Sources */,
 				3C08EB17279C76E500971D60 /* ListsVC+DataSource.swift in Sources */,
 				3C5B36B427FEAEDE00801FEE /* Settings+Strings.swift in Sources */,
+				3CD565862847304200E348A1 /* SD+More.swift in Sources */,
 				3C6C73752781946B00E039F0 /* LivePreviewVC+Photo.swift in Sources */,
 				3C257EEB280DAC01009B6FAE /* LaunchPageViewController.swift in Sources */,
 				3C1A2C1727E9010500B3D065 /* PhotosSlidesInfoViewController.swift in Sources */,
@@ -9624,6 +9736,7 @@
 				3CCE2B04279D008900F72351 /* ButtonView.swift in Sources */,
 				3CF15C0E27FF8AF000D51E9B /* SettingsSectionRows.swift in Sources */,
 				3C0AACBE27C82692009DFC09 /* Utilities+String.swift in Sources */,
+				3CD5658D2847304900E348A1 /* SD+More.swift in Sources */,
 				3C7B7A47277EB17D00E1F602 /* Utilities+CGRect.swift in Sources */,
 				3C798EEC27F6A2EF007BF68D /* List+Testing.swift in Sources */,
 				3CF15C2127FF8AF000D51E9B /* SettingsHighlightsIcon.swift in Sources */,
@@ -9796,6 +9909,7 @@
 				3CCCCAB427818CEC000381CE /* FindIconView.swift in Sources */,
 				3CCCCAB527818CEC000381CE /* ProgressLineView.swift in Sources */,
 				3C6C743A2781955D00E039F0 /* Utilities+Accessibility.swift in Sources */,
+				3CD5658E2847304A00E348A1 /* SD+More.swift in Sources */,
 				3C7B7A90277FA6E300E1F602 /* Utilities+SwiftUI.swift in Sources */,
 				3C0B5E6E27BAC05900EC881E /* PhotosPermissionsView.swift in Sources */,
 				3CF15C4527FF8AF100D51E9B /* SettingsMVC+Setup.swift in Sources */,
@@ -9899,6 +10013,7 @@
 				3C21EDC027A45C040005E183 /* RealmModel.swift in Sources */,
 				3C8A5252277FC929006CF91E /* Debug.swift in Sources */,
 				3C7B7AAA277FBBC000E1F602 /* ViewController.swift in Sources */,
+				3CD5658F2847304A00E348A1 /* SD+More.swift in Sources */,
 				3C8A523F277FC1F4006CF91E /* GeneralUtilities.swift in Sources */,
 				3CCCCAB127818CEB000381CE /* FindIconView.swift in Sources */,
 				3CF15C6827FF8AF100D51E9B /* SettingsConstants.swift in Sources */,
@@ -10024,6 +10139,15 @@
 				3CCA2C1828122F900019044D /* ToolbarViewModel.swift in Sources */,
 				3CCA2C0428122F3C0019044D /* AppDelegate.swift in Sources */,
 				3CCA2C0628122F3C0019044D /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD5656D2847277300E348A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD565762847277300E348A1 /* FindWidget.swift in Sources */,
+				3CD5657B2847277500E348A1 /* FindWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10158,6 +10282,7 @@
 				3C798F5E27F7829F007BF68D /* SearchFieldCell.swift in Sources */,
 				3C798F6627F7829F007BF68D /* SuggestionsView.swift in Sources */,
 				3C798EF227F6A2F2007BF68D /* List+Testing.swift in Sources */,
+				3CD5658528472DD800E348A1 /* SD+More.swift in Sources */,
 				3C798DEA27F61582007BF68D /* Utilities+UIViewController.swift in Sources */,
 				3C798F9A27F782BD007BF68D /* RealmModel.swift in Sources */,
 				3C798DF027F61582007BF68D /* Utilities+CGPoint.swift in Sources */,
@@ -10176,6 +10301,7 @@
 				3C798F4C27F78284007BF68D /* SearchNC+Prompt.swift in Sources */,
 				3CADD80B27FE8AF7009BBBDA /* SettingsDeepLink.swift in Sources */,
 				3C798FD027F784EE007BF68D /* SettingsMVC+Setup.swift in Sources */,
+				3CD565932847307500E348A1 /* SettingsWidgetsView.swift in Sources */,
 				3C2D22E927FD408E00D413B7 /* SD+About.swift in Sources */,
 				3C798DE927F612B9007BF68D /* SettingsViewModel.swift in Sources */,
 				3C798DF127F61582007BF68D /* Utilities+String.swift in Sources */,
@@ -10272,6 +10398,7 @@
 				3CF7642A278CC49500DCA4EA /* Protocols.swift in Sources */,
 				3CFD5FEF278B6F950031BC8B /* SearchFieldCell.swift in Sources */,
 				3CC59504279F3329001D07DC /* ColorPickerView.swift in Sources */,
+				3CD565902847304A00E348A1 /* SD+More.swift in Sources */,
 				3CCE2AF5279D008800F72351 /* SelectionIconView.swift in Sources */,
 				3C7A440327EE3AFA00DFF76F /* Utilities+Array.swift in Sources */,
 				3CFD5FDA278B6F2B0031BC8B /* ViewController.swift in Sources */,
@@ -10672,6 +10799,11 @@
 			isa = PBXTargetDependency;
 			target = 3C643F1826057806001E6FA1 /* FindClip */;
 			targetProxy = 3C643F2B26057807001E6FA1 /* PBXContainerItemProxy */;
+		};
+		3CD5657E2847277500E348A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CD565702847277300E348A1 /* FindWidgetExtension */;
+			targetProxy = 3CD5657D2847277500E348A1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -11557,6 +11689,7 @@
 		3C6C7332278193F800E039F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -11593,6 +11726,7 @@
 		3C6C7333278193F800E039F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -11930,6 +12064,66 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.ToolbarController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3CD565812847277500E348A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FindWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FindWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andrew. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.FindWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CD565822847277500E348A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FindWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FindWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andrew. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.FindWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -12365,6 +12559,15 @@
 			buildConfigurations = (
 				3CCA2C1328122F3D0019044D /* Debug */,
 				3CCA2C1428122F3D0019044D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CD565832847277500E348A1 /* Build configuration list for PBXNativeTarget "FindWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CD565812847277500E348A1 /* Debug */,
+				3CD565822847277500E348A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

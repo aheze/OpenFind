@@ -51,6 +51,9 @@ struct SettingsData {
             /// photos, camera, lists
             tabsSection,
             
+            /// widgets
+            moreSection,
+            
             /// rate, report, suggest
             feedbackSection,
             

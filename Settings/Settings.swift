@@ -18,9 +18,11 @@ enum Settings {
         case highlightsIcon
         case highlightsColor
 
+        case photosGridSize
+
         case cameraHapticFeedbackLevel
 
-        case photosGridSize
+        case widgets
 
         case credits
         case licenses

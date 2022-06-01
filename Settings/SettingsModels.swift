@@ -41,7 +41,8 @@ struct SettingsSection: Identifiable {
     var rows = [SettingsRow]()
     var customViewIdentifier: Settings.ViewIdentifier? /// show above the rows
     var description: Description? /// shown at bottom of rows
-
+    var visible = true
+    
     enum Description {
         case constant(string: String)
         case dynamic(identifier: Settings.StringIdentifier)

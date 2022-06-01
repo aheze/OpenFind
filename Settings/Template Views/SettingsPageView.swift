@@ -26,38 +26,41 @@ struct SettingsPageView: View {
                 VStack(spacing: SettingsConstants.sectionSpacing) {
                     ForEach(sections) { section in
 
-                        /// encompass each section
-                        VStack(spacing: 0) {
-                            VStack {
-                                if let header = section.header {
-                                    Text(header.uppercased())
-                                        .settingsHeaderStyle()
-                                }
+                        if section.visible {
+                            /// encompass each section
+                            VStack(spacing: 0) {
+                                VStack {
+                                    if let header = section.header {
+                                        Text(header.uppercased())
+                                            .settingsHeaderStyle()
+                                    }
 
-                                if let customViewIdentifier = section.customViewIdentifier {
-                                    SettingsCustomView(model: model, realmModel: realmModel, identifier: customViewIdentifier)
-                                }
-                            }
-
-                            if !section.rows.isEmpty {
-                                SettingsSectionRows(model: model, realmModel: realmModel, section: section)
-                            }
-
-                            if let description = section.description {
-                                Group {
-                                    switch description {
-                                    case .constant(string: let string):
-                                        Text(string)
-
-                                    case .dynamic(identifier: let identifier):
-                                        Text(identifier.getString(realmModel: realmModel))
+                                    if let customViewIdentifier = section.customViewIdentifier {
+                                        SettingsCustomView(model: model, realmModel: realmModel, identifier: customViewIdentifier)
                                     }
                                 }
-                                .settingsDescriptionStyle()
+
+                                if !section.rows.isEmpty {
+                                    SettingsSectionRows(model: model, realmModel: realmModel, section: section)
+                                }
+
+                                if let description = section.description {
+                                    Group {
+                                        switch description {
+                                        case .constant(string: let string):
+                                            Text(string)
+
+                                        case .dynamic(identifier: let identifier):
+                                            Text(identifier.getString(realmModel: realmModel))
+                                        }
+                                    }
+                                    .settingsDescriptionStyle()
+                                }
                             }
                         }
                     }
                 }
+
             case .custom(identifier: let identifier):
                 SettingsCustomView(
                     model: model,
