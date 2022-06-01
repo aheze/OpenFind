@@ -15,6 +15,12 @@ extension SettingsData {
         }
         return true
     }
+    static var widgetsIconAvailable: Bool {
+        if #available(iOS 15, *) {
+            return true
+        }
+        return false
+    }
     
     static var moreSection: SettingsSection = {
         .init(
@@ -23,7 +29,7 @@ extension SettingsData {
                     configuration: .link(
                         title: "Widgets",
                         leftIcon: .template(
-                            iconName: "square.grid.2x2",
+                            iconName: widgetsIconAvailable ? "square.text.square" : "square.fill",
                             backgroundColor: UIColor(hex: 0x00C6BF)
                         ),
                         indicatorStyle: .forwards,
@@ -46,20 +52,9 @@ extension SettingsData {
                         visible: widgetsWarningVisible
                     ),
                     .init(
-                        rows: [
-                            .init(
-                                configuration: .button(title: "Scanning Options", tintColor: nil, rightIconName: nil) {
-                                    showScanningOptions?()
-                                }
-                            )
-                        ]
-                    ),
-                    .init(
-                        header: "Gallery Grid Size",
-                        rows: [
-                            .init(configuration: .custom(title: "Gallery Grid Size", identifier: .photosGridSize))
-                        ],
-                        description: .constant(string: "Configure the size of the grid in the Photos tab.")
+                        header: "Photo Widget",
+                        rows: [],
+                        customViewIdentifier: .widgets
                     )
                 ]
             )

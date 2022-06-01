@@ -52,7 +52,7 @@ struct SettingsData {
             tabsSection,
             
             /// widgets
-            moreSection,
+//            moreSection,
             
             /// rate, report, suggest
             feedbackSection,
