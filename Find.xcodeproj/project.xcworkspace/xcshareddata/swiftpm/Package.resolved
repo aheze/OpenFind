@@ -37,6 +37,24 @@
       }
     },
     {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core",
+      "state" : {
+        "revision" : "9e2f3cb730a546ff33e95c563a85e3cf61f17d17",
+        "version" : "12.0.0"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "812fafabeb198b832e0a00633992f89907371ec5"
+      }
+    },
+    {
       "identity" : "shlist",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/YusukeHosonuma/SHList.git",
