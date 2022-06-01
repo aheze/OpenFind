@@ -95,7 +95,7 @@ struct PhotosPermissionsView: View {
                 image: "PhotosPermissions",
                 title: "Find Photos",
                 description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
-                actionLabel: "Allow Access",
+                actionLabel: "Continue",
                 dark: false
             ) {
                 model.requestAuthorization()
