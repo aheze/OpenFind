@@ -6,9 +6,5 @@
 	<array>
 		<string>applinks:lists.getfind.app</string>
 	</array>
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.app.getfind.Find</string>
-	</array>
 </dict>
 </plist>
