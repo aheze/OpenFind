@@ -36,6 +36,23 @@ extension PhotoMetadataText {
     }
 }
 
+extension PhotoMetadataText {
+    static var sampleSentence = Sentence(
+        string: "Hello, this is some testing test AAAAA",
+        confidence: 1,
+        topLeft: .init(x: 0, y: 0),
+        topRight: .init(x: 1, y: 0),
+        bottomRight: .init(x: 1, y: 1),
+        bottomLeft: .init(x: 0, y: 1)
+    )
+    static var sampleText = PhotoMetadataText(
+        sentences: Array(repeating: sampleSentence, count: 10),
+        scannedInLanguages: ["en_US"],
+        scannedInVersion: "2.0.7"
+    )
+    static var sampleRealmText = sampleText.getRealmText()
+}
+
 extension PhotoMetadataNote {
     func getRealmNote() -> RealmPhotoMetadataNote {
         let note = RealmPhotoMetadataNote()

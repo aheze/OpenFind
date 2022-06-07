@@ -140,6 +140,9 @@ extension RealmContainer {
     }
 
     func getText(from identifier: String) -> RealmPhotoMetadataText? {
+        if Debug.photosLoadManyImages {
+            return PhotoMetadataText.sampleRealmText
+        }
         let realm = try! Realm()
         if
             let realmMetadata = realm.object(ofType: RealmPhotoMetadata.self, forPrimaryKey: identifier),
