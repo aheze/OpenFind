@@ -57,7 +57,9 @@ extension LivePreviewViewController {
 
         DispatchQueue.main.async {
             self.addSession()
-            self.session.startRunning()
+            DispatchQueue.global().async {
+                self.session.startRunning()
+            }
         }
     }
 
