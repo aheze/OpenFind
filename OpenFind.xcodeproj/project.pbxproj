@@ -3315,7 +3315,7 @@
 		3C0B5E6F27BAC9B700EC881E /* PhotosVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Setup.swift"; sourceTree = "<group>"; };
 		3C0B5E7227BAF5CB00EC881E /* PhotosVM+Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVM+Load.swift"; sourceTree = "<group>"; };
 		3C0CC69D25CE0385008E5737 /* unused.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unused.rb; sourceTree = "<group>"; };
-		3C0F239627F3EDD800BCBFAE /* Find-New.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find-New.entitlements"; sourceTree = "<group>"; };
+		3C0F239627F3EDD800BCBFAE /* OpenFind.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenFind.entitlements; sourceTree = "<group>"; };
 		3C0F239727F3FA5A00BCBFAE /* IVC+AppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IVC+AppLink.swift"; sourceTree = "<group>"; };
 		3C0F239927F4045A00BCBFAE /* List+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Import.swift"; sourceTree = "<group>"; };
 		3C0F239B27F4270E00BCBFAE /* ListsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsContentView.swift; sourceTree = "<group>"; };
@@ -5600,10 +5600,10 @@
 			path = Finding;
 			sourceTree = "<group>";
 		};
-		3C6C7322278193F600E039F0 /* Find-New */ = {
+		3C6C7322278193F600E039F0 /* OpenFind */ = {
 			isa = PBXGroup;
 			children = (
-				3C0F239627F3EDD800BCBFAE /* Find-New.entitlements */,
+				3C0F239627F3EDD800BCBFAE /* OpenFind.entitlements */,
 				3C6C7323278193F600E039F0 /* AppDelegate.swift */,
 				3C6C7325278193F600E039F0 /* SceneDelegate.swift */,
 				3C299485280168F200AE1AEC /* Callback.swift */,
@@ -5614,7 +5614,7 @@
 				3C6C732E278193F800E039F0 /* LaunchScreen.storyboard */,
 				3C6C7331278193F800E039F0 /* Info.plist */,
 			);
-			path = "Find-New";
+			path = OpenFind;
 			sourceTree = "<group>";
 		};
 		3C6DA94125BDF14D00B3CE5B /* Model */ = {
@@ -5768,6 +5768,43 @@
 				3C7B7AB3277FBBC100E1F602 /* Info.plist */,
 			);
 			path = Testing;
+			sourceTree = "<group>";
+		};
+		3C924FF22903D1A700F6C0EE /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				4999AC922353A80A00AB06A7 /* Find */,
+				3C643F1A26057806001E6FA1 /* FindClip */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		3C924FF32903D1B300F6C0EE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3CE3D4D027DC44D700521735 /* Assets */,
+				3C6C7322278193F600E039F0 /* OpenFind */,
+				3C443F0227DD90290050A0AB /* Models */,
+				3C4D39C427475E800010FD68 /* Shared */,
+				3C21ED7727A3C4AB0005E183 /* RealmModel */,
+				3C4D3787274755FE0010FD68 /* TabController */,
+				3CCA2C0228122F3C0019044D /* ToolbarController */,
+				3C7B7AA4277FBBC000E1F602 /* ScrollZoom */,
+				3C7B7A78277FA50800E1F602 /* SwiftUIViews */,
+				3C4D3B31274776E90010FD68 /* SearchBar */,
+				3CFD5FD4278B6F2B0031BC8B /* SearchNavigation */,
+				3C6C5A2F284688620059F99F /* Finding */,
+				3C4D39D52747661E0010FD68 /* Photos */,
+				3C7B7A07277E93CA00E1F602 /* Highlights */,
+				3C4D396527475AB00010FD68 /* Camera */,
+				3C4D3A48274768FE0010FD68 /* Lists */,
+				3C2DBBDF277E739200911A74 /* MLVision */,
+				3C1D19F3275A9F390064F2C6 /* Popover */,
+				3CE40B7C27F5281F00CADCBF /* Settings */,
+				3CC0D125280B279B004E7016 /* Launch */,
+				3C4D39A427475D5F0010FD68 /* Utilities */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		3C93151B27B97C35009E5B6E /* Shared */ = {
@@ -6651,30 +6688,9 @@
 		4999AC872353A80A00AB06A7 = {
 			isa = PBXGroup;
 			children = (
+				3C924FF32903D1B300F6C0EE /* Sources */,
+				3C924FF22903D1A700F6C0EE /* Archive */,
 				3C9314EE27B87183009E5B6E /* README.md */,
-				3CE3D4D027DC44D700521735 /* Assets */,
-				3C6C7322278193F600E039F0 /* Find-New */,
-				3C443F0227DD90290050A0AB /* Models */,
-				3C4D39C427475E800010FD68 /* Shared */,
-				3C21ED7727A3C4AB0005E183 /* RealmModel */,
-				3C4D3787274755FE0010FD68 /* TabController */,
-				3CCA2C0228122F3C0019044D /* ToolbarController */,
-				3C7B7AA4277FBBC000E1F602 /* ScrollZoom */,
-				3C7B7A78277FA50800E1F602 /* SwiftUIViews */,
-				3C4D3B31274776E90010FD68 /* SearchBar */,
-				3CFD5FD4278B6F2B0031BC8B /* SearchNavigation */,
-				3C6C5A2F284688620059F99F /* Finding */,
-				3C4D39D52747661E0010FD68 /* Photos */,
-				3C7B7A07277E93CA00E1F602 /* Highlights */,
-				3C4D396527475AB00010FD68 /* Camera */,
-				3C4D3A48274768FE0010FD68 /* Lists */,
-				3C2DBBDF277E739200911A74 /* MLVision */,
-				3C1D19F3275A9F390064F2C6 /* Popover */,
-				3CE40B7C27F5281F00CADCBF /* Settings */,
-				3CC0D125280B279B004E7016 /* Launch */,
-				3C4D39A427475D5F0010FD68 /* Utilities */,
-				4999AC922353A80A00AB06A7 /* Find */,
-				3C643F1A26057806001E6FA1 /* FindClip */,
 				4999AC912353A80A00AB06A7 /* Products */,
 				D0464F2926E9ACFCA3CD293D /* Frameworks */,
 			);
@@ -11647,12 +11663,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Sources/OpenFind/OpenFind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5146;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Find-New/Info.plist";
+				INFOPLIST_FILE = Sources/OpenFind/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenFind;
 				INFOPLIST_KEY_NSCameraUsageDescription = "By allowing access to your camera, you'll be able to find text in real time using a live video feed.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from OpenFind, and even your entire photo library.";
@@ -11683,12 +11699,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_ENTITLEMENTS = "Find-New/Find-New.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Sources/OpenFind/OpenFind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5146;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Find-New/Info.plist";
+				INFOPLIST_FILE = Sources/OpenFind/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenFind;
 				INFOPLIST_KEY_NSCameraUsageDescription = "By allowing access to your camera, you'll be able to find text in real time using a live video feed.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from OpenFind, and even your entire photo library.";
