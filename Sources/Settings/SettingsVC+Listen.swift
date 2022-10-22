@@ -52,27 +52,6 @@ extension SettingsViewController {
             self.shareLink()
         }
 
-        SettingsData.rateTheApp = {
-            guard let url = URL(string: "https://apps.apple.com/app/id1506500202") else { return }
-            var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-
-            components?.queryItems = [
-                URLQueryItem(name: "action", value: "write-review")
-            ]
-
-            guard let writeReviewURL = components?.url else { return }
-            UIApplication.shared.open(writeReviewURL)
-        }
-        SettingsData.reportABug = {
-            if let url = URL(string: "https://forms.gle/d4yb8tyfkCsY4rFn6") {
-                UIApplication.shared.open(url)
-            }
-        }
-        SettingsData.suggestNewFeatures = {
-            if let url = URL(string: "https://forms.gle/pQrSyRnp9ZP7SJXdA") {
-                UIApplication.shared.open(url)
-            }
-        }
         SettingsData.helpCenter = { [weak self] in
             guard let self = self else { return }
             self.showSupportDocs()
@@ -89,13 +68,12 @@ extension SettingsViewController {
                 UIApplication.shared.open(url)
             }
         }
-        
+
         SettingsData.translateFind = {
             if let url = URL(string: "https://open.getfind.app/translate") {
                 UIApplication.shared.open(url)
             }
         }
-        
 
         SettingsData.shareApp = { [weak self] in
             guard let self = self else { return }
@@ -160,7 +138,7 @@ extension SettingsViewController {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         )
-        
+
         if let popoverPresentationController = alert.popoverPresentationController {
             let sourceRect = CGRect(
                 x: view.bounds.width / 2,
@@ -168,7 +146,7 @@ extension SettingsViewController {
                 width: 1,
                 height: 1
             )
-            
+
             popoverPresentationController.sourceView = self.view
             popoverPresentationController.sourceRect = sourceRect
             popoverPresentationController.permittedArrowDirections = .up

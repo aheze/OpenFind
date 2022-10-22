@@ -18,10 +18,7 @@ struct SettingsData {
     // MARK: Internal callback
 
     static var resetAllSettings: (() -> Void)?
-    /// feedback
-    static var rateTheApp: (() -> Void)?
-    static var reportABug: (() -> Void)?
-    static var suggestNewFeatures: (() -> Void)?
+
     static var helpCenter: (() -> Void)?
     static var joinTheDiscord: (() -> Void)?
     static var joinTheReddit: (() -> Void)?

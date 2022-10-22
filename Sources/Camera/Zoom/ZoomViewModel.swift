@@ -191,7 +191,10 @@ class ZoomViewModel: ObservableObject {
         
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
         let percentage = percentage(totalOffset: totalExpandedOffset)
-        self.percentage = percentage
+        
+        DispatchQueue.main.async {
+            self.percentage = percentage
+        }
         
         expand()
         setZoom(percentage: percentage)
@@ -341,9 +344,11 @@ class ZoomViewModel: ObservableObject {
                 generator.selectionChanged()
             }
             
-            zoom = newZoom
-            zoomLabel = newZoomLabel
-            aspectProgress = newAspectRatio
+            DispatchQueue.main.async {
+                self.zoom = newZoom
+                self.zoomLabel = newZoomLabel
+                self.aspectProgress = newAspectRatio
+            }
         }
     }
     

@@ -20,27 +20,27 @@ extension SettingsData {
                         indicatorStyle: .modal,
                         destination: nil
                     ) {
-                        rateTheApp?()
+                        guard let url = URL(string: "https://apps.apple.com/app/id1506500202") else { return }
+                        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+
+                        components?.queryItems = [
+                            URLQueryItem(name: "action", value: "write-review")
+                        ]
+
+                        guard let writeReviewURL = components?.url else { return }
+                        UIApplication.shared.open(writeReviewURL)
                     }
                 ),
                 .init(
                     configuration: .link(
-                        title: "Report a Bug",
-                        leftIcon: .template(iconName: "exclamationmark.triangle.fill", backgroundColor: UIColor(hex: 0xFF0000)),
+                        title: "Report Bugs / Suggest Features",
+                        leftIcon: .template(iconName: "sparkles", backgroundColor: UIColor(hex: 0xFF0000)),
                         indicatorStyle: .modal,
                         destination: nil
                     ) {
-                        reportABug?()
-                    }
-                ),
-                .init(
-                    configuration: .link(
-                        title: "Suggest New Features",
-                        leftIcon: .template(iconName: "sparkles", backgroundColor: UIColor(hex: 0x9E00FF)),
-                        indicatorStyle: .modal,
-                        destination: nil
-                    ) {
-                        suggestNewFeatures?()
+                        if let url = URL(string: "https://github.com/aheze/OpenFind/issues") {
+                            UIApplication.shared.open(url)
+                        }
                     }
                 )
             ]
