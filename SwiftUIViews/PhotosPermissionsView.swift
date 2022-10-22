@@ -94,7 +94,7 @@ struct PhotosPermissionsView: View {
             PermissionsActionView(
                 image: "PhotosPermissions",
                 title: "Find Photos",
-                description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
+                description: "Finding photos requires permission to access the photo library. OpenFind works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Continue",
                 dark: false
             ) {
@@ -104,7 +104,7 @@ struct PhotosPermissionsView: View {
             PermissionsActionView(
                 image: "PhotosPermissions",
                 title: "Find Photos",
-                description: "Finding photos requires permission to access the photo library. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
+                description: "Finding photos requires permission to access the photo library. OpenFind works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Go to Settings",
                 dark: false
             ) {

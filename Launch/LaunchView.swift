@@ -82,7 +82,7 @@ struct LaunchView: View {
         .overlay(
             VStack(spacing: c.spacing) {
                 VStack(spacing: c.headerSpacing) {
-                    Text("Find")
+                    Text("OpenFind")
                         .font(c.headerTitleFont.font)
                         .frame(maxWidth: .infinity, alignment: .leading)
 

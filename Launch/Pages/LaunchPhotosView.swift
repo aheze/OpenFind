@@ -18,7 +18,7 @@ struct LaunchPhotosView: View {
         LaunchPageViewContent(
             title: "Photos",
             description: "Search for text in your photos.",
-            footnote: "Comes in handy when you're trying to find memes. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone."
+            footnote: "Comes in handy when you're trying to find memes. OpenFind works 100% offline, never connects to the internet, and nothing ever leaves your phone."
         ) {
             Button {
                 flashAgain()

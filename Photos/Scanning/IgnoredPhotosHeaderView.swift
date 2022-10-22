@@ -18,7 +18,7 @@ struct IgnoredPhotosHeaderView: View {
                     .font(UIFont.preferredFont(forTextStyle: .title3).font)
                     .foregroundColor(Color.accent)
 
-                Text("Find will never scan these photos.")
+                Text("OpenFind will never scan these photos.")
                     .fixedSize(horizontal: false, vertical: true)
             }
             .foregroundColor(Color.accent)

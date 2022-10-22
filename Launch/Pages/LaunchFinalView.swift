@@ -27,7 +27,7 @@ struct LaunchFinalView: View {
                     y: 2
                 )
             
-            Text("What will you do with Find?")
+            Text("What will you do with OpenFind?")
                 .opacity(0.75)
                 .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .medium).font)
                 .frame(maxWidth: .infinity)

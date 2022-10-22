@@ -24,7 +24,7 @@ struct CameraNotFoundView: View {
                 Text("No Camera Found")
                     .font(.title.bold())
 
-                Text("Find was not able to access the camera. Would you like to find from your photos instead?")
+                Text("OpenFind was not able to access the camera. Would you like to find from your photos instead?")
                     .fontWeight(.medium)
 
                 Button {

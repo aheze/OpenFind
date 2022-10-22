@@ -252,7 +252,7 @@ extension PhotosViewModel {
         func getDescription() -> String {
             switch self {
             case .downloadingFromCloud:
-                return "Find fetches photos through Apple's built in APIs — all network connections are handled by Apple and not exposed to the app. Scanning may be slightly slower depending on your internet speed. "
+                return "OpenFind fetches photos through Apple's built in APIs — all network connections are handled by Apple and not exposed to the app. Scanning may be slightly slower depending on your internet speed. "
             case .photosFailedToScan(error: let error):
                 return "Error: [\(error)]. This could happen if you're using iCloud photos. To scan these photos, connect to the internet and download them to your device."
             }

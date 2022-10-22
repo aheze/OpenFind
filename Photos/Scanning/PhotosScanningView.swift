@@ -24,7 +24,7 @@ struct PhotosScanningViewHeader: View {
         ScrollView {
             VStack(spacing: SettingsConstants.sectionSpacing) {
                 /// Header
-                Container(description: "Find works completely offline, so your photos and other data never leave your phone.") {
+                Container(description: "OpenFind works completely offline, so your photos and other data never leave your phone.") {
                     HStack(spacing: 16) {
                         PhotosScanningProgressView(
                             model: model,

@@ -91,7 +91,7 @@ extension SettingsViewController {
         }
         
         SettingsData.translateFind = {
-            if let url = URL(string: "https://getfind.app/translate") {
+            if let url = URL(string: "https://open.getfind.app/translate") {
                 UIApplication.shared.open(url)
             }
         }
@@ -104,7 +104,7 @@ extension SettingsViewController {
     }
 
     func shareLink() {
-        guard let url = URL(string: "https://getfind.app/") else { return }
+        guard let url = URL(string: "https://open.getfind.app/") else { return }
         UIPasteboard.general.url = url
 
         let tag = UUID().uuidString

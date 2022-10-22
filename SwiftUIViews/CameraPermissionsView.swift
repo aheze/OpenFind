@@ -66,7 +66,7 @@ struct CameraPermissionsView: View {
             PermissionsActionView(
                 image: "CameraPermissions",
                 title: "Camera Permissions",
-                description: "Finding text in the live video feed requires permission to access the camera. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
+                description: "Finding text in the live video feed requires permission to access the camera. OpenFind works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Continue",
                 dark: true
             ) {
@@ -76,7 +76,7 @@ struct CameraPermissionsView: View {
             PermissionsActionView(
                 image: "CameraPermissions",
                 title: "Camera Permissions",
-                description: "Finding text in the live video feed requires permission to access the camera. Find works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
+                description: "Finding text in the live video feed requires permission to access the camera. OpenFind works 100% offline, never connects to the internet, and nothing ever leaves your phone.",
                 actionLabel: "Go to Settings",
                 dark: true
             ) {

@@ -41,7 +41,7 @@ extension CameraViewController {
         if photosPermissionsViewModel.currentStatus.isGranted() {
             self.saveImageAfterPermissionsGranted(image: image)
         } else if photosPermissionsViewModel.currentStatus == .notDetermined {
-            let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Save Photo To Photo Library", message: "OpenFind needs permission to save this photo to your photo library.", preferredStyle: .alert)
             alert.addAction(
                 UIAlertAction(title: "Continue", style: .default) { [weak self] _ in
                     guard let self = self else { return }
@@ -62,7 +62,7 @@ extension CameraViewController {
             }
             present(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Save Photo To Photo Library", message: "Find needs permission to save this photo to your photo library.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Save Photo To Photo Library", message: "OpenFind needs permission to save this photo to your photo library.", preferredStyle: .alert)
             alert.addAction(
                 UIAlertAction(title: "Go To Settings", style: .default) { [weak self] _ in
                     guard let self = self else { return }

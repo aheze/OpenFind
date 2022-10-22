@@ -58,7 +58,7 @@ struct SettingsShareAppView: View {
                     .cornerRadius(16)
 
                 VStack(alignment: .leading) {
-                    Text("Find")
+                    Text("OpenFind")
                         .font(UIFont.preferredCustomFont(forTextStyle: .title1, weight: .semibold).font)
 
                     Text("An app to find text in real life.")
@@ -81,7 +81,7 @@ struct SettingsShareAppView: View {
             .cornerRadius(16)
 
             Button {
-                UIPasteboard.general.url = URL(string: "https://getfind.app")
+                UIPasteboard.general.url = URL(string: "https://open.getfind.app")
                 withAnimation {
                     copied = true
                 }

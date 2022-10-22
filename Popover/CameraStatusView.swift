@@ -133,7 +133,7 @@ struct CameraStatusView: View {
                     status.title = "\(count) Results"
                 }
 
-                status.description = "Find is currently in Live Preview mode."
+                status.description = "OpenFind is currently in Live Preview mode."
                 status.secondaryDescription = "Tap the shutter to pause and scan."
             } else {
                 status.title = "No Text Detected"

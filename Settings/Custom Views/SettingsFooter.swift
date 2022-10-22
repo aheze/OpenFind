@@ -17,7 +17,7 @@ struct SettingsFooter: View {
             Text(verbatim: "Version \(Utilities.getVersionString())")
             Text(verbatim: " • ")
             Button {
-                if let url = URL(string: "https://getfind.app/whatsnew/") {
+                if let url = URL(string: "https://open.getfind.app/whatsnew/") {
                     UIApplication.shared.open(url)
                 }
             } label: {

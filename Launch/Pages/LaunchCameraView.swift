@@ -17,7 +17,7 @@ struct LaunchCameraView: View {
         LaunchPageViewContent(
             title: "Camera",
             description: "Search for text in real time.",
-            footnote: "Got allergies or other dietary restrictions? Just point your phone at the nutrition label and Find will scan it for you."
+            footnote: "Got allergies or other dietary restrictions? Just point your phone at the nutrition label and OpenFind will scan it for you."
         ) {
             Button {
                 changeColor()
