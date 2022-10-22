@@ -50,6 +50,11 @@ class PhotosSlidesViewController: UIViewController, Searchable, InteractivelyDis
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewContainerHeightC: NSLayoutConstraint!
 
+    // MARK: - Navigation Bar
+
+    let titleViewModel = TitleViewModel()
+    var titleView: UIView!
+
     // MARK: Info
 
     @IBOutlet var infoViewContainer: UIView!
