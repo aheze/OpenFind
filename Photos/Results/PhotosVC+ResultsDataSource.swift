@@ -154,7 +154,6 @@ extension PhotosViewController {
     func teardownCellResults(cell: PhotosCellResults, indexPath: IndexPath) {
         if let id = cell.fetchingID {
             cell.fetchingID = nil
-
             model.imageManager.cancelImageRequest(id)
         }
     }

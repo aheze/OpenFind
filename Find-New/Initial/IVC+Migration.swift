@@ -11,7 +11,7 @@ import UIKit
 
 extension InitialViewController {
     /// 18 = 2.0.4
-    /// 17 = 2.0.0
+    /// 17 = 2.0.0 
     func configureRealm() {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
