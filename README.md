@@ -1,5 +1,6 @@
-# OpenFind
+![OpenFind](Assets/Header.png)
 
-Command+F for Camera!
+An app to find text in real life. Now open-source!
+
 
 
