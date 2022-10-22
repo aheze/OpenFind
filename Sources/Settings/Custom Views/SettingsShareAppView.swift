@@ -94,13 +94,16 @@ struct SettingsShareAppView: View {
                     HStack(spacing: 10) {
                         Image(systemName: "doc.on.doc")
 
-                        Text("Copy Link")
+                        Text("open.getfind.app")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                     if copied {
                         Image(systemName: "checkmark")
                             .transition(.scale)
+                    } else {
+                        Text("Tap to copy")
+                            .font(.caption)
                     }
                 }
                 .font(UIFont.preferredCustomFont(forTextStyle: .title2, weight: .medium).font)
@@ -109,17 +112,16 @@ struct SettingsShareAppView: View {
                 .blueBackground()
             }
 
-            VStack(spacing: 0) {
+            VStack(spacing: 16) {
                 Image("AppQRCode")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(UIColor.label.color)
 
                 Text("Scan to download Find")
                     .foregroundColor(.accent)
                     .font(UIFont.preferredFont(forTextStyle: .title3).font)
             }
-            .padding(EdgeInsets(top: 16, leading: 20, bottom: 24, trailing: 20))
+            .padding(20)
             .blueBackground()
 
             Spacer()

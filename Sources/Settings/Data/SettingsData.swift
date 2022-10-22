@@ -39,7 +39,7 @@ struct SettingsData {
         bottomViewIdentifier: nil,
         addTopPadding: false
     )
-
+    
     static var mainSections: [SettingsSection] = {
         [
             /// general section

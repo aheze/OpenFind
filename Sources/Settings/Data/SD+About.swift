@@ -14,6 +14,21 @@ extension SettingsData {
             rows: [
                 .init(
                     configuration: .link(
+                        title: "View Source Code",
+                        leftIcon: .template(
+                            iconName: "curlybraces",
+                            backgroundColor: UIColor(hex: 0x006CFF)
+                        ),
+                        indicatorStyle: .none,
+                        destination: nil
+                    ) {
+                        if let url = URL(string: "https://github.com/aheze/OpenFind") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                ),
+                .init(
+                    configuration: .link(
                         title: "Credits",
                         leftIcon: .template(
                             iconName: "person.fill",
@@ -40,24 +55,19 @@ extension SettingsData {
         )
     }()
     
+    static var creditsPage: SettingsPage = .init(
+        title: "Credits",
+        explanation: nil,
+        configuration: .custom(identifier: .credits),
+        bottomViewIdentifier: nil,
+        addTopPadding: true
+    )
     
-    static var creditsPage: SettingsPage = {
-        .init(
-            title: "Credits",
-            explanation: nil,
-            configuration: .custom(identifier: .credits),
-            bottomViewIdentifier: nil,
-            addTopPadding: true
-        )
-    }()
-    
-    static var licensesPage: SettingsPage = {
-        .init(
-            title: "Licenses",
-            explanation: "Find is built using several open-source libraries — thank you to the developers!",
-            configuration: .custom(identifier: .licenses),
-            bottomViewIdentifier: nil,
-            addTopPadding: true
-        )
-    }()
+    static var licensesPage: SettingsPage = .init(
+        title: "Licenses",
+        explanation: "Find is built using several open-source libraries — thank you to the developers!",
+        configuration: .custom(identifier: .licenses),
+        bottomViewIdentifier: nil,
+        addTopPadding: true
+    )
 }
