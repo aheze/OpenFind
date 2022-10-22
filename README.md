@@ -18,8 +18,21 @@ I hope you can find some use out of this, whether it's from looking at the code,
 
 https://user-images.githubusercontent.com/49819455/197327363-27d9c486-340f-4e56-89b1-5325b9325fe2.mp4
 
+## What's Included
 
-
+- A fully-functional app.
+  - To build it yourself, just clone the repo and open it in Xcode. Should take ~30 seconds
+- A fully-functional app clip.
+  - It's inside the `FindClip` folder. I temporarily deprecated this due because it was hard to maintain
+- Examples of a bunch of Apple APIs
+  - Vision, Photos, SwiftUI, UIKit,
+- Examples of third-party APIs
+  - Realm, Popovers, SupportDocs
+- Lots of custom UI
+  - Navigation bar with swipable search bar
+  - Lists editor
+  - Animated tab bar
+  - Highlights overlay
 
 ## Community
 
