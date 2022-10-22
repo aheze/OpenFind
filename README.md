@@ -11,7 +11,9 @@ An app to find text in real life. Now open-source!
 - Tons of customizable settings.
 - Supports VoiceOver.
 
-OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here. I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff.
+OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here.
+
+I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box.
 
 
 https://user-images.githubusercontent.com/49819455/197327363-27d9c486-340f-4e56-89b1-5325b9325fe2.mp4
@@ -50,3 +52,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+> **Note**  
+> You can technically clone OpenFind and sell it on the App Store, but I'd appreciate it if you didn't do this. Instead, please make any changes you want to the main repo — all pull requests are welcome!
+
+
