@@ -452,6 +452,9 @@
 		3C22D4062702D578001E8474 /* PagingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3C82702D578001E8474 /* PagingTransition.swift */; };
 		3C22D4072702D578001E8474 /* PagingNavigationOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3C92702D578001E8474 /* PagingNavigationOrientation.swift */; };
 		3C22D4082702D578001E8474 /* PagingIndexItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3CA2702D578001E8474 /* PagingIndexItem.swift */; };
+		3C23586C2904F0C400114F5F /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C23586B2904F0C400114F5F /* libcompression.tbd */; };
+		3C23586E2904F0CD00114F5F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C23586D2904F0CD00114F5F /* libc++.tbd */; };
+		3C2358702904F0D500114F5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C23586F2904F0D500114F5F /* libz.tbd */; };
 		3C257EA7280BDFF6009B6FAE /* LaunchContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EA6280BDFF6009B6FAE /* LaunchContentViewController.swift */; };
 		3C257EA9280BE02A009B6FAE /* LaunchCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EA8280BE02A009B6FAE /* LaunchCVC+DataSource.swift */; };
 		3C257EAB280BE030009B6FAE /* LaunchCVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C257EAA280BE030009B6FAE /* LaunchCVC+Delegate.swift */; };
@@ -3474,6 +3477,9 @@
 		3C22D3C82702D578001E8474 /* PagingTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingTransition.swift; sourceTree = "<group>"; };
 		3C22D3C92702D578001E8474 /* PagingNavigationOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingNavigationOrientation.swift; sourceTree = "<group>"; };
 		3C22D3CA2702D578001E8474 /* PagingIndexItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingIndexItem.swift; sourceTree = "<group>"; };
+		3C23586B2904F0C400114F5F /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = usr/lib/libcompression.tbd; sourceTree = SDKROOT; };
+		3C23586D2904F0CD00114F5F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3C23586F2904F0D500114F5F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3C257EA6280BDFF6009B6FAE /* LaunchContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchContentViewController.swift; sourceTree = "<group>"; };
 		3C257EA8280BE02A009B6FAE /* LaunchCVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchCVC+DataSource.swift"; sourceTree = "<group>"; };
 		3C257EAA280BE030009B6FAE /* LaunchCVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchCVC+Delegate.swift"; sourceTree = "<group>"; };
@@ -3943,8 +3949,8 @@
 		3C9234D027E660100055061A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		3C9234D527E661380055061A /* PhotosVC+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+FlowLayout.swift"; sourceTree = "<group>"; };
 		3C9234D927E663280055061A /* ListsVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsVC+Setup.swift"; sourceTree = "<group>"; };
-		3C924FEC2903CA0F00F6C0EE /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RealmSwift.xcframework; sourceTree = "<group>"; };
-		3C924FED2903CA1100F6C0EE /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Realm.xcframework; sourceTree = "<group>"; };
+		3C924FEC2903CA0F00F6C0EE /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Sources/Resources/RealmSwift.xcframework; sourceTree = "<group>"; };
+		3C924FED2903CA1100F6C0EE /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Sources/Resources/Realm.xcframework; sourceTree = "<group>"; };
 		3C93147C27B760F5009E5B6E /* ListsDetailVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Delegate.swift"; sourceTree = "<group>"; };
 		3C93147F27B769A0009E5B6E /* ListsDetailVC+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsDetailVC+Scroll.swift"; sourceTree = "<group>"; };
 		3C93148227B76D84009E5B6E /* SearchVC+Listen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Listen.swift"; sourceTree = "<group>"; };
@@ -4371,6 +4377,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2358702904F0D500114F5F /* libz.tbd in Frameworks */,
+				3C23586E2904F0CD00114F5F /* libc++.tbd in Frameworks */,
+				3C23586C2904F0C400114F5F /* libcompression.tbd in Frameworks */,
 				3C5B377827FEAF6100801FEE /* SupportDocs in Frameworks */,
 				3C817F892819117700417835 /* Popovers in Frameworks */,
 				3C924FEE2903CA2200F6C0EE /* Realm.xcframework in Frameworks */,
@@ -6765,6 +6774,9 @@
 		D0464F2926E9ACFCA3CD293D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C23586F2904F0D500114F5F /* libz.tbd */,
+				3C23586D2904F0CD00114F5F /* libc++.tbd */,
+				3C23586B2904F0C400114F5F /* libcompression.tbd */,
 				3C924FED2903CA1100F6C0EE /* Realm.xcframework */,
 				3C924FEC2903CA0F00F6C0EE /* RealmSwift.xcframework */,
 				495D9CC524A16AAB009C507C /* WidgetKit.framework */,
