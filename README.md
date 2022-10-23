@@ -15,20 +15,20 @@ OpenFind (formerly **Find**) is my first app — I've been working on it for the
 
 I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box.
 
-
 https://user-images.githubusercontent.com/49819455/197327363-27d9c486-340f-4e56-89b1-5325b9325fe2.mp4
 
 ## What's Included
 
 - A fully-functional app.
 - A fully-functional app clip.
-- Examples of a bunch of Apple APIs
-- Examples of third-party APIs
-- Lots of custom UI
+- Examples of a bunch of Apple APIs.
+- Examples of third-party APIs.
+- Lots of custom UI.
 
 ## Resources
 
-I intend OpenFind to be fully-open to the open source community. Here's some links that can help you contribute to the app!
+OpenFind is fully open-source and I intend to be as transparent as possible. Here's some links for your reference!
+
 - [Website Analytics](https://umami.unisontech.org/share/HMMPoUZk/OpenFind) — implemented thanks to [@hkamran80](https://github.com/hkamran80)!
 - [Design and Assets](https://www.figma.com/file/BDlT8osG95efPTRMe76aQh/OpenFind?node-id=0%3A1)
 - [App Store Copy / Text](https://docs.google.com/document/d/1JufL_SMK0u8IVWj2Dru-Qoq7NJJHneQ8a7RtaRJaMec/edit?usp=sharing)
