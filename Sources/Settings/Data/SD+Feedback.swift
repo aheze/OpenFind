@@ -20,7 +20,7 @@ extension SettingsData {
                         indicatorStyle: .modal,
                         destination: nil
                     ) {
-                        guard let url = URL(string: "https://apps.apple.com/app/id1506500202") else { return }
+                        guard let url = URL(string: "https://apps.apple.com/app/id6443969902") else { return }
                         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
 
                         components?.queryItems = [
