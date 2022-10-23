@@ -11,6 +11,10 @@ An app to find text in real life. Now open-source!
 - Tons of customizable settings.
 - Supports VoiceOver.
 
+![](Assets/Camera.jpeg) | ![](Assets/Finding.jpeg) | ![](Assets/Photos.jpeg) | ![](Assets/Lists.jpeg)
+--- | --- | --- | ---
+
+
 OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here.
 
 I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box.
