@@ -1,9 +1,9 @@
-![OpenFind](Assets/Header.png)
+![OpenFind](Assets/GitHub/Header.png)
 
 An app to find text in real life. Now open-source!
 
 - Search your entire photo library in split seconds.
-- Find in real-time using the camera
+- Find in real-time using the camera.
 - Create lists of allergies and find unwanted ingredients instantly.
 - Organize photos with stars.
 - Look for multiple terms at the same time.
@@ -11,8 +11,7 @@ An app to find text in real life. Now open-source!
 - Tons of customizable settings.
 - Supports VoiceOver.
 
-![](Assets/Camera.jpeg) | ![](Assets/Finding.jpeg) | ![](Assets/Photos.jpeg) | ![](Assets/Lists.jpeg)
---- | --- | --- | ---
+![App preview](Assets/GitHub/Preview.png)
 
 
 OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here.
