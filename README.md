@@ -2,6 +2,7 @@
 
 An app to find text in real life. Now open-source!
 
+- [Download on the App Store](https://apps.apple.com/us/app/openfind/id6443969902).
 - Search your entire photo library in split seconds.
 - Find in real-time using the camera.
 - Create lists of allergies and find unwanted ingredients instantly.
@@ -11,7 +12,7 @@ An app to find text in real life. Now open-source!
 - Tons of customizable settings.
 - Supports VoiceOver.
 
-![App preview](Assets/GitHub/Preview.png)
+![App preview](Assets/GitHub/Summary.png)
 
 
 OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here.
