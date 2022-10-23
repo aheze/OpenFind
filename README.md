@@ -2,6 +2,7 @@
 
 An app to find text in real life. Now open-source!
 
+- [Download on the App Store](https://apps.apple.com/us/app/openfind/id6443969902).
 - Search your entire photo library in split seconds.
 - Find in real-time using the camera.
 - Create lists of allergies and find unwanted ingredients instantly.
