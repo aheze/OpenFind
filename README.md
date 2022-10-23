@@ -21,18 +21,21 @@ https://user-images.githubusercontent.com/49819455/197327363-27d9c486-340f-4e56-
 ## What's Included
 
 - A fully-functional app.
-  - To build it yourself, just clone the repo and open it in Xcode. Should take ~30 seconds
 - A fully-functional app clip.
-  - It's inside the `FindClip` folder. I temporarily deprecated this due because it was hard to maintain
 - Examples of a bunch of Apple APIs
-  - Vision, Photos, SwiftUI, UIKit,
 - Examples of third-party APIs
-  - Realm, Popovers, SupportDocs
 - Lots of custom UI
-  - Navigation bar with swipable search bar
-  - Lists editor
-  - Animated tab bar
-  - Highlights overlay
+
+## Resources
+
+I intend OpenFind to be fully-open to the open source community. Here's some links that can help you contribute to the app!
+- [Website Analytics](https://umami.unisontech.org/share/HMMPoUZk/OpenFind) — implemented thanks to [@hkamran80](https://github.com/hkamran80)!
+- [Design and Assets](https://www.figma.com/file/BDlT8osG95efPTRMe76aQh/OpenFind?node-id=0%3A1)
+- [App Store Copy / Text](https://docs.google.com/document/d/1JufL_SMK0u8IVWj2Dru-Qoq7NJJHneQ8a7RtaRJaMec/edit?usp=sharing)
+
+## Associated Repositories
+- Website - [OpenFind-Website](https://github.com/aheze/OpenFind-Website)
+- Help Center - [OpenFind-SupportDocs](https://github.com/aheze/OpenFind-SupportDocs)
 
 ## Community
 
