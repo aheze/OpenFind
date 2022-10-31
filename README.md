@@ -76,4 +76,7 @@ SOFTWARE.
 > **Note**  
 > You can technically clone OpenFind and sell it on the App Store, but I'd appreciate it if you didn't do this. Instead, please make any changes you want to the main repo — all pull requests are welcome!
 
+> **Note**  
+> If you like OpenFind, check out [Find v3](https://getfind.app)!
+
 
