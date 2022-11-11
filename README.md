@@ -3,9 +3,9 @@
 An app to find text in real life. Released in the public domain.
 
 - [Download on the App Store](https://apps.apple.com/app/id6443969902).
-- Search your entire photo library in split seconds.
 - Find in real-time using the camera.
 - Create lists of allergies and find unwanted ingredients instantly.
+- Search your entire photo library in split seconds.
 - Organize photos with stars.
 - Look for multiple terms at the same time.
 - Runs 100% offline. No servers, nothing weird going on.
