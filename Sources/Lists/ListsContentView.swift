@@ -76,6 +76,8 @@ class ListsContentView: UIView {
         headerImageView.setIconFont(font: c.headerDescriptionFont)
         headerTitleLabel.font = c.headerTitleFont
         headerDescriptionLabel.font = c.headerDescriptionFont
+        headerDescriptionLabel.alpha = 0.75
+        headerImageView.clipsToBounds = false
         
         headerViewHeightC.constant = c.headerTitleFont.lineHeight
             + c.headerEdgeInsets.top

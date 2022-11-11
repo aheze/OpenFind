@@ -13,7 +13,7 @@ extension List {
         var lists: [List] = [
             .init(
                 title: "Milk",
-                description: "Avoiding Milk",
+                description: "Ingredients with milk",
                 icon: "cup.and.saucer.fill",
                 color: 0x0089CF,
                 words: [
@@ -53,7 +53,7 @@ extension List {
             ),
             .init(
                 title: "Egg",
-                description: "Avoiding Egg",
+                description: "Common in kids",
                 icon: "oval.portrait",
                 color: 0x02BB00,
                 words: [
@@ -79,7 +79,7 @@ extension List {
             ),
             .init(
                 title: "Peanut",
-                description: "Avoiding Peanut",
+                description: "Common but serious",
                 icon: "circle.grid.2x1",
                 color: 0x8E5600,
                 words: [
@@ -101,7 +101,7 @@ extension List {
             ),
             .init(
                 title: "Soy",
-                description: "Avoiding Soy",
+                description: "+ other legumes",
                 icon: "cube",
                 color: 0xD12D00,
                 words: [
@@ -124,7 +124,7 @@ extension List {
             ),
             .init(
                 title: "Wheat",
-                description: "Avoiding Wheat",
+                description: "Includes gluten",
                 icon: "laurel.leading",
                 color: 0xCEA700,
                 words: [
@@ -145,6 +145,7 @@ extension List {
                     "Flour",
                     "Freekeh",
                     "Germ",
+                    "Gluten",
                     "Graham",
                     "Hydrolyzed wheat protein",
                     "Kamut",
@@ -167,7 +168,7 @@ extension List {
             ),
             .init(
                 title: "Tree Nuts",
-                description: "Avoiding Tree Nuts",
+                description: "Doesn't include peanuts",
                 icon: "leaf.fill",
                 color: 0x00A724,
                 words: [
