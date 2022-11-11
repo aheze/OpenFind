@@ -55,7 +55,7 @@ extension List {
                 title: "Egg",
                 description: "Avoiding Egg",
                 icon: "oval.portrait",
-                color: 0xE6E800,
+                color: 0x02BB00,
                 words: [
                     "Albumin",
                     "Albumen",
