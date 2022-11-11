@@ -1,6 +1,6 @@
 ![OpenFind](Assets/GitHub/Header.png)
 
-An app to find text in real life. Now open-source!
+An app to find text in real life. Released in the public domain.
 
 - [Download on the App Store](https://apps.apple.com/app/id6443969902).
 - Search your entire photo library in split seconds.
@@ -75,5 +75,8 @@ SOFTWARE.
 
 > **Note**  
 > You can technically clone OpenFind and sell it on the App Store, but I'd appreciate it if you didn't do this. Instead, please make any changes you want to the main repo — all pull requests are welcome!
+
+> **Note**  
+> If you like OpenFind, check out [Find v3](https://getfind.app)!
 
 
