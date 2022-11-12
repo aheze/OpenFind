@@ -17,7 +17,7 @@ An app to find text in real life. Released in the public domain.
 
 OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here.
 
-I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box.
+I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box, or you can download it on the [App Store](https://apps.apple.com/app/id6443969902).
 
 https://user-images.githubusercontent.com/49819455/197327363-27d9c486-340f-4e56-89b1-5325b9325fe2.mp4
 
