@@ -4,7 +4,7 @@ An app to find text in real life. Released in the public domain.
 
 - [Download on the App Store](https://apps.apple.com/app/id6443969902).
 - Find in real-time using the camera.
-- Create lists of allergies and find unwanted ingredients instantly.
+- Create lists of [allergies](https://open.getfind.app/allergy) and find unwanted ingredients instantly.
 - Search your entire photo library in split seconds.
 - Organize photos with stars.
 - Look for multiple terms at the same time.
@@ -52,7 +52,7 @@ Find is made by [aheze](https://github.com/aheze). | All contributions are welco
 ```
 MIT License
 
-Copyright (c) 2022 A. Zheng
+Copyright (c) 2023 A. Zheng
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
