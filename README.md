@@ -3,9 +3,9 @@
 An app to find text in real life. Released in the public domain.
 
 - [Download on the App Store](https://apps.apple.com/app/id6443969902).
-- Search your entire photo library in split seconds.
 - Find in real-time using the camera.
-- Create lists of allergies and find unwanted ingredients instantly.
+- Create lists of [allergies](https://open.getfind.app/allergy) and find unwanted ingredients instantly.
+- Search your entire photo library in split seconds.
 - Organize photos with stars.
 - Look for multiple terms at the same time.
 - Runs 100% offline. No servers, nothing weird going on.
@@ -17,7 +17,7 @@ An app to find text in real life. Released in the public domain.
 
 OpenFind (formerly **Find**) is my first app — I've been working on it for the past 3 years to learn Swift. You can view its entire history (1600+ commits!) here.
 
-I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box.
+I hope you can find some use out of this, whether it's from looking at the code, or just using it to find stuff. The app should build right out of the box, or you can download it on the [App Store](https://apps.apple.com/app/id6443969902).
 
 https://user-images.githubusercontent.com/49819455/197327363-27d9c486-340f-4e56-89b1-5325b9325fe2.mp4
 
@@ -52,7 +52,7 @@ Find is made by [aheze](https://github.com/aheze). | All contributions are welco
 ```
 MIT License
 
-Copyright (c) 2022 A. Zheng
+Copyright (c) 2023 A. Zheng
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
